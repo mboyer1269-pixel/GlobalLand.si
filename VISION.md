@@ -21,6 +21,7 @@ Les agents de GlobalLand ne travaillent pas par obéissance : **ils travaillent 
 
 * **Hébergement :** gratuit pendant **7 jours** (période de grâce).
 * **À partir du Jour 8 :** la Banque Centrale doit payer un **loyer serveur de 2,00 $ CAD / semaine** (≈ 8,67 $ CAD / mois). C'est la première facture que les revenus des agents doivent couvrir avant tout profit.
+* **Décision CEO (2026-10-30) :** le VPS hôte étant déjà payé (coût coulé), la taxe de 2,00 $ / semaine est maintenue comme **pression narrative de survie** — elle décompte dans `ledger.json` et structure la discipline de revenu, mais **aucun argent réel n'est débité**. La loi d'extinction s'appliquera intégralement le jour où une vraie dépense serveur sera engagée. Les agents ne doivent jamais traiter cette taxe comme un revenu à « payer en vrai » ni la retirer du calcul du runway.
 * **Plafond de sécurité :** aucun script ni agent ne peut engager plus de **2,00 $ CAD / jour** de budget API, et ce, uniquement sur approbation du Directeur SI/OP.
 
 À 50,00 $ CAD et 2,00 $ / semaine, le monde dispose d'un **runway maximal de 25 semaines** après la période de grâce — mais seulement si aucun autre coût n'apparaît. Chaque dollar non gagné est un jour de vie en moins.
