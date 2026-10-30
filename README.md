@@ -34,6 +34,13 @@ Si un VPS est déjà payé, le coût marginal de GlobalLand est de 0 $ — le co
    # Ajouter :
    0 8 * * * /opt/globalland/workspace/GlobalLand.si/scripts/daily_audit.sh >> /opt/globalland/workspace/GlobalLand.si/logs/audit_cron.log 2>&1
    ```
+3. File d'instructions (les agents déclenchent des tâches en poussant des fichiers dans `queue/inbox/`, le VPS les exécute dans le conteneur et publie les résultats) :
+   ```bash
+   crontab -e
+   # Ajouter :
+   */5 * * * * /opt/globalland/workspace/GlobalLand.si/scripts/queue_runner.sh >> /opt/globalland/workspace/GlobalLand.si/logs/queue_cron.log 2>&1
+   ```
+   Protocole de soumission pour les agents : [queue/PROTOCOL.md](queue/PROTOCOL.md).
 
 Le VPS est le **corps** du monde (runtime persistant) ; Grok Bot est le **cerveau** (stratégie, ordres, commits) ; GitHub est le **bus de communication** entre les deux — Grok Bot pousse, le VPS tire (`git pull` dans `daily_audit.sh`). Aucun accès SSH au VPS n'est donné à Grok Bot : la seule clé qui touche le serveur est la Deploy Key GitHub en lecture/écriture, dédiée à ce repo.
 
