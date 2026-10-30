@@ -23,6 +23,20 @@ docker exec globalland-core node scripts/audit.js
 # ...ou localement : node scripts/audit.js
 ```
 
+## Mode VPS (autonome, 24/7)
+
+Si un VPS est déjà payé, le coût marginal de GlobalLand est de 0 $ — le conteneur y vit isolé du reste des projets de la machine hôte (0,5 CPU, 1 Go RAM, aucun port exposé, `no-new-privileges`).
+
+1. Installation complète en une commande : `sudo bash scripts/setup_vps.sh` (crée `/opt/globalland`, la clé de déploiement, clone et démarre le conteneur).
+2. Automatisation de l'audit quotidien (décrémente la période de grâce, archive le rapport dans `bank/audits/`, publie le tout sur GitHub) :
+   ```bash
+   crontab -e
+   # Ajouter :
+   0 8 * * * /opt/globalland/workspace/GlobalLand.si/scripts/daily_audit.sh >> /opt/globalland/workspace/GlobalLand.si/logs/audit_cron.log 2>&1
+   ```
+
+Le VPS est le **corps** du monde (runtime persistant) ; Grok Bot est le **cerveau** (stratégie, ordres, commits) ; GitHub est le **bus de communication** entre les deux — Grok Bot pousse, le VPS tire (`git pull` dans `daily_audit.sh`). Aucun accès SSH au VPS n'est donné à Grok Bot : la seule clé qui touche le serveur est la Deploy Key GitHub en lecture/écriture, dédiée à ce repo.
+
 ## Documentation
 
 * [VISION.md](VISION.md) — La constitution : loi d'extinction, fiscalité, partage des profits, lois anti-échec
