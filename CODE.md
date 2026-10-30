@@ -41,7 +41,7 @@ GlobalLand.si/
 │   ├── README.md      # Procédure de convocation et règles du vivier
 │   ├── TEMPLATE.md    # Format officiel de carte d'agent
 │   ├── staff/         # Directeur SI/OP, Builder, Acquisition, Auditeur
-│   └── consultants/   # SEO/AEO, Content Creator, Growth Hacker, Code Reviewer
+│   └── consultants/   # Market Researcher, Pricing, SEO/AEO, Content Creator, Growth Hacker, Code Reviewer
 ├── logs/
 │   ├── transactions.log
 │   └── tasks.log

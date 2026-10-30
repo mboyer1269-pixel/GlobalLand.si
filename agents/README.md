@@ -14,10 +14,12 @@ agents/
 │   ├── acquisition.md        # Le distributeur et vendeur
 │   └── auditeur.md           # Le gardien du Grand Livre
 └── consultants/         # Les consultants externes (mission ponctuelle, pas de portefeuille GLC)
-    ├── consultant-seo-aeo.md
-    ├── consultant-content-creator.md
-    ├── consultant-growth-hacker.md
-    └── consultant-code-reviewer.md
+    ├── consultant-market-researcher.md   # Valideur de niches (avant la construction)
+    ├── consultant-pricing.md            # Prix et monétisation (avant/pendant la vente)
+    ├── consultant-seo-aeo.md            # Trafic organique et citations IA
+    ├── consultant-content-creator.md    # Contenu et récit
+    ├── consultant-growth-hacker.md      # Boucles de croissance gratuites
+    └── consultant-code-reviewer.md      # Porte qualité avant mise en vente
 ```
 
 ## Différence staff / consultant
