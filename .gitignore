@@ -1,0 +1,16 @@
+# Secrets — jamais dans le dépôt (public)
+.env
+.env.*
+*.pem
+*.key
+*_deploy_key*
+
+# Dépendances et build
+node_modules/
+dist/
+build/
+*.log.tmp
+
+# OS / IDE
+.DS_Store
+Thumbs.db
