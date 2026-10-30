@@ -33,7 +33,15 @@ Ces règles découlent d'expériences réelles documentées — les ignorer réd
 4. **Exécuter à coût 0 $** par défaut ; au-delà du plafond API de 2,00 $ CAD / jour, refus automatique.
 5. **Journaliser** : mise à jour de `ledger.json` + `logs/transactions.log` + commit atomique (`type(scope): description`).
 
-## 4. Conventions de Commit et de Structure
+## 4. Protocole de Soumission de Tâches au VPS (File d'instructions)
+
+Pour déclencher une exécution sur le serveur du monde, ne touche jamais au VPS : pousse un fichier de tâche dans `queue/inbox/` selon le schéma documenté dans `queue/PROTOCOL.md`, puis lis le résultat dans `queue/done/` ou `queue/failed/` au prochain pull. Rappels :
+
+* Actions limitées à la liste blanche (`node `, `bash scripts/`, `bash products/`, `npm run `) — tout le reste est refusé par le garde-fou.
+* Coût estimé > 0,00 $ CAD : exige `"approved_by": "CEO"`, plus la transaction `REAL_EXPENSE` au `ledger.json` dans le même commit.
+* La tâche s'exécute dans le conteneur isolé (5 min max, sortie tronquée) ; le résultat fait foi, pas ta mémoire.
+
+## 5. Conventions de Commit et de Structure
 
 * Messages de commit : `feat(scope): ...`, `fix(scope): ...`, `ledger(TX-XXXX): ...`.
 * Toute transaction financière correspond à un commit distinct et traçable.
