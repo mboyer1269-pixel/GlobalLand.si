@@ -37,11 +37,25 @@ GlobalLand.si/
 ├── CURSOR.md          # Règles de développement pour agents IA
 ├── CLAUDE.md          # Copie des règles (compatibilité Claude Code)
 ├── ledger.json        # Grand livre (CAD)
+├── agents/            # Vivier d'agents : staff permanent + consultants
+│   ├── README.md      # Procédure de convocation et règles du vivier
+│   ├── TEMPLATE.md    # Format officiel de carte d'agent
+│   ├── staff/         # Directeur SI/OP, Builder, Acquisition, Auditeur
+│   └── consultants/   # SEO/AEO, Content Creator, Growth Hacker, Code Reviewer
 ├── logs/
-│   └── transactions.log
+│   ├── transactions.log
+│   └── tasks.log
 ├── scripts/
 │   ├── audit.js       # Audit financier (Node.js pur, zéro dépendance)
-│   └── setup_vps.sh   # Reproduction de l'infrastructure sur un VPS
+│   ├── run_task.js    # Exécuteur de la file d'instructions (conteneur)
+│   ├── queue_runner.sh    # Surveillant de la file (VPS)
+│   ├── daily_audit.sh     # Audit quotidien automatisé (cron)
+│   └── setup_vps.sh       # Installation complète sur un VPS
+├── queue/
+│   ├── PROTOCOL.md    # Schémas des tâches SHELL et AGENT_CODE
+│   ├── inbox/         # Tâches en attente soumises par les agents
+│   ├── done/          # Résultats publiés (succès)
+│   └── failed/        # Résultats publiés (échecs/refus)
 ├── bank/
 │   └── audits/        # Rapports quotidiens
 └── products/          # Actifs monétisables des agents

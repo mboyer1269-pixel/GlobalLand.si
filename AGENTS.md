@@ -39,7 +39,16 @@ Chaque agent démarre avec un portefeuille interne de 100 GLC (prêt de la Banqu
 
 Dans la phase 2 de *Project Vend* d'Anthropic, la séparation des rôles (un agent marchandise, un agent vente, une couche CEO de contrôle des remises) a transformé une entreprise déficitaire en entreprise régulièrement rentable — les remises ont chuté d'environ 80 % ([Anthropic, Project Vend phase 2](https://www.anthropic.com/research/project-vend-2)). GlobalLand adopte la même architecture : **celui qui construit ne fixe pas seul les prix, celui qui vend ne tient pas la comptabilité, et personne ne touche au capital réel sans le CEO.**
 
-## 4. Bonification et Liquidation des Agents
+## 4. Le Vivier d'Agents (`agents/`)
+
+Chaque rôle de GlobalLand dispose d'une **carte d'agent officielle** dans le dossier `agents/` (format : frontmatter + identité, mission, règles critiques, livrables, workflow, métriques — adapté du projet open source [agency-agents](https://github.com/msitarzewski/agency-agents), licence MIT) :
+
+* `agents/staff/` — le personnel permanent : Directeur SI/OP, Builder, Acquisition, Auditeur (portefeuille GLC, taxe d'existence).
+* `agents/consultants/` — les consultants convoqués en mission ponctuelle par le Directeur SI/OP : SEO/AEO, Content Creator, Growth Hacker, Code Reviewer (pas de portefeuille, livraison et départ).
+
+Un consultant se convoque via une tâche `AGENT_CODE` (carte collée en tête du prompt, coût estimé et approbation CEO obligatoires) ou comme bot Grok Bot dédié. La procédure complète est dans `agents/README.md`. **Le vivier reste volontairement petit** : une carte n'est ajoutée que si elle sert directement la mission de revenus.
+
+## 5. Bonification et Liquidation des Agents
 
 1. **Bonification :** un agent qui génère un flux positif en CAD voit son solde GLC augmenter. Un solde élevé donne droit à des ressources prioritaires (modèles plus avancés, autonomie accrue, création de sous-agents).
 2. **Taxe d'existence :** chaque semaine, la Banque Centrale prélève une taxe de maintenance en GLC sur chaque agent actif. L'inaction mène mathématiquement à la liquidation.
