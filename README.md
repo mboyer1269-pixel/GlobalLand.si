@@ -50,6 +50,7 @@ Le VPS est le **corps** du monde (runtime persistant) ; Grok Bot est le **cervea
 * [AGENTS.md](AGENTS.md) — Organigramme exécutif : CEO, Directeur SI/OP (Grokbot), agents ouvriers
 * [CODE.md](CODE.md) — Architecture technique, 4 variables officielles, emplacement des logs
 * [CURSOR.md](CURSOR.md) / [CLAUDE.md](CLAUDE.md) — Règles strictes de développement pour tout agent IA
+* [SECURITY.md](SECURITY.md) — Audit de sécurité du canal de tâches du VPS (modèle de menace)
 
 ## Grand Livre
 

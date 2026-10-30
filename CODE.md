@@ -36,6 +36,7 @@ GlobalLand.si/
 ├── CODE.md            # Ce fichier : architecture, 4 variables, logs
 ├── CURSOR.md          # Règles de développement pour agents IA
 ├── CLAUDE.md          # Copie des règles (compatibilité Claude Code)
+├── SECURITY.md        # Modèle de menace et audit du canal de tâches
 ├── ledger.json        # Grand livre (CAD)
 ├── agents/            # Vivier d'agents : staff permanent + consultants
 │   ├── README.md      # Procédure de convocation et règles du vivier
@@ -47,6 +48,7 @@ GlobalLand.si/
 │   └── tasks.log
 ├── scripts/
 │   ├── audit.js       # Audit financier (Node.js pur, zéro dépendance)
+│   ├── tick.js        # Battement de cœur quotidien (décrément de grâce)
 │   ├── run_task.js    # Exécuteur de la file d'instructions (conteneur)
 │   ├── queue_runner.sh    # Surveillant de la file (VPS)
 │   ├── daily_audit.sh     # Audit quotidien automatisé (cron)

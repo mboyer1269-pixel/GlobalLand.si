@@ -47,6 +47,18 @@ function writeResult(dir, id, result) {
   fs.writeFileSync(path.join(dir, id + ".result.json"), JSON.stringify(result, null, 2) + "\n");
 }
 
+// Masque tout secret potentiel dans les sorties publiées (les .result.json vont sur un dépôt PUBLIC)
+function scrubSecrets(text) {
+  let t = String(text);
+  for (const k of ["ANTHROPIC_API_KEY", "OPENAI_API_KEY"]) {
+    const v = process.env[k];
+    if (v && v.length > 8) t = t.split(v).join("[REDACTÉ]");
+  }
+  t = t.replace(/sk-[a-zA-Z0-9_-]{10,}/g, "[REDACTÉ]");
+  t = t.replace(/-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----/g, "[REDACTÉ]");
+  return t;
+}
+
 function main() {
   const rel = process.argv[2];
   if (!rel) {
@@ -62,7 +74,8 @@ function main() {
     process.exit(2);
   }
 
-  const id = task.id || path.basename(rel, ".json");
+  // id assaini : alphanumérique, tiret et underscore uniquement (anti-traversée de chemin)
+  const id = String(task.id || path.basename(rel, ".json")).replace(/[^A-Za-z0-9_-]/g, "");
   const action = String(task.action || "");
   const taskType = task.type || "SHELL";
   const startedAt = nowIso();
@@ -146,6 +159,9 @@ function main() {
       output = output.slice(0, MAX_OUTPUT_CHARS) + "\n[... sortie tronquée]";
     }
   }
+
+  // Dernière ligne de défense : aucun secret ne doit paraître dans un .result.json public
+  output = scrubSecrets(output);
 
   const result = {
     id,

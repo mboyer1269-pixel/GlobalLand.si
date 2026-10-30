@@ -18,19 +18,9 @@ echo "[daily_audit] $(date -Iseconds) — début"
 cd "$REPO" || exit 1
 git pull --ff-only origin main
 
-# 2. Décrémenter la période de grâce (une fois par jour, par l'Agent Auditeur)
-node -e '
-const fs = require("fs");
-const p = "ledger.json";
-const l = JSON.parse(fs.readFileSync(p, "utf8"));
-if (l.grace_period_days_remaining > 0) {
-  l.grace_period_days_remaining -= 1;
-  l.transactions.push({ id: "TX-" + String(l.transactions.length + 1).padStart(4, "0"), type: "DAY_TICK", amount: 0, approved_by: "AUTO_AUDITOR", note: "Décrément période de grâce (jour écoulé)" });
-  fs.writeFileSync(p, JSON.stringify(l, null, 2) + "\n");
-  console.log("[daily_audit] période de grâce décrémentée :", l.grace_period_days_remaining, "jour(s) restants");
-} else {
-  console.log("[daily_audit] période de grâce écoulée");
-}'
+# 2. Décrémenter la période de grâce (une fois par jour, par l'Agent Auditeur) — DANS le conteneur
+# (aucun code du dépôt n'est exécuté directement sur l'hôte hors git/docker)
+docker exec "$CONTAINER" node scripts/tick.js || echo "[daily_audit] tick impossible (conteneur éteint ?)"
 
 # 3. Exécuter l'audit dans le conteneur et archiver le rapport
 mkdir -p "$REPO/bank/audits"

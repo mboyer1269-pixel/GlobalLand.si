@@ -39,14 +39,27 @@ fi
 
 for task in "${tasks[@]}"; do
   echo "[queue_runner] exécution de $task"
-  docker exec "${EXEC_ENV[@]}" "$CONTAINER" node scripts/run_task.js "$task" || \
-    echo "[queue_runner] échec de l'exécuteur sur $task (conteneur éteint ?)"
+  # Les clés API ne sont transmises qu'aux tâches AGENT_CODE — les tâches SHELL n'en ont pas besoin.
+  if grep -q '"type": "AGENT_CODE"' "$task"; then
+    docker exec "${EXEC_ENV[@]}" "$CONTAINER" node scripts/run_task.js "$task" || \
+      echo "[queue_runner] échec de l'exécuteur sur $task (conteneur éteint ?)"
+  else
+    docker exec "$CONTAINER" node scripts/run_task.js "$task" || \
+      echo "[queue_runner] échec de l'exécuteur sur $task (conteneur éteint ?)"
+  fi
   echo "$(date -u +%Y-%m-%dT%H:%M:%SZ) | QUEUE | $(basename "$task" .json) | traitée" >> logs/tasks.log
 
-  # Un agent de code peut avoir modifié le dépôt : on archive son travail dans le même cycle
+  # Un agent de code peut avoir modifié le dépôt : on archive son travail dans le même cycle.
+  # FILTRE ANTI-FUITE : aucun secret ne doit jamais être committé (le dépôt est public).
   git add -A
-  git -c user.name="globalland-runner" -c user.email="runner@globalland.local" \
-    commit -m "ops(queue): $(basename "$task" .json) — tâche exécutée" --quiet || true
+  if git diff --cached | grep -qE 'sk-[a-zA-Z0-9_-]{10,}|BEGIN [A-Z ]*PRIVATE KEY|ANTHROPIC_API_KEY=sk|OPENAI_API_KEY=sk'; then
+    git reset >/dev/null
+    echo "[queue_runner] ALERTE SÉCURITÉ : motif de secret détecté dans les modifications — commit et push BLOQUÉS (échec fermé)."
+    echo "$(date -u +%Y-%m-%dT%H:%M:%SZ) | ALERTE | $(basename "$task" .json) | secret détecté, commit bloqué" >> logs/tasks.log
+  else
+    git -c user.name="globalland-runner" -c user.email="runner@globalland.local" \
+      commit -m "ops(queue): $(basename "$task" .json) — tâche exécutée" --quiet || true
+  fi
 done
 
 # Publication des résultats sur GitHub (les agents lisent queue/done/ et queue/failed/)
