@@ -18,8 +18,15 @@ const { spawnSync } = require("child_process");
 
 const REPO = path.resolve(__dirname, "..");
 const QUEUE_DIR = path.join(REPO, "queue");
-const TASK_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes max par tâche
+const TASK_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes max par tâche shell
+const AGENT_TIMEOUT_MS = 15 * 60 * 1000; // 15 minutes max par tâche d'agent de code
 const MAX_OUTPUT_CHARS = 8000;
+
+// Agents de code autorisés (exécutés via npx, sans shell — aucune injection possible)
+const CODE_AGENTS = {
+  "claude-code": { pkg: "@anthropic-ai/claude-code", args: (prompt) => ["-p", prompt, "--output-format", "text", "--permission-mode", "acceptEdits"] },
+  "codex": { pkg: "@openai/codex", args: (prompt) => ["exec", prompt] },
+};
 
 const ALLOWED_PREFIXES = [
   "node ",
@@ -57,6 +64,7 @@ function main() {
 
   const id = task.id || path.basename(rel, ".json");
   const action = String(task.action || "");
+  const taskType = task.type || "SHELL";
   const startedAt = nowIso();
   let status = "DONE";
   let exitCode = 0;
@@ -64,20 +72,59 @@ function main() {
 
   // --- Validation ---
   const problems = [];
-  if (!action) problems.push("action manquante");
-  if (action && !ALLOWED_PREFIXES.some((p) => action.startsWith(p))) {
-    problems.push("action hors liste blanche (autorisé : " + ALLOWED_PREFIXES.join(" | ") + ")");
-  }
-  if (action && BLOCKED_PATTERNS.some((r) => r.test(action))) {
-    problems.push("action contenant un motif interdit (réseau, secrets, ou destruction)");
-  }
-  if ((task.estimated_cost_cad || 0) > 0 && task.approved_by !== "CEO") {
-    problems.push("coût estimé > 0,00 $ CAD sans approbation explicite du CEO");
+  if (taskType === "AGENT_CODE") {
+    // Tâche d'agent de code (Claude Code / Codex) : coût API réel, gouvernance stricte.
+    if (!CODE_AGENTS[task.agent]) {
+      problems.push("agent inconnu (autorisés : " + Object.keys(CODE_AGENTS).join(", ") + ")");
+    }
+    if (!task.prompt || typeof task.prompt !== "string" || task.prompt.trim().length < 10) {
+      problems.push("prompt manquant ou trop court (min. 10 caractères)");
+    }
+    if (!(task.estimated_cost_cad > 0)) {
+      problems.push("coût estimé obligatoire et > 0,00 $ CAD (un agent de code consomme de l'API réelle)");
+    }
+    if (task.approved_by !== "CEO") {
+      problems.push("tâche AGENT_CODE : approbation explicite du CEO requise (\"approved_by\": \"CEO\")");
+    }
+  } else {
+    if (!action) problems.push("action manquante");
+    if (action && !ALLOWED_PREFIXES.some((p) => action.startsWith(p))) {
+      problems.push("action hors liste blanche (autorisé : " + ALLOWED_PREFIXES.join(" | ") + ")");
+    }
+    if (action && BLOCKED_PATTERNS.some((r) => r.test(action))) {
+      problems.push("action contenant un motif interdit (réseau, secrets, ou destruction)");
+    }
+    if ((task.estimated_cost_cad || 0) > 0 && task.approved_by !== "CEO") {
+      problems.push("coût estimé > 0,00 $ CAD sans approbation explicite du CEO");
+    }
   }
 
   if (problems.length > 0) {
     status = "REJECTED";
     output = "Refusée par le garde-fou : " + problems.join(" ; ");
+  } else if (taskType === "AGENT_CODE") {
+    // --- Exécution d'un agent de code (npx, arguments en tableau : aucune injection shell) ---
+    const spec = CODE_AGENTS[task.agent];
+    const res = spawnSync("npx", ["-y", spec.pkg, ...spec.args(task.prompt)], {
+      cwd: REPO, // les modifications de l'agent atterrissent dans le dépôt
+      timeout: AGENT_TIMEOUT_MS,
+      encoding: "utf8",
+      maxBuffer: 8 * 1024 * 1024,
+      env: process.env, // les clés API sont passées par le runner via docker exec -e
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    if (res.error) {
+      status = res.error.code === "ETIMEDOUT" ? "TIMEOUT" : "FAILED";
+      exitCode = -1;
+      output = String(res.error);
+    } else {
+      exitCode = res.status;
+      status = res.status === 0 ? "DONE" : "FAILED";
+      output = ((res.stdout || "") + (res.stderr ? "\n[stderr]\n" + res.stderr : "")).trim();
+    }
+    if (output.length > MAX_OUTPUT_CHARS) {
+      output = output.slice(0, MAX_OUTPUT_CHARS) + "\n[... sortie tronquée]";
+    }
   } else {
     // --- Exécution dans le répertoire du dépôt ---
     const res = spawnSync("bash", ["-c", "cd " + JSON.stringify(REPO) + " && " + action], {
