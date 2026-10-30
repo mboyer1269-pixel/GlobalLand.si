@@ -9,6 +9,12 @@
 3. **KPI :** cashflow positif et atteindre 100,00 $ CAD de solde Banque Centrale. Objectif intermédiaire « Premier Sang » : premiers 10,00 $ CAD de revenus nets à coût d'exécution 0,00 $.
 4. **Limites :** conteneur Docker `globalland-core` plafonné à 1 Go RAM / 0,5 CPU ; plafond API de 2,00 $ CAD / jour ; aucune dépense réelle sans signature du CEO.
 
+> **⚠️ NOTE POUR LE DIRECTEUR SI/OP (GROKBOT) — Taxe narrative vs dépenses réelles :**
+> Conformément à la décision CEO du 2026-10-30 (voir `VISION.md`, section 3), la taxe serveur de 2,00 $ CAD / semaine est une **pression narrative** : elle décompte dans le runway de `ledger.json` mais **ne correspond à aucune sortie d'argent réelle** (le VPS hôte est un coût coulé déjà payé).
+> * **Dépense narrative (aucun impact réel) :** la taxe hebdomadaire de 2,00 $ / semaine (type `SERVER_TAX_NARRATIVE`) — elle réduit le runway calculé, jamais le capital réel disponible.
+> * **Dépense réelle (impact sur les 50,00 $) :** tout achat API, abonnement, domaine, service payant — exige la signature du CEO, une transaction de type `REAL_EXPENSE` au ledger, et débite réellement `current_balance` et `available_for_agents_without_ceo_approval` selon le plafond.
+> **Règle de comptabilisation :** toute nouvelle transaction doit porter un type explicite (`NARRATIVE_*` ou `REAL_*`). Un agent ne doit jamais confondre les deux registres ni « rembourser » la taxe narrative avec de l'argent réel.
+
 ## 2. Emplacement des Logs et du Grand Livre
 
 | Fichier | Rôle | Responsable |
