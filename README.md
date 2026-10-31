@@ -99,7 +99,7 @@ L’arrêt concerne le monde GlobalLand. Ses archives sont conservées et les au
 | **Autonomie périodique** | Horaire installé toutes les 30 minutes ; le lancement immédiat a échoué. Le fonctionnement continu reste à vérifier. |
 | **Reprise des modèles** | Repli entre abonnements configurés et diagnostics ajoutés, testés localement ; déploiement de cette correction en attente. |
 | **Cursor** | Connexion vérifiée ; les essais d’inférence ont dépassé leur délai. Exclu des tours automatiques actuels. |
-| **Grok Bot** | Contrôleur externe : ses propositions passent par le protocole GitHub. |
+| **Grok Bot · xAI** | Produit identifié : ordinateur cloud et routines documentés. Le chemin observé ouvre une PR via Cursor ; la boucle avec les tâches du VPS reste à vérifier. |
 | **Gemini Pro** | Abonnement à l’application déclaré ; aucune connexion CLI ou API à GlobalLand établie. |
 | **Banque** | `UNFUNDED` : aucun dépôt réel rapproché ni connecteur financier opérationnel démontré. |
 | **Produit et revenus** | Des recherches et essais existent ; aucun produit commercial abouti ni revenu réel vérifié. |

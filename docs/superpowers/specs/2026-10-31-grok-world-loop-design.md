@@ -1,12 +1,18 @@
 # Boucle Grok → GlobalLand → spécialistes
 
-**Statut : proposition de conception, pas une intégration déployée.** Préparée avec Superpowers à la demande du fondateur. Le nom exact de l’application Grok Bot et son transport de retour restent à identifier. L’opérateur confirme que Cursor ouvre ou rouvre une PR.
+**Statut : proposition de conception, pas une intégration déployée.** Préparée avec Superpowers à la demande du fondateur. L’application est désormais identifiée : **Grok Bot de xAI**. Ses fonctions natives sont documentées ; les accès et routines du compte de l’opérateur restent à vérifier. L’opérateur confirme que Cursor ouvre ou rouvre une PR.
 
 ## Intention
 
 Le fondateur parle à ses Grok Bots. Ceux-ci travaillent, choisissent les missions et utilisent Codex ou Claude comme spécialistes. Le superviseur GlobalLand organise l’exécution sur le VPS et conserve les preuves. Le fondateur ne doit pas recopier une commande Hostinger pour chaque mission.
 
 L’opérateur rapporte désormais un chemin **Grok Bot → Cursor → PR GitHub**. Ce circuit convient au développement ; une PR de tâches attend sa livraison à main avant consommation par le VPS. GitHub est déjà un transport prévu : ce sont le chemin, la branche, le format et le retour des résultats qui déterminent si une action atteint le monde.
+
+## Vérification du produit officiel
+
+Le [guide xAI Grok Bot 101](https://x.ai/bot/guides/grok-bot-101) et la [page produit](https://x.ai/bot), lus le 31 octobre 2026, documentent un ordinateur cloud persistant, un terminal, les applications, des routines programmées, des déclencheurs et les messages entre bots. Le guide décrit la délégation à Cursor Cloud Agent avec ouverture d’une PR. Il annonce aussi les mêmes serveurs MCP, plugins et skills que Cursor. Le produit ne doit donc pas être assimilé à une simple application de chat sans reprise autonome.
+
+Ces capacités sont des fonctions annoncées par le fournisseur, pas des essais réalisés dans le compte de l’opérateur. Un déclencheur GitHub PR est donné en exemple ; aucun déclencheur particulier sur un fichier de résultat de queue n’est établi. Le premier parcours proposé utilise une routine native qui consulte les résultats périodiquement. Il n’exige pas de présumer une API xAI distincte ou un nouvel abonnement.
 
 ## État de départ et limites
 
@@ -21,12 +27,13 @@ L’opérateur rapporte désormais un chemin **Grok Bot → Cursor → PR GitHub
 
 | Approche | Apport | Dépendance ou coût de changement |
 | --- | --- | --- |
-| **Réutiliser le moteur et sa queue, avec un adaptateur supporté par l’application** | Conserver les abonnements et choisir la liaison disponible la plus courte entre Grok et GlobalLand. | Identifier l’application et vérifier livraison, retour et reprise. Cursor est un relais possible, pas un intermédiaire obligatoire. |
+| **Routine native Grok Bot + queue existante** | Utiliser l’ordinateur et la reprise déjà documentés du produit ; conserver le moteur et les abonnements. | Vérifier les accès GitHub, la routine dans le compte et la déduplication des suites. Cursor n’est pas obligatoire. |
 | Faire passer les missions par le relais Cursor existant | Prouver rapidement le parcours si le relais peut aussi livrer des tâches sur main. | Aujourd’hui, seule l’ouverture d’une PR est rapportée ; une intervention par mission ne satisfait pas l’objectif. |
+| Outil MCP GlobalLand connecté à Grok Bot | Proposer des outils directs de soumission et de lecture. | Serveur authentifié accessible et connecteur à installer/vérifier ; aucun n’est présent aujourd’hui. |
 | Connecter directement une API Grok au VPS | Réveil programmable si l’offre et l’identité de service le permettent. | Connexion et facturation distinctes possibles ; aucune API autorisée ou configurée n’est établie. |
 | Migrer toute l’orchestration vers un framework | Apporter des abstractions de reprise et de coordination. | Migration sans résoudre à elle seule l’accès à l’application Grok ni la banque. |
 
-**Choix proposé : réutiliser les processus Python/Node et leur queue**, avec la liaison la plus courte officiellement supportée par l’application. Le plan ne décide pas que Cursor est le meilleur transport. Le relais existant sert de candidat à vérifier ; une interface directe à GlobalLand serait préférable si elle est disponible sans ajouter une API de modèle facturée. Le choix de l’adaptateur dépend de cette vérification, sans installation ni abonnement ajouté à ce stade.
+**Choix proposé : commencer par une routine native Grok Bot et la queue existante.** Le bot livre ses tâches via un connecteur dont les capacités auront été éprouvées, ou un petit client GitHub sur son ordinateur cloud. Il consulte les résultats lors de sa prochaine routine et poursuit la mission. Cursor reste utile au développement. Le MCP constitue une évolution possible si le parcours natif montre un besoin concret ; aucune nouvelle API de modèle n’est requise par cette conception.
 
 ## Deux circuits explicites
 
@@ -60,13 +67,15 @@ Le résultat de DELEGATE publie `products/delegations/TASK-NNNN.proposal.json` e
 
 La tâche et son empreinte sont enregistrées avant invocation. Une proposition validée est sauvegardée dans une outbox privée avant publication. Une reprise de publication réutilise ces octets. Une interruption à résultat inconnu n’est pas déclarée réussie et ne relance pas aveuglément le modèle.
 
-Le retour utilise un identifiant stable dérivé de l’ID de tâche, de son empreinte d’entrée et de son résultat. Le relais doit pouvoir dédupliquer les événements, réveiller ou solliciter le bon Grok Bot et obtenir un accusé de réception. Une livraison incertaine conserve son statut jusqu’au rapprochement. Le résultat durable sur GitHub reste accessible même si sa notification échoue.
+Le retour réutilise le résultat durable sur GitHub. Une routine native du bon Grok Bot consulte les IDs qu’il a soumis et reprend depuis son journal de mission. Le relais conserve les octets exacts avant envoi ; une nouvelle consultation retrouve la tâche en attente ou son résultat et ne la redépose pas. Les suites proposées par Grok doivent elles aussi être enregistrées avant transmission, afin de ne pas fabriquer de nouveaux IDs après une livraison incertaine.
 
-**Dépendance déterminante :** l’accès GitHub seul ne réveille pas une application. Si aucun mécanisme supporté de reprise de Grok n’est disponible, publier `WAITING_GROK_TRANSPORT` ou `WAITING_GROK_RESUME`, conserver les résultats et annoncer un parcours avec reprise manuelle. Ne pas appeler une session Codex de remplacement « Grok » et ne pas qualifier ce parcours d’autonomie complète.
+La progression utilise une barrière de lot : le bot attend les résultats publiés de toutes les tâches du lot, puis une seule source agrégée permet le lot suivant. Le journal de mission conserve cette association et le lot actif ; deux routines concurrentes ne peuvent pas produire deux suites. Cela n’assimile pas un résultat d’outil à un règlement financier : les opérations financières UNKNOWN restent à rapprocher via leurs identités d’origine.
+
+**Dépendance déterminante :** la routine doit être effectivement configurée et exécutée dans le compte. Sa documentation seule, comme l’accès GitHub seul, ne prouve pas une reprise de GlobalLand. Avant cet essai, publier `WAITING_GROK_TRANSPORT` ou `WAITING_GROK_RESUME` selon la dépendance constatée et conserver les résultats. Ne pas appeler une session Codex de remplacement « Grok » et ne pas qualifier ce parcours d’autonomie complète.
 
 La configuration du coordinateur est distincte des connexions des spécialistes. Un état dédié `world/coordinator.json` décrit `mode`, `state`, `automatic_resume_verified` et les références publiques du dernier événement. La readiness des abonnements ne sert pas de preuve du réveil de Grok. L’état et les codes sont fermés ; pas d’exception brute, token, détail de compte ou trace privée.
 
-La capacité de livraison vise l’arrivée effective sur main, par écriture directe ou fusion automatique vérifiée, pas une obligation d’utiliser un mécanisme particulier. Un essai administratif peut fonctionner en état VALIDATING avant la preuve d’autonomie : il concerne une mission nommée et deux reprises de Grok maximum, conserve `automatic_resume_verified: false` et ne s’active pas lui-même en READY. Cela permet de mesurer la vraie boucle avant d’autoriser son fonctionnement normal.
+La capacité de livraison vise l’arrivée effective sur main, par écriture directe ou fusion automatique vérifiée, pas une obligation d’utiliser un mécanisme particulier. Un essai administratif peut fonctionner en état VALIDATING avant la preuve d’autonomie : il concerne une mission nommée et deux lots de suite maximum via le relais, conserve `automatic_resume_verified: false` et ne s’active pas lui-même en READY. Le journal du relais compte les lots et applique cette borne atomiquement, y compris après redémarrage ; une consultation sans nouveau lot ne consomme pas la borne. Cette propriété ne prétend pas limiter les conversations ou tous les réveils de l’application xAI. Cela permet de mesurer la vraie boucle avant d’autoriser son fonctionnement normal.
 
 Dans le mode coordonné, un seul coordinateur conduit les suites de missions. Les horaires queue/daily demeurent ; le cycle think ne lance pas simultanément une stratégie indépendante ignorant Grok. La bascule est explicite, réversible et conserve les outboxes en cours.
 
@@ -95,4 +104,4 @@ Sources de mécanismes : [réservations TigerBeetle](https://docs.tigerbeetle.co
 4. Une panne de publication, un doublon et une indisponibilité de fournisseur sont testés sans refaire un effet incertain. Les statuts et identités correspondent aux invocations réelles.
 5. Aucun fonds réel n’est déplacé pendant cette preuve. La banque reste UNFUNDED. Les tests avec reçus financiers factices demeurent isolés de l’instance réelle.
 
-Des tests locaux avec faux transports prouvent le logiciel, pas ce parcours natif. L’autonomie de bout en bout reste non démontrée tant que le réveil réel de Grok et sa décision suivante ne sont pas observés.
+Des tests locaux avec faux transports prouvent le logiciel, pas ce parcours natif. L’autonomie de bout en bout reste non démontrée tant que l’exécution de la routine réelle de Grok et sa décision suivante ne sont pas observées. Les fonctions documentées de Grok Bot rendent ce chemin plausible ; elles ne constituent pas une preuve de sa configuration chez l’opérateur.
