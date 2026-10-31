@@ -35,7 +35,8 @@
 .invoice-lines th, .invoice-lines td { padding: 8px 6px; border-bottom: 1px solid #d8dee9; text-align: left; vertical-align: top; }
 .invoice-lines th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: #5f6b7a; }
 .invoice-lines td:first-child { overflow-wrap: anywhere; }
-.invoice .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.invoice .num { text-align: right; font-variant-numeric: tabular-nums; }
+.invoice td.num { white-space: nowrap; }
 .invoice-empty { color: #5f6b7a; text-align: center; }
 .invoice .invoice-totals { width: auto; min-width: 280px; margin: 16px 0 0 auto; }
 .invoice-totals th, .invoice-totals td { padding: 6px; font-weight: 400; text-align: left; }

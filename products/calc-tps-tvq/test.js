@@ -1,6 +1,8 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { execFileSync } = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
 const calc = require('./calc.js');
 const invoiceDoc = require('./invoice.js');
 
@@ -371,4 +373,80 @@ test('download file names are safe and descriptive', () => {
   assert.equal(invoiceDoc.invoiceFileName({ invoiceNumber: '../../etc/passwd' }, result), 'facture-etc-passwd.html');
   assert.equal(invoiceDoc.invoiceFileName({ invoiceDate: '2026-10-31' }, result), 'facture-2026-10-31.html');
   assert.equal(invoiceDoc.invoiceFileName({}, result), 'facture.html');
+});
+
+const source = (name) => fs.readFileSync(path.join(__dirname, name), 'utf8');
+const PAGE_FILES = ['index.html', 'app.js', 'invoice.js', 'calc.js'];
+
+test('page code never parses markup, stores data or calls the network', () => {
+  const forbidden = [
+    /\.innerHTML\b/, /\.outerHTML\b/, /insertAdjacentHTML/, /document\.write/, /\beval\s*\(/, /\bnew Function\b/,
+    /\bfetch\s*\(/, /XMLHttpRequest/, /sendBeacon/, /\bWebSocket\b/, /\bEventSource\b/,
+    /localStorage/, /sessionStorage/, /indexedDB/, /document\.cookie/,
+  ];
+  PAGE_FILES.forEach((name) => {
+    const text = source(name);
+    forbidden.forEach((pattern) => assert.ok(!pattern.test(text), `${name} matches ${pattern}`));
+  });
+});
+
+test('page loads only its own scripts and opens the external link in a new tab', () => {
+  const html = source('index.html');
+  assert.ok(html.startsWith('<!doctype html>\n<html lang="fr-CA">'));
+  assert.deepEqual([...html.matchAll(/<script\b([^>]*)>/g)].map((match) => match[1].trim()),
+    ['src="calc.js"', 'src="invoice.js"', 'src="app.js"']);
+  assert.deepEqual([...html.matchAll(/\b(?:src|srcset|poster|action|formaction)="([^"]*)"/g)].map((match) => match[1]),
+    ['calc.js', 'invoice.js', 'app.js']);
+  assert.deepEqual([...html.matchAll(/<link\b[^>]*>/g)].map((match) => match[0]), ['<link rel="icon" href="data:,">']);
+  const external = [...html.matchAll(/<a\b[^>]*>/g)].map((match) => match[0]).filter((tag) => !/href="#/.test(tag));
+  assert.equal(external.length, 1);
+  external.forEach((tag) => {
+    assert.match(tag, /href="https:\/\/www\.revenuquebec\.ca\//);
+    assert.match(tag, / target="_blank"/);
+    assert.match(tag, / rel="noopener noreferrer"/);
+  });
+});
+
+test('page fields accept fr-CA decimals and are each labelled', () => {
+  const html = source('index.html');
+  const app = source('app.js');
+  assert.ok(!/type="number"|type: 'number'/.test(html + app), 'number inputs drop the fr-CA decimal comma');
+  assert.equal(app.match(/inputmode: 'decimal'/g).length, 2);
+  for (const [tag, id] of html.matchAll(/<(?:input|textarea|select)\b[^>]*\bid="([^"]+)"[^>]*>/g)) {
+    const wrapped = html.includes(`<label class="check">${tag}`);
+    assert.ok(wrapped || html.includes(`for="${id}"`), `no label for #${id}`);
+  }
+  assert.equal(html.match(/<label><input type="radio"/g).length, 2);
+  assert.match(app, /\['label', \{ class: `field-label \$\{name\}-label`, for: id\(name\) \}, label\]/);
+  // The visible "Retirer" text starts the accessible name, which also says which line goes.
+  assert.match(app, /\['button', \{ type: 'button', class: 'secondary remove' \}, 'Retirer'\]/);
+  assert.match(app, /setAttribute\('aria-label', `Retirer la ligne \$\{index \+ 1\}`\)/);
+});
+
+test('only the total is announced, and printing shows only the invoice', () => {
+  const html = source('index.html');
+  assert.deepEqual([...html.matchAll(/<[^>]*aria-live[^>]*>/g)].map((match) => match[0]),
+    ['<p id="total-announcer" class="sr-only" aria-live="polite" aria-atomic="true">']);
+  assert.equal(html.match(/role="status"/g).length, 2);
+  assert.match(html, /@media print \{[^@]*@page \{ margin: 15mm; \}[^@]*\.screen-only \{ display: none !important; \}/);
+  for (const opening of ['<header class="screen-only">', '<div class="layout screen-only">',
+    '<section class="card screen-only" id="details"', '<footer class="screen-only">']) {
+    assert.ok(html.includes(opening), opening);
+  }
+  assert.ok(!/<div id="invoice-preview"[^>]*screen-only/.test(html));
+});
+
+test('page copy: prominent disclaimer, accurate small-supplier rule, French accents', () => {
+  const html = source('index.html');
+  [
+    '<strong>Outil informatif, pas un avis fiscal.</strong>',
+    'ne dépassent 30&nbsp;000&nbsp;$ ni au cours d’un seul trimestre civil, ni au total des quatre derniers trimestres civils consécutifs',
+    '(y compris détaxées) effectuées dans le monde, additionnées à celles de vos associés',
+    'mais peut le faire volontairement. Tant qu’il n’est pas inscrit, il ne doit pas facturer ces taxes.',
+    'organismes de services publics (seuil de 50&nbsp;000&nbsp;$)',
+    'Ce calculateur vise les fournitures effectuées au Québec.',
+    'aucune donnée saisie n’est enregistrée ni transmise',
+  ].forEach((text) => assert.ok(html.includes(text), text));
+  assert.ok(html.indexOf('Outil informatif') < html.indexOf('<div class="layout'), 'disclaimer comes before the calculator');
+  assert.ok(!/\bQuebec\b|Quantite|Rappel general|Resume/.test(html + source('app.js')));
 });
