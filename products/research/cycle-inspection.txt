@@ -1,0 +1,168 @@
+== guide (first 120 lines) ==
+ Manager.io M MANAGER Download Releases Guides Accountants Forum Cloud Edition Download Releases Guides Accountants Forum Cloud Edition 
+== distribution-access.json ==
+{
+  "purpose": "Discover existing distribution access without revealing credentials",
+  "tools": {
+    "gh": false,
+    "git": true,
+    "node": true,
+    "npm": true,
+    "wrangler": false,
+    "netlify": false,
+    "vercel": false
+  },
+  "publication_verified": false,
+  "payments_verified": false,
+  "traffic_verified": false
+}
+== offline-test-results.json ==
+{
+  "scope": "Generic CSV structure only; no accounting platform import tested",
+  "results": [
+    {
+      "name": "normal",
+      "passed": true
+    },
+    {
+      "name": "quoted comma",
+      "passed": true
+    },
+    {
+      "name": "quoted newline",
+      "passed": true
+    },
+    {
+      "name": "escaped quote",
+      "passed": true
+    },
+    {
+      "name": "CRLF",
+      "passed": true
+    },
+    {
+      "name": "BOM",
+      "passed": true
+    },
+    {
+      "name": "ragged",
+      "passed": true
+    },
+    {
+      "name": "unclosed",
+      "passed": true
+    },
+    {
+      "name": "duplicate",
+      "passed": true
+    },
+    {
+      "name": "empty header",
+      "passed": true
+    },
+    {
+      "name": "empty",
+      "passed": true
+    },
+    {
+      "name": "trailing text",
+      "passed": true
+    }
+  ]
+}
+== structure-test-results.json ==
+[
+  {
+    "case": "quoted multiline",
+    "passed": true,
+    "expected": [],
+    "actual": []
+  },
+  {
+    "case": "bom",
+    "passed": true,
+    "expected": [],
+    "actual": []
+  },
+  {
+    "case": "ragged",
+    "passed": true,
+    "expected": [
+      "column_count"
+    ],
+    "actual": [
+      "column_count"
+    ]
+  },
+  {
+    "case": "duplicates",
+    "passed": true,
+    "expected": [
+      "duplicate_header"
+    ],
+    "actual": [
+      "duplicate_header"
+    ]
+  },
+  {
+    "case": "empty",
+    "passed": true,
+    "expected": [
+      "empty_file"
+    ],
+    "actual": [
+      "empty_file"
+    ]
+  },
+  {
+    "case": "malformed",
+    "passed": true,
+    "expected": [
+      "invalid_csv"
+    ],
+    "actual": [
+      "invalid_csv"
+    ]
+  }
+]
+== STRUCTURE-CHECK.md ==
+# Local CSV structure check
+
+Run: python3 products/invoice-preflight/csv_structure_check.py products/invoice-preflight/sample.csv
+
+Checks comma-separated UTF-8 CSV syntax, blank or duplicate headers and inconsistent record widths. Runs locally using the Python standard library. Multiline quoted fields and UTF-8 BOM are supported.
+
+This is a generic structural check. It does not validate invoice amounts, tax, customer mappings, required platform fields or successful import into Manager or any accounting platform. Passing does not establish import compatibility. No payment or revenue has been verified.
+
+== sizes ==
+   608 invoice-preflight/STRUCTURE-CHECK.md
+  1036 invoice-preflight/csv_structure_check.py
+  2810 invoice-preflight/index.html
+  1275 invoice-preflight/offline-checker.js
+   829 invoice-preflight/offline-test-results.json
+    55 invoice-preflight/sample.csv
+   753 invoice-preflight/structure-test-results.json
+  2825 research/cycle-inspection.txt
+ 52630 research/demand-source-review.json
+ 13112 research/director-state-snapshot.txt
+   330 research/distribution-access.json
+ 68828 research/invoice-evidence-review.json
+ 55346 research/manager-forum-import-search.json
+   136 research/manager-invoice-import-guide.txt
+  6906 research/manager-invoice-import-source.html
+   148 research/workspace-inventory.txt
+207627 total
+== index.html head ==
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Invoice CSV preflight prototype</title><style>body{font:18px system-ui;max-width:760px;margin:40px auto;padding:20px}textarea{width:100%;height:200px}button,input{margin:12px 0}pre{white-space:pre-wrap}</style><h1>Check CSV structure before importing</h1><p>Free offline prototype. Checks comma-separated structure, row widths and headers. It does not validate invoice amounts, tax, customer mappings or compatibility with any accounting platform.</p><p>Open this downloaded file locally. This page contains no network requests; selected data is processed in your browser.</p><label>Choose CSV <input id="file" type="file" accept=".csv,text/csv"></label><p>Or paste CSV:</p><textarea id="csv" aria-label="CSV text">Invoice,Customer,Amount
+INV-001,Example customer,125.00</textarea><br><button id="run">Check structure</button><pre id="result" aria-live="polite"></pre><h2>Proposed paid customization</h2><p>Would a checker tailored to your export and import workflow be useful? Illustrative offer: USD 49 for one mapping and anonymized example fixtures, subject to scope agreement. This price is untested. Payment and ordering are not available on this page.</p><script>function check(text){
+text=text.replace(/^﻿/,'');let rows=[],row=[],cell='',quoted=false,closed=false,errors=[];
+for(let i=0;i<text.length;i++){let c=text[i];if(quoted){if(c==='"'){if(text[i+1]==='"'){cell+='"';i++;}else{quoted=false;closed=true;}}else cell+=c;continue;}
+if(c==='"'){if(cell!==''||closed)errors.push('Unexpected quote near character '+(i+1));else quoted=true;}
+else if(c===','){row.push(cell);cell='';closed=false;}
+else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cell);rows.push(row);row=[];cell='';closed=false;}
+else {if(closed)errors.push('Text after closing quote near character '+(i+1));cell+=c;}}
+if(quoted)errors.push('Unclosed quoted field');if(cell!==''||row.length||closed){row.push(cell);rows.push(row);}
+if(!rows.length)errors.push('Empty file');else{let width=rows[0].length;rows.forEach((r,i)=>{if(r.length!==width)errors.push('Row '+(i+1)+' has '+r.length+' columns; expected '+width);});let seen=new Set();rows[0].forEach((h,i)=>{if(!h.trim())errors.push('Empty header at column '+(i+1));if(seen.has(h.trim()))errors.push('Duplicate header: '+h);seen.add(h.trim());});}
+return {dataRows:Math.max(0,rows.length-1),columns:rows.length?rows[0].length:0,errors};}
+
+document.getElementById("run").onclick=()=>{document.getElementById("result").textContent=JSON.stringify(check(document.getElementById("csv").value),null,2)};document.getElementById("file").onchange=async e=>{const f=e.target.files[0];if(f)document.getElementById("csv").value=await f.text()};</script></html>
