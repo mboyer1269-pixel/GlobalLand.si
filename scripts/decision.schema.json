@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "summary",
+    "actions"
+  ],
+  "properties": {
+    "summary": {
+      "type": "string"
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "agent",
+          "action",
+          "args"
+        ],
+        "properties": {
+          "agent": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_-]{1,64}$"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "EXEC",
+              "FETCH",
+              "WORLD",
+              "STATUS",
+              "SPEND",
+              "RECONCILE"
+            ]
+          },
+          "args": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

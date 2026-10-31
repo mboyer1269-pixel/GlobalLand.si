@@ -1,96 +1,84 @@
-# Installation VPS, validation et retour arrière
+# Installer GlobalLand v3
 
-Aucun déploiement n'a été effectué par cette PR. Ne pas activer les anciens cron dans `workspace/GlobalLand.si/scripts/`. Cette version change le protocole ; seules les tâches SHELL/AUDIT sont acceptées.
+Prérequis : Ubuntu/Debian, Python3.12+, Git, Docker Compose, image Node22 vérifiée et environ1Go disponible pour une tâche isolée. Les services Oria restent séparés. Ne lancer aucun code depuis un checkout modifiable par les agents dans le cron.
 
-## Prérequis et identification exacte
+Pour une nouvelle installation, télécharger un SHA complet revu, vérifier un arbre Git propre et exécuter `sudo bash scripts/setup_vps.sh SHA_COMPLET node:22-bookworm@sha256:DIGEST_VERIFIE`. L'installeur crée `/opt/globalland`, contrôle séparé, Git bare et clé dédiée ; il ne démarre ni modèle ni cron. Après cette préparation, enregistrer uniquement la clé publique `ssh/deploy_key.pub` comme Deploy Key d'écriture sur ce dépôt. Installer les clés hôte GitHub vérifiées dans `ssh/known_hosts` mode600 avec StrictHostKeyChecking=yes ; ne jamais publier la clé privée. Finaliser ensuite avec `sudo bash /opt/globalland/control/finalize_setup.sh` ; le clone SSH fonctionne aussi pour un dépôt privé.
 
-Ubuntu/Debian, Python 3.12+, Git, Docker avec Compose v2, 1 Go de RAM disponible pour le worker et marge pour l'hôte. Vérifier les autres services, le disque, les sauvegardes et l'heure UTC. Le compte qui administre Docker est de confiance.
+Sur une installation existante v2, suivre la mise à niveau ci-dessous ; ne pas relancer l'installeur initial. Lire SECURITY.md, CODE.md et queue/PROTOCOL.md. Les placeholders SHA/digest/version doivent être remplacés par les valeurs réellement vérifiées, pas copiés littéralement.
 
-Après revue et fusion, choisir le **SHA Git complet de 40 caractères réellement fusionné**. Il est impossible de mettre son propre hash final dans le commit ; le champ Head de la PR permet d'identifier la version testée avant fusion. Si GitHub crée un merge/squash, relever le nouveau SHA puis vérifier que son contenu correspond.
+# Mise à niveau vers le monde autonome v3
+
+L'installation v2 continue de fonctionner tant que le contrôle v3 n'a pas été installé explicitement. Ne jamais exécuter un nouveau superviseur depuis le dépôt mutable. Utiliser un nouveau checkout propre au SHA complet revu/fusionné.
 
 ```bash
-REV=REMPLACER_PAR_LE_SHA_COMPLET_REVU
-IMAGE=node:22-bookworm@sha256:REMPLACER_PAR_LE_DIGEST_VERIFIE
-
-git clone https://github.com/mboyer1269-pixel/GlobalLand.si.git globalland-install
-cd globalland-install
-git checkout --detach "$REV"
-git status --porcelain
-node tests/runtime.test.js
-python3 -m unittest discover -s tests -p 'test_*.py'
+GIT_SSH_COMMAND='ssh -i /opt/globalland/ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/opt/globalland/ssh/known_hosts' \
+  git clone git@github.com:mboyer1269-pixel/GlobalLand.si.git /root/globalland-v3
+cd /root/globalland-v3
+git checkout --detach SHA_COMPLET_REVU
+sudo bash scripts/upgrade_vps.sh SHA_COMPLET_REVU
+sudo python3 /opt/globalland/control/supervisor.py status
 ```
 
-Obtenir le digest Node 22 Bookworm par un canal de confiance, puis télécharger cette image sur le VPS avant les tests. Ne pas utiliser le digest fictif d'un exemple. L'installeur exige le digest et refuse un arbre Git modifié.
+Le script désactive temporairement uniquement le fichier cron GlobalLand, attend son verrou, sauvegarde contrôle/état/Git/clé dédiée/releases, installe une release versionnée et conserve les credentials. Il restaure les anciens horaires queue/daily ; il ne lance aucun modèle et ne prétend pas avoir financé la Banque. Ne jamais supprimer les SQLite/WAL/journaux pour changer de version. Le fichier `backups/upgrade-date/state-before.tgz` est privé et contient la clé dédiée ; ne pas le publier.
 
-## Première installation (sans démarrer d'automatisme)
+## Smoke test gratuit de v3
+
+Après la mise à niveau : `status` doit montrer le monde et ses agents, une Banque UNFUNDED si aucune preuve réelle n'a été intégrée et un contrôleur en attente. Soumettre une tâche TOOL/WORLD créant une mission, puis une tâche EXEC produisant un petit README sous products/. Vérifier le produit et son reçu de hash sur GitHub ; le solde CAD ne doit pas être inventé. Le test `tests/test_docker_smoke.py` peut également être exécuté avec `GLOBALLAND_DOCKER_SMOKE=1` depuis le checkout après téléchargement de Node22.
+
+## Codex et Claude Code avec les abonnements
+
+Les documents officiels et les étapes se trouvent dans docs/INTEGRATIONS.md. Ne jamais coller un token de connexion dans GitHub ou dans la conversation. La procédure utilise seulement les CLIs officielles, pas une extraction de leur OAuth pour appeler une API.
+
+1. Construire une image privée avec des versions officielles exactes et une base Node identifiée par digest :
 
 ```bash
-sudo bash scripts/setup_vps.sh "$REV" "$IMAGE"
+docker build -f docker/Brain.Dockerfile \
+  --build-arg BASE_IMAGE=node:22-bookworm@sha256:DIGEST_VERIFIE \
+  --build-arg CODEX_VERSION=VERSION_OFFICIELLE_EXACTE \
+  --build-arg CLAUDE_CODE_VERSION=VERSION_OFFICIELLE_EXACTE \
+  -t globalland-brain:VERSION .
+docker image inspect globalland-brain:VERSION --format '{{.Id}}'
 ```
 
-Le script refuse un `/opt/globalland` existant. Il installe le contrôle revu, crée un Git bare privé et une **nouvelle clé de déploiement dédiée**, affiche uniquement sa partie publique. Il ne lit aucune ancienne clé de production, ne configure aucune API, ne démarre aucun conteneur et n'installe aucun cron.
+Un ID local immuable `sha256:...` convient, sans imposer un registre payant. Vérifier les versions et flags avec `--help` ; le contrôleur refuse les options requises absentes. Les placeholders ne sont pas des versions à copier telles quelles.
 
-1. Enregistrer la clé publique dans les Deploy Keys de ce seul dépôt, avec write access.
-2. Installer les clés hôte SSH GitHub vérifiées depuis une source officielle dans `/opt/globalland/ssh/known_hosts`, propriétaire root et mode 600. Ne pas accepter aveuglément `ssh-keyscan` et ne pas désactiver StrictHostKeyChecking.
-3. Vérifier l'image et la configuration :
+2. Connecter les abonnements personnellement dans le terminal privé :
 
 ```bash
-sudo docker image inspect "$IMAGE"
-sudo docker compose -f /opt/globalland/control/compose.yml config --quiet
-sudo ssh -i /opt/globalland/ssh/deploy_key -o IdentitiesOnly=yes \
-  -o StrictHostKeyChecking=yes \
-  -o UserKnownHostsFile=/opt/globalland/ssh/known_hosts -T git@github.com
+sudo bash /opt/globalland/control/login_subscriptions.sh codex sha256:ID_IMAGE
+sudo bash /opt/globalland/control/login_subscriptions.sh claude sha256:ID_IMAGE
 ```
 
-GitHub peut retourner le code SSH 1 tout en confirmant l'authentification et l'absence de shell. Confirmer le message et le dépôt dédié.
+Codex ouvre une connexion ChatGPT par code d'appareil. Claude ouvre sa connexion officielle. Vérifier que les plans incluent ces CLIs. Désactiver l'extra usage, les achats/recharges de crédits et les bascules facturées dans les comptes utilisés. Les abonnements déjà payés sont distincts du capital50 ; cette version ne doit déclencher aucune facturation supplémentaire à leur nom.
 
-## Test réel obligatoire avant cron
-
-Exécuter un cycle manuel sans clé API :
+3. Vérifier sans inférence, puis activer la configuration :
 
 ```bash
+sudo python3 /opt/globalland/control/configure_subscriptions.py \
+  --image sha256:ID_IMAGE --providers codex,claude \
+  --confirm-extra-usage-disabled
+sudo python3 /opt/globalland/control/supervisor.py think
 sudo python3 /opt/globalland/control/supervisor.py queue
-sudo python3 /opt/globalland/control/supervisor.py daily
-sudo python3 /opt/globalland/control/supervisor.py daily
 ```
 
-Si TASK-0001 a déjà été traité, créer une nouvelle tâche selon `queue/PROTOCOL.md`, avec un nouvel ID, puis relancer queue. Sur GitHub, vérifier :
+Le drapeau d'attestation suppose que tu as effectivement vérifié les comptes. Il n'est pas une preuve automatisée de leur facturation. Pour utiliser un seul abonnement, fournir `--providers codex` ou `--providers claude`. Aucun repli API ni achat de crédits n'est effectué si un quota est atteint.
 
-- résultat DONE et hash d'entrée correct ; entrée inbox retirée dans le même commit ;
-- rapport `bank/audits/audit-YYYY-MM-DD.md` et ledger/log publiés ensemble ;
-- second audit du même jour sans second DAY_TICK ni nouvelle baisse de grâce ;
-- même tâche non réexécutée à la relance ; conteneurs temporaires supprimés ;
-- configuration effective : UID 65534, aucun réseau/port, montage en lecture seule, RAM/CPU/PID limités.
-
-Soumettre ensuite une tâche avec un **nouvel ID** et `action: node -p 1` : résultat REJECTED attendu, aucun code libre exécuté. Tester la reprise de publication dans un dépôt de préproduction : couper l'accès Git après exécution puis le rétablir ; le hash et le résultat doivent rester les mêmes, sans second lancement. Une divergence doit arrêter le cycle et préserver le journal.
-
-Une sortie de commande seule ne certifie pas le déploiement : vérifier les commits distants et les journaux privés. Ne transmettre ni clés privées ni contenu confidentiel du journal au bot.
-
-## Cron et surveillance
-
-Seulement après les tests précédents : dans le crontab **root**, installer ces lignes qui exécutent le contrôle installé, jamais le dépôt mutable. Utiliser explicitement bash pour les wrappers installés en mode 644 :
+Vérifier une décision THINK, des tâches produites et leurs résultats/artefacts sur GitHub avant d'activer la réflexion périodique. Ajouter ensuite dans un fichier dédié `/etc/cron.d/globalland-think` mode644 :
 
 ```cron
-*/5 * * * * /bin/bash /opt/globalland/control/queue_runner.sh >> /var/log/globalland-queue.log 2>&1
-0 8 * * * /bin/bash /opt/globalland/control/daily_audit.sh >> /var/log/globalland-audit.log 2>&1
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+*/5 * * * * root /usr/bin/python3 /opt/globalland/control/supervisor.py think >> /var/log/globalland/think.log 2>&1
 ```
 
-08 h est l'heure de l'hôte ; les dates comptables sont UTC. Le verrou commun sérialise les deux. Configurer logrotate pour les deux fichiers `/var/log/globalland-*.log`, rotation quotidienne, conservation 14 jours, mode 600. Surveiller un rapport manquant, un statut INTERRUPTED ou une erreur du superviseur. Aucun service de notification n'est configuré par cette PR.
+Le verrou est commun aux trois cycles ; les agents pensent et travaillent entre les cycles. La rotation `/var/log/globalland/*.log` existante couvre ce nouveau journal. Ne pas toucher aux cron ou conteneurs Oria.
 
-## Reprise et incidents
+## Banque réelle
 
-- **Push refusé/réseau indisponible** : préserver `state/` et `source.git`. Rétablir l'accès puis relancer le même cycle ; le résultat terminal sera publié sans exécuter à nouveau l'action. Une file vide n'empêche pas la reprise.
-- **Historique divergent** : arrêter cron, sauvegarder. Réconcilier explicitement le commit local préparé et le ledger distant dans une branche de revue. Aucun force-push, reset ou rebase automatique.
-- **Tâche INTERRUPTED** : examiner le journal privé et le résultat ; créer une nouvelle tâche avec un nouvel ID seulement après revue. Ne pas effacer le journal pour réutiliser l'ID.
-- **Audit quotidien INTERRUPTED** : les cycles s'arrêtent pour revue opérateur. Après arrêt de cron et sauvegarde, vérifier `source.git` et GitHub : le ledger du jour et son journal sont-ils déjà committés/poussés ? Préserver le fichier `state/DAILY-date.json` dans un sous-dossier privé `state/quarantine/` avec une note d'incident, puis relancer daily seulement après rapprochement. Le tick UTC empêche un deuxième débit de grâce si le jour est déjà au ledger. Ne pas marquer un audit PUBLISHED sans vérifier sa publication.
-- **Secret détecté** : arrêt et traitement privé ; aucun contournement du filtre. Si le secret était déjà soumis à GitHub, le révoquer selon la procédure du propriétaire.
+Le monde peut faire du travail gratuit avec les abonnements connectés avant le dépôt. La Banque reste UNFUNDED tant qu'un service réel dédié et son vérificateur ne sont pas configurés. Voir docs/INTEGRATIONS.md pour les possibilités ; aucun faux reçu fourni dans les tests ne doit être importé dans l'instance réelle.
 
-## Sauvegarde, mise à niveau et retour arrière
+L'adaptateur privé `/opt/globalland/integrations/finance` est exécuté uniquement par le contrôle hôte. Il doit fournir quote/submit/reconcile/verify et vérifier les preuves du service choisi. Les agents ne reçoivent ni carte ni clé de retrait. Une attestation JSON ne constitue pas à elle seule un plafond fournisseur. L'ouverture/KYC et le dépôt réel restent à effectuer par le propriétaire du compte.
 
-Arrêter les deux entrées cron et attendre la fin du cycle sous verrou. Sauvegarder ensemble `/opt/globalland/control`, `state`, `source.git` et `ssh` dans une archive **privée**, chiffrée hors hôte, réservée à l'administrateur. Elle contient la mémoire anti-rejeu et la clé dédiée ; ne jamais la pousser sur GitHub.
+## Retour arrière v3
 
-Une mise à niveau du dépôt ne remplace jamais automatiquement `control/`. Préparer une nouvelle version depuis un SHA revu, exécuter ses tests, comparer les schémas de tâches/journaux/ledger et l'image, sauvegarder puis remplacer le contrôle administrativement. Cette première version ne fournit pas de migration automatique depuis l'ancienne installation ; conserver l'ancien arbre hors montages et procéder comme une nouvelle installation après sauvegarde.
-
-Pour revenir en arrière : désactiver cron, attendre le verrou, sauvegarder l'état courant, restaurer le précédent `control/` et sa configuration d'image. Conserver `state/` et les commits préparés si le schéma est compatible ; sinon réconcilier manuellement avant reprise. **Ne jamais restaurer un ancien ledger ou effacer state indépendamment**, sous peine de perdre des écritures ou de rejouer des tâches. Ne pas réactiver les anciens runners vulnérables. Relancer les tests manuels avant cron.
-
-Aucune suppression de serveur, aucun archivage du dépôt et aucun achat ne font partie de cette procédure automatisée.
+Désactiver seulement les cron GlobalLand (queue/daily/think), attendre le verrou et conserver une sauvegarde privée de l'état courant. Repointer `control` vers la release précédente conservée ; restaurer sa configuration et uniquement ses horaires compatibles. Ne pas supprimer les journaux de paiements, restaurer un vieux solde ou relancer un ancien paiement. Si v3 a engagé des opérations, les rapprocher avant de réactiver v2 ; v2 ne connaît pas cette trésorerie et n'est pas un moteur productif de secours. Oria reste en place.

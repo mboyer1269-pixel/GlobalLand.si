@@ -1,30 +1,32 @@
-# Architecture et état de GlobalLand
+# Architecture de GlobalLand v3
 
-## Quatre variables officielles initiales
+## État financier
 
-1. Trésorerie : **50 CAD**, réserve verrouillée **50 CAD**, disponible sans CEO **0 CAD**.
-2. Revenus déclarés au genesis : **0 CAD**. Seul le ledger courant fait foi.
-3. KPI : cashflow positif et solde de **100 CAD** ; objectif intermédiaire de **10 CAD** nets.
-4. Limites : **1 Go RAM / 0,5 CPU** ; plafond constitutionnel **2 CAD/jour**. Le canal actuel n'autorise aucune tâche payante et ne possède aucune clé API.
+Le capital initial autorisé est 50 CAD (5000 centimes), délégué en totalité aux agents. Les objectifs et marchés sont mondiaux. Aucun veto par action ni réserve minimale imposée. Les revenus réglés peuvent être réinvestis ; aucune dette ou recharge personnelle n'est autorisée.
 
-## Frontière d'exécution
+`ledger.json` et `logs/transactions.log` conservent l'histoire déclarative v2 et le tick narratif. Ils ne prouvent aucun financement externe et ne sont plus l'autorité de dépense. `bank/status.json` est la projection de la trésorerie privée ; UNFUNDED signifie que le dépôt réel n'a pas été vérifié, et ne signifie pas EXTINCT.
 
-`/opt/globalland/control` contient le superviseur Python et les modules Node installés depuis un commit revu. Ce code ne se met jamais à jour automatiquement. Le cron appelle Python via un chemin fixe.
+## Modules
 
-`source.git` est un dépôt bare privé. Aucun checkout Git ni fichier `.git` n'est monté dans le conteneur. Les exports Git refusent liens et fichiers spéciaux et sont plafonnés à 16 Mio, 1 Mio par fichier. L'index de publication est privé ; aucun hook ou filtre du dépôt téléchargé n'est exécuté.
+- `treasury.py` : SQLite privé, centimes exacts, réservation atomique, appels incertains retenus, preuves externes, positions et extinction irréversible.
+- `gateway.py` : contrat avec `/opt/globalland/integrations/finance` (non fourni sans choix du service réel). Les devis garantissent un maximum ; les appels utilisent une clé d'idempotence ; les reçus sont vérifiés. Aucun appel API ou achat simulé n'est présenté comme réel.
+- `world.py` : agents, missions hiérarchiques, messages, baux, portefeuilles/dettes GLC, cycles et liquidation.
+- `tools.py` + `executor.js` : commandes choisies par les agents dans un conteneur temporaire, fichiers de produits et recherche HTTP(S) publique via courtier.
+- `controller.py` : observations → décision structurée → tâches durables. Grok peut soumettre via GitHub. Le mode subscriptions appelle les CLIs officielles Codex/Claude Code avec leur connexion d'abonnement, sans reprise automatique sur une API payante.
+- `supervisor.py` : transport Git, verrou commun, reprise durable, publication vérifiée et arrêt productif à la mort du monde.
 
-`work` est un export éphémère, en lecture seule pour le conteneur non privilégié, hors réseau, sans clés, sans socket Docker. Seul le registre `SHELL/AUDIT` est public. Le tick quotidien est une opération interne de confiance.
+## Installation hôte
 
-`state` contient les journaux durables, le hash des octets d'entrée et les résultats préparés avant publication. Audit et file partagent un verrou. Un ID déjà connu ne peut pas lancer de nouveau travail. Une interruption est signalée et ne provoque jamais une relance automatique de l'action.
+`control` pointe vers un code administrativement installé depuis un SHA revu. `source.git`, `state/private`, `integrations` et `credentials` ne sont jamais montés dans le conteneur de produits. Les données privées ne sont pas publiées. Les credentials d'abonnement sont montés seulement dans le conteneur de réflexion officiel correspondant.
 
-## Comptabilité
+EXEC reçoit uniquement un export public en lecture seule, une requête et son wrapper installé. Son travail est dans un tmpfs de 256 Mio ; son rootfs est readonly, sans réseau direct, sans capacité Linux et sans socket Docker. Il peut choisir toute commande disponible dans son image. FETCH fournit le Web public, y compris téléchargement base64 ; les intégrations authentifiées et financières sont des modules privés. Les limites mémoire/CPU/processus/temps protègent le serveur partagé.
 
-`ledger.json` reste la source financière. Le capital genesis n'est pas changé par cette correction. Les calculs CAD se font en centimes et sont rapprochés avec le solde. Les montants des transactions sont positifs : `REAL_REVENUE` ajoute, `REAL_EXPENSE` retranche. `approved_by: CEO` dans un ledger est une déclaration historique, pas une preuve cryptographique bancaire.
+## Cycle
 
-`NARRATIVE_SERVER_TAX` et l'ancien alias `SERVER_TAX_NARRATIVE` affectent uniquement le runway narratif ; `GLC_TRANSFER` reste séparé du CAD. Aucun prélèvement narratif nouveau n'est fabriqué automatiquement. Le runway affiche la réserve réelle diminuée du cumul des taxes narratives déjà inscrites, divisée par la taxe hebdomadaire, plus la grâce. Sans taxe hebdomadaire, le runway est illimité (`null` en JSON).
+`queue` consomme les tâches ; `daily` maintient l'audit narratif idempotent ; `think` appelle le contrôleur configuré puis publie ses tâches ; `status` montre l'état privé sans secrets. Un accès GitHub seul ne réveille pas l'app Grok : tant que les CLIs ou un autre contrôleur ne sont pas connectés, WAITING_CONTROLLER est normal.
 
-`DAY_TICK` vaut zéro et porte un horodatage UTC. Le premier tick valide enlève un jour ; les suivants enlèvent les jours UTC écoulés depuis `last_tick_date`, au plus jusqu'à zéro. Une seconde exécution le même jour ne change rien ; un retour d'horloge est refusé.
+Les résultats et artefacts sont préparés durablement avant Git. Un push refusé ne relance pas l'action. Les modifications amont sans conflit sont rapprochées avec sauvegarde du commit local ; un même produit ou ledger modifié concurremment exige une réconciliation. Les décisions du contrôleur restent en outbox jusqu'à leur publication confirmée.
 
-Le journal `logs/transactions.log` est une projection régénérable du ledger validé. Le superviseur publie les deux dans le même commit. Les écritures locales du CLI tick sont atomiques fichier par fichier, sans garantie transactionnelle inter-fichiers ; en cas d'interruption, relancer reconstruit le journal depuis le ledger. Le VPS utilise une préparation en mémoire puis un commit commun.
+## Extinction
 
-Le cashflow est la somme réelle des revenus moins dépenses des sept jours UTC se terminant au jour du rapport. Le capital initial, le narratif et les GLC en sont exclus. Aucun revenu ni paiement n'est inventé ; les preuves bancaires restent à valider par le CEO.
+Le solde libre nul par réservation n'est pas une perte. Le patrimoine réel confirmé nul, positions et opérations réglées, crée un état terminal. Le contrôleur et les outils productifs s'arrêtent ; les preuves et snapshots restent accessibles. Ni arrêt de Docker partagé, ni suppression du VPS ou d'Oria, ni archivage automatique du dépôt.

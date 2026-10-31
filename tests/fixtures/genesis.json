@@ -1,0 +1,20 @@
+{
+  "bank_status": "CRITICAL_SHOCK",
+  "currency": "CAD",
+  "initial_capital": 50,
+  "current_balance": 50,
+  "locked_reserve": 50,
+  "available_for_agents_without_ceo_approval": 0,
+  "weekly_server_tax_cad": 2,
+  "grace_period_days_remaining": 7,
+  "kpi_target_balance": 100,
+  "transactions": [
+    {
+      "id": "TX-0001",
+      "type": "GENESIS_DEPOSIT",
+      "amount": 50,
+      "approved_by": "CEO",
+      "note": "Capital initial de survie GlobalLand"
+    }
+  ]
+}

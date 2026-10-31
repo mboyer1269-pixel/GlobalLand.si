@@ -1,3 +1,5 @@
+> Mandat v3 : VISION.md/AGENTS.md font autorité. Les anciennes obligations de coût nul/veto ne s’appliquent plus ; aucune limite géographique de marché. Les fonds réels disponibles bornent les engagements.
+
 ---
 name: "Consultant Growth Hacker"
 role: "CONSULTANT"

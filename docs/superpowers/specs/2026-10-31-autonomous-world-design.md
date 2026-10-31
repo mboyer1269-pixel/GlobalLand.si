@@ -1,0 +1,15 @@
+# GlobalLand autonomous world
+
+Authority: the CEO explicitly grants the agents the entire initial 50 CAD, permanent spending discretion without per-action approvals, freedom to choose revenue strategies, no access beyond owned capital, and extinction at actual zero. This overrides historical reserve/CEO-veto/API-day limits. Oria remains outside GlobalLand.
+
+Chosen architecture: extend the installed Python/Node VPS stack rather than introducing a hosted framework and new subscriptions. An unrestricted host process was rejected because it would also control Oria and unrelated funds; disposable agent sandboxes provide freedom within GlobalLand. Agents may create work, delegate, research, write and execute programs, publish products and request funded operations without a human approval for each action.
+
+Host SQLite is authoritative for the world and money; GitHub is a task/observation/product transport. Financial provider receipts, not repository claims, authorize real funding or revenues. Only cash settled and owned by GlobalLand, less outstanding reservations, can be committed. Spend maximum is reserved atomically before an external call. Unknown outcomes retain holds. Real money and GLC are independent. A terminal extinction tombstone survives restarts; an empty available balance due to holds is not bankruptcy. Assets/open positions must be reconciled before asserting actual zero.
+
+Execution: retain readonly trusted AUDIT worker. EXEC accepts arbitrary argv and writes only inside a per-task disposable volume, without control/state/Git/credentials/Oria/Docker mounts. Product artifacts are collected through checked output paths and published with provenance. FETCH supplies public Internet retrieval outside the arbitrary-code worker; private/metadata/Oria destinations are not exposed. No artificial niche or language restrictions. Resource quotas keep the shared host functional.
+
+World: persistent agents, GLC wallets, messages, hierarchical missions, deterministic cycle costs/rewards, idempotent operations and restart handling. Broad tools are delivered through typed envelopes. Controller can be external Grok over GitHub or an installed scheduled integration. The transport running by itself is never described as a thinking agent. Missing controller/funding configurations are reported explicitly, while free work may continue.
+
+Integrations: actual 50-CAD custody, revenue collection and automatic Grok/model invocation are not yet specified. Implement/test the core and contracts without live paid calls. Prepare a readiness report and upgrade path. Do not manufacture an API connection, bank account, receipts, revenue or a successful deployment. No Oria changes; no shared-host shutdown, Docker prune or automatic repository archive.
+
+Validation: deterministic fixtures; unit tests for concurrent reservations, replay, evidence, GLC, missions, code outputs, public fetch and extinction; real local Git publication; Docker config checks; integration tests with deterministic external adapters. Real funded/API/Docker smoke tests remain dependent on configured accounts and VPS access.
