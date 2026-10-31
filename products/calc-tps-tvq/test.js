@@ -1,6 +1,8 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { execFileSync } = require('node:child_process');
 const calc = require('./calc.js');
+const invoiceDoc = require('./invoice.js');
 
 const NBSP = '\u00a0';
 const cents = (value) => calc.parseMoneyToCents(value);
@@ -216,4 +218,157 @@ test('fr-CA currency formatting, negatives and no negative zero', () => {
   assert.equal(calc.formatMoneyFromCents(-1000), `-10,00${NBSP}$`);
   assert.equal(calc.formatMoneyFromCents(-0), `0,00${NBSP}$`);
   assert.throws(() => calc.formatMoneyFromCents(1.5), TypeError);
+});
+
+const sampleDetails = {
+  sellerName: 'Studio Exemple',
+  sellerAddress: '123, rue Principale\r\nMontréal (Québec)',
+  gstNumber: '123456789 RT0001',
+  qstNumber: '1234567890 TQ0001',
+  clientName: 'Client inc.',
+  clientAddress: '',
+  invoiceNumber: '2026-001',
+  invoiceDate: '2026-10-31',
+  notes: 'Payable dans 30 jours.',
+};
+
+function sampleResult() {
+  return calc.calculateInvoice([
+    { description: 'Service de consultation', quantity: '1', unitAmount: '100,00' },
+    { description: '', quantity: '1', unitAmount: '' },
+  ]);
+}
+
+function fakeDocument() {
+  const createElement = (tagName) => ({
+    tagName,
+    attributes: {},
+    childNodes: [],
+    setAttribute(name, value) {
+      this.attributes[name] = value;
+    },
+    appendChild(child) {
+      this.childNodes.push(child);
+      return child;
+    },
+  });
+  return { createElement, createTextNode: (data) => ({ data }) };
+}
+
+function collect(node, pick, found = []) {
+  const value = pick(node);
+  if (value !== undefined) {
+    found.push(value);
+  }
+  (node.childNodes || []).forEach((child) => collect(child, pick, found));
+  return found;
+}
+
+test('escapeHtml neutralises markup characters', () => {
+  assert.equal(
+    invoiceDoc.escapeHtml(`<img src=x onerror="alert('1')">&`),
+    '&lt;img src=x onerror=&quot;alert(&#39;1&#39;)&quot;&gt;&amp;',
+  );
+});
+
+test('downloaded invoice escapes every user value and carries a no-script policy', () => {
+  const attack = '<img src=x onerror=alert(1)><script>alert(2)</script>"\'&';
+  const details = Object.fromEntries(Object.keys(sampleDetails).map((field) => [field, attack]));
+  const result = calc.calculateInvoice([{ description: attack, quantity: '1', unitAmount: '1' }]);
+  const html = invoiceDoc.invoiceDocument(details, result);
+  assert.ok(!html.includes('<img'), 'raw <img> in output');
+  assert.ok(!/<script/i.test(html), 'raw <script> in output');
+  const escaped = '&lt;img src=x onerror=alert(1)&gt;&lt;script&gt;alert(2)&lt;/script&gt;&quot;&#39;&amp;';
+  assert.ok(html.split(escaped).length - 1 >= Object.keys(details).length, 'every field is escaped');
+  assert.ok(html.startsWith('<!doctype html>\n<html lang="fr-CA">'));
+  assert.ok(html.includes(
+    '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;">',
+  ));
+});
+
+test('renderers refuse code-like tag names, event handlers and style breakouts', () => {
+  assert.throws(() => invoiceDoc.renderHtml(['img onerror=alert(1)', {}]), /refusé/);
+  assert.throws(() => invoiceDoc.renderHtml(['p', { onclick: 'x' }]), /refusé/);
+  assert.throws(() => invoiceDoc.renderHtml(['style', {}, 'a{}</style><script>']), /CSS refusé/);
+  assert.throws(() => invoiceDoc.renderDom(['p', { onmouseover: 'x' }], fakeDocument()), /refusé/);
+});
+
+test('on-page preview is built from text nodes, never from parsed markup', () => {
+  const attack = '<img src=x onerror=alert(1)>';
+  const result = calc.calculateInvoice([{ description: attack, quantity: '1', unitAmount: '5' }]);
+  const tree = invoiceDoc.invoiceTree({ sellerName: attack, clientName: 'Client' }, result, { headingLevel: 3 });
+  const root = invoiceDoc.renderDom(tree, fakeDocument());
+  const tags = collect(root, (node) => node.tagName);
+  assert.equal(root.tagName, 'article');
+  assert.ok(!tags.includes('img'));
+  assert.ok(tags.includes('h3') && tags.includes('h4') && !tags.includes('h1'));
+  assert.equal(collect(root, (node) => node.data).filter((text) => text === attack).length, 2);
+});
+
+test('invoice document shows seller, registration numbers, client, lines and totals', () => {
+  const html = invoiceDoc.invoiceDocument(sampleDetails, sampleResult());
+  const expected = [
+    'Studio Exemple', `N° TPS${NBSP}: 123456789 RT0001`, `N° TVQ${NBSP}: 1234567890 TQ0001`, 'Client inc.',
+    `N°${NBSP}: 2026-001`, `Date${NBSP}: 31 octobre 2026`, 'Service de consultation', 'Sous-total',
+    `TPS (5${NBSP}%)`, `TVQ (9,975${NBSP}%)`, `114,98${NBSP}$`, 'Payable dans 30 jours.',
+    '<title>Facture – 2026-001 – Studio Exemple</title>',
+  ];
+  expected.forEach((text) => assert.ok(html.includes(text), text));
+  const linesTable = html.slice(html.indexOf('<table class="invoice-lines">'), html.indexOf('<table class="invoice-totals">'));
+  assert.equal(linesTable.split('<tr>').length - 1, 2, 'header row plus the single non-blank line');
+  assert.ok(!html.includes('Aucune ligne'));
+});
+
+test('tax-included, unregistered and credit-note invoices are labelled accordingly', () => {
+  const included = calc.calculateInvoice([{ description: 'Forfait', quantity: '1', unitAmount: '114,98' }], { mode: 'ttc' });
+  const includedHtml = invoiceDoc.invoiceDocument({}, included);
+  assert.ok(includedHtml.includes('Prix unitaire (taxes incluses)'));
+  assert.ok(includedHtml.includes('Les prix indiqués incluent la TPS et la TVQ.'));
+
+  const untaxed = calc.calculateInvoice([{ quantity: '1', unitAmount: '100' }], { taxable: false });
+  const untaxedText = invoiceDoc.invoiceText({}, untaxed);
+  assert.ok(!/TPS|TVQ|Sous-total/.test(invoiceDoc.invoiceDocument({}, untaxed)));
+  assert.ok(untaxedText.endsWith(`Total${NBSP}: 100,00${NBSP}$`));
+
+  const credit = calc.calculateInvoice([{ quantity: '1', unitAmount: '-50' }]);
+  assert.ok(invoiceDoc.invoiceDocument({}, credit).includes('Note de crédit'));
+  assert.equal(invoiceDoc.invoiceFileName({ invoiceNumber: '7' }, credit), 'note-de-credit-7.html');
+  assert.ok(invoiceDoc.invoiceDocument({}, calc.calculateInvoice([])).includes('Aucune ligne'));
+});
+
+test('copied text summary uses French typography and skips blank lines', () => {
+  assert.equal(invoiceDoc.invoiceText(sampleDetails, sampleResult()), [
+    `Facture n°${NBSP}2026-001 — 31 octobre 2026`,
+    '',
+    `De${NBSP}:`, 'Studio Exemple', '123, rue Principale', 'Montréal (Québec)',
+    `N° TPS${NBSP}: 123456789 RT0001`, `N° TVQ${NBSP}: 1234567890 TQ0001`,
+    '',
+    `Facturé à${NBSP}:`, 'Client inc.',
+    '',
+    `1. Service de consultation — 1 × 100,00${NBSP}$ = 100,00${NBSP}$`,
+    '',
+    `Sous-total${NBSP}: 100,00${NBSP}$`, `TPS (5${NBSP}%)${NBSP}: 5,00${NBSP}$`,
+    `TVQ (9,975${NBSP}%)${NBSP}: 9,98${NBSP}$`, `Total${NBSP}: 114,98${NBSP}$`,
+    '',
+    `Notes${NBSP}:`, 'Payable dans 30 jours.',
+  ].join('\n'));
+});
+
+test('invoice dates are calendar dates whatever the time zone', () => {
+  assert.equal(invoiceDoc.formatInvoiceDate('2026-10-31'), '31 octobre 2026');
+  assert.equal(invoiceDoc.formatInvoiceDate('2026-02-30'), '2026-02-30');
+  assert.equal(invoiceDoc.formatInvoiceDate('31/10/2026'), '31/10/2026');
+  const script = "process.stdout.write(require('./invoice.js').formatInvoiceDate('2026-10-31'))";
+  for (const zone of ['America/Vancouver', 'America/Toronto', 'Pacific/Kiritimati']) {
+    const output = execFileSync(process.execPath, ['-e', script], { cwd: __dirname, env: { ...process.env, TZ: zone } });
+    assert.equal(output.toString(), '31 octobre 2026', zone);
+  }
+});
+
+test('download file names are safe and descriptive', () => {
+  const result = sampleResult();
+  assert.equal(invoiceDoc.invoiceFileName({ invoiceNumber: 'Facture 2026/001 é<x>' }, result), 'facture-Facture-2026-001-e-x.html');
+  assert.equal(invoiceDoc.invoiceFileName({ invoiceNumber: '../../etc/passwd' }, result), 'facture-etc-passwd.html');
+  assert.equal(invoiceDoc.invoiceFileName({ invoiceDate: '2026-10-31' }, result), 'facture-2026-10-31.html');
+  assert.equal(invoiceDoc.invoiceFileName({}, result), 'facture.html');
 });
