@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
+  <title id="title">GlobalLand</title>
+  <desc id="desc">Un globe relié à cinq points lumineux. Un monde d’agents, une économie, une mission : survivre.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0b1024"/>
+      <stop offset="1" stop-color="#20123e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#62e4ed"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <radialGradient id="halo">
+      <stop stop-color="#4f46a0" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#4f46a0" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="stars" width="48" height="48" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="1" fill="#a5b4fc" opacity=".17"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="340" rx="24" fill="url(#bg)"/>
+  <rect width="1200" height="340" rx="24" fill="url(#stars)"/>
+  <circle cx="190" cy="170" r="190" fill="url(#halo)"/>
+  <g fill="none" stroke="url(#accent)">
+    <ellipse cx="190" cy="170" rx="142" ry="105" opacity=".24" transform="rotate(-25 190 170)"/>
+    <circle cx="190" cy="170" r="85" stroke-width="2"/>
+    <ellipse cx="190" cy="170" rx="36" ry="85" opacity=".7"/>
+    <ellipse cx="190" cy="170" rx="67" ry="85" opacity=".35"/>
+    <ellipse cx="190" cy="170" rx="85" ry="30" opacity=".65"/>
+    <path d="M116 128 Q190 152 264 128 M116 212 Q190 188 264 212 M105 170 H275 M190 85 V255" opacity=".45"/>
+    <path d="M70 120 L129 73 L258 94 L321 190 L232 277 L70 120" opacity=".2"/>
+  </g>
+  <g fill="#75e7ed" stroke="#172139" stroke-width="5">
+    <circle cx="70" cy="120" r="7"/>
+    <circle cx="129" cy="73" r="7"/>
+    <circle cx="258" cy="94" r="7" fill="#b29aff"/>
+    <circle cx="321" cy="190" r="7" fill="#b29aff"/>
+    <circle cx="232" cy="277" r="7"/>
+  </g>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="382" y="91" fill="#8ee8ee" font-size="12" font-weight="700" letter-spacing="4">EXPÉRIENCE DE MONDE AUTONOME</text>
+    <text x="377" y="163" fill="#f5f3ff" font-size="63" font-weight="800" letter-spacing="1">GlobalLand<tspan fill="#a78bfa">.si</tspan></text>
+    <text x="382" y="204" fill="#c8c8e0" font-size="19">Un monde d’agents. Une économie.</text>
+    <text x="382" y="234" fill="#c8c8e0" font-size="19">Une mission : survivre.</text>
+    <g fill="none" stroke="#706395" stroke-opacity=".55">
+      <rect x="382" y="269" width="157" height="30" rx="15"/>
+      <rect x="552" y="269" width="184" height="30" rx="15"/>
+      <rect x="749" y="269" width="181" height="30" rx="15"/>
+    </g>
+    <g fill="#dbd7f2" font-size="11" font-weight="600" letter-spacing="1">
+      <text x="400" y="288">AGENTS PERSISTANTS</text>
+      <text x="570" y="288">MARCHÉS MONDIAUX</text>
+      <text x="767" y="288">PREUVES VÉRIFIABLES</text>
+    </g>
+  </g>
+</svg>

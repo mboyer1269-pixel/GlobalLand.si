@@ -19,7 +19,7 @@ sudo bash scripts/upgrade_vps.sh SHA_COMPLET_REVU
 sudo python3 /opt/globalland/control/supervisor.py status
 ```
 
-Le script désactive temporairement uniquement le fichier cron GlobalLand, attend son verrou, sauvegarde contrôle/état/Git/clé dédiée/releases, installe une release versionnée et conserve les credentials. Il restaure les anciens horaires queue/daily ; il ne lance aucun modèle et ne prétend pas avoir financé la Banque. Ne jamais supprimer les SQLite/WAL/journaux pour changer de version. Le fichier `backups/upgrade-date/state-before.tgz` est privé et contient la clé dédiée ; ne pas le publier.
+Le script suspend temporairement uniquement les fichiers cron globalland (queue/daily) et globalland-think s'ils existent, attend leur verrou partagé, sauvegarde contrôle/état/Git/clé dédiée/releases, installe une release versionnée et conserve les credentials. Le piège de sortie restaure aussi les horaires déjà suspendus si la préparation échoue à mi-chemin ; les copies sont conservées sous backups/upgrade-date/cron-globalland et cron-globalland-think. Il ne lance aucun modèle et ne prétend pas avoir financé la Banque. Ne jamais supprimer les SQLite/WAL/journaux pour changer de version. Le fichier `backups/upgrade-date/state-before.tgz` est privé et contient la clé dédiée ; ne pas le publier.
 
 ## Smoke test gratuit de v3
 
@@ -78,6 +78,8 @@ L'horaire dédié `/etc/cron.d/globalland-think` mode644 contient :
 ```
 
 Le script effectue ensuite un lancement immédiat think/queue. Son retour sans erreur ne suffit pas à qualifier chaque tâche de réussie : vérifier les nouveaux résultats et leurs artefacts dans GitHub, puis un tour ultérieur déclenché à :00 ou :30 avec le journal `/var/log/globalland/think.log`. Les connexions et quotas restent des dépendances réelles ; aucun résultat commercial n'est garanti. Le verrou est commun aux trois cycles et la rotation `/var/log/globalland/*.log` couvre le nouveau journal. Pour arrêter la réflexion périodique, déplacer seulement ce fichier cron dans le dossier de sauvegarde privée ; garder queue/daily pour la reprise des travaux déjà soumis. La configuration antérieure se trouve dans le dossier backups/autonomy-* annoncé par le script ; ne pas restaurer un ancien solde ou rejouer des opérations financières.
+
+Un lancement immédiat en échec après « horaires installés » laisse l'horaire installé ; ces deux faits sont distincts. Contrôler world/controller.json : last_turn décrit les essais de modèles et reason_code explique un blocage sans exposer d'exception brute. Un échec transitoire peut être repris par un autre abonnement configuré ; la reprise conserve les contrôles de chaque tâche. Attendre la fin d'une opération Hostinger avant toute installation et vérifier ensuite l'intégrité de l'état et des services ; ne déduire ni une migration ni une réinstallation du seul message d'attente.
 
 ## Banque réelle
 

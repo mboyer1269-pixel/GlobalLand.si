@@ -49,6 +49,7 @@ class ThinkFailureTests(unittest.TestCase):
                 self.app.cycle('think')
 
         self.assertEqual(self.public_controller()['state'], 'CONTROLLER_BLOCKED')
+        self.assertEqual(self.public_controller()['reason_code'], 'provider_timeout')
         diagnostic = json.loads((self.install / 'state/private/controller-failure.json').read_text())
         self.assertEqual(diagnostic['exception_type'], 'TimeoutError')
         self.assertEqual(diagnostic['providers'], ['codex'])
@@ -92,7 +93,28 @@ class ThinkFailureTests(unittest.TestCase):
         diagnostic = json.loads((self.install / 'state/private/controller-failure.json').read_text())
         self.assertEqual(diagnostic['reason'], 'invalid_provider_structured_output')
         self.assertEqual(self.public_controller()['state'], 'CONTROLLER_BLOCKED')
+        self.assertEqual(self.public_controller()['reason_code'], 'invalid_provider_structured_output')
         self.assert_no_failed_plan_work()
+
+    def test_fallback_diagnostics_survive_queue_publication_without_exposing_raw_errors(self):
+        self.configure_controller()
+        path = self.install / 'control/config.json'
+        config = json.loads(path.read_text())
+        config['controller']['providers'] = ['codex', 'claude']
+        path.write_text(json.dumps(config))
+        secret = 'private-account-context'
+        decision = {'summary': 'Observe', 'actions': [{'agent': 'DIRECTOR', 'action': 'STATUS', 'args': {}}]}
+        def run(argv, **kwargs):
+            if 'codex' in argv: raise TimeoutError(secret)
+            return 0, json.dumps({'type': 'result', 'subtype': 'success', 'is_error': False, 'structured_output': decision}).encode()
+        with patch.object(Controller, 'check_provider'), patch('controller.run_brain', side_effect=run):
+            self.app.cycle('think')
+        status = self.public_controller()['last_turn']
+        self.assertEqual(status['provider'], 'claude')
+        self.assertEqual(status['attempts'][0]['reason'], 'provider_timeout')
+        self.app.cycle('queue')
+        self.assertEqual(self.public_controller()['last_turn'], status)
+        self.assertNotIn(secret, self.app.git('log', '--all', '-p').decode())
 
     def test_failed_blocked_push_keeps_private_diagnostic_and_retries_without_planning(self):
         self.configure_controller()
