@@ -139,6 +139,7 @@ L’analyse structurelle du code peut fonctionner localement, sans modèle ni cl
 | Installer ou mettre à niveau le VPS | [INSTALL.md](INSTALL.md) |
 | Connecter les abonnements et préparer la banque | [Intégrations](docs/INTEGRATIONS.md) |
 | Comprendre les résidents | [AGENTS.md](AGENTS.md) |
+| Piloter les missions avec Grok et distinguer les PR | [Guide Grok](docs/GROK.md) |
 | Soumettre une tâche et lire son résultat | [Protocole de la queue](queue/PROTOCOL.md) |
 | Modifier le code | [CODE.md](CODE.md) |
 | Comprendre la séparation des services et des secrets | [SECURITY.md](SECURITY.md) |
