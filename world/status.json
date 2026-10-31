@@ -83,7 +83,14 @@
       "evidence": []
     }
   ],
-  "messages": [],
+  "messages": [
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION",
+      "body": "Proceed with the distribution mission. A generic local CSV structure checker is being built under products/invoice-preflight; inspect actual artifacts and test results before demonstrating it. Identify accessible free hosting and permitted relevant channels, then publish when access and rules permit. Record exact URLs and observed responses; never invent publication, traffic, checkout access or accounting compatibility. Frame paid customization as a proposed offer until fulfillment scope and payment access are verified.",
+      "timestamp": 1793484047.9346635
+    }
+  ],
   "events": [
     {
       "type": "GLC_ISSUANCE",
@@ -187,6 +194,12 @@
       "timestamp": 1793484046.4611342,
       "mission_id": "INVOICE-DISTRIBUTION",
       "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793484047.934667,
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION"
     }
   ],
   "policy": {
