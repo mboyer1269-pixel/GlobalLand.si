@@ -30,6 +30,14 @@ def brain_command(root, image, provider):
     return argv + [image,'claude','--safe-mode','-p','--tools','','--disallowedTools','mcp__*','--strict-mcp-config','--mcp-config','{"mcpServers":{}}','--output-format','json','--json-schema',json.dumps(SCHEMA),'--no-session-persistence','--max-turns','1','--permission-prompts','none']
 
 
+def auth_command(provider):
+    """Probe the hidden Claude SDK flag through a non-inference subcommand."""
+    if provider=='codex':return ['codex','login','status']
+    if provider=='claude':return ['claude','--max-turns','1','auth','status']
+    if provider=='cursor':return ['cursor-agent','status']
+    raise ValueError('unsupported subscription provider')
+
+
 def cleanup_brain(name):
     """Remove exactly our named container, including after killing docker's client."""
     subprocess.run(['docker','rm','-f',name],env=ENV,stdout=subprocess.DEVNULL,
@@ -84,12 +92,17 @@ class Controller:
             code,out=run_brain(command_argv(command),limit=1024*1024,merge_stderr=True)
             if code:raise ValueError(f'{provider}: subscription CLI unavailable (help exit={code})')
             helptext+=out.decode('utf-8')
-        flags=['--ignore-user-config','--ignore-rules','--sandbox','--ephemeral','--skip-git-repo-check','--output-schema'] if provider=='codex' else ['--safe-mode','--tools','--disallowedTools','--strict-mcp-config','--mcp-config','--json-schema','--no-session-persistence','--max-turns','--permission-prompts']
+        flags=['--ignore-user-config','--ignore-rules','--sandbox','--ephemeral','--skip-git-repo-check','--output-schema'] if provider=='codex' else ['--safe-mode','--tools','--disallowedTools','--strict-mcp-config','--mcp-config','--json-schema','--no-session-persistence','--permission-prompts']
         if provider=='cursor':flags=['--print','--mode','--output-format']
         missing=[f for f in flags if f not in helptext]
         if missing:raise ValueError(provider+': required subscription CLI restriction unsupported: '+', '.join(missing))
-        command=['codex','login','status'] if provider=='codex' else ['claude','auth','status']
-        if provider=='cursor':command=['cursor-agent','status']
+        if provider=='claude' and '--max-turns' not in helptext:
+            # Hidden SDK flags cannot be established by help text alone.
+            probe='--globalland-invalid-option-probe'
+            code,out=run_brain(command_argv(['claude',probe,'auth','status']),limit=65536,merge_stderr=True)
+            if not code or probe.encode() not in out or not re.search(rb'unknown option|unrecognized option|unexpected argument|unknown argument',out,re.I):
+                raise ValueError(f'claude: hidden CLI option probe inconclusive (exit={code})')
+        command=auth_command(provider)
         code,out=run_brain(command_argv(command),limit=65536,merge_stderr=provider!='claude')
         # Codex's official status is text on some releases; never echo auth output.
         if provider=='codex':valid=not code and 'chatgpt' in out.decode('utf-8').lower()

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Read-only CLI diagnostics. No inference, login, billing attestation or GlobalLand config writes."""
 import argparse,json,pathlib,re
-from controller import brain_command,run_brain
+from controller import auth_command,brain_command,run_brain
 from supervisor import SECRET
 
 FLAGS={
  'codex':['--ignore-user-config','--ignore-rules','--sandbox','--ephemeral','--skip-git-repo-check','--output-schema'],
- 'claude':['--safe-mode','--tools','--disallowedTools','--strict-mcp-config','--mcp-config','--json-schema','--no-session-persistence','--max-turns','--permission-prompts'],
+ 'claude':['--safe-mode','--tools','--disallowedTools','--strict-mcp-config','--mcp-config','--json-schema','--no-session-persistence','--permission-prompts'],
  'cursor':['--print','--mode','--output-format'],
 }
 
@@ -20,10 +20,11 @@ def diagnose(root,image,provider):
  base=brain_command(root,image,provider);base=base[:base.index(image)+1]
  binary='cursor-agent' if provider=='cursor' else provider
  report={'provider':provider,'inference_performed':False,'globalland_configuration_written':False}
- for label,command in [('version',[binary,'--version']),('help',[binary,'exec','--help'] if provider=='codex' else [binary,'--help']),('auth',[binary,'login','status'] if provider=='codex' else [binary,'auth','status'] if provider=='claude' else [binary,'status'])]:
+ for label,command in [('version',[binary,'--version']),('help',[binary,'exec','--help'] if provider=='codex' else [binary,'--help']),('auth',auth_command(provider))]:
   code,out=run_brain(base+command,limit=1024*1024,merge_stderr=True)
   text=out.decode('utf-8',errors='replace')
   if label=='auth':
+   if provider=='claude':report['option_probe']=['--max-turns','1']
    errors={'read_only_filesystem':r'EROFS|read.only file system','permission_denied':r'EACCES|permission denied','unsupported_option':r'unknown option|unexpected argument','not_logged_in':r'not logged in|not authenticated','missing_file':r'ENOENT|no such file'}
    item={'exit':code,'bytes':len(out),'error_categories':[name for name,pattern in errors.items() if re.search(pattern,text,re.I)]}
    try:

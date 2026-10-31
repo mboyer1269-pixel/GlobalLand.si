@@ -26,9 +26,42 @@ class SubscriptionCompatibilityTests(unittest.TestCase):
   def run(argv,**kwargs):
    command=argv[argv.index('sha256:'+'a'*64)+1:]
    if command==['claude','--help']:return 0,CLAUDE_HELP
-   if command==['claude','auth','status']:return 0,b'{"loggedIn":true,"authMethod":"claude.ai"}'
+   if command==['claude','--max-turns','1','auth','status']:return 0,b'{"loggedIn":true,"authMethod":"claude.ai"}'
    return 1,b'unknown option --json'
   with patch('controller.run_brain',side_effect=run):self.make('claude').check_provider('claude')
+ def test_hidden_max_turns_is_probed_by_status_without_inference(self):
+  commands=[]
+  def run(argv,**kwargs):
+   command=argv[argv.index('sha256:'+'a'*64)+1:];commands.append(command)
+   if command==['claude','--help']:return 0,CLAUDE_HELP.replace(b'--max-turns',b'')
+   if command==['claude','--globalland-invalid-option-probe','auth','status']:return 1,b"error: unknown option '--globalland-invalid-option-probe'"
+   if command==['claude','--max-turns','1','auth','status']:return 0,b'{"loggedIn":true,"authMethod":"claude.ai"}'
+   raise AssertionError('Only help and option-bearing auth status may run')
+  with patch('controller.run_brain',side_effect=run):result=self.make('claude').check_provider('claude')
+  self.assertTrue(result['subscription_auth_verified']);self.assertEqual(len(commands),3)
+  runtime=brain_command('/tmp/gl-compat','sha256:'+'a'*64,'claude')
+  self.assertEqual(runtime[runtime.index('--max-turns')+1],'1')
+ def test_hidden_option_rejected_by_parser_keeps_provider_unverified(self):
+  c=self.make('claude')
+  with patch('controller.run_brain',side_effect=[(0,CLAUDE_HELP.replace(b'--max-turns',b'')),(1,b'unknown option --globalland-invalid-option-probe'),(1,b'unknown option --max-turns')]):
+   with self.assertRaisesRegex(ValueError,'status exit=1'):c.check_provider('claude')
+  self.assertFalse(c.readiness()['verified'])
+ def test_hidden_option_probe_does_not_accept_api_auth(self):
+  c=self.make('claude')
+  with patch('controller.run_brain',side_effect=[(0,CLAUDE_HELP.replace(b'--max-turns',b'')),(1,b'unknown option --globalland-invalid-option-probe'),(0,b'{"loggedIn":true,"authMethod":"api_key"}')]):
+   with self.assertRaisesRegex(ValueError,'authentication'):c.check_provider('claude')
+  self.assertFalse(c.readiness()['verified'])
+ def test_hidden_option_probe_rejects_cli_that_silently_ignores_unknown_flags(self):
+  c=self.make('claude')
+  with patch('controller.run_brain',side_effect=[(0,CLAUDE_HELP.replace(b'--max-turns',b'')),(0,b'{"loggedIn":true,"authMethod":"claude.ai"}')]) as run:
+   with self.assertRaisesRegex(ValueError,'probe inconclusive'):c.check_provider('claude')
+   self.assertEqual(run.call_count,2)
+  self.assertFalse(c.readiness()['verified'])
+ def test_failed_negative_control_must_name_the_rejected_flag(self):
+  c=self.make('claude')
+  with patch('controller.run_brain',side_effect=[(0,CLAUDE_HELP.replace(b'--max-turns',b'')),(1,b'network error')]):
+   with self.assertRaisesRegex(ValueError,'probe inconclusive'):c.check_provider('claude')
+  self.assertFalse(c.readiness()['verified'])
  def test_missing_flags_identify_provider_and_exact_options(self):
   with patch('controller.run_brain',return_value=(0,b'--tools')):
    with self.assertRaisesRegex(ValueError,r'claude:.*--safe-mode'):self.make('claude').check_provider('claude')
