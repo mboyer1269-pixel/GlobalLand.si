@@ -7,7 +7,7 @@ from supervisor import SECRET
 FLAGS={
  'codex':['--ignore-user-config','--ignore-rules','--sandbox','--ephemeral','--skip-git-repo-check','--output-schema'],
  'claude':['--safe-mode','--tools','--disallowedTools','--strict-mcp-config','--mcp-config','--json-schema','--no-session-persistence','--permission-prompts'],
- 'cursor':['--print','--mode','--output-format'],
+ 'cursor':['--print','--trust','--mode','--output-format'],
 }
 
 def safe_excerpt(raw,limit=1200):

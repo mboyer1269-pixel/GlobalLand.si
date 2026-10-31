@@ -4,6 +4,24 @@ sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts'))
 from controller import Controller,brain_command
 class CursorTests(unittest.TestCase):
  def make(self):return Controller('/tmp/gl-cursor-test',None,None,{'controller':{'mode':'subscriptions','providers':['cursor'],'image':'sha256:'+'a'*64,'subscriptions_confirmed':True,'extra_usage_disabled':True}})
+ def test_headless_plan_acknowledges_fixed_workspace_without_permission_bypass(self):
+  c=self.make();decision={'summary':'Observe','actions':[{'agent':'DIRECTOR','action':'STATUS','args':{}}]}
+  def run(argv,**kwargs):
+   if '--trust' not in argv:return 1,b''
+   self.assertEqual(argv[argv.index('--workdir')+1],'/tmp')
+   self.assertIn('/tmp:rw,nosuid,size=128m,uid=1000,gid=1000',argv)
+   self.assertIn('--print',argv);self.assertEqual(argv[argv.index('--mode')+1],'ask')
+   self.assertFalse(any(flag in argv for flag in ('--force','--yolo','-f')))
+   self.assertIn('dst=/home/node/.cursor/cli-config.json,readonly',' '.join(argv))
+   self.assertIn('dst=/home/node/.cursor/sandbox.json,readonly',' '.join(argv))
+   return 0,json.dumps({'type':'result','subtype':'success','is_error':False,'result':json.dumps(decision)}).encode()
+  with patch.object(c,'check_provider'),patch('controller.run_brain',side_effect=run):
+   self.assertEqual(c.plan('cursor','context'),decision)
+ def test_missing_workspace_trust_option_stops_before_login_or_inference(self):
+  c=self.make()
+  with patch('controller.run_brain',side_effect=[(0,b'--print --mode --output-format'),(0,b'Logged in as user@example.com')]) as run:
+   with self.assertRaisesRegex(ValueError,'--trust'):c.check_provider('cursor')
+   self.assertEqual(run.call_count,1)
  def test_cursor_command_persists_whole_private_home_without_hiding_binary(self):
   argv=brain_command('/opt/globalland','sha256:'+'a'*64,'cursor');text=' '.join(argv)
   self.assertIn('dst=/home/node',text);self.assertIn('src=/opt/globalland/credentials/cursor,',text);self.assertIn('CURSOR_CONFIG_DIR=/home/node/.cursor',argv);self.assertIn('agent',text)
@@ -17,7 +35,7 @@ class CursorTests(unittest.TestCase):
   seen=[]
   def run(command,**kwargs):
    seen.append(command)
-   return (0,b'--print --mode --output-format') if '--help' in command else (0,b'Logged in as user@example.com')
+   return (0,b'--print --trust --mode --output-format') if '--help' in command else (0,b'Logged in as user@example.com')
   with patch('controller.run_brain',side_effect=run):self.make().check_provider('cursor')
   for command in seen:self.assertIn('dst=/home/node/.cursor/cli-config.json,readonly',' '.join(command[:command.index(image)]))
  def test_cursor_nonobject_wrapper_is_rejected_as_structured_output(self):
@@ -45,11 +63,11 @@ class CursorTests(unittest.TestCase):
  def test_cursor_status_rejects_negative_auth_and_api_key(self):
   for status in [b'Not authenticated',b'Unauthenticated',b'Logged out',b'Authenticated using API key']:
    c=self.make()
-   with patch('controller.run_brain',side_effect=[(0,b'--print --mode --output-format'),(0,status)]):
+   with patch('controller.run_brain',side_effect=[(0,b'--print --trust --mode --output-format'),(0,status)]):
     with self.assertRaisesRegex(ValueError,'authentication'):c.check_provider('cursor')
  def test_cursor_status_verifies_browser_login_without_echoing_identity(self):
   c=self.make()
-  with patch('controller.run_brain',side_effect=[(0,b'--print --mode --output-format'),(0,b'Logged in as user@example.com')]):result=c.check_provider('cursor')
+  with patch('controller.run_brain',side_effect=[(0,b'--print --trust --mode --output-format'),(0,b'Logged in as user@example.com')]):result=c.check_provider('cursor')
   self.assertTrue(result['subscription_auth_verified']);self.assertNotIn('user@example.com',json.dumps(result))
  def test_cursor_unwraps_result_and_validates_local_decision(self):
   c=self.make();decision={'summary':'Build product','actions':[{'agent':'BUILDER','action':'EXEC','args':{'argv':['node','-p','1'],'outputs':[]}}]}

@@ -36,7 +36,7 @@ def brain_command(root, image, provider):
     argv = ['docker','run','--rm','--name','globalland-brain-'+uuid.uuid4().hex,'-i','--read-only','--user','1000:1000','--cap-drop','ALL','--security-opt','no-new-privileges:true','--memory','1g','--cpus','0.5','--pids-limit','128','--tmpfs','/tmp:rw,nosuid,size=128m,uid=1000,gid=1000','--mount',f'type=bind,src={root / "credentials" / provider},dst={auth_destination}','--mount',f'type=bind,src={root / "control" / "decision.schema.json"},dst=/decision.schema.json,readonly','--env',config_env,'--workdir','/tmp']
     if provider=='cursor':
         argv+=['--mount',f'type=bind,src={root / "control" / "cursor-cli-config.json"},dst=/home/node/.cursor/cli-config.json,readonly','--mount',f'type=bind,src={root / "control" / "cursor-sandbox.json"},dst=/home/node/.cursor/sandbox.json,readonly']
-        return argv+[image,'cursor-agent','--print','--mode','ask','--output-format','json']
+        return argv+[image,'cursor-agent','--print','--trust','--mode','ask','--output-format','json']
     if provider == 'codex':
         return argv + [image,'codex','exec','--ignore-user-config','--ignore-rules','--sandbox','read-only','--ephemeral','--skip-git-repo-check','--output-schema','/decision.schema.json','-c','forced_login_method="chatgpt"','-c','approval_policy="never"','-c','features.shell_tool=false','-c','web_search="disabled"','-c','tools.view_image=false','-c','features.multi_agent=false','-c','apps._default.enabled=false','-c','features.hooks=false','-c','mcp_servers={}','-']
     return argv + [image,'claude','--safe-mode','-p','--tools','','--disallowedTools','mcp__*','--strict-mcp-config','--mcp-config','{"mcpServers":{}}','--output-format','json','--json-schema',json.dumps(MODEL_SCHEMA),'--no-session-persistence','--max-turns',str(CLAUDE_MAX_TURNS),'--permission-prompts','none']
@@ -121,7 +121,7 @@ class Controller:
             if code:raise ValueError(f'{provider}: subscription CLI unavailable (help exit={code})')
             helptext+=out.decode('utf-8')
         flags=['--ignore-user-config','--ignore-rules','--sandbox','--ephemeral','--skip-git-repo-check','--output-schema'] if provider=='codex' else ['--safe-mode','--tools','--disallowedTools','--strict-mcp-config','--mcp-config','--json-schema','--no-session-persistence','--permission-prompts']
-        if provider=='cursor':flags=['--print','--mode','--output-format']
+        if provider=='cursor':flags=['--print','--trust','--mode','--output-format']
         missing=[f for f in flags if f not in helptext]
         if missing:raise ValueError(provider+': required subscription CLI restriction unsupported: '+', '.join(missing))
         if provider=='claude' and '--max-turns' not in helptext:
