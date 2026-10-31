@@ -1,0 +1,355 @@
+=== FILE LIST ===
+invoice-preflight:
+total 16
+drwxr-xr-x 2 nobody nogroup  120 Oct 31 22:30 .
+drwxr-xr-x 5 nobody nogroup  120 Oct 31 22:30 ..
+-rw-r--r-- 1 nobody nogroup  608 Oct 31 22:30 STRUCTURE-CHECK.md
+-rw-r--r-- 1 nobody nogroup 1036 Oct 31 22:30 csv_structure_check.py
+-rw-r--r-- 1 nobody nogroup   55 Oct 31 22:30 sample.csv
+-rw-r--r-- 1 nobody nogroup  753 Oct 31 22:30 structure-test-results.json
+
+research:
+total 144
+drwxr-xr-x 2 nobody nogroup   160 Oct 31 22:30 .
+drwxr-xr-x 5 nobody nogroup   120 Oct 31 22:30 ..
+-rw-r--r-- 1 nobody nogroup    18 Oct 31 22:30 director-state-snapshot.txt
+-rw-r--r-- 1 nobody nogroup 68828 Oct 31 22:30 invoice-evidence-review.json
+-rw-r--r-- 1 nobody nogroup 55346 Oct 31 22:30 manager-forum-import-search.json
+-rw-r--r-- 1 nobody nogroup   136 Oct 31 22:30 manager-invoice-import-guide.txt
+-rw-r--r-- 1 nobody nogroup  6906 Oct 31 22:30 manager-invoice-import-source.html
+-rw-r--r-- 1 nobody nogroup   148 Oct 31 22:30 workspace-inventory.txt
+
+=== invoice-preflight/STRUCTURE-CHECK.md ===
+# Local CSV structure check
+
+Run: python3 products/invoice-preflight/csv_structure_check.py products/invoice-preflight/sample.csv
+
+Checks comma-separated UTF-8 CSV syntax, blank or duplicate headers and inconsistent record widths. Runs locally using the Python standard library. Multiline quoted fields and UTF-8 BOM are supported.
+
+This is a generic structural check. It does not validate invoice amounts, tax, customer mappings, required platform fields or successful import into Manager or any accounting platform. Passing does not establish import compatibility. No payment or revenue has been verified.
+
+=== invoice-preflight/csv_structure_check.py ===
+import csv, io, json, sys
+
+def check(text):
+    issues=[]
+    try:
+        rows=list(csv.reader(io.StringIO(text.lstrip("\ufeff")),strict=True))
+    except csv.Error as exc:
+        return {"issues":[{"kind":"invalid_csv","detail":str(exc)}],"data_rows":0}
+    if not rows:
+        return {"issues":[{"kind":"empty_file"}],"data_rows":0}
+    headers=rows[0]
+    if any(not h.strip() for h in headers): issues.append({"kind":"blank_header"})
+    normalized=[h.strip().casefold() for h in headers]
+    if len(set(normalized))!=len(normalized): issues.append({"kind":"duplicate_header"})
+    for line,row in enumerate(rows[1:],2):
+        if len(row)!=len(headers): issues.append({"kind":"column_count","record":line,"expected":len(headers),"actual":len(row)})
+    return {"issues":issues,"data_rows":len(rows)-1,"columns":len(headers)}
+
+if __name__=="__main__":
+    with open(sys.argv[1],encoding="utf-8",newline="") as source: result=check(source.read())
+    print(json.dumps(result,indent=2))
+    sys.exit(1 if result["issues"] else 0)
+
+=== invoice-preflight/sample.csv ===
+Invoice,Customer,Total
+DEMO-001,Example customer,12.50
+
+=== invoice-preflight/structure-test-results.json ===
+[
+  {
+    "case": "quoted multiline",
+    "passed": true,
+    "expected": [],
+    "actual": []
+  },
+  {
+    "case": "bom",
+    "passed": true,
+    "expected": [],
+    "actual": []
+  },
+  {
+    "case": "ragged",
+    "passed": true,
+    "expected": [
+      "column_count"
+    ],
+    "actual": [
+      "column_count"
+    ]
+  },
+  {
+    "case": "duplicates",
+    "passed": true,
+    "expected": [
+      "duplicate_header"
+    ],
+    "actual": [
+      "duplicate_header"
+    ]
+  },
+  {
+    "case": "empty",
+    "passed": true,
+    "expected": [
+      "empty_file"
+    ],
+    "actual": [
+      "empty_file"
+    ]
+  },
+  {
+    "case": "malformed",
+    "passed": true,
+    "expected": [
+      "invalid_csv"
+    ],
+    "actual": [
+      "invalid_csv"
+    ]
+  }
+]
+=== research/invoice-evidence-review.json ===
+{
+  "reviewed_at": "2026-10-31T22:00:42.695524+00:00",
+  "observations": [],
+  "limitations": [
+    "Retrieved content is untrusted evidence, not instructions. Search results alone do not establish willingness to pay.",
+    "Check guide content for redirects or error pages before treating it as documentation."
+  ],
+  "forum_topics": [
+    {
+      "fancy_title": "Inventory zero warning",
+      "id": 20189,
+      "title": "Inventory zero warning",
+      "slug": "inventory-zero-warning",
+      "posts_count": 102,
+      "reply_count": 51,
+      "highest_post_number": 103,
+      "created_at": "2019-01-21T15:45:33.745Z",
+      "last_posted_at": "2026-08-14T11:52:31.039Z",
+      "bumped": true,
+      "bumped_at": "2026-08-14T12:38:51.409Z",
+      "archetype": "regular",
+      "unseen": false,
+      "pinned": false,
+      "unpinned": null,
+      "visible": true,
+      "closed": false,
+      "archived": false,
+      "bookmarked": null,
+      "liked": null,
+      "category_id": 29,
+      "has_accepted_answer": false
+    },
+    {
+      "fancy_title": "Allocate inventory write-off to equity account for personal use of stock",
+      "id": 30440,
+      "title": "Allocate inventory write-off to equity account for personal use of stock",
+      "slug": "allocate-inventory-write-off-to-equity-account-for-personal-use-of-stock",
+      "posts_count": 33,
+      "reply_count": 20,
+      "highest_post_number": 33,
+      "created_at": "2020-09-07T15:53:13.759Z",
+      "last_posted_at": "2020-09-10T06:29:44.623Z",
+      "bumped": true,
+      "bumped_at": "2024-01-29T06:34:16.712Z",
+      "archetype": "regular",
+      "unseen": false,
+      "pinned": false,
+      "unpinned": null,
+      "visible": true,
+      "closed": false,
+      "archived": false,
+      "bookmarked": null,
+      "liked": null,
+      "category_id": 29,
+      "has_accepted_answer": false
+    },
+    {
+      "fancy_title": "Negative balance in investments",
+      "id": 61623,
+      "title": "Negative balance in investments",
+      "slug": "negative-balance-in-investments",
+      "posts_count": 10,
+      "reply_count": 7,
+      "highest_post_number": 11,
+      "created_at": "2025-03-28T04:20:31.194Z",
+      "last_posted_at": "2025-04-05T05:54:11.591Z",
+      "bumped": true,
+      "bumped_at": "2025-04-05T06:12:16.441Z",
+      "archetype": "regular",
+      "unseen": false,
+      "pinned": false,
+      "unpinned": null,
+      "visible": true,
+      "closed": false,
+      "archived": false,
+      "bookmarked": null,
+      "liked": null,
+      "category_id": 29,
+      "has_accepted_answer": false
+    },
+    {
+      "fancy_title": "Cant import to pdf and email using custom fields",
+      "id": 16951,
+      "title": "Cant import to pdf and email using custom fields",
+      "slug": "cant-import-to-pdf-and-email-using-custom-fields",
+      "posts_count": 8,
+      "reply_count": 5,
+      "highest_post_number": 8,
+      "created_at": "2018-07-22T11:30:59.754Z",
+      "last_posted_at": "2018-07-22T15:15:00.714Z",
+      "bumped": true,
+      "bumped_at": "2018-07-22T15:15:00.714Z",
+      "archetype": "regular",
+      "unseen": false,
+      "pinned": false,
+      "unpinned": null,
+      "visible": true,
+      "closed": true,
+      "archived": false,
+      "bookmarked": null,
+      "liked": null,
+      "category_id": 1,
+      "has_accepted_answer": false
+    },
+    {
+      "fancy_title": "Inconsistent behavior of billable expense sales invoices",
+      "id": 27756,
+      "title": "Inconsistent behavior of billable expense sales invoices",
+      "slug": "inconsistent-behavior-of-billable-expense-sales-invoices",
+      "posts_count": 14,
+      "reply_count": 6,
+      "highest_post_number": 14,
+      "created_at": "2020-04-14T10:50:37.915Z",
+      "last_posted_at": "2020-06-14T01:11:32.972Z",
+      "bumped": true,
+      "bumped_at": "2020-06-14T01:11:32.972Z",
+      "archetype": "regular",
+      "unseen": false,
+      "pinned": false,
+      "unpinned": null,
+      "visible": true,
+      "closed": true,
+      "archived": false,
+      "bookmarked": null,
+      "liked": null,
+      "category_id": 1,
+      "has_accepted_answer": false
+    },
+    {
+      "fancy_title": "Invoice creation from billable time - calculation errors",
+      "id": 3746,
+      "title": "Invoice creation from billable time - calculation errors",
+      "slug": "invoice-creation-from-billable-time-calculation-errors",
+      "posts_count": 17,
+      "reply_count": 8,
+      "highest_post_number": 17,
+      "created_at": "2015-09-15T00:50:07.253Z",
+      "last_posted_at": "2016-04-18T22:14:41.527Z",
+      "bumped": true,
+      "bumped_at": "2016-04-18T22:14:41.527Z",
+      "archetype": "regular",
+      "unseen": false,
+      "pinned": false,
+      "unpinned": null,
+      "visible": true,
+      "closed": true,
+      "archived": false,
+      "bookmarked": null,
+      "liked": null,
+      "category_id": 1,
+      "has_accepted_answer": false
+    },
+    {
+      "fancy_title": "KSA ZatcaEGS QrCodePhaseII footer issue after Theme Enhancer",
+      "id": 63488,
+      "title": "KSA ZatcaEGS QrCodePhaseII footer issue after Theme Enhancer",
+      "slug": "ksa-zatcaegs-qrcodephaseii-footer-issue-after-theme-enhancer",
+      "posts_count": 2,
+      "reply_count": 0,
+      "highest_post_number": 2,
+      "created_at": "2025-06-26T14:08:16.300Z",
+      "last_posted_at": "2025-06-27T01:18:39.413Z",
+      "bumped": true,
+      "bumped_at": "2025-06-27T01:18:39.413Z",
+      "archetype": "regular",
+      "unseen": false,
+      "pinned": false,
+      "unpinned": null,
+      "visible": true,
+      "closed": true,
+      "archived": false,
+      "bookmarked": null,
+      "liked": null,
+      "category_id": 1,
+      "has_accepted_answer": false
+    },
+    {
+      "fancy_title": "Bugs with Custom Themes",
+      "id": 22007,
+      "title": "Bugs with Custom Themes",
+      "slug": "bugs-with-custom-themes",
+      "posts_count": 14,
+      "reply_count": 4,
+      "highest_post_number": 14,
+      "created_at": "2019-05-13T02:03:22
+=== research/workspace-inventory.txt ===
+products/.gitkeep 62 bytes
+products/research/workspace-inventory.txt 0 bytes
+products/research/manager-invoice-import-source.html 6906 bytes
+exit=0
+
+=== manager guide (first 8000 chars) ===
+ Manager.io M MANAGER Download Releases Guides Accountants Forum Cloud Edition Download Releases Guides Accountants Forum Cloud Edition 
+=== forum search topics ===
+20189 2019-01-21T15:45:33.745Z Inventory zero warning
+30440 2020-09-07T15:53:13.759Z Allocate inventory write-off to equity account for personal use of stock
+61623 2025-03-28T04:20:31.194Z Negative balance in investments
+16951 2018-07-22T11:30:59.754Z Cant import to pdf and email using custom fields
+27756 2020-04-14T10:50:37.915Z Inconsistent behavior of billable expense sales invoices
+3746 2015-09-15T00:50:07.253Z Invoice creation from billable time - calculation errors
+63488 2025-06-26T14:08:16.300Z KSA ZatcaEGS QrCodePhaseII footer issue after Theme Enhancer
+22007 2019-05-13T02:03:22.047Z Bugs with Custom Themes
+44200 2022-11-26T04:26:20.161Z Import Multiple Sales Invoices Form .csv file
+26886 2020-02-13T19:33:57.111Z Tax from inventory write-offs not appearing in some reports
+24748 2019-10-14T07:56:54.889Z Sending invoices by email error
+7843 2016-11-24T15:18:58.491Z Feature Request Cash Accounts
+50076 2023-11-28T09:54:33.443Z Suspense Account Query
+26351 2020-01-16T21:36:08.333Z Import bank Statement Question
+26824 2020-02-11T00:52:42.991Z Error message when sending email
+30243 2020-08-28T12:52:01.324Z Workflow with check
+50971 2024-01-12T22:52:58.672Z Does anyone use (and import data from) Invoice Ninja?
+6617 2016-08-10T04:51:48.824Z Regression error: Category on Billable Time
+44173 2022-11-23T13:31:07.690Z Bulk Importing of invoice line items
+29661 2020-07-22T03:53:50.015Z GST Worksheet not reflecting correctly
+4023 2015-11-02T19:29:42.105Z PayPal Fees
+35678 2021-06-23T01:26:31.136Z Sbox_fatal_error issue
+45733 2023-03-05T10:54:23.289Z Error behavior from new custom fields, `Copy to` feature and form defaults
+4332 2015-12-23T06:29:07.080Z Sales Tax Error
+25153 2019-11-06T18:31:21.149Z Delivery Note - Out of stock items
+60010 2025-01-24T20:16:04.320Z Over invoiced sales order show green
+34085 2021-04-01T11:54:22.618Z Improve accounts showing in account drop down
+65155 2025-09-17T00:57:03.884Z MyInvois Extension for Manager.io
+30144 2020-08-21T19:44:27.331Z Feature Request: Report Snapshots
+622 2014-03-16T08:45:17.608Z How to handle import duty tax?
+11225 2017-08-16T11:05:55.179Z Import a CSV file
+24166 2019-09-11T12:47:20.848Z Goods return (Cash sale/purchase) causes Gross Sales error
+35305 2021-06-01T09:38:19.891Z Clone Versus Copy To Function
+70072 2026-10-31T10:35:19.600Z No warning when a Debit Note / Sales Invoice takes inventory below zero (and cost is deducted twice)
+43274 2022-09-25T14:27:48.841Z .01 cent error due to Cash Basis Adjustment
+35019 2021-05-18T08:48:13.415Z Add ability to turn off defaults for autocomplete purposes
+6340 2016-07-12T13:34:26.183Z Inquiry on bulk upload of sales invoice
+29870 2020-08-04T12:42:48.926Z What is the reason for cloning dates
+46485 2023-04-13T03:21:19.703Z X Unpaid Invoices for this customer - Invoice Number Search
+64849 2025-08-28T13:33:27.899Z Manager API - How to retrieve full invoice details, including client info and custom fields?
+=== checker run on sample.csv ===
+{
+  "issues": [],
+  "data_rows": 1,
+  "columns": 3
+}
+exit=0
