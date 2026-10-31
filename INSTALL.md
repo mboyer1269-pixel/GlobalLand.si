@@ -63,15 +63,21 @@ sudo python3 /opt/globalland/control/supervisor.py queue
 
 Le drapeau d'attestation suppose que tu as effectivement vérifié les comptes. Il n'est pas une preuve automatisée de leur facturation. Pour utiliser un seul abonnement, fournir `--providers codex` ou `--providers claude`. Aucun repli API ni achat de crédits n'est effectué si un quota est atteint.
 
-Vérifier une décision THINK, des tâches produites et leurs résultats/artefacts sur GitHub avant d'activer la réflexion périodique. Ajouter ensuite dans un fichier dédié `/etc/cron.d/globalland-think` mode644 :
+Vérifier une décision THINK, des tâches produites et leurs résultats/artefacts sur GitHub avant d'activer la réflexion périodique. Après les tours réellement publiés de Codex et Claude, l'opérateur root peut lancer depuis son checkout administratif au SHA exact revu :
 
-```cron
-SHELL=/bin/bash
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-*/5 * * * * root /usr/bin/python3 /opt/globalland/control/supervisor.py think >> /var/log/globalland/think.log 2>&1
+```bash
+python3 scripts/start_autonomy.py
 ```
 
-Le verrou est commun aux trois cycles ; les agents pensent et travaillent entre les cycles. La rotation `/var/log/globalland/*.log` existante couvre ce nouveau journal. Ne pas toucher aux cron ou conteneurs Oria.
+Le script recontrôle le service cron, la version installée, les tours publiés et les connexions CLI. Il conserve les attestations d'usage existantes, sauvegarde la configuration puis sélectionne codex/claude. L'image et la connexion Cursor restent en place ; Cursor n'est pas sélectionné pour ces tours automatiques. Il écrit atomiquement un unique horaire toutes les30 minutes, sans remplacer un horaire différent existant et sans toucher aux tâches queue/daily ou Oria. Un échec d'installation de l'horaire avant sa publication restaure la configuration précédente. Le cron appelle exclusivement le contrôle installé, jamais le checkout administratif. Aucune mise à niveau du contrôle ou de l'image n'est nécessaire pour cette opération.
+
+L'horaire dédié `/etc/cron.d/globalland-think` mode644 contient :
+
+```cron
+*/30 * * * * root /usr/bin/python3 /opt/globalland/control/supervisor.py think >> /var/log/globalland/think.log 2>&1 && /usr/bin/python3 /opt/globalland/control/supervisor.py queue >> /var/log/globalland/think.log 2>&1
+```
+
+Le script effectue ensuite un lancement immédiat think/queue. Son retour sans erreur ne suffit pas à qualifier chaque tâche de réussie : vérifier les nouveaux résultats et leurs artefacts dans GitHub, puis un tour ultérieur déclenché à :00 ou :30 avec le journal `/var/log/globalland/think.log`. Les connexions et quotas restent des dépendances réelles ; aucun résultat commercial n'est garanti. Le verrou est commun aux trois cycles et la rotation `/var/log/globalland/*.log` couvre le nouveau journal. Pour arrêter la réflexion périodique, déplacer seulement ce fichier cron dans le dossier de sauvegarde privée ; garder queue/daily pour la reprise des travaux déjà soumis. La configuration antérieure se trouve dans le dossier backups/autonomy-* annoncé par le script ; ne pas restaurer un ancien solde ou rejouer des opérations financières.
 
 ## Banque réelle
 
