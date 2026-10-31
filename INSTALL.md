@@ -2,7 +2,7 @@
 
 Prérequis : Ubuntu/Debian, Python3.12+, Git, Docker Compose, image Node22 vérifiée et environ1Go disponible pour une tâche isolée. Les services Oria restent séparés. Ne lancer aucun code depuis un checkout modifiable par les agents dans le cron.
 
-Pour une nouvelle installation, télécharger un SHA complet revu, vérifier un arbre Git propre et exécuter `sudo bash scripts/setup_vps.sh SHA_COMPLET node:22-bookworm@sha256:DIGEST_VERIFIE`. L'installeur crée `/opt/globalland`, contrôle séparé, Git bare et clé dédiée ; il ne démarre ni modèle ni cron. Enregistrer uniquement la clé publique `ssh/deploy_key.pub` comme Deploy Key d'écriture sur ce dépôt. Installer les clés hôte GitHub vérifiées dans `ssh/known_hosts` mode600 avec StrictHostKeyChecking=yes ; ne jamais publier la clé privée.
+Pour une nouvelle installation, télécharger un SHA complet revu, vérifier un arbre Git propre et exécuter `sudo bash scripts/setup_vps.sh SHA_COMPLET node:22-bookworm@sha256:DIGEST_VERIFIE`. L'installeur crée `/opt/globalland`, contrôle séparé, Git bare et clé dédiée ; il ne démarre ni modèle ni cron. Après cette préparation, enregistrer uniquement la clé publique `ssh/deploy_key.pub` comme Deploy Key d'écriture sur ce dépôt. Installer les clés hôte GitHub vérifiées dans `ssh/known_hosts` mode600 avec StrictHostKeyChecking=yes ; ne jamais publier la clé privée. Finaliser ensuite avec `sudo bash /opt/globalland/control/finalize_setup.sh` ; le clone SSH fonctionne aussi pour un dépôt privé.
 
 Sur une installation existante v2, suivre la mise à niveau ci-dessous ; ne pas relancer l'installeur initial. Lire SECURITY.md, CODE.md et queue/PROTOCOL.md. Les placeholders SHA/digest/version doivent être remplacés par les valeurs réellement vérifiées, pas copiés littéralement.
 
@@ -11,7 +11,8 @@ Sur une installation existante v2, suivre la mise à niveau ci-dessous ; ne pas 
 L'installation v2 continue de fonctionner tant que le contrôle v3 n'a pas été installé explicitement. Ne jamais exécuter un nouveau superviseur depuis le dépôt mutable. Utiliser un nouveau checkout propre au SHA complet revu/fusionné.
 
 ```bash
-git clone https://github.com/mboyer1269-pixel/GlobalLand.si.git /root/globalland-v3
+GIT_SSH_COMMAND='ssh -i /opt/globalland/ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/opt/globalland/ssh/known_hosts' \
+  git clone git@github.com:mboyer1269-pixel/GlobalLand.si.git /root/globalland-v3
 cd /root/globalland-v3
 git checkout --detach SHA_COMPLET_REVU
 sudo bash scripts/upgrade_vps.sh SHA_COMPLET_REVU

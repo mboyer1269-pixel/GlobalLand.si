@@ -39,3 +39,7 @@ Analyses indépendantes de l'architecture financière et du runtime ; revues dé
 - Quelques frontières World restent sans assertion dédiée : seconde exacte d'expiration de bail, mauvais propriétaire avant expiration, arrondi indépendant d'intérêt, action d'un agent désactivé, limite de projection des événements, rejeu après opération invalidée. Aucun comportement incorrect identifié dans leur revue.
 
 Aucun déploiement de v3 ni moteur d'inférence réel connecté n'est revendiqué par ce rapport. La procédure fournit une mise à niveau avec conservation de l'état, des connexions officielles privées, un contrôle de disponibilité et des tests manuels avant horaires think.
+
+## Observation CI après publication
+
+Le run41171150862 a échoué avant toute étape, avec runner_id0, runner vide et steps[]. Les logs sont absents (BlobNotFound). Aucun résultat de testDocker CI n'est donc disponible et aucune cause de facturation précise n'est affirmée. Aucun réglage de facturation ni achat de runner n'a été fait. Le dépôt est désormais privé ; la procédure d'installation est adaptée au cloneSSH dédié. Le contrôle v2 et sa DeployKey continuent à être conservés.
