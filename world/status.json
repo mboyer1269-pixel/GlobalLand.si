@@ -1,0 +1,130 @@
+{
+  "state": "ACTIVE",
+  "agents": [
+    {
+      "agent_id": "DIRECTOR",
+      "role": "DIRECTOR",
+      "wallet_glc": 100,
+      "debt_glc": 100,
+      "status": "ACTIVE"
+    },
+    {
+      "agent_id": "RESEARCHER",
+      "role": "RESEARCHER",
+      "wallet_glc": 100,
+      "debt_glc": 100,
+      "status": "ACTIVE"
+    },
+    {
+      "agent_id": "BUILDER",
+      "role": "BUILDER",
+      "wallet_glc": 100,
+      "debt_glc": 100,
+      "status": "ACTIVE"
+    },
+    {
+      "agent_id": "ACQUISITION",
+      "role": "ACQUISITION",
+      "wallet_glc": 100,
+      "debt_glc": 100,
+      "status": "ACTIVE"
+    },
+    {
+      "agent_id": "AUDITOR",
+      "role": "AUDITOR",
+      "wallet_glc": 100,
+      "debt_glc": 100,
+      "status": "ACTIVE"
+    }
+  ],
+  "missions": [
+    {
+      "mission_id": "WORLD-FIRST-REVENUE",
+      "goal": "Choose any global Internet activity and produce evidence-backed revenue; explore all markets and strategies freely.",
+      "parent_id": null,
+      "agent_id": null,
+      "priority": 0,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
+    }
+  ],
+  "messages": [],
+  "events": [
+    {
+      "type": "GLC_ISSUANCE",
+      "timestamp": 1793423756.3320282,
+      "agent_id": "DIRECTOR",
+      "amount": 100,
+      "reason": "initial loan"
+    },
+    {
+      "type": "GLC_LOAN",
+      "timestamp": 1793423756.3320305,
+      "agent_id": "DIRECTOR",
+      "amount": 100
+    },
+    {
+      "type": "GLC_ISSUANCE",
+      "timestamp": 1793423756.332038,
+      "agent_id": "RESEARCHER",
+      "amount": 100,
+      "reason": "initial loan"
+    },
+    {
+      "type": "GLC_LOAN",
+      "timestamp": 1793423756.3320386,
+      "agent_id": "RESEARCHER",
+      "amount": 100
+    },
+    {
+      "type": "GLC_ISSUANCE",
+      "timestamp": 1793423756.3320425,
+      "agent_id": "BUILDER",
+      "amount": 100,
+      "reason": "initial loan"
+    },
+    {
+      "type": "GLC_LOAN",
+      "timestamp": 1793423756.3320434,
+      "agent_id": "BUILDER",
+      "amount": 100
+    },
+    {
+      "type": "GLC_ISSUANCE",
+      "timestamp": 1793423756.3320463,
+      "agent_id": "ACQUISITION",
+      "amount": 100,
+      "reason": "initial loan"
+    },
+    {
+      "type": "GLC_LOAN",
+      "timestamp": 1793423756.3320467,
+      "agent_id": "ACQUISITION",
+      "amount": 100
+    },
+    {
+      "type": "GLC_ISSUANCE",
+      "timestamp": 1793423756.3320496,
+      "agent_id": "AUDITOR",
+      "amount": 100,
+      "reason": "initial loan"
+    },
+    {
+      "type": "GLC_LOAN",
+      "timestamp": 1793423756.3320503,
+      "agent_id": "AUDITOR",
+      "amount": 100
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793423756.3320663,
+      "mission_id": "WORLD-FIRST-REVENUE"
+    }
+  ],
+  "policy": {
+    "maintenance_glc": 1,
+    "interest_basis_points": 500
+  }
+}
