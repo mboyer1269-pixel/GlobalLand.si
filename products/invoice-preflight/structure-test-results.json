@@ -1,0 +1,54 @@
+[
+  {
+    "case": "quoted multiline",
+    "passed": true,
+    "expected": [],
+    "actual": []
+  },
+  {
+    "case": "bom",
+    "passed": true,
+    "expected": [],
+    "actual": []
+  },
+  {
+    "case": "ragged",
+    "passed": true,
+    "expected": [
+      "column_count"
+    ],
+    "actual": [
+      "column_count"
+    ]
+  },
+  {
+    "case": "duplicates",
+    "passed": true,
+    "expected": [
+      "duplicate_header"
+    ],
+    "actual": [
+      "duplicate_header"
+    ]
+  },
+  {
+    "case": "empty",
+    "passed": true,
+    "expected": [
+      "empty_file"
+    ],
+    "actual": [
+      "empty_file"
+    ]
+  },
+  {
+    "case": "malformed",
+    "passed": true,
+    "expected": [
+      "invalid_csv"
+    ],
+    "actual": [
+      "invalid_csv"
+    ]
+  }
+]

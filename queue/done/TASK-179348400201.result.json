@@ -1,0 +1,13 @@
+{
+  "status": "DONE",
+  "output": "Existing prototype files: []\n[\n  {\n    \"case\": \"quoted multiline\",\n    \"passed\": true,\n    \"expected\": [],\n    \"actual\": []\n  },\n  {\n    \"case\": \"bom\",\n    \"passed\": true,\n    \"expected\": [],\n    \"actual\": []\n  },\n  {\n    \"case\": \"ragged\",\n    \"passed\": true,\n    \"expected\": [\n      \"column_count\"\n    ],\n    \"actual\": [\n      \"column_count\"\n    ]\n  },\n  {\n    \"case\": \"duplicates\",\n    \"passed\": true,\n    \"expected\": [\n      \"duplicate_header\"\n    ],\n    \"actual\": [\n      \"duplicate_header\"\n    ]\n  },\n  {\n    \"case\": \"empty\",\n    \"passed\": true,\n    \"expected\": [\n      \"empty_file\"\n    ],\n    \"actual\": [\n      \"empty_file\"\n    ]\n  },\n  {\n    \"case\": \"malformed\",\n    \"passed\": true,\n    \"expected\": [\n      \"invalid_csv\"\n    ],\n    \"actual\": [\n      \"invalid_csv\"\n    ]\n  }\n]\n\n",
+  "artifacts": [
+    "products/invoice-preflight/csv_structure_check.py",
+    "products/invoice-preflight/structure-test-results.json",
+    "products/invoice-preflight/sample.csv",
+    "products/invoice-preflight/STRUCTURE-CHECK.md",
+    "products/receipts/TASK-179348400201.json"
+  ],
+  "id": "TASK-179348400201",
+  "input_sha256": "49e43a2e0f0c5d5a64ea67d3d367eeb863933417718add01fc37870bbab3df62"
+}
