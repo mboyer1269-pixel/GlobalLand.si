@@ -1,89 +1,30 @@
-# 💻 CODE.md — Architecture Technique et État de la Banque Centrale
+# Architecture et état de GlobalLand
 
-> **NOTE POUR LE DIRECTEUR SI/OP (GROKBOT) :** ce fichier contient les **4 variables officielles** et l'emplacement des logs. Ne jamais inventer de chiffres en dehors de ce qui est écrit ici.
+## Quatre variables officielles initiales
 
-## 1. Les 4 Variables Officielles (État Initial Post-Choc)
+1. Trésorerie : **50 CAD**, réserve verrouillée **50 CAD**, disponible sans CEO **0 CAD**.
+2. Revenus déclarés au genesis : **0 CAD**. Seul le ledger courant fait foi.
+3. KPI : cashflow positif et solde de **100 CAD** ; objectif intermédiaire de **10 CAD** nets.
+4. Limites : **1 Go RAM / 0,5 CPU** ; plafond constitutionnel **2 CAD/jour**. Le canal actuel n'autorise aucune tâche payante et ne possède aucune clé API.
 
-1. **Trésorerie :** 50,00 $ CAD (réserve réelle verrouillée, détenue par le CEO ; disponible pour les agents sans approbation CEO : 0,00 $ CAD).
-2. **Revenus :** 0,00 $ CAD (le monde sort de l'état de choc, tout est à bâtir).
-3. **KPI :** cashflow positif et atteindre 100,00 $ CAD de solde Banque Centrale. Objectif intermédiaire « Premier Sang » : premiers 10,00 $ CAD de revenus nets à coût d'exécution 0,00 $.
-4. **Limites :** conteneur Docker `globalland-core` plafonné à 1 Go RAM / 0,5 CPU ; plafond API de 2,00 $ CAD / jour ; aucune dépense réelle sans signature du CEO.
+## Frontière d'exécution
 
-> **⚠️ NOTE POUR LE DIRECTEUR SI/OP (GROKBOT) — Taxe narrative vs dépenses réelles :**
-> Conformément à la décision CEO du 2026-10-30 (voir `VISION.md`, section 3), la taxe serveur de 2,00 $ CAD / semaine est une **pression narrative** : elle décompte dans le runway de `ledger.json` mais **ne correspond à aucune sortie d'argent réelle** (le VPS hôte est un coût coulé déjà payé).
-> * **Dépense narrative (aucun impact réel) :** la taxe hebdomadaire de 2,00 $ / semaine (type `SERVER_TAX_NARRATIVE`) — elle réduit le runway calculé, jamais le capital réel disponible.
-> * **Dépense réelle (impact sur les 50,00 $) :** tout achat API, abonnement, domaine, service payant — exige la signature du CEO, une transaction de type `REAL_EXPENSE` au ledger, et débite réellement `current_balance` et `available_for_agents_without_ceo_approval` selon le plafond.
-> **Règle de comptabilisation :** toute nouvelle transaction doit porter un type explicite (`NARRATIVE_*` ou `REAL_*`). Un agent ne doit jamais confondre les deux registres ni « rembourser » la taxe narrative avec de l'argent réel.
+`/opt/globalland/control` contient le superviseur Python et les modules Node installés depuis un commit revu. Ce code ne se met jamais à jour automatiquement. Le cron appelle Python via un chemin fixe.
 
-## 2. Emplacement des Logs et du Grand Livre
+`source.git` est un dépôt bare privé. Aucun checkout Git ni fichier `.git` n'est monté dans le conteneur. Les exports Git refusent liens et fichiers spéciaux et sont plafonnés à 16 Mio, 1 Mio par fichier. L'index de publication est privé ; aucun hook ou filtre du dépôt téléchargé n'est exécuté.
 
-| Fichier | Rôle | Responsable |
-|---|---|---|
-| `ledger.json` | Grand livre officiel de la Banque Centrale (source unique de vérité) | Directeur SI/OP |
-| `logs/transactions.log` | Journal horodaté de chaque action financière (append-only) | Agent Auditeur |
-| `scripts/audit.js` | Audit quotidien : runway, écart KPI, rapport froid | Directeur SI/OP |
-| `bank/audits/` | Rapports d'audit quotidiens et stress-tests hebdomadaires | Directeur SI/OP |
-| `products/` | Actifs monétisables construits par les agents | Agent Builder |
+`work` est un export éphémère, en lecture seule pour le conteneur non privilégié, hors réseau, sans clés, sans socket Docker. Seul le registre `SHELL/AUDIT` est public. Le tick quotidien est une opération interne de confiance.
 
-**Règle :** toute action financière (revenu, dépense, taxe serveur, transfert GLC) doit être inscrite simultanément dans `ledger.json` (nouvelle transaction + mise à jour de `current_balance`) et dans `logs/transactions.log` avant d'être considérée réelle.
+`state` contient les journaux durables, le hash des octets d'entrée et les résultats préparés avant publication. Audit et file partagent un verrou. Un ID déjà connu ne peut pas lancer de nouveau travail. Une interruption est signalée et ne provoque jamais une relance automatique de l'action.
 
-## 3. Structure du Dépôt
+## Comptabilité
 
-```text
-GlobalLand.si/
-├── VISION.md          # Constitution : lore, loi d'extinction, partage des profits
-├── AGENTS.md          # Organigramme exécutif et fiscalité interne
-├── CODE.md            # Ce fichier : architecture, 4 variables, logs
-├── CURSOR.md          # Règles de développement pour agents IA
-├── CLAUDE.md          # Copie des règles (compatibilité Claude Code)
-├── SECURITY.md        # Modèle de menace et audit du canal de tâches
-├── ledger.json        # Grand livre (CAD)
-├── agents/            # Vivier d'agents : staff permanent + consultants
-│   ├── README.md      # Procédure de convocation et règles du vivier
-│   ├── TEMPLATE.md    # Format officiel de carte d'agent
-│   ├── staff/         # Directeur SI/OP, Builder, Acquisition, Auditeur
-│   └── consultants/   # Market Researcher, Pricing, SEO/AEO, Content Creator, Growth Hacker, Code Reviewer
-├── logs/
-│   ├── transactions.log
-│   └── tasks.log
-├── scripts/
-│   ├── audit.js       # Audit financier (Node.js pur, zéro dépendance)
-│   ├── tick.js        # Battement de cœur quotidien (décrément de grâce)
-│   ├── run_task.js    # Exécuteur de la file d'instructions (conteneur)
-│   ├── queue_runner.sh    # Surveillant de la file (VPS)
-│   ├── daily_audit.sh     # Audit quotidien automatisé (cron)
-│   └── setup_vps.sh       # Installation complète sur un VPS
-├── queue/
-│   ├── PROTOCOL.md    # Schémas des tâches SHELL et AGENT_CODE
-│   ├── inbox/         # Tâches en attente soumises par les agents
-│   ├── done/          # Résultats publiés (succès)
-│   └── failed/        # Résultats publiés (échecs/refus)
-├── bank/
-│   └── audits/        # Rapports quotidiens
-└── products/          # Actifs monétisables des agents
-```
+`ledger.json` reste la source financière. Le capital genesis n'est pas changé par cette correction. Les calculs CAD se font en centimes et sont rapprochés avec le solde. Les montants des transactions sont positifs : `REAL_REVENUE` ajoute, `REAL_EXPENSE` retranche. `approved_by: CEO` dans un ledger est une déclaration historique, pas une preuve cryptographique bancaire.
 
-## 4. Architecture d'Exécution
+`NARRATIVE_SERVER_TAX` et l'ancien alias `SERVER_TAX_NARRATIVE` affectent uniquement le runway narratif ; `GLC_TRANSFER` reste séparé du CAD. Aucun prélèvement narratif nouveau n'est fabriqué automatiquement. Le runway affiche la réserve réelle diminuée du cumul des taxes narratives déjà inscrites, divisée par la taxe hebdomadaire, plus la grâce. Sans taxe hebdomadaire, le runway est illimité (`null` en JSON).
 
-* **Runtime :** Node.js 22 (image Docker `node:22-bookworm`), conteneur `globalland-core` plafonné à 1 Go RAM / 0,5 CPU, `no-new-privileges`, redémarrage automatique.
-* **Code :** zéro dépendance npm par défaut. Toute dépendance externe doit être justifiée par un gain de revenus direct et approuvée par le Directeur SI/OP.
-* **Hébergement gratuit autorisé (coût 0 $) :** GitHub Pages, GitHub Actions (CI/CD), Cloudflare Pages/Workers (offre gratuite), Vercel Hobby. Tout service payant exige l'approbation du CEO.
-* **Passerelle de paiement :** toute **sortie** d'argent réel exige la signature du CEO. Les **entrées** (liens de paiement, ventes d'actifs, sponsors) sont configurées avec le CEO dès que le produit est prêt.
-* **Secrets :** aucune clé d'API ou credential dans le repo (le dépôt est public). Les secrets vivent dans les variables d'environnement du conteneur ou dans GitHub Secrets.
+`DAY_TICK` vaut zéro et porte un horodatage UTC. Le premier tick valide enlève un jour ; les suivants enlèvent les jours UTC écoulés depuis `last_tick_date`, au plus jusqu'à zéro. Une seconde exécution le même jour ne change rien ; un retour d'horloge est refusé.
 
-## 5. Contraintes d'Infrastructure (VPS hôte)
+Le journal `logs/transactions.log` est une projection régénérable du ledger validé. Le superviseur publie les deux dans le même commit. Les écritures locales du CLI tick sont atomiques fichier par fichier, sans garantie transactionnelle inter-fichiers ; en cas d'interruption, relancer reconstruit le journal depuis le ledger. Le VPS utilise une préparation en mémoire puis un commit commun.
 
-L'infrastructure vit dans `/opt/globalland` sur le VPS, isolée du reste des projets de la machine hôte :
-
-```text
-/opt/globalland/
-├── docker-compose.yml      # Conteneur globalland-core (0,5 CPU, 1 Go RAM)
-├── .ssh/
-│   ├── globalland_deploy_key       # Clé privée de déploiement (chmod 600)
-│   └── globalland_deploy_key.pub   # À enregistrer dans les Deploy Keys GitHub
-└── workspace/GlobalLand.si/         # Dépôt git monté dans le conteneur
-```
-
-* Le conteneur n'expose **aucun port** vers l'hôte.
-* La clé SSH de déploiement est dédiée à ce seul repo (Deploy Key GitHub, accès lecture/écriture).
-* L'audit quotidien s'exécute avec : `docker exec globalland-core node scripts/audit.js`.
+Le cashflow est la somme réelle des revenus moins dépenses des sept jours UTC se terminant au jour du rapport. Le capital initial, le narratif et les GLC en sont exclus. Aucun revenu ni paiement n'est inventé ; les preuves bancaires restent à valider par le CEO.

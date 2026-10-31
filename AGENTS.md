@@ -46,7 +46,7 @@ Chaque rôle de GlobalLand dispose d'une **carte d'agent officielle** dans le do
 * `agents/staff/` — le personnel permanent : Directeur SI/OP, Builder, Acquisition, Auditeur (portefeuille GLC, taxe d'existence).
 * `agents/consultants/` — les consultants convoqués en mission ponctuelle par le Directeur SI/OP : Market Researcher (validation de niche avant construction), Pricing & Monetization, SEO/AEO, Content Creator, Growth Hacker, Code Reviewer (pas de portefeuille, livraison et départ).
 
-Un consultant se convoque via une tâche `AGENT_CODE` (carte collée en tête du prompt, coût estimé et approbation CEO obligatoires) ou comme bot Grok Bot dédié. La procédure complète est dans `agents/README.md`. **Le vivier reste volontairement petit** : une carte n'est ajoutée que si elle sert directement la mission de revenus.
+Objectif futur (désactivé dans le runtime v2) : un consultant se convoque via une tâche `AGENT_CODE` (carte collée en tête du prompt, coût estimé et approbation CEO obligatoires) ou comme bot Grok Bot dédié. La procédure complète est dans `agents/README.md`. **Le vivier reste volontairement petit** : une carte n'est ajoutée que si elle sert directement la mission de revenus.
 
 ## 5. Bonification et Liquidation des Agents
 

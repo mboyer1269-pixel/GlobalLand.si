@@ -2,6 +2,8 @@
 
 > Toute personne (humaine ou agent) listée ici est soumise aux lois de GlobalLand : `VISION.md`, `AGENTS.md`, `CODE.md`, `CURSOR.md`. Une carte d'agent ne remplace jamais le Grand Livre — elle décrit un rôle, ses règles et ses livrables.
 
+> Runtime v2 : ces cartes ne créent aucun processus. Seul SHELL/AUDIT gratuit est activé. AGENT_CODE est désactivé ; les procédures de convocation payantes ci-dessous sont des objectifs futurs, pas des capacités disponibles. Voir queue/PROTOCOL.md.
+
 ## Organisation du vivier
 
 ```text
