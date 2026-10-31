@@ -10,7 +10,7 @@ Le mandat du CEO du 2026-10-31 dans VISION.md fait autorité. Le capital initial
 - ACQUISITION : prépare la distribution, la vente et les expériences commerciales ; suit les recettes réglées.
 - AUDITOR : rapproche dépenses, revenus et preuves ; surveille la capacité financière et les résultats réels.
 
-Les identités sont persistantes dans le monde. Elles partagent un ou plusieurs modèles officiellement connectés (Codex/Claude Code via les abonnements du fondateur, ou contrôleur Grok externe). Une carte Markdown n'est pas un processus vivant : l'état du contrôleur doit prouver les invocations et résultats.
+Les identités sont persistantes dans le monde. Elles partagent un ou plusieurs modèles officiellement connectés (Codex/Claude Code/Cursor via les abonnements du fondateur, ou contrôleur Grok externe). Une carte Markdown n'est pas un processus vivant : l'état du contrôleur doit prouver les invocations et résultats.
 
 Chaque résident reçoit un prêt initial de 100 GLC avec événement d'émission. Politique initiale : maintenance 1 GLC par cycle et intérêt de dette 5 %, modifiables par WORLD/set_policy. Une liquidation GLC désactive l'agent et libère ses missions ; elle ne débite pas la Banque CAD. L'émission de récompenses reste virtuelle et explicite.
 

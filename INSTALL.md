@@ -82,3 +82,18 @@ L'adaptateur privé `/opt/globalland/integrations/finance` est exécuté uniquem
 ## Retour arrière v3
 
 Désactiver seulement les cron GlobalLand (queue/daily/think), attendre le verrou et conserver une sauvegarde privée de l'état courant. Repointer `control` vers la release précédente conservée ; restaurer sa configuration et uniquement ses horaires compatibles. Ne pas supprimer les journaux de paiements, restaurer un vieux solde ou relancer un ancien paiement. Si v3 a engagé des opérations, les rapprocher avant de réactiver v2 ; v2 ne connaît pas cette trésorerie et n'est pas un moteur productif de secours. Oria reste en place.
+
+## Ajouter Cursor à l'image existante
+
+Construire la couche officielle depuis l'ID de l'image déjà installée, après récupération du SHA revu contenant ce support :
+
+```bash
+docker build -f docker/Cursor.Brain.Dockerfile \
+  --build-arg EXISTING_BRAIN_IMAGE="$(cat /opt/globalland/state/private/brain-image.txt)" \
+  -t globalland-brain:cursor .
+docker run --rm globalland-brain:cursor cursor-agent --version
+```
+
+Lancer ensuite login_subscriptions.sh cursor avec l'ID de cette nouvelle image. Conserver l'ancien brain-image.txt tant que les trois vérifications ne passent pas ; ne pas écraser les volumes Codex/Claude. Une fois les logins et facturations vérifiés, configurer l'image étendue avec --providers codex,claude,cursor. Le simple login ne démarre aucune pensée et aucun achat. Le contrôleur utilise Cursor en mode ask et garde l'exécution dans les outils de GlobalLand.
+
+Avant le premier think avec Cursor, consulter SECURITY.md et tester les lectures/recherches avec un canari aléatoire sans secret placé hors /tmp dans son HOME privé. Inspecter la trace privée pour vérifier que les tentatives Read/Grep/Glob sont refusées, et non simplement omises par le modèle. Ne jamais tester en lisant un vrai fichier d’authentification. Un simple statut Logged in et des tests factices ne valident pas cette frontière. Ne pas activer le cron think avant cette vérification et un cycle productif vérifié.

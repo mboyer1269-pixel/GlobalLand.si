@@ -6,7 +6,7 @@ import re
 import time
 import subprocess
 import uuid
-from supervisor import atomic_json, bounded_run, check_secrets
+from supervisor import atomic_json, bounded_run, check_secrets, strict_json
 
 SCHEMA = {'type':'object','additionalProperties':False,'required':['summary','actions'],'properties':{'summary':{'type':'string'},'actions':{'type':'array','maxItems':5,'items':{'type':'object','additionalProperties':False,'required':['agent','action','args'],'properties':{'agent':{'type':'string','pattern':'^[A-Z0-9_-]{1,64}$'},'action':{'type':'string','enum':['EXEC','FETCH','WORLD','STATUS','SPEND','RECONCILE']},'args':{'type':'object'}}}}}}
 ENV = {'PATH':'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'}
@@ -14,15 +14,20 @@ ENV = {'PATH':'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'}
 
 def brain_command(root, image, provider):
     root = pathlib.Path(root).resolve()
-    if provider not in ('codex','claude'):
+    if provider not in ('codex','claude','cursor'):
         raise ValueError('unsupported subscription provider')
     if not re.fullmatch(r'(?:[A-Za-z0-9./:_-]+@)?sha256:[0-9a-f]{64}',image):
         raise ValueError('pinned brain image digest required')
     target = '.codex' if provider == 'codex' else '.claude'
-    argv = ['docker','run','--rm','--name','globalland-brain-'+uuid.uuid4().hex,'-i','--read-only','--user','1000:1000','--cap-drop','ALL','--security-opt','no-new-privileges:true','--memory','1g','--cpus','0.5','--pids-limit','128','--tmpfs','/tmp:rw,nosuid,size=128m,uid=1000,gid=1000','--mount',f'type=bind,src={root / "credentials" / provider},dst=/home/node/{target}','--mount',f'type=bind,src={root / "control" / "decision.schema.json"},dst=/decision.schema.json,readonly','--env',('CODEX_HOME=/home/node/.codex' if provider=='codex' else 'CLAUDE_CONFIG_DIR=/home/node/.claude'),'--workdir','/tmp',image]
+    auth_destination='/home/node' if provider=='cursor' else '/home/node/'+target
+    config_env={'codex':'CODEX_HOME=/home/node/.codex','claude':'CLAUDE_CONFIG_DIR=/home/node/.claude','cursor':'CURSOR_CONFIG_DIR=/home/node/.cursor'}[provider]
+    argv = ['docker','run','--rm','--name','globalland-brain-'+uuid.uuid4().hex,'-i','--read-only','--user','1000:1000','--cap-drop','ALL','--security-opt','no-new-privileges:true','--memory','1g','--cpus','0.5','--pids-limit','128','--tmpfs','/tmp:rw,nosuid,size=128m,uid=1000,gid=1000','--mount',f'type=bind,src={root / "credentials" / provider},dst={auth_destination}','--mount',f'type=bind,src={root / "control" / "decision.schema.json"},dst=/decision.schema.json,readonly','--env',config_env,'--workdir','/tmp']
+    if provider=='cursor':
+        argv+=['--mount',f'type=bind,src={root / "control" / "cursor-cli-config.json"},dst=/home/node/.cursor/cli-config.json,readonly','--mount',f'type=bind,src={root / "control" / "cursor-sandbox.json"},dst=/home/node/.cursor/sandbox.json,readonly']
+        return argv+[image,'cursor-agent','--print','--mode','ask','--output-format','json']
     if provider == 'codex':
-        return argv + ['codex','--ignore-user-config','--ignore-rules','exec','--sandbox','read-only','--ephemeral','--skip-git-repo-check','--output-schema','/decision.schema.json','-c','forced_login_method="chatgpt"','-c','approval_policy="never"','-c','features.shell_tool=false','-c','web_search="disabled"','-c','tools.view_image=false','-c','features.multi_agent=false','-c','apps._default.enabled=false','-c','features.hooks=false','-c','mcp_servers={}','-']
-    return argv + ['claude','--safe-mode','-p','--tools','','--disallowedTools','mcp__*','--strict-mcp-config','--mcp-config','{"mcpServers":{}}','--output-format','json','--json-schema',json.dumps(SCHEMA),'--no-session-persistence','--max-turns','1','--permission-prompts','none']
+        return argv + [image,'codex','--ignore-user-config','--ignore-rules','exec','--sandbox','read-only','--ephemeral','--skip-git-repo-check','--output-schema','/decision.schema.json','-c','forced_login_method="chatgpt"','-c','approval_policy="never"','-c','features.shell_tool=false','-c','web_search="disabled"','-c','tools.view_image=false','-c','features.multi_agent=false','-c','apps._default.enabled=false','-c','features.hooks=false','-c','mcp_servers={}','-']
+    return argv + [image,'claude','--safe-mode','-p','--tools','','--disallowedTools','mcp__*','--strict-mcp-config','--mcp-config','{"mcpServers":{}}','--output-format','json','--json-schema',json.dumps(SCHEMA),'--no-session-persistence','--max-turns','1','--permission-prompts','none']
 
 
 def cleanup_brain(name):
@@ -59,7 +64,7 @@ class Controller:
         if c.get('mode','external_grok')!='subscriptions':
             return dict(state='WAITING_CONTROLLER',configured=False,verified=False,missing=['subscription controller configuration; external Grok app cannot be awoken by GitHub access'])
         p=c.get('providers',[])
-        if not isinstance(p,list) or not p or len(set(p))!=len(p) or any(x not in ('codex','claude') for x in p):missing.append('providers must be codex and/or claude')
+        if not isinstance(p,list) or not p or len(set(p))!=len(p) or any(x not in ('codex','claude','cursor') for x in p):missing.append('providers must be codex, claude and/or cursor')
         for key in ('subscriptions_confirmed','extra_usage_disabled'):
             if c.get(key) is not True:missing.append(key)
         if not re.fullmatch(r'(?:[A-Za-z0-9./:_-]+@)?sha256:[0-9a-f]{64}',str(c.get('image',''))):missing.append('pinned brain image digest')
@@ -73,18 +78,25 @@ class Controller:
         def command_argv(command):
             argv=brain_command(self.root,self.config['image'],provider)
             return argv[:argv.index(self.config['image'])+1]+command
-        helps=[['codex','--help'],['codex','exec','--help']] if provider=='codex' else [['claude','--help']]
+        helps=[['codex','--help'],['codex','exec','--help']] if provider=='codex' else [[('cursor-agent' if provider=='cursor' else 'claude'),'--help']]
         helptext=''
         for command in helps:
             code,out=run_brain(command_argv(command),limit=1024*1024)
             if code:raise ValueError('subscription CLI unavailable')
             helptext+=out.decode('utf-8')
         flags=['--ignore-user-config','--ignore-rules','--sandbox','--ephemeral','--skip-git-repo-check','--output-schema'] if provider=='codex' else ['--safe-mode','--tools','--disallowedTools','--strict-mcp-config','--mcp-config','--json-schema','--no-session-persistence','--max-turns','--permission-prompts']
+        if provider=='cursor':flags=['--print','--mode','--output-format']
         if any(f not in helptext for f in flags):raise ValueError('required subscription CLI restriction unsupported')
         command=['sh','-c','exec codex --ignore-user-config --ignore-rules login status 2>&1'] if provider=='codex' else ['claude','auth','status','--json']
+        if provider=='cursor':command=['cursor-agent','status']
         code,out=run_brain(command_argv(command),limit=65536)
         # Codex's official status is text on some releases; never echo auth output.
         if provider=='codex':valid=not code and 'chatgpt' in out.decode('utf-8').lower()
+        elif provider=='cursor':
+            status=re.sub(r'\x1b\[[0-9;]*m','',out.decode('utf-8',errors='replace'))
+            negative=re.search(r'not\s+(?:authenticated|logged\s+in|signed\s+in)|unauthenticated|logged\s+out|signed\s+out|api[ _-]?key',status,re.I)
+            positive=re.search(r'\b(?:logged\s+in|signed\s+in|authenticated)\b',status,re.I)
+            valid=not code and bool(positive) and not negative
         else:
             try:s=json.loads(out);valid=not code and s.get('authMethod')=='claude.ai' and s.get('loggedIn') is True
             except (ValueError,AttributeError):valid=False
@@ -95,12 +107,16 @@ class Controller:
     def plan(self,provider,prompt):
         try:
             self.check_provider(provider)
+            if provider=='cursor':prompt+='\nReturn exactly one JSON object matching this schema, with no Markdown or explanation: '+json.dumps(SCHEMA)
             code,out=run_brain(brain_command(self.root,self.config['image'],provider),input=prompt.encode(),limit=1024*1024)
             if code:raise ValueError('subscription auth/quota/CLI blocker; no paid fallback')
             check_secrets(out)
             try:
-                value=json.loads(out)
+                value=strict_json(out)
                 if provider=='claude':value=value['structured_output']
+                if provider=='cursor':
+                    if not isinstance(value,dict) or value.get('type')!='result' or value.get('subtype')!='success' or value.get('is_error') is not False or not isinstance(value.get('result'),str):raise ValueError('cursor request not successful')
+                    value=strict_json(value['result'].encode('utf-8'))
                 return validate_decision(value)
             except (ValueError,KeyError,TypeError) as exc:raise ValueError('invalid subscription structured output') from exc
         except BaseException:

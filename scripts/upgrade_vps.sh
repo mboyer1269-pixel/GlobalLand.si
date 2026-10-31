@@ -24,7 +24,7 @@ install -d -m 755 "$ROOT/releases"
 tar -czf "$BACKUP/state-before.tgz" -C "$ROOT" control state source.git ssh releases
 RELEASE="$ROOT/releases/$REV"
 install -d -m 755 "$ROOT/releases" "$RELEASE"
-for file in "$HERE"/scripts/*.py "$HERE"/scripts/*.js "$HERE"/scripts/*.sh "$HERE"/scripts/decision.schema.json; do install -m 644 "$file" "$RELEASE/$(basename "$file")"; done
+for file in "$HERE"/scripts/*.py "$HERE"/scripts/*.js "$HERE"/scripts/*.sh "$HERE"/scripts/*.json; do install -m 644 "$file" "$RELEASE/$(basename "$file")"; done
 printf '%s\n' "$REV" > "$RELEASE/REVISION"
 install -m 644 "$ROOT/control/compose.yml" "$RELEASE/compose.yml"
 python3 - "$ROOT" "$RELEASE" <<'PY'

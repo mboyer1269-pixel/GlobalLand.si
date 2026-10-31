@@ -7,7 +7,7 @@ Un monde qui dispose d'un capital initial autorisé de **50 CAD** et doit géné
 - Agents persistants, missions, messagerie, baux et économie GLC.
 - Exécution de programmes choisis par les agents, recherche Web publique et publication de produits.
 - Banque privée avec réservations, rapprochement des preuves et extinction terminale.
-- Contrôleur Grok externe ou Codex/Claude Code par leurs CLIs officielles avec tes abonnements.
+- Contrôleur Grok externe ou Codex/Claude Code/Cursor par leurs CLIs officielles avec tes abonnements.
 - Reprise après interruption et publication, isolement d'Oria et du reste du VPS.
 
 ## État réel, sans simulation cachée
