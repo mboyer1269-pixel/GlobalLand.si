@@ -1,3 +1,3 @@
-# GlobalLand — Journal des transactions (append-only)
-# Format : ISO-8601 | TX-ID | TYPE | CAD | APPROUVE_PAR | NOTE
-2026-10-30T00:00:00Z | TX-0001 | GENESIS_DEPOSIT | +50.00 CAD | CEO | Capital initial de survie GlobalLand
+# GlobalLand — journal dérivé du ledger validé (CAD et GLC séparés)
+2026-10-30T00:00:00Z | TX-0001 | GENESIS_DEPOSIT | 50.00 CAD | CEO | Capital initial de survie GlobalLand
+2026-10-31T00:00:00Z | TX-0002 | DAY_TICK | 0.00 CAD | AUTO_AUDITOR | UTC tick; elapsed days: 1

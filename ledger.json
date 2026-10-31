@@ -1,20 +1,29 @@
 {
   "bank_status": "CRITICAL_SHOCK",
   "currency": "CAD",
-  "initial_capital": 50.00,
-  "current_balance": 50.00,
-  "locked_reserve": 50.00,
-  "available_for_agents_without_ceo_approval": 0.00,
-  "weekly_server_tax_cad": 2.00,
-  "grace_period_days_remaining": 7,
-  "kpi_target_balance": 100.00,
+  "initial_capital": 50,
+  "current_balance": 50,
+  "locked_reserve": 50,
+  "available_for_agents_without_ceo_approval": 0,
+  "weekly_server_tax_cad": 2,
+  "grace_period_days_remaining": 6,
+  "kpi_target_balance": 100,
   "transactions": [
     {
       "id": "TX-0001",
       "type": "GENESIS_DEPOSIT",
-      "amount": 50.00,
+      "amount": 50,
       "approved_by": "CEO",
       "note": "Capital initial de survie GlobalLand"
+    },
+    {
+      "id": "TX-0002",
+      "type": "DAY_TICK",
+      "amount": 0,
+      "created_at": "2026-10-31T00:00:00Z",
+      "approved_by": "AUTO_AUDITOR",
+      "note": "UTC tick; elapsed days: 1"
     }
-  ]
+  ],
+  "last_tick_date": "2026-10-31"
 }
