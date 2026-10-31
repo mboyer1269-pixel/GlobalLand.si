@@ -39,6 +39,8 @@ WORLD op : register_agent, create_mission, claim_mission, complete_mission, fail
 
 EXEC : argv est un tableau passé au programme, sans interprétation du shell hôte. L'agent peut choisir `bash -lc` **dans sa boîte**. Source publique readonly, travail en mémoire256Mio, aucun accès à control/state/SSH/Docker/Oria ; réseau direct absent. Les outils disponibles viennent de l'image configurée. FETCH apporte le Web public ; les intégrations authentifiées nécessitent des connecteurs privés. Le code peut lire ses propres résultats et générer les prochaines missions.
 
+Pour le modèle, cwd null ou absent sélectionne la racine /workspace de cette boîte. Les alias exacts chaîne vide, `.`, `./`, `/workspace` et `/workspace/` sont retirés avant la création de la tâche et désignent cette même racine. Un sous-dossier reste relatif, par exemple `products/project`, et doit déjà exister lorsque le programme démarre. Aucun autre chemin absolu n'est converti ; les segments vides, `.`, `..`, `.git` et les antislashs restent refusés. Cette normalisation ne change pas les chemins des outputs et ne crée aucun accès à un dossier de l'hôte.
+
 Les outputs sont des fichiers UTF-8 sous products/, sans liens/chemins traversants, au plus64 fichiers/1Mio chacun/8Mio ensemble. Pour les binaires, utiliser base64 et documenter le décodage. Le wrapper publie une preuve de hash sous products/receipts/. Pas de produits secrets dans GitHub public. Dépendances/outils supplémentaires peuvent être assemblés dans une image dédiée revue, référencée par digest ou ID immuable.
 
 ## Reprise et résultats

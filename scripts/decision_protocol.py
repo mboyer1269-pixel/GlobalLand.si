@@ -62,7 +62,11 @@ _TOOL_SCHEMAS = {
         'argv': {'type': 'array', 'minItems': 1, 'maxItems': 128,
                  'items': {'type': 'string', 'maxLength': 8192, 'pattern': '^[^\u0000]*$'}},
         'outputs': {'type': 'array', 'maxItems': 64, 'items': {'type': 'string'}},
-        'cwd': _nullable({'type': 'string'}),
+        'cwd': _nullable({'type': 'string', 'description':
+            'Use null for the /workspace root. Otherwise use a relative directory '
+            'inside /workspace, without empty, dot, dot-dot or .git segments '
+            'or backslashes. Exact root aliases ., ./, /workspace and '
+            '/workspace/ are accepted and normalized to the default root.'}),
         'mission_id': _nullable({'type': 'string'}),
     }),
     'FETCH': _object({
@@ -216,8 +220,8 @@ def normalize_model_action(action):
     """Convert one native provider/internal action, rejecting ambiguous shapes.
 
     Legacy args_json must be strict-parsed by the controller before calling
-    this function. Only nullable optional tool fields become absent; finance
-    values retain their nulls and every native JSON field.
+    this function. Nullable optional tool fields and exact workspace-root cwd
+    aliases become absent; finance values retain their nulls and JSON fields.
     """
     _closed(action, {'agent', 'action', 'args'})
     _validate_field(action['agent'], _AGENT)
@@ -240,4 +244,8 @@ def normalize_model_action(action):
     else:
         normalized = _normalize_arguments(args, _TOOL_SCHEMAS[kind],
                                           legacy_optional={'outputs'} if kind == 'EXEC' else ())
+        if kind == 'EXEC' and normalized.get('cwd') in ('', '.', './', '/workspace', '/workspace/'):
+            # These spellings name exactly the executor's fixed container root.
+            # Other paths still pass the unchanged envelope confinement checks.
+            normalized.pop('cwd', None)
     return {'agent': action['agent'], 'action': kind, 'args': normalized}

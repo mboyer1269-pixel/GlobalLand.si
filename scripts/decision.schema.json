@@ -64,7 +64,8 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Use null for the /workspace root. Otherwise use a relative directory inside /workspace, without empty, dot, dot-dot or .git segments or backslashes. Exact root aliases ., ./, /workspace and /workspace/ are accepted and normalized to the default root."
                   },
                   "mission_id": {
                     "type": [
