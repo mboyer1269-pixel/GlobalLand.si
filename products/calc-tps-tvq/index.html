@@ -128,7 +128,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 720px;
+      min-width: 560px;
     }
 
     th, td {
@@ -257,16 +257,13 @@
 
         <div class="table-wrap">
           <table aria-describedby="table-help">
-            <caption id="table-help" class="fine-print">TPS 5 %, TVQ 9,975 %. Les taxes sont arrondies au cent par ligne.</caption>
+            <caption id="table-help" class="fine-print">TPS 5 %, TVQ 9,975 %. Les taxes sont calculées une fois sur le sous-total, puis arrondies au cent.</caption>
             <thead>
               <tr>
                 <th>Description</th>
                 <th>Quantite</th>
                 <th>Prix unitaire</th>
-                <th>HT</th>
-                <th>TPS</th>
-                <th>TVQ</th>
-                <th>TTC</th>
+                <th>Montant</th>
                 <th></th>
               </tr>
             </thead>
@@ -324,10 +321,7 @@
         <td><input type="text" class="desc" aria-label="Description" value="${values?.description || ''}"></td>
         <td><input type="number" class="qty" aria-label="Quantite" min="0" step="0.01" value="${values?.quantity || '1'}"></td>
         <td><input type="text" class="money" aria-label="Prix unitaire" inputmode="decimal" value="${values?.unitAmount || ''}" placeholder="0,00"></td>
-        <td class="line-result ht">0,00 $</td>
-        <td class="line-result gst">0,00 $</td>
-        <td class="line-result qst">0,00 $</td>
-        <td class="line-result total">0,00 $</td>
+        <td class="line-result amount">0,00 $</td>
         <td><button type="button" class="secondary remove" aria-label="Supprimer la ligne">Retirer</button></td>`;
       linesEl.appendChild(row);
       row.addEventListener('input', update);
@@ -358,20 +352,16 @@
       try {
         const inputMode = mode();
         const enteredLines = readLines();
-        const result = calc.sumLines(enteredLines, inputMode);
+        const result = calc.calculateInvoice(enteredLines, { mode: inputMode });
 
         result.lines.forEach((line, index) => {
-          const row = enteredLines[index].row;
-          row.querySelector('.ht').textContent = format(line.subtotalCents);
-          row.querySelector('.gst').textContent = format(line.gstCents);
-          row.querySelector('.qst').textContent = format(line.qstCents);
-          row.querySelector('.total').textContent = format(line.totalCents);
+          enteredLines[index].row.querySelector('.amount').textContent = format(line.amountCents);
         });
 
-        document.getElementById('subtotal').textContent = format(result.totals.subtotalCents);
-        document.getElementById('gst').textContent = format(result.totals.gstCents);
-        document.getElementById('qst').textContent = format(result.totals.qstCents);
-        document.getElementById('total').textContent = format(result.totals.totalCents);
+        document.getElementById('subtotal').textContent = format(result.subtotalCents);
+        document.getElementById('gst').textContent = format(result.gstCents);
+        document.getElementById('qst').textContent = format(result.qstCents);
+        document.getElementById('total').textContent = format(result.totalCents);
         summaryEl.textContent = buildSummary(result);
       } catch (error) {
         summaryEl.textContent = `Erreur: ${error.message}`;
@@ -383,7 +373,7 @@
       const today = new Date().toLocaleDateString('fr-CA');
       const lineTexts = result.lines.map((line, index) => {
         const description = line.description || `Ligne ${index + 1}`;
-        return `${index + 1}. ${description} - qte ${line.quantity} - HT ${format(line.subtotalCents)} - TPS ${format(line.gstCents)} - TVQ ${format(line.qstCents)} - TTC ${format(line.totalCents)}`;
+        return `${index + 1}. ${description} - qte ${line.quantityText} x ${format(line.unitCents)} = ${format(line.amountCents)}`;
       });
 
       return [
@@ -391,10 +381,10 @@
         '',
         ...lineTexts,
         '',
-        `Sous-total HT: ${format(result.totals.subtotalCents)}`,
-        `TPS (5 %): ${format(result.totals.gstCents)}`,
-        `TVQ (9,975 %): ${format(result.totals.qstCents)}`,
-        `Total TTC: ${format(result.totals.totalCents)}`,
+        `Sous-total HT: ${format(result.subtotalCents)}`,
+        `TPS (5 %): ${format(result.gstCents)}`,
+        `TVQ (9,975 %): ${format(result.qstCents)}`,
+        `Total TTC: ${format(result.totalCents)}`,
         '',
         'Note: informations generales seulement; verifiez les obligations TPS/TVQ applicables avec Revenu Quebec.',
       ].join('\n');
