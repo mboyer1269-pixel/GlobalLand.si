@@ -55,7 +55,7 @@ class SupervisorTests(unittest.TestCase):
    def g(*args):return subprocess.run(['git','-C',str(seed),'-c','user.name=Test','-c','user.email=test@local',*args],check=True,capture_output=True).stdout
    base=pathlib.Path(__file__).resolve().parents[1]
    for name in ['ledger.json','queue/inbox/TASK-0001.json']:
-    p=seed/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes((base/name).read_bytes())
+    p=seed/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes((base/('tests/fixtures/genesis.json' if name=='ledger.json' else 'tests/fixtures/audit-task.json')).read_bytes())
    g('add','.');g('commit','-m','seed');g('remote','add','origin',str(remote));g('push','origin','main')
    subprocess.run(['git','clone','--bare',str(remote),str(install/'source.git')],check=True,capture_output=True)
    subprocess.run(['git','--git-dir='+str(install/'source.git'),'symbolic-ref','HEAD','refs/heads/main'],check=True)
@@ -97,4 +97,12 @@ class SupervisorTests(unittest.TestCase):
    s.bounded_run([sys.executable,'-c','import sys;sys.stdout.write("x"*200000)'],env=os.environ,limit=100000)
   code,out=s.bounded_run([sys.executable,'-c','print("ok")'],env=os.environ,limit=100000)
   self.assertEqual((code,out),(0,b'ok\n'))
+ def test_long_task_ids_are_not_secret_keys(self):
+  import supervisor as s
+  s.check_secrets(b'{"id":"TASK-180000000000"}')
+ def test_bounded_stdin_has_a_deadline_even_when_child_never_reads(self):
+  import supervisor as s,time
+  start=time.monotonic()
+  with self.assertRaises(TimeoutError):s.bounded_run([sys.executable,'-c','import time;time.sleep(2)'],env=os.environ,input=b'x'*2000000,timeout=0.1)
+  self.assertLess(time.monotonic()-start,1)
 if __name__=='__main__':unittest.main()

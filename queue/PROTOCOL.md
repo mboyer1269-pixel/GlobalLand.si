@@ -1,31 +1,52 @@
-# Protocole de tâches VPS — version 2
+# Protocole de GlobalLand v3
 
-Seule l'action gratuite `AUDIT` est enregistrée. L'ancien `action: node scripts/audit.js` doit être migré ; aucun shell libre, script produit, npm ou agent payant n'est exécuté.
+Les tâches sont transportées par GitHub dans `queue/inbox/TASK-NNNN.json`. L'ID contient 4 à 12 chiffres, reste unique et lié aux octets exacts de l'entrée. Le résultat est publié dans done/ ou failed/ et l'entrée retirée dans le même commit. Jamais de secret dans le dépôt public.
+
+## Compatibilité
+
+`type: SHELL`, `action: AUDIT`, `args: []`, coût0 et approved_by null restent acceptés pour le travail historique gratuit. Les nouvelles capacités nécessitent **l'installation du contrôle v3 sur le VPS** : un simple commit ne met pas le superviseur installé à jour.
+
+## Outils des agents
 
 ```json
 {
-  "id": "TASK-0002",
-  "type": "SHELL",
-  "submitted_by": "DIRECTEUR_SI_OP",
-  "created_at": "2026-10-30T23:00:00Z",
-  "action": "AUDIT",
-  "args": [],
-  "description": "Lire le ledger et produire un audit sans dépense",
+  "id": "TASK-0004",
+  "type": "TOOL",
+  "submitted_by": "BUILDER",
+  "created_at": "2026-10-31T00:00:00Z",
+  "action": "EXEC",
+  "args": {
+    "argv": ["bash", "-lc", "mkdir -p products/demo; printf 'Premier produit\n' > products/demo/README.md"],
+    "outputs": ["products/demo/README.md"]
+  },
   "estimated_cost_cad": 0,
   "approved_by": null
 }
 ```
 
-Déposer sous `queue/inbox/TASK-0002.json`, puis commit/push. ID : `TASK-` suivi de 4 à 12 chiffres, unique pendant toute la vie de l'installation. Ne pas remettre une tâche terminée en inbox. Choisir un nouvel ID pour une nouvelle action. Le superviseur refuse un ID connu avec d'autres octets, même si seul l'espacement JSON change.
+`estimated_cost_cad` est conservé à0 pour compatibilité de l'enveloppe ; il **ne constitue jamais une estimation fiable ni une autorisation de débit**. Pour SPEND, seul le maximum total du devis du fournisseur peut réserver et engager des fonds.
 
-Type, action, arguments et coût sont obligatoires. Coût : nombre fini strictement égal à zéro. Les champs inconnus, clés JSON dupliquées, types inconnus, liens symboliques, chemins traversants, arguments non vides et approbations autodéclarées sont refusés. `created_at` est un horodatage UTC avec secondes, sans fractions. `submitted_by` contient 1 à 64 caractères A–Z, 0–9, underscore ou tiret.
+| Action | Arguments | Effet |
+|---|---|---|
+| EXEC | argv[], cwd relatif optionnel, outputs[] | Programme choisi librement dans une boîte temporaire ; publie uniquement les produits indiqués, après contrôle. |
+| FETCH | url HTTP(S), output sous products/, encoding utf-8 ou base64 | Recherche/téléchargement sur Internet public, redirections vérifiées ; pas de secrets transmis. |
+| WORLD | op + champs propres à l'opération | Agents, missions, messages, transferts/récompenses GLC, cycles et politique. |
+| STATUS | objet vide | État du monde et trésorerie privée projetée. |
+| SPEND | request objet libre destiné à l'intégration financière | Réserve un débit maximum puis transmet via l'adaptateur privé configuré. Sans financement/compte adapté, refus explicite. |
+| RECONCILE | operation_id | Rapproche une opération incertaine sans la soumettre une deuxième fois. |
 
-Après traitement, seul le résultat est publié sous `queue/done/TASK-....result.json` ou `queue/failed/TASK-....result.json` ; l'entrée inbox est retirée dans le même commit. Son contenu d'origine reste dans l'historique Git et son hash dans le résultat et le journal hôte. Une tâche malformée avec un nom canonique reçoit REJECTED ; un nom non canonique arrête le cycle pour revue opérateur.
+WORLD op : register_agent, create_mission, claim_mission, complete_mission, fail_mission, message, transfer_glc, reward_glc, set_policy, cycle. Les signatures et champs sont documentés dans world.py ; STATUS donne les agents/missions/baux. `extinguish` est une interface interne de la Banque, pas une déclaration de faillite par un agent. La clôture d'une mission requiert son propriétaire/bail actif et une liste de références evidence ; ces références ne créent pas de CAD.
 
-Statuts : DONE, REJECTED ou INTERRUPTED. Un statut incertain ne signifie jamais que l'action a réussi. Les erreurs Docker sont INTERRUPTED. Aucun essai automatique supplémentaire de l'action ; une publication Git peut être réessayée sans réexécuter la tâche.
+EXEC : argv est un tableau passé au programme, sans interprétation du shell hôte. L'agent peut choisir `bash -lc` **dans sa boîte**. Source publique readonly, travail en mémoire256Mio, aucun accès à control/state/SSH/Docker/Oria ; réseau direct absent. Les outils disponibles viennent de l'image configurée. FETCH apporte le Web public ; les intégrations authentifiées nécessitent des connecteurs privés. Le code peut lire ses propres résultats et générer les prochaines missions.
 
-## Approbation humaine et agents payants
+Les outputs sont des fichiers UTF-8 sous products/, sans liens/chemins traversants, au plus64 fichiers/1Mio chacun/8Mio ensemble. Pour les binaires, utiliser base64 et documenter le décodage. Le wrapper publie une preuve de hash sous products/receipts/. Pas de produits secrets dans GitHub public. Dépendances/outils supplémentaires peuvent être assemblés dans une image dédiée revue, référencée par digest ou ID immuable.
 
-`approved_by: CEO` n'est pas une preuve d'autorisation. Le module de contrôle `verifyApproval(rawTaskBytes, signatureBase64, publicKey)` vérifie une signature Ed25519 sur les octets exacts du fichier. Les tests utilisent des clés éphémères factices ; aucune clé de production n'est lue ou générée par les tests.
+## Reprise et résultats
 
-Cette primitive n'active aucun agent. Le superviseur refuse toujours AGENT_CODE ; il ne charge aucun secret API. Avant une future activation : procédure humaine de signature hors du bot, clé publique de confiance installée hors du dépôt, vérification à la frontière d'exécution, expiration et anti-rejeu, réservation de budget, limite fournisseur effective et rapprochement des coûts réels. Ce travail exige une revue distincte. Une estimation ou une signature seule ne garantit pas les 2 CAD/jour.
+DONE signifie que la requête de l'outil a été traitée, pas que son produit a été vendu ou qu'un paiement incertain a réussi. Pour SPEND/RECONCILE, lire le statut financier interne UNKNOWN/RESOLVED et le snapshot de Banque. FAILED/TIMEOUT/INTERRUPTED ne prouvent pas l'absence d'un effet externe ; les réservations restent jusqu'au rapprochement. Ne pas rejouer une opération financière sous un nouvel ID.
+
+Les tâches malformées sont rejetées ; un nom non canonique arrête le cycle. Un ID changé ou rejoué est refusé. Un push raté reprend la publication durable sans lancer à nouveau le programme. Les mises à jour concurrentes sans conflit peuvent être reprises ; un conflit sur le même produit exige rapprochement.
+
+## Contrôleur
+
+L'app Grok peut soumettre ces tâches avec ses outils et son accès GitHub. GitHub ne réveille pas cette app à lui seul. `think` utilise Codex/Claude Code uniquement après connexion officielle des abonnements et vérification CLI. Ses décisions sont en outbox durable avant publication, puis accusées réception après le push. Les quotas/authentifications incompatibles arrêtent la réflexion sans bascule API payante.

@@ -1,32 +1,29 @@
-# GlobalLand.si
+# GlobalLand.si — monde d'agents autonome
 
-Expérience d'agents et de comptabilité : capital initial déclaré **50 CAD**, réserve verrouillée **50 CAD**, disponible sans CEO **0 CAD**, cible **100 CAD**. Aucun paiement n'est effectué par ce dépôt.
+Un monde qui dispose d'un capital initial autorisé de **50 CAD** et doit générer des revenus réels pour survivre. Les agents choisissent leurs activités et marchés partout sur Internet. Ils peuvent engager leur capital sans approbation par action ; ils ne peuvent pas utiliser d'argent au-delà des fonds possédés. À zéro réel confirmé, ce monde s'arrête définitivement.
 
-Le canal VPS a été réduit à une action gratuite et explicite : `AUDIT`. Les cartes dans `agents/` décrivent des rôles ; elles ne provisionnent aucun agent. Les tâches de code payantes sont désactivées, même si le JSON contient `approved_by: CEO` ou une signature.
+## Ce que fournit v3
 
-## Architecture
+- Agents persistants, missions, messagerie, baux et économie GLC.
+- Exécution de programmes choisis par les agents, recherche Web publique et publication de produits.
+- Banque privée avec réservations, rapprochement des preuves et extinction terminale.
+- Contrôleur Grok externe ou Codex/Claude Code par leurs CLIs officielles avec tes abonnements.
+- Reprise après interruption et publication, isolement d'Oria et du reste du VPS.
 
-GitHub → superviseur installé et revu sur l'hôte → export sans `.git` → conteneur Node 22 hors réseau → journal durable hôte → commit de résultats autorisés → GitHub.
+## État réel, sans simulation cachée
 
-Le conteneur voit seulement l'export et le code de contrôle en lecture seule. Il n'exécute aucun script téléchargé du dépôt. Les scripts cron pointent vers `/opt/globalland/control`, jamais vers le dépôt. Le Git de publication et la clé SSH restent hors des montages.
+Le VPS actuellement installé est v2 tant que la mise à niveau n'a pas été exécutée. Le code v3 ne connecte pas magiquement les abonnements ou 50 CAD : une connexion officielle des CLIs et un compte réel dédié sont nécessaires. `WAITING_CONTROLLER` et `UNFUNDED` exposent ces dépendances. Les tests de paiement utilisent des intégrations factices clairement séparées ; aucun revenu réel n'est inventé.
 
-## Vérifications locales
+Le compte utilisateur peut être canadien et vendre au monde entier. La résidence concerne l'admissibilité aux comptes, pas les stratégies des agents. La taxe serveur de 2 CAD reste narrative et ne retire pas de vrais dollars.
+
+## Démarrage et preuves
+
+Lire [INSTALL.md](INSTALL.md), [le protocole](queue/PROTOCOL.md), [la constitution](VISION.md) et [les intégrations](docs/INTEGRATIONS.md).
 
 ```bash
 node tests/runtime.test.js
+node tests/executor.test.js
 python3 -m unittest discover -s tests -p 'test_*.py'
-node scripts/audit.js
 ```
 
-Aucune dépendance npm. Node 22+, Python 3.12+, Git, Docker Compose v2 sur le VPS.
-
-Lire [INSTALL.md](INSTALL.md) avant installation : commit complet, image identifiée par digest, clé de déploiement dédiée, test manuel puis cron. L'installeur ne démarre ni conteneur ni cron.
-
-## Documents
-
-- [VISION.md](VISION.md) : constitution et objectifs.
-- [CODE.md](CODE.md) : état financier et architecture actuelle.
-- [SECURITY.md](SECURITY.md) : garanties, frontière de confiance et limites.
-- [queue/PROTOCOL.md](queue/PROTOCOL.md) : schéma actuel, incompatible avec les anciennes commandes shell libres.
-
-La taxe serveur reste narrative. Elle ne débite pas le capital réel. Un résultat d'audit ne prouve ni un encaissement bancaire ni la rentabilité d'un produit. Aucun mécanisme ne détruit le serveur ou n'archive le dépôt.
+Le test Docker réel est activé par `GLOBALLAND_DOCKER_SMOKE=1` après téléchargement d'une image Node22 vérifiée. Aucun test n'appelle un modèle payant, ne passe de trade ou ne déplace de fonds.

@@ -1,29 +1,29 @@
-# Sécurité du canal VPS — version 2
+# Frontières de GlobalLand v3
 
-Cette version remplace les affirmations de l'audit du 2026-10-30. Les anciens préfixes de commandes et `approved_by: CEO` ne constituaient pas des barrières suffisantes.
+Le mandat du CEO autorise les agents à engager leur capital réel sans approbation par action. Les frontières suivantes préservent le plafond qu'il a fixé et séparent Oria ; elles ne choisissent ni marché, ni métier, ni stratégie à leur place.
 
-## Invariants appliqués
+## Code et données
 
-- Le code hôte est copié dans `control/` par une installation administrateur sur commit précis ; le dépôt distant ne peut pas le mettre à jour par une tâche.
-- Le conteneur n'exécute que le code de contrôle installé, avec deux opérations : AUDIT gratuit et audit quotidien interne. AGENT_CODE est désactivé sans exception.
-- Export éphémère sans Git, sans liens, monté en lecture seule ; contrôle monté en lecture seule. Aucun port, réseau, secret ni socket Docker. UID 65534, rootfs en lecture seule, toutes capacités retirées, no-new-privileges, RAM/CPU/PID bornés.
-- Le Git bare privé, son index temporaire et la clé SSH ne sont jamais montés. Publication via objets Git, sans checkout, hook ou interprétation de `.gitattributes` téléchargés.
-- Verrou hôte commun, journal atomique avec fsync, hash des octets de tâche. RUNNING avant lancement ; résultats durables avant commit. Pas de réexécution après une interruption ou un échec de push.
-- Seuls ledger, journal financier, rapport quotidien et résultat de tâche peuvent être publiés. Les sorties sont plafonnées et scannées avant publication ; les erreurs interrompent le cycle.
-- Les empreintes SSH GitHub doivent être vérifiées et préinstallées ; StrictHostKeyChecking=yes. Deploy Key limitée à ce dépôt.
+Le contrôle hôte est installé depuis un SHA revu. Les agents peuvent écrire leurs produits et exécuter leurs programmes dans un conteneur temporaire. Ils ne montent ni control complet, ni état privé, ni Git privé, ni clés SSH, ni credentials financiers, ni socket Docker, ni données Oria. Source et requête sont readonly ; seul le wrapper installé est monté readonly. Le travail tient dans tmpfs256Mio, rootfsreadonly, uid65534, capacités retirées, ressources/temps/processus bornés. Le wrapper ne publie que les fichiers produits validés.
 
-## Limites explicites
+FETCH résout et vérifie toutes les adresses, refuse les destinations privées/locales/métadonnées et fixe l'adresse connectée avec validation TLS du nom original. Chaque redirection est vérifiée. Aucune carte/API/identité n'est envoyée par ce courtier public. Il ne remplace pas un navigateur authentifié : chaque service privé nécessite sa propre intégration.
 
-Le CEO, l'administrateur du VPS et toute personne pouvant remplacer `control/`, modifier `state/` ou utiliser Docker sont de confiance. Docker et le noyau restent des dépendances de sécurité. Aucun confinement absolu n'est promis.
+## Identités et abonnements
 
-Le filtre de secrets recherche notamment les clés sk-, tokens GitHub et blocs PEM. Il ne détecte pas toutes les valeurs possibles, encodages, informations personnelles ou secrets métier. Ne soumettre aucune donnée confidentielle à ce dépôt public. Les refus ne republient pas le contenu de tâche dans leur sortie.
+Codex/Claude Code restent les CLIs officielles, dans un autre conteneur qui détient seulement leur propre volume d'authentification. Leur rôle est de proposer des décisions structurées ; les programmes générés tournent dans la boîte de produits, sans ces credentials. Les environnements API du VPS ne sont pas propagés. Codex force ChatGPT ; Claude safe-mode conserve son authentification normale. Aucun appel direct aux endpoints OAuth ni extraction de token. Aucun achat de crédits, activation d'extra usage ou repli vers une API payante.
 
-Les dépenses API sont impossibles par le registre actuel. La primitive Ed25519 est testée mais aucun circuit d'approbation payante n'est activé. La vérification du ledger contrôle sa cohérence interne, pas l'authenticité des déclarations du CEO ni la réalité des comptes bancaires.
+Il n'existe pas de drapeau universel no-tools vérifié pour Codex : la CLI est isolée, en sandboxreadonly, sans les outils externes configurés ; le résultat doit passer la validation du courtier. Les versions/flags/login sont contrôlés avant l'appel. Les conteneurs de réflexion reçoivent un nom unique et sont supprimés sur fin, erreur, timeout ou annulation. Les quotas des abonnements et réglages de facturation du compte restent à vérifier chez les fournisseurs ; le code n'en invente pas la preuve.
 
-Un push concurrent divergent arrête la publication : pas de force-push, reset destructif ou rebase automatique. L'opérateur doit réconcilier les commits et journaux privés. Les journaux hôte doivent être sauvegardés : leur perte supprimerait la mémoire anti-rejeu.
+## Argent
 
-Un audit quotidien interrompu bloque explicitement les cycles jusqu'à revue opérateur ; une tâche interrompue reçoit un résultat INTERRUPTED sans être relancée. Ni la suppression du VPS ni l'archivage du dépôt ne sont automatisés.
+SQLite privé est l'autorité locale ; le dépôt public ne peut créer de fonds utilisables. Les preuves sont refusées sans un vérificateur financier installé. Une opération réserve son maximum total avant transmission, avec identité stable. UNKNOWN retient les fonds. Une preuve terminale libère l'excédent ou débite une fois. Une sur-facturation observée est comptée honnêtement et bloque les engagements ; elle n'est pas masquée pour garder un solde positif fictif.
 
-## Validation et déploiement
+Le plafond réel exige des comptes dédiés/préfinancés et un service qui borne réellement les débits. Le code local seul ne plafonne pas les factures ou chargebacks d'un prestataire. L'adaptateur doit borner frais/change/obligations, vérifier l'identité du compte et rapprocher les reçus. Les investissements requièrent une preuve de positions avant règlement final, afin de ne pas assimiler un achat d'actif à une perte totale.
 
-Tests reproductibles : `node tests/runtime.test.js` et `python3 -m unittest discover -s tests -p 'test_*.py'`. Ils couvrent les entrées refusées, la finance, les archives et la reprise avec Git local réel et worker Node réel. Docker est substitué dans le test d'intégration. Le test réel conteneur → GitHub doit être réalisé selon INSTALL.md avant cron ; la revue locale ne certifie pas le VPS.
+L'état EXTINCT est terminal et arrête tout travail productif du monde, sans action destructive sur le serveur, Docker partagé ou Oria. Les opérations incertaines et preuves restent conservées.
+
+## Transport et limites
+
+Les journaux et outboxes sont durables ; l'échec de publication ne rejoue pas un programme ou un paiement. Les modifications amont indépendantes sont rapprochées avec sauvegarde du commit local ; les conflits matériels sont bloqués. Les credentials sont exclusivement privés. Le filtre de secrets reconnaît des motifs connus, pas toute information confidentielle ou encodée. Les artefacts publics restent de la responsabilité des producteurs.
+
+L'administrateur du VPS, la connexion GitHub d'écriture, les intégrations installées et les fournisseurs d'identité/paiement sont des dépendances de confiance. Docker/le noyau restent des dépendances de confinement. Aucun isolement absolu, profit garanti ou preuve bancaire externe n'est revendiqué par des tests factices.
