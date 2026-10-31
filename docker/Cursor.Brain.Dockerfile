@@ -1,5 +1,5 @@
-# Extend the immutable image already containing the official Codex/Claude CLIs.
-ARG EXISTING_BRAIN_IMAGE
+# Use scripts/build_cursor_image.sh to verify and tag the existing local image.
+ARG EXISTING_BRAIN_IMAGE=globalland-brain:cursor-base-required
 FROM ${EXISTING_BRAIN_IMAGE}
 USER root
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

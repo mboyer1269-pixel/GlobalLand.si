@@ -85,14 +85,13 @@ Désactiver seulement les cron GlobalLand (queue/daily/think), attendre le verro
 
 ## Ajouter Cursor à l'image existante
 
-Construire la couche officielle depuis l'ID de l'image déjà installée, après récupération du SHA revu contenant ce support :
+Après récupération du SHA revu, utiliser le constructeur dédié :
 
 ```bash
-docker build -f docker/Cursor.Brain.Dockerfile \
-  --build-arg EXISTING_BRAIN_IMAGE="$(cat /opt/globalland/state/private/brain-image.txt)" \
-  -t globalland-brain:cursor .
-docker run --rm globalland-brain:cursor cursor-agent --version
+bash scripts/build_cursor_image.sh
 ```
+
+Un ID local sha256:... passé directement à FROM est interprété comme un nom de dépôt par BuildKit et provoque pull access denied. Le script vérifie l'image locale, lui attribue un tag GlobalLand dérivé de son ID complet, vérifie ce tag avant/après construction et fournit cette référence avec --pull=false. Il vérifie la version sans réseau, puis enregistre atomiquement le nouvel ID dans state/private/cursor-image.txt. L'ancien brain-image.txt reste inchangé. Il ne publie aucune image et ne touche à aucun conteneur existant.
 
 Lancer ensuite login_subscriptions.sh cursor avec l'ID de cette nouvelle image. Conserver l'ancien brain-image.txt tant que les trois vérifications ne passent pas ; ne pas écraser les volumes Codex/Claude. Une fois les logins et facturations vérifiés, configurer l'image étendue avec --providers codex,claude,cursor. Le simple login ne démarre aucune pensée et aucun achat. Le contrôleur utilise Cursor en mode ask et garde l'exécution dans les outils de GlobalLand.
 
