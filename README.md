@@ -12,7 +12,7 @@ Un monde qui dispose d'un capital initial autorisé de **50 CAD** et doit géné
 
 ## État réel, sans simulation cachée
 
-Le VPS actuellement installé est v2 tant que la mise à niveau n'a pas été exécutée. Le code v3 ne connecte pas magiquement les abonnements ou 50 CAD : une connexion officielle des CLIs et un compte réel dédié sont nécessaires. `WAITING_CONTROLLER` et `UNFUNDED` exposent ces dépendances. Les tests de paiement utilisent des intégrations factices clairement séparées ; aucun revenu réel n'est inventé.
+La version réellement installée se lit dans /opt/globalland/control/REVISION ; un commit présent sur GitHub ne prouve pas sa mise en service. Le code v3 ne connecte pas magiquement les abonnements ou 50 CAD : une connexion officielle des CLIs et un compte réel dédié sont nécessaires. `WAITING_CONTROLLER` et `UNFUNDED` exposent ces dépendances. Les tests de paiement utilisent des intégrations factices clairement séparées ; aucun revenu réel n'est inventé.
 
 Le compte utilisateur peut être canadien et vendre au monde entier. La résidence concerne l'admissibilité aux comptes, pas les stratégies des agents. La taxe serveur de 2 CAD reste narrative et ne retire pas de vrais dollars.
 
@@ -27,3 +27,9 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
 Le test Docker réel est activé par `GLOBALLAND_DOCKER_SMOKE=1` après téléchargement d'une image Node22 vérifiée. Aucun test n'appelle un modèle payant, ne passe de trade ou ne déplace de fonds.
+
+## Qui orchestre les agents ?
+
+Le superviseur GlobalLand sur le VPS reçoit les tâches, lance les outils et publie les résultats. Son contrôleur consulte un cerveau à la fois : Codex, Claude, puis Cursor selon les tours de réflexion enregistrés. Ce cerveau choisit les actions à entreprendre ; les programmes Python organisent et exécutent la boucle. Les rôles DIRECTOR, RESEARCHER, BUILDER, ACQUISITION et AUDITOR restent des identités persistantes dans le monde, servies par ces cerveaux plutôt que cinq processus IA permanents.
+
+Chaque tour lit le même cahier (missions, trésorerie vérifiée, résultats récents), propose des tâches, puis l’exécution fournit les observations au tour suivant. Grok peut proposer des missions par GitHub. Le cron think doit être installé seulement après un cycle manuel vérifié ; la connexion des comptes seule ne démarre pas une activité autonome. À un échec de modèle, le cycle s’arrête clairement et expose CONTROLLER_BLOCKED.

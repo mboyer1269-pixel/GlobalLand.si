@@ -26,7 +26,7 @@ class SubscriptionCompatibilityTests(unittest.TestCase):
   def run(argv,**kwargs):
    command=argv[argv.index('sha256:'+'a'*64)+1:]
    if command==['claude','--help']:return 0,CLAUDE_HELP
-   if command==['claude','--max-turns','1','auth','status']:return 0,b'{"loggedIn":true,"authMethod":"claude.ai"}'
+   if command==['claude','--max-turns','2','auth','status']:return 0,b'{"loggedIn":true,"authMethod":"claude.ai"}'
    return 1,b'unknown option --json'
   with patch('controller.run_brain',side_effect=run):self.make('claude').check_provider('claude')
  def test_hidden_max_turns_is_probed_by_status_without_inference(self):
@@ -35,12 +35,12 @@ class SubscriptionCompatibilityTests(unittest.TestCase):
    command=argv[argv.index('sha256:'+'a'*64)+1:];commands.append(command)
    if command==['claude','--help']:return 0,CLAUDE_HELP.replace(b'--max-turns',b'')
    if command==['claude','--globalland-invalid-option-probe','auth','status']:return 1,b"error: unknown option '--globalland-invalid-option-probe'"
-   if command==['claude','--max-turns','1','auth','status']:return 0,b'{"loggedIn":true,"authMethod":"claude.ai"}'
+   if command==['claude','--max-turns','2','auth','status']:return 0,b'{"loggedIn":true,"authMethod":"claude.ai"}'
    raise AssertionError('Only help and option-bearing auth status may run')
   with patch('controller.run_brain',side_effect=run):result=self.make('claude').check_provider('claude')
   self.assertTrue(result['subscription_auth_verified']);self.assertEqual(len(commands),3)
   runtime=brain_command('/tmp/gl-compat','sha256:'+'a'*64,'claude')
-  self.assertEqual(runtime[runtime.index('--max-turns')+1],'1')
+  self.assertEqual(runtime[runtime.index('--max-turns')+1],'2')
  def test_hidden_option_rejected_by_parser_keeps_provider_unverified(self):
   c=self.make('claude')
   with patch('controller.run_brain',side_effect=[(0,CLAUDE_HELP.replace(b'--max-turns',b'')),(1,b'unknown option --globalland-invalid-option-probe'),(1,b'unknown option --max-turns')]):

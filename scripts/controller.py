@@ -9,6 +9,23 @@ import uuid
 from supervisor import atomic_json, bounded_run, check_secrets, strict_json
 
 SCHEMA = {'type':'object','additionalProperties':False,'required':['summary','actions'],'properties':{'summary':{'type':'string'},'actions':{'type':'array','maxItems':5,'items':{'type':'object','additionalProperties':False,'required':['agent','action','args'],'properties':{'agent':{'type':'string','pattern':'^[A-Z0-9_-]{1,64}$'},'action':{'type':'string','enum':['EXEC','FETCH','WORLD','STATUS','SPEND','RECONCILE']},'args':{'type':'object'}}}}}}
+# Strict provider schemas cannot contain unconstrained JSON objects. Keep the
+# internal task protocol unchanged and encode arbitrary tool arguments as JSON text.
+MODEL_SCHEMA=json.loads(json.dumps(SCHEMA))
+_model_action=MODEL_SCHEMA['properties']['actions']['items']
+_model_action['required']=['agent','action','args_json']
+del _model_action['properties']['args']
+_model_action['properties']['args_json']={'type':'string','description':'Tool arguments encoded as one JSON object string, preserving arbitrary nested fields.'}
+CLAUDE_MAX_TURNS=2  # StructuredOutput may require a tool round trip plus its final result.
+TOOL_GUIDE = """Tool argument objects (encode in args_json):
+EXEC: {"argv":["node","-e","..."],"outputs":["products/result.txt"]}; optional cwd and mission_id. Programs see products in /workspace/products and write published outputs there.
+FETCH: {"url":"https://public-site/path","output":"products/research.txt"}; optional encoding utf-8 or base64. Reads public Web only.
+STATUS: {}.
+WORLD: {"op":"register_agent","agent_id":"NAME","role":"..."} or {"op":"create_mission","mission_id":"NAME","goal":"..."} (optional agent_id,parent_id,priority); {"op":"claim_mission","mission_id":"NAME","agent_id":"BUILDER","lease_seconds":3600}; {"op":"complete_mission","mission_id":"NAME","agent_id":"BUILDER","lease_token":"from claim result","evidence":["products/file.txt"]}; {"op":"fail_mission","mission_id":"NAME","agent_id":"BUILDER","lease_token":"from claim result","reason":"..."}; {"op":"message","from_agent":"DIRECTOR","to_agent":"BUILDER","body":"..."}; {"op":"transfer_glc","from_agent":"BUILDER","to_agent":"RESEARCHER","amount":1}; {"op":"reward_glc","agent_id":"BUILDER","amount":1,"evidence":["products/file.txt"]}; {"op":"set_policy","maintenance_glc":1,"interest_basis_points":500}; {"op":"cycle","cycle_id":"unique-cycle"}.
+SPEND: {"request":{...}} through the installed private finance integration, only with verified available funds.
+RECONCILE: {"operation_id":"TASK-0001"}.
+Actions run in order, but outcomes/claim lease tokens are available in the next decision's latest_task_results. Never invent a lease or financial proof.
+"""
 ENV = {'PATH':'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'}
 
 
@@ -27,13 +44,13 @@ def brain_command(root, image, provider):
         return argv+[image,'cursor-agent','--print','--mode','ask','--output-format','json']
     if provider == 'codex':
         return argv + [image,'codex','exec','--ignore-user-config','--ignore-rules','--sandbox','read-only','--ephemeral','--skip-git-repo-check','--output-schema','/decision.schema.json','-c','forced_login_method="chatgpt"','-c','approval_policy="never"','-c','features.shell_tool=false','-c','web_search="disabled"','-c','tools.view_image=false','-c','features.multi_agent=false','-c','apps._default.enabled=false','-c','features.hooks=false','-c','mcp_servers={}','-']
-    return argv + [image,'claude','--safe-mode','-p','--tools','','--disallowedTools','mcp__*','--strict-mcp-config','--mcp-config','{"mcpServers":{}}','--output-format','json','--json-schema',json.dumps(SCHEMA),'--no-session-persistence','--max-turns','1','--permission-prompts','none']
+    return argv + [image,'claude','--safe-mode','-p','--tools','','--disallowedTools','mcp__*','--strict-mcp-config','--mcp-config','{"mcpServers":{}}','--output-format','json','--json-schema',json.dumps(MODEL_SCHEMA),'--no-session-persistence','--max-turns',str(CLAUDE_MAX_TURNS),'--permission-prompts','none']
 
 
 def auth_command(provider):
     """Probe the hidden Claude SDK flag through a non-inference subcommand."""
     if provider=='codex':return ['codex','login','status']
-    if provider=='claude':return ['claude','--max-turns','1','auth','status']
+    if provider=='claude':return ['claude','--max-turns',str(CLAUDE_MAX_TURNS),'auth','status']
     if provider=='cursor':return ['cursor-agent','status']
     raise ValueError('unsupported subscription provider')
 
@@ -60,6 +77,22 @@ def validate_decision(value):
             raise ValueError('invalid controller action')
     json.dumps(value,allow_nan=False)
     return value
+
+
+def decode_model_decision(value):
+    if not isinstance(value,dict) or set(value)!={'summary','actions'} or not isinstance(value['actions'],list):
+        raise ValueError('invalid model decision')
+    actions=[]
+    for action in value['actions']:
+        if isinstance(action,dict) and 'args_json' in action:
+            if set(action)!={'agent','action','args_json'} or not isinstance(action['args_json'],str):
+                raise ValueError('invalid model action')
+            args=strict_json(action['args_json'].encode('utf-8'))
+            actions.append({'agent':action['agent'],'action':action['action'],'args':args})
+        else:
+            # Previously persisted/internal-format decisions remain compatible.
+            actions.append(action)
+    return validate_decision({'summary':value['summary'],'actions':actions})
 
 
 class Controller:
@@ -121,17 +154,20 @@ class Controller:
     def plan(self,provider,prompt):
         try:
             self.check_provider(provider)
-            if provider=='cursor':prompt+='\nReturn exactly one JSON object matching this schema, with no Markdown or explanation: '+json.dumps(SCHEMA)
+            prompt+='\n'+TOOL_GUIDE
+            if provider=='cursor':prompt+='\nReturn exactly one JSON object matching this schema, with no Markdown or explanation: '+json.dumps(MODEL_SCHEMA)
             code,out=run_brain(brain_command(self.root,self.config['image'],provider),input=prompt.encode(),limit=1024*1024)
             if code:raise ValueError('subscription auth/quota/CLI blocker; no paid fallback')
             check_secrets(out)
             try:
                 value=strict_json(out)
-                if provider=='claude':value=value['structured_output']
+                if provider=='claude':
+                    if not isinstance(value,dict) or value.get('type')!='result' or value.get('subtype')!='success' or value.get('is_error') is not False:raise ValueError('claude request not successful')
+                    value=value['structured_output']
                 if provider=='cursor':
                     if not isinstance(value,dict) or value.get('type')!='result' or value.get('subtype')!='success' or value.get('is_error') is not False or not isinstance(value.get('result'),str):raise ValueError('cursor request not successful')
                     value=strict_json(value['result'].encode('utf-8'))
-                return validate_decision(value)
+                return decode_model_decision(value)
             except (ValueError,KeyError,TypeError) as exc:raise ValueError('invalid subscription structured output') from exc
         except BaseException:
             self.verified[provider]=False

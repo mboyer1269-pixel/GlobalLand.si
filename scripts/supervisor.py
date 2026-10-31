@@ -248,9 +248,22 @@ class Supervisor:
     self.publish({'id':'READINESS','files':self.projections(world,bank,config),'base_sha':self.git('rev-parse','HEAD').decode().strip()});return
    try:
     turn,files=planner.tick()
-   except Exception:
-    files=self.projections(world,bank,config);files['world/controller.json']=json.dumps({'state':'CONTROLLER_BLOCKED','reason':'Authentication, quota, CLI compatibility or provider failure; inspect private controller logs; no API fallback'})+'\n'
-    self.publish({'id':'READINESS','files':files,'base_sha':self.git('rev-parse','HEAD').decode().strip()});return
+   except Exception as error:
+    message='Controller planning failed; inspect state/private/controller-failure.json'
+    try:
+     # Classify using fixed names only: provider exceptions can contain credentials.
+     kind=next((t.__name__ for t in (TimeoutError,FileNotFoundError,PermissionError,ValueError,OSError,RuntimeError) if isinstance(error,t)),'Exception')
+     reasons={'TimeoutError':'provider_timeout','FileNotFoundError':'runtime_dependency_missing','PermissionError':'runtime_permission_denied','ValueError':'provider_or_decision_validation_failed','OSError':'runtime_io_failure','RuntimeError':'runtime_failure'}
+     known={'invalid subscription structured output':'invalid_provider_structured_output','invalid controller decision':'invalid_controller_decision','invalid controller action':'invalid_controller_action','secret pattern detected; publication blocked':'secret_detected'}
+     detail=error.args[0] if len(error.args)==1 and isinstance(error.args[0],str) else None
+     reason=known.get(detail,reasons.get(kind,'unexpected_planner_failure'))
+     private=self.state/'private';private.mkdir(parents=True,exist_ok=True,mode=0o700)
+     atomic_json(private/'controller-failure.json',{'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'stage':'planner.tick','providers':[p for p in config.get('controller',{}).get('providers',[]) if p in ('codex','claude','cursor')],'exception_type':kind,'reason':reason})
+     files=self.projections(world,bank,config);files['world/controller.json']=json.dumps({'state':'CONTROLLER_BLOCKED','reason':message+'; no API fallback'})+'\n'
+     self.publish({'id':'READINESS','files':files,'base_sha':self.git('rev-parse','HEAD').decode().strip()})
+    except Exception:
+     raise RuntimeError(message+'; blocked-state reporting incomplete') from None
+    raise RuntimeError(message) from None
    p=self.state/(turn+'.json')
    r={'id':turn,'hash':hashlib.sha256(json.dumps(files,sort_keys=True).encode()).hexdigest(),'task':None,'state':'COMPLETED','files':{**files,**self.projections(world,bank,config,planner)},'base_sha':self.git('rev-parse','HEAD').decode().strip()}
    atomic_json(p,r);self.finish(p,r);return
