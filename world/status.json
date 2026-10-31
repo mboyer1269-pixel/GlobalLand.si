@@ -89,6 +89,12 @@
       "to_agent": "ACQUISITION",
       "body": "Proceed with the distribution mission. A generic local CSV structure checker is being built under products/invoice-preflight; inspect actual artifacts and test results before demonstrating it. Identify accessible free hosting and permitted relevant channels, then publish when access and rules permit. Record exact URLs and observed responses; never invent publication, traffic, checkout access or accounting compatibility. Frame paid customization as a proposed offer until fulfillment scope and payment access are verified.",
       "timestamp": 1793484047.9346635
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "BUILDER",
+      "body": "Focus target: Manager.io 'Import sales invoices' workflow (source saved at products/research/manager-invoice-import-guide.txt). Inspect csv_structure_check.py and director-state-snapshot.txt, then add a Manager-specific column/format preflight with fixtures derived only from the guide text, plus a single-file offline HTML checker. Record test outputs; claim no compatibility beyond what the tests and the guide support.",
+      "timestamp": 1793485830.9443715
     }
   ],
   "events": [
@@ -212,6 +218,12 @@
       "timestamp": 1793485829.4991515,
       "mission_id": "INVOICE-PRODUCT",
       "agent_id": "BUILDER"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793485830.9443743,
+      "from_agent": "DIRECTOR",
+      "to_agent": "BUILDER"
     }
   ],
   "policy": {
