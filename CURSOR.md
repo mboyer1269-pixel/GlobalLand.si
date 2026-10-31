@@ -33,13 +33,11 @@ Ces règles découlent d'expériences réelles documentées — les ignorer réd
 4. **Exécuter à coût 0 $** par défaut ; au-delà du plafond API de 2,00 $ CAD / jour, refus automatique.
 5. **Journaliser** : mise à jour de `ledger.json` + `logs/transactions.log` + commit atomique (`type(scope): description`).
 
-## 4. Protocole de Soumission de Tâches au VPS (File d'instructions)
+## 4. Protocole VPS actuel (version 2)
 
-Pour déclencher une exécution sur le serveur du monde, ne touche jamais au VPS : pousse un fichier de tâche dans `queue/inbox/` selon le schéma documenté dans `queue/PROTOCOL.md`, puis lis le résultat dans `queue/done/` ou `queue/failed/` au prochain pull. Rappels :
+Seul `SHELL` / `AUDIT` avec `args: []`, coût zéro et `approved_by: null` est exécuté. Aucun shell libre ni AGENT_CODE. Lire `queue/PROTOCOL.md` avant toute soumission. Une valeur `approved_by: CEO` écrite par un bot n'est jamais une autorisation humaine ; le canal payant reste fermé. Les preuves de paiement et autorisations réelles restent à vérifier par le CEO hors du bot.
 
-* Actions limitées à la liste blanche (`node `, `bash scripts/`, `bash products/`, `npm run `) — tout le reste est refusé par le garde-fou.
-* Coût estimé > 0,00 $ CAD : exige `"approved_by": "CEO"`, plus la transaction `REAL_EXPENSE` au `ledger.json` dans le même commit.
-* La tâche s'exécute dans le conteneur isolé (5 min max, sortie tronquée) ; le résultat fait foi, pas ta mémoire.
+Ne pas modifier le contrôle du VPS par une tâche : il est installé séparément depuis un commit revu. Les cartes d'agents et leurs outils décrivent des responsabilités, pas des permissions du runtime.
 
 ## 5. Conventions de Commit et de Structure
 

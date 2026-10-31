@@ -1,48 +1,29 @@
-# 🔐 SECURITY.md — Audit de Sécurité du Canal de Tâches du VPS
+# Sécurité du canal VPS — version 2
 
-> Dernier audit : 2026-10-30. Ce document décrit le modèle de menace du canal de tâches (`queue/` → `scripts/run_task.js` → `scripts/queue_runner.sh`), les défenses en place et les risques résiduels acceptés. Il doit être mis à jour à chaque changement du canal.
+Cette version remplace les affirmations de l'audit du 2026-10-30. Les anciens préfixes de commandes et `approved_by: CEO` ne constituaient pas des barrières suffisantes.
 
-## Actifs à protéger
+## Invariants appliqués
 
-| Actif | Où il vit | Impact si compromis |
-|---|---|---|
-| Les 50,00 $ CAD (réserve réelle) | Comptes du CEO (jamais dans le dépôt) | Mort du monde |
-| Clés API (Anthropic/OpenAI) | `/opt/globalland/.env` sur le VPS (chmod 600) | Dépenses réelles non contrôlées |
-| Accès push GitHub | Deploy Key dédiée au repo | Code malveillant committé |
-| Le reste du VPS (autres projets) | Hôte | Contamination inter-projets |
+- Le code hôte est copié dans `control/` par une installation administrateur sur commit précis ; le dépôt distant ne peut pas le mettre à jour par une tâche.
+- Le conteneur n'exécute que le code de contrôle installé, avec deux opérations : AUDIT gratuit et audit quotidien interne. AGENT_CODE est désactivé sans exception.
+- Export éphémère sans Git, sans liens, monté en lecture seule ; contrôle monté en lecture seule. Aucun port, réseau, secret ni socket Docker. UID 65534, rootfs en lecture seule, toutes capacités retirées, no-new-privileges, RAM/CPU/PID bornés.
+- Le Git bare privé, son index temporaire et la clé SSH ne sont jamais montés. Publication via objets Git, sans checkout, hook ou interprétation de `.gitattributes` téléchargés.
+- Verrou hôte commun, journal atomique avec fsync, hash des octets de tâche. RUNNING avant lancement ; résultats durables avant commit. Pas de réexécution après une interruption ou un échec de push.
+- Seuls ledger, journal financier, rapport quotidien et résultat de tâche peuvent être publiés. Les sorties sont plafonnées et scannées avant publication ; les erreurs interrompent le cycle.
+- Les empreintes SSH GitHub doivent être vérifiées et préinstallées ; StrictHostKeyChecking=yes. Deploy Key limitée à ce dépôt.
 
-## Frontière de confiance (à lire en premier)
+## Limites explicites
 
-**Quiconque peut pousser dans ce dépôt peut faire exécuter du code dans le conteneur `globalland-core`.** C'est voulu — c'est le principe même du canal de tâches — mais cela signifie que les garde-fous du canal protègent contre les *erreurs d'agents* (hallucinations, boucles), pas contre un *acteur malveillant ayant l'accès push*. La réponse à cette frontière est le confinement : le conteneur (1 Go RAM / 0,5 CPU / `no-new-privileges` / aucun port / aucune clé / aucune secret), et le fait que seuls le CEO et les agents autorisés détiennent l'accès push.
+Le CEO, l'administrateur du VPS et toute personne pouvant remplacer `control/`, modifier `state/` ou utiliser Docker sont de confiance. Docker et le noyau restent des dépendances de sécurité. Aucun confinement absolu n'est promis.
 
-## Défenses en profondeur (6 couches)
+Le filtre de secrets recherche notamment les clés sk-, tokens GitHub et blocs PEM. Il ne détecte pas toutes les valeurs possibles, encodages, informations personnelles ou secrets métier. Ne soumettre aucune donnée confidentielle à ce dépôt public. Les refus ne republient pas le contenu de tâche dans leur sortie.
 
-1. **Conteneur isolé** : `node:22-bookworm`, 0,5 CPU / 1 Go RAM, `no-new-privileges`, aucun port exposé, seul `./workspace` est monté. Les clés API ne sont **pas** dans le système de fichiers du conteneur.
-2. **Liste blanche d'actions** (`run_task.js`) : seuls `node `, `bash scripts/`, `bash products/`, `npm run ` — tout le reste est refusé.
-3. **Motifs interdits** : réseau (`curl`, `wget`, `ssh`), secrets (`.env`, clés), destruction (`sudo`, `rm -rf`, `shutdown`), et plafond de coût : toute tâche à coût estimé exige `"approved_by": "CEO"`.
-4. **Clés API réservées aux tâches `AGENT_CODE`** (`queue_runner.sh`) : les tâches SHELL tournent sans aucun secret dans leur environnement.
-5. **Masquage des secrets en sortie** (`run_task.js`, `scrubSecrets`) : les valeurs des clés d'environnement, les motifs `sk-...` et les blocs PEM sont remplacés par `[REDACTÉ]` avant toute publication du `.result.json` (dépôt public). L'`id` de tâche est assaini (anti-traversée de chemin, testé).
-6. **Filtre anti-fuite au commit** (`queue_runner.sh`) : avant chaque commit, les modifications sont scannées ; tout motif de secret bloque le commit et le push (échec fermé) et journalise une alerte dans `logs/tasks.log`.
+Les dépenses API sont impossibles par le registre actuel. La primitive Ed25519 est testée mais aucun circuit d'approbation payante n'est activé. La vérification du ledger contrôle sa cohérence interne, pas l'authenticité des déclarations du CEO ni la réalité des comptes bancaires.
 
-## Vulnérabilités corrigées lors de cet audit (testées, preuve à l'appui)
+Un push concurrent divergent arrête la publication : pas de force-push, reset destructif ou rebase automatique. L'opérateur doit réconcilier les commits et journaux privés. Les journaux hôte doivent être sauvegardés : leur perte supprimerait la mémoire anti-rejeu.
 
-| # | Vulnérabilité | Gravité | Correctif | Test |
-|---|---|---|---|---|
-| 1 | Traversée de chemin via `task.id` (`"id": "../../x"` écrivait hors de `queue/`) | Élevée | Assainissement de l'id (`[A-Za-z0-9_-]` uniquement) | Le résultat reste confiné dans `queue/done/` |
-| 2 | Fuite de clés API via la sortie des tâches (publiée sur le dépôt public) | Élevée | `scrubSecrets()` sur toute sortie publiée | La clé factice est publiée comme `[REDACTÉ]` |
-| 3 | Clés API transmises à toutes les tâches, y compris SHELL | Élevée | `docker exec -e` uniquement pour `AGENT_CODE` | Vérification par `grep` du type avant exécution |
-| 4 | Code du dépôt exécuté sur l'hôte par le cron (`node -e` inline dans `daily_audit.sh`) | Moyenne | Battement de cœur déplacé dans le conteneur (`scripts/tick.js`) | `daily_audit.sh` n'exécute plus que git + docker |
+Un audit quotidien interrompu bloque explicitement les cycles jusqu'à revue opérateur ; une tâche interrompue reçoit un résultat INTERRUPTED sans être relancée. Ni la suppression du VPS ni l'archivage du dépôt ne sont automatisés.
 
-## Risques résiduels (acceptés, documentés)
+## Validation et déploiement
 
-* **Exécution de code par un détenteur de l'accès push** : incluse dans la frontière de confiance. Le conteneur est la sanction : pas de secrets, pas de réseau utile, ressources bornées.
-* **Injection de prompt dans les tâches `AGENT_CODE`** : un contenu du repo lu par Claude Code/Codex pourrait tenter de détourner l'agent. Mitigé par : CEO obligatoire, coût estimé obligatoire, masquage des sorties, filtre au commit. Non éliminé.
-* **`node -e` dans une action SHELL** : permet d'exécuter du JS arbitraire (et donc du réseau). Accepté car équivalent à la frontière de confiance push — mais un agent honnête ne doit jamais l'utiliser pour du réseau (les motifs `curl`/`wget` explicites sont bloqués, pas les requêtes Node). Recommandation : le Directeur SI/OP refuse les actions `node -e` contenant du code non lisible.
-* **Plafond API 2 $/jour sur les tâches `AGENT_CODE`** : procédural (CEO approuve le coût estimé), pas techniquement borné par requête.
-
-## Règles d'hygiène permanentes
-
-1. Jamais de secret dans le dépôt (public) — le filtre au commit est la dernière ligne, pas la première.
-2. `/opt/globalland/.env` : chmod 600, lu uniquement par `queue_runner.sh`, jamais monté dans le conteneur.
-3. La Deploy Key reste dédiée à ce seul repo, write access, révocable en un clic.
-4. Toute modification de `run_task.js` ou `queue_runner.sh` exige un commit documenté et, idéalement, un re-test des 4 correctifs ci-dessus.
+Tests reproductibles : `node tests/runtime.test.js` et `python3 -m unittest discover -s tests -p 'test_*.py'`. Ils couvrent les entrées refusées, la finance, les archives et la reprise avec Git local réel et worker Node réel. Docker est substitué dans le test d'intégration. Le test réel conteneur → GitHub doit être réalisé selon INSTALL.md avant cron ; la revue locale ne certifie pas le VPS.

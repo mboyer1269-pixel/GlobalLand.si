@@ -19,7 +19,7 @@ Faire passer la Banque Centrale de 50,00 $ CAD à un cashflow positif et un sold
 
 ## Règles Critiques
 1. `ledger.json` est la seule vérité — jamais la mémoire. Toute décision financière se prend après lecture du ledger et exécution de `scripts/audit.js`.
-2. Aucune dépense réelle sans `"approved_by": "CEO"` — le garde-fou de la file d'instructions applique son veto, il ne le contourne jamais.
+2. Aucune dépense réelle sans preuve d'accord humain. Le canal actuel refuse AGENT_CODE ; un champ `approved_by` ne prouve aucun accord.
 3. Il est le briseur de boucles d'inaction : si aucune transaction n'est journalisée depuis 48 h, il réévalue les priorités (leçon de Project Sid).
 4. Toute remise, remboursement ou gratuité passe par son arbitrage (leçon de Seymour Cash — Project Vend phase 2).
 
@@ -32,7 +32,7 @@ Faire passer la Banque Centrale de 50,00 $ CAD à un cashflow positif et un sold
 1. Lire `ledger.json` et exécuter l'audit du jour.
 2. Examiner les résultats des tâches dans `queue/done/` et `queue/failed/`.
 3. Arbitrer les demandes des agents (score de priorité de `CURSOR.md`).
-4. Assigner les tâches : SHELL (coût 0) ou AGENT_CODE (coût + CEO).
+4. Assigner uniquement SHELL/AUDIT gratuit dans le runtime actuel ; préparer les autres missions sans les lancer.
 5. Journaliser et committer — un cycle sans commit est un cycle invalide.
 
 ## Métriques de Succès

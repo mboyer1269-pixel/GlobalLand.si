@@ -1,92 +1,96 @@
-# 🚀 INSTALL.md — Installation de GlobalLand sur un VPS
+# Installation VPS, validation et retour arrière
 
-> Prérequis : un VPS Ubuntu/Debian avec Docker et git installés (aucun autre service requis). L'installation n'affecte aucun autre projet de la machine : tout vit dans `/opt/globalland`, dans un conteneur sans port exposé.
+Aucun déploiement n'a été effectué par cette PR. Ne pas activer les anciens cron dans `workspace/GlobalLand.si/scripts/`. Cette version change le protocole ; seules les tâches SHELL/AUDIT sont acceptées.
 
-## 1. Installation (une commande)
+## Prérequis et identification exacte
 
-```bash
-git clone https://github.com/mboyer1269-pixel/GlobalLand.si /tmp/globalland-bootstrap && \
-sudo bash /tmp/globalland-bootstrap/scripts/setup_vps.sh && rm -rf /tmp/globalland-bootstrap
-```
+Ubuntu/Debian, Python 3.12+, Git, Docker avec Compose v2, 1 Go de RAM disponible pour le worker et marge pour l'hôte. Vérifier les autres services, le disque, les sauvegardes et l'heure UTC. Le compte qui administre Docker est de confiance.
 
-Le script : crée `/opt/globalland`, génère la clé de déploiement dédiée, écrit le `docker-compose.yml`, clone le dépôt et démarre le conteneur `globalland-core` (0,5 CPU / 1 Go RAM / `no-new-privileges` / aucun port).
-
-## 2. Enregistrer la clé de déploiement dans GitHub
-
-Le script affiche la clé publique. Puis :
-
-1. GitHub → `mboyer1269-pixel/GlobalLand.si` → **Settings** → **Deploy keys** → **Add deploy key**.
-2. Titre : `globalland-vps` — coller la clé — **cocher « Allow write access »** — Add key.
-
-Sans write access, le VPS ne pourra pas publier les audits ni les résultats de tâches.
-
-## 3. Activer les automatismes (crontab)
+Après revue et fusion, choisir le **SHA Git complet de 40 caractères réellement fusionné**. Il est impossible de mettre son propre hash final dans le commit ; le champ Head de la PR permet d'identifier la version testée avant fusion. Si GitHub crée un merge/squash, relever le nouveau SHA puis vérifier que son contenu correspond.
 
 ```bash
-crontab -e
+REV=REMPLACER_PAR_LE_SHA_COMPLET_REVU
+IMAGE=node:22-bookworm@sha256:REMPLACER_PAR_LE_DIGEST_VERIFIE
+
+git clone https://github.com/mboyer1269-pixel/GlobalLand.si.git globalland-install
+cd globalland-install
+git checkout --detach "$REV"
+git status --porcelain
+node tests/runtime.test.js
+python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-Ajouter les deux lignes :
+Obtenir le digest Node 22 Bookworm par un canal de confiance, puis télécharger cette image sur le VPS avant les tests. Ne pas utiliser le digest fictif d'un exemple. L'installeur exige le digest et refuse un arbre Git modifié.
+
+## Première installation (sans démarrer d'automatisme)
+
+```bash
+sudo bash scripts/setup_vps.sh "$REV" "$IMAGE"
+```
+
+Le script refuse un `/opt/globalland` existant. Il installe le contrôle revu, crée un Git bare privé et une **nouvelle clé de déploiement dédiée**, affiche uniquement sa partie publique. Il ne lit aucune ancienne clé de production, ne configure aucune API, ne démarre aucun conteneur et n'installe aucun cron.
+
+1. Enregistrer la clé publique dans les Deploy Keys de ce seul dépôt, avec write access.
+2. Installer les clés hôte SSH GitHub vérifiées depuis une source officielle dans `/opt/globalland/ssh/known_hosts`, propriétaire root et mode 600. Ne pas accepter aveuglément `ssh-keyscan` et ne pas désactiver StrictHostKeyChecking.
+3. Vérifier l'image et la configuration :
+
+```bash
+sudo docker image inspect "$IMAGE"
+sudo docker compose -f /opt/globalland/control/compose.yml config --quiet
+sudo ssh -i /opt/globalland/ssh/deploy_key -o IdentitiesOnly=yes \
+  -o StrictHostKeyChecking=yes \
+  -o UserKnownHostsFile=/opt/globalland/ssh/known_hosts -T git@github.com
+```
+
+GitHub peut retourner le code SSH 1 tout en confirmant l'authentification et l'absence de shell. Confirmer le message et le dépôt dédié.
+
+## Test réel obligatoire avant cron
+
+Exécuter un cycle manuel sans clé API :
+
+```bash
+sudo python3 /opt/globalland/control/supervisor.py queue
+sudo python3 /opt/globalland/control/supervisor.py daily
+sudo python3 /opt/globalland/control/supervisor.py daily
+```
+
+Si TASK-0001 a déjà été traité, créer une nouvelle tâche selon `queue/PROTOCOL.md`, avec un nouvel ID, puis relancer queue. Sur GitHub, vérifier :
+
+- résultat DONE et hash d'entrée correct ; entrée inbox retirée dans le même commit ;
+- rapport `bank/audits/audit-YYYY-MM-DD.md` et ledger/log publiés ensemble ;
+- second audit du même jour sans second DAY_TICK ni nouvelle baisse de grâce ;
+- même tâche non réexécutée à la relance ; conteneurs temporaires supprimés ;
+- configuration effective : UID 65534, aucun réseau/port, montage en lecture seule, RAM/CPU/PID limités.
+
+Soumettre ensuite une tâche avec un **nouvel ID** et `action: node -p 1` : résultat REJECTED attendu, aucun code libre exécuté. Tester la reprise de publication dans un dépôt de préproduction : couper l'accès Git après exécution puis le rétablir ; le hash et le résultat doivent rester les mêmes, sans second lancement. Une divergence doit arrêter le cycle et préserver le journal.
+
+Une sortie de commande seule ne certifie pas le déploiement : vérifier les commits distants et les journaux privés. Ne transmettre ni clés privées ni contenu confidentiel du journal au bot.
+
+## Cron et surveillance
+
+Seulement après les tests précédents : dans le crontab **root**, installer ces lignes qui exécutent le contrôle installé, jamais le dépôt mutable. Utiliser explicitement bash pour les wrappers installés en mode 644 :
 
 ```cron
-0 8 * * * /opt/globalland/workspace/GlobalLand.si/scripts/daily_audit.sh >> /opt/globalland/workspace/GlobalLand.si/logs/audit_cron.log 2>&1
-*/5 * * * * /opt/globalland/workspace/GlobalLand.si/scripts/queue_runner.sh >> /opt/globalland/workspace/GlobalLand.si/logs/queue_cron.log 2>&1
+*/5 * * * * /bin/bash /opt/globalland/control/queue_runner.sh >> /var/log/globalland-queue.log 2>&1
+0 8 * * * /bin/bash /opt/globalland/control/daily_audit.sh >> /var/log/globalland-audit.log 2>&1
 ```
 
-## 4. Vérifier que le monde vit
+08 h est l'heure de l'hôte ; les dates comptables sont UTC. Le verrou commun sérialise les deux. Configurer logrotate pour les deux fichiers `/var/log/globalland-*.log`, rotation quotidienne, conservation 14 jours, mode 600. Surveiller un rapport manquant, un statut INTERRUPTED ou une erreur du superviseur. Aucun service de notification n'est configuré par cette PR.
 
-```bash
-# Audit immédiat (rapport de la Banque Centrale)
-docker exec globalland-core node scripts/audit.js
+## Reprise et incidents
 
-# Après max 5 minutes : la tâche de fumée TASK-0001 (déjà dans queue/inbox/) doit être
-# exécutée et son résultat publié dans queue/done/TASK-0001.result.json sur GitHub.
-```
+- **Push refusé/réseau indisponible** : préserver `state/` et `source.git`. Rétablir l'accès puis relancer le même cycle ; le résultat terminal sera publié sans exécuter à nouveau l'action. Une file vide n'empêche pas la reprise.
+- **Historique divergent** : arrêter cron, sauvegarder. Réconcilier explicitement le commit local préparé et le ledger distant dans une branche de revue. Aucun force-push, reset ou rebase automatique.
+- **Tâche INTERRUPTED** : examiner le journal privé et le résultat ; créer une nouvelle tâche avec un nouvel ID seulement après revue. Ne pas effacer le journal pour réutiliser l'ID.
+- **Audit quotidien INTERRUPTED** : les cycles s'arrêtent pour revue opérateur. Après arrêt de cron et sauvegarde, vérifier `source.git` et GitHub : le ledger du jour et son journal sont-ils déjà committés/poussés ? Préserver le fichier `state/DAILY-date.json` dans un sous-dossier privé `state/quarantine/` avec une note d'incident, puis relancer daily seulement après rapprochement. Le tick UTC empêche un deuxième débit de grâce si le jour est déjà au ledger. Ne pas marquer un audit PUBLISHED sans vérifier sa publication.
+- **Secret détecté** : arrêt et traitement privé ; aucun contournement du filtre. Si le secret était déjà soumis à GitHub, le révoquer selon la procédure du propriétaire.
 
-## 5. (Optionnel) Activer les agents de code — Claude Code et Codex
+## Sauvegarde, mise à niveau et retour arrière
 
-Les tâches de type `AGENT_CODE` (voir `queue/PROTOCOL.md`) envoient Claude Code ou Codex travailler dans le dépôt, sur le VPS. Elles exigent toutes `"approved_by": "CEO"` et un coût estimé — l'argent réel ne sort jamais sans votre signature.
+Arrêter les deux entrées cron et attendre la fin du cycle sous verrou. Sauvegarder ensemble `/opt/globalland/control`, `state`, `source.git` et `ssh` dans une archive **privée**, chiffrée hors hôte, réservée à l'administrateur. Elle contient la mémoire anti-rejeu et la clé dédiée ; ne jamais la pousser sur GitHub.
 
-Pour les activer, renseignez les clés API dans `/opt/globalland/.env` (fichier créé par l'installeur, chmod 600, jamais commité) :
+Une mise à niveau du dépôt ne remplace jamais automatiquement `control/`. Préparer une nouvelle version depuis un SHA revu, exécuter ses tests, comparer les schémas de tâches/journaux/ledger et l'image, sauvegarder puis remplacer le contrôle administrativement. Cette première version ne fournit pas de migration automatique depuis l'ancienne installation ; conserver l'ancien arbre hors montages et procéder comme une nouvelle installation après sauvegarde.
 
-```bash
-sudo nano /opt/globalland/.env
-# ANTHROPIC_API_KEY=sk-ant-...   <- pour Claude Code
-# OPENAI_API_KEY=sk-...           <- pour Codex
-```
+Pour revenir en arrière : désactiver cron, attendre le verrou, sauvegarder l'état courant, restaurer le précédent `control/` et sa configuration d'image. Conserver `state/` et les commits préparés si le schéma est compatible ; sinon réconcilier manuellement avant reprise. **Ne jamais restaurer un ancien ledger ou effacer state indépendamment**, sous peine de perdre des écritures ou de rejouer des tâches. Ne pas réactiver les anciens runners vulnérables. Relancer les tests manuels avant cron.
 
-Les agents de code sont téléchargés et exécutés par `npx` dans le conteneur, sans shell (aucune injection possible), avec un plafond de 15 minutes par tâche.
-
-## 6. Test de bout en bout d'une tâche d'agent de code
-
-Depuis n'importe quel agent (Grok Bot, Claude Code local, ou vous-même), poussez :
-
-```bash
-cat > queue/inbox/TASK-0002.json << 'EOF'
-{
-  "id": "TASK-0002",
-  "type": "AGENT_CODE",
-  "submitted_by": "DIRECTEUR_SI_OP",
-  "created_at": "2026-10-31T12:00:00Z",
-  "agent": "claude-code",
-  "prompt": "Ajoute un fichier products/ideas.md listant 3 idées de micro-outils vendables à coût 0.",
-  "description": "Test du canal agents de code",
-  "estimated_cost_cad": 0.25,
-  "approved_by": "CEO"
-}
-EOF
-git add queue/inbox/TASK-0002.json && git commit -m "queue(TASK-0002): test agent de code" && git push origin main
-```
-
-Dans les 5 minutes, le VPS exécute la tâche, committe le fichier créé par l'agent et publie le rapport dans `queue/done/TASK-0002.result.json`.
-
-## Récapitulatif des règles de sécurité
-
-| Surface | Protection |
-|---|---|
-| Conteneur | 0,5 CPU / 1 Go RAM, `no-new-privileges`, aucun port, aucune clé |
-| Tâches SHELL | Liste blanche (`node`, `bash scripts/`, `bash products/`, `npm run`), motifs réseau/secrets/destruction bloqués |
-| Tâches AGENT_CODE | CEO obligatoire + coût estimé obligatoire, exécution sans shell, 15 min max |
-| Dépenses réelles | Veto CEO appliqué par le garde-fou, transaction `REAL_EXPENSE` au ledger obligatoire |
-| Clés API | `/opt/globalland/.env` (chmod 600), jamais dans le dépôt public |
-| Push VPS → GitHub | Deploy Key dédiée à ce seul repo (write access) |
+Aucune suppression de serveur, aucun archivage du dépôt et aucun achat ne font partie de cette procédure automatisée.
