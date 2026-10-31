@@ -49,6 +49,8 @@ DONE signifie que la requête de l'outil a été traitée, pas que son produit a
 
 Les tâches malformées sont rejetées ; un nom non canonique arrête le cycle. Un ID changé ou rejoué est refusé. Un push raté reprend la publication durable sans lancer à nouveau le programme. Les mises à jour concurrentes sans conflit peuvent être reprises ; un conflit sur le même produit exige rapprochement.
 
+Un programme EXEC qui échoue ne publie aucun fichier partiel. Son résultat conserve le code d'échec, le début de stderr (au plus6000 caractères) et de stdout (au plus1500), dans une sortie totale limitée à8000 caractères. Le contrôle de secrets s'applique avant publication. Le prochain tour reçoit les résultats récents, dont les premiers2000 caractères de cette erreur, pour permettre à l'agent de diagnostiquer et corriger son programme ; une tâche déjà terminée n'est pas rejouée automatiquement.
+
 ## Contrôleur
 
 L'app Grok peut soumettre ces tâches avec ses outils et son accès GitHub. GitHub ne réveille pas cette app à lui seul. `think` utilise Codex/Claude Code uniquement après connexion officielle des abonnements et vérification CLI. Ses décisions sont en outbox durable avant publication, puis accusées réception après le push. Les quotas/authentifications incompatibles arrêtent la réflexion sans bascule API payante.

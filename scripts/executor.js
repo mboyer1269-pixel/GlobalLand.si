@@ -13,7 +13,10 @@ function execute(input='/input',root='/workspace',request='/request.json'){
  fs.cpSync(input,root,{recursive:true,dereference:false,filter:src=>!fs.lstatSync(src).isSymbolicLink()});
  const cwd=args.cwd?path.resolve(root,args.cwd):root;if(cwd!==root&&!cwd.startsWith(root+path.sep))throw Error('invalid cwd');
  const run=spawnSync(args.argv[0],args.argv.slice(1),{cwd,timeout:60000,maxBuffer:1024*1024,encoding:'utf8',env:{PATH:process.env.PATH,HOME:'/tmp',TMPDIR:'/tmp'},stdio:['ignore','pipe','pipe']});
- if(run.error||run.status!==0)return{status:run.error?.code==='ETIMEDOUT'?'TIMEOUT':'FAILED',output:'Process failed: '+(run.error?.code||run.status),files:{}};
+ if(run.error||run.status!==0){
+  const output=('Process failed: '+(run.error?.code||run.status)+'\nstderr:\n'+(run.stderr||'').slice(0,6000)+'\nstdout:\n'+(run.stdout||'').slice(0,1500)).slice(0,8000);
+  return{status:run.error?.code==='ETIMEDOUT'?'TIMEOUT':'FAILED',output,files:{}};
+ }
  return{status:'DONE',output:((run.stdout||'')+'\n'+(run.stderr||'')).slice(0,8000),files:collect(root,args.outputs||[])};
 }
 if(require.main===module){try{process.stdout.write(JSON.stringify(execute())+'\n');}catch{process.stdout.write(JSON.stringify({status:'FAILED',output:'Sandbox artifact/execution validation failed',files:{}})+'\n');process.exitCode=1;}}
