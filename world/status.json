@@ -59,6 +59,17 @@
       "lease_token": null,
       "lease_expires_at": null,
       "evidence": []
+    },
+    {
+      "mission_id": "INVOICE-PRODUCT",
+      "goal": "Improve and test products/invoice-preflight against the strongest evidenced invoice import workflow. Inspect the prototype before changing it. Add a usable local browser interface if feasible using existing tools, precise compatibility documentation and realistic test fixtures. Do not claim accounting or platform compatibility without tests and source evidence. No paid dependencies or invented access.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "BUILDER",
+      "priority": 2,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [],
@@ -137,6 +148,11 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793458926.7912674,
       "mission_id": "INVOICE-DEMAND"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793458928.3266213,
+      "mission_id": "INVOICE-PRODUCT"
     }
   ],
   "policy": {
