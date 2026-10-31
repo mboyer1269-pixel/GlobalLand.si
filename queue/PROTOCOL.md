@@ -50,3 +50,7 @@ Les tâches malformées sont rejetées ; un nom non canonique arrête le cycle. 
 ## Contrôleur
 
 L'app Grok peut soumettre ces tâches avec ses outils et son accès GitHub. GitHub ne réveille pas cette app à lui seul. `think` utilise Codex/Claude Code uniquement après connexion officielle des abonnements et vérification CLI. Ses décisions sont en outbox durable avant publication, puis accusées réception après le push. Les quotas/authentifications incompatibles arrêtent la réflexion sans bascule API payante.
+
+## Transport interne des décisions de modèle
+
+Les tâches publiées conservent args objet, comme ci-dessus. Le schéma interne des modèles décrit les arguments natifs de chaque action et les champs des opérations WORLD. Les champs optionnels null du transport sont retirés avant de créer la tâche. Pour SPEND seulement, request_entries transporte les clés arbitraires du request, avec object_entries pour les objets imbriqués ; decision_protocol.encode_request est l’encodeur pour les producteurs de cette représentation. Les doublons sont rejetés, les tableaux et valeurs métier null sont conservés. Aucune chaîne de code n’est parsée comme un second document JSON. Les anciennes réponses args_json bien formées restent compatibles ; les réponses malformées s’arrêtent sans correction conjecturale et sans exécution partielle du lot.

@@ -8,9 +8,14 @@ class ModelDecisionTests(unittest.TestCase):
  def decision(self,args=None):return {'summary':'Build','actions':[{'agent':'BUILDER','action':'EXEC','args':args or {'argv':['node','-p','1'],'outputs':[]}}]}
  def wire(self,decision=None):
   decision=decision or self.decision()
-  return {'summary':decision['summary'],'actions':[{'agent':a['agent'],'action':a['action'],'args_json':json.dumps(a['args'])} for a in decision['actions']]}
+  actions=[]
+  for action in decision['actions']:
+   item={'agent':action['agent'],'action':action['action'],'args':dict(action['args'])}
+   if action['action']=='EXEC':item['args'].update(cwd=None,mission_id=None)
+   actions.append(item)
+  return {'summary':decision['summary'],'actions':actions}
  def test_provider_schema_closes_every_object_and_requires_all_fields(self):
-  # External OpenAI strict-output contract, not the internal task schema.
+  # External OpenAI strict-output contract, including native action variants.
   def walk(node):
    if isinstance(node,dict):
     if node.get('type')=='object':
@@ -20,8 +25,12 @@ class ModelDecisionTests(unittest.TestCase):
    elif isinstance(node,list):
     for value in node:walk(value)
   walk(self.model_schema())
-  fields=self.model_schema()['properties']['actions']['items']['properties']
-  self.assertEqual(fields.get('args_json',{}).get('type'),'string')
+  variants=self.model_schema()['properties']['actions']['items'].get('anyOf',[])
+  self.assertTrue(variants,'Actions must have typed native argument variants')
+  for variant in variants:
+   self.assertIn('args',variant['properties']);self.assertNotIn('args_json',variant['properties'])
+  execute=next(v for v in variants if v['properties']['action'].get('enum')==['EXEC'])
+  self.assertEqual(execute['properties']['args']['properties']['argv']['items']['type'],'string')
  def test_codex_file_and_claude_schema_describe_the_same_wire_contract(self):
   image='sha256:'+'a'*64;argv=controller.brain_command('/tmp',image,'claude')
   cli=json.loads(argv[argv.index('--json-schema')+1]);installed=json.loads((pathlib.Path(__file__).resolve().parents[1]/'scripts/decision.schema.json').read_text())
@@ -35,17 +44,27 @@ class ModelDecisionTests(unittest.TestCase):
  def test_nested_arbitrary_args_preserved_without_narrowing_agent_tools(self):
   wanted={'summary':'Explore','actions':[{'agent':'DIRECTOR','action':'SPEND','args':{'request':{'market':'worldwide','custom':{'symbols':['A','B'],'limit':0}}}}]}
   c=self.controller()
-  with patch.object(c,'check_provider'),patch('controller.run_brain',return_value=(0,json.dumps(self.wire(wanted)).encode())):self.assertEqual(c.plan('codex','context'),wanted)
+  wire={'summary':'Explore','actions':[{'agent':'DIRECTOR','action':'SPEND','args':{'request_entries':[
+   {'key':'market','value':'worldwide'},
+   {'key':'custom','value':{'object_entries':[{'key':'symbols','value':['A','B']},{'key':'limit','value':0}]}}
+  ]}}]}
+  with patch.object(c,'check_provider'),patch('controller.run_brain',return_value=(0,json.dumps(wire).encode())):self.assertEqual(c.plan('codex','context'),wanted)
  def test_nested_json_rejects_duplicates_nonfinite_arrays_and_mixed_fields(self):
   for args in ('{"a":1,"a":2}','{"cost":NaN}','{"cost":1e999}','[]','null'):
-   wire=self.wire();wire['actions'][0]['args_json']=args
+   wire={'summary':'Build','actions':[{'agent':'BUILDER','action':'EXEC','args_json':args}]}
    c=self.controller()
    with patch.object(c,'check_provider'),patch('controller.run_brain',return_value=(0,json.dumps(wire).encode())):
     with self.assertRaises(ValueError):c.plan('codex','context')
-  wire=self.wire();wire['actions'][0]['args']={}
+  wire=self.wire();wire['actions'][0]['args_json']='{}'
   c=self.controller()
   with patch.object(c,'check_provider'),patch('controller.run_brain',return_value=(0,json.dumps(wire).encode())):
    with self.assertRaises(ValueError):c.plan('codex','context')
+ def test_quote_heavy_javascript_round_trips_without_nested_json_parsing(self):
+  code='const csv = `=HYPERLINK("https://example.com", "CSV")`;\nconsole.log(/^[=+@\\-]/.test(csv));'
+  wanted=self.decision({'argv':['node','-e',code],'outputs':[]});c=self.controller()
+  raw=json.dumps(self.wire(wanted)).encode()
+  with patch.object(c,'check_provider'),patch('controller.run_brain',return_value=(0,raw)):
+   self.assertEqual(c.plan('codex','context'),wanted)
  def test_claude_error_wrapper_never_executes_embedded_structured_output(self):
   value={'type':'result','subtype':'error_max_turns','is_error':True,'structured_output':self.decision()}
   c=self.controller()

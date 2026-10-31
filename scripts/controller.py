@@ -9,20 +9,15 @@ import uuid
 from supervisor import atomic_json, bounded_run, check_secrets, strict_json
 
 SCHEMA = {'type':'object','additionalProperties':False,'required':['summary','actions'],'properties':{'summary':{'type':'string'},'actions':{'type':'array','maxItems':5,'items':{'type':'object','additionalProperties':False,'required':['agent','action','args'],'properties':{'agent':{'type':'string','pattern':'^[A-Z0-9_-]{1,64}$'},'action':{'type':'string','enum':['EXEC','FETCH','WORLD','STATUS','SPEND','RECONCILE']},'args':{'type':'object'}}}}}}
-# Strict provider schemas cannot contain unconstrained JSON objects. Keep the
-# internal task protocol unchanged and encode arbitrary tool arguments as JSON text.
-MODEL_SCHEMA=json.loads(json.dumps(SCHEMA))
-_model_action=MODEL_SCHEMA['properties']['actions']['items']
-_model_action['required']=['agent','action','args_json']
-del _model_action['properties']['args']
-_model_action['properties']['args_json']={'type':'string','description':'Tool arguments encoded as one JSON object string, preserving arbitrary nested fields.'}
+# Provider transport uses native, closed argument schemas.
+from decision_protocol import MODEL_SCHEMA, normalize_model_action
 CLAUDE_MAX_TURNS=2  # StructuredOutput may require a tool round trip plus its final result.
-TOOL_GUIDE = """Tool argument objects (encode in args_json):
+TOOL_GUIDE = """Return native args objects matching the supplied schema. Never serialize command arguments as JSON text. Supply nullable optional fields as null when unused; these are normalized before execution.
 EXEC: {"argv":["node","-e","..."],"outputs":["products/result.txt"]}; optional cwd and mission_id. Programs see products in /workspace/products and write published outputs there.
 FETCH: {"url":"https://public-site/path","output":"products/research.txt"}; optional encoding utf-8 or base64. Reads public Web only.
 STATUS: {}.
 WORLD: {"op":"register_agent","agent_id":"NAME","role":"..."} or {"op":"create_mission","mission_id":"NAME","goal":"..."} (optional agent_id,parent_id,priority); {"op":"claim_mission","mission_id":"NAME","agent_id":"BUILDER","lease_seconds":3600}; {"op":"complete_mission","mission_id":"NAME","agent_id":"BUILDER","lease_token":"from claim result","evidence":["products/file.txt"]}; {"op":"fail_mission","mission_id":"NAME","agent_id":"BUILDER","lease_token":"from claim result","reason":"..."}; {"op":"message","from_agent":"DIRECTOR","to_agent":"BUILDER","body":"..."}; {"op":"transfer_glc","from_agent":"BUILDER","to_agent":"RESEARCHER","amount":1}; {"op":"reward_glc","agent_id":"BUILDER","amount":1,"evidence":["products/file.txt"]}; {"op":"set_policy","maintenance_glc":1,"interest_basis_points":500}; {"op":"cycle","cycle_id":"unique-cycle"}.
-SPEND: {"request":{...}} through the installed private finance integration, only with verified available funds.
+SPEND model transport: {"request_entries":[{"key":"purpose","value":"..."}]}. For nested arbitrary request objects use {"object_entries":[{"key":"name","value":...}]}; arrays, strings, finite numbers, booleans and null stay native. These entries become the usual request object for the installed private finance integration, only with verified available funds.
 RECONCILE: {"operation_id":"TASK-0001"}.
 Actions run in order, but outcomes/claim lease tokens are available in the next decision's latest_task_results. Never invent a lease or financial proof.
 """
@@ -88,10 +83,10 @@ def decode_model_decision(value):
             if set(action)!={'agent','action','args_json'} or not isinstance(action['args_json'],str):
                 raise ValueError('invalid model action')
             args=strict_json(action['args_json'].encode('utf-8'))
-            actions.append({'agent':action['agent'],'action':action['action'],'args':args})
+            actions.append(normalize_model_action({'agent':action['agent'],'action':action['action'],'args':args}))
         else:
             # Previously persisted/internal-format decisions remain compatible.
-            actions.append(action)
+            actions.append(normalize_model_action(action))
     return validate_decision({'summary':value['summary'],'actions':actions})
 
 

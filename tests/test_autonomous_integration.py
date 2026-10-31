@@ -67,8 +67,8 @@ class AutonomousIntegration(unittest.TestCase):
   config={'controller':{'mode':'subscriptions','providers':['codex'],'subscriptions_confirmed':True,'extra_usage_disabled':True,'image':'brain@sha256:'+'1'*64}}
   (self.install/'control/config.json').write_text(json.dumps(config))
   wire={'summary':'Start evidence-backed work','actions':[
-   {'agent':'DIRECTOR','action':'WORLD','args_json':json.dumps({'op':'create_mission','mission_id':'WIRE-PRODUCT','goal':'Build a useful global product'})},
-   {'agent':'RESEARCHER','action':'FETCH','args_json':json.dumps({'url':'https://example.com/','output':'products/proof.txt'})}]}
+   {'agent':'DIRECTOR','action':'WORLD','args':{'op':'create_mission','mission_id':'WIRE-PRODUCT','goal':'Build a useful global product','agent_id':None,'parent_id':None,'priority':None}},
+   {'agent':'RESEARCHER','action':'FETCH','args':{'url':'https://example.com/','output':'products/proof.txt','encoding':'utf-8'}}]}
   def auth(controller,provider):controller.verified[provider]=True
   with patch.object(Controller,'check_provider',auth),patch('controller.run_brain',return_value=(0,json.dumps(wire).encode())):
    self.app.cycle('think')

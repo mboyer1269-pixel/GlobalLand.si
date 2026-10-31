@@ -1,5 +1,7 @@
 # Model decision and failed-cycle verification — 2026-10-31
 
+Historical record of the 7e4859d candidate. Its JSON-in-JSON transport later failed a real model response; the current native argument correction and latest evidence are recorded in 2026-10-31-native-arguments.md.
+
 Real VPS evidence before this patch: Codex, Claude and Cursor all passed the installed subscription/auth/capability checks at commit 8653e8ab90f49643b1a134d1a6287f26c9d6f1d9. The output explicitly reported inference_performed=false. No productive native-model cycle has yet been demonstrated.
 
 Preflight found that the logical decision schema used a free-form args object, while Codex 0.166.0 defaults to strict Responses output validation. Its immutable upstream core/src/client_common.rs defaults output_schema_strict=true; codex-api/src/common.rs forwards that setting. OpenAI's strict output contract requires closed object properties. MODEL_SCHEMA now transports args_json as a string; it is parsed with duplicate/nonfinite rejection and converted into the unchanged internal args object. Codex's installed schema, Claude's CLI schema and Cursor's prompt schema agree. Arbitrary nested tool arguments and old internal-format decisions remain supported.
