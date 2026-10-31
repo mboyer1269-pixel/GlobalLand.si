@@ -26,7 +26,7 @@ def brain_command(root, image, provider):
         argv+=['--mount',f'type=bind,src={root / "control" / "cursor-cli-config.json"},dst=/home/node/.cursor/cli-config.json,readonly','--mount',f'type=bind,src={root / "control" / "cursor-sandbox.json"},dst=/home/node/.cursor/sandbox.json,readonly']
         return argv+[image,'cursor-agent','--print','--mode','ask','--output-format','json']
     if provider == 'codex':
-        return argv + [image,'codex','--ignore-user-config','--ignore-rules','exec','--sandbox','read-only','--ephemeral','--skip-git-repo-check','--output-schema','/decision.schema.json','-c','forced_login_method="chatgpt"','-c','approval_policy="never"','-c','features.shell_tool=false','-c','web_search="disabled"','-c','tools.view_image=false','-c','features.multi_agent=false','-c','apps._default.enabled=false','-c','features.hooks=false','-c','mcp_servers={}','-']
+        return argv + [image,'codex','exec','--ignore-user-config','--ignore-rules','--sandbox','read-only','--ephemeral','--skip-git-repo-check','--output-schema','/decision.schema.json','-c','forced_login_method="chatgpt"','-c','approval_policy="never"','-c','features.shell_tool=false','-c','web_search="disabled"','-c','tools.view_image=false','-c','features.multi_agent=false','-c','apps._default.enabled=false','-c','features.hooks=false','-c','mcp_servers={}','-']
     return argv + [image,'claude','--safe-mode','-p','--tools','','--disallowedTools','mcp__*','--strict-mcp-config','--mcp-config','{"mcpServers":{}}','--output-format','json','--json-schema',json.dumps(SCHEMA),'--no-session-persistence','--max-turns','1','--permission-prompts','none']
 
 
@@ -36,10 +36,10 @@ def cleanup_brain(name):
                    stderr=subprocess.DEVNULL,timeout=30,check=False)
 
 
-def run_brain(argv, input=None, limit=1024*1024):
+def run_brain(argv, input=None, limit=1024*1024, merge_stderr=False):
     name=argv[argv.index('--name')+1]
     try:
-        return bounded_run(argv,env=ENV,input=input,limit=limit)
+        return bounded_run(argv,env=ENV,input=input,limit=limit,merge_stderr=merge_stderr)
     finally:
         cleanup_brain(name)
 
@@ -78,18 +78,19 @@ class Controller:
         def command_argv(command):
             argv=brain_command(self.root,self.config['image'],provider)
             return argv[:argv.index(self.config['image'])+1]+command
-        helps=[['codex','--help'],['codex','exec','--help']] if provider=='codex' else [[('cursor-agent' if provider=='cursor' else 'claude'),'--help']]
+        helps=[['codex','exec','--help']] if provider=='codex' else [[('cursor-agent' if provider=='cursor' else 'claude'),'--help']]
         helptext=''
         for command in helps:
-            code,out=run_brain(command_argv(command),limit=1024*1024)
-            if code:raise ValueError('subscription CLI unavailable')
+            code,out=run_brain(command_argv(command),limit=1024*1024,merge_stderr=True)
+            if code:raise ValueError(f'{provider}: subscription CLI unavailable (help exit={code})')
             helptext+=out.decode('utf-8')
         flags=['--ignore-user-config','--ignore-rules','--sandbox','--ephemeral','--skip-git-repo-check','--output-schema'] if provider=='codex' else ['--safe-mode','--tools','--disallowedTools','--strict-mcp-config','--mcp-config','--json-schema','--no-session-persistence','--max-turns','--permission-prompts']
         if provider=='cursor':flags=['--print','--mode','--output-format']
-        if any(f not in helptext for f in flags):raise ValueError('required subscription CLI restriction unsupported')
-        command=['sh','-c','exec codex --ignore-user-config --ignore-rules login status 2>&1'] if provider=='codex' else ['claude','auth','status','--json']
+        missing=[f for f in flags if f not in helptext]
+        if missing:raise ValueError(provider+': required subscription CLI restriction unsupported: '+', '.join(missing))
+        command=['codex','login','status'] if provider=='codex' else ['claude','auth','status']
         if provider=='cursor':command=['cursor-agent','status']
-        code,out=run_brain(command_argv(command),limit=65536)
+        code,out=run_brain(command_argv(command),limit=65536,merge_stderr=provider!='claude')
         # Codex's official status is text on some releases; never echo auth output.
         if provider=='codex':valid=not code and 'chatgpt' in out.decode('utf-8').lower()
         elif provider=='cursor':
@@ -101,7 +102,7 @@ class Controller:
             try:s=json.loads(out);valid=not code and s.get('authMethod')=='claude.ai' and s.get('loggedIn') is True
             except (ValueError,AttributeError):valid=False
         self.verified[provider]=bool(valid)
-        if not valid:raise ValueError('subscription authentication not verified')
+        if not valid:raise ValueError(f'{provider}: subscription authentication not verified (status exit={code})')
         return dict(provider=provider,subscription_auth_verified=True,cli_restrictions_verified=True)
 
     def plan(self,provider,prompt):

@@ -3,7 +3,7 @@
 import base64, datetime, fcntl, hashlib, io, json, os, pathlib, re, subprocess, sys, tarfile, tempfile
 ROOT=pathlib.Path('/opt/globalland')
 SECRET=re.compile(rb'(?<![A-Za-z0-9_])sk-[A-Za-z0-9_-]{10,}|(?:ghp_|github_pat_)[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(?:API_KEY|TOKEN|PASSWORD)\s*[=:]\s*[^\s#]{8,}',re.I)
-def bounded_run(args,env,input=None,limit=20*1024*1024,timeout=120):
+def bounded_run(args,env,input=None,limit=20*1024*1024,timeout=120,merge_stderr=False):
  """Bound all I/O under one deadline; callers own external-container cleanup."""
  import selectors,time
  with subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env) as proc:
@@ -25,10 +25,10 @@ def bounded_run(args,env,input=None,limit=20*1024*1024,timeout=120):
        continue
       data=os.read(key.fd,65536)
       if not data:selector.unregister(key.fileobj);continue
-      if key.data=='out':
+      if key.data=='out' or merge_stderr:
        if len(out)+len(data)>limit:raise ValueError('command output limit exceeded')
        out.extend(data)
-      else:
+      if key.data=='err':
        err_size+=len(data)
        if err_size>65536:raise ValueError('command error output limit exceeded')
    return proc.wait(timeout=max(0.1,deadline-time.monotonic())),bytes(out)

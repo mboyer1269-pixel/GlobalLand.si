@@ -1,0 +1,11 @@
+# Subscription compatibility follow-up — 2026-10-31
+
+Observed on the VPS: Cursor passed the installed controller auth/flag check; Codex normal login status returned exit 0 and Logged in using ChatGPT, while the controller variant returned exit 2 for unexpected --ignore-user-config. Claude help exposed none of the expected options and bare auth status returned exit 1/non-JSON; its underlying cause remains unknown.
+
+Confirmed fix: options now follow codex exec, matching the immutable official rust-v0.166.0 CLI parser. The auth check uses direct codex login status without an embedded shell. Claude auth status uses documented default JSON, without --json. Help checks accept output from stdout or stderr; model JSON remains stdout-only. Provider errors identify missing options and exit codes without account output.
+
+New coverage: 8 compatibility tests exercise exact command placement, auth subcommands, provider diagnostics and real subprocess stdout/stderr limits; 3 diagnostic tests check explicit command selection, secret/email redaction and withheld auth text. Their red runs reproduced the missing behavior before implementation. Existing controller and Cursor suites also pass. Full suite: 85 Python tests, 84 passed and 1 Docker smoke skipped locally; 8 Node runtime tests and 2 Node executor tests passed (94 passed, 1 skipped overall). Per-script Bash syntax, Python compilation and git diff checks passed. Independent review found no further material regression after narrowing the diagnostic configuration-write claim to GlobalLand configuration.
+
+Added an installed diagnostic command restricted to version/help/status; it never invokes inference or writes GlobalLand configuration. Native CLIs still retain their private cache/auth maintenance behavior. No production keys are read as diagnostic input and raw auth responses are not included in reports.
+
+Remaining: rerun the corrected exact commit on the VPS, collect the Claude diagnostic, then validate configuration and an actual manual cycle before scheduling. No claim that Claude is repaired, that Gemini is connected, or that an autonomous cycle has succeeded is made. Gemini Pro app ownership and disabled Claude/Cursor paid extra usage were reported by the user; Google login/quota have not been tested. OmniRoute was assessed separately and remains uninstalled.
