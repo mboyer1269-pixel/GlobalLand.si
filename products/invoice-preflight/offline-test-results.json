@@ -1,0 +1,53 @@
+{
+  "scope": "Generic CSV structure only; no accounting platform import tested",
+  "results": [
+    {
+      "name": "normal",
+      "passed": true
+    },
+    {
+      "name": "quoted comma",
+      "passed": true
+    },
+    {
+      "name": "quoted newline",
+      "passed": true
+    },
+    {
+      "name": "escaped quote",
+      "passed": true
+    },
+    {
+      "name": "CRLF",
+      "passed": true
+    },
+    {
+      "name": "BOM",
+      "passed": true
+    },
+    {
+      "name": "ragged",
+      "passed": true
+    },
+    {
+      "name": "unclosed",
+      "passed": true
+    },
+    {
+      "name": "duplicate",
+      "passed": true
+    },
+    {
+      "name": "empty header",
+      "passed": true
+    },
+    {
+      "name": "empty",
+      "passed": true
+    },
+    {
+      "name": "trailing text",
+      "passed": true
+    }
+  ]
+}

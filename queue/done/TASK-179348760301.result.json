@@ -1,0 +1,12 @@
+{
+  "status": "DONE",
+  "output": "{\"artifact\":\"products/invoice-preflight/index.html\",\"tests\":[{\"name\":\"normal\",\"passed\":true},{\"name\":\"quoted comma\",\"passed\":true},{\"name\":\"quoted newline\",\"passed\":true},{\"name\":\"escaped quote\",\"passed\":true},{\"name\":\"CRLF\",\"passed\":true},{\"name\":\"BOM\",\"passed\":true},{\"name\":\"ragged\",\"passed\":true},{\"name\":\"unclosed\",\"passed\":true},{\"name\":\"duplicate\",\"passed\":true},{\"name\":\"empty header\",\"passed\":true},{\"name\":\"empty\",\"passed\":true},{\"name\":\"trailing text\",\"passed\":true}],\"limitations\":\"Parser unit tests passed. Browser rendering, Manager imports, demand, publication and payments are not verified.\"}\n\n",
+  "artifacts": [
+    "products/invoice-preflight/index.html",
+    "products/invoice-preflight/offline-checker.js",
+    "products/invoice-preflight/offline-test-results.json",
+    "products/receipts/TASK-179348760301.json"
+  ],
+  "id": "TASK-179348760301",
+  "input_sha256": "0422d7b083061d6d841cd499d5bb1c509e5fca4c6772b0c01d649677d2577e71"
+}
