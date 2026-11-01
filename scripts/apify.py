@@ -54,7 +54,7 @@ def settings(config):
     if not isinstance(c, dict) or c.get('enabled') is not True:
         return None
     cap = c.get('max_event_price_usd', 0.05)
-    floor = c.get('min_event_price_usd', 0.0005)
+    floor = c.get('min_event_price_usd', min(0.0005, cap) if type(cap) in (int, float) and cap > 0 else 0.0005)
     wait = c.get('build_wait_seconds', 240)
     if (type(cap) not in (int, float) or not 0 < cap <= 10 or type(floor) not in (int, float) or not 0 < floor <= cap
             or type(wait) is not int or not 60 <= wait <= 600):
@@ -74,30 +74,9 @@ def review_digest(source_digest, args):
     return hashlib.sha256(json.dumps(listing, sort_keys=True).encode()).hexdigest()
 
 
-def approved_by_other(reviews, actor, digest, author, origin=None):
-    return approved(reviews, 'actor:' + actor, digest, author, origin)
-
-
-def approved(reviews, subject, digest, author, origin=None):
-    """Two-key rule with host-bound identities.
-
-    The latest review of this exact listing must be an APPROVE whose provenance
-    was recorded by the host (not chosen by the brain) and differs from the
-    publishing request: another provider in another turn, an external principal
-    (e.g. Grok through GitHub) or the founder. Agent names alone prove nothing:
-    one brain can type any of them."""
-    relevant = [r for r in reviews or [] if r.get('subject') == subject and r.get('digest') == digest]
-    if not relevant:
-        return False
-    latest = max(relevant, key=lambda r: (r.get('at') or 0, r.get('seq') or 0))
-    if latest.get('verdict') != 'APPROVE' or latest.get('reviewer') == author:
-        return False
-    turn, provider = origin or (None, None)
-    if latest.get('host_provider') == 'FOUNDER':
-        return True
-    if not latest.get('host_provider') or not latest.get('host_turn'):
-        return False
-    return latest['host_provider'] != provider and latest['host_turn'] != turn
+def approved_by_other(reviews, actor, digest, author, origin=None, content_authors=()):
+    from review import approved
+    return approved(reviews, 'actor:' + actor, digest, author, origin, content_authors)
 
 
 def read_token(root):
@@ -235,8 +214,10 @@ class Publisher:
         if want_public and not self.settings['allow_public']:
             raise ApifyError('Public Store listing not allowed by the founder yet; publish privately first')
         listing = review_digest(digest, args)
-        if want_public and self.settings['require_review'] and not approved_by_other(self.reviews, args['actor'], listing, task.get('submitted_by'), self.origin):
-            raise ApifyError('Public listing needs a WORLD review APPROVE of actor:%s for the review_digest returned by the private build with the same title, description and events, recorded in another turn by another provider, by Grok through GitHub or by the founder'
+        if want_public and self.settings['require_review'] and not approved_by_other(
+                self.reviews, args['actor'], listing, task.get('submitted_by'), self.origin,
+                __import__('review').authors(self.root, 'products/actors/' + args['actor'])):
+            raise ApifyError('Public listing needs a WORLD review APPROVE of actor:%s for the review_digest returned by the private build with the same title, description and events, recorded in another turn by a provider that neither wrote the Actor nor asks to publish it, by Grok through GitHub or by the founder'
                              % args['actor'])
         path = self._journal(args['actor'], digest)
         record = json.loads(path.read_text()) if path.exists() else None

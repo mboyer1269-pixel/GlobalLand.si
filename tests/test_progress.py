@@ -257,5 +257,28 @@ class BoundedWorldTests(unittest.TestCase):
             self.assertIn('WORLD-FIRST-REVENUE', missions)
             self.assertLessEqual(sum(1 for v in missions.values() if v == 'FAILED'), World.MAX_CLOSED_MISSIONS)
 
+
+class CompactionRegressionTests(unittest.TestCase):
+    def test_dropped_mission_ids_are_never_reused_and_lists_stay_bounded(self):
+        with tempfile.TemporaryDirectory() as d:
+            world = World(pathlib.Path(d) / 'w.sqlite3')
+            world.bootstrap()
+            for n in range(World.MAX_CLOSED_MISSIONS + 3):
+                world.apply('c%d' % n, dict(op='create_mission', mission_id='M%d' % n, goal='g'))
+                token = world.apply('k%d' % n, dict(op='claim_mission', mission_id='M%d' % n, agent_id='BUILDER', lease_seconds=60))['lease_token']
+                world.apply('f%d' % n, dict(op='fail_mission', mission_id='M%d' % n, agent_id='BUILDER', lease_token=token, reason='x'))
+            self.assertNotIn('M0', [m['mission_id'] for m in world.snapshot()['missions']])
+            with self.assertRaisesRegex(ValueError, 'already exists'):
+                world.apply('again', dict(op='create_mission', mission_id='M0', goal='reuse'))
+            self.assertNotIn('retired_missions', world.snapshot())
+            for n in range(World.MAX_AGENTS):
+                try:
+                    world.apply('a%d' % n, dict(op='register_agent', agent_id='AGENT-%d' % n, role='r'))
+                except ValueError as error:
+                    self.assertIn('Too many agents', str(error))
+                    break
+            else:
+                self.fail('agent registration was not bounded')
+
 if __name__ == '__main__':
     unittest.main()

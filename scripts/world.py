@@ -58,7 +58,7 @@ class World:
 
     # Bounded state: world/status.json must stay far below the 1 MiB
     # publication limit, or every publication (and so the world) would stop.
-    MAX_EVENTS, MAX_MESSAGES, MAX_CLOSED_MISSIONS = 2000, 100, 200
+    MAX_EVENTS, MAX_MESSAGES, MAX_CLOSED_MISSIONS, MAX_AGENTS = 2000, 100, 200, 100
 
     def _event(self, s, kind, **data):
         s['events'].append(dict(type=kind, timestamp=self.clock(), **data))
@@ -69,6 +69,10 @@ class World:
         closed = [m for m in s['missions'] if m['status'] in ('COMPLETED', 'FAILED')]
         for old in closed[:max(0, len(closed) - self.MAX_CLOSED_MISSIONS)]:
             s['missions'].remove(old)
+            # A dropped ID is never reused: history and lessons keep pointing at one mission.
+            s.setdefault('retired_missions', []).append(old['mission_id'])
+        del s.setdefault('retired_missions', [])[:-20000]
+        del s['cycles'][:-1000]
 
     def _agent(self, s, agent_id, active=False):
         a = self._find(s['agents'], 'agent_id', self._id(agent_id))
@@ -81,6 +85,8 @@ class World:
         self._text(role, 'role', 500)
         if any(a['agent_id'] == agent_id for a in s['agents']):
             raise ValueError('Agent already exists')
+        if len(s['agents']) >= self.MAX_AGENTS:
+            raise ValueError('Too many agents; liquidate or reuse existing ones')
         a = dict(agent_id=agent_id, role=role, wallet_glc=100, debt_glc=100, status='ACTIVE')
         s['agents'].append(a)
         self._event(s, 'GLC_ISSUANCE', agent_id=agent_id, amount=100, reason='initial loan')
@@ -111,7 +117,7 @@ class World:
         with self._connect() as db:
             s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
         view = {k: (v[-100:] if k == 'events' else v[-50:] if k in ('reviews', 'messages') else v) for k, v in s.items()
-                if k not in ('cycles', 'bootstrapped', 'lessons', 'lesson_seq')}
+                if k not in ('cycles', 'bootstrapped', 'lessons', 'lesson_seq', 'retired_missions')}
         # Lessons are retrieved by relevance for prompts, not dumped wholesale.
         view['lesson_count'] = len(s.get('lessons', []))
         return view
@@ -177,7 +183,7 @@ class World:
             return self._register(s, a['agent_id'], a['role'])
         if op == 'create_mission':
             mid = self._id(a['mission_id'])
-            if any(m['mission_id'] == mid for m in s['missions']):
+            if any(m['mission_id'] == mid for m in s['missions']) or mid in s.get('retired_missions', []):
                 raise ValueError('Mission already exists')
             self._text(a['goal'], 'goal', 10000)
             if a.get('parent_id') is not None:

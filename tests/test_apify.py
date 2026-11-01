@@ -122,6 +122,9 @@ class ApifyTests(unittest.TestCase):
         with self.assertRaisesRegex(ApifyError, 'floor'):
             pricing([dict(event, price_microusd=100)], 10_000, min_price_micro=500)
         self.assertEqual(apify.settings({'apify': {'enabled': True}})['min_price_micro'], 500)
+        # A cap below the default floor stays valid: the floor follows the cap.
+        low = apify.settings({'apify': {'enabled': True, 'max_event_price_usd': 0.0002}})
+        self.assertEqual((low['min_price_micro'], low['max_price_micro']), (200, 200))
         with self.assertRaises(ValueError):
             apify.settings({'apify': {'enabled': True, 'min_event_price_usd': 0.1, 'max_event_price_usd': 0.05}})
 
@@ -168,6 +171,11 @@ class ApifyTests(unittest.TestCase):
             with self.subTest(label):
                 ok = self.publisher(reviews=cases['approval later contradicted'] + [review]).publish(self.task('TASK-17934912001%d' % review['at'], public=True))
                 self.assertEqual(ok['status'], 'PUBLISHED')
+
+    def test_agent_guide_points_reviewers_at_the_review_digest(self):
+        from controller import TOOL_GUIDE
+        self.assertIn('review_digest from the private build or the site dry_run', TOOL_GUIDE)
+        self.assertNotIn('source_digest from the private build result', TOOL_GUIDE)
 
     def test_refusal_never_hands_the_digest_to_the_brain(self):
         private = self.publisher().publish(self.task())

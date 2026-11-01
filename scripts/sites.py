@@ -16,10 +16,10 @@ Host-enforced rules:
 - only the site's own files, bounded, secret-scanned; binary files are stored
   as <name>.b64 (base64 text) and served decoded;
 - index.html must say the site is made by autonomous AI agents;
-- going online needs a review APPROVE of the exact site digest recorded by
-  another provider in another turn, by Grok through GitHub or by the founder
-  (same host-bound two-key rule as Apify); `dry_run` returns that digest
-  without any external call;
+- going online needs a review APPROVE of the exact site digest by a principal
+  independent of the site's authors and of the publisher (review.py, same
+  host-bound two-key rule as Apify); `dry_run` returns that digest without any
+  external call; hidden files and receipts/ are never published;
 - the host only touches Worker scripts whose name starts with the configured
   prefix (default "globalland-"), never the founder's other Workers;
 - `online: false` takes a site offline (workers.dev route disabled): the
@@ -95,6 +95,11 @@ def load_site(work, site):
         if not path.is_file():
             continue
         rel = path.relative_to(base).as_posix()
+        if any(part.startswith('.') or part == 'receipts' for part in rel.split('/')):
+            continue  # never publish hidden files or receipts
+        size_on_disk = path.stat().st_size
+        if size_on_disk > MAX_TOTAL or total + size_on_disk > MAX_TOTAL * 2:
+            raise SiteError('Site too large (200 files, 1.5 MB total)')
         raw = path.read_bytes()
         check_secrets(raw)
         if rel.endswith('.b64'):
@@ -218,6 +223,16 @@ class Publisher:
     def publish(self, task):
         args = task['args']
         site = args['site']
+        if args.get('online') is False:
+            # Emergency switch first: it must work even if the source is now invalid or gone.
+            if not isinstance(site, str) or not NAME.fullmatch(site):
+                raise SiteError('Invalid site name: lowercase letters, digits and hyphens, at most 40')
+            if self.settings is None:
+                raise SiteError('Cloudflare integration not enabled by the founder')
+            script = self.settings['prefix'] + site
+            self._client().call('POST', '/accounts/%s/workers/scripts/%s/subdomain' % (self.settings['account_id'], script),
+                                {'enabled': False, 'previews_enabled': False})
+            return dict(status='OFFLINE', site=site, script=script)
         files, digest = load_site(self.root / 'work', site)
         if args.get('dry_run') is True:
             index = files['/index.html']['t'].encode()
@@ -230,13 +245,11 @@ class Publisher:
         script = self.settings['prefix'] + site
         account = self.settings['account_id']
         api = self._client()
-        if args.get('online') is False:
-            api.call('POST', '/accounts/%s/workers/scripts/%s/subdomain' % (account, script), {'enabled': False, 'previews_enabled': False})
-            return dict(status='OFFLINE', site=site, script=script)
         if self.settings['require_review']:
-            from apify import approved
-            if not approved(self.reviews, 'site:' + site, digest, task.get('submitted_by'), self.origin):
-                raise SiteError('Going online needs a WORLD review APPROVE of site:%s for the review_digest returned by a dry_run, recorded in another turn by another provider, by Grok through GitHub or by the founder' % site)
+            from review import approved, authors
+            if not approved(self.reviews, 'site:' + site, digest, task.get('submitted_by'), self.origin,
+                            authors(self.root, 'products/sites/' + site)):
+                raise SiteError('Going online needs a WORLD review APPROVE of site:%s for the review_digest returned by a dry_run, recorded in another turn by a provider that neither wrote the site nor asks to publish it, by Grok through GitHub or by the founder' % site)
         path = self.root / 'state' / 'sites' / ('%s-%s.json' % (site, digest[:24]))
         path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         record = json.loads(path.read_text()) if path.exists() else dict(site=site, script=script, digest=digest, step='STARTED', tasks=[])

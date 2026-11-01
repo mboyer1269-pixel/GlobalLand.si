@@ -166,6 +166,61 @@ console.log(JSON.stringify(out));
             Publisher(self.root, {'cloudflare': dict(CONFIG['cloudflare'], require_review=False)}).publish(self.task())
 
 
+class AuditRegressionTests(SiteTests):
+    """Findings of the independent code review (2026-11-01)."""
+
+    def receipt(self, task, provider, path='products/sites/chronicle/index.html'):
+        seconds = int(task[5:15])
+        (self.root / 'state/controller').mkdir(parents=True, exist_ok=True)
+        (self.root / ('state/controller/THINK-%d.json' % seconds)).write_text(json.dumps({'provider': provider}))
+        receipts = self.root / 'work/products/receipts'
+        receipts.mkdir(parents=True, exist_ok=True)
+        (receipts / (task + '.json')).write_text(json.dumps({'task': task, 'outputs': {path: 'x'}}))
+
+    def review(self, digest, provider, turn):
+        return [dict(reviewer='AUDITOR', subject='site:chronicle', digest=digest, verdict='APPROVE', at=1, seq=1,
+                     host_turn=turn, host_provider=provider)]
+
+    def test_offline_switch_works_even_when_the_source_is_gone(self):
+        import shutil
+        shutil.rmtree(self.root / 'work/products/sites/chronicle')
+        result = self.publisher(reviews=[]).publish(self.task(online=False))
+        self.assertEqual(result['status'], 'OFFLINE')
+
+    def test_reviewer_must_be_independent_of_the_content_authors(self):
+        _, digest = load_site(self.root / 'work', 'chronicle')
+        self.receipt('TASK-179349000010', 'claude')  # claude wrote the site
+        # claude approves in another turn, codex publishes: claude reviewed its own work.
+        with self.assertRaisesRegex(SiteError, 'review APPROVE'):
+            self.publisher(reviews=self.review(digest, 'claude', 'THINK-1793490500'), origin=('THINK-1793491000', 'codex')).publish(self.task())
+        # codex approves, claude (the author) publishes in another turn: independent second key.
+        ok = self.publisher(reviews=self.review(digest, 'codex', 'THINK-1793490500'), origin=('THINK-1793491000', 'claude')).publish(self.task())
+        self.assertEqual(ok['status'], 'ONLINE_VERIFIED')
+
+    def test_hidden_files_and_receipts_are_never_published(self):
+        base = self.root / 'work/products/sites/chronicle'
+        (base / 'receipts').mkdir()
+        (base / 'receipts/2026-10.txt').write_text('private receipt')
+        (base / '.env').write_text('X=1')
+        files, _ = load_site(self.root / 'work', 'chronicle')
+        self.assertFalse(any('receipt' in name or '.env' in name for name in files))
+
+    def test_oversized_file_is_refused(self):
+        (self.root / 'work/products/sites/chronicle/huge.txt').write_bytes(b'a' * 1_600_000)
+        with self.assertRaisesRegex(SiteError, 'too large'):
+            load_site(self.root / 'work', 'chronicle')
+
+    def test_founder_cli_can_approve_a_site(self):
+        import review_admin
+        from world import World
+        world = World(self.root / 'w.sqlite3'); world.bootstrap()
+        _, digest = load_site(self.root / 'work', 'chronicle')
+        review = review_admin.approve(world, 'chronicle', digest, kind='site')
+        self.assertEqual(review['subject'], 'site:chronicle')
+        ok = self.publisher(reviews=world.reviews()).publish(self.task())
+        self.assertEqual(ok['status'], 'ONLINE_VERIFIED')
+
+
 class PublishSiteQueueIntegration(unittest.TestCase):
     setUp = integration.AutonomousIntegration.setUp
     git = integration.AutonomousIntegration.git
