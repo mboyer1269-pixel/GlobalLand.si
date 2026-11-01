@@ -213,7 +213,34 @@ class BrainCommandTests(unittest.TestCase):
         servers = json.loads(argv[argv.index('--mcp-config') + 1])['mcpServers']
         self.assertEqual(list(servers), ['globalland'])
         with self.assertRaises(ValueError):
-            brain_command('/opt/globalland', IMAGE, 'codex', broker_dir='/tmp/x')
+            brain_command('/opt/globalland', IMAGE, 'cursor', broker_dir='/tmp/x')
+
+    def test_codex_broker_turn_gets_only_the_globalland_server_preapproved_and_required(self):
+        argv = brain_command('/opt/globalland', IMAGE, 'codex', broker_dir='/opt/globalland/state/broker/THINK-1')
+        self.assertIn('type=bind,src=/opt/globalland/state/broker/THINK-1,dst=/broker,readonly', argv)
+        self.assertIn('type=bind,src=/opt/globalland/control/globalland_mcp.js,dst=/globalland_mcp.js,readonly', argv)
+        overrides = [argv[i + 1] for i, a in enumerate(argv) if a == '-c']
+        self.assertNotIn('mcp_servers={}', overrides)
+        servers = {o.split('.')[1] for o in overrides if o.startswith('mcp_servers.')}
+        self.assertEqual(servers, {'globalland'})
+        for expected in ('mcp_servers.globalland.command="node"', 'mcp_servers.globalland.args=["/globalland_mcp.js"]',
+                         'mcp_servers.globalland.env={GLOBALLAND_BROKER="/broker/broker.sock"}', 'mcp_servers.globalland.required=true',
+                         'mcp_servers.globalland.default_tools_approval_mode="approve"',
+                         'mcp_servers.globalland.enabled_tools=["world_status", "list_products", "read_product", "recent_results", "submit_action"]',
+                         'approval_policy="never"', 'features.shell_tool=false', 'web_search="disabled"', 'apps._default.enabled=false'):
+            self.assertIn(expected, overrides)
+        self.assertEqual(argv[argv.index('--sandbox') + 1], 'read-only')
+        self.assertEqual(argv[-1], '-')
+        # Each override value must parse as TOML, as Codex parses it.
+        import tomllib
+        for o in overrides:
+            key, value = o.split('=', 1)
+            tomllib.loads('v = ' + value)
+
+    def test_codex_without_broker_keeps_mcp_disabled(self):
+        argv = brain_command('/opt/globalland', IMAGE, 'codex')
+        self.assertIn('mcp_servers={}', argv)
+        self.assertNotIn('dst=/broker', ' '.join(argv))
 
     def test_without_broker_the_command_is_unchanged(self):
         argv = brain_command('/opt/globalland', IMAGE, 'claude')
@@ -231,6 +258,43 @@ class ProviderCheckTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d, patch('controller.run_brain', return_value=(0, old_help.encode())):
             with self.assertRaisesRegex(ValueError, '--allowedTools, --setting-sources, --disable-slash-commands'):
                 Controller(d, None, None, config).check_provider('claude')
+
+
+class BrokerProvidersTests(unittest.TestCase):
+    def test_broker_defaults_to_claude_and_accepts_codex_opt_in(self):
+        from broker import limits
+        self.assertIsNone(limits({}))
+        self.assertEqual(limits({'broker': {'enabled': True}})['providers'], ['claude'])
+        self.assertEqual(limits({'broker': {'enabled': True, 'providers': ['claude', 'codex']}})['providers'], ['claude', 'codex'])
+        for bad in ([], ['cursor'], ['codex', 'codex'], 'codex', None):
+            with self.assertRaises(ValueError):
+                limits({'broker': {'enabled': True, 'providers': bad}})
+
+    def test_codex_turn_uses_the_broker_only_when_listed(self):
+        config = {'controller': {'mode': 'subscriptions', 'providers': ['codex'], 'image': IMAGE,
+                                 'broker': {'enabled': True, 'providers': ['claude']}}}
+        with tempfile.TemporaryDirectory() as d:
+            planner = Controller(d, None, None, config)
+            planner.executor = lambda task: {'status': 'DONE'}
+            planner.turn_seconds = TURN
+            with patch('controller.run_brain', return_value=(0, b'{}')) as run:
+                planner.run_turn('codex', 'prompt')
+            self.assertNotIn('dst=/broker', ' '.join(run.call_args[0][0]))
+            planner.config['broker']['providers'] = ['claude', 'codex']
+            with patch('controller.run_brain', return_value=(0, b'{}')) as run, patch('broker.read_handlers', return_value=dict(world_status=None, list_products=None, read_product=None, recent_results=None)):
+                planner.run_turn('codex', 'prompt')
+            argv = run.call_args[0][0]
+            self.assertIn('dst=/broker', ' '.join(argv))
+            self.assertIn('submit_action executes', run.call_args[1]['input'].decode())
+            self.assertEqual(run.call_args[1]['timeout'], 900)
+
+    def test_codex_broker_requires_the_config_flag_in_help(self):
+        config = {'controller': {'mode': 'subscriptions', 'providers': ['codex'], 'subscriptions_confirmed': True,
+                                 'extra_usage_disabled': True, 'image': IMAGE, 'broker': {'enabled': True, 'providers': ['codex']}}}
+        old_help = ' '.join(['--ignore-user-config', '--ignore-rules', '--sandbox', '--ephemeral', '--skip-git-repo-check', '--output-schema'])
+        with tempfile.TemporaryDirectory() as d, patch('controller.run_brain', return_value=(0, old_help.encode())):
+            with self.assertRaisesRegex(ValueError, '--config'):
+                Controller(d, None, None, config).check_provider('codex')
 
 
 class BrokerPublicationTests(unittest.TestCase):

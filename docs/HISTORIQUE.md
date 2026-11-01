@@ -47,7 +47,7 @@
 - [ ] Relire puis fusionner la **PR #3** (Codex).
 - [ ] Fusionner la **PR #5**. Si la branche de la #3 est conservée, repointer d'abord la #5 vers `main`.
 - [ ] Installer la version fusionnée sur le VPS : `upgrade_vps.sh` avec le SHA revu.
-- [ ] Activer le courtier : `configure_subscriptions.py … --broker on`.
+- [ ] Activer le courtier : `configure_subscriptions.py … --broker on` (puis, une fois Claude vérifié, `--broker-providers claude,codex`).
 - [ ] `sudo python3 /opt/globalland/control/preflight.py` → doit afficher **GO**.
 - [ ] Lancer un `think` manuel, puis vérifier `state/broker/THINK-*/calls.jsonl`, `world/controller.json` (OPERATIONAL) et `world/blockers.json`.
 
@@ -73,7 +73,8 @@
 ### Étape E — Fiabilité prouvée sur le VPS *(code : Claude ou Codex ; essais : VPS)*
 - [ ] Vérifier le socket du courtier à travers Docker (uid 1000, montage en lecture seule).
 - [ ] Endurance de 72 h sans recopie de commandes ni fusion manuelle, redémarrage et panne simulée d'un fournisseur compris.
-- [ ] Pont MCP pour Codex et Cursor, aujourd'hui limités à une passe par cycle.
+- [x] Pont MCP pour Codex codé et testé (`--broker-providers claude,codex`, optionnel).
+- [ ] Pont MCP de Codex éprouvé sur le VPS. Cursor reste à une passe par cycle.
 - [ ] Routine Grok éprouvée et coordinateur de secours.
 
 ### Étape F — Élargir l'économie *(après un premier revenu)*

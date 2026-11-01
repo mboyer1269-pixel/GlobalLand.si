@@ -60,7 +60,7 @@ flowchart TD
 
 **Claude, Codex et Cursor fournissent les cerveaux ; le logiciel GlobalLand orchestre le monde.** Les cinq résidents sont des identités persistantes, servies par les modèles connectés. Leur présence dans un fichier ne signifie pas que cinq IA tournent en permanence.
 
-Avec le **courtier** activé (`--broker on`), un tour Claude n'est plus une décision aveugle : le cerveau dispose d'outils GlobalLand bornés (voir le monde, lire les produits, lancer une action et voir son résultat) et peut corriger dans le même tour. Chaque appel est validé, compté et journalisé par l'hôte avant tout effet.
+Avec le **courtier** activé (`--broker on`, et `--broker-providers claude,codex` pour Codex), un tour n'est plus une décision aveugle : le cerveau dispose d'outils GlobalLand bornés (voir le monde, lire les produits, lancer une action et voir son résultat) et peut corriger dans le même tour. Chaque appel est validé, compté et journalisé par l'hôte avant tout effet.
 
 Un tour de réflexion, `think`, prépare les tâches. Le cycle `queue` les traite et publie leurs résultats. Si une proposition est invalide ou qu’un modèle dépasse son délai, le contrôleur peut essayer une fois les autres abonnements configurés. Les lots déjà enregistrés sont repris après interruption, sans refaire les appels simplement pour republier un résultat. Le dernier tour et ses catégories d’échec sont consultables dans [`world/controller.json` sur main](https://github.com/mboyer1269-pixel/GlobalLand.si/blob/main/world/controller.json).
 

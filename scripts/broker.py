@@ -25,6 +25,7 @@ MAX_REQUEST = 256 * 1024
 MAX_RESPONSE = 1024 * 1024
 MAX_READ = 64 * 1024
 FIRST_ACTION_SLOT = 10  # 00-04 stay reserved for the turn's final decision.
+BROKER_PROVIDERS = ('claude', 'codex')
 
 
 class BrokerError(ValueError):
@@ -41,10 +42,17 @@ def limits(config):
         if type(value) is not int or not low <= value <= high:
             raise ValueError('invalid broker configuration')
         return value
+    providers = c.get('providers', ['claude'])
+    # Codex reaches the broker through -c mcp_servers overrides; opt-in until
+    # the installed Codex CLI is proven to accept them (INSTALL.md).
+    if (not isinstance(providers, list) or not providers or len(set(providers)) != len(providers)
+            or any(p not in BROKER_PROVIDERS for p in providers)):
+        raise ValueError('invalid broker configuration')
     return dict(max_calls=bounded('max_calls', 40, 1, 200),
                 max_actions=bounded('max_actions', 20, 1, 100 - FIRST_ACTION_SLOT),
                 turn_timeout_seconds=bounded('turn_timeout_seconds', 900, 60, 3600),
-                max_turns=bounded('max_turns', 40, 2, 200))
+                max_turns=bounded('max_turns', 40, 2, 200),
+                providers=list(providers))
 
 
 class Broker:
