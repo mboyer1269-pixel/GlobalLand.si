@@ -126,8 +126,10 @@ Le workflow `.github/workflows/watchdog.yml` vérifie `main` chaque heure, depui
 L'outil fonctionne depuis n'importe quelle copie du dépôt, même si la version installée est ancienne. Il ne modifie rien et n'affiche aucun contenu de fichier ni de journal : seulement des codes d'erreur fixes, des âges, des compteurs et la correction de chaque constat. Sa sortie peut être recollée telle quelle dans un chat ou une issue.
 
 ```bash
-# Le dépôt est public : téléchargement direct (branche de la PR #5 tant qu'elle n'est pas fusionnée, puis main).
-curl -fsSL -o /tmp/incident.py https://raw.githubusercontent.com/mboyer1269-pixel/GlobalLand.si/claude/globalland-autonomous-world-nokkck/scripts/incident.py
+# Dépôt privé : copier le fichier depuis ton poste (ou le coller dans `sudo tee /tmp/incident.py`).
+scp scripts/incident.py <vps>:/tmp/incident.py
+# Dépôt public : téléchargement direct (branche de la PR #5 tant qu'elle n'est pas fusionnée, puis main).
+# curl -fsSL -o /tmp/incident.py https://raw.githubusercontent.com/mboyer1269-pixel/GlobalLand.si/claude/globalland-autonomous-world-nokkck/scripts/incident.py
 sudo python3 -I /tmp/incident.py /opt/globalland
 ```
 Constats possibles, du plus grave au moins grave :

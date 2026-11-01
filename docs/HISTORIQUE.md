@@ -34,7 +34,7 @@
 | 12 | 1er nov. | **Inspiration open source** : règle des deux clés et quatre fiches de décision (headcount, agency-agents) ; n8n écarté pour sa licence | PR #5 | `docs/research/2026-11-01-repos-n8n-headcount-agency.md` |
 | 13 | 1er nov. | **Audit de crise** : monde arrêté sans alerte → disjoncteur hors VPS ; faille des deux clés (un cerveau signait deux fois) corrigée ; état du monde borné sous 1 Mio ; `PUBLISH_SITE` (Cloudflare) ; vérification de démarrage GO/NO-GO ; prix plancher ; garde-fous juridiques ; 9 défauts de revue corrigés | PR #5 | [`docs/AUDIT-2026-11-01.md`](AUDIT-2026-11-01.md) ; 268 tests |
 | 14 | 1er nov. | **Après l'audit** : triage d'incident en une commande (`incident.py`), pont MCP pour Codex (optionnel), disjoncteur des fournisseurs et fiche « distribution agent d'abord » inspirés d'Agent-Reach (MIT) ; README refait | PR #5 | [`docs/research/2026-11-01-agent-reach.md`](research/2026-11-01-agent-reach.md) ; 287 tests |
-| 15 | 1er nov. | **Dépôt rendu public** par le fondateur : audit de tout l'historique (aucun secret), docs mises à jour, réglages GitHub recommandés | `main` (réglage) | `SECURITY.md`, section « Dépôt public » |
+| 15 | 1er nov. | **Préparation de la mise en public** : audit de tout l'historique (aucun secret), réglages GitHub recommandés. Vérification à 09:30 UTC : le dépôt est **encore privé** | PR #5 | `SECURITY.md`, section « Rendre le dépôt public » |
 
 **État de la CI :** verte sur chaque commit de la PR #5 vérifié.
 
