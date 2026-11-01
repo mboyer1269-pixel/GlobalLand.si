@@ -33,28 +33,36 @@ Chaque étape donne quatre choses : la **commande ou le check exact**, le **rés
 ## Les 30 premières minutes
 
 - [ ] **0–2 min : relancer la CI de #3.** Dans la PR #3 → onglet *Checks* → *Re-run all jobs*, ou `gh run rerun 41248645281` depuis ton terminal. **Attendu :** `tests` vert. **Preuve :** lien du run vert. **Si rouge en moins de 10 s :** GitHub → *Settings → Billing and plans* → paiement ou limite Actions. Ne hausse pas la limite sans décision d'argent.
+  - **État (2026-11-01, Claude Code) :** relance refusée à l'agent : `POST …/runs/41248645281/rerun` → `403 Resource not accessible by integration`. À cliquer par le propriétaire.
 - [ ] **2–6 min : installer les deux CLI dans `/tmp`**, sans toucher à ta config. Voir l'étape 1.1 et l'étape 2.1. **Preuve :** `codex-cli X.Y.Z` et `2026.xx.xx-…`.
-- [ ] **6–10 min : contrat des drapeaux Codex** (étape 1.3). **Preuve :** six lignes `OK` et `ordre main: exit=2`.
+  - **État (2026-11-01, Claude Code) :** Codex `codex-cli 0.166.0` installé dans `/tmp/cx`. Cursor : `cursor.com/install` refusé par la politique réseau de la session (403).
+- [x] **6–10 min : contrat des drapeaux Codex** (étape 1.3). **Preuve :** six lignes `OK` et `ordre main: exit=2`.
+  - **Preuve (2026-11-01, Claude Code) :** 6 × `OK` ; `ordre main: exit=2` (`error: unexpected argument '--ignore-user-config' found`) ; `apps`, `hooks`, `multi_agent`, `shell_tool` = `stable`. Détail : `docs/2026-11-01-lot1.md`.
 - [ ] **10–15 min : état de connexion Codex et Cursor sur TA machine** (étapes 1.4 et 2.2). **Preuve :** `Logged in using ChatGPT` et `"isAuthenticated": true`.
 - [ ] **15–20 min : quotas.** Lance `/status` dans Codex interactif et ouvre le tableau de bord d'usage Cursor (étapes 1.5 et 2.3). **Preuve :** capture sans courriel ni identifiant.
 - [ ] **20–25 min : reproduire la réécriture de `cli-config.json`** (étape 2.5). **Preuve :** taille avant/après.
-- [ ] **25–30 min : tests du dépôt sur `main` et sur #3** (étape 0.3). **Preuve :** `OK (skipped=1)` sur les deux.
+  - **État (2026-11-01, Claude Code) :** mécanisme isolé sans la CLI : fichier monté `--bind -o ro` → `rename FAILED EBUSY`, `in-place write FAILED EROFS` ; témoin `rename OK`. Reproduction avec la CLI Cursor bloquée (réseau).
+- [x] **25–30 min : tests du dépôt sur `main` et sur #3** (étape 0.3). **Preuve :** `OK (skipped=1)` sur les deux.
+  - **Preuve (2026-11-01, Claude Code) :** `main a29552d` : `Ran 60 tests … OK (skipped=1)` ; #3 `9f3499e` : `Ran 159 tests … OK (skipped=1)` ; #5 `33ccd6f` : `Ran 287 tests … OK (skipped=1)` ; node et `bash -n` à 0 sur les trois.
 
 ---
 
 ## Phase 0 — CI et preuves du dépôt (GitHub, local)
 
-- [ ] **0.1 Lire la vraie cause du rouge de #3**
+- [x] **0.1 Lire la vraie cause du rouge de #3**
+  - **Preuve (2026-11-01, Claude Code) :** « The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings ».
   - **Commande :** `gh api repos/mboyer1269-pixel/GlobalLand.si/check-runs/124677296547/annotations --jq '.[].message'`
   - **Attendu :** le message de facturation (« recent account payments have failed… »).
   - **Preuve :** la ligne collée dans la PR de ce plan.
   - **Si autre chose :** `gh run view 41248645281 --log-failed` et traiter comme un vrai échec de test.
 - [ ] **0.2 Relancer et obtenir du vert sur #3 et #5**
+  - **État (2026-11-01, Claude Code) :** relance refusée à l'agent (403 intégration). Depuis le 1er nov. 00:00 UTC, les runs de #5, #6, #7 et #8 passent : le quota du mois est revenu. #5 : run `41287274806` `success`.
   - **Commande :** `gh run rerun 41248645281`, puis `gh pr checks 3` et `gh pr checks 5`.
   - **Attendu :** `tests pass` sur les deux.
   - **Preuve :** sortie de `gh pr checks`.
   - **Si échec rapide encore :** facturation Actions (lien en Sources). Option gratuite : vérifier le quota de minutes inclus du mois. Ne rien acheter.
-- [ ] **0.3 Tests locaux sur trois révisions, sans toucher à ton checkout**
+- [x] **0.3 Tests locaux sur trois révisions, sans toucher à ton checkout**
+  - **Preuve (2026-11-01, Claude Code) :** trois `VERT` : main 60 OK, #3 159 OK, #5 287 OK (chacun `skipped=1`).
   - **Commande :**
     ```bash
     cd GlobalLand.si && git fetch origin
@@ -67,7 +75,8 @@ Chaque étape donne quatre choses : la **commande ou le check exact**, le **rés
   - **Attendu :** `OK (skipped=1)` puis `VERT` sur les trois révisions. La #3 prend environ 60 s.
   - **Preuve :** les trois lignes `VERT`.
   - **Si `ROUGE` :** relancer seulement la suite fautive avec `-v`, copier le nom du test, puis ouvrir un correctif sur la branche concernée. Ne pas fusionner.
-- [ ] **0.4 Confirmer quelle révision le VPS roule (local, Git seulement)**
+- [x] **0.4 Confirmer quelle révision le VPS roule (local, Git seulement)**
+  - **Preuve (2026-11-01, Claude Code) :** `world/controller.json` publié : `{"state": "CONTROLLER_BLOCKED", "reason": "…inspect state/private/controller-failure.json…"}`, sans `reason_code` ; `-S controller-failure.json` → `7e4859d` ; `-S reason_code=details` → `479b990`.
   - **Commande :** `git show origin/main:world/controller.json` et les deux `git log -S` du tableau plus haut.
   - **Attendu :** pas de `reason_code`, donc un contrôle entre `7e4859d` et `0a0fd24`.
   - **Preuve :** la sortie.
@@ -77,17 +86,20 @@ Chaque étape donne quatre choses : la **commande ou le check exact**, le **rés
 
 Doc : [CLI reference](https://developers.openai.com/codex/cli/reference), [Authentication](https://developers.openai.com/codex/auth), [Non-interactive](https://developers.openai.com/codex/noninteractive), [Config reference](https://developers.openai.com/codex/config-reference), [Pricing et limites](https://developers.openai.com/codex/pricing), [Slash commands](https://developers.openai.com/codex/cli/slash-commands).
 
-- [ ] **1.1 Version, et installation isolée**
+- [x] **1.1 Version, et installation isolée**
+  - **Preuve (2026-11-01, Claude Code) :** `codex-cli 0.166.0` (`npm install --prefix /tmp/cx @openai/codex@latest`).
   - **Commande :** `codex --version`. Pour une install jetable : `npm install --prefix /tmp/cx @openai/codex@latest && /tmp/cx/node_modules/.bin/codex --version`. Refaire avec `@openai/codex@<version de l'image>` si tu la connais.
   - **Attendu :** `codex-cli 0.166.0` ou plus récent.
   - **Preuve :** la ligne de version.
   - **Si `command not found` ou erreur npm :** `node -v` doit donner 22 ou plus ; réinstaller Node.
 - [ ] **1.2 Diagnostic officiel**
+  - **État (2026-11-01, Claude Code) :** `codex doctor` tourne mais `✗ reachability` : la session cloud bloque `api.openai.com`. Non concluant ici.
   - **Commande :** `codex doctor`, puis `codex doctor --json > /tmp/codex-doctor.json`. La sortie JSON est caviardée par Codex : relis-la quand même avant de la partager.
   - **Attendu :** `✓` partout sauf avertissements bénins (`TERM`).
   - **Preuve :** le fichier `/tmp/codex-doctor.json`.
   - **Si `✗ auth` :** étape 1.4. **Si `⚠ websocket` :** Codex retombe en HTTPS, mais ajoute des reconnexions ; lancer `codex doctor --network-only`.
-- [ ] **1.3 Contrat des drapeaux utilisés par le contrôleur**
+- [x] **1.3 Contrat des drapeaux utilisés par le contrôleur**
+  - **Preuve (2026-11-01, Claude Code) :** 6 × `OK`, `ordre main: exit=2`. **Écart trouvé :** `-c tools.view_image=false` → `session-flags: tools.view_image is ignored` ; clé valide `features.view_image`. Corrigé sur #5 (`a5ebb2c`).
   - **Commande :**
     ```bash
     C=${C:-codex}
@@ -115,6 +127,7 @@ Doc : [CLI reference](https://developers.openai.com/codex/cli/reference), [Authe
   - **Preuve :** la sortie, ou « aucune ligne ».
   - **Si `model = "gpt-5.5"` :** retirer la ligne (copie de sauvegarde d'abord) et relancer 1.7. Note : le contrôleur passe `--ignore-user-config`, donc il n'est pas touché par ta config locale.
 - [ ] **1.7 Analyse des drapeaux `-c` sans connexion ni coût**
+  - **État (2026-11-01, Claude Code) :** pas de 401 : réseau refusé. Observé : 5 reconnexions WebSocket (+8 s), bascule HTTPS puis `waiting for network` à +12/+21/+35/+59/+104 s, **aucune sortie avant 120 s**. Les drapeaux, eux, sont validés par `codex doctor --json` (voir 3.1).
   - **Commande :**
     ```bash
     mkdir -p /tmp/cxh && cp scripts/decision.schema.json /tmp/ds.json
@@ -134,6 +147,7 @@ Doc : [CLI reference](https://developers.openai.com/codex/cli/reference), [Authe
 Doc : [CLI parameters](https://cursor.com/docs/cli/reference/parameters), [Authentication](https://cursor.com/docs/cli/reference/authentication), [Configuration](https://cursor.com/docs/cli/reference/configuration), [Headless](https://cursor.com/docs/cli/headless), [Output format](https://cursor.com/docs/cli/reference/output-format), [Rules](https://cursor.com/docs/context/rules), [Plugins](https://cursor.com/docs/plugins), [GitHub integration](https://cursor.com/docs/integrations/github), [Cloud Agents](https://cursor.com/docs/cloud-agent).
 
 - [ ] **2.1 Version et drapeaux de la CLI**
+  - **État (2026-11-01, Claude Code) :** bloqué : `cursor.com`, `downloads.cursor.com`, `api2.cursor.sh` refusés par la politique réseau de la session.
   - **Commande :** `curl https://cursor.com/install -fsS | bash`, puis `agent --version` et `agent --help | grep -E -- '--(print|trust|mode|output-format)'`.
   - **Attendu :** version `2026.10.22-…` ou plus, et quatre lignes. Note : `cursor-agent` est un alias de `agent`.
   - **Preuve :** la sortie.
@@ -187,11 +201,14 @@ Doc : [CLI parameters](https://cursor.com/docs/cli/reference/parameters), [Authe
 ## Phase 3 — Corriger dans le dépôt (PR sur la pile #3 → #5, jamais fusionnées par un agent)
 
 - [ ] **3.1 Test de contrat contre les vraies CLI.** Créer un test optionnel, sur le modèle de `test_docker_smoke.py` (activé par variable d'environnement), qui lance `codex exec --help` et `agent --help` installés et vérifie chaque drapeau de `brain_command`, ordre compris. **Preuve :** le test échoue sur l'ordre de `main` et passe sur #3. **Si la CLI est absente :** le test est ignoré, pas vert.
+  - **État (2026-11-01, Claude Code) :** partie Codex faite sur #5 (`a5ebb2c`, `tests/test_cli_contract.py`) : rouge sur `33ccd6f` (clé ignorée), vert après ; `GLOBALLAND_CLI_CONTRACT=1 … -v` → `Ran 5 tests OK` ; ignoré sans la variable. Partie Cursor en attente de la CLI.
 - [ ] **3.2 Cursor : dossier de config jetable** au lieu d'un fichier `readonly` (suite de 2.5). **Preuve :** un test unitaire sur l'argv et la reproduction 2.5 sans erreur.
 - [ ] **3.3 Cursor : `status --format json`** pour la vérification de connexion. Le code de sortie seul ment (2.2). **Preuve :** des tests avec les sorties `unauthenticated` et `authenticated` en fixtures.
 - [ ] **3.4 Délai du cerveau configurable.** Aujourd'hui, c'est 120 s fixes via `bounded_run`. Ajouter une clé `controller.timeout_seconds` dans la config, avec 120 par défaut et une borne maximale. **Preuve :** un test avec une fausse commande lente. **Pas d'augmentation des CPU ou de la mémoire** sans décision.
-- [ ] **3.5 Vérifier que la bascule de `479b990` couvre le scénario observé** : succès, succès, puis échec du même fournisseur à répétition. **Commande :** `python3 -m unittest tests.test_provider_failover -v` sur #3. **Preuve :** vert.
+- [x] **3.5 Vérifier que la bascule de `479b990` couvre le scénario observé** : succès, succès, puis échec du même fournisseur à répétition. **Commande :** `python3 -m unittest tests.test_provider_failover -v` sur #3. **Preuve :** vert.
+  - **Preuve (2026-11-01, Claude Code) :** `python3 -m unittest tests.test_provider_failover -v` : #3 `Ran 12 tests … OK` ; #5 `OK`.
 - [ ] **3.6 Mettre `CLAUDE.md` à jour :** il dit « Le dépôt est public », alors que l'API GitHub répond `private: true`. Cela change la facturation Actions (Phase 0).
+  - **État (2026-11-01, Claude Code) :** fait constaté : `gh api repos/…/GlobalLand.si` → `{"private":true,"visibility":"private"}`. Correction du fichier au lot C.
 
 ## Remise au boss — VPS (hors périmètre, pas de cases)
 
