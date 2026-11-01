@@ -55,6 +55,21 @@ Un programme EXEC qui échoue ne publie aucun fichier partiel. Son résultat con
 
 L'app Grok peut soumettre ces tâches avec ses outils et son accès GitHub. GitHub ne réveille pas cette app à lui seul. `think` utilise Codex/Claude Code uniquement après connexion officielle des abonnements et vérification CLI. Ses décisions sont en outbox durable avant publication, puis accusées réception après le push. Les quotas/authentifications incompatibles arrêtent la réflexion sans bascule API payante.
 
+## Outils du cerveau pendant un tour (courtier)
+
+Option administrateur, désactivée par défaut (`controller.broker.enabled`). Pendant un tour `think` Claude, le superviseur ouvre un courtier hôte sur un socket Unix (`state/broker/THINK-*/broker.sock`), monté en lecture seule dans le conteneur de réflexion. Le serveur MCP stdio `globalland_mcp.js` y relaie cinq outils :
+
+| Outil | Effet |
+|---|---|
+| `world_status` | Monde et Banque (lecture). |
+| `list_products`, `read_product` | Produits publiés sous products/ (lecture, 64 Kio par fichier, contenu non fiable). |
+| `recent_results` | Derniers résultats de tâches. |
+| `submit_action` | Exécute immédiatement EXEC, FETCH, WORLD ou STATUS et rend le résultat. |
+
+Chaque appel est validé, compté (`max_calls`, `max_actions`) et inscrit dans `calls.jsonl` avant tout effet. Une action reçoit l'identifiant `TASK-<tour>NN` (NN de 10 à 99 ; 00-04 restent ceux de la décision finale), suit le même journal durable qu'une tâche de file, est publiée dans queue/done ou queue/failed avec sa requête, et n'est jamais réexécutée. SPEND et RECONCILE restent réservés à la décision finale et à la file. Le tour se termine par la décision JSON habituelle ; ses actions sont mises en file.
+
+Le conteneur Claude n'a aucun outil intégré (`--tools ''`), seulement ce serveur (`--strict-mcp-config`, `--allowedTools mcp__globalland`). `--safe-mode` désactive aussi les serveurs `--mcp-config` (vérifié avec la CLI 2.1.316) : les personnalisations sont donc exclues explicitement par `--setting-sources ''` et `--disable-slash-commands`. Codex et Cursor gardent le tour à une passe tant que leur pont MCP n'est pas éprouvé.
+
 ## Transport interne des décisions de modèle
 
 Les tâches publiées conservent args objet, comme ci-dessus. Le schéma interne des modèles décrit les arguments natifs de chaque action et les champs des opérations WORLD. Les champs optionnels null du transport sont retirés avant de créer la tâche. Pour SPEND seulement, request_entries transporte les clés arbitraires du request, avec object_entries pour les objets imbriqués ; decision_protocol.encode_request est l’encodeur pour les producteurs de cette représentation. Les doublons sont rejetés, les tableaux et valeurs métier null sont conservés. Aucune chaîne de code n’est parsée comme un second document JSON. Les anciennes réponses args_json bien formées restent compatibles ; les réponses malformées s’arrêtent sans correction conjecturale et sans exécution partielle du lot.

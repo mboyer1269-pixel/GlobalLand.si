@@ -173,7 +173,8 @@ class Supervisor:
   self.prepare_publication(record)
   files=record['files'];task=record.get('task');result=record.get('result')
   if result:
-   location='done' if result['status']=='DONE' else 'failed';files={**files,f"queue/{location}/{record['id']}.result.json":json.dumps({**result,'id':record['id'],'input_sha256':record['hash']},ensure_ascii=False,indent=2)+'\n'}
+   location='done' if result['status']=='DONE' else 'failed';request={'request':record['request']} if record.get('origin')=='broker' else {}
+   files={**files,f"queue/{location}/{record['id']}.result.json":json.dumps({**result,**request,'id':record['id'],'input_sha256':record['hash']},ensure_ascii=False,indent=2)+'\n'}
   for name,text in files.items():
    if not (allowed(safe_path(name)) or (record['id'].startswith('THINK-') and re.fullmatch(r'queue/inbox/TASK-[0-9]{4,12}\.json',name))) or not isinstance(text,str) or len(text.encode())>1024*1024:raise ValueError('invalid publication')
    check_secrets(text.encode())
@@ -199,6 +200,27 @@ class Supervisor:
    from controller import Controller
    Controller(self.root,None,None,{}).mark_published(r['id'])
   r['state']='PUBLISHED';atomic_json(p,r)
+ def execute_tool(self,task,world,bank,config):
+  """Run one broker action through the same durable journal as queued tasks.
+
+  The record is written before execution; an existing record is never rerun."""
+  from tools import Toolbox,rejection_reason
+  ident=task['id'];raw=(json.dumps(task,ensure_ascii=False,sort_keys=True)+'\n').encode();check_secrets(raw)
+  digest=hashlib.sha256(raw).hexdigest();p=self.state/(ident+'.json')
+  if p.exists():
+   r=recover(p)
+   if r['hash']!=digest:raise ValueError('task ID reused with different bytes')
+   return r.get('result') or {'status':'INTERRUPTED','output':'No recorded result; no automatic retry.'}
+  r={'id':ident,'hash':digest,'task':None,'origin':'broker','request':task,'state':'RUNNING','files':{},'base_sha':self.git('rev-parse','HEAD').decode().strip()};atomic_json(p,r)
+  try:
+   try:result,generated=Toolbox(self.root,world,bank,config).run(task)
+   except (ValueError,UnicodeError) as error:result,generated={'status':'REJECTED','output':rejection_reason(error)},{}
+   if not {'status','output'}<=set(result):raise ValueError('invalid tool result')
+   r['result']=result;r['files'].update(generated);r['files'].update(self.projections(world,bank,config));r['state']='COMPLETED'
+  except Exception:
+   r['state']='INTERRUPTED';r['result']={'status':'INTERRUPTED','output':'Broker action failed; inspect host journal. No automatic retry.'}
+  atomic_json(p,r);self.finish(p,r);self.refresh_work()
+  return r['result']
  def refresh_work(self):
   import shutil
   work=self.root/'work'
@@ -224,7 +246,7 @@ class Supervisor:
   for p in sorted(self.state.glob('*.json')):
    r=recover(p)
    self.cleanup_abandoned_job(r.get('id',p.stem))
-   if r['state']=='INTERRUPTED' and not r.get('task'):raise RuntimeError('Interrupted daily audit: operator review required; restore from journal backup or acknowledge after reconciliation')
+   if r['state']=='INTERRUPTED' and not r.get('task') and r.get('origin')!='broker':raise RuntimeError('Interrupted daily audit: operator review required; restore from journal backup or acknowledge after reconciliation')
    if r['state']!='PUBLISHED':self.finish(p,r)
   # A fetch-only first step permits upstream fast-forwards without a rejected push.
   self.git('fetch','origin','main')
@@ -255,6 +277,7 @@ class Supervisor:
   if mode=='think':
    from controller import Controller
    planner=Controller(self.root,world,bank,config)
+   planner.executor=lambda task:self.execute_tool(task,world,bank,config)
    if not planner.readiness().get('configured'):
     self.publish({'id':'READINESS','files':self.projections(world,bank,config),'base_sha':self.git('rev-parse','HEAD').decode().strip()});return
    try:

@@ -61,6 +61,8 @@ sudo python3 /opt/globalland/control/supervisor.py think
 sudo python3 /opt/globalland/control/supervisor.py queue
 ```
 
+Pour donner au cerveau Claude ses outils GlobalLand pendant un tour (plusieurs actions observées par cycle), ajouter `--broker on` ; `--broker off` les retire ; sans l'option, le réglage actuel est conservé. Valeurs par défaut : 40 appels, 20 actions, 900 secondes et 40 tours de modèle par cycle (`controller.broker` dans config.json). Lancer ensuite un `think` manuel et vérifier `state/broker/THINK-*/calls.jsonl` et les résultats publiés avant de réactiver l'horaire.
+
 Le drapeau d'attestation suppose que tu as effectivement vérifié les comptes. Il n'est pas une preuve automatisée de leur facturation. Pour utiliser un seul abonnement, fournir `--providers codex` ou `--providers claude`. Aucun repli API ni achat de crédits n'est effectué si un quota est atteint.
 
 Vérifier une décision THINK, des tâches produites et leurs résultats/artefacts sur GitHub avant d'activer la réflexion périodique. Après les tours réellement publiés de Codex et Claude, l'opérateur root peut lancer depuis son checkout administratif au SHA exact revu :

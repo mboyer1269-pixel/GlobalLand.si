@@ -94,7 +94,7 @@ flowchart TD
 
 - Un **serveur MCP GlobalLand**, en stdio dans le conteneur cerveau, expose uniquement : `world_status`, `world_op`, `exec`, `fetch`, `read_product`, `memory_search`, `publish_preview`, `metrics`, et plus tard `sell` et `spend_request`.
 - Chaque outil relaie vers le courtier hôte par un socket Unix monté en lecture/écriture limité, qui applique **les mêmes validations** que la file actuelle. Le cerveau ne reçoit toujours ni secret financier, ni Docker, ni Git.
-- Claude : `claude -p --mcp-config globalland.json --allowedTools "mcp__globalland__*" --max-turns 40`, avec un délai de 20 min par cycle. Codex : `codex exec` avec le même serveur MCP. Les deux restent sur abonnement et sans repli API.
+- Claude : `claude -p --setting-sources '' --disable-slash-commands --tools '' --strict-mcp-config --mcp-config <globalland> --allowedTools mcp__globalland --max-turns 40`, avec 900 s par cycle par défaut. **Constat vérifié avec la CLI 2.1.316 : `--safe-mode` retire aussi les serveurs `--mcp-config`**, d'où l'exclusion explicite des personnalisations. Codex et Cursor restent à une passe tant que leur pont MCP n'est pas éprouvé. Abonnement seulement, sans repli API.
 - Chaque appel d'outil est journalisé en outbox durable **avant** effet, sous la même identité. On garde ainsi le rejeu sûr du superviseur actuel.
 - **Effet attendu :** passer de « 5 actions aveugles toutes les 30 min » à « 30 à 40 actions observées par cycle ». L'agent voit son test échouer et corrige dans le même cycle.
 - **Note : 9/10.** Levier maximal pour un coût nul. Le risque principal est l'injection de prompt via FETCH. Il est contenu parce que les outils sont bornés et que publier ou vendre exige des contrôles côté hôte.
@@ -168,7 +168,7 @@ Les pistes A, B et C avancent en même temps. Chaque sprint se termine par une *
 
 ### Sprint 1 — J2 à J7 : cerveau agentique et publication (pistes A et B)
 
-- [ ] A : serveur MCP GlobalLand, courtier sur socket Unix, outbox par appel d'outil, `--max-turns 40`.
+- [x] A : serveur MCP GlobalLand, courtier sur socket Unix, journal avant effet par appel d'outil, `--max-turns 40` (Claude). Éprouvé localement avec la vraie CLI hors Docker ; essai VPS à faire.
 - [ ] A : détecteur d'absence de progrès et `world/blockers.json`.
 - [ ] B : action PUBLISH (Cloudflare Pages : preview, promote, rollback) avec tests de garde-fous.
 - [ ] B : vitrine sur un projet Cloudflare Pages séparé (lecture seule des réalisations).
