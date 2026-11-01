@@ -217,6 +217,7 @@ class Controller:
         return dict(provider=provider,subscription_auth_verified=True,cli_restrictions_verified=True)
 
     def plan(self,provider,prompt):
+        self.current_provider=provider
         try:
             self.check_provider(provider)
             prompt+='\n'+TOOL_GUIDE

@@ -204,7 +204,7 @@ class Supervisor:
    from controller import Controller
    Controller(self.root,None,None,{}).mark_published(r['id'])
   r['state']='PUBLISHED';atomic_json(p,r)
- def execute_tool(self,task,world,bank,config):
+ def execute_tool(self,task,world,bank,config,origin=None):
   """Run one broker action through the same durable journal as queued tasks.
 
   The record is written before execution; an existing record is never rerun."""
@@ -217,7 +217,7 @@ class Supervisor:
    return r.get('result') or {'status':'INTERRUPTED','output':'No recorded result; no automatic retry.'}
   r={'id':ident,'hash':digest,'task':None,'origin':'broker','request':task,'state':'RUNNING','files':{},'base_sha':self.git('rev-parse','HEAD').decode().strip()};atomic_json(p,r)
   try:
-   try:result,generated=Toolbox(self.root,world,bank,config).run(task)
+   try:result,generated=Toolbox(self.root,world,bank,config).run(task,origin=origin)
    except (ValueError,UnicodeError) as error:result,generated={'status':'REJECTED','output':rejection_reason(error)},{}
    if not {'status','output'}<=set(result):raise ValueError('invalid tool result')
    # Projections are published once by the turn itself, not per action.
@@ -302,7 +302,7 @@ class Supervisor:
   if mode=='think':
    from controller import Controller
    planner=Controller(self.root,world,bank,config)
-   planner.executor=lambda task:self.execute_tool(task,world,bank,config)
+   planner.executor=lambda task:self.execute_tool(task,world,bank,config,origin=('THINK-%d'%planner.turn_seconds,getattr(planner,'current_provider',None) or 'unknown'))
    if not planner.readiness().get('configured'):
     self.publish({'id':'READINESS','files':self.projections(world,bank,config),'base_sha':self.git('rev-parse','HEAD').decode().strip()});return
    try:

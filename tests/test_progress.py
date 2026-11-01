@@ -233,5 +233,29 @@ class ReviewOperationTests(unittest.TestCase):
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 self.world.apply('bad-' + next(iter(bad)), args)
 
+
+class BoundedWorldTests(unittest.TestCase):
+    """The public projection must stay under the 1 MiB publication limit."""
+
+    def test_heavy_activity_keeps_world_status_small(self):
+        with tempfile.TemporaryDirectory() as d:
+            world = World(pathlib.Path(d) / 'w.sqlite3')
+            world.bootstrap()
+            for n in range(World.MAX_CLOSED_MISSIONS + 10):
+                world.apply('c%d' % n, dict(op='create_mission', mission_id='M%d' % n, goal='goal'))
+                token = world.apply('k%d' % n, dict(op='claim_mission', mission_id='M%d' % n, agent_id='BUILDER', lease_seconds=60))['lease_token']
+                world.apply('f%d' % n, dict(op='fail_mission', mission_id='M%d' % n, agent_id='BUILDER', lease_token=token, reason='no demand'))
+            world.apply('open', dict(op='create_mission', mission_id='STILL-OPEN', goal='keep me'))
+            for n in range(World.MAX_MESSAGES + 20):
+                world.apply('m%d' % n, dict(op='message', from_agent='DIRECTOR', to_agent='BUILDER', body='x' * 10000))
+            snapshot = world.snapshot()
+            size = len(json.dumps(snapshot, ensure_ascii=False, indent=2).encode())
+            self.assertLess(size, 1024 * 1024)
+            self.assertEqual(len(snapshot['messages']), 50)
+            missions = {m['mission_id']: m['status'] for m in snapshot['missions']}
+            self.assertIn('STILL-OPEN', missions)
+            self.assertIn('WORLD-FIRST-REVENUE', missions)
+            self.assertLessEqual(sum(1 for v in missions.values() if v == 'FAILED'), World.MAX_CLOSED_MISSIONS)
+
 if __name__ == '__main__':
     unittest.main()

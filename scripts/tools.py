@@ -161,11 +161,28 @@ def sandbox_command(ident,workspace,image,args):
     control=workspace.parent.parent.parent/'control'/'executor.js'
     return ['docker','run','--rm','--name','globalland-job-'+ident.lower(),'--network','none','--read-only','--user','65534:65534','--cap-drop','ALL','--security-opt','no-new-privileges:true','--memory','1g','--cpus','0.5','--pids-limit','128','--tmpfs','/tmp:rw,noexec,nosuid,size=64m','--tmpfs','/workspace:rw,nosuid,size=256m,uid=65534,gid=65534','--mount',f'type=bind,src={workspace / "input"},dst=/input,readonly','--mount',f'type=bind,src={workspace / "request.json"},dst=/request.json,readonly','--mount',f'type=bind,src={control},dst=/executor.js,readonly','--workdir','/workspace',image,'node','/executor.js']
 
+def task_origin(root,task):
+    """Host-known origin of a task: (turn, provider). The brain cannot choose it.
+
+    Tasks from a think turn carry TASK-<turn seconds><slot>; the provider of that
+    turn is read from the host's own controller record. Anything else (an inbox
+    task pushed through GitHub, e.g. by Grok) is EXTERNAL."""
+    match=re.fullmatch(r'TASK-([0-9]{10})([0-9]{2})',task.get('id',''))
+    if match:
+        record=pathlib.Path(root)/'state'/'controller'/('THINK-%d.json'%int(match.group(1)))
+        if record.is_file():
+            try:
+                provider=json.loads(record.read_text()).get('provider')
+                if provider in ('codex','claude','cursor'):return ('THINK-%d'%int(match.group(1)),provider)
+            except ValueError:pass
+    return ('EXTERNAL-'+task.get('id','?'),'EXTERNAL')
+
 class Toolbox:
     def __init__(self,root,world,treasury,config=None):
         self.root=pathlib.Path(root);self.world=world;self.treasury=treasury;self.config=config or {}
-    def run(self,task):
+    def run(self,task,origin=None):
         validate_envelope(task)
+        origin=origin or task_origin(self.root,task)
         if self.treasury.snapshot()['state'] in ('EXTINCT','HALTED'):raise ValueError('GlobalLand is stopped')
         action,args=task['action'],task['args'];files={}
         if action=='EXEC':
@@ -210,12 +227,16 @@ class Toolbox:
             files[args['output']]=text
             return {'status':'DONE','output':json.dumps({'source':url,'http_status':status,'sha256':hashlib.sha256(raw).hexdigest(),'artifact':args['output']})},files
         if action=='WORLD':
+            if any(isinstance(k,str) and k.startswith('host_') for k in args):raise ValueError('host fields are reserved')
+            if args.get('op')=='review':
+                # Reviewer provenance is set by the host, never by the brain.
+                args=dict(args,host_turn=origin[0],host_provider=origin[1])
             value=self.world.apply(task['id'],args)
             return {'status':'DONE','output':json.dumps(value,ensure_ascii=False)},{}
         if action=='STATUS':return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':self.treasury.snapshot()},ensure_ascii=False)},{}
         if action in ('PUBLISH_ACTOR','ACTOR_STATS'):
             from apify import Publisher
-            publisher=Publisher(self.root,self.config,reviews=self.world.reviews() if hasattr(self.world,'reviews') else [])
+            publisher=Publisher(self.root,self.config,reviews=self.world.reviews() if hasattr(self.world,'reviews') else [],origin=origin)
             if action=='ACTOR_STATS':return {'status':'DONE','output':json.dumps(publisher.stats(task),ensure_ascii=False)},{}
             result=publisher.publish(task)
             return {'status':Publisher.task_status(result),'output':json.dumps(result,ensure_ascii=False)[:8000]},{}

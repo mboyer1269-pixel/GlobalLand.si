@@ -61,14 +61,33 @@ def settings(config):
                 build_wait_seconds=wait, require_review=c.get('require_review', True) is not False)
 
 
-def approved_by_other(reviews, actor, digest, author):
-    """Two-key rule: the latest review of this exact source must be an APPROVE
-    by an agent other than the one asking to publish."""
+def review_digest(source_digest, args):
+    """What a reviewer approves: the exact code AND the listing it will carry."""
+    listing = {'source': source_digest, 'title': args.get('title'), 'description': args.get('description'),
+               'events': args.get('events') or []}
+    return hashlib.sha256(json.dumps(listing, sort_keys=True).encode()).hexdigest()
+
+
+def approved_by_other(reviews, actor, digest, author, origin=None):
+    """Two-key rule with host-bound identities.
+
+    The latest review of this exact listing must be an APPROVE whose provenance
+    was recorded by the host (not chosen by the brain) and differs from the
+    publishing request: another provider in another turn, an external principal
+    (e.g. Grok through GitHub) or the founder. Agent names alone prove nothing:
+    one brain can type any of them."""
     relevant = [r for r in reviews or [] if r.get('subject') == 'actor:' + actor and r.get('digest') == digest]
     if not relevant:
         return False
     latest = max(relevant, key=lambda r: (r.get('at') or 0, r.get('seq') or 0))
-    return latest.get('verdict') == 'APPROVE' and latest.get('reviewer') != author
+    if latest.get('verdict') != 'APPROVE' or latest.get('reviewer') == author:
+        return False
+    turn, provider = origin or (None, None)
+    if latest.get('host_provider') == 'FOUNDER':
+        return True
+    if not latest.get('host_provider') or not latest.get('host_turn'):
+        return False
+    return latest['host_provider'] != provider and latest['host_turn'] != turn
 
 
 def read_token(root):
@@ -177,12 +196,13 @@ class Client:
 
 
 class Publisher:
-    def __init__(self, root, config, client=None, sleep=time.sleep, reviews=None):
+    def __init__(self, root, config, client=None, sleep=time.sleep, reviews=None, origin=None):
         self.root = pathlib.Path(root)
         self.settings = settings(config)
         self.client = client
         self.sleep = sleep
         self.reviews = reviews or []
+        self.origin = origin
 
     def _client(self):
         if self.settings is None:
@@ -204,9 +224,10 @@ class Publisher:
         want_public = args.get('public') is True
         if want_public and not self.settings['allow_public']:
             raise ApifyError('Public Store listing not allowed by the founder yet; publish privately first')
-        if want_public and self.settings['require_review'] and not approved_by_other(self.reviews, args['actor'], digest, task.get('submitted_by')):
-            raise ApifyError('Public listing needs a WORLD review APPROVE of subject actor:%s, digest %s, by an agent other than %s'
-                             % (args['actor'], digest, task.get('submitted_by') or 'the author'))
+        listing = review_digest(digest, args)
+        if want_public and self.settings['require_review'] and not approved_by_other(self.reviews, args['actor'], listing, task.get('submitted_by'), self.origin):
+            raise ApifyError('Public listing needs a WORLD review APPROVE of actor:%s for the review_digest returned by the private build with the same title, description and events, recorded in another turn by another provider, by Grok through GitHub or by the founder'
+                             % args['actor'])
         path = self._journal(args['actor'], digest)
         record = json.loads(path.read_text()) if path.exists() else None
         if record and record['step'] == 'BUILD_FAILED':
@@ -269,7 +290,7 @@ class Publisher:
             definition['pricingInfos'] = prices
         api.call('PUT', '/v2/acts/' + record['actor_id'], definition)
         result = dict(status='PUBLISHED' if want_public else 'PRIVATE_BUILD_READY', actor_id=record['actor_id'],
-                      source_digest=digest,
+                      source_digest=digest, review_digest=listing,
                       build_id=record['build_id'], public=want_public,
                       store_url='https://apify.com/%s/%s' % (record['username'], record['actor']) if want_public else None,
                       events={e['name']: e['price_microusd'] for e in args.get('events') or []},

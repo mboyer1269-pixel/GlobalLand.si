@@ -1,4 +1,5 @@
 """Persistent virtual agents and GLC. This module never handles real currency."""
+import contextlib
 import hashlib
 import json
 import re
@@ -20,8 +21,14 @@ class World:
                 state='ACTIVE', agents=[], missions=[], messages=[], events=[],
                 policy=dict(maintenance_glc=1, interest_basis_points=500), cycles=[])),))
 
+    @contextlib.contextmanager
     def _connect(self):
-        return sqlite3.connect(self.path, timeout=30, isolation_level=None)
+        # Always closed: the supervisor is long-lived across many operations.
+        db = sqlite3.connect(self.path, timeout=30, isolation_level=None)
+        try:
+            yield db
+        finally:
+            db.close()
 
     @staticmethod
     def _text(value, name, limit=4000):
@@ -49,8 +56,19 @@ class World:
             raise ValueError('Unknown ' + key)
         return found
 
+    # Bounded state: world/status.json must stay far below the 1 MiB
+    # publication limit, or every publication (and so the world) would stop.
+    MAX_EVENTS, MAX_MESSAGES, MAX_CLOSED_MISSIONS = 2000, 100, 200
+
     def _event(self, s, kind, **data):
         s['events'].append(dict(type=kind, timestamp=self.clock(), **data))
+        del s['events'][:-self.MAX_EVENTS]
+
+    def _compact(self, s):
+        del s['messages'][:-self.MAX_MESSAGES]
+        closed = [m for m in s['missions'] if m['status'] in ('COMPLETED', 'FAILED')]
+        for old in closed[:max(0, len(closed) - self.MAX_CLOSED_MISSIONS)]:
+            s['missions'].remove(old)
 
     def _agent(self, s, agent_id, active=False):
         a = self._find(s['agents'], 'agent_id', self._id(agent_id))
@@ -92,7 +110,7 @@ class World:
     def snapshot(self):
         with self._connect() as db:
             s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
-        view = {k: (v[-100:] if k == 'events' else v[-50:] if k == 'reviews' else v) for k, v in s.items()
+        view = {k: (v[-100:] if k == 'events' else v[-50:] if k in ('reviews', 'messages') else v) for k, v in s.items()
                 if k not in ('cycles', 'bootstrapped', 'lessons', 'lesson_seq')}
         # Lessons are retrieved by relevance for prompts, not dumped wholesale.
         view['lesson_count'] = len(s.get('lessons', []))
@@ -122,6 +140,7 @@ class World:
                 if s['state'] == 'EXTINCT':
                     raise ValueError('World is extinct')
                 result = self._dispatch(s, args)
+                self._compact(s)
                 # Freeze result before later operations can mutate the same object.
                 result_json = json.dumps(result)
                 db.execute('UPDATE world SET data=? WHERE id=1', (json.dumps(s),))
@@ -140,7 +159,7 @@ class World:
             'complete_mission': ({'mission_id', 'agent_id', 'lease_token', 'evidence'}, {'lesson'}),
             'fail_mission': ({'mission_id', 'agent_id', 'lease_token', 'reason'}, {'lesson'}),
             'record_lesson': ({'agent_id', 'lesson'}, {'mission_id', 'tags'}),
-            'review': ({'reviewer', 'subject', 'digest', 'verdict'}, {'notes'}),
+            'review': ({'reviewer', 'subject', 'digest', 'verdict'}, {'notes', 'host_turn', 'host_provider'}),
             'message': ({'from_agent', 'to_agent', 'body'}, set()),
             'transfer_glc': ({'from_agent', 'to_agent', 'amount'}, set()),
             'reward_glc': ({'agent_id', 'amount', 'evidence'}, set()),
@@ -246,7 +265,11 @@ class World:
         if op == 'review':
             # Producer and auditor are never the same agent: the host checks the
             # author against the reviewer where a review gates an effect.
-            self._agent(s, a['reviewer'], True)
+            if a.get('host_provider') == 'FOUNDER':
+                if a['reviewer'] != 'FOUNDER':
+                    raise ValueError('Invalid founder review')
+            else:
+                self._agent(s, a['reviewer'], True)
             if not isinstance(a['subject'], str) or not re.fullmatch(r'(actor|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}', a['subject']):
                 raise ValueError('Invalid review subject')
             if not isinstance(a['digest'], str) or not re.fullmatch(r'[0-9a-f]{64}', a['digest']):
@@ -256,6 +279,7 @@ class World:
             reviews = s.setdefault('reviews', [])
             review = dict(reviewer=a['reviewer'], subject=a['subject'], digest=a['digest'], verdict=a['verdict'],
                           notes=self._text(a['notes'], 'notes', 2000) if a.get('notes') is not None else None,
+                          host_turn=a.get('host_turn'), host_provider=a.get('host_provider'),
                           at=self.clock(), seq=len(reviews) and reviews[-1]['seq'] + 1 or 1)
             reviews.append(review)
             del reviews[:-500]

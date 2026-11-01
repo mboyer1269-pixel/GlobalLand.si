@@ -76,16 +76,20 @@ class ApifyTests(unittest.TestCase):
         write_actor(self.root / 'work')
         self.fake = FakeApify()
 
-    def publisher(self, config=CONFIG, reviews=None):
-        return Publisher(self.root, config, client=apify.Client('token-not-used', transport=self.fake), reviews=reviews)
+    PUBLISHER = ('THINK-2', 'claude')
+
+    def publisher(self, config=CONFIG, reviews=None, origin=PUBLISHER):
+        return Publisher(self.root, config, client=apify.Client('token-not-used', transport=self.fake), reviews=reviews, origin=origin)
 
     def task(self, ident='TASK-179349120010', **args):
         base = {'actor': 'title-extractor', 'title': 'Title extractor', 'description': 'Extracts page titles.'}
         base.update(args)
         return {'id': ident, 'action': 'PUBLISH_ACTOR', 'submitted_by': 'BUILDER', 'args': base}
 
-    def approval(self, digest, reviewer='AUDITOR', verdict='APPROVE', at=1):
-        return dict(reviewer=reviewer, subject='actor:title-extractor', digest=digest, verdict=verdict, at=at, seq=at)
+    def approval(self, digest, reviewer='AUDITOR', verdict='APPROVE', at=1, turn='THINK-1', provider='codex'):
+        # host_turn/host_provider are set by the host (Toolbox), never by the brain.
+        return dict(reviewer=reviewer, subject='actor:title-extractor', digest=digest, verdict=verdict, at=at, seq=at,
+                    host_turn=turn, host_provider=provider)
 
     def test_source_is_validated_and_actor_config_becomes_dot_actor(self):
         files, version, digest = load_source(self.root / 'work', 'title-extractor')
@@ -122,7 +126,8 @@ class ApifyTests(unittest.TestCase):
         self.assertEqual(Publisher.task_status(first), 'DONE')
         self.assertFalse(self.fake.actors['title-extractor']['isPublic'])
         event = dict(name='result', title='Result', description='One result', price_microusd=2000)
-        reviews = [self.approval(first['source_digest'])]
+        listing = apify.review_digest(first['source_digest'], self.task(events=[event])['args'])
+        reviews = [self.approval(listing)]
         second = self.publisher(reviews=reviews).publish(self.task('TASK-179349120011', public=True, events=[event]))
         self.assertEqual(second['status'], 'PUBLISHED')
         self.assertEqual(second['store_url'], 'https://apify.com/globalland/title-extractor')
@@ -133,19 +138,38 @@ class ApifyTests(unittest.TestCase):
         self.assertEqual(self.fake.count('POST', '/v2/acts/A1/builds'), 1)
 
     def test_public_listing_needs_an_independent_approval_of_the_exact_source(self):
-        digest = self.publisher().publish(self.task())['source_digest']
+        private = self.publisher().publish(self.task())
+        digest = private['review_digest']
+        self.assertEqual(digest, apify.review_digest(private['source_digest'], self.task()['args']))
         cases = {
             'no review': [],
             'self review': [self.approval(digest, reviewer='BUILDER')],
             'other source': [self.approval('0' * 64)],
             'approval later contradicted': [self.approval(digest, at=1), self.approval(digest, reviewer='CRITIC', verdict='NEEDS_WORK', at=2)],
+            # Security review finding: one brain can type any agent name, so names alone prove nothing.
+            'same provider, other agent name': [self.approval(digest, turn='THINK-1', provider='claude')],
+            'same turn': [self.approval(digest, turn='THINK-2', provider='codex')],
+            'no host provenance': [dict(self.approval(digest), host_turn=None, host_provider=None)],
         }
         for label, reviews in cases.items():
             with self.subTest(label), self.assertRaisesRegex(ApifyError, 'review APPROVE'):
                 self.publisher(reviews=reviews).publish(self.task('TASK-179349120011', public=True))
         self.assertFalse(self.fake.actors['title-extractor']['isPublic'])
-        ok = self.publisher(reviews=cases['approval later contradicted'] + [self.approval(digest, at=3)]).publish(self.task('TASK-179349120012', public=True))
-        self.assertEqual(ok['status'], 'PUBLISHED')
+        # Changing the listing after approval needs a new approval.
+        with self.assertRaisesRegex(ApifyError, 'review APPROVE'):
+            self.publisher(reviews=[self.approval(digest)]).publish(self.task('TASK-179349120013', public=True, title='Different title'))
+        for label, review in (('external (Grok via GitHub)', self.approval(digest, at=3, turn='EXTERNAL-TASK-0200', provider='EXTERNAL')),
+                              ('founder', dict(self.approval(digest, at=4, reviewer='FOUNDER', turn='FOUNDER-1', provider='FOUNDER')))):
+            with self.subTest(label):
+                ok = self.publisher(reviews=cases['approval later contradicted'] + [review]).publish(self.task('TASK-17934912001%d' % review['at'], public=True))
+                self.assertEqual(ok['status'], 'PUBLISHED')
+
+    def test_refusal_never_hands_the_digest_to_the_brain(self):
+        private = self.publisher().publish(self.task())
+        with self.assertRaises(ApifyError) as refused:
+            self.publisher().publish(self.task('TASK-179349120011', public=True))
+        self.assertNotIn(private['review_digest'], str(refused.exception))
+        self.assertNotIn(private['source_digest'], str(refused.exception))
 
     def test_public_listing_needs_the_founders_permission(self):
         config = {'apify': dict(CONFIG['apify'], allow_public=False)}
@@ -206,6 +230,50 @@ class ApifyTests(unittest.TestCase):
         self.assertEqual(stats['charged_events'], {'result': 160})
         self.assertAlmostEqual(stats['gross_charges_estimate_usd'], 0.32)
         self.assertIn('not', stats['note'].lower())
+
+
+class HostProvenanceTests(unittest.TestCase):
+    """Reviewer identity comes from the host, never from the brain's arguments."""
+
+    def setUp(self):
+        from treasury import Treasury
+        from world import World
+        self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
+        self.root = pathlib.Path(self.tmp.name)
+        (self.root / 'state/controller').mkdir(parents=True)
+        self.world = World(self.root / 'w.sqlite3'); self.world.bootstrap()
+        self.bank = Treasury(self.root / 't.sqlite3')
+
+    def review_task(self, ident, **extra):
+        args = dict(op='review', reviewer='AUDITOR', subject='actor:x', digest='a' * 64, verdict='APPROVE')
+        args.update(extra)
+        return {'id': ident, 'type': 'TOOL', 'submitted_by': 'BUILDER', 'created_at': '2026-11-01T00:00:00Z',
+                'action': 'WORLD', 'args': args, 'estimated_cost_cad': 0, 'approved_by': None}
+
+    def test_review_provenance_is_set_by_the_host(self):
+        from tools import Toolbox
+        (self.root / 'state/controller/THINK-1793491202.json').write_text(json.dumps({'provider': 'codex'}))
+        box = Toolbox(self.root, self.world, self.bank, {})
+        box.run(self.review_task('TASK-179349120201'))
+        box.run(self.review_task('TASK-0300'))
+        first, second = self.world.reviews()
+        self.assertEqual((first['host_turn'], first['host_provider']), ('THINK-1793491202', 'codex'))
+        self.assertEqual((second['host_turn'], second['host_provider']), ('EXTERNAL-TASK-0300', 'EXTERNAL'))
+        with self.assertRaisesRegex(ValueError, 'host fields are reserved'):
+            box.run(self.review_task('TASK-0301', host_provider='FOUNDER', host_turn='FOUNDER-1'))
+        broker_origin = ('THINK-1793491300', 'claude')
+        box.run(self.review_task('TASK-179349130010'), origin=broker_origin)
+        self.assertEqual(self.world.reviews()[-1]['host_provider'], 'claude')
+
+    def test_founder_review_cli(self):
+        import review_admin
+        review = review_admin.approve(self.world, 'title-extractor', 'b' * 64, notes='checked the README')
+        self.assertEqual((review['reviewer'], review['host_provider']), ('FOUNDER', 'FOUNDER'))
+        with self.assertRaisesRegex(ValueError, 'administrator'):
+            review_admin.main(['approve', '--actor', 'x', '--digest', 'b' * 64], root=str(self.root), euid=lambda: 1000)
+        with self.assertRaises(ValueError):
+            self.world.apply('fake', dict(op='review', reviewer='AUDITOR', subject='actor:x', digest='b' * 64,
+                                          verdict='APPROVE', host_turn='FOUNDER-1', host_provider='FOUNDER'))
 
 
 class PublishActorQueueIntegration(unittest.TestCase):
