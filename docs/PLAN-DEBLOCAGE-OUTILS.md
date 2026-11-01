@@ -9,6 +9,18 @@ Chaque étape donne quatre choses : la **commande ou le check exact**, le **rés
 
 ---
 
+## Suivi (mis à jour le 2026-11-01 par Claude Code)
+
+| Phase | État | Où |
+| --- | --- | --- |
+| 30 premières minutes | 2/7 cochées ; relance CI à faire par toi (403 pour l'agent) ; login et quotas = ta machine | ci-dessous |
+| Phase 0 — CI et preuves | 0.1, 0.3, 0.4 ✅ · 0.2 en attente de ta relance | ci-dessous |
+| Phase 1 — Codex | 1.1, 1.3 ✅ · **bogue trouvé et corrigé** : `tools.view_image` ignoré par Codex 0.166.0 · 1.2/1.7 bloquées par le réseau de la session | #5 `a5ebb2c` |
+| Phase 2 — Cursor | bloquée : `cursor.com`, `downloads.cursor.com`, `api2.cursor.sh` refusés par le réseau de la session ; mécanisme `EBUSY`/`EROFS` prouvé à part | `docs/2026-11-01-lot1.md` |
+| Phase 3 — Correctifs | 3.4, 3.5, 3.6 ✅ · 3.1 partie Codex ✅ · 3.2, 3.3 attendent la CLI Cursor | #5 `45a4596`, `ada661a`, `cd0de38` |
+
+Suite de #5 après correctifs : `Ran 297 tests … OK (skipped=4)` (3 tests de contrat CLI ignorés sans `GLOBALLAND_CLI_CONTRACT=1`).
+
 ## Ce que le dépôt prouve déjà
 
 | Fait vérifié | Preuve |
@@ -204,11 +216,12 @@ Doc : [CLI parameters](https://cursor.com/docs/cli/reference/parameters), [Authe
   - **État (2026-11-01, Claude Code) :** partie Codex faite sur #5 (`a5ebb2c`, `tests/test_cli_contract.py`) : rouge sur `33ccd6f` (clé ignorée), vert après ; `GLOBALLAND_CLI_CONTRACT=1 … -v` → `Ran 5 tests OK` ; ignoré sans la variable. Partie Cursor en attente de la CLI.
 - [ ] **3.2 Cursor : dossier de config jetable** au lieu d'un fichier `readonly` (suite de 2.5). **Preuve :** un test unitaire sur l'argv et la reproduction 2.5 sans erreur.
 - [ ] **3.3 Cursor : `status --format json`** pour la vérification de connexion. Le code de sortie seul ment (2.2). **Preuve :** des tests avec les sorties `unauthenticated` et `authenticated` en fixtures.
-- [ ] **3.4 Délai du cerveau configurable.** Aujourd'hui, c'est 120 s fixes via `bounded_run`. Ajouter une clé `controller.timeout_seconds` dans la config, avec 120 par défaut et une borne maximale. **Preuve :** un test avec une fausse commande lente. **Pas d'augmentation des CPU ou de la mémoire** sans décision.
+- [x] **3.4 Délai du cerveau configurable.** Aujourd'hui, c'est 120 s fixes via `bounded_run`. Ajouter une clé `controller.timeout_seconds` dans la config, avec 120 par défaut et une borne maximale. **Preuve :** un test avec une fausse commande lente. **Pas d'augmentation des CPU ou de la mémoire** sans décision.
+  - **Preuve (2026-11-01, Claude Code) :** `controller.timeout_seconds` (entier 30–900, défaut 120) sur #5, `45a4596`. `tests/test_turn_timeout.py` rouge avant (`KeyError: 'timeout'`, readiness muette), vert après ; une commande lente est coupée à 1 s et le conteneur nommé est nettoyé. Aucune hausse CPU/mémoire.
 - [x] **3.5 Vérifier que la bascule de `479b990` couvre le scénario observé** : succès, succès, puis échec du même fournisseur à répétition. **Commande :** `python3 -m unittest tests.test_provider_failover -v` sur #3. **Preuve :** vert.
-  - **Preuve (2026-11-01, Claude Code) :** `python3 -m unittest tests.test_provider_failover -v` : #3 `Ran 12 tests … OK` ; #5 `OK`.
-- [ ] **3.6 Mettre `CLAUDE.md` à jour :** il dit « Le dépôt est public », alors que l'API GitHub répond `private: true`. Cela change la facturation Actions (Phase 0).
-  - **État (2026-11-01, Claude Code) :** fait constaté : `gh api repos/…/GlobalLand.si` → `{"private":true,"visibility":"private"}`. Correction du fichier au lot C.
+  - **Preuve (2026-11-01, Claude Code) :** `python3 -m unittest tests.test_provider_failover -v` : #3 `Ran 12 tests … OK` ; #5 `OK`. Scénario exact ajouté sur #5 (`ada661a`) : deux succès puis claude refusé six cycles de suite → une décision codex à chaque cycle ; vérifié par mutation (sans bascule, le test échoue).
+- [x] **3.6 Mettre `CLAUDE.md` à jour :** il dit « Le dépôt est public », alors que l'API GitHub répond `private: true`. Cela change la facturation Actions (Phase 0).
+  - **Preuve (2026-11-01, Claude Code) :** `gh api repos/…/GlobalLand.si` → `{"private":true,"visibility":"private"}`. `CLAUDE.md` **et** `CURSOR.md` (même phrase fausse) corrigés sur #5, `cd0de38` : privé, écrire comme si public, Actions facturées, test de contrat CLI dans la ligne Tests.
 
 ## Remise au boss — VPS (hors périmètre, pas de cases)
 
