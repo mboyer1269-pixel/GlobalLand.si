@@ -105,11 +105,11 @@ flowchart TD
 |---|---|---|
 | **PUBLISH** | Cloudflare Pages par API Direct Upload, avec un token limité à un compte et un projet. `preview` → test HTTP → `promote` ; `rollback`. | Analyse de secrets, liste blanche de fichiers, taille max, pas de données privées, URL vérifiée par FETCH après publication. |
 | **SELL** | Merchant of Record (Lemon Squeezy, Paddle ou Gumroad, **à comparer et vérifier**) : créer un produit, un prix et un lien de paiement. | Prix plafond configurable par l'hôte, devise fixe, aucun remboursement automatique, journal de chaque création. |
-| **METRICS** | Lecture seule : analytics Cloudflare et commandes, paiements et remboursements du MoR. | Agrégats seulement. **Aucune donnée personnelle des clients ne remonte au cerveau ni dans le dépôt public.** |
+| **METRICS** | Lecture seule : analytics Cloudflare et commandes, paiements et remboursements du MoR. | Agrégats seulement. **Aucune donnée personnelle des clients ne remonte au cerveau ni dans le dépôt GitHub.** |
 
 Pourquoi un Merchant of Record : vendre au monde entier implique TPS/TVH, TVA UE et sales tax américaine. Le MoR collecte et remet ces taxes. Il n'y a **aucun coût initial**, seulement un pourcentage par vente (taux exacts **à vérifier**). C'est le seul moyen réaliste d'encaisser mondialement sans juriste.
 
-Vitrine publique : **GitHub Pages** sur ce dépôt public, pour les réalisations et non pour la vente. Les conditions de GitHub Pages excluent un site principalement transactionnel (**à relire avant activation**). Les produits vendus vont sur Cloudflare.
+Vitrine publique : **un deuxième projet Cloudflare Pages**, distinct de la vente, qui ne publie que les réalisations sélectionnées. Le dépôt GitHub est **privé** (visibilité vérifiée le 2026-11-01), alors que CLAUDE.md et SECURITY.md le disent public. GitHub Pages sur un dépôt privé exige un plan payant : je l'écarte.
 
 > **Vercel Hobby** est connecté à ma session. Il est limité à un usage non commercial (**à vérifier**), donc je l'écarte pour la vente. **Floot** (connecté aussi) offre des paiements Stripe intégrés : c'est utile pour un prototype que je construirais, pas comme capacité des agents.
 
@@ -171,7 +171,7 @@ Les pistes A, B et C avancent en même temps. Chaque sprint se termine par une *
 - [ ] A : serveur MCP GlobalLand, courtier sur socket Unix, outbox par appel d'outil, `--max-turns 40`.
 - [ ] A : détecteur d'absence de progrès et `world/blockers.json`.
 - [ ] B : action PUBLISH (Cloudflare Pages : preview, promote, rollback) avec tests de garde-fous.
-- [ ] B : vitrine GitHub Pages (lecture seule des réalisations).
+- [ ] B : vitrine sur un projet Cloudflare Pages séparé (lecture seule des réalisations).
 - **Preuve :** un agent publie lui-même une page, la vérifie par FETCH et corrige une erreur dans le même cycle, sans intervention.
 
 ### Sprint 2 — J7 à J14 : encaisser (pistes B et C)
@@ -201,7 +201,7 @@ Les pistes A, B et C avancent en même temps. Chaque sprint se termine par une *
 |---|---|---|---|
 | 1 | Créer un compte Cloudflare et un token API limité à 1 projet Pages, installé dans `/opt/globalland/integrations` (jamais dans GitHub) | PUBLISH | ~15 min |
 | 2 | Ouvrir un compte Merchant of Record (identité, fiscalité, versements), clé API limitée | SELL + revenus | ~30 à 60 min + délai de vérification |
-| 3 | Activer GitHub Pages sur le dépôt | Vitrine | 2 min |
+| 3 | Corriger la doc : le dépôt est privé, pas public (CLAUDE.md, SECURITY.md). Garder la règle « aucun secret » dans tous les cas | Cohérence et sécurité | 2 min |
 | 4 | Installer le contrôle v4 depuis un SHA revu (`upgrade_vps.sh`) | Rien ne change sur le VPS sans ça | ~20 min |
 | 5 | Vérifier que l'extra usage et les recharges sont désactivés sur les abonnements | Plafond réel | 10 min |
 | 6 | Décider de la tâche planifiée Claude dans le cloud (§3.5) | Redondance du coordinateur | 1 décision |
