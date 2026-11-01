@@ -64,6 +64,10 @@ class Treasury:
             if 'revenue' not in columns:
                 # Cumulative verified REVENUE only (refunds and funding excluded).
                 db.execute('ALTER TABLE treasury ADD COLUMN revenue INTEGER NOT NULL DEFAULT 0')
+            if 'attested' not in columns:
+                # Revenue proven by the founder's attestation rather than by an
+                # automated provider check: reported separately, never hidden.
+                db.execute('ALTER TABLE treasury ADD COLUMN attested INTEGER NOT NULL DEFAULT 0')
             if 'reserve_floor' not in columns:
                 # Owned cash never committed: covers customer refunds/disputes a
                 # merchant of record could otherwise claim from the founder.
@@ -109,6 +113,7 @@ class Treasury:
                     cash_cents=row['cash'], reserved_cents=held,
                     available_cents=max(spendable, 0) if row['state'] == 'ACTIVE' else 0, funding_verified=bool(row['funded']),
                     revenue_verified=bool(row['earned']), revenue_cents=row['revenue'],
+                    founder_attested_revenue_cents=row['attested'],
                     maturing_cents=maturing, next_maturity_at=next_at, reserve_floor_cents=floor,
                     position_cents=positions, extinction_reason=row['reason'])
 
@@ -170,8 +175,9 @@ class Treasury:
                     raise ValueError('invalid credit')
                 # Settled external revenue is owned capital even before the
                 # optional initial deposit. It never implies that deposit.
-                db.execute("UPDATE treasury SET cash=cash+?, earned=1, revenue=revenue+?, state=CASE WHEN state='UNFUNDED' THEN 'ACTIVE' ELSE state END WHERE id=1",
-                           (amount, amount if receipt['kind'] == 'REVENUE' else 0))
+                attested = amount if receipt['kind'] == 'REVENUE' and receipt.get('attestation') == 'FOUNDER' else 0
+                db.execute("UPDATE treasury SET cash=cash+?, earned=1, revenue=revenue+?, attested=attested+?, state=CASE WHEN state='UNFUNDED' THEN 'ACTIVE' ELSE state END WHERE id=1",
+                           (amount, amount if receipt['kind'] == 'REVENUE' else 0, attested))
                 available_at = receipt.get('available_at')
                 if available_at is not None:
                     # Set by the trusted adapter: the later of the provider payout

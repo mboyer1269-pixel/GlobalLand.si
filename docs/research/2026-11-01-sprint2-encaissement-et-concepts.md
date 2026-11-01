@@ -79,7 +79,7 @@ La clause de Polar rend le fondateur responsable d'un manque. Sans précaution, 
 | Piste | Livrable | Dépend de toi |
 |---|---|---|
 | **2-A Banque** ✅ | Revenu dépensable = versé, vérifié et sorti de la fenêtre de remboursement (`available_at`) ; `REVERSAL` ; plancher de réserve ; tests | Non |
-| **2-B Apify** ✅ (code) | Actions `PUBLISH_ACTOR` (téléversement, construction, prix à l'événement plafonné, mise en vente) et `ACTOR_STATS` (exécutions, estimation des charges) ; journal de reprise ; token seulement sur l'hôte. Reste : adaptateur `verify` des versements Apify pour la Banque | **Oui** : compte Apify, vérification d'identité, plafond d'usage, token API |
+| **2-B Apify** ✅ (code) | Actions `PUBLISH_ACTOR` et `ACTOR_STATS` ; journal de reprise ; token seulement sur l'hôte. Apify n'a pas d'API de versement : `payouts.py` enregistre la facture comme créance, puis le versement reçu comme revenu **attesté par le fondateur**, publié à part | **Oui** : compte Apify, vérification d'identité, plafond d'usage, token API, deux gestes par mois |
 | **2-C Leçons** ✅ | `lesson` à la conclusion d'une mission, `record_lesson`, sélection FTS5 et injection dans le prompt | Non |
 | **2-D Polar** (après 2-B) | Adaptateur ventes directes plus règle de réserve | Oui : compte Polar |
 

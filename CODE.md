@@ -15,6 +15,7 @@ Le capital initial autorisé est 50 CAD (5000 centimes), délégué en totalité
 - `controller.py` : observations → décision structurée → tâches durables. Grok peut soumettre via GitHub. Le mode subscriptions appelle les CLIs officielles Codex/Claude Code avec leur connexion d'abonnement, sans reprise automatique sur une API payante.
 - `broker.py` + `globalland_mcp.js` : outils du cerveau pendant un tour Claude, via un socket hôte. Validation, budget et journal avant effet ; les actions suivent le journal durable des tâches (voir queue/PROTOCOL.md).
 - `apify.py` : publication sur Apify Store (téléversement, construction, prix par événement plafonnés, mise en vente), journal de reprise et statistiques ; le token reste sur l'hôte.
+- `payouts.py` : versements Apify vers la Banque (facture = créance, versement reçu = REVENUE attesté par le fondateur), projection des créances.
 - `lessons.py` : sélection des leçons pertinentes (SQLite FTS5, BM25) injectées dans chaque prompt.
 - `progress.py` : détecteur d'absence de progrès (preuves de l'hôte) et projection `world/blockers.json`.
 - `supervisor.py` : transport Git, verrou commun, reprise durable, publication vérifiée et arrêt productif à la mort du monde.

@@ -96,6 +96,22 @@ sudo sh -c 'umask 077; cat > /opt/globalland/credentials/apify/token'   # coller
 
 4. Activer dans `/opt/globalland/control/config.json` : `"apify": {"enabled": true, "max_event_price_usd": 0.05, "allow_public": false, "build_wait_seconds": 240}`. Laisser `allow_public` à false jusqu'à la vérification d'une première construction privée, puis le passer à true.
 
+### Chaque mois : versements Apify vers la Banque
+
+Apify n'expose aucune API de versement. Deux gestes du fondateur, moins de 5 minutes par mois :
+
+1. **Du 11 au 14 :** dans la console Apify (Development > Insights > Payouts), vérifier et approuver la facture, puis l'enregistrer comme **créance**. Ce n'est pas de l'argent et elle n'est jamais dépensable :
+   ```bash
+   sudo python3 /opt/globalland/control/payouts.py invoice --month 2026-11 --usd 23.40
+   ```
+2. **Après réception (du 21 au 25) :** sur un compte dédié à GlobalLand (Wise ou PayPal, seuil de 20 $ US ; 100 $ US par virement), convertir en CAD, puis enregistrer le montant **réellement reçu** :
+   ```bash
+   sudo python3 /opt/globalland/control/payouts.py received --month 2026-11 \
+     --cad-cents 3180 --method WISE --reference ID_TRANSACTION --evidence /root/releve-2026-11.pdf
+   ```
+
+La Banque reçoit un REVENUE marqué `attestation: FOUNDER` et publie `founder_attested_revenue_cents` à part du revenu vérifié automatiquement. Seules les empreintes de la référence et du relevé sont conservées, jamais leur contenu. La commande refuse un mois sans facture et un taux CAD/USD hors de 1,0 à 2,0 (protection contre les fautes de frappe), sauf avec `--force`. Relancer la même commande ne crédite rien deux fois ; un autre montant pour le même mois est refusé. `payouts.py status` affiche les créances. `bank/status.json` les publie sous `receivables`.
+
 ## Banque réelle
 
 Le monde peut faire du travail gratuit avec les abonnements connectés avant le dépôt. La Banque reste UNFUNDED tant qu'un service réel dédié et son vérificateur ne sont pas configurés. Voir docs/INTEGRATIONS.md pour les possibilités ; aucun faux reçu fourni dans les tests ne doit être importé dans l'instance réelle.

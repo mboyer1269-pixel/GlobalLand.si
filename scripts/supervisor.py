@@ -136,7 +136,8 @@ class Supervisor:
   status=planner.projection()
   import progress
   snapshot=world.snapshot()
-  return {'bank/status.json':json.dumps(bank.snapshot(),indent=2)+'\n','world/status.json':json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n','world/controller.json':json.dumps(status,indent=2)+'\n','world/blockers.json':json.dumps(progress.board(self.root,snapshot),ensure_ascii=False,indent=2)+'\n'}
+  import payouts
+  return {'bank/status.json':json.dumps(dict(bank.snapshot(),receivables=payouts.receivables(self.root)),indent=2)+'\n','world/status.json':json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n','world/controller.json':json.dumps(status,indent=2)+'\n','world/blockers.json':json.dumps(progress.board(self.root,snapshot),ensure_ascii=False,indent=2)+'\n'}
  def prepare_publication(self,record):
   # Reapply a durable outbox on non-overlapping upstream changes; never rerun work.
   self.git('fetch','origin','main')
