@@ -8,7 +8,7 @@ Le capital initial autorisé est 50 CAD (5000 centimes), délégué en totalité
 
 ## Modules
 
-- `treasury.py` : SQLite privé, centimes exacts, réservation atomique, appels incertains retenus, preuves externes, positions et extinction irréversible.
+- `treasury.py` : SQLite privé, centimes exacts, réservation atomique, appels incertains retenus, preuves externes, revenus vérifiés acceptés avant le dépôt initial, positions par (fournisseur, compte, actif) et extinction irréversible.
 - `gateway.py` : contrat avec `/opt/globalland/integrations/finance` (non fourni sans choix du service réel). Les devis garantissent un maximum ; les appels utilisent une clé d'idempotence ; les reçus sont vérifiés. Aucun appel API ou achat simulé n'est présenté comme réel.
 - `world.py` : agents, missions hiérarchiques, messages, baux, portefeuilles/dettes GLC, cycles et liquidation.
 - `tools.py` + `executor.js` : commandes choisies par les agents dans un conteneur temporaire, fichiers de produits et recherche HTTP(S) publique via courtier.

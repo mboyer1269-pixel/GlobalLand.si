@@ -184,4 +184,93 @@ class TreasuryTests(unittest.TestCase):
         self.assertEqual(self.t.snapshot()['cash_cents'], 5100)
         with self.assertRaises(ValueError): Treasury(self.path).sync_receipts([], complete=True)
 
+    # Sprint 0 regressions -------------------------------------------------
+
+    def test_verified_revenue_before_initial_deposit_is_spendable(self):
+        self.t.credit(self.evidence('first-sale', 700, 'REVENUE'))
+        snap = self.t.snapshot()
+        self.assertEqual((snap['state'], snap['cash_cents'], snap['available_cents']), ('ACTIVE', 700, 700))
+        self.assertFalse(snap['funding_verified'])
+        self.assertTrue(snap['revenue_verified'])
+        with self.assertRaises(ValueError): self.t.reserve('too-much', 701, 'h')
+        self.t.reserve('reinvest', 700, 'h'); self.t.mark_submitted('reinvest')
+        self.t.settle('reinvest', self.evidence('reinvest-paid', 700, 'SPEND'))
+        # Spending earned revenue to zero is not extinction: the founder's
+        # deposit was never verified, so the world is merely out of cash.
+        self.assertEqual(self.t.snapshot()['state'], 'ACTIVE')
+        self.assertEqual(self.t.snapshot()['available_cents'], 0)
+        self.fund()
+        self.assertEqual(self.t.snapshot()['cash_cents'], 5000)
+        self.assertTrue(self.t.snapshot()['funding_verified'])
+
+    def test_unverified_revenue_never_activates_unfunded_bank(self):
+        with self.assertRaises(ValueError): self.t.credit(receipt('forged', 700, 'REVENUE'))
+        with self.assertRaises(ValueError): self.t.credit(self.evidence('empty', 0, 'REVENUE'))
+        self.assertEqual(self.t.snapshot()['state'], 'UNFUNDED')
+        with self.assertRaises(ValueError): self.t.reserve('nope', 1, 'h')
+
+    def test_revenue_before_funding_preserves_halt(self):
+        self.t.reserve('free', 0, 'h'); self.t.mark_submitted('free')
+        self.t.settle('free', self.evidence('unexpected-debit', 100, 'SPEND'))
+        self.t.credit(self.evidence('sale', 300, 'REVENUE'))
+        self.assertEqual(self.t.snapshot()['state'], 'HALTED')
+        self.assertEqual(self.t.snapshot()['cash_cents'], 200)
+
+    def position(self, event, amount, account, asset=None):
+        r = self.evidence(event, amount, 'POSITIONS'); r['account'] = account
+        if asset is not None: r['asset'] = asset
+        return r
+
+    def test_positions_of_distinct_accounts_and_assets_are_summed(self):
+        self.fund()
+        self.t.record_positions(self.position('a1', 300, 'wallet-a'))
+        self.t.record_positions(self.position('b1', 200, 'wallet-b', 'USDC'))
+        self.t.record_positions(self.position('b2', 50, 'wallet-b', 'ETH'))
+        self.assertEqual(self.t.snapshot()['position_cents'], 550)
+        self.t.record_positions(self.position('b3', 120, 'wallet-b', 'USDC'))
+        self.assertEqual(self.t.snapshot()['position_cents'], 470)
+        self.assertEqual(Treasury(self.path).snapshot()['position_cents'], 470)
+
+    def test_one_account_at_zero_does_not_hide_another_before_extinction(self):
+        self.fund()
+        self.t.record_positions(self.position('a', 2500, 'wallet-a'))
+        self.t.record_positions(self.position('b', 2500, 'wallet-b'))
+        self.t.reserve('buy', 5000, 'h'); self.t.mark_submitted('buy')
+        self.t.settle('buy', self.evidence('buy-paid', 5000, 'SPEND'))
+        self.t.record_positions(self.position('a-zero', 0, 'wallet-a'))
+        self.t.sync_receipts([], complete=True)
+        self.assertEqual(self.t.snapshot()['state'], 'ACTIVE')
+        self.assertEqual(self.t.snapshot()['position_cents'], 2500)
+        self.t.record_positions(self.position('b-zero', 0, 'wallet-b'))
+        self.assertEqual(self.t.snapshot()['state'], 'RECONCILING')
+        self.t.sync_receipts([], complete=True)
+        self.assertEqual(self.t.snapshot()['state'], 'EXTINCT')
+
+    def test_account_valued_whole_and_per_asset_is_rejected(self):
+        self.fund()
+        self.t.record_positions(self.position('whole', 300, 'wallet-a'))
+        with self.assertRaises(ValueError):
+            self.t.record_positions(self.position('part', 100, 'wallet-a', 'USDC'))
+        for bad in (' ', 'x' * 257, 7):
+            with self.subTest(asset=bad), self.assertRaises(ValueError):
+                self.t.record_positions(self.position('bad-' + str(len(str(bad))), 1, 'wallet-c', bad))
+        self.assertEqual(self.t.snapshot()['position_cents'], 300)
+
+    def test_legacy_scalar_position_is_migrated_not_dropped(self):
+        import sqlite3
+        legacy = Path(self.tmp.name) / 'legacy.db'
+        db = sqlite3.connect(str(legacy))
+        db.executescript("""
+            CREATE TABLE treasury (id INTEGER PRIMARY KEY CHECK(id=1), cash INTEGER NOT NULL DEFAULT 0,
+                positions INTEGER NOT NULL DEFAULT 0, funded INTEGER NOT NULL DEFAULT 0,
+                state TEXT NOT NULL DEFAULT 'UNFUNDED', reason TEXT, pending_sync INTEGER NOT NULL DEFAULT 0);
+            INSERT INTO treasury(id, cash, positions, funded, state) VALUES(1, 0, 900, 1, 'ACTIVE');
+        """)
+        db.commit(); db.close()
+        migrated = Treasury(legacy, verifier=self.t.verifier)
+        self.assertEqual(migrated.snapshot()['position_cents'], 900)
+        self.assertEqual(Treasury(legacy).snapshot()['position_cents'], 900)
+        self.assertEqual(migrated.snapshot()['state'], 'ACTIVE')
+
+
 if __name__ == '__main__': unittest.main()

@@ -115,7 +115,7 @@ Vitrine publique : **un deuxième projet Cloudflare Pages**, distinct de la vent
 
 ### 3.3 Banque : les revenus d'abord
 
-1. **Corriger `treasury.py:126`** : un REVENUE vérifié doit pouvoir créditer une banque `UNFUNDED`. Elle passe alors en `ACTIVE_REVENUE_ONLY`. Les 50 CAD restent une injection optionnelle, pas un préalable.
+1. **Corriger `treasury.py:126`** : un REVENUE vérifié doit pouvoir créditer une banque `UNFUNDED`. Elle passe alors en `ACTIVE` avec `revenue_verified: true` et `funding_verified: false` (implémenté au Sprint 0). Les 50 CAD restent une injection optionnelle, pas un préalable.
 2. Positions tenues par `(compte, actif)` en quantités natives. Contre-valeur CAD datée et sourcée (reprise de Codex).
 3. Rapprochement équitable : tous les dossiers `SUBMITTING`, traités par ancienneté et par lots, avec un curseur (correction du `[:16]`).
 4. **Revenu dépensable = versé (payout réglé)**, pas « commande payée ». Les fonds en attente chez le MoR ne financent rien, conformément à la constitution.

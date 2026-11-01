@@ -35,6 +35,10 @@ class Treasury:
                 CREATE TABLE IF NOT EXISTS operations (
                     id TEXT PRIMARY KEY, amount INTEGER NOT NULL, request_hash TEXT NOT NULL,
                     agent TEXT NOT NULL, status TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS positions (
+                    provider TEXT NOT NULL, account TEXT NOT NULL, asset TEXT NOT NULL,
+                    value_cents INTEGER NOT NULL, event_id TEXT NOT NULL,
+                    PRIMARY KEY(provider,account,asset));
                 CREATE TABLE IF NOT EXISTS events (
                     provider TEXT, account TEXT, event_id TEXT, digest TEXT NOT NULL,
                     body TEXT NOT NULL, action TEXT NOT NULL, operation_id TEXT,
@@ -45,8 +49,21 @@ class Treasury:
             for statement in schema.split(';'):
                 if statement.strip():
                     db.execute(statement)
-            if 'pending_sync' not in {row['name'] for row in db.execute('PRAGMA table_info(treasury)')}:
+            columns = {row['name'] for row in db.execute('PRAGMA table_info(treasury)')}
+            if 'pending_sync' not in columns:
                 db.execute('ALTER TABLE treasury ADD COLUMN pending_sync INTEGER NOT NULL DEFAULT 0')
+            if 'earned' not in columns:
+                # Verified settled revenue may exist before the initial deposit.
+                db.execute('ALTER TABLE treasury ADD COLUMN earned INTEGER NOT NULL DEFAULT 0')
+            if 'positions_migrated' not in columns:
+                # v3 kept one overwritten scalar. Preserve any nonzero legacy value
+                # under its own key: it is never silently dropped toward extinction.
+                db.execute('ALTER TABLE treasury ADD COLUMN positions_migrated INTEGER NOT NULL DEFAULT 0')
+            legacy = db.execute('SELECT positions, positions_migrated FROM treasury WHERE id=1').fetchone()
+            if not legacy['positions_migrated']:
+                if legacy['positions']:
+                    db.execute("INSERT OR IGNORE INTO positions VALUES('legacy','aggregate','',?,'legacy-scalar')", (legacy['positions'],))
+                db.execute('UPDATE treasury SET positions_migrated=1 WHERE id=1')
 
     @contextmanager
     def _tx(self):
@@ -68,10 +85,16 @@ class Treasury:
     def _view(self, db):
         row = db.execute('SELECT * FROM treasury WHERE id=1').fetchone()
         held = db.execute("SELECT COALESCE(SUM(amount),0) FROM operations WHERE status IN ('HELD','UNKNOWN')").fetchone()[0]
+        positions = db.execute('SELECT COALESCE(SUM(value_cents),0) FROM positions').fetchone()[0]
         return dict(state=row['state'], declared_capital_cents=5000,
                     cash_cents=row['cash'], reserved_cents=held,
                     available_cents=row['cash']-held if row['state'] == 'ACTIVE' else 0, funding_verified=bool(row['funded']),
-                    position_cents=row['positions'], extinction_reason=row['reason'])
+                    revenue_verified=bool(row['earned']),
+                    position_cents=positions, extinction_reason=row['reason'])
+
+    @staticmethod
+    def _capital_verified(view):
+        return view['funding_verified'] or view['revenue_verified']
 
     def snapshot(self):
         with self._tx() as db:
@@ -123,18 +146,40 @@ class Treasury:
             if self._evidence(db, receipt, {'REVENUE', 'REFUND'}, 'CREDIT'):
                 v = self._view(db)
                 amount = receipt['amount_cents']
-                if not v['funding_verified'] or amount == 0 or v['cash_cents'] + amount > MAX_CENTS:
+                if amount == 0 or v['cash_cents'] + amount > MAX_CENTS:
                     raise ValueError('invalid credit')
-                db.execute('UPDATE treasury SET cash=cash+? WHERE id=1', (amount,))
+                # Settled external revenue is owned capital even before the
+                # optional initial deposit. It never implies that deposit.
+                db.execute("UPDATE treasury SET cash=cash+?, earned=1, state=CASE WHEN state='UNFUNDED' THEN 'ACTIVE' ELSE state END WHERE id=1", (amount,))
         elif kind == 'POSITIONS':
             if self._evidence(db, receipt, {'POSITIONS'}, 'POSITIONS'):
                 v = self._view(db)
-                if not v['funding_verified']: raise ValueError('funding required')
-                db.execute('UPDATE treasury SET positions=? WHERE id=1', (receipt['amount_cents'],))
-                if v['position_cents'] > 0 and receipt['amount_cents'] == 0 and v['cash_cents'] == 0:
+                if not self._capital_verified(v): raise ValueError('verified capital required')
+                self._set_position(db, receipt)
+                after = self._view(db)
+                if v['position_cents'] > 0 and after['position_cents'] == 0 and v['cash_cents'] == 0:
                     db.execute("UPDATE treasury SET pending_sync=1, state=CASE WHEN state='HALTED' THEN state ELSE 'RECONCILING' END WHERE id=1")
         else:
             raise ValueError('unsupported account receipt kind')
+
+    def _set_position(self, db, receipt):
+        """A POSITIONS receipt values one (provider, account, asset) holding.
+
+        Distinct accounts and assets are summed, never overwritten by each other.
+        Without `asset`, the receipt values the whole account; an account is
+        valued either as a whole or per asset, never both, to avoid double counting.
+        """
+        asset = receipt.get('asset', '')
+        if not isinstance(asset, str) or len(asset) > 256 or (asset and not asset.strip()):
+            raise ValueError('position asset must be a bounded identifier')
+        provider, account = receipt['provider'], receipt['account']
+        other = db.execute("SELECT 1 FROM positions WHERE provider=? AND account=? AND (asset='') != (?='')",
+                           (provider, account, asset)).fetchone()
+        if other:
+            raise ValueError('account positions must be valued either whole or per asset')
+        db.execute('INSERT INTO positions VALUES(?,?,?,?,?) ON CONFLICT(provider,account,asset) '
+                   'DO UPDATE SET value_cents=excluded.value_cents, event_id=excluded.event_id',
+                   (provider, account, asset, receipt['amount_cents'], receipt['event_id']))
 
     def _account_receipt(self, receipt, kinds):
         if not isinstance(receipt, dict) or receipt.get('kind') not in kinds:
@@ -178,7 +223,7 @@ class Treasury:
                     raise ValueError('operation identity changed')
                 return dict(previous, idempotency_key=operation_id)
             v = self._view(db)
-            if max_debit_cents and (v['state'] != 'ACTIVE' or not v['funding_verified'] or max_debit_cents > v['available_cents']):
+            if max_debit_cents and (v['state'] != 'ACTIVE' or not self._capital_verified(v) or max_debit_cents > v['available_cents']):
                 raise ValueError('insufficient verified available capital')
             db.execute("INSERT INTO operations VALUES(?,?,?,?,'HELD')", (operation_id, max_debit_cents, request_hash, agent_id))
             return dict(id=operation_id, amount=max_debit_cents, request_hash=request_hash, agent=agent_id, status='HELD', idempotency_key=operation_id)
