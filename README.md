@@ -15,7 +15,7 @@
   <img alt="Objectif : 100 CAD vérifiés" src="https://img.shields.io/badge/objectif-100%20CAD%20v%C3%A9rifi%C3%A9s-f5c542?style=for-the-badge&labelColor=0b1024">
 </p>
 <p align="center">
-  <img alt="282 tests Python" src="https://img.shields.io/badge/tests%20Python-282%20OK-34d399?style=flat-square&labelColor=20123e">
+  <img alt="287 tests Python" src="https://img.shields.io/badge/tests%20Python-287%20OK-34d399?style=flat-square&labelColor=20123e">
   <img alt="11 tests Node" src="https://img.shields.io/badge/tests%20Node-11%20OK-34d399?style=flat-square&labelColor=20123e">
   <img alt="Python 3.12+" src="https://img.shields.io/badge/Python-3.12%2B-3776ab?style=flat-square&logo=python&logoColor=white&labelColor=20123e">
   <img alt="Node.js 22" src="https://img.shields.io/badge/Node.js-22-5fa04e?style=flat-square&logo=nodedotjs&logoColor=white&labelColor=20123e">
@@ -80,7 +80,7 @@ Trouver une demande, construire un produit, le vendre et encaisser. Premier obje
 |:-:|---|---|
 | 🔴 | **Cycles autonomes** | Ils ont tourné toutes les 30 min du 31 oct. au 1er nov. à 00:30 UTC. **Arrêtés depuis** (voir l’incident). |
 | 🟢 | **Cerveaux** | Codex et Claude Code sur abonnements officiels, avec bascule entre fournisseurs. Cursor est exclu des tours automatiques : délais dépassés. |
-| 🟡 | **Nouveau code** | PR #5, empilée sur la #3 : outils en cours de tour, détecteur de progrès, banque prudente, publication Apify et Cloudflare, revue à deux clés, disjoncteur. **282 tests OK, pas encore installé sur le VPS.** |
+| 🟡 | **Nouveau code** | PR #5, empilée sur la #3 : outils en cours de tour, détecteur de progrès, banque prudente, publication Apify et Cloudflare, revue à deux clés, disjoncteur. **287 tests OK, pas encore installé sur le VPS.** |
 | ⚪ | **Banque** | `UNFUNDED` : aucun dépôt ni revenu encaissé. Un premier revenu vérifié peut financer la banque seul. |
 | ⚪ | **Revenus** | **0 CAD.** Des recherches et un prototype (`products/invoice-preflight`). Prochain pas : un premier outil sur Apify Store. |
 | 🟡 | **Grok Bot · xAI** | Routine documentée. La boucle avec les tâches du VPS reste à vérifier. |
@@ -123,7 +123,7 @@ flowchart LR
 
 - **Les résidents** portent les objectifs, les missions et la mémoire du monde.
 - **Le superviseur**, sur le VPS, organise le travail et conserve chaque résultat de façon durable.
-- **Le contrôleur** consulte un abonnement IA à chaque tour. Si le fournisseur échoue, il bascule une fois vers l’autre. Un quota épuisé n’active **aucun repli API payant**.
+- **Le contrôleur** consulte un abonnement IA à chaque tour. Si le fournisseur échoue, il bascule une fois vers l’autre ; un fournisseur qui vient d’échouer passe ensuite en dernier pendant un temps (disjoncteur). Un quota épuisé n’active **aucun repli API payant**.
 - **Le courtier** (`--broker on`) donne au cerveau des outils pendant le tour : il peut agir, voir le résultat et corriger dans le même cycle. Chaque appel est validé, compté et journalisé par l’hôte **avant** tout effet.
 
 <details>
@@ -230,7 +230,7 @@ Le détail case par case, avec ce qui est déjà fait : **[docs/HISTORIQUE.md](d
 | 💻 Modifier le code | [CODE.md](CODE.md) |
 | 🔐 Séparer les services et les secrets | [SECURITY.md](SECURITY.md) |
 | 🚨 Dernier audit : failles, corrections, indicateurs de survie | [Audit du 1er nov.](docs/AUDIT-2026-11-01.md) |
-| 🔬 Choix de stratégie | [Plan](docs/superpowers/plans/2026-11-01-plan-claude-monde-autonome.md) · [Encaissement](docs/research/2026-11-01-sprint2-encaissement-et-concepts.md) · [Dépôts open source](docs/research/2026-11-01-repos-n8n-headcount-agency.md) |
+| 🔬 Choix de stratégie | [Plan](docs/superpowers/plans/2026-11-01-plan-claude-monde-autonome.md) · [Encaissement](docs/research/2026-11-01-sprint2-encaissement-et-concepts.md) · [Dépôts open source](docs/research/2026-11-01-repos-n8n-headcount-agency.md) · [Agent-Reach](docs/research/2026-11-01-agent-reach.md) |
 | 🧪 Preuves et limites connues | [Vérifications](docs/verification/) |
 
 <details>

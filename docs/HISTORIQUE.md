@@ -33,6 +33,7 @@
 | 11 | 1er nov. | **Sprint 2** : recherche d'encaissement (Apify d'abord), règle de réserve, leçons réinjectées, publication Apify, versements vers la Banque | PR #5 | `docs/research/…` ; tests |
 | 12 | 1er nov. | **Inspiration open source** : règle des deux clés et quatre fiches de décision (headcount, agency-agents) ; n8n écarté pour sa licence | PR #5 | `docs/research/2026-11-01-repos-n8n-headcount-agency.md` |
 | 13 | 1er nov. | **Audit de crise** : monde arrêté sans alerte → disjoncteur hors VPS ; faille des deux clés (un cerveau signait deux fois) corrigée ; état du monde borné sous 1 Mio ; `PUBLISH_SITE` (Cloudflare) ; vérification de démarrage GO/NO-GO ; prix plancher ; garde-fous juridiques ; 9 défauts de revue corrigés | PR #5 | [`docs/AUDIT-2026-11-01.md`](AUDIT-2026-11-01.md) ; 268 tests |
+| 14 | 1er nov. | **Après l'audit** : triage d'incident en une commande (`incident.py`), pont MCP pour Codex (optionnel), disjoncteur des fournisseurs et fiche « distribution agent d'abord » inspirés d'Agent-Reach (MIT) ; README refait | PR #5 | [`docs/research/2026-11-01-agent-reach.md`](research/2026-11-01-agent-reach.md) ; 287 tests |
 
 **État de la CI :** verte sur chaque commit de la PR #5 vérifié.
 

@@ -107,6 +107,14 @@ def collect(root, cron=pathlib.Path('/etc/cron.d/globalland-think'), log=pathlib
                                   at=_stamp(status.get('at')), state=status.get('state') if status.get('state') in ('RETRYING', 'BLOCKED', 'DECISION_READY') else None,
                                   attempts=attempts[:3])
 
+    health = _json(private / 'provider-health.json') or {}
+    facts['provider_health'] = {}
+    for provider in ('codex', 'claude', 'cursor'):
+        entry = health.get(provider)
+        if isinstance(entry, dict) and type(entry.get('failures')) is int and type(entry.get('at')) is int:
+            facts['provider_health'][provider] = dict(failures=entry['failures'], minutes_since=round((now - entry['at']) / 60, 1),
+                                                       reason=_code(entry.get('reason')))
+
     pending = 0
     for path in (root / 'state' / 'controller').glob('THINK-*.json'):
         saved = _json(path)

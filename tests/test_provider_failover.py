@@ -163,4 +163,63 @@ class ProviderFailoverTests(unittest.TestCase):
         self.assertEqual(self.seen, ['codex'])
 
 
+class ProviderCircuitBreakerTests(unittest.TestCase):
+    """Agent-Reach pattern: a provider that just failed goes last, never out."""
+    setUp = ProviderFailoverTests.setUp
+    tick = ProviderFailoverTests.tick
+
+    def publish_all(self, *extra):
+        # Extra published records shift the rotation so that codex would lead without the pause.
+        for name in extra:
+            (self.root / 'state/controller' / name).write_text(json.dumps({'published': True}))
+        for path in (self.root / 'state/controller').glob('THINK-*.json'):
+            path.write_text(json.dumps(dict(json.loads(path.read_text()), published=True)))
+
+    def health(self):
+        return json.loads((self.root / 'state/private/provider-health.json').read_text())
+
+    def test_failed_provider_goes_last_on_the_next_cycle_then_recovers_its_turn(self):
+        self.tick({'codex': TimeoutError('command timed out'), 'claude': self.good}, now=1800000000)
+        self.assertEqual(self.seen, ['codex', 'claude'])
+        self.assertEqual(self.health(), {'codex': {'failures': 1, 'at': 1800000000, 'reason': 'provider_timeout'}})
+        self.publish_all('THINK-1799999999.json')  # rotation alone would now start with codex
+        self.seen.clear()
+        self.tick({'codex': self.good, 'claude': self.good}, now=1800000000 + 600)
+        self.assertEqual(self.seen, ['claude'])
+        # After the pause (30 min for a first failure) codex may lead again and success clears it.
+        self.publish_all('THINK-1799999998.json')
+        self.seen.clear()
+        self.tick({'codex': self.good, 'claude': self.good}, now=1800000000 + 1900)
+        self.assertEqual(self.seen, ['codex'])
+        self.assertEqual(self.health(), {})
+
+    def test_paused_provider_is_still_tried_when_the_healthy_one_fails(self):
+        (self.root / 'state/private').mkdir(parents=True, exist_ok=True)
+        (self.root / 'state/private/provider-health.json').write_text(json.dumps(
+            {'codex': {'failures': 3, 'at': 1800000000 - 60, 'reason': 'provider_timeout'}}))
+        turn, files = self.tick({'codex': self.good, 'claude': TimeoutError('command timed out')})
+        self.assertEqual(self.seen, ['claude', 'codex'])
+        self.assertEqual(len(files), 1)
+
+    def test_pause_grows_with_repeated_failures_and_is_capped(self):
+        from controller import provider_paused, provider_order
+        now = 1800000000
+        self.assertTrue(provider_paused({'failures': 1, 'at': now - 1799}, now))
+        self.assertFalse(provider_paused({'failures': 1, 'at': now - 1800}, now))
+        self.assertTrue(provider_paused({'failures': 3, 'at': now - 7000}, now))
+        self.assertFalse(provider_paused({'failures': 50, 'at': now - 6 * 3600}, now))
+        for bad in (None, 'x', {'failures': '1', 'at': now}, {'failures': 0, 'at': now}, {'failures': True, 'at': now}):
+            self.assertFalse(provider_paused(bad, now))
+        self.assertEqual(provider_order(['codex', 'claude'], {'codex': {'failures': 1, 'at': now}}, now), ['claude', 'codex'])
+        self.assertEqual(provider_order(['codex', 'claude'], {'codex': {'failures': 1, 'at': now}, 'claude': {'failures': 1, 'at': now}}, now),
+                         ['codex', 'claude'])
+
+    def test_unwritable_health_file_never_stops_the_failover(self):
+        with patch('controller.atomic_json', side_effect=lambda path, value: (_ for _ in ()).throw(OSError('disk full'))
+                   if path.name == 'provider-health.json' else __import__('supervisor').atomic_json(path, value)):
+            turn, files = self.tick({'codex': TimeoutError('command timed out'), 'claude': self.good})
+        self.assertEqual(self.seen, ['codex', 'claude'])
+        self.assertEqual(len(files), 1)
+
+
 if __name__ == '__main__': unittest.main()

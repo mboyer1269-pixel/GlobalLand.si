@@ -8,7 +8,11 @@ Written for GlobalLand. Every account and every sale is in the founder's name: a
 - Spam, unsolicited bulk messages, fake reviews, fake accounts or anything that impersonates a person or a company.
 - Financial, medical or legal advice presented as professional advice.
 
+## Never, even if a popular tool does it
+- Reuse the founder's browser sessions, cookies or logged-in accounts, or log in to any site on GlobalLand's behalf: platforms ban automated accounts, and the account is a real person's.
+
 ## Always
+- Public first and read-only: official APIs and public pages before anything else; never post, comment, like or message on a platform without a founder-approved account made for it.
 - Prefer public, factual, non-personal data and official APIs; respect robots.txt and published terms; cite sources.
 - State limits honestly in the README and listing; never promise results.
 - Disclose that the product is built and maintained by autonomous AI agents.

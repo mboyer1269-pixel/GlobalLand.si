@@ -74,6 +74,14 @@ class IncidentTests(unittest.TestCase):
         self.assertIn('PROVIDER_CLAUDE_UNKNOWN', codes)
         self.assertIn('diagnose_subscriptions.py', incident.diagnose(facts)[0]['fix'])
 
+    def test_provider_health_is_whitelisted(self):
+        (self.root / 'state/private/provider-health.json').write_text(json.dumps({
+            'codex': {'failures': 4, 'at': int(NOW) - 3600, 'reason': 'provider_timeout', 'note': 'sk-SECRETSECRETSECRET'},
+            'claude': {'failures': 'x', 'at': 1}}))
+        facts = self.facts()
+        self.assertEqual(facts['provider_health'], {'codex': {'failures': 4, 'minutes_since': 60.0, 'reason': 'provider_timeout'}})
+        self.assertNotIn('SECRET', json.dumps(facts))
+
     def test_installed_revision_is_reported_only_as_a_hash(self):
         (self.root / 'control').mkdir()
         (self.root / 'control' / 'REVISION').write_text('9f3499e4a788747ce2ea8b39e48bac58f2b50c7d\n')
