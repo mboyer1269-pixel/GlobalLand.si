@@ -109,7 +109,7 @@ flowchart TD
 
 Pourquoi un Merchant of Record : vendre au monde entier implique TPS/TVH, TVA UE et sales tax américaine. Le MoR collecte et remet ces taxes. Il n'y a **aucun coût initial**, seulement un pourcentage par vente (taux exacts **à vérifier**). C'est le seul moyen réaliste d'encaisser mondialement sans juriste.
 
-Vitrine publique : **un deuxième projet Cloudflare Pages**, distinct de la vente, qui ne publie que les réalisations sélectionnées. Le dépôt GitHub est **privé** (visibilité vérifiée le 2026-11-01), alors que CLAUDE.md et SECURITY.md le disent public. GitHub Pages sur un dépôt privé exige un plan payant : je l'écarte.
+Vitrine publique : **un deuxième projet Cloudflare Pages**, distinct de la vente, qui ne publie que les réalisations sélectionnées. Le dépôt GitHub est **privé** (visibilité vérifiée le 2026-11-01), alors que CLAUDE.md et SECURITY.md le disent public. GitHub Pages sur un dépôt privé exige un plan payant : je l'écarte. *Mise à jour du 1er nov. : le fondateur a rendu le dépôt public. GitHub Pages devient gratuit, mais `PUBLISH_SITE` sur Cloudflare reste le canal des agents (revue à deux clés, coupure immédiate, aucun push Git requis).*
 
 > **Vercel Hobby** est connecté à ma session. Il est limité à un usage non commercial (**à vérifier**), donc je l'écarte pour la vente. **Floot** (connecté aussi) offre des paiements Stripe intégrés : c'est utile pour un prototype que je construirais, pas comme capacité des agents.
 
