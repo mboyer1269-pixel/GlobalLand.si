@@ -439,7 +439,8 @@
                   "mission_id",
                   "agent_id",
                   "lease_token",
-                  "evidence"
+                  "evidence",
+                  "lesson"
                 ],
                 "properties": {
                   "op": {
@@ -476,6 +477,15 @@
                       "maxLength": 4000,
                       "pattern": "\\S"
                     }
+                  },
+                  "lesson": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 1000,
+                    "pattern": "\\S"
                   }
                 }
               }
@@ -508,7 +518,8 @@
                   "mission_id",
                   "agent_id",
                   "lease_token",
-                  "reason"
+                  "reason",
+                  "lesson"
                 ],
                 "properties": {
                   "op": {
@@ -540,6 +551,89 @@
                     "minLength": 1,
                     "maxLength": 4000,
                     "pattern": "\\S"
+                  },
+                  "lesson": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 1000,
+                    "pattern": "\\S"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "WORLD"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "op",
+                  "agent_id",
+                  "lesson",
+                  "mission_id",
+                  "tags"
+                ],
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "record_lesson"
+                    ]
+                  },
+                  "agent_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "lesson": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1000,
+                    "pattern": "\\S"
+                  },
+                  "mission_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "maxItems": 8,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 40,
+                      "pattern": "\\S"
+                    }
                   }
                 }
               }

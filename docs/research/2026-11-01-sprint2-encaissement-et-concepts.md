@@ -78,9 +78,9 @@ La clause de Polar rend le fondateur responsable d'un manque. Sans précaution, 
 
 | Piste | Livrable | Dépend de toi |
 |---|---|---|
-| **2-A Banque** | Revenu dépensable = versé, vérifié et sorti de la fenêtre de remboursement ; réserve pour litiges ; tests | Non |
+| **2-A Banque** ✅ | Revenu dépensable = versé, vérifié et sorti de la fenêtre de remboursement (`available_at`) ; `REVERSAL` ; plancher de réserve ; tests | Non |
 | **2-B Apify** | Action hôte `PUBLISH_ACTOR` (source sous `products/actors/`, construction, prix à l'événement plafonné), action `METRICS` (exécutions, revenus) et adaptateur `verify` pour les paiements Apify ; token jamais dans le dépôt ni dans un conteneur | **Oui** : compte Apify, KYC, token API |
-| **2-C Leçons** | Réflexion obligatoire à la conclusion d'une mission, index FTS5, injection dans le prompt | Non |
+| **2-C Leçons** ✅ | `lesson` à la conclusion d'une mission, `record_lesson`, sélection FTS5 et injection dans le prompt | Non |
 | **2-D Polar** (après 2-B) | Adaptateur ventes directes plus règle de réserve | Oui : compte Polar |
 
 **Prochaine action :** je code 2-A et 2-C tout de suite, car ils ne dépendent de personne. En parallèle, ouvre un compte Apify, fais la vérification d'identité et crée un token API. Ne le colle pas ici : on l'installera dans `/opt/globalland/integrations`.

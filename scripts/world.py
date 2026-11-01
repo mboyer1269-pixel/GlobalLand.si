@@ -92,8 +92,11 @@ class World:
     def snapshot(self):
         with self._connect() as db:
             s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
-        return {k: (v[-100:] if k == 'events' else v) for k, v in s.items()
-                if k not in ('cycles', 'bootstrapped')}
+        view = {k: (v[-100:] if k == 'events' else v) for k, v in s.items()
+                if k not in ('cycles', 'bootstrapped', 'lessons', 'lesson_seq')}
+        # Lessons are retrieved by relevance for prompts, not dumped wholesale.
+        view['lesson_count'] = len(s.get('lessons', []))
+        return view
 
     def apply(self, operation_id, args):
         self._id(operation_id)
@@ -134,8 +137,9 @@ class World:
             'register_agent': ({'agent_id', 'role'}, set()),
             'create_mission': ({'mission_id', 'goal'}, {'agent_id', 'parent_id', 'priority'}),
             'claim_mission': ({'mission_id', 'agent_id'}, {'lease_seconds'}),
-            'complete_mission': ({'mission_id', 'agent_id', 'lease_token', 'evidence'}, set()),
-            'fail_mission': ({'mission_id', 'agent_id', 'lease_token', 'reason'}, set()),
+            'complete_mission': ({'mission_id', 'agent_id', 'lease_token', 'evidence'}, {'lesson'}),
+            'fail_mission': ({'mission_id', 'agent_id', 'lease_token', 'reason'}, {'lesson'}),
+            'record_lesson': ({'agent_id', 'lesson'}, {'mission_id', 'tags'}),
             'message': ({'from_agent', 'to_agent', 'body'}, set()),
             'transfer_glc': ({'from_agent', 'to_agent', 'amount'}, set()),
             'reward_glc': ({'agent_id', 'amount', 'evidence'}, set()),
@@ -186,6 +190,8 @@ class World:
                     m['reason'] = self._text(a['reason'], 'reason')
                     m['status'] = 'FAILED'
                 m.update(lease_token=None, lease_expires_at=None)
+                if a.get('lesson') is not None:
+                    self._lesson(s, a['agent_id'], a['lesson'], m['mission_id'], [], m['status'])
             self._event(s, op.upper(), mission_id=m['mission_id'], agent_id=a['agent_id'])
             return m
         if op == 'message':
@@ -236,6 +242,12 @@ class World:
                     self._event(s, 'AGENT_DISABLED', agent_id=agent['agent_id'])
             s['cycles'].append(cid)
             return dict(cycle_id=cid, applied=True)
+        if op == 'record_lesson':
+            self._agent(s, a['agent_id'], True)
+            mission = None
+            if a.get('mission_id') is not None:
+                mission = self._find(s['missions'], 'mission_id', self._id(a['mission_id']))['mission_id']
+            return self._lesson(s, a['agent_id'], a['lesson'], mission, a.get('tags') or [], None)
         if op == 'raise_blocker':
             return self._raise_blocker(s, a)
         if op == 'resolve_blocker':
@@ -253,6 +265,27 @@ class World:
             s['state'] = 'EXTINCT'
             self._event(s, 'WORLD_EXTINCT', reason=reason)
             return dict(state='EXTINCT', reason=reason)
+
+    MAX_LESSONS = 300
+
+    def _lesson(self, s, agent_id, text, mission_id, tags, outcome):
+        """Durable learning; the controller injects relevant lessons into prompts."""
+        if type(tags) is not list or len(tags) > 8:
+            raise ValueError('Invalid tags')
+        tags = [self._text(t, 'tag', 40) for t in tags]
+        lessons = s.setdefault('lessons', [])
+        s['lesson_seq'] = s.get('lesson_seq', 0) + 1
+        lesson = dict(lesson_id='L%d' % s['lesson_seq'], agent_id=agent_id, mission_id=mission_id,
+                      outcome=outcome, text=self._text(text, 'lesson', 1000), tags=tags, at=self.clock())
+        lessons.append(lesson)
+        del lessons[:-self.MAX_LESSONS]
+        self._event(s, 'LESSON_RECORDED', lesson_id=lesson['lesson_id'], agent_id=agent_id)
+        return lesson
+
+    def lessons(self):
+        with self._connect() as db:
+            s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
+        return s.get('lessons', [])
 
     BLOCKER_CATEGORIES = ('ACCOUNT', 'CREDENTIAL', 'IDENTITY', 'PAYMENT', 'DECISION', 'CAPABILITY', 'OTHER')
 

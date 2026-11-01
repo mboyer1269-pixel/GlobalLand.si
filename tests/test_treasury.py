@@ -286,4 +286,71 @@ class TreasuryTests(unittest.TestCase):
         self.assertEqual((snap['cash_cents'], snap['revenue_cents']), (6000, 700))
 
 
+
+class ReserveRuleTests(unittest.TestCase):
+    """Sprint 2-A: revenue is spendable only once paid and past its refund window."""
+    NOW = 1793491200
+    DAY = 86400
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.now = self.NOW
+        self.t = Treasury(Path(self.tmp.name) / 't.db', verifier=lambda r: r.get('signature') == 'trusted', clock=lambda: self.now)
+
+    def ev(self, event, amount, kind, **extra):
+        return receipt(event, amount, kind, signature='trusted', **extra)
+
+    def test_maturing_revenue_is_owned_but_not_spendable_until_available(self):
+        self.t.credit(self.ev('sale', 1000, 'REVENUE', available_at=self.NOW + 60 * self.DAY))
+        snap = self.t.snapshot()
+        self.assertEqual((snap['state'], snap['cash_cents'], snap['maturing_cents'], snap['available_cents']), ('ACTIVE', 1000, 1000, 0))
+        self.assertEqual(snap['next_maturity_at'], self.NOW + 60 * self.DAY)
+        with self.assertRaises(ValueError): self.t.reserve('early', 1, 'h')
+        self.now += 60 * self.DAY + 1
+        self.assertEqual(self.t.snapshot()['available_cents'], 1000)
+        self.t.reserve('later', 1000, 'h')
+
+    def test_revenue_without_maturity_is_spendable_now(self):
+        # e.g. a provider payout that is already final (no customer refund claim).
+        self.t.credit(self.ev('payout', 500, 'REVENUE'))
+        self.assertEqual(self.t.snapshot()['available_cents'], 500)
+
+    def test_reserve_floor_is_never_committable(self):
+        self.t.confirm_funding(self.ev('initial', 5000, 'FUNDING'))
+        self.assertEqual(self.t.set_reserve_floor(1500)['available_cents'], 3500)
+        with self.assertRaises(ValueError): self.t.reserve('too-much', 3501, 'h')
+        self.t.reserve('ok', 3500, 'h')
+        for bad in (-1, 1.5, True):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                self.t.set_reserve_floor(bad)
+
+    def test_customer_reversal_consumes_maturing_credit_and_revenue(self):
+        self.t.credit(self.ev('sale', 1000, 'REVENUE', available_at=self.NOW + 60 * self.DAY))
+        self.t.reverse(self.ev('refund-sale', 1000, 'REVERSAL', reverses='sale'))
+        self.t.reverse(self.ev('refund-sale', 1000, 'REVERSAL', reverses='sale'))  # replay is a no-op
+        snap = self.t.snapshot()
+        self.assertEqual((snap['cash_cents'], snap['revenue_cents'], snap['maturing_cents'], snap['state']), (0, 0, 0, 'ACTIVE'))
+
+    def test_spending_immature_revenue_is_what_the_rule_prevents(self):
+        # Without the rule, revenue spent before a refund leaves a debt the provider
+        # can claim from the founder. The bank records that as a halt.
+        self.t.credit(self.ev('sale', 1000, 'REVENUE'))
+        self.t.reserve('spend', 1000, 'h'); self.t.mark_submitted('spend')
+        self.t.settle('spend', self.ev('spent', 1000, 'SPEND'))
+        self.t.reverse(self.ev('chargeback', 1000, 'REVERSAL', reverses='sale'))
+        snap = self.t.snapshot()
+        self.assertEqual((snap['cash_cents'], snap['state']), (-1000, 'HALTED'))
+        self.assertIn('customer reversal exceeds owned cash', snap['extinction_reason'])
+
+    def test_maturity_only_on_revenue_and_reversal_last_in_a_batch(self):
+        with self.assertRaises(ValueError):
+            self.t.credit(self.ev('refund', 100, 'REFUND', available_at=self.NOW + 1))
+        with self.assertRaises(ValueError):
+            self.t.credit(self.ev('bad', 100, 'REVENUE', available_at='tomorrow'))
+        self.t.sync_receipts([self.ev('r', 300, 'REVERSAL', reverses='s'),
+                              self.ev('s', 1000, 'REVENUE', available_at=self.NOW + 10)])
+        snap = self.t.snapshot()
+        self.assertEqual((snap['cash_cents'], snap['maturing_cents']), (700, 700))
+
 if __name__ == '__main__': unittest.main()
