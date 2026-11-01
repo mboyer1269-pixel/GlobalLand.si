@@ -104,7 +104,7 @@ flowchart TD
 | Action | Implémentation | Garde-fous hôte |
 |---|---|---|
 | **PUBLISH** | Cloudflare Pages par API Direct Upload, avec un token limité à un compte et un projet. `preview` → test HTTP → `promote` ; `rollback`. | Analyse de secrets, liste blanche de fichiers, taille max, pas de données privées, URL vérifiée par FETCH après publication. |
-| **SELL** | Merchant of Record (Lemon Squeezy, Paddle ou Gumroad, **à comparer et vérifier**) : créer un produit, un prix et un lien de paiement. | Prix plafond configurable par l'hôte, devise fixe, aucun remboursement automatique, journal de chaque création. |
+| **SELL** | **Révisé le 2026-11-01** (voir `docs/research/2026-11-01-sprint2-encaissement-et-concepts.md`) : d'abord **Apify Store** en paiement à l'événement (distribution incluse, aucune responsabilité du fondateur pour les exécutions des clients), puis Polar pour les ventes directes. | Prix par événement plafonné par l'hôte ; revenu dépensable seulement s'il est versé, vérifié et sorti de la fenêtre de remboursement ; réserve pour litiges ; journal de chaque publication. |
 | **METRICS** | Lecture seule : analytics Cloudflare et commandes, paiements et remboursements du MoR. | Agrégats seulement. **Aucune donnée personnelle des clients ne remonte au cerveau ni dans le dépôt GitHub.** |
 
 Pourquoi un Merchant of Record : vendre au monde entier implique TPS/TVH, TVA UE et sales tax américaine. Le MoR collecte et remet ces taxes. Il n'y a **aucun coût initial**, seulement un pourcentage par vente (taux exacts **à vérifier**). C'est le seul moyen réaliste d'encaisser mondialement sans juriste.
