@@ -240,6 +240,135 @@
               "action": {
                 "type": "string",
                 "enum": [
+                  "PUBLISH_ACTOR"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "actor",
+                  "title",
+                  "description",
+                  "public",
+                  "events"
+                ],
+                "properties": {
+                  "actor": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$",
+                    "description": "Folder name under products/actors/; also the Apify Actor name."
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 60,
+                    "pattern": "\\S"
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 300,
+                    "pattern": "\\S"
+                  },
+                  "public": {
+                    "type": "boolean",
+                    "description": "List in Apify Store after a successful build."
+                  },
+                  "events": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "maxItems": 5,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "name",
+                        "title",
+                        "description",
+                        "price_microusd"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 60,
+                          "pattern": "\\S"
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 300,
+                          "pattern": "\\S"
+                        },
+                        "price_microusd": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 10000000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "ACTOR_STATS"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "actor"
+                ],
+                "properties": {
+                  "actor": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
                   "WORLD"
                 ]
               },

@@ -87,6 +87,17 @@ _TOOL_SCHEMAS = {
     'STATUS': _object({}),
     'RECONCILE': _object({'operation_id': {'type': 'string', 'pattern': '^TASK-[0-9]{4,12}$'}}),
     'SPEND': _object({'request_entries': {'type': 'array', 'items': {'$ref': '#/$defs/json_entry'}}}),
+    'PUBLISH_ACTOR': _object({
+        'actor': {'type': 'string', 'pattern': '^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$',
+                  'description': 'Folder name under products/actors/; also the Apify Actor name.'},
+        'title': _text(60), 'description': _text(300),
+        'public': {'type': 'boolean', 'description': 'List in Apify Store after a successful build.'},
+        'events': _nullable({'type': 'array', 'maxItems': 5, 'items': _object({
+            'name': {'type': 'string', 'pattern': '^[a-z0-9][a-z0-9-]{0,39}$'},
+            'title': _text(60), 'description': _text(300),
+            'price_microusd': _integer(10_000_000, 1)})}),
+    }),
+    'ACTOR_STATS': _object({'actor': {'type': 'string', 'pattern': '^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$'}}),
 }
 
 
@@ -127,7 +138,7 @@ def _validate_field(value, schema):
     kind = schema['type']
     if isinstance(kind, list):
         kind = next(item for item in kind if item != 'null')
-    expected = {'string': str, 'integer': int, 'array': list, 'boolean': bool}[kind]
+    expected = {'string': str, 'integer': int, 'array': list, 'boolean': bool, 'object': dict}[kind]
     if type(value) is not expected:
         raise ValueError('Invalid argument type')
     if 'enum' in schema and value not in schema['enum']:
@@ -139,6 +150,10 @@ def _validate_field(value, schema):
             raise ValueError('Invalid argument format')
     elif kind == 'boolean':
         return
+    elif kind == 'object':
+        _closed(value, set(schema['required']), set(schema['properties']) - set(schema['required']))
+        for key, item in value.items():
+            _validate_field(item, schema['properties'][key])
     elif kind == 'integer':
         if not schema.get('minimum', value) <= value <= schema.get('maximum', value):
             raise ValueError('Invalid integer argument')

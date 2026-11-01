@@ -65,7 +65,7 @@ class DecisionProtocolTests(unittest.TestCase):
 
     def test_schema_covers_all_tools_and_public_world_operations(self):
         kinds = {v['properties']['action']['enum'][0] for v in self.variants()}
-        self.assertEqual(kinds, {'EXEC', 'FETCH', 'STATUS', 'RECONCILE', 'SPEND', 'WORLD'})
+        self.assertEqual(kinds, {'EXEC', 'FETCH', 'STATUS', 'RECONCILE', 'SPEND', 'WORLD', 'PUBLISH_ACTOR', 'ACTOR_STATS'})
         world = [v['properties']['args'] for v in self.variants()
                  if v['properties']['action']['enum'] == ['WORLD']]
         self.assertEqual({v['properties']['op']['enum'][0] for v in world}, {
@@ -73,7 +73,7 @@ class DecisionProtocolTests(unittest.TestCase):
             'fail_mission', 'message', 'transfer_glc', 'reward_glc', 'set_policy', 'cycle',
             'raise_blocker', 'resolve_blocker', 'record_lesson',
         })
-        self.assertEqual(len(self.variants()), 18)
+        self.assertEqual(len(self.variants()), 20)
 
     def test_schema_represents_finance_json_recursively_with_entries_only(self):
         schema = self.protocol.MODEL_SCHEMA

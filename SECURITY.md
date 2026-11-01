@@ -14,6 +14,10 @@ Codex/Claude Code/Cursor restent les CLIs officielles, dans un autre conteneur q
 
 Il n'existe pas de drapeau universel no-tools vérifié pour Codex : la CLI est isolée, en sandboxreadonly, sans les outils externes configurés ; le résultat doit passer la validation du courtier. Les versions/flags/login sont contrôlés avant l'appel. Les conteneurs de réflexion reçoivent un nom unique et sont supprimés sur fin, erreur, timeout ou annulation. Les quotas des abonnements et réglages de facturation du compte restent à vérifier chez les fournisseurs ; le code n'en invente pas la preuve.
 
+## Apify
+
+Le token Apify vit uniquement dans `/opt/globalland/credentials/apify/token` (propriétaire seul, mode 600) et n'est lu que par le contrôle hôte. Il n'est jamais monté dans la boîte des agents ni dans le conteneur de réflexion. Les messages d'erreur renvoyés aux agents ne contiennent que des littéraux, des noms validés et des codes HTTP. Le code publié chez Apify passe par le filtre de secrets. Une mise en vente publique exige l'accord explicite du fondateur (`apify.allow_public`).
+
 ## Argent
 
 SQLite privé est l'autorité locale ; le dépôt public ne peut créer de fonds utilisables. Les preuves sont refusées sans un vérificateur financier installé. Une opération réserve son maximum total avant transmission, avec identité stable. UNKNOWN retient les fonds. Une preuve terminale libère l'excédent ou débite une fois. Une sur-facturation observée est comptée honnêtement et bloque les engagements ; elle n'est pas masquée pour garder un solde positif fictif.

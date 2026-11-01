@@ -13,7 +13,7 @@ import subprocess
 import urllib.parse
 from supervisor import bounded_run, check_secrets, safe_path
 
-TOOL_ACTIONS = {'EXEC', 'FETCH', 'WORLD', 'STATUS', 'SPEND', 'RECONCILE'}
+TOOL_ACTIONS = {'EXEC', 'FETCH', 'WORLD', 'STATUS', 'SPEND', 'RECONCILE', 'PUBLISH_ACTOR', 'ACTOR_STATS'}
 _RULE_MODULES = ('tools.py', 'world.py', 'treasury.py', 'gateway.py', 'supervisor.py', 'decision_protocol.py', 'broker.py')
 # 'Invalid ' + name / 'Unknown ' + key in world.py take code-defined names only.
 _RULE_PATTERN = re.compile(r'(?:Invalid|Unknown) [A-Za-z_]{1,30}(?: [A-Za-z_]{1,30}){0,3}|HTTP [1-5][0-9][0-9]')
@@ -45,7 +45,8 @@ def _rule_messages():
 def rejection_reason(error):
     """Explain a refused tool request so agents can correct the next one."""
     detail = error.args[0] if len(error.args) == 1 and isinstance(error.args[0], str) else None
-    if detail is not None and len(detail) <= 200 and (detail in _rule_messages() or _RULE_PATTERN.fullmatch(detail)):
+    safe = getattr(type(error), 'safe_message', False) is True
+    if detail is not None and len(detail) <= 200 and (safe or detail in _rule_messages() or _RULE_PATTERN.fullmatch(detail)):
         try:
             check_secrets(detail.encode())
             return 'Tool request refused: ' + detail + '. See queue/PROTOCOL.md.'
@@ -90,6 +91,11 @@ def validate_envelope(t):
     elif action=='STATUS' and args:raise ValueError('status takes no arguments')
     elif action=='SPEND':
         if set(args)!={'request'} or not isinstance(args['request'],dict):raise ValueError('spend requires a gateway request')
+    elif action=='PUBLISH_ACTOR':
+        if not {'actor','title','description'}<=set(args) or set(args)-{'actor','title','description','public','events'}:raise ValueError('publish actor requires actor, title and description')
+        if not isinstance(args.get('public',False),bool):raise ValueError('public must be boolean')
+    elif action=='ACTOR_STATS':
+        if set(args)!={'actor'}:raise ValueError('actor stats requires exactly an actor')
     elif action=='RECONCILE':
         if set(args)!={'operation_id'} or not re.fullmatch(r'TASK-[0-9]{4,12}',args.get('operation_id','')):raise ValueError('invalid operation')
     return t
@@ -207,6 +213,12 @@ class Toolbox:
             value=self.world.apply(task['id'],args)
             return {'status':'DONE','output':json.dumps(value,ensure_ascii=False)},{}
         if action=='STATUS':return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':self.treasury.snapshot()},ensure_ascii=False)},{}
+        if action in ('PUBLISH_ACTOR','ACTOR_STATS'):
+            from apify import Publisher
+            publisher=Publisher(self.root,self.config)
+            if action=='ACTOR_STATS':return {'status':'DONE','output':json.dumps(publisher.stats(task),ensure_ascii=False)},{}
+            result=publisher.publish(task)
+            return {'status':Publisher.task_status(result),'output':json.dumps(result,ensure_ascii=False)[:8000]},{}
         from gateway import Gateway
         gateway=Gateway(self.root,self.treasury)
         result=gateway.spend(task) if action=='SPEND' else gateway.reconcile(args['operation_id'])

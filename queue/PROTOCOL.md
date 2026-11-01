@@ -70,6 +70,22 @@ Chaque appel est validé, compté (`max_calls`, `max_actions`) et inscrit dans `
 
 Le conteneur Claude n'a aucun outil intégré (`--tools ''`), seulement ce serveur (`--strict-mcp-config`, `--allowedTools mcp__globalland`). `--safe-mode` désactive aussi les serveurs `--mcp-config` (vérifié avec la CLI 2.1.316) : les personnalisations sont donc exclues explicitement par `--setting-sources ''` et `--disable-slash-commands`. Codex et Cursor gardent le tour à une passe tant que leur pont MCP n'est pas éprouvé.
 
+## Publication sur Apify Store (PUBLISH_ACTOR, ACTOR_STATS)
+
+Premier rail de revenu (voir docs/research/2026-11-01-sprint2-encaissement-et-concepts.md). Le contrôle hôte détient seul le token Apify ; la boîte des agents n'y a jamais accès.
+
+| Action | Arguments | Effet |
+|---|---|---|
+| PUBLISH_ACTOR | actor, title, description, public (bool), events (≤ 5 : name, title, description, price_microusd) ou null | Téléverse `products/actors/<actor>/` (fichiers texte ; `actor-config/` devient `.actor/`), construit, puis applique la mise en vente et les prix par une mise à jour idempotente. |
+| ACTOR_STATS | actor | Exécutions récentes et **estimation** des charges brutes ; jamais un revenu. |
+
+Règles imposées par l'hôte :
+- Fichiers requis : `Dockerfile`, `README.md` et `actor-config/actor.json` (actorSpecification 1, name = actor, version MAJOR.MINOR). Au plus 100 fichiers, 512 Kio chacun, 2 Mio au total, filtre de secrets.
+- Le README doit dire que l'Actor est construit et maintenu par des agents IA autonomes.
+- Prix en micro-USD entiers, plafonnés par `apify.max_event_price_usd`. Mise en vente publique seulement si `apify.allow_public` est vrai et après une construction réussie.
+- Journal `state/apify/<actor>-<empreinte>.json` écrit avant tout appel : republier la même source reprend une construction en cours (résultat PENDING, statut TIMEOUT) sans en relancer une ni créer un second Actor. Une source dont la construction a échoué n'est pas reconstruite ; la fin du journal de construction est renvoyée.
+- Chez Apify, une hausse de prix ou un nouvel événement payant prend effet 14 jours après l'annonce et reste limité à un changement par mois, dès que l'Actor a des utilisateurs payants. Seul un versement Apify vérifié crédite la Banque.
+
 ## Progrès et tableau des blocages
 
 Le progrès se mesure sur des preuves de l'hôte, jamais sur une déclaration d'agent. Entre deux tours think réussis, un **résultat** est une mission passée à COMPLETED ou FAILED, ou une hausse du revenu vérifié cumulé (`revenue_cents` : REVENUE seulement, ni remboursement ni dépôt). Un tour est **productif** s'il a un résultat ou un nouveau chemin sous products/ hors products/research/ et products/receipts/. Réécrire des fichiers, envoyer des messages, réclamer une mission ou ajouter une note de recherche ne suffit pas.

@@ -21,9 +21,9 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { path: { type: 'string', description: 'products/... path' } }, required: ['path'], additionalProperties: false } },
   { name: 'recent_results', description: 'Most recent task results (status and first 2000 characters of output).',
     inputSchema: { type: 'object', properties: {}, additionalProperties: false } },
-  { name: 'submit_action', description: 'Execute one GlobalLand action now, on behalf of an agent, and return its result. EXEC runs a program in the offline sandbox and publishes the listed outputs; FETCH saves a public URL; WORLD changes agents, missions, messages or GLC; STATUS observes. Arguments follow the same contract as the decision actions. Each call consumes the turn budget; a refused call explains the rule it broke.',
+  { name: 'submit_action', description: 'Execute one GlobalLand action now, on behalf of an agent, and return its result. EXEC runs a program in the offline sandbox and publishes the listed outputs; FETCH saves a public URL; WORLD changes agents, missions, messages or GLC; STATUS observes; PUBLISH_ACTOR uploads, builds and (if allowed) lists products/actors/<name> on Apify Store with pay-per-event pricing; ACTOR_STATS reports its runs and estimated charges. Arguments follow the same contract as the decision actions. Each call consumes the turn budget; a refused call explains the rule it broke.',
     inputSchema: { type: 'object', additionalProperties: false, required: ['agent', 'action', 'args'],
-      properties: { agent: AGENT, action: { type: 'string', enum: ['EXEC', 'FETCH', 'WORLD', 'STATUS'] }, args: { type: 'object' } } } },
+      properties: { agent: AGENT, action: { type: 'string', enum: ['EXEC', 'FETCH', 'WORLD', 'STATUS', 'PUBLISH_ACTOR', 'ACTOR_STATS'] }, args: { type: 'object' } } } },
 ];
 
 function send(message) { process.stdout.write(JSON.stringify(message) + '\n'); }

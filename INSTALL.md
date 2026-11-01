@@ -83,6 +83,19 @@ Le script effectue ensuite un lancement immédiat think/queue. Son retour sans e
 
 Un lancement immédiat en échec après « horaires installés » laisse l'horaire installé ; ces deux faits sont distincts. Contrôler world/controller.json : last_turn décrit les essais de modèles et reason_code explique un blocage sans exposer d'exception brute. Un échec transitoire peut être repris par un autre abonnement configuré ; la reprise conserve les contrôles de chaque tâche. Attendre la fin d'une opération Hostinger avant toute installation et vérifier ensuite l'intégrité de l'état et des services ; ne déduire ni une migration ni une réinstallation du seul message d'attente.
 
+## Apify Store (premier rail de revenu)
+
+1. Créer un compte Apify au nom du fondateur, faire la vérification d'identité exigée pour la monétisation, et définir un nom d'utilisateur.
+2. **Plafonner les coûts :** les constructions et essais d'Actors consomment des crédits de plateforme sur ce compte. Rester sur le plan gratuit sans carte, ou fixer une limite d'usage mensuelle dans la facturation Apify : aucune recharge personnelle n'est permise.
+3. Créer un token API et l'installer sans jamais le coller dans GitHub ni dans un chat :
+
+```bash
+sudo install -d -m 700 /opt/globalland/credentials/apify
+sudo sh -c 'umask 077; cat > /opt/globalland/credentials/apify/token'   # coller le token, Entrée, Ctrl-D
+```
+
+4. Activer dans `/opt/globalland/control/config.json` : `"apify": {"enabled": true, "max_event_price_usd": 0.05, "allow_public": false, "build_wait_seconds": 240}`. Laisser `allow_public` à false jusqu'à la vérification d'une première construction privée, puis le passer à true.
+
 ## Banque réelle
 
 Le monde peut faire du travail gratuit avec les abonnements connectés avant le dépôt. La Banque reste UNFUNDED tant qu'un service réel dédié et son vérificateur ne sont pas configurés. Voir docs/INTEGRATIONS.md pour les possibilités ; aucun faux reçu fourni dans les tests ne doit être importé dans l'instance réelle.

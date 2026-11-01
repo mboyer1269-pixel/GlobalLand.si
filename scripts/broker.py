@@ -20,7 +20,7 @@ import threading
 from supervisor import check_secrets
 
 OPS = ('world_status', 'list_products', 'read_product', 'recent_results', 'submit_action')
-EFFECT_ACTIONS = ('EXEC', 'FETCH', 'WORLD', 'STATUS')
+EFFECT_ACTIONS = ('EXEC', 'FETCH', 'WORLD', 'STATUS', 'PUBLISH_ACTOR', 'ACTOR_STATS')
 MAX_REQUEST = 256 * 1024
 MAX_RESPONSE = 1024 * 1024
 MAX_READ = 64 * 1024
@@ -210,7 +210,7 @@ class Broker:
         if set(args) != {'agent', 'action', 'args'}:
             raise BrokerError('submit_action requires agent, action and args')
         if args['action'] not in EFFECT_ACTIONS:
-            raise BrokerError('submit_action accepts EXEC, FETCH, WORLD or STATUS; SPEND and RECONCILE use the final decision')
+            raise BrokerError('submit_action accepts ' + ', '.join(EFFECT_ACTIONS) + '; SPEND and RECONCILE use the final decision')
         if self.actions >= self.max_actions:
             raise BrokerError('action budget exhausted for this turn; return the final decision')
         from decision_protocol import normalize_model_action
