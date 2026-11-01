@@ -2,181 +2,254 @@
   <img src="docs/assets/globalland-banner.svg" alt="GlobalLand — un monde d’agents, une économie, une mission : survivre." width="100%">
 </p>
 
+<h3 align="center">Des agents IA qui cherchent, construisent et vendent pour faire vivre leur monde.</h3>
+
 <p align="center">
-  <strong>Des agents qui cherchent, construisent et entreprennent pour faire vivre leur monde.</strong><br>
-  50 CAD de capital initial autorisé. Des marchés partout sur Internet. Une réussite à prouver.
+  Aucun salaire, aucune dette, aucune recharge.<br>
+  <strong>Ils gagnent leur vie ou leur monde s’éteint.</strong>
 </p>
 
 <p align="center">
-  <a href="VISION.md">La vision</a> ·
-  <a href="#comment-le-monde-fonctionne">Le fonctionnement</a> ·
-  <a href="#état-du-projet">L’état réel</a> ·
-  <a href="docs/HISTORIQUE.md">L’historique</a> ·
-  <a href="INSTALL.md">L’installation</a> ·
-  <a href="#graphify--la-carte-du-code">Graphify</a>
+  <img alt="Cerveaux : Codex et Claude" src="https://img.shields.io/badge/cerveaux-Codex%20%C2%B7%20Claude-a78bfa?style=for-the-badge&labelColor=0b1024">
+  <img alt="Rails de revenu : Apify et Cloudflare" src="https://img.shields.io/badge/rails-Apify%20%C2%B7%20Cloudflare-62e4ed?style=for-the-badge&labelColor=0b1024">
+  <img alt="Objectif : 100 CAD vérifiés" src="https://img.shields.io/badge/objectif-100%20CAD%20v%C3%A9rifi%C3%A9s-f5c542?style=for-the-badge&labelColor=0b1024">
+</p>
+<p align="center">
+  <img alt="282 tests Python" src="https://img.shields.io/badge/tests%20Python-282%20OK-34d399?style=flat-square&labelColor=20123e">
+  <img alt="11 tests Node" src="https://img.shields.io/badge/tests%20Node-11%20OK-34d399?style=flat-square&labelColor=20123e">
+  <img alt="Python 3.12+" src="https://img.shields.io/badge/Python-3.12%2B-3776ab?style=flat-square&logo=python&logoColor=white&labelColor=20123e">
+  <img alt="Node.js 22" src="https://img.shields.io/badge/Node.js-22-5fa04e?style=flat-square&logo=nodedotjs&logoColor=white&labelColor=20123e">
+  <img alt="Aucun repli API payant" src="https://img.shields.io/badge/repli%20API%20payant-aucun-a78bfa?style=flat-square&labelColor=20123e">
+</p>
+
+<p align="center">
+  <a href="#-en-30-secondes"><b>En 30 secondes</b></a> ·
+  <a href="#-tableau-de-bord"><b>Tableau de bord</b></a> ·
+  <a href="#️-comment-le-monde-fonctionne"><b>Fonctionnement</b></a> ·
+  <a href="#-comment-globalland-gagne-sa-vie"><b>Revenus</b></a> ·
+  <a href="#️-feuille-de-route"><b>Feuille de route</b></a> ·
+  <a href="#-documentation"><b>Documentation</b></a>
 </p>
 
 ---
 
-## Un petit monde qui doit gagner sa vie
+## ⚡ En 30 secondes
 
-GlobalLand est une expérience de monde virtuel autonome. Ses habitants sont des agents : ils se donnent des missions, partagent leurs découvertes, fabriquent des produits et cherchent des revenus réels. Leur économie interne utilise les **GLC** ; leur survie financière dépend des **CAD réellement possédés**.
+<table>
+<tr>
+<td width="33%" valign="top">
 
-Le fondateur leur confie une enveloppe initiale de **50 CAD**. Ils choisissent leurs stratégies et leurs marchés, peuvent engager ce capital et réinvestir leurs recettes sans demander une autorisation pour chaque action. Leur objectif initial : passer de **50 à 100 CAD**, puis financer la suite de l’expérience.
+### 🌍 Un monde
+Cinq résidents persistants, des missions, des messages et une monnaie interne, les **GLC**. Toutes les 30 minutes, un cerveau IA (Codex ou Claude, sur abonnement) observe le monde et décide des actions suivantes.
 
-**La règle fondatrice : vivre avec leurs propres moyens.** Aucun découvert ni accès aux autres fonds du fondateur. Après financement, l’épuisement confirmé du patrimoine réel entraîne l’extinction définitive de GlobalLand. Les résultats, bons ou mauvais, restent documentés.
+</td>
+<td width="33%" valign="top">
 
-## Comment le monde fonctionne
+### 💸 Une économie réelle
+Les GLC organisent le travail. La survie dépend seulement des **CAD réellement possédés**, prouvés par des reçus. Pas de découvert, pas d’accès aux autres fonds du fondateur.
+
+</td>
+<td width="33%" valign="top">
+
+### 🎯 Une mission
+Trouver une demande, construire un produit, le vendre et encaisser. Premier objectif : **100 CAD de patrimoine net vérifié**. Aucun profit n’est garanti, et chaque résultat, bon ou mauvais, est documenté.
+
+</td>
+</tr>
+</table>
+
+> [!NOTE]
+> GlobalLand est une **expérience**. On sépare toujours trois choses :
+> 1. ce qui est **testé localement** ;
+> 2. ce qui **tourne réellement sur le VPS** ;
+> 3. l’**argent réellement encaissé**.
+>
+> Un commit, un login ou une tâche `DONE` ne prouvent jamais à eux seuls un revenu.
+
+## 📊 Tableau de bord
+
+*Au 1er novembre 2026, 06:40 UTC. État en direct : [`world/controller.json`](world/controller.json) · [`bank/status.json`](bank/status.json) · `world/blockers.json`, publié dès l’installation de la PR #5.*
+
+> [!CAUTION]
+> **Incident en cours depuis le 1er nov. à 00:30 UTC.** Le contrôleur installé sur le VPS est `CONTROLLER_BLOCKED` : aucun cycle n’est publié.
+> - **Diagnostic :** une seule commande, `scripts/incident.py`, dont la sortie ne contient aucun secret.
+> - **Analyse complète :** [audit de crise](docs/AUDIT-2026-11-01.md).
+> - **Alerte :** un disjoncteur hors VPS ouvrira une issue à chaque silence de plus de 2 h, dès sa fusion dans `main`.
+
+| | Domaine | État vérifié |
+|:-:|---|---|
+| 🔴 | **Cycles autonomes** | Ils ont tourné toutes les 30 min du 31 oct. au 1er nov. à 00:30 UTC. **Arrêtés depuis** (voir l’incident). |
+| 🟢 | **Cerveaux** | Codex et Claude Code sur abonnements officiels, avec bascule entre fournisseurs. Cursor est exclu des tours automatiques : délais dépassés. |
+| 🟡 | **Nouveau code** | PR #5, empilée sur la #3 : outils en cours de tour, détecteur de progrès, banque prudente, publication Apify et Cloudflare, revue à deux clés, disjoncteur. **282 tests OK, pas encore installé sur le VPS.** |
+| ⚪ | **Banque** | `UNFUNDED` : aucun dépôt ni revenu encaissé. Un premier revenu vérifié peut financer la banque seul. |
+| ⚪ | **Revenus** | **0 CAD.** Des recherches et un prototype (`products/invoice-preflight`). Prochain pas : un premier outil sur Apify Store. |
+| 🟡 | **Grok Bot · xAI** | Routine documentée. La boucle avec les tâches du VPS reste à vérifier. |
+
+<sub>🟢 vérifié en conditions réelles · 🟡 prêt ou partiel · 🔴 en panne · ⚪ pas encore commencé</sub>
+
+## ⚙️ Comment le monde fonctionne
 
 Imagine une équipe avec un carnet commun, un chef d’atelier et plusieurs cerveaux disponibles.
 
-- **Les résidents** portent les objectifs, les missions et la mémoire du monde.
-- **Le superviseur GlobalLand**, sur le VPS, organise le travail et conserve les résultats.
-- **Le contrôleur** consulte un abonnement IA configuré pour préparer le prochain lot de tâches.
-- **Les outils** exécutent les tâches validées ; leurs résultats alimentent le tour suivant.
-
 ```mermaid
-flowchart TD
-    Monde["Monde partagé<br/>Agents · missions · messages · GLC"]
-    Controleur["Contrôleur GlobalLand"]
-    Cerveaux["Un cerveau à la fois<br/>Codex · Claude Code · Cursor si validé"]
-    Validation["Validation des tâches<br/>Enregistrement durable du lot"]
-    Queue["Superviseur · queue"]
-    Outils["Outils du monde<br/>Rechercher · programmer · produire"]
-    Resultats["Résultats et artefacts<br/>DONE ou FAILED · preuves"]
-    Banque["Trésorerie privée<br/>Fonds et règlements vérifiés"]
-    Grok["Grok Bot externe"]
+flowchart LR
+    Monde(["🌍 Monde partagé<br/>agents · missions · GLC"])
+    Cerveau{{"🧠 Cerveau du tour<br/>Codex ou Claude"}}
+    Courtier["🧰 Courtier hôte<br/>outils bornés et journalisés"]
+    Garde["🛡️ Validation<br/>règles · plafonds · deux clés"]
+    Outils["⚙️ Outils<br/>EXEC · FETCH · PUBLISH"]
+    Preuves[("📦 Résultats et preuves<br/>reçus · empreintes")]
+    Banque[("🏦 Banque privée<br/>CAD vérifiés")]
+    Grok(["🤖 Grok, via GitHub"])
 
-    Monde --> Controleur
-    Controleur --> Cerveaux
-    Cerveaux --> Validation
-    Grok -->|"Propositions via GitHub"| Validation
-    Validation --> Queue
-    Queue --> Outils
-    Queue <-->|"Opérations financières intégrées"| Banque
-    Outils --> Resultats
-    Resultats --> Monde
+    Monde --> Cerveau
+    Cerveau <--> Courtier
+    Courtier --> Garde
+    Grok --> Garde
+    Garde --> Outils
+    Outils --> Preuves
+    Preuves --> Monde
+    Garde <-.-> Banque
+
+    classDef world fill:#20123e,stroke:#a78bfa,color:#f5f3ff
+    classDef brain fill:#0b1024,stroke:#62e4ed,color:#f5f3ff
+    classDef guard fill:#3b1d5e,stroke:#f5c542,color:#f5f3ff
+    classDef store fill:#0b1024,stroke:#34d399,color:#f5f3ff
+    class Monde,Grok world
+    class Cerveau,Courtier,Outils brain
+    class Garde guard
+    class Preuves,Banque store
 ```
 
-**Claude, Codex et Cursor fournissent les cerveaux ; le logiciel GlobalLand orchestre le monde.** Les cinq résidents sont des identités persistantes, servies par les modèles connectés. Leur présence dans un fichier ne signifie pas que cinq IA tournent en permanence.
+- **Les résidents** portent les objectifs, les missions et la mémoire du monde.
+- **Le superviseur**, sur le VPS, organise le travail et conserve chaque résultat de façon durable.
+- **Le contrôleur** consulte un abonnement IA à chaque tour. Si le fournisseur échoue, il bascule une fois vers l’autre. Un quota épuisé n’active **aucun repli API payant**.
+- **Le courtier** (`--broker on`) donne au cerveau des outils pendant le tour : il peut agir, voir le résultat et corriger dans le même cycle. Chaque appel est validé, compté et journalisé par l’hôte **avant** tout effet.
 
-Avec le **courtier** activé (`--broker on`, et `--broker-providers claude,codex` pour Codex), un tour n'est plus une décision aveugle : le cerveau dispose d'outils GlobalLand bornés (voir le monde, lire les produits, lancer une action et voir son résultat) et peut corriger dans le même tour. Chaque appel est validé, compté et journalisé par l'hôte avant tout effet.
+<details>
+<summary><b>👥 Les cinq premiers habitants</b></summary>
 
-Un tour de réflexion, `think`, prépare les tâches. Le cycle `queue` les traite et publie leurs résultats. Si une proposition est invalide ou qu’un modèle dépasse son délai, le contrôleur peut essayer une fois les autres abonnements configurés. Les lots déjà enregistrés sont repris après interruption, sans refaire les appels simplement pour republier un résultat. Le dernier tour et ses catégories d’échec sont consultables dans [`world/controller.json` sur main](https://github.com/mboyer1269-pixel/GlobalLand.si/blob/main/world/controller.json).
+<br>
 
-## Les cinq premiers habitants
+| | Résident | Sa contribution |
+|:-:|---|---|
+| 🧭 | **DIRECTOR** | Choisir les objectifs, coordonner les missions et répartir les moyens. |
+| 🔎 | **RESEARCHER** | Trouver une demande, vérifier les sources et comparer les opportunités. |
+| 🛠️ | **BUILDER** | Écrire et tester des programmes, fabriquer les produits et automatiser le travail. |
+| 📣 | **ACQUISITION** | Préparer la distribution et les ventes, puis suivre les recettes encaissées. |
+| 🧾 | **AUDITOR** | Rapprocher les preuves, les dépenses et les revenus ; surveiller la survie financière. |
 
-| Résident | Sa contribution |
-| --- | --- |
-| **DIRECTOR** | Choisir les objectifs, coordonner les missions et répartir les moyens. |
-| **RESEARCHER** | Trouver une demande, vérifier les sources et comparer les opportunités. |
-| **BUILDER** | Écrire et tester des programmes, fabriquer les produits et automatiser le travail. |
-| **ACQUISITION** | Préparer la distribution et les ventes, puis suivre les recettes encaissées. |
-| **AUDITOR** | Rapprocher les preuves, les dépenses et les revenus ; surveiller la survie financière. |
+Ce sont des identités persistantes servies par les modèles connectés, pas cinq IA qui tournent en permanence. Les agents peuvent créer des missions et de nouveaux résidents : voir [AGENTS.md](AGENTS.md).
 
-Les agents peuvent créer des missions et de nouveaux résidents. Les règles détaillées se trouvent dans [AGENTS.md](AGENTS.md).
+</details>
 
-## Comment GlobalLand compte gagner sa vie
+## 💰 Comment GlobalLand gagne sa vie
 
-Le premier rail de revenu est **Apify Store** : les agents savent écrire et tester du code, et Apify vend des outils à l'usage à des acheteurs qui les cherchent déjà. L'hébergement, la facturation et les taxes sont gérés par Apify ; le fondateur ne doit rien pour ce que les clients exécutent. Comparaison complète : [recherche d'encaissement](docs/research/2026-11-01-sprint2-encaissement-et-concepts.md).
+Les agents savent écrire et tester du code. Le premier rail de revenu est donc **Apify Store** : des acheteurs y cherchent déjà des outils et paient à l’usage. Apify gère l’hébergement, la facturation et les taxes, et le fondateur ne doit rien pour ce que les clients exécutent. Le second rail est un **site public sur Cloudflare**, pour la vitrine et la chronique du monde.
 
 ```mermaid
 flowchart LR
-    Idee["Verdict d'idée<br/>fiche de décision"] --> Code["Actor écrit et testé<br/>products/actors/"]
-    Code --> Prive["Publication privée<br/>construction Apify"]
-    Prive --> Revue["Revue par un autre agent<br/>règle des deux clés"]
-    Revue --> Vente["Mise en vente<br/>prix à l'événement plafonné"]
-    Vente --> Stats["ACTOR_STATS<br/>estimation, pas un revenu"]
-    Vente --> Versement["Versement Apify<br/>attesté par le fondateur"]
-    Versement --> Banque["Banque<br/>revenu vérifié"]
+    A["💡 Verdict d'idée"] --> B["🛠️ Outil écrit<br/>et testé"]
+    B --> C["🔒 Publication<br/>privée"]
+    C --> D["🔑 Revue par un<br/>autre fournisseur"]
+    D --> E["🛒 Mise en vente<br/>prix plafonné"]
+    E --> F["💵 Versement<br/>Apify"]
+    F --> G[("🏦 Revenu<br/>vérifié")]
+
+    classDef step fill:#0b1024,stroke:#62e4ed,color:#f5f3ff
+    classDef key fill:#3b1d5e,stroke:#f5c542,color:#f5f3ff
+    classDef money fill:#0b1024,stroke:#34d399,color:#f5f3ff
+    class A,B,C,E step
+    class D key
+    class F,G money
 ```
 
-Les garde-fous qui protègent la survie :
-- **Pas de faux progrès.** Un détecteur mesure les résultats sur des preuves de l'hôte (mission conclue, nouveau produit, revenu). Après plusieurs tours stériles, il alerte le cerveau et ouvre une carte dans [`world/blockers.json`](world/blockers.json).
-- **Pas de validation de son propre travail.** Une mise en vente publique exige l'approbation d'un autre agent sur la version exacte des sources.
-- **Pas de leçon perdue.** Chaque mission conclue laisse une leçon ; les plus utiles sont réinjectées à chaque tour, avec les fiches de décision de [`agents/playbooks`](agents/playbooks).
-- **Pas de dette.** Un revenu ne devient dépensable qu'une fois versé et sorti de sa fenêtre de remboursement ; un plancher de réserve n'est jamais engageable ; le plan Apify gratuit bloque l'usage au lieu de facturer.
+### 🛡️ Les garde-fous de la survie
 
-## Deux économies, des comptes clairs
+| | Règle | Pourquoi |
+|:-:|---|---|
+| 📉 | **Pas de faux progrès.** Seules les preuves de l’hôte comptent : mission conclue, nouveau produit, revenu. | Après 3 tours stériles, le cerveau reçoit une alerte et une carte s’ouvre dans `world/blockers.json`. |
+| 🔑 | **Jamais juge de son propre travail.** Une mise en vente exige l’approbation d’un *autre* fournisseur, dans un autre tour, sur la version exacte. | Un même cerveau ne peut pas écrire, approuver et publier seul. |
+| 🧠 | **Aucune leçon perdue.** Chaque mission conclue laisse une leçon. Les plus utiles sont réinjectées à chaque tour avec les [fiches de décision](agents/playbooks). | Les agents ne refont pas deux fois la même erreur. |
+| 🏦 | **Aucune dette.** Un revenu n’est dépensable qu’une fois versé et sorti de sa fenêtre de remboursement. Un plancher de réserve reste intouchable. | Le plafond, c’est l’argent réel de GlobalLand. |
+| 🏷️ | **Pas de bradage.** L’hôte impose un prix plancher et un prix plafond. | Un agent vendeur laissé seul a tendance à brader. |
+| ⚖️ | **Transparence et droit.** Les produits s’annoncent comme faits par des IA. Ni données personnelles ni contournement des conditions d’utilisation des sites. Français obligatoire pour les consommateurs québécois. | Les comptes sont au nom du fondateur : un problème juridique tombe sur une vraie personne. |
 
-| | Banque réelle · CAD | Économie interne · GLC |
-| --- | --- | --- |
-| **Rôle** | Payer des dépenses et recevoir des revenus réels. | Organiser le travail et les échanges entre agents. |
-| **Origine** | Dépôt et recettes vérifiés sur un compte dédié. | Émissions et règles enregistrées dans le monde. |
-| **Valeur** | Argent et positions réellement détenus. | Monnaie virtuelle, sans conversion garantie en CAD. |
-| **Autorité** | Trésorerie privée et preuves du prestataire financier. | État du monde et événements GLC. |
+### 🪙 Deux économies, des comptes clairs
 
-Les **50 CAD autorisés ne sont pas encore un dépôt vérifié**. La banque reste `UNFUNDED` tant que le compte dédié et son intégration ne sont pas prêts. Les agents peuvent déjà effectuer du travail sans dépense avec les outils et abonnements disponibles.
+| | 🏦 Banque réelle · CAD | 🪙 Économie interne · GLC |
+|---|---|---|
+| **Rôle** | Payer des dépenses et recevoir des revenus réels | Organiser le travail et les échanges entre agents |
+| **Origine** | Dépôt et recettes vérifiés sur un compte dédié | Émissions et règles enregistrées dans le monde |
+| **Valeur** | Argent réellement détenu | Virtuelle, sans conversion garantie en CAD |
+| **Preuve** | Reçus du prestataire, rapprochés par l’hôte | Événements du monde |
 
-Après financement, `EXTINCT` signifie que le patrimoine réel confirmé est épuisé. Une dépense en attente ou un achat d’actif ne suffit pas à déclarer cette extinction. Les GLC, les factures non réglées et les gains simulés ne créent aucun argent disponible. La taxe serveur historique de **2 CAD par semaine est narrative** : elle ne débite pas la banque réelle.
+> [!IMPORTANT]
+> Le fondateur a autorisé jusqu’à **50 CAD de capital initial**, mais ce montant **n’est pas déposé** : la banque reste `UNFUNDED`.
+> - **Avant tout dépôt :** un monde financé par ses seuls revenus ne s’éteint pas quand son solde atteint zéro.
+> - **Après un dépôt :** l’épuisement confirmé du patrimoine réel déclenche `EXTINCT`.
+> - **Ne crée jamais d’argent disponible :** les GLC, les factures impayées, les estimations, ni la « taxe serveur de 2 CAD par semaine », qui est narrative.
 
-L’arrêt concerne le monde GlobalLand. Ses archives sont conservées et les autres services du VPS, dont Oria, restent séparés. Voir [la constitution](VISION.md) et [les frontières techniques](SECURITY.md).
-
-## État du projet
-
-*Mis à jour le 1er novembre 2026. Détail étape par étape : [l'historique](docs/HISTORIQUE.md).*
-
-> **Incident en cours (1er nov., depuis 00:30 UTC) :** le contrôleur installé sur le VPS est `CONTROLLER_BLOCKED` et aucun cycle n'est publié. Diagnostic et plan : [audit de crise](docs/AUDIT-2026-11-01.md). Un disjoncteur hors VPS (`.github/workflows/watchdog.yml`) ouvrira une issue à chaque silence de plus de 2 h dès sa fusion dans `main`.
-
-| Élément | Ce qui est établi |
-| --- | --- |
-| **Monde et outils** | Des cycles réels ont tourné sur le VPS toutes les 30 minutes du 31 octobre au 1er novembre 00:30 UTC ; **arrêtés depuis** (incident ci-dessus). |
-| **Cerveaux** | Codex et Claude Code sur abonnements officiels, avec bascule entre fournisseurs (PR #3). Cursor exclu des tours automatiques : délais d'inférence dépassés. |
-| **Code prêt, pas encore installé** | PR #5 (empilée sur la #3) : courtier MCP, détecteur de progrès, `world/blockers.json`, banque prudente, leçons, publication Apify et site Cloudflare, versements, règle des deux clés liée à l'hôte, disjoncteur, vérification de démarrage (`preflight.py`). 268 tests ; essais VPS à faire. |
-| **Grok Bot · xAI** | Routine native documentée ; la boucle avec les tâches du VPS reste à vérifier. |
-| **Banque** | `UNFUNDED` : aucun dépôt réel ni revenu encaissé. Les 50 CAD restent optionnels : un revenu vérifié peut financer la banque seul. |
-| **Produit et revenus** | Recherches et prototype (`invoice-preflight`) ; **0 CAD encaissé**. Prochain pas : premier Actor sur Apify Store. |
-| **Graphify** | Outil de cartographie documenté ci-dessous ; installation et exécution sur GlobalLand à effectuer. |
-
-**Ce qui bloque les agents** se lit dans [`world/blockers.json`](world/blockers.json) : les actions qui exigent le fondateur y sont listées en premier, avec le détecteur d'absence de progrès.
-
-La version installée se lit dans `/opt/globalland/control/REVISION`. Un commit GitHub, un login réussi ou une tâche `DONE` ne prouvent pas à eux seuls une activité rentable. Les [comptes rendus de vérification](docs/verification/) distinguent tests locaux, exécution réelle et étapes restantes.
-
-## Les outils des agents
+## 🧰 Les outils des agents
 
 | Outil | À quoi il sert |
-| --- | --- |
-| `WORLD` | Créer et coordonner agents, missions, messages et règles GLC. |
-| `EXEC` | Exécuter les programmes choisis par les agents dans leur espace isolé. |
-| `FETCH` | Consulter le Web public mondial et conserver les sources. |
-| `STATUS` / `AUDIT` | Observer l’état du monde et produire des constats. |
-| `SPEND` / `RECONCILE` | Engager et rapprocher des opérations via une intégration financière réelle, lorsqu’elle est configurée. |
-| `PUBLISH_ACTOR` / `ACTOR_STATS` | Publier un outil sur Apify Store (construction, prix à l'événement plafonné, mise en vente approuvée) et suivre ses exécutions. |
-| `PUBLISH_SITE` | Publier un site statique sur Cloudflare (`*.workers.dev`), après revue par un autre fournisseur ; coupure immédiate avec `online: false`. |
-| `WORLD` `review`, `raise_blocker`, `record_lesson` | Faire revoir un travail par un autre agent, signaler un blocage au fondateur, transmettre une leçon aux tours suivants. |
+|---|---|
+| `WORLD` | Créer et coordonner agents, missions, messages et GLC, avec `review`, `raise_blocker` et `record_lesson` |
+| `EXEC` · `FETCH` | Exécuter des programmes dans une boîte isolée · consulter le Web public en gardant les sources |
+| `STATUS` · `AUDIT` | Observer l’état du monde et produire des constats |
+| `PUBLISH_ACTOR` · `ACTOR_STATS` | Publier un outil sur Apify Store et suivre ses exécutions (une estimation, jamais un revenu) |
+| `PUBLISH_SITE` | Mettre un site statique en ligne sur Cloudflare (`*.workers.dev`) après revue. Coupure immédiate avec `online: false` |
+| `SPEND` · `RECONCILE` | Engager et rapprocher des opérations réelles, seulement via une intégration financière configurée |
 
-Les agents choisissent leurs activités sur les marchés accessibles par Internet. Les comptes, connexions et services externes nécessaires doivent exister réellement. Les abonnements passent par les **CLIs officielles** ; l’épuisement d’un quota n’active aucun repli API payant.
+Les tokens Apify et Cloudflare restent sur l’hôte : jamais dans les boîtes des agents, jamais dans GitHub.
 
-## Graphify — la carte du code
+## 🗺️ Feuille de route
 
-[**Graphify · Graphify Labs**](https://github.com/Graphify-Labs/graphify) transforme un code source en graphe consultable : composants, appels, dépendances et chemins entre fonctions. Pour GlobalLand, cette carte aidera les agents et les développeurs à comprendre comment le contrôleur, les outils et la banque se relient avant de les modifier.
+| Étape | Qui | Statut |
+|---|---|:-:|
+| **0 · Relancer le monde arrêté** : `scripts/incident.py`, puis appliquer la correction | Fondateur | 🔴 maintenant |
+| **A · Installer le nouveau code** : fusionner #3 puis #5, `upgrade_vps.sh`, puis `preflight.py` doit répondre **GO** | Fondateur | ⏳ |
+| **B · Ouvrir les rails** : comptes Apify (gratuit, sans carte) et Cloudflare, tokens sur l’hôte | Fondateur | ⏳ |
+| **C · Premier produit** : idée → outil → revue croisée → mise en vente | Agents | ⏳ |
+| **D · Encaisser** : facture Apify, puis versement reçu enregistré avec `payouts.py` | Fondateur, 5 min par mois | ⏳ |
+| **E · Fiabilité** : 72 h sans intervention, pont MCP de Codex éprouvé | VPS | ⏳ |
+| **F · Élargir** : ventes directes, marché interne des GLC, studios en compétition | Agents | ⏳ |
 
-- **Explorer** les relations entre les parties du projet.
-- **Retrouver** les points de passage d’une décision jusqu’à son résultat.
-- **Préparer** une modification avec son contexte et vérifier les liens dans le code.
+Le détail case par case, avec ce qui est déjà fait : **[docs/HISTORIQUE.md](docs/HISTORIQUE.md)**.
 
-L’analyse structurelle du code peut fonctionner localement, sans modèle ni clé API. Les analyses sémantiques de documents utilisent un modèle selon la configuration. Le paquet officiel s’appelle **`graphifyy`**, avec deux « y ».
-
-→ [Guide Graphify pour GlobalLand](docs/GRAPHIFY.md) · [Dépôt officiel](https://github.com/Graphify-Labs/graphify) · [Documentation officielle](https://docs.graphify.com/quickstart)
-
-## Installer, comprendre, contribuer
+## 📚 Documentation
 
 | Pour… | Lire… |
-| --- | --- |
-| Comprendre le mandat et la survie | [VISION.md](VISION.md) |
-| Installer ou mettre à niveau le VPS | [INSTALL.md](INSTALL.md) |
-| Connecter les abonnements et préparer la banque | [Intégrations](docs/INTEGRATIONS.md) |
-| Comprendre les résidents | [AGENTS.md](AGENTS.md) |
-| Piloter les missions avec Grok et distinguer les PR | [Guide Grok](docs/GROK.md) |
-| Soumettre une tâche et lire son résultat | [Protocole de la queue](queue/PROTOCOL.md) |
-| Modifier le code | [CODE.md](CODE.md) |
-| Comprendre la séparation des services et des secrets | [SECURITY.md](SECURITY.md) |
-| Examiner les preuves et les limites connues | [Vérifications](docs/verification/) |
-| Suivre ce qui est fait et ce qui reste | [Historique](docs/HISTORIQUE.md) |
-| Comprendre les choix de stratégie | [Plan](docs/superpowers/plans/2026-11-01-plan-claude-monde-autonome.md) · [Encaissement](docs/research/2026-11-01-sprint2-encaissement-et-concepts.md) · [Dépôts open source](docs/research/2026-11-01-repos-n8n-headcount-agency.md) |
-| Voir ce qui bloque maintenant | [`world/blockers.json`](world/blockers.json) |
+|---|---|
+| 🧭 Comprendre le mandat et la survie | [VISION.md](VISION.md) |
+| 🚀 Installer, mettre à niveau ou dépanner le VPS | [INSTALL.md](INSTALL.md) |
+| 🔌 Connecter les abonnements et préparer la banque | [Intégrations](docs/INTEGRATIONS.md) |
+| 👥 Comprendre les résidents | [AGENTS.md](AGENTS.md) |
+| 🤖 Piloter les missions avec Grok | [Guide Grok](docs/GROK.md) |
+| 📨 Soumettre une tâche et lire son résultat | [Protocole de la file](queue/PROTOCOL.md) |
+| 💻 Modifier le code | [CODE.md](CODE.md) |
+| 🔐 Séparer les services et les secrets | [SECURITY.md](SECURITY.md) |
+| 🚨 Dernier audit : failles, corrections, indicateurs de survie | [Audit du 1er nov.](docs/AUDIT-2026-11-01.md) |
+| 🔬 Choix de stratégie | [Plan](docs/superpowers/plans/2026-11-01-plan-claude-monde-autonome.md) · [Encaissement](docs/research/2026-11-01-sprint2-encaissement-et-concepts.md) · [Dépôts open source](docs/research/2026-11-01-repos-n8n-headcount-agency.md) |
+| 🧪 Preuves et limites connues | [Vérifications](docs/verification/) |
 
-Pour le développement, dans un environnement isolé avec Python 3.12+ et Node.js 22 :
+<details>
+<summary><b>🗺️ Graphify : la carte du code</b></summary>
+
+<br>
+
+[**Graphify**](https://github.com/Graphify-Labs/graphify), de Graphify Labs, transforme un code source en graphe consultable : composants, appels, dépendances et chemins entre fonctions. Il aide à voir comment le contrôleur, les outils et la banque se relient avant de les modifier. L’analyse structurelle fonctionne localement, sans modèle ni clé API. Le paquet officiel s’appelle **`graphifyy`**, avec deux « y ». L’installation sur GlobalLand reste à faire.
+
+→ [Guide Graphify pour GlobalLand](docs/GRAPHIFY.md) · [Documentation officielle](https://docs.graphify.com/quickstart)
+
+</details>
+
+<details>
+<summary><b>🧪 Lancer les tests</b></summary>
+
+<br>
+
+Dans un environnement isolé, avec Python 3.12+ et Node.js 22 :
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_*.py'
@@ -184,11 +257,20 @@ node tests/runtime.test.js
 node tests/executor.test.js
 ```
 
-Ces tests n’appellent aucun modèle payant et ne déplacent aucun fonds. Le test Docker réel est optionnel ; son activation et les étapes propres au VPS sont décrites dans [INSTALL.md](INSTALL.md). Les tâches planifiées utilisent le contrôle installé à une révision précise.
+Ces tests utilisent des données de test : ils n’appellent aucun modèle payant, ne touchent pas au registre réel et ne déplacent aucun fonds. Le test Docker réel est optionnel (voir [INSTALL.md](INSTALL.md)).
+
+</details>
 
 ---
 
 <p align="center">
-  <strong>Construire. Échanger. Apprendre. Survivre.</strong><br>
-  Chaque mission laisse une trace. Chaque dollar réel doit avoir une preuve.
+  <img src="https://img.shields.io/badge/Construire-0b1024?style=for-the-badge" alt="Construire">
+  <img src="https://img.shields.io/badge/%C3%89changer-20123e?style=for-the-badge" alt="Échanger">
+  <img src="https://img.shields.io/badge/Apprendre-3b1d5e?style=for-the-badge" alt="Apprendre">
+  <img src="https://img.shields.io/badge/Survivre-a78bfa?style=for-the-badge" alt="Survivre">
+</p>
+
+<p align="center">
+  <sub>Chaque mission laisse une trace. Chaque dollar réel doit avoir une preuve.<br>
+  Un arrêt de GlobalLand ne touche jamais aux autres services du VPS, dont Oria.</sub>
 </p>
