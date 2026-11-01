@@ -14,19 +14,21 @@ Chaque étape donne quatre choses : la **commande ou le check exact**, le **rés
 | Phase | État | Où |
 | --- | --- | --- |
 | 30 premières minutes | 2/7 cochées ; relance CI à faire par toi (403 pour l'agent) ; login et quotas = ta machine | ci-dessous |
-| Phase 0 — CI et preuves | 0.1, 0.3, 0.4 ✅ · 0.2 en attente de ta relance | ci-dessous |
+| Phase 0 — CI et preuves | 0.1, 0.3 ✅ · 0.4 = hypothèse (lire `control/REVISION` sur le VPS) · 0.2 en attente de ta relance | ci-dessous |
 | Phase 1 — Codex | 1.1, 1.3 ✅ · **bogue trouvé et corrigé** : `tools.view_image` ignoré par Codex 0.166.0 · 1.2/1.7 bloquées par le réseau de la session | #5 `a5ebb2c` |
 | Phase 2 — Cursor | bloquée : `cursor.com`, `downloads.cursor.com`, `api2.cursor.sh` refusés par le réseau de la session ; mécanisme `EBUSY`/`EROFS` prouvé à part | `docs/2026-11-01-lot1.md` |
-| Phase 3 — Correctifs | 3.4, 3.5, 3.6 ✅ · 3.1 partie Codex ✅ · 3.2, 3.3 attendent la CLI Cursor | #5 `45a4596`, `ada661a`, `cd0de38` |
+| Phase 3 — Correctifs | 3.4, 3.5, 3.6 ✅ · 3.1 partie Codex ✅ (faux vert corrigé après revue Codex, `d1d9cf1`) · 3.2, 3.3 attendent la CLI Cursor | #5 `45a4596`, `ada661a`, `cd0de38`, `d1d9cf1` |
 
-Suite de #5 après correctifs : `Ran 297 tests … OK (skipped=4)` (3 tests de contrat CLI ignorés sans `GLOBALLAND_CLI_CONTRACT=1`).
+Suite de #5 après correctifs (`d1d9cf1`) : `Ran 304 tests … OK (skipped=5)` (4 tests de contrat CLI ignorés sans `GLOBALLAND_CLI_CONTRACT=1` ; avec Codex 0.166.0 : 12 tests OK).
+
+**Revue indépendante par Codex (2026-11-01)** sur #5 `bd17528` et #8 `6dab2e5` : verdict « à corriger d'abord », 3 corrections demandées, toutes appliquées : faux vert du contrat CLI (`d1d9cf1`), commande 0.3 qui masquait les échecs, case 0.4 décochée. Limite reconnue : le contrat n'est pas un inventaire exhaustif des outils du modèle.
 
 ## Ce que le dépôt prouve déjà
 
 | Fait vérifié | Preuve |
 | --- | --- |
 | Cinq tours THINK publiés aux 30 minutes, de 22:00 à 00:00 UTC le 31 oct., puis `CONTROLLER_BLOCKED` à 00:30 UTC le 1er nov. Aucun commit depuis. | `git log --format='%cI %s' origin/main \| grep -E 'THINK\|READINESS'` |
-| Le VPS ne roule **pas** `main`. Le texte publié (`inspect state/private/controller-failure.json`) n'existe dans aucun fichier de `main`. Il apparaît au commit `7e4859d` de la PR #3. Le champ `reason_code`, ajouté à `479b990`, est absent du statut publié. Le contrôle installé est donc entre `7e4859d` et `0a0fd24`, ce qui concorde avec le `4c5de50` annoncé dans #3. | `git log --oneline --all -S "controller-failure.json" -- scripts/supervisor.py` et `git log --oneline --all -S "reason_code=details" -- scripts/supervisor.py` |
+| *(Hypothèse, voir 0.4.)* Le VPS ne roule **pas** `main`. Le texte publié (`inspect state/private/controller-failure.json`) n'existe dans aucun fichier de `main`. Il apparaît au commit `7e4859d` de la PR #3. Le champ `reason_code`, ajouté à `479b990`, est absent du statut publié. Le contrôle installé serait donc entre `7e4859d` et `0a0fd24`, ce qui concorde avec le `4c5de50` annoncé dans #3. | `git log --oneline --all -S "controller-failure.json" -- scripts/supervisor.py` et `git log --oneline --all -S "reason_code=details" -- scripts/supervisor.py` |
 | Dans ce contrôle installé, le fournisseur est `providers[nombre de THINK-*.json % len(providers)]`. Un échec ne crée aucun fichier THINK : le **même** fournisseur est rechoisi à chaque cron, sans bascule. La bascule arrive seulement avec `479b990`, qui n'est pas déployé. | `git show 4c5de50:scripts/controller.py \| grep -n "providers\["` (ligne 220) |
 | La CI rouge de #3 en 4 s n'est **pas un bug de code**. GitHub n'a pas démarré le job : *« The job was not started because recent account payments have failed or your spending limit needs to be increased »*. Le dépôt est **privé**, donc Actions consomme des minutes facturées. Toutes les exécutions échouent jusqu'au 31 oct. à 23:xx UTC et réussissent depuis le 1er nov. à 00:00 UTC. Le dernier run de #3 date du 31 oct. à 22:32 : il est périmé. | `gh api repos/mboyer1269-pixel/GlobalLand.si/check-runs/124677296547/annotations` |
 | Les tests passent en local : `main` 60 Python OK (1 ignoré) plus les tests Node ; PR #3 159 Python OK (1 ignoré), Node OK et `bash -n` OK. | Section Phase 0, étape 0.3 |
@@ -55,7 +57,7 @@ Suite de #5 après correctifs : `Ran 297 tests … OK (skipped=4)` (3 tests de c
 - [ ] **20–25 min : reproduire la réécriture de `cli-config.json`** (étape 2.5). **Preuve :** taille avant/après.
   - **État (2026-11-01, Claude Code) :** mécanisme isolé sans la CLI : fichier monté `--bind -o ro` → `rename FAILED EBUSY`, `in-place write FAILED EROFS` ; témoin `rename OK`. Reproduction avec la CLI Cursor bloquée (réseau).
 - [x] **25–30 min : tests du dépôt sur `main` et sur #3** (étape 0.3). **Preuve :** `OK (skipped=1)` sur les deux.
-  - **Preuve (2026-11-01, Claude Code) :** `main a29552d` : `Ran 60 tests … OK (skipped=1)` ; #3 `9f3499e` : `Ran 159 tests … OK (skipped=1)` ; #5 `33ccd6f` : `Ran 287 tests … OK (skipped=1)` ; node et `bash -n` à 0 sur les trois.
+  - **Preuve (2026-11-01, Claude Code) :** `main a29552d` : `Ran 60 tests … OK (skipped=1)` ; #3 `9f3499e` : `Ran 159 tests … OK (skipped=1)` ; #5 `33ccd6f` : `Ran 287 tests … OK (skipped=1)` ; node à 0 sur les trois ; `bash -n` refait script par script (voir 0.3) : 6, 8 et 8 scripts OK.
 
 ---
 
@@ -74,21 +76,24 @@ Suite de #5 après correctifs : `Ran 297 tests … OK (skipped=4)` (3 tests de c
   - **Preuve :** sortie de `gh pr checks`.
   - **Si échec rapide encore :** facturation Actions (lien en Sources). Option gratuite : vérifier le quota de minutes inclus du mois. Ne rien acheter.
 - [x] **0.3 Tests locaux sur trois révisions, sans toucher à ton checkout**
-  - **Preuve (2026-11-01, Claude Code) :** trois `VERT` : main 60 OK, #3 159 OK, #5 287 OK (chacun `skipped=1`).
+  - **Preuve (2026-11-01, Claude Code, refaite après la revue Codex) :** avec `pipefail` et `bash -n` script par script : `origin/main a29552d VERT : Ran 60 tests … OK (skipped=1) ; 6 scripts` · `#3 9f3499e VERT : Ran 159 tests … OK (skipped=1) ; 8 scripts` · `#5 bd17528 VERT : Ran 297 tests … OK (skipped=4) ; 8 scripts`. Témoin : un test volontairement en échec ajouté sur `main` rend la commande `ROUGE`. L'ancienne commande affichait `VERT` dans ce cas (revue Codex).
   - **Commande :**
     ```bash
     cd GlobalLand.si && git fetch origin
+    set -o pipefail   # sinon `| tail -1` cache l'échec de unittest
     for ref in origin/main origin/feature/cursor-subscription origin/claude/globalland-autonomous-world-nokkck; do
-      d=/tmp/gl-$(echo $ref | tr '/' '-'); git worktree add -f "$d" "$ref" >/dev/null 2>&1
+      d=/tmp/gl-$(echo $ref | tr '/' '-'); git worktree add -f --detach "$d" "$ref" >/dev/null 2>&1
+      # `bash -n a.sh b.sh` ne vérifie que a.sh : un script à la fois.
       ( cd "$d" && node tests/runtime.test.js >/dev/null && node tests/executor.test.js >/dev/null \
-        && python3 -m unittest discover -s tests -p 'test_*.py' 2>&1 | tail -1 && bash -n scripts/*.sh && echo "$ref VERT" ) || echo "$ref ROUGE"
+        && python3 -m unittest discover -s tests -p 'test_*.py' 2>&1 | tail -1 \
+        && for f in scripts/*.sh; do bash -n "$f" || exit 1; done && echo "$ref VERT" ) || echo "$ref ROUGE"
     done
     ```
   - **Attendu :** `OK (skipped=1)` puis `VERT` sur les trois révisions. La #3 prend environ 60 s.
   - **Preuve :** les trois lignes `VERT`.
   - **Si `ROUGE` :** relancer seulement la suite fautive avec `-v`, copier le nom du test, puis ouvrir un correctif sur la branche concernée. Ne pas fusionner.
-- [x] **0.4 Confirmer quelle révision le VPS roule (local, Git seulement)**
-  - **Preuve (2026-11-01, Claude Code) :** `world/controller.json` publié : `{"state": "CONTROLLER_BLOCKED", "reason": "…inspect state/private/controller-failure.json…"}`, sans `reason_code` ; `-S controller-failure.json` → `7e4859d` ; `-S reason_code=details` → `479b990`.
+- [ ] **0.4 Confirmer quelle révision le VPS roule (local, Git seulement)**
+  - **État (2026-11-01, Claude Code) : décochée après la revue Codex.** Hypothèse seulement : la projection publiée est historique ; une mise à jour du VPS sans nouvelle publication laisserait exactement la même projection. Seule la lecture de `/opt/globalland/control/REVISION` sur le VPS (écrit par `setup_vps.sh`/`upgrade_vps.sh`) le confirme. Indices Git : `world/controller.json` publié : `{"state": "CONTROLLER_BLOCKED", "reason": "…inspect state/private/controller-failure.json…"}`, sans `reason_code` ; `-S controller-failure.json` → `7e4859d` ; `-S reason_code=details` → `479b990`.
   - **Commande :** `git show origin/main:world/controller.json` et les deux `git log -S` du tableau plus haut.
   - **Attendu :** pas de `reason_code`, donc un contrôle entre `7e4859d` et `0a0fd24`.
   - **Preuve :** la sortie.
