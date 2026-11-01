@@ -193,6 +193,28 @@ class ProviderCircuitBreakerTests(unittest.TestCase):
         self.assertEqual(self.seen, ['codex'])
         self.assertEqual(self.health(), {})
 
+    def test_observed_incident_success_success_then_same_provider_blocked_every_cycle(self):
+        # VPS, 31 oct. : cinq tours réussis puis CONTROLLER_BLOCKED, le même
+        # fournisseur rechoisi à chaque cron. Ici : deux succès, puis claude
+        # refusé (quota) à chaque cycle de 30 min ; chaque cycle doit quand
+        # même produire une décision par codex.
+        quota = lambda: ValueError('subscription auth/quota/CLI blocker; no paid fallback')
+        now = 1800000000
+        providers = []
+        for cycle in range(6):
+            outcomes = {'codex': self.good, 'claude': self.good if cycle < 2 else quota()}
+            self.seen.clear()
+            turn, files = self.tick(outcomes, now=now + cycle * 1800)
+            self.assertEqual(len(files), 1, (cycle, self.seen))
+            saved = json.loads((self.root / 'state/controller' / (turn + '.json')).read_text())
+            providers.append(saved['provider'])
+            if cycle >= 2:
+                self.assertIn('codex', self.seen)
+                self.assertLessEqual(self.seen.count('claude'), 1)
+            self.publish_all()
+        self.assertEqual(providers[2:], ['codex'] * 4)
+        self.assertGreaterEqual(self.health()['claude']['failures'], 1)
+
     def test_paused_provider_is_still_tried_when_the_healthy_one_fails(self):
         (self.root / 'state/private').mkdir(parents=True, exist_ok=True)
         (self.root / 'state/private/provider-health.json').write_text(json.dumps(
