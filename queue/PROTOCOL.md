@@ -87,6 +87,28 @@ Règles imposées par l'hôte :
 - Journal `state/apify/<actor>-<empreinte>.json` écrit avant tout appel : republier la même source reprend une construction en cours (résultat PENDING, statut TIMEOUT) sans en relancer une ni créer un second Actor. Une source dont la construction a échoué n'est pas reconstruite ; la fin du journal de construction est renvoyée.
 - Chez Apify, une hausse de prix ou un nouvel événement payant prend effet 14 jours après l'annonce et reste limité à un changement par mois, dès que l'Actor a des utilisateurs payants. Seul un versement Apify vérifié crédite la Banque.
 
+## Sites publics (PUBLISH_SITE)
+
+| Arguments | Effet |
+|---|---|
+| `site`, `dry_run: true` | Valide `products/sites/<site>/` et rend `review_digest`, sans aucun appel externe. |
+| `site` | Déploie le site comme un Worker Cloudflare `<préfixe><site>`, active `https://<préfixe><site>.<compte>.workers.dev/` et vérifie que la page publique sert le nouvel `index.html` (ONLINE_VERIFIED ; sinon ONLINE_UNVERIFIED, statut TIMEOUT). |
+| `site`, `online: false` | Coupure d'urgence (route workers.dev désactivée), sans revue, même si les sources sont invalides. |
+
+Règles de l'hôte :
+- Fichiers texte, et binaires sous la forme `<fichier>.b64` ; au plus 200 fichiers et 1,5 Mo ; filtre de secrets ; fichiers cachés et `receipts/` jamais publiés.
+- `index.html` doit dire que le site est fait par des agents IA autonomes.
+- Seuls les scripts portant le préfixe configuré sont touchés.
+- Journal `state/sites/` écrit avant tout appel.
+
+## Règle des deux clés (revues liées à l'hôte)
+
+Une mise en vente publique sur Apify ou une mise en ligne de site exige que la dernière revue (`review`) de l'empreinte exacte (`review_digest`) soit un APPROVE dont l'hôte a enregistré la provenance (`host_turn`, `host_provider`), indépendante :
+- des fournisseurs qui ont écrit le contenu, retrouvés par `products/receipts/<TASK>.json` → tour → fournisseur ;
+- du tour et du fournisseur qui demandent la publication.
+
+Les principaux indépendants sont un autre fournisseur, une tâche externe (Grok via GitHub : `EXTERNAL`) ou le fondateur (`review_admin.py`). Les noms d'agents ne prouvent rien et tout champ `host_*` fourni par un agent est refusé.
+
 ## Progrès et tableau des blocages
 
 Le progrès se mesure sur des preuves de l'hôte, jamais sur une déclaration d'agent. Entre deux tours think réussis, un **résultat** est une mission passée à COMPLETED ou FAILED, ou une hausse du revenu vérifié cumulé (`revenue_cents` : REVENUE seulement, ni remboursement ni dépôt). Un tour est **productif** s'il a un résultat ou un nouveau chemin sous products/ hors products/research/ et products/receipts/. Réécrire des fichiers, envoyer des messages, réclamer une mission ou ajouter une note de recherche ne suffit pas.

@@ -5,11 +5,12 @@
 > 2. **monde autonome éprouvé sur le VPS réel** ;
 > 3. **revenus externes réellement encaissés**.
 >
-> Aujourd'hui : (1) oui pour le code des PR #3 et #5 ; (2) partiellement, car les cycles autonomes tournent mais sans la version la plus récente du code ; (3) **non, 0 CAD encaissé**.
+> Aujourd'hui : (1) oui pour le code des PR #3 et #5 ; (2) **non depuis le 1er nov. 00:30 UTC** : le contrôleur installé est `CONTROLLER_BLOCKED` et plus aucun cycle n'est publié (voir [l'audit de crise](AUDIT-2026-11-01.md)) ; (3) **non, 0 CAD encaissé**.
 
 ## Où on en est, en cinq lignes
 
-- Le monde tourne sur le VPS : un cycle de réflexion toutes les 30 minutes depuis le 31 octobre, avec Codex et Claude sur abonnements.
+- **Incident en cours : le monde est arrêté depuis le 1er nov. à 00:30 UTC** (`CONTROLLER_BLOCKED`, aucun commit depuis). La cause est dans `state/private/controller-failure.json` sur le VPS, que seul le fondateur peut lire.
+- Avant l'incident, un cycle de réflexion tournait toutes les 30 minutes depuis le 31 octobre, avec Codex et Claude sur abonnements.
 - Les agents ont fabriqué de la recherche et un prototype (`products/invoice-preflight`), puis ont tourné en rond, faute de canal de publication et de vente.
 - Le code pour en sortir est écrit et testé (PR #5) : cerveau à plusieurs actions par cycle, détecteur d'absence de progrès, tableau des blocages, banque prudente, publication et vente sur Apify Store.
 - **Rien de cela n'est encore installé sur le VPS.** Le prochain pas appartient au fondateur : fusionner, installer, ouvrir le compte Apify.
@@ -31,16 +32,23 @@
 | 10 | 1er nov. | **Audit du Sprint 1** : 11 défauts corrigés (dont risque de double action et publication Git concurrente) | PR #5 | Skill `code-review`, tests de régression |
 | 11 | 1er nov. | **Sprint 2** : recherche d'encaissement (Apify d'abord), règle de réserve, leçons réinjectées, publication Apify, versements vers la Banque | PR #5 | `docs/research/…` ; tests |
 | 12 | 1er nov. | **Inspiration open source** : règle des deux clés et quatre fiches de décision (headcount, agency-agents) ; n8n écarté pour sa licence | PR #5 | `docs/research/2026-11-01-repos-n8n-headcount-agency.md` |
+| 13 | 1er nov. | **Audit de crise** : monde arrêté sans alerte → disjoncteur hors VPS ; faille des deux clés (un cerveau signait deux fois) corrigée ; état du monde borné sous 1 Mio ; `PUBLISH_SITE` (Cloudflare) ; vérification de démarrage GO/NO-GO ; prix plancher ; garde-fous juridiques ; 9 défauts de revue corrigés | PR #5 | [`docs/AUDIT-2026-11-01.md`](AUDIT-2026-11-01.md) ; 268 tests |
 
 **État de la CI :** verte sur chaque commit de la PR #5 vérifié.
 
 ## Ce qui reste, étape par étape
+
+### Étape 0 — Relancer le monde arrêté *(toi, maintenant)*
+- [ ] Sur le VPS : `sudo cat /opt/globalland/state/private/controller-failure.json` pour lire la cause exacte.
+- [ ] Si c'est un quota ou une session expirée : reconnecter le fournisseur (`login_subscriptions.sh <fournisseur>`), puis lancer un `think` manuel.
+- [ ] Sinon : passer directement à l'étape A, car la version de la PR #3 bascule automatiquement vers l'autre fournisseur.
 
 ### Étape A — Mettre le nouveau code en service *(toi, environ 1 h, une fois)*
 - [ ] Relire puis fusionner la **PR #3** (Codex).
 - [ ] Fusionner la **PR #5**. Si la branche de la #3 est conservée, repointer d'abord la #5 vers `main`.
 - [ ] Installer la version fusionnée sur le VPS : `upgrade_vps.sh` avec le SHA revu.
 - [ ] Activer le courtier : `configure_subscriptions.py … --broker on`.
+- [ ] `sudo python3 /opt/globalland/control/preflight.py` → doit afficher **GO**.
 - [ ] Lancer un `think` manuel, puis vérifier `state/broker/THINK-*/calls.jsonl`, `world/controller.json` (OPERATIONAL) et `world/blockers.json`.
 
 ### Étape B — Ouvrir le premier rail de revenu *(toi, environ 30 min, une fois)*
@@ -48,6 +56,7 @@
 - [ ] Créer un token API et l'installer dans `/opt/globalland/credentials/apify/token` (mode 600). Ne jamais le coller dans GitHub ni dans un chat.
 - [ ] Ouvrir un compte Wise ou PayPal réservé à GlobalLand, pour recevoir les versements (seuil de 20 $ US).
 - [ ] Activer Apify dans `config.json` avec `allow_public: false` et `require_review: true`.
+- [ ] Compte **Cloudflare gratuit** : `account_id` dans le bloc `cloudflare` de `config.json`, token « Workers Scripts: Edit » dans `/opt/globalland/credentials/cloudflare/token` (mode 600). Premier site : la chronique publique du monde (`PUBLISH_SITE`).
 
 ### Étape C — Premier produit vendable *(les agents, sans toi)*
 - [ ] Les agents choisissent un Actor, avec un verdict d'idée enregistré en leçon.
@@ -68,7 +77,6 @@
 - [ ] Routine Grok éprouvée et coordinateur de secours.
 
 ### Étape F — Élargir l'économie *(après un premier revenu)*
-- [ ] Action PUBLISH vers Cloudflare Pages (directive donnée à Codex).
 - [ ] Ventes directes via Polar, avec la règle de réserve (fenêtre de remboursement de 60 jours).
 - [ ] Marché interne des GLC pour le temps de calcul, studios en compétition avec critère d'abandon.
 - [ ] Vérification automatique des versements (API Wise, si elle est accessible à un compte personnel canadien : non vérifié).

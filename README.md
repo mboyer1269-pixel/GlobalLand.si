@@ -116,11 +116,13 @@ L’arrêt concerne le monde GlobalLand. Ses archives sont conservées et les au
 
 *Mis à jour le 1er novembre 2026. Détail étape par étape : [l'historique](docs/HISTORIQUE.md).*
 
+> **Incident en cours (1er nov., depuis 00:30 UTC) :** le contrôleur installé sur le VPS est `CONTROLLER_BLOCKED` et aucun cycle n'est publié. Diagnostic et plan : [audit de crise](docs/AUDIT-2026-11-01.md). Un disjoncteur hors VPS (`.github/workflows/watchdog.yml`) ouvrira une issue à chaque silence de plus de 2 h dès sa fusion dans `main`.
+
 | Élément | Ce qui est établi |
 | --- | --- |
-| **Monde et outils** | Des cycles réels tournent sur le VPS toutes les 30 minutes depuis le 31 octobre ; missions, programmes et artefacts publiés avec empreintes. |
+| **Monde et outils** | Des cycles réels ont tourné sur le VPS toutes les 30 minutes du 31 octobre au 1er novembre 00:30 UTC ; **arrêtés depuis** (incident ci-dessus). |
 | **Cerveaux** | Codex et Claude Code sur abonnements officiels, avec bascule entre fournisseurs (PR #3). Cursor exclu des tours automatiques : délais d'inférence dépassés. |
-| **Code prêt, pas encore installé** | PR #5 (empilée sur la #3) : courtier MCP, détecteur de progrès, `world/blockers.json`, banque prudente, leçons, publication Apify, versements, règle des deux clés. CI verte ; essais VPS à faire. |
+| **Code prêt, pas encore installé** | PR #5 (empilée sur la #3) : courtier MCP, détecteur de progrès, `world/blockers.json`, banque prudente, leçons, publication Apify et site Cloudflare, versements, règle des deux clés liée à l'hôte, disjoncteur, vérification de démarrage (`preflight.py`). 268 tests ; essais VPS à faire. |
 | **Grok Bot · xAI** | Routine native documentée ; la boucle avec les tâches du VPS reste à vérifier. |
 | **Banque** | `UNFUNDED` : aucun dépôt réel ni revenu encaissé. Les 50 CAD restent optionnels : un revenu vérifié peut financer la banque seul. |
 | **Produit et revenus** | Recherches et prototype (`invoice-preflight`) ; **0 CAD encaissé**. Prochain pas : premier Actor sur Apify Store. |
@@ -140,6 +142,7 @@ La version installée se lit dans `/opt/globalland/control/REVISION`. Un commit 
 | `STATUS` / `AUDIT` | Observer l’état du monde et produire des constats. |
 | `SPEND` / `RECONCILE` | Engager et rapprocher des opérations via une intégration financière réelle, lorsqu’elle est configurée. |
 | `PUBLISH_ACTOR` / `ACTOR_STATS` | Publier un outil sur Apify Store (construction, prix à l'événement plafonné, mise en vente approuvée) et suivre ses exécutions. |
+| `PUBLISH_SITE` | Publier un site statique sur Cloudflare (`*.workers.dev`), après revue par un autre fournisseur ; coupure immédiate avec `online: false`. |
 | `WORLD` `review`, `raise_blocker`, `record_lesson` | Faire revoir un travail par un autre agent, signaler un blocage au fondateur, transmettre une leçon aux tours suivants. |
 
 Les agents choisissent leurs activités sur les marchés accessibles par Internet. Les comptes, connexions et services externes nécessaires doivent exister réellement. Les abonnements passent par les **CLIs officielles** ; l’épuisement d’un quota n’active aucun repli API payant.

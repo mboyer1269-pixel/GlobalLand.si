@@ -96,6 +96,37 @@ sudo sh -c 'umask 077; cat > /opt/globalland/credentials/apify/token'   # coller
 
 4. Activer dans `/opt/globalland/control/config.json` : `"apify": {"enabled": true, "max_event_price_usd": 0.05, "allow_public": false, "require_review": true, "build_wait_seconds": 240}`. `require_review` impose la règle des deux clés : une mise en vente publique exige l'approbation (WORLD `review`) de la version exacte des sources par un agent autre que celui qui publie. Laisser `allow_public` à false jusqu'à la vérification d'une première construction privée, puis le passer à true.
 
+## Cloudflare : sites publics (PUBLISH_SITE)
+
+1. Créer un compte Cloudflare gratuit au nom du fondateur, puis choisir un sous-domaine workers.dev (Workers & Pages > Overview).
+2. Créer un token API **limité à ce compte** avec la seule permission « Workers Scripts : Edit ». Cloudflare ne permet pas de restreindre un token à un seul script : l'hôte ne touche donc qu'aux scripts préfixés `globalland-`.
+3. Installer le token sans le coller dans GitHub ni dans un chat :
+   ```bash
+   sudo install -d -m 700 /opt/globalland/credentials/cloudflare
+   sudo sh -c 'umask 077; cat > /opt/globalland/credentials/cloudflare/token'   # coller, Entrée, Ctrl-D
+   ```
+4. Activer dans `config.json` : `"cloudflare": {"enabled": true, "account_id": "<32 caractères hexadécimaux>", "script_prefix": "globalland-", "require_review": true}`.
+5. Coupure d'urgence d'un site : tâche `PUBLISH_SITE {"site": "<nom>", "online": false}`, sans revue.
+
+## Vérifier que tout est prêt
+
+```bash
+sudo python3 /opt/globalland/control/preflight.py
+```
+Le verdict GO ou NO-GO liste chaque manque avec sa correction, sans jamais afficher un secret. Les éléments OPTIONAL (courtier, Apify, Cloudflare) n'empêchent pas le démarrage.
+
+## Être prévenu quand le monde s'arrête
+
+Le workflow `.github/workflows/watchdog.yml` vérifie `main` chaque heure, depuis GitHub, sans le VPS. Si le superviseur se tait plus de 2 h, si le contrôleur est bloqué, STALE ou DEGRADED, ou si des actions attendent le fondateur, il ouvre une issue « GlobalLand : le monde a besoin d'attention ». GitHub envoie un courriel à l'ouverture, puis l'issue est mise à jour en silence. Elle se ferme d'elle-même au rétablissement. Le workflow s'active une fois fusionné dans `main`.
+
+## Revue d'une mise en vente par le fondateur
+
+Si un seul fournisseur IA est configuré, ou pour trancher une revue :
+```bash
+sudo python3 /opt/globalland/control/review_admin.py approve --actor <nom> --digest <review_digest>
+sudo python3 /opt/globalland/control/review_admin.py approve --site <nom> --digest <review_digest>
+```
+
 ### Chaque mois : versements Apify vers la Banque
 
 Apify n'expose aucune API de versement. Deux gestes du fondateur, moins de 5 minutes par mois :

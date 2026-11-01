@@ -18,6 +18,10 @@ Il n'existe pas de drapeau universel no-tools vérifié pour Codex : la CLI est 
 
 Le token Apify vit uniquement dans `/opt/globalland/credentials/apify/token` (propriétaire seul, mode 600) et n'est lu que par le contrôle hôte. Il n'est jamais monté dans la boîte des agents ni dans le conteneur de réflexion. Les messages d'erreur renvoyés aux agents ne contiennent que des littéraux, des noms validés et des codes HTTP. Le code publié chez Apify passe par le filtre de secrets. Une mise en vente publique exige l'accord explicite du fondateur (`apify.allow_public`).
 
+## Cloudflare et revues
+
+Le token Cloudflare vit uniquement dans `/opt/globalland/credentials/cloudflare/token` (mode 600) et n'est lu que par le contrôle hôte. Comme Cloudflare ne restreint pas un token à un seul script, l'hôte ne touche qu'aux scripts portant le préfixe configuré. La provenance d'une revue (`host_turn`, `host_provider`) est fixée par l'hôte ; un agent qui fournit un champ `host_*` est refusé. Une revue n'autorise une publication que si elle est indépendante des auteurs du contenu et du publieur (scripts/review.py). Revue de sécurité du 2026-11-01 : la seule faille confirmée, une auto-approbation par un même cerveau sous deux noms, est corrigée par cette provenance.
+
 ## Argent
 
 SQLite privé est l'autorité locale ; le dépôt public ne peut créer de fonds utilisables. Les preuves sont refusées sans un vérificateur financier installé. Une opération réserve son maximum total avant transmission, avec identité stable. UNKNOWN retient les fonds. Une preuve terminale libère l'excédent ou débite une fois. Une sur-facturation observée est comptée honnêtement et bloque les engagements ; elle n'est pas masquée pour garder un solde positif fictif.
