@@ -13,10 +13,10 @@ umask 077
 STAMP=$(date -u +%Y%m%dT%H%M%SZ)
 BACKUP="$ROOT/backups/upgrade-$STAMP"
 install -d -m 700 "$BACKUP"
-CRON_BACKUP="$BACKUP/cron"
-if [[ -f /etc/cron.d/globalland ]]; then mv /etc/cron.d/globalland "$CRON_BACKUP"; fi
-restore_cron() { if [[ -f $CRON_BACKUP ]]; then install -m 644 "$CRON_BACKUP" /etc/cron.d/globalland; fi; }
+source "$HERE/scripts/cron_pause.sh"
+restore_cron() { restore_globalland_cron /etc/cron.d "$BACKUP"; }
 trap restore_cron EXIT
+pause_globalland_cron /etc/cron.d "$BACKUP"
 exec 9>"$ROOT/state/supervisor.lock"
 flock -x 9
 # SQLite and task journals are quiescent under the same supervisor lock.
@@ -24,7 +24,7 @@ install -d -m 755 "$ROOT/releases"
 tar -czf "$BACKUP/state-before.tgz" -C "$ROOT" control state source.git ssh releases
 RELEASE="$ROOT/releases/$REV"
 install -d -m 755 "$ROOT/releases" "$RELEASE"
-for file in "$HERE"/scripts/*.py "$HERE"/scripts/*.js "$HERE"/scripts/*.sh "$HERE"/scripts/decision.schema.json; do install -m 644 "$file" "$RELEASE/$(basename "$file")"; done
+for file in "$HERE"/scripts/*.py "$HERE"/scripts/*.js "$HERE"/scripts/*.sh "$HERE"/scripts/*.json; do install -m 644 "$file" "$RELEASE/$(basename "$file")"; done
 printf '%s\n' "$REV" > "$RELEASE/REVISION"
 install -m 644 "$ROOT/control/compose.yml" "$RELEASE/compose.yml"
 python3 - "$ROOT" "$RELEASE" <<'PY'

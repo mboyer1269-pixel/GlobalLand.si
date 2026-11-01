@@ -15,7 +15,7 @@ GL_ROOT=/opt/globalland
 umask 077
 mkdir -p "$GL_ROOT"/{control,ssh,state,work}
 chmod 755 "$GL_ROOT" "$GL_ROOT/control" "$GL_ROOT/work"
-for file in "$HERE"/scripts/*.py "$HERE"/scripts/*.js "$HERE"/scripts/*.sh "$HERE"/scripts/decision.schema.json; do
+for file in "$HERE"/scripts/*.py "$HERE"/scripts/*.js "$HERE"/scripts/*.sh "$HERE"/scripts/*.json; do
  install -m 644 "$file" "$GL_ROOT/control/$(basename "$file")"
 done
 printf '%s\n' "$REV" > "$GL_ROOT/control/REVISION"

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "editor": {
+    "vimMode": false
+  },
+  "permissions": {
+    "allow": [],
+    "deny": [
+      "Shell(*)",
+      "Write(**)",
+      "Read(/home/node/**)",
+      "WebFetch(*)",
+      "Mcp(*:*)"
+    ]
+  },
+  "approvalMode": "allowlist",
+  "sandbox": {
+    "readBoundary": "workspace"
+  }
+}

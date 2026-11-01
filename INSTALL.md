@@ -19,7 +19,7 @@ sudo bash scripts/upgrade_vps.sh SHA_COMPLET_REVU
 sudo python3 /opt/globalland/control/supervisor.py status
 ```
 
-Le script désactive temporairement uniquement le fichier cron GlobalLand, attend son verrou, sauvegarde contrôle/état/Git/clé dédiée/releases, installe une release versionnée et conserve les credentials. Il restaure les anciens horaires queue/daily ; il ne lance aucun modèle et ne prétend pas avoir financé la Banque. Ne jamais supprimer les SQLite/WAL/journaux pour changer de version. Le fichier `backups/upgrade-date/state-before.tgz` est privé et contient la clé dédiée ; ne pas le publier.
+Le script suspend temporairement uniquement les fichiers cron globalland (queue/daily) et globalland-think s'ils existent, attend leur verrou partagé, sauvegarde contrôle/état/Git/clé dédiée/releases, installe une release versionnée et conserve les credentials. Le piège de sortie restaure aussi les horaires déjà suspendus si la préparation échoue à mi-chemin ; les copies sont conservées sous backups/upgrade-date/cron-globalland et cron-globalland-think. Il ne lance aucun modèle et ne prétend pas avoir financé la Banque. Ne jamais supprimer les SQLite/WAL/journaux pour changer de version. Le fichier `backups/upgrade-date/state-before.tgz` est privé et contient la clé dédiée ; ne pas le publier.
 
 ## Smoke test gratuit de v3
 
@@ -63,15 +63,23 @@ sudo python3 /opt/globalland/control/supervisor.py queue
 
 Le drapeau d'attestation suppose que tu as effectivement vérifié les comptes. Il n'est pas une preuve automatisée de leur facturation. Pour utiliser un seul abonnement, fournir `--providers codex` ou `--providers claude`. Aucun repli API ni achat de crédits n'est effectué si un quota est atteint.
 
-Vérifier une décision THINK, des tâches produites et leurs résultats/artefacts sur GitHub avant d'activer la réflexion périodique. Ajouter ensuite dans un fichier dédié `/etc/cron.d/globalland-think` mode644 :
+Vérifier une décision THINK, des tâches produites et leurs résultats/artefacts sur GitHub avant d'activer la réflexion périodique. Après les tours réellement publiés de Codex et Claude, l'opérateur root peut lancer depuis son checkout administratif au SHA exact revu :
 
-```cron
-SHELL=/bin/bash
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-*/5 * * * * root /usr/bin/python3 /opt/globalland/control/supervisor.py think >> /var/log/globalland/think.log 2>&1
+```bash
+python3 scripts/start_autonomy.py
 ```
 
-Le verrou est commun aux trois cycles ; les agents pensent et travaillent entre les cycles. La rotation `/var/log/globalland/*.log` existante couvre ce nouveau journal. Ne pas toucher aux cron ou conteneurs Oria.
+Le script recontrôle le service cron, la version installée, les tours publiés et les connexions CLI. Il conserve les attestations d'usage existantes, sauvegarde la configuration puis sélectionne codex/claude. L'image et la connexion Cursor restent en place ; Cursor n'est pas sélectionné pour ces tours automatiques. Il écrit atomiquement un unique horaire toutes les30 minutes, sans remplacer un horaire différent existant et sans toucher aux tâches queue/daily ou Oria. Un échec d'installation de l'horaire avant sa publication restaure la configuration précédente. Le cron appelle exclusivement le contrôle installé, jamais le checkout administratif. Aucune mise à niveau du contrôle ou de l'image n'est nécessaire pour cette opération.
+
+L'horaire dédié `/etc/cron.d/globalland-think` mode644 contient :
+
+```cron
+*/30 * * * * root /usr/bin/python3 /opt/globalland/control/supervisor.py think >> /var/log/globalland/think.log 2>&1 && /usr/bin/python3 /opt/globalland/control/supervisor.py queue >> /var/log/globalland/think.log 2>&1
+```
+
+Le script effectue ensuite un lancement immédiat think/queue. Son retour sans erreur ne suffit pas à qualifier chaque tâche de réussie : vérifier les nouveaux résultats et leurs artefacts dans GitHub, puis un tour ultérieur déclenché à :00 ou :30 avec le journal `/var/log/globalland/think.log`. Les connexions et quotas restent des dépendances réelles ; aucun résultat commercial n'est garanti. Le verrou est commun aux trois cycles et la rotation `/var/log/globalland/*.log` couvre le nouveau journal. Pour arrêter la réflexion périodique, déplacer seulement ce fichier cron dans le dossier de sauvegarde privée ; garder queue/daily pour la reprise des travaux déjà soumis. La configuration antérieure se trouve dans le dossier backups/autonomy-* annoncé par le script ; ne pas restaurer un ancien solde ou rejouer des opérations financières.
+
+Un lancement immédiat en échec après « horaires installés » laisse l'horaire installé ; ces deux faits sont distincts. Contrôler world/controller.json : last_turn décrit les essais de modèles et reason_code explique un blocage sans exposer d'exception brute. Un échec transitoire peut être repris par un autre abonnement configuré ; la reprise conserve les contrôles de chaque tâche. Attendre la fin d'une opération Hostinger avant toute installation et vérifier ensuite l'intégrité de l'état et des services ; ne déduire ni une migration ni une réinstallation du seul message d'attente.
 
 ## Banque réelle
 
@@ -82,3 +90,19 @@ L'adaptateur privé `/opt/globalland/integrations/finance` est exécuté uniquem
 ## Retour arrière v3
 
 Désactiver seulement les cron GlobalLand (queue/daily/think), attendre le verrou et conserver une sauvegarde privée de l'état courant. Repointer `control` vers la release précédente conservée ; restaurer sa configuration et uniquement ses horaires compatibles. Ne pas supprimer les journaux de paiements, restaurer un vieux solde ou relancer un ancien paiement. Si v3 a engagé des opérations, les rapprocher avant de réactiver v2 ; v2 ne connaît pas cette trésorerie et n'est pas un moteur productif de secours. Oria reste en place.
+
+## Ajouter Cursor à l'image existante
+
+Après récupération du SHA revu, utiliser le constructeur dédié :
+
+```bash
+bash scripts/build_cursor_image.sh
+```
+
+Un ID local sha256:... passé directement à FROM est interprété comme un nom de dépôt par BuildKit et provoque pull access denied. Le script vérifie l'image locale, lui attribue un tag GlobalLand dérivé de son ID complet, vérifie ce tag avant/après construction et fournit cette référence avec --pull=false. Il vérifie la version sans réseau, puis enregistre atomiquement le nouvel ID dans state/private/cursor-image.txt. L'ancien brain-image.txt reste inchangé. Il ne publie aucune image et ne touche à aucun conteneur existant.
+
+Lancer ensuite login_subscriptions.sh cursor avec l'ID de cette nouvelle image. Conserver l'ancien brain-image.txt tant que les trois vérifications ne passent pas ; ne pas écraser les volumes Codex/Claude. Une fois les logins et facturations vérifiés, configurer l'image étendue avec --providers codex,claude,cursor. Le simple login ne démarre aucune pensée et aucun achat. Le contrôleur utilise Cursor en mode ask et garde l'exécution dans les outils de GlobalLand.
+
+Avant le premier think avec Cursor, consulter SECURITY.md et tester les lectures/recherches avec un canari aléatoire sans secret placé hors /tmp dans son HOME privé. Inspecter la trace privée pour vérifier que les tentatives Read/Grep/Glob sont refusées, et non simplement omises par le modèle. Ne jamais tester en lisant un vrai fichier d’authentification. Un simple statut Logged in et des tests factices ne valident pas cette frontière. Ne pas activer le cron think avant cette vérification et un cycle productif vérifié.
+
+La commande installée `python3 /opt/globalland/control/verify_cursor_canary.py` réalise ce diagnostic sur l'image configurée, avec le verrou partagé et nettoyage de ses fichiers de test. REVIEW_REQUIRED n'est pas un PASS ; examiner le rapport puis les événements utiles de la trace privée. La CLI productive utilise `--trust` uniquement pour sa racine /tmp temporaire isolée ; ses règles d'outils ne changent pas. Ce correctif nécessite seulement la mise à jour du contrôle au SHA exact, sans reconstruire l'image ni reconnecter les comptes.
