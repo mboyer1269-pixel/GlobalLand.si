@@ -70,6 +70,16 @@ def checks(root, run=subprocess.run, disk=shutil.disk_usage):
         'chmod 700 /opt/globalland/state/private')
 
     broker = controller.get('broker') or {}
+    try:
+        from broker import limits
+        limits(controller)
+        broker_valid = True
+    except ImportError:
+        broker_valid = True  # older control without broker: nothing to validate
+    except ValueError:
+        broker_valid = False
+    add('Réglages du courtier valides', broker_valid,
+        'Corriger controller.broker (un réglage invalide fait échouer chaque cycle) : configure_subscriptions.py … --broker on --broker-providers claude')
     add('Courtier MCP activé', broker.get('enabled') is True, 'configure_subscriptions.py … --broker on', level='OPTIONAL')
     apify = config.get('apify') or {}
     add('Apify activé', apify.get('enabled') is True, 'Ajouter le bloc "apify" (INSTALL.md).', level='OPTIONAL')

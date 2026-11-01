@@ -55,6 +55,14 @@ class PreflightTests(unittest.TestCase):
         optional = {r['check'] for r in results if r['level'] == 'OPTIONAL' and not r['ok']}
         self.assertIn('Token Apify privé (600)', optional)
 
+    def test_invalid_broker_settings_are_no_go(self):
+        self.install(controller={'mode': 'subscriptions', 'providers': ['codex', 'claude'], 'image': DIGEST,
+                                 'broker': {'enabled': True, 'providers': ['cursor']}})
+        results = preflight.checks(self.root, run=lambda *a, **k: Done(), disk=lambda path: Usage())
+        failed = {r['check'] for r in results if not r['ok']}
+        self.assertIn('Réglages du courtier valides', failed)
+        self.assertEqual(preflight.verdict(results), 'NO-GO')
+
     def test_single_provider_and_readable_token_are_flagged(self):
         self.install(controller={'mode': 'subscriptions', 'providers': ['claude'], 'image': DIGEST},
                      apify={'enabled': True})
