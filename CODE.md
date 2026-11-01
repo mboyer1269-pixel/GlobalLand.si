@@ -23,7 +23,7 @@ EXEC reçoit uniquement un export public en lecture seule, une requête et son w
 
 ## Cycle
 
-`queue` consomme les tâches ; `daily` maintient l'audit narratif idempotent ; `think` appelle le contrôleur configuré puis publie ses tâches ; `status` montre l'état privé sans secrets. Un accès GitHub seul ne réveille pas l'app Grok : tant que les CLIs ou un autre contrôleur ne sont pas connectés, WAITING_CONTROLLER est normal.
+`queue` consomme les tâches ; `daily` maintient l'audit narratif idempotent ; `think` appelle le contrôleur configuré puis publie ses tâches ; `status` montre l'état privé sans secrets. Un accès GitHub seul ne réveille pas l'app Grok : tant que les CLIs ou un autre contrôleur ne sont pas connectés, WAITING_CONTROLLER est normal. `world/controller.json` dérive son état du dernier tour durable : OPERATIONAL (décision produite), DEGRADED (un fournisseur a échoué, bascule en cours), CONTROLLER_BLOCKED (tous ont échoué) ou STALE (aucun tour depuis `stale_after_seconds`, 7200 par défaut).
 
 Les résultats et artefacts sont préparés durablement avant Git. Un push refusé ne relance pas l'action. Les modifications amont sans conflit sont rapprochées avec sauvegarde du commit local ; un même produit ou ledger modifié concurremment exige une réconciliation. Les décisions du contrôleur restent en outbox jusqu'à leur publication confirmée.
 

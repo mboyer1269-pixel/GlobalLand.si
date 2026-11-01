@@ -14,6 +14,44 @@ import urllib.parse
 from supervisor import bounded_run, check_secrets, safe_path
 
 TOOL_ACTIONS = {'EXEC', 'FETCH', 'WORLD', 'STATUS', 'SPEND', 'RECONCILE'}
+_RULE_MODULES = ('tools.py', 'world.py', 'treasury.py', 'gateway.py', 'supervisor.py')
+_RULE_PATTERN = re.compile(r'(?:Invalid|Unknown) [A-Za-z_]{1,40}|HTTP [1-5][0-9][0-9]')
+_RULES = None
+
+
+def _rule_messages():
+    """Messages written as string literals in the installed control code.
+
+    Only these, or the closed patterns above, may be published: exception text
+    built from external data could carry credentials or untrusted content."""
+    global _RULES
+    if _RULES is None:
+        import ast
+        found = set()
+        for name in _RULE_MODULES:
+            path = pathlib.Path(__file__).with_name(name)
+            if not path.is_file():
+                continue
+            for node in ast.walk(ast.parse(path.read_text())):
+                if isinstance(node, ast.Raise) and isinstance(node.exc, ast.Call) and node.exc.args:
+                    arg = node.exc.args[0]
+                    if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+                        found.add(arg.value)
+        _RULES = frozenset(found)
+    return _RULES
+
+
+def rejection_reason(error):
+    """Explain a refused tool request so agents can correct the next one."""
+    detail = error.args[0] if len(error.args) == 1 and isinstance(error.args[0], str) else None
+    if detail is not None and len(detail) <= 200 and (detail in _rule_messages() or _RULE_PATTERN.fullmatch(detail)):
+        try:
+            check_secrets(detail.encode())
+            return 'Tool request refused: ' + detail + '. See queue/PROTOCOL.md.'
+        except ValueError:
+            pass
+    return 'Tool request refused (' + type(error).__name__ + '); detail withheld because it is not a fixed protocol rule. See queue/PROTOCOL.md.'
+
 
 def product_path(name):
     safe_path(name)

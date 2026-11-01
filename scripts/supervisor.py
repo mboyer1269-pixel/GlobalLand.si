@@ -132,7 +132,7 @@ class Supervisor:
  def projections(self,world,bank,config,planner=None):
   from controller import Controller
   planner=planner or Controller(self.root,world,bank,config)
-  status=planner.readiness();status['last_turn']=planner.last_status()
+  status=planner.projection()
   return {'bank/status.json':json.dumps(bank.snapshot(),indent=2)+'\n','world/status.json':json.dumps(world.snapshot(),ensure_ascii=False,indent=2)+'\n','world/controller.json':json.dumps(status,indent=2)+'\n'}
  def prepare_publication(self,record):
   # Reapply a durable outbox on non-overlapping upstream changes; never rerun work.
@@ -297,7 +297,9 @@ class Supervisor:
     if task_data and task_data.get('type')=='TOOL':
      from tools import Toolbox
      try:result,generated=Toolbox(self.root,world,bank,config).run(task_data)
-     except (ValueError,UnicodeError):result={'status':'REJECTED','output':'Tool request refused; check protocol and world readiness.'}
+     except (ValueError,UnicodeError) as error:
+      from tools import rejection_reason
+      result={'status':'REJECTED','output':rejection_reason(error)}
     else:
      if not rel:world.apply('cycle-'+ident[6:],{'op':'cycle','cycle_id':ident[6:]})
      result=self.worker('task' if rel else 'daily',rel or ident[6:])

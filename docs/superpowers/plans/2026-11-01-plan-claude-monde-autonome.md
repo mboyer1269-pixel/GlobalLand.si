@@ -15,7 +15,7 @@
 | Vitesse de validation | 3 | Neuf phases séquentielles et 72 h d'endurance avant de déclarer le monde « opérationnel ». |
 | Scalabilité | 7 | Bonne base : SQLite, journaux, identités stables. |
 | Différenciation | 6 | Solide, mais classique. Le monde reste une file de tâches plus qu'une société d'agents. |
-| Exécution | 6 | Le plan cite 169 tests et `/workspace/GlobalLand-autonomous`. Ce dépôt en contient **60** (59 réussis, 1 ignoré). Le travail de Codex n'est pas dans GitHub. |
+| Exécution | 6 | Le travail de Codex est sur la PR #3 (`feature/cursor-subscription`, 159 tests verts), non fusionnée : main restait à 60 tests et ne correspondait pas au code du VPS. *Rectifié le 2026-11-01 : j'avais d'abord écrit à tort que ce travail n'était pas dans GitHub.* |
 
 **Le problème central, que le plan Codex ne place pas au centre :** le monde tourne déjà. Les agents sont bloqués parce qu'ils **ne peuvent ni publier ni encaisser**, et parce que leur cerveau n'a aucun outil et une seule passe par cycle.
 
@@ -27,7 +27,7 @@
 
 - 47 commits `globalland-supervisor` en ~24 h. Un cycle `THINK-*` toutes les 30 minutes (22:00, 22:30, 23:00, 23:30, 00:00 UTC), chacun avec 5 tâches.
 - Le contrôleur par abonnements (Codex/Claude CLI) fonctionne donc sur le VPS. Le fichier `world/controller.json` publié (`WAITING_SUBSCRIPTION_AUTH`) est **périmé** : c'est une incohérence de projection, pas l'état réel.
-- Un trou de cycles entre 16:11 et 22:00 UTC le 31 oct. Cause inconnue (quota, panne, verrou). **À diagnostiquer.**
+- Un trou de cycles entre 16:11 et 22:00 UTC le 31 oct. **Diagnostic (HYPOTHÈSE forte, d'après l'historique Git) :** `cursor` venait d'être ajouté (3 fournisseurs). L'ancien code choisissait `providers[nombre de tours réussis % 3]` ; après 2 tours réussis, il retombait toujours sur `cursor`. Comme un échec ne crée pas de tour, le contrôleur restait bloqué sur ce fournisseur. Les états bloqués identiques ne produisaient aucun commit, d'où un silence. À 22:00, `cursor` a été retiré et les cycles ont repris. La bascule de la PR #3 et le champ `last_turn` corrigent ce cas. La cause exacte de l'échec de `cursor` est dans `state/private/controller-failure.json` sur le VPS, que je ne peux pas lire.
 - **Rectification au plan Codex :** la boucle Grok n'est pas démontrée. En revanche, la boucle autonome par abonnements l'est.
 
 ### 1.2 Les agents tournent en rond
@@ -64,7 +64,7 @@ Conséquence : 48 décisions par jour, sans boucle observation→action à l'int
 2. **Portefeuille autogéré sur Base.** Il faudrait garder une clé privée chaude sur un VPS partagé avec Oria. Les frais d'achat au Canada et de retrait sur Base ne sont pas prouvés sous 50 CAD (Codex le reconnaît). x402 suppose des acheteurs qui paient en USDC par HTTP, une demande quasi nulle aujourd'hui (HYPOTHÈSE forte). **Note : 4/10 maintenant, à revoir après les premiers revenus.**
 3. **Autonomie traitée en option.** Le MCP local apparaît en phase 3, « lorsque la CLI le permet ». C'est pourtant **le** levier n° 1 (voir 1.3).
 4. **Séquence en cascade.** Neuf phases séquentielles, c'est des semaines avant le premier client. Il faut des pistes parallèles et un premier encaissement visé avant J+14.
-5. **Preuve non publiée.** « 169 tests » et des chemins `/workspace/...` absents de GitHub. Pour les agents et pour toi, ce code n'existe pas tant qu'il n'est pas poussé sur une branche.
+5. **Base non fusionnée.** Le travail de Codex vit dans la PR #3, pas dans main. Le VPS exécute une version intermédiaire de cette PR. Tant qu'elle n'est pas fusionnée, main ne décrit pas le système réel. *(Rectifié : j'avais d'abord écrit que ce code n'était pas dans GitHub.)*
 
 Ce que Codex fait bien et que je garde **intégralement** : séparation stricte entre GLC, déclarations et fonds vérifiés ; réservation du maximum avant soumission ; jamais de rejeu d'un paiement incertain ; extinction seulement après rapprochement complet ; contrôleur et tests de référence non modifiables par les agents ; boîte de missions signées ; 72 h d'endurance comme critère final.
 
@@ -159,11 +159,11 @@ Les pistes A, B et C avancent en même temps. Chaque sprint se termine par une *
 
 ### Sprint 0 — J0 à J2 : assainir
 
-- [ ] Pousser le travail Codex (`/workspace/GlobalLand-autonomous`) sur une branche et réconcilier « 169 tests » avec les 60 d'ici.
-- [ ] Corriger les 4 défauts du §1.4 avec un test de régression pour chacun, dont REVENUE avant FUNDING.
-- [ ] CI : `for f in scripts/*.sh; do bash -n "$f"; done`.
-- [ ] Publier un `world/controller.json` fidèle à l'état réel, et diagnostiquer le trou de 16:11 à 22:00.
-- [ ] Rendre les messages `REJECTED` explicites (champ et raison).
+- [x] Empiler ce travail sur la PR #3 (fusion de `feature/cursor-subscription` dans cette branche) : 159 + 18 tests.
+- [x] Corriger les 4 défauts du §1.4 avec un test de régression pour chacun, dont REVENUE avant FUNDING.
+- [x] CI : `for f in scripts/*.sh; do bash -n "$f" || exit 1; done`.
+- [x] Publier un `world/controller.json` fidèle à l'état réel (`OPERATIONAL`, `DEGRADED`, `CONTROLLER_BLOCKED`, `STALE`) et diagnostiquer le trou de 16:11 à 22:00 (voir §1.1).
+- [x] Rendre les messages `REJECTED` explicites (seulement des règles écrites dans le code, jamais du texte externe).
 - **Preuve :** CI verte, sur un SHA installé identifiable sur le VPS.
 
 ### Sprint 1 — J2 à J7 : cerveau agentique et publication (pistes A et B)
@@ -262,7 +262,7 @@ Dans l'ordre : Cloudflare Pages (PUBLISH), MoR (SELL et METRICS), crédits prép
 
 1. **Toi :** valider ce plan, puis les actions 1 à 3 du §5. Cloudflare et MoR sont le vrai déblocage.
 2. **Moi, à ton feu vert :** Sprint 0 sur cette branche : les 4 corrections avec tests, la CI et les messages `REJECTED` explicites. Ensuite le serveur MCP GlobalLand.
-3. **Codex :** pousser son espace de travail sur une branche pour qu'on réconcilie les deux bases avant d'écrire du nouveau code financier.
+3. **Toi :** fusionner la PR #3, puis la PR #5 empilée dessus, et installer le SHA résultant sur le VPS.
 
 Déclarations séparées, comme l'exige Codex et comme je l'exige aussi :
 1. logiciel vérifié localement ;

@@ -124,6 +124,27 @@ class Controller:
         private=self.root/'state/private';private.mkdir(parents=True,exist_ok=True,mode=0o700)
         atomic_json(private/'controller-run.json',dict(turn=turn,at=datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),state=state,provider=provider,attempts=attempts))
 
+    def projection(self,now=None):
+        """Public controller status derived from the durable private turn record.
+
+        readiness() only knows what this process verified; a fresh process would
+        always report WAITING even while turns succeed. The last turn record is
+        the operational evidence. A record older than stale_after_seconds is
+        reported as STALE instead of claiming a live controller."""
+        status=self.readiness();last=self.last_status();status['last_turn']=last
+        if not status.get('configured') or last is None:return status
+        stale_after=self.config.get('stale_after_seconds',7200)
+        if type(stale_after) is not int or not 60<=stale_after<=7*86400:stale_after=7200
+        at=datetime.datetime.strptime(last['at'],'%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=datetime.timezone.utc).timestamp()
+        age=int((time.time() if now is None else now)-at)
+        if age>stale_after:status['state']='STALE'
+        elif last['state']=='DECISION_READY':
+            status.update(state='OPERATIONAL',verified=True,missing=[])
+        elif last['state']=='RETRYING':status['state']='DEGRADED'
+        else:status['state']='CONTROLLER_BLOCKED'
+        status['last_turn_age_seconds']=max(age,0)
+        return status
+
     def readiness(self):
         c=self.config;missing=[]
         if c.get('mode','external_grok')!='subscriptions':
