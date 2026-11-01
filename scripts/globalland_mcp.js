@@ -33,13 +33,15 @@ function fail(id, code, message) { send({ jsonrpc: '2.0', id, error: { code, mes
 function callBroker(op, args) {
   return new Promise((resolve) => {
     const conn = net.createConnection(SOCKET);
+    // Decode as one stream: a UTF-8 character may straddle two chunks.
+    conn.setEncoding('utf8');
     let buffer = '';
     let settled = false;
     const done = (value) => { if (!settled) { settled = true; conn.destroy(); resolve(value); } };
     conn.setTimeout(CALL_TIMEOUT_MS, () => done({ ok: false, error: 'broker call timed out; outcome unknown, inspect recent_results before retrying' }));
     conn.on('error', () => done({ ok: false, error: 'GlobalLand broker unavailable' }));
     conn.on('data', (chunk) => {
-      buffer += chunk.toString('utf8');
+      buffer += chunk;
       const end = buffer.indexOf('\n');
       if (end < 0) return;
       try { done(JSON.parse(buffer.slice(0, end))); } catch { done({ ok: false, error: 'invalid broker response' }); }

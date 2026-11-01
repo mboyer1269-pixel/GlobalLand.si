@@ -1,16 +1,20 @@
 """No-progress detector and the public blocker board.
 
 Progress is measured from host evidence, never from agent claims. Between two
-successful think turns, a turn is productive when at least one of these holds:
-- a mission reached COMPLETED or FAILED (a decision was made);
-- a new product path appeared outside products/research/ and products/receipts/;
-- verified bank cash grew beyond the initial deposit (net cash gain).
+successful think turns:
+- an OUTCOME is a mission reaching COMPLETED or FAILED (a decision was made) or
+  verified REVENUE growing (refunds and the founder's deposit excluded);
+- a turn is PRODUCTIVE if it has an outcome or a new product path outside
+  products/research/ and products/receipts/.
 Rewriting existing files, messages, claims and new research notes are not
 progress on their own: they are exactly what an audit loop produces.
 
-After `stall_turns` consecutive unproductive turns the brain receives a
-progress alert and a system card opens on world/blockers.json. It closes by
-itself on the next productive turn.
+Two counters, two alerts, each with a system card on world/blockers.json that
+closes by itself when the condition clears:
+- `stall_turns` (3) consecutive unproductive turns: the short loop alert;
+- `outcome_turns` (12) consecutive turns without an outcome: new files alone
+  can no longer hold off the alert, so producing throwaway files does not
+  game the detector.
 """
 import datetime
 import hashlib
@@ -22,11 +26,20 @@ from supervisor import atomic_json
 STATE = 'state/private/progress.json'
 MAX_FILES = 5000
 SYSTEM_CARD = 'SYSTEM-NO-PROGRESS'
+OUTCOME_CARD = 'SYSTEM-NO-OUTCOME'
+
+
+def _setting(config, key, default):
+    value = (config.get('progress') or {}).get(key, default)
+    return value if type(value) is int and 1 <= value <= 1000 else default
 
 
 def stall_turns(config):
-    value = (config.get('progress') or {}).get('stall_turns', 3)
-    return value if type(value) is int and 1 <= value <= 100 else 3
+    return _setting(config, 'stall_turns', 3)
+
+
+def outcome_turns(config):
+    return _setting(config, 'outcome_turns', 12)
 
 
 def fingerprint(root, world, bank):
@@ -40,8 +53,7 @@ def fingerprint(root, world, bank):
             if path.is_file() and not path.is_symlink() and 'receipts' not in path.relative_to(base).parts:
                 products[str(path.relative_to(base.parent))] = hashlib.sha256(path.read_bytes()).hexdigest()
     missions = {m['mission_id']: m['status'] for m in world.get('missions', [])}
-    return dict(products=products, missions=missions, cash_cents=bank.get('cash_cents', 0),
-                funding_verified=bool(bank.get('funding_verified')))
+    return dict(products=products, missions=missions, revenue_cents=bank.get('revenue_cents', 0))
 
 
 def delta(previous, current):
@@ -54,13 +66,12 @@ def delta(previous, current):
     old_missions = previous.get('missions', {})
     outcomes = sorted(m for m, status in current['missions'].items()
                       if status in ('COMPLETED', 'FAILED') and old_missions.get(m) != status)
-    gain = current['cash_cents'] - previous.get('cash_cents', current['cash_cents'])
-    if current['funding_verified'] and not previous.get('funding_verified', current['funding_verified']):
-        gain -= 5000  # the founder's deposit is not something the agents earned
-    productive = bool(outcomes or built or gain > 0)
-    return dict(productive=productive, mission_outcomes=outcomes, new_products=built[:20],
-                new_product_count=len(built), new_research_count=len(research),
-                rewritten_count=len(rewritten), net_cash_gain_cents=max(gain, 0))
+    # Cumulative verified REVENUE only: refunds and the founder's deposit are not earned.
+    gain = current['revenue_cents'] - previous.get('revenue_cents', current['revenue_cents'])
+    outcome = bool(outcomes or gain > 0)
+    return dict(productive=outcome or bool(built), outcome=outcome, mission_outcomes=outcomes,
+                new_products=built[:20], new_product_count=len(built), new_research_count=len(research),
+                rewritten_count=len(rewritten), revenue_gain_cents=max(gain, 0))
 
 
 def load(root):
@@ -72,17 +83,21 @@ def assess(root, world, bank, config):
     """Pure evaluation for the coming turn; nothing is persisted here."""
     state = load(root)
     current = fingerprint(root, world, bank)
-    threshold = stall_turns(config)
+    threshold, dry_limit = stall_turns(config), outcome_turns(config)
     if 'last' not in state:
-        change = dict(productive=None, baseline=True)
-        stalled = 0
+        change = dict(productive=None, outcome=None, baseline=True)
+        stalled = dry = 0
     else:
         change = delta(state['last'], current)
         stalled = 0 if change['productive'] else state.get('stalled_turns', 0) + 1
+        dry = 0 if change['outcome'] else state.get('dry_turns', 0) + 1
     return dict(current=current, change=change, stalled_turns=stalled, threshold=threshold,
-                alert=stalled >= threshold,
+                dry_turns=dry, outcome_threshold=dry_limit,
+                alert=stalled >= threshold, drought=dry >= dry_limit,
                 stalled_since=(state.get('stalled_since') if stalled and state.get('stalled_turns') else None),
-                last_productive_turn=state.get('last_productive_turn'))
+                dry_since=(state.get('dry_since') if dry and state.get('dry_turns') else None),
+                last_productive_turn=state.get('last_productive_turn'),
+                last_outcome_turn=state.get('last_outcome_turn'))
 
 
 def commit(root, turn, assessment):
@@ -90,10 +105,14 @@ def commit(root, turn, assessment):
     now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     state = load(root)
     stalled = assessment['stalled_turns']
+    dry = assessment['dry_turns']
     record = dict(last=assessment['current'], stalled_turns=stalled, threshold=assessment['threshold'],
+                  dry_turns=dry, outcome_threshold=assessment['outcome_threshold'],
                   last_turn=turn, last_turn_at=now,
                   stalled_since=(assessment['stalled_since'] or now) if stalled else None,
+                  dry_since=(assessment['dry_since'] or now) if dry else None,
                   last_productive_turn=(turn if assessment['change'].get('productive') else state.get('last_productive_turn')),
+                  last_outcome_turn=(turn if assessment['change'].get('outcome') else state.get('last_outcome_turn')),
                   last_change={k: v for k, v in assessment['change'].items()})
     atomic_json(pathlib.Path(root) / STATE, record)
     return record
@@ -102,16 +121,34 @@ def commit(root, turn, assessment):
 def for_prompt(assessment):
     """The part of the assessment the brain sees (no hashes)."""
     return dict(stalled_turns=assessment['stalled_turns'], threshold=assessment['threshold'],
-                alert=assessment['alert'], last_productive_turn=assessment['last_productive_turn'],
+                turns_without_outcome=assessment['dry_turns'], outcome_threshold=assessment['outcome_threshold'],
+                alert=assessment['alert'], drought=assessment['drought'],
+                last_productive_turn=assessment['last_productive_turn'],
+                last_outcome_turn=assessment['last_outcome_turn'],
                 change_since_last_turn=assessment['change'])
 
 
 ALERT = ('PROGRESS ALERT: {n} consecutive turns produced no completed or failed mission, no new product '
-         'outside products/research/ and no net cash gain. Do not repeat audits, access probes or status '
+         'outside products/research/ and no verified revenue. Do not repeat audits, access probes or status '
          'messages. This turn must do at least one of: complete a stalled mission with evidence; fail it '
          'with a reason and create a different mission (pivot); build and publish a new product file. If an '
          'external account, credential or capability is missing, record it once with WORLD raise_blocker '
          '(needs_founder true, a stable blocker_id) and continue with work that does not need it.')
+
+
+DROUGHT = ('OUTCOME ALERT: {n} consecutive turns without a completed or failed mission or verified revenue. '
+           'New files no longer count as progress. This turn must close a mission with evidence (complete it, or '
+           'fail it with a reason and pivot to a different mission), or put a product in front of real buyers. '
+           'Record any missing external capability once with WORLD raise_blocker.')
+
+
+def prompt_alerts(assessment):
+    alerts = []
+    if assessment['alert']:
+        alerts.append(ALERT.format(n=assessment['stalled_turns']))
+    if assessment['drought']:
+        alerts.append(DROUGHT.format(n=assessment['dry_turns']))
+    return alerts
 
 
 def _iso(value):
@@ -140,13 +177,23 @@ def board(root, world):
         cards.append(dict(id=SYSTEM_CARD, status='OPEN', owner='AGENTS', category='PROGRESS',
                           title='%d tours consécutifs sans résultat vérifiable' % stalled,
                           detail='Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, '
-                                 'aucun gain de trésorerie. Missions ouvertes : ' + (', '.join(running) or 'aucune') + '.',
+                                 'aucun revenu vérifié. Missions ouvertes : ' + (', '.join(running) or 'aucune') + '.',
                           mission_id=None, expected_gain=None, raised_by='PROGRESS-DETECTOR', reports=stalled,
                           opened_at=state.get('stalled_since'), last_reported_at=state.get('last_turn_at')))
+    dry, dry_limit = state.get('dry_turns', 0), state.get('outcome_threshold', 12)
+    if dry >= dry_limit:
+        cards.append(dict(id=OUTCOME_CARD, status='OPEN', owner='AGENTS', category='PROGRESS',
+                          title='%d tours consécutifs sans mission conclue ni revenu vérifié' % dry,
+                          detail='De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, '
+                                 'ou mettre un produit devant de vrais acheteurs.',
+                          mission_id=None, expected_gain=None, raised_by='PROGRESS-DETECTOR', reports=dry,
+                          opened_at=state.get('dry_since'), last_reported_at=state.get('last_turn_at')))
     cards.sort(key=lambda c: (c['owner'] != 'FOUNDER', c['opened_at'] or ''))
     resolved.sort(key=lambda c: c['resolved_at'] or '', reverse=True)
     return dict(founder_actions=sum(1 for c in cards if c['owner'] == 'FOUNDER'), open=cards,
                 resolved_recent=resolved[:20],
                 progress=dict(stalled_turns=stalled, threshold=threshold, stalled_since=state.get('stalled_since'),
+                              turns_without_outcome=dry, outcome_threshold=dry_limit, dry_since=state.get('dry_since'),
+                              last_outcome_turn=state.get('last_outcome_turn'),
                               last_productive_turn=state.get('last_productive_turn'),
                               last_turn=state.get('last_turn'), last_change=state.get('last_change')))

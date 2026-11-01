@@ -94,7 +94,7 @@ class Broker:
             for line in self.journal_path.read_text().splitlines():
                 entry = json.loads(line)
                 self.calls = max(self.calls, entry.get('n', 0))
-                if entry.get('op') == 'submit_action':
+                if 'task' in entry:
                     self.actions += 1
         if self.socket_path.exists() or self.socket_path.is_symlink():
             self.socket_path.unlink()
@@ -107,9 +107,16 @@ class Broker:
         self.thread.start()
 
     def stop(self):
+        """Refuse new calls, then wait for an in-flight action to finish.
+
+        An action already started must complete its durable record and
+        publication before the turn publishes: the supervisor never runs two
+        Git publications at once."""
         self.stopping.set()
+        with self.lock:
+            pass
         if self.thread:
-            self.thread.join(timeout=10)
+            self.thread.join()
         if self.server:
             self.server.close()
         if self.socket_path.exists():
@@ -160,6 +167,8 @@ class Broker:
     def request(self, line):
         """Handle one JSON line. Serialized: one effect at a time per turn."""
         with self.lock:
+            if self.stopping.is_set():
+                return self._refused('turn ended; return the final decision')
             if len(line) > MAX_REQUEST:
                 return self._refused('request too large')
             try:
@@ -176,6 +185,9 @@ class Broker:
             if self.calls >= self.max_calls:
                 return self._refused('call budget exhausted for this turn; return the final decision')
             self.calls += 1
+            # Every counted call is journaled first, so a retry in the same turn
+            # restores the exact budget, refused calls included.
+            self._journal(dict(op=value['op'], args_sha256=self._digest(args)))
             try:
                 return {'ok': True, 'result': self._dispatch(value['op'], args)}
             except BrokerError as error:
@@ -190,7 +202,6 @@ class Broker:
         if op != 'submit_action':
             if op != 'read_product' and args:
                 raise BrokerError(op + ' takes no arguments')
-            self._journal(dict(op=op, args_sha256=self._digest(args)))
             if op == 'read_product':
                 if set(args) != {'path'} or not isinstance(args['path'], str):
                     raise BrokerError('read_product requires exactly a path')
@@ -215,7 +226,7 @@ class Broker:
         check_secrets(json.dumps(task).encode())
         # The slot is consumed even if execution fails: an identifier is never reused.
         self.actions += 1
-        self._journal(dict(op=op, task=task))
+        self._journal(dict(op=op, task=task))  # the effect record precedes execution
         result = self.handlers['execute'](task)
         if not isinstance(result, dict) or not isinstance(result.get('status'), str):
             raise BrokerError('executor returned no result')

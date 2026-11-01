@@ -271,6 +271,19 @@ class TreasuryTests(unittest.TestCase):
         self.assertEqual(migrated.snapshot()['position_cents'], 900)
         self.assertEqual(Treasury(legacy).snapshot()['position_cents'], 900)
         self.assertEqual(migrated.snapshot()['state'], 'ACTIVE')
+        # The scalar was 'the latest reported total': a real valuation supersedes it
+        # instead of being added to it forever.
+        migrated.record_positions(self.position('real', 900, 'wallet-a'))
+        self.assertEqual(migrated.snapshot()['position_cents'], 900)
+        migrated.record_positions(self.position('sold', 0, 'wallet-a'))
+        self.assertEqual(migrated.snapshot()['position_cents'], 0)
+
+    def test_revenue_total_excludes_refunds_and_funding(self):
+        self.fund()
+        self.t.credit(self.evidence('sale', 700, 'REVENUE'))
+        self.t.credit(self.evidence('refund', 300, 'REFUND'))
+        snap = self.t.snapshot()
+        self.assertEqual((snap['cash_cents'], snap['revenue_cents']), (6000, 700))
 
 
 if __name__ == '__main__': unittest.main()

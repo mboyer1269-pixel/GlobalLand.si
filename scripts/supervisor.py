@@ -219,11 +219,32 @@ class Supervisor:
    try:result,generated=Toolbox(self.root,world,bank,config).run(task)
    except (ValueError,UnicodeError) as error:result,generated={'status':'REJECTED','output':rejection_reason(error)},{}
    if not {'status','output'}<=set(result):raise ValueError('invalid tool result')
-   r['result']=result;r['files'].update(generated);r['files'].update(self.projections(world,bank,config));r['state']='COMPLETED'
+   # Projections are published once by the turn itself, not per action.
+   r['result']=result;r['files'].update(generated);r['state']='COMPLETED'
   except Exception:
    r['state']='INTERRUPTED';r['result']={'status':'INTERRUPTED','output':'Broker action failed; inspect host journal. No automatic retry.'}
-  atomic_json(p,r);self.finish(p,r);self.refresh_work()
-  return r['result']
+  atomic_json(p,r)
+  result=dict(r['result'])
+  try:
+   self.finish(p,r)
+  except Exception:
+   # The effect already happened and is durably recorded; the next cycle
+   # publishes it. Say so, so the brain does not resubmit the same work.
+   result['publication']='PENDING: effect recorded; publication retried next cycle. Do not resubmit.'
+  else:
+   # Later actions in this turn see the published files without a full re-extract.
+   self.write_work(r['files'])
+  return result
+ def write_work(self,files):
+  work=self.root/'work'
+  for name,text in files.items():
+   if not allowed(safe_path(name)):continue
+   path=work
+   for part in name.split('/'):
+    path=path/part
+    if path.is_symlink():raise ValueError('symlink in work tree')
+   path.parent.mkdir(parents=True,exist_ok=True,mode=0o755)
+   path.write_text(text);path.chmod(0o644)
  def refresh_work(self):
   import shutil
   work=self.root/'work'

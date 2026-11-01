@@ -17,8 +17,8 @@ CONFIG = {'controller': {'mode': 'subscriptions', 'providers': ['claude'], 'subs
                          'extra_usage_disabled': True, 'image': 'brain@sha256:' + '1' * 64}}
 
 
-def fp(products=None, missions=None, cash=0, funded=False):
-    return dict(products=products or {}, missions=missions or {}, cash_cents=cash, funding_verified=funded)
+def fp(products=None, missions=None, revenue=0):
+    return dict(products=products or {}, missions=missions or {}, revenue_cents=revenue)
 
 
 class DeltaTests(unittest.TestCase):
@@ -28,20 +28,21 @@ class DeltaTests(unittest.TestCase):
             'new product outside research': (fp({**base['products'], 'products/app/new.js': '2'}, base['missions']), True),
             'mission completed': (fp(base['products'], {'M': 'COMPLETED'}), True),
             'mission failed (a decision)': (fp(base['products'], {'M': 'FAILED'}), True),
-            'verified revenue': (fp(base['products'], base['missions'], cash=700), True),
+            'verified revenue': (fp(base['products'], base['missions'], revenue=700), True),
             'research note only': (fp({**base['products'], 'products/research/b.json': '2'}, base['missions']), False),
             'rewrite of existing files': (fp({'products/research/a.json': '9', 'products/app/index.html': '9'}, base['missions']), False),
             'new mission or claim': (fp(base['products'], {'M': 'RUNNING', 'N': 'OPEN'}), False),
-            'founder deposit is not earned': (fp(base['products'], base['missions'], cash=5000, funded=True), False),
+            'deposit or refund (revenue unchanged)': (fp(base['products'], base['missions'], revenue=0), False),
         }
         for name, (current, expected) in cases.items():
             with self.subTest(name):
                 self.assertIs(progress.delta(base, current)['productive'], expected)
 
-    def test_deposit_plus_revenue_counts_only_the_revenue(self):
-        change = progress.delta(fp(), fp(cash=5700, funded=True))
-        self.assertEqual(change['net_cash_gain_cents'], 700)
-        self.assertTrue(change['productive'])
+    def test_outcome_requires_a_decision_or_revenue_not_files(self):
+        change = progress.delta(fp(), fp({'products/app/x.js': '1'}))
+        self.assertEqual((change['productive'], change['outcome']), (True, False))
+        change = progress.delta(fp(), fp(revenue=700))
+        self.assertEqual((change['revenue_gain_cents'], change['outcome']), (700, True))
 
 
 class AssessCommitTests(unittest.TestCase):
@@ -75,6 +76,22 @@ class AssessCommitTests(unittest.TestCase):
         state = progress.load(self.root)
         self.assertEqual((state['last_productive_turn'], state['stalled_since']), ('THINK-6', None))
 
+    def test_throwaway_files_cannot_hold_off_the_outcome_alert(self):
+        config = {'progress': {'outcome_turns': 4}}
+        self.turn('THINK-0', config)
+        app = self.root / 'work/products/app'; app.mkdir()
+        for n in range(1, 5):
+            (app / ('note-%d.md' % n)).write_text('filler')
+            a = self.turn('THINK-%d' % n, config)
+            self.assertEqual(a['stalled_turns'], 0)
+        self.assertEqual((a['dry_turns'], a['drought'], a['alert']), (4, True, False))
+        self.assertTrue(any(t.startswith('OUTCOME ALERT: 4') for t in progress.prompt_alerts(a)))
+        board = progress.board(self.root, {'missions': []})
+        self.assertEqual([c['id'] for c in board['open']], [progress.OUTCOME_CARD])
+        self.world['missions'][0]['status'] = 'FAILED'
+        self.assertEqual(self.turn('THINK-5', config)['dry_turns'], 0)
+        self.assertEqual(progress.board(self.root, {'missions': []})['open'], [])
+
     def test_threshold_is_configurable_and_bounded(self):
         self.assertEqual(progress.stall_turns({'progress': {'stall_turns': 5}}), 5)
         self.assertEqual(progress.stall_turns({'progress': {'stall_turns': 0}}), 3)
@@ -84,7 +101,7 @@ class AssessCommitTests(unittest.TestCase):
 class BlockerTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
-        self.clock = iter(range(1793491200, 1793500000, 60))
+        self.clock = iter(range(1793491200, 1793491200 + 60 * 100000, 60))
         self.world = World(pathlib.Path(self.tmp.name) / 'w.sqlite3', clock=lambda: next(self.clock))
         self.world.bootstrap()
 
@@ -106,6 +123,15 @@ class BlockerTests(unittest.TestCase):
         reopened = self.raise_('op-5')
         self.assertEqual((reopened['status'], reopened['reports']), ('OPEN', 1))
         self.assertNotIn('resolution', reopened)
+
+    def test_open_blockers_are_never_trimmed(self):
+        self.raise_('first', blocker_id='OLD-FOUNDER-ACTION')
+        for n in range(205):
+            self.raise_('r-%d' % n, blocker_id='B-%d' % n, needs_founder=False, category='OTHER')
+            self.world.apply('x-%d' % n, dict(op='resolve_blocker', blocker_id='B-%d' % n, agent_id='ACQUISITION', resolution='done'))
+        blockers = self.world.snapshot()['blockers']
+        self.assertLessEqual(len(blockers), 200)
+        self.assertIn('OLD-FOUNDER-ACTION', [b['blocker_id'] for b in blockers if b['status'] == 'OPEN'])
 
     def test_invalid_blockers_are_refused(self):
         for bad in (dict(category='URGENT'), dict(needs_founder='yes'), dict(mission_id='NOPE'), dict(title='')):

@@ -279,7 +279,10 @@ class World:
                 raise ValueError('Too many open blockers; resolve or merge existing ones')
             b = dict(blocker_id=bid, status='OPEN', raised_by=a['agent_id'], opened_at=now, reports=0)
             blockers.append(b)
-            del blockers[:-200]
+            # Keep every open card; forget the oldest resolved ones beyond 200.
+            resolved = [x for x in blockers if x['status'] != 'OPEN']
+            for old in resolved[:max(0, len(blockers) - 200)]:
+                blockers.remove(old)
         elif b['status'] != 'OPEN':
             b.update(status='OPEN', opened_at=now, reports=0)
             for key in ('resolution', 'resolved_by', 'resolved_at'):

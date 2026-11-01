@@ -14,8 +14,9 @@ import urllib.parse
 from supervisor import bounded_run, check_secrets, safe_path
 
 TOOL_ACTIONS = {'EXEC', 'FETCH', 'WORLD', 'STATUS', 'SPEND', 'RECONCILE'}
-_RULE_MODULES = ('tools.py', 'world.py', 'treasury.py', 'gateway.py', 'supervisor.py')
-_RULE_PATTERN = re.compile(r'(?:Invalid|Unknown) [A-Za-z_]{1,40}|HTTP [1-5][0-9][0-9]')
+_RULE_MODULES = ('tools.py', 'world.py', 'treasury.py', 'gateway.py', 'supervisor.py', 'decision_protocol.py', 'broker.py')
+# 'Invalid ' + name / 'Unknown ' + key in world.py take code-defined names only.
+_RULE_PATTERN = re.compile(r'(?:Invalid|Unknown) [A-Za-z_]{1,30}(?: [A-Za-z_]{1,30}){0,3}|HTTP [1-5][0-9][0-9]')
 _RULES = None
 
 

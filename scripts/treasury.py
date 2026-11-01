@@ -55,6 +55,9 @@ class Treasury:
             if 'earned' not in columns:
                 # Verified settled revenue may exist before the initial deposit.
                 db.execute('ALTER TABLE treasury ADD COLUMN earned INTEGER NOT NULL DEFAULT 0')
+            if 'revenue' not in columns:
+                # Cumulative verified REVENUE only (refunds and funding excluded).
+                db.execute('ALTER TABLE treasury ADD COLUMN revenue INTEGER NOT NULL DEFAULT 0')
             if 'positions_migrated' not in columns:
                 # v3 kept one overwritten scalar. Preserve any nonzero legacy value
                 # under its own key: it is never silently dropped toward extinction.
@@ -89,7 +92,7 @@ class Treasury:
         return dict(state=row['state'], declared_capital_cents=5000,
                     cash_cents=row['cash'], reserved_cents=held,
                     available_cents=row['cash']-held if row['state'] == 'ACTIVE' else 0, funding_verified=bool(row['funded']),
-                    revenue_verified=bool(row['earned']),
+                    revenue_verified=bool(row['earned']), revenue_cents=row['revenue'],
                     position_cents=positions, extinction_reason=row['reason'])
 
     @staticmethod
@@ -150,7 +153,8 @@ class Treasury:
                     raise ValueError('invalid credit')
                 # Settled external revenue is owned capital even before the
                 # optional initial deposit. It never implies that deposit.
-                db.execute("UPDATE treasury SET cash=cash+?, earned=1, state=CASE WHEN state='UNFUNDED' THEN 'ACTIVE' ELSE state END WHERE id=1", (amount,))
+                db.execute("UPDATE treasury SET cash=cash+?, earned=1, revenue=revenue+?, state=CASE WHEN state='UNFUNDED' THEN 'ACTIVE' ELSE state END WHERE id=1",
+                           (amount, amount if receipt['kind'] == 'REVENUE' else 0))
         elif kind == 'POSITIONS':
             if self._evidence(db, receipt, {'POSITIONS'}, 'POSITIONS'):
                 v = self._view(db)
@@ -173,6 +177,9 @@ class Treasury:
         if not isinstance(asset, str) or len(asset) > 256 or (asset and not asset.strip()):
             raise ValueError('position asset must be a bounded identifier')
         provider, account = receipt['provider'], receipt['account']
+        # The migrated v3 scalar was 'the latest reported total'. Any new
+        # verified valuation supersedes it, as the old overwrite did.
+        db.execute("DELETE FROM positions WHERE provider='legacy' AND account='aggregate' AND event_id='legacy-scalar'")
         other = db.execute("SELECT 1 FROM positions WHERE provider=? AND account=? AND (asset='') != (?='')",
                            (provider, account, asset)).fetchone()
         if other:

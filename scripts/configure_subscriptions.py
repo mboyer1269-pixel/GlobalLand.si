@@ -9,10 +9,11 @@ def main():
  if os.geteuid()!=0:raise ValueError('administrator required')
  if not args.confirm_extra_usage_disabled:raise ValueError('First disable paid extra usage/API fallback in every selected account; do not attest without checking')
  root=pathlib.Path('/opt/globalland');path=root/'control'/'config.json';config=json.loads(path.read_text()) if path.exists() else {}
- broker=dict(config.get('controller',{}).get('broker') or {})
- if args.broker:broker['enabled']=args.broker=='on'
- config['controller']={'mode':'subscriptions','providers':args.providers.split(','),'image':args.image,'subscriptions_confirmed':True,'extra_usage_disabled':True}
- if broker:config['controller']['broker']=broker
+ # Merge: other controller settings (broker, progress, stale_after_seconds) are kept.
+ controller=dict(config.get('controller') or {})
+ controller.update(mode='subscriptions',providers=args.providers.split(','),image=args.image,subscriptions_confirmed=True,extra_usage_disabled=True)
+ if args.broker:controller['broker']=dict(controller.get('broker') or {},enabled=args.broker=='on')
+ config['controller']=controller
  controller=Controller(root,None,None,config)
  statuses=[controller.check_provider(provider) for provider in config['controller']['providers']]
  atomic_json(path,config);print(json.dumps({'subscription_checks':statuses,'inference_performed':False,'next':'Run supervisor.py think manually; then verify its tasks and artifacts before enabling think cron.'},indent=2))

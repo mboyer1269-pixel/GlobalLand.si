@@ -106,6 +106,40 @@ class BrokerTests(unittest.TestCase):
             again = call(b.socket_path, 'submit_action', {'agent': 'DIRECTOR', 'action': 'STATUS', 'args': {}})
         self.assertEqual(again['result']['task_id'], 'TASK-%010d11' % TURN)
 
+    def test_refused_calls_count_toward_a_retried_turn_budget(self):
+        with self.broker(max_calls=4) as b:
+            call(b.socket_path, 'world_status')
+            call(b.socket_path, 'world_status', {'x': 1})
+            call(b.socket_path, 'submit_action', {'agent': 'DIRECTOR', 'action': 'SPEND', 'args': {}})
+        with self.broker(max_calls=4) as b:
+            self.assertTrue(call(b.socket_path, 'list_products')['ok'])
+            self.assertIn('call budget', call(b.socket_path, 'list_products')['error'])
+
+    def test_stop_waits_for_an_in_flight_action_and_refuses_new_calls(self):
+        import threading, time
+        started, release, order = threading.Event(), threading.Event(), []
+        table = self.fake.table()
+        def slow(task):
+            started.set(); release.wait(5); order.append('action finished'); return {'status': 'DONE', 'output': ''}
+        table['execute'] = slow
+        b = Broker(self.directory, TURN, table); b.start()
+        client = threading.Thread(target=call, args=(b.socket_path, 'submit_action', {'agent': 'DIRECTOR', 'action': 'STATUS', 'args': {}}))
+        client.start(); started.wait(5)
+        stopper = threading.Thread(target=lambda: (b.stop(), order.append('stopped')))
+        stopper.start(); time.sleep(0.3)
+        self.assertEqual(order, [])
+        self.assertIn('turn ended', b.request(b'{"op": "world_status"}')['error'])
+        release.set(); stopper.join(10); client.join(10)
+        self.assertEqual(order, ['action finished', 'stopped'])
+
+    def test_protocol_rules_from_the_decision_schema_are_explained(self):
+        with self.broker() as b:
+            response = call(b.socket_path, 'submit_action', {'agent': 'DIRECTOR', 'action': 'WORLD',
+                                                             'args': {'op': 'raise_blocker', 'blocker_id': 'X', 'agent_id': 'DIRECTOR',
+                                                                      'title': 't', 'category': 'OTHER', 'needs_founder': 'yes', 'detail': 'd'}})
+        self.assertIn('Invalid argument type', response['error'])
+        self.assertNotIn('withheld', response['error'])
+
     def test_configuration_is_disabled_by_default_and_bounded(self):
         self.assertIsNone(limits({}))
         self.assertIsNone(limits({'broker': {'enabled': 'yes'}}))
@@ -146,6 +180,14 @@ class McpServerTests(unittest.TestCase):
         self.assertTrue(replies[4]['result']['isError'])
         self.assertEqual(replies[5]['error']['code'], -32602)
         self.assertEqual(replies[6]['error']['code'], -32601)
+
+    def test_multibyte_text_survives_chunked_socket_reads(self):
+        text = ('Équipe à Gatineau — café ✓ ' * 9000)
+        table = self.fake.table(); table['world_status'] = lambda: {'note': text}
+        with Broker(self.directory, TURN, table) as b:
+            replies = self.converse(b.socket_path, [
+                {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/call', 'params': {'name': 'world_status', 'arguments': {}}}])
+        self.assertEqual(json.loads(replies[1]['result']['content'][0]['text'])['note'], text)
 
     def test_unavailable_broker_is_a_tool_error_not_a_crash(self):
         replies = self.converse(self.directory / 'missing.sock', [
@@ -189,6 +231,34 @@ class ProviderCheckTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d, patch('controller.run_brain', return_value=(0, old_help.encode())):
             with self.assertRaisesRegex(ValueError, '--allowedTools, --setting-sources, --disable-slash-commands'):
                 Controller(d, None, None, config).check_provider('claude')
+
+
+class BrokerPublicationTests(unittest.TestCase):
+    setUp = integration.AutonomousIntegration.setUp
+    git = integration.AutonomousIntegration.git
+
+    def run(self, args=None, result=None):
+        if isinstance(args, list):
+            return subprocess.run(args, check=True, capture_output=True).stdout
+        return super().run(args if args is not None else result)
+
+    def test_failed_publication_reports_the_recorded_effect_instead_of_an_error(self):
+        world, bank, config = self.app.services()
+        task = {'id': 'TASK-%010d10' % TURN, 'type': 'TOOL', 'submitted_by': 'DIRECTOR', 'created_at': '2026-11-01T00:00:00Z',
+                'action': 'WORLD', 'args': {'op': 'create_mission', 'mission_id': 'ONCE', 'goal': 'Exactly once'},
+                'description': 'broker', 'estimated_cost_cad': 0, 'approved_by': None}
+        self.app.refresh_work()
+        with patch.object(self.app, 'finish', side_effect=RuntimeError('git push failed')):
+            result = self.app.execute_tool(task, world, bank, config)
+        self.assertEqual(result['status'], 'DONE')
+        self.assertIn('Do not resubmit', result['publication'])
+        self.assertEqual(sum(m['mission_id'] == 'ONCE' for m in world.snapshot()['missions']), 1)
+        # Same identifier again: the recorded result, never a second effect.
+        self.assertEqual(self.app.execute_tool(task, world, bank, config)['status'], 'DONE')
+        # The next cycle publishes the pending record.
+        self.app.cycle('queue')
+        names = self.run(['git', '--git-dir=' + str(self.remote), 'ls-tree', '-r', '--name-only', 'main', 'queue/done']).decode()
+        self.assertIn(task['id'], names)
 
 
 class BrokerThinkIntegration(unittest.TestCase):
@@ -243,7 +313,10 @@ class BrokerThinkIntegration(unittest.TestCase):
         self.assertEqual(json.loads(self.remote_git('show', 'main:world/controller.json'))['state'], 'OPERATIONAL')
         journal = list((self.install / 'state/broker').glob('THINK-*/calls.jsonl'))
         self.assertEqual(len(journal), 1)
-        self.assertEqual(len(journal[0].read_text().splitlines()), 3)
+        entries = [json.loads(line) for line in journal[0].read_text().splitlines()]
+        # Three counted calls, and the two submitted tasks recorded before execution.
+        self.assertEqual([e['op'] for e in entries if 'task' not in e], ['submit_action', 'submit_action', 'world_status'])
+        self.assertEqual([e['task']['id'] for e in entries if 'task' in e], [created['result']['task_id'], refused['result']['task_id']])
         self.assertEqual(list((self.install / 'state/broker').glob('THINK-*/broker.sock')), [])
         # A later queue cycle neither replays broker actions nor fails on their journals.
         self.app.cycle('queue')
