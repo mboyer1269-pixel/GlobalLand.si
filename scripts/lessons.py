@@ -60,3 +60,25 @@ def relevant(lessons, missions, limit=8, recent_failures=3):
         if i not in chosen:
             chosen.append(i)
     return [_view(lessons[i]) for i in chosen]
+
+
+def playbooks(work, limit_chars=8000):
+    """Decision playbooks shipped in agents/playbooks/, injected in full each turn.
+
+    They are short on purpose (about 850 words): reliable rules beat retrieval
+    that might miss the one that matters this turn.
+    """
+    import pathlib
+    base = pathlib.Path(work) / 'agents' / 'playbooks'
+    out, used = {}, 0
+    if not base.is_dir():
+        return out
+    for path in sorted(base.glob('*.md')):
+        if path.name == 'THIRD_PARTY.md' or path.is_symlink():
+            continue
+        text = path.read_text(encoding='utf-8', errors='replace').strip()
+        if used + len(text) > limit_chars:
+            break
+        out[path.stem] = text
+        used += len(text)
+    return out

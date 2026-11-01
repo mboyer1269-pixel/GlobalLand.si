@@ -58,7 +58,17 @@ def settings(config):
     if type(cap) not in (int, float) or not 0 < cap <= 10 or type(wait) is not int or not 60 <= wait <= 600:
         raise ValueError('invalid apify configuration')
     return dict(max_price_micro=int(round(cap * 1_000_000)), allow_public=c.get('allow_public') is True,
-                build_wait_seconds=wait)
+                build_wait_seconds=wait, require_review=c.get('require_review', True) is not False)
+
+
+def approved_by_other(reviews, actor, digest, author):
+    """Two-key rule: the latest review of this exact source must be an APPROVE
+    by an agent other than the one asking to publish."""
+    relevant = [r for r in reviews or [] if r.get('subject') == 'actor:' + actor and r.get('digest') == digest]
+    if not relevant:
+        return False
+    latest = max(relevant, key=lambda r: (r.get('at') or 0, r.get('seq') or 0))
+    return latest.get('verdict') == 'APPROVE' and latest.get('reviewer') != author
 
 
 def read_token(root):
@@ -167,11 +177,12 @@ class Client:
 
 
 class Publisher:
-    def __init__(self, root, config, client=None, sleep=time.sleep):
+    def __init__(self, root, config, client=None, sleep=time.sleep, reviews=None):
         self.root = pathlib.Path(root)
         self.settings = settings(config)
         self.client = client
         self.sleep = sleep
+        self.reviews = reviews or []
 
     def _client(self):
         if self.settings is None:
@@ -193,6 +204,9 @@ class Publisher:
         want_public = args.get('public') is True
         if want_public and not self.settings['allow_public']:
             raise ApifyError('Public Store listing not allowed by the founder yet; publish privately first')
+        if want_public and self.settings['require_review'] and not approved_by_other(self.reviews, args['actor'], digest, task.get('submitted_by')):
+            raise ApifyError('Public listing needs a WORLD review APPROVE of subject actor:%s, digest %s, by an agent other than %s'
+                             % (args['actor'], digest, task.get('submitted_by') or 'the author'))
         path = self._journal(args['actor'], digest)
         record = json.loads(path.read_text()) if path.exists() else None
         if record and record['step'] == 'BUILD_FAILED':
@@ -255,6 +269,7 @@ class Publisher:
             definition['pricingInfos'] = prices
         api.call('PUT', '/v2/acts/' + record['actor_id'], definition)
         result = dict(status='PUBLISHED' if want_public else 'PRIVATE_BUILD_READY', actor_id=record['actor_id'],
+                      source_digest=digest,
                       build_id=record['build_id'], public=want_public,
                       store_url='https://apify.com/%s/%s' % (record['username'], record['actor']) if want_public else None,
                       events={e['name']: e['price_microusd'] for e in args.get('events') or []},

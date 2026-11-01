@@ -75,6 +75,16 @@ class RelevanceTests(unittest.TestCase):
         self.assertEqual(chosen[0], 'L3')
 
 
+class PlaybookTests(unittest.TestCase):
+    def test_playbooks_are_loaded_without_the_license_file_and_bounded(self):
+        root = pathlib.Path(__file__).resolve().parents[1]
+        loaded = lessons.playbooks(root)
+        self.assertEqual(set(loaded), {'idea-verdict', 'growth-constraint', 'completion-evidence', 'two-key-review'})
+        self.assertTrue(all('MIT' in text for text in loaded.values()))
+        self.assertLessEqual(len(lessons.playbooks(root, limit_chars=1000)), 1)
+        self.assertEqual(lessons.playbooks(root / 'missing'), {})
+
+
 class LessonPromptIntegration(unittest.TestCase):
     setUp = integration.AutonomousIntegration.setUp
     git = integration.AutonomousIntegration.git
@@ -88,6 +98,12 @@ class LessonPromptIntegration(unittest.TestCase):
         config = {'controller': {'mode': 'subscriptions', 'providers': ['claude'], 'subscriptions_confirmed': True,
                                  'extra_usage_disabled': True, 'image': 'brain@sha256:' + '1' * 64}}
         (self.install / 'control/config.json').write_text(json.dumps(config))
+        playbooks = self.seed / 'agents/playbooks'
+        playbooks.mkdir(parents=True)
+        source = pathlib.Path(__file__).resolve().parents[1] / 'agents/playbooks'
+        for name in ('two-key-review.md', 'idea-verdict.md', 'THIRD_PARTY.md'):
+            (playbooks / name).write_text((source / name).read_text())
+        self.git('add', '.'); self.git('commit', '-m', 'playbooks'); self.git('push', 'origin', 'main')
         world, _, _ = self.app.services()
         world.apply('m', dict(op='create_mission', mission_id='APIFY-ACTOR', goal='Publish a scraper actor on the Apify Store'))
         world.apply('l', dict(op='record_lesson', agent_id='BUILDER', lesson='Apify actors need an input schema before Store listing.'))
@@ -102,6 +118,8 @@ class LessonPromptIntegration(unittest.TestCase):
         with patch.object(Controller, 'check_provider'), patch('controller.run_brain', side_effect=brain):
             self.app.cycle('think')
         self.assertIn('Apify actors need an input schema before Store listing.', prompts[0])
+        self.assertIn('producer and auditor are never the same agent', prompts[0])
+        self.assertIn('Give one verdict', prompts[0])
         self.assertIn('include a lesson', prompts[0])
 
 

@@ -215,7 +215,7 @@ class Toolbox:
         if action=='STATUS':return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':self.treasury.snapshot()},ensure_ascii=False)},{}
         if action in ('PUBLISH_ACTOR','ACTOR_STATS'):
             from apify import Publisher
-            publisher=Publisher(self.root,self.config)
+            publisher=Publisher(self.root,self.config,reviews=self.world.reviews() if hasattr(self.world,'reviews') else [])
             if action=='ACTOR_STATS':return {'status':'DONE','output':json.dumps(publisher.stats(task),ensure_ascii=False)},{}
             result=publisher.publish(task)
             return {'status':Publisher.task_status(result),'output':json.dumps(result,ensure_ascii=False)[:8000]},{}

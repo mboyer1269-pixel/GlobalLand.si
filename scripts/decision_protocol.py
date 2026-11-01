@@ -63,6 +63,11 @@ _WORLD_FIELDS = {
         'mission_id': _nullable(_ID), 'expected_gain': _nullable(_text(500)),
     },
     'resolve_blocker': {'blocker_id': _ID, 'agent_id': _ID, 'resolution': _text(2000)},
+    'review': {'reviewer': _ID,
+               'subject': {'type': 'string', 'pattern': '^(actor|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$'},
+               'digest': {'type': 'string', 'pattern': '^[0-9a-f]{64}$'},
+               'verdict': {'type': 'string', 'enum': ['APPROVE', 'NEEDS_WORK']},
+               'notes': _nullable(_text(2000))},
 }
 _WORLD_SCHEMAS = {
     op: _object({'op': {'type': 'string', 'enum': [op]}, **fields})

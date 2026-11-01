@@ -76,13 +76,16 @@ class ApifyTests(unittest.TestCase):
         write_actor(self.root / 'work')
         self.fake = FakeApify()
 
-    def publisher(self, config=CONFIG):
-        return Publisher(self.root, config, client=apify.Client('token-not-used', transport=self.fake))
+    def publisher(self, config=CONFIG, reviews=None):
+        return Publisher(self.root, config, client=apify.Client('token-not-used', transport=self.fake), reviews=reviews)
 
     def task(self, ident='TASK-179349120010', **args):
         base = {'actor': 'title-extractor', 'title': 'Title extractor', 'description': 'Extracts page titles.'}
         base.update(args)
-        return {'id': ident, 'action': 'PUBLISH_ACTOR', 'args': base}
+        return {'id': ident, 'action': 'PUBLISH_ACTOR', 'submitted_by': 'BUILDER', 'args': base}
+
+    def approval(self, digest, reviewer='AUDITOR', verdict='APPROVE', at=1):
+        return dict(reviewer=reviewer, subject='actor:title-extractor', digest=digest, verdict=verdict, at=at, seq=at)
 
     def test_source_is_validated_and_actor_config_becomes_dot_actor(self):
         files, version, digest = load_source(self.root / 'work', 'title-extractor')
@@ -119,7 +122,8 @@ class ApifyTests(unittest.TestCase):
         self.assertEqual(Publisher.task_status(first), 'DONE')
         self.assertFalse(self.fake.actors['title-extractor']['isPublic'])
         event = dict(name='result', title='Result', description='One result', price_microusd=2000)
-        second = self.publisher().publish(self.task('TASK-179349120011', public=True, events=[event]))
+        reviews = [self.approval(first['source_digest'])]
+        second = self.publisher(reviews=reviews).publish(self.task('TASK-179349120011', public=True, events=[event]))
         self.assertEqual(second['status'], 'PUBLISHED')
         self.assertEqual(second['store_url'], 'https://apify.com/globalland/title-extractor')
         actor = self.fake.actors['title-extractor']
@@ -127,6 +131,21 @@ class ApifyTests(unittest.TestCase):
         self.assertEqual(actor['pricingInfos'][0]['pricingModel'], 'PAY_PER_EVENT')
         self.assertEqual(self.fake.count('POST', '/v2/acts'), 1)
         self.assertEqual(self.fake.count('POST', '/v2/acts/A1/builds'), 1)
+
+    def test_public_listing_needs_an_independent_approval_of_the_exact_source(self):
+        digest = self.publisher().publish(self.task())['source_digest']
+        cases = {
+            'no review': [],
+            'self review': [self.approval(digest, reviewer='BUILDER')],
+            'other source': [self.approval('0' * 64)],
+            'approval later contradicted': [self.approval(digest, at=1), self.approval(digest, reviewer='CRITIC', verdict='NEEDS_WORK', at=2)],
+        }
+        for label, reviews in cases.items():
+            with self.subTest(label), self.assertRaisesRegex(ApifyError, 'review APPROVE'):
+                self.publisher(reviews=reviews).publish(self.task('TASK-179349120011', public=True))
+        self.assertFalse(self.fake.actors['title-extractor']['isPublic'])
+        ok = self.publisher(reviews=cases['approval later contradicted'] + [self.approval(digest, at=3)]).publish(self.task('TASK-179349120012', public=True))
+        self.assertEqual(ok['status'], 'PUBLISHED')
 
     def test_public_listing_needs_the_founders_permission(self):
         config = {'apify': dict(CONFIG['apify'], allow_public=False)}
@@ -178,7 +197,8 @@ class ApifyTests(unittest.TestCase):
 
     def test_stats_estimate_charges_and_say_they_are_not_revenue(self):
         event = dict(name='result', title='Result', description='One result', price_microusd=2000)
-        self.publisher().publish(self.task(public=True, events=[event]))
+        no_review = {'apify': dict(CONFIG['apify'], require_review=False)}
+        self.publisher(no_review).publish(self.task(public=True, events=[event]))
         self.fake.runs = [{'status': 'SUCCEEDED', 'chargedEventCounts': {'result': 150}},
                           {'status': 'FAILED', 'chargedEventCounts': {'result': 10}}]
         stats = self.publisher().stats({'args': {'actor': 'title-extractor'}})

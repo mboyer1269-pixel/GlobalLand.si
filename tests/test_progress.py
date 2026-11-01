@@ -214,5 +214,24 @@ class DetectorIntegration(unittest.TestCase):
                          ('NO-HOSTING', 'FOUNDER', 'ACCOUNT', 'ACQUISITION'))
 
 
+
+class ReviewOperationTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
+        self.world = World(pathlib.Path(self.tmp.name) / 'w.sqlite3')
+        self.world.bootstrap()
+
+    def test_reviews_are_recorded_and_validated(self):
+        digest = 'a' * 64
+        r = self.world.apply('r1', dict(op='review', reviewer='AUDITOR', subject='actor:title-extractor', digest=digest, verdict='APPROVE', notes='README, input schema and a test run checked'))
+        self.assertEqual((r['seq'], r['verdict']), (1, 'APPROVE'))
+        self.assertEqual(self.world.apply('r2', dict(op='review', reviewer='BUILDER', subject='mission:WORLD-FIRST-REVENUE', digest=digest, verdict='NEEDS_WORK'))['seq'], 2)
+        self.assertEqual(len(self.world.reviews()), 2)
+        for bad in (dict(subject='file:/etc/passwd'), dict(digest='xyz'), dict(verdict='MAYBE'), dict(reviewer='NOBODY')):
+            args = dict(op='review', reviewer='AUDITOR', subject='actor:x', digest=digest, verdict='APPROVE')
+            args.update(bad)
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                self.world.apply('bad-' + next(iter(bad)), args)
+
 if __name__ == '__main__':
     unittest.main()

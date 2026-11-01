@@ -92,7 +92,7 @@ class World:
     def snapshot(self):
         with self._connect() as db:
             s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
-        view = {k: (v[-100:] if k == 'events' else v) for k, v in s.items()
+        view = {k: (v[-100:] if k == 'events' else v[-50:] if k == 'reviews' else v) for k, v in s.items()
                 if k not in ('cycles', 'bootstrapped', 'lessons', 'lesson_seq')}
         # Lessons are retrieved by relevance for prompts, not dumped wholesale.
         view['lesson_count'] = len(s.get('lessons', []))
@@ -140,6 +140,7 @@ class World:
             'complete_mission': ({'mission_id', 'agent_id', 'lease_token', 'evidence'}, {'lesson'}),
             'fail_mission': ({'mission_id', 'agent_id', 'lease_token', 'reason'}, {'lesson'}),
             'record_lesson': ({'agent_id', 'lesson'}, {'mission_id', 'tags'}),
+            'review': ({'reviewer', 'subject', 'digest', 'verdict'}, {'notes'}),
             'message': ({'from_agent', 'to_agent', 'body'}, set()),
             'transfer_glc': ({'from_agent', 'to_agent', 'amount'}, set()),
             'reward_glc': ({'agent_id', 'amount', 'evidence'}, set()),
@@ -242,6 +243,24 @@ class World:
                     self._event(s, 'AGENT_DISABLED', agent_id=agent['agent_id'])
             s['cycles'].append(cid)
             return dict(cycle_id=cid, applied=True)
+        if op == 'review':
+            # Producer and auditor are never the same agent: the host checks the
+            # author against the reviewer where a review gates an effect.
+            self._agent(s, a['reviewer'], True)
+            if not isinstance(a['subject'], str) or not re.fullmatch(r'(actor|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}', a['subject']):
+                raise ValueError('Invalid review subject')
+            if not isinstance(a['digest'], str) or not re.fullmatch(r'[0-9a-f]{64}', a['digest']):
+                raise ValueError('Invalid review digest')
+            if a['verdict'] not in ('APPROVE', 'NEEDS_WORK'):
+                raise ValueError('Invalid review verdict')
+            reviews = s.setdefault('reviews', [])
+            review = dict(reviewer=a['reviewer'], subject=a['subject'], digest=a['digest'], verdict=a['verdict'],
+                          notes=self._text(a['notes'], 'notes', 2000) if a.get('notes') is not None else None,
+                          at=self.clock(), seq=len(reviews) and reviews[-1]['seq'] + 1 or 1)
+            reviews.append(review)
+            del reviews[:-500]
+            self._event(s, 'REVIEW_RECORDED', reviewer=a['reviewer'], subject=a['subject'], verdict=a['verdict'])
+            return review
         if op == 'record_lesson':
             self._agent(s, a['agent_id'], True)
             mission = None
@@ -281,6 +300,11 @@ class World:
         del lessons[:-self.MAX_LESSONS]
         self._event(s, 'LESSON_RECORDED', lesson_id=lesson['lesson_id'], agent_id=agent_id)
         return lesson
+
+    def reviews(self):
+        with self._connect() as db:
+            s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
+        return s.get('reviews', [])
 
     def lessons(self):
         with self._connect() as db:

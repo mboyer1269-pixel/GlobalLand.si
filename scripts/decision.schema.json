@@ -1190,6 +1190,77 @@
                 }
               }
             }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "WORLD"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "op",
+                  "reviewer",
+                  "subject",
+                  "digest",
+                  "verdict",
+                  "notes"
+                ],
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "review"
+                    ]
+                  },
+                  "reviewer": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "subject": {
+                    "type": "string",
+                    "pattern": "^(actor|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                  },
+                  "digest": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  },
+                  "verdict": {
+                    "type": "string",
+                    "enum": [
+                      "APPROVE",
+                      "NEEDS_WORK"
+                    ]
+                  },
+                  "notes": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 2000,
+                    "pattern": "\\S"
+                  }
+                }
+              }
+            }
           }
         ]
       }

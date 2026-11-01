@@ -86,7 +86,7 @@ Un lancement immédiat en échec après « horaires installés » laisse l'horai
 ## Apify Store (premier rail de revenu)
 
 1. Créer un compte Apify au nom du fondateur, faire la vérification d'identité exigée pour la monétisation, et définir un nom d'utilisateur.
-2. **Plafonner les coûts :** les constructions et essais d'Actors consomment des crédits de plateforme sur ce compte. Rester sur le plan gratuit sans carte, ou fixer une limite d'usage mensuelle dans la facturation Apify : aucune recharge personnelle n'est permise.
+2. **Plafonner les coûts : rester sur le plan gratuit, sans carte.** Il donne 5 $ de crédits de plateforme par mois. Une fois ces crédits épuisés, le compte est bloqué jusqu'au cycle suivant, sans facture : c'est un plafond réel (page officielle des tarifs, vérifiée le 2026-11-01). Ne pas ajouter de carte : un plan payant facture les dépassements. Les constructions et essais d'Actors consomment ces crédits ; les exécutions des clients d'un Actor à l'événement sont déduites des gains, jamais facturées au développeur.
 3. Créer un token API et l'installer sans jamais le coller dans GitHub ni dans un chat :
 
 ```bash
@@ -94,7 +94,7 @@ sudo install -d -m 700 /opt/globalland/credentials/apify
 sudo sh -c 'umask 077; cat > /opt/globalland/credentials/apify/token'   # coller le token, Entrée, Ctrl-D
 ```
 
-4. Activer dans `/opt/globalland/control/config.json` : `"apify": {"enabled": true, "max_event_price_usd": 0.05, "allow_public": false, "build_wait_seconds": 240}`. Laisser `allow_public` à false jusqu'à la vérification d'une première construction privée, puis le passer à true.
+4. Activer dans `/opt/globalland/control/config.json` : `"apify": {"enabled": true, "max_event_price_usd": 0.05, "allow_public": false, "require_review": true, "build_wait_seconds": 240}`. `require_review` impose la règle des deux clés : une mise en vente publique exige l'approbation (WORLD `review`) de la version exacte des sources par un agent autre que celui qui publie. Laisser `allow_public` à false jusqu'à la vérification d'une première construction privée, puis le passer à true.
 
 ### Chaque mois : versements Apify vers la Banque
 

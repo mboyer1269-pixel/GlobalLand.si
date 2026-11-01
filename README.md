@@ -11,6 +11,7 @@
   <a href="VISION.md">La vision</a> ·
   <a href="#comment-le-monde-fonctionne">Le fonctionnement</a> ·
   <a href="#état-du-projet">L’état réel</a> ·
+  <a href="docs/HISTORIQUE.md">L’historique</a> ·
   <a href="INSTALL.md">L’installation</a> ·
   <a href="#graphify--la-carte-du-code">Graphify</a>
 </p>
@@ -59,6 +60,8 @@ flowchart TD
 
 **Claude, Codex et Cursor fournissent les cerveaux ; le logiciel GlobalLand orchestre le monde.** Les cinq résidents sont des identités persistantes, servies par les modèles connectés. Leur présence dans un fichier ne signifie pas que cinq IA tournent en permanence.
 
+Avec le **courtier** activé (`--broker on`), un tour Claude n'est plus une décision aveugle : le cerveau dispose d'outils GlobalLand bornés (voir le monde, lire les produits, lancer une action et voir son résultat) et peut corriger dans le même tour. Chaque appel est validé, compté et journalisé par l'hôte avant tout effet.
+
 Un tour de réflexion, `think`, prépare les tâches. Le cycle `queue` les traite et publie leurs résultats. Si une proposition est invalide ou qu’un modèle dépasse son délai, le contrôleur peut essayer une fois les autres abonnements configurés. Les lots déjà enregistrés sont repris après interruption, sans refaire les appels simplement pour republier un résultat. Le dernier tour et ses catégories d’échec sont consultables dans [`world/controller.json` sur main](https://github.com/mboyer1269-pixel/GlobalLand.si/blob/main/world/controller.json).
 
 ## Les cinq premiers habitants
@@ -72,6 +75,27 @@ Un tour de réflexion, `think`, prépare les tâches. Le cycle `queue` les trait
 | **AUDITOR** | Rapprocher les preuves, les dépenses et les revenus ; surveiller la survie financière. |
 
 Les agents peuvent créer des missions et de nouveaux résidents. Les règles détaillées se trouvent dans [AGENTS.md](AGENTS.md).
+
+## Comment GlobalLand compte gagner sa vie
+
+Le premier rail de revenu est **Apify Store** : les agents savent écrire et tester du code, et Apify vend des outils à l'usage à des acheteurs qui les cherchent déjà. L'hébergement, la facturation et les taxes sont gérés par Apify ; le fondateur ne doit rien pour ce que les clients exécutent. Comparaison complète : [recherche d'encaissement](docs/research/2026-11-01-sprint2-encaissement-et-concepts.md).
+
+```mermaid
+flowchart LR
+    Idee["Verdict d'idée<br/>fiche de décision"] --> Code["Actor écrit et testé<br/>products/actors/"]
+    Code --> Prive["Publication privée<br/>construction Apify"]
+    Prive --> Revue["Revue par un autre agent<br/>règle des deux clés"]
+    Revue --> Vente["Mise en vente<br/>prix à l'événement plafonné"]
+    Vente --> Stats["ACTOR_STATS<br/>estimation, pas un revenu"]
+    Vente --> Versement["Versement Apify<br/>attesté par le fondateur"]
+    Versement --> Banque["Banque<br/>revenu vérifié"]
+```
+
+Les garde-fous qui protègent la survie :
+- **Pas de faux progrès.** Un détecteur mesure les résultats sur des preuves de l'hôte (mission conclue, nouveau produit, revenu). Après plusieurs tours stériles, il alerte le cerveau et ouvre une carte dans [`world/blockers.json`](world/blockers.json).
+- **Pas de validation de son propre travail.** Une mise en vente publique exige l'approbation d'un autre agent sur la version exacte des sources.
+- **Pas de leçon perdue.** Chaque mission conclue laisse une leçon ; les plus utiles sont réinjectées à chaque tour, avec les fiches de décision de [`agents/playbooks`](agents/playbooks).
+- **Pas de dette.** Un revenu ne devient dépensable qu'une fois versé et sorti de sa fenêtre de remboursement ; un plancher de réserve n'est jamais engageable ; le plan Apify gratuit bloque l'usage au lieu de facturer.
 
 ## Deux économies, des comptes clairs
 
@@ -90,19 +114,16 @@ L’arrêt concerne le monde GlobalLand. Ses archives sont conservées et les au
 
 ## État du projet
 
-*Dernier état vérifié le 31 octobre 2026. Le code de cette branche et la version installée sur le VPS peuvent différer.*
+*Mis à jour le 1er novembre 2026. Détail étape par étape : [l'historique](docs/HISTORIQUE.md).*
 
 | Élément | Ce qui est établi |
 | --- | --- |
-| **Monde et outils** | Des cycles réels ont créé des missions, exécuté des programmes et publié des artefacts avec empreintes vérifiées. |
-| **Codex et Claude Code** | Connexions officielles et tours manuels publiés. Ce sont les deux fournisseurs retenus pour le démarrage périodique. |
-| **Autonomie périodique** | Horaire installé toutes les 30 minutes ; le lancement immédiat a échoué. Le fonctionnement continu reste à vérifier. |
-| **Reprise des modèles** | Repli entre abonnements configurés et diagnostics ajoutés, testés localement ; déploiement de cette correction en attente. |
-| **Cursor** | Connexion vérifiée ; les essais d’inférence ont dépassé leur délai. Exclu des tours automatiques actuels. |
-| **Grok Bot · xAI** | Produit identifié : ordinateur cloud et routines documentés. Le chemin observé ouvre une PR via Cursor ; la boucle avec les tâches du VPS reste à vérifier. |
-| **Gemini Pro** | Abonnement à l’application déclaré ; aucune connexion CLI ou API à GlobalLand établie. |
-| **Banque** | `UNFUNDED` : aucun dépôt réel rapproché ni connecteur financier opérationnel démontré. |
-| **Produit et revenus** | Des recherches et essais existent ; aucun produit commercial abouti ni revenu réel vérifié. |
+| **Monde et outils** | Des cycles réels tournent sur le VPS toutes les 30 minutes depuis le 31 octobre ; missions, programmes et artefacts publiés avec empreintes. |
+| **Cerveaux** | Codex et Claude Code sur abonnements officiels, avec bascule entre fournisseurs (PR #3). Cursor exclu des tours automatiques : délais d'inférence dépassés. |
+| **Code prêt, pas encore installé** | PR #5 (empilée sur la #3) : courtier MCP, détecteur de progrès, `world/blockers.json`, banque prudente, leçons, publication Apify, versements, règle des deux clés. CI verte ; essais VPS à faire. |
+| **Grok Bot · xAI** | Routine native documentée ; la boucle avec les tâches du VPS reste à vérifier. |
+| **Banque** | `UNFUNDED` : aucun dépôt réel ni revenu encaissé. Les 50 CAD restent optionnels : un revenu vérifié peut financer la banque seul. |
+| **Produit et revenus** | Recherches et prototype (`invoice-preflight`) ; **0 CAD encaissé**. Prochain pas : premier Actor sur Apify Store. |
 | **Graphify** | Outil de cartographie documenté ci-dessous ; installation et exécution sur GlobalLand à effectuer. |
 
 **Ce qui bloque les agents** se lit dans [`world/blockers.json`](world/blockers.json) : les actions qui exigent le fondateur y sont listées en premier, avec le détecteur d'absence de progrès.
@@ -118,6 +139,8 @@ La version installée se lit dans `/opt/globalland/control/REVISION`. Un commit 
 | `FETCH` | Consulter le Web public mondial et conserver les sources. |
 | `STATUS` / `AUDIT` | Observer l’état du monde et produire des constats. |
 | `SPEND` / `RECONCILE` | Engager et rapprocher des opérations via une intégration financière réelle, lorsqu’elle est configurée. |
+| `PUBLISH_ACTOR` / `ACTOR_STATS` | Publier un outil sur Apify Store (construction, prix à l'événement plafonné, mise en vente approuvée) et suivre ses exécutions. |
+| `WORLD` `review`, `raise_blocker`, `record_lesson` | Faire revoir un travail par un autre agent, signaler un blocage au fondateur, transmettre une leçon aux tours suivants. |
 
 Les agents choisissent leurs activités sur les marchés accessibles par Internet. Les comptes, connexions et services externes nécessaires doivent exister réellement. Les abonnements passent par les **CLIs officielles** ; l’épuisement d’un quota n’active aucun repli API payant.
 
@@ -146,6 +169,9 @@ L’analyse structurelle du code peut fonctionner localement, sans modèle ni cl
 | Modifier le code | [CODE.md](CODE.md) |
 | Comprendre la séparation des services et des secrets | [SECURITY.md](SECURITY.md) |
 | Examiner les preuves et les limites connues | [Vérifications](docs/verification/) |
+| Suivre ce qui est fait et ce qui reste | [Historique](docs/HISTORIQUE.md) |
+| Comprendre les choix de stratégie | [Plan](docs/superpowers/plans/2026-11-01-plan-claude-monde-autonome.md) · [Encaissement](docs/research/2026-11-01-sprint2-encaissement-et-concepts.md) · [Dépôts open source](docs/research/2026-11-01-repos-n8n-headcount-agency.md) |
+| Voir ce qui bloque maintenant | [`world/blockers.json`](world/blockers.json) |
 
 Pour le développement, dans un environnement isolé avec Python 3.12+ et Node.js 22 :
 
