@@ -809,6 +809,164 @@
                 }
               }
             }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "WORLD"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "op",
+                  "blocker_id",
+                  "agent_id",
+                  "title",
+                  "category",
+                  "needs_founder",
+                  "detail",
+                  "mission_id",
+                  "expected_gain"
+                ],
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "raise_blocker"
+                    ]
+                  },
+                  "blocker_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "agent_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "pattern": "\\S"
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "ACCOUNT",
+                      "CREDENTIAL",
+                      "IDENTITY",
+                      "PAYMENT",
+                      "DECISION",
+                      "CAPABILITY",
+                      "OTHER"
+                    ]
+                  },
+                  "needs_founder": {
+                    "type": "boolean"
+                  },
+                  "detail": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000,
+                    "pattern": "\\S"
+                  },
+                  "mission_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "expected_gain": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 500,
+                    "pattern": "\\S"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "WORLD"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "op",
+                  "blocker_id",
+                  "agent_id",
+                  "resolution"
+                ],
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "resolve_blocker"
+                    ]
+                  },
+                  "blocker_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "agent_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "resolution": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000,
+                    "pattern": "\\S"
+                  }
+                }
+              }
+            }
           }
         ]
       }

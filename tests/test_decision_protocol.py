@@ -71,8 +71,9 @@ class DecisionProtocolTests(unittest.TestCase):
         self.assertEqual({v['properties']['op']['enum'][0] for v in world}, {
             'register_agent', 'create_mission', 'claim_mission', 'complete_mission',
             'fail_mission', 'message', 'transfer_glc', 'reward_glc', 'set_policy', 'cycle',
+            'raise_blocker', 'resolve_blocker',
         })
-        self.assertEqual(len(self.variants()), 15)
+        self.assertEqual(len(self.variants()), 17)
 
     def test_schema_represents_finance_json_recursively_with_entries_only(self):
         schema = self.protocol.MODEL_SCHEMA

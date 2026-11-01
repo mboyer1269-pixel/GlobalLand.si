@@ -169,7 +169,7 @@ Les pistes A, B et C avancent en même temps. Chaque sprint se termine par une *
 ### Sprint 1 — J2 à J7 : cerveau agentique et publication (pistes A et B)
 
 - [x] A : serveur MCP GlobalLand, courtier sur socket Unix, journal avant effet par appel d'outil, `--max-turns 40` (Claude). Éprouvé localement avec la vraie CLI hors Docker ; essai VPS à faire.
-- [ ] A : détecteur d'absence de progrès et `world/blockers.json`.
+- [x] A : détecteur d'absence de progrès (preuves de l'hôte, 3 tours par défaut) et `world/blockers.json` (cartes `raise_blocker` des agents + carte système).
 - [ ] B : action PUBLISH (Cloudflare Pages : preview, promote, rollback) avec tests de garde-fous.
 - [ ] B : vitrine sur un projet Cloudflare Pages séparé (lecture seule des réalisations).
 - **Preuve :** un agent publie lui-même une page, la vérifie par FETCH et corrige une erreur dans le même cycle, sans intervention.

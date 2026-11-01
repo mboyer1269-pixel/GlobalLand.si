@@ -56,8 +56,9 @@ def check_secrets(raw):
 def safe_path(name):
  if not isinstance(name,str) or not name or name.startswith('/') or '\\' in name or any(p in ('','.','..','.git') for p in name.split('/')):raise ValueError('unsafe path')
  return name
+PROJECTIONS=('bank/status.json','world/status.json','world/controller.json','world/blockers.json')
 def allowed(name):
- return name in ('ledger.json','logs/transactions.log','bank/status.json','world/status.json','world/controller.json') or (name.startswith('products/') and not any(p.startswith('.') for p in name.split('/'))) or bool(re.fullmatch(r'bank/audits/audit-\d{4}-\d\d-\d\d\.md|queue/(?:done|failed)/TASK-[0-9]{4,12}\.result\.json',name))
+ return name in ('ledger.json','logs/transactions.log',*PROJECTIONS) or (name.startswith('products/') and not any(p.startswith('.') for p in name.split('/'))) or bool(re.fullmatch(r'bank/audits/audit-\d{4}-\d\d-\d\d\.md|queue/(?:done|failed)/TASK-[0-9]{4,12}\.result\.json',name))
 def read_artifact(root,name):
  if not allowed(safe_path(name)):raise ValueError('publication outside allowlist')
  p=root
@@ -133,7 +134,9 @@ class Supervisor:
   from controller import Controller
   planner=planner or Controller(self.root,world,bank,config)
   status=planner.projection()
-  return {'bank/status.json':json.dumps(bank.snapshot(),indent=2)+'\n','world/status.json':json.dumps(world.snapshot(),ensure_ascii=False,indent=2)+'\n','world/controller.json':json.dumps(status,indent=2)+'\n'}
+  import progress
+  snapshot=world.snapshot()
+  return {'bank/status.json':json.dumps(bank.snapshot(),indent=2)+'\n','world/status.json':json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n','world/controller.json':json.dumps(status,indent=2)+'\n','world/blockers.json':json.dumps(progress.board(self.root,snapshot),ensure_ascii=False,indent=2)+'\n'}
  def prepare_publication(self,record):
   # Reapply a durable outbox on non-overlapping upstream changes; never rerun work.
   self.git('fetch','origin','main')
@@ -141,7 +144,7 @@ class Supervisor:
   base=record.get('base_sha')
   if base and remote!=base:
    for name,text in record['files'].items():
-    if name in ('bank/status.json','world/status.json','world/controller.json'):continue
+    if name in PROJECTIONS:continue
     def content(ref):
      try:return self.git('show',ref+':'+name)
      except RuntimeError:return None
@@ -155,7 +158,7 @@ class Supervisor:
     base=record.get('base_sha')
     if not base:raise RuntimeError('Divergent legacy publication; operator reconciliation required')
     for name,text in record['files'].items():
-     if name in ('bank/status.json','world/status.json','world/controller.json'):continue
+     if name in PROJECTIONS:continue
      def blob(ref):
       try:return self.git('show',ref+':'+name)
       except RuntimeError:return None

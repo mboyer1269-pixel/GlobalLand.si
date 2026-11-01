@@ -35,7 +35,7 @@ Les tâches sont transportées par GitHub dans `queue/inbox/TASK-NNNN.json`. L'I
 | SPEND | request objet libre destiné à l'intégration financière | Réserve un débit maximum puis transmet via l'adaptateur privé configuré. Sans financement/compte adapté, refus explicite. |
 | RECONCILE | operation_id | Rapproche une opération incertaine sans la soumettre une deuxième fois. |
 
-WORLD op : register_agent, create_mission, claim_mission, complete_mission, fail_mission, message, transfer_glc, reward_glc, set_policy, cycle. Les signatures et champs sont documentés dans world.py ; STATUS donne les agents/missions/baux. `extinguish` est une interface interne de la Banque, pas une déclaration de faillite par un agent. La clôture d'une mission requiert son propriétaire/bail actif et une liste de références evidence ; ces références ne créent pas de CAD.
+WORLD op : register_agent, create_mission, claim_mission, complete_mission, fail_mission, message, transfer_glc, reward_glc, set_policy, cycle, raise_blocker, resolve_blocker. Les signatures et champs sont documentés dans world.py ; STATUS donne les agents/missions/baux. `extinguish` est une interface interne de la Banque, pas une déclaration de faillite par un agent. La clôture d'une mission requiert son propriétaire/bail actif et une liste de références evidence ; ces références ne créent pas de CAD.
 
 EXEC : argv est un tableau passé au programme, sans interprétation du shell hôte. L'agent peut choisir `bash -lc` **dans sa boîte**. Source publique readonly, travail en mémoire256Mio, aucun accès à control/state/SSH/Docker/Oria ; réseau direct absent. Les outils disponibles viennent de l'image configurée. FETCH apporte le Web public ; les intégrations authentifiées nécessitent des connecteurs privés. Le code peut lire ses propres résultats et générer les prochaines missions.
 
@@ -69,6 +69,16 @@ Option administrateur, désactivée par défaut (`controller.broker.enabled`). P
 Chaque appel est validé, compté (`max_calls`, `max_actions`) et inscrit dans `calls.jsonl` avant tout effet. Une action reçoit l'identifiant `TASK-<tour>NN` (NN de 10 à 99 ; 00-04 restent ceux de la décision finale), suit le même journal durable qu'une tâche de file, est publiée dans queue/done ou queue/failed avec sa requête, et n'est jamais réexécutée. SPEND et RECONCILE restent réservés à la décision finale et à la file. Le tour se termine par la décision JSON habituelle ; ses actions sont mises en file.
 
 Le conteneur Claude n'a aucun outil intégré (`--tools ''`), seulement ce serveur (`--strict-mcp-config`, `--allowedTools mcp__globalland`). `--safe-mode` désactive aussi les serveurs `--mcp-config` (vérifié avec la CLI 2.1.316) : les personnalisations sont donc exclues explicitement par `--setting-sources ''` et `--disable-slash-commands`. Codex et Cursor gardent le tour à une passe tant que leur pont MCP n'est pas éprouvé.
+
+## Progrès et tableau des blocages
+
+Le progrès se mesure sur des preuves de l'hôte, jamais sur une déclaration d'agent. Entre deux tours think réussis, un tour est productif si une mission passe à COMPLETED ou FAILED, si un nouveau chemin apparaît sous products/ hors products/research/ et products/receipts/, ou si la trésorerie vérifiée augmente au-delà du dépôt initial. Réécrire des fichiers, envoyer des messages, réclamer une mission ou ajouter une note de recherche ne suffit pas.
+
+Après `controller.progress.stall_turns` tours non productifs consécutifs (3 par défaut), le prompt reçoit une alerte de progrès et une carte système `SYSTEM-NO-PROGRESS` s'ouvre. Elle se ferme d'elle-même au prochain tour productif. Le compteur est enregistré une fois par tour réussi (`state/private/progress.json`) : un essai de fournisseur échoué ne compte pas deux fois.
+
+`raise_blocker` (blocker_id, agent_id, title, category ACCOUNT|CREDENTIAL|IDENTITY|PAYMENT|DECISION|CAPABILITY|OTHER, needs_founder, detail, mission_id et expected_gain optionnels) enregistre une fois ce qui empêche d'avancer ; le même blocker_id met la carte à jour au lieu de la dupliquer. `resolve_blocker` la ferme avec une résolution. Au plus 50 cartes ouvertes.
+
+`world/blockers.json` est le seul endroit que le fondateur doit consulter : `founder_actions` compte les cartes qui exigent son identité, un compte, un credential, un paiement ou une décision ; `open` les liste en premier, puis les cartes des agents et la carte système ; `progress` résume le compteur.
 
 ## Transport interne des décisions de modèle
 

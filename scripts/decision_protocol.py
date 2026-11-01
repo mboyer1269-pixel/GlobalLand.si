@@ -52,6 +52,13 @@ _WORLD_FIELDS = {
     'reward_glc': {'agent_id': _ID, 'amount': _integer(), 'evidence': _EVIDENCE},
     'set_policy': {'maintenance_glc': _integer(10000), 'interest_basis_points': _integer(10000)},
     'cycle': {'cycle_id': _ID},
+    'raise_blocker': {
+        'blocker_id': _ID, 'agent_id': _ID, 'title': _text(200),
+        'category': {'type': 'string', 'enum': ['ACCOUNT', 'CREDENTIAL', 'IDENTITY', 'PAYMENT', 'DECISION', 'CAPABILITY', 'OTHER']},
+        'needs_founder': {'type': 'boolean'}, 'detail': _text(2000),
+        'mission_id': _nullable(_ID), 'expected_gain': _nullable(_text(500)),
+    },
+    'resolve_blocker': {'blocker_id': _ID, 'agent_id': _ID, 'resolution': _text(2000)},
 }
 _WORLD_SCHEMAS = {
     op: _object({'op': {'type': 'string', 'enum': [op]}, **fields})
@@ -116,7 +123,7 @@ def _validate_field(value, schema):
     kind = schema['type']
     if isinstance(kind, list):
         kind = next(item for item in kind if item != 'null')
-    expected = {'string': str, 'integer': int, 'array': list}[kind]
+    expected = {'string': str, 'integer': int, 'array': list, 'boolean': bool}[kind]
     if type(value) is not expected:
         raise ValueError('Invalid argument type')
     if 'enum' in schema and value not in schema['enum']:
@@ -126,6 +133,8 @@ def _validate_field(value, schema):
             raise ValueError('Invalid argument length')
         if 'pattern' in schema and not re.search(schema['pattern'], value):
             raise ValueError('Invalid argument format')
+    elif kind == 'boolean':
+        return
     elif kind == 'integer':
         if not schema.get('minimum', value) <= value <= schema.get('maximum', value):
             raise ValueError('Invalid integer argument')

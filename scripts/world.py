@@ -140,7 +140,9 @@ class World:
             'transfer_glc': ({'from_agent', 'to_agent', 'amount'}, set()),
             'reward_glc': ({'agent_id', 'amount', 'evidence'}, set()),
             'set_policy': ({'maintenance_glc', 'interest_basis_points'}, set()),
-            'cycle': ({'cycle_id'}, set()), 'extinguish': ({'reason'}, set())}
+            'cycle': ({'cycle_id'}, set()), 'extinguish': ({'reason'}, set()),
+            'raise_blocker': ({'blocker_id', 'agent_id', 'title', 'category', 'needs_founder', 'detail'}, {'mission_id', 'expected_gain'}),
+            'resolve_blocker': ({'blocker_id', 'agent_id', 'resolution'}, set())}
         op = a.get('op')
         if not isinstance(op, str) or op not in fields:
             raise ValueError('Unknown operation')
@@ -234,11 +236,57 @@ class World:
                     self._event(s, 'AGENT_DISABLED', agent_id=agent['agent_id'])
             s['cycles'].append(cid)
             return dict(cycle_id=cid, applied=True)
+        if op == 'raise_blocker':
+            return self._raise_blocker(s, a)
+        if op == 'resolve_blocker':
+            blockers = s.setdefault('blockers', [])
+            self._agent(s, a['agent_id'], True)
+            b = self._find(blockers, 'blocker_id', self._id(a['blocker_id']))
+            if b['status'] != 'OPEN':
+                raise ValueError('Blocker already resolved')
+            b.update(status='RESOLVED', resolution=self._text(a['resolution'], 'resolution', 2000),
+                     resolved_by=a['agent_id'], resolved_at=self.clock())
+            self._event(s, 'BLOCKER_RESOLVED', blocker_id=b['blocker_id'], agent_id=a['agent_id'])
+            return b
         if op == 'extinguish':
             reason = self._text(a['reason'], 'reason')
             s['state'] = 'EXTINCT'
             self._event(s, 'WORLD_EXTINCT', reason=reason)
             return dict(state='EXTINCT', reason=reason)
+
+    BLOCKER_CATEGORIES = ('ACCOUNT', 'CREDENTIAL', 'IDENTITY', 'PAYMENT', 'DECISION', 'CAPABILITY', 'OTHER')
+
+    def _raise_blocker(self, s, a):
+        """Record once what prevents progress; repeated reports update the card."""
+        blockers = s.setdefault('blockers', [])
+        self._agent(s, a['agent_id'], True)
+        bid = self._id(a['blocker_id'])
+        if a['category'] not in self.BLOCKER_CATEGORIES:
+            raise ValueError('Invalid blocker category')
+        if type(a['needs_founder']) is not bool:
+            raise ValueError('needs_founder must be boolean')
+        fields = dict(title=self._text(a['title'], 'title', 200), category=a['category'],
+                      needs_founder=a['needs_founder'], detail=self._text(a['detail'], 'detail', 2000),
+                      mission_id=None, expected_gain=None)
+        if a.get('mission_id') is not None:
+            fields['mission_id'] = self._find(s['missions'], 'mission_id', self._id(a['mission_id']))['mission_id']
+        if a.get('expected_gain') is not None:
+            fields['expected_gain'] = self._text(a['expected_gain'], 'expected gain', 500)
+        now = self.clock()
+        b = next((x for x in blockers if x['blocker_id'] == bid), None)
+        if b is None:
+            if sum(1 for x in blockers if x['status'] == 'OPEN') >= 50:
+                raise ValueError('Too many open blockers; resolve or merge existing ones')
+            b = dict(blocker_id=bid, status='OPEN', raised_by=a['agent_id'], opened_at=now, reports=0)
+            blockers.append(b)
+            del blockers[:-200]
+        elif b['status'] != 'OPEN':
+            b.update(status='OPEN', opened_at=now, reports=0)
+            for key in ('resolution', 'resolved_by', 'resolved_at'):
+                b.pop(key, None)
+        b.update(fields, last_reported_by=a['agent_id'], last_reported_at=now, reports=b['reports'] + 1)
+        self._event(s, 'BLOCKER_RAISED', blocker_id=bid, agent_id=a['agent_id'])
+        return b
 
     def _evidence(self, evidence):
         if type(evidence) is not list or not 1 <= len(evidence) <= 100:

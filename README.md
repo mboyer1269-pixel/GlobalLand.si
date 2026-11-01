@@ -105,6 +105,8 @@ L’arrêt concerne le monde GlobalLand. Ses archives sont conservées et les au
 | **Produit et revenus** | Des recherches et essais existent ; aucun produit commercial abouti ni revenu réel vérifié. |
 | **Graphify** | Outil de cartographie documenté ci-dessous ; installation et exécution sur GlobalLand à effectuer. |
 
+**Ce qui bloque les agents** se lit dans [`world/blockers.json`](world/blockers.json) : les actions qui exigent le fondateur y sont listées en premier, avec le détecteur d'absence de progrès.
+
 La version installée se lit dans `/opt/globalland/control/REVISION`. Un commit GitHub, un login réussi ou une tâche `DONE` ne prouvent pas à eux seuls une activité rentable. Les [comptes rendus de vérification](docs/verification/) distinguent tests locaux, exécution réelle et étapes restantes.
 
 ## Les outils des agents
