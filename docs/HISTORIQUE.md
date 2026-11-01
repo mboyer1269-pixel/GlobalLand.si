@@ -9,7 +9,7 @@
 
 ## Où on en est, en cinq lignes
 
-- **Incident en cours : le monde est arrêté depuis le 1er nov. à 00:30 UTC** (`CONTROLLER_BLOCKED`, aucun commit depuis). La cause est dans `state/private/controller-failure.json` sur le VPS, que seul le fondateur peut lire.
+- **Incident en cours : le monde est arrêté depuis le 1er nov. à 00:30 UTC** (`CONTROLLER_BLOCKED`, aucun commit depuis). La cause est dans l'état privé du VPS : `scripts/incident.py` la lit en une commande, sans secret dans la sortie.
 - Avant l'incident, un cycle de réflexion tournait toutes les 30 minutes depuis le 31 octobre, avec Codex et Claude sur abonnements.
 - Les agents ont fabriqué de la recherche et un prototype (`products/invoice-preflight`), puis ont tourné en rond, faute de canal de publication et de vente.
 - Le code pour en sortir est écrit et testé (PR #5) : cerveau à plusieurs actions par cycle, détecteur d'absence de progrès, tableau des blocages, banque prudente, publication et vente sur Apify Store.
@@ -39,9 +39,9 @@
 ## Ce qui reste, étape par étape
 
 ### Étape 0 — Relancer le monde arrêté *(toi, maintenant)*
-- [ ] Sur le VPS : `sudo cat /opt/globalland/state/private/controller-failure.json` pour lire la cause exacte.
+- [ ] Sur le VPS : `sudo python3 scripts/incident.py /opt/globalland` depuis une copie fraîche du dépôt (voir INSTALL, « triage en une commande »). La sortie ne contient aucun secret et peut être recollée à Claude ou à Codex.
 - [ ] Si c'est un quota ou une session expirée : reconnecter le fournisseur (`login_subscriptions.sh <fournisseur>`), puis lancer un `think` manuel.
-- [ ] Sinon : passer directement à l'étape A, car la version de la PR #3 bascule automatiquement vers l'autre fournisseur.
+- [ ] Sinon, appliquer la correction indiquée par l'outil. Si le code d'échec est une décision invalide (`invalid_controller_*`, `invalid_task_path`), passer à l'étape A : la PR #5 met à jour le guide et le schéma.
 
 ### Étape A — Mettre le nouveau code en service *(toi, environ 1 h, une fois)*
 - [ ] Relire puis fusionner la **PR #3** (Codex).

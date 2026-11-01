@@ -119,6 +119,25 @@ Le verdict GO ou NO-GO liste chaque manque avec sa correction, sans jamais affic
 
 Le workflow `.github/workflows/watchdog.yml` vérifie `main` chaque heure, depuis GitHub, sans le VPS. Si le superviseur se tait plus de 2 h, si le contrôleur est bloqué, STALE ou DEGRADED, ou si des actions attendent le fondateur, il ouvre une issue « GlobalLand : le monde a besoin d'attention ». GitHub envoie un courriel à l'ouverture, puis l'issue est mise à jour en silence. Elle se ferme d'elle-même au rétablissement. Le workflow s'active une fois fusionné dans `main`.
 
+## Le monde est muet ou bloqué : triage en une commande
+
+L'outil fonctionne depuis n'importe quelle copie du dépôt, même si la version installée est ancienne. Il ne modifie rien et n'affiche aucun contenu de fichier ni de journal : seulement des codes d'erreur fixes, des âges, des compteurs et la correction de chaque constat. Sa sortie peut être recollée telle quelle dans un chat ou une issue.
+
+```bash
+# Le dépôt est privé : copier le fichier depuis ton poste (ou le coller dans `sudo tee /tmp/incident.py`).
+scp scripts/incident.py <vps>:/tmp/incident.py
+sudo python3 -I /tmp/incident.py /opt/globalland
+```
+Constats possibles, du plus grave au moins grave :
+- un cycle coincé qui tient le verrou ;
+- des cycles en pause après une mise à jour interrompue, avec la commande de restauration ;
+- cron qui ne lance plus rien ;
+- Docker arrêté ;
+- conteneurs restants, disque plein ou connexion absente ;
+- code d'échec du planificateur, avec le détail par fournisseur.
+
+Ne jamais supprimer `state/` ni les journaux pour « débloquer ».
+
 ## Revue d'une mise en vente par le fondateur
 
 Si un seul fournisseur IA est configuré, ou pour trancher une revue :

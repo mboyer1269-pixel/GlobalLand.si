@@ -20,6 +20,7 @@ Le capital initial autorisé est 50 CAD (5000 centimes), délégué en totalité
 - `review.py` : règle des deux clés liée à l'hôte (auteurs retrouvés par les reçus, provenance des revues).
 - `watchdog.py` + `.github/workflows/watchdog.yml` : disjoncteur horaire hors VPS (issue GitHub si le monde se tait ou est bloqué).
 - `preflight.py` : vérification GO/NO-GO de l'installation, en lecture seule.
+- `incident.py` : triage d'un monde muet ou bloqué (verrou, horaire, cron, Docker, disque, codes d'échec par fournisseur), en lecture seule, autonome (bibliothèque standard) et sans secret dans la sortie.
 - `review_admin.py` : revue du fondateur (Apify ou site).
 - `lessons.py` : sélection des leçons pertinentes (SQLite FTS5, BM25) injectées dans chaque prompt.
 - `progress.py` : détecteur d'absence de progrès (preuves de l'hôte) et projection `world/blockers.json`.
