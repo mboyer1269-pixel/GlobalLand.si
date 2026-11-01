@@ -54,10 +54,16 @@ def settings(config):
     if not isinstance(c, dict) or c.get('enabled') is not True:
         return None
     cap = c.get('max_event_price_usd', 0.05)
+    floor = c.get('min_event_price_usd', 0.0005)
     wait = c.get('build_wait_seconds', 240)
-    if type(cap) not in (int, float) or not 0 < cap <= 10 or type(wait) is not int or not 60 <= wait <= 600:
+    if (type(cap) not in (int, float) or not 0 < cap <= 10 or type(floor) not in (int, float) or not 0 < floor <= cap
+            or type(wait) is not int or not 60 <= wait <= 600):
         raise ValueError('invalid apify configuration')
-    return dict(max_price_micro=int(round(cap * 1_000_000)), allow_public=c.get('allow_public') is True,
+    # The floor exists because a lone seller agent gives discounts too easily
+    # (Anthropic Project Vend) and an event priced under Apify's platform cost
+    # loses money on every run.
+    return dict(max_price_micro=int(round(cap * 1_000_000)), min_price_micro=int(round(floor * 1_000_000)),
+                allow_public=c.get('allow_public') is True,
                 build_wait_seconds=wait, require_review=c.get('require_review', True) is not False)
 
 
@@ -69,6 +75,10 @@ def review_digest(source_digest, args):
 
 
 def approved_by_other(reviews, actor, digest, author, origin=None):
+    return approved(reviews, 'actor:' + actor, digest, author, origin)
+
+
+def approved(reviews, subject, digest, author, origin=None):
     """Two-key rule with host-bound identities.
 
     The latest review of this exact listing must be an APPROVE whose provenance
@@ -76,7 +86,7 @@ def approved_by_other(reviews, actor, digest, author, origin=None):
     publishing request: another provider in another turn, an external principal
     (e.g. Grok through GitHub) or the founder. Agent names alone prove nothing:
     one brain can type any of them."""
-    relevant = [r for r in reviews or [] if r.get('subject') == 'actor:' + actor and r.get('digest') == digest]
+    relevant = [r for r in reviews or [] if r.get('subject') == subject and r.get('digest') == digest]
     if not relevant:
         return False
     latest = max(relevant, key=lambda r: (r.get('at') or 0, r.get('seq') or 0))
@@ -148,7 +158,7 @@ def load_source(work, actor):
     return files, version, digest
 
 
-def pricing(events, max_price_micro):
+def pricing(events, max_price_micro, min_price_micro=1):
     """Pay-per-event pricing records; an empty list keeps the Actor free."""
     if not events:
         return []
@@ -159,8 +169,8 @@ def pricing(events, max_price_micro):
         name, price = event.get('name'), event.get('price_microusd')
         if not isinstance(name, str) or not EVENT.fullmatch(name) or name in seen:
             raise ApifyError('Invalid or duplicate event name')
-        if type(price) is not int or not 1 <= price <= max_price_micro:
-            raise ApifyError('Event price outside the allowed range (1 micro-USD to the configured cap)')
+        if type(price) is not int or not min_price_micro <= price <= max_price_micro:
+            raise ApifyError('Event price outside the host range (configured floor to configured cap, in micro-USD)')
         seen.add(name)
         charge[name] = {'eventTitle': event['title'], 'eventDescription': event['description'],
                         'eventPriceUsd': price / 1_000_000}
@@ -220,7 +230,7 @@ class Publisher:
         args = task['args']
         api = self._client()
         files, version, digest = load_source(self.root / 'work', args['actor'])
-        prices = pricing(args.get('events'), self.settings['max_price_micro'])
+        prices = pricing(args.get('events'), self.settings['max_price_micro'], self.settings['min_price_micro'])
         want_public = args.get('public') is True
         if want_public and not self.settings['allow_public']:
             raise ApifyError('Public Store listing not allowed by the founder yet; publish privately first')

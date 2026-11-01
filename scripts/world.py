@@ -270,7 +270,7 @@ class World:
                     raise ValueError('Invalid founder review')
             else:
                 self._agent(s, a['reviewer'], True)
-            if not isinstance(a['subject'], str) or not re.fullmatch(r'(actor|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}', a['subject']):
+            if not isinstance(a['subject'], str) or not re.fullmatch(r'(actor|site|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}', a['subject']):
                 raise ValueError('Invalid review subject')
             if not isinstance(a['digest'], str) or not re.fullmatch(r'[0-9a-f]{64}', a['digest']):
                 raise ValueError('Invalid review digest')

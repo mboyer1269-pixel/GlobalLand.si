@@ -369,6 +369,57 @@
               "action": {
                 "type": "string",
                 "enum": [
+                  "PUBLISH_SITE"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "site",
+                  "dry_run",
+                  "online"
+                ],
+                "properties": {
+                  "site": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9](?:[a-z0-9-]{0,38}[a-z0-9])?$",
+                    "description": "Folder name under products/sites/."
+                  },
+                  "dry_run": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "description": "Validate only and return the review_digest."
+                  },
+                  "online": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "description": "false takes the site offline."
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
                   "WORLD"
                 ]
               },
@@ -1236,7 +1287,7 @@
                   },
                   "subject": {
                     "type": "string",
-                    "pattern": "^(actor|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                    "pattern": "^(actor|site|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
                   },
                   "digest": {
                     "type": "string",

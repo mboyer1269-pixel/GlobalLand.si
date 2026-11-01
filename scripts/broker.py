@@ -20,7 +20,7 @@ import threading
 from supervisor import check_secrets
 
 OPS = ('world_status', 'list_products', 'read_product', 'recent_results', 'submit_action')
-EFFECT_ACTIONS = ('EXEC', 'FETCH', 'WORLD', 'STATUS', 'PUBLISH_ACTOR', 'ACTOR_STATS')
+EFFECT_ACTIONS = ('EXEC', 'FETCH', 'WORLD', 'STATUS', 'PUBLISH_ACTOR', 'ACTOR_STATS', 'PUBLISH_SITE')
 MAX_REQUEST = 256 * 1024
 MAX_RESPONSE = 1024 * 1024
 MAX_READ = 64 * 1024

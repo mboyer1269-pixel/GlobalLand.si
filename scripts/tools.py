@@ -13,7 +13,7 @@ import subprocess
 import urllib.parse
 from supervisor import bounded_run, check_secrets, safe_path
 
-TOOL_ACTIONS = {'EXEC', 'FETCH', 'WORLD', 'STATUS', 'SPEND', 'RECONCILE', 'PUBLISH_ACTOR', 'ACTOR_STATS'}
+TOOL_ACTIONS = {'EXEC', 'FETCH', 'WORLD', 'STATUS', 'SPEND', 'RECONCILE', 'PUBLISH_ACTOR', 'ACTOR_STATS', 'PUBLISH_SITE'}
 _RULE_MODULES = ('tools.py', 'world.py', 'treasury.py', 'gateway.py', 'supervisor.py', 'decision_protocol.py', 'broker.py')
 # 'Invalid ' + name / 'Unknown ' + key in world.py take code-defined names only.
 _RULE_PATTERN = re.compile(r'(?:Invalid|Unknown) [A-Za-z_]{1,30}(?: [A-Za-z_]{1,30}){0,3}|HTTP [1-5][0-9][0-9]')
@@ -94,6 +94,9 @@ def validate_envelope(t):
     elif action=='PUBLISH_ACTOR':
         if not {'actor','title','description'}<=set(args) or set(args)-{'actor','title','description','public','events'}:raise ValueError('publish actor requires actor, title and description')
         if not isinstance(args.get('public',False),bool):raise ValueError('public must be boolean')
+    elif action=='PUBLISH_SITE':
+        if 'site' not in args or set(args)-{'site','dry_run','online'}:raise ValueError('publish site requires a site')
+        if any(not isinstance(args.get(k,False),bool) for k in ('dry_run','online')):raise ValueError('dry_run and online must be boolean')
     elif action=='ACTOR_STATS':
         if set(args)!={'actor'}:raise ValueError('actor stats requires exactly an actor')
     elif action=='RECONCILE':
@@ -234,6 +237,10 @@ class Toolbox:
             value=self.world.apply(task['id'],args)
             return {'status':'DONE','output':json.dumps(value,ensure_ascii=False)},{}
         if action=='STATUS':return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':self.treasury.snapshot()},ensure_ascii=False)},{}
+        if action=='PUBLISH_SITE':
+            from sites import Publisher as SitePublisher
+            result=SitePublisher(self.root,self.config,reviews=self.world.reviews() if hasattr(self.world,'reviews') else [],origin=origin).publish(task)
+            return {'status':SitePublisher.task_status(result),'output':json.dumps(result,ensure_ascii=False)[:8000]},{}
         if action in ('PUBLISH_ACTOR','ACTOR_STATS'):
             from apify import Publisher
             publisher=Publisher(self.root,self.config,reviews=self.world.reviews() if hasattr(self.world,'reviews') else [],origin=origin)

@@ -119,6 +119,11 @@ class ApifyTests(unittest.TestCase):
             with self.subTest(bad=len(bad)), self.assertRaises(ApifyError):
                 pricing(bad, 10_000)
         self.assertEqual(pricing(None, 10_000), [])
+        with self.assertRaisesRegex(ApifyError, 'floor'):
+            pricing([dict(event, price_microusd=100)], 10_000, min_price_micro=500)
+        self.assertEqual(apify.settings({'apify': {'enabled': True}})['min_price_micro'], 500)
+        with self.assertRaises(ValueError):
+            apify.settings({'apify': {'enabled': True, 'min_event_price_usd': 0.1, 'max_event_price_usd': 0.05}})
 
     def test_private_build_then_public_listing_without_rebuilding(self):
         first = self.publisher().publish(self.task())

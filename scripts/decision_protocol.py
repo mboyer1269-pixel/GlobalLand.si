@@ -64,7 +64,7 @@ _WORLD_FIELDS = {
     },
     'resolve_blocker': {'blocker_id': _ID, 'agent_id': _ID, 'resolution': _text(2000)},
     'review': {'reviewer': _ID,
-               'subject': {'type': 'string', 'pattern': '^(actor|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$'},
+               'subject': {'type': 'string', 'pattern': '^(actor|site|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$'},
                'digest': {'type': 'string', 'pattern': '^[0-9a-f]{64}$'},
                'verdict': {'type': 'string', 'enum': ['APPROVE', 'NEEDS_WORK']},
                'notes': _nullable(_text(2000))},
@@ -103,6 +103,12 @@ _TOOL_SCHEMAS = {
             'price_microusd': _integer(10_000_000, 1)})}),
     }),
     'ACTOR_STATS': _object({'actor': {'type': 'string', 'pattern': '^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$'}}),
+    'PUBLISH_SITE': _object({
+        'site': {'type': 'string', 'pattern': '^[a-z0-9](?:[a-z0-9-]{0,38}[a-z0-9])?$',
+                 'description': 'Folder name under products/sites/.'},
+        'dry_run': _nullable({'type': 'boolean', 'description': 'Validate only and return the review_digest.'}),
+        'online': _nullable({'type': 'boolean', 'description': 'false takes the site offline.'}),
+    }),
 }
 
 

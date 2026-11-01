@@ -79,8 +79,8 @@ class PlaybookTests(unittest.TestCase):
     def test_playbooks_are_loaded_without_the_license_file_and_bounded(self):
         root = pathlib.Path(__file__).resolve().parents[1]
         loaded = lessons.playbooks(root)
-        self.assertEqual(set(loaded), {'idea-verdict', 'growth-constraint', 'completion-evidence', 'two-key-review'})
-        self.assertTrue(all('MIT' in text for text in loaded.values()))
+        self.assertEqual(set(loaded), {'idea-verdict', 'growth-constraint', 'completion-evidence', 'two-key-review', 'legal-guardrails'})
+        self.assertTrue(all('MIT' in text for name, text in loaded.items() if name != 'legal-guardrails'))
         self.assertLessEqual(len(lessons.playbooks(root, limit_chars=1000)), 1)
         self.assertEqual(lessons.playbooks(root / 'missing'), {})
 
