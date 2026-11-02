@@ -18,22 +18,25 @@
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-02T21:30:45Z",
-    "turns_without_outcome": 1,
+    "stalled_since": null,
+    "turns_without_outcome": 2,
     "outcome_threshold": 12,
     "dry_since": "2026-11-02T21:30:45Z",
     "last_outcome_turn": null,
-    "last_productive_turn": null,
-    "last_turn": "THINK-1793655002",
+    "last_productive_turn": "THINK-1793656801",
+    "last_turn": "THINK-1793656801",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
-      "new_research_count": 0,
+      "new_products": [
+        "products/distribution/bundle-manifest.json",
+        "products/distribution/invoice-preflight-review.zip.base64.txt"
+      ],
+      "new_product_count": 2,
+      "new_research_count": 1,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
