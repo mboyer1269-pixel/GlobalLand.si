@@ -1,0 +1,32 @@
+{
+ "title": "CSV Preflight input",
+ "type": "object",
+ "schemaVersion": 1,
+ "properties": {
+  "csvText": {
+   "title": "CSV text",
+   "type": "string",
+   "editor": "textarea",
+   "description": "Paste CSV content (UTF-8)."
+  },
+  "csvUrls": {
+   "title": "CSV URLs",
+   "type": "array",
+   "editor": "stringList",
+   "description": "Public URLs of UTF-8 CSV files (max 10 MiB each)."
+  },
+  "delimiter": {
+   "title": "Delimiter",
+   "type": "string",
+   "editor": "textfield",
+   "default": ",",
+   "description": "Single character, default comma."
+  },
+  "requiredColumns": {
+   "title": "Required columns",
+   "type": "array",
+   "editor": "stringList",
+   "description": "Header names that must be present (case-insensitive)."
+  }
+ }
+}

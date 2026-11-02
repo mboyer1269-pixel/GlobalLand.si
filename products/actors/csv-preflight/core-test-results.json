@@ -1,0 +1,72 @@
+{
+ "scope": "core.check only; Apify SDK wrapper (src/main.py) NOT executed offline",
+ "results": {
+  "valid": {
+   "expected_ok": true,
+   "actual_ok": true,
+   "pass": true,
+   "kinds": []
+  },
+  "bom": {
+   "expected_ok": true,
+   "actual_ok": true,
+   "pass": true,
+   "kinds": []
+  },
+  "short_row": {
+   "expected_ok": false,
+   "actual_ok": false,
+   "pass": true,
+   "kinds": [
+    "column_count"
+   ]
+  },
+  "dup_header": {
+   "expected_ok": false,
+   "actual_ok": false,
+   "pass": true,
+   "kinds": [
+    "duplicate_header"
+   ]
+  },
+  "blank_header": {
+   "expected_ok": false,
+   "actual_ok": false,
+   "pass": true,
+   "kinds": [
+    "blank_header"
+   ]
+  },
+  "unclosed_quote": {
+   "expected_ok": false,
+   "actual_ok": false,
+   "pass": true,
+   "kinds": [
+    "invalid_csv"
+   ]
+  },
+  "empty": {
+   "expected_ok": false,
+   "actual_ok": false,
+   "pass": true,
+   "kinds": [
+    "empty_file"
+   ]
+  },
+  "missing_required": {
+   "expected_ok": false,
+   "actual_ok": false,
+   "pass": true,
+   "kinds": [
+    "missing_required_column"
+   ]
+  },
+  "semicolon": {
+   "expected_ok": true,
+   "actual_ok": true,
+   "pass": true,
+   "kinds": []
+  }
+ },
+ "all_pass": true
+}
