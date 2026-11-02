@@ -13,6 +13,7 @@ SCHEMA = {'type':'object','additionalProperties':False,'required':['summary','ac
 from decision_protocol import MODEL_SCHEMA, normalize_model_action
 CLAUDE_MAX_TURNS=2  # StructuredOutput may require a tool round trip plus its final result.
 TOOL_GUIDE = """Return native args objects matching the supplied schema. Never serialize command arguments as JSON text. Supply nullable optional fields as null when unused; these are normalized before execution.
+Choose tools using context.capabilities: BUILT_IN is a local implementation; CONFIGURED_UNVERIFIED means prerequisites exist, not working auth or a successful deployment. NOT_CONFIGURED gives missing prerequisites: record a precise blocker and continue feasible work instead of repeatedly probing absent accounts. Every productive action needs an ACTIVE submitted_by resident. For WORLD, from_agent, reviewer or the acting agent_id must match the action's agent; only DIRECTOR may register agents, mint rewards, set policy or request a cycle. Creating a mission for another resident is delegation, not impersonation. These identities are roles within a shared controller, not independently authenticated model processes.
 EXEC: {"argv":["node","-e","..."],"outputs":["products/result.txt"]}; optional cwd and mission_id. Use cwd null for the /workspace root, or a relative subdirectory such as products/project. Other absolute paths and paths with empty, dot, dot-dot or .git segments or backslashes are refused. Exact root aliases ., ./, /workspace and /workspace/ normalize to the default root. Programs see products in /workspace/products and write published outputs there.
 FETCH: {"url":"https://public-site/path","output":"products/research.txt"}; optional encoding utf-8 or base64. Reads public Web only.
 STATUS: {}.
@@ -162,7 +163,7 @@ def decode_model_decision(value):
 class Controller:
     def __init__(self,root,world,treasury,config):
         self.root=pathlib.Path(root);self.world=world;self.treasury=treasury
-        self.config=config.get('controller',{});self.verified={}
+        self.config=config.get('controller',{});self.verified={};self.tool_config=config
         # Set by the supervisor for think turns: runs one broker action durably.
         self.executor=None;self.turn_seconds=None
 
@@ -358,7 +359,9 @@ class Controller:
             import lessons
             relevant=lessons.relevant(self.world.lessons(),world.get('missions',[]))
         import lessons as lessons_module
+        from tools import capability_view
         return dict(world=world,treasury=self.treasury.snapshot(),source_products=products,latest_task_results=results,lessons=relevant,
+                    capabilities=capability_view(self.root,self.tool_config),
                     playbooks=lessons_module.playbooks(work))
 
     def mark_published(self,turn):

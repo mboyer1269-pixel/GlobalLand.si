@@ -260,7 +260,7 @@ class HostProvenanceTests(unittest.TestCase):
     def review_task(self, ident, **extra):
         args = dict(op='review', reviewer='AUDITOR', subject='actor:x', digest='a' * 64, verdict='APPROVE')
         args.update(extra)
-        return {'id': ident, 'type': 'TOOL', 'submitted_by': 'BUILDER', 'created_at': '2026-11-01T00:00:00Z',
+        return {'id': ident, 'type': 'TOOL', 'submitted_by': 'AUDITOR', 'created_at': '2026-11-01T00:00:00Z',
                 'action': 'WORLD', 'args': args, 'estimated_cost_cad': 0, 'approved_by': None}
 
     def test_review_provenance_is_set_by_the_host(self):

@@ -37,7 +37,9 @@ class ToolsTests(unittest.TestCase):
    root=pathlib.Path(d);(root/'work/products').mkdir(parents=True);(root/'control').mkdir()
    t={'id':'TASK-0100','type':'TOOL','submitted_by':'BUILDER','created_at':'2026-10-31T00:00:00Z','action':'EXEC','args':{'argv':['node','-p','1'],'outputs':[]},'estimated_cost_cad':0,'approved_by':None}
    with patch('tools.bounded_run',return_value=(0,b'{"status":"DONE","output":"ok","files":{}}')),patch('tools.subprocess.run',return_value=type('Result',(),{'returncode':0})()):
-    result,files=Toolbox(root,None,Bank(),{'executor_enabled':True,'executor_image':'node@sha256:'+'1'*64}).run(t)
+    from world import World
+    world=World(root/'world.db');world.bootstrap()
+    result,files=Toolbox(root,world,Bank(),{'executor_enabled':True,'executor_image':'node@sha256:'+'1'*64}).run(t)
    self.assertEqual(result['status'],'DONE');self.assertFalse((root/'jobs/TASK-0100').exists())
  def test_failed_exec_diagnostic_is_checked_for_secrets_before_reporting(self):
   import json
@@ -51,7 +53,9 @@ class ToolsTests(unittest.TestCase):
     task={'id':'TASK-0100','type':'TOOL','submitted_by':'BUILDER','created_at':'2026-10-31T00:00:00Z','action':'EXEC','args':{'argv':['node','-e','process.exit(1)'],'outputs':[]},'estimated_cost_cad':0,'approved_by':None}
     response=json.dumps({'status':'FAILED','output':output,'files':{}}).encode()
     with patch('tools.bounded_run',return_value=(0,response)),patch('tools.subprocess.run',return_value=type('Result',(),{'returncode':0})()):
-     box=Toolbox(root,None,Bank(),{'executor_enabled':True,'executor_image':'node@sha256:'+'1'*64})
+     from world import World
+     world=World(root/'world.db');world.bootstrap()
+     box=Toolbox(root,world,Bank(),{'executor_enabled':True,'executor_image':'node@sha256:'+'1'*64})
      if output.startswith('API_KEY='):
       with self.assertRaisesRegex(ValueError,'secret pattern detected'):box.run(task)
      else:

@@ -14,8 +14,8 @@ class AutonomousIntegration(unittest.TestCase):
   if args is None or not isinstance(args,list):return super().run(args if args is not None else result)
   return subprocess.run(args,check=True,capture_output=True).stdout
  def git(self,*args):return self.run(['git','-C',str(self.seed),'-c','user.name=Test','-c','user.email=test@local',*args])
- def submit(self,number,action,args):
-  ident='TASK-'+str(number).zfill(4);task={'id':ident,'type':'TOOL','submitted_by':'DIRECTOR','created_at':'2026-10-31T00:00:00Z','action':action,'args':args,'estimated_cost_cad':0,'approved_by':None};self.git('pull','--ff-only','origin','main');(self.seed/'queue/inbox').mkdir(exist_ok=True,parents=True);(self.seed/'queue/inbox'/(ident+'.json')).write_text(json.dumps(task));self.git('add','.');self.git('commit','-m','submit');self.git('push','origin','main');return ident
+ def submit(self,number,action,args,agent='DIRECTOR'):
+  ident='TASK-'+str(number).zfill(4);task={'id':ident,'type':'TOOL','submitted_by':agent,'created_at':'2026-10-31T00:00:00Z','action':action,'args':args,'estimated_cost_cad':0,'approved_by':None};self.git('pull','--ff-only','origin','main');(self.seed/'queue/inbox').mkdir(exist_ok=True,parents=True);(self.seed/'queue/inbox'/(ident+'.json')).write_text(json.dumps(task));self.git('add','.');self.git('commit','-m','submit');self.git('push','origin','main');return ident
  def test_world_tools_products_and_private_bank(self):
   self.submit(100,'WORLD',{'op':'create_mission','mission_id':'GLOBAL-PRODUCT','goal':'Sell an Internet tool globally'})
   self.app.cycle('queue')

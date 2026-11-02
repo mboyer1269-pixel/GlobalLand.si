@@ -261,7 +261,10 @@ def read_handlers(root, world, treasury, context):
     work = pathlib.Path(root) / 'work'
 
     def world_status():
-        return {'world': world.snapshot(), 'bank': treasury.snapshot()}
+        value = {'world': world.snapshot(), 'bank': treasury.snapshot()}
+        # Share the planner's capability observation without exposing config.
+        value['capabilities'] = context().get('capabilities', {})
+        return value
 
     def list_products():
         base = work / 'products'
