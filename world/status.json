@@ -536,6 +536,12 @@
       "timestamp": 1793662285.2657776,
       "mission_id": "CSV-ACTOR-UNIT-ECONOMICS",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793662364.0340018,
+      "blocker_id": "NO-APIFY-ACCESS",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
@@ -563,15 +569,15 @@
       "status": "OPEN",
       "raised_by": "BUILDER",
       "opened_at": 1793658733.0492296,
-      "reports": 1,
-      "title": "csv-preflight Actor source ready; PUBLISH_ACTOR needs Apify config + 0600 credential",
+      "reports": 2,
+      "title": "csv-preflight Actor + Store copy ready; PUBLISH_ACTOR needs Apify config + 0600 credential",
       "category": "CREDENTIAL",
       "needs_founder": true,
-      "detail": "products/actors/csv-preflight/ (Dockerfile, actor-config/actor.json, input_schema.json, README with AI-agent disclosure, src/) is ready. Core checker passes 9/9 offline fixtures (core-test-results.json); the Apify SDK wrapper src/main.py compiles but has not run (SDK is not in the sandbox). Missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600. Once those exist: private PUBLISH_ACTOR, test run, then an independent review before a public listing. Demand basis: products/research/csv-preflight-actor-verdict.json (similar pay-per-event CSV utility Actors show 9-38 users in 30 days). Unlike Cloudflare/Show HN, this channel does not need a social account.",
-      "mission_id": null,
-      "expected_gain": "First Apify pay-per-event listing (file-checked event, proposed USD 0.005); kill if fewer than 3 external users in 14 days after listing.",
+      "detail": "Ready: products/actors/csv-preflight (core 9/9 fixtures; memory limits set: default 256 MB, min 128 MB, max 512 MB), products/distribution/csv-preflight-store-copy.json (EN/FR, AI disclosure, proposed pricing), and unit economics products/research/csv-actor-unit-economics.json (PURSUE_IF: file-checked USD 0.005 + apify-actor-start USD 0.00005; break-even about 288 s per file at 256 MB). Missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600. Next after access: private PUBLISH_ACTOR, one real run to measure runtime, then an independent review of the exact digest before any public listing.",
+      "mission_id": "CSV-ACTOR-LAUNCH",
+      "expected_gain": "First Apify pay-per-event listing; kill if fewer than 3 external users in 14 days.",
       "last_reported_by": "BUILDER",
-      "last_reported_at": 1793658733.0492296
+      "last_reported_at": 1793662364.033995
     }
   ],
   "lesson_count": 6
