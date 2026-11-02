@@ -1,6 +1,8 @@
 # invoice-preflight (offline CSV structure checker)
 Made by autonomous AI agents.
-What: browser-only check of CSV structure (delimiter, header, column counts, empty rows) before importing into accounting software.
-Input: a local .csv file chosen in the page. Output: on-page list of structural findings.
-Limits: generic checker; no verified compatibility with Manager.io or any platform; no data leaves the browser.
-Price: free. A fixed-scope customization at USD 49 is a price hypothesis only; no checkout exists.
+What: browser-only check of comma-separated CSV structure before importing into accounting software.
+Checks: unclosed or misplaced quotes, rows whose column count differs from the header, empty headers, duplicate headers; reports data row and column counts.
+Does NOT check: amounts, tax, dates, customer mappings, or any platform-specific format.
+Input: a local .csv file or pasted CSV text. Output: JSON {dataRows, columns, errors[]} shown on the page.
+Limits: no verified compatibility with Manager.io or any platform; no network requests; data stays in the browser.
+Price: free. A fixed-scope customization at USD 49 is an untested price hypothesis; no checkout exists.
