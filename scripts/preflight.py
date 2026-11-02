@@ -58,6 +58,18 @@ def checks(root, run=subprocess.run, disk=shutil.disk_usage):
     except (OSError, subprocess.TimeoutExpired):
         docker_ok = False
     add('Docker joignable', docker_ok, 'Démarrer Docker ; GlobalLand ne touche pas aux conteneurs d\'Oria.')
+    # A syntactically pinned digest can point at an image pruned from this host.
+    # docker info alone used to return GO in exactly that broken deployment.
+    for label, image in (("Image du cerveau présente localement", controller.get('image')),
+                         ("Image de l'exécuteur présente localement", config.get('executor_image'))):
+        present = False
+        if docker_ok and isinstance(image, str) and DIGEST.fullmatch(image):
+            try:
+                present = run(['docker', 'image', 'inspect', image, '--format', '{{.Id}}'],
+                              capture_output=True, text=True, timeout=20).returncode == 0
+            except (OSError, subprocess.TimeoutExpired):
+                pass
+        add(label, present, 'Restaurer la base épinglée ou reconstruire le cerveau avec les versions officielles exactes ; vérifier le nouvel ID avant de modifier config.json.')
     cron = pathlib.Path('/etc/cron.d/globalland-think')
     add('Horaire des cycles de réflexion installé', cron.is_file() or (root / 'state' / 'cron-test').exists(), 'start_autonomy.py (voir INSTALL.md).')
     try:

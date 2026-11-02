@@ -34,7 +34,7 @@ _ID = {'type': 'string', 'minLength': 1, 'maxLength': 128,
 _EVIDENCE = {'type': 'array', 'minItems': 1, 'maxItems': 100, 'items': _text()}
 
 _WORLD_FIELDS = {
-    'register_agent': {'agent_id': _ID, 'role': _text(500)},
+    'register_agent': {'agent_id': _AGENT, 'role': _text(500)},
     'create_mission': {
         'mission_id': _ID, 'goal': _text(10000), 'agent_id': _nullable(_ID),
         'parent_id': _nullable(_ID), 'priority': _nullable(_integer(10000)),

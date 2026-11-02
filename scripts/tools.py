@@ -4,6 +4,7 @@ import hashlib
 import http.client
 import ipaddress
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -180,6 +181,60 @@ def task_origin(root,task):
             except ValueError:pass
     return ('EXTERNAL-'+task.get('id','?'),'EXTERNAL')
 
+
+def capability_view(root, config):
+    """Local prerequisites only; never infer working auth from a file or flag.
+
+    Fixed messages deliberately exclude configuration values and credentials.
+    No network call or credential read is needed to build this observation.
+    """
+    root = pathlib.Path(root)
+
+    def private_token(service):
+        path = root / 'credentials' / service / 'token'
+        try:
+            return (not any(p.is_symlink() for p in (root / 'credentials', path.parent, path))
+                    and path.is_file() and not path.stat().st_mode & 0o077 and path.stat().st_size > 0)
+        except OSError:
+            return False
+
+    def view(missing, constraints):
+        return dict(state='NOT_CONFIGURED' if missing else 'CONFIGURED_UNVERIFIED',
+                    missing=missing, constraints=constraints)
+
+    image = config.get('executor_image')
+    executor = config.get('executor_enabled') is True and isinstance(image, str) and bool(
+        re.fullmatch(r'[A-Za-z0-9./:_-]+@sha256:[0-9a-f]{64}', image))
+    result = {'EXEC': view([] if executor else ['enabled executor with pinned image'],
+                           'no direct network; use FETCH for public HTTP(S); only installed image programs are available; publish declared products outputs')}
+    for action in ('FETCH', 'WORLD', 'STATUS'):
+        result[action] = dict(state='BUILT_IN', missing=[], constraints={
+            'FETCH': 'public HTTP(S) GET only; no authenticated sessions; 1 MiB response limit; reachability unverified',
+            'WORLD': 'live resident identity required; action owner must match submitted_by; economy and registration require DIRECTOR',
+            'STATUS': 'observation only; configuration is not proof of connectivity or revenue'}[action])
+    for service, actions in (('apify', ('PUBLISH_ACTOR', 'ACTOR_STATS')), ('cloudflare', ('PUBLISH_SITE',))):
+        module = __import__('apify' if service == 'apify' else 'sites')
+        try:
+            configured = module.settings(config) is not None
+        except (ValueError, TypeError):
+            configured = False
+        missing = ([] if configured else ['valid enabled ' + service + ' configuration'])
+        if not private_token(service):
+            missing.append('private ' + service + ' credential file with mode 0600')
+        for action in actions:
+            result[action] = view(list(missing), 'account access and remote service unverified; public publication may require an independent review')
+    adapter = root / 'integrations' / 'finance'
+    try:
+        finance = (not (root / 'integrations').is_symlink() and not adapter.is_symlink()
+                   and adapter.is_file() and not adapter.stat().st_mode & 0o022 and os.access(adapter, os.X_OK))
+    except OSError:
+        finance = False
+    for action in ('SPEND', 'RECONCILE'):
+        result[action] = view([] if finance else ['installed trusted executable finance adapter'],
+                              'verified available CAD required for SPEND; adapter and receipts unverified; GLC is virtual')
+    return result
+
+
 class Toolbox:
     def __init__(self,root,world,treasury,config=None):
         self.root=pathlib.Path(root);self.world=world;self.treasury=treasury;self.config=config or {}
@@ -188,6 +243,7 @@ class Toolbox:
         origin=origin or task_origin(self.root,task)
         if self.treasury.snapshot()['state'] in ('EXTINCT','HALTED'):raise ValueError('GlobalLand is stopped')
         action,args=task['action'],task['args'];files={}
+        if action != 'STATUS':self.world.require_active(task['submitted_by'])
         if action=='EXEC':
             if self.config.get('executor_enabled') is not True:raise ValueError('executor not configured; install v3 control/image')
             job=self.root/'jobs'/task['id'];workspace=job/'workspace'
@@ -234,9 +290,9 @@ class Toolbox:
             if args.get('op')=='review':
                 # Reviewer provenance is set by the host, never by the brain.
                 args=dict(args,host_turn=origin[0],host_provider=origin[1])
-            value=self.world.apply(task['id'],args)
+            value=self.world.apply(task['id'],args,actor=task['submitted_by'])
             return {'status':'DONE','output':json.dumps(value,ensure_ascii=False)},{}
-        if action=='STATUS':return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':self.treasury.snapshot()},ensure_ascii=False)},{}
+        if action=='STATUS':return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':self.treasury.snapshot(),'capabilities':capability_view(self.root,self.config)},ensure_ascii=False)},{}
         if action=='PUBLISH_SITE':
             from sites import Publisher as SitePublisher
             result=SitePublisher(self.root,self.config,reviews=self.world.reviews() if hasattr(self.world,'reviews') else [],origin=origin).publish(task)

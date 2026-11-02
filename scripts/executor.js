@@ -17,7 +17,12 @@ function execute(input='/input',root='/workspace',request='/request.json'){
   const output=('Process failed: '+(run.error?.code||run.status)+'\nstderr:\n'+(run.stderr||'').slice(0,6000)+'\nstdout:\n'+(run.stdout||'').slice(0,1500)).slice(0,8000);
   return{status:run.error?.code==='ETIMEDOUT'?'TIMEOUT':'FAILED',output,files:{}};
  }
- return{status:'DONE',output:((run.stdout||'')+'\n'+(run.stderr||'')).slice(0,8000),files:collect(root,args.outputs||[])};
+ let files;
+ try{files=collect(root,args.outputs||[]);}catch(error){
+  if(error?.code==='ERR_ENCODING_INVALID_ENCODED_DATA')return{status:'FAILED',output:'Outputs must be UTF-8 text; encode binary artifacts as base64 text before publishing. No files published.',files:{}};
+  throw error;
+ }
+ return{status:'DONE',output:((run.stdout||'')+'\n'+(run.stderr||'')).slice(0,8000),files};
 }
 if(require.main===module){try{process.stdout.write(JSON.stringify(execute())+'\n');}catch{process.stdout.write(JSON.stringify({status:'FAILED',output:'Sandbox artifact/execution validation failed',files:{}})+'\n');process.exitCode=1;}}
 module.exports={safe,collect,execute};

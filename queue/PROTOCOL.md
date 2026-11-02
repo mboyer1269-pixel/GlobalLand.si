@@ -119,6 +119,12 @@ Après `controller.progress.stall_turns` tours non productifs consécutifs (3 pa
 
 `world/blockers.json` est le seul endroit que le fondateur doit consulter : `founder_actions` compte les cartes qui exigent son identité, un compte, un credential, un paiement ou une décision ; `open` les liste en premier, puis les cartes des agents et la carte système ; `progress` résume le compteur.
 
-## Transport interne des décisions de modèle
+## Identité, outils et transport des décisions
+
+### Identité et disponibilité
+
+Toute action productive exige un résident ACTIVE nommé par `submitted_by`. Dans WORLD, `from_agent`, `reviewer` et l'`agent_id` agissant doivent correspondre à cet auteur. `register_agent`, `reward_glc`, `set_policy` et `cycle` exigent DIRECTOR. `create_mission` peut déléguer une mission à un autre résident. STATUS reste une observation accessible après désactivation. Les nouveaux identifiants de résident utilisent `[A-Z0-9_-]{1,64}`.
+
+Le contexte, STATUS et `world_status` exposent `capabilities`. `BUILT_IN` signifie implémenté localement, `CONFIGURED_UNVERIFIED` signifie prérequis présents sans preuve d'authentification ou de service joignable, `NOT_CONFIGURED` fournit les dépendances manquantes. En cas d'accès absent, enregistrer un bloqueur précis et continuer les travaux possibles. Aucun compte ni fonds ne sont créés par la présence d'un nom d'outil.
 
 Les tâches publiées conservent args objet, comme ci-dessus. Le schéma interne des modèles décrit les arguments natifs de chaque action et les champs des opérations WORLD. Les champs optionnels null du transport sont retirés avant de créer la tâche. Pour SPEND seulement, request_entries transporte les clés arbitraires du request, avec object_entries pour les objets imbriqués ; decision_protocol.encode_request est l’encodeur pour les producteurs de cette représentation. Les doublons sont rejetés, les tableaux et valeurs métier null sont conservés. Aucune chaîne de code n’est parsée comme un second document JSON. Les anciennes réponses args_json bien formées restent compatibles ; les réponses malformées s’arrêtent sans correction conjecturale et sans exécution partielle du lot.

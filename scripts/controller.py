@@ -13,8 +13,10 @@ SCHEMA = {'type':'object','additionalProperties':False,'required':['summary','ac
 from decision_protocol import MODEL_SCHEMA, normalize_model_action
 CLAUDE_MAX_TURNS=2  # StructuredOutput may require a tool round trip plus its final result.
 TOOL_GUIDE = """Return native args objects matching the supplied schema. Never serialize command arguments as JSON text. Supply nullable optional fields as null when unused; these are normalized before execution.
+Choose tools using context.capabilities: BUILT_IN is a local implementation; CONFIGURED_UNVERIFIED means prerequisites exist, not working auth or a successful deployment. NOT_CONFIGURED gives missing prerequisites: record a precise blocker and continue feasible work instead of repeatedly probing absent accounts. Every productive action needs an ACTIVE submitted_by resident. For WORLD, from_agent, reviewer or the acting agent_id must match the action's agent; only DIRECTOR may register agents, mint rewards, set policy or request a cycle. Creating a mission for another resident is delegation, not impersonation. These identities are roles within a shared controller, not independently authenticated model processes.
 EXEC: {"argv":["node","-e","..."],"outputs":["products/result.txt"]}; optional cwd and mission_id. Use cwd null for the /workspace root, or a relative subdirectory such as products/project. Other absolute paths and paths with empty, dot, dot-dot or .git segments or backslashes are refused. Exact root aliases ., ./, /workspace and /workspace/ normalize to the default root. Programs see products in /workspace/products and write published outputs there.
 FETCH: {"url":"https://public-site/path","output":"products/research.txt"}; optional encoding utf-8 or base64. Reads public Web only.
+EXEC published outputs must be UTF-8 text. Encode ZIP archives and other binary artifacts as base64 text in the sandbox and declare that text file in outputs; raw binary output rejects the whole artifact set.
 STATUS: {}.
 WORLD: {"op":"register_agent","agent_id":"NAME","role":"..."} or {"op":"create_mission","mission_id":"NAME","goal":"..."} (optional agent_id,parent_id,priority); {"op":"claim_mission","mission_id":"NAME","agent_id":"BUILDER","lease_seconds":3600}; {"op":"complete_mission","mission_id":"NAME","agent_id":"BUILDER","lease_token":"from claim result","evidence":["products/file.txt"],"lesson":"what worked, what did not, what to do differently"}; {"op":"fail_mission","mission_id":"NAME","agent_id":"BUILDER","lease_token":"from claim result","reason":"...","lesson":"..."}; {"op":"record_lesson","agent_id":"RESEARCHER","lesson":"...","mission_id":null,"tags":["hosting"]}; {"op":"review","reviewer":"AUDITOR","subject":"actor:name or site:name","digest":"review_digest from the private build or the site dry_run","verdict":"APPROVE|NEEDS_WORK","notes":"what was checked"} (the host records which turn and provider made the review; a public listing or site needs an APPROVE recorded in another turn by a provider that neither wrote the content nor publishes it, by Grok through GitHub or by the founder); {"op":"message","from_agent":"DIRECTOR","to_agent":"BUILDER","body":"..."}; {"op":"transfer_glc","from_agent":"BUILDER","to_agent":"RESEARCHER","amount":1}; {"op":"reward_glc","agent_id":"BUILDER","amount":1,"evidence":["products/file.txt"]}; {"op":"set_policy","maintenance_glc":1,"interest_basis_points":500}; {"op":"cycle","cycle_id":"unique-cycle"}; {"op":"raise_blocker","blocker_id":"NO-HOSTING-ACCESS","agent_id":"ACQUISITION","title":"...","category":"ACCOUNT|CREDENTIAL|IDENTITY|PAYMENT|DECISION|CAPABILITY|OTHER","needs_founder":true,"detail":"what is missing and what it unblocks","mission_id":null,"expected_gain":null} records a blocker once (repeat with the same blocker_id to update it); {"op":"resolve_blocker","blocker_id":"NO-HOSTING-ACCESS","agent_id":"ACQUISITION","resolution":"..."}. Open blockers are published in world/blockers.json for the founder.
 SPEND model transport: {"request_entries":[{"key":"purpose","value":"..."}]}. For nested arbitrary request objects use {"object_entries":[{"key":"name","value":...}]}; arrays, strings, finite numbers, booleans and null stay native. These entries become the usual request object for the installed private finance integration, only with verified available funds.
@@ -162,7 +164,7 @@ def decode_model_decision(value):
 class Controller:
     def __init__(self,root,world,treasury,config):
         self.root=pathlib.Path(root);self.world=world;self.treasury=treasury
-        self.config=config.get('controller',{});self.verified={}
+        self.config=config.get('controller',{});self.verified={};self.tool_config=config
         # Set by the supervisor for think turns: runs one broker action durably.
         self.executor=None;self.turn_seconds=None
 
@@ -358,7 +360,9 @@ class Controller:
             import lessons
             relevant=lessons.relevant(self.world.lessons(),world.get('missions',[]))
         import lessons as lessons_module
+        from tools import capability_view
         return dict(world=world,treasury=self.treasury.snapshot(),source_products=products,latest_task_results=results,lessons=relevant,
+                    capabilities=capability_view(self.root,self.tool_config),
                     playbooks=lessons_module.playbooks(work))
 
     def mark_published(self,turn):

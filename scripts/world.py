@@ -82,6 +82,8 @@ class World:
 
     def _register(self, s, agent_id, role):
         self._id(agent_id)
+        if not re.fullmatch(r'[A-Z0-9_-]{1,64}', agent_id):
+            raise ValueError('Invalid agent ID; use 1-64 uppercase letters, digits, underscore or hyphen')
         self._text(role, 'role', 500)
         if any(a['agent_id'] == agent_id for a in s['agents']):
             raise ValueError('Agent already exists')
@@ -122,7 +124,32 @@ class World:
         view['lesson_count'] = len(s.get('lessons', []))
         return view
 
-    def apply(self, operation_id, args):
+    def require_active(self, actor):
+        """Admission for every productive tool, before any external effect."""
+        with self._connect() as db:
+            s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
+        if s['state'] in ('HALTED', 'EXTINCT'):
+            raise ValueError('World is stopped')
+        self._agent(s, actor, True)
+
+    def _authorize(self, s, actor, args):
+        self._agent(s, actor, True)
+        op = args.get('op')
+        if not isinstance(op, str):
+            raise ValueError('Unknown operation')
+        if op in ('register_agent', 'set_policy', 'reward_glc', 'cycle') and actor != 'DIRECTOR':
+            raise ValueError('WORLD operation requires DIRECTOR actor')
+        owner_field = {'message': 'from_agent', 'transfer_glc': 'from_agent',
+                       'claim_mission': 'agent_id', 'complete_mission': 'agent_id',
+                       'fail_mission': 'agent_id', 'record_lesson': 'agent_id',
+                       'raise_blocker': 'agent_id', 'resolve_blocker': 'agent_id',
+                       'review': 'reviewer'}.get(op)
+        if owner_field and args.get(owner_field) != actor:
+            raise ValueError('WORLD actor must match action owner')
+        if op == 'extinguish':
+            raise ValueError('extinction is triggered by verified treasury state')
+
+    def apply(self, operation_id, args, *, actor=None):
         self._id(operation_id)
         if type(args) is not dict:
             raise ValueError('Arguments must be an object')
@@ -132,17 +159,24 @@ class World:
             raise ValueError('Arguments must be JSON-safe') from exc
         if len(encoded) > 50000:
             raise ValueError('Arguments too large')
-        digest = hashlib.sha256(encoded.encode()).hexdigest()
+        # None is reserved for trusted host administration. Existing host
+        # operation digests stay compatible; agent replays also bind identity.
+        binding = encoded if actor is None else json.dumps([actor, encoded], separators=(',', ':'))
+        digest = hashlib.sha256(binding.encode()).hexdigest()
         with self._connect() as db:
             db.execute('BEGIN IMMEDIATE')
             try:
+                s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
+                if actor is not None:
+                    if s['state'] in ('HALTED', 'EXTINCT'):
+                        raise ValueError('World is stopped')
+                    self._authorize(s, actor, args)
                 old = db.execute('SELECT digest,result FROM operations WHERE id=?', (operation_id,)).fetchone()
                 if old:
                     if old[0] != digest:
                         raise ValueError('Operation ID is bound to different arguments')
                     db.commit()
                     return json.loads(old[1])
-                s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
                 if s['state'] == 'EXTINCT':
                     raise ValueError('World is extinct')
                 result = self._dispatch(s, args)

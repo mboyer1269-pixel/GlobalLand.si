@@ -63,6 +63,19 @@ class PreflightTests(unittest.TestCase):
         self.assertIn('Réglages du courtier valides', failed)
         self.assertEqual(preflight.verdict(results), 'NO-GO')
 
+    def test_pinned_but_missing_images_are_no_go(self):
+        self.install()
+        def run(argv, **kwargs):
+            value = Done()
+            if argv[:3] == ['docker', 'image', 'inspect']:
+                value.returncode = 1
+            return value
+        results = preflight.checks(self.root, run=run, disk=lambda path: Usage())
+        self.assertEqual(preflight.verdict(results), 'NO-GO')
+        failures = [r['check'] for r in results if not r['ok'] and r['level'] == 'REQUIRED']
+        self.assertIn('Image du cerveau présente localement', failures)
+        self.assertIn('Image de l\'exécuteur présente localement', failures)
+
     def test_single_provider_and_readable_token_are_flagged(self):
         self.install(controller={'mode': 'subscriptions', 'providers': ['claude'], 'image': DIGEST},
                      apify={'enabled': True})

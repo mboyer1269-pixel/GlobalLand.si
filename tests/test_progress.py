@@ -205,7 +205,7 @@ class DetectorIntegration(unittest.TestCase):
         self.submit(110, 'WORLD', {'op': 'raise_blocker', 'blocker_id': 'NO-HOSTING', 'agent_id': 'ACQUISITION',
                                    'title': 'No hosting access', 'category': 'ACCOUNT', 'needs_founder': True,
                                    'detail': 'Cloudflare account and a token scoped to one Pages project.',
-                                   'expected_gain': 'Publish the demo and measure visits'})
+                                   'expected_gain': 'Publish the demo and measure visits'}, agent='ACQUISITION')
         self.app.cycle('queue')
         board = self.board()
         self.assertEqual(board['founder_actions'], 1)

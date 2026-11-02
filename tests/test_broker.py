@@ -1,6 +1,7 @@
 """Sprint 1: host broker, stdio MCP server and broker-enabled think turns."""
 import json
 import pathlib
+import shutil
 import socket
 import subprocess
 import sys
@@ -156,7 +157,7 @@ class McpServerTests(unittest.TestCase):
 
     def converse(self, socket_path, messages):
         lines = '\n'.join(json.dumps(m) for m in messages) + '\n'
-        out = subprocess.run(['node', str(ROOT / 'scripts/globalland_mcp.js')], input=lines.encode(),
+        out = subprocess.run([shutil.which('node') or 'node', str(ROOT / 'scripts/globalland_mcp.js')], input=lines.encode(),
                              env={'GLOBALLAND_BROKER': str(socket_path), 'PATH': '/usr/bin:/bin:/usr/local/bin:/opt/node22/bin'},
                              capture_output=True, timeout=30, check=True).stdout.decode()
         return {r['id']: r for r in map(json.loads, out.splitlines())}

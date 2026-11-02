@@ -123,7 +123,7 @@ class DecisionProtocolTests(unittest.TestCase):
 
     def test_all_public_world_operations_preserve_fields(self):
         examples = [
-            {'op': 'register_agent', 'agent_id': 'helper.1', 'role': 'Build products'},
+            {'op': 'register_agent', 'agent_id': 'HELPER_1', 'role': 'Build products'},
             {'op': 'create_mission', 'mission_id': 'M1', 'goal': 'Earn', 'agent_id': 'BUILDER', 'parent_id': 'WORLD-FIRST-REVENUE', 'priority': 0},
             {'op': 'claim_mission', 'mission_id': 'M1', 'agent_id': 'BUILDER', 'lease_seconds': 3600},
             {'op': 'complete_mission', 'mission_id': 'M1', 'agent_id': 'BUILDER', 'lease_token': 'existing', 'evidence': ['products/proof.txt']},
