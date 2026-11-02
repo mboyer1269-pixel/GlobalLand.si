@@ -6,7 +6,7 @@
   "locked_reserve": 50,
   "available_for_agents_without_ceo_approval": 0,
   "weekly_server_tax_cad": 2,
-  "grace_period_days_remaining": 6,
+  "grace_period_days_remaining": 4,
   "kpi_target_balance": 100,
   "transactions": [
     {
@@ -23,7 +23,15 @@
       "created_at": "2026-10-31T00:00:00Z",
       "approved_by": "AUTO_AUDITOR",
       "note": "UTC tick; elapsed days: 1"
+    },
+    {
+      "id": "TX-0003",
+      "type": "DAY_TICK",
+      "amount": 0,
+      "created_at": "2026-11-02T00:00:00Z",
+      "approved_by": "AUTO_AUDITOR",
+      "note": "UTC tick; elapsed days: 2"
     }
   ],
-  "last_tick_date": "2026-10-31"
+  "last_tick_date": "2026-11-02"
 }

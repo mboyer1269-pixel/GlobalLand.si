@@ -1,1 +1,14 @@
-{"state": "CONTROLLER_BLOCKED", "reason": "Controller planning failed; inspect state/private/controller-failure.json; no API fallback"}
+{
+  "state": "WAITING_SUBSCRIPTION_AUTH",
+  "configured": true,
+  "verified": false,
+  "providers": [
+    "codex",
+    "claude"
+  ],
+  "missing": [
+    "CLI restrictions and subscription login not verified"
+  ],
+  "account_settings_verified": false,
+  "last_turn": null
+}
