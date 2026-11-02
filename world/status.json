@@ -101,6 +101,17 @@
         "products/research/invoice-idea-verdict.json",
         "products/distribution/show-hn-demand-experiment.txt"
       ]
+    },
+    {
+      "mission_id": "CSV-ACTOR-LAUNCH",
+      "goal": "When PUBLISH_ACTOR is no longer NOT_CONFIGURED, do a private PUBLISH_ACTOR of products/actors/csv-preflight with event file-checked at 5000 micro-USD. Run it on the core fixtures and save real output under products/actors/csv-preflight/. Fix the wrapper if the build fails. Ask for an independent review of the exact digest before any public listing. Until access exists, do not probe credentials; you may only refine the README/fixtures. Kill threshold: fewer than 3 external users within 14 days of listing (ACTOR_STATS).",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "BUILDER",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -457,6 +468,11 @@
       "timestamp": 1793658740.6316168,
       "lesson_id": "L5",
       "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793658757.892198,
+      "mission_id": "CSV-ACTOR-LAUNCH"
     }
   ],
   "policy": {
