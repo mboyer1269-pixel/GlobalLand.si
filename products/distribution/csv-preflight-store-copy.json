@@ -1,0 +1,73 @@
+{
+ "status": "DRAFT - not published; Actor not built or listed; PUBLISH_ACTOR NOT_CONFIGURED (blocker NO-APIFY-ACCESS)",
+ "prepared_on": "2026-11-02",
+ "prepared_by": "ACQUISITION",
+ "basis": [
+  "products/actors/csv-preflight/README.md",
+  "products/actors/csv-preflight/actor-config/input_schema.json",
+  "products/actors/csv-preflight/core-test-results.json",
+  "products/research/apify-csv-demand-summary.json",
+  "products/research/csv-actor-unit-economics.json"
+ ],
+ "store_title": "CSV Preflight Validator: Check CSV Structure Before Import",
+ "seo_title": "CSV Validator - find broken rows, quotes, duplicate headers",
+ "short_description_en": "Check a CSV before you import it. Finds unclosed quotes, rows with the wrong column count, blank or duplicate headers and missing required columns, and returns JSON errors per file. Built by autonomous AI agents.",
+ "description_en": "One job: validate the structure of UTF-8 CSV files (pasted text or public URLs) before an import. Returns one dataset item per file with ok, issues (kind, record, column, header, expected, actual, detail), data_rows, columns, headers, had_bom and error. Checks: parse errors in strict mode (unclosed/stray quotes), blank and duplicate headers (case-insensitive), missing required columns, rows whose column count differs from the header, blank rows, UTF-8 BOM (reported, not an error). Not checked: amounts, dates, tax, non-UTF-8 encodings, or compatibility with any accounting or import platform; passing does not guarantee an import succeeds. Designed for AI agents and scripts: stable JSON fields, one call per batch of files. This Actor is built and maintained by autonomous AI agents (GlobalLand).",
+ "short_description_fr": "Vérifiez un CSV avant de l'importer : guillemets non fermés, lignes au mauvais nombre de colonnes, en-têtes vides ou en double, colonnes obligatoires manquantes. Résultat JSON par fichier. Conçu par des agents IA autonomes.",
+ "description_fr": "Une seule tâche : valider la structure de fichiers CSV UTF-8 (texte collé ou URL publiques) avant un import. Un élément de jeu de données par fichier : ok, issues, data_rows, columns, headers, had_bom, error. Non vérifié : montants, dates, taxes, encodages autres que UTF-8, compatibilité avec un logiciel comptable ou une plateforme d'import ; réussir la vérification ne garantit pas la réussite d'un import. Cet Actor est conçu et maintenu par des agents d'IA autonomes (GlobalLand).",
+ "example_input": {
+  "csvText": "Invoice,Amount\nINV-1,10.00\nINV-2\n",
+  "requiredColumns": [
+   "Invoice",
+   "Amount",
+   "Date"
+  ]
+ },
+ "expected_issue_kinds_for_example": [
+  "column_count",
+  "missing_required_column"
+ ],
+ "example_note": "Issue kinds come from core fixtures short_row and missing_required (core-test-results.json, 9/9 pass, core only; SDK wrapper not yet executed). Exact output for this combined example must be captured from the first private run before listing.",
+ "output_fields": {
+  "source": "pasted_text or the URL",
+  "ok": "bool",
+  "issues": "list, empty when ok or when error is set",
+  "data_rows": "int",
+  "columns": "int",
+  "headers": "list",
+  "had_bom": "bool",
+  "error": "null unless fetch/decode failed"
+ },
+ "limits": [
+  "UTF-8 only",
+  "10 MiB per file",
+  "public URLs only, no logins",
+  "default memory 256 MB (max 512 MB)"
+ ],
+ "pricing_proposed": {
+  "events": [
+   {
+    "name": "file-checked",
+    "price_usd": 0.005,
+    "when": "one file successfully parsed and checked; failed downloads not charged"
+   },
+   {
+    "name": "apify-actor-start",
+    "price_usd": 5e-05,
+    "when": "Apify synthetic start event, default price"
+   }
+  ],
+  "label": "PROPOSED - see csv-actor-unit-economics.json (PURSUE_IF: measured billed time per file under 30 s at 256 MB)"
+ },
+ "kill_threshold": "fewer than 3 external users within 14 days of public listing (ACTOR_STATS)",
+ "agent_entry_point": "llms-style one-liner: Run Apify Actor csv-preflight with {\"csvUrls\":[url],\"requiredColumns\":[...]}; read dataset items; ok=false means fix issues before import.",
+ "disclosure": "Built and maintained by autonomous AI agents.",
+ "not_claimed": [
+  "publication",
+  "users",
+  "revenue",
+  "live checkout",
+  "platform compatibility",
+  "SDK wrapper execution"
+ ]
+}
