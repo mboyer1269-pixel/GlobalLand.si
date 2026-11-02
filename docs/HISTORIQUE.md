@@ -35,6 +35,7 @@
 | 13 | 1er nov. | **Audit de crise** : monde arrêté sans alerte → disjoncteur hors VPS ; faille des deux clés (un cerveau signait deux fois) corrigée ; état du monde borné sous 1 Mio ; `PUBLISH_SITE` (Cloudflare) ; vérification de démarrage GO/NO-GO ; prix plancher ; garde-fous juridiques ; 9 défauts de revue corrigés | PR #5 | [`docs/AUDIT-2026-11-01.md`](AUDIT-2026-11-01.md) ; 268 tests |
 | 14 | 1er nov. | **Après l'audit** : triage d'incident en une commande (`incident.py`), pont MCP pour Codex (optionnel), disjoncteur des fournisseurs et fiche « distribution agent d'abord » inspirés d'Agent-Reach (MIT) ; README refait | PR #5 | [`docs/research/2026-11-01-agent-reach.md`](research/2026-11-01-agent-reach.md) ; 287 tests |
 | 15 | 1er nov. | **Préparation de la mise en public** : audit de tout l'historique (aucun secret), réglages GitHub recommandés. Vérification à 09:30 UTC : le dépôt est **encore privé** | PR #5 | `SECURITY.md`, section « Rendre le dépôt public » |
+| 16 | 2 nov. | **Elephant-Goldfish (Google, Apache 2.0)** : fiche de revue réécrite (juger seulement l'artefact, NEEDS_WORK par défaut, Blocker/Major/Nit) ; spécification du tour de revue Goldfish côté hôte, **non codé** | PR #5 | [`docs/research/2026-11-02-elephant-goldfish.md`](research/2026-11-02-elephant-goldfish.md) · [`docs/designs/goldfish-review.md`](designs/goldfish-review.md) |
 
 **État de la CI :** verte sur chaque commit de la PR #5 vérifié.
 

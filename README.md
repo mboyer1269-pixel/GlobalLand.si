@@ -230,7 +230,7 @@ Le détail case par case, avec ce qui est déjà fait : **[docs/HISTORIQUE.md](d
 | 💻 Modifier le code | [CODE.md](CODE.md) |
 | 🔐 Séparer les services et les secrets | [SECURITY.md](SECURITY.md) |
 | 🚨 Dernier audit : failles, corrections, indicateurs de survie | [Audit du 1er nov.](docs/AUDIT-2026-11-01.md) |
-| 🔬 Choix de stratégie | [Plan](docs/superpowers/plans/2026-11-01-plan-claude-monde-autonome.md) · [Encaissement](docs/research/2026-11-01-sprint2-encaissement-et-concepts.md) · [Dépôts open source](docs/research/2026-11-01-repos-n8n-headcount-agency.md) · [Agent-Reach](docs/research/2026-11-01-agent-reach.md) |
+| 🔬 Choix de stratégie | [Plan](docs/superpowers/plans/2026-11-01-plan-claude-monde-autonome.md) · [Encaissement](docs/research/2026-11-01-sprint2-encaissement-et-concepts.md) · [Dépôts open source](docs/research/2026-11-01-repos-n8n-headcount-agency.md) · [Agent-Reach](docs/research/2026-11-01-agent-reach.md) · [Elephant-Goldfish](docs/research/2026-11-02-elephant-goldfish.md) |
 | 🧪 Preuves et limites connues | [Vérifications](docs/verification/) |
 
 <details>
