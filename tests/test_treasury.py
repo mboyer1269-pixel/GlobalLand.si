@@ -184,4 +184,173 @@ class TreasuryTests(unittest.TestCase):
         self.assertEqual(self.t.snapshot()['cash_cents'], 5100)
         with self.assertRaises(ValueError): Treasury(self.path).sync_receipts([], complete=True)
 
+    # Sprint 0 regressions -------------------------------------------------
+
+    def test_verified_revenue_before_initial_deposit_is_spendable(self):
+        self.t.credit(self.evidence('first-sale', 700, 'REVENUE'))
+        snap = self.t.snapshot()
+        self.assertEqual((snap['state'], snap['cash_cents'], snap['available_cents']), ('ACTIVE', 700, 700))
+        self.assertFalse(snap['funding_verified'])
+        self.assertTrue(snap['revenue_verified'])
+        with self.assertRaises(ValueError): self.t.reserve('too-much', 701, 'h')
+        self.t.reserve('reinvest', 700, 'h'); self.t.mark_submitted('reinvest')
+        self.t.settle('reinvest', self.evidence('reinvest-paid', 700, 'SPEND'))
+        # Spending earned revenue to zero is not extinction: the founder's
+        # deposit was never verified, so the world is merely out of cash.
+        self.assertEqual(self.t.snapshot()['state'], 'ACTIVE')
+        self.assertEqual(self.t.snapshot()['available_cents'], 0)
+        self.fund()
+        self.assertEqual(self.t.snapshot()['cash_cents'], 5000)
+        self.assertTrue(self.t.snapshot()['funding_verified'])
+
+    def test_unverified_revenue_never_activates_unfunded_bank(self):
+        with self.assertRaises(ValueError): self.t.credit(receipt('forged', 700, 'REVENUE'))
+        with self.assertRaises(ValueError): self.t.credit(self.evidence('empty', 0, 'REVENUE'))
+        self.assertEqual(self.t.snapshot()['state'], 'UNFUNDED')
+        with self.assertRaises(ValueError): self.t.reserve('nope', 1, 'h')
+
+    def test_revenue_before_funding_preserves_halt(self):
+        self.t.reserve('free', 0, 'h'); self.t.mark_submitted('free')
+        self.t.settle('free', self.evidence('unexpected-debit', 100, 'SPEND'))
+        self.t.credit(self.evidence('sale', 300, 'REVENUE'))
+        self.assertEqual(self.t.snapshot()['state'], 'HALTED')
+        self.assertEqual(self.t.snapshot()['cash_cents'], 200)
+
+    def position(self, event, amount, account, asset=None):
+        r = self.evidence(event, amount, 'POSITIONS'); r['account'] = account
+        if asset is not None: r['asset'] = asset
+        return r
+
+    def test_positions_of_distinct_accounts_and_assets_are_summed(self):
+        self.fund()
+        self.t.record_positions(self.position('a1', 300, 'wallet-a'))
+        self.t.record_positions(self.position('b1', 200, 'wallet-b', 'USDC'))
+        self.t.record_positions(self.position('b2', 50, 'wallet-b', 'ETH'))
+        self.assertEqual(self.t.snapshot()['position_cents'], 550)
+        self.t.record_positions(self.position('b3', 120, 'wallet-b', 'USDC'))
+        self.assertEqual(self.t.snapshot()['position_cents'], 470)
+        self.assertEqual(Treasury(self.path).snapshot()['position_cents'], 470)
+
+    def test_one_account_at_zero_does_not_hide_another_before_extinction(self):
+        self.fund()
+        self.t.record_positions(self.position('a', 2500, 'wallet-a'))
+        self.t.record_positions(self.position('b', 2500, 'wallet-b'))
+        self.t.reserve('buy', 5000, 'h'); self.t.mark_submitted('buy')
+        self.t.settle('buy', self.evidence('buy-paid', 5000, 'SPEND'))
+        self.t.record_positions(self.position('a-zero', 0, 'wallet-a'))
+        self.t.sync_receipts([], complete=True)
+        self.assertEqual(self.t.snapshot()['state'], 'ACTIVE')
+        self.assertEqual(self.t.snapshot()['position_cents'], 2500)
+        self.t.record_positions(self.position('b-zero', 0, 'wallet-b'))
+        self.assertEqual(self.t.snapshot()['state'], 'RECONCILING')
+        self.t.sync_receipts([], complete=True)
+        self.assertEqual(self.t.snapshot()['state'], 'EXTINCT')
+
+    def test_account_valued_whole_and_per_asset_is_rejected(self):
+        self.fund()
+        self.t.record_positions(self.position('whole', 300, 'wallet-a'))
+        with self.assertRaises(ValueError):
+            self.t.record_positions(self.position('part', 100, 'wallet-a', 'USDC'))
+        for bad in (' ', 'x' * 257, 7):
+            with self.subTest(asset=bad), self.assertRaises(ValueError):
+                self.t.record_positions(self.position('bad-' + str(len(str(bad))), 1, 'wallet-c', bad))
+        self.assertEqual(self.t.snapshot()['position_cents'], 300)
+
+    def test_legacy_scalar_position_is_migrated_not_dropped(self):
+        import sqlite3
+        legacy = Path(self.tmp.name) / 'legacy.db'
+        db = sqlite3.connect(str(legacy))
+        db.executescript("""
+            CREATE TABLE treasury (id INTEGER PRIMARY KEY CHECK(id=1), cash INTEGER NOT NULL DEFAULT 0,
+                positions INTEGER NOT NULL DEFAULT 0, funded INTEGER NOT NULL DEFAULT 0,
+                state TEXT NOT NULL DEFAULT 'UNFUNDED', reason TEXT, pending_sync INTEGER NOT NULL DEFAULT 0);
+            INSERT INTO treasury(id, cash, positions, funded, state) VALUES(1, 0, 900, 1, 'ACTIVE');
+        """)
+        db.commit(); db.close()
+        migrated = Treasury(legacy, verifier=self.t.verifier)
+        self.assertEqual(migrated.snapshot()['position_cents'], 900)
+        self.assertEqual(Treasury(legacy).snapshot()['position_cents'], 900)
+        self.assertEqual(migrated.snapshot()['state'], 'ACTIVE')
+        # The scalar was 'the latest reported total': a real valuation supersedes it
+        # instead of being added to it forever.
+        migrated.record_positions(self.position('real', 900, 'wallet-a'))
+        self.assertEqual(migrated.snapshot()['position_cents'], 900)
+        migrated.record_positions(self.position('sold', 0, 'wallet-a'))
+        self.assertEqual(migrated.snapshot()['position_cents'], 0)
+
+    def test_revenue_total_excludes_refunds_and_funding(self):
+        self.fund()
+        self.t.credit(self.evidence('sale', 700, 'REVENUE'))
+        self.t.credit(self.evidence('refund', 300, 'REFUND'))
+        snap = self.t.snapshot()
+        self.assertEqual((snap['cash_cents'], snap['revenue_cents']), (6000, 700))
+
+
+
+class ReserveRuleTests(unittest.TestCase):
+    """Sprint 2-A: revenue is spendable only once paid and past its refund window."""
+    NOW = 1793491200
+    DAY = 86400
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.now = self.NOW
+        self.t = Treasury(Path(self.tmp.name) / 't.db', verifier=lambda r: r.get('signature') == 'trusted', clock=lambda: self.now)
+
+    def ev(self, event, amount, kind, **extra):
+        return receipt(event, amount, kind, signature='trusted', **extra)
+
+    def test_maturing_revenue_is_owned_but_not_spendable_until_available(self):
+        self.t.credit(self.ev('sale', 1000, 'REVENUE', available_at=self.NOW + 60 * self.DAY))
+        snap = self.t.snapshot()
+        self.assertEqual((snap['state'], snap['cash_cents'], snap['maturing_cents'], snap['available_cents']), ('ACTIVE', 1000, 1000, 0))
+        self.assertEqual(snap['next_maturity_at'], self.NOW + 60 * self.DAY)
+        with self.assertRaises(ValueError): self.t.reserve('early', 1, 'h')
+        self.now += 60 * self.DAY + 1
+        self.assertEqual(self.t.snapshot()['available_cents'], 1000)
+        self.t.reserve('later', 1000, 'h')
+
+    def test_revenue_without_maturity_is_spendable_now(self):
+        # e.g. a provider payout that is already final (no customer refund claim).
+        self.t.credit(self.ev('payout', 500, 'REVENUE'))
+        self.assertEqual(self.t.snapshot()['available_cents'], 500)
+
+    def test_reserve_floor_is_never_committable(self):
+        self.t.confirm_funding(self.ev('initial', 5000, 'FUNDING'))
+        self.assertEqual(self.t.set_reserve_floor(1500)['available_cents'], 3500)
+        with self.assertRaises(ValueError): self.t.reserve('too-much', 3501, 'h')
+        self.t.reserve('ok', 3500, 'h')
+        for bad in (-1, 1.5, True):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                self.t.set_reserve_floor(bad)
+
+    def test_customer_reversal_consumes_maturing_credit_and_revenue(self):
+        self.t.credit(self.ev('sale', 1000, 'REVENUE', available_at=self.NOW + 60 * self.DAY))
+        self.t.reverse(self.ev('refund-sale', 1000, 'REVERSAL', reverses='sale'))
+        self.t.reverse(self.ev('refund-sale', 1000, 'REVERSAL', reverses='sale'))  # replay is a no-op
+        snap = self.t.snapshot()
+        self.assertEqual((snap['cash_cents'], snap['revenue_cents'], snap['maturing_cents'], snap['state']), (0, 0, 0, 'ACTIVE'))
+
+    def test_spending_immature_revenue_is_what_the_rule_prevents(self):
+        # Without the rule, revenue spent before a refund leaves a debt the provider
+        # can claim from the founder. The bank records that as a halt.
+        self.t.credit(self.ev('sale', 1000, 'REVENUE'))
+        self.t.reserve('spend', 1000, 'h'); self.t.mark_submitted('spend')
+        self.t.settle('spend', self.ev('spent', 1000, 'SPEND'))
+        self.t.reverse(self.ev('chargeback', 1000, 'REVERSAL', reverses='sale'))
+        snap = self.t.snapshot()
+        self.assertEqual((snap['cash_cents'], snap['state']), (-1000, 'HALTED'))
+        self.assertIn('customer reversal exceeds owned cash', snap['extinction_reason'])
+
+    def test_maturity_only_on_revenue_and_reversal_last_in_a_batch(self):
+        with self.assertRaises(ValueError):
+            self.t.credit(self.ev('refund', 100, 'REFUND', available_at=self.NOW + 1))
+        with self.assertRaises(ValueError):
+            self.t.credit(self.ev('bad', 100, 'REVENUE', available_at='tomorrow'))
+        self.t.sync_receipts([self.ev('r', 300, 'REVERSAL', reverses='s'),
+                              self.ev('s', 1000, 'REVENUE', available_at=self.NOW + 10)])
+        snap = self.t.snapshot()
+        self.assertEqual((snap['cash_cents'], snap['maturing_cents']), (700, 700))
+
 if __name__ == '__main__': unittest.main()

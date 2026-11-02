@@ -240,6 +240,186 @@
               "action": {
                 "type": "string",
                 "enum": [
+                  "PUBLISH_ACTOR"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "actor",
+                  "title",
+                  "description",
+                  "public",
+                  "events"
+                ],
+                "properties": {
+                  "actor": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$",
+                    "description": "Folder name under products/actors/; also the Apify Actor name."
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 60,
+                    "pattern": "\\S"
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 300,
+                    "pattern": "\\S"
+                  },
+                  "public": {
+                    "type": "boolean",
+                    "description": "List in Apify Store after a successful build."
+                  },
+                  "events": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "maxItems": 5,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "name",
+                        "title",
+                        "description",
+                        "price_microusd"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 60,
+                          "pattern": "\\S"
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 300,
+                          "pattern": "\\S"
+                        },
+                        "price_microusd": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 10000000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "ACTOR_STATS"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "actor"
+                ],
+                "properties": {
+                  "actor": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "PUBLISH_SITE"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "site",
+                  "dry_run",
+                  "online"
+                ],
+                "properties": {
+                  "site": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9](?:[a-z0-9-]{0,38}[a-z0-9])?$",
+                    "description": "Folder name under products/sites/."
+                  },
+                  "dry_run": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "description": "Validate only and return the review_digest."
+                  },
+                  "online": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "description": "false takes the site offline."
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
                   "WORLD"
                 ]
               },
@@ -439,7 +619,8 @@
                   "mission_id",
                   "agent_id",
                   "lease_token",
-                  "evidence"
+                  "evidence",
+                  "lesson"
                 ],
                 "properties": {
                   "op": {
@@ -476,6 +657,15 @@
                       "maxLength": 4000,
                       "pattern": "\\S"
                     }
+                  },
+                  "lesson": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 1000,
+                    "pattern": "\\S"
                   }
                 }
               }
@@ -508,7 +698,8 @@
                   "mission_id",
                   "agent_id",
                   "lease_token",
-                  "reason"
+                  "reason",
+                  "lesson"
                 ],
                 "properties": {
                   "op": {
@@ -540,6 +731,89 @@
                     "minLength": 1,
                     "maxLength": 4000,
                     "pattern": "\\S"
+                  },
+                  "lesson": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 1000,
+                    "pattern": "\\S"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "WORLD"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "op",
+                  "agent_id",
+                  "lesson",
+                  "mission_id",
+                  "tags"
+                ],
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "record_lesson"
+                    ]
+                  },
+                  "agent_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "lesson": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1000,
+                    "pattern": "\\S"
+                  },
+                  "mission_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "maxItems": 8,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 40,
+                      "pattern": "\\S"
+                    }
                   }
                 }
               }
@@ -805,6 +1079,235 @@
                     "minLength": 1,
                     "maxLength": 128,
                     "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "WORLD"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "op",
+                  "blocker_id",
+                  "agent_id",
+                  "title",
+                  "category",
+                  "needs_founder",
+                  "detail",
+                  "mission_id",
+                  "expected_gain"
+                ],
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "raise_blocker"
+                    ]
+                  },
+                  "blocker_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "agent_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "pattern": "\\S"
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "ACCOUNT",
+                      "CREDENTIAL",
+                      "IDENTITY",
+                      "PAYMENT",
+                      "DECISION",
+                      "CAPABILITY",
+                      "OTHER"
+                    ]
+                  },
+                  "needs_founder": {
+                    "type": "boolean"
+                  },
+                  "detail": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000,
+                    "pattern": "\\S"
+                  },
+                  "mission_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "expected_gain": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 500,
+                    "pattern": "\\S"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "WORLD"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "op",
+                  "blocker_id",
+                  "agent_id",
+                  "resolution"
+                ],
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "resolve_blocker"
+                    ]
+                  },
+                  "blocker_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "agent_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "resolution": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000,
+                    "pattern": "\\S"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent",
+              "action",
+              "args"
+            ],
+            "properties": {
+              "agent": {
+                "type": "string",
+                "pattern": "^[A-Z0-9_-]{1,64}$"
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "WORLD"
+                ]
+              },
+              "args": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "op",
+                  "reviewer",
+                  "subject",
+                  "digest",
+                  "verdict",
+                  "notes"
+                ],
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "review"
+                    ]
+                  },
+                  "reviewer": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+                  },
+                  "subject": {
+                    "type": "string",
+                    "pattern": "^(actor|site|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                  },
+                  "digest": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  },
+                  "verdict": {
+                    "type": "string",
+                    "enum": [
+                      "APPROVE",
+                      "NEEDS_WORK"
+                    ]
+                  },
+                  "notes": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 2000,
+                    "pattern": "\\S"
                   }
                 }
               }

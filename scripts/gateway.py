@@ -64,10 +64,16 @@ class Gateway:
         cursor=response.get('next_cursor')
         if cursor is not None and (not isinstance(cursor,str) or len(cursor)>2048):raise ValueError('invalid account cursor')
         atomic_json(path,{'cursor':cursor})
-        for pending in sorted(path.parent.glob('TASK-*.json'))[:16]:
-            record=json.loads(pending.read_text())
-            if record.get('state')=='SUBMITTING':self.reconcile(record['id'])
-        return bank
+        # Every uncertain operation is reconciled, oldest ID first; one failing
+        # record neither starves later ones nor hides its own failure.
+        failed=[]
+        for pending in sorted(path.parent.glob('TASK-*.json'),key=lambda p:(len(p.stem),p.stem)):
+            try:
+                record=json.loads(pending.read_text())
+                if record.get('state')=='SUBMITTING':self.reconcile(record['id'])
+            except Exception:failed.append(pending.stem)
+        if failed:raise RuntimeError('reconciliation incomplete; holds retained for '+', '.join(failed))
+        return self.treasury.snapshot()
     def reconcile(self,ident):
         p=self._path(ident)
         if not p.exists():raise ValueError('unknown financial operation')

@@ -56,8 +56,9 @@ def check_secrets(raw):
 def safe_path(name):
  if not isinstance(name,str) or not name or name.startswith('/') or '\\' in name or any(p in ('','.','..','.git') for p in name.split('/')):raise ValueError('unsafe path')
  return name
+PROJECTIONS=('bank/status.json','world/status.json','world/controller.json','world/blockers.json')
 def allowed(name):
- return name in ('ledger.json','logs/transactions.log','bank/status.json','world/status.json','world/controller.json') or (name.startswith('products/') and not any(p.startswith('.') for p in name.split('/'))) or bool(re.fullmatch(r'bank/audits/audit-\d{4}-\d\d-\d\d\.md|queue/(?:done|failed)/TASK-[0-9]{4,12}\.result\.json',name))
+ return name in ('ledger.json','logs/transactions.log',*PROJECTIONS) or (name.startswith('products/') and not any(p.startswith('.') for p in name.split('/'))) or bool(re.fullmatch(r'bank/audits/audit-\d{4}-\d\d-\d\d\.md|queue/(?:done|failed)/TASK-[0-9]{4,12}\.result\.json',name))
 def read_artifact(root,name):
  if not allowed(safe_path(name)):raise ValueError('publication outside allowlist')
  p=root
@@ -132,8 +133,11 @@ class Supervisor:
  def projections(self,world,bank,config,planner=None):
   from controller import Controller
   planner=planner or Controller(self.root,world,bank,config)
-  status=planner.readiness();status['last_turn']=planner.last_status()
-  return {'bank/status.json':json.dumps(bank.snapshot(),indent=2)+'\n','world/status.json':json.dumps(world.snapshot(),ensure_ascii=False,indent=2)+'\n','world/controller.json':json.dumps(status,indent=2)+'\n'}
+  status=planner.projection()
+  import progress
+  snapshot=world.snapshot()
+  import payouts
+  return {'bank/status.json':json.dumps(dict(bank.snapshot(),receivables=payouts.receivables(self.root)),indent=2)+'\n','world/status.json':json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n','world/controller.json':json.dumps(status,indent=2)+'\n','world/blockers.json':json.dumps(progress.board(self.root,snapshot),ensure_ascii=False,indent=2)+'\n'}
  def prepare_publication(self,record):
   # Reapply a durable outbox on non-overlapping upstream changes; never rerun work.
   self.git('fetch','origin','main')
@@ -141,7 +145,7 @@ class Supervisor:
   base=record.get('base_sha')
   if base and remote!=base:
    for name,text in record['files'].items():
-    if name in ('bank/status.json','world/status.json','world/controller.json'):continue
+    if name in PROJECTIONS:continue
     def content(ref):
      try:return self.git('show',ref+':'+name)
      except RuntimeError:return None
@@ -155,7 +159,7 @@ class Supervisor:
     base=record.get('base_sha')
     if not base:raise RuntimeError('Divergent legacy publication; operator reconciliation required')
     for name,text in record['files'].items():
-     if name in ('bank/status.json','world/status.json','world/controller.json'):continue
+     if name in PROJECTIONS:continue
      def blob(ref):
       try:return self.git('show',ref+':'+name)
       except RuntimeError:return None
@@ -173,7 +177,8 @@ class Supervisor:
   self.prepare_publication(record)
   files=record['files'];task=record.get('task');result=record.get('result')
   if result:
-   location='done' if result['status']=='DONE' else 'failed';files={**files,f"queue/{location}/{record['id']}.result.json":json.dumps({**result,'id':record['id'],'input_sha256':record['hash']},ensure_ascii=False,indent=2)+'\n'}
+   location='done' if result['status']=='DONE' else 'failed';request={'request':record['request']} if record.get('origin')=='broker' else {}
+   files={**files,f"queue/{location}/{record['id']}.result.json":json.dumps({**result,**request,'id':record['id'],'input_sha256':record['hash']},ensure_ascii=False,indent=2)+'\n'}
   for name,text in files.items():
    if not (allowed(safe_path(name)) or (record['id'].startswith('THINK-') and re.fullmatch(r'queue/inbox/TASK-[0-9]{4,12}\.json',name))) or not isinstance(text,str) or len(text.encode())>1024*1024:raise ValueError('invalid publication')
    check_secrets(text.encode())
@@ -199,6 +204,48 @@ class Supervisor:
    from controller import Controller
    Controller(self.root,None,None,{}).mark_published(r['id'])
   r['state']='PUBLISHED';atomic_json(p,r)
+ def execute_tool(self,task,world,bank,config,origin=None):
+  """Run one broker action through the same durable journal as queued tasks.
+
+  The record is written before execution; an existing record is never rerun."""
+  from tools import Toolbox,rejection_reason
+  ident=task['id'];raw=(json.dumps(task,ensure_ascii=False,sort_keys=True)+'\n').encode();check_secrets(raw)
+  digest=hashlib.sha256(raw).hexdigest();p=self.state/(ident+'.json')
+  if p.exists():
+   r=recover(p)
+   if r['hash']!=digest:raise ValueError('task ID reused with different bytes')
+   return r.get('result') or {'status':'INTERRUPTED','output':'No recorded result; no automatic retry.'}
+  r={'id':ident,'hash':digest,'task':None,'origin':'broker','request':task,'state':'RUNNING','files':{},'base_sha':self.git('rev-parse','HEAD').decode().strip()};atomic_json(p,r)
+  try:
+   try:result,generated=Toolbox(self.root,world,bank,config).run(task,origin=origin)
+   except (ValueError,UnicodeError) as error:result,generated={'status':'REJECTED','output':rejection_reason(error)},{}
+   if not {'status','output'}<=set(result):raise ValueError('invalid tool result')
+   # Projections are published once by the turn itself, not per action.
+   r['result']=result;r['files'].update(generated);r['state']='COMPLETED'
+  except Exception:
+   r['state']='INTERRUPTED';r['result']={'status':'INTERRUPTED','output':'Broker action failed; inspect host journal. No automatic retry.'}
+  atomic_json(p,r)
+  result=dict(r['result'])
+  try:
+   self.finish(p,r)
+  except Exception:
+   # The effect already happened and is durably recorded; the next cycle
+   # publishes it. Say so, so the brain does not resubmit the same work.
+   result['publication']='PENDING: effect recorded; publication retried next cycle. Do not resubmit.'
+  else:
+   # Later actions in this turn see the published files without a full re-extract.
+   self.write_work(r['files'])
+  return result
+ def write_work(self,files):
+  work=self.root/'work'
+  for name,text in files.items():
+   if not allowed(safe_path(name)):continue
+   path=work
+   for part in name.split('/'):
+    path=path/part
+    if path.is_symlink():raise ValueError('symlink in work tree')
+   path.parent.mkdir(parents=True,exist_ok=True,mode=0o755)
+   path.write_text(text);path.chmod(0o644)
  def refresh_work(self):
   import shutil
   work=self.root/'work'
@@ -224,7 +271,7 @@ class Supervisor:
   for p in sorted(self.state.glob('*.json')):
    r=recover(p)
    self.cleanup_abandoned_job(r.get('id',p.stem))
-   if r['state']=='INTERRUPTED' and not r.get('task'):raise RuntimeError('Interrupted daily audit: operator review required; restore from journal backup or acknowledge after reconciliation')
+   if r['state']=='INTERRUPTED' and not r.get('task') and r.get('origin')!='broker':raise RuntimeError('Interrupted daily audit: operator review required; restore from journal backup or acknowledge after reconciliation')
    if r['state']!='PUBLISHED':self.finish(p,r)
   # A fetch-only first step permits upstream fast-forwards without a rejected push.
   self.git('fetch','origin','main')
@@ -255,6 +302,7 @@ class Supervisor:
   if mode=='think':
    from controller import Controller
    planner=Controller(self.root,world,bank,config)
+   planner.executor=lambda task:self.execute_tool(task,world,bank,config,origin=('THINK-%d'%planner.turn_seconds,getattr(planner,'current_provider',None) or 'unknown'))
    if not planner.readiness().get('configured'):
     self.publish({'id':'READINESS','files':self.projections(world,bank,config),'base_sha':self.git('rev-parse','HEAD').decode().strip()});return
    try:
@@ -297,7 +345,9 @@ class Supervisor:
     if task_data and task_data.get('type')=='TOOL':
      from tools import Toolbox
      try:result,generated=Toolbox(self.root,world,bank,config).run(task_data)
-     except (ValueError,UnicodeError):result={'status':'REJECTED','output':'Tool request refused; check protocol and world readiness.'}
+     except (ValueError,UnicodeError) as error:
+      from tools import rejection_reason
+      result={'status':'REJECTED','output':rejection_reason(error)}
     else:
      if not rel:world.apply('cycle-'+ident[6:],{'op':'cycle','cycle_id':ident[6:]})
      result=self.worker('task' if rel else 'daily',rel or ident[6:])

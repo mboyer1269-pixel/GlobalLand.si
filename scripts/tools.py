@@ -13,7 +13,47 @@ import subprocess
 import urllib.parse
 from supervisor import bounded_run, check_secrets, safe_path
 
-TOOL_ACTIONS = {'EXEC', 'FETCH', 'WORLD', 'STATUS', 'SPEND', 'RECONCILE'}
+TOOL_ACTIONS = {'EXEC', 'FETCH', 'WORLD', 'STATUS', 'SPEND', 'RECONCILE', 'PUBLISH_ACTOR', 'ACTOR_STATS', 'PUBLISH_SITE'}
+_RULE_MODULES = ('tools.py', 'world.py', 'treasury.py', 'gateway.py', 'supervisor.py', 'decision_protocol.py', 'broker.py')
+# 'Invalid ' + name / 'Unknown ' + key in world.py take code-defined names only.
+_RULE_PATTERN = re.compile(r'(?:Invalid|Unknown) [A-Za-z_]{1,30}(?: [A-Za-z_]{1,30}){0,3}|HTTP [1-5][0-9][0-9]')
+_RULES = None
+
+
+def _rule_messages():
+    """Messages written as string literals in the installed control code.
+
+    Only these, or the closed patterns above, may be published: exception text
+    built from external data could carry credentials or untrusted content."""
+    global _RULES
+    if _RULES is None:
+        import ast
+        found = set()
+        for name in _RULE_MODULES:
+            path = pathlib.Path(__file__).with_name(name)
+            if not path.is_file():
+                continue
+            for node in ast.walk(ast.parse(path.read_text())):
+                if isinstance(node, ast.Raise) and isinstance(node.exc, ast.Call) and node.exc.args:
+                    arg = node.exc.args[0]
+                    if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+                        found.add(arg.value)
+        _RULES = frozenset(found)
+    return _RULES
+
+
+def rejection_reason(error):
+    """Explain a refused tool request so agents can correct the next one."""
+    detail = error.args[0] if len(error.args) == 1 and isinstance(error.args[0], str) else None
+    safe = getattr(type(error), 'safe_message', False) is True
+    if detail is not None and len(detail) <= 200 and (safe or detail in _rule_messages() or _RULE_PATTERN.fullmatch(detail)):
+        try:
+            check_secrets(detail.encode())
+            return 'Tool request refused: ' + detail + '. See queue/PROTOCOL.md.'
+        except ValueError:
+            pass
+    return 'Tool request refused (' + type(error).__name__ + '); detail withheld because it is not a fixed protocol rule. See queue/PROTOCOL.md.'
+
 
 def product_path(name):
     safe_path(name)
@@ -51,6 +91,14 @@ def validate_envelope(t):
     elif action=='STATUS' and args:raise ValueError('status takes no arguments')
     elif action=='SPEND':
         if set(args)!={'request'} or not isinstance(args['request'],dict):raise ValueError('spend requires a gateway request')
+    elif action=='PUBLISH_ACTOR':
+        if not {'actor','title','description'}<=set(args) or set(args)-{'actor','title','description','public','events'}:raise ValueError('publish actor requires actor, title and description')
+        if not isinstance(args.get('public',False),bool):raise ValueError('public must be boolean')
+    elif action=='PUBLISH_SITE':
+        if 'site' not in args or set(args)-{'site','dry_run','online'}:raise ValueError('publish site requires a site')
+        if any(not isinstance(args.get(k,False),bool) for k in ('dry_run','online')):raise ValueError('dry_run and online must be boolean')
+    elif action=='ACTOR_STATS':
+        if set(args)!={'actor'}:raise ValueError('actor stats requires exactly an actor')
     elif action=='RECONCILE':
         if set(args)!={'operation_id'} or not re.fullmatch(r'TASK-[0-9]{4,12}',args.get('operation_id','')):raise ValueError('invalid operation')
     return t
@@ -116,11 +164,28 @@ def sandbox_command(ident,workspace,image,args):
     control=workspace.parent.parent.parent/'control'/'executor.js'
     return ['docker','run','--rm','--name','globalland-job-'+ident.lower(),'--network','none','--read-only','--user','65534:65534','--cap-drop','ALL','--security-opt','no-new-privileges:true','--memory','1g','--cpus','0.5','--pids-limit','128','--tmpfs','/tmp:rw,noexec,nosuid,size=64m','--tmpfs','/workspace:rw,nosuid,size=256m,uid=65534,gid=65534','--mount',f'type=bind,src={workspace / "input"},dst=/input,readonly','--mount',f'type=bind,src={workspace / "request.json"},dst=/request.json,readonly','--mount',f'type=bind,src={control},dst=/executor.js,readonly','--workdir','/workspace',image,'node','/executor.js']
 
+def task_origin(root,task):
+    """Host-known origin of a task: (turn, provider). The brain cannot choose it.
+
+    Tasks from a think turn carry TASK-<turn seconds><slot>; the provider of that
+    turn is read from the host's own controller record. Anything else (an inbox
+    task pushed through GitHub, e.g. by Grok) is EXTERNAL."""
+    match=re.fullmatch(r'TASK-([0-9]{10})([0-9]{2})',task.get('id',''))
+    if match:
+        record=pathlib.Path(root)/'state'/'controller'/('THINK-%d.json'%int(match.group(1)))
+        if record.is_file():
+            try:
+                provider=json.loads(record.read_text()).get('provider')
+                if provider in ('codex','claude','cursor'):return ('THINK-%d'%int(match.group(1)),provider)
+            except ValueError:pass
+    return ('EXTERNAL-'+task.get('id','?'),'EXTERNAL')
+
 class Toolbox:
     def __init__(self,root,world,treasury,config=None):
         self.root=pathlib.Path(root);self.world=world;self.treasury=treasury;self.config=config or {}
-    def run(self,task):
+    def run(self,task,origin=None):
         validate_envelope(task)
+        origin=origin or task_origin(self.root,task)
         if self.treasury.snapshot()['state'] in ('EXTINCT','HALTED'):raise ValueError('GlobalLand is stopped')
         action,args=task['action'],task['args'];files={}
         if action=='EXEC':
@@ -165,9 +230,23 @@ class Toolbox:
             files[args['output']]=text
             return {'status':'DONE','output':json.dumps({'source':url,'http_status':status,'sha256':hashlib.sha256(raw).hexdigest(),'artifact':args['output']})},files
         if action=='WORLD':
+            if any(isinstance(k,str) and k.startswith('host_') for k in args):raise ValueError('host fields are reserved')
+            if args.get('op')=='review':
+                # Reviewer provenance is set by the host, never by the brain.
+                args=dict(args,host_turn=origin[0],host_provider=origin[1])
             value=self.world.apply(task['id'],args)
             return {'status':'DONE','output':json.dumps(value,ensure_ascii=False)},{}
         if action=='STATUS':return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':self.treasury.snapshot()},ensure_ascii=False)},{}
+        if action=='PUBLISH_SITE':
+            from sites import Publisher as SitePublisher
+            result=SitePublisher(self.root,self.config,reviews=self.world.reviews() if hasattr(self.world,'reviews') else [],origin=origin).publish(task)
+            return {'status':SitePublisher.task_status(result),'output':json.dumps(result,ensure_ascii=False)[:8000]},{}
+        if action in ('PUBLISH_ACTOR','ACTOR_STATS'):
+            from apify import Publisher
+            publisher=Publisher(self.root,self.config,reviews=self.world.reviews() if hasattr(self.world,'reviews') else [],origin=origin)
+            if action=='ACTOR_STATS':return {'status':'DONE','output':json.dumps(publisher.stats(task),ensure_ascii=False)},{}
+            result=publisher.publish(task)
+            return {'status':Publisher.task_status(result),'output':json.dumps(result,ensure_ascii=False)[:8000]},{}
         from gateway import Gateway
         gateway=Gateway(self.root,self.treasury)
         result=gateway.spend(task) if action=='SPEND' else gateway.reconcile(args['operation_id'])

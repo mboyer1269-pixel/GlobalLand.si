@@ -1,0 +1,51 @@
+name: Watchdog
+# Dead man's switch: alerts the founder by GitHub issue (e-mail) when the world
+# goes silent or blocked. Runs on GitHub, independent of the VPS. Scheduled
+# workflows run from the default branch only.
+on:
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: watchdog
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 200
+      - name: Check the world
+        id: check
+        run: |
+          python3 scripts/watchdog.py --repo . > report.json
+          cat report.json
+          echo "status=$(python3 -c 'import json;print(json.load(open("report.json"))["status"])')" >> "$GITHUB_OUTPUT"
+          python3 scripts/watchdog.py --repo . --body > body.md
+      - name: Open or update the alert issue
+        if: steps.check.outputs.status == 'ALERT'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create globalland-watchdog --color B60205 --description "Alerte automatique GlobalLand" --force
+          number=$(gh issue list --label globalland-watchdog --state open --json number -q '.[0].number')
+          if [ -z "$number" ]; then
+            gh issue create --title "GlobalLand : le monde a besoin d'attention" --label globalland-watchdog --body-file body.md
+          else
+            # Silent update: one e-mail when the alert opens, not one per hour.
+            gh issue edit "$number" --body-file body.md
+          fi
+      - name: Close the alert when the world is healthy
+        if: steps.check.outputs.status == 'OK'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for number in $(gh issue list --label globalland-watchdog --state open --json number -q '.[].number'); do
+            gh issue close "$number" --comment "Rétabli : le superviseur publie et le contrôleur est opérationnel."
+          done

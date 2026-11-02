@@ -1,4 +1,5 @@
 """Persistent virtual agents and GLC. This module never handles real currency."""
+import contextlib
 import hashlib
 import json
 import re
@@ -20,8 +21,14 @@ class World:
                 state='ACTIVE', agents=[], missions=[], messages=[], events=[],
                 policy=dict(maintenance_glc=1, interest_basis_points=500), cycles=[])),))
 
+    @contextlib.contextmanager
     def _connect(self):
-        return sqlite3.connect(self.path, timeout=30, isolation_level=None)
+        # Always closed: the supervisor is long-lived across many operations.
+        db = sqlite3.connect(self.path, timeout=30, isolation_level=None)
+        try:
+            yield db
+        finally:
+            db.close()
 
     @staticmethod
     def _text(value, name, limit=4000):
@@ -49,8 +56,23 @@ class World:
             raise ValueError('Unknown ' + key)
         return found
 
+    # Bounded state: world/status.json must stay far below the 1 MiB
+    # publication limit, or every publication (and so the world) would stop.
+    MAX_EVENTS, MAX_MESSAGES, MAX_CLOSED_MISSIONS, MAX_AGENTS = 2000, 100, 200, 100
+
     def _event(self, s, kind, **data):
         s['events'].append(dict(type=kind, timestamp=self.clock(), **data))
+        del s['events'][:-self.MAX_EVENTS]
+
+    def _compact(self, s):
+        del s['messages'][:-self.MAX_MESSAGES]
+        closed = [m for m in s['missions'] if m['status'] in ('COMPLETED', 'FAILED')]
+        for old in closed[:max(0, len(closed) - self.MAX_CLOSED_MISSIONS)]:
+            s['missions'].remove(old)
+            # A dropped ID is never reused: history and lessons keep pointing at one mission.
+            s.setdefault('retired_missions', []).append(old['mission_id'])
+        del s.setdefault('retired_missions', [])[:-20000]
+        del s['cycles'][:-1000]
 
     def _agent(self, s, agent_id, active=False):
         a = self._find(s['agents'], 'agent_id', self._id(agent_id))
@@ -63,6 +85,8 @@ class World:
         self._text(role, 'role', 500)
         if any(a['agent_id'] == agent_id for a in s['agents']):
             raise ValueError('Agent already exists')
+        if len(s['agents']) >= self.MAX_AGENTS:
+            raise ValueError('Too many agents; liquidate or reuse existing ones')
         a = dict(agent_id=agent_id, role=role, wallet_glc=100, debt_glc=100, status='ACTIVE')
         s['agents'].append(a)
         self._event(s, 'GLC_ISSUANCE', agent_id=agent_id, amount=100, reason='initial loan')
@@ -92,8 +116,11 @@ class World:
     def snapshot(self):
         with self._connect() as db:
             s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
-        return {k: (v[-100:] if k == 'events' else v) for k, v in s.items()
-                if k not in ('cycles', 'bootstrapped')}
+        view = {k: (v[-100:] if k == 'events' else v[-50:] if k in ('reviews', 'messages') else v) for k, v in s.items()
+                if k not in ('cycles', 'bootstrapped', 'lessons', 'lesson_seq', 'retired_missions')}
+        # Lessons are retrieved by relevance for prompts, not dumped wholesale.
+        view['lesson_count'] = len(s.get('lessons', []))
+        return view
 
     def apply(self, operation_id, args):
         self._id(operation_id)
@@ -119,6 +146,7 @@ class World:
                 if s['state'] == 'EXTINCT':
                     raise ValueError('World is extinct')
                 result = self._dispatch(s, args)
+                self._compact(s)
                 # Freeze result before later operations can mutate the same object.
                 result_json = json.dumps(result)
                 db.execute('UPDATE world SET data=? WHERE id=1', (json.dumps(s),))
@@ -134,13 +162,17 @@ class World:
             'register_agent': ({'agent_id', 'role'}, set()),
             'create_mission': ({'mission_id', 'goal'}, {'agent_id', 'parent_id', 'priority'}),
             'claim_mission': ({'mission_id', 'agent_id'}, {'lease_seconds'}),
-            'complete_mission': ({'mission_id', 'agent_id', 'lease_token', 'evidence'}, set()),
-            'fail_mission': ({'mission_id', 'agent_id', 'lease_token', 'reason'}, set()),
+            'complete_mission': ({'mission_id', 'agent_id', 'lease_token', 'evidence'}, {'lesson'}),
+            'fail_mission': ({'mission_id', 'agent_id', 'lease_token', 'reason'}, {'lesson'}),
+            'record_lesson': ({'agent_id', 'lesson'}, {'mission_id', 'tags'}),
+            'review': ({'reviewer', 'subject', 'digest', 'verdict'}, {'notes', 'host_turn', 'host_provider'}),
             'message': ({'from_agent', 'to_agent', 'body'}, set()),
             'transfer_glc': ({'from_agent', 'to_agent', 'amount'}, set()),
             'reward_glc': ({'agent_id', 'amount', 'evidence'}, set()),
             'set_policy': ({'maintenance_glc', 'interest_basis_points'}, set()),
-            'cycle': ({'cycle_id'}, set()), 'extinguish': ({'reason'}, set())}
+            'cycle': ({'cycle_id'}, set()), 'extinguish': ({'reason'}, set()),
+            'raise_blocker': ({'blocker_id', 'agent_id', 'title', 'category', 'needs_founder', 'detail'}, {'mission_id', 'expected_gain'}),
+            'resolve_blocker': ({'blocker_id', 'agent_id', 'resolution'}, set())}
         op = a.get('op')
         if not isinstance(op, str) or op not in fields:
             raise ValueError('Unknown operation')
@@ -151,7 +183,7 @@ class World:
             return self._register(s, a['agent_id'], a['role'])
         if op == 'create_mission':
             mid = self._id(a['mission_id'])
-            if any(m['mission_id'] == mid for m in s['missions']):
+            if any(m['mission_id'] == mid for m in s['missions']) or mid in s.get('retired_missions', []):
                 raise ValueError('Mission already exists')
             self._text(a['goal'], 'goal', 10000)
             if a.get('parent_id') is not None:
@@ -184,6 +216,8 @@ class World:
                     m['reason'] = self._text(a['reason'], 'reason')
                     m['status'] = 'FAILED'
                 m.update(lease_token=None, lease_expires_at=None)
+                if a.get('lesson') is not None:
+                    self._lesson(s, a['agent_id'], a['lesson'], m['mission_id'], [], m['status'])
             self._event(s, op.upper(), mission_id=m['mission_id'], agent_id=a['agent_id'])
             return m
         if op == 'message':
@@ -234,11 +268,115 @@ class World:
                     self._event(s, 'AGENT_DISABLED', agent_id=agent['agent_id'])
             s['cycles'].append(cid)
             return dict(cycle_id=cid, applied=True)
+        if op == 'review':
+            # Producer and auditor are never the same agent: the host checks the
+            # author against the reviewer where a review gates an effect.
+            if a.get('host_provider') == 'FOUNDER':
+                if a['reviewer'] != 'FOUNDER':
+                    raise ValueError('Invalid founder review')
+            else:
+                self._agent(s, a['reviewer'], True)
+            if not isinstance(a['subject'], str) or not re.fullmatch(r'(actor|site|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}', a['subject']):
+                raise ValueError('Invalid review subject')
+            if not isinstance(a['digest'], str) or not re.fullmatch(r'[0-9a-f]{64}', a['digest']):
+                raise ValueError('Invalid review digest')
+            if a['verdict'] not in ('APPROVE', 'NEEDS_WORK'):
+                raise ValueError('Invalid review verdict')
+            reviews = s.setdefault('reviews', [])
+            review = dict(reviewer=a['reviewer'], subject=a['subject'], digest=a['digest'], verdict=a['verdict'],
+                          notes=self._text(a['notes'], 'notes', 2000) if a.get('notes') is not None else None,
+                          host_turn=a.get('host_turn'), host_provider=a.get('host_provider'),
+                          at=self.clock(), seq=len(reviews) and reviews[-1]['seq'] + 1 or 1)
+            reviews.append(review)
+            del reviews[:-500]
+            self._event(s, 'REVIEW_RECORDED', reviewer=a['reviewer'], subject=a['subject'], verdict=a['verdict'])
+            return review
+        if op == 'record_lesson':
+            self._agent(s, a['agent_id'], True)
+            mission = None
+            if a.get('mission_id') is not None:
+                mission = self._find(s['missions'], 'mission_id', self._id(a['mission_id']))['mission_id']
+            return self._lesson(s, a['agent_id'], a['lesson'], mission, a.get('tags') or [], None)
+        if op == 'raise_blocker':
+            return self._raise_blocker(s, a)
+        if op == 'resolve_blocker':
+            blockers = s.setdefault('blockers', [])
+            self._agent(s, a['agent_id'], True)
+            b = self._find(blockers, 'blocker_id', self._id(a['blocker_id']))
+            if b['status'] != 'OPEN':
+                raise ValueError('Blocker already resolved')
+            b.update(status='RESOLVED', resolution=self._text(a['resolution'], 'resolution', 2000),
+                     resolved_by=a['agent_id'], resolved_at=self.clock())
+            self._event(s, 'BLOCKER_RESOLVED', blocker_id=b['blocker_id'], agent_id=a['agent_id'])
+            return b
         if op == 'extinguish':
             reason = self._text(a['reason'], 'reason')
             s['state'] = 'EXTINCT'
             self._event(s, 'WORLD_EXTINCT', reason=reason)
             return dict(state='EXTINCT', reason=reason)
+
+    MAX_LESSONS = 300
+
+    def _lesson(self, s, agent_id, text, mission_id, tags, outcome):
+        """Durable learning; the controller injects relevant lessons into prompts."""
+        if type(tags) is not list or len(tags) > 8:
+            raise ValueError('Invalid tags')
+        tags = [self._text(t, 'tag', 40) for t in tags]
+        lessons = s.setdefault('lessons', [])
+        s['lesson_seq'] = s.get('lesson_seq', 0) + 1
+        lesson = dict(lesson_id='L%d' % s['lesson_seq'], agent_id=agent_id, mission_id=mission_id,
+                      outcome=outcome, text=self._text(text, 'lesson', 1000), tags=tags, at=self.clock())
+        lessons.append(lesson)
+        del lessons[:-self.MAX_LESSONS]
+        self._event(s, 'LESSON_RECORDED', lesson_id=lesson['lesson_id'], agent_id=agent_id)
+        return lesson
+
+    def reviews(self):
+        with self._connect() as db:
+            s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
+        return s.get('reviews', [])
+
+    def lessons(self):
+        with self._connect() as db:
+            s = json.loads(db.execute('SELECT data FROM world WHERE id=1').fetchone()[0])
+        return s.get('lessons', [])
+
+    BLOCKER_CATEGORIES = ('ACCOUNT', 'CREDENTIAL', 'IDENTITY', 'PAYMENT', 'DECISION', 'CAPABILITY', 'OTHER')
+
+    def _raise_blocker(self, s, a):
+        """Record once what prevents progress; repeated reports update the card."""
+        blockers = s.setdefault('blockers', [])
+        self._agent(s, a['agent_id'], True)
+        bid = self._id(a['blocker_id'])
+        if a['category'] not in self.BLOCKER_CATEGORIES:
+            raise ValueError('Invalid blocker category')
+        if type(a['needs_founder']) is not bool:
+            raise ValueError('needs_founder must be boolean')
+        fields = dict(title=self._text(a['title'], 'title', 200), category=a['category'],
+                      needs_founder=a['needs_founder'], detail=self._text(a['detail'], 'detail', 2000),
+                      mission_id=None, expected_gain=None)
+        if a.get('mission_id') is not None:
+            fields['mission_id'] = self._find(s['missions'], 'mission_id', self._id(a['mission_id']))['mission_id']
+        if a.get('expected_gain') is not None:
+            fields['expected_gain'] = self._text(a['expected_gain'], 'expected gain', 500)
+        now = self.clock()
+        b = next((x for x in blockers if x['blocker_id'] == bid), None)
+        if b is None:
+            if sum(1 for x in blockers if x['status'] == 'OPEN') >= 50:
+                raise ValueError('Too many open blockers; resolve or merge existing ones')
+            b = dict(blocker_id=bid, status='OPEN', raised_by=a['agent_id'], opened_at=now, reports=0)
+            blockers.append(b)
+            # Keep every open card; forget the oldest resolved ones beyond 200.
+            resolved = [x for x in blockers if x['status'] != 'OPEN']
+            for old in resolved[:max(0, len(blockers) - 200)]:
+                blockers.remove(old)
+        elif b['status'] != 'OPEN':
+            b.update(status='OPEN', opened_at=now, reports=0)
+            for key in ('resolution', 'resolved_by', 'resolved_at'):
+                b.pop(key, None)
+        b.update(fields, last_reported_by=a['agent_id'], last_reported_at=now, reports=b['reports'] + 1)
+        self._event(s, 'BLOCKER_RAISED', blocker_id=bid, agent_id=a['agent_id'])
+        return b
 
     def _evidence(self, evidence):
         if type(evidence) is not list or not 1 <= len(evidence) <= 100:

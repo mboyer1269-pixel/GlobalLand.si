@@ -44,14 +44,30 @@ _WORLD_FIELDS = {
         'lease_seconds': _nullable(_integer(3600, 1)),
     },
     'complete_mission': {'mission_id': _ID, 'agent_id': _ID,
-                         'lease_token': _text(128), 'evidence': _EVIDENCE},
+                         'lease_token': _text(128), 'evidence': _EVIDENCE,
+                         'lesson': _nullable(_text(1000))},
     'fail_mission': {'mission_id': _ID, 'agent_id': _ID,
-                     'lease_token': _text(128), 'reason': _text()},
+                     'lease_token': _text(128), 'reason': _text(),
+                     'lesson': _nullable(_text(1000))},
+    'record_lesson': {'agent_id': _ID, 'lesson': _text(1000), 'mission_id': _nullable(_ID),
+                      'tags': _nullable({'type': 'array', 'maxItems': 8, 'items': _text(40)})},
     'message': {'from_agent': _ID, 'to_agent': _ID, 'body': _text(10000)},
     'transfer_glc': {'from_agent': _ID, 'to_agent': _ID, 'amount': _integer()},
     'reward_glc': {'agent_id': _ID, 'amount': _integer(), 'evidence': _EVIDENCE},
     'set_policy': {'maintenance_glc': _integer(10000), 'interest_basis_points': _integer(10000)},
     'cycle': {'cycle_id': _ID},
+    'raise_blocker': {
+        'blocker_id': _ID, 'agent_id': _ID, 'title': _text(200),
+        'category': {'type': 'string', 'enum': ['ACCOUNT', 'CREDENTIAL', 'IDENTITY', 'PAYMENT', 'DECISION', 'CAPABILITY', 'OTHER']},
+        'needs_founder': {'type': 'boolean'}, 'detail': _text(2000),
+        'mission_id': _nullable(_ID), 'expected_gain': _nullable(_text(500)),
+    },
+    'resolve_blocker': {'blocker_id': _ID, 'agent_id': _ID, 'resolution': _text(2000)},
+    'review': {'reviewer': _ID,
+               'subject': {'type': 'string', 'pattern': '^(actor|site|mission):[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$'},
+               'digest': {'type': 'string', 'pattern': '^[0-9a-f]{64}$'},
+               'verdict': {'type': 'string', 'enum': ['APPROVE', 'NEEDS_WORK']},
+               'notes': _nullable(_text(2000))},
 }
 _WORLD_SCHEMAS = {
     op: _object({'op': {'type': 'string', 'enum': [op]}, **fields})
@@ -76,6 +92,23 @@ _TOOL_SCHEMAS = {
     'STATUS': _object({}),
     'RECONCILE': _object({'operation_id': {'type': 'string', 'pattern': '^TASK-[0-9]{4,12}$'}}),
     'SPEND': _object({'request_entries': {'type': 'array', 'items': {'$ref': '#/$defs/json_entry'}}}),
+    'PUBLISH_ACTOR': _object({
+        'actor': {'type': 'string', 'pattern': '^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$',
+                  'description': 'Folder name under products/actors/; also the Apify Actor name.'},
+        'title': _text(60), 'description': _text(300),
+        'public': {'type': 'boolean', 'description': 'List in Apify Store after a successful build.'},
+        'events': _nullable({'type': 'array', 'maxItems': 5, 'items': _object({
+            'name': {'type': 'string', 'pattern': '^[a-z0-9][a-z0-9-]{0,39}$'},
+            'title': _text(60), 'description': _text(300),
+            'price_microusd': _integer(10_000_000, 1)})}),
+    }),
+    'ACTOR_STATS': _object({'actor': {'type': 'string', 'pattern': '^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$'}}),
+    'PUBLISH_SITE': _object({
+        'site': {'type': 'string', 'pattern': '^[a-z0-9](?:[a-z0-9-]{0,38}[a-z0-9])?$',
+                 'description': 'Folder name under products/sites/.'},
+        'dry_run': _nullable({'type': 'boolean', 'description': 'Validate only and return the review_digest.'}),
+        'online': _nullable({'type': 'boolean', 'description': 'false takes the site offline.'}),
+    }),
 }
 
 
@@ -116,7 +149,7 @@ def _validate_field(value, schema):
     kind = schema['type']
     if isinstance(kind, list):
         kind = next(item for item in kind if item != 'null')
-    expected = {'string': str, 'integer': int, 'array': list}[kind]
+    expected = {'string': str, 'integer': int, 'array': list, 'boolean': bool, 'object': dict}[kind]
     if type(value) is not expected:
         raise ValueError('Invalid argument type')
     if 'enum' in schema and value not in schema['enum']:
@@ -126,6 +159,12 @@ def _validate_field(value, schema):
             raise ValueError('Invalid argument length')
         if 'pattern' in schema and not re.search(schema['pattern'], value):
             raise ValueError('Invalid argument format')
+    elif kind == 'boolean':
+        return
+    elif kind == 'object':
+        _closed(value, set(schema['required']), set(schema['properties']) - set(schema['required']))
+        for key, item in value.items():
+            _validate_field(item, schema['properties'][key])
     elif kind == 'integer':
         if not schema.get('minimum', value) <= value <= schema.get('maximum', value):
             raise ValueError('Invalid integer argument')

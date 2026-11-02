@@ -61,6 +61,12 @@ sudo python3 /opt/globalland/control/supervisor.py think
 sudo python3 /opt/globalland/control/supervisor.py queue
 ```
 
+Pour donner au cerveau Claude ses outils GlobalLand pendant un tour (plusieurs actions observées par cycle), ajouter `--broker on` ; `--broker off` les retire ; sans l'option, le réglage actuel est conservé. Valeurs par défaut : 40 appels, 20 actions, 900 secondes et 40 tours de modèle par cycle (`controller.broker` dans config.json). Lancer ensuite un `think` manuel et vérifier `state/broker/THINK-*/calls.jsonl` et les résultats publiés avant de réactiver l'horaire.
+
+**Délai d'un tour sans courtier.** `controller.timeout_seconds` dans config.json : entier de 30 à 900, 120 par défaut. Une valeur invalide bloque la préparation (`missing`) avant tout appel au modèle. Sans réseau joignable, Codex 0.166.0 reste en « waiting for network » au-delà de 120 s : un délai plus court fait basculer plus vite, un délai plus long laisse plus de marge à un tour lent. Ne pas hausser CPU ou mémoire pour compenser sans décision.
+
+**Codex avec les outils (optionnel, à éprouver d'abord).** Par défaut, seul Claude reçoit le courtier ; Codex reste à une décision par cycle. Pour l'ajouter : `--broker-providers claude,codex`. Codex reçoit alors uniquement le serveur `globalland`, limité à ses cinq outils, pré-approuvé (le courtier hôte valide et budgète chaque appel) et requis au démarrage. Un pont cassé fait échouer le tour Codex, puis la bascule passe à Claude, au lieu de tourner sans outils. Ces réglages viennent du code source officiel de Codex (`enabled_tools`, `default_tools_approval_mode`, `required`, `tool_timeout_sec`) et n'ont pas été exécutés avec la CLI de l'image du VPS. Après activation : lancer un `think` manuel, puis vérifier que `state/broker/THINK-*/calls.jsonl` contient des appels pendant un tour Codex. Sinon : `--broker-providers claude`.
+
 Le drapeau d'attestation suppose que tu as effectivement vérifié les comptes. Il n'est pas une preuve automatisée de leur facturation. Pour utiliser un seul abonnement, fournir `--providers codex` ou `--providers claude`. Aucun repli API ni achat de crédits n'est effectué si un quota est atteint.
 
 Vérifier une décision THINK, des tâches produites et leurs résultats/artefacts sur GitHub avant d'activer la réflexion périodique. Après les tours réellement publiés de Codex et Claude, l'opérateur root peut lancer depuis son checkout administratif au SHA exact revu :
@@ -80,6 +86,87 @@ L'horaire dédié `/etc/cron.d/globalland-think` mode644 contient :
 Le script effectue ensuite un lancement immédiat think/queue. Son retour sans erreur ne suffit pas à qualifier chaque tâche de réussie : vérifier les nouveaux résultats et leurs artefacts dans GitHub, puis un tour ultérieur déclenché à :00 ou :30 avec le journal `/var/log/globalland/think.log`. Les connexions et quotas restent des dépendances réelles ; aucun résultat commercial n'est garanti. Le verrou est commun aux trois cycles et la rotation `/var/log/globalland/*.log` couvre le nouveau journal. Pour arrêter la réflexion périodique, déplacer seulement ce fichier cron dans le dossier de sauvegarde privée ; garder queue/daily pour la reprise des travaux déjà soumis. La configuration antérieure se trouve dans le dossier backups/autonomy-* annoncé par le script ; ne pas restaurer un ancien solde ou rejouer des opérations financières.
 
 Un lancement immédiat en échec après « horaires installés » laisse l'horaire installé ; ces deux faits sont distincts. Contrôler world/controller.json : last_turn décrit les essais de modèles et reason_code explique un blocage sans exposer d'exception brute. Un échec transitoire peut être repris par un autre abonnement configuré ; la reprise conserve les contrôles de chaque tâche. Attendre la fin d'une opération Hostinger avant toute installation et vérifier ensuite l'intégrité de l'état et des services ; ne déduire ni une migration ni une réinstallation du seul message d'attente.
+
+## Apify Store (premier rail de revenu)
+
+1. Créer un compte Apify au nom du fondateur, faire la vérification d'identité exigée pour la monétisation, et définir un nom d'utilisateur.
+2. **Plafonner les coûts : rester sur le plan gratuit, sans carte.** Il donne 5 $ de crédits de plateforme par mois. Une fois ces crédits épuisés, le compte est bloqué jusqu'au cycle suivant, sans facture : c'est un plafond réel (page officielle des tarifs, vérifiée le 2026-11-01). Ne pas ajouter de carte : un plan payant facture les dépassements. Les constructions et essais d'Actors consomment ces crédits ; les exécutions des clients d'un Actor à l'événement sont déduites des gains, jamais facturées au développeur.
+3. Créer un token API et l'installer sans jamais le coller dans GitHub ni dans un chat :
+
+```bash
+sudo install -d -m 700 /opt/globalland/credentials/apify
+sudo sh -c 'umask 077; cat > /opt/globalland/credentials/apify/token'   # coller le token, Entrée, Ctrl-D
+```
+
+4. Activer dans `/opt/globalland/control/config.json` : `"apify": {"enabled": true, "max_event_price_usd": 0.05, "allow_public": false, "require_review": true, "build_wait_seconds": 240}`. `require_review` impose la règle des deux clés : une mise en vente publique exige l'approbation (WORLD `review`) de la version exacte des sources par un agent autre que celui qui publie. Laisser `allow_public` à false jusqu'à la vérification d'une première construction privée, puis le passer à true.
+
+## Cloudflare : sites publics (PUBLISH_SITE)
+
+1. Créer un compte Cloudflare gratuit au nom du fondateur, puis choisir un sous-domaine workers.dev (Workers & Pages > Overview).
+2. Créer un token API **limité à ce compte** avec la seule permission « Workers Scripts : Edit ». Cloudflare ne permet pas de restreindre un token à un seul script : l'hôte ne touche donc qu'aux scripts préfixés `globalland-`.
+3. Installer le token sans le coller dans GitHub ni dans un chat :
+   ```bash
+   sudo install -d -m 700 /opt/globalland/credentials/cloudflare
+   sudo sh -c 'umask 077; cat > /opt/globalland/credentials/cloudflare/token'   # coller, Entrée, Ctrl-D
+   ```
+4. Activer dans `config.json` : `"cloudflare": {"enabled": true, "account_id": "<32 caractères hexadécimaux>", "script_prefix": "globalland-", "require_review": true}`.
+5. Coupure d'urgence d'un site : tâche `PUBLISH_SITE {"site": "<nom>", "online": false}`, sans revue.
+
+## Vérifier que tout est prêt
+
+```bash
+sudo python3 /opt/globalland/control/preflight.py
+```
+Le verdict GO ou NO-GO liste chaque manque avec sa correction, sans jamais afficher un secret. Les éléments OPTIONAL (courtier, Apify, Cloudflare) n'empêchent pas le démarrage.
+
+## Être prévenu quand le monde s'arrête
+
+Le workflow `.github/workflows/watchdog.yml` vérifie `main` chaque heure, depuis GitHub, sans le VPS. Si le superviseur se tait plus de 2 h, si le contrôleur est bloqué, STALE ou DEGRADED, ou si des actions attendent le fondateur, il ouvre une issue « GlobalLand : le monde a besoin d'attention ». GitHub envoie un courriel à l'ouverture, puis l'issue est mise à jour en silence. Elle se ferme d'elle-même au rétablissement. Le workflow s'active une fois fusionné dans `main`.
+
+## Le monde est muet ou bloqué : triage en une commande
+
+L'outil fonctionne depuis n'importe quelle copie du dépôt, même si la version installée est ancienne. Il ne modifie rien et n'affiche aucun contenu de fichier ni de journal : seulement des codes d'erreur fixes, des âges, des compteurs et la correction de chaque constat. Sa sortie peut être recollée telle quelle dans un chat ou une issue.
+
+```bash
+# Dépôt privé : copier le fichier depuis ton poste (ou le coller dans `sudo tee /tmp/incident.py`).
+scp scripts/incident.py <vps>:/tmp/incident.py
+# Dépôt public : téléchargement direct (branche de la PR #5 tant qu'elle n'est pas fusionnée, puis main).
+# curl -fsSL -o /tmp/incident.py https://raw.githubusercontent.com/mboyer1269-pixel/GlobalLand.si/claude/globalland-autonomous-world-nokkck/scripts/incident.py
+sudo python3 -I /tmp/incident.py /opt/globalland
+```
+Constats possibles, du plus grave au moins grave :
+- un cycle coincé qui tient le verrou ;
+- des cycles en pause après une mise à jour interrompue, avec la commande de restauration ;
+- cron qui ne lance plus rien ;
+- Docker arrêté ;
+- conteneurs restants, disque plein ou connexion absente ;
+- code d'échec du planificateur, avec le détail par fournisseur.
+
+Ne jamais supprimer `state/` ni les journaux pour « débloquer ».
+
+## Revue d'une mise en vente par le fondateur
+
+Si un seul fournisseur IA est configuré, ou pour trancher une revue :
+```bash
+sudo python3 /opt/globalland/control/review_admin.py approve --actor <nom> --digest <review_digest>
+sudo python3 /opt/globalland/control/review_admin.py approve --site <nom> --digest <review_digest>
+```
+
+### Chaque mois : versements Apify vers la Banque
+
+Apify n'expose aucune API de versement. Deux gestes du fondateur, moins de 5 minutes par mois :
+
+1. **Du 11 au 14 :** dans la console Apify (Development > Insights > Payouts), vérifier et approuver la facture, puis l'enregistrer comme **créance**. Ce n'est pas de l'argent et elle n'est jamais dépensable :
+   ```bash
+   sudo python3 /opt/globalland/control/payouts.py invoice --month 2026-11 --usd 23.40
+   ```
+2. **Après réception (du 21 au 25) :** sur un compte dédié à GlobalLand (Wise ou PayPal, seuil de 20 $ US ; 100 $ US par virement), convertir en CAD, puis enregistrer le montant **réellement reçu** :
+   ```bash
+   sudo python3 /opt/globalland/control/payouts.py received --month 2026-11 \
+     --cad-cents 3180 --method WISE --reference ID_TRANSACTION --evidence /root/releve-2026-11.pdf
+   ```
+
+La Banque reçoit un REVENUE marqué `attestation: FOUNDER` et publie `founder_attested_revenue_cents` à part du revenu vérifié automatiquement. Seules les empreintes de la référence et du relevé sont conservées, jamais leur contenu. La commande refuse un mois sans facture et un taux CAD/USD hors de 1,0 à 2,0 (protection contre les fautes de frappe), sauf avec `--force`. Relancer la même commande ne crédite rien deux fois ; un autre montant pour le même mois est refusé. `payouts.py status` affiche les créances. `bank/status.json` les publie sous `receivables`.
 
 ## Banque réelle
 
