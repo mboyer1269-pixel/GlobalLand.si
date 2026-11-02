@@ -28,7 +28,7 @@ Les nouvelles opérations WORLD incluent l'auteur dans leur digest d'idempotence
 
 ## Validation
 
-Suite finale locale sous Ubuntu 24.04 / Python 3.12 / Node 22.22.3 : **315 tests Python, 310 réussis et 5 optionnels ignorés ; 11 tests Node réussis**. Vérification de diff sans erreur. Les échecs initiaux de préparation (Node absent et CRLF) ont été corrigés avant cette validation.
+Suite locale sous Ubuntu 24.04 / Python 3.12 / Node 22.22.3 : **315 tests Python, 310 réussis et 5 optionnels ignorés**. Les échecs initiaux de préparation (Node absent et CRLF) ont été corrigés avant cette validation. Une régression Node supplémentaire couvre le diagnostic d'un artefact binaire après le premier cycle réel.
 
 Les régressions couvrent les actions au nom d'autrui, les agents désactivés, la liaison auteur/idempotence, les identifiants, les opérations mal formées, les capacités et les images absentes. Les contrôles existants de reprise Git, banque, publications, MCP et arrêt terminal sont conservés. La relecture indépendante a relevé deux incohérences supplémentaires, corrigées avec régressions observées avant correction.
 
