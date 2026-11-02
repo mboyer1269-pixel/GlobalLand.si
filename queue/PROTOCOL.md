@@ -39,6 +39,8 @@ WORLD op : register_agent, create_mission, claim_mission, complete_mission, fail
 
 EXEC : argv est un tableau passé au programme, sans interprétation du shell hôte. L'agent peut choisir `bash -lc` **dans sa boîte**. Source publique readonly, travail en mémoire256Mio, aucun accès à control/state/SSH/Docker/Oria ; réseau direct absent. Les outils disponibles viennent de l'image configurée. FETCH apporte le Web public ; les intégrations authentifiées nécessitent des connecteurs privés. Le code peut lire ses propres résultats et générer les prochaines missions.
 
+Pour le modèle, cwd null ou absent sélectionne la racine /workspace de cette boîte. Les alias exacts chaîne vide, `.`, `./`, `/workspace` et `/workspace/` sont retirés avant la création de la tâche et désignent cette même racine. Un sous-dossier reste relatif, par exemple `products/project`, et doit déjà exister lorsque le programme démarre. Aucun autre chemin absolu n'est converti ; les segments vides, `.`, `..`, `.git` et les antislashs restent refusés. Cette normalisation ne change pas les chemins des outputs et ne crée aucun accès à un dossier de l'hôte.
+
 Les outputs sont des fichiers UTF-8 sous products/, sans liens/chemins traversants, au plus64 fichiers/1Mio chacun/8Mio ensemble. Pour les binaires, utiliser base64 et documenter le décodage. Le wrapper publie une preuve de hash sous products/receipts/. Pas de produits secrets dans GitHub public. Dépendances/outils supplémentaires peuvent être assemblés dans une image dédiée revue, référencée par digest ou ID immuable.
 
 ## Reprise et résultats
@@ -47,6 +49,12 @@ DONE signifie que la requête de l'outil a été traitée, pas que son produit a
 
 Les tâches malformées sont rejetées ; un nom non canonique arrête le cycle. Un ID changé ou rejoué est refusé. Un push raté reprend la publication durable sans lancer à nouveau le programme. Les mises à jour concurrentes sans conflit peuvent être reprises ; un conflit sur le même produit exige rapprochement.
 
+Un programme EXEC qui échoue ne publie aucun fichier partiel. Son résultat conserve le code d'échec, le début de stderr (au plus6000 caractères) et de stdout (au plus1500), dans une sortie totale limitée à8000 caractères. Le contrôle de secrets s'applique avant publication. Le prochain tour reçoit les résultats récents, dont les premiers2000 caractères de cette erreur, pour permettre à l'agent de diagnostiquer et corriger son programme ; une tâche déjà terminée n'est pas rejouée automatiquement.
+
 ## Contrôleur
 
 L'app Grok peut soumettre ces tâches avec ses outils et son accès GitHub. GitHub ne réveille pas cette app à lui seul. `think` utilise Codex/Claude Code uniquement après connexion officielle des abonnements et vérification CLI. Ses décisions sont en outbox durable avant publication, puis accusées réception après le push. Les quotas/authentifications incompatibles arrêtent la réflexion sans bascule API payante.
+
+## Transport interne des décisions de modèle
+
+Les tâches publiées conservent args objet, comme ci-dessus. Le schéma interne des modèles décrit les arguments natifs de chaque action et les champs des opérations WORLD. Les champs optionnels null du transport sont retirés avant de créer la tâche. Pour SPEND seulement, request_entries transporte les clés arbitraires du request, avec object_entries pour les objets imbriqués ; decision_protocol.encode_request est l’encodeur pour les producteurs de cette représentation. Les doublons sont rejetés, les tableaux et valeurs métier null sont conservés. Aucune chaîne de code n’est parsée comme un second document JSON. Les anciennes réponses args_json bien formées restent compatibles ; les réponses malformées s’arrêtent sans correction conjecturale et sans exécution partielle du lot.

@@ -62,4 +62,28 @@ class AutonomousIntegration(unittest.TestCase):
    return original(box,task)
   with patch('tools.fetch_public',return_value=(b'fresh research','https://example.com/',200)),patch('tools.Toolbox.run',run):self.app.cycle('queue')
   self.assertEqual(json.loads(self.app.git('show','HEAD:queue/done/TASK-0202.result.json'))['output'],'consumed')
+ def test_wire_decision_becomes_durable_tasks_and_real_git_results(self):
+  from controller import Controller
+  config={'controller':{'mode':'subscriptions','providers':['codex'],'subscriptions_confirmed':True,'extra_usage_disabled':True,'image':'brain@sha256:'+'1'*64}}
+  (self.install/'control/config.json').write_text(json.dumps(config))
+  wire={'summary':'Start evidence-backed work','actions':[
+   {'agent':'DIRECTOR','action':'WORLD','args':{'op':'create_mission','mission_id':'WIRE-PRODUCT','goal':'Build a useful global product','agent_id':None,'parent_id':None,'priority':None}},
+   {'agent':'RESEARCHER','action':'FETCH','args':{'url':'https://example.com/','output':'products/proof.txt','encoding':'utf-8'}}]}
+  def auth(controller,provider):controller.verified[provider]=True
+  with patch.object(Controller,'check_provider',auth),patch('controller.run_brain',return_value=(0,json.dumps(wire).encode())):
+   self.app.cycle('think')
+  tracked=self.app.git('ls-tree','-r','--name-only','HEAD').decode().splitlines()
+  tasks=[p for p in tracked if p.startswith('queue/inbox/TASK-')]
+  self.assertEqual(len(tasks),2)
+  for task in tasks:
+   value=json.loads(self.app.git('show','HEAD:'+task));self.assertIsInstance(value['args'],dict);self.assertNotIn('args_json',value)
+  with patch('tools.fetch_public',return_value=(b'public fixture evidence','https://example.com/',200)):self.app.cycle('queue')
+  self.assertEqual(self.app.git('show','HEAD:products/proof.txt'),b'public fixture evidence')
+  for task in tasks:
+   name=pathlib.PurePosixPath(task).stem
+   self.assertEqual(json.loads(self.app.git('show','HEAD:queue/done/'+name+'.result.json'))['status'],'DONE')
+  w,b,_=self.app.services();self.assertTrue(any(m['mission_id']=='WIRE-PRODUCT' for m in w.snapshot()['missions']))
+  self.assertEqual(b.snapshot()['state'],'UNFUNDED')
+  outboxes=list((self.install/'state/controller').glob('THINK-*.json'));self.assertEqual(len(outboxes),1)
+  self.assertTrue(json.loads(outboxes[0].read_text())['published'])
 if __name__=='__main__':unittest.main()

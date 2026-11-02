@@ -5,9 +5,9 @@ from controller import Controller
 from supervisor import atomic_json
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--image',required=True);p.add_argument('--providers',default='codex,claude');p.add_argument('--confirm-extra-usage-disabled',action='store_true');args=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--image',required=True);p.add_argument('--providers',default='codex,claude',help='Comma-separated codex,claude,cursor; only logged-in providers should be selected');p.add_argument('--confirm-extra-usage-disabled',action='store_true');args=p.parse_args()
  if os.geteuid()!=0:raise ValueError('administrator required')
- if not args.confirm_extra_usage_disabled:raise ValueError('First disable paid extra usage/API fallback in both accounts; do not attest without checking')
+ if not args.confirm_extra_usage_disabled:raise ValueError('First disable paid extra usage/API fallback in every selected account; do not attest without checking')
  root=pathlib.Path('/opt/globalland');path=root/'control'/'config.json';config=json.loads(path.read_text()) if path.exists() else {}
  config['controller']={'mode':'subscriptions','providers':args.providers.split(','),'image':args.image,'subscriptions_confirmed':True,'extra_usage_disabled':True}
  controller=Controller(root,None,None,config)
