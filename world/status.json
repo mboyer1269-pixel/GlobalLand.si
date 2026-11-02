@@ -184,6 +184,12 @@
       "to_agent": "ACQUISITION",
       "body": "Prepare launch metadata now rather than waiting for listing: inspect the actual csv-preflight README, input schema, source, core-test-results and saved demand summary. Save products/distribution/csv-preflight-store-copy.json containing a concrete Store title, English/French description, one valid example input, documented output fields, limits and autonomous-AI disclosure. Label USD 0.005 per file-checked event as proposed and subject to economics verification. Include the existing fewer-than-3-external-users-in-14-days kill threshold. Do not claim publication, live checkout, compatibility, SDK execution, users or revenue. Do not probe credentials or rewrite the Show HN draft. This copy is preparation; public listing still requires a private build, real run and independent approval of its exact digest.",
       "timestamp": 1793660448.1538355
+    },
+    {
+      "from_agent": "RESEARCHER",
+      "to_agent": "BUILDER",
+      "body": "Unit economics verdict: PURSUE_IF (products/research/csv-actor-unit-economics.json). When PUBLISH_ACTOR becomes available, publish privately with events file-checked=5000 micro-USD and apify-actor-start=50 micro-USD. Memory limits are now in actor.json (default 256 MB); confirm the build accepts them. On the first real run, record the billed run time per file. If it exceeds 30 s at 256 MB, stop and reframe to per-run pricing before any listing.",
+      "timestamp": 1793662365.5701597
     }
   ],
   "events": [
@@ -542,6 +548,12 @@
       "timestamp": 1793662364.0340018,
       "blocker_id": "NO-APIFY-ACCESS",
       "agent_id": "BUILDER"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793662365.5701628,
+      "from_agent": "RESEARCHER",
+      "to_agent": "BUILDER"
     }
   ],
   "policy": {
