@@ -43,7 +43,7 @@ Le principe est simple : les **GLC** organisent le travail interne, les **CAD r�
 | **Services externes** | Apify et Cloudflare sans configuration ni credentials ; aucun adaptateur financier installé. Le code de publication ne constitue pas un accès à ces services. |
 | **Validation locale** | **315 tests Python : 310 réussis, 5 optionnels ignorés ; 12 tests Node réussis** (8 runtime, 4 executor). Les tests optionnels ignorés ne sont pas comptés comme réussis. |
 | **Docker réel** | Smoke test VPS réussi : fichier produit en conteneur, accès à l’état privé et au socket Docker absent, nettoyage du conteneur confirmé ; trésorerie de production préservée. Ce contrôle est distinct de la suite locale. |
-| **Branches** | Les PR [#3](https://github.com/mboyer1269-pixel/GlobalLand.si/pull/3), [#5](https://github.com/mboyer1269-pixel/GlobalLand.si/pull/5) et [#9](https://github.com/mboyer1269-pixel/GlobalLand.si/pull/9) sont empilées et non fusionnées. Une release installée peut précéder sa fusion dans `main`. |
+| **Intégration** | Correctifs et documentation intégrés dans `main` par les PR [#3](https://github.com/mboyer1269-pixel/GlobalLand.si/pull/3), [#5](https://github.com/mboyer1269-pixel/GlobalLand.si/pull/5), puis [#9](https://github.com/mboyer1269-pixel/GlobalLand.si/pull/9). Le contrôle installé sur le VPS reste une release revue distincte ; une fusion Git ne le met pas à jour. |
 
 > [!IMPORTANT]
 > Une connexion, un cron, un verdict `GO` ou un statut `DONE` ne prouvent ni l’exécution complète d’un cycle ni une vente. Les projections [`world/controller.json`](world/controller.json), [`bank/status.json`](bank/status.json) et `world/blockers.json` lorsqu’il est publié doivent être lues avec leurs dates et les résultats publiés.
@@ -178,6 +178,7 @@ Ne pas supprimer l’état ou les journaux pour débloquer une reprise. L’inst
 | Comprendre les modules et la reprise durable | [CODE.md](CODE.md) |
 | Vérifier les frontières, secrets et publications | [SECURITY.md](SECURITY.md) |
 | Connecter les abonnements et services | [Intégrations](docs/INTEGRATIONS.md) |
+| Raccorder un compte réel et vérifier les fonds | [Banque : étapes et contrat](docs/BANQUE-RACCORDEMENT.md) |
 | Comprendre les résidents et soumettre du travail | [AGENTS.md](AGENTS.md) · [Protocole](queue/PROTOCOL.md) · [Guide Grok](docs/GROK.md) |
 | Suivre le diagnostic et ses preuves | [Diagnostic du 2 novembre](docs/DIAGNOSTIC-AUTONOMIE-2026-11-02.md) · [Preuves de reprise](docs/verification/2026-11-02-recovery.md) · [Vérifications](docs/verification/) |
 | Retrouver les choix et étapes du projet | [Historique](docs/HISTORIQUE.md) · [Fiches de décision](agents/playbooks/) |
