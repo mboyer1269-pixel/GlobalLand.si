@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "tallyrake/youtube-autocomplete-scraper 65 539 PAY_PER_EVENT {\"actorChargeEvents\": {\"apify-default-dataset-item\": {\"eventTitle\": \"result\", \"eventDescription\": \"Single result in the  | YouTube search suggestions as CSV/JSON rows: seed, query sent, suggestion, rank, expansion\nnerolabs/bulk-ocr-image-pdf-to-text 50 75 PAY_PER_EVENT {\"actorChargeEvents\": {\"page-ocr\": {\"eventTitle\": \"OCR page\", \"eventDescription\": \"One page (an image counts as one page | OCR every image and scanned PDF linked in an Apify dataset, CSV, Excel or Google Sheet, ke\nhumble-echidna/dataset-transform 38 56 PAY_PER_EVENT {\"actorChargeEvents\": {\"apify-actor-start\": {\"eventTitle\": \"Actor Start\", \"eventDescription\": \"Charged when the Actor st | Clean, deduplicate and transform data: an Apify dataset, pasted JSON or a CSV, JSON, JSONL\nchris_elder/bulk-file-downloader 35 49 PAY_PER_EVENT {\"actorChargeEvents\": {\"apify-actor-start\": {\"eventTitle\": \"Actor Start\", \"eventDescription\": \"Charged when the Actor st | $2 per 1,000 files; failed downloads are free. Download all images and files (PDFs, docs, \nnerolabs/bulk-pagespeed-checker 32 59 PAY_PER_EVENT {\"actorChargeEvents\": {\"page-audited\": {\"eventTitle\": \"Page test\", \"eventDescription\": \"One page tested on one device (m | Google PageSpeed Insights (Lighthouse) scores, Core Web Vitals and top speed fixes for eve\nafanasenko/instagram-comments-scraper 28 82 PAY_PER_EVENT {\"actorChargeEvents\": {\"COMMENT_EXPORTED\": {\"eventTitle\": \"Comment\", \"eventDescription\": \"Charged for each comment retur | Instagram comments scraper: export Instagram comments to CSV, JSON or Excel from any publi\nb2bsearch/bulk-people-enrichment 24 43 PAY_PER_EVENT {\"actorChargeEvents\": {\"apify-actor-start\": {\"eventTitle\": \"Actor Start\", \"eventDescription\": \"Charged when the Actor st | Bulk LinkedIn profile scraper alternative and email enrichment from a CSV: upload emails, \nnerolabs/bulk-file-downloader 21 42 PAY_PER_EVENT {\"actorChargeEvents\": {\"file-downloaded\": {\"eventTitle\": \"File\", \"eventDescription\": \"One file downloaded and stored wit | Downloads every image or file linked in a dataset, CSV, Excel or Google Sheet and stores e\nsaliga/bulk-http-requests 16 21 PAY_PER_EVENT {\"actorChargeEvents\": {\"http-request\": {\"eventTitle\": \"HTTP request\", \"eventDescription\": \"One request from your input.  | Send bulk HTTP requests: call any API once for every row of a CSV, JSON list or Apify data\namr-mando/email-verifier 15 294 PAY_PER_EVENT {\"actorChargeEvents\": {\"apify-default-dataset-item\": {\"eventTitle\": \"result\", \"eventDescription\": \"per valided email\", \" | $1.01/1000 - Validate your emails with 100% handshake accuracy  📧 Bulk CSV & output with o\nantonio_cesar/whatsapp-scraper-profile-bulk 14 511 PAY_PER_EVENT {\"actorChargeEvents\": {\"profile-search\": {\"eventTitle\": \"profile\", \"eventDescription\": \"Single profile in the default da | Whatsapp Bulk Scraper Profile send your spreadsheet or CSV file and scrape\nsaliga/dataset-merge-dedupe 12 18 PAY_PER_EVENT {\"actorChargeEvents\": {\"apify-actor-start\": {\"eventTitle\": \"Actor Start\", \"eventDescription\": \"Charged when the Actor st | Merge Apify datasets, CSV, JSON and Excel files or Google Sheets into one table. Clean fie\ngochujang/excel-extractor 11 26 PAY_PER_EVENT {\"actorChargeEvents\": {\"apify-actor-start\": {\"eventTitle\": \"Actor Start\", \"eventDescription\": \"Charged when the Actor st | Read Excel file data from a public URL or base64 content and convert Excel to JSON. Conver\nthodor/tiktok-comments-scraper 9 728 PAY_PER_EVENT {\"actorChargeEvents\": {\"apify-actor-start\": {\"eventTitle\": \"Actor Start\", \"eventDescription\": \"Charged when the Actor st | Export TikTok comments to CSV, Excel, or JSON from any video URL. No comment cap, handles \nthecfmarketing/csv-xlsx-dataset-merger-pattern-splitter 9 43 PAY_PER_EVENT {\"actorChargeEvents\": {\"apify-actor-start\": {\"eventTitle\": \"Actor Start\", \"eventDescription\": \"Charged when the Actor st | High-speed tool to merge multiple CSV & Excel files or split large datasets into smaller c\n\n",
+  "artifacts": [
+    "products/research/apify-csv-demand-summary.json",
+    "products/receipts/TASK-179365860215.json"
+  ],
+  "request": {
+    "id": "TASK-179365860215",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-02T22:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nd=json.load(open('/workspace/products/research/apify-store-csv-search.json'))\nitems=d.get('data',{}).get('items',[])\nout=[]\nfor i in items:\n  s=i.get('stats') or {}\n  p=i.get('currentPricingInfo') or {}\n  out.append({'name':i.get('username','')+'/'+i.get('name',''),'title':i.get('title'),'users_total':s.get('totalUsers'),'users_30d':s.get('totalUsers30Days') or s.get('monthlyUsers'),'runs':s.get('totalRuns'),'pricing_model':p.get('pricingModel'),'price':p.get('pricePerUnitUsd') or p.get('pricingPerEvent'),'desc':(i.get('description') or '')[:160]})\nout.sort(key=lambda x:-(x['users_30d'] or 0))\nres={'source':'https://api.apify.com/v2/store?search=csv&limit=30','fetched_task':'TASK-179365860212','total':d.get('data',{}).get('total'),'items':out,'note':'Store stats are public listing data, untrusted; users are not revenue.'}\nopen('/workspace/products/research/apify-csv-demand-summary.json','w').write(json.dumps(res,indent=1))\nfor o in out[:15]: print(o['name'],o['users_30d'],o['users_total'],o['pricing_model'],json.dumps(o['price'])[:120],'|',o['desc'][:90])"
+      ],
+      "outputs": [
+        "products/research/apify-csv-demand-summary.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793658602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179365860215",
+  "input_sha256": "4d6a8e08b9f9ba2eabf521bf4e67ad81fe48f28214a4a7a26f96fc13e0d3acc3"
+}

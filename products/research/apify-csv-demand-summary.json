@@ -1,0 +1,1213 @@
+{
+ "source": "https://api.apify.com/v2/store?search=csv&limit=30",
+ "fetched_task": "TASK-179365860212",
+ "total": 21022,
+ "items": [
+  {
+   "name": "tallyrake/youtube-autocomplete-scraper",
+   "title": "YouTube Autocomplete Keyword Scraper: a-z, questions, CSV/JSON",
+   "users_total": 539,
+   "users_30d": 65,
+   "runs": 966,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-default-dataset-item": {
+      "eventTitle": "result",
+      "eventDescription": "Single result in the default dataset.",
+      "isOneTimeEvent": false,
+      "eventPriceUsd": 0.00025,
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "YouTube search suggestions as CSV/JSON rows: seed, query sent, suggestion, rank, expansion (a-z, question words, prepositions; comparisons and numbers optional)"
+  },
+  {
+   "name": "nerolabs/bulk-ocr-image-pdf-to-text",
+   "title": "Bulk OCR: Image & Scanned PDF to Text from CSV or Google Sheet",
+   "users_total": 75,
+   "users_30d": 50,
+   "runs": 268,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "page-ocr": {
+      "eventTitle": "OCR page",
+      "eventDescription": "One page (an image counts as one page) read by OCR that produced at least one word. Blank pages are free.",
+      "isOneTimeEvent": false,
+      "isPrimaryEvent": true,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.005
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0045
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.004
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0035
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0035
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0035
+       }
+      }
+     },
+     "page-text-layer": {
+      "eventTitle": "Text-layer page",
+      "eventDescription": "One PDF page copied exactly from its own text layer instead of being recognised.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.001
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0009
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0008
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0007
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0007
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0007
+       }
+      }
+     },
+     "file-export": {
+      "eventTitle": "File export",
+      "eventDescription": "One downloadable CSV or Excel file of the results.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.01
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.009
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.008
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.007
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.007
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.007
+       }
+      }
+     },
+     "webhook-delivery": {
+      "eventTitle": "Webhook delivery",
+      "eventDescription": "The run summary delivered to your webhook, charged only on a 2xx response.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.02
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.018
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.016
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.014
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.014
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.014
+       }
+      }
+     },
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05
+     }
+    }
+   },
+   "desc": "OCR every image and scanned PDF linked in an Apify dataset, CSV, Excel or Google Sheet, keeping your columns. Inputs: datasetId or fileUrl or fileUrls, urlField"
+  },
+  {
+   "name": "humble-echidna/dataset-transform",
+   "title": "Dataset Transformer: Filter, Dedupe, JSON to CSV",
+   "users_total": 56,
+   "users_30d": 38,
+   "runs": 390,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05
+     },
+     "apify-default-dataset-item": {
+      "eventTitle": "Row",
+      "eventDescription": "One output row written to your dataset after filters and dedupe. Rows filtered out or removed as duplicates are not charged; the optional file export is free.",
+      "isOneTimeEvent": false,
+      "isPrimaryEvent": true,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.001
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0009
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0008
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0007
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0007
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0007
+       }
+      }
+     }
+    }
+   },
+   "desc": "Clean, deduplicate and transform data: an Apify dataset, pasted JSON or a CSV, JSON, JSONL or Excel XLSX file URL. Filter rows, remove duplicates by any field, "
+  },
+  {
+   "name": "chris_elder/bulk-file-downloader",
+   "title": "Bulk Image & File Downloader: URLs, Pages or CSV to ZIP",
+   "users_total": 49,
+   "users_30d": 35,
+   "runs": 430,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "eventPriceUsd": 0.0005,
+      "isOneTimeEvent": true
+     },
+     "file-downloaded": {
+      "eventTitle": "File downloaded",
+      "eventDescription": "One file successfully saved to the Key-Value store (and included in the ZIP when enabled). Failed, blocked and oversize downloads are free.",
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.002
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.002
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0016
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0012
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0012
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0012
+       }
+      },
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "$2 per 1,000 files; failed downloads are free. Download all images and files (PDFs, docs, media) from web pages, URL lists, CSV files, Google Sheets (e.g. Shopi"
+  },
+  {
+   "name": "nerolabs/bulk-pagespeed-checker",
+   "title": "Bulk PageSpeed & Lighthouse Checker: Core Web Vitals from CSV",
+   "users_total": 59,
+   "users_30d": 32,
+   "runs": 197,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "page-audited": {
+      "eventTitle": "Page test",
+      "eventDescription": "One page tested on one device (mobile or desktop) for which Google PageSpeed Insights returned a full Lighthouse report. A page Google could not load, a value that is not a web address, a rate limit and a timeout are not charged. Testing both devices is two page tests.",
+      "isOneTimeEvent": false,
+      "isPrimaryEvent": true,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.005
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0045
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.004
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0035
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0035
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0035
+       }
+      }
+     },
+     "file-export": {
+      "eventTitle": "File export",
+      "eventDescription": "One results file written as CSV or Excel, only when an export was requested.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.01
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.009
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.008
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.007
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.007
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.007
+       }
+      }
+     },
+     "webhook-delivery": {
+      "eventTitle": "Webhook delivery",
+      "eventDescription": "The run summary delivered to your own webhook URL, charged only on a confirmed 2xx response.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.02
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.018
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.016
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.014
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.014
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.014
+       }
+      }
+     },
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05
+     }
+    }
+   },
+   "desc": "Google PageSpeed Insights (Lighthouse) scores, Core Web Vitals and top speed fixes for every URL in a plain urls list, Apify dataset, CSV or Google Sheet, keepi"
+  },
+  {
+   "name": "afanasenko/instagram-comments-scraper",
+   "title": "Instagram Comments Scraper with Replies \u2014 CSV Export, No Login",
+   "users_total": 82,
+   "users_30d": 28,
+   "runs": 1056,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "COMMENT_EXPORTED": {
+      "eventTitle": "Comment",
+      "eventDescription": "Charged for each comment returned; a reply is a comment and is charged the same. Duplicates are dropped before the charge, and a post whose comments are switched off costs nothing. Per 1,000 comments: $2.60 on Free, $2.34 on Bronze, $2.08 on Silver, and $1.82 on Gold, Platinum and Diamond.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.0026
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.00234
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.00208
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.00182
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.00182
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.00182
+       }
+      },
+      "isPrimaryEvent": true
+     },
+     "COMMENT_LIKER": {
+      "eventTitle": "Comment liker",
+      "eventDescription": "Charged for each account returned as having liked a comment. Off by default; posts with comment likes switched off are detected before any lookup and cost nothing. Per 1,000 likers: $0.43 on Free, $0.39 on Bronze, $0.34 on Silver, and $0.30 on Gold, Platinum and Diamond.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.00043
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.00039
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.00034
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0003
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0003
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0003
+       }
+      }
+     }
+    }
+   },
+   "desc": "Instagram comments scraper: export Instagram comments to CSV, JSON or Excel from any public post or reel \u2014 comment text, author, likes, reply threads, @mentions"
+  },
+  {
+   "name": "b2bsearch/bulk-people-enrichment",
+   "title": "Bulk LinkedIn Profile Scraper & Email Enrichment \u2014 CSV, 50k",
+   "users_total": 43,
+   "users_30d": 24,
+   "runs": 1084,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "eventPriceUsd": 0.0002,
+      "isOneTimeEvent": true
+     },
+     "row-found": {
+      "eventTitle": "Row resolved (summary)",
+      "eventDescription": "A CSV row resolved to a profile; compact row delivered. Refusals are free.",
+      "eventPriceUsd": 0.0032,
+      "isOneTimeEvent": false,
+      "isPrimaryEvent": true
+     },
+     "row-found-full": {
+      "eventTitle": "Row resolved (full profile)",
+      "eventDescription": "A CSV row resolved to a profile; complete profile document delivered.",
+      "eventPriceUsd": 0.008,
+      "isOneTimeEvent": false
+     }
+    }
+   },
+   "desc": "Bulk LinkedIn profile scraper alternative and email enrichment from a CSV: upload emails, LinkedIn profile URLs or names + domains, get enriched profiles back a"
+  },
+  {
+   "name": "nerolabs/bulk-file-downloader",
+   "title": "Bulk Image Downloader: Files from CSV, Google Sheet or Dataset",
+   "users_total": 42,
+   "users_30d": 21,
+   "runs": 198,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "file-downloaded": {
+      "eventTitle": "File",
+      "eventDescription": "One file downloaded and stored with a public link. Broken links, web pages, blocked hosts, filtered types and repeats of a link already downloaded are free.",
+      "isOneTimeEvent": false,
+      "isPrimaryEvent": true,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.004
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0036
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0032
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0028
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0028
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0028
+       }
+      }
+     },
+     "data-10mb": {
+      "eventTitle": "10 MB of data",
+      "eventDescription": "Each full 10 MB of a stored file, and each 10 MB (rounded up) of a ZIP archive. Files under 10 MB pay only the per-file price.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.003
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0027
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0024
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0021
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0021
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0021
+       }
+      }
+     },
+     "file-export": {
+      "eventTitle": "File export",
+      "eventDescription": "One downloadable CSV or Excel file of the results table.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.01
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.009
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.008
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.007
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.007
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.007
+       }
+      }
+     },
+     "webhook-delivery": {
+      "eventTitle": "Webhook delivery",
+      "eventDescription": "The run summary delivered to your webhook, charged only on a 2xx response.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.02
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.018
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.016
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.014
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.014
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.014
+       }
+      }
+     },
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05
+     }
+    }
+   },
+   "desc": "Downloads every image or file linked in a dataset, CSV, Excel or Google Sheet and stores each with a public link, keeping your columns. Inputs: datasetId or fil"
+  },
+  {
+   "name": "saliga/bulk-http-requests",
+   "title": "Bulk HTTP Requests \u2014 API Calls for Clay, n8n, CSV & Datasets",
+   "users_total": 21,
+   "users_30d": 16,
+   "runs": 201,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "http-request": {
+      "eventTitle": "HTTP request",
+      "eventDescription": "One request from your input. Retries are free.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.001
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0009
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0008
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0007
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0007
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0007
+       }
+      },
+      "isPrimaryEvent": true
+     },
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05
+     }
+    }
+   },
+   "desc": "Send bulk HTTP requests: call any API once for every row of a CSV, JSON list or Apify dataset. Write the request once with {{column}} placeholders. Up to 200 pa"
+  },
+  {
+   "name": "amr-mando/email-verifier",
+   "title": "\u2b50 Email Verifier & Validator + CSV Input (ZeroBounce Alt) \u2705",
+   "users_total": 294,
+   "users_30d": 15,
+   "runs": 4018,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-default-dataset-item": {
+      "eventTitle": "result",
+      "eventDescription": "per valided email",
+      "isOneTimeEvent": false,
+      "eventPriceUsd": 0.001,
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "$1.01/1000 - Validate your emails with 100% handshake accuracy  \ud83d\udce7 Bulk CSV & output with original columns without manual matching \u2705"
+  },
+  {
+   "name": "antonio_cesar/whatsapp-scraper-profile-bulk",
+   "title": "Whatsapp Scraper Profile Bulk, CSV, SpreadSheet or Input file",
+   "users_total": 511,
+   "users_30d": 14,
+   "runs": 100570,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "profile-search": {
+      "eventTitle": "profile",
+      "eventDescription": "Single profile in the default dataset.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.009
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.008
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.006
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.05
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.05
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.05
+       }
+      },
+      "isPrimaryEvent": true
+     },
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 0.01
+     },
+     "whatsapp-business-addon": {
+      "eventTitle": "whatsapp business found addon",
+      "eventDescription": "Charged only when a WhatsApp Business account is found. A profile photo is not required.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.005
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.004
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.003
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.002
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.002
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.002
+       }
+      }
+     }
+    }
+   },
+   "desc": "Whatsapp Bulk Scraper Profile send your spreadsheet or CSV file and scrape"
+  },
+  {
+   "name": "saliga/dataset-merge-dedupe",
+   "title": "Dataset Merge & Dedup Datasets \u2014 Filter, Join CSV & Excel",
+   "users_total": 18,
+   "users_30d": 12,
+   "runs": 310,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05
+     },
+     "row": {
+      "eventTitle": "Output row",
+      "eventDescription": "One row written to the output table. Filtered rows, duplicates and file exports are free.",
+      "isOneTimeEvent": false,
+      "eventPriceUsd": 0.0005,
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Merge Apify datasets, CSV, JSON and Excel files or Google Sheets into one table. Clean fields, normalise URLs, extract domains, filter, remove duplicates and jo"
+  },
+  {
+   "name": "gochujang/excel-extractor",
+   "title": "Excel to JSON - CSV to JSON & XLSX File Reader",
+   "users_total": 26,
+   "users_30d": 11,
+   "runs": 194,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 0.001
+     },
+     "row-extracted": {
+      "eventTitle": "Row Extracted",
+      "eventDescription": "Charged per row extracted from Excel or CSV file.",
+      "isOneTimeEvent": false,
+      "eventPriceUsd": 0.0001,
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Read Excel file data from a public URL or base64 content and convert Excel to JSON. Convert CSV to JSON too; extract XLSX sheet names, column headers and rows f"
+  },
+  {
+   "name": "thodor/tiktok-comments-scraper",
+   "title": "TikTok Comment Exporter (CSV/Excel/API)",
+   "users_total": 728,
+   "users_30d": 9,
+   "runs": 2017,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05
+     },
+     "comment": {
+      "eventTitle": "Comment scraped",
+      "eventDescription": "Per unique comment or reply",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.0005
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.00045
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0004
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.00035
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.00035
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.00035
+       }
+      },
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Export TikTok comments to CSV, Excel, or JSON from any video URL. No comment cap, handles 100k+ comments, replies included. Use it as a TikTok comment scraper, "
+  },
+  {
+   "name": "thecfmarketing/csv-xlsx-dataset-merger-pattern-splitter",
+   "title": "CSV & Excel Dataset Merger / Splitter [Bulk Optimizer]",
+   "users_total": 43,
+   "users_30d": 9,
+   "runs": 163,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventTieredPricingUsd": {
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.09
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.08
+       },
+       "FREE": {
+        "tieredEventPriceUsd": 0.1
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.07
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.07
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.07
+       }
+      }
+     },
+     "apify-default-dataset-item": {
+      "eventTitle": "Processed Dataset Part",
+      "eventDescription": "Cleaned, deduplicated, and pattern-split output file generated.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0027
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0024
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.002
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.002
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.002
+       },
+       "FREE": {
+        "tieredEventPriceUsd": 0.003
+       }
+      },
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "High-speed tool to merge multiple CSV & Excel files or split large datasets into smaller chunks by rows, file size, or specific patterns. Clean duplicates, opti"
+  },
+  {
+   "name": "monkey.d.scraping/telegram-channel-scraper",
+   "title": "Telegram Channel Scraper \u2014 History & CSV Export",
+   "users_total": 35,
+   "users_30d": 9,
+   "runs": 12976,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "telegram-post": {
+      "eventTitle": "Telegram post returned",
+      "eventDescription": "One public Telegram post written to the dataset. Channel details and starting the run are free.",
+      "isOneTimeEvent": false,
+      "eventPriceUsd": 0.0002,
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Export public Telegram channel posts and accessible history to CSV, Excel or JSON. Filter by date; collect text, views and media URLs. $0.20/1K posts, no start "
+  },
+  {
+   "name": "memo23/google-maps-list-scraper",
+   "title": "Google Maps List Scraper \u2014 Shared Lists to CSV, Phones, Emails",
+   "users_total": 51,
+   "users_30d": 7,
+   "runs": 296,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 0.005
+     },
+     "apify-default-dataset-item": {
+      "eventTitle": "Place exported",
+      "eventDescription": "One place row saved to the default dataset (includes reviews and emails when enabled).",
+      "isOneTimeEvent": false,
+      "isPrimaryEvent": true,
+      "eventPriceUsd": 0.001
+     },
+     "additional-data": {
+      "eventTitle": "Contact email found",
+      "eventDescription": "Charged when a contact email is discovered for a place from its own website (opt-in via includeWebsiteEmails). Never charged when no email is found.",
+      "isOneTimeEvent": false,
+      "eventPriceUsd": 0.001
+     }
+    }
+   },
+   "desc": "Google Maps shared list scraper (maps.app.goo.gl): export saved places to CSV with name, note, phone, website, rating, hours, photos, and filters. Optional newe"
+  },
+  {
+   "name": "whoareyouanas/linkedin-profile-actor",
+   "title": "LinkedIn Profile Scraper - No Login, JSON & CSV",
+   "users_total": 47,
+   "users_30d": 6,
+   "runs": 1258,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05
+     },
+     "apify-default-dataset-item": {
+      "eventTitle": "result",
+      "eventDescription": "Single result in the default dataset.",
+      "isOneTimeEvent": false,
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Scrape public LinkedIn profiles from URLs or usernames. Extract names, headlines, company, experience, education and skills to JSON or CSV. No account cookies r"
+  },
+  {
+   "name": "crawlplant/tennis-match-dataset",
+   "title": "ATP & WTA Tennis Match Dataset - Sackmann CSV Format",
+   "users_total": 24,
+   "users_30d": 5,
+   "runs": 499,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05,
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event)."
+     },
+     "match-row": {
+      "eventTitle": "Match",
+      "eventDescription": "One played singles match in Jeff Sackmann's atp_matches / wta_matches columns, plus match id, tour and both players' pre-match Elo.",
+      "isOneTimeEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.001
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0009
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0008
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0007
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0007
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0007
+       }
+      },
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Whole seasons of ATP and WTA singles results in the columns of Jeff Sackmann's tennis_atp / tennis_wta CSV files, from 1990 to this week: winner and loser, rank"
+  },
+  {
+   "name": "tidydata/merge-dedupe-datasets",
+   "title": "Merge, Filter, Deduplicate & Transform Datasets \u2014 CSV, Excel",
+   "users_total": 12,
+   "users_30d": 5,
+   "runs": 278,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "row": {
+      "eventTitle": "Row in the result",
+      "eventDescription": "One row in the merged, cleaned result. Rows removed as duplicates or by filters are free.",
+      "isPrimaryEvent": true,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.00025
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.000225
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0002125
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.0002
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0002
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.0002
+       }
+      }
+     },
+     "file": {
+      "eventTitle": "File created",
+      "eventDescription": "One CSV, Excel or JSON export file.",
+      "isPrimaryEvent": false,
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.005
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.0045
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.00425
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.004
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.004
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.004
+       }
+      }
+     }
+    }
+   },
+   "desc": "Filter, merge and deduplicate Apify datasets, CSV, Excel, JSON and Google Sheets: keep only rows matching your conditions, remove or merge duplicates (smart URL"
+  },
+  {
+   "name": "memo23/bumeran-job-scraper",
+   "title": "Bumeran Job Scraper \u2014 Argentina Jobs to JSON/CSV",
+   "users_total": 27,
+   "users_30d": 4,
+   "runs": 314,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 0.0005
+     },
+     "job": {
+      "eventTitle": "Job listing",
+      "eventDescription": "One job-listing row \u2014 title, company, location, work mode, area, dates, vacancies and more.",
+      "isOneTimeEvent": false,
+      "isPrimaryEvent": true,
+      "eventPriceUsd": 0.0015
+     }
+    }
+   },
+   "desc": "Scrape Bumeran Argentina job listings by keyword, province or area \u2014 or paste search / job URLs. One flat row per job: title, company, location, work mode, area"
+  },
+  {
+   "name": "logiover/jobicy-remote-jobs-scraper",
+   "title": "Jobicy Remote Jobs Scraper - Jobs to CSV/JSON",
+   "users_total": 27,
+   "users_30d": 4,
+   "runs": 318,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 5e-05
+     },
+     "apify-default-dataset-item": {
+      "eventTitle": "result",
+      "eventDescription": "Single result in the default dataset.",
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.0045
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.004
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0035
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.003
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.003
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.003
+       }
+      },
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Scrape Jobicy remote jobs without login via this unofficial Jobicy API alternative. Export remote job listings to CSV or JSON; filter by industry & level."
+  },
+  {
+   "name": "taroyamada/apple-podcast-scraper",
+   "title": "Apple Podcasts Scraper \u2014 Search Shows & Episodes to CSV",
+   "users_total": 32,
+   "users_30d": 3,
+   "runs": 57564,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-default-dataset-item": {
+      "eventTitle": "result",
+      "eventDescription": "Single result in the default dataset.",
+      "isOneTimeEvent": false,
+      "eventPriceUsd": 0.0025,
+      "isPrimaryEvent": true
+     },
+     "apify-actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+      "isOneTimeEvent": true,
+      "eventPriceUsd": 0.005
+     }
+    }
+   },
+   "desc": "Apple Podcasts scraper: keyword search, show metadata, RSS feed URL and episodes \u2192 CSV/JSON. No API key. Open Input \u2192 leave defaults \u2192 Start (~$0.0125): https:/"
+  },
+  {
+   "name": "eloquent_mountain/json-to-csv-converter",
+   "title": "JSON to CSV Converter",
+   "users_total": 41,
+   "users_30d": 2,
+   "runs": 740,
+   "pricing_model": "FREE",
+   "price": null,
+   "desc": "JSON to CSV Converter.\n\nEffortlessly transform JSON data into CSV with our Apify actor. Handle nested structures, expand lists into rows, and customize separato"
+  },
+  {
+   "name": "datamule/socrata-soda-extractor",
+   "title": "Socrata Open Data Scraper: SODA datasets to CSV/JSON",
+   "users_total": 1,
+   "users_30d": 1,
+   "runs": 130,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "dataset-item": {
+      "eventTitle": "Dataset item",
+      "eventDescription": "Charged per record returned (row, catalog entry, or metadata record).",
+      "eventTieredPricingUsd": {
+       "FREE": {
+        "tieredEventPriceUsd": 0.0005
+       },
+       "BRONZE": {
+        "tieredEventPriceUsd": 0.00045
+       },
+       "SILVER": {
+        "tieredEventPriceUsd": 0.0004
+       },
+       "GOLD": {
+        "tieredEventPriceUsd": 0.00035
+       },
+       "PLATINUM": {
+        "tieredEventPriceUsd": 0.0003
+       },
+       "DIAMOND": {
+        "tieredEventPriceUsd": 0.00025
+       }
+      },
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Export rows from any Socrata open-data portal (NYC, Chicago, WA, SF) by domain + dataset ID, with optional SoQL filters. Also lists a portal's datasets or a dat"
+  },
+  {
+   "name": "newbs/RemoteOk-Premium-Job-Scraper",
+   "title": "RemoteOK Job Scraper | Salaries, JSON & CSV",
+   "users_total": 103,
+   "users_30d": 1,
+   "runs": 1465,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-default-dataset-item": {
+      "eventTitle": "Job result",
+      "eventDescription": "One RemoteOK job saved to the default dataset. Empty searches and source-error diagnostics do not create billable result rows.",
+      "eventPriceUsd": 0.001,
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Scrape remote jobs from RemoteOK with companies, locations, salaries, descriptions and application links. Filter by keyword, location or salary. Export JSON, CS"
+  },
+  {
+   "name": "motivational_nickel/dataset-cleaner-and-formatter",
+   "title": "Fast Dataset Cleaner & CSV Formatter",
+   "users_total": 21,
+   "users_30d": null,
+   "runs": 361,
+   "pricing_model": "PAY_PER_EVENT",
+   "price": {
+    "actorChargeEvents": {
+     "apify-default-dataset-item": {
+      "eventTitle": "result",
+      "eventDescription": "Single result in the default dataset.",
+      "isOneTimeEvent": false,
+      "eventPriceUsd": 0.00075,
+      "isPrimaryEvent": true
+     }
+    }
+   },
+   "desc": "Fast dataset cleaning for CSV and JSON files. Automatically removes duplicates, trims whitespace, fixes capitalization, and normalizes fields. Works with Apify "
+  }
+ ],
+ "note": "Store stats are public listing data, untrusted; users are not revenue."
+}
