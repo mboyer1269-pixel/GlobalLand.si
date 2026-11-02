@@ -1,0 +1,33 @@
+{
+ "input": {
+  "csvText": "Invoice,Amount\nINV-1,10.00\nINV-2\n",
+  "requiredColumns": [
+   "Invoice",
+   "Amount",
+   "Date"
+  ]
+ },
+ "core_check_output": {
+  "ok": false,
+  "issues": [
+   {
+    "kind": "missing_required_column",
+    "header": "Date"
+   },
+   {
+    "kind": "column_count",
+    "record": 3,
+    "expected": 2,
+    "actual": 1
+   }
+  ],
+  "data_rows": 2,
+  "columns": 2,
+  "headers": [
+   "Invoice",
+   "Amount"
+  ],
+  "had_bom": false
+ },
+ "scope": "core.check only, offline; not the Apify run"
+}

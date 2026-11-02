@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"ok\": false, \"issues\": [{\"kind\": \"missing_required_column\", \"header\": \"Date\"}, {\"kind\": \"column_count\", \"record\": 3, \"expected\": 2, \"actual\": 1}], \"data_rows\": 2, \"columns\": 2, \"headers\": [\"Invoice\", \"Amount\"], \"had_bom\": false}\n\n",
+  "artifacts": [
+    "products/distribution/csv-preflight-example-output.json",
+    "products/receipts/TASK-179366220219.json"
+  ],
+  "request": {
+    "id": "TASK-179366220219",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-02T23:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import sys,json\nsys.path.insert(0,'/workspace/products/actors/csv-preflight/src')\nfrom core import check\nr=check('Invoice,Amount\\nINV-1,10.00\\nINV-2\\n',',',['Invoice','Amount','Date'])\nout={'input':{'csvText':'Invoice,Amount\\nINV-1,10.00\\nINV-2\\n','requiredColumns':['Invoice','Amount','Date']},'core_check_output':r,'scope':'core.check only, offline; not the Apify run'}\nopen('/workspace/products/distribution/csv-preflight-example-output.json','w').write(json.dumps(out,indent=1))\nprint(json.dumps(r))"
+      ],
+      "outputs": [
+        "products/distribution/csv-preflight-example-output.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793662202",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179366220219",
+  "input_sha256": "e00f4d767d9131a727083a84cf020a92b6898c5a99d72c48c905fdff458a281d"
+}
