@@ -352,11 +352,34 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793653943.5881212,
       "mission_id": "INVOICE-IDEA-VERDICT"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793653947.9531455,
+      "blocker_id": "NO-HOSTING-ACCESS",
+      "agent_id": "ACQUISITION"
     }
   ],
   "policy": {
     "maintenance_glc": 1,
     "interest_basis_points": 500
   },
+  "blockers": [
+    {
+      "blocker_id": "NO-HOSTING-ACCESS",
+      "status": "OPEN",
+      "raised_by": "ACQUISITION",
+      "opened_at": 1793653947.953137,
+      "reports": 1,
+      "title": "Public deployment lacks configured hosting credentials",
+      "category": "CREDENTIAL",
+      "needs_founder": true,
+      "detail": "PUBLISH_SITE is NOT_CONFIGURED: missing valid enabled Cloudflare configuration and a private Cloudflare credential file with mode 0600. Existing CLI presence does not establish authenticated hosting. A review bundle is being prepared; publication also requires independent approval of the exact digest. No deployment has been attempted or claimed.",
+      "mission_id": "INVOICE-DISTRIBUTION",
+      "expected_gain": "Enable a publicly verifiable product demonstration and a measurable demand experiment.",
+      "last_reported_by": "ACQUISITION",
+      "last_reported_at": 1793653947.953137
+    }
+  ],
   "lesson_count": 0
 }
