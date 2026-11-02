@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "compiled ok\napify sdk installed: False\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179365860218.json"
+  ],
+  "request": {
+    "id": "TASK-179365860218",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-02T22:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import py_compile,glob,importlib.util;[py_compile.compile(f,doraise=True) for f in glob.glob('/workspace/products/actors/csv-preflight/src/*.py')];print('compiled ok');print('apify sdk installed:',importlib.util.find_spec('apify') is not None)"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1793658602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179365860218",
+  "input_sha256": "9e1ff5f0dfd7b818a1e8428880ba6420647eb1038a816ece010de7fcba484c62"
+}
