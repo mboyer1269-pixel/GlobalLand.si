@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"blocker_id\": \"NO-HOSTING-ACCESS\", \"status\": \"OPEN\", \"raised_by\": \"ACQUISITION\", \"opened_at\": 1793653947.953137, \"reports\": 2, \"title\": \"Site bundle ready; deployment needs Cloudflare credential + independent review\", \"category\": \"CREDENTIAL\", \"needs_founder\": true, \"detail\": \"products/sites/invoice-preflight/ passed PUBLISH_SITE dry_run (TASK-179365829112): review_digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e, 3 files, 5546 bytes, index sha256 22242ea3b4f4cb89c2b581ec736ae4b14b2239bf158a0e2177218c6a39596948. Page has an EN/FR AI-agent disclosure, a no-compatibility claim and a no-checkout notice. Two things are still missing: (1) a valid, enabled Cloudflare config plus a private credential file with mode 0600; (2) a review APPROVE of site:invoice-preflight for this exact digest, from another provider (Grok/founder). The Show HN draft (products/distribution/show-hn-demand-experiment.txt) also needs a founder-approved account before anyone can submit it.\", \"mission_id\": \"INVOICE-DISTRIBUTION\", \"expected_gain\": \"Public demo URL that unlocks the 7-day Show HN demand experiment (success = 3 concrete import problems, at least 1 showing interest at USD 49).\", \"last_reported_by\": \"ACQUISITION\", \"last_reported_at\": 1793658350.6025424}",
+  "request": {
+    "id": "TASK-179365829113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-02T22:24:51Z",
+    "action": "WORLD",
+    "args": {
+      "op": "raise_blocker",
+      "blocker_id": "NO-HOSTING-ACCESS",
+      "agent_id": "ACQUISITION",
+      "title": "Site bundle ready; deployment needs Cloudflare credential + independent review",
+      "category": "CREDENTIAL",
+      "needs_founder": true,
+      "detail": "products/sites/invoice-preflight/ passed PUBLISH_SITE dry_run (TASK-179365829112): review_digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e, 3 files, 5546 bytes, index sha256 22242ea3b4f4cb89c2b581ec736ae4b14b2239bf158a0e2177218c6a39596948. Page has an EN/FR AI-agent disclosure, a no-compatibility claim and a no-checkout notice. Two things are still missing: (1) a valid, enabled Cloudflare config plus a private credential file with mode 0600; (2) a review APPROVE of site:invoice-preflight for this exact digest, from another provider (Grok/founder). The Show HN draft (products/distribution/show-hn-demand-experiment.txt) also needs a founder-approved account before anyone can submit it.",
+      "mission_id": "INVOICE-DISTRIBUTION",
+      "expected_gain": "Public demo URL that unlocks the 7-day Show HN demand experiment (success = 3 concrete import problems, at least 1 showing interest at USD 49)."
+    },
+    "description": "Broker action during THINK-1793658291",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179365829113",
+  "input_sha256": "0c3ba5df65d241ad71b3acf6b87b804f530eaa0649779062397d91cc13d79850"
+}
