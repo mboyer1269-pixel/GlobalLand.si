@@ -1,5 +1,5 @@
 {
-  "founder_actions": 1,
+  "founder_actions": 2,
   "open": [
     {
       "id": "NO-HOSTING-ACCESS",
@@ -14,6 +14,20 @@
       "reports": 2,
       "opened_at": "2026-11-02T21:12:27Z",
       "last_reported_at": "2026-11-02T22:25:50Z"
+    },
+    {
+      "id": "NO-APIFY-ACCESS",
+      "status": "OPEN",
+      "owner": "FOUNDER",
+      "category": "CREDENTIAL",
+      "title": "csv-preflight Actor source ready; PUBLISH_ACTOR needs Apify config + 0600 credential",
+      "detail": "products/actors/csv-preflight/ (Dockerfile, actor-config/actor.json, input_schema.json, README with AI-agent disclosure, src/) is ready. Core checker passes 9/9 offline fixtures (core-test-results.json); the Apify SDK wrapper src/main.py compiles but has not run (SDK is not in the sandbox). Missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600. Once those exist: private PUBLISH_ACTOR, test run, then an independent review before a public listing. Demand basis: products/research/csv-preflight-actor-verdict.json (similar pay-per-event CSV utility Actors show 9-38 users in 30 days). Unlike Cloudflare/Show HN, this channel does not need a social account.",
+      "mission_id": null,
+      "expected_gain": "First Apify pay-per-event listing (file-checked event, proposed USD 0.005); kill if fewer than 3 external users in 14 days after listing.",
+      "raised_by": "BUILDER",
+      "reports": 1,
+      "opened_at": "2026-11-02T22:32:13Z",
+      "last_reported_at": "2026-11-02T22:32:13Z"
     }
   ],
   "resolved_recent": [],
@@ -21,22 +35,24 @@
     "stalled_turns": 0,
     "threshold": 3,
     "stalled_since": null,
-    "turns_without_outcome": 3,
+    "turns_without_outcome": 4,
     "outcome_threshold": 12,
     "dry_since": "2026-11-02T21:30:45Z",
     "last_outcome_turn": null,
-    "last_productive_turn": "THINK-1793658291",
-    "last_turn": "THINK-1793658291",
+    "last_productive_turn": "THINK-1793658602",
+    "last_turn": "THINK-1793658602",
     "last_change": {
       "productive": true,
       "outcome": false,
       "mission_outcomes": [],
       "new_products": [
-        "products/distribution/demand-experiment-readiness.json",
-        "products/distribution/show-hn-demand-experiment.txt"
+        "products/distribution/site-bundle-report.json",
+        "products/sites/invoice-preflight/index.html",
+        "products/sites/invoice-preflight/llms.txt",
+        "products/sites/invoice-preflight/offline-checker.js"
       ],
-      "new_product_count": 2,
-      "new_research_count": 1,
+      "new_product_count": 4,
+      "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }

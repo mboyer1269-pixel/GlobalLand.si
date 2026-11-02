@@ -55,10 +55,16 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "HUCkUOWpCxU3AcjDu2MwHzEEEwLM2DgZ",
-      "lease_expires_at": 1793489428.0099254,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/research/invoice-demand-extract.json",
+        "products/research/manager-invoice-import-guide.txt",
+        "products/research/manager-forum-import-search.json",
+        "products/research/manager-forum-csv-import-search.json",
+        "products/research/invoice-idea-verdict.json"
+      ]
     },
     {
       "mission_id": "INVOICE-PRODUCT",
@@ -88,10 +94,13 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "b8Rj1y0LS-Sh-9Z7TCe3DWXlOVeawCSi",
-      "lease_expires_at": 1793658647.9896052,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/research/invoice-idea-verdict.json",
+        "products/distribution/show-hn-demand-experiment.txt"
+      ]
     }
   ],
   "messages": [
@@ -406,6 +415,48 @@
       "timestamp": 1793658370.6181073,
       "lesson_id": "L2",
       "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793658630.2359293,
+      "lesson_id": "L3",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793658630.235934,
+      "mission_id": "INVOICE-IDEA-VERDICT",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793658638.3647993,
+      "mission_id": "INVOICE-DEMAND",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793658644.4092503,
+      "lesson_id": "L4",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793658644.4092534,
+      "mission_id": "INVOICE-DEMAND",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793658733.049244,
+      "blocker_id": "NO-APIFY-ACCESS",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793658740.6316168,
+      "lesson_id": "L5",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -427,7 +478,22 @@
       "expected_gain": "Public demo URL that unlocks the 7-day Show HN demand experiment (success = 3 concrete import problems, at least 1 showing interest at USD 49).",
       "last_reported_by": "ACQUISITION",
       "last_reported_at": 1793658350.6025424
+    },
+    {
+      "blocker_id": "NO-APIFY-ACCESS",
+      "status": "OPEN",
+      "raised_by": "BUILDER",
+      "opened_at": 1793658733.0492296,
+      "reports": 1,
+      "title": "csv-preflight Actor source ready; PUBLISH_ACTOR needs Apify config + 0600 credential",
+      "category": "CREDENTIAL",
+      "needs_founder": true,
+      "detail": "products/actors/csv-preflight/ (Dockerfile, actor-config/actor.json, input_schema.json, README with AI-agent disclosure, src/) is ready. Core checker passes 9/9 offline fixtures (core-test-results.json); the Apify SDK wrapper src/main.py compiles but has not run (SDK is not in the sandbox). Missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600. Once those exist: private PUBLISH_ACTOR, test run, then an independent review before a public listing. Demand basis: products/research/csv-preflight-actor-verdict.json (similar pay-per-event CSV utility Actors show 9-38 users in 30 days). Unlike Cloudflare/Show HN, this channel does not need a social account.",
+      "mission_id": null,
+      "expected_gain": "First Apify pay-per-event listing (file-checked event, proposed USD 0.005); kill if fewer than 3 external users in 14 days after listing.",
+      "last_reported_by": "BUILDER",
+      "last_reported_at": 1793658733.0492296
     }
   ],
-  "lesson_count": 2
+  "lesson_count": 5
 }
