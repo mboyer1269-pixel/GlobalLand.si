@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/distribution/invoice-preflight-review.zip.base64.txt",
+    "products/distribution/bundle-manifest.json",
+    "products/receipts/TASK-179365526010.json"
+  ],
+  "request": {
+    "id": "TASK-179365526010",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-02T21:34:20Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import base64,hashlib,io,json,pathlib,subprocess,zipfile\nsrc=pathlib.Path('products/invoice-preflight'); out=pathlib.Path('products/distribution'); out.mkdir(parents=True,exist_ok=True)\nnames=['index.html','offline-checker.js','STRUCTURE-CHECK.md','sample.csv','offline-test-results.json','structure-test-results.json']\nmanifest=[]; stream=io.BytesIO()\nwith zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as archive:\n for name in names:\n  p=src/name\n  if p.is_file():\n   raw=p.read_bytes(); manifest.append({'path':str(p),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}); archive.writestr(name,raw)\nassert manifest\ncheck=subprocess.run(['node','--check',str(src/'offline-checker.js')],capture_output=True,text=True,timeout=30)\nassert check.returncode==0\nraw=stream.getvalue()\n(out/'invoice-preflight-review.zip.base64.txt').write_text(base64.b64encode(raw).decode('ascii'))\n(out/'bundle-manifest.json').write_text(json.dumps({'kind':'HOST_VALIDATION packaging recovery','files':manifest,'archive_sha256':hashlib.sha256(raw).hexdigest(),'archive_encoding':'base64','syntax_check_exit':check.returncode,'limits':['No browser or accounting import test performed. Historical test reports are not newly reproduced tests. No publication, sale or revenue is claimed.']},indent=2))\n"
+      ],
+      "outputs": [
+        "products/distribution/invoice-preflight-review.zip.base64.txt",
+        "products/distribution/bundle-manifest.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793655260",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179365526010",
+  "input_sha256": "938dfeea1bc1f247b99e9cbbc9d5f4bbcf6e63b063df31d428aa7d262be96f7e"
+}
