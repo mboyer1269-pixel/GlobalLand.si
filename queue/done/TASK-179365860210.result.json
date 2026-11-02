@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "['verdict', 'decision_basis', 'source_evidence', 'quotation_scope', 'uncertainties', 'next_experiment', 'limitations']\nverdict => \"REVISE\"\nuncertainties => [\"Whether original sources describe a workflow this checker actually solves\", \"Current paid alternatives and their prices\", \"Whether buyers will pay for a generic structure checker or customization\", \"Whether a permitted reachable distribution channel is available\"]\nnext_experiment => {\"offer\": \"Proposed USD 49 CSV preflight customization; price hypothesis only; payment unavailable until verified\", \"method\": \"Prepare one channel-specific demonstration and submission draft from the existing tested artifact. Verify channel rules and independent review before any public listing.\", \"measurement\": \"Record actual publication URL, response count, qualified workflow examples and explicit paid-interest responses separately.\", \"success_criterion\": \"At least one prospective buyer supplies a specific import workflow and explicitly expresses interest at the proposed price. This is demand evidence, not revenue.\", \"start_condition\": \"A permitted channel and required independent approval are verified; no experiment clock starts before actual publication.\"}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179365860210.json"
+  ],
+  "request": {
+    "id": "TASK-179365860210",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-02T22:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json;c=json.load(open('/workspace/products/research/invoice-idea-verdict.json'));print(list(c.keys()));[print(k,'=>',json.dumps(c.get(k))[:1200]) for k in c if k in ('verdict','next_experiment','next_demand_experiment','selected_experiment','uncertainties','paid_alternative_evidence','paid_alternatives','summary','rationale')]"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1793658602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179365860210",
+  "input_sha256": "9a8cff3a389470dc7e99830642168915328cee4050f3a7fd80877364c2fe3cbb"
+}
