@@ -9,18 +9,11 @@
   "missing": [],
   "account_settings_verified": false,
   "last_turn": {
-    "turn": "THINK-1793653901",
-    "at": "2026-11-02T21:12:21Z",
+    "turn": "THINK-1793655002",
+    "at": "2026-11-02T21:30:45Z",
     "state": "DECISION_READY",
     "provider": "codex",
     "attempts": [
-      {
-        "provider": "claude",
-        "status": "FAILED",
-        "stage": "planning",
-        "exception_type": "ValueError",
-        "reason": "provider_or_decision_validation_failed"
-      },
       {
         "provider": "codex",
         "status": "SUCCEEDED",
@@ -30,5 +23,5 @@
       }
     ]
   },
-  "last_turn_age_seconds": 8
+  "last_turn_age_seconds": 0
 }
