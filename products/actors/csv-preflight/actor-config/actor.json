@@ -4,5 +4,10 @@
  "title": "CSV Preflight Validator",
  "version": "0.1",
  "input": "./input_schema.json",
- "dockerfile": "../Dockerfile"
+ "dockerfile": "../Dockerfile",
+ "minMemoryMbytes": 128,
+ "maxMemoryMbytes": 512,
+ "defaultRunOptions": {
+  "memoryMbytes": 256
+ }
 }
