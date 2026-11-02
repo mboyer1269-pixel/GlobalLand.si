@@ -1,0 +1,24 @@
+{
+ "idea": "Agent-callable CSV preflight Apify Actor: validate structure (row width, quotes, empty/duplicate headers, encoding BOM) of a CSV at a URL or pasted text and return stable JSON errors",
+ "verdict": "PURSUE_IF",
+ "condition": "Founder provides Apify configuration + 0600 credential (PUBLISH_ACTOR NOT_CONFIGURED). Until then only private-ready source can be prepared.",
+ "evidence": {
+  "source": "products/research/apify-csv-demand-summary.json (from https://api.apify.com/v2/store?search=csv&limit=30, TASK-179365860212)",
+  "observed": [
+   "humble-echidna/dataset-transform: 38 users in 30 days, pay-per-event (clean/dedupe/transform CSV/JSON)",
+   "saliga/dataset-merge-dedupe: 12 users in 30 days, pay-per-event",
+   "thecfmarketing/csv-xlsx-dataset-merger-pattern-splitter: 9 users in 30 days, pay-per-event",
+   "gochujang/excel-extractor: 11 users in 30 days, pay-per-event"
+  ],
+  "interpretation": "Small but real pay-per-event usage of generic file-utility Actors on Apify; budgets exist at cents-per-run scale. Store users are not revenue and the figures are listing data, untrusted."
+ },
+ "competition": "Transform/merge Actors exist; none in this 30-item search is described as a pre-import structure validator. Absence may mean low demand.",
+ "monetization_hypothesis": "Pay-per-event e.g. USD 0.005 per file checked; must exceed platform compute cost (unmeasured).",
+ "cheapest_test": "Private publish, run on the existing fixtures, then list publicly after independent APPROVE; measure ACTOR_STATS runs over 14 days; kill threshold: fewer than 3 external users in 14 days.",
+ "uncertainties": [
+  "Apify account access",
+  "Real run cost",
+  "Whether agents/users search for validation vs transformation"
+ ],
+ "relation_to_invoice": "Reuses tested parser from products/invoice-preflight; avoids depending on Show HN account or Cloudflare."
+}
