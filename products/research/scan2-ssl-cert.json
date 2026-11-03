@@ -1,0 +1,944 @@
+{
+  "data": {
+    "total": 193,
+    "count": 15,
+    "offset": 0,
+    "limit": 15,
+    "desc": false,
+    "items": [
+      {
+        "title": "SSL Certificate Checker",
+        "name": "ssl-certificate-checker",
+        "username": "automation-lab",
+        "stats": {
+          "totalBuilds": 20,
+          "totalRuns": 421,
+          "totalUsers": 23,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 3,
+          "totalUsers90Days": 6,
+          "lastRunStartedAt": "2026-11-01T21:00:56.978Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 35,
+            "TIMED-OUT": 0,
+            "TOTAL": 35
+          }
+        },
+        "description": "SSL Certificate Checker connects to domains over TLS and inspects their SSL certificates. It returns structured data about certificate validity, expiry, issuer chain, TLS protocol version, cipher suite, and a security grade from A+ to F.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/tMcWWUo_GZKt4y9Kgbh7bxn_OAejTRAJf9_Bwjp0mYE/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vbnRIQ25oTlVrelhSN25iVVotYWN0b3ItZlNBSDVhTkVPT2V3SVdNaU8tYlBVSWtxcXVPYS1hY3Rvci1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Automation Lab",
+        "userPictureUrl": "https://images.apifyusercontent.com/K_C4LOMfOgJZv5UcVqbze6xlfc6mS23zsoHRS5nDXvM/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMDdsSFdveGptQlpJN0NMWkJqVi1wUlBjV0ZHRFQyRzIwVjdkVzBRSzBCay9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZiblJJUTI1b1RsVnJlbGhTTjI1aVZWb3RjSEp2Wm1sc1pTMW9ORkJYYTNsWWVVSmxMV0YxZEc5dFlYUnBiMjR0YkdGaUxYQnliMlpwYkdVdGJHOW5ieTV3Ym1jLnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-08-25T20:07:09.349Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "start": {
+                "eventTitle": "Run started",
+                "eventDescription": "One-time charge when the actor starts",
+                "eventPriceUsd": 0.035,
+                "isOneTimeEvent": true
+              },
+              "domain-checked": {
+                "eventTitle": "Domain checked",
+                "eventDescription": "Charged per domain SSL certificate checked",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.00115
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00078
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0006
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0004
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00028
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-04-01T05:57:58.993Z",
+          "createdAt": "2026-08-25T20:07:09.443Z"
+        },
+        "id": "fSAH5aNEOOewIWMiO",
+        "url": "https://apify.com/automation-lab/ssl-certificate-checker"
+      },
+      {
+        "title": "SSL Certificate Checker — Bulk Expiry & Chain Monitor",
+        "name": "ssl-certificate-checker",
+        "username": "nexgendata",
+        "stats": {
+          "totalBuilds": 35,
+          "totalRuns": 293,
+          "totalUsers": 10,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-02T16:24:56.361Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Bulk SSL/TLS certificate checker: for a list of domains, returns validity, expiry/days-remaining, issuer, subject, SANs, protocol, and cipher. For DevOps, security, and cert-expiry monitoring.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "BUSINESS",
+          "AI"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/REZ-VO3iX5jBjGqUiafAtGmYzFWEm7p6MqJ4EBnYQSs/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vUFFZaExmMkt1NllxeUNXYngtYWN0b3ItV2hETzM1TE5XYWpFNEU3a1ktRUthaG9nOUE0Ui1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "NexGenData",
+        "userPictureUrl": "https://images.apifyusercontent.com/DFoEfAV1iSBokBNjpIZdoeMlxK2y6UEav2Se4BxUDrI/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20veU5Nancta2JUQ2FFN3lQUTNGZnR1SHBQX0FoWkVNVlVFLTdfSVFOTjNzby9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZVRkZaYUV4bU1rdDFObGx4ZVVOWFluZ3RjSEp2Wm1sc1pTMXVSMmRzVGxZeU5VVkRMVzVuWkMxemRHRmphMlZrTFd4dlkydDFjQzFrWVhKckxuQnVady5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-07-17T01:25:43.000Z",
+          "reasonForChange": "A9 metadata normalization (Steve-authorized 2026-07-17): explicit isPrimaryEvent:false on apify-actor-start. SAME PRICE - no price value changes.",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005,
+                "isPrimaryEvent": false
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "Certificate check",
+                "eventDescription": "Single result in the default dataset.",
+                "eventPriceUsd": 0.01,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-07-17T01:25:43.793Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "WhDO35LNWajE4E7kY",
+        "url": "https://apify.com/nexgendata/ssl-certificate-checker"
+      },
+      {
+        "title": "SSL Certificate Checker - Domain TLS Expiry & KYB API",
+        "name": "ssl-certificate-checker",
+        "username": "pink_comic",
+        "stats": {
+          "totalBuilds": 6,
+          "totalRuns": 476,
+          "totalUsers": 6,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 3,
+          "lastRunStartedAt": "2026-11-02T07:41:00.950Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 34,
+            "TIMED-OUT": 0,
+            "TOTAL": 34
+          }
+        },
+        "description": "Bulk SSL/TLS certificate checker for domain KYB and HTTPS audits: expiry, issuer, SANs, chain validation, TLS version, and cipher evidence. Catch expired or misconfigured certs before outages. Related: whois-domain-lookup, dns-lookup-records, website-tech-stack-scanner.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "BUSINESS",
+          "AGENTS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/KdUCsuEC27OTxLG511Z6XXG128XFYXSO8CJ4a2LTxFE/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vcUhCNFdCdVdsUmtraUdIWXctYWN0b3Itd08zRVNGaUhMZHl5aFVYZUstS3FaZlZ2Nkp5OS1zc2wtY2VydGlmaWNhdGUtY2hlY2tlci5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Ava Torres",
+        "userPictureUrl": "https://images.apifyusercontent.com/xHIQ8NPgSWhC7jbdKz1bniz5JDgrODfO99BuuEXmJbQ/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vV19KMWN2OFBpYlc5enZjT2ZWUVcxTnNyQVk1eU9Sd0F3QkMwWWYzWGpRSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZjVWhDTkZkQ2RWZHNVbXRyYVVkSVdYY3RjSEp2Wm1sc1pTMW1NakYwYkdwVFFraDNMWE5qY21WbGJuTm9iM1JmTWpBeU5pMHdNeTB5TkY5aGRGODRMalExTGpFMVgwRk5MbkJ1WncucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.0001
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "SSL check",
+                "eventDescription": "Single domain SSL certificate check.",
+                "eventPriceUsd": 0.0001,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-04-21T00:00:00.000Z",
+          "createdAt": "2026-04-07T00:21:57.122Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "wO3ESFiHLdyyhUXeK",
+        "url": "https://apify.com/pink_comic/ssl-certificate-checker"
+      },
+      {
+        "title": "Website Uptime Monitor & SSL Certificate Checker",
+        "name": "website-uptime-checker",
+        "username": "eliai",
+        "stats": {
+          "totalBuilds": 20,
+          "totalRuns": 178,
+          "totalUsers": 4,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 2,
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "lastRunStartedAt": "2026-11-02T02:54:22.622Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Checks website uptime and works as an SSL certificate checker for one URL or up to 200 per run. Returns up/down, HTTP status, latency in ms, the final URL and whether the SSL certificate validates. For developers, agencies, freelancers and no-code automation builders.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/Y6ubPeW_-pA4x0SKh5cwZEbb92EJLQI6T6I3eZwrMaI/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20veDRkaFprWEFyZWNqWmYwRDEtYWN0b3ItV29VZDhiRGpMS1Nud2YyVGMtMHUxc1g3RWFySy13ZWJzaXRlLXVwdGltZS1jaGVja2VyLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Broke to Built",
+        "userPictureUrl": "https://images.apifyusercontent.com/QMkw6wv6DWIUToyhWVZW9vdOfV8EJUSu8gM41J7aS-w/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMEd6SV9NU2hjbTF1bjdCYVMxbUo3anBlX085YmlISDNVWU9waGtlQ2Fxcy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZlRFJrYUZwcldFRnlaV05xV21Zd1JERXRjSEp2Wm1sc1pTMXdSREIzVlU0eVVrazFMV05vWVc1dVpXeHpORjl3Y205bWFXeGxMbXB3WncuanBn.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-08-23T01:06:47.536Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "url-checked": {
+                "eventTitle": "Uptime check",
+                "eventDescription": "One URL checked for availability and latency.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.01
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0093
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0087
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.008
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0073
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0067
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "reasonForChange": "Subscribers on higher Apify plans now pay less per uptime check. The Free plan price is unchanged at $0.01, and it steps down to $0.0067 on Diamond. Output, limits and behaviour are unchanged.",
+          "createdAt": "2026-08-23T01:06:48.620Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-08-23T01:35:47.398Z"
+        },
+        "id": "WoUd8bDjLKSnwf2Tc",
+        "url": "https://apify.com/eliai/website-uptime-checker"
+      },
+      {
+        "title": "SSL Certificate Checker",
+        "name": "ssl-certificate-checker",
+        "username": "rationalistic_counsel",
+        "stats": {
+          "totalBuilds": 2,
+          "totalRuns": 223,
+          "totalUsers": 3,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-01T17:12:23.880Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "categories": [
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/uqY4BIr4AnOG-Yx0bLL_1PfeAgcH3DDL1BidEdE2YZ8/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vRnhCQUdCRVdxczJRa0lGZWctYWN0b3ItN1RwMnNmMk1GTjNYYjAzVkItTEdKRmEwV2lDMS1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "J N",
+        "userPictureUrl": "https://images.apifyusercontent.com/hhvRX8t6777ovBVIjoKmcZnZMedsdP5-oYKF-L9E5Uo/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vS05FZzZiMnRYMWZJTDI4anFaR0JueDRSZ3g3dDdSVERSQXZWMUpROGlxUS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpURE0wYm5SWFZraG5Ta0ZxY3pKQ2VsbzBRMXBQVjFaT09WOU5NbWhHVms1S1ZWQm9hbGxhTVdOMmRsRmhUMWxtZDFJM1p6MXpPVFl0WXc.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "reasonForChange": "Initial monetization setup for the SSL Certificate Checker actor.",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "eventPriceUsd": 0.01,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-03-24T09:01:56.624Z",
+          "createdAt": "2026-03-10T09:01:57.895Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-03-10T09:02:18.030Z"
+        },
+        "id": "7Tp2sf2MFN3Xb03VB",
+        "url": "https://apify.com/rationalistic_counsel/ssl-certificate-checker"
+      },
+      {
+        "title": "SSL Certificate Checker",
+        "name": "ssl-certificate-checker",
+        "username": "bgfc97",
+        "stats": {
+          "totalBuilds": 3,
+          "totalRuns": 101,
+          "totalUsers": 3,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-01T14:32:29.681Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Check TLS/SSL certificates for many hosts: issuer, valid-from/to, days until expiry, expired/expiring-soon flags, SAN domains and trust status. For uptime & certificate-expiry monitoring. No key, no proxy.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "BUSINESS",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/Oxq5H7vAr2_XrA5MGvT15Ej90gmIGjeSnOpu5LXjFVc/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vZ3Zwenl1b3RkZ25iT0N2c1ktYWN0b3ItMVlnRXdZdGN1Nk5HMTZYdzcteERvVm9jWUdhRy0xWWdFd1l0Y3U2TkcxNlh3Ny5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Bruno",
+        "userPictureUrl": "https://images.apifyusercontent.com/lAD9ZVAUTb8SZgCL1fdqVM0-Jl6ho87Te4zypprnu80/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vcDJqb05pSU8xMTh4UUlNb1U1TUZscUk5eGpCQlJYYjgwR2s4c093eTBlby9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTMDFLT1RKaU9WWTBUWG81WkdGSlRrOUNSWEZFVkdOdlJWVlpZbVJJYlRkWWVEVTBiMlJCVFdKWlVtdDJlbWgxU1Qxek9UWXRZdw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "host-checked": {
+                "eventTitle": "Host checked",
+                "eventDescription": "Each host's SSL certificate inspected",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.003,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-07-16T06:11:17.099Z",
+          "startedAt": "2026-07-16T06:11:17.099Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "1YgEwYtcu6NG16Xw7",
+        "url": "https://apify.com/bgfc97/ssl-certificate-checker"
+      },
+      {
+        "title": "SSL / TLS Certificate Expiry Checker",
+        "name": "ssl-certificate-expiry-evidence",
+        "username": "gifted_wagon",
+        "stats": {
+          "totalBuilds": 1,
+          "totalRuns": 76,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T11:22:27.634Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 27,
+            "TIMED-OUT": 0,
+            "TOTAL": 27
+          }
+        },
+        "description": "Inspect public TLS certificates with validity, SAN, issuer, fingerprint, protocol, authorization, and expiry evidence.",
+        "categories": [
+          "OTHER",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/F5nKGyyR9Qw2FRT3sj-rtlDKMFdniVomCHN59qvDk-o/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vY0luRUVEbGxQUlFYa3dzc2gtYWN0b3ItcmVnR1dydXY5R2NhUmwwSFUtcXM5Q1FlVWFUaC1zdG9yZS1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Michael Olmos",
+        "userPictureUrl": "https://images.apifyusercontent.com/0CHkSV7chAXPaVp7EPePa1PP0isbXab9ZIPSjSCi5gY/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUjBqaDhpUjZoelVkb3BMdThMYUFoSzU2NXBwN19ybFZXTlpzRENKUjZUOC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTVlJ6T1dsdlptcDJTVkJCVVRCQ1FVZGZiakJpYkVWM1dXeHRkRUZZYkdkNFdtSk1UREUzTm1SeVUyRkJWRjh4VDIxRlFR.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.0004,
+                "isPrimaryEvent": false,
+                "isOneTimeEvent": true
+              },
+              "certificate-checked": {
+                "eventTitle": "Certificate checked",
+                "eventDescription": "One valid public target is successfully processed, stored, and returned with normalized evidence. Invalid inputs and network or protocol failures are not charged.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0009
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0008
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0007
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00064
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00064
+                  }
+                },
+                "isPrimaryEvent": true,
+                "isOneTimeEvent": false
+              }
+            }
+          },
+          "minimalMaxTotalChargeUsd": 0.0014,
+          "createdAt": "2026-08-16T15:19:26.557Z",
+          "startedAt": "2026-08-16T15:19:26.557Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "regGWruv9GcaRl0HU",
+        "url": "https://apify.com/gifted_wagon/ssl-certificate-expiry-evidence"
+      },
+      {
+        "title": "SSL Certificate Checker - Issuer, SANs, Expiry, Chain JSON",
+        "name": "ssl-certificate-checker",
+        "username": "eliai",
+        "stats": {
+          "totalBuilds": 20,
+          "totalRuns": 169,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T14:54:24.661Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 28
+          }
+        },
+        "description": "Checks the TLS certificate of each hostname or URL with a live handshake, up to 200 hosts per run on any port. Returns issuer, SANs, days to expiry, the chain, negotiated protocol and a self-signed or expired diagnosis; unreachable hosts are free. For SREs, security auditors and MSPs.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/h7gduIXEbwCQVjoDOUDz4V75pb65VxsyWgO79qZqB94/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20veDRkaFprWEFyZWNqWmYwRDEtYWN0b3ItSFNjdERVTTIycThNYm9ZaVQtTXhEdDc2VmhSMC1zc2wtY2VydGlmaWNhdGUtY2hlY2tlci5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Broke to Built",
+        "userPictureUrl": "https://images.apifyusercontent.com/QMkw6wv6DWIUToyhWVZW9vdOfV8EJUSu8gM41J7aS-w/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMEd6SV9NU2hjbTF1bjdCYVMxbUo3anBlX085YmlISDNVWU9waGtlQ2Fxcy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZlRFJrYUZwcldFRnlaV05xV21Zd1JERXRjSEp2Wm1sc1pTMXdSREIzVlU0eVVrazFMV05vWVc1dVpXeHpORjl3Y205bWFXeGxMbXB3WncuanBn.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-08-23T01:06:30.254Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "host-checked": {
+                "eventTitle": "Certificate-checked hosts",
+                "eventDescription": "One host's live TLS certificate inspected: issuer, SANs, expiry, chain, protocol. Unreachable hosts and connection failures are recorded free.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.0008
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00074
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0007
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00064
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00058
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00054
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "reasonForChange": "Subscribers on higher Apify plans now pay less per certificate-checked host. The Free plan price is unchanged at $0.0008, and it steps down to $0.00054 on Diamond. Output, limits and behaviour are unchanged.",
+          "createdAt": "2026-08-23T01:06:31.346Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-08-23T01:35:47.054Z"
+        },
+        "id": "HSctDUM22q8MboYiT",
+        "url": "https://apify.com/eliai/ssl-certificate-checker"
+      },
+      {
+        "title": "SSL Certificate Checker — Expiry, Issuer & SAN by Domain",
+        "name": "ssl-certificate-checker",
+        "username": "technicaldost",
+        "stats": {
+          "totalBuilds": 5,
+          "totalRuns": 136,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-02T07:30:29.145Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 27,
+            "TIMED-OUT": 0,
+            "TOTAL": 27
+          }
+        },
+        "description": "Returns SSL/TLS certificate details for any list of domains: issuer, subject, valid from/to, days until expiry, SANs and protocol. Bulk checks in one run, no API key. Ideal for expiry monitoring.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/dIQy3T7UKTAju4MRsK2MCLeiyDaFuvEaaotU_ggDJYo/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vOFVEWGpPbko5UnJsUFRBb2YtYWN0b3ItTVIzR004S3FUemVXV2VTMjUtcWVoTEt0RnA1Sy1zc2wtY2VydGlmaWNhdGUtY2hlY2tlci5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Technical Dost Solutions",
+        "userPictureUrl": "https://images.apifyusercontent.com/02bmUNph7kL27NcFRSvKR5_PlAvounCCxPLS0yX90HY/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vQjU2UV9JWm14dGhmZGNCbWtDc3diWGpQZW5UYXpvdWoxM3o0WTVDNXRBMC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpURTVTWjNjek0ybEVWMHhWVGw5aVVIRmZlV1ZpUTJaRldIUlZjWFJrVUROdlNrRm5kbk10YVc1NllVeHlkMVJDVjFV.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-09-13T14:14:48.494Z",
+          "reasonForChange": "Competitive Store repricing 2026-09-13. floor null → 1",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "actor-start": {
+                "eventTitle": "Actor start",
+                "eventDescription": "Charged once per run",
+                "eventPriceUsd": 0.001,
+                "isOneTimeEvent": true
+              },
+              "result": {
+                "eventTitle": "Result",
+                "eventDescription": "Charged per successful result",
+                "eventPriceUsd": 0.002,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "minimalMaxTotalChargeUsd": 1,
+          "createdAt": "2026-09-13T14:14:48.672Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-09-13T14:35:58.458Z"
+        },
+        "id": "MR3GM8KqTzeWWeS25",
+        "url": "https://apify.com/technicaldost/ssl-certificate-checker"
+      },
+      {
+        "title": "SSL Certificate Expiry Checker: Days Left, Issuer, Trust",
+        "name": "ssl-expiry",
+        "username": "lepidata",
+        "stats": {
+          "totalBuilds": 7,
+          "totalRuns": 20,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T22:46:23.928Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 15,
+            "TIMED-OUT": 0,
+            "TOTAL": 15
+          }
+        },
+        "description": "Check when each host's SSL certificate expires, with days remaining, issuer, hostname match and trust status. Flags certs expiring soon.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "OTHER"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Lepi Data",
+        "userPictureUrl": "https://images.apifyusercontent.com/XMTGFRncOshGrW0JIZZX5GxORA0EyYM7R5ovROClL5w/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vQUY0VlA1bkhRendFTTg2aThwQUZLWk05X0hJWTdMYzcxYVZsMThaM2ZBRS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZZV042ZFc1YVUzRTFaR0p2ZERoME1uQXRjSEp2Wm1sc1pTMVpiVmxrU1dOcVVFMTBMWEJtY0MxaGJHbG5ibTFsYm5RdWFuQmxady5qcGVn.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "host": {
+                "eventTitle": "Host checked",
+                "eventDescription": "One host's TLS certificate checked on port 443: expiry date, days left, issuer, hostname match and trust. Unreachable hosts, errors and limit rows are free.",
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.0001
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0001
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0001
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0001
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0001
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0001
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": "2026-10-18T21:03:02.230Z",
+          "startedAt": "2026-10-18T21:03:02.230Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "Cxhk6h0DBZiASHZC6",
+        "url": "https://apify.com/lepidata/ssl-expiry"
+      },
+      {
+        "title": "SSL Certificate Checker: Expiry, Chain & CT, No Login",
+        "name": "ssl-certificate-inspector",
+        "username": "cliqtomedia",
+        "stats": {
+          "totalBuilds": 18,
+          "totalRuns": 61,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-02T09:56:26.736Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 5,
+            "TIMED-OUT": 0,
+            "TOTAL": 5
+          }
+        },
+        "description": "Bulk SSL/TLS certificate checker: validity verdict, days to expiry, issuer, SANs, TLS version and cipher grade, chain, optional check of each TLS version (1.0 to 1.3) and Certificate Transparency history for up to 5,000 domains or host:port values. No login, no API key.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/GS1uybL8j2PT8jeeGJr7JNLSvZ-dPOwNCyU32Kb7d5I/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vZkxvWmg1OTdZN240Qzl1N0ctYWN0b3ItT3FsSnRVS2hXalBTaWtZTk8tV3ZaTTJOWVhFdS1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Cliqto Media",
+        "userPictureUrl": "https://images.apifyusercontent.com/ZLJ9sO1ngENv1eeunERCc3cqAEVtJSNMZtYcUlooI-w/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vVlB6WmZENGg4aVlYTUVpNURTN0tjNU5Ia0hISmVoTW0yaFJDby1SZEdrOC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZaa3h2V21nMU9UZFpOMjQwUXpsMU4wY3RjSEp2Wm1sc1pTMVNTV0psU2xnMWMxVjFMV0YyWVhSaGNsOHllQzV3Ym1jLnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.0015
+              },
+              "host-checked": {
+                "eventTitle": "Host check",
+                "eventDescription": "One host the Actor tried to reach over DNS and TLS, whatever the answer (certificate, not in DNS or no TLS answer). Invalid values, duplicates and private addresses are not charged.",
+                "eventPriceUsd": 0.0001
+              },
+              "certificate-read": {
+                "eventTitle": "Certificate read",
+                "eventDescription": "One host whose certificate was read and saved to the Dataset (checkStatus ok), with its verdict, dates, issuer, SANs and chain.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.0008
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00072
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00064
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00056
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00056
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00056
+                  }
+                },
+                "isPrimaryEvent": true
+              },
+              "ct-history": {
+                "eventTitle": "CT history",
+                "eventDescription": "Certificate Transparency history from crt.sh found and saved for one host (ctStatus found). Failed or empty lookups are not charged.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.002
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0018
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0016
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0014
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0014
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0014
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": "2026-10-28T05:44:49.359Z",
+          "startedAt": "2026-10-28T05:44:46.000Z",
+          "apifyMarginPercentage": 0.2,
+          "minimalMaxTotalChargeUsd": 0.0025
+        },
+        "id": "OqlJtUKhWjPSikYNO",
+        "url": "https://apify.com/cliqtomedia/ssl-certificate-inspector"
+      },
+      {
+        "title": "SSL Certificate Expiry Checker — Days Left, Issuer",
+        "name": "ssl-certificate-expiry-checker",
+        "username": "kadro",
+        "stats": {
+          "totalBuilds": 2,
+          "totalRuns": 5,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T17:26:28.754Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 4,
+            "TIMED-OUT": 0,
+            "TOTAL": 4
+          }
+        },
+        "description": "Check the TLS certificate of a list of domains: expiry date, days left, issuer, alt names, TLS version. Flags expired and expiring-soon certificates.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Kadro Tools",
+        "userPictureUrl": "https://images.apifyusercontent.com/Szn9Gy-1EgZwMe_b1dJGeJehHj6OtsmNYAzGqIkPXQE/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vLXlOcGtBblpfSzdaUkNiVnpVenQwMkkyT2I1R3JoWFBKODZYQlJwUDZtUS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTM2RWZDBka1RVZHFYM1JSU0RoclZIWXdhMHRNWjNkS1JIUjNaMTlXZUU5cFJYSllNbVl0UkZCVGMwdDJXalYzUFhNNU5pMWo.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "host-checked": {
+                "eventTitle": "Host checked",
+                "eventDescription": "One host's TLS certificate checked (expiry, issuer, TLS version).",
+                "eventPriceUsd": 0.002,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-10-27T21:10:54.684Z",
+          "startedAt": "2026-10-27T21:10:54.684Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "3bX76eiJkGYpyXW7Q",
+        "url": "https://apify.com/kadro/ssl-certificate-expiry-checker"
+      },
+      {
+        "title": "SSL Certificate Checker & Expiry Monitor",
+        "name": "ssl-expiry-monitor",
+        "username": "sterlingverify",
+        "stats": {
+          "totalBuilds": 6,
+          "totalRuns": 21,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T18:08:25.536Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 19,
+            "TIMED-OUT": 0,
+            "TOTAL": 19
+          }
+        },
+        "description": "Check SSL/TLS certificates for a list of domains: valid or not, issuer, expiry date, days left, TLS version and SAN list. Flags EXPIRED, EXPIRING_SOON and INVALID certificates, with an option to output only problems: ideal for scheduled monitoring of merchant, checkout and API domains.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/Juo8A0EstgEvRN5M33ZQf6_X68HLMC3R2_bdfekBpMk/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vZmN0bG1iZ09NQWRSVzc4S2ItYWN0b3ItWTB3ZmVLRWE2WU1ZYldnYkgtM0FRY2FJOU1pWi1zdGVybGluZ3ZlcmlmeS1sb2dvLW5hdnkucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Luke Mangan",
+        "userPictureUrl": "https://images.apifyusercontent.com/vyK5a4tNo15OHbvSpJIo--H6zr1P8AtbH1WQcPKXpqI/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vSzlMSElNT0lSbUNOQWJOWEJJUTJxVzNUcjBocFJ0RWw5NFdkZWprSGpBRS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZabU4wYkcxaVowOU5RV1JTVnpjNFMySXRjSEp2Wm1sc1pTMTNUMGxVTldObk1Vd3lMWE4wWlhKc2FXNW5kbVZ5YVdaNUxXeHZaMjh0Ym1GMmVTNXdibWMucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "domain-checked": {
+                "eventTitle": "Domain checked",
+                "eventDescription": "One domain's certificate checked",
+                "eventPriceUsd": 0.0003,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-10-13T11:32:06.740Z",
+          "startedAt": "2026-10-13T11:32:06.740Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "ZAUKEtM8p83mhdB3Z",
+        "url": "https://apify.com/sterlingverify/ssl-expiry-monitor"
+      }
+    ]
+  }
+}
