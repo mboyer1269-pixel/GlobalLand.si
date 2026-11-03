@@ -1,0 +1,47 @@
+{
+  "status": "DONE",
+  "output": "9\n\n",
+  "artifacts": [
+    "products/actors/rss-reader/tests/fixtures/atom.xml",
+    "products/actors/rss-reader/tests/fixtures/rss2.xml",
+    "products/actors/rss-reader/tests/fixtures/rss1.xml",
+    "products/actors/rss-reader/tests/fixtures/malformed.xml",
+    "products/actors/rss-reader/tests/fixtures/empty-channel.xml",
+    "products/actors/rss-reader/tests/fixtures/billion-laughs.xml",
+    "products/actors/rss-reader/tests/fixtures/xxe.xml",
+    "products/actors/rss-reader/tests/fixtures/not-a-feed.xml",
+    "products/actors/rss-reader/tests/fixtures/undefined-entity.xml",
+    "products/receipts/TASK-179366940212.json"
+  ],
+  "request": {
+    "id": "TASK-179366940212",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T01:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "set -e\nF=products/actors/rss-reader/tests/fixtures\nmkdir -p $F\ncat > $F/atom.xml <<'EOF'\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<feed xmlns=\"http://www.w3.org/2005/Atom\">\n  <title>Example Atom Feed</title>\n  <id>urn:uuid:feed-1</id>\n  <updated>2026-10-30T12:00:00Z</updated>\n  <link href=\"https://example.org/\"/>\n  <entry>\n    <title>First entry</title>\n    <link rel=\"self\" href=\"https://example.org/entries/1.atom\"/>\n    <link rel=\"alternate\" type=\"text/html\" href=\"https://example.org/entries/1\"/>\n    <id>urn:uuid:entry-1</id>\n    <published>2026-10-29T08:30:00+02:00</published>\n    <updated>2026-10-30T09:00:00Z</updated>\n    <summary type=\"html\">&lt;p&gt;Hello &amp;amp; welcome&lt;/p&gt;</summary>\n  </entry>\n  <entry>\n    <title type=\"text\">Second entry</title>\n    <link href=\"https://example.org/entries/2\"/>\n    <id>urn:uuid:entry-2</id>\n    <updated>2026-10-28T10:00:00Z</updated>\n    <content type=\"html\">&lt;b&gt;Bold&lt;/b&gt; text</content>\n  </entry>\n</feed>\nEOF\ncat > $F/rss2.xml <<'EOF'\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\">\n<channel>\n  <title>Example RSS 2.0 Feed</title>\n  <link>https://example.com/</link>\n  <description>Fixture</description>\n  <item>\n    <title>Item with link</title>\n    <link>https://example.com/a</link>\n    <guid isPermaLink=\"false\">item-a</guid>\n    <pubDate>Mon, 02 Nov 2026 10:15:00 GMT</pubDate>\n    <description><![CDATA[<p>Summary <em>A</em></p>]]></description>\n  </item>\n  <item>\n    <title>Item with permalink guid only</title>\n    <guid>https://example.com/b</guid>\n    <pubDate>not a date</pubDate>\n    <content:encoded><![CDATA[<div>Body B</div>]]></content:encoded>\n  </item>\n  <item>\n    <title>Item with no date</title>\n    <link>https://example.com/c</link>\n  </item>\n</channel>\n</rss>\nEOF\ncat > $F/rss1.xml <<'EOF'\n<?xml version=\"1.0\"?>\n<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns=\"http://purl.org/rss/1.0/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n  <channel rdf:about=\"https://example.net/\">\n    <title>Example RSS 1.0</title>\n    <link>https://example.net/</link>\n    <description>Fixture</description>\n  </channel>\n  <item rdf:about=\"https://example.net/x\">\n    <title>RDF item</title>\n    <link>https://example.net/x</link>\n    <dc:date>2026-10-01T00:00:00Z</dc:date>\n    <description>Plain text</description>\n  </item>\n</rdf:RDF>\nEOF\ncat > $F/malformed.xml <<'EOF'\n<rss version=\"2.0\"><channel><title>Broken</title><item><title>Unclosed</item></channel></rss>\nEOF\ncat > $F/empty-channel.xml <<'EOF'\n<rss version=\"2.0\"><channel><title>Empty</title></channel></rss>\nEOF\ncat > $F/billion-laughs.xml <<'EOF'\n<?xml version=\"1.0\"?>\n<!DOCTYPE lolz [\n <!ENTITY lol \"lol\">\n <!ENTITY lol2 \"&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;\">\n <!ENTITY lol3 \"&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;\">\n]>\n<rss version=\"2.0\"><channel><title>&lol3;</title><item><title>x</title></item></channel></rss>\nEOF\ncat > $F/xxe.xml <<'EOF'\n<?xml version=\"1.0\"?>\n<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/passwd\">]>\n<rss version=\"2.0\"><channel><title>&xxe;</title><item><title>x</title></item></channel></rss>\nEOF\ncat > $F/not-a-feed.xml <<'EOF'\n<html><head><title>x</title></head><body><p>hi</p></body></html>\nEOF\ncat > $F/undefined-entity.xml <<'EOF'\n<rss version=\"2.0\"><channel><title>A&nbsp;B</title><item><title>x</title></item></channel></rss>\nEOF\nls $F | wc -l"
+      ],
+      "outputs": [
+        "products/actors/rss-reader/tests/fixtures/atom.xml",
+        "products/actors/rss-reader/tests/fixtures/rss2.xml",
+        "products/actors/rss-reader/tests/fixtures/rss1.xml",
+        "products/actors/rss-reader/tests/fixtures/malformed.xml",
+        "products/actors/rss-reader/tests/fixtures/empty-channel.xml",
+        "products/actors/rss-reader/tests/fixtures/billion-laughs.xml",
+        "products/actors/rss-reader/tests/fixtures/xxe.xml",
+        "products/actors/rss-reader/tests/fixtures/not-a-feed.xml",
+        "products/actors/rss-reader/tests/fixtures/undefined-entity.xml"
+      ],
+      "mission_id": "RSS-ACTOR-BUILD"
+    },
+    "description": "Broker action during THINK-1793669402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179366940212",
+  "input_sha256": "eefe5a570522725f231d05199072d9e29a14147196b021d2a2d9501cb6668d4e"
+}
