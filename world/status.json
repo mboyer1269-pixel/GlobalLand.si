@@ -249,9 +249,9 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "BUILDER",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "9b9TryrWM2JnJbvjp2hnnT03_MwPiCwS",
+      "lease_expires_at": 1793741428.626322,
       "evidence": []
     }
   ],
@@ -372,11 +372,6 @@
     }
   ],
   "events": [
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793458928.3266213,
-      "mission_id": "INVOICE-PRODUCT"
-    },
     {
       "type": "MISSION_CREATED",
       "timestamp": 1793458929.8739877,
@@ -973,6 +968,12 @@
       "timestamp": 1793736086.7979352,
       "blocker_id": "BOUNTY-SUBMISSION-ELIGIBILITY",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793737828.6263509,
+      "mission_id": "PUBLIC-DOCS-REPAIR",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
