@@ -374,11 +374,6 @@
   "events": [
     {
       "type": "MISSION_CREATED",
-      "timestamp": 1793458926.7912674,
-      "mission_id": "INVOICE-DEMAND"
-    },
-    {
-      "type": "MISSION_CREATED",
       "timestamp": 1793458928.3266213,
       "mission_id": "INVOICE-PRODUCT"
     },
@@ -972,6 +967,12 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793736085.06621,
       "mission_id": "PUBLIC-DOCS-REPAIR"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793736086.7979352,
+      "blocker_id": "BOUNTY-SUBMISSION-ELIGIBILITY",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
@@ -1008,6 +1009,21 @@
       "expected_gain": "Two Apify pay-per-event listings in jobs where incumbents show 39-53 users_30d (public Store snapshot); revenue unverified.",
       "last_reported_by": "BUILDER",
       "last_reported_at": 1793673052.8320463
+    },
+    {
+      "blocker_id": "BOUNTY-SUBMISSION-ELIGIBILITY",
+      "status": "OPEN",
+      "raised_by": "RESEARCHER",
+      "opened_at": 1793736086.7979198,
+      "reports": 1,
+      "title": "Expensify bounty submission and payout eligibility unverified",
+      "category": "ACCOUNT",
+      "needs_founder": true,
+      "detail": "Five advertised $250 issues were rejected for current execution. No dedicated authorized GitHub/Upwork submission access or payout eligibility is verified; the official contribution guide requires an accepted proposal before a PR, hiring on Upwork, a CLA and cross-platform testing. Evidence: products/research/public-bounty-opportunity.json. Do not create accounts, accept agreements or submit proposals on the founder's behalf. This route is parked while public-source documentation repair work proceeds.",
+      "mission_id": "PUBLIC-BOUNTY-OPPORTUNITY",
+      "expected_gain": "Would permit consideration of future sponsored tasks; no award, funding or payout is guaranteed.",
+      "last_reported_by": "RESEARCHER",
+      "last_reported_at": 1793736086.7979198
     }
   ],
   "lesson_count": 18
