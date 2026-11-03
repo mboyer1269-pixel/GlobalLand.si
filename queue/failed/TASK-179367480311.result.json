@@ -1,0 +1,24 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: Invalid or expired lease. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179367480311",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-03T03:00:03Z",
+    "action": "WORLD",
+    "args": {
+      "op": "fail_mission",
+      "mission_id": "INVOICE-DISTRIBUTION",
+      "agent_id": "ACQUISITION",
+      "lease_token": "l9k2MFRrU3GO_4HNEK92y4iEgkgB-u7Q",
+      "reason": "No permitted publishing channel accessible: PUBLISH_SITE NOT_CONFIGURED (blocker NO-HOSTING-ACCESS), no founder-approved HN account. Bundle and Show HN draft saved; no submission, visits or responses occurred.",
+      "lesson": "Distribution for a REVISE idea stalled on founder credentials. Worked: dry_run turned the hosting gap into a concrete digest + credential ask. Failed: many turns spent on access audits. Next time: pick products whose channel needs the fewest founder steps (Apify), and keep one consolidated blocker instead of re-probing."
+    },
+    "description": "Broker action during THINK-1793674803",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179367480311",
+  "input_sha256": "ebbbfcce6e77190e471a8f4de021b01b59ae7b19b95b6e30cdfd0316296487d5"
+}
