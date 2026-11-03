@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "ok 50\n\n",
+  "artifacts": [
+    "products/distribution/rss-reader-store-copy.json",
+    "products/distribution/link-checker-store-copy.json",
+    "products/receipts/TASK-179367300210.json"
+  ],
+  "request": {
+    "id": "TASK-179367300210",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-03T02:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json\np='products/distribution/rss-reader-store-copy.json'\nd=json.load(open(p,encoding='utf-8'))\nd['description_fr']=\"Lisez des flux publics RSS 2.0, RSS 1.0 (RDF) et Atom et obtenez une ligne JSON propre par article, avec les mêmes champs pour chaque flux : titre, lien, date de publication ISO 8601, résumé sans HTML et guid. Un flux en erreur renvoie une ligne d'erreur stable au lieu d'interrompre l'exécution. Conçu et maintenu par des agents d'IA autonomes.\"\nd['ai_disclosure']=\"Built and maintained by autonomous AI agents (GlobalLand). / Conçu et maintenu par des agents d'IA autonomes (GlobalLand).\"\njson.dump(d,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=1)\nt='Broken Link Checker - Bulk HTTP Status & Redirects'\nc={\n'status':'PREPARATION ONLY. Not listed. No private build, live run, users or revenue exist. The Apify wrapper (src/main.py) is untested until a private build runs (blocker NO-APIFY-ACCESS).',\n'sources':['products/actors/link-checker/README.md','products/actors/link-checker/llms.txt','products/actors/link-checker/actor-config/input_schema.json','products/actors/link-checker/core-test-results.json','products/research/next-idea-scan.json'],\n'store_title':t,'store_title_length':len(t),\n'seo_title':'Broken link checker: bulk check HTTP status codes, redirects and dead links for a URL list',\n'description_en':'Check a list of up to 1000 public http(s) URLs you supply (no crawling) and get one JSON row per URL: final HTTP status, ok flag, redirect count, final URL, stable error code (http_404, timeout, dns_error, redirect_loop...) and elapsed time. HEAD first with a GET fallback, one request at a time per host, identified User-Agent. Built and maintained by autonomous AI agents.',\n'description_fr':\"Vérifiez une liste de 1000 URL publiques http(s) au maximum que vous fournissez (sans exploration du site) et obtenez une ligne JSON par URL : code HTTP final, indicateur ok, nombre de redirections, URL finale, code d'erreur stable (http_404, timeout, dns_error, redirect_loop...) et durée. Requête HEAD d'abord, puis GET si nécessaire, une requête à la fois par hôte, User-Agent identifié. Conçu et maintenu par des agents d'IA autonomes.\",\n'example_input':{'urls':['https://example.com/','https://example.com/old-page'],'timeoutSecs':15,'maxRedirects':10},\n'output_fields':['url','final_url','status_code','redirect_count','ok','error_code','error','elapsed_ms'],\n'nullable_fields':['final_url','status_code','error_code','error'],\n'error_codes':['http_<status>','timeout','network_error','dns_error','tls_error','redirect_loop','too_many_redirects','invalid_scheme','invalid_url','blocked_address','internal_error'],\n'limits':['At most 1000 unique URLs per run; extra URLs dropped, duplicates removed.','timeoutSecs 1-60 (default 15); maxRedirects 0-20 (default 10).','Same starting host: one request at a time with a 0.5 s pause; up to 8 hosts in parallel. Redirects to another host are not throttled separately.','Private, loopback and other non-public addresses refused (blocked_address); this pre-connect check is a safeguard, not a guarantee.','Some sites block automated clients or answer HEAD/GET differently from a browser, so results may differ from what a person sees.','No crawling, no login, cookies or JavaScript rendering.'],\n'test_evidence':'21/21 offline tests in core-test-results.json (Python 3.11.2) against a local 127.0.0.1 server: 200, 301/302 chain, relative redirect, 404, 500, HEAD 405 -> GET, 1 s timeout, redirect loop, too many redirects, ftp/javascript schemes, invalid port, connection refused, blocked private addresses, per-host concurrency 1, 1000 cap, User-Agent. No public URL has been checked; the Apify wrapper is not executed.',\n'ai_disclosure':\"Built and maintained by autonomous AI agents (GlobalLand). / Conçu et maintenu par des agents d'IA autonomes (GlobalLand).\",\n'pricing_proposed':{'label':'PROPOSED, not active','link-checked_usd':0.0008,'apify-actor-start_usd':0.00005,'not_charged':'URLs rejected before any request (invalid_scheme, invalid_url, blocked_address)','incumbent_reference':'Incumbent khadinakbar charges USD 0.001 per link with 53 users_30d per products/research/next-idea-scan.json (public Store snapshot; paid-user share not observable).'},\n'kill_threshold':'Unlist or reframe if fewer than 3 external users within 14 days of public listing, measured with ACTOR_STATS.',\n'prerequisites_before_listing':['Founder supplies Apify config + 0600 credential','Private PUBLISH_ACTOR build succeeds','Real run on 3 public URLs saved with billed runtime','Independent APPROVE of the exact review_digest from another provider']}\nassert len(t)<=60\njson.dump(c,open('products/distribution/link-checker-store-copy.json','w',encoding='utf-8'),ensure_ascii=False,indent=1)\nprint('ok',len(t))"
+      ],
+      "outputs": [
+        "products/distribution/rss-reader-store-copy.json",
+        "products/distribution/link-checker-store-copy.json"
+      ],
+      "mission_id": "INVOICE-DISTRIBUTION"
+    },
+    "description": "Broker action during THINK-1793673002",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179367300210",
+  "input_sha256": "0da367262ec4583cec5739650ba9e68c2f159a96ee9bd329a6f613428b3570ae"
+}
