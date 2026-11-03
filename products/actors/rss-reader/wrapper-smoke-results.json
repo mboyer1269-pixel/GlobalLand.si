@@ -1,0 +1,165 @@
+{
+ "meta": {
+  "kind": "Apify wrapper smoke test with a STUB apify module (not the real SDK, not a platform build)",
+  "python": "3.11.2",
+  "date": "2026-11-03T04:00:51Z",
+  "server": "local 127.0.0.1 only"
+ },
+ "cases": [
+  [
+   "read_feed_signature",
+   "(url, max_items=50, fetcher=<function fetch at 0x7ebe803e4040>)"
+  ],
+  [
+   "none_input",
+   {
+    "input": null,
+    "exception": null,
+    "failed_status": "Provide at least one public feed URL in feedUrls",
+    "context_entered": true,
+    "context_exited": true,
+    "rows": 0,
+    "charges": {},
+    "sample_rows": []
+   }
+  ],
+  [
+   "empty_feeds",
+   {
+    "input": {
+     "feedUrls": []
+    },
+    "exception": null,
+    "failed_status": "Provide at least one public feed URL in feedUrls",
+    "context_entered": true,
+    "context_exited": true,
+    "rows": 0,
+    "charges": {},
+    "sample_rows": []
+   }
+  ],
+  [
+   "local_feed",
+   {
+    "input": {
+     "feedUrls": [
+      "http://127.0.0.1:36023/feed.xml",
+      "http://127.0.0.1:36023/feed.xml",
+      "http://127.0.0.1:36023/missing"
+     ],
+     "maxItems": 2
+    },
+    "exception": null,
+    "failed_status": null,
+    "context_entered": true,
+    "context_exited": true,
+    "rows": 3,
+    "charges": {
+     "item-parsed": 2
+    },
+    "sample_rows": [
+     {
+      "row_type": "item",
+      "feed_url": "http://127.0.0.1:36023/feed.xml",
+      "feed_title": "Example RSS 2.0 Feed",
+      "feed_format": "rss2",
+      "title": "Item with link",
+      "link": "https://example.com/a",
+      "published": "2026-11-02T10:15:00+00:00",
+      "summary": "Summary A",
+      "guid": "item-a",
+      "error_code": null,
+      "error": null
+     },
+     {
+      "row_type": "item",
+      "feed_url": "http://127.0.0.1:36023/feed.xml",
+      "feed_title": "Example RSS 2.0 Feed",
+      "feed_format": "rss2",
+      "title": "Item with permalink guid only",
+      "link": "https://example.com/b",
+      "published": null,
+      "summary": "Body B",
+      "guid": "https://example.com/b",
+      "error_code": null,
+      "error": null
+     },
+     {
+      "row_type": "error",
+      "feed_url": "http://127.0.0.1:36023/missing",
+      "feed_title": null,
+      "feed_format": null,
+      "title": null,
+      "link": null,
+      "published": null,
+      "summary": null,
+      "guid": null,
+      "error_code": "http_error",
+      "error": "HTTP 404"
+     }
+    ]
+   }
+  ],
+  [
+   "bad_maxItems",
+   {
+    "input": {
+     "feedUrls": [
+      "http://127.0.0.1:36023/feed.xml"
+     ],
+     "maxItems": "x"
+    },
+    "exception": null,
+    "failed_status": null,
+    "context_entered": true,
+    "context_exited": true,
+    "rows": 3,
+    "charges": {
+     "item-parsed": 3
+    },
+    "sample_rows": [
+     {
+      "row_type": "item",
+      "feed_url": "http://127.0.0.1:36023/feed.xml",
+      "feed_title": "Example RSS 2.0 Feed",
+      "feed_format": "rss2",
+      "title": "Item with link",
+      "link": "https://example.com/a",
+      "published": "2026-11-02T10:15:00+00:00",
+      "summary": "Summary A",
+      "guid": "item-a",
+      "error_code": null,
+      "error": null
+     },
+     {
+      "row_type": "item",
+      "feed_url": "http://127.0.0.1:36023/feed.xml",
+      "feed_title": "Example RSS 2.0 Feed",
+      "feed_format": "rss2",
+      "title": "Item with permalink guid only",
+      "link": "https://example.com/b",
+      "published": null,
+      "summary": "Body B",
+      "guid": "https://example.com/b",
+      "error_code": null,
+      "error": null
+     },
+     {
+      "row_type": "item",
+      "feed_url": "http://127.0.0.1:36023/feed.xml",
+      "feed_title": "Example RSS 2.0 Feed",
+      "feed_format": "rss2",
+      "title": "Item with no date",
+      "link": "https://example.com/c",
+      "published": null,
+      "summary": null,
+      "guid": null,
+      "error_code": null,
+      "error": null
+     }
+    ]
+   }
+  ]
+ ],
+ "requirements": "apify>=2.0.0\n"
+}

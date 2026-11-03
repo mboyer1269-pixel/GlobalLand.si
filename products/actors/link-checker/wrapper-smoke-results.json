@@ -1,0 +1,187 @@
+{
+ "meta": {
+  "kind": "Apify wrapper smoke test with a STUB apify module (not the real SDK, not a platform build)",
+  "python": "3.11.2",
+  "date": "2026-11-03T04:00:51Z",
+  "server": "local 127.0.0.1 only"
+ },
+ "cases": [
+  [
+   "none_input",
+   {
+    "input": null,
+    "exception": null,
+    "failed_status": "Provide at least one public http(s) URL in urls",
+    "context_entered": true,
+    "context_exited": true,
+    "rows": 0,
+    "charges": {},
+    "sample_rows": []
+   }
+  ],
+  [
+   "empty_urls",
+   {
+    "input": {
+     "urls": []
+    },
+    "exception": null,
+    "failed_status": "Provide at least one public http(s) URL in urls",
+    "context_entered": true,
+    "context_exited": true,
+    "rows": 0,
+    "charges": {},
+    "sample_rows": []
+   }
+  ],
+  [
+   "public_path_loopback_blocked",
+   {
+    "input": {
+     "urls": [
+      "http://127.0.0.1:36023/ok",
+      "ftp://x/",
+      "not a url",
+      "http://127.0.0.1:36023/ok"
+     ]
+    },
+    "exception": null,
+    "failed_status": null,
+    "context_entered": true,
+    "context_exited": true,
+    "rows": 3,
+    "charges": {},
+    "sample_rows": [
+     {
+      "url": "http://127.0.0.1:36023/ok",
+      "final_url": "http://127.0.0.1:36023/ok",
+      "status_code": null,
+      "redirect_count": 0,
+      "ok": false,
+      "error_code": "blocked_address",
+      "error": "host resolves to a non-public address",
+      "elapsed_ms": 0
+     },
+     {
+      "url": "ftp://x/",
+      "final_url": "ftp://x/",
+      "status_code": null,
+      "redirect_count": 0,
+      "ok": false,
+      "error_code": "invalid_scheme",
+      "error": "only http(s) URLs are accepted",
+      "elapsed_ms": 0
+     },
+     {
+      "url": "not a url",
+      "final_url": "not a url",
+      "status_code": null,
+      "redirect_count": 0,
+      "ok": false,
+      "error_code": "invalid_scheme",
+      "error": "only http(s) URLs are accepted",
+      "elapsed_ms": 0
+     }
+    ]
+   }
+  ],
+  [
+   "loopback_allowed_billable",
+   {
+    "input": {
+     "urls": [
+      "http://127.0.0.1:36023/ok",
+      "http://127.0.0.1:36023/old",
+      "http://127.0.0.1:36023/missing",
+      "ftp://x/"
+     ],
+     "timeoutSecs": "5",
+     "maxRedirects": 3
+    },
+    "exception": null,
+    "failed_status": null,
+    "context_entered": true,
+    "context_exited": true,
+    "rows": 4,
+    "charges": {
+     "link-checked": 3
+    },
+    "sample_rows": [
+     {
+      "url": "http://127.0.0.1:36023/ok",
+      "final_url": "http://127.0.0.1:36023/ok",
+      "status_code": 200,
+      "redirect_count": 0,
+      "ok": true,
+      "error_code": null,
+      "error": null,
+      "elapsed_ms": 1
+     },
+     {
+      "url": "http://127.0.0.1:36023/old",
+      "final_url": "http://127.0.0.1:36023/ok",
+      "status_code": 200,
+      "redirect_count": 1,
+      "ok": true,
+      "error_code": null,
+      "error": null,
+      "elapsed_ms": 3
+     },
+     {
+      "url": "http://127.0.0.1:36023/missing",
+      "final_url": "http://127.0.0.1:36023/missing",
+      "status_code": 404,
+      "redirect_count": 0,
+      "ok": false,
+      "error_code": "http_404",
+      "error": "HTTP 404",
+      "elapsed_ms": 1
+     },
+     {
+      "url": "ftp://x/",
+      "final_url": "ftp://x/",
+      "status_code": null,
+      "redirect_count": 0,
+      "ok": false,
+      "error_code": "invalid_scheme",
+      "error": "only http(s) URLs are accepted",
+      "elapsed_ms": 0
+     }
+    ]
+   }
+  ],
+  [
+   "bad_numeric_input",
+   {
+    "input": {
+     "urls": [
+      "http://127.0.0.1:36023/ok"
+     ],
+     "timeoutSecs": "abc",
+     "maxRedirects": 999
+    },
+    "exception": null,
+    "failed_status": null,
+    "context_entered": true,
+    "context_exited": true,
+    "rows": 1,
+    "charges": {
+     "link-checked": 1
+    },
+    "sample_rows": [
+     {
+      "url": "http://127.0.0.1:36023/ok",
+      "final_url": "http://127.0.0.1:36023/ok",
+      "status_code": 200,
+      "redirect_count": 0,
+      "ok": true,
+      "error_code": null,
+      "error": null,
+      "elapsed_ms": 1
+     }
+    ]
+   }
+  ]
+ ],
+ "requirements": "apify>=2.0.0\n"
+}

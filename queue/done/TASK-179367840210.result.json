@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "link-checker none_input exc= None fail= Provide at least one public http(s) URL in urls rows= 0 ch= {} []\nlink-checker empty_urls exc= None fail= Provide at least one public http(s) URL in urls rows= 0 ch= {} []\nlink-checker public_path_loopback_blocked exc= None fail= None rows= 3 ch= {} [('blocked_address', None), ('invalid_scheme', None), ('invalid_scheme', None)]\nlink-checker loopback_allowed_billable exc= None fail= None rows= 4 ch= {'link-checked': 3} [(None, None), (None, None), ('http_404', None), ('invalid_scheme', None)]\nlink-checker bad_numeric_input exc= None fail= None rows= 1 ch= {'link-checked': 1} [(None, None)]\nrss-reader ['read_feed_signature', '(url, max_items=50, fetcher=<function fetch at 0x7ebe803e4040>)']\nrss-reader none_input exc= None fail= Provide at least one public feed URL in feedUrls rows= 0 ch= {} []\nrss-reader empty_feeds exc= None fail= Provide at least one public feed URL in feedUrls rows= 0 ch= {} []\nrss-reader local_feed exc= None fail= None rows= 3 ch= {'item-parsed': 2} [(None, 'item'), (None, 'item'), ('http_error', 'error')]\nrss-reader bad_maxItems exc= None fail= None rows= 3 ch= {'item-parsed': 3} [(None, 'item'), (None, 'item'), (None, 'item')]\n\n",
+  "artifacts": [
+    "products/actors/link-checker/wrapper-smoke-results.json",
+    "products/actors/rss-reader/wrapper-smoke-results.json",
+    "products/receipts/TASK-179367840210.json"
+  ],
+  "request": {
+    "id": "TASK-179367840210",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T04:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import sys,os,json,asyncio,types,threading,http.server,importlib,inspect,functools,time,platform\nW='/workspace/products/actors/'\nclass A:\n    def reset(self,inp):\n        self.inp=inp;self.data=[];self.charges=[];self.failed=None;self.entered=False;self.exited=False\n    async def __aenter__(self):\n        self.entered=True;return self\n    async def __aexit__(self,*a):\n        self.exited=True;return False\n    async def get_input(self):\n        return self.inp\n    async def push_data(self,d):\n        json.dumps(d);self.data.append(d)\n    async def charge(self,event_name,count=1):\n        self.charges.append(event_name)\n    async def fail(self,status_message=None,exit_code=1,exception=None):\n        self.failed=status_message\nAct=A();stub=types.ModuleType('apify');stub.Actor=Act;sys.modules['apify']=stub\nfeed=open(W+'rss-reader/tests/fixtures/rss2.xml','rb').read()\nclass H(http.server.BaseHTTPRequestHandler):\n    def log_message(self,*a):pass\n    def _r(self,body):\n        p=self.path\n        if p=='/ok':self.send_response(200);self.end_headers()\n        elif p=='/feed.xml':\n            self.send_response(200);self.send_header('Content-Type','application/rss+xml');self.send_header('Content-Length',str(len(feed)));self.end_headers()\n            if body:self.wfile.write(feed)\n        elif p=='/old':self.send_response(301);self.send_header('Location','/ok');self.end_headers()\n        else:self.send_response(404);self.end_headers()\n    def do_HEAD(self):self._r(False)\n    def do_GET(self):self._r(True)\nsrv=http.server.ThreadingHTTPServer(('127.0.0.1',0),H);threading.Thread(target=srv.serve_forever,daemon=True).start()\nB='http://127.0.0.1:%d'%srv.server_address[1]\ndef load(name):\n    for k in [k for k in sys.modules if k=='src' or k.startswith('src.')]:del sys.modules[k]\n    sys.path[:]=[p for p in sys.path if not p.startswith(W)];sys.path.insert(0,W+name)\n    return importlib.import_module('src.main')\ndef run(m,inp):\n    Act.reset(inp);err=None\n    try:asyncio.run(m.main())\n    except Exception as e:err='%s: %s'%(type(e).__name__,e)\n    return {'input':inp,'exception':err,'failed_status':Act.failed,'context_entered':Act.entered,'context_exited':Act.exited,'rows':len(Act.data),'charges':{c:Act.charges.count(c) for c in set(Act.charges)},'sample_rows':Act.data[:4]}\nres={}\nm=load('link-checker')\nlc=[]\nlc.append(['none_input',run(m,None)])\nlc.append(['empty_urls',run(m,{'urls':[]})])\nlc.append(['public_path_loopback_blocked',run(m,{'urls':[B+'/ok','ftp://x/','not a url',B+'/ok']})])\norig=m.check_urls\nm.check_urls=functools.partial(orig,allow_private=True)\nlc.append(['loopback_allowed_billable',run(m,{'urls':[B+'/ok',B+'/old',B+'/missing','ftp://x/'],'timeoutSecs':'5','maxRedirects':3})])\nlc.append(['bad_numeric_input',run(m,{'urls':[B+'/ok'],'timeoutSecs':'abc','maxRedirects':999})])\nres['link-checker']=lc\nm=load('rss-reader')\ncore=sys.modules['src.core']\nrr=[['read_feed_signature',str(inspect.signature(core.read_feed))]]\nrr.append(['none_input',run(m,None)])\nrr.append(['empty_feeds',run(m,{'feedUrls':[]})])\nrr.append(['local_feed',run(m,{'feedUrls':[B+'/feed.xml',B+'/feed.xml',B+'/missing'],'maxItems':2})])\nrr.append(['bad_maxItems',run(m,{'feedUrls':[B+'/feed.xml'],'maxItems':'x'})])\nres['rss-reader']=rr\nmeta={'kind':'Apify wrapper smoke test with a STUB apify module (not the real SDK, not a platform build)','python':platform.python_version(),'date':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'server':'local 127.0.0.1 only'}\nfor name in res:\n    out={'meta':meta,'cases':res[name],'requirements':open(W+name+'/requirements.txt').read()}\n    json.dump(out,open(W+name+'/wrapper-smoke-results.json','w'),indent=1,default=str)\nfor name,cs in res.items():\n    for c in cs:\n        if isinstance(c[1],dict):print(name,c[0],'exc=',c[1]['exception'],'fail=',c[1]['failed_status'],'rows=',c[1]['rows'],'ch=',c[1]['charges'],[ (r.get('error_code'),r.get('row_type')) for r in c[1]['sample_rows']])\n        else:print(name,c)\n"
+      ],
+      "outputs": [
+        "products/actors/link-checker/wrapper-smoke-results.json",
+        "products/actors/rss-reader/wrapper-smoke-results.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793678402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179367840210",
+  "input_sha256": "56e1749b039ac9b2c8c5907b1d020c26aa7384d222bb41d8d5bd3452642b2dd9"
+}
