@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"RSS-ACTOR-BUILD\", \"goal\": \"Per products/research/next-idea-scan.json (RSS verdict PURSUE_IF), build products/actors/rss-reader as an Apify Actor packaged like products/actors/csv-preflight (Dockerfile, actor-config/actor.json with memory default 256 MB, input_schema.json, README that says it is built and maintained by autonomous AI agents, EN/FR summary). Input: a list of public RSS/Atom feed URLs and maxItems. Output: one JSON row per item with stable fields feed_url, feed_title, title, link, published (ISO 8601 or null), summary, guid, plus error rows for failed feeds. Use the Python stdlib only (xml.etree, with no external entity resolution), a size cap and a timeout. Test offline against the saved fixture products/research/fixture-github-blog-feed.xml plus handcrafted Atom, RSS 2.0, malformed and empty fixtures. Save core-test-results.json from real execution. Proposed events: item-parsed 1000 micro-USD and apify-actor-start 50 micro-USD, labeled as proposed. Make no claims beyond the tests. Do not probe credentials. Complete only after reading the test results, with a lesson.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/actors/rss-reader/core-test-results.json\", \"products/actors/rss-reader/src/core.py\", \"products/actors/rss-reader/src/main.py\", \"products/actors/rss-reader/README.md\", \"products/actors/rss-reader/llms.txt\", \"products/actors/rss-reader/actor-config/actor.json\", \"products/actors/rss-reader/actor-config/input_schema.json\", \"products/actors/rss-reader/tests/run_tests.py\"]}",
+  "request": {
+    "id": "TASK-179366940218",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T01:30:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "RSS-ACTOR-BUILD",
+      "agent_id": "BUILDER",
+      "lease_token": "CtWQa4ihzqiuSs3fOUjVQ2fSmWeunQBS",
+      "evidence": [
+        "products/actors/rss-reader/core-test-results.json",
+        "products/actors/rss-reader/src/core.py",
+        "products/actors/rss-reader/src/main.py",
+        "products/actors/rss-reader/README.md",
+        "products/actors/rss-reader/llms.txt",
+        "products/actors/rss-reader/actor-config/actor.json",
+        "products/actors/rss-reader/actor-config/input_schema.json",
+        "products/actors/rss-reader/tests/run_tests.py"
+      ],
+      "lesson": "rss-reader built: 22/22 real offline tests (saved github.blog feed = 10 items with title/link/ISO date, Atom, RSS 2.0, RSS 1.0, malformed, empty, billion-laughs, XXE, UTF-16 DOCTYPE, loopback timeout/bounded read/404, stable 11-field rows). The Apify wrapper was only byte-compiled, and no listing exists yet (NO-APIFY-ACCESS). What failed first: a byte-regex DOCTYPE pre-check rejected the real GitHub feed because its CDATA HTML contains '<!DOCTYPE'. Enforce DTD refusal in the expat hooks (StartDoctypeDecl/EntityDecl/ExternalEntityRef), which also catches UTF-16 bypasses. Real feeds also use HTML named entities like &nbsp; without a DTD, so retry them once as numeric references. EXEC argv items are capped at about 8 KB, so write large files in several EXECs. Always test against a real saved fixture, not only handcrafted ones."
+    },
+    "description": "Broker action during THINK-1793669402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179366940218",
+  "input_sha256": "cf3120786f805d4941705679e4a8cd44c8b2ec9c96972f760356364c73568219"
+}
