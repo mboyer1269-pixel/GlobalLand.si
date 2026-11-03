@@ -1,0 +1,915 @@
+{
+  "data": {
+    "total": 2310,
+    "count": 15,
+    "offset": 0,
+    "limit": 15,
+    "desc": false,
+    "items": [
+      {
+        "title": "Sitemap Extractor",
+        "name": "sitemap-extractor",
+        "username": "apify",
+        "stats": {
+          "totalBuilds": 77,
+          "totalRuns": 9398,
+          "totalUsers": 438,
+          "totalUsers7Days": 17,
+          "totalUsers30Days": 49,
+          "totalUsers90Days": 134,
+          "lastRunStartedAt": "2026-11-02T09:00:37.211Z",
+          "actorReviewCount": 8,
+          "actorReviewRating": 3.24065679283384,
+          "bookmarkCount": 8,
+          "publicActorRunStats30Days": {
+            "ABORTED": 29,
+            "FAILED": 34,
+            "SUCCEEDED": 219,
+            "TIMED-OUT": 3,
+            "TOTAL": 285
+          }
+        },
+        "description": "This Apify Actor extracts all URLs from a website's sitemaps and checks their status codes via lightweight HTTP requests. It provides a clean list of valid links, acting as an ideal pre-processor to ensure your larger crawling projects target only active URLs.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS",
+          "OPEN_SOURCE"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/RfdEwfz18122xY1eZrerZ5nLzrr9g7nBMTG57jJInkU/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vWnNjTXdGUjVIN2VDdFd0eWgtYWN0b3ItckdlVE5FU0NoRFo2NUViWWgtOEJvOVdtWFozYi1TaXRlbWFwX0V4dHJhY3Rvci12NC5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 8,
+        "actorReviewRating": 3.24065679283384,
+        "actorReviewCount": 8,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Apify",
+        "userPictureUrl": "https://images.apifyusercontent.com/W831qifiDbg1ltpsHQIGyWH55ztmmv7T4EILHVqoFU4/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vSTdzZWx3YUVOam9GRG9Td3J3ODFQYXc2SEpXSjJRZk0tNzhMa1ZxcEtEQS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZXbk5qVFhkR1VqVklOMlZEZEZkMGVXZ3RjSEp2Wm1sc1pTMVBiamhzU0U1bGJrSnZMV0Z3YVdaNUxYTjViV0p2YkMxamIyeHZjbk10YldGeVoybHVMbk4yWnk1d2JtYy5wbmc.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.0005
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0003
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0002
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0001
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0001
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0001
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-02-23T11:47:11.822Z",
+          "createdAt": "2026-02-23T11:47:12.260Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "rGeTNESChDZ65EbYh",
+        "url": "https://apify.com/apify/sitemap-extractor"
+      },
+      {
+        "title": "Sitemap URL Extractor",
+        "name": "sitemap-url-extractor",
+        "username": "onescales",
+        "stats": {
+          "totalBuilds": 26,
+          "totalRuns": 9677,
+          "totalUsers": 662,
+          "totalUsers7Days": 8,
+          "totalUsers30Days": 20,
+          "totalUsers90Days": 40,
+          "lastRunStartedAt": "2026-11-02T04:02:19.385Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 2,
+            "FAILED": 0,
+            "SUCCEEDED": 157,
+            "TIMED-OUT": 1,
+            "TOTAL": 160
+          },
+          "actorReviewCount": 3,
+          "actorReviewRating": 5.000000000000001,
+          "bookmarkCount": 14
+        },
+        "description": "Provide a website link to a sitemap.xml and the app will extract and list all URLs in the sitemap as well as additional data in the sitemap (i.e. https://onescales.com/sitemap.xml).",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "ECOMMERCE",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/wruqiZ4tJ-E-7wvK38fz8vOXTSy3mfb9_qwN8-JjKsw/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vVnpmSTRJQlZXUTNRSTZBcGEtYWN0b3ItT3BzVG5UZXdVdlNYWEtjTnEtaFpZaHJSYmRNZi1zaXRlbWFwLXVybC1leHRyYWN0b3ItYXBpZnktYXBwLWxvZ28ucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 14,
+        "actorReviewRating": 5.000000000000001,
+        "actorReviewCount": 3,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "One Scales",
+        "userPictureUrl": "https://images.apifyusercontent.com/OvUT-kfj9rOcHvf7gNdpNj3Nts66kIN-FXLM9ptC1nY/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vR3hMdkpTNU9yUG9RZFVZUUhkdU8zSTNyZHNfOW5yQVJRR2J0eVFPd0l4QS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZWbnBtU1RSSlFsWlhVVE5SU1RaQmNHRXRjSEp2Wm1sc1pTMTJWRUZaYzNjeFpHVnlMV1poZG1samIyNHROVEV5TG5CdVp3LnBuZw.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.03
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0028
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0026
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.001
+                  }
+                },
+                "isPrimaryEvent": true
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              }
+            }
+          },
+          "startedAt": "2026-10-15T03:43:28.428Z",
+          "createdAt": "2026-10-15T03:43:28.795Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-15T04:00:32.832Z"
+        },
+        "id": "OpsTnTewUvSXXKcNq",
+        "url": "https://apify.com/onescales/sitemap-url-extractor"
+      },
+      {
+        "title": "Sitemap Detector",
+        "name": "sitemap-detector",
+        "username": "coder_zoro",
+        "stats": {
+          "totalBuilds": 5,
+          "totalRuns": 2816,
+          "totalUsers": 182,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 0,
+          "totalUsers90Days": 3,
+          "lastRunStartedAt": "2026-11-01T12:14:28.837Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          },
+          "actorReviewCount": 3,
+          "actorReviewRating": 5,
+          "bookmarkCount": 11
+        },
+        "description": "Find sitemap URLs fast with our free Sitemap Finder tool. Instantly detect sitemaps from any website for SEO audits, indexing checks, and crawl planning. Improve visibility, site structure insights, and search engine performance in just seconds",
+        "categories": [
+          "ECOMMERCE",
+          "AUTOMATION",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/16UxMtkg0BbjIjc3ZjZT3OK67K-PCRpKAZgz_xIkejU/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vZUtwZGE3bGREaUdEblNPbVktYWN0b3Itdzl6YU9ieXVZMnhrVkRrOUMtRzJnN3hrTzYyYy1DaGF0R1BUX0ltYWdlX0p1bF8yX18yMDI1X18wNV8wNF8wOF9QTS5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 11,
+        "actorReviewRating": 5,
+        "actorReviewCount": 3,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Zoro",
+        "userPictureUrl": "https://images.apifyusercontent.com/BwxBrvgOLhnTsD9ikhc8Z3r7u6u3y81YtHzz80n8zTg/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vQzF3d2dOZlZHWllFTUR5UW1OX1d5Y2tmVERpLXk2RHpQOHdkdFExSzZZdy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZaVXR3WkdFM2JHUkVhVWRFYmxOUGJWa3RjSEp2Wm1sc1pTMXhNVmg1Vmt4WlkwaG5MVlZ1ZEdsMGJHVmtYMlJsYzJsbmJpNXdibWMucG5n.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.00499
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00432
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00366
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00299
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00299
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00299
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-08-29T13:15:33.966Z",
+          "createdAt": "2026-08-29T13:15:34.217Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-08-29T13:35:46.308Z"
+        },
+        "id": "w9zaObyuY2xkVDk9C",
+        "url": "https://apify.com/coder_zoro/sitemap-detector"
+      },
+      {
+        "title": "Website Metadata Extractor(sitemap, socialLinks, robotsTxt)",
+        "name": "website-metadata-extractor",
+        "username": "codescraper",
+        "stats": {
+          "totalBuilds": 30,
+          "totalRuns": 20546,
+          "totalUsers": 117,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 4,
+          "totalUsers90Days": 8,
+          "lastRunStartedAt": "2026-11-01T15:28:23.331Z",
+          "actorReviewCount": 2,
+          "actorReviewRating": 5,
+          "bookmarkCount": 3,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 39,
+            "TIMED-OUT": 0,
+            "TOTAL": 39
+          }
+        },
+        "description": "A fast metadata extractor for all meta tags, robots.txt, sitemaps, 15+ social links, H1s, word count, JSON-LD data, contacts & technology detection. Now with AI business & industry classification. Pay-per-event from $1/1k domains with zero server rental.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/bfHBrhPDp11CgLEv4_SyuuHQjX2F9P8vqL3VPyGB4IQ/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vc2hWYjA1S0ZSdnVPSjh0WHktYWN0b3ItcVBDRG5LS1J2VFJNY3BwbVktY21QdDRWblAyUy1XZWJzaXRlX01ldGFEYXRhX0V4dHJhY3Rvci5zdmcucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 3,
+        "actorReviewRating": 5,
+        "actorReviewCount": 2,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "CodeScraper",
+        "userPictureUrl": "https://images.apifyusercontent.com/ggVHx58HwAWwcSoPFstm9adycswtGF4I0rvpYKcetkE/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vN0R2MGVzSS1OdG1SVVY5WG1CNmhlSnFzWTViRy1ZdXo1NFlId25UVnhJay9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZjMmhXWWpBMVMwWlNkblZQU2poMFdIa3RjSEp2Wm1sc1pTMDRTSGRIYzBKRlRFNVFMVUZ3YVdaNVgxQnliMlpwYkdWZlNXMWhaMlV1Y0c1bi5wbmc.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "reasonForChange": "Upgraded to full AI company intelligence (business model, ICP, core offerings, company stage, compliance signals) and multi-channel contact extraction.",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.005
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.0005
+              },
+              "domain-processed": {
+                "eventTitle": "Domain Analyzed & Extracted",
+                "eventDescription": "Standard domain extraction ($0.001 per domain / $1 per 1,000 domains). Failed or unreachable domains cost $0.00.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0009
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0008
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0007
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0007
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0007
+                  }
+                },
+                "isPrimaryEvent": true
+              },
+              "ai-nature-of-business": {
+                "eventTitle": "AI Business & Industry Classification",
+                "eventDescription": "AI nature of business and company intelligence using Groq openai/gpt-oss-120b ($0.003 per domain / $3 per 1,000 domains). Combined with base extraction is $0.004 per domain ($4 per 1,000 domains). Failed domains cost $0.00.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.003
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0028
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0027
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0026
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0026
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0026
+                  }
+                }
+              }
+            }
+          },
+          "startedAt": "2026-11-01T11:32:22.083Z",
+          "createdAt": "2026-10-18T11:32:26.575Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-10-18T11:32:46.917Z",
+          "notifiedAboutChangeAt": "2026-11-01T12:00:27.313Z"
+        },
+        "id": "qPCDnKKRvTRMcppmY",
+        "url": "https://apify.com/codescraper/website-metadata-extractor"
+      },
+      {
+        "title": "Sitemap Extractor: Website → All URLs (sitemap.xml parser)",
+        "name": "sitemap-extractor",
+        "username": "boxbox10",
+        "stats": {
+          "totalBuilds": 2,
+          "totalRuns": 282,
+          "totalUsers": 56,
+          "totalUsers7Days": 15,
+          "totalUsers30Days": 33,
+          "totalUsers90Days": 44,
+          "lastRunStartedAt": "2026-11-02T08:51:01.002Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 5,
+            "FAILED": 0,
+            "SUCCEEDED": 151,
+            "TIMED-OUT": 5,
+            "TOTAL": 161
+          }
+        },
+        "description": "Give it a website. Get every URL from its sitemap — loc, lastmod, changefreq, priority — as one clean record per URL. Auto-discovers sitemap.xml, robots.txt Sitemap: directives, and nested sitemap indexes. Perfect for SEO audits, crawl seeding, and URL discovery.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Marvin Eguilos",
+        "userPictureUrl": "https://images.apifyusercontent.com/dwPcBkWQWP5xP92qrFElIPXbE4ojnlvjZ2rTX5aeYEY/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUFl4UkFMZTJPY3BTZ2Q3dlZvMHNUS2RqOXBNREZQSEFlbWlVaXFSNlZhSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpUR05MY1ZOclRWSlNXSFF4VUcxV2NGSk5ZblV0TjFkdlFWUlBkR2s0T1ZwbldHeHRTRlU0ZG5nd1kzZDJkRzFmTWxwMWR6MXpPVFl0WXc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "FREE"
+        },
+        "id": "4PwuQ9YmC9EkzF3ld",
+        "url": "https://apify.com/boxbox10/sitemap-extractor"
+      },
+      {
+        "title": "Website Metadata Extractor (meta tags, sitemap, robots)  🔎",
+        "name": "website-metadata-extractor",
+        "username": "powerful_bachelor",
+        "stats": {
+          "totalBuilds": 13,
+          "totalRuns": 11928,
+          "totalUsers": 8,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-01T12:46:29.486Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 27,
+            "TIMED-OUT": 0,
+            "TOTAL": 27
+          },
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 1
+        },
+        "description": "🔍 Website Metadata Extractor 🌐 Extract essential website data: meta tags, robots.txt, and sitemap.xml in one scan. 📊 Analyze SEO elements, crawler directives, and site structure. ✅ Perfect for SEO audits, 🔎 competitor research, and 🚀 understanding how search engines view your website.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/O6Eo3nZsB2SWdWZSrW7NZd_lZciszS3cwNk-by-oWwI/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vUGc2NUduQTJRRmZSWVE4ZEEtYWN0b3IteGZheTV2eGluTDdGbEZxZmYtUjI5TWtDT1hBbC1DaGF0R1BUX0ltYWdlX0p1bl8xMV9fMjAyNV9fMDFfMjFfMTdfUE0ucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 1,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Powerful Bachelor",
+        "userPictureUrl": "https://images.apifyusercontent.com/6wA1hw5w1k773L73w_3KnPxJR7rrIjxR4D5WMpIKlHw/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUlRxUUxmR3BsZmF6VExXV044a29uWmZKdzRubTN6T0ozQ0lzbGxSOEVtSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZVR2MyTlVkdVFUSlJSbVpTV1ZFNFpFRXZhMUUzUzNCaWNXSlVjRTlTUzFjNFNqWXRiVjhsTWpneEpUSTVMbkJ1WncucG5n.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.004
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0048
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0046
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0044
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0044
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0044
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-09-22T17:19:58.348Z",
+          "createdAt": "2026-09-22T17:19:59.822Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-09-22T17:36:07.706Z"
+        },
+        "id": "xfay5vxinL7FlFqff",
+        "url": "https://apify.com/powerful_bachelor/website-metadata-extractor"
+      },
+      {
+        "title": "Sitemap Change Detector",
+        "name": "sitemap-change-detector",
+        "username": "tri_angle",
+        "stats": {
+          "totalBuilds": 10,
+          "totalRuns": 633,
+          "totalUsers": 73,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 4,
+          "lastRunStartedAt": "2026-11-02T08:32:01.380Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 131,
+            "TIMED-OUT": 0,
+            "TOTAL": 131
+          },
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 4
+        },
+        "description": "Identify and monitor sitemaps for specified websites. Retrieve only the new, updated, or removed URLs since the last crawl.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS",
+          "INTEGRATIONS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/dxXKm0K96y7IjYwksDY7hbP1cULFQs9plyRr9J1Seh8/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vYzNycTVidHo5NGVGZTZUZ20tYWN0b3ItNWt6Qno4ZVdZUDJ0S0FEaW4telBuc2hjcnR2Ri1TQ1ItMjAyNTA2MjAtbHN0dC5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 4,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Tri⟁angle",
+        "userPictureUrl": "https://images.apifyusercontent.com/KyTUecaNlLL-rqWdW9dl65s7f3iJ3uwICVJ-u3QZRHQ/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vWDdyanN1S0VhWXdxOEdndmdYSUNEdGEzX0xDajRiSU1kX0ZqLXlOaHpXUS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZZek55Y1RWaWRIbzVOR1ZHWlRaVVoyMHZjVk5QUTJ4U1JqRnBTV000ZVZGQ1NUWXRWSEpwWVc1bmJHVmZYMTlQY21GdVoyVmZKVEk0TVNVeU9TNXdibWMucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "FREE"
+        },
+        "id": "5kzBz8eWYP2tKADin",
+        "url": "https://apify.com/tri_angle/sitemap-change-detector"
+      },
+      {
+        "title": "Sitemap Health Validator",
+        "name": "my-actor",
+        "username": "predictable_function",
+        "stats": {
+          "totalBuilds": 5,
+          "totalRuns": 384,
+          "totalUsers": 66,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T22:02:24.827Z",
+          "actorReviewCount": 2,
+          "actorReviewRating": 5,
+          "bookmarkCount": 1,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 28
+          }
+        },
+        "description": "Validates sitemap.xml files and checks health of listed URLs",
+        "categories": [
+          "SEO_TOOLS"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 1,
+        "actorReviewRating": 5,
+        "actorReviewCount": 2,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "riya rawat",
+        "userPictureUrl": "https://images.apifyusercontent.com/dP44El1-62b2SlpvWYMK6ZbIpGtORRlU-Bs7OZK0HEw/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vTHY3MTFCZ1B6RW9TSVlrWGg2aEhwRTNzZWtVbThoc1M0b2g1QnBVamZSTS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloZG1GMFlYSnpMbWRwZEdoMVluVnpaWEpqYjI1MFpXNTBMbU52YlM5MUx6SXpOVGs0TkRVM09UOTJQVFE.webp",
+        "currentPricingInfo": {
+          "pricingModel": "FREE"
+        },
+        "id": "08nUNGUAFFrShSskq",
+        "url": "https://apify.com/predictable_function/my-actor"
+      },
+      {
+        "title": "Sitemap to URL Crawler — Extract Sitemap.xml URLs",
+        "name": "sitemap-to-url-crawler",
+        "username": "logiover",
+        "stats": {
+          "totalBuilds": 37,
+          "totalRuns": 464,
+          "totalUsers": 63,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 12,
+          "lastRunStartedAt": "2026-11-02T00:24:26.879Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 1,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 31,
+            "TIMED-OUT": 0,
+            "TOTAL": 31
+          }
+        },
+        "description": "Extract all URLs from any sitemap.xml recursively. Export sitemap URLs to CSV/JSON for RAG pipelines, SEO audits, and LLM training datasets.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/O3Q23maDv7aZWoyRz31jFoU9W9iYA7d_TI9JTvcmWNs/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vR2pTNm5ROHFhdU9kcTlLR3ktYWN0b3ItMExTYnpvQUVGUnhmcWJtZVotQlNRaFpwdXV5ZC11bm5hbWVkXyUyODUlMjkuanBn.webp",
+        "notice": "NONE",
+        "bookmarkCount": 1,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Logiover",
+        "userPictureUrl": "https://images.apifyusercontent.com/kxSRwmWqUkC5jJXw5FI9NYpfuhuSdnO30XYx7OCQu1M/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vZ1JTQnpIUXlnbFY4YTFCakgwNjlyQUNheTdtQjRlenN2NFJmanFPTWNJTS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZSMnBUTm01Uk9IRmhkVTlrY1RsTFIza3RjSEp2Wm1sc1pTMVlWMUl6VEdGWGFVNVBMVWRxVXpadVVUaHhZWFZQWkhFNVMwZDVMWEJ5YjJacGJHVXRlR1ZYTkhaUE1GUlRWUzExYm01aGJXVmtMbkJ1WncucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "createdAt": "2026-01-30T02:05:07.355Z",
+          "startedAt": "2026-01-30T02:05:07.355Z",
+          "apifyMarginPercentage": 0.2,
+          "isPriceChangeNotificationSuppressed": true,
+          "reasonForChange": "Migration from Pay Per Result to Pay Per Event with apify-default-dataset-item event",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.0015
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00116667
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00083333
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0005
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0005
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0005
+                  }
+                }
+              }
+            }
+          },
+          "forceContainsSignificantPriceChange": false
+        },
+        "id": "0LSbzoAEFRxfqbmeZ",
+        "url": "https://apify.com/logiover/sitemap-to-url-crawler"
+      },
+      {
+        "title": "Sitemap Change Orchestrator",
+        "name": "sitemap-change-orchestrator",
+        "username": "tri_angle",
+        "stats": {
+          "totalBuilds": 9,
+          "totalRuns": 135,
+          "totalUsers": 45,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 3,
+          "lastRunStartedAt": "2026-10-27T12:38:23.815Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 0,
+            "TIMED-OUT": 16,
+            "TOTAL": 16
+          },
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 6
+        },
+        "description": "Monitor website sitemaps for new, updated, or removed URLs. Integration with the Website Content Crawler (WCC) allows feeding only relevant URLs. This ensures your web crawls are efficient, targeted, and resource-optimized, keeping your datasets fresh for any application.",
+        "categories": [
+          "AI",
+          "INTEGRATIONS",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/KQVIJQzai5uDmeuaP4Cy6mesGhquJlOO62W0YBZlhIg/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vYzNycTVidHo5NGVGZTZUZ20tYWN0b3ItZndRMnpWc0FRR3RqaGdvTnctNk9oVENEdDhhVS1TQ1ItMjAyNTA2MjAtbHF2cy5qcGVn.webp",
+        "notice": "NONE",
+        "bookmarkCount": 6,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Tri⟁angle",
+        "userPictureUrl": "https://images.apifyusercontent.com/KyTUecaNlLL-rqWdW9dl65s7f3iJ3uwICVJ-u3QZRHQ/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vWDdyanN1S0VhWXdxOEdndmdYSUNEdGEzX0xDajRiSU1kX0ZqLXlOaHpXUS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZZek55Y1RWaWRIbzVOR1ZHWlRaVVoyMHZjVk5QUTJ4U1JqRnBTV000ZVZGQ1NUWXRWSEpwWVc1bmJHVmZYMTlQY21GdVoyVmZKVEk0TVNVeU9TNXdibWMucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "FREE"
+        },
+        "id": "fwQ2zVsAQGtjhgoNw",
+        "url": "https://apify.com/tri_angle/sitemap-change-orchestrator"
+      },
+      {
+        "title": "Fast Sitemap Generator",
+        "name": "sitemap-generator",
+        "username": "eunit",
+        "stats": {
+          "totalBuilds": 35,
+          "totalRuns": 373,
+          "totalUsers": 36,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 3,
+          "lastRunStartedAt": "2026-11-01T12:18:27.804Z",
+          "actorReviewCount": 1,
+          "actorReviewRating": 5,
+          "bookmarkCount": 4,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 27,
+            "TIMED-OUT": 0,
+            "TOTAL": 27
+          }
+        },
+        "description": "Boost SEO with this automatic Sitemap Generator. Crawl any site to create XML, HTML, & TXT sitemaps. Supports custom depth, regex filters, & robots.txt. Compatible with Google Search Console.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/7a0t1wdBjgTJf3Jj8aFq0gU7tj1ssL7H9YFo8ivB2l0/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vUmpvUWtlU2piN0xNNnNyaU0tYWN0b3ItQWNsYjczbXY1aDdwTTVWd3EtWFhMbWZnRlJjNy1XaGF0LWlzLWEtV2ViLUNyYXdsZXItb3ItQm90LnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 4,
+        "actorReviewRating": 4.999999999999999,
+        "actorReviewCount": 1,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Emmanuel Uchenna",
+        "userPictureUrl": "https://images.apifyusercontent.com/K0UL4mLz5ZbHedf1uiVTTOKQW64DRImy-e9akoFd-lc/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vc1JiQ1N6SXlqUy1hMWxHSHdzWUgwWTZCNmVPN0ZTRkVJMjNtZWEybGFRRS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloZG1GMFlYSnpMbWRwZEdoMVluVnpaWEpqYjI1MFpXNTBMbU52YlM5MUx6STBPRFExTURBNA.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "page-crawled": {
+                "eventTitle": "Successful crawling of a page",
+                "eventDescription": "Successful crawling of a page",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.099
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.097
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.091
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.08
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.08
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.08
+                  }
+                },
+                "isPrimaryEvent": true
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.007
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.05
+              }
+            }
+          },
+          "startedAt": "2026-07-19T08:06:10.471Z",
+          "createdAt": "2026-07-19T08:06:11.936Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-07-19T08:35:37.087Z"
+        },
+        "id": "Aclb73mv5h7pM5Vwq",
+        "url": "https://apify.com/eunit/sitemap-generator"
+      },
+      {
+        "title": "Sitemap Generator",
+        "name": "sitemap-generator",
+        "username": "igview-owner",
+        "stats": {
+          "totalBuilds": 12,
+          "totalRuns": 350,
+          "totalUsers": 30,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 0,
+          "totalUsers90Days": 0,
+          "lastRunStartedAt": "2026-11-01T12:44:25.202Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 2,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 27,
+            "TIMED-OUT": 0,
+            "TOTAL": 27
+          }
+        },
+        "description": "Automatically crawl any website and generate XML, HTML, and text sitemaps for SEO optimization. Perfect for submitting to Google Search Console, Bing Webmaster Tools, and improving search engine indexing. no manual work required. Free sitemap generator tool for WordPress, Blogger, and all website.",
+        "categories": [
+          "AUTOMATION",
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/IY49_uimjZxdO9TB91RWVoybnoCXjQMIUKnoMhung8U/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vdVZ0TGFjRzZxMnozcHBOV0otYWN0b3ItZmxmdVZkbWFjRnFRRWJFWTUtWWlJRUg5RmZDci1zaXRlbWFwX2dlbmVyYXRvci10b29sLnBuZy5qcGc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 2,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Sachin Kumar Yadav",
+        "userPictureUrl": "https://images.apifyusercontent.com/vuRLinymPhXZMdQ8gDXfChOz0w3vmkX3QzgyAFpBzYk/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vWlFrYjNSc2hucThxdFJoakJwQlRWUkQ0QmtFbTdpV3JWRHBHWTVhU2ZjMC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTWGcxVnpOd1gwVkxOMDFJTXpWRllUTkplVmh5UlZkUVMzZEpUMkpRUTBobkxVSkVYM1IwWjNwTFpXaEhjMUJwV1dz.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.02
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.007
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.007
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.005
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.005
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.005
+                  }
+                },
+                "isPrimaryEvent": true
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.02
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.003
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.002
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.001
+                  }
+                }
+              }
+            }
+          },
+          "startedAt": "2026-10-25T13:14:55.736Z",
+          "createdAt": "2026-10-25T13:14:56.088Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-25T13:30:26.866Z"
+        },
+        "id": "flfuVdmacFqQEbEY5",
+        "url": "https://apify.com/igview-owner/sitemap-generator"
+      }
+    ]
+  }
+}
