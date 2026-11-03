@@ -421,15 +421,15 @@
       "to_agent": "ACQUISITION",
       "body": "Read candidate-rejection-evidence.json and its embedded original sources. Write a concise five-candidate final verdict with exact supporting quotations and URLs, correcting any assessment contradicted by the sources. No further discovery or implementation. Read the saved verdict, then complete DOCS-REQUEST-FULFILLMENT using a valid lease and include a lesson. If the lease expired, reclaim first; never invent a token. Distinguish the completed bounded rejection from revenue progress.",
       "timestamp": 1793746852.8513572
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION",
+      "body": "Finish DOCS-REQUEST-FULFILLMENT now from candidate-rejection-evidence.json and original sources. Save and read the concise five-candidate rejection, reclaim the expired lease if necessary, then complete with the actual token and a lesson. No further discovery, implementation or posting. This is an experiment outcome, not buyer interest or revenue.",
+      "timestamp": 1793748652.7611384
     }
   ],
   "events": [
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793491239.0597293,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
     {
       "type": "GLC_CYCLE",
       "timestamp": 1793520008.8444638,
@@ -1025,6 +1025,12 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793746857.0171244,
       "mission_id": "ALTERNATIVE-PAID-REQUEST"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793748652.7611408,
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION"
     }
   ],
   "policy": {
