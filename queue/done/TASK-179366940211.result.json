@@ -1,0 +1,43 @@
+{
+  "status": "DONE",
+  "output": "PKG_OK\n\n",
+  "artifacts": [
+    "products/actors/rss-reader/src/__init__.py",
+    "products/actors/rss-reader/src/__main__.py",
+    "products/actors/rss-reader/src/main.py",
+    "products/actors/rss-reader/requirements.txt",
+    "products/actors/rss-reader/Dockerfile",
+    "products/actors/rss-reader/actor-config/actor.json",
+    "products/actors/rss-reader/actor-config/input_schema.json",
+    "products/receipts/TASK-179366940211.json"
+  ],
+  "request": {
+    "id": "TASK-179366940211",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T01:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "set -e\nA=products/actors/rss-reader\nmkdir -p $A/src $A/actor-config\n: > $A/src/__init__.py\ncat > $A/src/__main__.py <<'EOF'\nimport asyncio\nfrom .main import main\nasyncio.run(main())\nEOF\ncat > $A/src/main.py <<'EOF'\nimport asyncio\nfrom apify import Actor\nfrom .core import read_feed\n\nMAX_FEEDS = 100\n\n\nasync def main():\n    async with Actor:\n        inp = await Actor.get_input() or {}\n        urls = [u.strip() for u in (inp.get(\"feedUrls\") or []) if isinstance(u, str) and u.strip()]\n        try:\n            max_items = int(inp.get(\"maxItems\") or 50)\n        except (TypeError, ValueError):\n            max_items = 50\n        max_items = max(1, min(max_items, 1000))\n        if not urls:\n            await Actor.fail(status_message=\"Provide at least one public feed URL in feedUrls\")\n            return\n        urls = list(dict.fromkeys(urls))[:MAX_FEEDS]\n        for url in urls:\n            rows = await asyncio.to_thread(read_feed, url, max_items)\n            for row in rows:\n                await Actor.push_data(row)\n                if row[\"row_type\"] == \"item\":\n                    await Actor.charge(event_name=\"item-parsed\")\nEOF\necho 'apify>=2.0.0' > $A/requirements.txt\ncp products/actors/csv-preflight/Dockerfile $A/Dockerfile\ncat > $A/actor-config/actor.json <<'EOF'\n{\n \"actorSpecification\": 1,\n \"name\": \"rss-reader\",\n \"title\": \"RSS & Atom Feed Reader to JSON\",\n \"version\": \"0.1\",\n \"input\": \"./input_schema.json\",\n \"dockerfile\": \"../Dockerfile\",\n \"minMemoryMbytes\": 128,\n \"maxMemoryMbytes\": 512,\n \"defaultMemoryMbytes\": 256\n}\nEOF\ncat > $A/actor-config/input_schema.json <<'EOF'\n{\n \"title\": \"RSS reader input\",\n \"type\": \"object\",\n \"schemaVersion\": 1,\n \"properties\": {\n  \"feedUrls\": {\n   \"title\": \"Feed URLs\",\n   \"type\": \"array\",\n   \"editor\": \"stringList\",\n   \"description\": \"Public RSS 2.0, RSS 1.0 or Atom feed URLs (http/https only, at most 100 per run, at most 5 MiB each).\",\n   \"prefill\": [\"https://github.blog/feed/\"]\n  },\n  \"maxItems\": {\n   \"title\": \"Max items per feed\",\n   \"type\": \"integer\",\n   \"editor\": \"number\",\n   \"default\": 50,\n   \"minimum\": 1,\n   \"maximum\": 1000,\n   \"description\": \"Items kept per feed, in document order.\"\n  }\n },\n \"required\": [\"feedUrls\"]\n}\nEOF\npython3 -m py_compile $A/src/main.py $A/src/__main__.py && python3 -c \"import json;json.load(open('$A/actor-config/actor.json'));json.load(open('$A/actor-config/input_schema.json'));print('PKG_OK')\""
+      ],
+      "outputs": [
+        "products/actors/rss-reader/src/__init__.py",
+        "products/actors/rss-reader/src/__main__.py",
+        "products/actors/rss-reader/src/main.py",
+        "products/actors/rss-reader/requirements.txt",
+        "products/actors/rss-reader/Dockerfile",
+        "products/actors/rss-reader/actor-config/actor.json",
+        "products/actors/rss-reader/actor-config/input_schema.json"
+      ],
+      "mission_id": "RSS-ACTOR-BUILD"
+    },
+    "description": "Broker action during THINK-1793669402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179366940211",
+  "input_sha256": "2d531698bb016cc72eb0fecaf40cfcb935625d05886f26f400a1ea9e98bd6684"
+}

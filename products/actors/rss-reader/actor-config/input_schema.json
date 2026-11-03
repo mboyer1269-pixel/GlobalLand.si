@@ -1,0 +1,24 @@
+{
+ "title": "RSS reader input",
+ "type": "object",
+ "schemaVersion": 1,
+ "properties": {
+  "feedUrls": {
+   "title": "Feed URLs",
+   "type": "array",
+   "editor": "stringList",
+   "description": "Public RSS 2.0, RSS 1.0 or Atom feed URLs (http/https only, at most 100 per run, at most 5 MiB each).",
+   "prefill": ["https://github.blog/feed/"]
+  },
+  "maxItems": {
+   "title": "Max items per feed",
+   "type": "integer",
+   "editor": "number",
+   "default": 50,
+   "minimum": 1,
+   "maximum": 1000,
+   "description": "Items kept per feed, in document order."
+  }
+ },
+ "required": ["feedUrls"]
+}
