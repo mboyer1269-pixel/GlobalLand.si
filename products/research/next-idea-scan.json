@@ -1,0 +1,287 @@
+{
+ "mission": "NEXT-IDEA-SCAN",
+ "agent": "RESEARCHER",
+ "observed_on": "2026-11-03",
+ "method": "Narrow Store queries; users_30d is a rolling window that mixes free and paid users; paid share is unobservable; ratings are sparse",
+ "candidates": [
+  {
+   "job": "broken-link",
+   "query_url": "https://api.apify.com/v2/store?search=broken%20link%20checker&limit=15",
+   "artifact": "products/research/scan-broken-link.json",
+   "fetch_task": "TASK-179366580219",
+   "store_total_results": 482,
+   "incumbents_with_20plus_users_30d": 1,
+   "top3": [
+    {
+     "name": "khadinakbar/broken-link-checker",
+     "id": "a2yeVoO8SdJgVEgbK",
+     "title": "Broken Link Checker \u2014 404s, Redirects & SEO Audit",
+     "users_30d": 53,
+     "users_total": 115,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "apify-actor-start": 5e-05,
+      "link-checked": 0.001
+     }
+    },
+    {
+     "name": "parseforge/broken-link-checker",
+     "id": "3IbATLWWJ3BcLQTLU",
+     "title": "Broken Link Checker",
+     "users_30d": 6,
+     "users_total": 95,
+     "rating": 2.747926359640775,
+     "reviews": 3,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "apify-actor-start": 0.04,
+      "result-item": 0.0012
+     }
+    },
+    {
+     "name": "automation-lab/sitewide-broken-link-checker",
+     "id": "D1VsA1x11YGaqHl5V",
+     "title": "Broken Link Checker Scraper",
+     "users_30d": 4,
+     "users_total": 6,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "start": 0.005,
+      "item": 0.00092
+     }
+    }
+   ],
+   "verdict": "PURSUE_IF",
+   "reason": "One incumbent (khadinakbar, 53 users_30d) proves demand; the other 10 have 0-6. Condition: a differentiator that is verifiable without a live crawl budget (e.g. check a supplied URL list only, per-link price at or below 0.001 USD). Crawling third-party sites raises runtime cost and robots.txt obligations."
+  },
+  {
+   "job": "sitemap",
+   "query_url": "https://api.apify.com/v2/store?search=sitemap&limit=15",
+   "artifact": "products/research/scan-sitemap.json",
+   "fetch_task": "TASK-179366580220",
+   "store_total_results": 2310,
+   "incumbents_with_20plus_users_30d": 3,
+   "top3": [
+    {
+     "name": "apify/sitemap-extractor",
+     "id": "rGeTNESChDZ65EbYh",
+     "title": "Sitemap Extractor",
+     "users_30d": 49,
+     "users_total": 438,
+     "rating": 3.24065679283384,
+     "reviews": 8,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "apify-default-dataset-item": 0.0005
+     }
+    },
+    {
+     "name": "boxbox10/sitemap-extractor",
+     "id": "4PwuQ9YmC9EkzF3ld",
+     "title": "Sitemap Extractor: Website \u2192 All URLs (sitemap.xml parser)",
+     "users_30d": 33,
+     "users_total": 56,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "FREE",
+     "event_prices_usd_free_tier": {}
+    },
+    {
+     "name": "onescales/sitemap-url-extractor",
+     "id": "OpsTnTewUvSXXKcNq",
+     "title": "Sitemap URL Extractor",
+     "users_30d": 20,
+     "users_total": 662,
+     "rating": 5.000000000000001,
+     "reviews": 3,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "apify-default-dataset-item": 0.03,
+      "apify-actor-start": 5e-05
+     }
+    }
+   ],
+   "verdict": "DO_NOT_PURSUE",
+   "reason": "Official apify/sitemap-extractor (49 users_30d, 0.0005 USD/item) plus a FREE alternative with 33 users_30d; no price room."
+  },
+  {
+   "job": "rss",
+   "query_url": "https://api.apify.com/v2/store?search=rss%20feed&limit=15",
+   "artifact": "products/research/scan-rss.json",
+   "fetch_task": "TASK-179366580221",
+   "store_total_results": 2128,
+   "incumbents_with_20plus_users_30d": 2,
+   "top3": [
+    {
+     "name": "santamaria-automations/rss-feed-reader",
+     "id": "NidfICHJMoodOqCg2",
+     "title": "RSS & Atom Feed Reader - Monitor Any Feed at Scale",
+     "users_30d": 51,
+     "users_total": 103,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "enrichment-start": 0.001,
+      "enrichment-result": 0.002
+     }
+    },
+    {
+     "name": "automation-lab/rss-feed-reader",
+     "id": "Wpw2UeM32mgfovnbo",
+     "title": "RSS Feed Reader",
+     "users_30d": 39,
+     "users_total": 193,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "start": 0.035,
+      "item-parsed": 0.00115
+     }
+    },
+    {
+     "name": "technicaldost/rss-feed-scraper",
+     "id": "LR87biSfc03YzjqVZ",
+     "title": "RSS Feed Scraper - RSS & Atom to JSON",
+     "users_30d": 16,
+     "users_total": 100,
+     "rating": 5,
+     "reviews": 1,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "apify-default-dataset-item": 0.008
+     }
+    }
+   ],
+   "verdict": "PURSUE_IF",
+   "reason": "Demand is spread across 3 incumbents with 16-51 users_30d; none has more than 1 review and the pricing is fragmented (0.001-0.008 USD per item, some with 0.035 USD start fees). Parsing public feeds is light, read-only and fits agent-first distribution. Condition: a listing with a start fee at or below 0.00005 USD, a per-item price at or below 0.001 USD and stable JSON fields, tested on real feeds; kill if fewer than 3 external users in 14 days."
+  },
+  {
+   "job": "pdf-text",
+   "query_url": "https://api.apify.com/v2/store?search=pdf%20to%20text&limit=15",
+   "artifact": "products/research/scan-pdf-text.json",
+   "fetch_task": "TASK-179366580222",
+   "store_total_results": 2437,
+   "incumbents_with_20plus_users_30d": 4,
+   "top3": [
+    {
+     "name": "gochujang/image-ocr-extractor",
+     "id": "lLnKDJXM395nSyWXi",
+     "title": "OCR Image to Text - OCR PDF & Screenshot to Text",
+     "users_30d": 69,
+     "users_total": 122,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "apify-actor-start": 0.001,
+      "image-ocr-extracted": 0.002
+     }
+    },
+    {
+     "name": "nerolabs/bulk-ocr-image-pdf-to-text",
+     "id": "gzzNKKyLzA7Z0ZSMc",
+     "title": "Bulk OCR: Image & Scanned PDF to Text from CSV or Google Sheet",
+     "users_30d": 50,
+     "users_total": 75,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "page-ocr": 0.005,
+      "page-text-layer": 0.001,
+      "file-export": 0.01,
+      "webhook-delivery": 0.02,
+      "apify-actor-start": 5e-05
+     }
+    },
+    {
+     "name": "gochujang/pdf-text-extractor",
+     "id": "yLH9HFNd8bpZjF2At",
+     "title": "PDF to Text Extractor - PDF Parser & PDF to Markdown",
+     "users_30d": 47,
+     "users_total": 281,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "pdf-extracted": 0.02,
+      "page-extracted": 0.001,
+      "apify-actor-start": 0.001
+     }
+    }
+   ],
+   "verdict": "DO_NOT_PURSUE",
+   "reason": "Crowded: 4 incumbents with 21-69 users_30d, including OCR; OCR needs heavier runtime and dependencies than available."
+  },
+  {
+   "job": "screenshot",
+   "query_url": "https://api.apify.com/v2/store?search=website%20screenshot&limit=15",
+   "artifact": "products/research/scan-screenshot.json",
+   "fetch_task": "TASK-179366580223",
+   "store_total_results": 713,
+   "incumbents_with_20plus_users_30d": 4,
+   "top3": [
+    {
+     "name": "apify/screenshot-url",
+     "id": "rGCyoaKTKhyMiiTvS",
+     "title": "Website Screenshot Generator",
+     "users_30d": 1859,
+     "users_total": 9716,
+     "rating": 3.878393288583986,
+     "reviews": 20,
+     "pricing_model": "FREE",
+     "event_prices_usd_free_tier": {}
+    },
+    {
+     "name": "cheapapi/website-screenshot-api",
+     "id": "wfjpX6F6cc9FxBogf",
+     "title": "Website Screenshot API \u2014 Full-Page, Element & Device Capture",
+     "users_30d": 236,
+     "users_total": 398,
+     "rating": 5,
+     "reviews": 1,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "apify-actor-start": 1e-05,
+      "screenshot": 0.00089
+     }
+    },
+    {
+     "name": "moonweil/url-screenshot-api",
+     "id": "4X8u4O2IIS8NiIxrM",
+     "title": "Website Screenshot API \u2014 URL & HTML to PNG, JPEG, WebP, PDF",
+     "users_30d": 141,
+     "users_total": 282,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "event_prices_usd_free_tier": {
+      "apify-actor-start": 0.001,
+      "apify-default-dataset-item": 0.004
+     }
+    }
+   ],
+   "verdict": "DO_NOT_PURSUE",
+   "reason": "Computed: 4 incumbents with 20 or more users_30d (top: apify/screenshot-url with 1859). Screenshots need a headless browser (heavier runtime than this sandbox image is verified to support)."
+  }
+ ],
+ "recommended_build": {
+  "job": "rss",
+  "what": "RSS/Atom feed reader Actor: input a list of public feed URLs, output one JSON row per item with stable fields (feed_url, title, link, published, summary, guid), and report which source answered. Same packaging as products/actors/csv-preflight (Dockerfile, actor.json, input schema, README with AI disclosure). Reuse its HTTP fetch, size limits and error handling.",
+  "price_hypothesis": "item-parsed 0.001 USD; apify-actor-start 0.00005 USD",
+  "gating": "Outward listing is still blocked by NO-APIFY-ACCESS (founder). The build is cheap and offline-testable on saved feed fixtures, so build it now, but do not count it as an outcome until listed.",
+  "kill_threshold": "fewer than 3 external users within 14 days of listing"
+ },
+ "uncertainties": [
+  "users_30d is not paid users",
+  "one snapshot only",
+  "robots/terms of individual feeds vary; only public feeds",
+  "incumbent quality not tested by running them"
+ ]
+}

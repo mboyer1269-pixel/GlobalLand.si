@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "broken-link 1 PURSUE_IF [('khadinakbar/broken-link-checker', 53), ('parseforge/broken-link-checker', 6), ('automation-lab/sitewide-broken-link-checker', 4)]\nsitemap 3 DO_NOT_PURSUE [('apify/sitemap-extractor', 49), ('boxbox10/sitemap-extractor', 33), ('onescales/sitemap-url-extractor', 20)]\nrss 2 PURSUE_IF [('santamaria-automations/rss-feed-reader', 51), ('automation-lab/rss-feed-reader', 39), ('technicaldost/rss-feed-scraper', 16)]\npdf-text 4 DO_NOT_PURSUE [('gochujang/image-ocr-extractor', 69), ('nerolabs/bulk-ocr-image-pdf-to-text', 50), ('gochujang/pdf-text-extractor', 47)]\nscreenshot 4 DO_NOT_PURSUE [('apify/screenshot-url', 1859), ('cheapapi/website-screenshot-api', 236), ('moonweil/url-screenshot-api', 141)]\n\n",
+  "artifacts": [
+    "products/research/next-idea-scan.json",
+    "products/receipts/TASK-179366580225.json"
+  ],
+  "request": {
+    "id": "TASK-179366580225",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-03T00:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nQ={'broken-link':'broken%20link%20checker','sitemap':'sitemap','rss':'rss%20feed','pdf-text':'pdf%20to%20text','screenshot':'website%20screenshot'}\nT={'broken-link':'TASK-179366580219','sitemap':'TASK-179366580220','rss':'TASK-179366580221','pdf-text':'TASK-179366580222','screenshot':'TASK-179366580223'}\ndef ev(o):\n    if isinstance(o,dict):\n        if 'actorChargeEvents' in o:\n            return {k:(v.get('eventPriceUsd') if v.get('eventPriceUsd') is not None else ((v.get('eventTieredPricingUsd') or {}).get('FREE') or {}).get('tieredEventPriceUsd')) for k,v in o['actorChargeEvents'].items()}\n        for v in o.values():\n            x=ev(v)\n            if x: return x\n    return {}\nV={'broken-link':('PURSUE_IF','One incumbent (khadinakbar, 53 users_30d) proves demand; the other 10 have 0-6. Condition: a differentiator that is verifiable without a live crawl budget (e.g. check a supplied URL list only, per-link price at or below 0.001 USD). Crawling third-party sites raises runtime cost and robots.txt obligations.'),\n'sitemap':('DO_NOT_PURSUE','Official apify/sitemap-extractor (49 users_30d, 0.0005 USD/item) plus a FREE alternative with 33 users_30d; no price room.'),\n'rss':('PURSUE_IF','Demand is spread across 3 incumbents with 16-51 users_30d; none has more than 1 review and the pricing is fragmented (0.001-0.008 USD per item, some with 0.035 USD start fees). Parsing public feeds is light, read-only and fits agent-first distribution. Condition: a listing with a start fee at or below 0.00005 USD, a per-item price at or below 0.001 USD and stable JSON fields, tested on real feeds; kill if fewer than 3 external users in 14 days.'),\n'pdf-text':('DO_NOT_PURSUE','Crowded: 4 incumbents with 21-69 users_30d, including OCR; OCR needs heavier runtime and dependencies than available.')}\nout={'mission':'NEXT-IDEA-SCAN','agent':'RESEARCHER','observed_on':'2026-11-03','method':'Narrow Store queries; users_30d is a rolling window that mixes free and paid users; paid share is unobservable; ratings are sparse','candidates':[]}\nfor f,q in Q.items():\n    d=json.load(open('products/research/scan-%s.json'%f));d=d.get('data',d)\n    items=[]\n    for it in d['items']:\n        s=it.get('stats') or {};pi=it.get('currentPricingInfo') or {}\n        items.append({'name':it['username']+'/'+it['name'],'id':it['id'],'title':it.get('title'),'users_30d':s.get('totalUsers30Days'),'users_total':s.get('totalUsers'),'rating':it.get('actorReviewRating'),'reviews':it.get('actorReviewCount'),'pricing_model':pi.get('pricingModel'),'event_prices_usd_free_tier':ev(pi)})\n    items.sort(key=lambda x:-(x['users_30d'] or 0))\n    n20=sum(1 for x in items if (x['users_30d'] or 0)>=20)\n    if f=='screenshot':\n        v=('DO_NOT_PURSUE' if n20>=2 else 'PURSUE_IF','Computed: %d incumbents with 20 or more users_30d (top: %s with %s). Screenshots need a headless browser (heavier runtime than this sandbox image is verified to support).'%(n20,items[0]['name'] if items else None,items[0]['users_30d'] if items else None))\n    else: v=V[f]\n    out['candidates'].append({'job':f,'query_url':'https://api.apify.com/v2/store?search=%s&limit=15'%q,'artifact':'products/research/scan-%s.json'%f,'fetch_task':T[f],'store_total_results':d.get('total'),'incumbents_with_20plus_users_30d':n20,'top3':items[:3],'verdict':v[0],'reason':v[1]})\nout['recommended_build']={'job':'rss','what':'RSS/Atom feed reader Actor: input a list of public feed URLs, output one JSON row per item with stable fields (feed_url, title, link, published, summary, guid), and report which source answered. Same packaging as products/actors/csv-preflight (Dockerfile, actor.json, input schema, README with AI disclosure). Reuse its HTTP fetch, size limits and error handling.','price_hypothesis':'item-parsed 0.001 USD; apify-actor-start 0.00005 USD','gating':'Outward listing is still blocked by NO-APIFY-ACCESS (founder). The build is cheap and offline-testable on saved feed fixtures, so build it now, but do not count it as an outcome until listed.','kill_threshold':'fewer than 3 external users within 14 days of listing'}\nout['uncertainties']=['users_30d is not paid users','one snapshot only','robots/terms of individual feeds vary; only public feeds','incumbent quality not tested by running them']\njson.dump(out,open('products/research/next-idea-scan.json','w'),indent=1)\nfor c in out['candidates']: print(c['job'],c['incumbents_with_20plus_users_30d'],c['verdict'],[ (t['name'],t['users_30d']) for t in c['top3']])\n"
+      ],
+      "outputs": [
+        "products/research/next-idea-scan.json"
+      ],
+      "mission_id": "NEXT-IDEA-SCAN"
+    },
+    "description": "Broker action during THINK-1793665802",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179366580225",
+  "input_sha256": "3f1f8ffa0dedbca9ecc7e3c465dcf37b54fb8060eefcbe71db097cedf7b421f3"
+}
