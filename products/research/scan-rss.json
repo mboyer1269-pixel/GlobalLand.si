@@ -1,0 +1,986 @@
+{
+  "data": {
+    "total": 2128,
+    "count": 15,
+    "offset": 0,
+    "limit": 15,
+    "desc": false,
+    "items": [
+      {
+        "title": "RSS Feed Scraper - RSS & Atom to JSON",
+        "name": "rss-feed-scraper",
+        "username": "technicaldost",
+        "stats": {
+          "totalBuilds": 13,
+          "totalRuns": 6385,
+          "totalUsers": 100,
+          "totalUsers7Days": 6,
+          "totalUsers30Days": 16,
+          "totalUsers90Days": 40,
+          "lastRunStartedAt": "2026-11-02T08:00:20.021Z",
+          "actorReviewCount": 1,
+          "actorReviewRating": 5,
+          "bookmarkCount": 1,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 191,
+            "TIMED-OUT": 0,
+            "TOTAL": 191
+          }
+        },
+        "description": "Convert public RSS and Atom feeds to JSON or CSV, or paste any website and the Actor finds its feed. Titles, links, dates, authors, summaries and full content, with keyword and date filters. Failed feeds are not charged.",
+        "categories": [
+          "NEWS",
+          "AUTOMATION",
+          "AI"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/YTNDPDuLDhMVyC0F1ZDFAa67h9ABtYRscVfr7R3XHOo/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vOFVEWGpPbko5UnJsUFRBb2YtYWN0b3ItTFI4N2JpU2ZjMDNZempxVlotYWdMRmtBY2U5US1yc3MtZmVlZC1zY3JhcGVyLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 1,
+        "actorReviewRating": 5,
+        "actorReviewCount": 1,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Technical Dost Solutions",
+        "userPictureUrl": "https://images.apifyusercontent.com/02bmUNph7kL27NcFRSvKR5_PlAvounCCxPLS0yX90HY/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vQjU2UV9JWm14dGhmZGNCbWtDc3diWGpQZW5UYXpvdWoxM3o0WTVDNXRBMC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpURTVTWjNjek0ybEVWMHhWVGw5aVVIRmZlV1ZpUTJaRldIUlZjWFJrVUROdlNrRm5kbk10YVc1NllVeHlkMVJDVjFV.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "item",
+                "eventDescription": "Single item in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.008,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "minimalMaxTotalChargeUsd": 1,
+          "reasonForChange": "Adding a $1 minimum for max cost per run. No event price is changed.",
+          "startedAt": "2026-09-20T06:04:11.103Z",
+          "createdAt": "2026-09-20T06:04:11.266Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "LR87biSfc03YzjqVZ",
+        "url": "https://apify.com/technicaldost/rss-feed-scraper"
+      },
+      {
+        "title": "RSS Feed Reader",
+        "name": "rss-feed-reader",
+        "username": "automation-lab",
+        "stats": {
+          "totalBuilds": 23,
+          "totalRuns": 51166,
+          "totalUsers": 193,
+          "totalUsers7Days": 18,
+          "totalUsers30Days": 39,
+          "totalUsers90Days": 80,
+          "lastRunStartedAt": "2026-11-02T10:18:27.496Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 3,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 7,
+            "SUCCEEDED": 796,
+            "TIMED-OUT": 0,
+            "TOTAL": 803
+          }
+        },
+        "description": "This actor fetches and parses RSS 2.0, Atom, and RSS 1.0 (RDF) feeds into clean, structured JSON data. It extracts article titles, links, publication dates, authors, categories, descriptions, and full content. Use it to monitor news sources, aggregate blog posts, or build content pipelines.",
+        "categories": [
+          "NEWS",
+          "MARKETING"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/65WzqgupIdiFKsoaHXWfuRTwnKKCv9bcyG8ls5VSGv8/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vbnRIQ25oTlVrelhSN25iVVotYWN0b3ItV3B3MlVlTTMybWdmb3ZuYm8tUEVCS2tsR3J4Ui1hY3Rvci1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 3,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Automation Lab",
+        "userPictureUrl": "https://images.apifyusercontent.com/K_C4LOMfOgJZv5UcVqbze6xlfc6mS23zsoHRS5nDXvM/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMDdsSFdveGptQlpJN0NMWkJqVi1wUlBjV0ZHRFQyRzIwVjdkVzBRSzBCay9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZiblJJUTI1b1RsVnJlbGhTTjI1aVZWb3RjSEp2Wm1sc1pTMW9ORkJYYTNsWWVVSmxMV0YxZEc5dFlYUnBiMjR0YkdGaUxYQnliMlpwYkdVdGJHOW5ieTV3Ym1jLnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-08-25T20:06:35.443Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "start": {
+                "eventTitle": "Start",
+                "eventDescription": "One-time charge when the actor starts",
+                "eventPriceUsd": 0.035,
+                "isOneTimeEvent": true
+              },
+              "item-parsed": {
+                "eventTitle": "Item parsed",
+                "eventDescription": "Charged for each feed item extracted",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.00115
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00078
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0006
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0004
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00028
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-04-01T05:57:53.003Z",
+          "createdAt": "2026-08-25T20:06:35.534Z"
+        },
+        "id": "Wpw2UeM32mgfovnbo",
+        "url": "https://apify.com/automation-lab/rss-feed-reader"
+      },
+      {
+        "title": "RSS Feed Scraper — Atom, Podcast & Multi-Feed Aggregator",
+        "name": "rss-feed-scraper",
+        "username": "devilscrapes",
+        "stats": {
+          "totalBuilds": 11,
+          "totalRuns": 6744,
+          "totalUsers": 16,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 4,
+          "totalUsers90Days": 11,
+          "lastRunStartedAt": "2026-11-01T23:01:50.800Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 2,
+            "SUCCEEDED": 1917,
+            "TIMED-OUT": 0,
+            "TOTAL": 1919
+          }
+        },
+        "description": "Parse and convert any RSS or Atom feed to a clean dataset — title, link, author, published date, summary, full HTML content, tags, GUID — export to JSON or CSV. A drop-in RSS feed parser for RSS 2.0, Atom 1.0, and the content:encoded / dc:creator extensions. Also a scheduled news feed monitor.",
+        "categories": [
+          "AUTOMATION",
+          "NEWS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/h0Du1z4ccHw-nJHoOCEvBNxuSoihX61mOzaaGn9NJSA/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vVE9iWEhQUlpzb2t0MFNCUGUtYWN0b3ItVkxzY1BkcmVxSFBmRXFLYmotOHJoNWlkaHBoOC1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "DevilScrapes",
+        "userPictureUrl": "https://images.apifyusercontent.com/2sThxlwPh-1eu3WVnVJ3mpJKE6PaiB1ZYZLuK5Vnepw/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vZFJGejhXcmFtUUJZTE5hSmllR1VtaFdST2RqV0drQndZMFJTeWdLeGt1NC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZWRTlpV0VoUVVscHpiMnQwTUZOQ1VHVXRjSEp2Wm1sc1pTMTJiVTlJTjNsbFdHTkhMV1JsZG1sc2MyTnlZWEJsY3kxcFkyOXVMbk4yWnk1d2JtYy5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricePerUnitUsd": 0.0001,
+          "minimalMaxTotalChargeUsd": 0,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "actor-start": {
+                "eventTitle": "Actor start",
+                "eventDescription": "Charged once when the Actor begins a run.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.005
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0048
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0046
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0044
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0044
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0044
+                  }
+                }
+              },
+              "result": {
+                "eventTitle": "Result emitted",
+                "eventDescription": "Charged for each item written to the dataset.",
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00096
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00092
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00088
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00088
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00088
+                  }
+                }
+              }
+            }
+          },
+          "reasonForChange": "Store discounts: Bronze, Silver and Gold subscribers now pay slightly less per event. The Free-plan price is unchanged.",
+          "startedAt": "2026-11-01T22:53:03.000Z",
+          "createdAt": "2026-11-01T22:53:04.130Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-11-01T23:00:35.470Z"
+        },
+        "id": "VLscPdreqHPfEqKbj",
+        "url": "https://apify.com/devilscrapes/rss-feed-scraper"
+      },
+      {
+        "title": "RSS & Atom Feed Reader - Monitor Any Feed at Scale",
+        "name": "rss-feed-reader",
+        "username": "santamaria-automations",
+        "stats": {
+          "totalBuilds": 12,
+          "totalRuns": 131841,
+          "totalUsers": 103,
+          "totalUsers7Days": 23,
+          "totalUsers30Days": 51,
+          "totalUsers90Days": 81,
+          "lastRunStartedAt": "2026-11-02T10:02:37.242Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 1,
+          "publicActorRunStats30Days": {
+            "ABORTED": 1,
+            "FAILED": 1455,
+            "SUCCEEDED": 18463,
+            "TIMED-OUT": 0,
+            "TOTAL": 19919
+          }
+        },
+        "description": "Extract articles from RSS, Atom, and JSON feeds including title, author, content, images, categories, enclosures, and publication dates. Export data, run via API, schedule and monitor runs, or integrate with other tools.",
+        "categories": [
+          "NEWS",
+          "AI"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/ivlKrKf8xVDJcPwnwq67owgvqjVfN0JSyav1tA1xy2Y/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vSlBUdXNDcmFZcGFic2pEWHEtYWN0b3ItTmlkZklDSEpNb29kT3FDZzItU2NtVWlZdEtUSC1pY29uLXJzcy1mZWVkLXJlYWRlcl8lMjgxJTI5LnN2Zy5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 1,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "NanoScrape",
+        "userPictureUrl": "https://images.apifyusercontent.com/7aoyvDSYVKjMBDKkOZ5CweA9eg0v0pvmfmOcxCsBHxE/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vTmpRYW1hMjd4cDNUdlVEeXZwWUNteV9scWFpcWJ2QmVmakJfdkFSMEg0TS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZTbEJVZFhORGNtRlpjR0ZpYzJwRVdIRXRjSEp2Wm1sc1pTMTRkRUZ0T1dGRFNFcDVMWGx2ZFhSMVltVXRZWFpoZEdGeUxUZ3dNQzV3Ym1jLnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "enrichment-start": {
+                "eventTitle": "Actor run started",
+                "eventDescription": "Charged once per actor run",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.001
+              },
+              "enrichment-result": {
+                "eventTitle": "Feed parsed",
+                "eventDescription": "Per feed parsed with all items",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.002,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-04-11T13:46:58.970Z",
+          "startedAt": "2026-04-11T13:46:58.970Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "NidfICHJMoodOqCg2",
+        "url": "https://apify.com/santamaria-automations/rss-feed-reader"
+      },
+      {
+        "title": "RSS Feed Aggregator",
+        "name": "rss-feed-aggregator",
+        "username": "eloquent_mountain",
+        "stats": {
+          "totalBuilds": 21,
+          "totalRuns": 3657,
+          "totalUsers": 77,
+          "totalUsers7Days": 9,
+          "totalUsers30Days": 12,
+          "totalUsers90Days": 12,
+          "lastRunStartedAt": "2026-11-02T10:00:04.225Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 443,
+            "TIMED-OUT": 0,
+            "TOTAL": 443
+          },
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 3
+        },
+        "description": "RSS Feed Aggregator\n\nCollect and consolidate multiple RSS feeds effortlessly with this Apify actor. Fetch items concurrently from various feeds, deduplicate entries, and select specific fields for a customized output. Ideal for news aggregation and content curation.",
+        "categories": [
+          "AUTOMATION",
+          "NEWS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/wVUttEDBsmPAhSQhV1QiPAKvMKJEiznDNaO_mlknwt8/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vSGNyUXgzWlVnUGMwaVVGYmkvOG44RXlNRzBMbGxyVGZKNWItUlNTX0ZFRURfQUdHUkVHQVRPUi5qcGc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 3,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Paco",
+        "userPictureUrl": "https://images.apifyusercontent.com/KC8RVPBP0u4mhoAmP6iUTYvABJ-UEzHyM_fBfsgisFI/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20valdZd3R3X2VzTXhOR1FEa3l3dGpjZWZQQXFTTW1DaklucDZQdWlObjBRQS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11WVcxaGVtOXVZWGR6TG1OdmJTOTBhVmcyYWtoS1FXZFpjMDV3Ym1acmNTOUJlbGcwWjBzMVRuVlhiVGRIV0RaQlRTMDFOekU1TXpjeExuQnVady5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "FREE",
+          "createdAt": "2026-10-06T09:22:00.830Z",
+          "startedAt": "2026-10-06T09:22:00.830Z",
+          "apifyMarginPercentage": 0,
+          "forceContainsSignificantPriceChange": false,
+          "reasonForChange": "[Automatic migration]: This Actor was automatically switched to pay-per-usage during the rental sunset.",
+          "notifiedAboutChangeAt": "2026-10-06T09:30:33.014Z"
+        },
+        "id": "HcrQx3ZUgPc0iUFbi",
+        "url": "https://apify.com/eloquent_mountain/rss-feed-aggregator"
+      },
+      {
+        "title": "Podcast Transcript Scraper — Any RSS Feed to Text & SRT",
+        "name": "podcast-transcript-scraper",
+        "username": "scrapersdelight",
+        "stats": {
+          "totalBuilds": 5,
+          "totalRuns": 286,
+          "totalUsers": 46,
+          "totalUsers7Days": 3,
+          "totalUsers30Days": 7,
+          "totalUsers90Days": 19,
+          "lastRunStartedAt": "2026-11-01T21:30:26.985Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 43,
+            "TIMED-OUT": 0,
+            "TOTAL": 43
+          }
+        },
+        "description": "Extract per-episode transcripts from any podcast RSS feed via the Podcasting 2.0 <podcast:transcript> tag — no login, no ASR. Clean text, timestamped segments & SRT/VTT per episode, plus metadata. Works with Buzzsprout, Captivate, Transistor, RSS.com & more. $2 per 1,000 episodes.",
+        "categories": [
+          "AI",
+          "AUTOMATION",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/L8q0uqAtHSwPQGiTgVa_uUbbO5fRUKMTKysCzUjeLTo/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vQlRna3dMRUM0YlpWemI4VmItYWN0b3Itb2ltR1FLTThxelA3Mm1hOFAtbGVOZzFJR1JNci1HZW1pbmlfR2VuZXJhdGVkX0ltYWdlX2dsdmF5NWdsdmF5NWdsdmEucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Scrapers Delight",
+        "userPictureUrl": "https://images.apifyusercontent.com/SjUfVS2plLJy6kHfthU67C5f9v0e6wVrAbVTS2w1R3A/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vRmxwWnZpaF9memhGWnlPTEI4Ml9FRGhTQm1pUFRiYWJUWWNia00ySUhnNC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZRbFJuYTNkTVJVTTBZbHBXZW1JNFZtSXRjSEp2Wm1sc1pTMWxTRVJxZW5BMU4wOVlMVWRsYldsdWFWOUhaVzVsY21GMFpXUmZTVzFoWjJWZmFuVXhhek5tYW5VeGF6Tm1hblV4YXkxamJHVmhiaTV3Ym1jLnBuZw.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "lot-scraped": {
+                "eventTitle": "Per record returned",
+                "eventDescription": "Charged for each record returned.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.001,
+                "isPrimaryEvent": true
+              },
+              "lot-detail-enriched": {
+                "eventTitle": "Per detail enrichment",
+                "eventDescription": "Charged only when enrichment succeeds — you are not charged for failed or skipped items.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.001
+              },
+              "monitor-run-completed": {
+                "eventTitle": "Per scheduled run",
+                "eventDescription": "Charged once per scheduled monitoring run.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.05
+              },
+              "new-lot-detected": {
+                "eventTitle": "Per new record",
+                "eventDescription": "Charged for each new record found.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.02
+              },
+              "alert-delivered": {
+                "eventTitle": "Per alert delivered",
+                "eventDescription": "Charged only when an alert is actually delivered — not charged for failed or skipped alerts.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.005
+              }
+            }
+          },
+          "startedAt": "2026-06-14T00:17:51.288Z",
+          "createdAt": "2026-06-14T00:17:51.459Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "oimGQKM8qzP72ma8P",
+        "url": "https://apify.com/scrapersdelight/podcast-transcript-scraper"
+      },
+      {
+        "title": "Podcast Transcription API — RSS feeds to episode transcripts",
+        "name": "podcast-transcription-api",
+        "username": "amanatools",
+        "stats": {
+          "totalBuilds": 4,
+          "totalRuns": 210,
+          "totalUsers": 21,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 5,
+          "totalUsers90Days": 17,
+          "lastRunStartedAt": "2026-11-02T03:30:03.115Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 1,
+            "FAILED": 1,
+            "SUCCEEDED": 36,
+            "TIMED-OUT": 0,
+            "TOTAL": 38
+          }
+        },
+        "description": "Transcribe podcast episodes straight from an RSS feed. Pick the newest N per show, only episodes after a date, or only titles matching a phrase. Whisper runs inside the Actor — no API key. Show and episode metadata, text, SRT + VTT. Failed or silent episodes are never billed.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/6f_v8ZTeZLkFiKR0hcMKg4QlSPKX2WdsI9g5ex0RZW0/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vWXZuVENUZlF3V29kWThjNVAtYWN0b3ItbmVOTFJXcWJqanZ4WEtKYWQtYUtPZWhmZTUxYy1wb2RjYXN0LXRyYW5zY3JpcHRpb24tYXBpLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Dos",
+        "userPictureUrl": "https://images.apifyusercontent.com/S5cDdhModkhwgfYrYcUj_0l9I5gSbbotot_D2LAQcO8/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vbkNyMjYwVXFIeG1RSy02OUIxNkhHVU80cm1hVlk5Y3MtQURLOEt2OEF3Zy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloZG1GMFlYSnpMbWRwZEdoMVluVnpaWEpqYjI1MFpXNTBMbU52YlM5MUx6STNOelUyTnprX2RqMDA.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "episode-transcribed": {
+                "eventTitle": "Episode transcribed",
+                "eventDescription": "One episode that delivered a non-empty transcript. Failed downloads, undecodable audio, silent files and unreadable feeds are never charged.",
+                "eventPriceUsd": 0.005,
+                "isPrimaryEvent": true
+              },
+              "transcription-minute": {
+                "eventTitle": "Minute of audio transcribed",
+                "eventDescription": "One started minute of audio transcribed, capped at your own max_minutes_per_episode setting.",
+                "eventPriceUsd": 0.008
+              }
+            }
+          },
+          "createdAt": "2026-08-18T00:20:42.468Z",
+          "startedAt": "2026-08-18T00:20:42.468Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "neNLRWqbjjvxXKJad",
+        "url": "https://apify.com/amanatools/podcast-transcription-api"
+      },
+      {
+        "title": "RSS Feed Scraper — News Scraper & Article Extractor",
+        "name": "rss-feed-scraper----news-scraper-article-extractor",
+        "username": "scrapepilot",
+        "stats": {
+          "totalBuilds": 6,
+          "totalRuns": 250,
+          "totalUsers": 8,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-01T18:38:31.991Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 43,
+            "TIMED-OUT": 0,
+            "TOTAL": 43
+          }
+        },
+        "description": "Scrape any RSS or Atom news feed. Get article title, URL, description, author, date, category, and image. 20+ built-in presets: BBC, Reuters, TechCrunch, CNN, NYT, Wired & more. Optional full article text. No login. $6.99/month. 2-hour free trial.",
+        "categories": [
+          "NEWS",
+          "AUTOMATION",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/W1d48TPyIpEefQKAOvWhz8JFIv7PgQCs6WRrr9zHYBA/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vZndwaEFlcDZMTVZITmRLeTYtYWN0b3ItU245YWN0b29SYXVyZUJXTlcteVEzMFd5STZOZC1DaGF0R1BUX0ltYWdlX01hcl8xNV9fMjAyNl9fMDFfMjFfMzBfUE0ucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Scrape Pilot",
+        "userPictureUrl": "https://images.apifyusercontent.com/lV2ISUBSVlj09KYW4HZvz6Po_Q9SN4nfeADQy3DVh14/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vWTNCa0tKTkFJZkpzZnl1b1FZOWRmbVBUYktvY0tfa3hyRy1nMlg3cFVNRS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZabmR3YUVGbGNEWk1UVlpJVG1STGVUWXRjSEp2Wm1sc1pTMWpiRGw1WnpWc1pqQkpMVk4wYjJOclEyRnJaUzFGZEdobGNtVmhiRjlRZFhKd2JHVmZSbXh2ZDJWeUxUSXhOREF4TURJdGJXVmthWFZ0TG1wd1p3LmpwZw.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.05
+              },
+              "result-scrape": {
+                "eventTitle": "Scraped RSS News Article",
+                "eventDescription": "Charged 1 event for each successfully extracted RSS/Atom news article, including title, link, description, published date, author, category, and full text content.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.0035,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-09-26T06:15:37.095Z",
+          "createdAt": "2026-09-26T06:15:35.192Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-09-26T06:35:45.104Z"
+        },
+        "id": "Sn9actooRaureBWNW",
+        "url": "https://apify.com/scrapepilot/rss-feed-scraper----news-scraper-article-extractor"
+      },
+      {
+        "title": "RSS Feed Scraper",
+        "name": "rss-scraper",
+        "username": "ef12",
+        "stats": {
+          "totalBuilds": 3,
+          "totalRuns": 7518,
+          "totalUsers": 5,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 3,
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "lastRunStartedAt": "2026-11-01T12:18:25.697Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 28
+          }
+        },
+        "description": "Fetch and parse any RSS or Atom feed into structured JSON. Get titles, links, descriptions, authors, dates, and categories.",
+        "categories": [
+          "DEVELOPER_TOOLS"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Daniel Wilson",
+        "userPictureUrl": "https://images.apifyusercontent.com/7ekrxOHCq5nal__j7RjbsEP8pKCosa9Gn_p35TjNJxQ/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vcEhlZzdDNFE3Nksydk1XX1lhM3FvRG9rOVY3WkpfU3piR0VRclVvMlFxOC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTVWR6U2xCTVUxbzBYemhHWkdWUWNXZ3lVMWs1VjFCbmRtd3laV2xEUkZZMU1GVnVXVXRPVW1aUlpHNUhhaTFSUFhNNU5pMWo.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "result": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.01,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-08-28T15:10:58.336Z",
+          "createdAt": "2026-08-14T15:10:58.489Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-08-14T15:11:18.680Z",
+          "notifiedAboutChangeAt": "2026-08-28T15:35:45.290Z"
+        },
+        "id": "nqgzgxCIIeA83TI4D",
+        "url": "https://apify.com/ef12/rss-scraper"
+      },
+      {
+        "title": "Website to RSS Feed Generator",
+        "name": "website-to-rss",
+        "username": "constant_quadruped",
+        "stats": {
+          "totalBuilds": 33,
+          "totalRuns": 1419,
+          "totalUsers": 98,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 3,
+          "totalUsers90Days": 8,
+          "lastRunStartedAt": "2026-11-02T00:14:30.080Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 2,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 7,
+            "SUCCEEDED": 156,
+            "TIMED-OUT": 0,
+            "TOTAL": 163
+          }
+        },
+        "description": "Convert any website into an RSS feed instantly. Auto-detects blog posts, news, and articles. Supports JavaScript sites via Playwright. Filter by keywords, extract full content, output as RSS or JSON. Perfect for competitor monitoring, news aggregation, and research tracking.",
+        "categories": [
+          "NEWS",
+          "AUTOMATION",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/fR-iRTW-f6VKcgyfinQMh4pB7Q3hhYO8lNX3SoJRsF0/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vODFPaGxCYzFpcWIxalU1eHYtYWN0b3ItSmpTUE1Fc1R5NHYwenpiR0ItUlFXazJYRDg1bS1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 2,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "CQ",
+        "userPictureUrl": "https://images.apifyusercontent.com/iOiIiSrqO9NOYxhelJ997JCRuw3DZSgf3jJWjG8he3w/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vNkZvcllzcDdWWWdkdnZodGxFbHhiWFVoY1NhNFp5d3UtWERNdXE3b2JZay9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZPREZQYUd4Q1l6RnBjV0l4YWxVMWVIWXRjSEp2Wm1sc1pTMXNiM2hqV1ROaGVtSk9MWFZ1Ym1GdFpXUXVjRzVuLnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "FREE"
+        },
+        "id": "JjSPMEsTy4v0zzbGB",
+        "url": "https://apify.com/constant_quadruped/website-to-rss"
+      },
+      {
+        "title": "RSS & Atom Feed to JSON Scraper",
+        "name": "rss-parser",
+        "username": "andok",
+        "stats": {
+          "totalBuilds": 5,
+          "totalRuns": 1003,
+          "totalUsers": 30,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 3,
+          "totalUsers90Days": 3,
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "lastRunStartedAt": "2026-11-01T13:20:26.299Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 37,
+            "TIMED-OUT": 0,
+            "TOTAL": 37
+          }
+        },
+        "description": "Monitor blogs, news sites, and podcasts. Convert any RSS or Atom feed into structured JSON data for instant content syndication.",
+        "categories": [
+          "NEWS",
+          "DEVELOPER_TOOLS",
+          "INTEGRATIONS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/97qXmV92ZgqiCObH6z6fHbO0tshhGDv4zUG7Hbm0fK0/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vNEg3THBabnhwYXU4NU0yS3QtYWN0b3Ita0txYmo5MGs2T3BpbEdlNTQtR1p3Nk9rUlJoWS1yc3MtcGFyc2VyLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Andok",
+        "userPictureUrl": "https://images.apifyusercontent.com/ZkPjYJ1sTRdNBOVIbQon0YZEgDH3WH_bGt3yi7lWMtI/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUnUtOUgxQm5NdnFoUDRxM0F5dnJCNFh5VjhZVUtkZXRYbXc5UjZ4dXMwMC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZORWczVEhCYWJuaHdZWFU0TlUweVMzUXRjSEp2Wm1sc1pTMVRiV2wyZG5KblpuUlJMV0Z1Wkc5ckxXRjJZWFJoY2k1d2JtYy5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "createdAt": "2026-10-19T01:41:41.045Z",
+          "startedAt": "2026-11-02T02:41:15.000Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "Item Parsed",
+                "eventDescription": "Per dataset item returned",
+                "isOneTimeEvent": false,
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.000667
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.000567
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.000467
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.000467
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.000467
+                  }
+                }
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.01
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0067
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0057
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0047
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0047
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0047
+                  }
+                }
+              }
+            }
+          },
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-10-19T01:42:01.304Z",
+          "notifiedAboutChangeAt": "2026-11-02T03:00:44.133Z"
+        },
+        "id": "kKqbj90k6OpilGe54",
+        "url": "https://apify.com/andok/rss-parser"
+      },
+      {
+        "title": "RSS Feed Scraper — $1/1K · Articles, Dates & Feed Updates",
+        "name": "universal-rss-scraper",
+        "username": "apivault_labs",
+        "stats": {
+          "totalBuilds": 17,
+          "totalRuns": 347,
+          "totalUsers": 15,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 9,
+          "lastRunStartedAt": "2026-11-01T23:18:26.045Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 32,
+            "TIMED-OUT": 0,
+            "TOTAL": 32
+          }
+        },
+        "description": "Collect RSS, Atom and JSON Feed entries; normalize dates and filter delivered feed items. Bulk export: JSON, CSV, Excel and API. PPE: $1/1K feed items; start fee, usage extra.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "NEWS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/LqypVP3xLI9bIFUDk-MVCcKrIQBMd63vBOMiE0YDQP0/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20veUQ1VWZUNmJhbmR2eW03NTYtYWN0b3ItWEl0b2VEc1E1eWl4VmFNS0ktcGR2QlRDUHYyai11bml2ZXJzYWwtcnNzLXNjcmFwZXIuanBn.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Apivault Labs",
+        "userPictureUrl": "https://images.apifyusercontent.com/eP0jKApGrxNpVvW77QOMpwULclV41A4L2avtvLG4wmo/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vOHBNNFZ0Vm9EcDVhUWRzVFJ2QzREZGJEZWVKY0thelZDdy1jZzVndzBGcy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZlVVExVldaVU5tSmhibVIyZVcwM05UWXRjSEp2Wm1sc1pTMTFURkZ6UkU0elJIaDVMV1psTkRoaU5EVTFMV1E1TmprdE5ESTNOaTFoTjJZM0xUTTROVEJqTlRRMVpERXhZekUzTnpNMU16VXlNekV3TWpZdFozVTRhSHA2ZGpVd2FTNXdibWMucG5n.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "Feed Item Extracted",
+                "eventDescription": "Fee per successful result",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.001,
+                "isPrimaryEvent": true
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              }
+            }
+          },
+          "startedAt": "2026-07-26T23:49:15.730Z",
+          "createdAt": "2026-07-12T23:49:16.114Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-07-12T23:49:36.290Z",
+          "notifiedAboutChangeAt": "2026-07-27T00:05:44.486Z"
+        },
+        "id": "XItoeDsQ5yixVaMKI",
+        "url": "https://apify.com/apivault_labs/universal-rss-scraper"
+      },
+      {
+        "title": "RSS Feed Scraper — Parse RSS & Atom to JSON/CSV",
+        "name": "rss-feed-aggregator",
+        "username": "taroyamada",
+        "stats": {
+          "totalBuilds": 32,
+          "totalRuns": 957,
+          "totalUsers": 13,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-02T09:37:42.536Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 1,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 87,
+            "TIMED-OUT": 0,
+            "TOTAL": 87
+          }
+        },
+        "description": "Merge many RSS and Atom feeds into one deduplicated dataset, filtered by your keywords: title, link, ISO date, author and source feed per item. Charged only for parsed items. No API key or login.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION",
+          "NEWS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/hDznYK0q2uNIZx5fPjk8MZCrc0aW5lBqyJ0sV4lAAXI/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vaGp3elZIdWVEWkVjR2dJTmMtYWN0b3ItTTJEWUlncUZsY3Uwek5maGEtUmpwc1ZJTnRNNy1zdG9yZS10aHVtYm5haWwucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 1,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "naoki anzai",
+        "userPictureUrl": "https://images.apifyusercontent.com/ii1-AEMwRnF2-l9hO_DZzmhF9GYllcznIEI5NBf7uA0/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vWU5CXzlWZGFPcjRIQ0pHZ0xIa3hOZ2ZzelMwV083TnMwT3NiVTkwbnFmcy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTWFZsVUVOT1pDMW1TM0U0VlU4ME1FMDNla3hsZDI1NUxYaDRObVYzY0hGMlZrWk5ORW8yT1hWd2RVVjZOemQzUFhNNU5pMWo.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "RSS or Atom item",
+                "eventDescription": "Charged only for one successfully parsed public feed item.",
+                "eventPriceUsd": 0.001,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-08-27T07:28:03.855Z",
+          "createdAt": "2026-08-13T07:23:07.506Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-08-13T07:23:27.735Z",
+          "notifiedAboutChangeAt": "2026-08-27T07:35:48.482Z"
+        },
+        "id": "M2DYIgqFlcu0zNfha",
+        "url": "https://apify.com/taroyamada/rss-feed-aggregator"
+      },
+      {
+        "title": "RSS Feed Scraper (All-in-one) 🔎📡📰",
+        "name": "rss-feed-scraper-all-in-one",
+        "username": "scrapestorm",
+        "stats": {
+          "totalBuilds": 11,
+          "totalRuns": 338,
+          "totalUsers": 12,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 0,
+          "totalUsers90Days": 0,
+          "lastRunStartedAt": "2026-11-02T02:50:22.383Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 28
+          },
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 3
+        },
+        "description": "Unlock the power of news and content with automated RSS feed scraping 📡📰\n\nDiscover and aggregate articles across multiple sources, extract structured data like titles, authors, publish dates, and content 📊\n\nPerfect for news aggregation, media monitoring, content research, and trend analysis 🌍📈",
+        "categories": [
+          "AUTOMATION",
+          "NEWS",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/8QQ7XcChpVOpAA4ZHiYS8Jnfzx8l5-EvZLDk2jUTet0/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vQkFoY29OZWZMY2Y5TDNoUVMtYWN0b3ItV1ZHeXFoOEQ1Z0lnSXc4YUItYlZ0TEp2WnRYbi0xbmV3cy5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 3,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Storm_Scraper",
+        "userPictureUrl": "https://images.apifyusercontent.com/VwryAra0QLMEMuC7T20ezHx0tkgf6XoR2o7MqaBC1ZE/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vN0ktVzd2cjJab1J4VUptZ09LcjlFX2xINUV3cFFzNjhfQ2kwdU9pQzIwOC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZRa0ZvWTI5T1pXWk1ZMlk1VEROb1VWTXRjSEp2Wm1sc1pTMUVZWE5CUzNKRWVIaGhMVk4wYjNKdExuQnVady5wbmc.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005,
+                "isPrimaryEvent": true
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.00299
+              }
+            }
+          },
+          "startedAt": "2026-09-16T14:24:04.602Z",
+          "createdAt": "2026-09-16T14:24:04.644Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-09-16T14:35:53.876Z"
+        },
+        "id": "WVGyqh8D5gIgIw8aB",
+        "url": "https://apify.com/scrapestorm/rss-feed-scraper-all-in-one"
+      }
+    ]
+  }
+}
