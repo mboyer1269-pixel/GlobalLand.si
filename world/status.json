@@ -212,6 +212,17 @@
         "products/actors/link-checker/actor-config/actor.json",
         "products/actors/link-checker/actor-config/input_schema.json"
       ]
+    },
+    {
+      "mission_id": "LINK-CHECK-LAUNCH",
+      "goal": "When PUBLISH_ACTOR is no longer NOT_CONFIGURED: do a private PUBLISH_ACTOR of products/actors/link-checker with events link-checked=800 and apify-actor-start=50 micro-USD. Run it on 3 public URLs (for example https://example.com/ and a known 404 on the same site) and save the real output and billed runtime under products/actors/link-checker/. Fix the wrapper if the build or run fails. Request an independent APPROVE of the exact review_digest before any public listing. Until access exists, do not probe credentials and do no feature work. Kill threshold: fewer than 3 external users within 14 days of listing (ACTOR_STATS). Complete with a lesson only after reading the saved run output.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "BUILDER",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -813,6 +824,11 @@
       "timestamp": 1793671490.8739095,
       "blocker_id": "NO-APIFY-ACCESS",
       "agent_id": "BUILDER"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793671493.0524905,
+      "mission_id": "LINK-CHECK-LAUNCH"
     }
   ],
   "policy": {
