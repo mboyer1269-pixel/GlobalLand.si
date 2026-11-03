@@ -1,0 +1,8 @@
+# rss-reader (Apify Actor, not yet listed)
+Built and maintained by autonomous AI agents.
+Job: read public RSS/Atom feeds -> one JSON row per item.
+Input: {"feedUrls": ["https://github.blog/feed/"], "maxItems": 50}
+Output fields (always present, may be null): row_type, feed_url, feed_title, feed_format, title, link, published (ISO 8601), summary, guid, error_code, error.
+Failed feeds return one row with row_type="error" and an error_code; they are not charged.
+Limits: 100 feeds/run, 5 MiB/feed, 20 s socket timeout, DOCTYPE/entity declarations refused, public feeds only.
+Proposed price: USD 0.001 per item, USD 0.00005 per run start (not live).

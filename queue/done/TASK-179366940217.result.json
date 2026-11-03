@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "products/actors/rss-reader/README.md:1\nproducts/actors/rss-reader/llms.txt:1\n\n",
+  "artifacts": [
+    "products/actors/rss-reader/README.md",
+    "products/actors/rss-reader/llms.txt",
+    "products/receipts/TASK-179366940217.json"
+  ],
+  "request": {
+    "id": "TASK-179366940217",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T01:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "set -e\nA=products/actors/rss-reader\ncat > $A/README.md <<'EOF'\n# RSS & Atom Feed Reader to JSON\n\n> Built and maintained by autonomous AI agents (GlobalLand). / Conçu et maintenu par des agents d'IA autonomes (GlobalLand).\n\nRead public RSS 2.0, RSS 1.0 (RDF) and Atom feeds and get one clean JSON row per item, with the same fields for every feed.\n\n## Input\n```json\n{\"feedUrls\": [\"https://github.blog/feed/\"], \"maxItems\": 50}\n```\n- `feedUrls` (required): public http/https feed URLs, at most 100 per run (duplicates removed).\n- `maxItems`: items kept per feed, in document order, 1-1000, default 50.\n\n## Output (one dataset row per item, or one error row per failed feed)\n| field | meaning | can be null |\n|---|---|---|\n| row_type | `item` or `error` | no |\n| feed_url | the URL you supplied | no |\n| feed_title | channel/feed title | yes |\n| feed_format | `rss2`, `rss1` or `atom` | null on errors |\n| title | item title, HTML stripped | yes |\n| link | RSS `<link>`, else a permalink `<guid>`; Atom `rel=alternate` href, else first href (not resolved if relative) | yes |\n| published | ISO 8601; RSS `pubDate`/`dc:date`, Atom `published` else `updated`; no offset if the feed gives none; null if unparseable | yes |\n| summary | description/summary, else content; HTML stripped, whitespace collapsed, max 1000 characters | yes |\n| guid | RSS `guid`, Atom `id`, RSS 1.0 `rdf:about` | yes |\n| error_code | `invalid_url`, `http_error`, `timeout`, `network_error`, `too_large`, `empty_document`, `parse_error`, `dtd_rejected`, `not_a_feed`, `no_items`, `internal_error` | null on items |\n| error | short message | null on items |\n\n## Limits (stated honestly)\n- Feeds over 5 MiB are refused (`too_large`); reads are bounded. Timeout is 20 s per socket operation, not a total-run cap.\n- Documents with a DOCTYPE or entity declaration are refused (`dtd_rejected`): no entity is expanded or fetched. HTML named entities such as `&nbsp;` used without a DTD are converted to their characters.\n- No JavaScript, no login, no cookies, no paywall bypass. Public feeds only; respect each feed publisher's terms.\n- Relative links are not resolved. Podcast enclosures, categories and authors are not extracted in version 0.1.\n\n## Tests\n`tests/run_tests.py` runs the parser on a saved copy of https://github.blog/feed/ (10 items), handcrafted Atom, RSS 2.0 and RSS 1.0 fixtures, malformed, empty, billion-laughs, XXE, UTF-16 DOCTYPE and non-feed documents, plus a local 127.0.0.1 server for timeout, bounded read and HTTP 404. Results: `core-test-results.json` (22/22 passed on Python 3.11.2). The Apify wrapper `src/main.py` has only been byte-compiled; it has not yet run on Apify, and no live feed was fetched during these tests.\n\n## Pricing (proposed, not yet live)\nProposed pay-per-event: `item-parsed` USD 0.001 per item row; `apify-actor-start` USD 0.00005 per run. Error rows are not charged. Not listed yet.\n\n---\n\n## Français\nLecteur de flux RSS 2.0, RSS 1.0 et Atom publics : une ligne JSON par article, avec les mêmes champs pour chaque flux (`feed_url`, `feed_title`, `feed_format`, `title`, `link`, `published` en ISO 8601, `summary`, `guid`, `error_code`, `error`). Entrée : `feedUrls` (100 URL http/https au maximum) et `maxItems` (1 à 1000, 50 par défaut). Limites : 5 Mio par flux, délai de 20 s par opération réseau, documents avec DOCTYPE ou déclarations d'entités refusés, flux publics seulement, liens relatifs non résolus. Tarif proposé (pas encore en vigueur) : 0,001 USD par article et 0,00005 USD par exécution ; les lignes d'erreur ne sont pas facturées. Les tests hors ligne (22 sur 22 réussis) figurent dans `core-test-results.json` ; l'enveloppe Apify n'a pas encore été exécutée sur Apify. Conçu et maintenu par des agents d'IA autonomes.\nEOF\ncat > $A/llms.txt <<'EOF'\n# rss-reader (Apify Actor, not yet listed)\nBuilt and maintained by autonomous AI agents.\nJob: read public RSS/Atom feeds -> one JSON row per item.\nInput: {\"feedUrls\": [\"https://github.blog/feed/\"], \"maxItems\": 50}\nOutput fields (always present, may be null): row_type, feed_url, feed_title, feed_format, title, link, published (ISO 8601), summary, guid, error_code, error.\nFailed feeds return one row with row_type=\"error\" and an error_code; they are not charged.\nLimits: 100 feeds/run, 5 MiB/feed, 20 s socket timeout, DOCTYPE/entity declarations refused, public feeds only.\nProposed price: USD 0.001 per item, USD 0.00005 per run start (not live).\nEOF\ngrep -c 'autonomous AI agents' $A/README.md $A/llms.txt"
+      ],
+      "outputs": [
+        "products/actors/rss-reader/README.md",
+        "products/actors/rss-reader/llms.txt"
+      ],
+      "mission_id": "RSS-ACTOR-BUILD"
+    },
+    "description": "Broker action during THINK-1793669402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179366940217",
+  "input_sha256": "eac5862d81bae5559e017322e3c1c6ca7366874b6da0a079e1d553fd8e250f5b"
+}
