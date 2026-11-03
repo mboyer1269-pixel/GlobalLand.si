@@ -12,7 +12,7 @@ def failure_details(error):
  kind=next((t.__name__ for t in (TimeoutError,FileNotFoundError,PermissionError,ValueError,OSError,RuntimeError) if isinstance(error,t)),'Exception')
  detail=error.args[0] if len(error.args)==1 and isinstance(error.args[0],str) else None
  return {'exception_type':kind,'reason':FAILURE_MESSAGES.get(detail,FAILURE_DEFAULTS[kind])}
-def bounded_run(args,env,input=None,limit=20*1024*1024,timeout=120,merge_stderr=False):
+def bounded_run(args,env,input=None,limit=20*1024*1024,timeout=120,merge_stderr=False,stderr_limit=65536):
  """Bound all I/O under one deadline; callers own external-container cleanup."""
  import selectors,time
  with subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env) as proc:
@@ -39,7 +39,7 @@ def bounded_run(args,env,input=None,limit=20*1024*1024,timeout=120,merge_stderr=
        out.extend(data)
       if key.data=='err':
        err_size+=len(data)
-       if err_size>65536:raise ValueError('command error output limit exceeded')
+       if err_size>stderr_limit:raise ValueError('command error output limit exceeded')
    return proc.wait(timeout=max(0.1,deadline-time.monotonic())),bytes(out)
   except BaseException:
    proc.kill();proc.wait();raise

@@ -130,7 +130,10 @@ def cleanup_brain(name):
 def run_brain(argv, input=None, limit=1024*1024, merge_stderr=False, timeout=120):
     name=argv[argv.index('--name')+1]
     try:
-        return bounded_run(argv,env=ENV,input=input,limit=limit,merge_stderr=merge_stderr,timeout=timeout)
+        # Codex echoes the prompt on stderr before answering. Account for those
+        # known bytes plus a bounded diagnostic stream; keep stdout JSON separate.
+        stderr_limit=max(65536,limit)+len(input or b'')
+        return bounded_run(argv,env=ENV,input=input,limit=limit,merge_stderr=merge_stderr,timeout=timeout,stderr_limit=stderr_limit)
     finally:
         cleanup_brain(name)
 
