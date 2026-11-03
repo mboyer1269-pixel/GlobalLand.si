@@ -1,5 +1,5 @@
 # RSS 2.0 / RSS 1.0 (RDF) / Atom parsing core. Python standard library only.
-import re, html, socket, urllib.request, urllib.error
+import re, html, html.entities, socket, urllib.request, urllib.error
 import xml.etree.ElementTree as ET
 from xml.parsers import expat
 from email.utils import parsedate_to_datetime
@@ -116,6 +116,20 @@ def _atom_link(entry):
     return best
 
 
+_NAMED = re.compile(rb"&([A-Za-z][A-Za-z0-9]{1,31});")
+_XML_NAMED = {b"amp", b"lt", b"gt", b"quot", b"apos"}
+
+
+def _numeric_entities(data):
+    def sub(m):
+        n = m.group(1)
+        cp = html.entities.name2codepoint.get(n.decode("ascii"))
+        if n in _XML_NAMED or cp is None:
+            return m.group(0)
+        return b"&#%d;" % cp
+    return _NAMED.sub(sub, data)
+
+
 def parse_feed(data, feed_url, max_items=50):
     if not data or not data.strip():
         raise FeedError("empty_document", "response body is empty")
@@ -124,7 +138,13 @@ def parse_feed(data, feed_url, max_items=50):
     # No byte-level DOCTYPE scan: real feeds embed "<!DOCTYPE" inside CDATA HTML (github.blog does).
     # Refusal happens in the expat DTD/entity hooks, which only fire on a real declaration.
     try:
-        root = _parse_xml(data)
+        try:
+            root = _parse_xml(data)
+        except expat.ExpatError as e:
+            # Many feeds use HTML named entities (&nbsp;) without a DTD; retry once with numeric references.
+            if "undefined entity" not in str(e):
+                raise
+            root = _parse_xml(_numeric_entities(data))
     except _Refused as e:
         raise FeedError("dtd_rejected", str(e))
     except expat.ExpatError as e:

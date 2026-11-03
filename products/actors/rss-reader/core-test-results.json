@@ -1,9 +1,9 @@
 {
  "actor": "rss-reader",
- "generated_at": "2026-11-03T01:34:17.906302+00:00",
+ "generated_at": "2026-11-03T01:34:36.301295+00:00",
  "python": "3.11.2",
  "scope": "Real execution of src/core.py on saved/handcrafted fixtures and a local 127.0.0.1 HTTP server. No live third-party feed was fetched in this run. src/main.py (Apify SDK wrapper) was byte-compiled only, never executed; no Apify build exists.",
- "passed": 21,
+ "passed": 22,
  "failed": 0,
  "tests": [
   {
@@ -161,7 +161,12 @@
    "detail": "not_a_feed"
   },
   {
-   "name": "undefined_html_entity_is_parse_error",
+   "name": "html_named_entity_recovered",
+   "passed": true,
+   "detail": "A B"
+  },
+  {
+   "name": "unknown_entity_is_parse_error",
    "passed": true,
    "detail": "parse_error"
   },
@@ -202,7 +207,7 @@
    "name": "stable_fields_all_rows",
    "passed": true,
    "detail": {
-    "rows_checked": 31,
+    "rows_checked": 32,
     "fields": [
      "row_type",
      "feed_url",

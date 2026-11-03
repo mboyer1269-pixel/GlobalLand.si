@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "passed 22 failed 0\n\n",
+  "artifacts": [
+    "products/actors/rss-reader/src/core.py",
+    "products/actors/rss-reader/tests/run_tests.py",
+    "products/actors/rss-reader/core-test-results.json",
+    "products/receipts/TASK-179366940216.json"
+  ],
+  "request": {
+    "id": "TASK-179366940216",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T01:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "set -e\nA=products/actors/rss-reader\npython3 -I - <<'EOF'\np='products/actors/rss-reader/src/core.py'\ns=open(p).read()\ns=s.replace('import re, html, socket','import re, html, html.entities, socket',1)\nold='''    try:\n        root = _parse_xml(data)\n    except _Refused as e:'''\nnew='''    try:\n        try:\n            root = _parse_xml(data)\n        except expat.ExpatError as e:\n            # Many feeds use HTML named entities (&nbsp;) without a DTD; retry once with numeric references.\n            if \"undefined entity\" not in str(e):\n                raise\n            root = _parse_xml(_numeric_entities(data))\n    except _Refused as e:'''\nassert old in s\ns=s.replace(old,new)\nold2='def parse_feed('\nhelper='''_NAMED = re.compile(rb\"&([A-Za-z][A-Za-z0-9]{1,31});\")\n_XML_NAMED = {b\"amp\", b\"lt\", b\"gt\", b\"quot\", b\"apos\"}\n\n\ndef _numeric_entities(data):\n    def sub(m):\n        n = m.group(1)\n        cp = html.entities.name2codepoint.get(n.decode(\"ascii\"))\n        if n in _XML_NAMED or cp is None:\n            return m.group(0)\n        return b\"&#%d;\" % cp\n    return _NAMED.sub(sub, data)\n\n\ndef parse_feed('''\ns=s.replace(old2,helper,1)\nopen(p,'w').write(s)\nt='products/actors/rss-reader/tests/run_tests.py'\nu=open(t).read()\nold3='''def undefined_html_entity_is_parse_error():\n    c = err(rows_for(\"undefined-entity.xml\")); assert c == \"parse_error\", c; return c'''\nassert old3 in u\nu=u.replace(old3,'''def html_named_entity_recovered():\n    r = rows_for(\"undefined-entity.xml\")\n    assert r[0][\"row_type\"] == \"item\" and r[0][\"feed_title\"] == \"A B\", r; return r[0][\"feed_title\"]\n\n@test\ndef unknown_entity_is_parse_error():\n    c = err(rows_for(\"bogus\", data=b\"<rss><channel><title>&bogusentity;</title><item><title>x</title></item></channel></rss>\")); assert c == \"parse_error\", c; return c''')\nopen(t,'w').write(u)\nEOF\npython3 -I $A/tests/run_tests.py"
+      ],
+      "outputs": [
+        "products/actors/rss-reader/src/core.py",
+        "products/actors/rss-reader/tests/run_tests.py",
+        "products/actors/rss-reader/core-test-results.json"
+      ],
+      "mission_id": "RSS-ACTOR-BUILD"
+    },
+    "description": "Broker action during THINK-1793669402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179366940216",
+  "input_sha256": "8284bae23e912a99edc36d497cd51de1b408a348ea08231c634edfe3e859978c"
+}

@@ -110,8 +110,13 @@ def not_a_feed():
     c = err(rows_for("not-a-feed.xml")); assert c == "not_a_feed", c; return c
 
 @test
-def undefined_html_entity_is_parse_error():
-    c = err(rows_for("undefined-entity.xml")); assert c == "parse_error", c; return c
+def html_named_entity_recovered():
+    r = rows_for("undefined-entity.xml")
+    assert r[0]["row_type"] == "item" and r[0]["feed_title"] == "A B", r; return r[0]["feed_title"]
+
+@test
+def unknown_entity_is_parse_error():
+    c = err(rows_for("bogus", data=b"<rss><channel><title>&bogusentity;</title><item><title>x</title></item></channel></rss>")); assert c == "parse_error", c; return c
 
 @test
 def oversize_document():
