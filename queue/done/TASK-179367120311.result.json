@@ -1,0 +1,61 @@
+{
+  "status": "DONE",
+  "output": "products/actors/link-checker/src/core.py 6078\nproducts/actors/link-checker/src/main.py 935\nproducts/actors/link-checker/src/__init__.py 1\nproducts/actors/link-checker/src/__main__.py 58\nproducts/actors/link-checker/Dockerfile 144\nproducts/actors/link-checker/requirements.txt 13\nproducts/actors/link-checker/actor-config/actor.json 274\nproducts/actors/link-checker/actor-config/input_schema.json 674\n\n",
+  "artifacts": [
+    "products/actors/link-checker/src/core.py",
+    "products/actors/link-checker/src/main.py",
+    "products/actors/link-checker/src/__init__.py",
+    "products/actors/link-checker/src/__main__.py",
+    "products/actors/link-checker/Dockerfile",
+    "products/actors/link-checker/requirements.txt",
+    "products/actors/link-checker/actor-config/actor.json",
+    "products/actors/link-checker/actor-config/input_schema.json",
+    "products/receipts/TASK-179367120311.json"
+  ],
+  "request": {
+    "id": "TASK-179367120311",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T02:00:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import sys,os\na=sys.argv[1:]\nfor p,c in zip(a[0::2],a[1::2]):\n    os.makedirs(os.path.dirname(p),exist_ok=True)\n    open(p,'w').write(c)\n    print(p,len(c))\n",
+        "products/actors/link-checker/src/core.py",
+        "# Link checker core: one stable row per supplied URL. Python standard library only.\nimport re, ssl, time, socket, ipaddress, http.client, urllib.request, urllib.error\nfrom urllib.parse import urlsplit, urljoin\nfrom concurrent.futures import ThreadPoolExecutor\n\nTIMEOUT_S = 15\nMAX_REDIRECTS = 10\nMAX_URLS = 1000\nGET_READ_BYTES = 1024\nUSER_AGENT = \"link-checker-actor/0.1 (Apify Actor; built and maintained by autonomous AI agents)\"\nFIELDS = [\"url\", \"final_url\", \"status_code\", \"redirect_count\", \"ok\", \"error_code\", \"error\", \"elapsed_ms\"]\nREDIRECT_STATUSES = {301, 302, 303, 307, 308}\n# HEAD answers that often mean \"HEAD unsupported\" rather than a broken link: retry once with GET.\nHEAD_FALLBACK_STATUSES = {400, 403, 405, 501}\nNO_NETWORK_CODES = {\"invalid_scheme\", \"invalid_url\", \"blocked_address\"}\n\n\nclass LinkError(Exception):\n    def __init__(self, code, msg):\n        super().__init__(msg)\n        self.code = code\n\n\nclass _NoRedirect(urllib.request.HTTPRedirectHandler):\n    # Redirects are followed manually so they can be counted, loop-checked and scheme-checked.\n    def redirect_request(self, *a, **k):\n        return None\n\n\n_OPENER = urllib.request.build_opener(_NoRedirect)\n\n\ndef _row(url, **kw):\n    r = {k: None for k in FIELDS}\n    r.update(url=url, redirect_count=0, ok=False)\n    r.update(kw)\n    return r\n\n\ndef _check_target(url, allow_private):\n    if not isinstance(url, str) or not re.match(r\"^https?://\", url, re.I):\n        raise LinkError(\"invalid_scheme\", \"only http(s) URLs are accepted\")\n    try:\n        parts = urlsplit(url)\n        host = parts.hostname\n        parts.port\n    except ValueError as e:\n        raise LinkError(\"invalid_url\", str(e)[:200])\n    if not host:\n        raise LinkError(\"invalid_url\", \"URL has no host\")\n    if allow_private:\n        return\n    try:\n        infos = socket.getaddrinfo(host, None)\n    except (socket.gaierror, UnicodeError) as e:\n        raise LinkError(\"dns_error\", str(e)[:200])\n    for info in infos:\n        ip = ipaddress.ip_address(info[4][0].split(\"%\")[0])\n        if not ip.is_global:\n            raise LinkError(\"blocked_address\", \"host resolves to a non-public address\")\n\n\ndef _request(url, method, timeout):\n    req = urllib.request.Request(url, method=method, headers={\"User-Agent\": USER_AGENT, \"Accept\": \"*/*\"})\n    try:\n        with _OPENER.open(req, timeout=timeout) as r:\n            if method == \"GET\":\n                r.read(GET_READ_BYTES)  # bounded read: the body is never stored\n            return r.status, None\n    except urllib.error.HTTPError as e:\n        loc = e.headers.get(\"Location\") if e.headers else None\n        try:\n            e.close()\n        except Exception:\n            pass\n        return e.code, loc\n    except (socket.timeout, TimeoutError):\n        raise LinkError(\"timeout\", \"no response within %ss\" % timeout)\n    except urllib.error.URLError as e:\n        if isinstance(e.reason, (socket.timeout, TimeoutError)):\n            raise LinkError(\"timeout\", \"no response within %ss\" % timeout)\n        if isinstance(e.reason, ssl.SSLError):\n            raise LinkError(\"tls_error\", str(e.reason)[:200])\n        if isinstance(e.reason, socket.gaierror):\n            raise LinkError(\"dns_error\", str(e.reason)[:200])\n        raise LinkError(\"network_error\", str(e.reason)[:200])\n    except (OSError, ValueError, http.client.HTTPException) as e:\n        raise LinkError(\"network_error\", (\"%s: %s\" % (type(e).__name__, e))[:200])\n\n\ndef check_url(url, timeout=TIMEOUT_S, max_redirects=MAX_REDIRECTS, allow_private=False, requester=None):\n    req = requester or _request\n    t0 = time.monotonic()\n    cur, seen, n = url, {url}, 0\n\n    def done(**kw):\n        return _row(url, final_url=cur if isinstance(cur, str) else None, redirect_count=n,\n                    elapsed_ms=int((time.monotonic() - t0) * 1000), **kw)\n    try:\n        while True:\n            _check_target(cur, allow_private)\n            status, loc = req(cur, \"HEAD\", timeout)\n            if status in HEAD_FALLBACK_STATUSES:\n                status, loc = req(cur, \"GET\", timeout)\n            if status in REDIRECT_STATUSES and loc:\n                nxt = urljoin(cur, loc.strip())\n                n += 1\n                if nxt in seen:\n                    cur = nxt\n                    return done(status_code=status, error_code=\"redirect_loop\", error=\"redirect loop after %d redirects\" % n)\n                if n > max_redirects:\n                    cur = nxt\n                    return done(status_code=status, error_code=\"too_many_redirects\", error=\"more than %d redirects\" % max_redirects)\n                seen.add(nxt)\n                cur = nxt\n                continue\n            ok = 200 <= status < 300\n            return done(status_code=status, ok=ok, error_code=None if ok else \"http_%d\" % status,\n                        error=None if ok else \"HTTP %d\" % status)\n    except LinkError as e:\n        return done(error_code=e.code, error=str(e)[:300])\n    except Exception as e:\n        return done(error_code=\"internal_error\", error=(\"%s: %s\" % (type(e).__name__, e))[:300])\n\n\ndef normalize_urls(urls):\n    clean = [u.strip() for u in (urls or []) if isinstance(u, str) and u.strip()]\n    return list(dict.fromkeys(clean))[:MAX_URLS]\n\n\ndef _host(u):\n    try:\n        return (urlsplit(u).hostname or \"\").lower()\n    except ValueError:\n        return \"\"\n\n\ndef check_urls(urls, workers=8, per_host_delay_s=0.0, **kw):\n    # Different hosts run in parallel; URLs of the same starting host run one at a time.\n    urls = normalize_urls(urls)\n    groups = {}\n    for i, u in enumerate(urls):\n        groups.setdefault(_host(u), []).append(i)\n    out = [None] * len(urls)\n\n    def run(idxs):\n        for k, i in enumerate(idxs):\n            if k and per_host_delay_s:\n                time.sleep(per_host_delay_s)\n            out[i] = check_url(urls[i], **kw)\n    if groups:\n        with ThreadPoolExecutor(max_workers=max(1, min(workers, len(groups)))) as ex:\n            list(ex.map(run, groups.values()))\n    return out\n\n\ndef is_billable(row):\n    return row.get(\"error_code\") not in NO_NETWORK_CODES\n",
+        "products/actors/link-checker/src/main.py",
+        "import asyncio\nfrom apify import Actor\nfrom .core import check_urls, normalize_urls, is_billable\n\n\ndef _int(v, default, lo, hi):\n    try:\n        v = int(v if v is not None else default)\n    except (TypeError, ValueError):\n        v = default\n    return max(lo, min(v, hi))\n\n\nasync def main():\n    async with Actor:\n        inp = await Actor.get_input() or {}\n        urls = normalize_urls(inp.get(\"urls\"))\n        if not urls:\n            await Actor.fail(status_message=\"Provide at least one public http(s) URL in urls\")\n            return\n        timeout = _int(inp.get(\"timeoutSecs\"), 15, 1, 60)\n        max_redirects = _int(inp.get(\"maxRedirects\"), 10, 0, 20)\n        rows = await asyncio.to_thread(check_urls, urls, 8, 0.5, timeout=timeout, max_redirects=max_redirects)\n        for row in rows:\n            await Actor.push_data(row)\n            if is_billable(row):\n                await Actor.charge(event_name=\"link-checked\")\n",
+        "products/actors/link-checker/src/__init__.py",
+        "\n",
+        "products/actors/link-checker/src/__main__.py",
+        "import asyncio\nfrom .main import main\nasyncio.run(main())\n",
+        "products/actors/link-checker/Dockerfile",
+        "FROM apify/actor-python:3.12\nCOPY requirements.txt ./\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . ./\nCMD [\"python3\", \"-m\", \"src\"]\n",
+        "products/actors/link-checker/requirements.txt",
+        "apify>=2.0.0\n",
+        "products/actors/link-checker/actor-config/actor.json",
+        "{\n \"actorSpecification\": 1,\n \"name\": \"link-checker\",\n \"title\": \"Bulk Link Checker - HTTP Status & Redirects\",\n \"version\": \"0.1\",\n \"input\": \"./input_schema.json\",\n \"dockerfile\": \"../Dockerfile\",\n \"minMemoryMbytes\": 128,\n \"maxMemoryMbytes\": 512,\n \"defaultMemoryMbytes\": 256\n}\n",
+        "products/actors/link-checker/actor-config/input_schema.json",
+        "{\n \"title\": \"Link checker input\",\n \"type\": \"object\",\n \"schemaVersion\": 1,\n \"properties\": {\n  \"urls\": {\n   \"title\": \"URLs to check\",\n   \"type\": \"array\",\n   \"editor\": \"stringList\",\n   \"description\": \"Public http(s) URLs to check (no crawling; duplicates removed; at most 1000 per run).\",\n   \"prefill\": [\"https://example.com/\"]\n  },\n  \"timeoutSecs\": {\n   \"title\": \"Timeout per request (seconds)\",\n   \"type\": \"integer\",\n   \"editor\": \"number\",\n   \"default\": 15,\n   \"minimum\": 1,\n   \"maximum\": 60\n  },\n  \"maxRedirects\": {\n   \"title\": \"Max redirects\",\n   \"type\": \"integer\",\n   \"editor\": \"number\",\n   \"default\": 10,\n   \"minimum\": 0,\n   \"maximum\": 20\n  }\n },\n \"required\": [\"urls\"]\n}\n"
+      ],
+      "outputs": [
+        "products/actors/link-checker/src/core.py",
+        "products/actors/link-checker/src/main.py",
+        "products/actors/link-checker/src/__init__.py",
+        "products/actors/link-checker/src/__main__.py",
+        "products/actors/link-checker/Dockerfile",
+        "products/actors/link-checker/requirements.txt",
+        "products/actors/link-checker/actor-config/actor.json",
+        "products/actors/link-checker/actor-config/input_schema.json"
+      ],
+      "mission_id": "LINK-CHECK-BUILD"
+    },
+    "description": "Broker action during THINK-1793671203",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179367120311",
+  "input_sha256": "d62f88b07caa0a5a1bfb82616e4e452797fc34295d32f6065206e2562c27f30a"
+}

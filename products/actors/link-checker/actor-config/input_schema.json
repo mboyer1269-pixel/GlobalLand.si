@@ -1,0 +1,31 @@
+{
+ "title": "Link checker input",
+ "type": "object",
+ "schemaVersion": 1,
+ "properties": {
+  "urls": {
+   "title": "URLs to check",
+   "type": "array",
+   "editor": "stringList",
+   "description": "Public http(s) URLs to check (no crawling; duplicates removed; at most 1000 per run).",
+   "prefill": ["https://example.com/"]
+  },
+  "timeoutSecs": {
+   "title": "Timeout per request (seconds)",
+   "type": "integer",
+   "editor": "number",
+   "default": 15,
+   "minimum": 1,
+   "maximum": 60
+  },
+  "maxRedirects": {
+   "title": "Max redirects",
+   "type": "integer",
+   "editor": "number",
+   "default": 10,
+   "minimum": 0,
+   "maximum": 20
+  }
+ },
+ "required": ["urls"]
+}

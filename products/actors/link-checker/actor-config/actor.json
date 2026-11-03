@@ -1,0 +1,11 @@
+{
+ "actorSpecification": 1,
+ "name": "link-checker",
+ "title": "Bulk Link Checker - HTTP Status & Redirects",
+ "version": "0.1",
+ "input": "./input_schema.json",
+ "dockerfile": "../Dockerfile",
+ "minMemoryMbytes": 128,
+ "maxMemoryMbytes": 512,
+ "defaultMemoryMbytes": 256
+}
