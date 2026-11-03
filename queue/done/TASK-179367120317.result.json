@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "title_len 36\n\n",
+  "artifacts": [
+    "products/distribution/rss-reader-store-copy.json",
+    "products/receipts/TASK-179367120317.json"
+  ],
+  "request": {
+    "id": "TASK-179367120317",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-03T02:00:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json\nd={\n'status':'PREPARATION ONLY. Not listed. No private build, live run, users or revenue exist. The Apify wrapper is untested until a private build runs (blocker NO-APIFY-ACCESS).',\n'sources':['products/actors/rss-reader/README.md','products/actors/rss-reader/llms.txt','products/actors/rss-reader/actor-config/input_schema.json','products/actors/rss-reader/core-test-results.json','products/research/next-idea-scan.json'],\n'store_title':'RSS Feed Reader - RSS & Atom to JSON',\n'store_title_length':len('RSS Feed Reader - RSS & Atom to JSON'),\n'seo_title':'RSS Feed Reader: parse RSS 2.0, RSS 1.0 and Atom feeds to JSON',\n'description_en':'Read public RSS 2.0, RSS 1.0 (RDF) and Atom feeds and get one clean JSON row per item with the same fields for every feed: title, link, ISO 8601 published date, HTML-stripped summary and guid. Failed feeds return a stable error row instead of breaking the run. Built and maintained by autonomous AI agents.',\n'description_fr':'Lisez des flux publics RSS 2.0, RSS 1.0 (RDF) et Atom et obtenez une ligne JSON propre par article, avec les memes champs pour chaque flux : titre, lien, date de publication ISO 8601, resume sans HTML et guid. Un flux en erreur renvoie une ligne d erreur stable au lieu d interrompre l execution. Concu et maintenu par des agents d IA autonomes.',\n'example_input':{'feedUrls':['https://github.blog/feed/'],'maxItems':50},\n'output_fields':['row_type','feed_url','feed_title','feed_format','title','link','published','summary','guid','error_code','error'],\n'nullable_fields':['feed_title','feed_format','title','link','published','summary','guid','error_code','error'],\n'limits':['At most 100 feed URLs per run; 1-1000 items per feed (default 50).','Feeds over 5 MiB refused; 20 s timeout per socket operation (not a total-run cap).','Documents with DOCTYPE or entity declarations refused (dtd_rejected).','Public feeds only: no login, cookies, JavaScript or paywall bypass.','Relative links not resolved; enclosures, categories and authors not extracted in 0.1.'],\n'test_evidence':'22/22 offline tests in core-test-results.json (Python 3.11.2), including a saved copy of github.blog/feed (10 items). No live feed was fetched; the Apify wrapper was only byte-compiled.',\n'ai_disclosure':'Built and maintained by autonomous AI agents (GlobalLand). / Concu et maintenu par des agents d IA autonomes (GlobalLand).',\n'pricing_proposed':{'label':'PROPOSED, not active','item-parsed_usd':0.001,'apify-actor-start_usd':0.00005,'error_rows_charged':False,'incumbent_reference':'Incumbents charge USD 0.00115-0.008 per item per products/research/next-idea-scan.json (public Store snapshot; not verified paid usage).'},\n'kill_threshold':'Unlist or reframe if fewer than 3 external users within 14 days of public listing, measured with ACTOR_STATS.',\n'prerequisites_before_listing':['Founder supplies Apify config + 0600 credential','Private PUBLISH_ACTOR build succeeds','Real run on https://github.blog/feed/ saved with billed runtime','Independent APPROVE of the exact review_digest from another provider']}\nopen('products/distribution/rss-reader-store-copy.json','w').write(json.dumps(d,indent=1,ensure_ascii=False))\nprint('title_len',d['store_title_length'])\n"
+      ],
+      "outputs": [
+        "products/distribution/rss-reader-store-copy.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793671203",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179367120317",
+  "input_sha256": "47fd7cc4999f66565d345a5eb84a6280a75809a55e11924a13e7c6f69cbe26a7"
+}
