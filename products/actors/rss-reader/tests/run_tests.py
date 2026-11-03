@@ -152,19 +152,19 @@ try:
     BASE = "http://127.0.0.1:%d" % srv.server_address[1]
     @test
     def loopback_ok():
-        rows = read_feed(BASE + "/ok"); all_rows.extend(rows)
+        rows = read_feed(BASE + "/ok", fetcher=lambda u: fetch(u, allow_private=True)); all_rows.extend(rows)
         assert len(rows) == 2 and rows[0]["row_type"] == "item", rows; return len(rows)
     @test
     def loopback_timeout():
-        t = time.time(); rows = read_feed(BASE + "/slow", fetcher=lambda u: fetch(u, timeout=1)); el = time.time() - t
+        t = time.time(); rows = read_feed(BASE + "/slow", fetcher=lambda u: fetch(u, timeout=1, allow_private=True)); el = time.time() - t
         all_rows.extend(rows); c = err(rows); assert c == "timeout" and el < 2.5, (c, el); return {"code": c, "elapsed_s": round(el, 2)}
     @test
     def loopback_bounded_read():
-        rows = read_feed(BASE + "/big", fetcher=lambda u: fetch(u, max_bytes=1000)); all_rows.extend(rows)
+        rows = read_feed(BASE + "/big", fetcher=lambda u: fetch(u, max_bytes=1000, allow_private=True)); all_rows.extend(rows)
         c = err(rows); assert c == "too_large", c; return c
     @test
     def loopback_http_404():
-        rows = read_feed(BASE + "/missing"); all_rows.extend(rows)
+        rows = read_feed(BASE + "/missing", fetcher=lambda u: fetch(u, allow_private=True)); all_rows.extend(rows)
         c = err(rows); assert c == "http_error" and "404" in rows[0]["error"], rows; return rows[0]["error"]
 except OSError as e:
     results.append({"name": "loopback_server", "passed": False, "detail": "could not bind: %s" % e})
@@ -192,3 +192,4 @@ print("passed", out["passed"], "failed", out["failed"])
 for r in results:
     if not r["passed"]:
         print("FAIL", r["name"], str(r["detail"])[:200])
+sys.exit(1 if out["failed"] else 0)

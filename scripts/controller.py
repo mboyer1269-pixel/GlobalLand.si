@@ -168,9 +168,9 @@ class Controller:
         # Set by the supervisor for think turns: runs one broker action durably.
         self.executor=None;self.turn_seconds=None
 
-    def last_status(self):
+    def last_status(self,filename='controller-run.json'):
         """Only a closed, fixed-code operational record may reach GitHub."""
-        path=self.root/'state/private/controller-run.json'
+        path=self.root/'state/private'/filename
         if not path.exists():return None
         value=strict_json(path.read_bytes())
         if not isinstance(value,dict) or set(value)!={'turn','at','state','provider','attempts'}:
@@ -213,7 +213,24 @@ class Controller:
 
     def record_status(self,turn,state,provider,attempts):
         private=self.root/'state/private';private.mkdir(parents=True,exist_ok=True,mode=0o700)
-        atomic_json(private/'controller-run.json',dict(turn=turn,at=datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),state=state,provider=provider,attempts=attempts))
+        record=dict(turn=turn,at=datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),state=state,provider=provider,attempts=attempts)
+        success=self.last_status('controller-last-success.json')
+        previous=self.last_status()
+        if success is None and previous and previous['state']=='DECISION_READY':
+            # Preserve the last pre-upgrade success before a failure overwrites it.
+            success=previous
+            atomic_json(private/'controller-last-success.json',success)
+        if state=='DECISION_READY':
+            outbox=self.root/'state/controller'/(turn+'.json')
+            if outbox.exists():
+                saved=strict_json(outbox.read_bytes())
+                # Legacy outboxes have no finish time: their turn start is a
+                # conservative bound, never the time of a later publication retry.
+                record['at']=saved.get('planned_at') or datetime.datetime.fromtimestamp(int(turn.split('-')[1]),datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+                datetime.datetime.strptime(record['at'],'%Y-%m-%dT%H:%M:%SZ')
+            if success and success['turn']==turn:record['at']=success['at']
+            atomic_json(private/'controller-last-success.json',record)
+        atomic_json(private/'controller-run.json',record)
 
     def projection(self,now=None):
         """Public controller status derived from the durable private turn record.
@@ -223,6 +240,8 @@ class Controller:
         the operational evidence. A record older than stale_after_seconds is
         reported as STALE instead of claiming a live controller."""
         status=self.readiness();last=self.last_status();status['last_turn']=last
+        success=self.last_status('controller-last-success.json')
+        status['last_successful_plan']=success if success and success['state']=='DECISION_READY' else (last if last and last['state']=='DECISION_READY' else None)
         if not status.get('configured') or last is None:return status
         stale_after=self.config.get('stale_after_seconds',7200)
         if type(stale_after) is not int or not 60<=stale_after<=7*86400:stale_after=7200
@@ -425,7 +444,7 @@ class Controller:
                 raise
             attempts.append(dict(provider=provider,status='SUCCEEDED',stage=stage,exception_type=None,reason=None))
             self.note_provider(provider,seconds)
-            atomic_json(path,dict(provider=provider,decision=decision,files=files,published=False,attempts=attempts))
+            atomic_json(path,dict(provider=provider,decision=decision,files=files,published=False,attempts=attempts,planned_at=datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')))
             progress.commit(self.root,turn,assessment)
             self.record_status(turn,'DECISION_READY',provider,attempts)
             return turn,files

@@ -131,3 +131,4 @@ print("passed %d/%d" % (passed, len(results)))
 for r in results:
     if not r["passed"]:
         print("FAIL", r["name"], r["failures"][:3])
+sys.exit(1 if passed != len(results) else 0)
