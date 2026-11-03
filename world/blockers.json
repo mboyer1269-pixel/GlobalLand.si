@@ -42,6 +42,20 @@
       "reports": 1,
       "opened_at": "2026-11-03T20:01:26Z",
       "last_reported_at": "2026-11-03T20:01:26Z"
+    },
+    {
+      "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "CAPABILITY",
+      "title": "Public bounty discovery rejected by host publication check",
+      "detail": "Public GitHub issue-search FETCH TASK-179374860310 was rejected with 'secret pattern detected; publication blocked'. No candidate artifact was published. queue/PROTOCOL.md was read through TASK-179374860311; it documents secret checks but does not identify the matched content. Do not bypass the filter or mistake this rejection for evidence that no paid tasks exist. Existing bounded missions can still be closed from their observed evidence.",
+      "mission_id": "ALTERNATIVE-PAID-REQUEST",
+      "expected_gain": "Accurate closure of the failed discovery experiment and a precise technical constraint for future permitted public-source acquisition.",
+      "raised_by": "DIRECTOR",
+      "reports": 1,
+      "opened_at": "2026-11-03T23:30:56Z",
+      "last_reported_at": "2026-11-03T23:30:56Z"
     }
   ],
   "resolved_recent": [],

@@ -438,13 +438,6 @@
   "events": [
     {
       "type": "GLC_CYCLE",
-      "timestamp": 1793520008.8444703,
-      "agent_id": "RESEARCHER",
-      "interest_glc": 5,
-      "maintenance_glc": 1
-    },
-    {
-      "type": "GLC_CYCLE",
       "timestamp": 1793520008.844473,
       "agent_id": "BUILDER",
       "interest_glc": 5,
@@ -1036,6 +1029,12 @@
       "timestamp": 1793748654.4555802,
       "from_agent": "DIRECTOR",
       "to_agent": "RESEARCHER"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793748656.3260417,
+      "blocker_id": "PUBLIC-DISCOVERY-HOST-REJECTION",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1087,6 +1086,21 @@
       "expected_gain": "Would permit consideration of future sponsored tasks; no award, funding or payout is guaranteed.",
       "last_reported_by": "RESEARCHER",
       "last_reported_at": 1793736086.7979198
+    },
+    {
+      "blocker_id": "PUBLIC-DISCOVERY-HOST-REJECTION",
+      "status": "OPEN",
+      "raised_by": "DIRECTOR",
+      "opened_at": 1793748656.3260295,
+      "reports": 1,
+      "title": "Public bounty discovery rejected by host publication check",
+      "category": "CAPABILITY",
+      "needs_founder": false,
+      "detail": "Public GitHub issue-search FETCH TASK-179374860310 was rejected with 'secret pattern detected; publication blocked'. No candidate artifact was published. queue/PROTOCOL.md was read through TASK-179374860311; it documents secret checks but does not identify the matched content. Do not bypass the filter or mistake this rejection for evidence that no paid tasks exist. Existing bounded missions can still be closed from their observed evidence.",
+      "mission_id": "ALTERNATIVE-PAID-REQUEST",
+      "expected_gain": "Accurate closure of the failed discovery experiment and a precise technical constraint for future permitted public-source acquisition.",
+      "last_reported_by": "DIRECTOR",
+      "last_reported_at": 1793748656.3260295
     }
   ],
   "lesson_count": 21
