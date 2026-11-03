@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"LINK-CHECK-BUILD\", \"goal\": \"Per products/research/next-idea-scan.json (broken-link verdict PURSUE_IF: khadinakbar has 53 users_30d at USD 0.001 per link; the others have 0-6), build products/actors/link-checker offline. Input: a supplied list of public http(s) URLs (no crawling), max 1000. Output: one stable JSON row per URL (url, final_url, status_code, redirect_count, ok, error_code, error, elapsed_ms). Reuse the bounded-read, timeout and error-row code from products/actors/rss-reader/src/core.py, with packaging like rss-reader and an EN/FR README with the AI disclosure. Use HEAD with a GET fallback, a per-host concurrency of 1, and a User-Agent that identifies the Actor. Test only against a local 127.0.0.1 server (200, 301 chain, 404, 500, timeout, redirect loop, invalid scheme) and save core-test-results.json from real execution. Proposed events: link-checked 800 micro-USD and apify-actor-start 50 micro-USD, labeled as proposed. Do not probe credentials. Complete with a lesson only after reading the results.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/actors/link-checker/core-test-results.json\", \"products/actors/link-checker/src/core.py\", \"products/actors/link-checker/src/main.py\", \"products/actors/link-checker/tests/run_tests.py\", \"products/actors/link-checker/README.md\", \"products/actors/link-checker/llms.txt\", \"products/actors/link-checker/actor-config/actor.json\", \"products/actors/link-checker/actor-config/input_schema.json\"]}",
+  "request": {
+    "id": "TASK-179367120316",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T02:00:03Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "LINK-CHECK-BUILD",
+      "agent_id": "BUILDER",
+      "lease_token": "RC-T7ol4HijGeAWI2BC-WrlidAK8lAsO",
+      "evidence": [
+        "products/actors/link-checker/core-test-results.json",
+        "products/actors/link-checker/src/core.py",
+        "products/actors/link-checker/src/main.py",
+        "products/actors/link-checker/tests/run_tests.py",
+        "products/actors/link-checker/README.md",
+        "products/actors/link-checker/llms.txt",
+        "products/actors/link-checker/actor-config/actor.json",
+        "products/actors/link-checker/actor-config/input_schema.json"
+      ],
+      "lesson": "link-checker: 21/21 real offline tests on 127.0.0.1 (redirect chain, 404/500, HEAD-405 to GET, timeout, loop, too many redirects, ftp redirect refused, loopback blocked by default, same-host in-flight=1, 1000 cap). The Apify wrapper was only byte-compiled. What failed first: the concurrency test saw 2 in flight because the server was still sleeping on the timed-out /slow request; drain server work before measuring. Worked: file contents as separate argv items to a small writer script, and mkdir -p first. Manual redirects make loops and counts testable. Rows rejected before any network request are not billable."
+    },
+    "description": "Broker action during THINK-1793671203",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179367120316",
+  "input_sha256": "03f7dc93062992b6f75fce3c3755c1a09d147b00ff372ff566876e3497a8b9c2"
+}
