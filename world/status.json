@@ -236,9 +236,9 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "GgszhGwpFleB5im4yHZJhUWJuiujxt4A",
+      "lease_expires_at": 1793737622.0774927,
       "evidence": []
     }
   ],
@@ -347,12 +347,6 @@
     }
   ],
   "events": [
-    {
-      "type": "GLC_LOAN",
-      "timestamp": 1793423756.3320434,
-      "agent_id": "BUILDER",
-      "amount": 100
-    },
     {
       "type": "GLC_ISSUANCE",
       "timestamp": 1793423756.3320463,
@@ -949,6 +943,12 @@
       "timestamp": 1793733990.9244537,
       "lesson_id": "L17",
       "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793734022.077526,
+      "mission_id": "PUBLIC-BOUNTY-OPPORTUNITY",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
