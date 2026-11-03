@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "ssl-cert 193 0 [('automation-lab/ssl-certificate-checker', 3, 'PAY_PER_EVENT', {'start': 0.035, 'domain-checked': 0.00115}), ('pink_comic/ssl-certificate-checker', 2, 'PAY_PER_EVENT', {'apify-actor-start': 0.0001, 'apify-default-dataset-item': 0.0001}), ('rationalistic_counsel/ssl-certificate-ch', 2, 'PAY_PER_EVENT', {'apify-actor-start': 5e-05, 'apify-default-dataset-item': 0.01})]\nsecurity-headers 818 0 [('smart-digital/website-security-vulnerabi', 5, 'PAY_PER_EVENT', {'apify-actor-start': 0.01, 'PAGE_AUDITED': 0.02}), ('jungle_synthesizer/ssl-security-headers-', 5, 'PAY_PER_EVENT', {'apify-actor-start': 0.1, 'data-record': 0.002}), ('ninhothedev/security-headers-checker', 3, 'PAY_PER_EVENT', {'apify-actor-start': 5e-05, 'apify-default-dataset-item': 0.001})]\nmeta-tags 1643 0 [('logiover/json-ld-schema-meta-tag-extract', 4, 'PAY_PER_EVENT', {'apify-default-dataset-item': 0.005}), ('bgfc97/opengraph-meta-extractor', 1, 'PAY_PER_EVENT', {'url-extracted': 0.001}), ('gifted_wagon/website-metadata-evidence-e', 1, 'PAY_PER_EVENT', {'apify-actor-start': 0.0004, 'page-analyzed': 0.005})]\nredirect 980 0 [('q_services/redirect-chain-checker', 9, 'PAY_PER_EVENT', {'actor-start': 0.005, 'dataset-item': 0.0002}), ('mighty_monk/redirect-chain-checker', 6, 'PAY_PER_EVENT', {'apify-actor-start': 5e-05, 'apify-default-dataset-item': 0.002}), ('jtpalms/url-status-checker', 6, 'PAY_PER_EVENT', {'url-checked': 0.0015, 'apify-actor-start': 5e-05})]\ndns 1214 2 [('santamaria-automations/domain-whois-dns', 33, 'PAY_PER_EVENT', {'enrichment-start': 0.001, 'enrichment-result': 0.003}), ('automation-lab/domain-availability-check', 29, 'PAY_PER_EVENT', {'start': 0.035, 'domain-checked': 0.0023}), ('gazidev/bulk-dns-lookup', 8, 'PAY_PER_EVENT', {'apify-actor-start': 5e-05, 'domain-checked': 0.001})]\n\n",
+  "artifacts": [
+    "products/research/scan2-summary.json",
+    "products/receipts/TASK-179367480321.json"
+  ],
+  "request": {
+    "id": "TASK-179367480321",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-03T03:00:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nfiles={'ssl-cert':'scan2-ssl-cert','security-headers':'scan2-security-headers','meta-tags':'scan2-meta-tags','redirect':'scan2-redirect','dns':'scan2-dns'}\nout={'observed_on':'2026-11-03','method':'public Apify Store API, narrow queries; users_30d mixes free and paid users; paid share unobservable','jobs':{}}\nfor job,f in files.items():\n  d=json.load(open('/workspace/products/research/'+f+'.json'))\n  d=d.get('data',d)\n  items=d.get('items',[])\n  rows=[]\n  for it in items:\n    st=it.get('stats') or {}\n    pi=it.get('currentPricingInfo') or {}\n    ev={}\n    for k,v in ((pi.get('pricingPerEvent') or {}).get('actorChargeEvents') or {}).items():\n      p=v.get('eventPriceUsd')\n      if p is None:\n        t=(v.get('eventTieredPricingUsd') or {}).get('FREE') or {}\n        p=t.get('tieredEventPriceUsd')\n      ev[k]=p\n    rows.append({'name':it.get('username','')+'/'+it.get('name',''),'title':it.get('title'),'users_30d':st.get('totalUsers30Days'),'users_total':st.get('totalUsers'),'rating':it.get('actorReviewRating'),'reviews':it.get('actorReviewCount'),'pricing_model':pi.get('pricingModel'),'events':ev})\n  rows.sort(key=lambda r:-(r['users_30d'] or 0))\n  out['jobs'][job]={'artifact':'products/research/'+f+'.json','total':d.get('total'),'n20plus':sum(1 for r in rows if (r['users_30d'] or 0)>=20),'top5':rows[:5]}\njson.dump(out,open('/workspace/products/research/scan2-summary.json','w'),indent=1)\nfor j,v in out['jobs'].items():\n  print(j,v['total'],v['n20plus'],[(r['name'][:40],r['users_30d'],r['pricing_model'],{k:p for k,p in list(r['events'].items())[:2]}) for r in v['top5'][:3]])\n"
+      ],
+      "outputs": [
+        "products/research/scan2-summary.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793674803",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179367480321",
+  "input_sha256": "0d64b8f8ebebee8d7bbbf883931f270d23451b0aecbd139cd3083900c08848c1"
+}
