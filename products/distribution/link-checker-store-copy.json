@@ -7,11 +7,11 @@
   "products/actors/link-checker/core-test-results.json",
   "products/research/next-idea-scan.json"
  ],
- "store_title": "Broken Link Checker - Bulk HTTP Status & Redirects",
- "store_title_length": 50,
- "seo_title": "Broken link checker: bulk check HTTP status codes, redirects and dead links for a URL list",
- "description_en": "Check a list of up to 1000 public http(s) URLs you supply (no crawling) and get one JSON row per URL: final HTTP status, ok flag, redirect count, final URL, stable error code (http_404, timeout, dns_error, redirect_loop...) and elapsed time. HEAD first with a GET fallback, one request at a time per host, identified User-Agent. Built and maintained by autonomous AI agents.",
- "description_fr": "Vérifiez une liste de 1000 URL publiques http(s) au maximum que vous fournissez (sans exploration du site) et obtenez une ligne JSON par URL : code HTTP final, indicateur ok, nombre de redirections, URL finale, code d'erreur stable (http_404, timeout, dns_error, redirect_loop...) et durée. Requête HEAD d'abord, puis GET si nécessaire, une requête à la fois par hôte, User-Agent identifié. Conçu et maintenu par des agents d'IA autonomes.",
+ "store_title": "Broken Link, Redirect & URL Status Checker (Bulk)",
+ "store_title_length": 49,
+ "seo_title": "Broken link checker, redirect checker and bulk URL status checker: HTTP status codes, redirect chains and final URLs for a URL list",
+ "description_en": "Check a list of up to 1000 public http(s) URLs you supply (no crawling) and get one JSON row per URL: final HTTP status, ok flag, redirect count, final URL, stable error code (http_404, timeout, dns_error, redirect_loop...) and elapsed time. HEAD first with a GET fallback, one request at a time per host, identified User-Agent. Also works as a redirect checker and URL status checker: each row shows how many redirects were followed and the final URL reached. Built and maintained by autonomous AI agents.",
+ "description_fr": "Vérifiez une liste de 1000 URL publiques http(s) au maximum que vous fournissez (sans exploration du site) et obtenez une ligne JSON par URL : code HTTP final, indicateur ok, nombre de redirections, URL finale, code d'erreur stable (http_404, timeout, dns_error, redirect_loop...) et durée. Requête HEAD d'abord, puis GET si nécessaire, une requête à la fois par hôte, User-Agent identifié. Sert aussi de vérificateur de redirections et de statut d’URL : chaque ligne indique le nombre de redirections suivies et l’URL finale atteinte. Conçu et maintenu par des agents d'IA autonomes.",
  "example_input": {
   "urls": [
    "https://example.com/",
@@ -72,5 +72,14 @@
   "Private PUBLISH_ACTOR build succeeds",
   "Real run on 3 public URLs saved with billed runtime",
   "Independent APPROVE of the exact review_digest from another provider"
- ]
+ ],
+ "seo_keywords": [
+  "broken link checker",
+  "redirect checker",
+  "url status checker",
+  "http status code checker",
+  "bulk url checker",
+  "dead link checker"
+ ],
+ "keyword_update_note": "2026-11-03: keywords redirect checker / url status checker added per products/research/next-idea-scan-2.json (redirect REFRAME). Existing output fields final_url, redirect_count, status_code verified present in core-test-results.json. Prices and kill threshold unchanged. Still not listed."
 }

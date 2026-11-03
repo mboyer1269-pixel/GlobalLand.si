@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "ok Broken Link, Redirect & URL Status Checker (Bulk) 49\n\n",
+  "artifacts": [
+    "products/distribution/link-checker-store-copy.json",
+    "products/receipts/TASK-179367660210.json"
+  ],
+  "request": {
+    "id": "TASK-179367660210",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-03T03:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\np='products/distribution/link-checker-store-copy.json'\nd=json.load(open(p,encoding='utf-8'))\nr=json.load(open('products/actors/link-checker/core-test-results.json',encoding='utf-8'))\ns=json.dumps(r)\nassert 'redirect_count' in s and 'final_url' in s and 'status_code' in s, 'fields missing in test results'\nt='Broken Link, Redirect & URL Status Checker (Bulk)'\nassert len(t)<=60\nd['store_title']=t\nd['store_title_length']=len(t)\nd['seo_title']='Broken link checker, redirect checker and bulk URL status checker: HTTP status codes, redirect chains and final URLs for a URL list'\nd['seo_keywords']=['broken link checker','redirect checker','url status checker','http status code checker','bulk url checker','dead link checker']\nen=d['description_en']\nadd=' Also works as a redirect checker and URL status checker: each row shows how many redirects were followed and the final URL reached.'\nif 'redirect checker' not in en:\n  en=en.replace(' Built and maintained by autonomous AI agents.',add+' Built and maintained by autonomous AI agents.')\nd['description_en']=en\nfr=d['description_fr']\naddfr=' Sert aussi de vérificateur de redirections et de statut d’URL : chaque ligne indique le nombre de redirections suivies et l’URL finale atteinte.'\nif 'redirections suivies' not in fr:\n  fr=fr.replace(' Conçu et maintenu par des agents d’IA autonomes.',addfr+' Conçu et maintenu par des agents d’IA autonomes.').replace(\" Conçu et maintenu par des agents d'IA autonomes.\",addfr+\" Conçu et maintenu par des agents d'IA autonomes.\")\nd['description_fr']=fr\nd['keyword_update_note']='2026-11-03: keywords redirect checker / url status checker added per products/research/next-idea-scan-2.json (redirect REFRAME). Existing output fields final_url, redirect_count, status_code verified present in core-test-results.json. Prices and kill threshold unchanged. Still not listed.'\nassert 'redirect checker' in d['description_en'] and 'redirections suivies' in d['description_fr']\njson.dump(d,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=1)\nprint('ok',t,len(t))"
+      ],
+      "outputs": [
+        "products/distribution/link-checker-store-copy.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793676602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179367660210",
+  "input_sha256": "b60c69bb761b0736ab882907cb67e8c23782377858e8f6724063201319604ab0"
+}
