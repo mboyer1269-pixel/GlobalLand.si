@@ -1,0 +1,982 @@
+{
+  "data": {
+    "total": 713,
+    "count": 15,
+    "offset": 0,
+    "limit": 15,
+    "desc": false,
+    "items": [
+      {
+        "title": "Website Screenshot Generator",
+        "name": "screenshot-url",
+        "username": "apify",
+        "stats": {
+          "totalBuilds": 93,
+          "totalRuns": 2315298,
+          "totalUsers": 9716,
+          "lastRunStartedAt": "2026-11-02T10:22:01.006Z",
+          "totalUsers30Days": 1859,
+          "totalUsers7Days": 771,
+          "totalUsers90Days": 3014,
+          "totalMetamorphs": 7,
+          "publicActorRunStats30Days": {
+            "ABORTED": 580,
+            "FAILED": 12,
+            "SUCCEEDED": 130278,
+            "TIMED-OUT": 4338,
+            "TOTAL": 135208
+          },
+          "actorReviewCount": 21,
+          "actorReviewRating": 3.902732630971479,
+          "bookmarkCount": 172
+        },
+        "description": "Create a screenshot of a website based on a specified URL. The screenshot is stored as the output in a key-value store. It can be used to monitor web changes regularly after setting up the scheduler.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "OPEN_SOURCE"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/Q-vTCPBDbvntHruLBZsZSZICrL0YYdslTTReHFsxfnw/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMuYW1hem9uYXdzLmNvbS9yR0N5b2FLVEtoeU1paVR2Uy8zNkY1V3FkcGF1UldEU055OS1zY3JlZW5zaG90X2Rvd25sb2FkLTAxLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 174,
+        "actorReviewRating": 3.878393288583986,
+        "actorReviewCount": 20,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Apify",
+        "userPictureUrl": "https://images.apifyusercontent.com/W831qifiDbg1ltpsHQIGyWH55ztmmv7T4EILHVqoFU4/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vSTdzZWx3YUVOam9GRG9Td3J3ODFQYXc2SEpXSjJRZk0tNzhMa1ZxcEtEQS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZXbk5qVFhkR1VqVklOMlZEZEZkMGVXZ3RjSEp2Wm1sc1pTMVBiamhzU0U1bGJrSnZMV0Z3YVdaNUxYTjViV0p2YkMxamIyeHZjbk10YldGeVoybHVMbk4yWnk1d2JtYy5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "FREE"
+        },
+        "id": "rGCyoaKTKhyMiiTvS",
+        "url": "https://apify.com/apify/screenshot-url"
+      },
+      {
+        "title": "Website Screenshot",
+        "name": "website-screenshot",
+        "username": "i-scraper",
+        "stats": {
+          "totalBuilds": 50,
+          "totalRuns": 24179,
+          "totalUsers": 322,
+          "totalUsers7Days": 14,
+          "totalUsers30Days": 61,
+          "totalUsers90Days": 171,
+          "lastRunStartedAt": "2026-11-02T09:21:27.690Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 3,
+            "FAILED": 5,
+            "SUCCEEDED": 7581,
+            "TIMED-OUT": 14,
+            "TOTAL": 7603
+          },
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 3
+        },
+        "description": "⚡️ Website screenshot: easy-peasy screenshots, PNG & JPG formats",
+        "categories": [
+          "AUTOMATION",
+          "OTHER"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/LilXLdl2LcAuWiqce6IhjvfTaP5RvNm6V_47umi2YbU/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20valJ6UFBiT2dmSDhuaGxWQ0EtYWN0b3ItanoyY3RoaVJyYXlicmJtdTgtdU9rU3VBaTZQWi0wNDNiY2NjZS03ZDJiLTQyMjQtODIzNC1lMzQxZDM4NGMxY2UucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 3,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "i-Scraper",
+        "userPictureUrl": "https://images.apifyusercontent.com/DmhC3CLXA9hK1rKgA_1ne-Pxg_J33-2_WG3L4ibYXuM/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vZ1lodldra0dvdkZXS1ZLWlB0RDB0cVZ4cTFucWYzVlk2WERsZTlOSGhWUS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZhbEo2VUZCaVQyZG1TRGh1YUd4V1EwRXRjSEp2Wm1sc1pTMU9jVkJ3U2tSWGRFaFhMVEkzTnpjMk16SmlMVE5rTlRjdE5HVXhOeTA0TmpJeUxUSmxNR1JrWlRCa1lXUmtNUzV3Ym1jLnBuZw.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "reasonForChange": "Platform usage costs will be billed separately to keep the service sustainable across pages with varying compute, traffic, and proxy usage. The result price remains unchanged at $6 per 1,000 results.",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.006,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-08-31T23:11:58.032Z",
+          "createdAt": "2026-08-17T23:11:58.789Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-08-17T23:12:20.053Z",
+          "notifiedAboutChangeAt": "2026-08-31T23:35:55.169Z"
+        },
+        "id": "jz2cthiRraybrbmu8",
+        "url": "https://apify.com/i-scraper/website-screenshot"
+      },
+      {
+        "title": "Website Screenshot API — Full-Page, Element & Device Capture",
+        "name": "website-screenshot-api",
+        "username": "cheapapi",
+        "stats": {
+          "totalBuilds": 6,
+          "totalRuns": 12331,
+          "totalUsers": 398,
+          "totalUsers7Days": 83,
+          "totalUsers30Days": 236,
+          "totalUsers90Days": 316,
+          "actorReviewCount": 1,
+          "actorReviewRating": 4.999999999999999,
+          "bookmarkCount": 4,
+          "lastRunStartedAt": "2026-11-02T10:10:15.259Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 202,
+            "FAILED": 1,
+            "SUCCEEDED": 7070,
+            "TIMED-OUT": 107,
+            "TOTAL": 7380
+          }
+        },
+        "description": "Website Screenshot API: capture any URL as PNG, JPEG or WebP (PDF too) — true full-page, element & region capture, 13 device profiles, dark mode, retina, ad/cookie-banner blocking, stealth, auth & geo. Self-scaling and SSRF-safe. Standby HTTP + batch.",
+        "categories": [
+          "OTHER",
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/bU6RInomLmvZkJF7uX0Kp6zKV03pg-prl35opx1O7mI/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vMGllcWZ3cDNkR1Y0U2NyaWwtYWN0b3Itd2ZqcFg2RjZjYzlGeEJvZ2YtWmZBNjE5N1JKRC1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 4,
+        "actorReviewRating": 5,
+        "actorReviewCount": 1,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "CheapAPI",
+        "userPictureUrl": "https://images.apifyusercontent.com/ngstvySoIEKLhqlgN8LMKRvbi66C_tMz7KHieXmvZbo/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vSXZ4UW1uLUdDTFJfd1NlSlE3c3FmQl95bDhPaTBtYWpMRTJINnlZeUFGZy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZNR2xsY1daM2NETmtSMVkwVTJOeWFXd3RjSEp2Wm1sc1pTMDVkSEpJZDFCT1MyZzFMV05vWldGd1lYQnBMbkJ1WncucG5n.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "reasonForChange": "Website Screenshot API now uses pay-per-event pricing: $0.89 per 1,000 successful screenshots; failed captures are free. You also pay standard Apify platform usage. Effective June 28, 2026",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00001
+              },
+              "screenshot": {
+                "eventTitle": "Screenshot",
+                "eventDescription": "One successful screenshot delivered (PNG/JPEG/WebP/PDF). Failed captures and rejections are free.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.00089
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00083
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00074
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00061
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00061
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00061
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-06-28T13:34:31.702Z",
+          "createdAt": "2026-06-14T13:34:32.972Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-06-14T13:34:53.243Z"
+        },
+        "id": "wfjpX6F6cc9FxBogf",
+        "url": "https://apify.com/cheapapi/website-screenshot-api"
+      },
+      {
+        "title": "Website Screenshot API: Bulk, Full Page & PDF",
+        "name": "website-screenshot-pro",
+        "username": "egra_van",
+        "stats": {
+          "totalBuilds": 7,
+          "totalRuns": 66,
+          "totalUsers": 1,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 0,
+          "totalUsers90Days": 0,
+          "lastRunStartedAt": "2026-11-02T05:42:31.088Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 1,
+            "FAILED": 0,
+            "SUCCEEDED": 48,
+            "TIMED-OUT": 0,
+            "TOTAL": 49
+          }
+        },
+        "description": "Website screenshot API in bulk: paste hundreds of URLs and get full-page or viewport screenshots on desktop, tablet or mobile as PNG, JPEG or WebP, plus optional PDF, in one ZIP. Cookie banners hidden, ads blocked, lazy images loaded. $3 per 1,000 screenshots, +$1 per 1,000 PDFs; failed URLs free.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/jNn3IBKER9cuw5CtnpAXdKvK94rSmBiJg9jax8oRsKs/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vWTJqb1ZhQUJxcE1uVk5meEktYWN0b3ItdThMMFJqQk5qMjFTdTltbTctbzRmV0VVVlloMy1zY3JlZW5zaG90LnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Argentin Vazdautan",
+        "userPictureUrl": "https://images.apifyusercontent.com/Y1fMZfE7cOczq56kR9k-yQds2NsexErA3jC0Qp4u2N4/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vc2NtZ1NkQkxfYndpcm4wLTg5Vi1BVHlyUDlsS0NiRTJUaW4yd2tqZEJvSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTMHBhTVZkVFNFTmxlbXAwVVVwVU9GbHJhSGxqVjFGQk5sOUJlRnBsWjNacldEWlJOMnRqYm0xS1FtUnhUVzVqUjJzOWN6azJMV00.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "screenshot": {
+                "eventTitle": "Web page screenshot",
+                "eventDescription": "One successful screenshot of a web page (full page or viewport, desktop or mobile). Failed URLs are free.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.003
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0025
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.002
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0015
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0015
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0015
+                  }
+                },
+                "isPrimaryEvent": true
+              },
+              "pdf-export": {
+                "eventTitle": "PDF copy of the page",
+                "eventDescription": "Optional PDF version of the page, charged only when PDF export is turned on.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.001
+              }
+            }
+          },
+          "startedAt": "2026-10-08T18:09:44.904Z",
+          "createdAt": "2026-10-08T18:09:45.754Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-08T18:30:27.456Z"
+        },
+        "id": "u8L0RjBNj21Su9mm7",
+        "url": "https://apify.com/egra_van/website-screenshot-pro"
+      },
+      {
+        "title": "Website Screenshot API — URL & HTML to PNG, JPEG, WebP, PDF",
+        "name": "url-screenshot-api",
+        "username": "moonweil",
+        "stats": {
+          "totalBuilds": 15,
+          "totalRuns": 10576,
+          "totalUsers": 282,
+          "totalUsers7Days": 41,
+          "totalUsers30Days": 141,
+          "totalUsers90Days": 216,
+          "lastRunStartedAt": "2026-11-02T10:16:55.133Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 3,
+            "FAILED": 204,
+            "SUCCEEDED": 8444,
+            "TIMED-OUT": 6,
+            "TOTAL": 8657
+          }
+        },
+        "description": "Turn any URL or raw HTML into a screenshot, PDF, or Open Graph card. Full-page & device capture, dark mode, ad/tracker/cookie-banner blocking, visual diffing, base64-to-image conversion, and DOM + console-error extraction — all through one fast API.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/4U-IRZR3Q4ukjI__qXDQjE-2ZSkUyIj6pCOoKdKgos4/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vYkpwWXpsU2JWd05ZVU9mZmMtYWN0b3ItNFg4dTRPMklJUzhOaUl4ck0tU3pyOXQwVTc1eC1hY3Rvci1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Aleksandr Jelohhin",
+        "userPictureUrl": "https://images.apifyusercontent.com/cOUQgQsJVEvB97dHT9vTQUNFrDQ_Wg1PDuVOxTbVgBM/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMGItTzV2NTU3a3NFTDFrUWJnZ3NydmNFMDdSR0c3akpBUHY4SnBFVExQSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpURE5zYURoUFpFbERiMlZ1Y1drelNtOURWR0YzWldveWJFSjVVR0Z1WHpKMlZrTm9URlJoWDJ0NWNIcDFPV1I0V1Qxek9UWXRZdw.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.001
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.004,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-07-14T08:28:27.227Z",
+          "createdAt": "2026-07-14T08:28:28.209Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "4X8u4O2IIS8NiIxrM",
+        "url": "https://apify.com/moonweil/url-screenshot-api"
+      },
+      {
+        "title": "Website Screenshot API — Full-Page PNG, JPEG, PDF, WebP",
+        "name": "web-screenshot-pro",
+        "username": "fetchbase",
+        "stats": {
+          "totalBuilds": 15,
+          "totalRuns": 510,
+          "totalUsers": 20,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 15,
+          "totalUsers90Days": 16,
+          "lastRunStartedAt": "2026-11-02T04:48:25.291Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 7,
+            "FAILED": 0,
+            "SUCCEEDED": 127,
+            "TIMED-OUT": 0,
+            "TOTAL": 134
+          }
+        },
+        "description": "Screenshot any URL as PNG, JPEG, WebP or PDF. Full-page shots that work: sticky headers un-stuck, cookie banners and ads removed, lazy content settled. Device presets, dark mode, retina, authenticated pages, PDF controls, proxy. Charged only per successful screenshot — no startup fee.",
+        "categories": [
+          "AUTOMATION",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/9hnV5e8rzoSIGZX-JcJkLZgH7GGqpshi8d7HvovjWCE/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vQWhKWUZjUHZ2ZEplNzFBSGUtYWN0b3IteFBaejdUY3o1NGhEMmIxdXAta2dJRzB1ZjZWSi13ZWItc2NyZWVuc2hvdC1wcm8ucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Fetchbase",
+        "userPictureUrl": "https://images.apifyusercontent.com/LUnyg6xaNEZS4LxEu7TLQuqdMuQrQhBXdM7FiRU02nU/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vQ09nMkVvVmNMMTBoLTR5VW9sS3lIU0dIanN5N0hzMHlUSFM0U0gzZzFmdy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloZG1GMFlYSnpMbWRwZEdoMVluVnpaWEpqYjI1MFpXNTBMbU52YlM5MUx6TXpOREEzT1RBelAzWTlOQQ.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "screenshot": {
+                "eventTitle": "Screenshot captured",
+                "eventDescription": "One successful screenshot (PNG/JPEG/WebP/PDF). Failed captures are never charged.",
+                "eventPriceUsd": 0.02,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-07-12T04:27:55.070Z",
+          "startedAt": "2026-07-12T04:27:55.070Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-07-13T10:36:45.046Z"
+        },
+        "id": "xPZz7Tcz54hD2b1up",
+        "url": "https://apify.com/fetchbase/web-screenshot-pro"
+      },
+      {
+        "title": "Website Screenshot Generator",
+        "name": "screenshot-url",
+        "username": "parseforge",
+        "stats": {
+          "totalBuilds": 33,
+          "totalRuns": 1403,
+          "totalUsers": 84,
+          "totalUsers7Days": 4,
+          "totalUsers30Days": 5,
+          "totalUsers90Days": 33,
+          "lastRunStartedAt": "2026-11-02T04:00:30.013Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 268,
+            "TIMED-OUT": 0,
+            "TOTAL": 268
+          }
+        },
+        "description": "Renders a list of URLs in a headless browser and returns a screenshot for each one, with optional HTML snapshots and mobile variants.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/7H3lTkQjp5P9yan666O1p_wgRRVKlv8tikRUYnD-j_o/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vY1ZNRVRxQUhSTmJuT0N6QXEtYWN0b3ItZmFTWGpzTmpDY2xYTDVPUm8ta3k1V0FzSzR3MC1zY3JlZW5zaG90LXVybC1sb2dvLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "ParseForge",
+        "userPictureUrl": "https://images.apifyusercontent.com/7v_fw1tYOZK4ZaPIPpFJPq4bd1wmXxpvscQbD-yADiU/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vWkphSmZPeFdyX3NPNFdCNU0wNEpfRWYyc1BlaWxmN0JyWUJGTkt5TmNFdy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZZMVpOUlZSeFFVaFNUbUp1VDBONlFYRXRjSEp2Wm1sc1pTMW5VbmxJWTBGSlFXNWtMWEJoY25ObFptOXlaMlZmYkc5bmJ5NXdibWMucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "reasonForChange": "Enterprise discount: PLATINUM and DIAMOND plans now pay less per result than GOLD. All other prices are unchanged.",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "result-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.016
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.01533
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.01467
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.014
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0126
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0112
+                  }
+                }
+              },
+              "mobile-screenshot": {
+                "eventTitle": "Mobile screenshot",
+                "eventDescription": "Only with Capture Mobile Variant on: one per URL whose mobile (iPhone-class) screenshot was saved to the key-value store.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.005
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00481
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00463
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00445
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00445
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00445
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": "2026-10-27T22:19:02.633Z",
+          "startedAt": "2026-10-27T22:19:02.633Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-27T22:30:30.037Z"
+        },
+        "id": "faSXjsNjCclXL5ORo",
+        "url": "https://apify.com/parseforge/screenshot-url"
+      },
+      {
+        "title": "Website Screenshot API",
+        "name": "website-screenshot-api",
+        "username": "spectre_scrape",
+        "stats": {
+          "totalBuilds": 3,
+          "totalRuns": 689,
+          "totalUsers": 9,
+          "totalUsers7Days": 3,
+          "totalUsers30Days": 5,
+          "totalUsers90Days": 6,
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 1,
+          "lastRunStartedAt": "2026-11-02T01:24:25.265Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 28
+          }
+        },
+        "description": "Create a screenshot of a website based on a specified URL. It can be used to monitor web changes regularly after setting up the scheduler. Capture clean website screenshots with lazy-load handling, cookie banner dismissal, sticky header removal, and element targeting.",
+        "categories": [
+          "AUTOMATION",
+          "OTHER",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/LCtj0OOzOJdEghADvNljOKXh0As-yXIAtvHK1KJ-sic/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vR2pEdVZMWTRhU2MwM1JGSWYtYWN0b3Ita2g5NWVHNnVJRDl3OEZ4T28tQWtkaWQ1aWJnMC1zc2xvZ28ud2VicA.webp",
+        "notice": "NONE",
+        "bookmarkCount": 1,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Spectre",
+        "userPictureUrl": "https://images.apifyusercontent.com/SauM2UnO7fyt9laPEJGX098bmB9WCAvOM7T3y2bbTO8/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vN3ZvekpGbjhWTDl5ZUowcmNRS29tRUpxS2lwRjR2MUx5VVdwazVYZ29QMC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZSMnBFZFZaTVdUUmhVMk13TTFKR1NXWXRjSEp2Wm1sc1pTMW5jRk5qYzJsc1NtRmhMWE53WldOMGNtVXVjRzVuLnBuZw.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.009,
+                "isPrimaryEvent": true
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.005
+              }
+            }
+          },
+          "startedAt": "2026-05-15T08:53:49.569Z",
+          "createdAt": "2026-05-15T08:53:51.646Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "kh95eG6uID9w8FxOo",
+        "url": "https://apify.com/spectre_scrape/website-screenshot-api"
+      },
+      {
+        "title": "Website Screenshot Pro",
+        "name": "website-screenshot-pro",
+        "username": "onescales",
+        "stats": {
+          "totalBuilds": 80,
+          "totalRuns": 1810,
+          "totalUsers": 138,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 4,
+          "totalUsers90Days": 5,
+          "lastRunStartedAt": "2026-11-01T12:04:28.628Z",
+          "actorReviewCount": 4,
+          "actorReviewRating": 4.999999999999999,
+          "bookmarkCount": 7,
+          "publicActorRunStats30Days": {
+            "ABORTED": 1,
+            "FAILED": 2,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 32
+          }
+        },
+        "description": "Capture high-quality, full page screenshots of any website across multiple device sizes in one go. Perfect for responsive design testing, presentations, documentation, or archiving web pages.\nSupports viewport, full page scrolling. Export to json, csv (excel or google sheets) and api and automation.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION",
+          "OTHER"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/Jq-O86nRO1cgKvxH4PTRSKAm-kRHeUK05NOaX1JXv6c/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vVnpmSTRJQlZXUTNRSTZBcGEtYWN0b3ItYXNxbmhLMmtUZGY4YkhiNUItTkdwbmNZV3FkQS13ZWJzaXRlLXNjcmVlbnNob3QtcHJvLWFwaWZ5LWxvZ28ucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 7,
+        "actorReviewRating": 4.999999999999999,
+        "actorReviewCount": 4,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "One Scales",
+        "userPictureUrl": "https://images.apifyusercontent.com/OvUT-kfj9rOcHvf7gNdpNj3Nts66kIN-FXLM9ptC1nY/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vR3hMdkpTNU9yUG9RZFVZUUhkdU8zSTNyZHNfOW5yQVJRR2J0eVFPd0l4QS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZWbnBtU1RSSlFsWlhVVE5SU1RaQmNHRXRjSEp2Wm1sc1pTMTJWRUZaYzNjeFpHVnlMV1poZG1samIyNHROVEV5TG5CdVp3LnBuZw.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.5
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.05
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.04
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.001
+                  }
+                },
+                "isPrimaryEvent": true
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              }
+            }
+          },
+          "startedAt": "2026-10-19T02:18:48.428Z",
+          "createdAt": "2026-10-19T02:18:48.778Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-19T02:30:11.811Z"
+        },
+        "id": "asqnhK2kTdf8bHb5B",
+        "url": "https://apify.com/onescales/website-screenshot-pro"
+      },
+      {
+        "title": "Website Screenshot Generator",
+        "name": "website-screenshot-generator",
+        "username": "akash9078",
+        "stats": {
+          "totalBuilds": 45,
+          "totalRuns": 3226,
+          "totalUsers": 94,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 3,
+          "totalUsers90Days": 10,
+          "lastRunStartedAt": "2026-11-01T21:30:28.873Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 35,
+            "TIMED-OUT": 0,
+            "TOTAL": 35
+          },
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 2
+        },
+        "description": "Generate a screenshot of any website by entering its URL. The image is stored in a key-value store, making it ideal for tracking visual changes on webpages—especially when run on a scheduled basis.",
+        "categories": [
+          "AUTOMATION",
+          "DEVELOPER_TOOLS",
+          "OTHER"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/HcHSut56QDyfkC1BBojPiCrDGLp_e8P3JlmMoOV_vuk/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vR1dYQkJOSWdtNWdKSDV2VWwtYWN0b3ItY010d1ZvNDRVTGVFQjZ2Y2steDh2SmpncFpvbC1zY3JlZW5zaG90X2dlbmVyYXRvci5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 2,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Akash Kumar Naik",
+        "userPictureUrl": "https://images.apifyusercontent.com/ninLEVJqdO_JQoc_Vvm9JRK8ntZJHLHASVGZrQ9yP0E/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUTFTNFVXSVJoVVU5UTFDdlFaRzJlWWx1ejhoR0xVWUhEWGFtVlJJWGFuWS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZSMWRZUWtKT1NXZHROV2RLU0RWMlZXd3RjSEp2Wm1sc1pTMU9kMUZhTmpKV1ptWXdMVUZyWVhOb01TNXdibWMucG5n.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005,
+                "isPrimaryEvent": true
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.00001
+              },
+              "screenshot_captured": {
+                "eventTitle": "Screenshot Captured",
+                "eventDescription": "Charged for each successful screenshot captured",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.02
+              }
+            }
+          },
+          "startedAt": "2026-05-05T11:35:13.773Z",
+          "createdAt": "2026-04-21T11:35:15.132Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-04-21T11:35:35.671Z"
+        },
+        "id": "cMtwVo44ULeEB6vck",
+        "url": "https://apify.com/akash9078/website-screenshot-generator"
+      },
+      {
+        "title": "HTML to PDF & URL to PDF API - Website Screenshots",
+        "name": "universal-web-printer",
+        "username": "autofacts",
+        "stats": {
+          "totalBuilds": 29,
+          "totalRuns": 2783,
+          "totalUsers": 62,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 9,
+          "totalUsers90Days": 20,
+          "lastRunStartedAt": "2026-11-02T08:04:28.882Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 3,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 249,
+            "TIMED-OUT": 0,
+            "TOTAL": 249
+          }
+        },
+        "description": "A powerful web rendering Actor that converts URLs and HTML to PDF, PNG, JPEG, or WebP. Features smart scroll-stitch for full-page captures, element-level extraction, reading mode, watermark and PDF merging.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION",
+          "MCP_SERVERS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/pVUDBqUa7rQpCTZyDoXSEJOllMLldbG7FHdk_yeh3ak/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20veU5NYTRUVDZCOXRIRTJUaVAtYWN0b3ItZmk2QkNoSW5MSmNpT1dtaEktRkpCYzVIYU56Zi1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 3,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Proooxy",
+        "userPictureUrl": "https://images.apifyusercontent.com/y3NgY8rT13amFNWS1qzIYYfWtz8VZcjIrJefLqOUEUg/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vTENCd0ZYRTZ4WFJsMWNGang4cnFDOGo3Z0ZBbkQyZ1ZZOURZTkNFOUJPSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11WVcxaGVtOXVZWGR6TG1OdmJTOTVUazFoTkZSVU5rSTVkRWhGTWxScFVDODJNMU5uT1VOWFYyUkNRWEJoVnpOeGVDMHlOemMwTkRFekxtcHdaV2MuanBlZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "reasonForChange": "Lower prices: Render $0.004 (was $0.007). Other prices unchanged.",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              },
+              "render": {
+                "eventTitle": "Render",
+                "eventDescription": "Charged for each successful page render (PDF or image).",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.004,
+                "isPrimaryEvent": true
+              },
+              "watermark": {
+                "eventTitle": "Watermark",
+                "eventDescription": "Charged when a watermark is applied to the output.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.002
+              },
+              "encryption": {
+                "eventTitle": "PDF Encryption",
+                "eventDescription": "Charged when PDF is encrypted with password protection.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.003
+              },
+              "merge": {
+                "eventTitle": "PDF Merge",
+                "eventDescription": "Charged when multiple PDFs are merged into one.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.01
+              }
+            }
+          },
+          "minimalMaxTotalChargeUsd": 0.1,
+          "createdAt": "2026-10-26T11:02:07.104Z",
+          "startedAt": "2026-10-26T11:02:07.104Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-26T11:30:39.609Z"
+        },
+        "id": "fi6BChInLJciOWmhI",
+        "url": "https://apify.com/autofacts/universal-web-printer"
+      },
+      {
+        "title": "Website Screenshotter",
+        "name": "website-screenshotter",
+        "username": "eunit",
+        "stats": {
+          "totalBuilds": 9,
+          "totalRuns": 493,
+          "totalUsers": 47,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 0,
+          "totalUsers90Days": 5,
+          "lastRunStartedAt": "2026-09-25T10:47:58.421Z",
+          "actorReviewCount": 1,
+          "actorReviewRating": 5,
+          "bookmarkCount": 5,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 8,
+            "TIMED-OUT": 0,
+            "TOTAL": 8
+          }
+        },
+        "description": "Capture high-quality website screenshots. Features full-page capture, mobile emulation, custom resolutions, and export to JPG, PNG, or PDF. Fast and reliable. Export your result in any format of your choosing.",
+        "categories": [
+          "INTEGRATIONS",
+          "OTHER",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/TQ798vKqJXI6KIBffXIOMFh9-NSQRUOh49qZ9WSy3_Q/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vUmpvUWtlU2piN0xNNnNyaU0tYWN0b3ItbGlUeW9BeGUwaTF1a29ZM2EtdlBwNHVhSThOVy04NDI4NTc3LnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 5,
+        "actorReviewRating": 5,
+        "actorReviewCount": 1,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Emmanuel Uchenna",
+        "userPictureUrl": "https://images.apifyusercontent.com/K0UL4mLz5ZbHedf1uiVTTOKQW64DRImy-e9akoFd-lc/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vc1JiQ1N6SXlqUy1hMWxHSHdzWUgwWTZCNmVPN0ZTRkVJMjNtZWEybGFRRS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloZG1GMFlYSnpMbWRwZEdoMVluVnpaWEpqYjI1MFpXNTBMbU52YlM5MUx6STBPRFExTURBNA.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "screenshot-captured": {
+                "eventTitle": "Screenshot",
+                "eventDescription": "Charged when a full-page screenshot is captured.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.099,
+                "isPrimaryEvent": true
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.0009
+              }
+            }
+          },
+          "startedAt": "2026-07-01T13:00:34.856Z",
+          "createdAt": "2026-06-17T13:00:38.336Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-06-17T13:00:58.690Z"
+        },
+        "id": "liTyoAxe0i1ukoY3a",
+        "url": "https://apify.com/eunit/website-screenshotter"
+      },
+      {
+        "title": "Website Screenshot Generator",
+        "name": "website-screenshot-generator",
+        "username": "fetch_cat",
+        "stats": {
+          "totalBuilds": 41,
+          "totalRuns": 615,
+          "totalUsers": 36,
+          "totalUsers7Days": 4,
+          "totalUsers30Days": 9,
+          "totalUsers90Days": 21,
+          "lastRunStartedAt": "2026-11-02T04:09:29.795Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 17,
+            "SUCCEEDED": 129,
+            "TIMED-OUT": 2,
+            "TOTAL": 148
+          }
+        },
+        "description": "Capture bulk website screenshots and downloadable PDFs with full-page, element, mobile, dark-mode, and overlay-hiding controls.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/SIimrk2bgt_19hgb0RFdDjksppncpCQqXLi4eNMutsM/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vSElNVTB4a3R1MUplWmI0WGwtYWN0b3ItMXQ2VXBVTE5GZzRhQVVlVFItaVY2OEtSVnNtYi13ZWJzaXRlLXNjcmVlbnNob3QtZ2VuZXJhdG9yLWFjdG9yLWljb24ucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Fetch Cat",
+        "userPictureUrl": "https://images.apifyusercontent.com/wMOmozuIOx-7qvEqqbdVc_regQYdwPwwJWQVGQW0hDE/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUDE5TEpqTjk4RXNrY1FtN2ZDQjVIN3pfeU9lWDB4UDB3Q19XLUJrS0lsdy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZTRWxOVlRCNGEzUjFNVXBsV21JMFdHd3RjSEp2Wm1sc1pTMU9Zak5WZFVsUVRYazFMV1J2ZDI1c2IyRmtYeVV5T0RjbE1qa3VjRzVuLnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-09-03T21:40:00.000Z",
+          "reasonForChange": "We are updating capture prices to keep reliable browser-based screenshot and PDF generation available across supported capture modes.",
+          "apifyMarginPercentage": 0.2,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "start": {
+                "eventTitle": "Run started",
+                "eventDescription": "One-time fee charged when a run starts. Covers fixed startup cost (init, proxy warmup, first HTTP setup).",
+                "eventPriceUsd": 0.005,
+                "isOneTimeEvent": true
+              },
+              "capture": {
+                "eventTitle": "Capture extracted",
+                "eventDescription": "Charged per successful screenshot or PDF capture.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.008
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0075
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0072
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.007
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0068
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0066
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "isPPEPlatformUsagePaidByUser": true,
+          "createdAt": "2026-08-20T21:38:11.609Z",
+          "notifiedAboutFutureChangeAt": "2026-08-20T21:38:32.083Z",
+          "notifiedAboutChangeAt": "2026-09-03T22:05:45.673Z"
+        },
+        "id": "1t6UpULNFg4aAUeTR",
+        "url": "https://apify.com/fetch_cat/website-screenshot-generator"
+      }
+    ]
+  }
+}
