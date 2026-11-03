@@ -130,7 +130,10 @@ def cleanup_brain(name):
 def run_brain(argv, input=None, limit=1024*1024, merge_stderr=False, timeout=120):
     name=argv[argv.index('--name')+1]
     try:
-        return bounded_run(argv,env=ENV,input=input,limit=limit,merge_stderr=merge_stderr,timeout=timeout)
+        # Codex echoes the prompt on stderr before answering. Account for those
+        # known bytes plus a bounded diagnostic stream; keep stdout JSON separate.
+        stderr_limit=max(65536,limit)+len(input or b'')
+        return bounded_run(argv,env=ENV,input=input,limit=limit,merge_stderr=merge_stderr,timeout=timeout,stderr_limit=stderr_limit)
     finally:
         cleanup_brain(name)
 
@@ -370,7 +373,14 @@ class Controller:
                 ident=pathlib.PurePosixPath(task).stem if isinstance(task,str) else p.name.removesuffix('.result.json').removesuffix('.json')
                 if ident in seen:continue
                 v=v.get('result',v)
-                if re.search(r'receipt|credential|auth\.json|access_token|refresh_token',json.dumps(v),re.I):continue
+                if not isinstance(v,dict):continue
+                screened=dict(v)
+                if isinstance(screened.get('artifacts'),list):
+                    # EXEC adds this public provenance path to every success.
+                    # Exempt only its filename, never receipt contents or output.
+                    screened['artifacts']=[name for name in screened['artifacts'] if not (
+                        isinstance(name,str) and re.fullmatch(r'products/receipts/TASK-[0-9]{4,12}\.json',name))]
+                if re.search(r'receipt|credential|auth\.json|access_token|refresh_token',json.dumps(screened),re.I):continue
                 item={'task':ident,'status':v.get('status'),'output':str(v.get('output',''))[:2000]}
                 check_secrets(json.dumps(item).encode());results.append(item);seen.add(ident)
             except (ValueError,AttributeError):continue
