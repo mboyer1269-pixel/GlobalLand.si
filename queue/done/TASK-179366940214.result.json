@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "208034 dtd_rejected DOCTYPE/ENTITY declarations are refused (entity expansion disabled)\nb'<?xml version=\"1.0\" encoding=\"UTF-8\"?><rss version=\"2.0\"\\n\\txmlns:content=\"http://purl.org/rss/1.0/modules/content/\"\\n\\txmlns:wfw=\"http://wellformedweb.org/CommentAPI/\"\\n\\txmlns:dc=\"http://purl.org/dc/elements/1.1/\"\\n\\txmlns:atom=\"http://www.w3.org/2005/Atom\"\\n\\txmlns:sy=\"http://purl.org/rss/1.0/modules/syndi'\n{b'&bull;', b'&lt;', b'&rsquo;', b'&amp;', b'&mdash;', b'&hellip;', b'&times;', b'&Ouml;', b'&gt;', b'&ndash;', b'&nbsp;', b'&rdquo;', b'&ldquo;', b'&rarr;'}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179366940214.json"
+  ],
+  "request": {
+    "id": "TASK-179366940214",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T01:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import sys,re;sys.path.insert(0,'products/actors/rss-reader');from src.core import read_feed;d=open('products/research/fixture-github-blog-feed.xml','rb').read();r=read_feed('x',5,fetcher=lambda u:d);print(len(d),r[0]['error_code'],r[0]['error']);print(d[:300]);print(set(re.findall(rb'&[a-zA-Z][a-zA-Z0-9]*;',d)))"
+      ],
+      "outputs": [],
+      "mission_id": "RSS-ACTOR-BUILD"
+    },
+    "description": "Broker action during THINK-1793669402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179366940214",
+  "input_sha256": "a0488eff2889f73fa7d32f4fadce99277da055e39f402a009565f28e01af4cbc"
+}
