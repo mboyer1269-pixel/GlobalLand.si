@@ -35,22 +35,23 @@
     "stalled_turns": 0,
     "threshold": 3,
     "stalled_since": null,
-    "turns_without_outcome": 1,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-03T03:01:42Z",
-    "last_outcome_turn": "THINK-1793673002",
-    "last_productive_turn": "THINK-1793674803",
-    "last_turn": "THINK-1793674803",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1793676602",
+    "last_productive_turn": "THINK-1793676602",
+    "last_turn": "THINK-1793676602",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/distribution/link-checker-store-copy.json"
+      "outcome": true,
+      "mission_outcomes": [
+        "INVOICE-DISTRIBUTION",
+        "INVOICE-PRODUCT"
       ],
-      "new_product_count": 1,
-      "new_research_count": 0,
-      "rewritten_count": 1,
+      "new_products": [],
+      "new_product_count": 0,
+      "new_research_count": 7,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
