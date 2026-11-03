@@ -1,0 +1,959 @@
+{
+  "data": {
+    "total": 1643,
+    "count": 15,
+    "offset": 0,
+    "limit": 15,
+    "desc": false,
+    "items": [
+      {
+        "title": "Open Graph & Meta Tag Extractor",
+        "name": "opengraph-meta-extractor",
+        "username": "bgfc97",
+        "stats": {
+          "totalBuilds": 3,
+          "totalRuns": 126,
+          "totalUsers": 4,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 2,
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "lastRunStartedAt": "2026-11-02T08:12:23.844Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Extract link-preview metadata from any URL in bulk: Open Graph, Twitter Card, title, meta description, canonical, favicon and language. Perfect for building preview cards, SEO audits and social sharing tools. No API key, no proxy - just paste URLs.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS",
+          "MARKETING"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/5PRxp4msJvc7WwD8Pfjwwromsd9hpZPq969L4FzlxDQ/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vZ3Zwenl1b3RkZ25iT0N2c1ktYWN0b3ItQmh4cnI4VGtLMmQ5bEdqMXAtVlhoYnBvMGVsai1CaHhycjhUa0syZDlsR2oxcC5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "Bruno",
+        "userPictureUrl": "https://images.apifyusercontent.com/lAD9ZVAUTb8SZgCL1fdqVM0-Jl6ho87Te4zypprnu80/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vcDJqb05pSU8xMTh4UUlNb1U1TUZscUk5eGpCQlJYYjgwR2s4c093eTBlby9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTMDFLT1RKaU9WWTBUWG81WkdGSlRrOUNSWEZFVkdOdlJWVlpZbVJJYlRkWWVEVTBiMlJCVFdKWlVtdDJlbWgxU1Qxek9UWXRZdw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "isPPEPlatformUsagePaidByUser": true,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "url-extracted": {
+                "eventTitle": "URL extracted",
+                "eventDescription": "Each URL parsed for preview metadata",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.001,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-07-16T05:45:06.878Z",
+          "startedAt": "2026-07-16T05:45:06.878Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "Bhxrr8TkK2d9lGj1p",
+        "url": "https://apify.com/bgfc97/opengraph-meta-extractor"
+      },
+      {
+        "title": "JSON-LD Schema & Meta Tag Extractor",
+        "name": "json-ld-schema-meta-tag-extractor",
+        "username": "logiover",
+        "stats": {
+          "totalBuilds": 37,
+          "totalRuns": 955,
+          "totalUsers": 51,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 4,
+          "totalUsers90Days": 10,
+          "lastRunStartedAt": "2026-11-01T22:28:27.725Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 1,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 77,
+            "TIMED-OUT": 2,
+            "TOTAL": 79
+          }
+        },
+        "description": "Bulk JSON-LD structured data scraper and meta tag extractor for any URL. Export Schema.org, OpenGraph and Twitter Cards to CSV/JSON. No API.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/DkZZxGGVduSVp5MyktPwWdJnphTtzPQ-HMcnEWDq3WY/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vR2pTNm5ROHFhdU9kcTlLR3ktYWN0b3ItdDRONVQ1VVdrYkNPMnZacmQtYTJTVjBWRktwMS11bm5hbWVkXyUyODExJTI5LmpwZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 1,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Logiover",
+        "userPictureUrl": "https://images.apifyusercontent.com/kxSRwmWqUkC5jJXw5FI9NYpfuhuSdnO30XYx7OCQu1M/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vZ1JTQnpIUXlnbFY4YTFCakgwNjlyQUNheTdtQjRlenN2NFJmanFPTWNJTS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZSMnBUTm01Uk9IRmhkVTlrY1RsTFIza3RjSEp2Wm1sc1pTMVlWMUl6VEdGWGFVNVBMVWRxVXpadVVUaHhZWFZQWkhFNVMwZDVMWEJ5YjJacGJHVXRlR1ZYTkhaUE1GUlRWUzExYm01aGJXVmtMbkJ1WncucG5n.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.005
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0045
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.004
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0035
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0035
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0035
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-02-24T11:27:09.411Z",
+          "createdAt": "2026-02-10T11:27:10.315Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-02-10T11:27:30.557Z"
+        },
+        "id": "t4N5T5UWkbCO2vZrd",
+        "url": "https://apify.com/logiover/json-ld-schema-meta-tag-extractor"
+      },
+      {
+        "title": "Meta Tag & OpenGraph Scraper",
+        "name": "meta-tag-analyzer",
+        "username": "taroyamada",
+        "stats": {
+          "totalBuilds": 32,
+          "totalRuns": 390,
+          "totalUsers": 11,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 0,
+          "totalUsers90Days": 6,
+          "lastRunStartedAt": "2026-11-02T02:56:25.218Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 28
+          }
+        },
+        "description": "Audit meta tags, OpenGraph, SEO signals. No API key / no login. Open Input → leave defaults → Start (1 page ≈ USD 0.003/row): https://console.apify.com/actors/pRIbTQnVnGcacOLMv/input From USD 3/1k.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS",
+          "MARKETING"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/OLe6HDyZ0RjBVgrbltznkgy6XesdIUPovbc4nOp0mNY/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vaGp3elZIdWVEWkVjR2dJTmMtYWN0b3ItcFJJYlRRblZuR2NhY09MTXYtTEhTVzJCNW9jaC1zdG9yZS10aHVtYm5haWwucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "naoki anzai",
+        "userPictureUrl": "https://images.apifyusercontent.com/ii1-AEMwRnF2-l9hO_DZzmhF9GYllcznIEI5NBf7uA0/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vWU5CXzlWZGFPcjRIQ0pHZ0xIa3hOZ2ZzelMwV083TnMwT3NiVTkwbnFmcy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTWFZsVUVOT1pDMW1TM0U0VlU4ME1FMDNla3hsZDI1NUxYaDRObVYzY0hGMlZrWk5ORW8yT1hWd2RVVjZOemQzUFhNNU5pMWo.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "Page metadata audit",
+                "eventDescription": "Charged only for one delivered metadata and issue audit row.",
+                "eventPriceUsd": 0.003,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-08-27T07:05:38.673Z",
+          "createdAt": "2026-08-13T07:00:41.629Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-08-13T07:01:02.393Z",
+          "notifiedAboutChangeAt": "2026-08-27T07:35:48.398Z"
+        },
+        "id": "pRIbTQnVnGcacOLMv",
+        "url": "https://apify.com/taroyamada/meta-tag-analyzer"
+      },
+      {
+        "title": "Meta Tags Extractor - SEO & Open Graph Data",
+        "name": "meta-tags-extractor",
+        "username": "benthepythondev",
+        "stats": {
+          "totalBuilds": 2,
+          "totalRuns": 138,
+          "totalUsers": 3,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 0,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T21:36:26.616Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 28
+          }
+        },
+        "description": "Extract page title, meta description, robots, canonical URL, Open Graph tags, Twitter Card tags and alternate links from web pages.",
+        "categories": [
+          "SEO_TOOLS",
+          "MARKETING",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/lecFzUpuLa9b7oWD09WeDR8PL-YaWja7gzBR7ZtxTTg/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vT3JOQ0NWNm8xajU1THlPVFotYWN0b3IteGllWlhndWczNXN3ekNmS0QtWW4xOXFnQWZIdC13ZWJzaXRlLWNvbnRhY3QtZXh0cmFjdG9yLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Ben",
+        "userPictureUrl": "https://images.apifyusercontent.com/2uHzQHA1ompnXtYvA4IUQM5GaLvBCLIBmsVFdLt-evY/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vVzhUaGJqVkNtY24taDZwUUo5ZmM3ME9KajlUcFhGc1VHUGlDUUxpMF9Cdy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZUM0pPUTBOV05tOHhhalUxVEhsUFZGb3RjSEp2Wm1sc1pTMTJNRlZsUjJkMVMyaHNMV0psYm5Sb1pYQjVkR2h2Ym1SbGRpNXdibWMucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-08-02T09:42:00.000Z",
+          "isPriceChangeNotificationSuppressed": false,
+          "reasonForChange": "Add progressive Apify plan discounts while preserving every existing Free-tier event price.",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.00005
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.000045
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0000425
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00004
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0000375
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.000035
+                  }
+                }
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Charged per meta tag extraction result pushed to the default dataset.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.0015
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00135
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.001275
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0012
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.001125
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00105
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-07-18T09:46:18.966Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-07-18T09:46:39.220Z",
+          "notifiedAboutChangeAt": "2026-08-05T15:06:25.125Z"
+        },
+        "id": "6n06NoTVc5q96umDJ",
+        "url": "https://apify.com/benthepythondev/meta-tags-extractor"
+      },
+      {
+        "title": "Bulk Meta Tag Scraper",
+        "name": "bulk-meta-tag-scraper",
+        "username": "mahogany_songbird",
+        "stats": {
+          "totalBuilds": 1,
+          "totalRuns": 123,
+          "totalUsers": 2,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 0,
+          "totalUsers90Days": 2,
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "lastRunStartedAt": "2026-11-02T01:34:28.240Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Title, description, canonical, and Open Graph tags from many URLs.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Britton Furness",
+        "userPictureUrl": "https://images.apifyusercontent.com/xNsdx_cknS1MFuYY9DSYiOWNDiuKdh3lcuK5Dgqwx_Y/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMDAzVGQtRkRaTVlnMElGdTBpbFFxZTdscThsdnZmLXgxd19IS3pXSEcwRS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTek50TVVOQ2VWcE1NREV0UVVwU2ExbzBXa2hNT0RFeFNYTXRkbUZFV1VORlMwVkVVVVZqY2tGdWExQlhiVlJyVlZN.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "apifyMarginPercentage": 0.2,
+          "createdAt": "2026-07-05T02:31:14.532Z",
+          "startedAt": "2026-07-19T02:31:14.000Z",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.00005,
+                "isOneTimeEvent": true
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "Dataset row",
+                "eventDescription": "One result row in the default dataset.",
+                "eventPriceUsd": 0.002,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "notifiedAboutChangeAt": "2026-07-19T02:35:43.969Z"
+        },
+        "id": "aFoeZd46wBzGqyFpD",
+        "url": "https://apify.com/mahogany_songbird/bulk-meta-tag-scraper"
+      },
+      {
+        "title": "Meta Tag Extractor",
+        "name": "website-metadata-evidence-extractor",
+        "username": "gifted_wagon",
+        "stats": {
+          "totalBuilds": 1,
+          "totalRuns": 76,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T11:22:27.841Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 27,
+            "TIMED-OUT": 0,
+            "TOTAL": 27
+          }
+        },
+        "description": "Extract normalized page metadata with exact tag evidence, safe fetching, deterministic limits, and truthful per-URL failures.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/zv42CybbTVR5CoUNkwhpgVHLF4Y87sKie96GuOIjdPc/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vY0luRUVEbGxQUlFYa3dzc2gtYWN0b3ItRTJUVmJ0ZVhSemFtZ1NjZmIteUFiVGRQbk1ONi1zdG9yZS1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Michael Olmos",
+        "userPictureUrl": "https://images.apifyusercontent.com/0CHkSV7chAXPaVp7EPePa1PP0isbXab9ZIPSjSCi5gY/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUjBqaDhpUjZoelVkb3BMdThMYUFoSzU2NXBwN19ybFZXTlpzRENKUjZUOC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTVlJ6T1dsdlptcDJTVkJCVVRCQ1FVZGZiakJpYkVWM1dXeHRkRUZZYkdkNFdtSk1UREUzTm1SeVUyRkJWRjh4VDIxRlFR.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.0004,
+                "isPrimaryEvent": false,
+                "isOneTimeEvent": true
+              },
+              "page-analyzed": {
+                "eventTitle": "Page analyzed",
+                "eventDescription": "One valid public target is successfully processed, stored, and returned with normalized evidence. Invalid inputs and network or protocol failures are not charged.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.005
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0045
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.004
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0035
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0032
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0032
+                  }
+                },
+                "isPrimaryEvent": true,
+                "isOneTimeEvent": false
+              }
+            }
+          },
+          "minimalMaxTotalChargeUsd": 0.0054,
+          "createdAt": "2026-08-16T15:18:37.713Z",
+          "startedAt": "2026-08-16T15:18:37.713Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "E2TVbteXRzamgScfb",
+        "url": "https://apify.com/gifted_wagon/website-metadata-evidence-extractor"
+      },
+      {
+        "title": "Meta Tags & Metadata Extractor: Open Graph, Twitter, JSON-LD",
+        "name": "webpage-metadata-extractor",
+        "username": "eliai",
+        "stats": {
+          "totalBuilds": 20,
+          "totalRuns": 176,
+          "totalUsers": 2,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T17:20:25.401Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Extracts metadata from web page URLs, single or bulk, into one JSON record per page. Returns title, meta description, canonical, robots, Open Graph, Twitter Card, JSON-LD, schema types and favicon. For SEO specialists, link-preview developers and content aggregators.",
+        "categories": [
+          "SEO_TOOLS",
+          "MARKETING",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/ktSaWY-legjH8NDKdH5RoHnTyruf4Jf2vF5ouuF6LdY/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20veDRkaFprWEFyZWNqWmYwRDEtYWN0b3ItZzRxUmFwV3IxbE56bWJvdWEtQ1pBMWV3WDUzZS13ZWJwYWdlLW1ldGFkYXRhLWV4dHJhY3Rvci5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Broke to Built",
+        "userPictureUrl": "https://images.apifyusercontent.com/QMkw6wv6DWIUToyhWVZW9vdOfV8EJUSu8gM41J7aS-w/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMEd6SV9NU2hjbTF1bjdCYVMxbUo3anBlX085YmlISDNVWU9waGtlQ2Fxcy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZlRFJrYUZwcldFRnlaV05xV21Zd1JERXRjSEp2Wm1sc1pTMXdSREIzVlU0eVVrazFMV05vWVc1dVpXeHpORjl3Y205bWFXeGxMbXB3WncuanBn.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-08-23T01:06:25.454Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "page-analyzed": {
+                "eventTitle": "Metadata extraction",
+                "eventDescription": "Metadata extracted from one web page.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.02
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0186
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0174
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.016
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0146
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0134
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "reasonForChange": "Subscribers on higher Apify plans now pay less per metadata extraction. The Free plan price is unchanged at $0.02, and it steps down to $0.013 on Diamond. Output, limits and behaviour are unchanged.",
+          "createdAt": "2026-08-23T01:06:26.567Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-08-23T01:35:46.899Z"
+        },
+        "id": "g4qRapWr1lNzmboua",
+        "url": "https://apify.com/eliai/webpage-metadata-extractor"
+      },
+      {
+        "title": "Open Graph & Meta Tag Extractor: Titles, Descriptions, Cards",
+        "name": "open-graph",
+        "username": "lepidata",
+        "stats": {
+          "totalBuilds": 6,
+          "totalRuns": 22,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T22:46:23.986Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 15,
+            "TIMED-OUT": 0,
+            "TOTAL": 15
+          }
+        },
+        "description": "Pull title, description, canonical, Open Graph and Twitter card tags from any list of URLs. Head tags only, robots.txt respected.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Lepi Data",
+        "userPictureUrl": "https://images.apifyusercontent.com/XMTGFRncOshGrW0JIZZX5GxORA0EyYM7R5ovROClL5w/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vQUY0VlA1bkhRendFTTg2aThwQUZLWk05X0hJWTdMYzcxYVZsMThaM2ZBRS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZZV042ZFc1YVUzRTFaR0p2ZERoME1uQXRjSEp2Wm1sc1pTMVpiVmxrU1dOcVVFMTBMWEJtY0MxaGJHbG5ibTFsYm5RdWFuQmxady5qcGVn.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "page": {
+                "eventTitle": "Page read",
+                "eventDescription": "One page read for its head tags: title, meta description, canonical, Open Graph and Twitter Card tags. Blocked pages, errors and limit rows are free.",
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.0003
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0003
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0003
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0003
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0003
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0003
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": "2026-10-18T21:03:00.462Z",
+          "startedAt": "2026-10-18T21:03:00.462Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "GHPxtFwEirj4tIqdl",
+        "url": "https://apify.com/lepidata/open-graph"
+      },
+      {
+        "title": "SEO Meta Tag Extractor",
+        "name": "seo-meta-tag-extractor",
+        "username": "autoloom",
+        "stats": {
+          "totalBuilds": 8,
+          "totalRuns": 22,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "lastRunStartedAt": "2026-11-01T12:40:26.998Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 22,
+            "TIMED-OUT": 0,
+            "TOTAL": 22
+          }
+        },
+        "description": "Give it a list of URLs and get each page's SEO meta tags (title, description, canonical, Open Graph, Twitter) plus a list of common SEO issues.",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Autoloom",
+        "userPictureUrl": "https://images.apifyusercontent.com/kNFewRYA2x1EFNpD3Tgt9phA5_u4jntmobTqf5jH11k/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMHdqSmZ4NXNwc3ZKUDdhNWhZb0xlY3NwNHVId1J3U19oZmtHN2piNmpvSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpURE5SZVZKc1kyNHdMWE14VFhOM2VFMU9ielIxYzJOTE1pMTNRVU5aYkhWVWVESTBOMHBwVmxsUGNERXphbkIzUFhNNU5pMWo.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "reasonForChange": "Moving to a simple, predictable pay-per-result price ($1.50 per 1,000 results). Platform usage is now free to you - you only pay for the results you receive. The flat per-result rate keeps costs transparent while the Actor is maintained and improved.",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.0015,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-10-11T20:03:19.724Z",
+          "createdAt": "2026-10-11T20:03:20.197Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-11T20:30:23.687Z"
+        },
+        "id": "o9BXgiNXYKbSeDIgX",
+        "url": "https://apify.com/autoloom/seo-meta-tag-extractor"
+      },
+      {
+        "title": "SEO Audit API - Broken Links, Meta Tags & Site Crawler",
+        "name": "seo-audit",
+        "username": "sndzcc",
+        "stats": {
+          "totalBuilds": 5,
+          "totalRuns": 11,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T10:32:27.339Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 7,
+            "TIMED-OUT": 0,
+            "TOTAL": 7
+          }
+        },
+        "description": "Crawl any website and audit every page: SEO score, issues to fix, broken links, redirects, titles, meta descriptions, headings, images without alt, structured data, sitemap and robots.txt.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/J2W2no2PeoNedLQHuzvIe-SRCzbzz--w3D3u0lIPaZw/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vR1VtY09iNmxOSWZ0VmRYcEMtYWN0b3ItSFc1U1pyaEMxblA1T1dOM0ktRnNXTEhpNGJoMi1zZW8tYXVkaXQucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Sndz Data",
+        "userPictureUrl": "https://images.apifyusercontent.com/nW7FTtgGBI9cM4Pt1HhBDET4u7UwFte6RameDi3dqBc/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vU2QwVFkwVnB2S2d4dndxSHFZYmhrQUc2dUtad2JLVnF6SjZ6TDdhZC1BYy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZSMVZ0WTA5aU5teE9TV1owVm1SWWNFTXRjSEp2Wm1sc1pTMTNibWhMZFU5RWVWRXlMWEJsY21acGJDMXpibVI2TFdSaGRHRXRZMmx5WTNWc1lYSXVjRzVuLnBuZw.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "Page audited",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.002,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-10-26T10:17:48.499Z",
+          "createdAt": "2026-10-26T10:17:48.493Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "HW5SZrhC1nP5OWN3I",
+        "url": "https://apify.com/sndzcc/seo-audit"
+      },
+      {
+        "title": "SEO Meta Tags Extractor – Titles, Descriptions, Headings, OG",
+        "name": "seo-meta-tags-extractor",
+        "username": "shawndunn",
+        "stats": {
+          "totalBuilds": 1,
+          "totalRuns": 5,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-02T00:38:26.634Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 4,
+            "TIMED-OUT": 0,
+            "TOTAL": 4
+          }
+        },
+        "description": "Bulk-extract title, meta description (with length flags), robots, canonical, H1–H3, Open Graph and Twitter tags and language for any list of URLs. Extracts fields: url, finalUrl, statusCode, title, titleLength, titleTooLong, metaDescription, metaDescriptionLength, metaDescriptionTooLong.",
+        "categories": [
+          "DEVELOPER_TOOLS"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "CarrierDaily",
+        "userPictureUrl": "https://images.apifyusercontent.com/C1gvtI-dvdf4qO0Bsw7eeeieuBJ8tYUe5HmwyjdwV7Q/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vOTN3ZFNiMW9GTzZPbTF2WTBqTGdPOENObjR3TVRQQy1RNXRCWVBHQ25OZy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTkzZDNjdVozSmhkbUYwWVhJdVkyOXRMMkYyWVhSaGNpODVaRFV5WmpobFpqbGxNbUkyTXpsa1pXTTJOVEkwWkdReU56aGpOemsxT0RObVlqZzNNalpsTWpZMVkyTTFPVFV3Tnpjek5UQmpObUZtT1RjelkyTXlQMlE5YUhSMGNITWxNMEVsTWtZbE1rWmpaRzR1WVhCcFpua3VZMjl0SlRKR2FXMW5KVEpHYVdOdmJuTWxNa1poYm05dWVXMXZkWE5mZFhObGNsOXdhV04wZFhKbExuQnVadw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-10-30T00:15:52.000Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "url": {
+                "eventTitle": "Url",
+                "eventDescription": "Charged per url pushed to the dataset. Error rows are free.",
+                "eventPriceUsd": 0.0005,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-10-30T00:15:52.876Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "ZGfvD37n7WrbEZvgz",
+        "url": "https://apify.com/shawndunn/seo-meta-tags-extractor"
+      },
+      {
+        "title": "SEO Audit Tool & Meta Tag Checker: Crawler, Broken Links",
+        "name": "seo-audit-tool",
+        "username": "data-done-right",
+        "stats": {
+          "totalBuilds": 9,
+          "totalRuns": 19,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T16:24:23.846Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 9,
+            "TIMED-OUT": 0,
+            "TOTAL": 9
+          }
+        },
+        "description": "SEO audit tool and SEO crawler: audit every page for technical SEO (status codes, redirect chains, titles, meta descriptions, H1s, canonicals, noindex, alt text, hreflang, Open Graph, JSON-LD). Works as a meta tag checker and broken link checker. Every page gets issues and a 0-100 score.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/WX6Gj2pwR_9E0Mgxjl9PVIehkU5oUGXLjTqjgL7GUTo/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vYmM5V1kzMG8xUzZ4ekx0OGEtYWN0b3ItRldndGQzYlZ4MVJPNEdJS2ItQVJGZ08yRXc2Vi1zZW8tYXVkaXQtdG9vbC5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Data Done Right",
+        "userPictureUrl": "https://images.apifyusercontent.com/VhAJcDbcnXfNQfGT_4kK-uMX3J3QFYWjLKCUpQwVJeo/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUXAxTTBPOVpoMV8tN1BDbktIN3N0Q1ZKTkJHZEltYzJjclhFWUo4U0xiSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZZbU01VjFrek1HOHhVelo0ZWt4ME9HRXRjSEp2Wm1sc1pTMTFWekpGWTNWU05ITjZMV3h2WjI4dWNHNW4ucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "page": {
+                "eventTitle": "Audited page",
+                "eventDescription": "One audited page with issues and score (internal link checks included).",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.032
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.032
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0288
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0256
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0256
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0256
+                  }
+                },
+                "isPrimaryEvent": true
+              },
+              "external-link-check": {
+                "eventTitle": "External link check",
+                "eventDescription": "One unique external URL checked (only when enabled).",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.0008
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0008
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00072
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00064
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00064
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00064
+                  }
+                },
+                "isPrimaryEvent": false
+              }
+            }
+          },
+          "createdAt": "2026-10-19T20:15:07.432Z",
+          "startedAt": "2026-10-19T20:15:07.432Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "FWgtd3bVx1RO4GIKb",
+        "url": "https://apify.com/data-done-right/seo-audit-tool"
+      },
+      {
+        "title": "Meta Tags Extractor: title, description, Open Graph, hreflang",
+        "name": "meta-tags-extractor",
+        "username": "examsens.ai",
+        "stats": {
+          "totalBuilds": 2,
+          "totalRuns": 8,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-02T03:48:28.077Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 4,
+            "TIMED-OUT": 0,
+            "TOTAL": 4
+          }
+        },
+        "description": "Extracts the title, meta description, canonical, robots directives, Open Graph, Twitter card tags and hreflang of many pages at once, with length checks, preview image checks and a list of problems for each page.",
+        "categories": [
+          "SEO_TOOLS",
+          "MARKETING"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/J2T_-EbkwPtWs7iXApHDasF-5rhzhgtn-9ROjL9RsVA/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vSXhLZnZFTFdiMGZldWNOU1YtYWN0b3ItZjg5cDJBdzVWaThUS1N1b0UtOHJIUGwwM2FZdy1tZXRhLXRhZ3MtZXh0cmFjdG9yLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Ed Rayyis",
+        "userPictureUrl": "https://images.apifyusercontent.com/tEKMKX-2xKRf0WNHutqCu2KHmBXDgfMWL_EL6nrcvjA/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMW9ENDlCbDFPeFJSdzBCWjdDM2hPemR3czRCamtfRXVfUExXV3B5MDlSSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTVU5MWms1VWRXdExMV2hVTVdKcVFrb3ljRGhOYnpSck5HNVhjRFV3UzJoVWJGZEhibkE0WXkxck5EUkhVWEp6YW1JOWN6azJMV00.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "page-checked": {
+                "eventTitle": "Page checked",
+                "eventDescription": "One page read for its meta tags.",
+                "eventPriceUsd": 0.0045,
+                "isPrimaryEvent": true
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.00005
+              }
+            }
+          },
+          "minimalMaxTotalChargeUsd": 0.03,
+          "createdAt": "2026-10-18T15:07:58.557Z",
+          "startedAt": "2026-10-18T15:07:58.557Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "f89p2Aw5Vi8TKSuoE",
+        "url": "https://apify.com/examsens.ai/meta-tags-extractor"
+      }
+    ]
+  }
+}
