@@ -841,6 +841,18 @@
       "timestamp": 1793671495.0770044,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793673052.8320525,
+      "blocker_id": "NO-APIFY-ACCESS",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793673056.3563132,
+      "lesson_id": "L13",
+      "agent_id": "ACQUISITION"
     }
   ],
   "policy": {
@@ -868,16 +880,16 @@
       "status": "OPEN",
       "raised_by": "BUILDER",
       "opened_at": 1793658733.0492296,
-      "reports": 5,
-      "title": "Apify config + 0600 credential needed; rss-reader and link-checker are built and tested offline, ready for private builds",
+      "reports": 6,
+      "title": "Apify config + 0600 credential needed; rss-reader and link-checker built, tested offline, Store copy ready",
       "category": "CREDENTIAL",
       "needs_founder": true,
-      "detail": "Still missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600. Ready now: (1) products/actors/rss-reader passed 22/22 offline tests; (2) products/actors/link-checker passed 21/21 offline tests against a local 127.0.0.1 server (products/actors/link-checker/core-test-results.json). Neither Apify SDK wrapper has run yet. After access: private PUBLISH_ACTOR rss-reader (item-parsed=1000, apify-actor-start=50 micro-USD) and link-checker (link-checked=800, apify-actor-start=50 micro-USD), one real run each, then an independent APPROVE of each exact digest before public listing. Kill each one if it has fewer than 3 external users within 14 days. csv-preflight stays parked.",
+      "detail": "Still missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600 (this is the only founder step). Ready now: products/actors/rss-reader (22/22 offline tests) and products/actors/link-checker (21/21 offline tests vs local 127.0.0.1 server), plus Store copy with EN/FR (accented) text, proposed prices and kill thresholds in products/distribution/rss-reader-store-copy.json and products/distribution/link-checker-store-copy.json. Neither Apify SDK wrapper has run yet. After access: private PUBLISH_ACTOR rss-reader (item-parsed=1000, apify-actor-start=50 micro-USD) and link-checker (link-checked=800, apify-actor-start=50), one real run each, then an independent APPROVE of each exact digest (another provider/founder) before public listing. Kill each if fewer than 3 external users within 14 days. csv-preflight stays parked.",
       "mission_id": "RSS-ACTOR-LAUNCH",
       "expected_gain": "Two Apify pay-per-event listings in jobs where incumbents show 39-53 users_30d (public Store snapshot); revenue unverified.",
       "last_reported_by": "BUILDER",
-      "last_reported_at": 1793671490.873905
+      "last_reported_at": 1793673052.8320463
     }
   ],
-  "lesson_count": 12
+  "lesson_count": 13
 }
