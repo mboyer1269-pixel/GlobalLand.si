@@ -72,10 +72,15 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "BUILDER",
       "priority": 2,
-      "status": "RUNNING",
-      "lease_token": "iA96NydlygOy4BNho2u1ekZddAqX9cai",
-      "lease_expires_at": 1793489429.4991214,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/invoice-preflight/index.html",
+        "products/invoice-preflight/offline-test-results.json",
+        "products/invoice-preflight/structure-test-results.json",
+        "products/sites/invoice-preflight/index.html"
+      ]
     },
     {
       "mission_id": "INVOICE-DISTRIBUTION",
@@ -83,10 +88,11 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 3,
-      "status": "RUNNING",
-      "lease_token": "l9k2MFRrU3GO_4HNEK92y4iEgkgB-u7Q",
-      "lease_expires_at": 1793493037.7747197,
-      "evidence": []
+      "status": "FAILED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [],
+      "reason": "No permitted publishing channel accessible: PUBLISH_SITE NOT_CONFIGURED (blocker NO-HOSTING-ACCESS), no founder-approved HN account. Bundle and Show HN draft saved; no submission, visits or responses occurred."
     },
     {
       "mission_id": "INVOICE-IDEA-VERDICT",
@@ -853,6 +859,48 @@
       "timestamp": 1793673056.3563132,
       "lesson_id": "L13",
       "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793674837.1471527,
+      "mission_id": "INVOICE-PRODUCT",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793674838.7335324,
+      "mission_id": "INVOICE-DISTRIBUTION",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793674843.451595,
+      "lesson_id": "L14",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793674843.4515984,
+      "mission_id": "INVOICE-PRODUCT",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793674846.091822,
+      "lesson_id": "L15",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "FAIL_MISSION",
+      "timestamp": 1793674846.0918257,
+      "mission_id": "INVOICE-DISTRIBUTION",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793674890.4788718,
+      "lesson_id": "L16",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -891,5 +939,5 @@
       "last_reported_at": 1793673052.8320463
     }
   ],
-  "lesson_count": 13
+  "lesson_count": 16
 }

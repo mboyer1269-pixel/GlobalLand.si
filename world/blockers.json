@@ -35,36 +35,22 @@
     "stalled_turns": 0,
     "threshold": 3,
     "stalled_since": null,
-    "turns_without_outcome": 0,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-03T03:01:42Z",
     "last_outcome_turn": "THINK-1793673002",
-    "last_productive_turn": "THINK-1793673002",
-    "last_turn": "THINK-1793673002",
+    "last_productive_turn": "THINK-1793674803",
+    "last_turn": "THINK-1793674803",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "LINK-CHECK-BUILD"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/actors/link-checker/Dockerfile",
-        "products/actors/link-checker/README.md",
-        "products/actors/link-checker/actor-config/actor.json",
-        "products/actors/link-checker/actor-config/input_schema.json",
-        "products/actors/link-checker/core-test-results.json",
-        "products/actors/link-checker/llms.txt",
-        "products/actors/link-checker/requirements.txt",
-        "products/actors/link-checker/src/__init__.py",
-        "products/actors/link-checker/src/__main__.py",
-        "products/actors/link-checker/src/core.py",
-        "products/actors/link-checker/src/main.py",
-        "products/actors/link-checker/tests/run_tests.py",
-        "products/distribution/rss-reader-store-copy.json"
+        "products/distribution/link-checker-store-copy.json"
       ],
-      "new_product_count": 13,
+      "new_product_count": 1,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
