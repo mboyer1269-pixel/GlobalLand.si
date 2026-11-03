@@ -32,22 +32,25 @@
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-03T00:32:50Z",
-    "turns_without_outcome": 1,
+    "stalled_since": null,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-03T00:32:50Z",
-    "last_outcome_turn": "THINK-1793664002",
-    "last_productive_turn": "THINK-1793664002",
-    "last_turn": "THINK-1793665802",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1793667603",
+    "last_productive_turn": "THINK-1793667603",
+    "last_turn": "THINK-1793667603",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "CSV-PAID-DEMAND-TEST",
+        "NEXT-IDEA-SCAN"
+      ],
       "new_products": [],
       "new_product_count": 0,
-      "new_research_count": 1,
+      "new_research_count": 9,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
