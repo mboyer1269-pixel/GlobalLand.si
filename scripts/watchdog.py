@@ -7,13 +7,15 @@ commit and then nothing, because identical states produce no commit. On
 
 This script reads the checked-out main branch and reports ALERT when:
 - the supervisor has not committed for more than --max-silence-hours;
-- world/controller.json says CONTROLLER_BLOCKED, STALE or DEGRADED;
+- world/controller.json is absent/invalid or not OPERATIONAL;
+- no recent successful plan is evidenced, independently of Git publications;
 - world/blockers.json has open actions for the founder.
 
 Output: one JSON object on stdout. The workflow opens, updates or closes a
 GitHub issue from it, so the founder gets an e-mail. No secret is read.
 """
 import argparse
+import datetime
 import json
 import pathlib
 import subprocess
@@ -21,7 +23,6 @@ import sys
 import time
 
 SUPERVISOR = 'globalland-supervisor'
-BAD_STATES = ('CONTROLLER_BLOCKED', 'STALE', 'DEGRADED')
 
 
 def last_supervisor_commit(repo):
@@ -47,16 +48,38 @@ def check(repo, now=None, max_silence_hours=2.0):
         reasons.append('Aucun commit du superviseur trouvé.')
     elif age_hours > max_silence_hours:
         reasons.append('Le superviseur ne publie plus rien depuis %.1f h (seuil %.1f h).' % (age_hours, max_silence_hours))
-    controller = read_json(repo, 'world/controller.json') or {}
+    controller = read_json(repo, 'world/controller.json')
+    if not isinstance(controller, dict) or not controller:
+        reasons.append('Statut du contrôleur absent, illisible ou invalide : world/controller.json.')
+        controller = {}
     state = controller.get('state')
-    if state in BAD_STATES:
+    if state != 'OPERATIONAL':
         reasons.append('Contrôleur dans l\'état %s : %s' % (state, controller.get('reason_code') or controller.get('reason') or 'voir world/controller.json'))
+    # Publication is a heartbeat, not evidence that a model produced a valid plan.
+    # This timestamp deliberately does not claim successful task execution/revenue.
+    success = controller.get('last_successful_plan') or controller.get('last_turn')
+    success_age = None
+    success_at = None
+    if isinstance(success, dict) and success.get('state') == 'DECISION_READY':
+        try:
+            success_at = success['at']
+            at = datetime.datetime.strptime(success_at, '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=datetime.timezone.utc).timestamp()
+            success_age = (now - at) / 3600
+        except (KeyError, TypeError, ValueError, OverflowError):
+            success_at = None
+    if success_age is None:
+        reasons.append('Aucune date valide de dernier plan réussi du contrôleur.')
+    elif success_age < 0:
+        reasons.append('La date du dernier plan réussi est dans le futur ; vérifier les horloges.')
+    elif success_age > max_silence_hours:
+        reasons.append('Aucun plan réussi du contrôleur depuis %.1f h (seuil %.1f h).' % (success_age, max_silence_hours))
     blockers = read_json(repo, 'world/blockers.json') or {}
     founder = [c for c in blockers.get('open', []) if c.get('owner') == 'FOUNDER']
     if founder:
         reasons.append('%d action(s) attendent le fondateur : %s' % (len(founder), '; '.join(c.get('title', c.get('id', '?')) for c in founder[:5])))
     return dict(status='ALERT' if reasons else 'OK', reasons=reasons, last_supervisor_commit_age_hours=age_hours,
-                controller_state=state, founder_actions=len(founder))
+                controller_state=state, founder_actions=len(founder), last_successful_plan_at=success_at,
+                last_successful_plan_age_hours=None if success_age is None else round(success_age, 2))
 
 
 def issue_body(report):

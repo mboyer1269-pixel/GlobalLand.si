@@ -1,5 +1,6 @@
 # Link checker core: one stable row per supplied URL. Python standard library only.
-import re, ssl, time, socket, ipaddress, http.client, urllib.request, urllib.error
+import ssl, time, socket, http.client
+from .public_http import request, resolve, PublicHTTPError
 from urllib.parse import urlsplit, urljoin
 from concurrent.futures import ThreadPoolExecutor
 
@@ -21,15 +22,6 @@ class LinkError(Exception):
         self.code = code
 
 
-class _NoRedirect(urllib.request.HTTPRedirectHandler):
-    # Redirects are followed manually so they can be counted, loop-checked and scheme-checked.
-    def redirect_request(self, *a, **k):
-        return None
-
-
-_OPENER = urllib.request.build_opener(_NoRedirect)
-
-
 def _row(url, **kw):
     r = {k: None for k in FIELDS}
     r.update(url=url, redirect_count=0, ok=False)
@@ -37,59 +29,31 @@ def _row(url, **kw):
     return r
 
 
-def _check_target(url, allow_private):
-    if not isinstance(url, str) or not re.match(r"^https?://", url, re.I):
-        raise LinkError("invalid_scheme", "only http(s) URLs are accepted")
+def _request(url, method, timeout, allow_private=False):
     try:
-        parts = urlsplit(url)
-        host = parts.hostname
-        parts.port
-    except ValueError as e:
-        raise LinkError("invalid_url", str(e)[:200])
-    if not host:
-        raise LinkError("invalid_url", "URL has no host")
-    if allow_private:
-        return
-    try:
-        infos = socket.getaddrinfo(host, None)
-    except (socket.gaierror, UnicodeError) as e:
-        raise LinkError("dns_error", str(e)[:200])
-    for info in infos:
-        ip = ipaddress.ip_address(info[4][0].split("%")[0])
-        if not ip.is_global:
-            raise LinkError("blocked_address", "host resolves to a non-public address")
-
-
-def _request(url, method, timeout):
-    req = urllib.request.Request(url, method=method, headers={"User-Agent": USER_AGENT, "Accept": "*/*"})
-    try:
-        with _OPENER.open(req, timeout=timeout) as r:
-            if method == "GET":
-                r.read(GET_READ_BYTES)  # bounded read: the body is never stored
-            return r.status, None
-    except urllib.error.HTTPError as e:
-        loc = e.headers.get("Location") if e.headers else None
-        try:
-            e.close()
-        except Exception:
-            pass
-        return e.code, loc
+        status, location, _ = request(url, method, timeout, GET_READ_BYTES,
+                                     {"User-Agent": USER_AGENT, "Accept": "*/*"}, allow_private)
+        return status, location
+    except PublicHTTPError as e:
+        raise LinkError(e.code, str(e)) from None
     except (socket.timeout, TimeoutError):
         raise LinkError("timeout", "no response within %ss" % timeout)
-    except urllib.error.URLError as e:
-        if isinstance(e.reason, (socket.timeout, TimeoutError)):
-            raise LinkError("timeout", "no response within %ss" % timeout)
-        if isinstance(e.reason, ssl.SSLError):
-            raise LinkError("tls_error", str(e.reason)[:200])
-        if isinstance(e.reason, socket.gaierror):
-            raise LinkError("dns_error", str(e.reason)[:200])
-        raise LinkError("network_error", str(e.reason)[:200])
+    except ssl.SSLError:
+        raise LinkError("tls_error", "TLS verification or connection failed") from None
     except (OSError, ValueError, http.client.HTTPException) as e:
         raise LinkError("network_error", ("%s: %s" % (type(e).__name__, e))[:200])
 
 
 def check_url(url, timeout=TIMEOUT_S, max_redirects=MAX_REDIRECTS, allow_private=False, requester=None):
-    req = requester or _request
+    def req(target, method, request_timeout):
+        if requester is None:
+            return _request(target, method, request_timeout, allow_private)
+        # Custom requesters are a Python test seam, never an Actor input.
+        try:
+            resolve(target, allow_private)
+        except PublicHTTPError as e:
+            raise LinkError(e.code, str(e)) from None
+        return requester(target, method, request_timeout)
     t0 = time.monotonic()
     cur, seen, n = url, {url}, 0
 
@@ -98,7 +62,6 @@ def check_url(url, timeout=TIMEOUT_S, max_redirects=MAX_REDIRECTS, allow_private
                     elapsed_ms=int((time.monotonic() - t0) * 1000), **kw)
     try:
         while True:
-            _check_target(cur, allow_private)
             status, loc = req(cur, "HEAD", timeout)
             if status in HEAD_FALLBACK_STATUSES:
                 status, loc = req(cur, "GET", timeout)

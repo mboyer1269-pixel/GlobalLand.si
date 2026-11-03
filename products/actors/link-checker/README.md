@@ -33,8 +33,11 @@ You give it a list of public http(s) URLs (up to 1000 per run). For each URL it 
 - At most 1000 unique URLs per run; anything over that is dropped. Duplicates are removed.
 - Some sites block automated clients or answer HEAD/GET differently from a browser, so a reported error may not match what a person sees in a browser.
 - Per-host serialization applies to the **starting** host only: redirects to another host are not throttled separately.
-- The non-public address check runs before connecting. DNS is resolved again when the connection is made, so this is a safeguard and not a guarantee.
+- Every resolved address is checked before connecting; the connection uses a validated numeric address without resolving again. Each redirect and HEAD-to-GET retry is rechecked. TLS verifies the original hostname. Private/local/metadata/multicast destinations, URL credentials and automatic proxies are not supported.
 - Tested offline only, against a local test server (`core-test-results.json`, 21/21). It has not yet been run on the Apify platform.
+
+## Reproducible checks
+`tests/run_tests.py` runs 21 local HTTP cases and exits nonzero on failure; the JSON report is regenerated. Repository tests cover private destinations, DNS rebinding, redirects and TLS hostname handling. From the repository root, `python3 tests/actor_sdk_smoke.py --actor link-checker` executes the real SDK wrapper with local input/datasets and simulated billing (install requirements first). Only remote HTTP transport is substituted. Dependencies are pinned for Python 3.12. This does not verify an Apify cloud deployment.
 
 ## Pricing (proposed, not yet active)
 - `link-checked`: USD 0.0008 per URL that reached the network check. URLs rejected before any request (`invalid_scheme`, `invalid_url`, `blocked_address`) are not charged.

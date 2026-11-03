@@ -21,3 +21,23 @@ jobs:
         env:
           GLOBALLAND_DOCKER_SMOKE: '1'
       - run: for f in scripts/*.sh; do bash -n "$f" || exit 1; done
+  actor-products:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        actor: [rss-reader, link-checker]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the pinned Actor SDK
+        run: python3 -m pip install -r products/actors/${{ matrix.actor }}/requirements.txt
+      - name: Test the product core
+        run: python3 products/actors/${{ matrix.actor }}/tests/run_tests.py
+      - name: Test public network restrictions
+        run: python3 -m unittest discover -s tests -p 'test_actor_network.py'
+      - name: Execute the real SDK wrapper locally (no billing)
+        run: python3 tests/actor_sdk_smoke.py --actor '${{ matrix.actor }}'

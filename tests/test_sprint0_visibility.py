@@ -56,6 +56,31 @@ class ControllerProjectionTests(unittest.TestCase):
         unconfigured = Controller(self.root, None, None, {})
         self.assertEqual(unconfigured.projection(now=AT_SECONDS)['state'], 'WAITING_CONTROLLER')
 
+    def test_success_timestamp_survives_a_later_failed_turn_and_new_process(self):
+        self.controller.record_status('THINK-1', 'DECISION_READY', 'claude', [])
+        before = self.controller.last_status()
+        self.controller.record_status('THINK-2', 'BLOCKED', None, [])
+        fresh = Controller(self.root, None, None, CONFIG)
+        report = fresh.projection()
+        self.assertEqual(report['state'], 'CONTROLLER_BLOCKED')
+        self.assertEqual(report.get('last_successful_plan'), before)
+
+    def test_pre_upgrade_success_is_retained_before_first_failed_turn(self):
+        self.record('DECISION_READY')
+        self.controller.record_status('THINK-2', 'BLOCKED', None, [])
+        self.assertEqual(self.controller.projection()['last_successful_plan']['at'], AT)
+
+    def test_pending_outbox_replay_keeps_original_planning_timestamp(self):
+        directory = self.root / 'state/controller'
+        directory.mkdir(parents=True)
+        saved = dict(provider='claude', attempts=[], files={}, published=False, planned_at=AT)
+        (directory / 'THINK-1793491200.json').write_text(json.dumps(saved))
+        with patch.object(self.controller, 'plan', side_effect=AssertionError('must not plan again')):
+            self.controller.tick(now=AT_SECONDS + 86400)
+        report = self.controller.projection(now=AT_SECONDS + 86400)
+        self.assertEqual(report['state'], 'STALE')
+        self.assertEqual(report['last_successful_plan']['at'], AT)
+
 
 class RejectionReasonTests(unittest.TestCase):
     def test_fixed_protocol_rules_are_explained(self):

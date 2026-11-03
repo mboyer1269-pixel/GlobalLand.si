@@ -30,7 +30,8 @@ class WatchdogTests(unittest.TestCase):
         self.git('add', '.'); self.git('commit', '-q', '-m', 'ops', author=author, date='@%d +0000' % at)
 
     def test_healthy_world_is_ok(self):
-        self.commit({'world/controller.json': {'state': 'OPERATIONAL'}}, at=1793491200)
+        self.commit({'world/controller.json': {'state': 'OPERATIONAL', 'last_turn': {
+            'state': 'DECISION_READY', 'at': '2026-11-01T00:00:00Z'}}}, at=1793491200)
         report = watchdog.check(self.repo, now=1793491200 + 1800)
         self.assertEqual((report['status'], report['reasons']), ('OK', []))
 
@@ -51,6 +52,31 @@ class WatchdogTests(unittest.TestCase):
     def test_no_supervisor_commit_at_all_is_an_alert(self):
         self.commit({'README.md': 'x'}, author='Michael')
         self.assertEqual(watchdog.check(self.repo, now=1793491200)['status'], 'ALERT')
+
+    def test_missing_invalid_or_unknown_controller_is_never_ok(self):
+        self.commit({'README.md': 'recent publication'})
+        path = self.repo / 'world/controller.json'
+        self.assertEqual(watchdog.check(self.repo, now=1793491200)['status'], 'ALERT')
+        path.parent.mkdir(exist_ok=True)
+        for raw in ('{broken', '[]', 'null', '42', '{}', '{"state":"NEW_STATE"}', '{"state":[]}'):
+            with self.subTest(raw=raw):
+                path.write_text(raw)
+                self.assertEqual(watchdog.check(self.repo, now=1793491200)['status'], 'ALERT')
+
+    def test_recent_publication_cannot_hide_old_or_missing_success(self):
+        for turn in (None, {'state': 'DECISION_READY', 'at': '2026-10-31T00:00:00Z'},
+                     {'state': 'BLOCKED', 'at': '2026-11-01T00:00:00Z'},
+                     {'state': 'DECISION_READY', 'at': 'not a date'},
+                     {'state': 'DECISION_READY', 'at': '2026-11-02T00:00:00Z'}):
+            with self.subTest(turn=turn):
+                path = self.repo / 'world/controller.json'
+                if not (self.repo / 'README.md').exists():
+                    self.commit({'README.md': 'recent publication'})
+                path.parent.mkdir(exist_ok=True)
+                path.write_text(json.dumps({'state': 'OPERATIONAL', 'last_turn': turn}))
+                report = watchdog.check(self.repo, now=1793491200)
+                self.assertEqual(report['last_supervisor_commit_age_hours'], 0)
+                self.assertEqual(report['status'], 'ALERT')
 
     def test_workflow_is_scheduled_with_minimal_permissions(self):
         text = (pathlib.Path(__file__).resolve().parents[1] / '.github/workflows/watchdog.yml').read_text()

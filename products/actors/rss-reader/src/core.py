@@ -1,5 +1,7 @@
 # RSS 2.0 / RSS 1.0 (RDF) / Atom parsing core. Python standard library only.
-import re, html, html.entities, socket, urllib.request, urllib.error
+import re, html, html.entities, socket, ssl, http.client
+from urllib.parse import urljoin
+from .public_http import request, PublicHTTPError
 import xml.etree.ElementTree as ET
 from xml.parsers import expat
 from email.utils import parsedate_to_datetime
@@ -186,23 +188,32 @@ def parse_feed(data, feed_url, max_items=50):
     return rows, fmt, len(items)
 
 
-def fetch(url, timeout=TIMEOUT_S, max_bytes=MAX_BYTES):
-    if not isinstance(url, str) or not re.match(r"^https?://", url, re.I):
-        raise FeedError("invalid_url", "only http(s) URLs are accepted")
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT,
-        "Accept": "application/rss+xml, application/atom+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5"})
+def fetch(url, timeout=TIMEOUT_S, max_bytes=MAX_BYTES, *, allow_private=False, max_redirects=5):
+    # allow_private is only a Python test seam; Actor input never exposes it.
+    headers = {"User-Agent": USER_AGENT,
+        "Accept": "application/rss+xml, application/atom+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5"}
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:
-            data = r.read(max_bytes + 1)
-    except urllib.error.HTTPError as e:
-        raise FeedError("http_error", "HTTP %s" % e.code)
+        seen = set()
+        for hop in range(max_redirects + 1):
+            if url in seen:
+                raise FeedError("redirect_loop", "redirect loop")
+            seen.add(url)
+            status, location, data = request(url, "GET", timeout, max_bytes + 1, headers, allow_private)
+            if status in (301, 302, 303, 307, 308) and location:
+                if hop == max_redirects:
+                    raise FeedError("too_many_redirects", "redirect limit exceeded")
+                url = urljoin(url, location.strip())
+                continue
+            if not 200 <= status < 300:
+                raise FeedError("http_error", "HTTP %s" % status)
+            break
+    except PublicHTTPError as e:
+        raise FeedError("invalid_url" if e.code == "invalid_scheme" else e.code, str(e)) from None
     except (socket.timeout, TimeoutError):
         raise FeedError("timeout", "no data within %ss" % timeout)
-    except urllib.error.URLError as e:
-        if isinstance(e.reason, (socket.timeout, TimeoutError)):
-            raise FeedError("timeout", "no data within %ss" % timeout)
-        raise FeedError("network_error", str(e.reason)[:200])
-    except (OSError, ValueError) as e:
+    except ssl.SSLError:
+        raise FeedError("tls_error", "TLS verification or connection failed") from None
+    except (OSError, ValueError, http.client.HTTPException) as e:
         raise FeedError("network_error", str(e)[:200])
     if len(data) > max_bytes:
         raise FeedError("too_large", "response exceeds %d bytes" % max_bytes)
