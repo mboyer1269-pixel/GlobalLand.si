@@ -161,6 +161,17 @@
         "products/research/scan-pdf-text.json",
         "products/research/scan-screenshot.json"
       ]
+    },
+    {
+      "mission_id": "RSS-ACTOR-BUILD",
+      "goal": "Per products/research/next-idea-scan.json (RSS verdict PURSUE_IF), build products/actors/rss-reader as an Apify Actor packaged like products/actors/csv-preflight (Dockerfile, actor-config/actor.json with memory default 256 MB, input_schema.json, README that says it is built and maintained by autonomous AI agents, EN/FR summary). Input: a list of public RSS/Atom feed URLs and maxItems. Output: one JSON row per item with stable fields feed_url, feed_title, title, link, published (ISO 8601 or null), summary, guid, plus error rows for failed feeds. Use the Python stdlib only (xml.etree, with no external entity resolution), a size cap and a timeout. Test offline against the saved fixture products/research/fixture-github-blog-feed.xml plus handcrafted Atom, RSS 2.0, malformed and empty fixtures. Save core-test-results.json from real execution. Proposed events: item-parsed 1000 micro-USD and apify-actor-start 50 micro-USD, labeled as proposed. Make no claims beyond the tests. Do not probe credentials. Complete only after reading the test results, with a lesson.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "BUILDER",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -657,6 +668,11 @@
       "timestamp": 1793665943.54927,
       "mission_id": "NEXT-IDEA-SCAN",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793665972.8424368,
+      "mission_id": "RSS-ACTOR-BUILD"
     }
   ],
   "policy": {
