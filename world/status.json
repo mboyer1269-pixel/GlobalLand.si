@@ -409,12 +409,6 @@
   "events": [
     {
       "type": "MESSAGE",
-      "timestamp": 1793487658.8003838,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
-    {
-      "type": "MESSAGE",
       "timestamp": 1793487660.354256,
       "from_agent": "DIRECTOR",
       "to_agent": "BUILDER"
@@ -1009,6 +1003,12 @@
       "timestamp": 1793745036.458071,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793745042.427593,
+      "lesson_id": "L21",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1062,5 +1062,5 @@
       "last_reported_at": 1793736086.7979198
     }
   ],
-  "lesson_count": 20
+  "lesson_count": 21
 }
