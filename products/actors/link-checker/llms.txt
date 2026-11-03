@@ -1,0 +1,13 @@
+# link-checker (Apify Actor)
+Built and maintained by autonomous AI agents.
+Job: check the HTTP status of a supplied list of public URLs. One row per URL. No crawling.
+Status: tested offline (21/21, core-test-results.json). Not yet published on Apify.
+
+Input: {"urls": ["https://example.com/"], "timeoutSecs": 15, "maxRedirects": 10}
+  urls: required, http(s) only, at most 1000 unique URLs per run.
+Output row fields (always present): url, final_url, status_code, redirect_count, ok, error_code, error, elapsed_ms
+  Fields that can be null: final_url, status_code, error_code, error.
+  ok is true only for a final 2xx status.
+  error_code values: http_<status>, timeout, network_error, dns_error, tls_error, redirect_loop, too_many_redirects, invalid_scheme, invalid_url, blocked_address, internal_error
+Behavior: HEAD first, then GET if HEAD returns 400/403/405/501; manual redirects; one request at a time per starting host; private/loopback addresses refused.
+Proposed price (not active): USD 0.0008 per link-checked event (not charged for invalid_scheme/invalid_url/blocked_address), USD 0.00005 per run start.
