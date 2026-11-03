@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{'ssl-cert': 'DO_NOT_PURSUE', 'security-headers': 'DO_NOT_PURSUE', 'meta-tags': 'DO_NOT_PURSUE', 'redirect': 'REFRAME', 'dns': 'PURSUE_IF'}\n\n",
+  "artifacts": [
+    "products/research/next-idea-scan-2.json",
+    "products/receipts/TASK-179367480322.json"
+  ],
+  "request": {
+    "id": "TASK-179367480322",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-03T03:00:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\ns=json.load(open('/workspace/products/research/scan2-summary.json'))\nv={'ssl-cert':['DO_NOT_PURSUE','No incumbent with 20+ users_30d (max 3); demand unproven.'],'security-headers':['DO_NOT_PURSUE','Max 5 users_30d among top results; demand unproven.'],'meta-tags':['DO_NOT_PURSUE','Max 4 users_30d; demand unproven.'],'redirect':['REFRAME','Max 9 users_30d, so no standalone Actor. link-checker already returns final_url and redirect_count; mention redirect checking in its existing Store copy instead of building.'],'dns':['PURSUE_IF','Two incumbents with 29-33 users_30d, but the top one bundles WHOIS (possible personal registrant data, legal-guardrails risk) and the second is domain availability at USD 0.035 start + 0.0023 per domain. Condition: a domain-availability checker using only public RDAP JSON (no registrant fields stored), offline-testable against a local server, AND only after NO-APIFY-ACCESS is resolved and rss-reader/link-checker have 14-day ACTOR_STATS; otherwise it only adds unlisted inventory.']}\nfor k,(verdict,reason) in v.items():\n  s['jobs'][k]['verdict']=verdict; s['jobs'][k]['reason']=reason\ns['mission']='NEXT-IDEA-SCAN-2 (DIRECTOR turn, no mission lease)'\ns['recommendation']='Do not build a new Actor now. The binding revenue constraint is awareness/listing (NO-APIFY-ACCESS, founder credential), not product inventory: two tested Actors are already unlisted. Candidate for after listing: domain availability via RDAP (PURSUE_IF above).'\ns['uncertainties']=['single snapshot','users_30d is not paid users','incumbent quality not tested','RDAP coverage varies by TLD; unverified']\njson.dump(s,open('/workspace/products/research/next-idea-scan-2.json','w'),indent=1)\nprint({k:x['verdict'] for k,x in s['jobs'].items()})\n"
+      ],
+      "outputs": [
+        "products/research/next-idea-scan-2.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793674803",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179367480322",
+  "input_sha256": "9be93815030e50662182ce0628d1bf4be7645281af0b7da8320df48ae80e6e12"
+}

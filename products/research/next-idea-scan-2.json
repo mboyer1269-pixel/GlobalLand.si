@@ -1,0 +1,377 @@
+{
+ "observed_on": "2026-11-03",
+ "method": "public Apify Store API, narrow queries; users_30d mixes free and paid users; paid share unobservable",
+ "jobs": {
+  "ssl-cert": {
+   "artifact": "products/research/scan2-ssl-cert.json",
+   "total": 193,
+   "n20plus": 0,
+   "top5": [
+    {
+     "name": "automation-lab/ssl-certificate-checker",
+     "title": "SSL Certificate Checker",
+     "users_30d": 3,
+     "users_total": 23,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "start": 0.035,
+      "domain-checked": 0.00115
+     }
+    },
+    {
+     "name": "pink_comic/ssl-certificate-checker",
+     "title": "SSL Certificate Checker - Domain TLS Expiry & KYB API",
+     "users_30d": 2,
+     "users_total": 6,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 0.0001,
+      "apify-default-dataset-item": 0.0001
+     }
+    },
+    {
+     "name": "rationalistic_counsel/ssl-certificate-checker",
+     "title": "SSL Certificate Checker",
+     "users_30d": 2,
+     "users_total": 3,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 5e-05,
+      "apify-default-dataset-item": 0.01
+     }
+    },
+    {
+     "name": "bgfc97/ssl-certificate-checker",
+     "title": "SSL Certificate Checker",
+     "users_30d": 2,
+     "users_total": 3,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "host-checked": 0.003
+     }
+    },
+    {
+     "name": "nexgendata/ssl-certificate-checker",
+     "title": "SSL Certificate Checker \u2014 Bulk Expiry & Chain Monitor",
+     "users_30d": 1,
+     "users_total": 10,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 5e-05,
+      "apify-default-dataset-item": 0.01
+     }
+    }
+   ],
+   "verdict": "DO_NOT_PURSUE",
+   "reason": "No incumbent with 20+ users_30d (max 3); demand unproven."
+  },
+  "security-headers": {
+   "artifact": "products/research/scan2-security-headers.json",
+   "total": 818,
+   "n20plus": 0,
+   "top5": [
+    {
+     "name": "smart-digital/website-security-vulnerability-audit",
+     "title": "Website Security Audit - Headers, SSL & Exposure Scanner",
+     "users_30d": 5,
+     "users_total": 45,
+     "rating": 5,
+     "reviews": 1,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 0.01,
+      "PAGE_AUDITED": 0.02
+     }
+    },
+    {
+     "name": "jungle_synthesizer/ssl-security-headers-checker",
+     "title": "HTTP Probe -- TLS, Security Headers, Redirects",
+     "users_30d": 5,
+     "users_total": 7,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 0.1,
+      "data-record": 0.002,
+      "data-record-premium": 0.004
+     }
+    },
+    {
+     "name": "ninhothedev/security-headers-checker",
+     "title": "HTTP Security Headers Checker \u2014 HSTS, CSP, Grade A-F",
+     "users_30d": 3,
+     "users_total": 4,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 5e-05,
+      "apify-default-dataset-item": 0.001
+     }
+    },
+    {
+     "name": "benthepythondev/http-headers-checker",
+     "title": "HTTP Headers Checker - Security Header Audit",
+     "users_30d": 2,
+     "users_total": 9,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 5e-05,
+      "apify-default-dataset-item": 0.001
+     }
+    },
+    {
+     "name": "pink_comic/security-headers-checker",
+     "title": "Security Headers Checker API - HTTP Security Scanner",
+     "users_30d": 2,
+     "users_total": 8,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 0.0001,
+      "apify-default-dataset-item": 0.002
+     }
+    }
+   ],
+   "verdict": "DO_NOT_PURSUE",
+   "reason": "Max 5 users_30d among top results; demand unproven."
+  },
+  "meta-tags": {
+   "artifact": "products/research/scan2-meta-tags.json",
+   "total": 1643,
+   "n20plus": 0,
+   "top5": [
+    {
+     "name": "logiover/json-ld-schema-meta-tag-extractor",
+     "title": "JSON-LD Schema & Meta Tag Extractor",
+     "users_30d": 4,
+     "users_total": 51,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-default-dataset-item": 0.005
+     }
+    },
+    {
+     "name": "bgfc97/opengraph-meta-extractor",
+     "title": "Open Graph & Meta Tag Extractor",
+     "users_30d": 1,
+     "users_total": 4,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "url-extracted": 0.001
+     }
+    },
+    {
+     "name": "gifted_wagon/website-metadata-evidence-extractor",
+     "title": "Meta Tag Extractor",
+     "users_30d": 1,
+     "users_total": 2,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 0.0004,
+      "page-analyzed": 0.005
+     }
+    },
+    {
+     "name": "eliai/webpage-metadata-extractor",
+     "title": "Meta Tags & Metadata Extractor: Open Graph, Twitter, JSON-LD",
+     "users_30d": 1,
+     "users_total": 2,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "page-analyzed": 0.02
+     }
+    },
+    {
+     "name": "lepidata/open-graph",
+     "title": "Open Graph & Meta Tag Extractor: Titles, Descriptions, Cards",
+     "users_30d": 1,
+     "users_total": 2,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "page": 0.0003
+     }
+    }
+   ],
+   "verdict": "DO_NOT_PURSUE",
+   "reason": "Max 4 users_30d; demand unproven."
+  },
+  "redirect": {
+   "artifact": "products/research/scan2-redirect.json",
+   "total": 980,
+   "n20plus": 0,
+   "top5": [
+    {
+     "name": "q_services/redirect-chain-checker",
+     "title": "Redirect Chain Checker",
+     "users_30d": 9,
+     "users_total": 19,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "actor-start": 0.005,
+      "dataset-item": 0.0002
+     }
+    },
+    {
+     "name": "mighty_monk/redirect-chain-checker",
+     "title": "Redirect Chain Checker",
+     "users_30d": 6,
+     "users_total": 12,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 5e-05,
+      "apify-default-dataset-item": 0.002
+     }
+    },
+    {
+     "name": "jtpalms/url-status-checker",
+     "title": "URL Status Checker: Bulk HTTP Status Code & Redirect Checker",
+     "users_30d": 6,
+     "users_total": 7,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "url-checked": 0.0015,
+      "apify-actor-start": 5e-05
+     }
+    },
+    {
+     "name": "benthepythondev/url-shortener-expander",
+     "title": "URL Shortener Expander - Redirect Checker",
+     "users_30d": 4,
+     "users_total": 11,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 5e-05,
+      "apify-default-dataset-item": 0.001
+     }
+    },
+    {
+     "name": "scrapesignal_labs/bulk-url-status-checker",
+     "title": "Bulk URL Status & Redirect Checker \u2014 $0.10/1K",
+     "users_30d": 4,
+     "users_total": 8,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-default-dataset-item": 0.0001,
+      "apify-actor-start": 5e-05
+     }
+    }
+   ],
+   "verdict": "REFRAME",
+   "reason": "Max 9 users_30d, so no standalone Actor. link-checker already returns final_url and redirect_count; mention redirect checking in its existing Store copy instead of building."
+  },
+  "dns": {
+   "artifact": "products/research/scan2-dns.json",
+   "total": 1214,
+   "n20plus": 2,
+   "top5": [
+    {
+     "name": "santamaria-automations/domain-whois-dns",
+     "title": "Domain WHOIS & DNS Lookup - Bulk Domain Intelligence",
+     "users_30d": 33,
+     "users_total": 169,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "enrichment-start": 0.001,
+      "enrichment-result": 0.003
+     }
+    },
+    {
+     "name": "automation-lab/domain-availability-checker",
+     "title": "Domain Availability Checker \u2014 Bulk DNS & WHOIS Lookup",
+     "users_30d": 29,
+     "users_total": 200,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "start": 0.035,
+      "domain-checked": 0.0023
+     }
+    },
+    {
+     "name": "gazidev/bulk-dns-lookup",
+     "title": "DNS Lookup \u2013 Bulk DNS Records, MX, SPF, DMARC & Reverse DNS",
+     "users_30d": 8,
+     "users_total": 9,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 5e-05,
+      "domain-checked": 0.001
+     }
+    },
+    {
+     "name": "superlativetech/dns-lookup",
+     "title": "DNS Lookup",
+     "users_30d": 8,
+     "users_total": 146,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "FREE",
+     "events": {}
+    },
+    {
+     "name": "logiover/bulk-dns-records-lookup",
+     "title": "Bulk DNS Records Lookup - A, MX, TXT, NS, CNAME",
+     "users_30d": 5,
+     "users_total": 13,
+     "rating": 0,
+     "reviews": 0,
+     "pricing_model": "PAY_PER_EVENT",
+     "events": {
+      "apify-actor-start": 5e-05,
+      "apify-default-dataset-item": 0.005
+     }
+    }
+   ],
+   "verdict": "PURSUE_IF",
+   "reason": "Two incumbents with 29-33 users_30d, but the top one bundles WHOIS (possible personal registrant data, legal-guardrails risk) and the second is domain availability at USD 0.035 start + 0.0023 per domain. Condition: a domain-availability checker using only public RDAP JSON (no registrant fields stored), offline-testable against a local server, AND only after NO-APIFY-ACCESS is resolved and rss-reader/link-checker have 14-day ACTOR_STATS; otherwise it only adds unlisted inventory."
+  }
+ },
+ "mission": "NEXT-IDEA-SCAN-2 (DIRECTOR turn, no mission lease)",
+ "recommendation": "Do not build a new Actor now. The binding revenue constraint is awareness/listing (NO-APIFY-ACCESS, founder credential), not product inventory: two tested Actors are already unlisted. Candidate for after listing: domain availability via RDAP (PURSUE_IF above).",
+ "uncertainties": [
+  "single snapshot",
+  "users_30d is not paid users",
+  "incumbent quality not tested",
+  "RDAP coverage varies by TLD; unverified"
+ ]
+}
