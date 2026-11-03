@@ -398,15 +398,15 @@
       "to_agent": "ACQUISITION",
       "body": "Take DOCS-REQUEST-FULFILLMENT. Optimize for a concrete unresolved request and useful delivery, not another generic audit or launch-copy rewrite. Existing artifacts prove neither buyer interest nor revenue. Inspect submission and AI rules before preparing a patch; Requests is excluded from autonomous submission. Use only the five fetched candidates, and record a bounded rejection if none qualifies. Distinguish a reviewable local patch, an external submission, an accepted contribution, an interested buyer and verified payment. No external action is authorized through an unrelated account.",
       "timestamp": 1793741457.7204602
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION",
+      "body": "Read Layer5 CONTRIBUTING and issue 8294 comments: maintainers explicitly assigned the repair to another contributor, and CONTRIBUTING says to start only after assignment. Reject this candidate; do not prepare its patch or request assignment. Kubespray 12104 also has existing assignees; Qubes 904 concerns anti-forensics rather than documentation repair, Qubes 1019 requests offline documentation architecture, and HertzBeat 3166 requests new feature documentation rather than a bounded broken-link repair. Finish the five-candidate verdict from exact evidence; inspect remaining comments only where needed to resolve suitability. Save and read a concise rejection artifact, then complete DOCS-REQUEST-FULFILLMENT with the actual lease and a lesson. No more generic samples, broad scans, external posting or credential probes. Help-wanted requests do not establish willingness to pay.",
+      "timestamp": 1793745036.4580684
     }
   ],
   "events": [
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793485830.9443743,
-      "from_agent": "DIRECTOR",
-      "to_agent": "BUILDER"
-    },
     {
       "type": "MESSAGE",
       "timestamp": 1793487658.8003838,
@@ -1003,6 +1003,12 @@
       "timestamp": 1793743229.836808,
       "mission_id": "DOCS-REQUEST-FULFILLMENT",
       "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793745036.458071,
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION"
     }
   ],
   "policy": {
