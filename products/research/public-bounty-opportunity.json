@@ -1,0 +1,80 @@
+{
+  "observed_on": "2026-11-03",
+  "verdict": "Do not pursue",
+  "selected_task": null,
+  "sponsor": "Expensify, as stated by its official repository and contribution guide",
+  "funding": "Advertised rewards only; escrow, currency code and payout eligibility not verified. No treasury funding or revenue.",
+  "candidates": [
+    {
+      "url": "https://github.com/Expensify/App/issues/100882",
+      "title_quote": "[$250] Web- Wallet - The popup moves is not repositioned properly after the window is resized",
+      "advertised_reward": "$250; dollar currency code not explicitly established by title",
+      "observed_state": "open",
+      "unclaimed_status": "Not established; open and Help Wanted do not establish unclaimed status",
+      "verdict": "Do not pursue with current capabilities",
+      "reason": "No verified dedicated submission account, payout eligibility, accepted proposal or required platform test access. No implementation authorized by sponsor."
+    },
+    {
+      "url": "https://github.com/Expensify/App/issues/104504",
+      "title_quote": "[$250] [Sentry: APP-JVF] Web: useSidebarOrderedReports setState loop, \"Maximum update depth exceeded\"",
+      "advertised_reward": "$250; dollar currency code not explicitly established by title",
+      "observed_state": "open",
+      "unclaimed_status": "Not established; open and Help Wanted do not establish unclaimed status",
+      "verdict": "Do not pursue with current capabilities",
+      "reason": "No verified dedicated submission account, payout eligibility, accepted proposal or required platform test access. No implementation authorized by sponsor."
+    },
+    {
+      "url": "https://github.com/Expensify/App/issues/104951",
+      "title_quote": "[$250] [Exploratory] Web-Workspace-The newly created workspace is obscured by another workspace.",
+      "advertised_reward": "$250; dollar currency code not explicitly established by title",
+      "observed_state": "open",
+      "unclaimed_status": "Not established; open and Help Wanted do not establish unclaimed status",
+      "verdict": "Do not pursue with current capabilities",
+      "reason": "No verified dedicated submission account, payout eligibility, accepted proposal or required platform test access. No implementation authorized by sponsor."
+    },
+    {
+      "url": "https://github.com/Expensify/App/issues/105145",
+      "title_quote": "[$250] Android - Spend - \"Apply\" button is overlapped by keyboard in exposed filter.",
+      "advertised_reward": "$250; dollar currency code not explicitly established by title",
+      "observed_state": "open",
+      "unclaimed_status": "Not established; open and Help Wanted do not establish unclaimed status",
+      "verdict": "Do not pursue with current capabilities",
+      "reason": "No verified dedicated submission account, payout eligibility, accepted proposal or required platform test access. No implementation authorized by sponsor."
+    },
+    {
+      "url": "https://github.com/Expensify/App/issues/102333",
+      "title_quote": "[$250] Hold - Approve modal displays same amount full report and pending expense",
+      "advertised_reward": "$250; dollar currency code not explicitly established by title",
+      "observed_state": "open",
+      "unclaimed_status": "Not established; open and Help Wanted do not establish unclaimed status",
+      "verdict": "Do not pursue with current capabilities",
+      "reason": "No verified dedicated submission account, payout eligibility, accepted proposal or required platform test access. No implementation authorized by sponsor."
+    }
+  ],
+  "submission_rules": {
+    "source": "https://raw.githubusercontent.com/Expensify/App/main/contributingGuides/CONTRIBUTING.md",
+    "exact_quotes": [
+      "* Expensify requires that you can test the app on iOS, MacOS, Android, Web, and mWeb.",
+      "    - On issues where [MelvinBot](./HOW_TO_WORK_WITH_MELVINBOT.md) has posted a proposal, review Melvin's proposal using the same standards as contributor proposals. Melvin's proposal is not guaranteed to be the earliest, but it should always be reviewed first because we are spending the money to run it. Follow first-come-first-serve review order for all other proposals after `Help Wanted`. **Do not open a PR** until a proposal is accepted. See [How to Work with MelvinBot](./HOW_TO_WORK_WITH_MELVINBOT.md) for more details.",
+      "8. If your proposal is accepted by the Expensify engineer assigned to the issue, Expensify will hire you on Upwork and assign the GitHub issue to you.",
+      "\t1. CLA - You must sign our [Contributor License Agreement](https://github.com/Expensify/App/blob/main/CLA.md) by following the CLA bot instructions that will be posted on your PR"
+    ]
+  },
+  "104951_discussion": {
+    "source": "https://api.github.com/repos/Expensify/App/issues/104951/comments?per_page=100",
+    "comment_count_in_saved_response": 24,
+    "proposal_comments": 17,
+    "acceptance_status": "No acceptance inferred from proposal counts or assignees; no claim of availability.",
+    "affected_platform": "MacOS Safari per issue body",
+    "acceptance_quote": "After step 6, all workspaces in the list should be displayed fully and clearly.",
+    "smallest_deliverable_if_prerequisites_met": "Reproduce workspace overlap on Safari, then prepare a minimal layout fix with regression steps; source cause remains unverified.",
+    "measurable_test": "Create two workspaces and return to list in Safari; each row remains fully visible without overlap, with required cross-platform regression checks."
+  },
+  "rejection_scope": "All five rejected on common access/testing prerequisites. Other four discussions not fetched; no assertion of allocation or accepted proposals.",
+  "sources": [
+    "products/research/bounty-expensify-candidates-corrected.json",
+    "products/research/bounty-expensify-contributing.md",
+    "products/research/bounty-104951-comments.json"
+  ],
+  "next_step": "Pivot to a concrete offline deliverable using existing link-checker: an auditable broken-link report from a small official public documentation page, with exact source links and reproducible observations. No crawl, publication or contact without permitted access."
+}
