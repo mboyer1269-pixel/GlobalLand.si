@@ -121,8 +121,8 @@ def parse_feed(data, feed_url, max_items=50):
         raise FeedError("empty_document", "response body is empty")
     if len(data) > MAX_BYTES:
         raise FeedError("too_large", "document exceeds %d bytes" % MAX_BYTES)
-    if _DTD.search(data):
-        raise FeedError("dtd_rejected", "DOCTYPE/ENTITY declarations are refused (entity expansion disabled)")
+    # No byte-level DOCTYPE scan: real feeds embed "<!DOCTYPE" inside CDATA HTML (github.blog does).
+    # Refusal happens in the expat DTD/entity hooks, which only fire on a real declaration.
     try:
         root = _parse_xml(data)
     except _Refused as e:

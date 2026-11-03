@@ -1,20 +1,33 @@
 {
  "actor": "rss-reader",
- "generated_at": "2026-11-03T01:34:01.075675+00:00",
+ "generated_at": "2026-11-03T01:34:17.906302+00:00",
  "python": "3.11.2",
  "scope": "Real execution of src/core.py on saved/handcrafted fixtures and a local 127.0.0.1 HTTP server. No live third-party feed was fetched in this run. src/main.py (Apify SDK wrapper) was byte-compiled only, never executed; no Apify build exists.",
- "passed": 19,
- "failed": 2,
+ "passed": 21,
+ "failed": 0,
  "tests": [
   {
    "name": "github_blog_saved_fixture",
-   "passed": false,
-   "detail": "AssertionError: [{'row_type': 'error', 'feed_url': 'https://github.blog/feed/', 'feed_title': None, 'feed_format': None, 'title': None, 'link': None, 'published': None, 'summary': None, 'guid': None, 'error_code': 'dtd_rejected', 'error': 'DOCTYPE/ENTITY declarations are refused (entity expansion disabled)'}]"
+   "passed": true,
+   "detail": {
+    "sha256": "3cefd3abd8b1a50b1c24dcff068c8705c91028d97ca4725b5f2e31663768f768",
+    "items": 10,
+    "feed_title": "The GitHub Blog",
+    "first": {
+     "title": "Game Off 2026: The theme is SHIFT",
+     "link": "https://github.blog/open-source/gaming/game-off-2026-the-theme-is-shift/",
+     "published": "2026-11-01T21:36:00+00:00",
+     "guid": "https://github.blog/?p=99918",
+     "summary": "GitHub’s annual month-long game jam is back for its 14th year! This November, make a game inspired b"
+    }
+   }
   },
   {
    "name": "max_items_cap",
-   "passed": false,
-   "detail": "AssertionError: 1"
+   "passed": true,
+   "detail": {
+    "rows": 2
+   }
   },
   {
    "name": "atom",
@@ -189,7 +202,7 @@
    "name": "stable_fields_all_rows",
    "passed": true,
    "detail": {
-    "rows_checked": 22,
+    "rows_checked": 31,
     "fields": [
      "row_type",
      "feed_url",
