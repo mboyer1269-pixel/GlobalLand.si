@@ -97,6 +97,12 @@ case("connection_refused", C("http://127.0.0.1:%d/" % DEAD, timeout=2), ok=False
 case("loopback_blocked_by_default", core.check_url(B + "/ok"), ok=False, error_code="blocked_address")
 case("private_10_blocked_by_default", core.check_url("http://10.0.0.1/"), ok=False, error_code="blocked_address")
 
+# Wait for the abandoned /slow handler (client timed out at 1s, server sleeps 3s) to finish.
+for _ in range(100):
+    if STATE["inflight"] == 0:
+        break
+    time.sleep(0.05)
+results.append({"name": "drain_before_concurrency", "passed": STATE["inflight"] == 0, "failures": [] if STATE["inflight"] == 0 else ["inflight=%d" % STATE["inflight"]]})
 STATE["max_inflight"] = 0
 urls = [B + "/delay%d" % i for i in range(6)] + [B + "/delay0"]
 t = time.monotonic(); rows = core.check_urls(urls, workers=8, allow_private=True); dt = time.monotonic() - t

@@ -1,9 +1,9 @@
 {
  "suite": "link-checker core (offline, 127.0.0.1 only)",
- "executed_at_unix": 1793671375,
+ "executed_at_unix": 1793671390,
  "python": "3.11.2",
- "passed": 19,
- "total": 20,
+ "passed": 21,
+ "total": 21,
  "scope_note": "Tests the stdlib core only. The Apify SDK wrapper (src/main.py) is not executed here.",
  "results": [
   {
@@ -11,8 +11,8 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/ok",
-    "final_url": "http://127.0.0.1:36269/ok",
+    "url": "http://127.0.0.1:41683/ok",
+    "final_url": "http://127.0.0.1:41683/ok",
     "status_code": 200,
     "redirect_count": 0,
     "ok": true,
@@ -26,14 +26,14 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/r1",
-    "final_url": "http://127.0.0.1:36269/ok",
+    "url": "http://127.0.0.1:41683/r1",
+    "final_url": "http://127.0.0.1:41683/ok",
     "status_code": 200,
     "redirect_count": 3,
     "ok": true,
     "error_code": null,
     "error": null,
-    "elapsed_ms": 5
+    "elapsed_ms": 3
    }
   },
   {
@@ -41,14 +41,14 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/rel",
-    "final_url": "http://127.0.0.1:36269/ok",
+    "url": "http://127.0.0.1:41683/rel",
+    "final_url": "http://127.0.0.1:41683/ok",
     "status_code": 200,
     "redirect_count": 1,
     "ok": true,
     "error_code": null,
     "error": null,
-    "elapsed_ms": 2
+    "elapsed_ms": 1
    }
   },
   {
@@ -56,8 +56,8 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/missing",
-    "final_url": "http://127.0.0.1:36269/missing",
+    "url": "http://127.0.0.1:41683/missing",
+    "final_url": "http://127.0.0.1:41683/missing",
     "status_code": 404,
     "redirect_count": 0,
     "ok": false,
@@ -71,8 +71,8 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/err",
-    "final_url": "http://127.0.0.1:36269/err",
+    "url": "http://127.0.0.1:41683/err",
+    "final_url": "http://127.0.0.1:41683/err",
     "status_code": 500,
     "redirect_count": 0,
     "ok": false,
@@ -86,8 +86,8 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/nohead",
-    "final_url": "http://127.0.0.1:36269/nohead",
+    "url": "http://127.0.0.1:41683/nohead",
+    "final_url": "http://127.0.0.1:41683/nohead",
     "status_code": 200,
     "redirect_count": 0,
     "ok": true,
@@ -101,8 +101,8 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/slow",
-    "final_url": "http://127.0.0.1:36269/slow",
+    "url": "http://127.0.0.1:41683/slow",
+    "final_url": "http://127.0.0.1:41683/slow",
     "status_code": null,
     "redirect_count": 0,
     "ok": false,
@@ -117,14 +117,14 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/loop-a",
-    "final_url": "http://127.0.0.1:36269/loop-a",
+    "url": "http://127.0.0.1:41683/loop-a",
+    "final_url": "http://127.0.0.1:41683/loop-a",
     "status_code": 301,
     "redirect_count": 2,
     "ok": false,
     "error_code": "redirect_loop",
     "error": "redirect loop after 2 redirects",
-    "elapsed_ms": 3
+    "elapsed_ms": 2
    }
   },
   {
@@ -132,14 +132,14 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/chain/0",
-    "final_url": "http://127.0.0.1:36269/chain/6",
+    "url": "http://127.0.0.1:41683/chain/0",
+    "final_url": "http://127.0.0.1:41683/chain/6",
     "status_code": 301,
     "redirect_count": 6,
     "ok": false,
     "error_code": "too_many_redirects",
     "error": "more than 5 redirects",
-    "elapsed_ms": 5
+    "elapsed_ms": 6
    }
   },
   {
@@ -147,7 +147,7 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/to-ftp",
+    "url": "http://127.0.0.1:41683/to-ftp",
     "final_url": "ftp://127.0.0.1/file",
     "status_code": null,
     "redirect_count": 1,
@@ -207,8 +207,8 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:49683/",
-    "final_url": "http://127.0.0.1:49683/",
+    "url": "http://127.0.0.1:53959/",
+    "final_url": "http://127.0.0.1:53959/",
     "status_code": null,
     "redirect_count": 0,
     "ok": false,
@@ -222,8 +222,8 @@
    "passed": true,
    "failures": [],
    "row": {
-    "url": "http://127.0.0.1:36269/ok",
-    "final_url": "http://127.0.0.1:36269/ok",
+    "url": "http://127.0.0.1:41683/ok",
+    "final_url": "http://127.0.0.1:41683/ok",
     "status_code": null,
     "redirect_count": 0,
     "ok": false,
@@ -248,12 +248,15 @@
    }
   },
   {
+   "name": "drain_before_concurrency",
+   "passed": true,
+   "failures": []
+  },
+  {
    "name": "same_host_concurrency_1_and_dedupe",
-   "passed": false,
-   "failures": [
-    "max_inflight=2 rows=6"
-   ],
-   "max_inflight": 2,
+   "passed": true,
+   "failures": [],
+   "max_inflight": 1,
    "rows": 6,
    "wall_s": 0.91
   },
