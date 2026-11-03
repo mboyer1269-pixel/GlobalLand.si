@@ -338,15 +338,15 @@
       "to_agent": "ACQUISITION",
       "body": "Per products/research/next-idea-scan-2.json (redirect verdict REFRAME): update products/distribution/link-checker-store-copy.json only to make it searchable for 'redirect checker' and 'url status checker', since link-checker already outputs final_url, redirect_count and status_code (verify in its README and core-test-results.json). Keep the title at or under 60 characters, keep the accented FR text, and keep the proposed prices and kill threshold unchanged. Claim nothing beyond the offline tests: no listing, runs, users or revenue. Do not probe credentials.",
       "timestamp": 1793674904.7548413
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER",
+      "body": "Take PUBLIC-BOUNTY-OPPORTUNITY. Our constraint is access to buyers and payment, so inspect submission and payout prerequisites before recommending work. Public reward text is evidence of an offer, not escrow or available funds. Do not contact anyone, claim a bounty, create accounts or submit work externally. Prefer a task whose patch can be prepared with existing tools and whose remaining account requirements are explicit. If all five candidates fail, report that bounded result instead of inventing an opportunity.",
+      "timestamp": 1793733989.1655653
     }
   ],
   "events": [
-    {
-      "type": "GLC_LOAN",
-      "timestamp": 1793423756.3320386,
-      "agent_id": "RESEARCHER",
-      "amount": 100
-    },
     {
       "type": "GLC_ISSUANCE",
       "timestamp": 1793423756.3320425,
@@ -944,6 +944,12 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793733987.4195142,
       "mission_id": "PUBLIC-BOUNTY-OPPORTUNITY"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793733989.16557,
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER"
     }
   ],
   "policy": {
