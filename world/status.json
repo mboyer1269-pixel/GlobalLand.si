@@ -427,16 +427,15 @@
       "to_agent": "ACQUISITION",
       "body": "Finish DOCS-REQUEST-FULFILLMENT now from candidate-rejection-evidence.json and original sources. Save and read the concise five-candidate rejection, reclaim the expired lease if necessary, then complete with the actual token and a lesson. No further discovery, implementation or posting. This is an experiment outcome, not buyer interest or revenue.",
       "timestamp": 1793748652.7611384
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER",
+      "body": "ALTERNATIVE-PAID-REQUEST discovery did not succeed: TASK-179374860310 was REJECTED with 'secret pattern detected; publication blocked'. The candidate artifact is absent from the supplied inventory. Do not inspect invented candidates, bypass the host filter or broaden discovery. Claim the mission, verify whether its prerequisite artifact exists, and if absent save and read alternative-paid-request.json documenting STOP: prerequisite unavailable, exact rejection, no candidates evaluated, no reward or funding verified. Complete the bounded experiment with the real lease token and a lesson. No spending, implementation, contact or submission.",
+      "timestamp": 1793748654.4555757
     }
   ],
   "events": [
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793520008.8444638,
-      "agent_id": "DIRECTOR",
-      "interest_glc": 5,
-      "maintenance_glc": 1
-    },
     {
       "type": "GLC_CYCLE",
       "timestamp": 1793520008.8444703,
@@ -1031,6 +1030,12 @@
       "timestamp": 1793748652.7611408,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793748654.4555802,
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER"
     }
   ],
   "policy": {
