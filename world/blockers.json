@@ -42,40 +42,28 @@
       "reports": 1,
       "opened_at": "2026-11-03T20:01:26Z",
       "last_reported_at": "2026-11-03T20:01:26Z"
-    },
-    {
-      "id": "SYSTEM-NO-PROGRESS",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "3 tours consécutifs sans résultat vérifiable",
-      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CSV-ACTOR-LAUNCH, LINK-CHECK-LAUNCH, PUBLIC-DOCS-REPAIR, RSS-ACTOR-LAUNCH, WORLD-FIRST-REVENUE.",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 3,
-      "opened_at": "2026-11-03T19:26:59Z",
-      "last_reported_at": "2026-11-03T20:01:22Z"
     }
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 3,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-03T19:26:59Z",
-    "turns_without_outcome": 4,
+    "stalled_since": null,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-03T19:26:25Z",
-    "last_outcome_turn": "THINK-1793676602",
-    "last_productive_turn": "THINK-1793733956",
-    "last_turn": "THINK-1793736002",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1793737802",
+    "last_productive_turn": "THINK-1793737802",
+    "last_turn": "THINK-1793737802",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "PUBLIC-BOUNTY-OPPORTUNITY"
+      ],
       "new_products": [],
       "new_product_count": 0,
-      "new_research_count": 3,
+      "new_research_count": 1,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
