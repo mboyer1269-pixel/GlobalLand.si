@@ -168,9 +168,9 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "BUILDER",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "CtWQa4ihzqiuSs3fOUjVQ2fSmWeunQBS",
+      "lease_expires_at": 1793671246.5841537,
       "evidence": []
     }
   ],
@@ -691,6 +691,12 @@
       "timestamp": 1793665978.0703356,
       "from_agent": "DIRECTOR",
       "to_agent": "BUILDER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793667646.5841749,
+      "mission_id": "RSS-ACTOR-BUILD",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
