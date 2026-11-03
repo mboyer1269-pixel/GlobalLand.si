@@ -49,22 +49,28 @@
     "stalled_turns": 0,
     "threshold": 3,
     "stalled_since": null,
-    "turns_without_outcome": 1,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-03T21:01:29Z",
-    "last_outcome_turn": "THINK-1793737802",
-    "last_productive_turn": "THINK-1793739604",
-    "last_turn": "THINK-1793739604",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1793741402",
+    "last_productive_turn": "THINK-1793741402",
+    "last_turn": "THINK-1793741402",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/docs-repair/requests-CONTRIBUTING.md",
-        "products/services/docs-repair/requests-LICENSE.txt",
-        "products/services/docs-repair/requests-README.original.md"
+      "outcome": true,
+      "mission_outcomes": [
+        "PUBLIC-DOCS-REPAIR"
       ],
-      "new_product_count": 3,
+      "new_products": [
+        "products/services/docs-repair/fixture-results.json",
+        "products/services/docs-repair/link-evidence.json",
+        "products/services/docs-repair/replay_evidence.py",
+        "products/services/docs-repair/requests-AI_POLICY.md",
+        "products/services/docs-repair/requests-contributor-guide.html",
+        "products/services/docs-repair/requests-documentation.html",
+        "products/services/docs-repair/service-sample.md"
+      ],
+      "new_product_count": 7,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
