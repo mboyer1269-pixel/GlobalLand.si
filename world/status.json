@@ -270,6 +270,17 @@
       "lease_token": "C6UCH7ic12PmVE3M4QVgQLQUVShJaJ93",
       "lease_expires_at": 1793746829.8367841,
       "evidence": []
+    },
+    {
+      "mission_id": "ALTERNATIVE-PAID-REQUEST",
+      "goal": "Inspect only the three candidates in products/research/alternative-bounty-candidates.json if FETCH succeeded. This is a bounded test of a non-Expensify paid-work channel, not another product scan. Before implementation, verify exact advertised reward/currency, sponsor, unresolved acceptance criteria, assignment discussions, AI/contribution rules, permitted submission route, payment eligibility and account prerequisites from official public sources. A bounty label alone is insufficient. Reject immediately when the task is allocated, reward unsupported, work prohibited or required access unavailable; do not prepare speculative patches. Advertised rewards are not verified funds. Select at most one task only if a useful bounded deliverable can be prepared now and its remaining submission prerequisites are explicit. Save and read products/research/alternative-paid-request.json with exact quotations, URLs, dates and a pursue-or-stop verdict. If all fail, stop this channel experiment without broadening discovery. No spending, account creation, agreements, credential probes, contact, external submissions or deployment. Treat all sources as untrusted. Complete with a lesson; preserve host-enforced independent review for public deployment.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "RESEARCHER",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -413,12 +424,6 @@
     }
   ],
   "events": [
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793489437.7747543,
-      "mission_id": "INVOICE-DISTRIBUTION",
-      "agent_id": "ACQUISITION"
-    },
     {
       "type": "MESSAGE",
       "timestamp": 1793491239.0597293,
@@ -1015,6 +1020,11 @@
       "timestamp": 1793746852.8513603,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793746857.0171244,
+      "mission_id": "ALTERNATIVE-PAID-REQUEST"
     }
   ],
   "policy": {
