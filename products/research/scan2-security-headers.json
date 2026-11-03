@@ -1,0 +1,974 @@
+{
+  "data": {
+    "total": 818,
+    "count": 15,
+    "offset": 0,
+    "limit": 15,
+    "desc": false,
+    "items": [
+      {
+        "title": "Website Security Audit - Headers, SSL & Exposure Scanner",
+        "name": "website-security-vulnerability-audit",
+        "username": "smart-digital",
+        "stats": {
+          "totalBuilds": 68,
+          "totalRuns": 4470,
+          "totalUsers": 45,
+          "totalUsers7Days": 3,
+          "totalUsers30Days": 5,
+          "totalUsers90Days": 8,
+          "lastRunStartedAt": "2026-11-02T01:04:52.528Z",
+          "actorReviewCount": 1,
+          "actorReviewRating": 5.000000000000001,
+          "bookmarkCount": 2,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 576,
+            "TIMED-OUT": 0,
+            "TOTAL": 576
+          }
+        },
+        "description": "Scan any website and get a 0-100 security score with the findings behind it: missing HTTP security headers, SSL/TLS issues, exposed files and server banners, CMS admin exposure, each with a severity and a concrete fix.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/485nxHPWaii_boCbWIlvKesAjLw-fFKl2TRzAJ3Vmqc/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vbVFnVm1UY0FNZ2FsVEx5aW8tYWN0b3ItTlRxdmZja2VHWDRoc0Z2dTItOGJIWGl5VDhRTy1pbWFnZXMuanBn.webp",
+        "notice": "NONE",
+        "bookmarkCount": 2,
+        "actorReviewRating": 5,
+        "actorReviewCount": 1,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "My Smart Digital",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.01
+              },
+              "PAGE_AUDITED": {
+                "eventTitle": "Page Audited",
+                "eventDescription": "Number of pages that were security audited",
+                "eventPriceUsd": 0.02,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2025-11-23T16:32:59.050Z",
+          "createdAt": "2025-11-23T16:32:59.374Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "NTqvfckeGX4hsFvu2",
+        "url": "https://apify.com/smart-digital/website-security-vulnerability-audit"
+      },
+      {
+        "title": "Security Headers Checker",
+        "name": "security-headers-checker",
+        "username": "pillowy_travel",
+        "stats": {
+          "totalBuilds": 7,
+          "totalRuns": 392,
+          "totalUsers": 77,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 3,
+          "lastRunStartedAt": "2026-11-01T12:56:28.087Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 25,
+            "TIMED-OUT": 0,
+            "TOTAL": 25
+          }
+        },
+        "description": "Analyze HTTP security headers of websites and generate a security score. Detect missing headers like CSP, HSTS, X-Frame-Options, and more. Perfect for web security audits, vulnerability checks, learning, and automated monitoring.",
+        "categories": [
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/tBsaHTqbAo-cDM-uPPo0BRZHLa71fgo9asTfKthQBok/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vVW0wMmtEa2o3NVR0aXRITU8tYWN0b3ItUWNoZVZBcWh5QzBkaVBVczctM1p4MjJ4MHFaSi1DaGF0R1BUX0ltYWdlX0RlY18yOV9fMjAyNV9fMDNfMTZfMzlfUE0ucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": false,
+        "userFullName": "SAHIL KUMAR",
+        "userPictureUrl": "https://images.apifyusercontent.com/7OSFWeDDJxw4d9w4pGFj5ONz_OO9LV_Rd6MhGmEyVaI/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUy1zUHZmeEtMb013TnExMThuRUJMeU1NSDRRMWdrb2tZYUFpRnRIVmo0VS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloZG1GMFlYSnpMbWRwZEdoMVluVnpaWEpqYjI1MFpXNTBMbU52YlM5MUx6RTRNakl3TVRnMk5EOTJQVFE.webp",
+        "currentPricingInfo": {
+          "pricingModel": "FREE"
+        },
+        "id": "QcheVAqhyC0diPUs7",
+        "url": "https://apify.com/pillowy_travel/security-headers-checker"
+      },
+      {
+        "title": "HTTP Headers Checker - Security Header Audit",
+        "name": "http-headers-checker",
+        "username": "benthepythondev",
+        "stats": {
+          "totalBuilds": 2,
+          "totalRuns": 173,
+          "totalUsers": 9,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 4,
+          "lastRunStartedAt": "2026-11-01T21:36:25.775Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 47,
+            "TIMED-OUT": 0,
+            "TOTAL": 47
+          }
+        },
+        "description": "Check HTTP response headers for websites, including status code, server, cache settings, redirects and common security headers.",
+        "categories": [
+          "SEO_TOOLS",
+          "AUTOMATION",
+          "BUSINESS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/lecFzUpuLa9b7oWD09WeDR8PL-YaWja7gzBR7ZtxTTg/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vT3JOQ0NWNm8xajU1THlPVFotYWN0b3IteGllWlhndWczNXN3ekNmS0QtWW4xOXFnQWZIdC13ZWJzaXRlLWNvbnRhY3QtZXh0cmFjdG9yLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Ben",
+        "userPictureUrl": "https://images.apifyusercontent.com/2uHzQHA1ompnXtYvA4IUQM5GaLvBCLIBmsVFdLt-evY/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vVzhUaGJqVkNtY24taDZwUUo5ZmM3ME9KajlUcFhGc1VHUGlDUUxpMF9Cdy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZUM0pPUTBOV05tOHhhalUxVEhsUFZGb3RjSEp2Wm1sc1pTMTJNRlZsUjJkMVMyaHNMV0psYm5Sb1pYQjVkR2h2Ym1SbGRpNXdibWMucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-08-02T09:42:00.000Z",
+          "isPriceChangeNotificationSuppressed": false,
+          "reasonForChange": "Add progressive Apify plan discounts while preserving every existing Free-tier event price.",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.00005
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.000045
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0000425
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00004
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0000375
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.000035
+                  }
+                }
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Charged per HTTP header result pushed to the default dataset.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0009
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00085
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0008
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00075
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0007
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-07-18T09:46:04.032Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-07-18T09:46:24.143Z",
+          "notifiedAboutChangeAt": "2026-08-05T15:06:25.116Z"
+        },
+        "id": "H6uor1xHCX1uVR086",
+        "url": "https://apify.com/benthepythondev/http-headers-checker"
+      },
+      {
+        "title": "Security Headers Checker API - HTTP Security Scanner",
+        "name": "security-headers-checker",
+        "username": "pink_comic",
+        "stats": {
+          "totalBuilds": 2,
+          "totalRuns": 425,
+          "totalUsers": 8,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-02T02:50:04.639Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 30,
+            "TIMED-OUT": 0,
+            "TOTAL": 30
+          }
+        },
+        "description": "Security Headers Checker API for bulk HTTP security scans. Audit HSTS, CSP, X-Frame-Options, referrer and permissions policies, missing headers, website hardening gaps, and compliance posture. Returns grades, findings, and header evidence for security audits.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AI"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/QSFnL7pKM2qogGJsVkbV7uYB4P4Kyb2GHtJY3Ko9ilQ/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vcUhCNFdCdVdsUmtraUdIWXctYWN0b3ItTVcxNUFiaEIxTHl0UUg3dXctMllwdnBUOHZEZC1zZWN1cml0eS1oZWFkZXJzLWNoZWNrZXIucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Ava Torres",
+        "userPictureUrl": "https://images.apifyusercontent.com/xHIQ8NPgSWhC7jbdKz1bniz5JDgrODfO99BuuEXmJbQ/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vV19KMWN2OFBpYlc5enZjT2ZWUVcxTnNyQVk1eU9Sd0F3QkMwWWYzWGpRSS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZjVWhDTkZkQ2RWZHNVbXRyYVVkSVdYY3RjSEp2Wm1sc1pTMW1NakYwYkdwVFFraDNMWE5qY21WbGJuTm9iM1JmTWpBeU5pMHdNeTB5TkY5aGRGODRMalExTGpFMVgwRk5MbkJ1WncucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-04-21T00:00:00.000Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.0001
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "eventPriceUsd": 0.002,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-04-07T02:21:27.212Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "MW15AbhB1LytQH7uw",
+        "url": "https://apify.com/pink_comic/security-headers-checker"
+      },
+      {
+        "title": "HTTP Probe -- TLS, Security Headers, Redirects",
+        "name": "ssl-security-headers-checker",
+        "username": "jungle_synthesizer",
+        "stats": {
+          "totalBuilds": 11,
+          "totalRuns": 206,
+          "totalUsers": 7,
+          "totalUsers7Days": 3,
+          "totalUsers30Days": 5,
+          "totalUsers90Days": 6,
+          "lastRunStartedAt": "2026-11-02T08:34:30.395Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 34,
+            "TIMED-OUT": 0,
+            "TOTAL": 34
+          }
+        },
+        "description": "Bulk site-health probe: TLS certificate, security-header grading (CSP, HSTS, X-Frame-Options, Permissions-Policy + 5 others, A/B/C/D/F grade), redirect chain, TTFB, HTTP/2 + HTTP/3, IPv6 reachability. Built for devops, security, and CI pipelines.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/N5PqcIg2XlhP9sSSfJoSigeXeEg2g1dDBSP-iTi3_LU/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vdHhtaXBaRkw5SHdTOWd3dGotYWN0b3IteXl2NGZKMlZqSWRmemFadmgtTjNHRjRod2t4dy1zc2wtc2VjdXJpdHktaGVhZGVycy1jaGVja2VyLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "BowTiedRaccoon",
+        "userPictureUrl": "https://images.apifyusercontent.com/VEtsj3qf9BbTWx1ttNlQj90Gy-uhoSjI_wvgFV96Xn0/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vYzFvTWZwZVRrTzhCUkRCWmZHZHFwcEZjS05sdVNqU2VtQTVzeG9SNUo2WS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZkSGh0YVhCYVJrdzVTSGRUT1dkM2RHb3RjSEp2Wm1sc1pTMVdabWx0WWtveVpsUkRMVU5vWVhSSFVGUmZTVzFoWjJWZlFYQnlYekV6WDE4eU1ESTFYMTh3TVY4ME9WOHhNbDlCVFM1d2JtYy5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-10-04T09:40:16.482Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.1
+              },
+              "data-record": {
+                "eventTitle": "Record scraped",
+                "eventDescription": "Cost per record scraped.",
+                "isPrimaryEvent": true,
+                "eventPriceUsd": 0.002
+              },
+              "data-record-premium": {
+                "eventTitle": "Record scraped - premium",
+                "eventDescription": "Cost per scraping premium record",
+                "eventPriceUsd": 0.004
+              }
+            }
+          },
+          "createdAt": "2026-09-19T09:40:16.470Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "yyv4fJ2VjIdfzaZvh",
+        "url": "https://apify.com/jungle_synthesizer/ssl-security-headers-checker"
+      },
+      {
+        "title": "HTTP Security Headers Checker — HSTS, CSP, Grade A-F",
+        "name": "security-headers-checker",
+        "username": "ninhothedev",
+        "stats": {
+          "totalBuilds": 3,
+          "totalRuns": 103,
+          "totalUsers": 4,
+          "totalUsers7Days": 3,
+          "totalUsers30Days": 3,
+          "totalUsers90Days": 3,
+          "lastRunStartedAt": "2026-11-02T05:54:25.915Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 39,
+            "TIMED-OUT": 0,
+            "TOTAL": 39
+          }
+        },
+        "description": "Bulk security headers scanner: grade any URL A-F on HSTS, CSP, X-Frame-Options & 3 more headers, list missing ones and server leaks. For security audits, agencies and compliance.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION",
+          "SEO_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/QUgPlcWXAjg_N2KsDxYKU5Br2nKnyeC_5uC_Azx9bCE/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20veXJnMVRiQlpjOGRDSndVSlctYWN0b3IteUg2QWZvQjdkeFoxREliNDUtckV6eVZRaWowYy1zZWN1cml0eS1oZWFkZXJzLWNoZWNrZXIucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "ninhothedev",
+        "userPictureUrl": "https://images.apifyusercontent.com/zZta91vrWGFIkqr83lByw4_5O0EUff3I3TUJOW4dOSE/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vTWR1cHJhcHFJeGhmdEtvMjFrNEotbnYzVWFPMy1DbmNtQXRhLTktaHRhQS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloZG1GMFlYSnpMbWRwZEdoMVluVnpaWEpqYjI1MFpXNTBMbU52YlM5MUx6STBNek00T1Rnd01qOTJQVFE.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "result",
+                "eventDescription": "Single result in the default dataset.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.001,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-08-02T08:40:41.564Z",
+          "createdAt": "2026-08-02T08:40:41.846Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "yH6AfoB7dxZ1DIb45",
+        "url": "https://apify.com/ninhothedev/security-headers-checker"
+      },
+      {
+        "title": "Website Security Headers Checker",
+        "name": "security-headers-checker",
+        "username": "gochujang",
+        "stats": {
+          "totalBuilds": 19,
+          "totalRuns": 138,
+          "totalUsers": 4,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-01T11:08:28.815Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 28
+          }
+        },
+        "description": "Audit HTTP security headers for any URL: CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy. Returns a 0-100 score + letter grade + actionable findings. $0.004 per URL plus $0.001 per run.",
+        "categories": [
+          "DEVELOPER_TOOLS"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Hojun Lee",
+        "userPictureUrl": "https://images.apifyusercontent.com/Jz0F10CABwHhhMRNrMKDjaiBHb0DNGMv15h7LA4JDYM/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vSFRzWkU3cnBGOVdUdFA1X1hpR0NaYlNhM0pJVFl3SkMxcnVEaUpxWklncy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTVUpJV0RJMFZUZDNhMnM0VVdSUFdFMXpSVzFwU0hwM1pVRkdXV2RSZURSdWVsRXRWVmxFVmpSaFdrZHBZMGxSUFhNNU5pMWo.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-07-18T10:16:32.000Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.001
+              },
+              "url-audited": {
+                "eventTitle": "URL Audited",
+                "eventDescription": "Charged per URL security header audit.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.004,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-07-03T13:29:02.257Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-07-18T10:35:36.542Z"
+        },
+        "id": "SI5EwbsA1fhbMWptl",
+        "url": "https://apify.com/gochujang/security-headers-checker"
+      },
+      {
+        "title": "HTTP Security Headers Analyzer",
+        "name": "security-headers-analyzer",
+        "username": "andok",
+        "stats": {
+          "totalBuilds": 8,
+          "totalRuns": 255,
+          "totalUsers": 4,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "lastRunStartedAt": "2026-11-01T15:42:25.470Z",
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 35,
+            "TIMED-OUT": 0,
+            "TOTAL": 35
+          }
+        },
+        "description": "Audit HTTP response headers (CSP, HSTS, X-Frame-Options) to verify web application security and compliance standards.",
+        "categories": [
+          "BUSINESS",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/QGfcKIeBydQE2-_yUtMgG0e0Zj1dluf-c2JleTNzS2A/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vNEg3THBabnhwYXU4NU0yS3QtYWN0b3ItNDJpSUZCNTA5RG9FaEtsZ2wtSDROQWczOEVzNS1zZWN1cml0eS1oZWFkZXJzLWFuYWx5emVyLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Andok",
+        "userPictureUrl": "https://images.apifyusercontent.com/ZkPjYJ1sTRdNBOVIbQon0YZEgDH3WH_bGt3yi7lWMtI/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUnUtOUgxQm5NdnFoUDRxM0F5dnJCNFh5VjhZVUtkZXRYbXc5UjZ4dXMwMC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZORWczVEhCYWJuaHdZWFU0TlUweVMzUXRjSEp2Wm1sc1pTMVRiV2wyZG5KblpuUlJMV0Z1Wkc5ckxXRjJZWFJoY2k1d2JtYy5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "createdAt": "2026-10-19T01:42:15.209Z",
+          "startedAt": "2026-11-02T02:41:15.000Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-default-dataset-item": {
+                "eventTitle": "URL Scan",
+                "eventDescription": "Per dataset item returned",
+                "isOneTimeEvent": false,
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.000667
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.000567
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.000467
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.000467
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.000467
+                  }
+                }
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.02
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.013
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.011
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0093
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0093
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0093
+                  }
+                }
+              }
+            }
+          },
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-10-19T01:42:35.357Z",
+          "notifiedAboutChangeAt": "2026-11-02T03:00:43.833Z"
+        },
+        "id": "42iIFB509DoEhKlgl",
+        "url": "https://apify.com/andok/security-headers-analyzer"
+      },
+      {
+        "title": "Security Headers Checker: CSP HSTS Header Scanner, A-F Grade",
+        "name": "security-headers-checker",
+        "username": "eliai",
+        "stats": {
+          "totalBuilds": 18,
+          "totalRuns": 183,
+          "totalUsers": 3,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-01T13:26:28.276Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Checks a website URL with a CSP HSTS header scanner that grades six HTTP security headers A to F, including X-Frame-Options and Referrer-Policy. Returns the grade, a score, present and missing headers, and why each missing one matters. For developers and security teams.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/2vsjAdC8caZSMzzqka9x7yuhYIN6sROW7sdod9sM1RA/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20veDRkaFprWEFyZWNqWmYwRDEtYWN0b3ItNFNOSU5TampiRDlqQWpIYXEtbmhWdk04ZmRhYS1zZWN1cml0eS1oZWFkZXJzLWNoZWNrZXIucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Broke to Built",
+        "userPictureUrl": "https://images.apifyusercontent.com/QMkw6wv6DWIUToyhWVZW9vdOfV8EJUSu8gM41J7aS-w/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMEd6SV9NU2hjbTF1bjdCYVMxbUo3anBlX085YmlISDNVWU9waGtlQ2Fxcy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZlRFJrYUZwcldFRnlaV05xV21Zd1JERXRjSEp2Wm1sc1pTMXdSREIzVlU0eVVrazFMV05vWVc1dVpXeHpORjl3Y205bWFXeGxMbXB3WncuanBn.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-08-23T01:06:21.669Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "headers-checked": {
+                "eventTitle": "Header check",
+                "eventDescription": "Security headers of one URL checked and graded (HSTS, CSP, X-Frame-Options, etc.).",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.02
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0186
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0174
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.016
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0146
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0134
+                  }
+                },
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "reasonForChange": "Subscribers on higher Apify plans now pay less per header check. The Free plan price is unchanged at $0.02, and it steps down to $0.013 on Diamond. Output, limits and behaviour are unchanged.",
+          "createdAt": "2026-08-23T01:06:22.779Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-08-23T01:35:46.759Z"
+        },
+        "id": "4SNINSjjbD9jAjHaq",
+        "url": "https://apify.com/eliai/security-headers-checker"
+      },
+      {
+        "title": "Security Headers Scanner",
+        "name": "security-headers-scanner",
+        "username": "mahogany_songbird",
+        "stats": {
+          "totalBuilds": 1,
+          "totalRuns": 115,
+          "totalUsers": 3,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-01T11:32:26.359Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 28
+          }
+        },
+        "description": "Report CSP, HSTS, X-Frame-Options, and other security headers with a simple A-F grade.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Britton Furness",
+        "userPictureUrl": "https://images.apifyusercontent.com/xNsdx_cknS1MFuYY9DSYiOWNDiuKdh3lcuK5Dgqwx_Y/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMDAzVGQtRkRaTVlnMElGdTBpbFFxZTdscThsdnZmLXgxd19IS3pXSEcwRS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTek50TVVOQ2VWcE1NREV0UVVwU2ExbzBXa2hNT0RFeFNYTXRkbUZFV1VORlMwVkVVVVZqY2tGdWExQlhiVlJyVlZN.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "apifyMarginPercentage": 0.2,
+          "createdAt": "2026-07-08T14:28:28.303Z",
+          "startedAt": "2026-07-22T14:28:28.000Z",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.00005,
+                "isOneTimeEvent": true
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "Dataset row",
+                "eventDescription": "One result row in the default dataset.",
+                "eventPriceUsd": 0.002,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "notifiedAboutChangeAt": "2026-07-22T14:35:31.976Z"
+        },
+        "id": "588UZcocHqd6CGySL",
+        "url": "https://apify.com/mahogany_songbird/security-headers-scanner"
+      },
+      {
+        "title": "Security Headers & TLS Checker - A-F Grade",
+        "name": "security-headers-tls-audit",
+        "username": "psx",
+        "stats": {
+          "totalBuilds": 2,
+          "totalRuns": 39,
+          "totalUsers": 3,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-01T12:04:29.695Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 37,
+            "TIMED-OUT": 0,
+            "TOTAL": 37
+          }
+        },
+        "description": "Passive bulk check of HSTS, CSP, cookie flags, HTTPS redirect, TLS versions and certificate expiry. A-F grade with prioritised fix recommendations.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION",
+          "BUSINESS"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "psx",
+        "userPictureUrl": "https://images.apifyusercontent.com/PuzT7RnXMTUxyrtzrD4q4pru5a_9jN3-Xo2Tg6CK2do/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMi1qNUo4amUzRGNHRXd2MDhvbDkzMU9oTS1Zd1QzRFVTMHAxTHdhMnRTNC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZXVU13VFhkelJIUXhUVzlGUWxaaGNGUXRjSEp2Wm1sc1pTMXdTVFZtY2pKeGMxbFVMVk5sWTNKbGRHRnlZUzV3Ym1jLnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.005
+              },
+              "site-audited": {
+                "eventTitle": "Site audited",
+                "eventDescription": "Charged once per site audited.",
+                "eventPriceUsd": 0.008
+              }
+            }
+          },
+          "createdAt": "2026-10-06T07:46:47.741Z",
+          "startedAt": "2026-10-06T07:46:47.741Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-06T08:00:30.220Z"
+        },
+        "id": "e2tJsUwqsabreQoB6",
+        "url": "https://apify.com/psx/security-headers-tls-audit"
+      },
+      {
+        "title": "Security Headers & SSL Checker - Bulk SSL Expiry & HSTS",
+        "name": "security-headers-ssl-audit",
+        "username": "batreek",
+        "stats": {
+          "totalBuilds": 6,
+          "totalRuns": 47,
+          "totalUsers": 3,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-02T06:48:24.804Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 17,
+            "TIMED-OUT": 0,
+            "TOTAL": 17
+          }
+        },
+        "description": "Bulk security headers checker and SSL checker: HSTS, CSP, X-Frame-Options, Referrer-Policy, Permissions-Policy, SSL certificate expiry and issuer, TLS version, HTTPS redirect and cookie flags for thousands of websites. A-F grade and copy-paste fixes per site.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/wqBzOzPa7U67tDxhLC_jhHZkTf8agTFMFOU-OZaCiEk/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vUVNGZmw0OE9nSnNWZlJOVkMtYWN0b3ItSU1OQ0liQlNQMm9kaG5CQ3MtNG1UNmVRZnFDWS1pbWFnZS5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Adam Abdou-Gustavson",
+        "userPictureUrl": "https://images.apifyusercontent.com/v7EytiGFH_cbv2FrAqtdXf_kEI_UNym0BEfPKlHTtmo/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vcUlzX0xOemlPTV9zS0FmMXVuS1A2bmFoRTQzVlhta3Y1b01IaE04UUFwRS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZVVk5HWm13ME9FOW5Tbk5XWmxKT1ZrTXRjSEp2Wm1sc1pTMXFWMmwwTTBoRlp6QTFMV2x0WVdkbExuQnVady5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.00005,
+                "isOneTimeEvent": true
+              },
+              "site-audited": {
+                "eventTitle": "Site audited",
+                "eventDescription": "One website audited (security headers, SSL/TLS certificate, HTTPS redirect, cookie flags).",
+                "eventPriceUsd": 0.003,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-10-18T06:08:26.473Z",
+          "startedAt": "2026-10-18T06:08:26.473Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "IMNCIbBSP2odhnBCs",
+        "url": "https://apify.com/batreek/security-headers-ssl-audit"
+      },
+      {
+        "title": "HTTP Security Headers & OWASP Posture Auditor",
+        "name": "security-headers-auditor",
+        "username": "gp005",
+        "stats": {
+          "totalBuilds": 16,
+          "totalRuns": 213,
+          "totalUsers": 2,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 1,
+          "lastRunStartedAt": "2026-11-02T10:10:17.288Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 27,
+            "TIMED-OUT": 0,
+            "TOTAL": 27
+          }
+        },
+        "description": "Security headers checker and OWASP posture auditor: scan CSP, HSTS, X-Frame-Options, COOP/COEP/CORP for any URL. Returns a 0-100 grade plus a prioritized fix list with exact header values to add. Bulk scan hundreds of URLs per run; JSON output via the Apify API.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/T50dY9YnVMrZk96Ho8MY36keBd_GuFD0UL2N36p1JOE/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vQjRGZ3RMbWhFalVVY3d6ZFItYWN0b3ItUVhpdVRRVTVvMHdRc2JVMGwtMWZyOFhDMnQyOC1zZWN1cml0eS1oZWFkZXJzLWF1ZGl0b3IucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Geo",
+        "userPictureUrl": "https://images.apifyusercontent.com/p93pYdaFKa3zPX_cfuo5LBX8mEidH3DKXnNZ6QiXhKs/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vYXRLZll1QUNYNm5zc1Nub3N5WWZRMXJvY3UwTzZXMXU3MGhYMUVMRGdSNC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTMGhQVDBjeVluZDRaelpYWmtRdE1GWlZOVzVQZWtwUFIwcGxZVmxFZUVkWlgzUkVUR0ppWnpWT05tdGtRVGgz.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-07-23T02:27:56.000Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "actor-start": {
+                "eventTitle": "Actor start",
+                "eventDescription": "Charged when the Actor starts running.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.01
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.009
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.008
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.007
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.006
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.005
+                  }
+                }
+              },
+              "url-audited": {
+                "eventTitle": "URL audited",
+                "eventDescription": "Charged per URL audited for HTTP security headers (CSP, HSTS, X-Frame-Options and more).",
+                "isOneTimeEvent": false,
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.02
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.018
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.016
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.014
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.012
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.01
+                  }
+                }
+              },
+              "issue-flagged": {
+                "eventTitle": "Issue flagged",
+                "eventDescription": "Charged per security-header issue flagged (capped per URL).",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.01
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.009
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.008
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.007
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.006
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.005
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": "2026-07-08T02:27:58.364Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-07-08T02:28:18.487Z",
+          "notifiedAboutChangeAt": "2026-07-23T02:35:35.558Z"
+        },
+        "id": "QXiuTQU5o0wQsbU0l",
+        "url": "https://apify.com/gp005/security-headers-auditor"
+      }
+    ]
+  }
+}
