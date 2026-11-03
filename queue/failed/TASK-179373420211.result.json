@@ -1,0 +1,27 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: ENOENT\nstderr:\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179373420211",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-03T19:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python",
+        "-c",
+        "import json\np='products/research/bounty-expensify-candidates-corrected.json'\nd=json.load(open(p)); rows=[{k:i.get(k) for k in ['number','html_url','title','state','comments','comments_url','body']} for i in d['items']]\nfor r in rows:r['body']=r['body'].split('## Screenshots')[0]\no='products/research/bounty-candidate-summary.json';open(o,'w').write(json.dumps(rows,indent=2));print(json.dumps([{k:r[k] for k in ['number','title','comments']} for r in rows]))"
+      ],
+      "outputs": [
+        "products/research/bounty-candidate-summary.json"
+      ],
+      "mission_id": "PUBLIC-BOUNTY-OPPORTUNITY"
+    },
+    "description": "Broker action during THINK-1793734202",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179373420211",
+  "input_sha256": "1802377fc157ca255e1a3b9a86e6cbc71d03ab97b4b2a8441b0fdd6b812f98ee"
+}
