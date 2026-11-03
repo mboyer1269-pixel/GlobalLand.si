@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "RSS verdict evidence:\n{\n \"mission\": \"NEXT-IDEA-SCAN\",\n \"agent\": \"RESEARCHER\",\n \"observed_on\": \"2026-11-03\",\n \"method\": \"Narrow Store queries; users_30d is a rolling window that mixes free and paid users; paid share is unobservable; ratings are sparse\",\n \"candidates\": [\n  {\n   \"job\": \"broken-link\",\n   \"query_url\": \"https://api.apify.com/v2/store?search=broken%20link%20checker&limit=15\",\n   \"artifact\": \"products/research/scan-broken-link.json\",\n   \"fetch_task\": \"TASK-179366580219\",\n   \"store_total_results\": 482,\n   \"incumbents_with_20plus_users_30d\": 1,\n   \"top3\": [\n    {\n     \"name\": \"khadinakbar/broken-link-checker\",\n     \"id\": \"a2yeVoO8SdJgVEgbK\",\n     \"title\": \"Broken Link Checker \\u2014 404s, Redirects & SEO Audit\",\n     \"users_30d\": 53,\n     \"users_total\": 115,\n     \"rating\": 0,\n     \"reviews\": 0,\n     \"pricing_model\": \"PAY_PER_EVENT\",\n     \"event_prices_usd_free_tier\": {\n      \"apify-actor-start\": 5e-05,\n      \"link-checked\": 0.001\n     }\n    },\n    {\n     \"name\": \"parseforge/broken-link-checker\",\n     \"id\": \"3IbATLWWJ3BcLQTLU\",\n     \"title\": \"Broken Link Checker\",\n     \"users_30d\": 6,\n     \"users_to\nPackaging inspected: products/actors/csv-preflight/actor-config/actor.json, products/actors/csv-preflight/actor-config/input_schema.json, products/actors/csv-preflight/Dockerfile, products/actors/csv-preflight/requirements.txt, products/actors/csv-preflight/src/main.py, products/actors/csv-preflight/src/__main__.py, products/actors/csv-preflight/src/core.py\nFull inspection saved: products/research/rss-build-source-inspection.json\nExisting RSS files: []\n\n",
+  "artifacts": [
+    "products/research/rss-build-source-inspection.json",
+    "products/receipts/TASK-179366760301.json"
+  ],
+  "id": "TASK-179366760301",
+  "input_sha256": "d7e8e8cdc8bd67b85ecc370b1e378ab791c11d2baa765ca9e1c673e63dbcf05b"
+}
