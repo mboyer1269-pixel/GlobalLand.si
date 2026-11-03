@@ -35,23 +35,25 @@
     "stalled_turns": 0,
     "threshold": 3,
     "stalled_since": null,
-    "turns_without_outcome": 0,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-03T19:26:25Z",
     "last_outcome_turn": "THINK-1793676602",
-    "last_productive_turn": "THINK-1793676602",
-    "last_turn": "THINK-1793676602",
+    "last_productive_turn": "THINK-1793733956",
+    "last_turn": "THINK-1793733956",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "INVOICE-DISTRIBUTION",
-        "INVOICE-PRODUCT"
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [
+        "products/actors/link-checker/src/public_http.py",
+        "products/actors/link-checker/wrapper-smoke-results.json",
+        "products/actors/rss-reader/src/public_http.py",
+        "products/actors/rss-reader/wrapper-smoke-results.json"
       ],
-      "new_products": [],
-      "new_product_count": 0,
-      "new_research_count": 7,
-      "rewritten_count": 0,
+      "new_product_count": 4,
+      "new_research_count": 0,
+      "rewritten_count": 9,
       "revenue_gain_cents": 0
     }
   }
