@@ -1,5 +1,7 @@
 # Instructions de travail — GlobalLand autonome
 
+Pour notre travail de conception, de code et de conférence avec le fondateur, lire et appliquer d'abord le [mandat commun de développement](docs/MANDAT-DEVELOPPEMENT.md). Préserver le choix stratégique des agents ; ne pas transformer une plateforme comme Apify en objectif imposé. Ce cadre concerne les assistants de développement et ne configure pas le VPS. Faire le passage de relais commun à Codex et Claude prévu dans ce document.
+
 Lire VISION.md, AGENTS.md, CODE.md, SECURITY.md et queue/PROTOCOL.md. Le mandat permanent du CEO du 2026-10-31 remplace les anciens veto par transaction et le verrou des 50 CAD.
 
 Les agents choisissent activités, marchés mondiaux, outils, programmes et investissements. Ils peuvent créer des missions et sous-agents, publier du travail et engager le capital réellement disponible via la passerelle financière. Aucune validation humaine systématique d'une niche, d'un prix, d'une dépense ou d'un outil n'est requise.
