@@ -348,13 +348,6 @@
   ],
   "events": [
     {
-      "type": "GLC_ISSUANCE",
-      "timestamp": 1793423756.3320425,
-      "agent_id": "BUILDER",
-      "amount": 100,
-      "reason": "initial loan"
-    },
-    {
       "type": "GLC_LOAN",
       "timestamp": 1793423756.3320434,
       "agent_id": "BUILDER",
@@ -950,6 +943,12 @@
       "timestamp": 1793733989.16557,
       "from_agent": "DIRECTOR",
       "to_agent": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793733990.9244537,
+      "lesson_id": "L17",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -988,5 +987,5 @@
       "last_reported_at": 1793673052.8320463
     }
   ],
-  "lesson_count": 16
+  "lesson_count": 17
 }
