@@ -20,14 +20,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "CREDENTIAL",
-      "title": "csv-preflight Actor + Store copy ready; PUBLISH_ACTOR needs Apify config + 0600 credential",
-      "detail": "Ready: products/actors/csv-preflight (core 9/9 fixtures; memory limits set: default 256 MB, min 128 MB, max 512 MB), products/distribution/csv-preflight-store-copy.json (EN/FR, AI disclosure, proposed pricing), and unit economics products/research/csv-actor-unit-economics.json (PURSUE_IF: file-checked USD 0.005 + apify-actor-start USD 0.00005; break-even about 288 s per file at 256 MB). Missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600. Next after access: private PUBLISH_ACTOR, one real run to measure runtime, then an independent review of the exact digest before any public listing.",
+      "title": "Apify config + 0600 credential needed; csv-preflight demand now weak, rss-reader is the next candidate",
+      "detail": "Still missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600. Update: products/research/csv-paid-demand-test.json found 12 competing CSV validators with at most 1 user in 30 days each (verdict DO_NOT_PURSUE). csv-preflight stays ready but parked; listing it would cost nothing extra but is unlikely to earn. products/research/next-idea-scan.json recommends an RSS/Atom feed reader Actor (PURSUE_IF: 2 incumbents with 39-51 users_30d, crowded market, price-based edge only). It is being built offline (mission RSS-ACTOR-BUILD). After access: private PUBLISH_ACTOR, a real run, then independent APPROVE of the exact digest before any public listing. Kill if fewer than 3 external users in 14 days.",
       "mission_id": "CSV-ACTOR-LAUNCH",
-      "expected_gain": "First Apify pay-per-event listing; kill if fewer than 3 external users in 14 days.",
+      "expected_gain": "First Apify pay-per-event listing (rss-reader, proposed USD 0.001 per item); revenue unverified and uncertain.",
       "raised_by": "BUILDER",
-      "reports": 2,
+      "reports": 3,
       "opened_at": "2026-11-02T22:32:13Z",
-      "last_reported_at": "2026-11-02T23:32:44Z"
+      "last_reported_at": "2026-11-03T00:32:56Z"
     }
   ],
   "resolved_recent": [],
