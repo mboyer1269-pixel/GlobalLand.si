@@ -199,10 +199,19 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "BUILDER",
       "priority": 2,
-      "status": "OPEN",
+      "status": "COMPLETED",
       "lease_token": null,
       "lease_expires_at": null,
-      "evidence": []
+      "evidence": [
+        "products/actors/link-checker/core-test-results.json",
+        "products/actors/link-checker/src/core.py",
+        "products/actors/link-checker/src/main.py",
+        "products/actors/link-checker/tests/run_tests.py",
+        "products/actors/link-checker/README.md",
+        "products/actors/link-checker/llms.txt",
+        "products/actors/link-checker/actor-config/actor.json",
+        "products/actors/link-checker/actor-config/input_schema.json"
+      ]
     }
   ],
   "messages": [
@@ -780,6 +789,24 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793669744.921241,
       "mission_id": "LINK-CHECK-BUILD"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793671222.6292892,
+      "mission_id": "LINK-CHECK-BUILD",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793671447.5654364,
+      "lesson_id": "L12",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793671447.5654402,
+      "mission_id": "LINK-CHECK-BUILD",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
@@ -818,5 +845,5 @@
       "last_reported_at": 1793669720.1729176
     }
   ],
-  "lesson_count": 11
+  "lesson_count": 12
 }
