@@ -1,0 +1,611 @@
+{
+ "mission": "CSV-PAID-DEMAND-TEST",
+ "agent": "RESEARCHER",
+ "observed_on": "2026-11-03",
+ "sources": [
+  {
+   "url": "https://api.apify.com/v2/store?search=csv&limit=30",
+   "artifact": "products/research/apify-store-csv-search.json",
+   "fetch_task": "TASK-179365860212",
+   "role": "original snapshot (2026-11-02)"
+  },
+  {
+   "url": "https://api.apify.com/v2/store?search=csv&limit=30",
+   "artifact": "products/research/apify-store-csv-followup.json",
+   "fetch_task": "TASK-179366400201",
+   "role": "follow-up snapshot"
+  },
+  {
+   "url": "https://api.apify.com/v2/store?search=csv%20validator&limit=20",
+   "artifact": "products/research/apify-store-csv-validator-search.json",
+   "fetch_task": "TASK-179366580212",
+   "role": "direct-competitor search (2026-11-03)"
+  }
+ ],
+ "metric_meanings": {
+  "totalUsers": "cumulative distinct users ever, free and paid mixed",
+  "totalUsers30Days": "distinct users in rolling 30-day window; two snapshots about 1 day apart overlap by ~29 days so their difference is NOT new users",
+  "publicActorRunStats30Days.TOTAL": "runs in rolling 30 days, includes developer test runs",
+  "paid_users": "NOT exposed by the public Store API; paid-user volume cannot be observed"
+ },
+ "snapshot_comparison": {
+  "original_total_results": 21022,
+  "followup_total_results": 21046,
+  "actors_compared": 27,
+  "actors_with_nonzero_users_total_delta": [],
+  "all": [
+   {
+    "id": "7ORmMuqokvDqcIQgK",
+    "name": "antonio_cesar/whatsapp-scraper-profile-bulk",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 14,
+    "users_30d_followup": 14,
+    "users_total_delta": 0,
+    "runs_30d_original": 413,
+    "runs_30d_followup": 413
+   },
+   {
+    "id": "82cKuLhJJl9vLKVec",
+    "name": "taroyamada/apple-podcast-scraper",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 3,
+    "users_30d_followup": 3,
+    "users_total_delta": 0,
+    "runs_30d_original": 46,
+    "runs_30d_followup": 46
+   },
+   {
+    "id": "EhVyi9uvJ4eaUz9nF",
+    "name": "b2bsearch/bulk-people-enrichment",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 24,
+    "users_30d_followup": 24,
+    "users_total_delta": 0,
+    "runs_30d_original": 1001,
+    "runs_30d_followup": 1001
+   },
+   {
+    "id": "GopabUiu7wAuvdK5X",
+    "name": "tidydata/merge-dedupe-datasets",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 5,
+    "users_30d_followup": 5,
+    "users_total_delta": 0,
+    "runs_30d_original": 244,
+    "runs_30d_followup": 244
+   },
+   {
+    "id": "H9KF6MX81eK2jV58y",
+    "name": "motivational_nickel/dataset-cleaner-and-formatter",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 0,
+    "users_30d_followup": 0,
+    "users_total_delta": 0,
+    "runs_30d_original": 28,
+    "runs_30d_followup": 28
+   },
+   {
+    "id": "JA83jsthUR6Va1WZl",
+    "name": "nerolabs/bulk-pagespeed-checker",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 32,
+    "users_30d_followup": 32,
+    "users_total_delta": 0,
+    "runs_30d_original": 152,
+    "runs_30d_followup": 152
+   },
+   {
+    "id": "MAsq5cA192TWKaqg7",
+    "name": "datamule/socrata-soda-extractor",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 1,
+    "users_30d_followup": 1,
+    "users_total_delta": 0,
+    "runs_30d_original": 43,
+    "runs_30d_followup": 43
+   },
+   {
+    "id": "MYfSz51PIX2MGOzR6",
+    "name": "memo23/google-maps-list-scraper",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 7,
+    "users_30d_followup": 7,
+    "users_total_delta": 0,
+    "runs_30d_original": 72,
+    "runs_30d_followup": 72
+   },
+   {
+    "id": "SOQmgkOByk6dtr5Or",
+    "name": "saliga/bulk-http-requests",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 16,
+    "users_30d_followup": 16,
+    "users_total_delta": 0,
+    "runs_30d_original": 172,
+    "runs_30d_followup": 172
+   },
+   {
+    "id": "YHNv81f5s5RaLdXTf",
+    "name": "monkey.d.scraping/telegram-channel-scraper",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 9,
+    "users_30d_followup": 9,
+    "users_total_delta": 0,
+    "runs_30d_original": 8652,
+    "runs_30d_followup": 8652
+   },
+   {
+    "id": "YND3uhSgPdVbh9mOR",
+    "name": "newbs/RemoteOk-Premium-Job-Scraper",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 1,
+    "users_30d_followup": 1,
+    "users_total_delta": 0,
+    "runs_30d_original": 40,
+    "runs_30d_followup": 40
+   },
+   {
+    "id": "Z2samcXlPvSQy1oTq",
+    "name": "chris_elder/bulk-file-downloader",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 35,
+    "users_30d_followup": 35,
+    "users_total_delta": 0,
+    "runs_30d_original": 367,
+    "runs_30d_followup": 367
+   },
+   {
+    "id": "Zk4NL09KuDccV11Z4",
+    "name": "thodor/tiktok-comments-scraper",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 9,
+    "users_30d_followup": 9,
+    "users_total_delta": 0,
+    "runs_30d_original": 106,
+    "runs_30d_followup": 106
+   },
+   {
+    "id": "bl1FNYgwE6k8eG4aW",
+    "name": "eloquent_mountain/json-to-csv-converter",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 2,
+    "users_30d_followup": 2,
+    "users_total_delta": 0,
+    "runs_30d_original": 28,
+    "runs_30d_followup": 28
+   },
+   {
+    "id": "d2cmioI7mA8DfVcoz",
+    "name": "memo23/bumeran-job-scraper",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 4,
+    "users_30d_followup": 4,
+    "users_total_delta": 0,
+    "runs_30d_original": 123,
+    "runs_30d_followup": 123
+   },
+   {
+    "id": "dNo2eHsgX7nec70EF",
+    "name": "afanasenko/instagram-comments-scraper",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 28,
+    "users_30d_followup": 28,
+    "users_total_delta": 0,
+    "runs_30d_original": 853,
+    "runs_30d_followup": 853
+   },
+   {
+    "id": "djlGc4lFXxTIYV4Cv",
+    "name": "thecfmarketing/csv-xlsx-dataset-merger-pattern-splitter",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 9,
+    "users_30d_followup": 9,
+    "users_total_delta": 0,
+    "runs_30d_original": 51,
+    "runs_30d_followup": 51
+   },
+   {
+    "id": "gzzNKKyLzA7Z0ZSMc",
+    "name": "nerolabs/bulk-ocr-image-pdf-to-text",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 50,
+    "users_30d_followup": 50,
+    "users_total_delta": 0,
+    "runs_30d_original": 180,
+    "runs_30d_followup": 180
+   },
+   {
+    "id": "hCQPeiBxp8Juem32W",
+    "name": "nerolabs/bulk-file-downloader",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 21,
+    "users_30d_followup": 21,
+    "users_total_delta": 0,
+    "runs_30d_original": 148,
+    "runs_30d_followup": 148
+   },
+   {
+    "id": "hPoDPuM4tQIRqkAj0",
+    "name": "humble-echidna/dataset-transform",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 38,
+    "users_30d_followup": 38,
+    "users_total_delta": 0,
+    "runs_30d_original": 269,
+    "runs_30d_followup": 269
+   },
+   {
+    "id": "iUWm9bLqFzMMAnXDg",
+    "name": "saliga/dataset-merge-dedupe",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 12,
+    "users_30d_followup": 12,
+    "users_total_delta": 0,
+    "runs_30d_original": 300,
+    "runs_30d_followup": 300
+   },
+   {
+    "id": "jcFygCZ1zCxhB6Zx2",
+    "name": "logiover/jobicy-remote-jobs-scraper",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 4,
+    "users_30d_followup": 4,
+    "users_total_delta": 0,
+    "runs_30d_original": 30,
+    "runs_30d_followup": 30
+   },
+   {
+    "id": "mLCxQsjuon0cW5sqC",
+    "name": "gochujang/excel-extractor",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 11,
+    "users_30d_followup": 11,
+    "users_total_delta": 0,
+    "runs_30d_original": 75,
+    "runs_30d_followup": 75
+   },
+   {
+    "id": "xlWThR6pfc9ka55eH",
+    "name": "amr-mando/email-verifier",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 15,
+    "users_30d_followup": 15,
+    "users_total_delta": 0,
+    "runs_30d_original": 363,
+    "runs_30d_followup": 363
+   },
+   {
+    "id": "y7H4rk4aSw0MEUI5W",
+    "name": "tallyrake/youtube-autocomplete-scraper",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 65,
+    "users_30d_followup": 65,
+    "users_total_delta": 0,
+    "runs_30d_original": 193,
+    "runs_30d_followup": 193
+   },
+   {
+    "id": "yfsGxzjjQX5LSdwga",
+    "name": "crawlplant/tennis-match-dataset",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 5,
+    "users_30d_followup": 5,
+    "users_total_delta": 0,
+    "runs_30d_original": 232,
+    "runs_30d_followup": 232
+   },
+   {
+    "id": "zj7kKwjTyEhUNvyK9",
+    "name": "whoareyouanas/linkedin-profile-actor",
+    "in_original": true,
+    "in_followup": true,
+    "users_30d_original": 6,
+    "users_30d_followup": 6,
+    "users_total_delta": 0,
+    "runs_30d_original": 58,
+    "runs_30d_followup": 58
+   }
+  ],
+  "caveat": "Snapshots are about one day apart; deltas are tiny and cannot show a trend. The CSV-keyword list is dominated by CSV-producing scrapers and dataset transformers, not file validators."
+ },
+ "direct_competitors_csv_validators": [
+  {
+   "id": "9GmfAyI0DFy5PSnjs",
+   "name": "grayt/delivery-check",
+   "title": "Delivery Check \u2014 JSON & CSV Handoff Validator",
+   "users_total": 2,
+   "users_7d": 1,
+   "users_30d": 1,
+   "runs_30d": 28,
+   "last_run": "2026-11-01T23:52:24.820Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "apify-actor-start": 5e-05,
+    "apify-default-dataset-item": 0.01
+   },
+   "job": "Preflight a small JSON, CSV, and UTF-8 text handoff bundle. Enforce required names, SHA-256 of supplied content, byte caps, exact CSV headers and row counts, and a bounded JSON Schema. Deterministic P"
+  },
+  {
+   "id": "p4ZBCjnSjn9aWRaXl",
+   "name": "biztoolsus/pinterest-retail-catalog-csv-validator",
+   "title": "Pinterest Retail Catalog CSV Field Validator",
+   "users_total": 2,
+   "users_7d": 1,
+   "users_30d": 1,
+   "runs_30d": 37,
+   "last_run": "2026-11-01T19:14:27.911Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "report-generated": 0.03
+   },
+   "job": "Check selected required product feed fields and return redacted row/codes before manual Pinterest upload. No URL fetch, account validation or ingestion guarantee."
+  },
+  {
+   "id": "OCfyMd8cYgye6ei5R",
+   "name": "biztoolsus/webflow-cms-reference-csv-validator",
+   "title": "Webflow CMS Reference CSV Validator",
+   "users_total": 2,
+   "users_7d": 1,
+   "users_30d": 1,
+   "runs_30d": 36,
+   "last_run": "2026-11-01T11:28:26.093Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "report-generated": 0.03
+   },
+   "job": "Check one declared single/multi reference column against exact target Collection slugs. No Webflow access, slug guessing, import certification or repair."
+  },
+  {
+   "id": "ZaXHx8X7L1d1uNpn8",
+   "name": "biztoolsus/shopify-inventory-safety-diff",
+   "title": "Shopify Inventory CSV Validator & Safety Diff",
+   "users_total": 2,
+   "users_7d": 1,
+   "users_30d": 1,
+   "runs_30d": 38,
+   "last_run": "2026-11-01T19:16:24.161Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "report-generated": 0.02
+   },
+   "job": "Compare All states inventory CSVs before a manual Shopify import. Flag selected safety cues; no live stock check or import certification."
+  },
+  {
+   "id": "3fjNaBCXkw7WdBrFH",
+   "name": "mouadapi/shopify-product-feed-validator",
+   "title": "Shopify Product CSV Validator & Cleaner",
+   "users_total": 1,
+   "users_7d": 0,
+   "users_30d": 1,
+   "runs_30d": 26,
+   "last_run": "2026-11-02T06:32:42.489Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "apify-actor-start": 5e-05,
+    "variant-check": 0.0015
+   },
+   "job": "Checks your Shopify product CSV before import: each variant's errors and warnings (columns, options, SKUs, GTIN check digits, prices, image URLs), one row per issue, a summary and a cleaned CSV; faile"
+  },
+  {
+   "id": "3jamvtTn1FvxUggCZ",
+   "name": "biztoolsus/woocommerce-variation-csv-validator",
+   "title": "WooCommerce Variation CSV Validator & Parent Check",
+   "users_total": 1,
+   "users_7d": 0,
+   "users_30d": 0,
+   "runs_30d": 36,
+   "last_run": "2026-11-01T11:28:25.892Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "report-generated": 0.03
+   },
+   "job": "Check declared variable/variation rows, parent order, identities and attribute pairs before a manual native WooCommerce CSV import. No store access or import certification."
+  },
+  {
+   "id": "BXS4gn6YgUnfdnaia",
+   "name": "taigongye/catalogcheck-product-csv-validator",
+   "title": "CatalogCheck \u2013 Product CSV Validator",
+   "users_total": 1,
+   "users_7d": 0,
+   "users_30d": 0,
+   "runs_30d": null,
+   "last_run": "2026-09-29T04:56:16.267Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "apify-actor-start": 0.02,
+    "catalog-row-checked": 0.0005
+   },
+   "job": "Validate product catalog CSV data, detect duplicate SKUs, invalid prices, missing fields, currency-format errors, and malformed URLs. Generates JSON, CSV, and readable HTML reports without accessing p"
+  },
+  {
+   "id": "VaGq3bTrZc8cszSEc",
+   "name": "pennymachine42/penny-product-catalog-audit",
+   "title": "Product CSV Audit: Duplicate SKUs & Price Checks",
+   "users_total": 2,
+   "users_7d": 1,
+   "users_30d": 1,
+   "runs_30d": 5,
+   "last_run": "2026-11-01T11:46:23.656Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "apify-actor-start": 5e-05,
+    "catalog-audit": 0.05
+   },
+   "job": "Audit product catalogue CSVs for duplicate SKUs, missing identifiers, conflicting prices and formatting risks. Receive a review report and processed CSV. Up to 500 rows / 128 KB; no store connection r"
+  },
+  {
+   "id": "19lns6bTohVwhfvEY",
+   "name": "everyday_shortcuts_lab/inventory-csv-preflight",
+   "title": "Inventory CSV Preflight",
+   "users_total": 2,
+   "users_7d": 1,
+   "users_30d": 1,
+   "runs_30d": 25,
+   "last_run": "2026-11-01T16:12:24.344Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "completed-report": 1
+   },
+   "job": "Check inventory CSVs for duplicate or conflicting SKU/location keys, blank fields, quantity and price policy violations, whitespace and formula-like text. Read-only JSON and HTML reports preserve lead"
+  },
+  {
+   "id": "t4pycMsNtl85FisPp",
+   "name": "skyfishdev/merchant-feed-validator",
+   "title": "Merchant Feed Validator \u2014 XML, CSV, TSV & JSON",
+   "users_total": 2,
+   "users_7d": 1,
+   "users_30d": 1,
+   "runs_30d": 24,
+   "last_run": "2026-11-01T12:18:29.359Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "apify-actor-start": 5e-05,
+    "apify-default-dataset-item": 0.0015
+   },
+   "job": "Validate Google-style merchant feeds before import. Find missing fields, duplicate IDs, invalid prices, availability values, overlong text, and GTIN checksum errors. Supports RSS/Atom XML, quoted CSV/"
+  },
+  {
+   "id": "ifQ5NipxVAbdJ6Mxj",
+   "name": "ceddl/csv-jsonl-data-contract-gate",
+   "title": "CSV & JSONL Data Validator",
+   "users_total": 2,
+   "users_7d": 1,
+   "users_30d": 1,
+   "runs_30d": 27,
+   "last_run": "2026-11-02T06:26:23.781Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "batch-contract-evaluated": 0.03,
+    "apify-actor-start": 5e-05
+   },
+   "job": "Validate inline CSV and JSONL batches against a field contract for required fields, types, ranges, allowed values, and uniqueness. Get isolated batch results and stable findings for data pipeline deci"
+  },
+  {
+   "id": "HJmww4p09e5YMnyC3",
+   "name": "perryay/data-validator-profiler",
+   "title": "Data Validator & Profiler \u2014 CSV JSON XML schema inference",
+   "users_total": 2,
+   "users_7d": 1,
+   "users_30d": 1,
+   "runs_30d": 28,
+   "last_run": "2026-11-01T16:58:26.534Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "apify-actor-start": 0.02,
+    "data-validate": 0.005,
+    "schema-infer": 0.01,
+    "batch-profile": 0.01
+   },
+   "job": "Validate and profile CSV, JSON, and XML datasets. Auto-detects schema (column types, null ratios, uniqueness), flags anomalies (mixed types, high nulls), and produces a detailed profile report. Suppor"
+  }
+ ],
+ "direct_competitor_summary": {
+  "count_found": 12,
+  "max_users_total": 2,
+  "max_users_30d": 1,
+  "observation": "Every listed CSV validator/preflight Actor found has at most 2 total users and at most 1 user in 30 days; runs_30d of ~25-38 with 1 user is consistent with developer or automated test runs, not buyer demand. Several are near-identical autonomous-style listings (narrow per-platform validators with disclaimers)."
+ },
+ "adjacent_with_usage": [
+  {
+   "id": "hPoDPuM4tQIRqkAj0",
+   "name": "humble-echidna/dataset-transform",
+   "title": "Dataset Transformer: Filter, Dedupe, JSON to CSV",
+   "users_total": 56,
+   "users_7d": 11,
+   "users_30d": 38,
+   "runs_30d": 269,
+   "last_run": "2026-11-02T07:08:15.482Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "apify-actor-start": 5e-05,
+    "apify-default-dataset-item": 0.001
+   },
+   "job": "Clean, deduplicate and transform data: an Apify dataset, pasted JSON or a CSV, JSON, JSONL or Excel XLSX file URL. Filter rows, remove duplicates by any field, sort, rename fields, flatten JSON. Get a"
+  },
+  {
+   "id": "GopabUiu7wAuvdK5X",
+   "name": "tidydata/merge-dedupe-datasets",
+   "title": "Merge, Filter, Deduplicate & Transform Datasets \u2014 CSV, Excel",
+   "users_total": 12,
+   "users_7d": 2,
+   "users_30d": 5,
+   "runs_30d": 244,
+   "last_run": "2026-11-01T20:44:28.043Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "row": 0.00025,
+    "file": 0.005
+   },
+   "job": "Filter, merge and deduplicate Apify datasets, CSV, Excel, JSON and Google Sheets: keep only rows matching your conditions, remove or merge duplicates (smart URL/email/phone matching), sort, add comput"
+  },
+  {
+   "id": "iUWm9bLqFzMMAnXDg",
+   "name": "saliga/dataset-merge-dedupe",
+   "title": "Dataset Merge & Dedup Datasets \u2014 Filter, Join CSV & Excel",
+   "users_total": 18,
+   "users_7d": 7,
+   "users_30d": 12,
+   "runs_30d": 300,
+   "last_run": "2026-11-02T01:12:40.277Z",
+   "pricing_model": "PAY_PER_EVENT",
+   "event_prices_usd_free_tier": {
+    "apify-actor-start": 5e-05,
+    "row": 0.0005
+   },
+   "job": "Merge Apify datasets, CSV, JSON and Excel files or Google Sheets into one table. Clean fields, normalise URLs, extract domains, filter, remove duplicates and join (VLOOKUP) in one run. Works with limi"
+  }
+ ],
+ "adjacent_note": "Adjacent transformers (filter/dedupe/merge, charging per output row) show 5-38 users_30d; they do a different job (transform data) than csv-preflight (report structure problems). Their usage does not transfer to a checker.",
+ "uncertainties": [
+  "paid-plan share of any users is unobservable",
+  "users_30d may include the developer",
+  "Store search ranking may hide better-performing validators not matching the query",
+  "single 1-day comparison window",
+  "buyer demand outside Apify (e.g. accounting import users) is not measured here"
+ ],
+ "verdict": "DO_NOT_PURSUE",
+ "verdict_reason": "At least a dozen directly competing CSV validator Actors already exist on Apify Store and none shows more than 1 user in 30 days or 2 users ever; a generic CSV checker has no observable buyer pull in this channel, and paid-user volume cannot be observed at all.",
+ "reframe_candidate_hypothesis": "If the Actor is ever listed (zero marginal build cost once the founder credential exists), treat it as a free-tier funnel only; the stronger adjacent pattern is per-output-row transform/dedupe of scraped datasets, but that market already has 5+ priced incumbents and is NOT verified as an opening.",
+ "acquisition_experiment": {
+  "name": "listing-only Store test (only if NO-APIFY-ACCESS is resolved by the founder)",
+  "prerequisites": [
+   "founder Apify credential (blocker NO-APIFY-ACCESS)",
+   "independent APPROVE of exact build digest"
+  ],
+  "metric": "ACTOR_STATS distinct external users",
+  "read_by": "14 days after public listing",
+  "kill_threshold": "fewer than 3 external users in 14 days (unchanged)",
+  "no_further_build_before_result": true
+ },
+ "claims_not_made": [
+  "no distribution occurred",
+  "no users, revenue or payments observed for csv-preflight",
+  "estimated charges are not revenue"
+ ]
+}
