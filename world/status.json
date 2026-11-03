@@ -249,10 +249,16 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "BUILDER",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "9b9TryrWM2JnJbvjp2hnnT03_MwPiCwS",
-      "lease_expires_at": 1793741428.626322,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/services/docs-repair/link-evidence.json",
+        "products/services/docs-repair/replay_evidence.py",
+        "products/services/docs-repair/fixture-results.json",
+        "products/services/docs-repair/service-sample.md",
+        "products/services/docs-repair/requests-AI_POLICY.md"
+      ]
     }
   ],
   "messages": [
@@ -378,18 +384,6 @@
     }
   ],
   "events": [
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793463105.8553686,
-      "mission_id": "INVOICE-DEMAND",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793463107.448743,
-      "mission_id": "INVOICE-PRODUCT",
-      "agent_id": "BUILDER"
-    },
     {
       "type": "CLAIM_MISSION",
       "timestamp": 1793484046.4611342,
@@ -981,6 +975,18 @@
       "timestamp": 1793737836.4598875,
       "from_agent": "DIRECTOR",
       "to_agent": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793739691.9995563,
+      "lesson_id": "L19",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793739691.9995592,
+      "mission_id": "PUBLIC-DOCS-REPAIR",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
@@ -1034,5 +1040,5 @@
       "last_reported_at": 1793736086.7979198
     }
   ],
-  "lesson_count": 18
+  "lesson_count": 19
 }
