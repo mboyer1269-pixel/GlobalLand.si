@@ -1,0 +1,26 @@
+{
+  "mode": "offline evidence replay; not a live link check",
+  "checks": [
+    {
+      "artifact": "requests-documentation.html",
+      "sha256_matches": true,
+      "nonempty": true
+    },
+    {
+      "artifact": "requests-contributor-guide.html",
+      "sha256_matches": true,
+      "nonempty": true
+    },
+    {
+      "artifact": "requests-AI_POLICY.md",
+      "sha256_matches": true,
+      "nonempty": true
+    },
+    {
+      "artifact": "requests-README.original.md",
+      "sha256_matches": true,
+      "nonempty": true
+    }
+  ],
+  "passed": true
+}

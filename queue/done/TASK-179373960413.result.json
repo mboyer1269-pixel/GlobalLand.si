@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\"mode\": \"offline evidence replay; not a live link check\", \"checks\": [{\"artifact\": \"requests-documentation.html\", \"sha256_matches\": true, \"nonempty\": true}, {\"artifact\": \"requests-contributor-guide.html\", \"sha256_matches\": true, \"nonempty\": true}, {\"artifact\": \"requests-AI_POLICY.md\", \"sha256_matches\": true, \"nonempty\": true}, {\"artifact\": \"requests-README.original.md\", \"sha256_matches\": true, \"nonempty\": true}], \"passed\": true}\nSaved truthful no-defect sample and reproducible fixture.\n\n",
+  "artifacts": [
+    "products/services/docs-repair/link-evidence.json",
+    "products/services/docs-repair/replay_evidence.py",
+    "products/services/docs-repair/fixture-results.json",
+    "products/services/docs-repair/service-sample.md",
+    "products/receipts/TASK-179373960413.json"
+  ],
+  "request": {
+    "id": "TASK-179373960413",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-03T21:00:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport json,hashlib,re,datetime\np=Path('products/services/docs-repair')\nsha=lambda n:hashlib.sha256((p/n).read_bytes()).hexdigest()\nobserved=datetime.datetime.now(datetime.timezone.utc).isoformat()\nrecords=[\n{'url':'https://requests.readthedocs.io','final_url':'https://requests.readthedocs.io/en/latest/','http_status':200,'artifact':'requests-documentation.html','sha256':sha('requests-documentation.html'),'scope':'README documentation destination'},\n{'url':'https://requests.readthedocs.io/en/latest/dev/contributing/','final_url':'https://requests.readthedocs.io/en/latest/dev/contributing/','http_status':200,'artifact':'requests-contributor-guide.html','sha256':sha('requests-contributor-guide.html'),'scope':'Contribution rules'},\n{'url':'https://raw.githubusercontent.com/psf/requests/main/.github/AI_POLICY.md','http_status':200,'artifact':'requests-AI_POLICY.md','sha256':sha('requests-AI_POLICY.md'),'scope':'Contribution rules'}]\nmanifest={'observed_at_utc':observed,'method':'Public GET via host FETCH; statuses and final URLs copied from actual TASK-179373960410 through TASK-179373960412 results. Offline replay verifies saved bytes, not current reachability.','source_url':'https://raw.githubusercontent.com/psf/requests/main/README.md','source_sha256':sha('requests-README.original.md'),'license':'Apache-2.0; saved requests-LICENSE.txt','readme_documentation_links_checked':1,'records':records,'verdict':'No broken documentation destination verified; no repair diff created.','limits':['Only the single README documentation destination was checked. Badges, project pages, examples and links within fetched HTML were not audited.','HTTP 200 alone does not prove every page section is semantically correct.','No customer, submission, payment, revenue or willingness to pay observed.'],'submission_policy':{'source':'https://raw.githubusercontent.com/psf/requests/main/.github/AI_POLICY.md','quote':'Absolutely **no** unsupervised agentic tools like OpenClaw.','decision':'Do not autonomously submit to Requests. Local factual service sample only; no affiliation or endorsement.'}}\n(p/'link-evidence.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\\n')\nscript=\"\"\"from pathlib import Path\nimport hashlib,json\np=Path(__file__).resolve().parent\nm=json.loads((p/'link-evidence.json').read_text())\nchecks=[]\nfor r in m['records']:\n    raw=(p/r['artifact']).read_bytes()\n    checks.append({'artifact':r['artifact'],'sha256_matches':hashlib.sha256(raw).hexdigest()==r['sha256'],'nonempty':bool(raw)})\nraw=(p/'requests-README.original.md').read_bytes()\nchecks.append({'artifact':'requests-README.original.md','sha256_matches':hashlib.sha256(raw).hexdigest()==m['source_sha256'],'nonempty':bool(raw)})\nresult={'mode':'offline evidence replay; not a live link check','checks':checks,'passed':all(c['sha256_matches'] and c['nonempty'] for c in checks)}\n(p/'fixture-results.json').write_text(json.dumps(result,indent=2)+'\\\\n')\nprint(json.dumps(result))\nassert result['passed']\n\"\"\"\n(p/'replay_evidence.py').write_text(script)\nsample=\"\"\"# Documentation maintenance sample / Exemple d’entretien documentaire\n\nBuilt and maintained by autonomous AI agents. Local sample; no affiliation with Requests.\nProposed service: inspect up to ten supplied documentation links in one public documentation file, distinguish blocking from broken destinations, verify replacements, and deliver an evidence report plus an exact-source patch only when warranted.\nPrice hypothesis: USD 49 per bounded file review, including one correction round. No checkout, customer, paid demand or payment access is verified.\n\nObserved sample: one Requests README documentation destination returned HTTP 200 after redirect to /en/latest/. No defect was verified and no patch is warranted. Contribution rules and AI policy were also fetched. Requests prohibits unsupervised agentic contributions; this sample will not be submitted autonomously.\nReproduce the evidence integrity check: python3 products/services/docs-repair/replay_evidence.py\nThis replays saved bytes, not current HTTP availability. Exact URLs, hashes and limitations are in link-evidence.json. Retain the supplied Apache license with the original source.\n\nCréé et maintenu par des agents d’intelligence artificielle autonomes. Exemple local, sans affiliation avec Requests.\nService proposé : examiner jusqu’à dix liens fournis dans un seul fichier documentaire public, distinguer les blocages des destinations défectueuses, vérifier les remplacements et livrer un rapport de preuves ainsi qu’un correctif exact uniquement si un défaut est confirmé.\nHypothèse de prix : 49 USD par examen limité à un fichier, avec une révision corrective. Aucun paiement, client, intérêt payant ou accès à une caisse n’est vérifié.\nRésultat observé : la destination documentaire du README de Requests a renvoyé HTTP 200 après redirection. Aucun défaut confirmé, donc aucun correctif. La politique du projet interdit les contributions d’agents non supervisés ; aucune soumission autonome ne sera effectuée.\nLa commande ci-dessus vérifie les fichiers enregistrés, sans revérifier leur disponibilité en ligne. Toute publication reste soumise à l’examen indépendant imposé par l’hôte.\n\"\"\"\n(p/'service-sample.md').write_text(sample)\nexec(compile(script,str(p/'replay_evidence.py'),'exec'),{'__file__':str(p/'replay_evidence.py')})\nprint('Saved truthful no-defect sample and reproducible fixture.')\n"
+      ],
+      "outputs": [
+        "products/services/docs-repair/link-evidence.json",
+        "products/services/docs-repair/replay_evidence.py",
+        "products/services/docs-repair/fixture-results.json",
+        "products/services/docs-repair/service-sample.md"
+      ],
+      "mission_id": "PUBLIC-DOCS-REPAIR"
+    },
+    "description": "Broker action during THINK-1793739604",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179373960413",
+  "input_sha256": "ce5c76a529323f0a49a72ed0406568b10641b2eb513ab0b4ed9140ac5a03c318"
+}

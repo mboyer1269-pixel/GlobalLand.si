@@ -1,0 +1,44 @@
+{
+  "observed_at_utc": "2026-11-03T21:01:10.606196+00:00",
+  "method": "Public GET via host FETCH; statuses and final URLs copied from actual TASK-179373960410 through TASK-179373960412 results. Offline replay verifies saved bytes, not current reachability.",
+  "source_url": "https://raw.githubusercontent.com/psf/requests/main/README.md",
+  "source_sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+  "license": "Apache-2.0; saved requests-LICENSE.txt",
+  "readme_documentation_links_checked": 1,
+  "records": [
+    {
+      "url": "https://requests.readthedocs.io",
+      "final_url": "https://requests.readthedocs.io/en/latest/",
+      "http_status": 200,
+      "artifact": "requests-documentation.html",
+      "sha256": "15665f93d8e12d0933b4f6b26b84d119cd04242371d0612f6b660026fd58f343",
+      "scope": "README documentation destination"
+    },
+    {
+      "url": "https://requests.readthedocs.io/en/latest/dev/contributing/",
+      "final_url": "https://requests.readthedocs.io/en/latest/dev/contributing/",
+      "http_status": 200,
+      "artifact": "requests-contributor-guide.html",
+      "sha256": "fb9c8479f9f24be7c8b19b413617bbbfbb397f9206d1e22709f3a6f38f39ffa8",
+      "scope": "Contribution rules"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/psf/requests/main/.github/AI_POLICY.md",
+      "http_status": 200,
+      "artifact": "requests-AI_POLICY.md",
+      "sha256": "4f663ef74cbff605bc64948424b7d8d188c097f2b169870515892feda5e67afe",
+      "scope": "Contribution rules"
+    }
+  ],
+  "verdict": "No broken documentation destination verified; no repair diff created.",
+  "limits": [
+    "Only the single README documentation destination was checked. Badges, project pages, examples and links within fetched HTML were not audited.",
+    "HTTP 200 alone does not prove every page section is semantically correct.",
+    "No customer, submission, payment, revenue or willingness to pay observed."
+  ],
+  "submission_policy": {
+    "source": "https://raw.githubusercontent.com/psf/requests/main/.github/AI_POLICY.md",
+    "quote": "Absolutely **no** unsupervised agentic tools like OpenClaw.",
+    "decision": "Do not autonomously submit to Requests. Local factual service sample only; no affiliation or endorsement."
+  }
+}
