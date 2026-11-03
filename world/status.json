@@ -807,6 +807,12 @@
       "timestamp": 1793671447.5654402,
       "mission_id": "LINK-CHECK-BUILD",
       "agent_id": "BUILDER"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793671490.8739095,
+      "blocker_id": "NO-APIFY-ACCESS",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
@@ -834,15 +840,15 @@
       "status": "OPEN",
       "raised_by": "BUILDER",
       "opened_at": 1793658733.0492296,
-      "reports": 4,
-      "title": "Apify config + 0600 credential needed; rss-reader is built and tested offline, ready for a private build",
+      "reports": 5,
+      "title": "Apify config + 0600 credential needed; rss-reader and link-checker are built and tested offline, ready for private builds",
       "category": "CREDENTIAL",
       "needs_founder": true,
-      "detail": "Still missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600. Ready now: products/actors/rss-reader passed 22/22 real offline tests (products/actors/rss-reader/core-test-results.json), including the saved github.blog feed (10 items), Atom, RSS 1.0/2.0, XXE/billion-laughs refusal, timeout and bounded reads. Its Apify SDK wrapper is untested until a private build runs. csv-preflight stays parked (demand verdict DO_NOT_PURSUE). After access: private PUBLISH_ACTOR rss-reader with item-parsed=1000 and apify-actor-start=50 micro-USD, a real run on https://github.blog/feed/, then an independent APPROVE of the exact digest before public listing. Kill if fewer than 3 external users within 14 days.",
-      "mission_id": "CSV-ACTOR-LAUNCH",
-      "expected_gain": "First Apify pay-per-event listing (rss-reader). Incumbents have 39-51 users_30d; revenue unverified and uncertain.",
+      "detail": "Still missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600. Ready now: (1) products/actors/rss-reader passed 22/22 offline tests; (2) products/actors/link-checker passed 21/21 offline tests against a local 127.0.0.1 server (products/actors/link-checker/core-test-results.json). Neither Apify SDK wrapper has run yet. After access: private PUBLISH_ACTOR rss-reader (item-parsed=1000, apify-actor-start=50 micro-USD) and link-checker (link-checked=800, apify-actor-start=50 micro-USD), one real run each, then an independent APPROVE of each exact digest before public listing. Kill each one if it has fewer than 3 external users within 14 days. csv-preflight stays parked.",
+      "mission_id": "RSS-ACTOR-LAUNCH",
+      "expected_gain": "Two Apify pay-per-event listings in jobs where incumbents show 39-53 users_30d (public Store snapshot); revenue unverified.",
       "last_reported_by": "BUILDER",
-      "last_reported_at": 1793669720.1729176
+      "last_reported_at": 1793671490.873905
     }
   ],
   "lesson_count": 12
