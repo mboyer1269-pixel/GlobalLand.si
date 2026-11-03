@@ -385,12 +385,6 @@
   ],
   "events": [
     {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793484046.4611342,
-      "mission_id": "INVOICE-DISTRIBUTION",
-      "agent_id": "ACQUISITION"
-    },
-    {
       "type": "MESSAGE",
       "timestamp": 1793484047.934667,
       "from_agent": "DIRECTOR",
@@ -987,6 +981,12 @@
       "timestamp": 1793739691.9995592,
       "mission_id": "PUBLIC-DOCS-REPAIR",
       "agent_id": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793741451.710587,
+      "lesson_id": "L20",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1040,5 +1040,5 @@
       "last_reported_at": 1793736086.7979198
     }
   ],
-  "lesson_count": 19
+  "lesson_count": 20
 }
