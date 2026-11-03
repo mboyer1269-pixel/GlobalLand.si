@@ -1,0 +1,1196 @@
+{
+  "data": {
+    "total": 2437,
+    "count": 15,
+    "offset": 0,
+    "limit": 15,
+    "desc": false,
+    "items": [
+      {
+        "title": "PDF to Text Extractor - PDF Parser & PDF to Markdown",
+        "name": "pdf-text-extractor",
+        "username": "gochujang",
+        "stats": {
+          "totalBuilds": 83,
+          "totalRuns": 2124,
+          "totalUsers": 281,
+          "totalUsers7Days": 12,
+          "totalUsers30Days": 47,
+          "totalUsers90Days": 178,
+          "lastRunStartedAt": "2026-11-02T09:14:29.129Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 2,
+            "FAILED": 1,
+            "SUCCEEDED": 256,
+            "TIMED-OUT": 3,
+            "TOTAL": 262
+          }
+        },
+        "description": "Extract text from PDF URLs or base64 files with this PDF extractor and PDF parser. Get per-page text, PDF to Markdown, or RAG chunks; optionally extract tables and OCR scanned pages.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/djsGEz3T9ldRjoMiFgiZJb2cALKWjCmZYTr2y2GsUy8/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vVmpyNG5FTWczc3A5WnplUlUtYWN0b3IteUxIOUhGTmQ4YnBaakYyQXQtd2g0Q2xRRGJMNS1pY29uX3BkZl9leHRyYWN0b3IucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Hojun Lee",
+        "userPictureUrl": "https://images.apifyusercontent.com/Jz0F10CABwHhhMRNrMKDjaiBHb0DNGMv15h7LA4JDYM/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vSFRzWkU3cnBGOVdUdFA1X1hpR0NaYlNhM0pJVFl3SkMxcnVEaUpxWklncy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTVUpJV0RJMFZUZDNhMnM0VVdSUFdFMXpSVzFwU0hwM1pVRkdXV2RSZURSdWVsRXRWVmxFVmpSaFdrZHBZMGxSUFhNNU5pMWo.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-09-22T00:00:00.000Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "pdf-extracted": {
+                "eventTitle": "Pdf Extracted",
+                "eventDescription": "Flat fee per PDF (download + metadata + structure).",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.02,
+                "isPrimaryEvent": true
+              },
+              "page-extracted": {
+                "eventTitle": "Page Extracted",
+                "eventDescription": "Charged per page extracted.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.001
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.001
+              }
+            }
+          },
+          "createdAt": "2026-09-05T14:37:44.889Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-09-05T14:38:07.235Z",
+          "notifiedAboutChangeAt": "2026-09-22T00:05:56.635Z"
+        },
+        "id": "yLH9HFNd8bpZjF2At",
+        "url": "https://apify.com/gochujang/pdf-text-extractor"
+      },
+      {
+        "title": "Bulk OCR: Image & Scanned PDF to Text from CSV or Google Sheet",
+        "name": "bulk-ocr-image-pdf-to-text",
+        "username": "nerolabs",
+        "stats": {
+          "totalBuilds": 6,
+          "totalRuns": 268,
+          "totalUsers": 75,
+          "totalUsers7Days": 3,
+          "totalUsers30Days": 50,
+          "totalUsers90Days": 59,
+          "lastRunStartedAt": "2026-11-02T08:22:15.547Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 9,
+            "SUCCEEDED": 170,
+            "TIMED-OUT": 1,
+            "TOTAL": 180
+          }
+        },
+        "description": "OCR every image and scanned PDF linked in an Apify dataset, CSV, Excel or Google Sheet, keeping your columns. Inputs: datasetId or fileUrl or fileUrls, urlField, languages. Adds text, confidence and page counts. Tesseract inside the run, no outside service. Charged per page. Agent-ready: x402, MCP.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION",
+          "AGENTS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/vPhVIyxZ5PMY12mCS6H0u1-tPLvl4KKlv_MNCEzi7z4/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20veGdEZXYxdkN0NHlBR1duVHctYWN0b3ItZ3p6TktLeUx6QTdaMFpTTWMta0pQZU9WRUJRdS1pY29uLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Adam Pearce",
+        "userPictureUrl": "https://images.apifyusercontent.com/mjUr3h4hz4H7cesYAJSFSNmk9q-SqEBzZiGDZlSimYQ/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vanU2bjR2QlZXQ2pidVN1dmhMRTdWdUh0cU84T0IyemVxbWNpSVFxaVZMZy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZlR2RFWlhZeGRrTjBOSGxCUjFkdVZIY3RjSEp2Wm1sc1pTMW5XV3RuZUc5R1VWRlVMVU5vWVhSSFVGUmZTVzFoWjJWZlFYVm5YelZmWHpJd01qWmZYekE1WHpVM1h6VTRYMEZOTG5CdVp3LnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "page-ocr": {
+                "eventTitle": "OCR page",
+                "eventDescription": "One page (an image counts as one page) read by OCR that produced at least one word. Blank pages are free.",
+                "isOneTimeEvent": false,
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.005
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0045
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.004
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0035
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0035
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0035
+                  }
+                }
+              },
+              "page-text-layer": {
+                "eventTitle": "Text-layer page",
+                "eventDescription": "One PDF page copied exactly from its own text layer instead of being recognised.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0009
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0008
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0007
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0007
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0007
+                  }
+                }
+              },
+              "file-export": {
+                "eventTitle": "File export",
+                "eventDescription": "One downloadable CSV or Excel file of the results.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.01
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.009
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.008
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.007
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.007
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.007
+                  }
+                }
+              },
+              "webhook-delivery": {
+                "eventTitle": "Webhook delivery",
+                "eventDescription": "The run summary delivered to your webhook, charged only on a 2xx response.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.02
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.018
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.016
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.014
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.014
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.014
+                  }
+                }
+              },
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              }
+            }
+          },
+          "createdAt": "2026-09-14T01:12:42.943Z",
+          "startedAt": "2026-09-14T01:12:41.000Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "gzzNKKyLzA7Z0ZSMc",
+        "url": "https://apify.com/nerolabs/bulk-ocr-image-pdf-to-text"
+      },
+      {
+        "title": "PDF OCR Extractor — scanned PDFs to text (Arabic + English)",
+        "name": "pdf-ocr-extractor",
+        "username": "amanatools",
+        "stats": {
+          "totalBuilds": 5,
+          "totalRuns": 454,
+          "totalUsers": 43,
+          "totalUsers7Days": 3,
+          "totalUsers30Days": 21,
+          "totalUsers90Days": 36,
+          "lastRunStartedAt": "2026-11-02T03:10:07.755Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 90,
+            "TIMED-OUT": 0,
+            "TOTAL": 90
+          }
+        },
+        "description": "Turn scanned or image-only PDFs into structured text that keeps its reading order: per-block bounding boxes, per-block OCR confidence, column-aware ordering, and a spatial plain-text rendering. Arabic and English OCR built in. Pay per document plus per page.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AI"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/WMiTh0P5l7MjmDF4EK9hHz8S-jkgAewY5ztn49QHgt8/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vWXZuVENUZlF3V29kWThjNVAtYWN0b3ItS2dHdk5kY0JwRUgxZVU4ZWUteklyT2Q0UlhTcy1wZGYtb2NyLWV4dHJhY3Rvci5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Dos",
+        "userPictureUrl": "https://images.apifyusercontent.com/S5cDdhModkhwgfYrYcUj_0l9I5gSbbotot_D2LAQcO8/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vbkNyMjYwVXFIeG1RSy02OUIxNkhHVU80cm1hVlk5Y3MtQURLOEt2OEF3Zy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloZG1GMFlYSnpMbWRwZEdoMVluVnpaWEpqYjI1MFpXNTBMbU52YlM5MUx6STNOelUyTnprX2RqMDA.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.002
+              },
+              "document-processed": {
+                "eventTitle": "Document processed",
+                "eventDescription": "One PDF successfully downloaded and read.",
+                "eventPriceUsd": 0.005,
+                "isPrimaryEvent": true
+              },
+              "ocr-page": {
+                "eventTitle": "Page OCR'd",
+                "eventDescription": "One scanned or image-only page rasterized and passed through OCR.",
+                "eventPriceUsd": 0.015
+              },
+              "text-page": {
+                "eventTitle": "Page read from text layer",
+                "eventDescription": "One page read from the PDF's existing text layer — no OCR needed.",
+                "eventPriceUsd": 0.001
+              }
+            }
+          },
+          "createdAt": "2026-08-01T11:45:04.975Z",
+          "startedAt": "2026-08-01T11:45:04.975Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-08-05T15:06:18.494Z"
+        },
+        "id": "KgGvNdcBpEH1eU8ee",
+        "url": "https://apify.com/amanatools/pdf-ocr-extractor"
+      },
+      {
+        "title": "OCR Image to Text - OCR PDF & Screenshot to Text",
+        "name": "image-ocr-extractor",
+        "username": "gochujang",
+        "stats": {
+          "totalBuilds": 46,
+          "totalRuns": 550,
+          "totalUsers": 122,
+          "totalUsers7Days": 9,
+          "totalUsers30Days": 69,
+          "totalUsers90Days": 90,
+          "lastRunStartedAt": "2026-11-02T09:54:48.914Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 5,
+            "FAILED": 0,
+            "SUCCEEDED": 352,
+            "TIMED-OUT": 10,
+            "TOTAL": 367
+          }
+        },
+        "description": "Convert image to text or screenshot to text from public URLs. OCR PDF pages, scans, and photos with Tesseract; get recognized text and confidence scores in dataset records.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/kvORZDFNeQM2tsk0IT3lnP-IiDnltfRViY_PeCelcDM/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vVmpyNG5FTWczc3A5WnplUlUtYWN0b3ItbExuS0RKWE0zOTVuU3lXWGktck80bnQ3VU43MS1pY29uX2ltYWdlX29jci5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Hojun Lee",
+        "userPictureUrl": "https://images.apifyusercontent.com/Jz0F10CABwHhhMRNrMKDjaiBHb0DNGMv15h7LA4JDYM/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vSFRzWkU3cnBGOVdUdFA1X1hpR0NaYlNhM0pJVFl3SkMxcnVEaUpxWklncy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTlzYURNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRMMkV2UVVObk9HOWpTVUpJV0RJMFZUZDNhMnM0VVdSUFdFMXpSVzFwU0hwM1pVRkdXV2RSZURSdWVsRXRWVmxFVmpSaFdrZHBZMGxSUFhNNU5pMWo.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-09-15T00:00:00.000Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.001
+              },
+              "image-ocr-extracted": {
+                "eventTitle": "Image OCR Extracted",
+                "eventDescription": "Charged per image successfully OCR-processed.",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.002,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-08-28T14:30:31.638Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-08-28T14:30:51.935Z",
+          "notifiedAboutChangeAt": "2026-09-15T00:05:53.116Z"
+        },
+        "id": "lLnKDJXM395nSyWXi",
+        "url": "https://apify.com/gochujang/image-ocr-extractor"
+      },
+      {
+        "title": "PDF to Text API | Document Extraction for LLMs & RAG",
+        "name": "pdf-text-converter",
+        "username": "andok",
+        "stats": {
+          "totalBuilds": 4,
+          "totalRuns": 713,
+          "totalUsers": 28,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 0,
+          "totalUsers90Days": 0,
+          "lastRunStartedAt": "2026-11-01T13:50:26.839Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Convert bulk PDF documents via URL into clean, raw text. The perfect document scraper for LLMs, vector databases, and RAG pipelines.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS",
+          "BUSINESS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/Q40bRbCowNpRbRbU-66SAQgqq_NggxUdYVI7QzuIYDQ/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vNEg3THBabnhwYXU4NU0yS3QtYWN0b3ItTlRTRnZKZHpTdTFSMlF6UFUtN1I5ZGdaV3pVOS1wZGYtdGV4dC1jb252ZXJ0ZXIucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Andok",
+        "userPictureUrl": "https://images.apifyusercontent.com/ZkPjYJ1sTRdNBOVIbQon0YZEgDH3WH_bGt3yi7lWMtI/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vUnUtOUgxQm5NdnFoUDRxM0F5dnJCNFh5VjhZVUtkZXRYbXc5UjZ4dXMwMC9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZORWczVEhCYWJuaHdZWFU0TlUweVMzUXRjSEp2Wm1sc1pTMVRiV2wyZG5KblpuUlJMV0Z1Wkc5ckxXRjJZWFJoY2k1d2JtYy5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.01
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0067
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0057
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0047
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0029
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0014
+                  }
+                }
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "Document Converted",
+                "eventDescription": "Charged per dataset item",
+                "isOneTimeEvent": false,
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.001
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.000667
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.000567
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.000467
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.000287
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00014
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": "2026-08-28T16:14:32.108Z",
+          "startedAt": "2026-08-28T16:14:32.108Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-08-28T16:35:50.760Z"
+        },
+        "id": "NTSFvJdzSu1R2QzPU",
+        "url": "https://apify.com/andok/pdf-text-converter"
+      },
+      {
+        "title": "PDF to Text Extractor with OCR — Scanned & Digital PDF API",
+        "name": "pdf-text-extractor",
+        "username": "eliai",
+        "stats": {
+          "totalBuilds": 48,
+          "totalRuns": 292,
+          "totalUsers": 28,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 10,
+          "totalUsers90Days": 26,
+          "lastRunStartedAt": "2026-11-01T15:52:25.844Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 1,
+            "FAILED": 0,
+            "SUCCEEDED": 40,
+            "TIMED-OUT": 0,
+            "TOTAL": 41
+          }
+        },
+        "description": "Extracts text from PDF files by URL: digital PDFs keep their text layer, scanned pages are read with OCR. Returns the full text, page count and metadata (title, author, ISO dates) as JSON. Failed URLs are never charged. For RAG engineers, agent builders and legal researchers.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/piBoJM1xe1ATLc1eYbSBSd45I1VVV5EFND9OIl62bjU/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20veDRkaFprWEFyZWNqWmYwRDEtYWN0b3ItWFpRTnZvcFBWTDlld3NVWEstR1g4WXE3TVF4SC1wZGYtdGV4dC1leHRyYWN0b3IucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Broke to Built",
+        "userPictureUrl": "https://images.apifyusercontent.com/QMkw6wv6DWIUToyhWVZW9vdOfV8EJUSu8gM41J7aS-w/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMEd6SV9NU2hjbTF1bjdCYVMxbUo3anBlX085YmlISDNVWU9waGtlQ2Fxcy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZlRFJrYUZwcldFRnlaV05xV21Zd1JERXRjSEp2Wm1sc1pTMXdSREIzVlU0eVVrazFMV05vWVc1dVpXeHpORjl3Y205bWFXeGxMbXB3WncuanBn.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "startedAt": "2026-09-26T23:14:46.793Z",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "pdf-processed": {
+                "eventTitle": "Processed PDFs",
+                "eventDescription": "Text and metadata extracted from one PDF. URLs that fail (dead link, not a PDF, encrypted, oversized) return {ok:false} records and are never charged.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.003
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00279
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00261
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0024
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0024
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0024
+                  }
+                },
+                "isPrimaryEvent": true
+              },
+              "ocr-page": {
+                "eventTitle": "OCR pages",
+                "eventDescription": "One scanned page read by OCR. Born-digital pages are never charged this event.",
+                "eventPriceUsd": 0.015
+              }
+            }
+          },
+          "reasonForChange": "Scanned pages that need OCR now cost $0.015 per page. Born-digital PDFs are unchanged at $0.003 per PDF and never incur the OCR charge.",
+          "createdAt": "2026-09-11T23:14:45.712Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-09-11T23:15:06.033Z",
+          "notifiedAboutChangeAt": "2026-09-26T23:35:54.352Z"
+        },
+        "id": "XZQNvopPVL9ewsUXK",
+        "url": "https://apify.com/eliai/pdf-text-extractor"
+      },
+      {
+        "title": "PDF Text Extractor - Bulk PDF to Text & Metadata",
+        "name": "pdf-extractor",
+        "username": "santamaria-automations",
+        "stats": {
+          "totalBuilds": 11,
+          "totalRuns": 478,
+          "totalUsers": 27,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 4,
+          "lastRunStartedAt": "2026-11-02T06:57:01.021Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 29,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Extract text and metadata from any PDF URL in bulk. Get page content, author, title, creation date, and more. Detects scanned PDFs that need OCR. Perfect for document analysis, research, and compliance.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/mMlfNHh48DqxOtJryn9aOKzeMdMYMcKTw2nUdt7tyKU/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vSlBUdXNDcmFZcGFic2pEWHEtYWN0b3ItNGgxSGVGODdieEVzZWs4RlIteUpFbVczemR2Wi1pY29uLXBkZi10ZXh0LWV4dHJhY3Rvci5zdmcucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "NanoScrape",
+        "userPictureUrl": "https://images.apifyusercontent.com/7aoyvDSYVKjMBDKkOZ5CweA9eg0v0pvmfmOcxCsBHxE/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vTmpRYW1hMjd4cDNUdlVEeXZwWUNteV9scWFpcWJ2QmVmakJfdkFSMEg0TS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZTbEJVZFhORGNtRlpjR0ZpYzJwRVdIRXRjSEp2Wm1sc1pTMTRkRUZ0T1dGRFNFcDVMWGx2ZFhSMVltVXRZWFpoZEdGeUxUZ3dNQzV3Ym1jLnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "enrichment-start": {
+                "eventTitle": "Actor run started",
+                "eventDescription": "Charged once per actor run",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.001
+              },
+              "enrichment-result": {
+                "eventTitle": "PDF extracted",
+                "eventDescription": "Per-PDF text and metadata extraction",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.005,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "createdAt": "2026-04-11T07:24:40.508Z",
+          "startedAt": "2026-04-11T07:24:40.508Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "4h1HeF87bxEsek8FR",
+        "url": "https://apify.com/santamaria-automations/pdf-extractor"
+      },
+      {
+        "title": "OCR & Document Extractor – PDF & Image to Text, JSON, Word",
+        "name": "ocr-document-extractor",
+        "username": "lofomachines",
+        "stats": {
+          "totalBuilds": 9,
+          "totalRuns": 177,
+          "totalUsers": 20,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 1,
+          "totalUsers90Days": 7,
+          "lastRunStartedAt": "2026-11-02T09:40:28.519Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 30,
+            "TIMED-OUT": 0,
+            "TOTAL": 30
+          }
+        },
+        "description": "Convert scanned PDFs and images into clean, structured text in bulk. Export to JSON, Markdown, DOCX, TXT or HTML with tables and layout preserved.",
+        "categories": [
+          "AGENTS",
+          "DEVELOPER_TOOLS",
+          "AI"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/Xd8z2s1kY7BEtQaj9i-HULaikWgWcQsK2rqRbJMLNPg/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vUmVkNnNHSEFOa0x6b3NzdkUtYWN0b3ItSFZCd3MwRTlMeFN0TkdlYkgtSlRLbUxOemNiWC1DaGF0R1BUX0ltYWdlXzE5X2dpdV8yMDI2X18xMl8zOF80My5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Lofomachines",
+        "userPictureUrl": "https://images.apifyusercontent.com/PHi3Py-51URv-VOyJ1EVi53Xh5aQawWfTq_BM6sz4JA/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20va2NzM2JqZXVFa2RGdlVXVkVGczltYWVhLUhpZmVwTW9UWi1SQS0zdl9Xdy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZVbVZrTm5OSFNFRk9hMHg2YjNOemRrVXRjSEp2Wm1sc1pTMDFORUY1WVZCWGFESldMV3h2WjI5aGNHbG1lUzV3Ym1jLnBuZw.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              },
+              "apify-default-dataset-item": {
+                "eventTitle": "File processed",
+                "eventDescription": "Charged for each file downloaded and hashed",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.03,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "startedAt": "2026-06-19T10:40:28.755Z",
+          "createdAt": "2026-06-19T10:40:29.028Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "HVBws0E9LxStNGebH",
+        "url": "https://apify.com/lofomachines/ocr-document-extractor"
+      },
+      {
+        "title": "OCR Text Extractor - Images & Scanned PDFs to Text",
+        "name": "ocr-text-extractor",
+        "username": "scrapesage",
+        "stats": {
+          "totalBuilds": 6,
+          "totalRuns": 260,
+          "totalUsers": 15,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 4,
+          "totalUsers90Days": 10,
+          "lastRunStartedAt": "2026-11-02T05:53:02.362Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 1,
+            "FAILED": 0,
+            "SUCCEEDED": 68,
+            "TIMED-OUT": 0,
+            "TOTAL": 69
+          }
+        },
+        "description": "Extract text from images (PNG, JPG, TIFF, WEBP, BMP, GIF) and scanned PDFs with Tesseract OCR in 28 languages. Per-page text, confidence scores, optional word boxes, automatic text-layer detection for born-digital PDFs. No API key, no browser. JSON, CSV, Excel.",
+        "categories": [
+          "AI",
+          "AUTOMATION",
+          "DEVELOPER_TOOLS"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/k88ZPgd8ODVup1JgGr2ZZX24NNUX79nvt8qk-N89IGY/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vS2ZJMkRCWGxKenl1QUZxTXotYWN0b3ItekplZ2xKYlNJRXQyeDJPa2UtWFhFOGh1dVlhWC1PQ1JfVGV4dF9FeHRyYWN0b3JfLV9JbWFnZXNfX19TY2FubmVkX1BERnNfdG9fVGV4dC5wbmc.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Scrape Sage",
+        "userPictureUrl": "https://images.apifyusercontent.com/4S7GKlllKQyVtLhgCdN20Y9_jGA5IW09930pQc_S0GU/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMHJ5WFF1LTc3bzZZNjlIRUIyZ3dmRHZaREZSNFZ5Qk5FenlVTFRsZ1A4by9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZTMlpKTWtSQ1dHeEtlbmwxUVVaeFRYb3RjSEp2Wm1sc1pTMTZjMWxZZUhoQmVIbEhMVk5qY21Gd1pWOVRZV2RsTG5CdVp3LnBuZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "page": {
+                "eventTitle": "OCR page",
+                "eventDescription": "One page recognised (an image counts as one page; a PDF is charged per page processed). Failed downloads and unreadable files are never charged.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.003
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00255
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0021
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00165
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00114
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00075
+                  }
+                },
+                "isOneTimeEvent": false,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "minimalMaxTotalChargeUsd": 0.02,
+          "createdAt": "2026-09-02T05:41:29.337Z",
+          "startedAt": "2026-09-02T05:41:29.337Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "zJeglJbSIEt2x2Oke",
+        "url": "https://apify.com/scrapesage/ocr-text-extractor"
+      },
+      {
+        "title": "PDF to Text API — Extract PDF Text to Clean JSON for LLM & RAG",
+        "name": "pdf-text",
+        "username": "omao",
+        "stats": {
+          "totalBuilds": 6,
+          "totalRuns": 125,
+          "totalUsers": 5,
+          "totalUsers7Days": 1,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 4,
+          "lastRunStartedAt": "2026-11-01T19:32:29.733Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 1,
+            "SUCCEEDED": 28,
+            "TIMED-OUT": 0,
+            "TOTAL": 29
+          }
+        },
+        "description": "Extract clean, structured text from any PDF by URL, page by page. Returns one row per page with de-hyphenated, whitespace-normalized text. Fast, no setup.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AI"
+        ],
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Marouane Oulabass",
+        "userPictureUrl": "https://images.apifyusercontent.com/uKD-e466-0YMi8Fh24qeks7hM0PEZePdI7ojTlHaMQw/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vMVVxZTJpZWo4M0kwb3cxbFJGS2FselptX2Z6dGViZU1PTjZDRm40WkZUYy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZha0pDUkRONWFtZzRkVzAyTW5JNFpIVXRjSEp2Wm1sc1pTMWpUMGxpYlhGNWJuQkNMVU5vWVhSSFVGUmZTVzFoWjJWZk1URmZhblZwYkM1Zk1qQXlObDlmTWpCZk5UWmZNVFV1Y0c1bi5wbmc.webp",
+        "currentPricingInfo": {
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "pdf-page": {
+                "eventDescription": "Charged once per PDF page whose text is extracted.",
+                "eventTieredPricingUsd": {
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00144
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0016
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0018
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0012
+                  },
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.002
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00132
+                  }
+                },
+                "eventTitle": "PDF page extracted",
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "pricingModel": "PAY_PER_EVENT",
+          "createdAt": "2026-07-14T09:08:29.428Z",
+          "startedAt": "2026-07-14T09:08:29.428Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-07-14T09:35:37.743Z"
+        },
+        "id": "HqDk45iTHWquINgfs",
+        "url": "https://apify.com/omao/pdf-text"
+      },
+      {
+        "title": "PDF to Text – Extract Text From PDF, Page by Page",
+        "name": "pdf-page-text-extractor",
+        "username": "rowfeed",
+        "stats": {
+          "totalBuilds": 4,
+          "totalRuns": 177,
+          "totalUsers": 5,
+          "totalUsers7Days": 0,
+          "totalUsers30Days": 3,
+          "totalUsers90Days": 4,
+          "lastRunStartedAt": "2026-11-02T00:00:05.276Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 40,
+            "TIMED-OUT": 0,
+            "TOTAL": 40
+          }
+        },
+        "description": "Extract text from any PDF URL, one row per page. Pages with no extractable text (scanned PDFs) are never charged — the main differentiator. pypdf parsing, no OCR. Clean JSON for RAG pipelines, researchers and automation.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AI",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/jlc0CU0bbRa9VIW4gfm1E7yplA4IfoC96DdHhKi5c5k/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vWDhwbHBzRXRkcmpHaE5oTmktYWN0b3ItSEw2Y3J0U1ZycTNiaTduRkctVmRYU2txQmVPWC1wZGZ0ZXh0LnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Rowfeed",
+        "userPictureUrl": "https://images.apifyusercontent.com/iQ8h7joNlOs2S6AMWfqTUOj_wmVCtQB0P_vv8I6Wyh0/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20veTZPN2diM1VXSFV2dEotUkhXOUV0SzZpUlc3dEJ0Y2ZCNGZrb0Mxd0lIYy9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZXRGh3YkhCelJYUmtjbXBIYUU1b1Rta3RjSEp2Wm1sc1pTMTNaamhuUTFsWWVraHdMV2x0WVdkbExURTNPRGc1TnpRMU5qWTFOVGN1YW5Cbi5qcGc.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "eventPriceUsd": 0.007
+              },
+              "page": {
+                "eventTitle": "Page",
+                "eventDescription": "One page of extracted PDF text. Only charged when the page actually has extractable text.",
+                "eventPriceUsd": 0.0005,
+                "isPrimaryEvent": true
+              }
+            }
+          },
+          "minimalMaxTotalChargeUsd": 0.1,
+          "startedAt": "2026-10-08T07:31:24.710Z",
+          "createdAt": "2026-09-23T07:31:25.205Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutFutureChangeAt": "2026-09-23T07:31:45.390Z",
+          "notifiedAboutChangeAt": "2026-10-08T08:00:24.381Z"
+        },
+        "id": "HL6crtSVrq3bi7nFG",
+        "url": "https://apify.com/rowfeed/pdf-page-text-extractor"
+      },
+      {
+        "title": "PDF to Text & Markdown: Extract PDF Content by URL",
+        "name": "pdf-text-extractor",
+        "username": "accountable_eel",
+        "stats": {
+          "totalBuilds": 4,
+          "totalRuns": 40,
+          "totalUsers": 4,
+          "totalUsers7Days": 3,
+          "totalUsers30Days": 3,
+          "totalUsers90Days": 3,
+          "lastRunStartedAt": "2026-11-02T00:28:26.419Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 30,
+            "TIMED-OUT": 0,
+            "TOTAL": 30
+          }
+        },
+        "description": "PDF text extraction by URL: PDF to plain text or Markdown for a list of PDF URLs. Extract selected pages, split PDF text by page for chunking. Rebuilds headings and best-effort tables for a RAG pipeline, an LLM or Google Sheets, via API or n8n. No OCR: scanned PDFs are flagged, not charged.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/Aq2VnCMqZA1Ac0pATlIBRvRsxGqH1WecQdsoFUKTiyM/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vNkVMTUNxazg0eEpBSHU2SmQtYWN0b3ItaUdSd1NJaWNrZFQzdUtyVUwtMTBVU0pPSVo0VS1wZGYtdGV4dC1leHRyYWN0b3IucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Adriana Voss",
+        "userPictureUrl": "https://images.apifyusercontent.com/CGe0bLNDet-YF5zEdso7hmRkv8G729sNu_uWbXRy0eU/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vdWEwVVBjRXJSeE5hSEx2WDBJMW9pSGk4Z0x0YWdOY2VTMEhzNlhBMXBjby9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZOa1ZNVFVOeGF6ZzBlRXBCU0hVMlNtUXRjSEp2Wm1sc1pTMXZPV2RHUVc5SWRqQjJMWEJsZUdWc2N5MWhiblJ2Ym1sdkxXSmhkR2x1YVdNdE1qVTNNelF6TkMwME1UWTBOREU0TG1wd1p3LmpwZw.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "minimalMaxTotalChargeUsd": null,
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.003
+              },
+              "document": {
+                "eventTitle": "Document processed (up to 20 pages)",
+                "eventDescription": "Charged once per PDF successfully extracted, covering up to 20 pages. A miss (bad URL, not a PDF, over the 50 MB limit) and a scanned PDF with no text layer are never charged.",
+                "isOneTimeEvent": false,
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.002
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.00184
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00168
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.00152
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.00152
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.00152
+                  }
+                }
+              },
+              "page": {
+                "eventTitle": "Extra page beyond 20",
+                "eventDescription": "Charged once per extracted page beyond the first 20 in a single document.",
+                "isOneTimeEvent": false,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.0003
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.000276
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.000252
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.000228
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.000228
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.000228
+                  }
+                }
+              }
+            }
+          },
+          "reasonForChange": "The per-run start fee is increasing to cover the platform and proxy cost of runs that return no results.",
+          "createdAt": "2026-10-18T23:31:40.862Z",
+          "startedAt": "2026-10-18T23:31:40.862Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-19T00:00:30.323Z"
+        },
+        "id": "iGRwSIickdT3uKrUL",
+        "url": "https://apify.com/accountable_eel/pdf-text-extractor"
+      },
+      {
+        "title": "PDF to Markdown & Text Extractor",
+        "name": "pdf-to-markdown",
+        "username": "lintlab",
+        "stats": {
+          "totalBuilds": 18,
+          "totalRuns": 54,
+          "totalUsers": 3,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-01T12:18:23.591Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 30,
+            "TIMED-OUT": 0,
+            "TOTAL": 30
+          }
+        },
+        "description": "PDF to Markdown converter and PDF text extractor for RAG and AI agents, including scanned PDFs via OCR (7 Latin-script languages). Convert a public PDF to text or page-aware Markdown with metadata, links and simple tables; OCR reads image-only pages instead of only flagging them.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "AI"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/zPyWIliwgcdLVXPexUoH2NIMSZkuQ0Hjy_zEMwY5i-g/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vVUtVZUhWYjlDaUF1SkFhQjItYWN0b3ItT3Y1R01VcXpFaDJaVUVtY2stTTZ0b1c3N081ZC1saW50bGFiLWFwaWZ5LWljb24tNTEyLnBuZw.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "lintlab",
+        "userPictureUrl": "https://images.apifyusercontent.com/UfEQMmY_ll6M8t17Z5T_vuYAGmI_1t3n7sp0OCIv1L8/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vRzdtTGlCSFlFa0owRFdjbWp5VlRIVk85dHk3M0J0NlA1WVJPQmQ0SGxnby9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZWVXRWWlVoV1lqbERhVUYxU2tGaFFqSXRjSEp2Wm1sc1pTMXJiemRXY1dSek9YTnFMV3hwYm5Sc1lXSXRZWEJwWm5rdGFXTnZiaTAxTVRJdWNHNW4ucG5n.webp",
+        "currentPricingInfo": {
+          "pricingModel": "PAY_PER_EVENT",
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "pdf-processed": {
+                "eventTitle": "PDF processed",
+                "eventDescription": "Charged only after a usable PDF extraction or clean image-only report is saved to the dataset.",
+                "isPrimaryEvent": true,
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.003
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0027
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.00255
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0024
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0024
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0024
+                  }
+                }
+              },
+              "ocr-page": {
+                "eventTitle": "OCR page",
+                "eventDescription": "Charged per scanned or image-only page that OCR turns into at least 20 characters of text; failed or skipped pages are free.",
+                "eventTieredPricingUsd": {
+                  "FREE": {
+                    "tieredEventPriceUsd": 0.006
+                  },
+                  "BRONZE": {
+                    "tieredEventPriceUsd": 0.0054
+                  },
+                  "SILVER": {
+                    "tieredEventPriceUsd": 0.0051
+                  },
+                  "GOLD": {
+                    "tieredEventPriceUsd": 0.0048
+                  },
+                  "PLATINUM": {
+                    "tieredEventPriceUsd": 0.0048
+                  },
+                  "DIAMOND": {
+                    "tieredEventPriceUsd": 0.0048
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": "2026-10-02T06:34:03.348Z",
+          "startedAt": "2026-10-02T06:34:03.348Z",
+          "apifyMarginPercentage": 0.2,
+          "notifiedAboutChangeAt": "2026-10-02T06:35:49.199Z"
+        },
+        "id": "Ov5GMUqzEh2ZUEmck",
+        "url": "https://apify.com/lintlab/pdf-to-markdown"
+      },
+      {
+        "title": "PDF Text Extractor – Bulk PDF to Text & Markdown with OCR",
+        "name": "pdf-text-extractor",
+        "username": "gazidev",
+        "stats": {
+          "totalBuilds": 1,
+          "totalRuns": 32,
+          "totalUsers": 3,
+          "totalUsers7Days": 2,
+          "totalUsers30Days": 2,
+          "totalUsers90Days": 2,
+          "lastRunStartedAt": "2026-11-01T22:56:26.369Z",
+          "actorReviewCount": 0,
+          "actorReviewRating": 0,
+          "bookmarkCount": 0,
+          "publicActorRunStats30Days": {
+            "ABORTED": 0,
+            "FAILED": 0,
+            "SUCCEEDED": 30,
+            "TIMED-OUT": 0,
+            "TOTAL": 30
+          }
+        },
+        "description": "Extract text or clean Markdown (headings, lists, tables) from PDF URLs in bulk, or from every PDF linked on a web page. Metadata, page ranges, per-page or per-document output, OCR for scanned pages, RAG chunks. Full .md/.txt files saved to the key-value store.",
+        "categories": [
+          "AI",
+          "DEVELOPER_TOOLS",
+          "AUTOMATION"
+        ],
+        "pictureUrl": "https://images.apifyusercontent.com/wabG8A0rcDzoqG3OTzE7s0eOHQ-NY9pmeDaPx6z3oKQ/rs:fill:76:76/cb:1/aHR0cHM6Ly9hcGlmeS1pbWFnZS11cGxvYWRzLXByb2QuczMudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vYllTdHlxV1JDSWRpaGlWREUtYWN0b3ItZkY1RzE0RFhxUXhDOUVqS0stblBqNWJsY2RaZy1wZGYtdGV4dC1leHRyYWN0b3IucG5n.webp",
+        "notice": "NONE",
+        "bookmarkCount": 0,
+        "actorReviewRating": 0,
+        "actorReviewCount": 0,
+        "badge": null,
+        "isWhiteListedForAgenticPayments": true,
+        "userFullName": "Cemal Atakli",
+        "userPictureUrl": "https://images.apifyusercontent.com/-_6KzX3OUksbxUoX5ttbhyF_BHLHhwqVeLV4HSuF0lM/rs:fill:32:32/cb:1/aHR0cHM6Ly9pbWFnZXMuYXBpZnl1c2VyY29udGVudC5jb20vVG96N0R3cnVNYWV3Si1SMXN2S2ZXeVQ0RWx0dEk0dTB1RGFpU0NHSEt1RS9yczpmaWxsOjMyOjMyL2NiOjEvYUhSMGNITTZMeTloY0dsbWVTMXBiV0ZuWlMxMWNHeHZZV1J6TFhCeWIyUXVjek11ZFhNdFpXRnpkQzB4TG1GdFlYcHZibUYzY3k1amIyMHZZbGxUZEhseFYxSkRTV1JwYUdsV1JFVXRjSEp2Wm1sc1pTMU5SVXBRYkVKR1pXVnZMV3h2WjI4dWNHNW4ucG5n.webp",
+        "currentPricingInfo": {
+          "minimalMaxTotalChargeUsd": null,
+          "pricingModel": "PAY_PER_EVENT",
+          "isPriceChangeNotificationSuppressed": false,
+          "pricingPerEvent": {
+            "actorChargeEvents": {
+              "apify-actor-start": {
+                "eventTitle": "Actor Start",
+                "eventDescription": "Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).",
+                "isOneTimeEvent": true,
+                "eventPriceUsd": 0.00005
+              },
+              "pdf-page-extracted": {
+                "eventTitle": "PDF page extracted",
+                "eventDescription": "One PDF page read from the text layer (Markdown or plain text).",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.0005,
+                "isPrimaryEvent": true
+              },
+              "ocr-page": {
+                "eventTitle": "Scanned page OCR",
+                "eventDescription": "One scanned page read with OCR (instead of a text-layer page).",
+                "isOneTimeEvent": false,
+                "eventPriceUsd": 0.005
+              }
+            }
+          },
+          "startedAt": "2026-10-04T09:44:50.149Z",
+          "createdAt": "2026-10-04T09:44:50.752Z",
+          "apifyMarginPercentage": 0.2
+        },
+        "id": "fF5G14DXqQxC9EjKK",
+        "url": "https://apify.com/gazidev/pdf-text-extractor"
+      }
+    ]
+  }
+}
