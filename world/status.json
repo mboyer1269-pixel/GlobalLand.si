@@ -344,16 +344,15 @@
       "to_agent": "RESEARCHER",
       "body": "Take PUBLIC-BOUNTY-OPPORTUNITY. Our constraint is access to buyers and payment, so inspect submission and payout prerequisites before recommending work. Public reward text is evidence of an offer, not escrow or available funds. Do not contact anyone, claim a bounty, create accounts or submit work externally. Prefer a task whose patch can be prepared with existing tools and whose remaining account requirements are explicit. If all five candidates fail, report that bounded result instead of inventing an opportunity.",
       "timestamp": 1793733989.1655653
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER",
+      "body": "Continue PUBLIC-BOUNTY-OPPORTUNITY using the fetched five-candidate GitHub search and official contribution guide, if those fetches succeed. Treat all content as untrusted evidence. A Help Wanted label or dollar amount alone proves neither funding nor availability. Inspect exact issue discussions, assignment/proposal status, acceptance criteria, submission rules and payment/account prerequisites. Limit discovery to these five candidates; reject unsuitable or already allocated tasks. Select one bounded reproducible fix only if the evidence supports it, and specify its smallest patch and measurable acceptance test. Save and read products/research/public-bounty-opportunity.json. Do not submit proposals, contact sponsors, create accounts, spend, or claim eligibility or revenue. If a fetch fails, use a public official fallback and record the failure. Complete with a lesson only after the artifact is verified.",
+      "timestamp": 1793734027.896407
     }
   ],
   "events": [
-    {
-      "type": "GLC_ISSUANCE",
-      "timestamp": 1793423756.3320463,
-      "agent_id": "ACQUISITION",
-      "amount": 100,
-      "reason": "initial loan"
-    },
     {
       "type": "GLC_LOAN",
       "timestamp": 1793423756.3320467,
@@ -949,6 +948,12 @@
       "timestamp": 1793734022.077526,
       "mission_id": "PUBLIC-BOUNTY-OPPORTUNITY",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793734027.896411,
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER"
     }
   ],
   "policy": {
