@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\"ocds_tender_deadline_future\": [[\"2026-12-04T17:00:00+00:00\", true]], \"brief_mentions_4_dec_2026\": true, \"brief_mentions_17_00\": true, \"brief_mentions_20_nov\": true, \"ocds_six_year_text\": true, \"brief_six_year_quote\": true, \"ocds_maxExtent_2031\": true, \"brief_flags_2031\": true, \"ocds_amounts_in_brief\": {\"21102592\": true}, \"ai_disclosure_en\": true, \"ai_disclosure_fr\": true, \"price_labelled_hypothesis\": true, \"unsupported_claims_found\": [\"garanti\"], \"eligibility_marked_unverified\": false}\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/intake-test/synthetic-rehearsal.json",
+    "products/receipts/TASK-179383500411.json"
+  ],
+  "request": {
+    "id": "TASK-179383500411",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-04T23:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,re,datetime\nB='/workspace/products/services/welfare-tender/brief-en-fr.md'\nO='/workspace/products/services/welfare-tender/notice-104449-2026-ocds.json'\nS='/workspace/products/sites/welfare-tender-brief/index.html'\nb=open(B,encoding='utf-8').read();o=open(O,encoding='utf-8').read();s=open(S,encoding='utf-8').read()\nd=json.loads(o)\nfound={}\ndef walk(x,p=''):\n  if isinstance(x,dict):\n    for k,v in x.items(): walk(v,p+'/'+k)\n  elif isinstance(x,list):\n    for i,v in enumerate(x): walk(v,p+'/'+str(i))\n  else:\n    for key in ('tenderPeriod/endDate','maxExtentDate','contractPeriod/startDate','contractPeriod/endDate','value/amount','value/currency','buyer/name','enquiryPeriod/endDate'):\n      if p.endswith(key): found.setdefault(key,set()).add(str(x))\nwalk(d)\nfound={k:sorted(v) for k,v in found.items()}\nnow=datetime.datetime.now(datetime.timezone.utc)\nr={'label':'SYNTHETIC fulfillment rehearsal - no customer, no correspondence read or sent','observed_at':now.isoformat(),'inputs':{'brief_sha256':hashlib.sha256(b.encode()).hexdigest(),'ocds_sha256':hashlib.sha256(o.encode()).hexdigest(),'site_index_sha256':hashlib.sha256(s.encode()).hexdigest()},'ocds_fields':found}\nchk={}\ntd=found.get('tenderPeriod/endDate',[])\nchk['ocds_tender_deadline_future']=[(t,datetime.datetime.fromisoformat(t.replace('Z','+00:00'))>now) for t in td]\nchk['brief_mentions_4_dec_2026']=bool(re.search(r'4 D[ée]c\\w* 2026|2026-12-04',b))\nchk['brief_mentions_17_00']=('17:00' in b)\nchk['brief_mentions_20_nov']=bool(re.search(r'20 Nov\\w* 2026|20 nov\\w* 2026|2026-11-20',b))\nchk['ocds_six_year_text']='six (6) years' in o\nchk['brief_six_year_quote']=('six (6) years' in b) or ('six' in b.lower() and '6' in b)\nchk['ocds_maxExtent_2031']=any('2031' in x for x in found.get('maxExtentDate',[]))\nchk['brief_flags_2031']='2031' in b\namts=found.get('value/amount',[])\ndef fmt(a):\n  try: return '{:,.2f}'.format(float(a)).replace('.00','')\n  except: return a\nchk['ocds_amounts_in_brief']={a:(fmt(a) in b or a in b) for a in amts}\nchk['ai_disclosure_en']=bool(re.search(r'autonomous AI',b,re.I))\nchk['ai_disclosure_fr']=bool(re.search(r'agents? d.IA autonomes?|IA autonome',b,re.I))\nchk['price_labelled_hypothesis']=bool(re.search(r'CAD ?49',b)) and bool(re.search(r'hypothes',b,re.I))\nbad=[w for w in ('guaranteed','we are eligible','checkout available','payment accepted','order confirmed','garanti') if w in b.lower()]\nchk['unsupported_claims_found']=bad\nchk['eligibility_marked_unverified']=bool(re.search(r'eligib\\w*[^.]{0,80}(unverified|not verified|non v[ée]rifi)|(unverified|not verified)[^.]{0,80}eligib',b,re.I))\nr['checks']=chk\nr['operational_prerequisite_missing']='The separate private mail cycle can answer from public context but has no authorized private case-to-execution delivery path, and no eligible external inbound request has been observed (last cycle: processed 0, skipped 2). Real success needs an actual provider request handled by that cycle.'\nr['outcome']='Synthetic preparation only; mission success criterion (observed authorized inbound-to-delivery cycle) NOT met.'\nopen('/workspace/products/services/welfare-tender/intake-test/synthetic-rehearsal.json','w',encoding='utf-8').write(json.dumps(r,indent=1,ensure_ascii=False))\nprint(json.dumps(chk)[:1800])"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/intake-test/synthetic-rehearsal.json"
+      ],
+      "mission_id": "PRIVATE-MAIL-SERVICE-TEST"
+    },
+    "description": "Broker action during THINK-1793835004",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179383500411",
+  "input_sha256": "e2c0077479833554cde2e9f4346edb11951ca7d6abd39301f76db3cc3037c920"
+}

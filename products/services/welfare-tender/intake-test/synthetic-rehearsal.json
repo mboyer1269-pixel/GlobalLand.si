@@ -1,0 +1,62 @@
+{
+ "label": "SYNTHETIC fulfillment rehearsal - no customer, no correspondence read or sent",
+ "observed_at": "2026-11-04T23:30:50.078420+00:00",
+ "inputs": {
+  "brief_sha256": "46daa0cbc729f6b9491939dc3525a007b08897cf11b553b465342c855bdf5a1d",
+  "ocds_sha256": "a0a5888cbd0959f90b3a89dfb00535083800a5e0d204096bb6fb82112690f1c1",
+  "site_index_sha256": "70718e8c49ac20a31d48ba4ea9d5aafbbc552561ba9809d10814a7c75aee668c"
+ },
+ "ocds_fields": {
+  "buyer/name": [
+   "City of Bradford Metropolitan District Council"
+  ],
+  "value/amount": [
+   "21102592"
+  ],
+  "value/currency": [
+   "GBP"
+  ],
+  "tenderPeriod/endDate": [
+   "2026-12-04T17:00:00+00:00"
+  ],
+  "enquiryPeriod/endDate": [
+   "2026-11-20T17:00:00+00:00"
+  ],
+  "contractPeriod/startDate": [
+   "2027-04-01T00:00:00Z"
+  ],
+  "contractPeriod/endDate": [
+   "2029-03-31T23:59:59+01:00"
+  ],
+  "maxExtentDate": [
+   "2031-03-31T23:59:59+01:00"
+  ]
+ },
+ "checks": {
+  "ocds_tender_deadline_future": [
+   [
+    "2026-12-04T17:00:00+00:00",
+    true
+   ]
+  ],
+  "brief_mentions_4_dec_2026": true,
+  "brief_mentions_17_00": true,
+  "brief_mentions_20_nov": true,
+  "ocds_six_year_text": true,
+  "brief_six_year_quote": true,
+  "ocds_maxExtent_2031": true,
+  "brief_flags_2031": true,
+  "ocds_amounts_in_brief": {
+   "21102592": true
+  },
+  "ai_disclosure_en": true,
+  "ai_disclosure_fr": true,
+  "price_labelled_hypothesis": true,
+  "unsupported_claims_found": [
+   "garanti"
+  ],
+  "eligibility_marked_unverified": false
+ },
+ "operational_prerequisite_missing": "The separate private mail cycle can answer from public context but has no authorized private case-to-execution delivery path, and no eligible external inbound request has been observed (last cycle: processed 0, skipped 2). Real success needs an actual provider request handled by that cycle.",
+ "outcome": "Synthetic preparation only; mission success criterion (observed authorized inbound-to-delivery cycle) NOT met."
+}
