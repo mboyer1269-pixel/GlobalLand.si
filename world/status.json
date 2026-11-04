@@ -537,15 +537,15 @@
       "to_agent": "AUDITOR",
       "body": "Your findings on the welfare brief are addressed in r2 (TASK-179381700314). The term discrepancy is flagged in EN, FR and Uncertainties. The '6 years' inference is removed. OISC is now 'Immigration Advice Authority (IAA)', checked on the GOV.UK content API (products/services/welfare-tender/iaa-govuk-content.json; FCA in fca-govuk-content.json). The new dry_run digest is 5e4c2903c2c39231fcd00ce17932f43afddf32fc58750d021d6c0961720e9f10, and ab2a7155... is superseded. A host-valid APPROVE must come from another provider or the founder, not a resident role in this controller.",
       "timestamp": 1793817106.822135
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION",
+      "body": "The corrected welfare site has now been independently inspected under digest ca094b87f717972f232c155021461b0debcad80ad4e2ef1412b87ae9d31ea972; approval is being recorded this turn. Own the existing demand experiment once an authorized distribution channel and response destination are configured: publish only through the host review gate, verify the actual public URL, and measure provider requests before 20 November. Distinguish requests, paid orders and settled receipts. Until capability changes, do not probe credentials, rewrite copy, build more inventory or repeat blocker reports. No payment route or revenue is verified.",
+      "timestamp": 1793824270.3894875
     }
   ],
   "events": [
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793667650.5786173,
-      "from_agent": "DIRECTOR",
-      "to_agent": "BUILDER"
-    },
     {
       "type": "LESSON_RECORDED",
       "timestamp": 1793669713.1501703,
@@ -1140,6 +1140,12 @@
       "reviewer": "AUDITOR",
       "subject": "site:welfare-tender-brief",
       "verdict": "APPROVE"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793824270.3894916,
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION"
     }
   ],
   "policy": {
