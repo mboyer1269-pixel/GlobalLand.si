@@ -496,18 +496,6 @@
   ],
   "events": [
     {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793662214.4885397,
-      "mission_id": "CSV-ACTOR-UNIT-ECONOMICS",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793662285.2657738,
-      "lesson_id": "L6",
-      "agent_id": "RESEARCHER"
-    },
-    {
       "type": "COMPLETE_MISSION",
       "timestamp": 1793662285.2657776,
       "mission_id": "CSV-ACTOR-UNIT-ECONOMICS",
@@ -1092,6 +1080,18 @@
       "timestamp": 1793815970.6598115,
       "lesson_id": "L27",
       "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793816020.3767536,
+      "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793816023.232498,
+      "lesson_id": "L28",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1164,16 +1164,16 @@
       "status": "OPEN",
       "raised_by": "RESEARCHER",
       "opened_at": 1793815968.865765,
-      "reports": 1,
-      "title": "Verified tender brief ready; no approved channel or payment route to offer it to welfare-advice providers",
+      "reports": 2,
+      "title": "Welfare tender brief site bundle ready (dry_run passed); needs Cloudflare credential + independent APPROVE",
       "category": "ACCOUNT",
       "needs_founder": true,
-      "detail": "products/services/welfare-tender/brief-en-fr.md and evidence.json cover the open Bradford tender 104449-2026, checked against the official OCDS API. Questions close 20 Nov 2026 17:00 UTC and tenders close 4 Dec 2026 17:00 UTC, so the brief loses value after those dates. To test the CAD 49 follow-on hypothesis, the founder would need to supply (1) an approved publication or contact channel that is not unsolicited bulk messaging, e.g. hosting via the NO-HOSTING-ACCESS credential plus independent review, and (2) any payment route. Agents will not contact the buyer or providers, register on portals or post without this.",
+      "detail": "products/sites/welfare-tender-brief/ (index.html + llms.txt, built from products/services/welfare-tender/brief-en-fr.md) passed PUBLISH_SITE dry_run TASK-179381597311: review_digest ab2a71558a2769b90c2ed9aaaa912f4bee7ec04baf7e4c0a8ca53646666f1a92, 2 files, 7451 bytes, index sha256 90eee5de6b54d4e3bdb24819243f333bc4fb122b6e952966c1ddae8ebc1fd649. EN/FR AI disclosure, no checkout, CAD 49 labelled an unvalidated hypothesis, no personal contacts. Founder steps: (1) Cloudflare config + 0600 credential (same as NO-HOSTING-ACCESS); (2) APPROVE of site:welfare-tender-brief for this digest by another provider/founder; (3) any payment route for the follow-on. Time-sensitive: questions close 20 Nov 2026 17:00 UTC, tenders 4 Dec 2026 17:00 UTC; after that the page should be taken offline. Agents will not contact providers or the buyer.",
       "mission_id": "WELFARE-TENDER-DELIVERY",
-      "expected_gain": "First possible buyer-response test for a verified, time-limited deliverable; revenue unverified.",
+      "expected_gain": "Public, verifiable, time-limited deliverable for welfare-advice providers; first possible buyer-response signal. Revenue unverified.",
       "last_reported_by": "RESEARCHER",
-      "last_reported_at": 1793815968.865765
+      "last_reported_at": 1793816020.3767455
     }
   ],
-  "lesson_count": 27
+  "lesson_count": 28
 }

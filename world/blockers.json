@@ -48,14 +48,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "ACCOUNT",
-      "title": "Verified tender brief ready; no approved channel or payment route to offer it to welfare-advice providers",
-      "detail": "products/services/welfare-tender/brief-en-fr.md and evidence.json cover the open Bradford tender 104449-2026, checked against the official OCDS API. Questions close 20 Nov 2026 17:00 UTC and tenders close 4 Dec 2026 17:00 UTC, so the brief loses value after those dates. To test the CAD 49 follow-on hypothesis, the founder would need to supply (1) an approved publication or contact channel that is not unsolicited bulk messaging, e.g. hosting via the NO-HOSTING-ACCESS credential plus independent review, and (2) any payment route. Agents will not contact the buyer or providers, register on portals or post without this.",
+      "title": "Welfare tender brief site bundle ready (dry_run passed); needs Cloudflare credential + independent APPROVE",
+      "detail": "products/sites/welfare-tender-brief/ (index.html + llms.txt, built from products/services/welfare-tender/brief-en-fr.md) passed PUBLISH_SITE dry_run TASK-179381597311: review_digest ab2a71558a2769b90c2ed9aaaa912f4bee7ec04baf7e4c0a8ca53646666f1a92, 2 files, 7451 bytes, index sha256 90eee5de6b54d4e3bdb24819243f333bc4fb122b6e952966c1ddae8ebc1fd649. EN/FR AI disclosure, no checkout, CAD 49 labelled an unvalidated hypothesis, no personal contacts. Founder steps: (1) Cloudflare config + 0600 credential (same as NO-HOSTING-ACCESS); (2) APPROVE of site:welfare-tender-brief for this digest by another provider/founder; (3) any payment route for the follow-on. Time-sensitive: questions close 20 Nov 2026 17:00 UTC, tenders 4 Dec 2026 17:00 UTC; after that the page should be taken offline. Agents will not contact providers or the buyer.",
       "mission_id": "WELFARE-TENDER-DELIVERY",
-      "expected_gain": "First possible buyer-response test for a verified, time-limited deliverable; revenue unverified.",
+      "expected_gain": "Public, verifiable, time-limited deliverable for welfare-advice providers; first possible buyer-response signal. Revenue unverified.",
       "raised_by": "RESEARCHER",
-      "reports": 1,
+      "reports": 2,
       "opened_at": "2026-11-04T18:12:48Z",
-      "last_reported_at": "2026-11-04T18:12:48Z"
+      "last_reported_at": "2026-11-04T18:13:40Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -74,21 +74,27 @@
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-04T18:12:46Z",
-    "turns_without_outcome": 1,
+    "stalled_since": null,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-04T18:12:46Z",
-    "last_outcome_turn": "THINK-1793759403",
-    "last_productive_turn": "THINK-1793759403",
-    "last_turn": "THINK-1793815837",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1793815973",
+    "last_productive_turn": "THINK-1793815973",
+    "last_turn": "THINK-1793815973",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "WELFARE-TENDER-DELIVERY"
+      ],
+      "new_products": [
+        "products/services/welfare-tender/brief-en-fr.md",
+        "products/services/welfare-tender/evidence.json",
+        "products/services/welfare-tender/notice-104449-2026-ocds.json"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
