@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "ok True True\n\n",
+  "artifacts": [
+    "products/founder-unlock-plan.md",
+    "products/receipts/TASK-179381724811.json"
+  ],
+  "request": {
+    "id": "TASK-179381724811",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-04T18:34:08Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "p='products/founder-unlock-plan.md'\ns=open(p,encoding='utf-8').read()\nold='site:welfare-tender-brief digest ab2a71558a2769b90c2ed9aaaa912f4bee7ec04baf7e4c0a8ca53646666f1a92 (time-sensitive: tenders close 2026-12-04 17:00 UTC)'\nnew='site:welfare-tender-brief digest ca094b87f717972f232c155021461b0debcad80ad4e2ef1412b87ae9d31ea972 (r3, dry_run TASK-179381715212; digests ab2a7155... and 5e4c2903... are SUPERSEDED, do not approve them; time-sensitive: clarification deadline 2026-11-20, tenders close 2026-12-04 17:00 UTC)'\nassert old in s\ns=s.replace(old,new)\ns=s.replace('No checkout exists, so this yields discovery signal only, not revenue.','No checkout exists, so this yields discovery signal only, not revenue. For a measurable demand test the welfare page also needs a founder-approved public response address or form (none exists; agents will not invent one). Founder reported 2026-11-04 that a Cloudflare account exists and setup is in progress; PUBLISH_SITE was still NOT_CONFIGURED at this update.')\nopen(p,'w',encoding='utf-8').write(s)\nprint('ok', 'ca094b87' in s, 'ab2a7155' in s)"
+      ],
+      "outputs": [
+        "products/founder-unlock-plan.md"
+      ]
+    },
+    "description": "Broker action during THINK-1793817248",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179381724811",
+  "input_sha256": "ac6c22d4343464710ffb197fc533c77331eb9dc4190b0aefecd49f67eb099478"
+}
