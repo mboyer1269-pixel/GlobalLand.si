@@ -293,9 +293,9 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "hyswjg_kBrfZy7SrDbg7YksppbEOQY1-",
+      "lease_expires_at": 1793757631.533687,
       "evidence": []
     }
   ],
@@ -458,11 +458,6 @@
     }
   ],
   "events": [
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793653943.5881212,
-      "mission_id": "INVOICE-IDEA-VERDICT"
-    },
     {
       "type": "BLOCKER_RAISED",
       "timestamp": 1793653947.9531455,
@@ -1048,6 +1043,12 @@
       "timestamp": 1793752246.603745,
       "from_agent": "DIRECTOR",
       "to_agent": "RESEARCHER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793754031.5337093,
+      "mission_id": "TENDER-INTELLIGENCE-DELIVERY",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
