@@ -1,0 +1,20 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://rdap.verisign.com/com/v1/domain/example.com\", \"http_status\": 200, \"sha256\": \"b3adc820331024227b47ac6b7dbad08778508f95fc94478cfce4ae42b4400f0c\", \"artifact\": \"products/actors/domain-availability/tests/fixtures/verisign-example-com.json\"}",
+  "request": {
+    "id": "TASK-179382060212",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-04T19:30:02Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://rdap.verisign.com/com/v1/domain/example.com",
+      "output": "products/actors/domain-availability/tests/fixtures/verisign-example-com.json"
+    },
+    "description": "Broker action during THINK-1793820602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179382060212",
+  "input_sha256": "f65659b89bec987d7e81a61ff397da271c34ad77f98a94faea08a8b8d90fb718"
+}
