@@ -496,12 +496,6 @@
   ],
   "events": [
     {
-      "type": "MESSAGE",
-      "timestamp": 1793660448.1538393,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
-    {
       "type": "CLAIM_MISSION",
       "timestamp": 1793662214.4885397,
       "mission_id": "CSV-ACTOR-UNIT-ECONOMICS",
@@ -1092,6 +1086,12 @@
       "timestamp": 1793815968.8657784,
       "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793815970.6598115,
+      "lesson_id": "L27",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1175,5 +1175,5 @@
       "last_reported_at": 1793815968.865765
     }
   ],
-  "lesson_count": 26
+  "lesson_count": 27
 }
