@@ -74,23 +74,25 @@
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-04T21:00:39Z",
-    "turns_without_outcome": 3,
+    "stalled_since": null,
+    "turns_without_outcome": 4,
     "outcome_threshold": 12,
     "dry_since": "2026-11-04T20:31:06Z",
     "last_outcome_turn": "THINK-1793822403",
-    "last_productive_turn": "THINK-1793824202",
-    "last_turn": "THINK-1793827805",
+    "last_productive_turn": "THINK-1793829604",
+    "last_turn": "THINK-1793829604",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/welfare-tender/intake-test/synthetic-preflight.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
-      "rewritten_count": 4,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
