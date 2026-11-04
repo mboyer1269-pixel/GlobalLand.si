@@ -103,7 +103,13 @@ def run_mail_cycle(root, config):
     from mail import Mailbox
     if (config.get('agentmail') or {}).get('enabled') is not True:
         return {'enabled': False}
-    result = Mailbox(root, config).cycle(MailResponder(root, config))
+    fulfillment = (config.get('agentmail') or {}).get('fulfillment') or {}
+    if isinstance(fulfillment, dict) and fulfillment.get('enabled') is True:
+        from private_work import PrivateResponder
+        responder = PrivateResponder(root, config)
+    else:
+        responder = MailResponder(root, config)
+    result = Mailbox(root, config).cycle(responder)
     # Fixed aggregate fields only: normal planners can observe service health,
     # but correspondence and generated replies stay out of the public world.
     observed = {k: v for k, v in result.items()

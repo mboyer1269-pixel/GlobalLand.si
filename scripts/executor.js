@@ -5,7 +5,7 @@ function safe(name){if(typeof name!=='string'||!name.startsWith('products/')||na
 function collect(root,names){let total=0;const files={};if(!Array.isArray(names)||names.length>64)throw Error('output count');
  for(const name of names){safe(name);let p=root;for(const part of name.split('/')){p=path.join(p,part);if(fs.lstatSync(p).isSymbolicLink())throw Error('symlink output');}
  const stat=fs.statSync(p);total+=stat.size;if(!stat.isFile()||stat.nlink!==1||stat.size>1024*1024||total>8*1024*1024)throw Error('artifact limit');
- const raw=fs.readFileSync(p),text=new TextDecoder('utf-8',{fatal:true}).decode(raw);files[name]=text;}
+ const raw=fs.readFileSync(p),text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(raw);files[name]=text;}
  return files;
 }
 function execute(input='/input',root='/workspace',request='/request.json'){

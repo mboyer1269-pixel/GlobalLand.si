@@ -349,6 +349,7 @@ class Mailbox:
                             result['unknown'] += 1
                     except MailError:
                         pass  # Corrupt records remain immutable; handled per-message.
+                retries = []
                 for item in self.client.list_received():
                     mid = item.get('message_id')
                     try:
@@ -358,6 +359,11 @@ class Mailbox:
                                 or previous['retry_after'] > time.time()):
                             result['skipped'] += 1
                             continue
+                        if previous is not None:
+                            # Fresh messages get a turn before due retries, even
+                            # when polling runs more slowly than retry backoff.
+                            retries.append((mid, path, previous))
+                            continue
                     except Exception:
                         result['failed'] += 1
                         continue
@@ -365,6 +371,12 @@ class Mailbox:
                     self._process(mid, path, responder, result, previous)
                     if result['processed'] >= self.settings['max_messages_per_cycle']:
                         break
+                if result['processed'] < self.settings['max_messages_per_cycle']:
+                    for mid, path, previous in retries:
+                        result['processed'] += 1
+                        self._process(mid, path, responder, result, previous)
+                        if result['processed'] >= self.settings['max_messages_per_cycle']:
+                            break
         except Exception:
             result['failed'] += 1
         return result
@@ -410,7 +422,20 @@ class Mailbox:
             record.update(state='ACCEPTED', outbound_message_id=response['message_id'])
             self._save(path, record)
             result['accepted'] += 1
-        except Exception:
+        except Exception as error:
+            if not started and getattr(type(error), 'private_deferred', False) is True:
+                result['processed'] -= 1
+                result['skipped'] += 1
+                if getattr(error, 'progressed', True):
+                    # A partial computation is neither sent nor terminally
+                    # ignored. Delay it while other cases use the shared budget.
+                    record.update(state='RETRY', attempts=(previous or {}).get('attempts', 0) + 1,
+                                  retry_after=int(time.time()) + 600)
+                    try:
+                        self._save(path, record)
+                    except Exception:
+                        result['failed'] += 1
+                return
             record['state'] = 'UNKNOWN' if started else 'RETRY'
             if not started:
                 attempts = (previous or {}).get('attempts', 0) + 1
