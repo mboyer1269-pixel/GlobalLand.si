@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "products/actors/domain-availability/src/core.py 4325\n\n",
+  "artifacts": [
+    "products/actors/domain-availability/src/core.py",
+    "products/receipts/TASK-179382060214.json"
+  ],
+  "request": {
+    "id": "TASK-179382060214",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-04T19:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import sys,pathlib;p=pathlib.Path(sys.argv[1]);p.parent.mkdir(parents=True,exist_ok=True);open(p,sys.argv[2],encoding='utf-8').write(sys.argv[3]);print(p,p.stat().st_size)",
+        "products/actors/domain-availability/src/core.py",
+        "w",
+        "import http.client\nimport json\nimport re\nimport socket\nimport ssl\nimport time\nfrom concurrent.futures import ThreadPoolExecutor\nfrom datetime import datetime, timezone\nfrom pathlib import Path\nfrom urllib.parse import urljoin, urlsplit\n\nfrom .public_http import request, PublicHTTPError\n\nMAX_DOMAINS = 1000\nMAX_BODY = 262144\nMAX_REDIRECTS = 3\nUSER_AGENT = 'GlobalLand-domain-availability/0.1 (Apify Actor built and maintained by autonomous AI agents)'\nBOOTSTRAP_PATH = Path(__file__).resolve().parent.parent / 'data' / 'rdap-dns-bootstrap.json'\nREDIRECTS = (301, 302, 303, 307, 308)\n_LABEL = re.compile(r'^(?!-)[a-z0-9-]{1,63}(?<!-)$')\n\n\ndef normalize_domain(raw):\n    if not isinstance(raw, str):\n        return None\n    d = raw.strip().lower()\n    if '://' in d:\n        try:\n            d = urlsplit(d).hostname or ''\n        except ValueError:\n            return None\n    d = d.rstrip('.')\n    if not d or any(c.isspace() for c in d):\n        return None\n    try:\n        d = d.encode('idna').decode('ascii')\n    except UnicodeError:\n        return None\n    labels = d.split('.')\n    if len(d) > 253 or len(labels) < 2 or labels[-1].isdigit() or not all(_LABEL.match(x) for x in labels):\n        return None\n    return d\n\n\ndef normalize_domains(values, limit=MAX_DOMAINS):\n    if isinstance(values, str):\n        values = values.splitlines()\n    if not isinstance(values, list):\n        return []\n    out, seen = [], set()\n    for raw in values:\n        if isinstance(raw, str) and not raw.strip():\n            continue\n        d = normalize_domain(raw)\n        key = d or ('invalid:' + repr(raw))\n        if key in seen:\n            continue\n        seen.add(key)\n        out.append((raw, d))\n        if len(out) >= limit:\n            break\n    return out\n\n\ndef load_bootstrap(path=BOOTSTRAP_PATH):\n    data = json.loads(Path(path).read_text(encoding='utf-8'))\n    mapping = {}\n    for entry in data.get('services', []):\n        tlds, urls = entry[0], entry[1]\n        https = [u for u in urls if isinstance(u, str) and u.startswith('https://')]\n        if not https:\n            continue\n        base = https[0] if https[0].endswith('/') else https[0] + '/'\n        for t in tlds:\n            mapping[t.lower()] = base\n    return mapping\n\n\ndef find_server(domain, mapping):\n    if not domain:\n        return None\n    labels = domain.split('.')\n    for i in range(1, len(labels)):\n        base = mapping.get('.'.join(labels[i:]))\n        if base:\n            return base\n    return None\n\n\ndef _row(raw, domain):\n    return {'input': raw if isinstance(raw, str) else repr(raw), 'domain': domain, 'available': None,\n            'rdap_status_code': None, 'statuses': [], 'registered_at': None, 'expires_at': None,\n            'registrar': None, 'nameservers': [], 'rdap_server': None, 'redirect_count': 0,\n            'error_code': None, 'error': None, 'elapsed_ms': 0, 'checked_at': None}\n\n\ndef _vcard_fn(vcard):\n    try:\n        for prop in vcard[1]:\n            if prop[0] == 'fn' and isinstance(prop[3], str) and prop[3].strip():\n                return prop[3].strip()[:200]\n    except (TypeError, IndexError, KeyError):\n        pass\n    return None\n\n\ndef _extract(row, doc):\n    # Only registry facts are kept: status, dates, registrar organisation, nameservers.\n    # Registrant, admin, tech, abuse and any other contact entity are never read.\n    statuses = doc.get('status')\n    if isinstance(statuses, list):\n        row['statuses'] = [s for s in statuses if isinstance(s, str)][:20]\n    for ev in doc.get('events') or []:\n        if not isinstance(ev, dict) or not isinstance(ev.get('eventDate'), str):\n            continue\n        if ev.get('eventAction') == 'registration' and row['registered_at'] is None:\n            row['registered_at'] = ev['eventDate']\n        elif ev.get('eventAction') == 'expiration' and row['expires_at'] is None:\n            row['expires_at'] = ev['eventDate']\n    for ent in doc.get('entities') or []:\n        if isinstance(ent, dict) and 'registrar' in (ent.get('roles') or []):\n            row['registrar'] = _vcard_fn(ent.get('vcardArray'))\n            break\n    ns = doc.get('nameservers')\n    if isinstance(ns, list):\n        row['nameservers'] = [n['ldhName'].lower() for n in ns\n                              if isinstance(n, dict) and isinstance(n.get('ldhName'), str)][:20]\n"
+      ],
+      "outputs": [
+        "products/actors/domain-availability/src/core.py"
+      ],
+      "mission_id": "DOMAIN-RDAP-BUILD"
+    },
+    "description": "Broker action during THINK-1793820602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179382060214",
+  "input_sha256": "9a7e1358e4f151664eabc60eb1d6583a4d8dcda77d0aa4eeb3a89d1858d1ee99"
+}
