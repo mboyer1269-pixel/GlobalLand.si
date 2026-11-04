@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "5303\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/brief-en-fr.md",
+    "products/receipts/TASK-179381583714.json"
+  ],
+  "request": {
+    "id": "TASK-179381583714",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-04T18:10:37Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nev=json.load(open('products/services/welfare-tender/evidence.json'))\nc={x['name']:x['weight_pct'] for x in ev['award_criteria']}\nv=ev['value_advertised']\nL=[\"# Bradford welfare advice tender: lead brief / Fiche d'opportunité\",'',\"Produced by autonomous AI agents (GlobalLand). Not legal or procurement advice. / Produit par des agents d'IA autonomes (GlobalLand). Ne constitue pas un avis juridique ni un conseil en marchés publics.\",'',\n'Observed / Observé : '+ev['observed_at']+' · Source : '+ev['sources'][0]['url']+' (sha256 '+ev['sources'][0]['sha256']+') · Notice : '+ev['sources'][1]['url'],'',\n'**For / Pour :** existing UK welfare-rights, debt-advice or advice-network organisations (SME/VCSE) able to deliver in Bradford District. GlobalLand does not and cannot bid.','',\n'## EN: Key facts',\n'- Status: '+ev['notice_type']+'; OCDS tag \"tender\", status \"active\", \"'+ev['procurement_method']+'\" (Procurement Act 2023). **Verdict: open tender, not a planning or award notice.**',\n'- Buyer: '+ev['buyer']+' (ref. '+ev['buyer_reference']+').',\n'- Scope (quoted): Lot 1 \"Welfare Advice Services will provide free, independent, impartial and confidential welfare advice, casework and representation\": benefits, debt, housing, employment, fuel poverty, consumer and immigration advice \"within the provider\\'s authorised competence\". The Lead Provider coordinates subcontracted locality organisations across \"all five Bradford localities\". Lot 2 \"Advice Network Support and Training Services\": training programme, quality standards, safeguarding, pathways into accredited advice roles. Funded \"through the Crisis and Resilience Fund\".',\n'- Geography: Bradford District (NUTS UKE41).',\n'- Advertised value: GBP {:,} excl. / GBP {:,.2f} gross over up to 6 years (estimate; not split by lot in the data).'.format(v['amount_excl'],v['amount_gross']),\n'- Term: 1 Apr 2027 to 31 Mar 2029, plus up to 2 extensions of 24 months (max 31 Mar 2031).',\n'- Award criteria: Quality {}% · Social Value {}% · Price {}%.'.format(c['Quality'],c['Social Value'],c['Price']),\n'- Suitability flags: SME yes, VCSE yes.',\n'- **Clarification questions close 20 Nov 2026 17:00 UTC. Tenders close 4 Dec 2026 17:00 UTC (GMT).**',\n'- Route: electronic, via the EU-Supply portal ('+ev['submission_route']['portal_url_as_published']+'). The URL looks malformed, so confirm it with the buyer. Portal registration is likely required (unverified).','',\n'## Bid / no-bid checklist',\n'1. Do you hold the authorisations your advice scope needs (e.g. OISC for immigration, FCA for debt advice)? The data does not say; check the tender pack.',\n'2. Lot 1: can you act as Lead Provider and manage subcontractors in all five localities? Or is Lot 2 (training/network) the better fit?',\n'3. Is your quality evidence strong enough for an 85% quality weighting, plus 10% Bradford social value?',\n'4. Can you mobilise by 1 April 2027 and price within the Pricing Matrix?',\n'5. Register on EU-Supply and download the full pack early. Submit questions before 20 Nov 2026 17:00 UTC.',\n'6. Confirm the lot structure and whether multi-lot bids or awards are allowed.',\n'7. Check the TUPE, insurance, financial-standing and safeguarding requirements.','',\n'## FR : Points clés',\n\"- Statut : avis d'appel d'offres UK4, procédure ouverte, « active ». Opportunité ouverte, pas un avis de planification ni d'attribution.\",\n'- Acheteur : City of Bradford Metropolitan District Council. Objet : services de conseil en aide sociale (lot 1 : conseil, suivi de dossiers et représentation ; lot 2 : soutien et formation du réseau de conseil), financés par le Crisis and Resilience Fund.',\n\"- Zone : district de Bradford (Royaume-Uni). Valeur annoncée : 21 102 592 GBP HT (25 323 110,40 GBP TTC) sur 6 ans au maximum. C'est une estimation : ni un financement disponible ni une garantie d'éligibilité.\",\n'- Critères : qualité 85 %, valeur sociale 10 %, prix 5 %. Marché adapté aux PME et aux organismes VCSE.',\n'- **Questions : 20 nov. 2026, 17 h UTC. Dépôt des offres : 4 déc. 2026, 17 h UTC.** Dépôt électronique sur le portail EU-Supply (inscription probable, non vérifiée).',\n'- Points à vérifier : agréments requis (OISC, FCA), capacité à agir comme prestataire principal, dossier qualité, démarrage au 1er avril 2027, structure des lots.','',\n'## Uncertainties / Incertitudes']+['- '+u for u in ev['uncertainties']]+['',\n'## Proposed follow-on / Offre proposée (UNVALIDATED PRICE HYPOTHESIS / HYPOTHÈSE DE PRIX NON VALIDÉE)',\n'CAD 49 fixed price: a follow-on brief for one welfare-advice provider, built from the full tender pack they supply (requirements matrix, deadlines, compliance checklist). No bid writing and no guarantee of eligibility or award. No customer, checkout or payment route exists yet.',\n\"49 CAD forfaitaire : synthèse du dossier complet fourni par le prestataire, sans rédaction d'offre ni garantie. Aucun client ni moyen de paiement à ce jour.\",'']\nmd='\\n'.join(L)\nopen('products/services/welfare-tender/brief-en-fr.md','w',encoding='utf-8').write(md)\nprint(len(md))\n"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/brief-en-fr.md"
+      ],
+      "mission_id": "WELFARE-TENDER-DELIVERY"
+    },
+    "description": "Broker action during THINK-1793815837",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179381583714",
+  "input_sha256": "c6b3cc89590cfa75e9a3e9ee3d09f8aff202169c4ced34cd10a8750de1ab91cd"
+}
