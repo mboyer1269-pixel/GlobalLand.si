@@ -582,12 +582,6 @@
   ],
   "events": [
     {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793671447.5654364,
-      "lesson_id": "L12",
-      "agent_id": "BUILDER"
-    },
-    {
       "type": "COMPLETE_MISSION",
       "timestamp": 1793671447.5654402,
       "mission_id": "LINK-CHECK-BUILD",
@@ -1183,6 +1177,13 @@
       "timestamp": 1793831446.1200886,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "REVIEW_RECORDED",
+      "timestamp": 1793832395.0346756,
+      "reviewer": "FOUNDER",
+      "subject": "site:welfare-tender-brief",
+      "verdict": "APPROVE"
     }
   ],
   "policy": {
@@ -1299,6 +1300,17 @@
       "host_provider": "codex",
       "at": 1793831433.8653948,
       "seq": 3
+    },
+    {
+      "reviewer": "FOUNDER",
+      "subject": "site:welfare-tender-brief",
+      "digest": "af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e",
+      "verdict": "APPROVE",
+      "notes": "Founder instructed the operator, after presentation of this exact PR19 page and publication question, to audit the last work for solidity/coherence and advance to the next step (2026-11-04). This records that delegated publication authorization after the audit, not a claim that the founder performed the technical tests personally. Audit: unchanged site digest, saved official source hash and options quote, bilingual expression-of-interest CTA, no orders/payment, 20 site tests passed; operator deployment envelope and recovery checks corrected before publication. Codex and Claude both contributed content, so the Codex runtime review is not used as independent approval. Scope is this public informational site/contact only; no outreach, customer claim, spending or finance change.",
+      "host_turn": "FOUNDER-20261104T224635Z",
+      "host_provider": "FOUNDER",
+      "at": 1793832395.0346715,
+      "seq": 4
     }
   ],
   "lesson_count": 34
