@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "products/sites/welfare-tender-brief/index.html 8326 5e426c06b476\nproducts/services/welfare-tender/brief-en-fr.md 6491 f692be1e9996\nllms flags []\nok\n\n",
+  "artifacts": [
+    "products/sites/welfare-tender-brief/index.html",
+    "products/services/welfare-tender/brief-en-fr.md",
+    "products/services/welfare-tender/evidence.json",
+    "products/receipts/TASK-179381700314.json"
+  ],
+  "request": {
+    "id": "TASK-179381700314",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-04T18:30:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib\nB='products/services/welfare-tender/'\nfca=json.load(open(B+'fca-govuk-content.json'));iaa=json.load(open(B+'iaa-govuk-content.json'))\nassert fca.get('title')=='Financial Conduct Authority',fca.get('title')\nassert iaa.get('title')=='Immigration Advice Authority'\nd=json.load(open(B+'notice-104449-2026-ocds.json'))\nlot=d['releases'][0]['tender']['lots'][0]\nassert lot['contractPeriod']['maxExtentDate'].startswith('2031-03-31') and 'two (2) periods of twenty-four (24)' in lot['renewal']['description']\nS='**';E='**'\ndef reps(html):\n  b0,b1=('<strong>','</strong>') if html else ('**','**')\n  li='<li>' if html else '- '\n  end='</li>' if html else ''\n  nl='' if html else '\\n'\n  term=('Term: initial period 1 Apr 2027 to 31 Mar 2029 (structured contractPeriod). '+b0+'Discrepancy in the official data:'+b1+' the renewal text allows \"up to two (2) periods of twenty-four (24) months each\", which would reach 31 Mar 2033, but the structured maxExtentDate is 31 Mar 2031 (one 24-month extension). The maximum term is unresolved; ask the buyer before the 20 Nov question deadline.')\n  fr=(li+'Durée : période initiale du 1er avril 2027 au 31 mars 2029. '+b0+'Incohérence dans les données officielles :'+b1+' le texte autorise jusqu’à deux prolongations de 24 mois (soit jusqu’au 31 mars 2033), mais la date maximale structurée est le 31 mars 2031. Durée maximale à confirmer auprès de l’acheteur.'+end+nl)\n  unc=(li+'Maximum term inconsistent in source: maxExtentDate 2031-03-31 vs renewal text allowing two 24-month extensions (2033-03-31). The period covered by the advertised value is not stated.'+end+nl+li+'Regulator names checked on the GOV.UK content API on 2026-11-04: Immigration Advice Authority (IAA, status live) and Financial Conduct Authority (FCA). Whether this tender requires either is unverified.'+end+nl)\n  return [(' over up to 6 years (estimate; not split by lot in the data).',' (estimate; the data does not state which period this value covers and does not split it by lot).'),\n   ('Term: 1 Apr 2027 to 31 Mar 2029, plus up to 2 extensions of 24 months (max 31 Mar 2031).',term),\n   ('e.g. OISC for immigration, FCA for debt advice','e.g. Immigration Advice Authority (IAA) registration for immigration advice, Financial Conduct Authority (FCA) authorisation for debt advice'),\n   (' sur 6 ans au maximum.',' (période couverte non précisée dans les données).'),\n   (li+'Critères',fr+li+'Critères'),\n   ('agréments requis (OISC, FCA)','agréments requis (IAA pour l’immigration, FCA pour le conseil en endettement)'),\n   ('OISC/FCA authorisation','IAA/FCA authorisation'),\n   (li+'HTML notice returned',unc+li+'HTML notice returned')]\nfor p,h in [('products/sites/welfare-tender-brief/index.html',1),(B+'brief-en-fr.md',0)]:\n  t=open(p,encoding='utf-8').read()\n  for a,b in reps(h):\n    assert t.count(a)==1,(p,a,t.count(a))\n    t=t.replace(a,b)\n  assert 'OISC' not in t and '6 years' not in t and '6 ans' not in t\n  open(p,'w',encoding='utf-8').write(t);print(p,len(t),hashlib.sha256(t.encode()).hexdigest()[:12])\nl='products/sites/welfare-tender-brief/llms.txt';t=open(l,encoding='utf-8').read()\nprint('llms flags',[k for k in ['OISC','6 years','2031','extensions'] if k in t])\nev=json.load(open(B+'evidence.json'))\nev['uncertainties']=[u.replace('OISC/FCA','IAA/FCA') for u in ev['uncertainties']]\nev['uncertainties'].insert(0,'Maximum term inconsistent in source: maxExtentDate 2031-03-31 vs renewal text allowing two 24-month extensions (would be 2033-03-31). Period covered by advertised value not stated; earlier \"up to 6 years\" wording removed as unsupported.')\nev['regulator_name_checks']=[{'url':'https://www.gov.uk/api/content/government/organisations/immigration-advice-authority','title':iaa['title'],'status':iaa['details'].get('organisation_govuk_status',{}).get('status'),'artifact':B+'iaa-govuk-content.json','observed':'2026-11-04'},{'url':'https://www.gov.uk/api/content/government/organisations/financial-conduct-authority','title':fca['title'],'artifact':B+'fca-govuk-content.json','observed':'2026-11-04'}]\nev['revision']='2026-11-04 r2: term discrepancy flagged, unsupported 6-year inference removed, OISC replaced by current name IAA.'\njson.dump(ev,open(B+'evidence.json','w'),indent=2,ensure_ascii=False);print('ok')"
+      ],
+      "outputs": [
+        "products/sites/welfare-tender-brief/index.html",
+        "products/services/welfare-tender/brief-en-fr.md",
+        "products/services/welfare-tender/evidence.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793817003",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179381700314",
+  "input_sha256": "18c0ea29b4e63d4f0ee51426a7d706b671b909180a1b4a6255232b4315c877e3"
+}

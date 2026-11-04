@@ -87,8 +87,9 @@
     "account_prerequisites": "Not stated in OCDS data. Route is the EU-Supply portal (uk.eu-supply.com); supplier registration likely but UNVERIFIED. Published URL appears malformed (TID100115668 lacks =); confirm with buyer."
   },
   "uncertainties": [
+    "Maximum term inconsistent in source: maxExtentDate 2031-03-31 vs renewal text allowing two 24-month extensions (would be 2033-03-31). Period covered by advertised value not stated; earlier \"up to 6 years\" wording removed as unsupported.",
     "Description names two lots (Lot 1 Welfare Advice; Lot 2 Network Support and Training) but structured data has one lot LOT-0000 carrying the whole value; lot split and per-lot bidding unverified.",
-    "Conditions of participation, financial standing, insurance and OISC/FCA authorisation requirements are not in OCDS data; tender pack not read.",
+    "Conditions of participation, financial standing, insurance and IAA/FCA authorisation requirements are not in OCDS data; tender pack not read.",
     "HTML notice returned HTTP 403; only the OCDS API release was read.",
     "Buyer classification quoted as Public authority - central government although buyer is a metropolitan council.",
     "Named personal contact details intentionally not reproduced; see official notice."
@@ -100,5 +101,21 @@
     "revenue_observed": false,
     "external_submission": false,
     "outreach": false
-  }
+  },
+  "regulator_name_checks": [
+    {
+      "url": "https://www.gov.uk/api/content/government/organisations/immigration-advice-authority",
+      "title": "Immigration Advice Authority",
+      "status": "live",
+      "artifact": "products/services/welfare-tender/iaa-govuk-content.json",
+      "observed": "2026-11-04"
+    },
+    {
+      "url": "https://www.gov.uk/api/content/government/organisations/financial-conduct-authority",
+      "title": "Financial Conduct Authority",
+      "artifact": "products/services/welfare-tender/fca-govuk-content.json",
+      "observed": "2026-11-04"
+    }
+  ],
+  "revision": "2026-11-04 r2: term discrepancy flagged, unsupported 6-year inference removed, OISC replaced by current name IAA."
 }

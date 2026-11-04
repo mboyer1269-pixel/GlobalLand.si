@@ -11,15 +11,15 @@ Observed / Observé : 2026-11-04T18:11:55.750312+00:00 · Source : https://www.f
 - Buyer: City of Bradford Metropolitan District Council (ref. CBMC-PTR-291-2026-27).
 - Scope (quoted): Lot 1 "Welfare Advice Services will provide free, independent, impartial and confidential welfare advice, casework and representation": benefits, debt, housing, employment, fuel poverty, consumer and immigration advice "within the provider's authorised competence". The Lead Provider coordinates subcontracted locality organisations across "all five Bradford localities". Lot 2 "Advice Network Support and Training Services": training programme, quality standards, safeguarding, pathways into accredited advice roles. Funded "through the Crisis and Resilience Fund".
 - Geography: Bradford District (NUTS UKE41).
-- Advertised value: GBP 21,102,592 excl. / GBP 25,323,110.40 gross over up to 6 years (estimate; not split by lot in the data).
-- Term: 1 Apr 2027 to 31 Mar 2029, plus up to 2 extensions of 24 months (max 31 Mar 2031).
+- Advertised value: GBP 21,102,592 excl. / GBP 25,323,110.40 gross (estimate; the data does not state which period this value covers and does not split it by lot).
+- Term: initial period 1 Apr 2027 to 31 Mar 2029 (structured contractPeriod). **Discrepancy in the official data:** the renewal text allows "up to two (2) periods of twenty-four (24) months each", which would reach 31 Mar 2033, but the structured maxExtentDate is 31 Mar 2031 (one 24-month extension). The maximum term is unresolved; ask the buyer before the 20 Nov question deadline.
 - Award criteria: Quality 85% · Social Value 10% · Price 5%.
 - Suitability flags: SME yes, VCSE yes.
 - **Clarification questions close 20 Nov 2026 17:00 UTC. Tenders close 4 Dec 2026 17:00 UTC (GMT).**
 - Route: electronic, via the EU-Supply portal (https://uk.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=110669&TID100115668&B=). The URL looks malformed, so confirm it with the buyer. Portal registration is likely required (unverified).
 
 ## Bid / no-bid checklist
-1. Do you hold the authorisations your advice scope needs (e.g. OISC for immigration, FCA for debt advice)? The data does not say; check the tender pack.
+1. Do you hold the authorisations your advice scope needs (e.g. Immigration Advice Authority (IAA) registration for immigration advice, Financial Conduct Authority (FCA) authorisation for debt advice)? The data does not say; check the tender pack.
 2. Lot 1: can you act as Lead Provider and manage subcontractors in all five localities? Or is Lot 2 (training/network) the better fit?
 3. Is your quality evidence strong enough for an 85% quality weighting, plus 10% Bradford social value?
 4. Can you mobilise by 1 April 2027 and price within the Pricing Matrix?
@@ -30,14 +30,17 @@ Observed / Observé : 2026-11-04T18:11:55.750312+00:00 · Source : https://www.f
 ## FR : Points clés
 - Statut : avis d'appel d'offres UK4, procédure ouverte, « active ». Opportunité ouverte, pas un avis de planification ni d'attribution.
 - Acheteur : City of Bradford Metropolitan District Council. Objet : services de conseil en aide sociale (lot 1 : conseil, suivi de dossiers et représentation ; lot 2 : soutien et formation du réseau de conseil), financés par le Crisis and Resilience Fund.
-- Zone : district de Bradford (Royaume-Uni). Valeur annoncée : 21 102 592 GBP HT (25 323 110,40 GBP TTC) sur 6 ans au maximum. C'est une estimation : ni un financement disponible ni une garantie d'éligibilité.
+- Zone : district de Bradford (Royaume-Uni). Valeur annoncée : 21 102 592 GBP HT (25 323 110,40 GBP TTC) (période couverte non précisée dans les données). C'est une estimation : ni un financement disponible ni une garantie d'éligibilité.
+- Durée : période initiale du 1er avril 2027 au 31 mars 2029. **Incohérence dans les données officielles :** le texte autorise jusqu’à deux prolongations de 24 mois (soit jusqu’au 31 mars 2033), mais la date maximale structurée est le 31 mars 2031. Durée maximale à confirmer auprès de l’acheteur.
 - Critères : qualité 85 %, valeur sociale 10 %, prix 5 %. Marché adapté aux PME et aux organismes VCSE.
 - **Questions : 20 nov. 2026, 17 h UTC. Dépôt des offres : 4 déc. 2026, 17 h UTC.** Dépôt électronique sur le portail EU-Supply (inscription probable, non vérifiée).
-- Points à vérifier : agréments requis (OISC, FCA), capacité à agir comme prestataire principal, dossier qualité, démarrage au 1er avril 2027, structure des lots.
+- Points à vérifier : agréments requis (IAA pour l’immigration, FCA pour le conseil en endettement), capacité à agir comme prestataire principal, dossier qualité, démarrage au 1er avril 2027, structure des lots.
 
 ## Uncertainties / Incertitudes
 - Description names two lots (Lot 1 Welfare Advice; Lot 2 Network Support and Training) but structured data has one lot LOT-0000 carrying the whole value; lot split and per-lot bidding unverified.
-- Conditions of participation, financial standing, insurance and OISC/FCA authorisation requirements are not in OCDS data; tender pack not read.
+- Conditions of participation, financial standing, insurance and IAA/FCA authorisation requirements are not in OCDS data; tender pack not read.
+- Maximum term inconsistent in source: maxExtentDate 2031-03-31 vs renewal text allowing two 24-month extensions (2033-03-31). The period covered by the advertised value is not stated.
+- Regulator names checked on the GOV.UK content API on 2026-11-04: Immigration Advice Authority (IAA, status live) and Financial Conduct Authority (FCA). Whether this tender requires either is unverified.
 - HTML notice returned HTTP 403; only the OCDS API release was read.
 - Buyer classification quoted as Public authority - central government although buyer is a metropolitan council.
 - Named personal contact details intentionally not reproduced; see official notice.
