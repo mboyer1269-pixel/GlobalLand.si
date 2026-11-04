@@ -60,21 +60,26 @@
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-04T01:30:22Z",
-    "turns_without_outcome": 2,
+    "stalled_since": null,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-04T01:30:22Z",
-    "last_outcome_turn": "THINK-1793754002",
-    "last_productive_turn": "THINK-1793754002",
-    "last_turn": "THINK-1793757603",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1793759403",
+    "last_productive_turn": "THINK-1793759403",
+    "last_turn": "THINK-1793759403",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "TENDER-INTELLIGENCE-DELIVERY"
+      ],
+      "new_products": [
+        "products/services/tender-intelligence/bounded-result.json",
+        "products/services/tender-intelligence/brief-en-fr.md"
+      ],
+      "new_product_count": 2,
       "new_research_count": 1,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
