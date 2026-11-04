@@ -63,20 +63,21 @@
     "stalled_turns": 0,
     "threshold": 3,
     "stalled_since": null,
-    "turns_without_outcome": 6,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-03T22:00:27Z",
-    "last_outcome_turn": "THINK-1793741402",
-    "last_productive_turn": "THINK-1793752202",
-    "last_turn": "THINK-1793752202",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1793754002",
+    "last_productive_turn": "THINK-1793754002",
+    "last_turn": "THINK-1793754002",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/docs-repair/request-fulfillment/final-verdict.json"
+      "outcome": true,
+      "mission_outcomes": [
+        "ALTERNATIVE-PAID-REQUEST",
+        "DOCS-REQUEST-FULFILLMENT"
       ],
-      "new_product_count": 1,
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 1,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
