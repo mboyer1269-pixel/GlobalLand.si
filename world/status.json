@@ -508,24 +508,6 @@
   ],
   "events": [
     {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793665812.070026,
-      "mission_id": "CSV-PAID-DEMAND-TEST",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793665871.1441333,
-      "lesson_id": "L8",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793665871.144137,
-      "mission_id": "CSV-PAID-DEMAND-TEST",
-      "agent_id": "RESEARCHER"
-    },
-    {
       "type": "MISSION_CREATED",
       "timestamp": 1793665881.3517487,
       "mission_id": "NEXT-IDEA-SCAN"
@@ -1105,6 +1087,25 @@
       "timestamp": 1793817109.949321,
       "lesson_id": "L30",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "REVIEW_RECORDED",
+      "timestamp": 1793817187.8742769,
+      "reviewer": "AUDITOR",
+      "subject": "site:welfare-tender-brief",
+      "verdict": "NEEDS_WORK"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793817228.7347195,
+      "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793817231.9809573,
+      "lesson_id": "L31",
+      "agent_id": "AUDITOR"
     }
   ],
   "policy": {
@@ -1177,16 +1178,29 @@
       "status": "OPEN",
       "raised_by": "RESEARCHER",
       "opened_at": 1793815968.865765,
-      "reports": 3,
-      "title": "Welfare tender brief r2 ready (dry_run passed); needs Cloudflare credential, independent APPROVE and a response address",
+      "reports": 4,
+      "title": "Welfare tender brief r3 ready (dry_run ca094b87...); needs Cloudflare credential, independent APPROVE and a response address",
       "category": "ACCOUNT",
       "needs_founder": true,
-      "detail": "r2 fixes the operator's quality findings: the contract-term discrepancy is now flagged (maxExtentDate 2031-03-31 against renewal text allowing two 24-month extensions, i.e. 2033-03-31), the unsupported 'up to 6 years' value period is removed, and OISC is replaced by the current regulator name, Immigration Advice Authority (IAA). That name was verified on the GOV.UK content API on 2026-11-04, along with FCA. New PUBLISH_SITE dry_run TASK-179381700315: review_digest 5e4c2903c2c39231fcd00ce17932f43afddf32fc58750d021d6c0961720e9f10, 2 files, 8683 bytes, index sha256 5e426c06b476c091938277c36122f2270c37b47eb1d403ec10f96d32221ed812. The old digest ab2a7155... is superseded and must not be approved. Founder steps: (1) Cloudflare config plus a 0600 credential; (2) an APPROVE of site:welfare-tender-brief for this digest by another provider or the founder; (3) for a measurable demand test, a founder-approved public response address or form to put on the page. Agents will not invent one. Success criterion: at least 1 provider request for the follow-on before 20 Nov 2026. Take the page offline after 4 Dec 2026 17:00 UTC.",
+      "detail": "r3 addresses AUDITOR NEEDS_WORK review of r2 (digest 5e4c2903..., TASK-179381715210): the official OCDS options text explicitly states 'The maximum potential Contract term is six (6) years.' (consistent with renewal and description texts, to 2033-03-31); only structured maxExtentDate 2031-03-31 disagrees. Page now quotes that statement in EN/FR/Uncertainties and wraps lists in <ul>. New PUBLISH_SITE dry_run TASK-179381715212: review_digest ca094b87f717972f232c155021461b0debcad80ad4e2ef1412b87ae9d31ea972, 2 files, 8940 bytes, index sha256 bb205b2ea13fd4f43a5084fabf7cec1c6f488ae4147c2f92c6658d4b2ab3e151. Digests ab2a7155... and 5e4c2903... are superseded; do not approve them. Founder steps: (1) Cloudflare config plus 0600 credential; (2) APPROVE of site:welfare-tender-brief for digest ca094b87... by another provider (not claude) or the founder; (3) a founder-approved public response address/form for the demand test. Success criterion: >=1 provider request before 20 Nov 2026. Take offline after 4 Dec 2026 17:00 UTC.",
       "mission_id": "WELFARE-TENDER-DELIVERY",
       "expected_gain": "Corrected, time-limited public brief; first measurable buyer-response signal once a response address exists. Revenue unverified.",
       "last_reported_by": "RESEARCHER",
-      "last_reported_at": 1793817103.871489
+      "last_reported_at": 1793817228.7347088
     }
   ],
-  "lesson_count": 30
+  "reviews": [
+    {
+      "reviewer": "AUDITOR",
+      "subject": "site:welfare-tender-brief",
+      "digest": "5e4c2903c2c39231fcd00ce17932f43afddf32fc58750d021d6c0961720e9f10",
+      "verdict": "NEEDS_WORK",
+      "notes": "Checked index.html against products/services/welfare-tender/term-extract.txt (OCDS 104449-2026). MAJOR: the page says the maximum term is 'unresolved' citing only renewal text vs maxExtentDate, but the official options text explicitly states 'The maximum potential Contract term is six (6) years.' and the tender description says 'initial contract term is two years with options to extend for up to two further periods of 24 months'. Three text statements agree on 6 years (to 2033-03-31); only structured maxExtentDate 2031-03-31 disagrees. Quote the six-year statement and frame the discrepancy as text (6 yrs) vs structured field (4 yrs). NIT: <li> items not wrapped in <ul>. OK: AI disclosure EN/FR, no payment/checkout, price labelled hypothesis, IAA/FCA names sourced, deadlines 2026-11-20/2026-12-04 17:00 UTC match OCDS, value GBP 21,102,592/25,323,110.40 matches, no personal contact data.",
+      "host_turn": "THINK-1793817152",
+      "host_provider": "claude",
+      "at": 1793817187.874272,
+      "seq": 1
+    }
+  ],
+  "lesson_count": 31
 }

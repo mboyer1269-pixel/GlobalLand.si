@@ -48,14 +48,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "ACCOUNT",
-      "title": "Welfare tender brief r2 ready (dry_run passed); needs Cloudflare credential, independent APPROVE and a response address",
-      "detail": "r2 fixes the operator's quality findings: the contract-term discrepancy is now flagged (maxExtentDate 2031-03-31 against renewal text allowing two 24-month extensions, i.e. 2033-03-31), the unsupported 'up to 6 years' value period is removed, and OISC is replaced by the current regulator name, Immigration Advice Authority (IAA). That name was verified on the GOV.UK content API on 2026-11-04, along with FCA. New PUBLISH_SITE dry_run TASK-179381700315: review_digest 5e4c2903c2c39231fcd00ce17932f43afddf32fc58750d021d6c0961720e9f10, 2 files, 8683 bytes, index sha256 5e426c06b476c091938277c36122f2270c37b47eb1d403ec10f96d32221ed812. The old digest ab2a7155... is superseded and must not be approved. Founder steps: (1) Cloudflare config plus a 0600 credential; (2) an APPROVE of site:welfare-tender-brief for this digest by another provider or the founder; (3) for a measurable demand test, a founder-approved public response address or form to put on the page. Agents will not invent one. Success criterion: at least 1 provider request for the follow-on before 20 Nov 2026. Take the page offline after 4 Dec 2026 17:00 UTC.",
+      "title": "Welfare tender brief r3 ready (dry_run ca094b87...); needs Cloudflare credential, independent APPROVE and a response address",
+      "detail": "r3 addresses AUDITOR NEEDS_WORK review of r2 (digest 5e4c2903..., TASK-179381715210): the official OCDS options text explicitly states 'The maximum potential Contract term is six (6) years.' (consistent with renewal and description texts, to 2033-03-31); only structured maxExtentDate 2031-03-31 disagrees. Page now quotes that statement in EN/FR/Uncertainties and wraps lists in <ul>. New PUBLISH_SITE dry_run TASK-179381715212: review_digest ca094b87f717972f232c155021461b0debcad80ad4e2ef1412b87ae9d31ea972, 2 files, 8940 bytes, index sha256 bb205b2ea13fd4f43a5084fabf7cec1c6f488ae4147c2f92c6658d4b2ab3e151. Digests ab2a7155... and 5e4c2903... are superseded; do not approve them. Founder steps: (1) Cloudflare config plus 0600 credential; (2) APPROVE of site:welfare-tender-brief for digest ca094b87... by another provider (not claude) or the founder; (3) a founder-approved public response address/form for the demand test. Success criterion: >=1 provider request before 20 Nov 2026. Take offline after 4 Dec 2026 17:00 UTC.",
       "mission_id": "WELFARE-TENDER-DELIVERY",
       "expected_gain": "Corrected, time-limited public brief; first measurable buyer-response signal once a response address exists. Revenue unverified.",
       "raised_by": "RESEARCHER",
-      "reports": 3,
+      "reports": 4,
       "opened_at": "2026-11-04T18:12:48Z",
-      "last_reported_at": "2026-11-04T18:31:43Z"
+      "last_reported_at": "2026-11-04T18:33:48Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -74,23 +74,27 @@
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-04T18:32:08Z",
-    "turns_without_outcome": 3,
+    "stalled_since": null,
+    "turns_without_outcome": 4,
     "outcome_threshold": 12,
     "dry_since": "2026-11-04T18:22:23Z",
     "last_outcome_turn": "THINK-1793815973",
-    "last_productive_turn": "THINK-1793816547",
-    "last_turn": "THINK-1793817003",
+    "last_productive_turn": "THINK-1793817152",
+    "last_turn": "THINK-1793817152",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/welfare-tender/fca-govuk-content.json",
+        "products/services/welfare-tender/iaa-govuk-content.json",
+        "products/services/welfare-tender/term-extract.txt"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 3,
       "revenue_gain_cents": 0
     }
   }
