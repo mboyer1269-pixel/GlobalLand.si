@@ -300,6 +300,13 @@ class Supervisor:
    return
   for name,text in self.projections(world,bank,config).items():
    target=work/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_text(text);target.chmod(0o644)
+  if mode=='mail':
+   # Private correspondence never enters task journals, WORLD or Git output.
+   if bank.snapshot()['state']=='HALTED':return
+   from mail_agent import run_mail_cycle
+   try:run_mail_cycle(self.root,config)
+   except Exception:raise RuntimeError('Private mail cycle failed; inspect private mail status') from None
+   return
   if mode=='think':
    from controller import Controller
    planner=Controller(self.root,world,bank,config)
@@ -369,7 +376,7 @@ class Supervisor:
    atomic_json(p,r);self.finish(p,r)
    self.refresh_work()
 def main():
- if len(sys.argv)!=2 or sys.argv[1] not in ('queue','daily','think','status'):raise ValueError('usage: supervisor.py queue|daily|think|status')
+ if len(sys.argv)!=2 or sys.argv[1] not in ('queue','daily','think','mail','status'):raise ValueError('usage: supervisor.py queue|daily|think|mail|status')
  ROOT.joinpath('state').mkdir(parents=True,exist_ok=True)
  with open(ROOT/'state/supervisor.lock','a') as lock:
   fcntl.flock(lock,fcntl.LOCK_EX)
