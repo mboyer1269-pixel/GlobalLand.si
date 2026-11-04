@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PRIVATE-MAIL-SERVICE-TEST\", \"goal\": \"Test the newly CONFIGURED_UNVERIFIED PRIVATE_MAIL capability as a usable inbound channel for the existing welfare-tender service, without creating another product or rewriting approved copy. Read the documented private-correspondence contract and the latest observed cycle result first. Configuration alone proves neither a running schedule nor delivery. Determine whether the separate authorized private cycle can receive a request and deliver the existing sourced brief; use that cycle only within its documented authority. Never put correspondence bodies, addresses or customer details in public tasks or products. No unsolicited outreach, account creation, agreements, credential probes, spending or bypass of the host review gate. If an actual eligible inbound request exists, fulfill it privately using the verified brief, disclose autonomous AI production and distinguish free delivery, quoted work, accepted orders and settled receipts. Otherwise run a local synthetic fulfillment rehearsal, clearly labeled synthetic, checking scope, source citations, procurement deadlines, term discrepancy, bilingual disclosure and no unsupported eligibility or payment claims. Save only a redacted operational result and actual verification output under products/services/welfare-tender/intake-test/. Identify the exact missing operational prerequisite if the private cycle cannot be used; do not repeat hosting or Apify checks. Read saved evidence before completing with a valid lease and a lesson. Success is an observed authorized inbound-to-delivery cycle; a synthetic rehearsal is preparation only.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"FAILED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [], \"reason\": \"Success criterion (observed authorized inbound-to-delivery cycle) not met: no eligible external request observed (last private cycle processed 0, skipped 2), and the private mail cycle has no authorized case-to-execution delivery path. Synthetic rehearsal (products/services/welfare-tender/intake-test/synthetic-rehearsal.json, TASK-179383500411/413) verified the brief against official OCDS: deadline 2026-12-04T17:00Z future and matched, six-year text vs 2031 structured date flagged, GBP 21,102,592 matched, EN/FR AI disclosure, CAD49 labelled hypothesis, eligibility disclaimed; 'garanti' hits were negations. Preparation only.\"}",
+  "request": {
+    "id": "TASK-179383500414",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-04T23:30:04Z",
+    "action": "WORLD",
+    "args": {
+      "op": "fail_mission",
+      "mission_id": "PRIVATE-MAIL-SERVICE-TEST",
+      "agent_id": "ACQUISITION",
+      "lease_token": "jtLbBm9RcQBe7QLCbnQHh5pHFjgArsL-",
+      "reason": "Success criterion (observed authorized inbound-to-delivery cycle) not met: no eligible external request observed (last private cycle processed 0, skipped 2), and the private mail cycle has no authorized case-to-execution delivery path. Synthetic rehearsal (products/services/welfare-tender/intake-test/synthetic-rehearsal.json, TASK-179383500411/413) verified the brief against official OCDS: deadline 2026-12-04T17:00Z future and matched, six-year text vs 2031 structured date flagged, GBP 21,102,592 matched, EN/FR AI disclosure, CAD49 labelled hypothesis, eligibility disclaimed; 'garanti' hits were negations. Preparation only.",
+      "lesson": "Semantic checks against the structured source (parse OCDS fields, compare to brief, then manually read regex hits in context) replaced misleading text-presence checks in two EXECs; naive keyword flags ('garanti', ISO date) produced false positives that only context reading resolved. Don't open missions whose success depends on an inbound customer we cannot cause; fold intake readiness into the live demand experiment instead, and spend effort on discovery of the live page."
+    },
+    "description": "Broker action during THINK-1793835004",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179383500414",
+  "input_sha256": "4c3dca7a5a7a54bade96cce5484f6d93a759068dc19d67ed5b008af765eb7a3e"
+}
