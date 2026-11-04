@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "ok 49\n\n",
+  "artifacts": [
+    "products/distribution/domain-availability-store-copy.json",
+    "products/receipts/TASK-179382240310.json"
+  ],
+  "request": {
+    "id": "TASK-179382240310",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-04T20:00:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json\nd={\n'status':'PREPARATION ONLY. Not listed. No private build, live registry run, users or revenue exist. The Apify wrapper (Python 3.12 image) is untested until a private build runs (blocker NO-APIFY-ACCESS).',\n'sources':['products/actors/domain-availability/README.md','products/actors/domain-availability/llms.txt','products/actors/domain-availability/actor-config/input_schema.json','products/actors/domain-availability/core-test-results.json','products/research/next-idea-scan-2.json'],\n'store_title':'Bulk Domain Availability Checker (RDAP, No WHOIS)',\n'seo_title':'Bulk domain availability checker: check if domain names are registered via official registry RDAP, with expiry dates, statuses and nameservers',\n'description_en':'Check up to 1000 domain names per run against the official public RDAP server of each registry (located through the IANA bootstrap). One JSON row per domain: available (true/false/null), registry statuses, registration and expiry dates, registrar organisation, nameservers and a stable error code. available=true means the registry answered 404: a strong hint, not a guarantee (reserved or premium names may still be unavailable). No WHOIS, no scraping, and registrant or contact data is never read or stored. Errors are not charged. Built and maintained by autonomous AI agents.',\n'description_fr':'Vérifiez jusqu’à 1000 noms de domaine par exécution auprès du serveur RDAP public officiel de chaque registre (trouvé grâce à l’amorçage de l’IANA). Une ligne JSON par domaine : disponibilité (true/false/null), statuts du registre, dates d’enregistrement et d’expiration, registraire, serveurs de noms et code d’erreur stable. available=true signifie que le registre a répondu 404 : c’est un indice fort, pas une garantie (un nom réservé ou premium peut rester indisponible). Aucun WHOIS, aucune extraction de pages, et les coordonnées des titulaires ou contacts ne sont jamais lues ni conservées. Les erreurs ne sont pas facturées. Conçu et maintenu par des agents d’IA autonomes.',\n'example_input':{'domains':['example.com','https://www.example.org/page','some-unregistered-name-2026.com'],'timeoutSecs':15},\n'output_fields':['input','domain','available','rdap_status_code','statuses','registered_at','expires_at','registrar','nameservers','rdap_server','redirect_count','error_code','error','elapsed_ms','checked_at'],\n'error_codes':['invalid_domain','unsupported_tld','rate_limited','http_error','timeout','tls_error','connection_error','body_too_large','invalid_json','unexpected_response','too_many_redirects','blocked_address'],\n'limits':['At most 1000 domains per run; URLs reduced to host name; duplicates removed.','timeoutSecs 1-60 (default 15).','TLDs without an RDAP server in the IANA bootstrap return unsupported_tld (several ccTLDs).','Same registry: one request at a time with 0.5 s pause; registries may still rate-limit (rate_limited).','Responses capped at 256 KiB; at most 3 RDAP redirects.','available=true is a hint; confirm with a registrar before buying.'],\n'test_evidence':'22/22 offline tests in core-test-results.json (Python 3.11) against a local 127.0.0.1 server: registered, 404 unregistered, 429, 500, timeout, oversized body, invalid JSON, redirect and loop, unsupported TLD, invalid domain, private-address block, no contact fields stored. No live registry has been queried by the Actor; the Apify wrapper is not executed.',\n'ai_disclosure':'Built and maintained by autonomous AI agents (GlobalLand). / Conçu et maintenu par des agents d’IA autonomes (GlobalLand).',\n'pricing_proposed':{'label':'PROPOSED, not active','domain-checked_usd':0.0015,'apify-actor-start_usd':5e-05,'charged_only_when':'available is true or false; error rows are free','incumbent_reference':'automation-lab/domain-availability-checker: 29 users_30d, USD 0.035 per start + USD 0.0023 per domain (public Store snapshot 2026-11-03, products/research/next-idea-scan-2.json; paid-user share not observable).'},\n'kill_threshold':'Unlist or reframe if fewer than 3 external users within 14 days of public listing, measured with ACTOR_STATS.',\n'prerequisites_before_listing':['Founder supplies Apify config + 0600 credential','Private PUBLISH_ACTOR build succeeds on the Python 3.12 image','Real run on example.com, an unregistered sample .com and an unsupported-TLD name saved with billed runtime','Independent APPROVE of the exact review_digest from another provider or the founder'],\n'seo_keywords':['domain availability checker','bulk domain checker','rdap lookup','domain expiry checker','check if domain is registered','domain name search']}\nd['store_title_length']=len(d['store_title'])\nassert d['store_title_length']<=60\nopen('products/distribution/domain-availability-store-copy.json','w',encoding='utf-8').write(json.dumps(d,ensure_ascii=False,indent=1))\nprint('ok',d['store_title_length'])"
+      ],
+      "outputs": [
+        "products/distribution/domain-availability-store-copy.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793822403",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179382240310",
+  "input_sha256": "422eda8e301c73f9c08ca9c79565324ed75fdf4c24b6480dd0dfc0923b47e148"
+}
