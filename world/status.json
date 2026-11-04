@@ -541,12 +541,6 @@
   ],
   "events": [
     {
-      "type": "MESSAGE",
-      "timestamp": 1793665978.0703356,
-      "from_agent": "DIRECTOR",
-      "to_agent": "BUILDER"
-    },
-    {
       "type": "CLAIM_MISSION",
       "timestamp": 1793667646.5841749,
       "mission_id": "RSS-ACTOR-BUILD",
@@ -1139,6 +1133,12 @@
       "timestamp": 1793820981.7720985,
       "blocker_id": "NO-APIFY-ACCESS",
       "agent_id": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793822451.979923,
+      "lesson_id": "L34",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1235,5 +1235,5 @@
       "seq": 1
     }
   ],
-  "lesson_count": 33
+  "lesson_count": 34
 }
