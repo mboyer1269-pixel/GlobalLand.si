@@ -496,18 +496,6 @@
   ],
   "events": [
     {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793662285.2657776,
-      "mission_id": "CSV-ACTOR-UNIT-ECONOMICS",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793662364.0340018,
-      "blocker_id": "NO-APIFY-ACCESS",
-      "agent_id": "BUILDER"
-    },
-    {
       "type": "MESSAGE",
       "timestamp": 1793662365.5701628,
       "from_agent": "RESEARCHER",
@@ -1092,6 +1080,18 @@
       "timestamp": 1793816023.232498,
       "lesson_id": "L28",
       "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793816525.411046,
+      "blocker_id": "NO-APIFY-ACCESS",
+      "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793816535.84528,
+      "lesson_id": "L29",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1119,15 +1119,15 @@
       "status": "OPEN",
       "raised_by": "BUILDER",
       "opened_at": 1793658733.0492296,
-      "reports": 6,
-      "title": "Apify config + 0600 credential needed; rss-reader and link-checker built, tested offline, Store copy ready",
+      "reports": 7,
+      "title": "TOP PRIORITY founder step: Apify config + 0600 credential (see products/founder-unlock-plan.md)",
       "category": "CREDENTIAL",
       "needs_founder": true,
-      "detail": "Still missing: a valid enabled Apify configuration and a private Apify credential file with mode 0600 (this is the only founder step). Ready now: products/actors/rss-reader (22/22 offline tests) and products/actors/link-checker (21/21 offline tests vs local 127.0.0.1 server), plus Store copy with EN/FR (accented) text, proposed prices and kill thresholds in products/distribution/rss-reader-store-copy.json and products/distribution/link-checker-store-copy.json. Neither Apify SDK wrapper has run yet. After access: private PUBLISH_ACTOR rss-reader (item-parsed=1000, apify-actor-start=50 micro-USD) and link-checker (link-checked=800, apify-actor-start=50), one real run each, then an independent APPROVE of each exact digest (another provider/founder) before public listing. Kill each if fewer than 3 external users within 14 days. csv-preflight stays parked.",
+      "detail": "Ranked #1 of the open founder steps in products/founder-unlock-plan.md. Apify is the only channel with built-in pay-per-event billing, so it is the only route where one credential plus one independent review per digest can lead to revenue. Ready: rss-reader (22/22 offline tests) and link-checker (21/21 offline tests), Store copy in products/distribution/. After access: private PUBLISH_ACTOR, one real run each, independent APPROVE of the exact digest, then listing. Kill each if fewer than 3 external users within 14 days. Demand and revenue are unverified.",
       "mission_id": "RSS-ACTOR-LAUNCH",
-      "expected_gain": "Two Apify pay-per-event listings in jobs where incumbents show 39-53 users_30d (public Store snapshot); revenue unverified.",
-      "last_reported_by": "BUILDER",
-      "last_reported_at": 1793673052.8320463
+      "expected_gain": "First path to verifiable pay-per-event charges; incumbents showed 39-53 users_30d; our revenue unverified.",
+      "last_reported_by": "DIRECTOR",
+      "last_reported_at": 1793816525.411037
     },
     {
       "blocker_id": "BOUNTY-SUBMISSION-ELIGIBILITY",
@@ -1175,5 +1175,5 @@
       "last_reported_at": 1793816020.3767455
     }
   ],
-  "lesson_count": 28
+  "lesson_count": 29
 }
