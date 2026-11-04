@@ -1,0 +1,247 @@
+{
+ "actor": "domain-availability",
+ "kind": "offline core tests against a local 127.0.0.1 HTTP server; Apify wrapper and live registries not tested",
+ "executed_at": "2026-11-04T19:35:22+00:00",
+ "python": "3.11.2",
+ "bootstrap_sha256": "2789f2f92f7ba785e0d3cd4cdcc70709e0ded1d331619e6784317c8bf2bc72b6",
+ "passed": 22,
+ "total": 22,
+ "results": [
+  {
+   "test": "bootstrap_com_server",
+   "pass": true,
+   "detail": "https://rdap.verisign.com/com/v1/"
+  },
+  {
+   "test": "bootstrap_tld_count",
+   "pass": true,
+   "detail": 1201
+  },
+  {
+   "test": "normalize_domain",
+   "pass": true,
+   "detail": {
+    "Example.COM.": "example.com",
+    "https://Sub.Example.com/path?x=1": "sub.example.com",
+    "bücher.de": "xn--bcher-kva.de",
+    "bad domain.com": null,
+    "-x.com": null,
+    "localhost": null,
+    "1.2.3.4": null,
+    "a..com": null,
+    "42": null
+   }
+  },
+  {
+   "test": "dedupe_cap_multiline",
+   "pass": true,
+   "detail": [
+    2,
+    1000,
+    2
+   ]
+  },
+  {
+   "test": "registered_record",
+   "pass": true,
+   "detail": {
+    "input": "taken.test",
+    "domain": "taken.test",
+    "available": false,
+    "rdap_status_code": 200,
+    "statuses": [
+     "client delete prohibited",
+     "client transfer prohibited",
+     "client update prohibited"
+    ],
+    "registered_at": "1995-08-14T04:00:00Z",
+    "expires_at": "2027-08-13T04:00:00Z",
+    "registrar": "RESERVED-Internet Assigned Numbers Authority",
+    "nameservers": [
+     "elliott.ns.cloudflare.com",
+     "hera.ns.cloudflare.com"
+    ],
+    "rdap_server": "http://127.0.0.1:45389/",
+    "redirect_count": 0,
+    "error_code": null,
+    "error": null,
+    "elapsed_ms": 1,
+    "checked_at": "2026-11-04T19:35:20+00:00"
+   }
+  },
+  {
+   "test": "no_contact_data_in_row",
+   "pass": true,
+   "detail": [
+    "available",
+    "checked_at",
+    "domain",
+    "elapsed_ms",
+    "error",
+    "error_code",
+    "expires_at",
+    "input",
+    "nameservers",
+    "rdap_server",
+    "rdap_status_code",
+    "redirect_count",
+    "registered_at",
+    "registrar",
+    "statuses"
+   ]
+  },
+  {
+   "test": "unregistered_404",
+   "pass": true,
+   "detail": {
+    "input": "free.test",
+    "domain": "free.test",
+    "available": true,
+    "rdap_status_code": 404,
+    "statuses": [],
+    "registered_at": null,
+    "expires_at": null,
+    "registrar": null,
+    "nameservers": [],
+    "rdap_server": "http://127.0.0.1:45389/",
+    "redirect_count": 0,
+    "error_code": null,
+    "error": null,
+    "elapsed_ms": 1,
+    "checked_at": "2026-11-04T19:35:20+00:00"
+   }
+  },
+  {
+   "test": "rate_limited_429",
+   "pass": true,
+   "detail": "RDAP server rate limit (HTTP 429); retry later"
+  },
+  {
+   "test": "server_error_500",
+   "pass": true,
+   "detail": "RDAP server returned HTTP 500"
+  },
+  {
+   "test": "oversized_body",
+   "pass": true,
+   "detail": "RDAP response exceeds 262144 bytes"
+  },
+  {
+   "test": "invalid_json",
+   "pass": true,
+   "detail": "RDAP response is not valid JSON"
+  },
+  {
+   "test": "non_domain_object",
+   "pass": true,
+   "detail": "RDAP response is not a domain object"
+  },
+  {
+   "test": "timeout",
+   "pass": true,
+   "detail": [
+    "timeout",
+    1001
+   ]
+  },
+  {
+   "test": "redirect_followed",
+   "pass": true,
+   "detail": [
+    false,
+    1
+   ]
+  },
+  {
+   "test": "redirect_loop_capped",
+   "pass": true,
+   "detail": [
+    "too_many_redirects",
+    3
+   ]
+  },
+  {
+   "test": "unsupported_tld_no_request",
+   "pass": true,
+   "detail": "unsupported_tld"
+  },
+  {
+   "test": "invalid_domain_row",
+   "pass": true,
+   "detail": "invalid_domain"
+  },
+  {
+   "test": "private_address_blocked_by_default",
+   "pass": true,
+   "detail": "blocked_address"
+  },
+  {
+   "test": "request_headers",
+   "pass": true,
+   "detail": [
+    [
+     "/domain/taken.test",
+     "GlobalLand-domain-availability/0.1 (Apify Actor built and maintained by autonomous AI agents)",
+     "application/rdap+json, application/json"
+    ]
+   ]
+  },
+  {
+   "test": "billing_only_definitive",
+   "pass": true,
+   "detail": "errors not billable"
+  },
+  {
+   "test": "batch_order_and_results",
+   "pass": true,
+   "detail": [
+    [
+     "free.test",
+     true,
+     null
+    ],
+    [
+     "bad domain",
+     null,
+     "invalid_domain"
+    ],
+    [
+     "taken.test",
+     false,
+     null
+    ],
+    [
+     "x.nosuchtld",
+     null,
+     "unsupported_tld"
+    ],
+    [
+     "moved.test",
+     false,
+     null
+    ]
+   ]
+  },
+  {
+   "test": "stable_row_schema",
+   "pass": true,
+   "detail": [
+    "available",
+    "checked_at",
+    "domain",
+    "elapsed_ms",
+    "error",
+    "error_code",
+    "expires_at",
+    "input",
+    "nameservers",
+    "rdap_server",
+    "rdap_status_code",
+    "redirect_count",
+    "registered_at",
+    "registrar",
+    "statuses"
+   ]
+  }
+ ]
+}
