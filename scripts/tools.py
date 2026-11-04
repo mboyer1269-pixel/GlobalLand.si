@@ -243,6 +243,22 @@ def capability_view(root, config):
         'separate private correspondence cycle receives and replies using the subscription brain; '
         'not a submit_action tool; no message bodies or customer details belong in public tasks; '
         'configuration does not prove receipt, delivery or a running mail schedule')
+    fulfillment = mail.get('fulfillment') if isinstance(mail, dict) else None
+    if isinstance(fulfillment, dict) and fulfillment.get('enabled') is True:
+        missing_work = list(missing_mail)
+        if not executor:
+            missing_work.append('enabled executor with pinned image')
+        for key, default, maximum in (('max_steps_per_cycle', 2, 4), ('max_steps_per_case', 8, 16)):
+            value = fulfillment.get(key, default)
+            if type(value) is not int or not 1 <= value <= maximum:
+                missing_work.append('valid private work step limits')
+                break
+        result['PRIVATE_MAIL']['fulfillment'] = view(missing_work,
+            'case-local offline EXEC, durable results and inline UTF-8 artifact replies; '
+            'no public case data, new URL retrieval or incoming attachments; '
+            'configured is not proof of execution or recipient delivery')
+    else:
+        result['PRIVATE_MAIL']['fulfillment'] = {'state': 'DISABLED'}
     mail_status = root / 'state/private/agentmail-status.json'
     try:
         if (configured_mail and not any(p.is_symlink() for p in (root/'state', mail_status.parent, mail_status))

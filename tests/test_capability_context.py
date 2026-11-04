@@ -53,6 +53,23 @@ class CapabilityContextTests(unittest.TestCase):
         self.assertEqual(json.loads(result['output'])['capabilities'],
                          Controller(self.root, self.world, self.bank, config).context()['capabilities'])
 
+    def test_private_work_requires_executor_and_does_not_expose_case_data(self):
+        token = self.root / 'credentials/agentmail/token'
+        token.parent.mkdir(parents=True)
+        token.write_text('DO-NOT-READ-PRIVATE-KEY'); token.chmod(0o600)
+        config = {'agentmail': {'enabled': True, 'inbox_id': 'private-inbox',
+                               'inbox_address': 'private@example.invalid',
+                               'fulfillment': {'enabled': True, 'case': 'PRIVATE-CASE'}}}
+        def capability():
+            return Controller(self.root, self.world, self.bank, config).context()['capabilities']['PRIVATE_MAIL']
+        self.assertEqual(capability()['fulfillment']['state'], 'NOT_CONFIGURED')
+        config.update(executor_enabled=True, executor_image='node@sha256:' + '1' * 64)
+        self.assertEqual(capability()['fulfillment']['state'], 'CONFIGURED_UNVERIFIED')
+        self.assertNotIn('PRIVATE-CASE', json.dumps(capability()))
+        self.assertNotIn('private@example', json.dumps(capability()))
+        config['agentmail']['fulfillment']['enabled'] = False
+        self.assertEqual(capability()['fulfillment']['state'], 'DISABLED')
+
     def test_private_mail_observation_exposes_only_counts_and_timestamp(self):
         token = self.root / 'credentials/agentmail/token'
         token.parent.mkdir(parents=True)
