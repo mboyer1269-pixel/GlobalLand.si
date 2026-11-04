@@ -1,0 +1,11 @@
+{
+ "actorSpecification": 1,
+ "name": "domain-availability",
+ "title": "Bulk Domain Availability Checker - RDAP",
+ "version": "0.1",
+ "input": "./input_schema.json",
+ "dockerfile": "../Dockerfile",
+ "minMemoryMbytes": 128,
+ "maxMemoryMbytes": 512,
+ "defaultMemoryMbytes": 256
+}

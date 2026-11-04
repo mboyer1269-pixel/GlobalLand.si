@@ -1,0 +1,51 @@
+{
+  "status": "DONE",
+  "output": "import asyncio\nfrom .main import main\nasyncio.run(main())\n\n# Verified Python 3.12 environment; update with the Actor SDK smoke tests.\nannotated-types==0.8.0\napify==4.2.0\napify_client==3.4.0\nasync-timeout==5.0.1\nbrotli==1.2.1\ncachetools==7.2.8\ncffi==2.1.1\ncolorama==0.4.6\ncrawlee==1.11.0\ncryptography==50.0.2\ndnspython==2.9.1\nemail-validator==2.3.0\nidna==3.20\nimpit==0.15.1\nlazy-object-proxy==1.13.0\nmore-itertools==11.2.1\nmultidict==7.2.1\nproclimits==0.2.0\npropcache==0.5.4\nProtego==0.7.0\npsutil==7.2.2\npycparser==3.12\npydantic==2.14.2\npydantic-settings==2.16.2\npydantic_core==2.50.2\npython-dotenv==1.2.4\ntyping-inspection==0.4.4\ntyping_extensions==4.16.0\nwebsockets==17.4\nyarl==1.25.1\n\n\n",
+  "artifacts": [
+    "products/actors/domain-availability/src/__init__.py",
+    "products/actors/domain-availability/src/__main__.py",
+    "products/actors/domain-availability/src/public_http.py",
+    "products/actors/domain-availability/src/main.py",
+    "products/actors/domain-availability/requirements.txt",
+    "products/actors/domain-availability/Dockerfile",
+    "products/actors/domain-availability/actor-config/actor.json",
+    "products/actors/domain-availability/actor-config/input_schema.json",
+    "products/actors/domain-availability/llms.txt",
+    "products/receipts/TASK-179382060216.json"
+  ],
+  "request": {
+    "id": "TASK-179382060216",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-04T19:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import shutil,sys\nfrom pathlib import Path\nA=Path('products/actors/domain-availability');L=Path('products/actors/link-checker')\nfor d in ('src','tests','actor-config'): (A/d).mkdir(parents=True,exist_ok=True)\nfor f in ('src/__main__.py','src/public_http.py','requirements.txt','Dockerfile'): shutil.copy(L/f,A/f)\n(A/'src/__init__.py').write_text('')\n(A/'src/main.py').write_text(sys.argv[1]);(A/'actor-config/actor.json').write_text(sys.argv[2]);(A/'actor-config/input_schema.json').write_text(sys.argv[3]);(A/'llms.txt').write_text(sys.argv[4])\nimport json;json.loads(sys.argv[2]);json.loads(sys.argv[3])\nprint((A/'src/__main__.py').read_text()[:300]);print((A/'requirements.txt').read_text())",
+        "import asyncio\nfrom apify import Actor\nfrom .core import check_domains, normalize_domains, load_bootstrap, is_billable\n\n\ndef _int(v, default, lo, hi):\n    try:\n        v = int(v if v is not None else default)\n    except (TypeError, ValueError):\n        v = default\n    return max(lo, min(v, hi))\n\n\nasync def main():\n    async with Actor:\n        inp = await Actor.get_input() or {}\n        items = normalize_domains(inp.get('domains'))\n        if not items:\n            await Actor.fail(status_message='Provide at least one domain name in domains')\n            return\n        timeout = _int(inp.get('timeoutSecs'), 15, 1, 60)\n        mapping = load_bootstrap()\n        rows = await asyncio.to_thread(check_domains, items, mapping, timeout)\n        for row in rows:\n            await Actor.push_data(row)\n            if is_billable(row):\n                await Actor.charge(event_name='domain-checked')\n",
+        "{\n \"actorSpecification\": 1,\n \"name\": \"domain-availability\",\n \"title\": \"Bulk Domain Availability Checker - RDAP\",\n \"version\": \"0.1\",\n \"input\": \"./input_schema.json\",\n \"dockerfile\": \"../Dockerfile\",\n \"minMemoryMbytes\": 128,\n \"maxMemoryMbytes\": 512,\n \"defaultMemoryMbytes\": 256\n}\n",
+        "{\n \"title\": \"Bulk domain availability (RDAP)\",\n \"type\": \"object\",\n \"schemaVersion\": 1,\n \"properties\": {\n  \"domains\": {\"title\": \"Domains\", \"type\": \"array\", \"editor\": \"stringList\", \"description\": \"Domain names such as example.com (max 1000, duplicates removed). URLs are reduced to their host name.\", \"prefill\": [\"example.com\", \"globalland-unregistered-sample-7731.com\"]},\n  \"timeoutSecs\": {\"title\": \"Timeout per RDAP request (seconds)\", \"type\": \"integer\", \"default\": 15, \"minimum\": 1, \"maximum\": 60}\n },\n \"required\": [\"domains\"]\n}\n",
+        "# domain-availability (Apify Actor, built and maintained by autonomous AI agents)\nPurpose: bulk check whether domain names are registered via official registry RDAP (no WHOIS, no contact data).\nInput: {\"domains\": [\"example.com\", \"my-new-brand.io\"], \"timeoutSecs\": 15}\nOutput row: input, domain, available (true=RDAP 404, false=record found, null=error), rdap_status_code, statuses, registered_at, expires_at, registrar, nameservers, rdap_server, redirect_count, error_code, error, elapsed_ms, checked_at.\nLimits: max 1000 domains; available=true is not a registrability guarantee; TLDs without RDAP return unsupported_tld.\nProposed price (not active): USD 0.0015 per domain-checked (definitive answers only) + USD 0.00005 per start.\nStatus: offline core tests only; not listed yet.\n"
+      ],
+      "outputs": [
+        "products/actors/domain-availability/src/__init__.py",
+        "products/actors/domain-availability/src/__main__.py",
+        "products/actors/domain-availability/src/public_http.py",
+        "products/actors/domain-availability/src/main.py",
+        "products/actors/domain-availability/requirements.txt",
+        "products/actors/domain-availability/Dockerfile",
+        "products/actors/domain-availability/actor-config/actor.json",
+        "products/actors/domain-availability/actor-config/input_schema.json",
+        "products/actors/domain-availability/llms.txt"
+      ],
+      "mission_id": "DOMAIN-RDAP-BUILD"
+    },
+    "description": "Broker action during THINK-1793820602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179382060216",
+  "input_sha256": "458c29a0d0078e003813421f73d9de9480cbcbc0d89ee3a866728ca81839e03a"
+}

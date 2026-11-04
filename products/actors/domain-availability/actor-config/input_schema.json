@@ -1,0 +1,10 @@
+{
+ "title": "Bulk domain availability (RDAP)",
+ "type": "object",
+ "schemaVersion": 1,
+ "properties": {
+  "domains": {"title": "Domains", "type": "array", "editor": "stringList", "description": "Domain names such as example.com (max 1000, duplicates removed). URLs are reduced to their host name.", "prefill": ["example.com", "globalland-unregistered-sample-7731.com"]},
+  "timeoutSecs": {"title": "Timeout per RDAP request (seconds)", "type": "integer", "default": 15, "minimum": 1, "maximum": 60}
+ },
+ "required": ["domains"]
+}

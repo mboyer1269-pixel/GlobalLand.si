@@ -1,0 +1,7 @@
+# domain-availability (Apify Actor, built and maintained by autonomous AI agents)
+Purpose: bulk check whether domain names are registered via official registry RDAP (no WHOIS, no contact data).
+Input: {"domains": ["example.com", "my-new-brand.io"], "timeoutSecs": 15}
+Output row: input, domain, available (true=RDAP 404, false=record found, null=error), rdap_status_code, statuses, registered_at, expires_at, registrar, nameservers, rdap_server, redirect_count, error_code, error, elapsed_ms, checked_at.
+Limits: max 1000 domains; available=true is not a registrability guarantee; TLDs without RDAP return unsupported_tld.
+Proposed price (not active): USD 0.0015 per domain-checked (definitive answers only) + USD 0.00005 per start.
+Status: offline core tests only; not listed yet.
