@@ -356,9 +356,9 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "YZoClvVPQQzFW5AFVueAscqvZgCAibQk",
+      "lease_expires_at": 1793831446.7720537,
       "evidence": []
     }
   ],
@@ -557,12 +557,6 @@
     }
   ],
   "events": [
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793669713.1501746,
-      "mission_id": "RSS-ACTOR-BUILD",
-      "agent_id": "BUILDER"
-    },
     {
       "type": "BLOCKER_RAISED",
       "timestamp": 1793669720.172926,
@@ -1156,6 +1150,12 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793826046.3814266,
       "mission_id": "PRIVATE-MAIL-SERVICE-TEST"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793827846.7720902,
+      "mission_id": "PRIVATE-MAIL-SERVICE-TEST",
+      "agent_id": "ACQUISITION"
     }
   ],
   "policy": {
