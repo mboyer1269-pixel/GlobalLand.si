@@ -77,38 +77,22 @@
     "stalled_turns": 0,
     "threshold": 3,
     "stalled_since": null,
-    "turns_without_outcome": 0,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-04T20:31:06Z",
     "last_outcome_turn": "THINK-1793822403",
-    "last_productive_turn": "THINK-1793822403",
-    "last_turn": "THINK-1793822403",
+    "last_productive_turn": "THINK-1793824202",
+    "last_turn": "THINK-1793824202",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "DOMAIN-RDAP-BUILD"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/actors/domain-availability/Dockerfile",
-        "products/actors/domain-availability/README.md",
-        "products/actors/domain-availability/actor-config/actor.json",
-        "products/actors/domain-availability/actor-config/input_schema.json",
-        "products/actors/domain-availability/core-test-results.json",
-        "products/actors/domain-availability/data/rdap-dns-bootstrap.json",
-        "products/actors/domain-availability/llms.txt",
-        "products/actors/domain-availability/requirements.txt",
-        "products/actors/domain-availability/src/__init__.py",
-        "products/actors/domain-availability/src/__main__.py",
-        "products/actors/domain-availability/src/core.py",
-        "products/actors/domain-availability/src/main.py",
-        "products/actors/domain-availability/src/public_http.py",
-        "products/actors/domain-availability/tests/fixtures/verisign-example-com.json",
-        "products/actors/domain-availability/tests/run_tests.py"
+        "products/distribution/domain-availability-store-copy.json"
       ],
-      "new_product_count": 15,
+      "new_product_count": 1,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
