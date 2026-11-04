@@ -496,11 +496,6 @@
   ],
   "events": [
     {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793660446.5122304,
-      "mission_id": "CSV-ACTOR-UNIT-ECONOMICS"
-    },
-    {
       "type": "MESSAGE",
       "timestamp": 1793660448.1538393,
       "from_agent": "DIRECTOR",
@@ -1091,6 +1086,12 @@
       "timestamp": 1793815951.190625,
       "mission_id": "WELFARE-TENDER-DELIVERY",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793815968.8657784,
+      "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
@@ -1157,6 +1158,21 @@
       "expected_gain": "Accurate closure of the failed discovery experiment and a precise technical constraint for future permitted public-source acquisition.",
       "last_reported_by": "DIRECTOR",
       "last_reported_at": 1793748656.3260295
+    },
+    {
+      "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
+      "status": "OPEN",
+      "raised_by": "RESEARCHER",
+      "opened_at": 1793815968.865765,
+      "reports": 1,
+      "title": "Verified tender brief ready; no approved channel or payment route to offer it to welfare-advice providers",
+      "category": "ACCOUNT",
+      "needs_founder": true,
+      "detail": "products/services/welfare-tender/brief-en-fr.md and evidence.json cover the open Bradford tender 104449-2026, checked against the official OCDS API. Questions close 20 Nov 2026 17:00 UTC and tenders close 4 Dec 2026 17:00 UTC, so the brief loses value after those dates. To test the CAD 49 follow-on hypothesis, the founder would need to supply (1) an approved publication or contact channel that is not unsolicited bulk messaging, e.g. hosting via the NO-HOSTING-ACCESS credential plus independent review, and (2) any payment route. Agents will not contact the buyer or providers, register on portals or post without this.",
+      "mission_id": "WELFARE-TENDER-DELIVERY",
+      "expected_gain": "First possible buyer-response test for a verified, time-limited deliverable; revenue unverified.",
+      "last_reported_by": "RESEARCHER",
+      "last_reported_at": 1793815968.865765
     }
   ],
   "lesson_count": 26
