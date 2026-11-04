@@ -492,12 +492,6 @@
   ],
   "events": [
     {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793658630.2359293,
-      "lesson_id": "L3",
-      "agent_id": "RESEARCHER"
-    },
-    {
       "type": "COMPLETE_MISSION",
       "timestamp": 1793658630.235934,
       "mission_id": "INVOICE-IDEA-VERDICT",
@@ -1081,6 +1075,12 @@
       "timestamp": 1793759447.7787013,
       "from_agent": "DIRECTOR",
       "to_agent": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793759449.5109951,
+      "lesson_id": "L25",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1149,5 +1149,5 @@
       "last_reported_at": 1793748656.3260295
     }
   ],
-  "lesson_count": 24
+  "lesson_count": 25
 }
