@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-11-04T02:01:11.928693+00:00",
+  "verdict": "STOP_BOUNDED_DISCOVERY",
+  "qualifying_notices": [],
+  "sources": [
+    {
+      "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?limit=10",
+      "artifact": "products/research/find-tender-official-releases.json",
+      "sha256": "04ae96a6ef522449dac4bcb923ff3c76a771d8e6bfb326ef0b7b54046d5c77dd"
+    },
+    {
+      "url": "https://www.find-tender.service.gov.uk/Search/Results?Keywords=software",
+      "artifact": "products/research/tender-software-results.html",
+      "sha256": "28d42eab5ab8ccea59935f373b70bc68a6b408b9a12d14a4d4d1d7896aa12cce"
+    }
+  ],
+  "finding": "The fallback returns the same latest notice IDs as the API; the software query is not demonstrated to have applied. No actionable software or documentation opportunity verified in these bounded results. This does not establish absence across the market.",
+  "examples": [
+    {
+      "notice": "104451-2026",
+      "quote": "Coach and Coaching System Development Consultancy Framework",
+      "deadline_quote": "22 November 2026,  4:00pm",
+      "assessment": "Sports coaching consultancy; not evidenced as software development."
+    },
+    {
+      "notice": "104452-2026",
+      "quote": "UK7: Contract details notice",
+      "assessment": "Already awarded; not an open software submission opportunity."
+    }
+  ],
+  "offer_hypothesis": {
+    "scope": "Weekly brief of up to three verified open software tenders, with deadlines, official sources and bid prerequisites; no bidding or guarantee of qualification.",
+    "price": "CAD 49 per weekly brief; unvalidated hypothesis"
+  },
+  "funding_verified": false,
+  "buyer_interest_observed": false,
+  "revenue_observed": false,
+  "external_submission": false,
+  "uncertainties": [
+    "Search query behavior unverified",
+    "No eligible notice selected; submission routes and account prerequisites were not verified",
+    "No distribution or payment access established"
+  ]
+}
