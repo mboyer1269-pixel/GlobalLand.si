@@ -31,7 +31,7 @@
     "amount_excl": 21102592,
     "amount_gross": 25323110.4,
     "currency": "GBP",
-    "note": "Advertised estimate over maximum term; not available funding; eligibility not implied."
+    "note": "Advertised estimate; period covered is not stated in the source. Not available funding; eligibility not implied."
   },
   "deadlines": {
     "tender_submission": "2026-12-04T17:00:00+00:00",
@@ -87,7 +87,7 @@
     "account_prerequisites": "Not stated in OCDS data. Route is the EU-Supply portal (uk.eu-supply.com); supplier registration likely but UNVERIFIED. Published URL appears malformed (TID100115668 lacks =); confirm with buyer."
   },
   "uncertainties": [
-    "Maximum term inconsistent in source: maxExtentDate 2031-03-31 vs renewal text allowing two 24-month extensions (would be 2033-03-31). Period covered by advertised value not stated; earlier \"up to 6 years\" wording removed as unsupported.",
+    "Maximum term inconsistent in source: options text explicitly states a six-year maximum, consistent with renewal and description texts (to 2033-03-31); structured maxExtentDate is 2031-03-31. Confirm with buyer. Period covered by advertised value is not stated.",
     "Description names two lots (Lot 1 Welfare Advice; Lot 2 Network Support and Training) but structured data has one lot LOT-0000 carrying the whole value; lot split and per-lot bidding unverified.",
     "Conditions of participation, financial standing, insurance and IAA/FCA authorisation requirements are not in OCDS data; tender pack not read.",
     "HTML notice returned HTTP 403; only the OCDS API release was read.",
@@ -117,5 +117,6 @@
       "observed": "2026-11-04"
     }
   ],
-  "revision": "2026-11-04 r2: term discrepancy flagged, unsupported 6-year inference removed, OISC replaced by current name IAA."
+  "revision": "2026-11-04 r4: synchronize evidence with r3 page using the same saved official source, including the explicit six-year options quote; no new live source verification.",
+  "options_quote": "The Contract will commence on 1 April 2027 for an initial period of two (2) years. The Council reserves the right, at its sole discretion, to extend the Contract for up to two (2) further periods of up to twenty-four (24) months each, subject to satisfactory performance, continued service need, available funding and all necessary approvals. The maximum potential Contract term is six (6) years."
 }
