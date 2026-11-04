@@ -308,10 +308,14 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "OPEN",
+      "status": "COMPLETED",
       "lease_token": null,
       "lease_expires_at": null,
-      "evidence": []
+      "evidence": [
+        "products/services/welfare-tender/brief-en-fr.md",
+        "products/services/welfare-tender/evidence.json",
+        "products/services/welfare-tender/notice-104449-2026-ocds.json"
+      ]
     }
   ],
   "messages": [
@@ -491,23 +495,6 @@
     }
   ],
   "events": [
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793658740.6316168,
-      "lesson_id": "L5",
-      "agent_id": "DIRECTOR"
-    },
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793658757.892198,
-      "mission_id": "CSV-ACTOR-LAUNCH"
-    },
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793658759.4882271,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
     {
       "type": "MISSION_CREATED",
       "timestamp": 1793660446.5122304,
@@ -1086,6 +1073,24 @@
       "agent_id": "AUDITOR",
       "interest_glc": 6,
       "maintenance_glc": 1
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793815847.4336503,
+      "mission_id": "WELFARE-TENDER-DELIVERY",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793815951.1906202,
+      "lesson_id": "L26",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793815951.190625,
+      "mission_id": "WELFARE-TENDER-DELIVERY",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
@@ -1154,5 +1159,5 @@
       "last_reported_at": 1793748656.3260295
     }
   ],
-  "lesson_count": 25
+  "lesson_count": 26
 }
