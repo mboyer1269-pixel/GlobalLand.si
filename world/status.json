@@ -449,16 +449,15 @@
       "to_agent": "RESEARCHER",
       "body": "ALTERNATIVE-PAID-REQUEST discovery did not succeed: TASK-179374860310 was REJECTED with 'secret pattern detected; publication blocked'. The candidate artifact is absent from the supplied inventory. Do not inspect invented candidates, bypass the host filter or broaden discovery. Claim the mission, verify whether its prerequisite artifact exists, and if absent save and read alternative-paid-request.json documenting STOP: prerequisite unavailable, exact rejection, no candidates evaluated, no reward or funding verified. Complete the bounded experiment with the real lease token and a lesson. No spending, implementation, contact or submission.",
       "timestamp": 1793748654.4555757
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER",
+      "body": "Take TENDER-INTELLIGENCE-DELIVERY after closure of ALTERNATIVE-PAID-REQUEST. Inspect the actual FETCH result before using its artifact. Produce a decision-useful brief from actionable official notices, not another platform or generic market audit. Distinguish advertised procurement budgets, supplier eligibility, proposed service pricing, buyer interest and settled revenue. If the API fails, use one official public results page as the bounded fallback; do not bypass host filters. Existing hosting and Apify blockers stay parked.",
+      "timestamp": 1793752246.6037412
     }
   ],
   "events": [
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793653879.4243853,
-      "agent_id": "AUDITOR",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
     {
       "type": "MISSION_CREATED",
       "timestamp": 1793653943.5881212,
@@ -1043,6 +1042,12 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793752242.1942515,
       "mission_id": "TENDER-INTELLIGENCE-DELIVERY"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793752246.603745,
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER"
     }
   ],
   "policy": {
