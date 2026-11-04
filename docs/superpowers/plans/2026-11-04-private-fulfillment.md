@@ -35,16 +35,16 @@ Files: new scripts/private_work.py (split private sandbox adapter if useful), ne
 - [x] Implement private case persistence and isolated computation using the installed executor contract. Never call public Supervisor.execute_tool.
 - [x] Add planner result feedback and final artifact selection; validate that every delivered file was actually generated for this case.
 - [x] Integrate with Mailbox without breaking existing replies; persist READY decision before returning to sender.
-- [ ] Verify targeted mail/work tests and a real Docker sandbox computation. Commit implementation.
+- [x] Verify targeted mail/work tests and a real Docker sandbox computation. Commit implementation.
 
 ### Task 2: Review, install and controlled acceptance
 
 - [x] Independently review complete diff against the spec and confidentiality/recovery boundaries; fix confirmed defects.
 - [x] Update docs/AGENTMAIL.md and capability descriptions to actual supported behavior.
-- [ ] Run full GitHub checks and merge reviewed change; upgrade with existing backup/config preservation script.
-- [ ] Enable the private fulfillment option in host configuration, preserving credentials and cron.
-- [ ] Send a controlled test from the authorized fixture inbox, verify actual execution and recipient receipt, then repeat a cycle and verify no duplicate.
-- [ ] Record observed results/limits and durable development handoff, without storing correspondence in AgentMemory or public Git.
+- [x] Run full GitHub checks and merge reviewed change; upgrade with existing backup/config preservation script.
+- [x] Enable the private fulfillment option in host configuration, preserving credentials and cron.
+- [x] Send a controlled test from the authorized fixture inbox, verify actual execution and recipient receipt, then repeat a cycle and verify no duplicate.
+- [x] Record observed results/limits and durable development handoff, without storing correspondence in AgentMemory or public Git.
 
 ## Execution ledger
 
@@ -55,3 +55,4 @@ Files: new scripts/private_work.py (split private sandbox adapter if useful), ne
 - Core case implementation and UTF-8 collector fix are in 33c7788. The collector now preserves BOM, Unicode and line endings; regression reproduced the lost three bytes before the fix and all five Node executor tests pass afterward.
 - Independent review identified unbounded mailbox reads after model-budget exhaustion and potential retry starvation. Correction: bounded page/body reads, durable pending batch with atomic page continuation, and alternating fresh/retry queues. The focused re-review found no remaining blocker; 23 private-work and 36 existing mail tests pass. Real Docker/recipient verification remains required before claiming the full path is operational.
 - Local WSL Docker integration is unavailable. Real Docker tests run in GitHub CI and on the installed VPS; no local Docker setting is changed.
+- Completed: PR #21 installed at 23:48 UTC with backup. CI ran 435 Python tests (6 skipped), 13 JavaScript tests and two actual Docker tests. The scheduled mail cycle produced and delivered one correct synthetic CSV; repeat cycle left one execution and one reply. See [observed evidence and limits](../../verification/2026-11-04-private-fulfillment.md).

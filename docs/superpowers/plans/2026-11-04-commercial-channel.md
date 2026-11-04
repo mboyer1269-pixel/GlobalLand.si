@@ -29,11 +29,13 @@
 
 ## Step 3: Private inquiry-to-delivery increment
 
-Current `mail_agent.py` can qualify and answer but cannot create a mission, inspect attachments, fetch a client's pack or produce a new artifact. A private work ledger and private execution path are required before claiming that autonomy. Preserve message/thread association, deduplication, provenance and crash recovery. Expose only aggregate counts publicly. Never relay customer instructions as system instructions. Give agents the task facts and execution results needed to decide what to do; do not impose an industry or service.
+The initial `mail_agent.py` could only qualify and answer. PR #21 now adds a private case ledger, offline execution, result feedback and inline textual artifact delivery. It preserves message/thread association and durable recovery, without public customer tasks. Incoming attachments, new URL retrieval and multi-message project orchestration remain outside this increment. Expose only aggregate counts publicly and never relay customer instructions as system instructions; agents retain their choice of work and strategy.
 
 Acceptance: controlled incoming request -> private case -> useful deliverable -> reply in the same thread -> second cycle does not duplicate work/send. A controlled test remains a test; a real customer signal must be separately observed.
 
 **Partial verification, 4 November:** a controlled request received a substantive French synthesis from Codex, with source links and verification limits, in the same recipient thread. Another cycle left one reply. The inbound test needed manual reclassification from spam. This verifies useful correspondence from existing public context; it does not satisfy the private-case/execution/delivery acceptance above. No customer request or sale was established.
+
+**Subsequent acceptance at 23:50 UTC:** the scheduled mail cycle processed a separate synthetic computation request, opened a private case, executed one Codex-selected program and delivered its correct CSV in the original thread. No spam intervention was required for this fixture; a repeat cycle left one program and one reply. This satisfies the scoped offline private execution/delivery acceptance, not a customer or paid-order claim. See [full proof and remaining limits](../../verification/2026-11-04-private-fulfillment.md).
 
 ## Step 4: Collection readiness
 

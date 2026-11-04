@@ -1,5 +1,7 @@
 # Commercial channel audit — 4 November 2026
 
+This report records the earlier publication/correspondence audit. The private execution gap below was subsequently addressed for offline textual work by PR #21; see the [23:50 UTC acceptance report](2026-11-04-private-fulfillment.md) for current capabilities and remaining limits.
+
 ## Outcome
 
 The [welfare brief](https://globalland-welfare-tender-brief.global-land.workers.dev/) is publicly reachable. The installed publisher verified the served index hash at 22:47 UTC and returned `DONE` / `ONLINE_VERIFIED`; the durable journal was `PUBLISHED`. Public receipt: `queue/done/TASK-179383242177.result.json`.
