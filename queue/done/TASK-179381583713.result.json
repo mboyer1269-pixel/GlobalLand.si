@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "VERIFIED_OPEN_TENDER {'tender_submission': '2026-12-04T17:00:00+00:00', 'clarification_questions': '2026-11-20T17:00:00+00:00', 'award_period_end': '2027-01-18T23:59:59Z', 'timezone': '+00:00 as published (UTC = GMT in Nov/Dec)', 'days_to_submission': 30.0, 'days_to_questions': 16.0}\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/evidence.json",
+    "products/receipts/TASK-179381583713.json"
+  ],
+  "request": {
+    "id": "TASK-179381583713",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-04T18:10:37Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,datetime\np='products/services/welfare-tender/notice-104449-2026-ocds.json'\nraw=open(p,'rb').read()\nd=json.loads(raw)\nr=d['releases'][0];t=r['tender'];lot=t['lots'][0]\nnow=datetime.datetime.now(datetime.timezone.utc)\nend=datetime.datetime.fromisoformat(t['tenderPeriod']['endDate'])\nenq=datetime.datetime.fromisoformat(t['enquiryPeriod']['endDate'])\ndoc=[x for x in t['documents'] if x.get('noticeType')][0]\nev={'observed_at':now.isoformat(),'notice_id':r['id'],'ocid':r['ocid'],'verdict':'VERIFIED_OPEN_TENDER' if (t['status']=='active' and 'tender' in r['tag'] and end>now) else 'FAILED_VERIFICATION',\n'sources':[{'url':'https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026','artifact':p,'sha256':hashlib.sha256(raw).hexdigest(),'http_status':200},{'url':doc['url'],'result':'FETCH refused HTTP 403 (TASK-179381583711); HTML notice not read'}],\n'release_tag':r['tag'],'notice_type':doc['noticeType']+' - '+doc['description'],\n'buyer':r['buyer']['name'],'buyer_reference':t['id'],'legal_basis':t['legalBasis']['uri'],'title':t['title'],'description_quote':t['description'],\n'procurement_method':t['procurementMethodDetails'],'status':t['status'],'above_threshold':t['aboveThreshold'],\n'value_advertised':{'amount_excl':t['value']['amount'],'amount_gross':t['value']['amountGross'],'currency':t['value']['currency'],'note':'Advertised estimate over maximum term; not available funding; eligibility not implied.'},\n'deadlines':{'tender_submission':t['tenderPeriod']['endDate'],'clarification_questions':t['enquiryPeriod']['endDate'],'award_period_end':t['awardPeriod']['endDate'],'timezone':'+00:00 as published (UTC = GMT in Nov/Dec)','days_to_submission':round((end-now).total_seconds()/86400,1),'days_to_questions':round((enq-now).total_seconds()/86400,1)},\n'contract_period':lot['contractPeriod'],'renewal_quote':lot['renewal']['description'],\n'award_criteria':[{'name':c['name'],'weight_pct':c['numbers'][0]['number'],'quote':c['description']} for c in lot['awardCriteria']['criteria']],\n'suitability':lot['suitability'],'geography':[a['region'] for a in t['items'][0]['deliveryAddresses']],'cpv':[c['id']+' '+c['description'] for c in t['items'][0]['additionalClassifications']],\n'submission_route':{'portal_url_as_published':t['submissionMethodDetails'],'electronic':t['submissionTerms']['electronicSubmissionPolicy'],'languages':t['submissionTerms']['languages'],'account_prerequisites':'Not stated in OCDS data. Route is the EU-Supply portal (uk.eu-supply.com); supplier registration likely but UNVERIFIED. Published URL appears malformed (TID100115668 lacks =); confirm with buyer.'},\n'uncertainties':['Description names two lots (Lot 1 Welfare Advice; Lot 2 Network Support and Training) but structured data has one lot LOT-0000 carrying the whole value; lot split and per-lot bidding unverified.','Conditions of participation, financial standing, insurance and OISC/FCA authorisation requirements are not in OCDS data; tender pack not read.','HTML notice returned HTTP 403; only the OCDS API release was read.','Buyer classification quoted as Public authority - central government although buyer is a metropolitan council.','Named personal contact details intentionally not reproduced; see official notice.'],\n'globalland_position':{'can_bid':False,'customer_interest_observed':False,'funding_verified':False,'revenue_observed':False,'external_submission':False,'outreach':False}}\njson.dump(ev,open('products/services/welfare-tender/evidence.json','w'),indent=2,ensure_ascii=False)\nprint(ev['verdict'],ev['deadlines'])\n"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/evidence.json"
+      ],
+      "mission_id": "WELFARE-TENDER-DELIVERY"
+    },
+    "description": "Broker action during THINK-1793815837",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179381583713",
+  "input_sha256": "142ade5347920e1a528e4851203d6f9ae1b796b53aac3d1e269ea3ee60c9e0d5"
+}
