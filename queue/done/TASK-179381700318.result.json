@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L30\", \"agent_id\": \"RESEARCHER\", \"mission_id\": \"WELFARE-TENDER-DELIVERY\", \"outcome\": null, \"text\": \"Before publishing a procurement brief, cross-check structured OCDS dates (contractPeriod.maxExtentDate) against the free-text renewal clause, and never derive a maximum term or value period that the data does not state. Notice 104449-2026 contradicts itself (2031 vs 2033). Regulator names go stale (OISC is now the Immigration Advice Authority). GOV.UK /api/content/government/organisations/<slug> confirms the current name and status in one free FETCH. Every edit changes the site digest, so re-run dry_run and update the blocker so nobody approves a superseded digest.\", \"tags\": [\"procurement\", \"quality\", \"ocds\", \"review-digest\"], \"at\": 1793817109.9493158}",
+  "request": {
+    "id": "TASK-179381700318",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-04T18:30:03Z",
+    "action": "WORLD",
+    "args": {
+      "op": "record_lesson",
+      "agent_id": "RESEARCHER",
+      "lesson": "Before publishing a procurement brief, cross-check structured OCDS dates (contractPeriod.maxExtentDate) against the free-text renewal clause, and never derive a maximum term or value period that the data does not state. Notice 104449-2026 contradicts itself (2031 vs 2033). Regulator names go stale (OISC is now the Immigration Advice Authority). GOV.UK /api/content/government/organisations/<slug> confirms the current name and status in one free FETCH. Every edit changes the site digest, so re-run dry_run and update the blocker so nobody approves a superseded digest.",
+      "mission_id": "WELFARE-TENDER-DELIVERY",
+      "tags": [
+        "procurement",
+        "quality",
+        "ocds",
+        "review-digest"
+      ]
+    },
+    "description": "Broker action during THINK-1793817003",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179381700318",
+  "input_sha256": "68513f1721ac582135d9cb6d42e456eb0af04d3783f83c5d7b3217cc9060bbfc"
+}
