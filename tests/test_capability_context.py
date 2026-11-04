@@ -53,6 +53,24 @@ class CapabilityContextTests(unittest.TestCase):
         self.assertEqual(json.loads(result['output'])['capabilities'],
                          Controller(self.root, self.world, self.bank, config).context()['capabilities'])
 
+    def test_private_mail_observation_exposes_only_counts_and_timestamp(self):
+        token = self.root / 'credentials/agentmail/token'
+        token.parent.mkdir(parents=True)
+        token.write_text('DO-NOT-READ-PRIVATE-KEY'); token.chmod(0o600)
+        status = self.root / 'state/private/agentmail-status.json'
+        status.parent.mkdir(parents=True)
+        status.write_text(json.dumps({'accepted': 1, 'failed': 0, 'body': 'PRIVATE-MAIL',
+                                     'subject': 'PRIVATE-SUBJECT', 'ignored': 'PRIVATE-MAIL',
+                                     'observed_at': '2026-11-04T19:00:00+00:00'}))
+        config = {'agentmail': {'enabled': True, 'inbox_id': 'PRIVATE-INBOX',
+                               'inbox_address': 'private@example.invalid'}}
+        view = Controller(self.root, self.world, self.bank, config).context()['capabilities']['PRIVATE_MAIL']
+        self.assertEqual(view['state'], 'CONFIGURED_UNVERIFIED')
+        self.assertEqual(view['last_cycle'], {'accepted': 1, 'failed': 0,
+                                             'observed_at': '2026-11-04T19:00:00+00:00'})
+        self.assertNotIn('PRIVATE', json.dumps(view))
+        self.assertNotIn('example.invalid', json.dumps(view))
+
 
 if __name__ == '__main__':
     unittest.main()

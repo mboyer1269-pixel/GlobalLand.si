@@ -232,6 +232,31 @@ def capability_view(root, config):
     for action in ('SPEND', 'RECONCILE'):
         result[action] = view([] if finance else ['installed trusted executable finance adapter'],
                               'verified available CAD required for SPEND; adapter and receipts unverified; GLC is virtual')
+    mail = config.get('agentmail') or {}
+    configured_mail = (isinstance(mail, dict) and mail.get('enabled') is True
+                       and isinstance(mail.get('inbox_id'), str) and bool(mail['inbox_id'])
+                       and isinstance(mail.get('inbox_address'), str) and '@' in mail['inbox_address'])
+    missing_mail = [] if configured_mail else ['enabled private AgentMail inbox configuration']
+    if not private_token('agentmail'):
+        missing_mail.append('private agentmail credential file with mode 0600')
+    result['PRIVATE_MAIL'] = view(missing_mail,
+        'separate private correspondence cycle receives and replies using the subscription brain; '
+        'not a submit_action tool; no message bodies or customer details belong in public tasks; '
+        'configuration does not prove receipt, delivery or a running mail schedule')
+    mail_status = root / 'state/private/agentmail-status.json'
+    try:
+        if (configured_mail and not any(p.is_symlink() for p in (root/'state', mail_status.parent, mail_status))
+                and mail_status.is_file() and mail_status.stat().st_size < 4096):
+            observation = json.loads(mail_status.read_text())
+            safe_observation = {k: v for k, v in observation.items()
+                                if k in ('processed', 'accepted', 'ignored', 'unknown', 'failed', 'skipped', 'retry')
+                                and type(v) is int and v >= 0}
+            at = observation.get('observed_at')
+            if isinstance(at, str) and re.fullmatch(r'[0-9T:+.Z-]{20,40}', at):
+                safe_observation['observed_at'] = at
+            result['PRIVATE_MAIL']['last_cycle'] = safe_observation
+    except (OSError, ValueError, AttributeError):
+        pass
     return result
 
 
