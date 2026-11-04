@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "23\n{\"value\": {\"amountGross\": 25323110.4, \"amount\": 21102592, \"currency\": \"GBP\"}, \"contractPeriod\": null}\n{\"value\": {\"amountGross\": 25323110.4, \"amount\": 21102592, \"currency\": \"GBP\"}, \"contractPeriod\": {\"startDate\": \"2027-04-01T00:00:00Z\", \"endDate\": \"2029-03-31T23:59:59+01:00\", \"maxExtentDate\": \"2031-03-31T23:59:59+01:00\"}, \"renewal\": {\"description\": \"The Contract may be extended by up to two (2) periods of twenty-four (24) months each at the Council's discretion, subject to performance, funding and service requirements.\"}, \"hasRenewal\": true}\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/term-extract.txt",
+    "products/receipts/TASK-179381700311.json"
+  ],
+  "request": {
+    "id": "TASK-179381700311",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-04T18:30:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re\nd=json.load(open('products/services/welfare-tender/notice-104449-2026-ocds.json'))\ns=json.dumps(d)\nout=[]\nfor k in ['contractPeriod','maxExtent','renewal','duration','year','period','months','value']:\n  for m in re.finditer(k,s,re.I):\n    out.append(k+': '+s[max(0,m.start()-150):m.end()+200])\nopen('products/services/welfare-tender/term-extract.txt','w').write('\\n---\\n'.join(out))\nprint(len(out))\nr=d['releases'][0]\nt=r['tender']\nprint(json.dumps({k:t.get(k) for k in ['value','contractPeriod']})[:600])\nfor l in t.get('lots',[]):print(json.dumps({k:l.get(k) for k in ['value','contractPeriod','renewal','hasRenewal']})[:900])"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/term-extract.txt"
+      ]
+    },
+    "description": "Broker action during THINK-1793817003",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179381700311",
+  "input_sha256": "dbbc8410b4793b1e94d30e55ddf3ce747a0805e3d8b72d023a6b55dee06dc81a"
+}
