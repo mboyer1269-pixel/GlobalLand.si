@@ -23,6 +23,8 @@ import sys
 KNOWN_KINDS = ('TimeoutError', 'FileNotFoundError', 'PermissionError', 'ValueError', 'OSError', 'RuntimeError', 'Exception')
 # Fixed codes written by the installed controller (supervisor.FAILURE_DEFAULTS and FAILURE_MESSAGES).
 FIXES = {
+    'brain_image_missing': 'Image du contrôleur absente : vérifier docker image inspect <image du contrôleur>, puis restaurer ou reconstruire cette image avec ses versions épinglées avant de relancer le contrôleur.',
+    'brain_image_inspection_failed': 'Présence de l\'image non vérifiée : vérifier docker info, le service Docker et les permissions du socket avant de réessayer.',
     'all_subscription_providers_failed': (
         'Chaque fournisseur a échoué à ce cycle (détail dans attempts). Vérifier la connexion et le quota de chacun : '
         'sudo python3 /opt/globalland/control/diagnose_subscriptions.py --image <image> --provider codex (puis claude). '

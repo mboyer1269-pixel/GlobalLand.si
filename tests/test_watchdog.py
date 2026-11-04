@@ -53,6 +53,28 @@ class WatchdogTests(unittest.TestCase):
         self.commit({'README.md': 'x'}, author='Michael')
         self.assertEqual(watchdog.check(self.repo, now=1793491200)['status'], 'ALERT')
 
+    def test_missing_image_alert_points_to_image_recovery_instead_of_login(self):
+        self.commit({'world/controller.json': {
+            'state': 'CONTROLLER_BLOCKED', 'reason_code': 'brain_image_missing'}})
+        report = watchdog.check(self.repo, now=1793491200)
+        body = watchdog.issue_body(report)
+        self.assertIn('docker image inspect', body)
+        self.assertIn('brain_image_missing', body)
+        self.assertNotIn('session expirée', body)
+
+    def test_image_inspection_failure_alert_points_to_docker_health(self):
+        self.commit({'world/controller.json': {
+            'state': 'CONTROLLER_BLOCKED', 'reason_code': 'brain_image_inspection_failed'}})
+        body = watchdog.issue_body(watchdog.check(self.repo, now=1793491200))
+        self.assertIn('docker info', body)
+        self.assertNotIn('session expirée', body)
+
+    def test_invalid_reason_code_does_not_prevent_alert_body(self):
+        self.commit({'world/controller.json': {'state': 'CONTROLLER_BLOCKED', 'reason_code': []}})
+        report = watchdog.check(self.repo, now=1793491200)
+        self.assertIsNone(report['controller_reason_code'])
+        self.assertIn('controller-failure.json', watchdog.issue_body(report))
+
     def test_missing_invalid_or_unknown_controller_is_never_ok(self):
         self.commit({'README.md': 'recent publication'})
         path = self.repo / 'world/controller.json'

@@ -138,6 +138,21 @@ def run_brain(argv, input=None, limit=1024*1024, merge_stderr=False, timeout=120
         cleanup_brain(name)
 
 
+def check_brain_image(image):
+    """Diagnose Docker startup failure without exposing Docker output or using inference."""
+    try:
+        code,out=bounded_run(['docker','image','inspect','--format','{{.Id}}',image],
+                             env=ENV,limit=65536,timeout=30,merge_stderr=True)
+    except (OSError,ValueError,subprocess.SubprocessError):
+        raise RuntimeError('brain image inspection failed') from None
+    if not code:return
+    # A failed inspect alone is not proof of absence (daemon/socket/permissions).
+    missing=re.compile(rb'(?:Error response from daemon:|Error:) No such image: '+re.escape(image.encode()))
+    if any(missing.fullmatch(line.strip()) for line in out.splitlines()):
+        raise RuntimeError('configured brain image missing')
+    raise RuntimeError('brain image inspection failed')
+
+
 def validate_decision(value):
     if not isinstance(value,dict) or set(value)!={'summary','actions'} or not isinstance(value['summary'],str) or not isinstance(value['actions'],list) or len(value['actions'])>5:
         raise ValueError('invalid controller decision')
@@ -283,6 +298,7 @@ class Controller:
         helptext=''
         for command in helps:
             code,out=run_brain(command_argv(command),limit=1024*1024,merge_stderr=True)
+            if code==125:check_brain_image(self.config['image'])
             if code:raise ValueError(f'{provider}: subscription CLI unavailable (help exit={code})')
             helptext+=out.decode('utf-8')
         flags=['--ignore-user-config','--ignore-rules','--sandbox','--ephemeral','--skip-git-repo-check','--output-schema'] if provider=='codex' else ['--safe-mode','--tools','--disallowedTools','--strict-mcp-config','--mcp-config','--json-schema','--no-session-persistence','--permission-prompts']

@@ -84,6 +84,36 @@ class ThinkFailureTests(unittest.TestCase):
         self.assertEqual(self.public_controller()['state'], 'CONTROLLER_BLOCKED')
         self.assert_no_failed_plan_work()
 
+    def test_missing_brain_image_is_preserved_in_private_and_public_diagnosis(self):
+        self.configure_controller()
+        path = self.install / 'control/config.json'
+        config = json.loads(path.read_text())
+        config['controller']['providers'] = ['codex', 'claude']
+        path.write_text(json.dumps(config))
+        image = config['controller']['image']
+        calls = []
+        secret = b'private-account-context'
+
+        def docker(argv, **kwargs):
+            calls.append(argv)
+            if argv[:3] == ['docker', 'image', 'inspect']:
+                self.assertEqual(argv[-1], image)
+                return 1, b'Error response from daemon: No such image: ' + image.encode() + b'\n'
+            self.assertIn('--help', argv)  # Neither auth nor inference may run.
+            return 125, secret
+
+        with patch('controller.bounded_run', side_effect=docker), patch('controller.cleanup_brain'):
+            with self.assertRaisesRegex(RuntimeError, 'Controller planning failed'):
+                self.app.cycle('think')
+        private = (self.install / 'state/private/controller-failure.json').read_text()
+        public = self.public_controller()
+        self.assertEqual(json.loads(private)['reason'], 'brain_image_missing')
+        self.assertEqual(public['reason_code'], 'brain_image_missing')
+        self.assertEqual(public['last_turn']['attempts'][0]['reason'], 'brain_image_missing')
+        self.assertEqual(len(calls), 2)
+        self.assertNotIn(secret.decode(), private + json.dumps(public))
+        self.assert_no_failed_plan_work()
+
     def test_invalid_provider_output_has_a_safe_specific_private_reason(self):
         self.configure_controller()
         # Authentication and CLI execution are external; parse the provider output for real.

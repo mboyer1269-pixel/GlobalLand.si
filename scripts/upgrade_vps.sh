@@ -23,22 +23,25 @@ flock -x 9
 install -d -m 755 "$ROOT/releases"
 tar -czf "$BACKUP/state-before.tgz" -C "$ROOT" control state source.git ssh releases
 RELEASE="$ROOT/releases/$REV"
+python3 - "$ROOT" "$BACKUP/config-pending.json" <<'PY'
+import json,pathlib,re,sys
+root,pending=map(pathlib.Path,sys.argv[1:]);old=root/'control/config.json'
+config=json.loads(old.read_text()) if old.exists() else {}
+image=re.search(r'^\s*image:\s*(\S+)',(root/'control/compose.yml').read_text(),re.M)
+if not image:raise SystemExit('Existing image missing')
+config.update(executor_enabled=True,executor_image=image.group(1))
+config.setdefault('controller',{'mode':'external_grok'})
+pending.write_text(json.dumps(config,indent=2)+'\n')
+PY
+docker compose -f "$ROOT/control/compose.yml" config --quiet
+# A retention failure must remain retryable without reserving the final release.
+python3 "$HERE/scripts/image_guard.py" --root "$ROOT" --config "$BACKUP/config-pending.json" ensure
 install -d -m 755 "$ROOT/releases" "$RELEASE"
 for file in "$HERE"/scripts/*.py "$HERE"/scripts/*.js "$HERE"/scripts/*.sh "$HERE"/scripts/*.json; do install -m 644 "$file" "$RELEASE/$(basename "$file")"; done
 printf '%s\n' "$REV" > "$RELEASE/REVISION"
 install -m 644 "$ROOT/control/compose.yml" "$RELEASE/compose.yml"
-python3 - "$ROOT" "$RELEASE" <<'PY'
-import json,pathlib,re,sys
-root,release=map(pathlib.Path,sys.argv[1:]);old=root/'control/config.json'
-config=json.loads(old.read_text()) if old.exists() else {}
-image=re.search(r'^\s*image:\s*(\S+)',(release/'compose.yml').read_text(),re.M)
-if not image:raise SystemExit('Existing image missing')
-config.update(executor_enabled=True,executor_image=image.group(1))
-config.setdefault('controller',{'mode':'external_grok'})
-(release/'config.json').write_text(json.dumps(config,indent=2)+'\n')
-PY
+install -m 600 "$BACKUP/config-pending.json" "$RELEASE/config.json"
 python3 -m py_compile "$RELEASE"/*.py
-docker compose -f "$RELEASE/compose.yml" config --quiet
 # Keep previous installed code for rollback, including configs. No credentials are moved.
 if [[ -L $ROOT/control ]]; then cp -a "$ROOT/control" "$BACKUP/control-link"; rm "$ROOT/control"; else mv "$ROOT/control" "$BACKUP/control"; fi
 ln -s "$RELEASE" "$ROOT/control"

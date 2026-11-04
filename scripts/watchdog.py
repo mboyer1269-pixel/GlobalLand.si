@@ -77,17 +77,23 @@ def check(repo, now=None, max_silence_hours=2.0):
     founder = [c for c in blockers.get('open', []) if c.get('owner') == 'FOUNDER']
     if founder:
         reasons.append('%d action(s) attendent le fondateur : %s' % (len(founder), '; '.join(c.get('title', c.get('id', '?')) for c in founder[:5])))
+    reason_code = controller.get('reason_code')
     return dict(status='ALERT' if reasons else 'OK', reasons=reasons, last_supervisor_commit_age_hours=age_hours,
-                controller_state=state, founder_actions=len(founder), last_successful_plan_at=success_at,
+                controller_state=state, controller_reason_code=reason_code if isinstance(reason_code, str) else None,
+                founder_actions=len(founder), last_successful_plan_at=success_at,
                 last_successful_plan_age_hours=None if success_age is None else round(success_age, 2))
 
 
 def issue_body(report):
     lines = ['GlobalLand a besoin d\'attention.', '']
     lines += ['- ' + r for r in report['reasons']]
+    remedy = {
+        'brain_image_missing': 'Vérifier `docker image inspect <image du contrôleur>` puis restaurer ou reconstruire l\'image configurée avec ses versions épinglées avant de relancer le contrôleur.',
+        'brain_image_inspection_failed': 'Vérifier `docker info`, le service Docker et les permissions du socket ; la présence de l\'image n\'a pas pu être établie.',
+    }.get(report.get('controller_reason_code'), 'Vérifier les connexions des abonnements (quota atteint, session expirée) : voir INSTALL.md.')
     lines += ['', 'Que faire, dans l\'ordre :',
-              '1. Sur le VPS : `sudo python3 /opt/globalland/control/supervisor.py status` et lire `state/private/controller-failure.json` (cause exacte, jamais publiée).',
-              '2. Vérifier les connexions des abonnements (quota atteint, session expirée) : voir INSTALL.md.',
+              '1. Sur le VPS : `sudo python3 /opt/globalland/control/supervisor.py status` et lire `state/private/controller-failure.json` (classification technique privée, sans sortie brute).',
+              '2. ' + remedy,
               '3. Lire `world/blockers.json` pour les actions qui t\'attendent.',
               '', 'Cette issue est ouverte et mise à jour chaque heure par le workflow `watchdog` ; elle se ferme seule au rétablissement.']
     return '\n'.join(lines)
