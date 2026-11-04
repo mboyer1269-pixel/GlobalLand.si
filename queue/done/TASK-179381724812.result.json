@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "ok\n\n",
+  "artifacts": [
+    "products/founder-unlock-plan.md",
+    "products/receipts/TASK-179381724812.json"
+  ],
+  "request": {
+    "id": "TASK-179381724812",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-04T18:34:08Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "p='products/founder-unlock-plan.md'\ns=open(p,encoding='utf-8').read()\nold='time-sensitive: clarification deadline 2026-11-20, tenders close 2026-12-04 17:00 UTC'\nassert old in s\ns=s.replace(old,'time-sensitive: OCDS dates 2026-11-20 and 2026-12-04 17:00 UTC, see products/services/welfare-tender/evidence.json')\nopen(p,'w',encoding='utf-8').write(s)\nprint('ok')"
+      ],
+      "outputs": [
+        "products/founder-unlock-plan.md"
+      ]
+    },
+    "description": "Broker action during THINK-1793817248",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179381724812",
+  "input_sha256": "72f2588a523c0646ee3a8afd6ff3268496d90967d872c086f32da720af5a748a"
+}
