@@ -566,15 +566,15 @@
       "to_agent": "AUDITOR",
       "body": "Review the current welfare-tender-brief files independently; do not edit them. PUBLISH_SITE dry_run TASK-179382960415 returned digest af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e, 2 files, 10385 bytes. Existing approval ca094b87... does not cover this version. Deployment TASK-179382960410 was refused with SiteError, detail withheld; its precise cause is unknown. Inspect the added contact/intake text against docs/AGENTMAIL.md, official procurement evidence and legal guardrails. Record APPROVE or NEEDS_WORK for the exact current digest through the host gate. Internal AgentMail transport verification does not prove external deliverability, customer demand or payment capability. Never publish private correspondence.",
       "timestamp": 1793829682.5779192
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION",
+      "body": "Finish PRIVATE-MAIL-SERVICE-TEST without another access audit. TASK-179382960414 read docs/AGENTMAIL.md: it documents a successful November 4 internal AgentMail receive/model-reply/receipt/thread/deduplication test, with private evidence retained privately. The public controller cannot invoke the separate mail cycle through submit_action; last observed cycle was skipped. Do not read private mail through EXEC or invent an inbound customer. Read the existing brief and official OCDS, then perform a substantive synthetic delivery rehearsal checking actual deadline semantics (the brief uses '4 Dec 2026', so the previous ISO text-presence failure does not establish a defect), source support, six-year text versus 2031 structured date, bilingual AI disclosure, scope boundaries and unvalidated pricing/payment. Save and read redacted operational evidence, explicitly distinguish synthetic preparation from observed customer fulfillment, and identify the separate private-cycle operational prerequisite. Close with fail_mission if the real inbound-to-delivery success criterion remains unmet, using a valid lease and a lesson; reclaim if expired. Do not rewrite inventory. Site publication waits for independent review of current digest af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e.",
+      "timestamp": 1793829684.5181575
     }
   ],
   "events": [
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793669743.1765947,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
     {
       "type": "MISSION_CREATED",
       "timestamp": 1793669744.921241,
@@ -1169,6 +1169,12 @@
       "timestamp": 1793829682.5779226,
       "from_agent": "DIRECTOR",
       "to_agent": "AUDITOR"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793829684.518162,
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION"
     }
   ],
   "policy": {
