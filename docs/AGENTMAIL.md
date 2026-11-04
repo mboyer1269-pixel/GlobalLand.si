@@ -43,6 +43,8 @@ Les tests automatisés utilisent exclusivement des réponses simulées et n'envo
 
 Vérification du 4 novembre 2026 : un message envoyé depuis une boîte de test AgentMail distincte a été reçu par GlobalLand. Le modèle abonné Codex a rédigé la réponse ; celle-ci a été reçue dans la boîte de test, dans le bon fil et avec la référence attendue. Un second cycle a laissé une seule réponse envoyée et a ignoré le message déjà traité. Ce test couvre le transport interne AgentMail ; il ne prouve pas la délivrabilité vers Gmail ou Outlook, ni l'existence d'un client ou d'une vente. Les identifiants et preuves détaillées restent privés.
 
+Audit complémentaire du 4 novembre : une demande de test a reçu une synthèse substantielle de la fiche publique, avec sources et limites de vérification, dans le même fil. La réponse a été lue dans la boîte destinataire et un nouveau cycle n'a pas créé de doublon. **Ce message entrant avait d'abord été classé comme spam et a nécessité un reclassement manuel ciblé.** Le test ne prouve donc pas un parcours entièrement sans intervention. La liste normale des messages reçus exclut ces messages ; aucun accès automatisé à leur lecture n'a été validé avec la clé actuelle. Aucun filtre global ni droit de la clé n'a été élargi. Voir le [rapport et les limites restantes](verification/2026-11-04-commercial-channel.md).
+
 ## Références fournisseur
 
 - [Formule gratuite](https://www.agentmail.to/pricing)

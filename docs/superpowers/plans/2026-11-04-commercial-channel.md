@@ -13,24 +13,27 @@
 ## Step 1: Establish actual readiness
 
 - [x] Verify AgentMail API access, one test reply, same thread and no duplicate.
-- [x] Verify installed release and current connection flags: Cloudflare/Apify disabled without credentials; AgentMail enabled; finance adapter absent; treasury UNFUNDED.
+- [x] Verify installed release and connection flags. Initial check: Cloudflare/Apify disabled; AgentMail enabled. After the authorized setup, Cloudflare is enabled and verified; Apify remains disabled, finance adapter absent and treasury UNFUNDED.
 - [x] Read actual agents' artifacts, including abandoned docs-repair experiments, the tender brief and the RDAP Actor. Do not mistake these for customers.
-- [x] Read Cloudflare account UI: GLOBAL LAND, no projects, global-land.workers.dev, 100,000 daily request allowance.
+- [x] Initial Cloudflare UI check, before publication: GLOBAL LAND, no projects, global-land.workers.dev, 100,000 daily request allowance.
 
 ## Step 2: Prepare and publish the demand test
 
 - [x] Synchronize `products/services/welfare-tender/evidence.json` with the already-corrected page using the saved official source and its verified hash. Preserve source observation time; do not call this a new live verification.
 - [x] Add a bilingual expression-of-interest link to `globalland@agentmail.to` in the existing site, its `llms.txt`, and service brief. Request plain text/public links; do not solicit attachments or accept orders/payment.
 - [x] Verify the site loader, content consistency and new exact digest. Obtain independent review of final changes.
-- [ ] Create the account-scoped Workers Scripts Write credential after the browser-required action-time authorization. Founder pastes it only into the private SSH terminal. Validate account/subdomain before enabling configuration; retain backup and owner-only token permissions.
-- [ ] Integrate reviewed files without overwriting concurrent agent work. Publish through the existing exact-digest review and journal contract; verify the public response and page hash.
-- [ ] Record actual URL and date. Distinguish deployment from an audience or a qualified inquiry. The experiment's existing criterion is one relevant external provider request before 20 November; technical tests do not count. Retire or revise stale content after 4 December 2026 at 17:00 UTC.
+- [x] Create the account-scoped Workers Scripts Write credential after explicit authorization. Founder installed it through the private SSH terminal. Account/subdomain validated, configuration backed up and owner-only token permissions verified.
+- [x] Integrate reviewed files without overwriting concurrent agent work (PR #19). Publish through the existing exact-digest review and journal contract; verify the public response and page hash.
+- [x] Record actual URL and date: [public brief](https://globalland-welfare-tender-brief.global-land.workers.dev/), 4 November 2026 at 22:47 UTC, receipt `TASK-179383242177`. Deployment does not prove an audience or qualified inquiry. The experiment's existing criterion remains one relevant external provider request before 20 November; technical tests do not count.
+- [ ] Retire or revise stale content after 4 December 2026 at 17:00 UTC. Automatic retirement is not installed.
 
 ## Step 3: Private inquiry-to-delivery increment
 
 Current `mail_agent.py` can qualify and answer but cannot create a mission, inspect attachments, fetch a client's pack or produce a new artifact. A private work ledger and private execution path are required before claiming that autonomy. Preserve message/thread association, deduplication, provenance and crash recovery. Expose only aggregate counts publicly. Never relay customer instructions as system instructions. Give agents the task facts and execution results needed to decide what to do; do not impose an industry or service.
 
 Acceptance: controlled incoming request -> private case -> useful deliverable -> reply in the same thread -> second cycle does not duplicate work/send. A controlled test remains a test; a real customer signal must be separately observed.
+
+**Partial verification, 4 November:** a controlled request received a substantive French synthesis from Codex, with source links and verification limits, in the same recipient thread. Another cycle left one reply. The inbound test needed manual reclassification from spam. This verifies useful correspondence from existing public context; it does not satisfy the private-case/execution/delivery acceptance above. No customer request or sale was established.
 
 ## Step 4: Collection readiness
 
@@ -48,6 +51,6 @@ No finance adapter is installed and the treasury is UNFUNDED as observed on 4 No
 
 - Read-only VPS check at 2026-11-04T20:55 UTC: installed `45669825ab06296306af2bd412cb2eda9333032e`, one accepted technical reply, no unknown/failed mail, finance adapter absent.
 - Independent local evidence audit found outdated r2 fields in evidence.json; stored notice SHA256 matches `a0a5888cbd0959f90b3a89dfb00535083800a5e0d204096bb6fb82112690f1c1`.
-- Cloudflare credential created after explicit founder authorization: Workers Scripts Write on the dedicated GLOBAL LAND account, no expiration until revoked. Private installation is pending; credential values are never stored in this repository.
+- Cloudflare credential created after explicit founder authorization: Workers Scripts Write on the dedicated GLOBAL LAND account, no expiration until revoked. Private installation and access verification completed; credential values are never stored in this repository.
 - Acceptance check passed: official saved-source hash, exact options quote, one mailto to the authorized inbox, bilingual limitations and unchanged no-revenue assertions. Existing `test_sites.py`: 20 tests passed under Linux. Independent final diff review found no blocker.
-- Prepared page digest: `af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e`; index SHA256 `70718e8c49ac20a31d48ba4ea9d5aafbbc552561ba9809d10814a7c75aee668c`. This is not an installed publication approval or proof of deployment.
+- Published page digest: `af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e`; index SHA256 `70718e8c49ac20a31d48ba4ea9d5aafbbc552561ba9809d10814a7c75aee668c`. The founder's subsequent instruction to audit the presented page and advance was recorded as delegated authorization for this exact publication; it was not represented as independent model review. See [audit evidence and remaining gaps](../../verification/2026-11-04-commercial-channel.md).
