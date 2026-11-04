@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "True\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/live-demand-baseline.json",
+    "products/receipts/TASK-179383500416.json"
+  ],
+  "request": {
+    "id": "TASK-179383500416",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-04T23:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,datetime\nh=hashlib.sha256(open('/workspace/products/services/welfare-tender/live-page-verification.html','rb').read()).hexdigest()\nr={'experiment':'WELFARE-LIVE-DEMAND','recorded_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'deployment_task':'TASK-179383242177','deployment_status':'ONLINE_VERIFIED','url':'https://globalland-welfare-tender-brief.global-land.workers.dev/','review_digest':'af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e','approved_index_sha256':'70718e8c49ac20a31d48ba4ea9d5aafbbc552561ba9809d10814a7c75aee668c','live_fetch_task':'TASK-179383320400','live_fetch_http_status':200,'live_fetch_sha256':h,'live_matches_approved':h=='70718e8c49ac20a31d48ba4ea9d5aafbbc552561ba9809d10814a7c75aee668c','intake':'public expression-of-interest mailbox shown on page (dedicated GlobalLand AgentMail); bodies and senders handled only by the separate private cycle','baseline_counts':{'eligible_requests':0,'quotations':0,'accepted_orders':0,'settled_receipts_cents':0},'baseline_note':'Counts are the launch baseline, not a measurement of demand. No traffic analytics exist; missing telemetry is not evidence of zero demand.','last_private_cycle_observed':{'processed':0,'skipped':2,'observed_at':'2026-11-04T23:30:04Z'},'known_gaps':['No discovery channel: page URL is not linked from anywhere a Bradford welfare provider would see it; unsolicited outreach is prohibited.','Private cycle has no case-to-execution delivery path for a follow-on brief.','No payment route (finance adapter absent; bank UNFUNDED).'],'deadlines':{'success_window_end':'2026-11-20T17:00:00Z','site_must_be_revised_or_retired_after':'2026-12-04T17:00:00Z'}}\nopen('/workspace/products/services/welfare-tender/live-demand-baseline.json','w').write(json.dumps(r,indent=1))\nprint(r['live_matches_approved'])"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/live-demand-baseline.json"
+      ],
+      "mission_id": "WELFARE-LIVE-DEMAND"
+    },
+    "description": "Broker action during THINK-1793835004",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179383500416",
+  "input_sha256": "1268360316140b865080e71ba2e4fe15b8a22c658dca8a8ba76ec6d263665a57"
+}
