@@ -60,22 +60,24 @@
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-04T00:00:35Z",
-    "turns_without_outcome": 5,
+    "stalled_since": null,
+    "turns_without_outcome": 6,
     "outcome_threshold": 12,
     "dry_since": "2026-11-03T22:00:27Z",
     "last_outcome_turn": "THINK-1793741402",
-    "last_productive_turn": "THINK-1793748603",
-    "last_turn": "THINK-1793750403",
+    "last_productive_turn": "THINK-1793752202",
+    "last_turn": "THINK-1793752202",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
-      "new_research_count": 0,
+      "new_products": [
+        "products/services/docs-repair/request-fulfillment/final-verdict.json"
+      ],
+      "new_product_count": 1,
+      "new_research_count": 1,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
