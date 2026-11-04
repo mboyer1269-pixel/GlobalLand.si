@@ -95,28 +95,73 @@ class LessonPromptIntegration(unittest.TestCase):
         return super().run(args if args is not None else result)
 
     def test_relevant_lessons_reach_the_brain_prompt(self):
-        config = {'controller': {'mode': 'subscriptions', 'providers': ['claude'], 'subscriptions_confirmed': True,
+        self.check_prompt_and_action_continuity('claude')
+
+    def test_codex_receives_complete_guides_and_action_feedback(self):
+        self.check_prompt_and_action_continuity('codex')
+
+    def check_prompt_and_action_continuity(self, provider):
+        # The model and HTTP are fixtures; queue execution, Git publication and
+        # next-turn context are real, isolated in a temporary installation.
+        config = {'controller': {'mode': 'subscriptions', 'providers': [provider], 'subscriptions_confirmed': True,
                                  'extra_usage_disabled': True, 'image': 'brain@sha256:' + '1' * 64}}
         (self.install / 'control/config.json').write_text(json.dumps(config))
         playbooks = self.seed / 'agents/playbooks'
         playbooks.mkdir(parents=True)
         source = pathlib.Path(__file__).resolve().parents[1] / 'agents/playbooks'
-        for name in ('two-key-review.md', 'idea-verdict.md', 'THIRD_PARTY.md'):
-            (playbooks / name).write_text((source / name).read_text())
+        expected = {}
+        for path in source.glob('*.md'):
+            (playbooks / path.name).write_text(path.read_text(encoding='utf-8'), encoding='utf-8')
+            if path.name != 'THIRD_PARTY.md':
+                expected[path.stem] = path.read_text(encoding='utf-8').strip()
+        self.assertLessEqual(sum(map(len, expected.values())), 8000)
         self.git('add', '.'); self.git('commit', '-m', 'playbooks'); self.git('push', 'origin', 'main')
         world, _, _ = self.app.services()
         world.apply('m', dict(op='create_mission', mission_id='APIFY-ACTOR', goal='Publish a scraper actor on the Apify Store'))
         world.apply('l', dict(op='record_lesson', agent_id='BUILDER', lesson='Apify actors need an input schema before Store listing.'))
         prompts = []
-        decision = {'summary': 'ok', 'actions': []}
-        reply = json.dumps({'type': 'result', 'subtype': 'success', 'is_error': False, 'structured_output': decision}).encode()
+        expected_feedback = None
+        decisions = [
+            {'summary': 'Check an accessible channel', 'actions': [
+                {'agent': 'RESEARCHER', 'action': 'FETCH', 'args': {
+                    'url': 'https://example.com/', 'output': 'products/channel.txt'}}]},
+            {'summary': 'Retain the result for the next decision', 'actions': [
+                {'agent': 'RESEARCHER', 'action': 'WORLD', 'args': {
+                    'op': 'record_lesson', 'agent_id': 'RESEARCHER',
+                    'mission_id': 'APIFY-ACTOR', 'tags': ['distribution'],
+                    'lesson': 'Channel terms saved in products/channel.txt; payment eligibility remains unknown.'}}]},
+        ]
 
         def brain(argv, **kwargs):
             prompts.append(kwargs['input'].decode())
-            return 0, reply
+            context = json.JSONDecoder().raw_decode(prompts[-1].split('\n', 1)[1])[0]
+            self.assertEqual(context['playbooks'], expected)
+            if len(prompts) == 2:
+                self.assertIn('products/channel.txt', context['source_products'])
+                self.assertIn(expected_feedback, context['latest_task_results'])
+            decision = decisions[len(prompts) - 1]
+            reply = ({'type': 'result', 'subtype': 'success', 'is_error': False,
+                      'structured_output': decision} if provider == 'claude' else decision)
+            return 0, json.dumps(reply).encode()
 
         with patch.object(Controller, 'check_provider'), patch('controller.run_brain', side_effect=brain):
-            self.app.cycle('think')
+            with patch('controller.time.time', return_value=1800000000):
+                self.app.cycle('think')
+            with patch('tools.fetch_public', return_value=(b'Fixture channel terms', 'https://example.com/', 200)):
+                self.app.cycle('queue')
+            self.assertEqual(self.app.git('show', 'HEAD:products/channel.txt'), b'Fixture channel terms')
+            done = [p for p in self.app.git('ls-tree', '-r', '--name-only', 'HEAD').decode().splitlines()
+                    if p.startswith('queue/done/') and p.endswith('.result.json')]
+            self.assertEqual(len(done), 1)
+            result = json.loads(self.app.git('show', 'HEAD:' + done[0]))
+            self.assertEqual(result['status'], 'DONE')
+            expected_feedback = {'task': pathlib.PurePosixPath(done[0]).name.removesuffix('.result.json'),
+                                 'status': 'DONE', 'output': str(result.get('output', ''))[:2000]}
+            with patch('controller.time.time', return_value=1800001800):
+                self.app.cycle('think')
+            self.app.cycle('queue')
+        self.assertEqual(len(prompts), 2)
+        self.assertTrue(any(l['text'] == decisions[1]['actions'][0]['args']['lesson'] for l in world.lessons()))
         self.assertIn('Apify actors need an input schema before Store listing.', prompts[0])
         self.assertIn('producer and auditor are never the same agent', prompts[0])
         self.assertIn('Give one verdict', prompts[0])
