@@ -141,7 +141,56 @@ class MailTests(unittest.TestCase):
         self.transport.messages = [message('pending', agent_armor={'status': 'pending'}), message('ready')]
         self.assertEqual(self.box.cycle(self.responder)['accepted'], 1)
         self.transport.messages[0]['agent_armor']['status'] = 'complete'
+        self.transport.messages[0]['agent_armor']['verdict'] = 'clear'
         self.assertEqual(self.box.cycle(self.responder)['accepted'], 1)
+
+    def test_armor_held_then_released_is_revisited_without_terminal_ignore(self):
+        self.config['agentmail']['max_messages_per_cycle'] = 1
+        self.box = Mailbox(self.root, self.config, self.client)
+        held = message('held', agent_armor={'status': 'complete', 'verdict': 'review'})
+        held['labels'].append('agent-armor-held')
+        self.transport.messages = [held, message('ready')]
+        seen = []
+        def respond(msg):
+            seen.append(msg['message_id'])
+            return self.responder(msg)
+        first = self.box.cycle(respond)
+        self.assertEqual((first['accepted'], first['skipped'], first['ignored']), (1, 1, 0))
+        self.assertEqual(seen, ['ready'])
+        self.assertFalse(self.box._path('held').exists())
+        held['agent_armor']['manual_override'] = {
+            'override_id': 'verified-release', 'released_at': '2026-11-04T12:00:00Z'}
+        # Labels can lag release; wait for the held label to clear too.
+        self.assertEqual(self.box.cycle(respond)['accepted'], 0)
+        held['labels'].remove('agent-armor-held')
+        self.assertEqual(self.box.cycle(respond)['accepted'], 1)
+        self.assertEqual(seen, ['ready', 'held'])
+        self.assertEqual(self.box.cycle(respond)['accepted'], 0)
+
+    def test_armor_review_without_label_unavailable_and_malformed_defer(self):
+        variants = [
+            {'status': 'complete', 'verdict': 'review'},
+            {'status': 'complete', 'verdict': 'review', 'manual_override': {}},
+            {'status': 'complete', 'verdict': 'review', 'manual_override': True},
+            {'status': 'unavailable', 'unavailable_reason': 'payload_too_large'},
+            {'status': 'unavailable', 'unavailable_reason': 'deadline_exceeded'},
+            {'status': 'complete'}, {}, 'malformed',
+        ]
+        seen = []
+        for index, armor in enumerate(variants):
+            with self.subTest(armor=armor):
+                self.transport.messages = [message(str(index), agent_armor=armor)]
+                result = self.box.cycle(lambda msg: seen.append(msg))
+                self.assertEqual((result['processed'], result['skipped'], result['ignored']), (0, 1, 0))
+                self.assertFalse(self.records())
+        self.assertFalse(seen)
+        self.assertFalse(any(c[0] == 'POST' for c in self.transport.calls))
+
+    def test_armor_held_label_defers_even_without_scan_result(self):
+        self.transport.messages[0]['labels'].append('agent-armor-held')
+        result = self.box.cycle(self.responder)
+        self.assertEqual((result['accepted'], result['skipped'], result['ignored']), (0, 1, 0))
+        self.assertFalse(self.records())
 
     def test_concurrent_cycle_cannot_send_twice(self):
         nested = []

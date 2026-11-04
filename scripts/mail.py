@@ -170,6 +170,30 @@ def _addresses(value):
     return [address.lower() for _, address in getaddresses(values) if address]
 
 
+def _armor_deferred(message):
+    """Polling also sees held mail; wait for a clear result or verified release.
+
+    AgentMail documents unavailable scans as requiring the same review as a
+    review verdict. Held labels may lag either verdict or release, so check both.
+    This gateway never releases mail or changes provider security settings.
+    """
+    labels = message.get('labels')
+    if isinstance(labels, list) and 'agent-armor-held' in labels:
+        return True
+    armor = message.get('agent_armor')
+    if armor is None:
+        return False  # Mail received without Agent Armor has no result field.
+    if not isinstance(armor, dict) or armor.get('status') != 'complete':
+        return True
+    if armor.get('verdict') == 'clear':
+        return False
+    override = armor.get('manual_override')
+    released = (isinstance(override, dict)
+                and all(isinstance(override.get(k), str) and override[k].strip()
+                        for k in ('override_id', 'released_at')))
+    return not (armor.get('verdict') == 'review' and released)
+
+
 def _should_ignore(message, own_address):
     labels = message.get('labels')
     if not isinstance(labels, list) or not all(isinstance(v, str) for v in labels):
@@ -353,10 +377,9 @@ class Mailbox:
             if (message.get('message_id') != mid
                     or message.get('inbox_id') != self.settings['inbox_id']):
                 raise MailError('Mail identity mismatch')
-            armor = message.get('agent_armor') or {}
-            if isinstance(armor, dict) and armor.get('status') == 'pending':
-                # The vendor scan normally completes seconds later. Do not create
-                # a terminal record or consume the response budget while it runs.
+            if _armor_deferred(message):
+                # Revisit after the scan or a provider-side human release. Never
+                # give held content to the responder or create a terminal record.
                 result['processed'] -= 1
                 result['skipped'] += 1
                 return
