@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "garanti | on précisée dans les données). C'est une estimation : ni un financement disponible ni une garantie d'éligibilité. - Durée : période initiale du 1er avril 2027 au 31 mars 2029. **Incohéren\ngaranti | 49 CAD : synthèse du dossier complet fourni par le prestataire, sans rédaction d'offre ni garantie. Aucun client ni moyen de paiement à ce jour.  ## Contact / Demande d’intérêt Interested\neligib | requirements matrix, deadlines, compliance checklist). No bid writing and no guarantee of eligibility or award. No customer, checkout or payment route exists yet. Service envisagé, sous \nligibilit | dans les données). C'est une estimation : ni un financement disponible ni une garantie d'éligibilité. - Durée : période initiale du 1er avril 2027 au 31 mars 2029. **Incohérence dans les do\nligibilit | equirements matrix, deadlines, compliance checklist). No bid writing and no guarantee of eligibility or award. No customer, checkout or payment route exists yet. Service envisagé, sous rése\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179383500412.json"
+  ],
+  "request": {
+    "id": "TASK-179383500412",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-04T23:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re\nb=open('/workspace/products/services/welfare-tender/brief-en-fr.md',encoding='utf-8').read()\nfor w in ('garanti','eligib','ligibilit'):\n  for m in re.finditer(w,b,re.I): print(w,'|',b[max(0,m.start()-90):m.end()+90].replace('\\n',' '))"
+      ],
+      "outputs": [],
+      "mission_id": "PRIVATE-MAIL-SERVICE-TEST"
+    },
+    "description": "Broker action during THINK-1793835004",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179383500412",
+  "input_sha256": "af6ad69f71fbb26a558dc4497950ddbbb993fd61c86c95e12985e43e6fd7df53"
+}
