@@ -316,6 +316,28 @@
         "products/services/welfare-tender/evidence.json",
         "products/services/welfare-tender/notice-104449-2026-ocds.json"
       ]
+    },
+    {
+      "mission_id": "DOMAIN-RDAP-BUILD",
+      "goal": "Per products/research/next-idea-scan-2.json (dns verdict PURSUE_IF: automation-lab/domain-availability-checker 29 users_30d at USD 0.035 start + 0.0023/domain), build products/actors/domain-availability offline: bulk domain availability via public RDAP JSON only (IANA bootstrap), no WHOIS, no registrant/entity fields stored. Output one row per domain: domain, available (true/false/null), rdap_status_code, statuses, registered_at, expires_at, rdap_server, error_code, error. Reuse link-checker public_http transport, packaging, EN/FR README with AI disclosure. Test offline against a local 127.0.0.1 server (registered, 404 unregistered, 429, 500, timeout, unsupported TLD, invalid domain, oversized body) and save core-test-results.json from real execution. Proposed events domain-checked 1500 and apify-actor-start 50 micro-USD, labeled proposed. Listing still waits on NO-APIFY-ACCESS. No credential probes. Complete with a lesson after reading results.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "BUILDER",
+      "priority": 1,
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/actors/domain-availability/core-test-results.json",
+        "products/actors/domain-availability/src/core.py",
+        "products/actors/domain-availability/src/main.py",
+        "products/actors/domain-availability/tests/run_tests.py",
+        "products/actors/domain-availability/README.md",
+        "products/actors/domain-availability/llms.txt",
+        "products/actors/domain-availability/actor-config/actor.json",
+        "products/actors/domain-availability/actor-config/input_schema.json",
+        "products/actors/domain-availability/data/rdap-dns-bootstrap.json",
+        "products/actors/domain-availability/tests/fixtures/verisign-example-com.json"
+      ]
     }
   ],
   "messages": [
@@ -507,30 +529,6 @@
     }
   ],
   "events": [
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793665884.8205616,
-      "lesson_id": "L9",
-      "agent_id": "DIRECTOR"
-    },
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793665890.3902578,
-      "mission_id": "NEXT-IDEA-SCAN",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793665943.5492666,
-      "lesson_id": "L10",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793665943.54927,
-      "mission_id": "NEXT-IDEA-SCAN",
-      "agent_id": "RESEARCHER"
-    },
     {
       "type": "MISSION_CREATED",
       "timestamp": 1793665972.8424368,
@@ -1107,6 +1105,29 @@
       "timestamp": 1793817310.606708,
       "lesson_id": "L32",
       "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793820657.3141394,
+      "mission_id": "DOMAIN-RDAP-BUILD"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793820669.6742074,
+      "mission_id": "DOMAIN-RDAP-BUILD",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793820959.3945627,
+      "lesson_id": "L33",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793820959.394576,
+      "mission_id": "DOMAIN-RDAP-BUILD",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
@@ -1203,5 +1224,5 @@
       "seq": 1
     }
   ],
-  "lesson_count": 32
+  "lesson_count": 33
 }

@@ -70,19 +70,33 @@
       "reports": 1,
       "opened_at": "2026-11-03T23:30:56Z",
       "last_reported_at": "2026-11-03T23:30:56Z"
+    },
+    {
+      "id": "SYSTEM-NO-PROGRESS",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "PROGRESS",
+      "title": "3 tours consécutifs sans résultat vérifiable",
+      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CSV-ACTOR-LAUNCH, LINK-CHECK-LAUNCH, RSS-ACTOR-LAUNCH, WORLD-FIRST-REVENUE.",
+      "mission_id": null,
+      "expected_gain": null,
+      "raised_by": "PROGRESS-DETECTOR",
+      "reports": 3,
+      "opened_at": "2026-11-04T18:35:20Z",
+      "last_reported_at": "2026-11-04T19:36:17Z"
     }
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 3,
     "threshold": 3,
     "stalled_since": "2026-11-04T18:35:20Z",
-    "turns_without_outcome": 6,
+    "turns_without_outcome": 7,
     "outcome_threshold": 12,
     "dry_since": "2026-11-04T18:22:23Z",
     "last_outcome_turn": "THINK-1793815973",
     "last_productive_turn": "THINK-1793817152",
-    "last_turn": "THINK-1793818803",
+    "last_turn": "THINK-1793820602",
     "last_change": {
       "productive": false,
       "outcome": false,
@@ -90,7 +104,7 @@
       "new_products": [],
       "new_product_count": 0,
       "new_research_count": 0,
-      "rewritten_count": 1,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
