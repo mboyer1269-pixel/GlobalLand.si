@@ -293,10 +293,14 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "7C6bT9sZ2K-VQXrIzvOApXYzlPmMNPrY",
-      "lease_expires_at": 1793761244.319459,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/research/tender-results-extract.txt",
+        "products/services/tender-intelligence/bounded-result.json",
+        "products/services/tender-intelligence/brief-en-fr.md"
+      ]
     }
   ],
   "messages": [
@@ -470,18 +474,6 @@
     }
   ],
   "events": [
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793655054.2664165,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793655055.98692,
-      "lesson_id": "L1",
-      "agent_id": "DIRECTOR"
-    },
     {
       "type": "BLOCKER_RAISED",
       "timestamp": 1793658350.6025717,
@@ -1061,6 +1053,18 @@
       "timestamp": 1793757644.319487,
       "mission_id": "TENDER-INTELLIGENCE-DELIVERY",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793757683.3539364,
+      "lesson_id": "L24",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793757683.3539395,
+      "mission_id": "TENDER-INTELLIGENCE-DELIVERY",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
@@ -1129,5 +1133,5 @@
       "last_reported_at": 1793748656.3260295
     }
   ],
-  "lesson_count": 23
+  "lesson_count": 24
 }
