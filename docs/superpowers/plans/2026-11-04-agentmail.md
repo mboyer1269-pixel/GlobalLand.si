@@ -26,11 +26,13 @@
 - [x] Implement `scripts/mail_agent.py`: subscribed brain generates private structured reply using current public context; reject invented tool actions, no paid fallback, include AI identity. Test command privacy and parsing without live calls.
 - [x] Add supervisor `mail` mode and aggregate capability observation, with tests confirming no public task/mail data leakage and disabled mode makes no API call.
 - [x] Review and automated checks: 399 Python tests (5 skipped) and 12 Node tests passed under Linux WSL. Review found an Agent Armor hold bypass; fixed with a red/green regression and 28 mailbox tests passing. Independent review confirms no remaining blocker.
-- [ ] Install the reviewed exact revision with backup after the account and credential are ready.
-- [ ] Founder finishes account/auth/terms and enters scoped credential privately; validate Free status and configured inbox read access.
-- [ ] Verify real inbound receipt, actual subscribed-agent response, receipt at test sender, and duplicate-safe second polling cycle. Install cron only after manual verification. Record evidence without claiming a customer or sale.
+- [x] Install the reviewed exact candidate with backup and preserve configuration and existing schedules.
+- [x] Founder finishes account/auth/terms and enters scoped credential privately; validate Free status and configured inbox read access.
+- [x] Verify real inbound receipt, actual subscribed-agent response, receipt at test sender, and duplicate-safe second polling cycle. Install cron only after manual verification. Record evidence without claiming a customer or sale.
 
 ## Ledger
 
-- Account sign-up opened; personal authentication/terms handed to founder. No account created by the assistant yet.
+- Founder completed Free account signup and private credential entry. Dedicated operational and test inboxes created; credential scoped to operational inbox with exactly three required permissions.
+- Real subscribed Codex reply received at the AgentMail test inbox on November 4, 2026; thread/reference matched. Second cycle processed zero new messages and skipped the already-handled message; provider API still reported exactly one test reply. Internal transport only, no customer or sale claimed.
+- Five-minute polling added to the existing managed GlobalLand cron file after backup; scheduler service active. Actual scheduled execution must be observed separately from installation.
 - Reusing clean isolated execution worktree, new branch codex/agentmail from current origin/main. No changes to the city checkout or Oria.

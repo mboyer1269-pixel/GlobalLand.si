@@ -19,6 +19,12 @@ Cette intégration traite les courriels reçus dans une boîte dédiée et perme
 
 Le traitement est effectué par lots configurables pour que les autres activités continuent à progresser. Il ne crée ni plafond financier inventé ni approbation humaine par réponse. Les limites et conditions du fournisseur restent applicables.
 
+Après vérification, placer la ligne suivante dans le fichier existant `/etc/cron.d/globalland`, après sauvegarde. Ce fichier est déjà suspendu et restauré par la procédure de mise à jour. Précréer le journal privé en mode `0600` ; le verrou supplémentaire évite d'accumuler des processus en attente du superviseur.
+
+```cron
+*/5 * * * * root /usr/bin/flock -n /opt/globalland/state/mail-schedule.lock /usr/bin/python3 /opt/globalland/control/supervisor.py mail >> /opt/globalland/state/private/mail-cron.log 2>&1
+```
+
 ## Confidentialité et comportement
 
 - Les courriels entrants sont des données non fiables. Le modèle de correspondance reçoit le message et du contexte produit public, sans outils ni clés AgentMail. Il peut répondre ou ignorer ; aucune action de sa réponse ne devient une tâche publique.
@@ -34,6 +40,8 @@ Le traitement est effectué par lots configurables pour que les autres activité
 Envoyer un message bénin contenant une référence de test unique depuis une boîte de test autorisée vers GlobalLand. Observer sa réception, une vraie invocation du modèle abonné, l'acceptation de sa réponse et la réception de celle-ci dans la boîte de test avec le bon lien de conversation. Relancer un cycle et vérifier l'absence de doublon. Si les deux boîtes utilisent AgentMail, rapporter explicitement qu'il s'agit d'un test interne au fournisseur ; cela ne garantit pas la délivrabilité vers Gmail ou Outlook.
 
 Les tests automatisés utilisent exclusivement des réponses simulées et n'envoient aucun courriel. Ils ne remplacent pas cette vérification réelle.
+
+Vérification du 4 novembre 2026 : un message envoyé depuis une boîte de test AgentMail distincte a été reçu par GlobalLand. Le modèle abonné Codex a rédigé la réponse ; celle-ci a été reçue dans la boîte de test, dans le bon fil et avec la référence attendue. Un second cycle a laissé une seule réponse envoyée et a ignoré le message déjà traité. Ce test couvre le transport interne AgentMail ; il ne prouve pas la délivrabilité vers Gmail ou Outlook, ni l'existence d'un client ou d'une vente. Les identifiants et preuves détaillées restent privés.
 
 ## Références fournisseur
 
