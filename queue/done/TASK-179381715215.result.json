@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L31\", \"agent_id\": \"AUDITOR\", \"mission_id\": \"WELFARE-TENDER-DELIVERY\", \"outcome\": null, \"text\": \"When a source looks self-contradictory, search the whole record before declaring the value unresolved: OCDS notice 104449-2026 states the six-year maximum explicitly in tender.lots[].options.description, which r2 missed while removing the operator-flagged inference. Grep every free-text field (description, renewal, options) for the term before writing. A claude-provider NEEDS_WORK review is accepted by the host, but an APPROVE for the revised digest must come from a different provider or the founder. Since all channels stay blocked, no further revisions unless a new defect is found.\", \"tags\": [\"review\", \"ocds\", \"quality\", \"review-digest\"], \"at\": 1793817231.980951}",
+  "request": {
+    "id": "TASK-179381715215",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-04T18:32:32Z",
+    "action": "WORLD",
+    "args": {
+      "op": "record_lesson",
+      "agent_id": "AUDITOR",
+      "lesson": "When a source looks self-contradictory, search the whole record before declaring the value unresolved: OCDS notice 104449-2026 states the six-year maximum explicitly in tender.lots[].options.description, which r2 missed while removing the operator-flagged inference. Grep every free-text field (description, renewal, options) for the term before writing. A claude-provider NEEDS_WORK review is accepted by the host, but an APPROVE for the revised digest must come from a different provider or the founder. Since all channels stay blocked, no further revisions unless a new defect is found.",
+      "mission_id": "WELFARE-TENDER-DELIVERY",
+      "tags": [
+        "review",
+        "ocds",
+        "quality",
+        "review-digest"
+      ]
+    },
+    "description": "Broker action during THINK-1793817152",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179381715215",
+  "input_sha256": "3b9897d3480ee10983fbe3d75366533951cdba96065b42e8f77ac6559bfb8783"
+}
