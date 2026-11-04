@@ -277,9 +277,9 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "zfpvBnrF2OVaWh45J3FeRN2oOjozZd_I",
+      "lease_expires_at": 1793754038.0992131,
       "evidence": []
     }
   ],
@@ -436,13 +436,6 @@
     }
   ],
   "events": [
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793520008.844473,
-      "agent_id": "BUILDER",
-      "interest_glc": 5,
-      "maintenance_glc": 1
-    },
     {
       "type": "GLC_CYCLE",
       "timestamp": 1793520008.8444743,
@@ -1035,6 +1028,12 @@
       "timestamp": 1793748656.3260417,
       "blocker_id": "PUBLIC-DISCOVERY-HOST-REJECTION",
       "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793750438.0992417,
+      "mission_id": "ALTERNATIVE-PAID-REQUEST",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
