@@ -125,3 +125,79 @@ def _extract(row, doc):
     if isinstance(ns, list):
         row['nameservers'] = [n['ldhName'].lower() for n in ns
                               if isinstance(n, dict) and isinstance(n.get('ldhName'), str)][:20]
+
+
+def check_domain(raw, domain, mapping, timeout=15, allow_private=False, max_redirects=MAX_REDIRECTS):
+    row = _row(raw, domain)
+    start = time.monotonic()
+    try:
+        if domain is None:
+            raise PublicHTTPError('invalid_domain', 'not a valid domain name')
+        base = find_server(domain, mapping)
+        if base is None:
+            raise PublicHTTPError('unsupported_tld', 'no RDAP server listed in the IANA bootstrap for this TLD')
+        row['rdap_server'] = base
+        url = base + 'domain/' + domain
+        headers = {'Accept': 'application/rdap+json, application/json', 'User-Agent': USER_AGENT}
+        while True:
+            status, location, body = request(url, 'GET', timeout, read_bytes=MAX_BODY + 1,
+                                             headers=headers, allow_private=allow_private)
+            if status in REDIRECTS and location:
+                if row['redirect_count'] >= max_redirects:
+                    raise PublicHTTPError('too_many_redirects', 'more than %d RDAP redirects' % max_redirects)
+                row['redirect_count'] += 1
+                url = urljoin(url, location)
+                continue
+            break
+        row['rdap_status_code'] = status
+        if status == 404:
+            row['available'] = True
+        elif status == 200:
+            if len(body) > MAX_BODY:
+                raise PublicHTTPError('body_too_large', 'RDAP response exceeds %d bytes' % MAX_BODY)
+            try:
+                doc = json.loads(body.decode('utf-8'))
+            except (UnicodeDecodeError, ValueError):
+                raise PublicHTTPError('invalid_json', 'RDAP response is not valid JSON') from None
+            if not isinstance(doc, dict) or doc.get('objectClassName') != 'domain':
+                raise PublicHTTPError('unexpected_response', 'RDAP response is not a domain object')
+            row['available'] = False
+            _extract(row, doc)
+        elif status == 429:
+            raise PublicHTTPError('rate_limited', 'RDAP server rate limit (HTTP 429); retry later')
+        else:
+            raise PublicHTTPError('http_error', 'RDAP server returned HTTP %d' % status)
+    except PublicHTTPError as e:
+        row['error_code'], row['error'] = e.code, str(e)
+    except (TimeoutError, socket.timeout):
+        row['error_code'], row['error'] = 'timeout', 'RDAP request timed out'
+    except ssl.SSLError:
+        row['error_code'], row['error'] = 'tls_error', 'TLS handshake or certificate failure'
+    except (OSError, http.client.HTTPException, ValueError):
+        row['error_code'], row['error'] = 'connection_error', 'could not complete the RDAP request'
+    row['elapsed_ms'] = int((time.monotonic() - start) * 1000)
+    row['checked_at'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
+    return row
+
+
+def check_domains(items, mapping, timeout=15, allow_private=False, delay=0.5, workers=4):
+    # Domains served by one RDAP server run sequentially with a pause; servers run in parallel.
+    groups = {}
+    for idx, (raw, d) in enumerate(items):
+        groups.setdefault(find_server(d, mapping), []).append((idx, raw, d))
+    results = [None] * len(items)
+
+    def run(key_group):
+        key, group = key_group
+        for n, (idx, raw, d) in enumerate(group):
+            if n and delay and key and d:
+                time.sleep(delay)
+            results[idx] = check_domain(raw, d, mapping, timeout, allow_private)
+
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+        list(pool.map(run, groups.items()))
+    return results
+
+
+def is_billable(row):
+    return row.get('available') is not None

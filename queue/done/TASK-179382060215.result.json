@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "products/actors/domain-availability/src/core.py 7953\n\n",
+  "artifacts": [
+    "products/actors/domain-availability/src/core.py",
+    "products/receipts/TASK-179382060215.json"
+  ],
+  "request": {
+    "id": "TASK-179382060215",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-04T19:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import sys,pathlib;p=pathlib.Path(sys.argv[1]);p.parent.mkdir(parents=True,exist_ok=True);open(p,sys.argv[2],encoding='utf-8').write(sys.argv[3]);print(p,p.stat().st_size)",
+        "products/actors/domain-availability/src/core.py",
+        "a",
+        "\n\ndef check_domain(raw, domain, mapping, timeout=15, allow_private=False, max_redirects=MAX_REDIRECTS):\n    row = _row(raw, domain)\n    start = time.monotonic()\n    try:\n        if domain is None:\n            raise PublicHTTPError('invalid_domain', 'not a valid domain name')\n        base = find_server(domain, mapping)\n        if base is None:\n            raise PublicHTTPError('unsupported_tld', 'no RDAP server listed in the IANA bootstrap for this TLD')\n        row['rdap_server'] = base\n        url = base + 'domain/' + domain\n        headers = {'Accept': 'application/rdap+json, application/json', 'User-Agent': USER_AGENT}\n        while True:\n            status, location, body = request(url, 'GET', timeout, read_bytes=MAX_BODY + 1,\n                                             headers=headers, allow_private=allow_private)\n            if status in REDIRECTS and location:\n                if row['redirect_count'] >= max_redirects:\n                    raise PublicHTTPError('too_many_redirects', 'more than %d RDAP redirects' % max_redirects)\n                row['redirect_count'] += 1\n                url = urljoin(url, location)\n                continue\n            break\n        row['rdap_status_code'] = status\n        if status == 404:\n            row['available'] = True\n        elif status == 200:\n            if len(body) > MAX_BODY:\n                raise PublicHTTPError('body_too_large', 'RDAP response exceeds %d bytes' % MAX_BODY)\n            try:\n                doc = json.loads(body.decode('utf-8'))\n            except (UnicodeDecodeError, ValueError):\n                raise PublicHTTPError('invalid_json', 'RDAP response is not valid JSON') from None\n            if not isinstance(doc, dict) or doc.get('objectClassName') != 'domain':\n                raise PublicHTTPError('unexpected_response', 'RDAP response is not a domain object')\n            row['available'] = False\n            _extract(row, doc)\n        elif status == 429:\n            raise PublicHTTPError('rate_limited', 'RDAP server rate limit (HTTP 429); retry later')\n        else:\n            raise PublicHTTPError('http_error', 'RDAP server returned HTTP %d' % status)\n    except PublicHTTPError as e:\n        row['error_code'], row['error'] = e.code, str(e)\n    except (TimeoutError, socket.timeout):\n        row['error_code'], row['error'] = 'timeout', 'RDAP request timed out'\n    except ssl.SSLError:\n        row['error_code'], row['error'] = 'tls_error', 'TLS handshake or certificate failure'\n    except (OSError, http.client.HTTPException, ValueError):\n        row['error_code'], row['error'] = 'connection_error', 'could not complete the RDAP request'\n    row['elapsed_ms'] = int((time.monotonic() - start) * 1000)\n    row['checked_at'] = datetime.now(timezone.utc).isoformat(timespec='seconds')\n    return row\n\n\ndef check_domains(items, mapping, timeout=15, allow_private=False, delay=0.5, workers=4):\n    # Domains served by one RDAP server run sequentially with a pause; servers run in parallel.\n    groups = {}\n    for idx, (raw, d) in enumerate(items):\n        groups.setdefault(find_server(d, mapping), []).append((idx, raw, d))\n    results = [None] * len(items)\n\n    def run(key_group):\n        key, group = key_group\n        for n, (idx, raw, d) in enumerate(group):\n            if n and delay and key and d:\n                time.sleep(delay)\n            results[idx] = check_domain(raw, d, mapping, timeout, allow_private)\n\n    with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:\n        list(pool.map(run, groups.items()))\n    return results\n\n\ndef is_billable(row):\n    return row.get('available') is not None\n"
+      ],
+      "outputs": [
+        "products/actors/domain-availability/src/core.py"
+      ],
+      "mission_id": "DOMAIN-RDAP-BUILD"
+    },
+    "description": "Broker action during THINK-1793820602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179382060215",
+  "input_sha256": "f7aa49f22924e57d1f975608d610750101822cc96e790acec076832e21417df9"
+}
