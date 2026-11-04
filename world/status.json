@@ -267,8 +267,8 @@
       "agent_id": "ACQUISITION",
       "priority": 1,
       "status": "RUNNING",
-      "lease_token": "C6UCH7ic12PmVE3M4QVgQLQUVShJaJ93",
-      "lease_expires_at": 1793746829.8367841,
+      "lease_token": "qEgQiIryonB9w1cE0PQJ6akuSdUfsBgR",
+      "lease_expires_at": 1793754042.5038242,
       "evidence": []
     },
     {
@@ -436,13 +436,6 @@
     }
   ],
   "events": [
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793520008.8444743,
-      "agent_id": "ACQUISITION",
-      "interest_glc": 5,
-      "maintenance_glc": 1
-    },
     {
       "type": "GLC_CYCLE",
       "timestamp": 1793520008.8444762,
@@ -1034,6 +1027,12 @@
       "timestamp": 1793750438.0992417,
       "mission_id": "ALTERNATIVE-PAID-REQUEST",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793750442.503849,
+      "mission_id": "DOCS-REQUEST-FULFILLMENT",
+      "agent_id": "ACQUISITION"
     }
   ],
   "policy": {
