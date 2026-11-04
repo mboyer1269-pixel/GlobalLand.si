@@ -58,5 +58,14 @@
   "eligibility_marked_unverified": false
  },
  "operational_prerequisite_missing": "The separate private mail cycle can answer from public context but has no authorized private case-to-execution delivery path, and no eligible external inbound request has been observed (last cycle: processed 0, skipped 2). Real success needs an actual provider request handled by that cycle.",
- "outcome": "Synthetic preparation only; mission success criterion (observed authorized inbound-to-delivery cycle) NOT met."
+ "outcome": "Synthetic preparation only; mission success criterion (observed authorized inbound-to-delivery cycle) NOT met.",
+ "manual_context_review": {
+  "task": "TASK-179383500412",
+  "garanti_matches": "Both occurrences are negations (ni une garantie d eligibilite; sans redaction d offre ni garantie) - false positive, no unsupported claim.",
+  "eligibility": "Regex check false because brief phrases it as no guarantee of eligibility or award; EN and FR both disclaim eligibility. Acceptable.",
+  "deadline": "OCDS tenderPeriod.endDate 2026-12-04T17:00:00Z is future and matches brief 4 Dec 2026 17:00; earlier ISO text-presence failure was a check artifact, not a defect.",
+  "term": "OCDS options text six (6) years vs structured maxExtentDate 2031 both flagged in brief.",
+  "value": "OCDS amount 21102592 appears in brief."
+ },
+ "verdict": "Brief is deliverable as-is to a real eligible requester. Synthetic preparation only; no real inbound-to-delivery cycle observed."
 }
