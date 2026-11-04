@@ -582,12 +582,6 @@
   ],
   "events": [
     {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793671447.5654402,
-      "mission_id": "LINK-CHECK-BUILD",
-      "agent_id": "BUILDER"
-    },
-    {
       "type": "BLOCKER_RAISED",
       "timestamp": 1793671490.8739095,
       "blocker_id": "NO-APIFY-ACCESS",
@@ -1184,6 +1178,12 @@
       "reviewer": "FOUNDER",
       "subject": "site:welfare-tender-brief",
       "verdict": "APPROVE"
+    },
+    {
+      "type": "BLOCKER_RESOLVED",
+      "timestamp": 1793833239.0766556,
+      "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1253,7 +1253,7 @@
     },
     {
       "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
-      "status": "OPEN",
+      "status": "RESOLVED",
       "raised_by": "RESEARCHER",
       "opened_at": 1793815968.865765,
       "reports": 4,
@@ -1264,7 +1264,10 @@
       "mission_id": "WELFARE-TENDER-DELIVERY",
       "expected_gain": "Corrected, time-limited public brief; first measurable buyer-response signal once a response address exists. Revenue unverified.",
       "last_reported_by": "RESEARCHER",
-      "last_reported_at": 1793817228.7347088
+      "last_reported_at": 1793817228.7347088,
+      "resolution": "TASK-179383242177 reports ONLINE_VERIFIED at https://globalland-welfare-tender-brief.global-land.workers.dev/ for approved digest af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e. The public informational offer and expression-of-interest destination are deployed. External mail delivery, provider requests, payment access and revenue remain unverified.",
+      "resolved_by": "DIRECTOR",
+      "resolved_at": 1793833239.0766523
     }
   ],
   "reviews": [
