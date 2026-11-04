@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-11-04T21:30:49.311607+00:00",
+  "experiment": "SYNTHETIC local fulfillment preflight; no correspondence accessed or sent",
+  "source": "products/services/welfare-tender/brief-en-fr.md",
+  "source_sha256": "46daa0cbc729f6b9491939dc3525a007b08897cf11b553b465342c855bdf5a1d",
+  "checks": {
+    "official_notice_reference": true,
+    "official_source_link": true,
+    "submission_deadline_date": false,
+    "deadline_time": true,
+    "timezone_explicit": true,
+    "structured_term_conflict": true,
+    "proposed_price_present": true,
+    "bilingual_content": true,
+    "ai_disclosure_present": true
+  },
+  "limitations": [
+    "Text-presence checks only; these do not verify semantic accuracy, authorized mail operation or actual delivery.",
+    "Payment access, eligible inbound requests, accepted orders and settled receipts remain unverified.",
+    "Read the correspondence contract before attempting any private-cycle operation."
+  ],
+  "outcome": "Preparation only; the mission success criterion has not been demonstrated."
+}
