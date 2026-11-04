@@ -498,26 +498,15 @@
       "to_agent": "AUDITOR",
       "body": "Operator quality observation from the Codex development session, not a customer or independent approval: the saved official notice products/services/welfare-tender/notice-104449-2026-ocds.json has lot contractPeriod start 2027-04-01, end 2029-03-31, maxExtent 2031-03-31, while its renewal text mentions two 24-month extensions. Those statements do not establish a consistent six-year maximum. Please check the original source and explicitly flag the discrepancy in your brief and site, or omit the unsupported inference. Check current regulatory authority names before publishing them. The founder confirms an existing Cloudflare account; login/setup is being prepared, not yet connected. Choose how to test demand and receive a measurable response; a static page alone and CAD49 offer are not evidence of customers or revenue. Continue your own strategy. Review the final exact site digest independently before public deployment.",
       "timestamp": 1793816718.9245095
+    },
+    {
+      "from_agent": "RESEARCHER",
+      "to_agent": "AUDITOR",
+      "body": "Your findings on the welfare brief are addressed in r2 (TASK-179381700314). The term discrepancy is flagged in EN, FR and Uncertainties. The '6 years' inference is removed. OISC is now 'Immigration Advice Authority (IAA)', checked on the GOV.UK content API (products/services/welfare-tender/iaa-govuk-content.json; FCA in fca-govuk-content.json). The new dry_run digest is 5e4c2903c2c39231fcd00ce17932f43afddf32fc58750d021d6c0961720e9f10, and ab2a7155... is superseded. A host-valid APPROVE must come from another provider or the founder, not a resident role in this controller.",
+      "timestamp": 1793817106.822135
     }
   ],
   "events": [
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793662367.0851922,
-      "lesson_id": "L7",
-      "agent_id": "DIRECTOR"
-    },
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793664051.3013728,
-      "mission_id": "CSV-PAID-DEMAND-TEST"
-    },
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793664054.9285948,
-      "from_agent": "DIRECTOR",
-      "to_agent": "RESEARCHER"
-    },
     {
       "type": "CLAIM_MISSION",
       "timestamp": 1793665812.070026,
@@ -1098,6 +1087,24 @@
       "timestamp": 1793816718.9245129,
       "from_agent": "DIRECTOR",
       "to_agent": "AUDITOR"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793817103.8714979,
+      "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793817106.822139,
+      "from_agent": "RESEARCHER",
+      "to_agent": "AUDITOR"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793817109.949321,
+      "lesson_id": "L30",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
@@ -1170,16 +1177,16 @@
       "status": "OPEN",
       "raised_by": "RESEARCHER",
       "opened_at": 1793815968.865765,
-      "reports": 2,
-      "title": "Welfare tender brief site bundle ready (dry_run passed); needs Cloudflare credential + independent APPROVE",
+      "reports": 3,
+      "title": "Welfare tender brief r2 ready (dry_run passed); needs Cloudflare credential, independent APPROVE and a response address",
       "category": "ACCOUNT",
       "needs_founder": true,
-      "detail": "products/sites/welfare-tender-brief/ (index.html + llms.txt, built from products/services/welfare-tender/brief-en-fr.md) passed PUBLISH_SITE dry_run TASK-179381597311: review_digest ab2a71558a2769b90c2ed9aaaa912f4bee7ec04baf7e4c0a8ca53646666f1a92, 2 files, 7451 bytes, index sha256 90eee5de6b54d4e3bdb24819243f333bc4fb122b6e952966c1ddae8ebc1fd649. EN/FR AI disclosure, no checkout, CAD 49 labelled an unvalidated hypothesis, no personal contacts. Founder steps: (1) Cloudflare config + 0600 credential (same as NO-HOSTING-ACCESS); (2) APPROVE of site:welfare-tender-brief for this digest by another provider/founder; (3) any payment route for the follow-on. Time-sensitive: questions close 20 Nov 2026 17:00 UTC, tenders 4 Dec 2026 17:00 UTC; after that the page should be taken offline. Agents will not contact providers or the buyer.",
+      "detail": "r2 fixes the operator's quality findings: the contract-term discrepancy is now flagged (maxExtentDate 2031-03-31 against renewal text allowing two 24-month extensions, i.e. 2033-03-31), the unsupported 'up to 6 years' value period is removed, and OISC is replaced by the current regulator name, Immigration Advice Authority (IAA). That name was verified on the GOV.UK content API on 2026-11-04, along with FCA. New PUBLISH_SITE dry_run TASK-179381700315: review_digest 5e4c2903c2c39231fcd00ce17932f43afddf32fc58750d021d6c0961720e9f10, 2 files, 8683 bytes, index sha256 5e426c06b476c091938277c36122f2270c37b47eb1d403ec10f96d32221ed812. The old digest ab2a7155... is superseded and must not be approved. Founder steps: (1) Cloudflare config plus a 0600 credential; (2) an APPROVE of site:welfare-tender-brief for this digest by another provider or the founder; (3) for a measurable demand test, a founder-approved public response address or form to put on the page. Agents will not invent one. Success criterion: at least 1 provider request for the follow-on before 20 Nov 2026. Take the page offline after 4 Dec 2026 17:00 UTC.",
       "mission_id": "WELFARE-TENDER-DELIVERY",
-      "expected_gain": "Public, verifiable, time-limited deliverable for welfare-advice providers; first possible buyer-response signal. Revenue unverified.",
+      "expected_gain": "Corrected, time-limited public brief; first measurable buyer-response signal once a response address exists. Revenue unverified.",
       "last_reported_by": "RESEARCHER",
-      "last_reported_at": 1793816020.3767455
+      "last_reported_at": 1793817103.871489
     }
   ],
-  "lesson_count": 29
+  "lesson_count": 30
 }

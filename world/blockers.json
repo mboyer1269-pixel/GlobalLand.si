@@ -48,14 +48,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "ACCOUNT",
-      "title": "Welfare tender brief site bundle ready (dry_run passed); needs Cloudflare credential + independent APPROVE",
-      "detail": "products/sites/welfare-tender-brief/ (index.html + llms.txt, built from products/services/welfare-tender/brief-en-fr.md) passed PUBLISH_SITE dry_run TASK-179381597311: review_digest ab2a71558a2769b90c2ed9aaaa912f4bee7ec04baf7e4c0a8ca53646666f1a92, 2 files, 7451 bytes, index sha256 90eee5de6b54d4e3bdb24819243f333bc4fb122b6e952966c1ddae8ebc1fd649. EN/FR AI disclosure, no checkout, CAD 49 labelled an unvalidated hypothesis, no personal contacts. Founder steps: (1) Cloudflare config + 0600 credential (same as NO-HOSTING-ACCESS); (2) APPROVE of site:welfare-tender-brief for this digest by another provider/founder; (3) any payment route for the follow-on. Time-sensitive: questions close 20 Nov 2026 17:00 UTC, tenders 4 Dec 2026 17:00 UTC; after that the page should be taken offline. Agents will not contact providers or the buyer.",
+      "title": "Welfare tender brief r2 ready (dry_run passed); needs Cloudflare credential, independent APPROVE and a response address",
+      "detail": "r2 fixes the operator's quality findings: the contract-term discrepancy is now flagged (maxExtentDate 2031-03-31 against renewal text allowing two 24-month extensions, i.e. 2033-03-31), the unsupported 'up to 6 years' value period is removed, and OISC is replaced by the current regulator name, Immigration Advice Authority (IAA). That name was verified on the GOV.UK content API on 2026-11-04, along with FCA. New PUBLISH_SITE dry_run TASK-179381700315: review_digest 5e4c2903c2c39231fcd00ce17932f43afddf32fc58750d021d6c0961720e9f10, 2 files, 8683 bytes, index sha256 5e426c06b476c091938277c36122f2270c37b47eb1d403ec10f96d32221ed812. The old digest ab2a7155... is superseded and must not be approved. Founder steps: (1) Cloudflare config plus a 0600 credential; (2) an APPROVE of site:welfare-tender-brief for this digest by another provider or the founder; (3) for a measurable demand test, a founder-approved public response address or form to put on the page. Agents will not invent one. Success criterion: at least 1 provider request for the follow-on before 20 Nov 2026. Take the page offline after 4 Dec 2026 17:00 UTC.",
       "mission_id": "WELFARE-TENDER-DELIVERY",
-      "expected_gain": "Public, verifiable, time-limited deliverable for welfare-advice providers; first possible buyer-response signal. Revenue unverified.",
+      "expected_gain": "Corrected, time-limited public brief; first measurable buyer-response signal once a response address exists. Revenue unverified.",
       "raised_by": "RESEARCHER",
-      "reports": 2,
+      "reports": 3,
       "opened_at": "2026-11-04T18:12:48Z",
-      "last_reported_at": "2026-11-04T18:13:40Z"
+      "last_reported_at": "2026-11-04T18:31:43Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -74,23 +74,21 @@
   ],
   "resolved_recent": [],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
-    "turns_without_outcome": 2,
+    "stalled_since": "2026-11-04T18:32:08Z",
+    "turns_without_outcome": 3,
     "outcome_threshold": 12,
     "dry_since": "2026-11-04T18:22:23Z",
     "last_outcome_turn": "THINK-1793815973",
     "last_productive_turn": "THINK-1793816547",
-    "last_turn": "THINK-1793816547",
+    "last_turn": "THINK-1793817003",
     "last_change": {
-      "productive": true,
+      "productive": false,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [
-        "products/founder-unlock-plan.md"
-      ],
-      "new_product_count": 1,
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
