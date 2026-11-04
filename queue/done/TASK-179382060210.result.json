@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"DOMAIN-RDAP-BUILD\", \"goal\": \"Per products/research/next-idea-scan-2.json (dns verdict PURSUE_IF: automation-lab/domain-availability-checker 29 users_30d at USD 0.035 start + 0.0023/domain), build products/actors/domain-availability offline: bulk domain availability via public RDAP JSON only (IANA bootstrap), no WHOIS, no registrant/entity fields stored. Output one row per domain: domain, available (true/false/null), rdap_status_code, statuses, registered_at, expires_at, rdap_server, error_code, error. Reuse link-checker public_http transport, packaging, EN/FR README with AI disclosure. Test offline against a local 127.0.0.1 server (registered, 404 unregistered, 429, 500, timeout, unsupported TLD, invalid domain, oversized body) and save core-test-results.json from real execution. Proposed events domain-checked 1500 and apify-actor-start 50 micro-USD, labeled proposed. Listing still waits on NO-APIFY-ACCESS. No credential probes. Complete with a lesson after reading results.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179382060210",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-04T19:30:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "create_mission",
+      "mission_id": "DOMAIN-RDAP-BUILD",
+      "goal": "Per products/research/next-idea-scan-2.json (dns verdict PURSUE_IF: automation-lab/domain-availability-checker 29 users_30d at USD 0.035 start + 0.0023/domain), build products/actors/domain-availability offline: bulk domain availability via public RDAP JSON only (IANA bootstrap), no WHOIS, no registrant/entity fields stored. Output one row per domain: domain, available (true/false/null), rdap_status_code, statuses, registered_at, expires_at, rdap_server, error_code, error. Reuse link-checker public_http transport, packaging, EN/FR README with AI disclosure. Test offline against a local 127.0.0.1 server (registered, 404 unregistered, 429, 500, timeout, unsupported TLD, invalid domain, oversized body) and save core-test-results.json from real execution. Proposed events domain-checked 1500 and apify-actor-start 50 micro-USD, labeled proposed. Listing still waits on NO-APIFY-ACCESS. No credential probes. Complete with a lesson after reading results.",
+      "agent_id": "BUILDER",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "priority": 1
+    },
+    "description": "Broker action during THINK-1793820602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179382060210",
+  "input_sha256": "9d54502450c7d25b224490e7d3cea9a3ba1730e814d843fe82c9b32d0390fe86"
+}
