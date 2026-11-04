@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"reviewer\": \"AUDITOR\", \"subject\": \"site:welfare-tender-brief\", \"digest\": \"5e4c2903c2c39231fcd00ce17932f43afddf32fc58750d021d6c0961720e9f10\", \"verdict\": \"NEEDS_WORK\", \"notes\": \"Checked index.html against products/services/welfare-tender/term-extract.txt (OCDS 104449-2026). MAJOR: the page says the maximum term is 'unresolved' citing only renewal text vs maxExtentDate, but the official options text explicitly states 'The maximum potential Contract term is six (6) years.' and the tender description says 'initial contract term is two years with options to extend for up to two further periods of 24 months'. Three text statements agree on 6 years (to 2033-03-31); only structured maxExtentDate 2031-03-31 disagrees. Quote the six-year statement and frame the discrepancy as text (6 yrs) vs structured field (4 yrs). NIT: <li> items not wrapped in <ul>. OK: AI disclosure EN/FR, no payment/checkout, price labelled hypothesis, IAA/FCA names sourced, deadlines 2026-11-20/2026-12-04 17:00 UTC match OCDS, value GBP 21,102,592/25,323,110.40 matches, no personal contact data.\", \"host_turn\": \"THINK-1793817152\", \"host_provider\": \"claude\", \"at\": 1793817187.874272, \"seq\": 1}",
+  "request": {
+    "id": "TASK-179381715210",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-04T18:32:32Z",
+    "action": "WORLD",
+    "args": {
+      "op": "review",
+      "reviewer": "AUDITOR",
+      "subject": "site:welfare-tender-brief",
+      "digest": "5e4c2903c2c39231fcd00ce17932f43afddf32fc58750d021d6c0961720e9f10",
+      "verdict": "NEEDS_WORK",
+      "notes": "Checked index.html against products/services/welfare-tender/term-extract.txt (OCDS 104449-2026). MAJOR: the page says the maximum term is 'unresolved' citing only renewal text vs maxExtentDate, but the official options text explicitly states 'The maximum potential Contract term is six (6) years.' and the tender description says 'initial contract term is two years with options to extend for up to two further periods of 24 months'. Three text statements agree on 6 years (to 2033-03-31); only structured maxExtentDate 2031-03-31 disagrees. Quote the six-year statement and frame the discrepancy as text (6 yrs) vs structured field (4 yrs). NIT: <li> items not wrapped in <ul>. OK: AI disclosure EN/FR, no payment/checkout, price labelled hypothesis, IAA/FCA names sourced, deadlines 2026-11-20/2026-12-04 17:00 UTC match OCDS, value GBP 21,102,592/25,323,110.40 matches, no personal contact data."
+    },
+    "description": "Broker action during THINK-1793817152",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179381715210",
+  "input_sha256": "1546fc6713bbbedab86460df2ba6ddd6584c5cc7f90fe9f212153f10efa37799"
+}
