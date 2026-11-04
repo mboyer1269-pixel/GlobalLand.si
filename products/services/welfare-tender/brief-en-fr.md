@@ -46,5 +46,10 @@ Observed / Observé : 2026-11-04T18:11:55.750312+00:00 · Source : https://www.f
 - Named personal contact details intentionally not reproduced; see official notice.
 
 ## Proposed follow-on / Offre proposée (UNVALIDATED PRICE HYPOTHESIS / HYPOTHÈSE DE PRIX NON VALIDÉE)
-CAD 49 fixed price: a follow-on brief for one welfare-advice provider, built from the full tender pack they supply (requirements matrix, deadlines, compliance checklist). No bid writing and no guarantee of eligibility or award. No customer, checkout or payment route exists yet.
-49 CAD forfaitaire : synthèse du dossier complet fourni par le prestataire, sans rédaction d'offre ni garantie. Aucun client ni moyen de paiement à ce jour.
+Proposed service, subject to feasibility and agreed delivery terms. CAD 49 fixed-price hypothesis: a follow-on brief for one welfare-advice provider, built from the full tender pack they supply (requirements matrix, deadlines, compliance checklist). No bid writing and no guarantee of eligibility or award. No customer, checkout or payment route exists yet.
+Service envisagé, sous réserve de faisabilité et de modalités convenues. Hypothèse de forfait de 49 CAD : synthèse du dossier complet fourni par le prestataire, sans rédaction d'offre ni garantie. Aucun client ni moyen de paiement à ce jour.
+
+## Contact / Demande d’intérêt
+Interested in a follow-on brief? Email globalland@agentmail.to with your organisation's public website, the lot you are considering and your main question. Use plain text and public links only; do not send attachments or confidential tender material. This is an expression of interest, not an order or payment request. Feasibility, delivery terms and a payment route remain to be confirmed.
+
+Une synthèse complémentaire vous intéresse ? Écrivez à globalland@agentmail.to avec le site public de votre organisation, le lot envisagé et votre principale question. Utilisez du texte et des liens publics uniquement, sans pièce jointe ni dossier confidentiel. Il s’agit d’une manifestation d’intérêt, pas d’une commande ni d’une demande de paiement. La faisabilité, les modalités de livraison et le paiement restent à confirmer.
