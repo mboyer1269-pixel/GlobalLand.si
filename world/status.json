@@ -541,12 +541,6 @@
   ],
   "events": [
     {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793665976.3882775,
-      "blocker_id": "NO-APIFY-ACCESS",
-      "agent_id": "BUILDER"
-    },
-    {
       "type": "MESSAGE",
       "timestamp": 1793665978.0703356,
       "from_agent": "DIRECTOR",
@@ -1139,6 +1133,12 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793820979.9406495,
       "mission_id": "DOMAIN-RDAP-LAUNCH"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793820981.7720985,
+      "blocker_id": "NO-APIFY-ACCESS",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
@@ -1166,15 +1166,15 @@
       "status": "OPEN",
       "raised_by": "BUILDER",
       "opened_at": 1793658733.0492296,
-      "reports": 7,
-      "title": "TOP PRIORITY founder step: Apify config + 0600 credential (see products/founder-unlock-plan.md)",
+      "reports": 8,
+      "title": "TOP PRIORITY founder step: Apify config + 0600 credential unlocks 3 tested Actors",
       "category": "CREDENTIAL",
       "needs_founder": true,
-      "detail": "Ranked #1 of the open founder steps in products/founder-unlock-plan.md. Apify is the only channel with built-in pay-per-event billing, so it is the only route where one credential plus one independent review per digest can lead to revenue. Ready: rss-reader (22/22 offline tests) and link-checker (21/21 offline tests), Store copy in products/distribution/. After access: private PUBLISH_ACTOR, one real run each, independent APPROVE of the exact digest, then listing. Kill each if fewer than 3 external users within 14 days. Demand and revenue are unverified.",
-      "mission_id": "RSS-ACTOR-LAUNCH",
-      "expected_gain": "First path to verifiable pay-per-event charges; incumbents showed 39-53 users_30d; our revenue unverified.",
-      "last_reported_by": "DIRECTOR",
-      "last_reported_at": 1793816525.411037
+      "detail": "Three Actors are ready and unlisted: rss-reader (22/22 offline tests), link-checker (21/21) and domain-availability (22/22, RDAP-only, no contact data; built 2026-11-04, products/actors/domain-availability/core-test-results.json). Apify is the only channel with built-in pay-per-event billing. Missing: a valid enabled Apify config and a private credential file with mode 0600. Afterwards: a private PUBLISH_ACTOR of each, one real run, an independent APPROVE of each exact digest, then listing. Kill any Actor with fewer than 3 external users within 14 days. Demand and revenue are unverified.",
+      "mission_id": "DOMAIN-RDAP-LAUNCH",
+      "expected_gain": "First path to verifiable pay-per-event charges. Incumbents showed 29-53 users_30d; our revenue is unverified.",
+      "last_reported_by": "BUILDER",
+      "last_reported_at": 1793820981.772091
     },
     {
       "blocker_id": "BOUNTY-SUBMISSION-ELIGIBILITY",
