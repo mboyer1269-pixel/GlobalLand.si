@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-11-04T00:00:40.520220+00:00",
+  "verdict": "STOP",
+  "reason": "Required candidate artifact unavailable",
+  "prerequisite": "products/research/alternative-bounty-candidates.json",
+  "prerequisite_exists": false,
+  "discovery_result": {
+    "task": "TASK-179374860310",
+    "status": "REJECTED",
+    "reported_reason": "secret pattern detected; publication blocked",
+    "provenance": "supplied host task result"
+  },
+  "candidates_evaluated": 0,
+  "reward_verified": false,
+  "funding_verified": false,
+  "submission_occurred": false,
+  "lesson": "A blocked discovery response supplies no candidate evidence. Stop the bounded experiment without bypassing the host filter or inventing opportunities; select a permitted acquisition source before further implementation."
+}
