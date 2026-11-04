@@ -6,6 +6,7 @@ SECRET=re.compile(rb'(?<![A-Za-z0-9_])sk-[A-Za-z0-9_-]{10,}|(?:ghp_|github_pat_)
 FAILURE_KINDS=('TimeoutError','FileNotFoundError','PermissionError','ValueError','OSError','RuntimeError','Exception')
 FAILURE_DEFAULTS={'TimeoutError':'provider_timeout','FileNotFoundError':'runtime_dependency_missing','PermissionError':'runtime_permission_denied','ValueError':'provider_or_decision_validation_failed','OSError':'runtime_io_failure','RuntimeError':'runtime_failure','Exception':'unexpected_planner_failure'}
 FAILURE_MESSAGES={'invalid subscription structured output':'invalid_provider_structured_output','invalid controller decision':'invalid_controller_decision','invalid controller action':'invalid_controller_action','secret pattern detected; publication blocked':'secret_detected','unsafe path':'invalid_task_path','outputs must be public products paths':'invalid_task_path','all configured subscription providers failed':'all_subscription_providers_failed','Cannot verify brain container cleanup':'container_cleanup_unverified'}
+FAILURE_MESSAGES.update({'configured brain image missing':'brain_image_missing','brain image inspection failed':'brain_image_inspection_failed'})
 FAILURE_CODES=frozenset(FAILURE_DEFAULTS.values())|frozenset(FAILURE_MESSAGES.values())
 def failure_details(error):
  # Exception strings can contain credentials: expose fixed codes only.

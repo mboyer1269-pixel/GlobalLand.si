@@ -82,6 +82,18 @@ class IncidentTests(unittest.TestCase):
         self.assertEqual(facts['provider_health'], {'codex': {'failures': 4, 'minutes_since': 60.0, 'reason': 'provider_timeout'}})
         self.assertNotIn('SECRET', json.dumps(facts))
 
+    def test_image_failure_codes_survive_collection_with_infrastructure_fixes(self):
+        for reason, remedy in (('brain_image_missing', 'docker image inspect'),
+                               ('brain_image_inspection_failed', 'docker info')):
+            with self.subTest(reason=reason):
+                (self.root / 'state/private/controller-failure.json').write_text(json.dumps(dict(
+                    at='2026-11-04T12:30:00Z', stage='planner.tick', providers=['codex', 'claude'],
+                    exception_type='RuntimeError', reason=reason)))
+                finding = incident.diagnose(self.facts())[0]
+                self.assertEqual(finding['code'], 'PLANNER_' + reason.upper())
+                self.assertIn(remedy, finding['fix'])
+                self.assertNotIn('login_subscriptions', finding['fix'])
+
     def test_installed_revision_is_reported_only_as_a_hash(self):
         (self.root / 'control').mkdir()
         (self.root / 'control' / 'REVISION').write_text('9f3499e4a788747ce2ea8b39e48bac58f2b50c7d\n')
