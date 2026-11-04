@@ -277,10 +277,12 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "zfpvBnrF2OVaWh45J3FeRN2oOjozZd_I",
-      "lease_expires_at": 1793754038.0992131,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/research/alternative-paid-request.json"
+      ]
     }
   ],
   "messages": [
@@ -436,20 +438,6 @@
     }
   ],
   "events": [
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793520008.8444762,
-      "agent_id": "AUDITOR",
-      "interest_glc": 5,
-      "maintenance_glc": 1
-    },
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793653879.4243522,
-      "agent_id": "DIRECTOR",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
     {
       "type": "GLC_CYCLE",
       "timestamp": 1793653879.424378,
@@ -1033,6 +1021,18 @@
       "timestamp": 1793750442.503849,
       "mission_id": "DOCS-REQUEST-FULFILLMENT",
       "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793752238.7957108,
+      "lesson_id": "L22",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793752238.7957141,
+      "mission_id": "ALTERNATIVE-PAID-REQUEST",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
@@ -1101,5 +1101,5 @@
       "last_reported_at": 1793748656.3260295
     }
   ],
-  "lesson_count": 21
+  "lesson_count": 22
 }
