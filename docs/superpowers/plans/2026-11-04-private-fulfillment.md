@@ -31,16 +31,16 @@
 
 Files: new scripts/private_work.py (split private sandbox adapter if useful), new tests/test_private_work.py; scripts/mail_agent.py, scripts/mail.py and targeted tests as required.
 
-- [ ] Write failing tests for request -> program -> recorded result -> delivery, replay, pre-send retry, uncertain execution/send, unsafe paths and public confidentiality.
-- [ ] Implement private case persistence and isolated computation using the installed executor contract. Never call public Supervisor.execute_tool.
-- [ ] Add planner result feedback and final artifact selection; validate that every delivered file was actually generated for this case.
-- [ ] Integrate with Mailbox without breaking existing replies; persist READY decision before returning to sender.
+- [x] Write failing tests for request -> program -> recorded result -> delivery, replay, pre-send retry, uncertain execution/send, unsafe paths and public confidentiality.
+- [x] Implement private case persistence and isolated computation using the installed executor contract. Never call public Supervisor.execute_tool.
+- [x] Add planner result feedback and final artifact selection; validate that every delivered file was actually generated for this case.
+- [x] Integrate with Mailbox without breaking existing replies; persist READY decision before returning to sender.
 - [ ] Verify targeted mail/work tests and a real Docker sandbox computation. Commit implementation.
 
 ### Task 2: Review, install and controlled acceptance
 
-- [ ] Independently review complete diff against the spec and confidentiality/recovery boundaries; fix confirmed defects.
-- [ ] Update docs/AGENTMAIL.md and capability descriptions to actual supported behavior.
+- [x] Independently review complete diff against the spec and confidentiality/recovery boundaries; fix confirmed defects.
+- [x] Update docs/AGENTMAIL.md and capability descriptions to actual supported behavior.
 - [ ] Run full GitHub checks and merge reviewed change; upgrade with existing backup/config preservation script.
 - [ ] Enable the private fulfillment option in host configuration, preserving credentials and cron.
 - [ ] Send a controlled test from the authorized fixture inbox, verify actual execution and recipient receipt, then repeat a cycle and verify no duplicate.
@@ -50,3 +50,8 @@ Files: new scripts/private_work.py (split private sandbox adapter if useful), ne
 
 - Ruling: the founder's latest go approves the previously described private execution/delivery priority; implementation choices reuse the existing stack. No additional product or platform approval is required.
 - Baseline: origin/main 69b7a0190cdbba8fe853f668e2a05e6ac2e8a285, isolated branch codex/private-fulfillment. Production controller currently 45669825ab06296306af2bd412cb2eda9333032e.
+- Private planner guide is host-selected and replaces the public tool guide; default public behavior remains unchanged (7255693, two regression tests).
+- Ruling: this increment delivers exact UTF-8 file text inline with filename/hash. No new attachment API or private browsing integration is needed for the approved acceptance.
+- Core case implementation and UTF-8 collector fix are in 33c7788. The collector now preserves BOM, Unicode and line endings; regression reproduced the lost three bytes before the fix and all five Node executor tests pass afterward.
+- Independent review identified unbounded mailbox reads after model-budget exhaustion and potential retry starvation. Correction: bounded page/body reads, durable pending batch with atomic page continuation, and alternating fresh/retry queues. The focused re-review found no remaining blocker; 23 private-work and 36 existing mail tests pass. Real Docker/recipient verification remains required before claiming the full path is operational.
+- Local WSL Docker integration is unavailable. Real Docker tests run in GitHub CI and on the installed VPS; no local Docker setting is changed.

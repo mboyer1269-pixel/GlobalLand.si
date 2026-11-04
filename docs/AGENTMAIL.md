@@ -51,9 +51,13 @@ Le mode de travail privé est facultatif dans la configuration de l'hôte :
 
 Ce fragment complète la configuration de boîte existante ; il ne la remplace pas. Les limites de pas bornent la durée du traitement, pas le marché ou le type de produit choisi par les agents. Le mode désactivé conserve le comportement initial.
 
+Le budget de planification est partagé par tout le passage, y compris les essais de fournisseurs : 1 à 4 pas par passage (2 par défaut), et 1 à 16 actions par dossier (8 par défaut). Chaque invocation de planification utilise un délai maximal de 120 secondes. Un travail différé reste reprenable après temporisation. La boîte alterne nouvelles demandes et reprises, limite les lectures complètes à deux fois `max_messages_per_cycle`, et découvre au plus deux pages de 100 messages par passage. Les identifiants en attente et le curseur de pagination sont conservés ensemble dans son journal privé `.schedule`.
+
 Une demande admissible ouvre un dossier privé associé à l'identité de la boîte et du message. Le modèle peut décider de répondre directement ou de produire un livrable par `EXEC`. Il reçoit ensuite le résultat réel du programme avant de rédiger la réponse finale. Le programme tourne dans le conteneur isolé existant, sans réseau, secrets, état public du monde ni accès aux autres dossiers clients. Les fichiers générés restent privés.
 
 L'agent sélectionne les fichiers effectivement produits. L'hôte insère leurs octets UTF-8 dans la réponse avec nom et empreinte SHA256. Il s'agit d'un livrable textuel **dans le corps du courriel**, pas d'une pièce jointe ni d'un téléchargement public. Les tailles sont bornées ; un fichier trop volumineux n'est pas livré partiellement en étant présenté comme complet. Les pièces jointes entrantes et les consultations de nouveaux sites ne sont pas disponibles dans cette version.
+
+Limites de cette livraison : 256 Kio pour l'instantané entrant, 24 000 octets UTF-8 cumulés pour les fichiers d'une exécution et 32 000 caractères pour la réponse finale. Les fichiers et reçus vivent sous `state/private/fulfillment/`, séparément du journal d'envoi `state/private/agentmail/`. Le modèle voit les résultats du dossier courant, jamais ceux d'un autre client.
 
 Les décisions, résultats d'exécution et réponses prêtes sont persistants. Un résultat terminé n'est pas recalculé après une panne avant l'envoi. La protection `STARTED` / `UNKNOWN` de la messagerie continue d'empêcher une retransmission aveugle après un envoi incertain. Un dossier prêt à répondre ne prouve pas que la réponse est arrivée : la réception doit être vérifiée séparément.
 

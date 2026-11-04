@@ -281,6 +281,123 @@ class PrivateWorkTests(unittest.TestCase):
         with patch('mail.time.time', return_value=10**12), patch('controller.Controller.plan', side_effect=AssertionError('must replay')):
             self.assertEqual(box.cycle(self.responder())['accepted'], 1)
 
+    def test_exhausted_budget_bounds_body_fetches_and_case_creation(self):
+        config = {'agentmail': {'enabled': True, 'inbox_id': 'private-inbox',
+                               'inbox_address': 'city@example.test', 'max_messages_per_cycle': 1}}
+        incoming = [dict(self.message, message_id=str(i), labels=['received'],
+                         **{'from': 'human@example.test'}) for i in range(200)]
+        fetched = []
+        class Client:
+            def list_received(self): return incoming
+            def get_message(self, mid): fetched.append(mid); return incoming[int(mid)]
+        box = Mailbox(self.root, config, Client())
+        def defer(msg): raise PrivateDeferred(False)
+        result = box.cycle(defer)
+        self.assertEqual(len(fetched), 2)
+        self.assertEqual((result['accepted'], result['ignored']), (0, 0))
+        box.cycle(defer)
+        self.assertEqual(fetched, ['0', '1', '2', '3'])
+
+    def test_due_ready_retry_gets_turn_despite_fresh_arrivals_and_scan_failure(self):
+        config = {'agentmail': {'enabled': True, 'inbox_id': 'private-inbox',
+                               'inbox_address': 'city@example.test', 'max_messages_per_cycle': 1}}
+        incoming = [dict(self.message, labels=['received'], **{'from': 'human@example.test'})]
+        sent = []
+        class Client:
+            broken = False
+            def list_received(self):
+                if self.broken: raise ValueError('private provider error')
+                return incoming
+            def get_message(self, mid): return next(m for m in incoming if m['message_id'] == mid)
+            def reply(self, mid, *args): sent.append(mid); return {'message_id': 'sent'}
+        client = Client(); box = Mailbox(self.root, config, client)
+        def fail(_): raise ValueError('pre-send failure')
+        box.cycle(fail)
+        incoming.append(dict(incoming[0], message_id='new-arrival'))
+        with patch('mail.time.time', return_value=10**12):
+            box.cycle(lambda _: {'action': 'reply', 'text': 'Durable reply'})
+        self.assertEqual(sent, ['private-message'])
+        # Another retry remains serviceable even if fresh metadata listing fails.
+        box.cycle(fail)
+        client.broken = True
+        with patch('mail.time.time', return_value=10**12):
+            box.cycle(lambda _: {'action': 'reply', 'text': 'Durable reply'})
+        self.assertEqual(sent, ['private-message', 'new-arrival'])
+
+    def test_provider_metadata_scan_is_bounded_and_checkpointed(self):
+        from mail import Client
+        from urllib.parse import parse_qs, urlsplit
+        config = {'agentmail': {'enabled': True, 'inbox_id': 'private-inbox',
+                               'inbox_address': 'city@example.test', 'max_messages_per_cycle': 1}}
+        token = self.root / 'credentials/agentmail/token'; token.parent.mkdir(parents=True)
+        token.write_text('fixture-token'); token.chmod(0o600)
+        pages = []
+        def transport(method, url, headers, payload):
+            query = parse_qs(urlsplit(url).query)
+            if not query:
+                mid = urlsplit(url).path.rsplit('/', 1)[-1]
+                return dict(self.message, message_id=mid, labels=['received'], **{'from': 'human@example.test'})
+            number = int(query.get('page_token', ['0'])[0]); pages.append(number)
+            if number > 8:
+                raise ValueError('fixture page bound exceeded')
+            return {'messages': [dict(self.message, message_id=str(number))], 'next_page_token': str(number+1)}
+        def defer(_): raise PrivateDeferred(False)
+        box = Mailbox(self.root, config, Client(self.root, config, transport))
+        box.cycle(defer)
+        self.assertEqual(pages, [0, 1])
+        box.cycle(defer)
+        self.assertEqual(pages, [0, 1, 2, 3])
+
+    def test_pending_page_batch_drains_before_scanning_past_held_messages(self):
+        from mail import Client
+        from urllib.parse import parse_qs, urlsplit
+        config = {'agentmail': {'enabled': True, 'inbox_id': 'private-inbox',
+                               'inbox_address': 'city@example.test', 'max_messages_per_cycle': 1}}
+        token = self.root / 'credentials/agentmail/token'; token.parent.mkdir(parents=True)
+        token.write_text('fixture-token'); token.chmod(0o600)
+        pages, sent = [], []
+        def incoming(mid):
+            armor = {'status': 'pending'} if int(mid) % 3 < 2 else {'status': 'complete', 'verdict': 'clear'}
+            return dict(self.message, message_id=mid, labels=['received'], agent_armor=armor,
+                        **{'from': 'human@example.test'})
+        def transport(method, url, headers, payload):
+            query = parse_qs(urlsplit(url).query)
+            if method == 'POST':
+                sent.append(urlsplit(url).path.split('/')[-2]); return {'message_id': 'sent'}
+            if not query:
+                return incoming(urlsplit(url).path.rsplit('/', 1)[-1])
+            number = int(query.get('page_token', ['0'])[0]); pages.append(number)
+            return {'messages': [incoming(str(number*3+i)) for i in range(3)],
+                    'next_page_token': str(number+1) if number < 2 else None}
+        box = Mailbox(self.root, config, Client(self.root, config, transport))
+        respond = lambda _: {'action': 'reply', 'text': 'Useful result'}
+        self.assertEqual(box.cycle(respond)['accepted'], 0)
+        self.assertEqual(box.cycle(respond)['accepted'], 1)
+        self.assertEqual(pages, [0, 1])
+        self.assertEqual(sent, ['2'])
+        self.assertEqual(box.cycle(respond)['accepted'], 0)
+        self.assertEqual(box.cycle(respond)['accepted'], 1)
+        self.assertEqual(sent, ['2', '5'])
+
+    def test_completed_page_survives_later_failure_and_stale_cursor_resets(self):
+        from mail import Client
+        from urllib.parse import parse_qs, urlsplit
+        config = {'agentmail': {'enabled': True, 'inbox_id': 'private-inbox',
+                               'inbox_address': 'city@example.test', 'max_messages_per_cycle': 1}}
+        token = self.root / 'credentials/agentmail/token'; token.parent.mkdir(parents=True)
+        token.write_text('fixture-token'); token.chmod(0o600)
+        pages = []
+        def transport(method, url, headers, payload):
+            number = int(parse_qs(urlsplit(url).query).get('page_token', ['0'])[0]); pages.append(number)
+            if number == 1: raise OSError('fixture page failure')
+            return {'messages': [], 'next_page_token': '1'}
+        box = Mailbox(self.root, config, Client(self.root, config, transport))
+        box.cycle(lambda _: None)
+        self.assertEqual(json.loads((box.directory / '.schedule').read_text())['page_token'], '1')
+        box.cycle(lambda _: None)
+        self.assertIsNone(json.loads((box.directory / '.schedule').read_text())['page_token'])
+        self.assertEqual(pages, [0, 1, 1])
+
     def test_enabled_cycle_selects_private_responder_and_legacy_stays_tool_free(self):
         config = dict(self.config, agentmail=dict(enabled=True, fulfillment={'enabled': True}))
         observed = []

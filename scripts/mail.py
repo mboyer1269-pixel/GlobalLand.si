@@ -7,6 +7,7 @@ can recover while later mail progresses. The supervisor owns scheduling.
 """
 import contextlib
 import hashlib
+import itertools
 import json
 import os
 from pathlib import Path
@@ -124,23 +125,33 @@ class Client:
         except Exception:
             raise MailError('Mail API request failed') from None
 
-    def list_received(self):
-        """Walk every received page oldest first; callers may stop lazily."""
-        token, seen = None, set()
+    def list_received(self, *, page_token=None, max_pages=None, checkpoint=None):
+        """Walk received metadata; bounded callers persist opaque continuation."""
+        token, seen, pages = page_token, set(), 0
         while True:
             query = {'labels': 'received', 'ascending': 'true', 'limit': 100}
             if token:
                 query['page_token'] = token
-            page = self._request('GET', query=query)
+            try:
+                page = self._request('GET', query=query)
+            except MailError:
+                if token is not None and pages == 0 and checkpoint is not None:
+                    checkpoint(None)  # Stale provider cursors cannot wedge polling.
+                raise
             messages = page.get('messages')
-            if not isinstance(messages, list) or any(not isinstance(m, dict) for m in messages):
+            if not isinstance(messages, list) or len(messages) > 100 or any(not isinstance(m, dict) for m in messages):
                 raise MailError('Invalid mail API response')
             yield from messages
             token = page.get('next_page_token')
-            if token is None or token == '':
-                return
-            if not isinstance(token, str) or len(token) > 8192 or token in seen:
+            if token is not None and token != '' and (not isinstance(token, str) or len(token) > 8192 or token in seen):
+                if checkpoint is not None:
+                    checkpoint(None)
                 raise MailError('Invalid mail pagination')
+            if checkpoint is not None:
+                checkpoint(token or None)
+            pages += 1
+            if not token or (max_pages is not None and pages >= max_pages):
+                return
             seen.add(token)
 
     def get_message(self, message_id):
@@ -332,6 +343,37 @@ class Mailbox:
                 result['failed'] += 1
         return result
 
+    def _schedule(self):
+        path = self.directory / '.schedule'
+        if path.is_symlink():
+            raise MailError('Unsafe mail schedule')
+        if not path.exists():
+            return dict(state='SCHEDULE', next_category='new', new_cursor=None,
+                        retry_cursor=None, page_token=None, pending_new=[])
+        try:
+            if not path.is_file() or path.stat().st_nlink != 1 or path.stat().st_size > 4 * MAX_RESPONSE:
+                raise ValueError()
+            value = json.loads(path.read_text(encoding='utf-8'))
+            if (not isinstance(value, dict) or set(value) != {'state', 'next_category', 'new_cursor', 'retry_cursor', 'page_token', 'pending_new'}
+                    or value['state'] != 'SCHEDULE' or value['next_category'] not in ('new', 'retry')
+                    or any(value[k] is not None and (not isinstance(value[k], str)
+                        or not re.fullmatch(r'[0-9a-f]{64}', value[k])) for k in ('new_cursor', 'retry_cursor'))
+                    or (value['page_token'] is not None and (not isinstance(value['page_token'], str)
+                        or not value['page_token'] or len(value['page_token']) > 8192))
+                    or not isinstance(value['pending_new'], list) or len(value['pending_new']) > 200
+                    or any(not isinstance(mid, str) or not mid or len(mid) > 2048 for mid in value['pending_new'])):
+                raise ValueError()
+            return value
+        except Exception:
+            raise MailError('Invalid mail schedule') from None
+
+    @staticmethod
+    def _rotate(candidates, cursor):
+        for index, (_, path, _) in enumerate(candidates):
+            if path.stem == cursor:
+                return candidates[index+1:] + candidates[:index+1]
+        return candidates
+
     def cycle(self, responder):
         result = dict(enabled=self.settings is not None, processed=0, accepted=0,
                       ignored=0, unknown=0, failed=0, skipped=0)
@@ -339,6 +381,8 @@ class Mailbox:
             return result
         try:
             with self._lock():
+                schedule = self._schedule()
+                retries = []
                 # Recover even if a STARTED message has since left the received list.
                 for path in self.directory.glob('*.json'):
                     try:
@@ -347,36 +391,67 @@ class Mailbox:
                             record['state'] = 'UNKNOWN'
                             self._save(path, record)
                             result['unknown'] += 1
+                        elif (record['state'] == 'RETRY' and record['retry_after'] <= time.time()
+                                and record.get('inbox_id') == self.settings['inbox_id']
+                                and self._path(record.get('message_id')) == path):
+                            retries.append((record['message_id'], path, record))
                     except MailError:
                         pass  # Corrupt records remain immutable; handled per-message.
-                retries = []
-                for item in self.client.list_received():
-                    mid = item.get('message_id')
+                fresh, seen, schedule_failed = [], set(), False
+                def checkpoint(token):
+                    nonlocal schedule_failed
+                    schedule['page_token'] = token
+                    schedule['pending_new'] = [mid for mid, _, _ in fresh]
                     try:
-                        path = self._path(mid)
-                        previous = self._read(path)
-                        if previous is not None and (previous['state'] != 'RETRY'
-                                or previous['retry_after'] > time.time()):
-                            result['skipped'] += 1
-                            continue
-                        if previous is not None:
-                            # Fresh messages get a turn before due retries, even
-                            # when polling runs more slowly than retry backoff.
-                            retries.append((mid, path, previous))
-                            continue
+                        self._save(self.directory / '.schedule', schedule)
                     except Exception:
-                        result['failed'] += 1
-                        continue
+                        schedule_failed = True
+                        raise
+                try:
+                    if schedule['pending_new']:
+                        items = ({'message_id': mid} for mid in schedule['pending_new'])
+                    elif isinstance(self.client, Client):
+                        items = self.client.list_received(page_token=schedule['page_token'], max_pages=2, checkpoint=checkpoint)
+                    else:
+                        items = itertools.islice(self.client.list_received(), 200)
+                    for item in items:
+                        try:
+                            mid = item.get('message_id'); path = self._path(mid)
+                            if path in seen:
+                                continue
+                            seen.add(path)
+                            if self._read(path) is not None:
+                                result['skipped'] += 1
+                            else:
+                                fresh.append((mid, path, None))
+                        except Exception:
+                            result['failed'] += 1
+                except Exception:
+                    # Already-journaled READY/retry work remains serviceable if
+                    # discovery fails; no remote error text leaves the gateway.
+                    result['failed'] += 1
+                if schedule_failed:
+                    return result  # No body/send while durable scheduling failed.
+                schedule['pending_new'] = [mid for mid, _, _ in fresh]
+                self._save(self.directory / '.schedule', schedule)
+                queues = dict(new=self._rotate(fresh, schedule['new_cursor']),
+                              retry=self._rotate(sorted(retries, key=lambda v: v[1].name), schedule['retry_cursor']))
+                attempts, limit = 0, self.settings['max_messages_per_cycle']
+                while attempts < 2 * limit and result['processed'] < limit and any(queues.values()):
+                    category = schedule['next_category']
+                    if not queues[category]:
+                        category = 'retry' if category == 'new' else 'new'
+                    mid, path, previous = queues[category].pop(0)
+                    if category == 'new':
+                        schedule['pending_new'].remove(mid)
+                    schedule[category + '_cursor'] = path.stem
+                    schedule['next_category'] = 'retry' if category == 'new' else 'new'
+                    # Advance before the body request, so held/failed messages
+                    # cannot monopolize the next poll even after interruption.
+                    self._save(self.directory / '.schedule', schedule)
+                    attempts += 1
                     result['processed'] += 1
                     self._process(mid, path, responder, result, previous)
-                    if result['processed'] >= self.settings['max_messages_per_cycle']:
-                        break
-                if result['processed'] < self.settings['max_messages_per_cycle']:
-                    for mid, path, previous in retries:
-                        result['processed'] += 1
-                        self._process(mid, path, responder, result, previous)
-                        if result['processed'] >= self.settings['max_messages_per_cycle']:
-                            break
         except Exception:
             result['failed'] += 1
         return result

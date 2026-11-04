@@ -1,7 +1,8 @@
-"""Private correspondence using the existing subscription brain, without tools.
+"""Private correspondence using the existing subscription brain.
 
 No Controller.tick(), WORLD mutation, public task or publication is used here.
-The only possible effect is a reply sent by the host mailbox to its inbound mail.
+The default responder is tool-free. Opt-in fulfillment adds private offline EXEC;
+only the host mailbox sends a reply to the original inbound mail.
 """
 import copy
 import json
