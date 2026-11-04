@@ -334,7 +334,9 @@ class Controller:
         self.current_provider=provider
         try:
             self.check_provider(provider)
-            prompt+='\n'+TOOL_GUIDE
+            # Private host workflows supply their own guide; never append the
+            # public publication instructions after a customer's private task.
+            prompt+='\n'+getattr(self,'tool_guide',TOOL_GUIDE)
             if provider=='cursor':prompt+='\nReturn exactly one JSON object matching this schema, with no Markdown or explanation: '+json.dumps(MODEL_SCHEMA)
             code,out=self.run_turn(provider,prompt)
             if code:raise ValueError('subscription auth/quota/CLI blocker; no paid fallback')

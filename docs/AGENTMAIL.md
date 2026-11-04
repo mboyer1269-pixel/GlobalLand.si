@@ -27,7 +27,7 @@ Après vérification, placer la ligne suivante dans le fichier existant `/etc/cr
 
 ## Confidentialité et comportement
 
-- Les courriels entrants sont des données non fiables. Le modèle de correspondance reçoit le message et du contexte produit public, sans outils ni clés AgentMail. Il peut répondre ou ignorer ; aucune action de sa réponse ne devient une tâche publique.
+- Les courriels entrants sont des données non fiables. Le modèle de correspondance reçoit le message et du contexte produit public, sans clés AgentMail. Le mode initial répond ou ignore sans outils. Le mode de travail privé décrit ci-dessous peut exécuter des programmes isolés ; aucune action privée ne devient une tâche publique.
 - Les réponses portent l'identité GlobalLand et une mention d'agent IA. Le fournisseur les rattache au message reçu ; le modèle ne choisit pas de destinataires supplémentaires.
 - Les pièces jointes ne sont pas téléchargées dans cette première version. Le modèle ne doit pas prétendre les avoir lues.
 - Messages, identifiants et preuves d'envoi restent sous `state/private/agentmail/`. Seuls des compteurs et la date du dernier cycle peuvent être exposés au contrôleur public. Aucun résultat de correspondance n'est publié dans GitHub.
@@ -40,6 +40,28 @@ Après vérification, placer la ligne suivante dans le fichier existant `/etc/cr
 Envoyer un message bénin contenant une référence de test unique depuis une boîte de test autorisée vers GlobalLand. Observer sa réception, une vraie invocation du modèle abonné, l'acceptation de sa réponse et la réception de celle-ci dans la boîte de test avec le bon lien de conversation. Relancer un cycle et vérifier l'absence de doublon. Si les deux boîtes utilisent AgentMail, rapporter explicitement qu'il s'agit d'un test interne au fournisseur ; cela ne garantit pas la délivrabilité vers Gmail ou Outlook.
 
 Les tests automatisés utilisent exclusivement des réponses simulées et n'envoient aucun courriel. Ils ne remplacent pas cette vérification réelle.
+
+## Travail privé et livrables
+
+Le mode de travail privé est facultatif dans la configuration de l'hôte :
+
+```json
+{"agentmail":{"fulfillment":{"enabled":true,"max_steps_per_cycle":2,"max_steps_per_case":8}}}
+```
+
+Ce fragment complète la configuration de boîte existante ; il ne la remplace pas. Les limites de pas bornent la durée du traitement, pas le marché ou le type de produit choisi par les agents. Le mode désactivé conserve le comportement initial.
+
+Le budget de planification est partagé par tout le passage, y compris les essais de fournisseurs : 1 à 4 pas par passage (2 par défaut), et 1 à 16 actions par dossier (8 par défaut). Chaque invocation de planification utilise un délai maximal de 120 secondes. Un travail différé reste reprenable après temporisation. La boîte alterne nouvelles demandes et reprises, limite les lectures complètes à deux fois `max_messages_per_cycle`, et découvre au plus deux pages de 100 messages par passage. Les identifiants en attente et le curseur de pagination sont conservés ensemble dans son journal privé `.schedule`.
+
+Une demande admissible ouvre un dossier privé associé à l'identité de la boîte et du message. Le modèle peut décider de répondre directement ou de produire un livrable par `EXEC`. Il reçoit ensuite le résultat réel du programme avant de rédiger la réponse finale. Le programme tourne dans le conteneur isolé existant, sans réseau, secrets, état public du monde ni accès aux autres dossiers clients. Les fichiers générés restent privés.
+
+L'agent sélectionne les fichiers effectivement produits. L'hôte insère leurs octets UTF-8 dans la réponse avec nom et empreinte SHA256. Il s'agit d'un livrable textuel **dans le corps du courriel**, pas d'une pièce jointe ni d'un téléchargement public. Les tailles sont bornées ; un fichier trop volumineux n'est pas livré partiellement en étant présenté comme complet. Les pièces jointes entrantes et les consultations de nouveaux sites ne sont pas disponibles dans cette version.
+
+Limites de cette livraison : 256 Kio pour l'instantané entrant, 24 000 octets UTF-8 cumulés pour les fichiers d'une exécution et 32 000 caractères pour la réponse finale. Les fichiers et reçus vivent sous `state/private/fulfillment/`, séparément du journal d'envoi `state/private/agentmail/`. Le modèle voit les résultats du dossier courant, jamais ceux d'un autre client.
+
+Les décisions, résultats d'exécution et réponses prêtes sont persistants. Un résultat terminé n'est pas recalculé après une panne avant l'envoi. La protection `STARTED` / `UNKNOWN` de la messagerie continue d'empêcher une retransmission aveugle après un envoi incertain. Un dossier prêt à répondre ne prouve pas que la réponse est arrivée : la réception doit être vérifiée séparément.
+
+Le parcours n'accepte ni paiement ni contrat et ne convertit pas un test technique en client ou revenu. La vérification complète doit demander un résultat calculable à partir de données fictives, constater l'exécution réelle, vérifier les octets du livrable reçu, puis confirmer l'absence de doublon lors d'un nouveau passage.
 
 Vérification du 4 novembre 2026 : un message envoyé depuis une boîte de test AgentMail distincte a été reçu par GlobalLand. Le modèle abonné Codex a rédigé la réponse ; celle-ci a été reçue dans la boîte de test, dans le bon fil et avec la référence attendue. Un second cycle a laissé une seule réponse envoyée et a ignoré le message déjà traité. Ce test couvre le transport interne AgentMail ; il ne prouve pas la délivrabilité vers Gmail ou Outlook, ni l'existence d'un client ou d'une vente. Les identifiants et preuves détaillées restent privés.
 

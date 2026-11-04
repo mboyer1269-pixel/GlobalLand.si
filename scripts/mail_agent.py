@@ -1,7 +1,8 @@
-"""Private correspondence using the existing subscription brain, without tools.
+"""Private correspondence using the existing subscription brain.
 
 No Controller.tick(), WORLD mutation, public task or publication is used here.
-The only possible effect is a reply sent by the host mailbox to its inbound mail.
+The default responder is tool-free. Opt-in fulfillment adds private offline EXEC;
+only the host mailbox sends a reply to the original inbound mail.
 """
 import copy
 import json
@@ -103,7 +104,13 @@ def run_mail_cycle(root, config):
     from mail import Mailbox
     if (config.get('agentmail') or {}).get('enabled') is not True:
         return {'enabled': False}
-    result = Mailbox(root, config).cycle(MailResponder(root, config))
+    fulfillment = (config.get('agentmail') or {}).get('fulfillment') or {}
+    if isinstance(fulfillment, dict) and fulfillment.get('enabled') is True:
+        from private_work import PrivateResponder
+        responder = PrivateResponder(root, config)
+    else:
+        responder = MailResponder(root, config)
+    result = Mailbox(root, config).cycle(responder)
     # Fixed aggregate fields only: normal planners can observe service health,
     # but correspondence and generated replies stay out of the public world.
     observed = {k: v for k, v in result.items()

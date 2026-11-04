@@ -1,6 +1,16 @@
 'use strict';
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const {collect,safe,execute}=require('../scripts/executor');
+
+test('UTF-8 collection preserves BOM, Unicode and line endings byte for byte',t=>{
+ const d=fs.mkdtempSync(path.join(os.tmpdir(),'gl-utf8-'));
+ t.after(()=>fs.rmSync(d,{force:true,recursive:true}));
+ fs.mkdirSync(path.join(d,'products'));
+ const original=Buffer.from('\uFEFFQuébec,24.00\r\n東京,7.00\n','utf8');
+ fs.writeFileSync(path.join(d,'products/result.csv'),original);
+ const result=collect(d,['products/result.csv']);
+ assert.deepEqual(Buffer.from(result['products/result.csv'],'utf8'),original);
+});
 test('generated product artifact is collected without host path access',t=>{const d=fs.mkdtempSync(path.join(os.tmpdir(),'gl-exec-'));t.after(()=>fs.rmSync(d,{force:true,recursive:true}));fs.mkdirSync(path.join(d,'products'));fs.writeFileSync(path.join(d,'products/a.txt'),'product');assert.deepEqual(collect(d,['products/a.txt']),{'products/a.txt':'product'});fs.symlinkSync('/etc/passwd',path.join(d,'products/link'));assert.throws(()=>collect(d,['products/link']));fs.linkSync(path.join(d,'products/a.txt'),path.join(d,'products/hard'));assert.throws(()=>collect(d,['products/hard']));});
 test('publication stays inside visible products',()=>{for(const n of ['../oria','products/../x','/products/x','products/.env','scripts/control.py'])assert.throws(()=>safe(n));});
 test('binary artifacts explain how to recover without publishing partial files',t=>{
