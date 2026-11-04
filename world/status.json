@@ -4,36 +4,36 @@
     {
       "agent_id": "DIRECTOR",
       "role": "DIRECTOR",
-      "wallet_glc": 97,
-      "debt_glc": 117,
+      "wallet_glc": 96,
+      "debt_glc": 123,
       "status": "ACTIVE"
     },
     {
       "agent_id": "RESEARCHER",
       "role": "RESEARCHER",
-      "wallet_glc": 97,
-      "debt_glc": 117,
+      "wallet_glc": 96,
+      "debt_glc": 123,
       "status": "ACTIVE"
     },
     {
       "agent_id": "BUILDER",
       "role": "BUILDER",
-      "wallet_glc": 97,
-      "debt_glc": 117,
+      "wallet_glc": 96,
+      "debt_glc": 123,
       "status": "ACTIVE"
     },
     {
       "agent_id": "ACQUISITION",
       "role": "ACQUISITION",
-      "wallet_glc": 97,
-      "debt_glc": 117,
+      "wallet_glc": 96,
+      "debt_glc": 123,
       "status": "ACTIVE"
     },
     {
       "agent_id": "AUDITOR",
       "role": "AUDITOR",
-      "wallet_glc": 97,
-      "debt_glc": 117,
+      "wallet_glc": 96,
+      "debt_glc": 123,
       "status": "ACTIVE"
     }
   ],
@@ -491,36 +491,6 @@
     }
   ],
   "events": [
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793658630.235934,
-      "mission_id": "INVOICE-IDEA-VERDICT",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793658638.3647993,
-      "mission_id": "INVOICE-DEMAND",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793658644.4092503,
-      "lesson_id": "L4",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793658644.4092534,
-      "mission_id": "INVOICE-DEMAND",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793658733.049244,
-      "blocker_id": "NO-APIFY-ACCESS",
-      "agent_id": "BUILDER"
-    },
     {
       "type": "LESSON_RECORDED",
       "timestamp": 1793658740.6316168,
@@ -1081,6 +1051,41 @@
       "timestamp": 1793759449.5109951,
       "lesson_id": "L25",
       "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793779206.7618806,
+      "agent_id": "DIRECTOR",
+      "interest_glc": 6,
+      "maintenance_glc": 1
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793779206.7618887,
+      "agent_id": "RESEARCHER",
+      "interest_glc": 6,
+      "maintenance_glc": 1
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793779206.7618918,
+      "agent_id": "BUILDER",
+      "interest_glc": 6,
+      "maintenance_glc": 1
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793779206.7618945,
+      "agent_id": "ACQUISITION",
+      "interest_glc": 6,
+      "maintenance_glc": 1
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793779206.7618964,
+      "agent_id": "AUDITOR",
+      "interest_glc": 6,
+      "maintenance_glc": 1
     }
   ],
   "policy": {
