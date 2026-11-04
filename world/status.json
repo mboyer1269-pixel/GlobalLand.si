@@ -576,11 +576,6 @@
   ],
   "events": [
     {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793669744.921241,
-      "mission_id": "LINK-CHECK-BUILD"
-    },
-    {
       "type": "CLAIM_MISSION",
       "timestamp": 1793671222.6292892,
       "mission_id": "LINK-CHECK-BUILD",
@@ -1175,6 +1170,13 @@
       "timestamp": 1793829684.518162,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "REVIEW_RECORDED",
+      "timestamp": 1793831433.8653998,
+      "reviewer": "AUDITOR",
+      "subject": "site:welfare-tender-brief",
+      "verdict": "APPROVE"
     }
   ],
   "policy": {
@@ -1280,6 +1282,17 @@
       "host_provider": "codex",
       "at": 1793824268.549619,
       "seq": 2
+    },
+    {
+      "reviewer": "AUDITOR",
+      "subject": "site:welfare-tender-brief",
+      "digest": "af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e",
+      "verdict": "APPROVE",
+      "notes": "Blocker: none for this informational sample and expression-of-interest intake. Independently read both public files, the official saved OCDS release and docs/AGENTMAIL.md; reproduced the exact digest in TASK-179383140311. Buyer, scope, values, deadlines, award weights and six-year text versus 2031 structured-date discrepancy match the source. EN/FR AI disclosures and unvalidated CAD49 price, no orders/checkout and unverified eligibility/payment route are explicit. Added intake requests plain text/public links only, excludes confidential material and attachments, and uses the dedicated GlobalLand mailbox documented by the private-mail integration. No correspondence is published. Internal transport testing establishes neither external delivery nor customer demand. Nit: none requiring changes. Approval does not establish working hosting or revenue; deployment must retain the host's other-turn/provider gate.",
+      "host_turn": "THINK-1793831403",
+      "host_provider": "codex",
+      "at": 1793831433.8653948,
+      "seq": 3
     }
   ],
   "lesson_count": 34
