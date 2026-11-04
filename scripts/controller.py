@@ -376,10 +376,17 @@ class Controller:
         if work.exists():
             products=[str(p.relative_to(work)) for p in sorted((work/'products').rglob('*')) if p.is_file() and not p.is_symlink() and 'receipts' not in p.parts][:500]
         candidates=[]
-        for base,pattern in ((work/'queue','*.result.json'),(self.root/'state','TASK-*.json')):
-            if base.exists():candidates.extend(p for p in base.rglob(pattern) if p.is_file() and not p.is_symlink())
+        for base,pattern,private in ((work/'queue','*.result.json',False),(self.root/'state','TASK-*.json',True)):
+            if base.exists():candidates.extend((private,p) for p in base.rglob(pattern) if p.is_file() and not p.is_symlink())
+        def recency(candidate):
+            private,p=candidate
+            number=re.fullmatch(r'TASK-([0-9]{4,12})(?:\.result)?\.json',p.name)
+            # Durable journals retain completion/publication times. Worktree
+            # mtimes are recreated by every Git archive extraction, so public
+            # fallback uses stable task order, never extraction order.
+            return (private,p.stat().st_mtime_ns if private else 0,int(number[1]) if number else -1,str(p))
         seen=set()
-        for p in sorted(candidates,key=lambda x:x.stat().st_mtime,reverse=True):
+        for _,p in sorted(candidates,key=recency,reverse=True):
             if len(results)>=20:break
             if p.stat().st_size>1024*1024:continue
             try:
