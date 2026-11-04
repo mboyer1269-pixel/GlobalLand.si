@@ -266,10 +266,13 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "qEgQiIryonB9w1cE0PQJ6akuSdUfsBgR",
-      "lease_expires_at": 1793754042.5038242,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/services/docs-repair/request-fulfillment/final-verdict.json",
+        "products/services/docs-repair/request-fulfillment/candidate-rejection-evidence.json"
+      ]
     },
     {
       "mission_id": "ALTERNATIVE-PAID-REQUEST",
@@ -438,20 +441,6 @@
     }
   ],
   "events": [
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793653879.424378,
-      "agent_id": "RESEARCHER",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793653879.424381,
-      "agent_id": "BUILDER",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
     {
       "type": "GLC_CYCLE",
       "timestamp": 1793653879.4243832,
@@ -1033,6 +1022,18 @@
       "timestamp": 1793752238.7957141,
       "mission_id": "ALTERNATIVE-PAID-REQUEST",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793752240.4835422,
+      "lesson_id": "L23",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793752240.4835455,
+      "mission_id": "DOCS-REQUEST-FULFILLMENT",
+      "agent_id": "ACQUISITION"
     }
   ],
   "policy": {
@@ -1101,5 +1102,5 @@
       "last_reported_at": 1793748656.3260295
     }
   ],
-  "lesson_count": 22
+  "lesson_count": 23
 }
