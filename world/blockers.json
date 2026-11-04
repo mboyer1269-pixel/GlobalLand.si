@@ -1,20 +1,6 @@
 {
-  "founder_actions": 3,
+  "founder_actions": 2,
   "open": [
-    {
-      "id": "NO-HOSTING-ACCESS",
-      "status": "OPEN",
-      "owner": "FOUNDER",
-      "category": "CREDENTIAL",
-      "title": "Site bundle ready; deployment needs Cloudflare credential + independent review",
-      "detail": "products/sites/invoice-preflight/ passed PUBLISH_SITE dry_run (TASK-179365829112): review_digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e, 3 files, 5546 bytes, index sha256 22242ea3b4f4cb89c2b581ec736ae4b14b2239bf158a0e2177218c6a39596948. Page has an EN/FR AI-agent disclosure, a no-compatibility claim and a no-checkout notice. Two things are still missing: (1) a valid, enabled Cloudflare config plus a private credential file with mode 0600; (2) a review APPROVE of site:invoice-preflight for this exact digest, from another provider (Grok/founder). The Show HN draft (products/distribution/show-hn-demand-experiment.txt) also needs a founder-approved account before anyone can submit it.",
-      "mission_id": "INVOICE-DISTRIBUTION",
-      "expected_gain": "Public demo URL that unlocks the 7-day Show HN demand experiment (success = 3 concrete import problems, at least 1 showing interest at USD 49).",
-      "raised_by": "ACQUISITION",
-      "reports": 2,
-      "opened_at": "2026-11-02T21:12:27Z",
-      "last_reported_at": "2026-11-02T22:25:50Z"
-    },
     {
       "id": "NO-APIFY-ACCESS",
       "status": "OPEN",
@@ -42,6 +28,20 @@
       "reports": 1,
       "opened_at": "2026-11-03T20:01:26Z",
       "last_reported_at": "2026-11-03T20:01:26Z"
+    },
+    {
+      "id": "NO-HOSTING-ACCESS",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "OTHER",
+      "title": "Invoice-preflight demo: Cloudflare now works; only an independent APPROVE of digest 867f3f8c... is missing",
+      "detail": "Reconciled 2026-11-04: Cloudflare hosting is verified working (TASK-179383242177 ONLINE_VERIFIED for welfare-tender-brief), so the credential part of this blocker is resolved. Fresh dry_run TASK-179383500417 of products/sites/invoice-preflight/ returns unchanged review_digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e (3 files, 5546 bytes, index sha256 22242ea3...). Remaining: an APPROVE of site:invoice-preflight for this exact digest from another provider turn (not claude) or the founder. The Show HN submission still needs a founder-approved account and is not requested now.",
+      "mission_id": null,
+      "expected_gain": "Free public demo of the tested offline CSV checker; discovery surface only, no revenue claimed (idea verdict REVISE).",
+      "raised_by": "ACQUISITION",
+      "reports": 3,
+      "opened_at": "2026-11-02T21:12:27Z",
+      "last_reported_at": "2026-11-04T23:31:56Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -78,21 +78,23 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-04T22:30:42Z",
-    "turns_without_outcome": 6,
+    "stalled_since": null,
+    "turns_without_outcome": 7,
     "outcome_threshold": 12,
     "dry_since": "2026-11-04T20:31:06Z",
     "last_outcome_turn": "THINK-1793822403",
-    "last_productive_turn": "THINK-1793829604",
-    "last_turn": "THINK-1793833204",
+    "last_productive_turn": "THINK-1793835004",
+    "last_turn": "THINK-1793835004",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/welfare-tender/live-page-verification.html"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0

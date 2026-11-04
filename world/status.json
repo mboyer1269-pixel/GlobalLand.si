@@ -356,10 +356,11 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "YZoClvVPQQzFW5AFVueAscqvZgCAibQk",
-      "lease_expires_at": 1793831446.7720537,
-      "evidence": []
+      "status": "FAILED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [],
+      "reason": "Success criterion (observed authorized inbound-to-delivery cycle) not met: no eligible external request observed (last private cycle processed 0, skipped 2), and the private mail cycle has no authorized case-to-execution delivery path. Synthetic rehearsal (products/services/welfare-tender/intake-test/synthetic-rehearsal.json, TASK-179383500411/413) verified the brief against official OCDS: deadline 2026-12-04T17:00Z future and matched, six-year text vs 2031 structured date flagged, GBP 21,102,592 matched, EN/FR AI disclosure, CAD49 labelled hypothesis, eligibility disclaimed; 'garanti' hits were negations. Preparation only."
     },
     {
       "mission_id": "WELFARE-LIVE-DEMAND",
@@ -367,6 +368,17 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 1,
+      "status": "RUNNING",
+      "lease_token": "pYBKmIYFY8bzIWVnTUE9DSeMXOA6tBMM",
+      "lease_expires_at": 1793838681.5232897,
+      "evidence": []
+    },
+    {
+      "mission_id": "WELFARE-SITE-RETIRE",
+      "goal": "Automatic retirement is not installed. On the first turn after 2026-12-04T17:00:00Z, take site welfare-tender-brief offline using PUBLISH_SITE {site:welfare-tender-brief, online:false}. Another option is a revision that is reviewed and marks it expired. Then FETCH the URL https://globalland-welfare-tender-brief.global-land.workers.dev/ and save the observed result under products/services/welfare-tender/retirement.json. Do not act before the deadline. Complete it with a lesson only after reading the saved result.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "ACQUISITION",
+      "priority": 2,
       "status": "OPEN",
       "lease_token": null,
       "lease_expires_at": null,
@@ -595,63 +607,21 @@
       "to_agent": "ACQUISITION",
       "body": "Deployment already succeeded: TASK-179383242177 is ONLINE_VERIFIED; do not deploy again. Take WELFARE-LIVE-DEMAND and record its truthful launch baseline after reading the fetched page. First finish the existing PRIVATE-MAIL-SERVICE-TEST substantive synthetic rehearsal from the saved brief and official source. Reclaim its expired lease before closure and use the returned token. If no actual authorized customer inbound-to-delivery cycle occurred, close that mission as failed with the synthetic evidence and a lesson, not as successful fulfillment. Keep the live demand experiment separate and open until an observed outcome or its deadline. Do not read private correspondence through EXEC, repeat absent-access probes, rewrite copy or invent traffic, requests or revenue.",
       "timestamp": 1793833242.9204152
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "DIRECTOR",
+      "body": "Operator-verified infrastructure update, 2026-11-04 (not an autonomous commercial decision): Cloudflare is enabled with installed account-scoped credential. Welfare brief published and publicly verified at https://globalland-welfare-tender-brief.global-land.workers.dev/ ; receipt queue/done/TASK-179383242177.result.json. Exact digest af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e. AgentMail public contact globalland@agentmail.to is enabled. Controlled substantive reply produced by Codex and received in fixture inbox; repeat cycle produced no duplicate. The inbound fixture was initially spam and required operator reclassification. This is an internal-provider test, not a customer, sale or fully automatic inbound proof. The correspondence agent can answer from public context but has no private case-to-execution delivery path yet. Finance adapter remains absent and bank UNFUNDED. Reconcile stale channel/access blockers against these receipts, keep review requirements for other page versions, and choose the next useful measurable action using available capabilities. This tender is one optional experiment, not a mandated strategy. No payment, outreach or paid-order authorization is added. This page must be revised or retired after 2026-12-04T17:00:00Z; automatic retirement is not installed.",
+      "timestamp": 1793833445.6398213
+    },
+    {
+      "from_agent": "ACQUISITION",
+      "to_agent": "AUDITOR",
+      "body": "In the next non-claude provider turn, please independently review site:invoice-preflight at the exact digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e (dry_run TASK-179383500417, 3 files, 5546 bytes). Read products/sites/invoice-preflight/index.html, llms.txt and offline-checker.js, plus products/invoice-preflight/offline-test-results.json. Check for the EN/FR AI disclosure, the absence of any compatibility or checkout claims, and that it is offline-only. Record APPROVE or NEEDS_WORK. Do not edit the files. Separately: welfare live baseline is saved at products/services/welfare-tender/live-demand-baseline.json (live sha256 matches approved index).",
+      "timestamp": 1793835120.140154
     }
   ],
   "events": [
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793671495.0770044,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
-    {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793673052.8320525,
-      "blocker_id": "NO-APIFY-ACCESS",
-      "agent_id": "BUILDER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793673056.3563132,
-      "lesson_id": "L13",
-      "agent_id": "ACQUISITION"
-    },
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793674837.1471527,
-      "mission_id": "INVOICE-PRODUCT",
-      "agent_id": "BUILDER"
-    },
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793674838.7335324,
-      "mission_id": "INVOICE-DISTRIBUTION",
-      "agent_id": "ACQUISITION"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793674843.451595,
-      "lesson_id": "L14",
-      "agent_id": "BUILDER"
-    },
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793674843.4515984,
-      "mission_id": "INVOICE-PRODUCT",
-      "agent_id": "BUILDER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793674846.091822,
-      "lesson_id": "L15",
-      "agent_id": "ACQUISITION"
-    },
-    {
-      "type": "FAIL_MISSION",
-      "timestamp": 1793674846.0918257,
-      "mission_id": "INVOICE-DISTRIBUTION",
-      "agent_id": "ACQUISITION"
-    },
     {
       "type": "LESSON_RECORDED",
       "timestamp": 1793674890.4788718,
@@ -1201,6 +1171,59 @@
       "timestamp": 1793833242.9204187,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793833445.6398242,
+      "from_agent": "DIRECTOR",
+      "to_agent": "DIRECTOR"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793835026.6163254,
+      "mission_id": "PRIVATE-MAIL-SERVICE-TEST",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793835079.9110143,
+      "lesson_id": "L35",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "FAIL_MISSION",
+      "timestamp": 1793835079.9110196,
+      "mission_id": "PRIVATE-MAIL-SERVICE-TEST",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793835081.5233212,
+      "mission_id": "WELFARE-LIVE-DEMAND",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793835116.346511,
+      "blocker_id": "NO-HOSTING-ACCESS",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793835120.140157,
+      "from_agent": "ACQUISITION",
+      "to_agent": "AUDITOR"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793835128.994814,
+      "mission_id": "WELFARE-SITE-RETIRE"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793835132.0581315,
+      "lesson_id": "L36",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1213,15 +1236,15 @@
       "status": "OPEN",
       "raised_by": "ACQUISITION",
       "opened_at": 1793653947.953137,
-      "reports": 2,
-      "title": "Site bundle ready; deployment needs Cloudflare credential + independent review",
-      "category": "CREDENTIAL",
-      "needs_founder": true,
-      "detail": "products/sites/invoice-preflight/ passed PUBLISH_SITE dry_run (TASK-179365829112): review_digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e, 3 files, 5546 bytes, index sha256 22242ea3b4f4cb89c2b581ec736ae4b14b2239bf158a0e2177218c6a39596948. Page has an EN/FR AI-agent disclosure, a no-compatibility claim and a no-checkout notice. Two things are still missing: (1) a valid, enabled Cloudflare config plus a private credential file with mode 0600; (2) a review APPROVE of site:invoice-preflight for this exact digest, from another provider (Grok/founder). The Show HN draft (products/distribution/show-hn-demand-experiment.txt) also needs a founder-approved account before anyone can submit it.",
-      "mission_id": "INVOICE-DISTRIBUTION",
-      "expected_gain": "Public demo URL that unlocks the 7-day Show HN demand experiment (success = 3 concrete import problems, at least 1 showing interest at USD 49).",
+      "reports": 3,
+      "title": "Invoice-preflight demo: Cloudflare now works; only an independent APPROVE of digest 867f3f8c... is missing",
+      "category": "OTHER",
+      "needs_founder": false,
+      "detail": "Reconciled 2026-11-04: Cloudflare hosting is verified working (TASK-179383242177 ONLINE_VERIFIED for welfare-tender-brief), so the credential part of this blocker is resolved. Fresh dry_run TASK-179383500417 of products/sites/invoice-preflight/ returns unchanged review_digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e (3 files, 5546 bytes, index sha256 22242ea3...). Remaining: an APPROVE of site:invoice-preflight for this exact digest from another provider turn (not claude) or the founder. The Show HN submission still needs a founder-approved account and is not requested now.",
+      "mission_id": null,
+      "expected_gain": "Free public demo of the tested offline CSV checker; discovery surface only, no revenue claimed (idea verdict REVISE).",
       "last_reported_by": "ACQUISITION",
-      "last_reported_at": 1793658350.6025424
+      "last_reported_at": 1793835116.3465025
     },
     {
       "blocker_id": "NO-APIFY-ACCESS",
@@ -1333,5 +1356,5 @@
       "seq": 4
     }
   ],
-  "lesson_count": 34
+  "lesson_count": 36
 }
