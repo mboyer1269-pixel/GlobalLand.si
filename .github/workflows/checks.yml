@@ -35,6 +35,56 @@ jobs:
         env:
           GLOBALLAND_DOCKER_SMOKE: '1'
       - run: for f in scripts/*.sh; do bash -n "$f" || exit 1; done
+  bootstrap-install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Refuse an existing or non-disposable host
+        id: host-preflight
+        run: |
+          test "$GITHUB_ACTIONS" = true
+          test "$RUNNER_ENVIRONMENT" = github-hosted
+          for path in /opt/globalland /etc/cron.d/globalland /etc/cron.d/globalland-think /etc/logrotate.d/globalland /var/log/globalland; do
+            test ! -e "$path" && test ! -L "$path"
+          done
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare disposable host prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cron logrotate acl
+          # Prepare trusted ancestors on this disposable host only. Keep /opt's
+          # default ACL so the fresh-root isolation regression stays exercised.
+          sudo chmod 755 /opt /var/log
+          sudo systemctl start cron logrotate.timer
+          docker compose version
+          docker pull node:22-bookworm
+      - name: Verify real bootstrap without productive cycles
+        run: |
+          set -euo pipefail
+          digest=$(docker image inspect node:22-bookworm --format '{{index .RepoDigests 0}}')
+          sudo env PATH="$PATH" GITHUB_ACTIONS="$GITHUB_ACTIONS" \
+            RUNNER_ENVIRONMENT="$RUNNER_ENVIRONMENT" GLOBALLAND_BOOTSTRAP_SMOKE=1 \
+            GLOBALLAND_BOOTSTRAP_IMAGE="node:22-bookworm@${digest##*@}" \
+            python3 tests/bootstrap_install_smoke.py
+      - name: Show only installation permission metadata on failure
+        if: ${{ failure() && steps.host-preflight.outcome == 'success' }}
+        run: |
+          for path in /opt /opt/globalland /opt/globalland/control /opt/globalland/ssh /opt/globalland/state /opt/globalland/backups /opt/globalland/source.git /var /var/log /etc /etc/cron.d /etc/logrotate.d; do
+            if test -d "$path"; then
+              sudo stat -c '%a %A %U:%G %n' "$path"
+              sudo getfacl --absolute-names "$path"
+            fi
+          done
+      - name: Stop disposable scheduler and all children
+        if: ${{ always() && steps.host-preflight.outcome == 'success' }}
+        run: |
+          sudo systemctl kill --kill-whom=all --signal=SIGKILL cron.service || true
+          sudo systemctl stop cron.service
   actor-products:
     runs-on: ubuntu-latest
     timeout-minutes: 10

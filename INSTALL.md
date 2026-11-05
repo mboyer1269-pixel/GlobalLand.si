@@ -1,6 +1,6 @@
 # Installer GlobalLand v3
 
-Prérequis : Ubuntu/Debian avec systemd, Python3.12+, Git, Docker Compose, cron, logrotate, image Node22 vérifiée et environ1Go disponible pour une tâche isolée. Les services Oria restent séparés. Ne lancer aucun code depuis un checkout modifiable par les agents dans le cron.
+Prérequis : Ubuntu/Debian avec systemd, Python3.12+, Git, Docker Compose, cron, logrotate, le paquet `acl` (commande `setfacl`), image Node22 vérifiée et environ1Go disponible pour une tâche isolée. Les services Oria restent séparés. Ne lancer aucun code depuis un checkout modifiable par les agents dans le cron. Le bootstrap supprime les ACL héritées uniquement sur sa nouvelle racine avant de créer les dossiers privés ; `umask` seul ne neutralise pas les ACL par défaut du parent.
 
 Pour une nouvelle installation, télécharger un SHA complet revu, vérifier un arbre Git propre et exécuter `sudo bash scripts/setup_vps.sh SHA_COMPLET node:22-bookworm@sha256:DIGEST_VERIFIE`. L'installeur crée `/opt/globalland`, le contrôle séparé et la clé dédiée ; il ne démarre ni modèle ni cron. Après cette préparation, enregistrer uniquement la clé publique `ssh/deploy_key.pub` comme Deploy Key d'écriture sur ce dépôt. Installer les clés hôte GitHub vérifiées dans `ssh/known_hosts` mode600 avec StrictHostKeyChecking=yes ; ne jamais publier la clé privée. Finaliser ensuite avec `sudo bash /opt/globalland/control/finalize_setup.sh`, qui initialise le Git bare ; le clone SSH fonctionne aussi pour un dépôt privé.
 
@@ -9,6 +9,8 @@ Sur une installation existante v2, suivre la mise à niveau ci-dessous ; ne pas 
 ## Horaires de base et rotation sur une installation neuve
 
 Sur un nouveau serveur, préparer les paquets `cron` et `logrotate` et vérifier `systemctl is-active cron` et `systemctl is-active logrotate.timer`. Leur activation relève de l'administration du serveur ; l'outil GlobalLand ne modifie aucun service système. Vérifier aussi que l'image d'exécution est présente localement. Après finalisation des sources, effectuer et vérifier les cycles manuels autorisés `supervisor.py queue` puis `supervisor.py daily` avant l'activation périodique : ces commandes peuvent exécuter des tâches et publier, elles ne sont pas de simples contrôles en lecture seule.
+
+Les dossiers parents utilisés par la maintenance, notamment `/opt` et `/var/log`, doivent être détenus par l'administrateur et non modifiables par un autre groupe ou utilisateur. Certains systèmes livrent `/var/log` en `775` pour `syslog` : l'outil refuse alors cette précondition, même si les fichiers GlobalLand sont privés. Faire revoir l'organisation des journaux et les permissions de l'hôte avant application ; ne pas modifier automatiquement les dossiers partagés d'un VPS existant. Le test CI prépare ces prérequis sur son runner jetable, sans appliquer ces changements au VPS.
 
 L'outil installé permet ensuite de relire les fichiers proposés avant application :
 
