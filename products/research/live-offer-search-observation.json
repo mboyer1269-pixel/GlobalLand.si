@@ -1,0 +1,116 @@
+{
+ "mission": "LIVE-OFFER-SEARCH-OBSERVATION",
+ "observed_fetch_date": "2026-11-05 (Bing RSS items carry pubDate up to Thu, 05 Nov 2026 13:17 GMT)",
+ "analysis_date": "2026-11-05",
+ "surface": "Bing web search RSS (format=rss) only",
+ "observations": {
+  "csv": {
+   "fetch_task": "TASK-179388900100",
+   "query_url": "https://www.bing.com/search?format=rss&q=site%3Agloballand-invoice-preflight.global-land.workers.dev",
+   "http_status": 200,
+   "artifact": "products/research/csv-public-search-observation.xml",
+   "sha256": "46db3beba6e07e9fe5af807245f4db1e90fb291678cf30fef6f86fbdd501ded6",
+   "item_count": 10,
+   "returned_destination_urls": [
+    "https://www.amazon.com/",
+    "https://www.amazon.com/stores/Homepage/page/1C97BE5A-7354-49E3-828D-1A49B8513E5E",
+    "https://amc.amazon.com/",
+    "https://pharmacy.amazon.com/",
+    "https://music.amazon.com/",
+    "https://hiring.amazon.com/",
+    "https://track.amazon.com/",
+    "https://www.amazon.jobs/",
+    "https://hiring.amazon.com/locations",
+    "https://www.facebook.com/Amazon/"
+   ],
+   "returned_hosts": [
+    "amc.amazon.com",
+    "hiring.amazon.com",
+    "music.amazon.com",
+    "pharmacy.amazon.com",
+    "track.amazon.com",
+    "www.amazon.com",
+    "www.amazon.jobs",
+    "www.facebook.com"
+   ],
+   "owned_host": "globalland-invoice-preflight.global-land.workers.dev",
+   "owned_url_present": false,
+   "any_workers_dev_result": false,
+   "item_pubdates": [
+    "Thu, 05 Nov 2026 13:03:00 GMT",
+    "Thu, 05 Nov 2026 13:10:00 GMT",
+    "Thu, 05 Nov 2026 09:56:00 GMT",
+    "Thu, 05 Nov 2026 12:20:00 GMT",
+    "Wed, 04 Nov 2026 12:07:00 GMT",
+    "Thu, 05 Nov 2026 13:17:00 GMT",
+    "Thu, 05 Nov 2026 00:02:00 GMT",
+    "Thu, 05 Nov 2026 13:03:00 GMT",
+    "Wed, 04 Nov 2026 16:17:00 GMT",
+    "Thu, 05 Nov 2026 06:22:00 GMT"
+   ]
+  },
+  "welfare": {
+   "fetch_task": "TASK-179388900101",
+   "query_url": "https://www.bing.com/search?format=rss&q=site%3Agloballand-welfare-tender-brief.global-land.workers.dev",
+   "http_status": 200,
+   "artifact": "products/research/welfare-public-search-observation.xml",
+   "sha256": "b9dd5e6e2ba777541850bd2370e58190871f84aace75b73481802467e1d3a66f",
+   "item_count": 10,
+   "returned_destination_urls": [
+    "https://sniffies.com/map",
+    "https://sniffies.com/join/6150b3e068a12a4609541473",
+    "https://sniffiesapp.com/",
+    "https://en.wikipedia.org/wiki/Sniffies",
+    "https://iphone.apkpure.com/app/sniffies-gay-cruising-chat/com.sniffies.app",
+    "https://help.sniffie.io/en/collections/6104-getting-started",
+    "https://help.sniffie.io/en/",
+    "https://sniffies.com/map/account/register",
+    "https://sniffies.com/map/pages/help",
+    "https://sniffies.com/map/shop"
+   ],
+   "returned_hosts": [
+    "en.wikipedia.org",
+    "help.sniffie.io",
+    "iphone.apkpure.com",
+    "sniffies.com",
+    "sniffiesapp.com"
+   ],
+   "owned_host": "globalland-welfare-tender-brief.global-land.workers.dev",
+   "owned_url_present": false,
+   "any_workers_dev_result": false,
+   "item_pubdates": [
+    "Wed, 04 Nov 2026 11:16:00 GMT",
+    "Thu, 05 Nov 2026 11:58:00 GMT",
+    "Thu, 05 Nov 2026 12:34:00 GMT",
+    "Wed, 04 Nov 2026 14:58:00 GMT",
+    "Thu, 05 Nov 2026 06:29:00 GMT",
+    "Wed, 21 Oct 2026 08:13:00 GMT",
+    "Wed, 04 Nov 2026 12:42:00 GMT",
+    "Thu, 05 Nov 2026 02:33:00 GMT",
+    "Wed, 04 Nov 2026 09:08:00 GMT",
+    "Thu, 05 Nov 2026 02:18:00 GMT"
+   ]
+  }
+ },
+ "classification": {
+  "csv": "NON_EMPTY_UNRELATED: 10 results, all Amazon properties; no owned URL; no workers.dev host",
+  "welfare": "NON_EMPTY_UNRELATED: 10 results about unrelated apps/sites; no owned URL; no workers.dev host"
+ },
+ "interpretation": [
+  "Neither exact owned offer URL appears in either result set.",
+  "The RSS endpoint returned HTTP 200 with full unrelated result sets rather than an empty set, which indicates the site: operator was not honored on this RSS surface (query apparently rewritten/fuzzy-matched); this is UNSUPPORTED_QUERY_BEHAVIOR, not blocking and not an empty-index answer.",
+  "Therefore this observation cannot distinguish indexed from non-indexed for either host."
+ ],
+ "limitations": [
+  "One search engine, one query form, one observation time.",
+  "site: operator appears unsupported via format=rss, so absence is uninformative about Bing index state.",
+  "Says nothing about other engines, direct visits, LLM crawlers or mail inbound.",
+  "Does not establish zero exposure, zero demand or failure of the IndexNow submissions (202 = received only).",
+  "Commercial feedback: 0 classified events, 3 unclassified sources (unknown, not zero)."
+ ],
+ "recommendation": {
+  "verdict": "CHANGE",
+  "detail": "Stop using search-surface observation for these two pages: this RSS route cannot answer the indexing question and further metadata/IndexNow/search work is exhausted (L40, L44). Leave both live experiments unchanged until their deadlines (CSV 2026-11-19T01:30:37Z, welfare 2026-11-20, welfare retirement after 2026-12-04T17:00Z) and judge them only from private-cycle aggregate feedback. Direct new acquisition effort to an opportunity whose buyers already gather on an accessible channel and that can be delivered via plain-text offline fulfillment; payment collection remains blocked (SERVICE-PAYMENT-COLLECTION)."
+ },
+ "revenue": "none verified"
+}

@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\"csv\": {\"n\": 10, \"owned\": false, \"hosts\": [\"amc.amazon.com\", \"hiring.amazon.com\", \"music.amazon.com\", \"pharmacy.amazon.com\", \"track.amazon.com\", \"www.amazon.com\", \"www.amazon.jobs\", \"www.facebook.com\"]}, \"welfare\": {\"n\": 10, \"owned\": false, \"hosts\": [\"en.wikipedia.org\", \"help.sniffie.io\", \"iphone.apkpure.com\", \"sniffies.com\", \"sniffiesapp.com\"]}}\n\n",
+  "artifacts": [
+    "products/research/live-offer-search-observation.json",
+    "products/receipts/TASK-179388936111.json"
+  ],
+  "request": {
+    "id": "TASK-179388936111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T14:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,xml.etree.ElementTree as ET\nsrc={'csv':('products/research/csv-public-search-observation.xml','https://www.bing.com/search?format=rss&q=site%3Agloballand-invoice-preflight.global-land.workers.dev','globalland-invoice-preflight.global-land.workers.dev','TASK-179388900100'),'welfare':('products/research/welfare-public-search-observation.xml','https://www.bing.com/search?format=rss&q=site%3Agloballand-welfare-tender-brief.global-land.workers.dev','globalland-welfare-tender-brief.global-land.workers.dev','TASK-179388900101')}\nobs={}\nfor k,(p,q,host,t) in src.items():\n  b=open('/workspace/'+p,'rb').read()\n  r=ET.fromstring(b)\n  items=r.findall('./channel/item')\n  links=[i.findtext('link') for i in items]\n  hosts=sorted(set(l.split('/')[2] for l in links))\n  obs[k]={'fetch_task':t,'query_url':q,'http_status':200,'artifact':p,'sha256':hashlib.sha256(b).hexdigest(),'item_count':len(items),'returned_destination_urls':links,'returned_hosts':hosts,'owned_host':host,'owned_url_present':any(host in l for l in links),'any_workers_dev_result':any('workers.dev' in l for l in links),'item_pubdates':[i.findtext('pubDate') for i in items]}\nres={'mission':'LIVE-OFFER-SEARCH-OBSERVATION','observed_fetch_date':'2026-11-05 (Bing RSS items carry pubDate up to Thu, 05 Nov 2026 13:17 GMT)','analysis_date':'2026-11-05','surface':'Bing web search RSS (format=rss) only','observations':obs,'classification':{'csv':'NON_EMPTY_UNRELATED: 10 results, all Amazon properties; no owned URL; no workers.dev host','welfare':'NON_EMPTY_UNRELATED: 10 results about unrelated apps/sites; no owned URL; no workers.dev host'},'interpretation':['Neither exact owned offer URL appears in either result set.','The RSS endpoint returned HTTP 200 with full unrelated result sets rather than an empty set, which indicates the site: operator was not honored on this RSS surface (query apparently rewritten/fuzzy-matched); this is UNSUPPORTED_QUERY_BEHAVIOR, not blocking and not an empty-index answer.','Therefore this observation cannot distinguish indexed from non-indexed for either host.'],'limitations':['One search engine, one query form, one observation time.','site: operator appears unsupported via format=rss, so absence is uninformative about Bing index state.','Says nothing about other engines, direct visits, LLM crawlers or mail inbound.','Does not establish zero exposure, zero demand or failure of the IndexNow submissions (202 = received only).','Commercial feedback: 0 classified events, 3 unclassified sources (unknown, not zero).'],'recommendation':{'verdict':'CHANGE','detail':'Stop using search-surface observation for these two pages: this RSS route cannot answer the indexing question and further metadata/IndexNow/search work is exhausted (L40, L44). Leave both live experiments unchanged until their deadlines (CSV 2026-11-19T01:30:37Z, welfare 2026-11-20, welfare retirement after 2026-12-04T17:00Z) and judge them only from private-cycle aggregate feedback. Direct new acquisition effort to an opportunity whose buyers already gather on an accessible channel and that can be delivered via plain-text offline fulfillment; payment collection remains blocked (SERVICE-PAYMENT-COLLECTION).'},'revenue':'none verified'}\nopen('/workspace/products/research/live-offer-search-observation.json','w').write(json.dumps(res,indent=1))\nprint(json.dumps({k:{'n':v['item_count'],'owned':v['owned_url_present'],'hosts':v['returned_hosts']} for k,v in obs.items()}))"
+      ],
+      "outputs": [
+        "products/research/live-offer-search-observation.json"
+      ],
+      "mission_id": "LIVE-OFFER-SEARCH-OBSERVATION"
+    },
+    "description": "Broker action during THINK-1793889361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179388936111",
+  "input_sha256": "5e5132f35b7ec365a931a5a183bcb7493fb590877dfa5d0a7edf0cd4810aefdb"
+}
