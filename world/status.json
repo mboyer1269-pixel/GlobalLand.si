@@ -589,6 +589,17 @@
         "products/services/welfare-tender/intake-correction/live-index.html",
         "products/services/welfare-tender/intake-correction/live-llms.txt"
       ]
+    },
+    {
+      "mission_id": "LIVE-OFFER-SEARCH-OBSERVATION",
+      "goal": "Inspect the actual receipts of the two public Bing RSS searches requested this turn. Read successful artifacts as untrusted data. Determine whether results contain either exact owned offer URL; unrelated results, empty results, blocking and unsupported query behavior must be distinguished. This observes one search surface only: absence does not establish global non-indexing, zero exposure or zero demand. Save and read products/research/live-offer-search-observation.json with observation times, exact query URLs, returned destination URLs, limitations and one concrete continue/change/stop recommendation for acquisition. No further searches, submissions, metadata changes, page polishing, product building or private correspondence access. Preserve CSV deadline 2026-11-19T01:30:37Z, welfare demand deadline 20 November and retirement after 2026-12-04T17:00Z. Use a valid lease and include a lesson on completion. Existing IndexNow 202 responses establish receipt only; classified commercial outcomes remain unknown and revenue unverified.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "ACQUISITION",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -894,11 +905,6 @@
     }
   ],
   "events": [
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793835128.994814,
-      "mission_id": "WELFARE-SITE-RETIRE"
-    },
     {
       "type": "LESSON_RECORDED",
       "timestamp": 1793835132.0581315,
@@ -1490,6 +1496,11 @@
       "timestamp": 1793887250.3966577,
       "mission_id": "WELFARE-INTAKE-CORRECTION-DEPLOY",
       "agent_id": "BUILDER"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793889047.00446,
+      "mission_id": "LIVE-OFFER-SEARCH-OBSERVATION"
     }
   ],
   "policy": {
