@@ -160,16 +160,20 @@ def install(paths=Paths(),with_mail=None,run=subprocess.run):
         # lock acquisition. Validate the current protected configuration too.
         _verify_source_image(paths,revision,image,run)
         changes=[name for name in ('rotation','cron') if previous[name]!=templates[name].encode()]
-        if not changes:return dict(revision=revision,mail_enabled=enabled,changes=[],backup=None)
         with tempfile.NamedTemporaryFile(prefix='globalland-logrotate-',mode='w',encoding='utf-8') as candidate:
             candidate.write(templates['rotation']);candidate.flush()
             _check(run,['logrotate','--debug','--state','/dev/null',candidate.name],'logrotate syntax check failed')
         for directory in (paths.root/'backups',paths.root/'state/private',paths.logs):
             directory.mkdir(parents=True,exist_ok=True,mode=0o700)
+        created_logs=[]
         for path in (paths.logs/'queue.log',paths.logs/'daily.log',paths.logs/'think.log',paths.root/'state/private/mail-cron.log'):
             try:fd=os.open(path,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o600)
             except FileExistsError:continue
-            else:os.close(fd)
+            else:os.close(fd);created_logs.append(str(path))
+        # Matching configs are not proof that all prerequisites survived a
+        # partial restore or log cleanup. Repair them without rewriting cron.
+        if not changes:
+            return dict(revision=revision,mail_enabled=enabled,changes=[],created_logs=created_logs,backup=None)
         backup=pathlib.Path(tempfile.mkdtemp(prefix='maintenance-',dir=paths.root/'backups'))
         saved={name:raw.decode() if raw is not None else None for name,raw in previous.items()}
         _replace(backup/'before.json',json.dumps(saved).encode(),0o600)
@@ -189,7 +193,7 @@ def install(paths=Paths(),with_mail=None,run=subprocess.run):
             except Exception as rollback_error:
                 raise RuntimeError('Maintenance rollback incomplete; inspect private backup '+str(backup)) from rollback_error
             raise
-        return dict(revision=revision,mail_enabled=enabled,changes=changes,backup=str(backup))
+        return dict(revision=revision,mail_enabled=enabled,changes=changes,created_logs=created_logs,backup=str(backup))
 
 
 def main():

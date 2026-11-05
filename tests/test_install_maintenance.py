@@ -240,12 +240,47 @@ class MaintenanceTests(unittest.TestCase):
         with self.assertRaises(ValueError):maintenance.install(self.paths,run=concurrent_admin)
         self.assertFalse(self.paths.cron.exists());self.assertFalse(self.paths.rotation.exists())
 
+    def test_rerun_repairs_missing_log_directory_without_rewriting_configs(self):
+        self.install()
+        previous={name:(path.read_bytes(),path.stat().st_mtime_ns)
+                  for name,path in (('cron',self.paths.cron),('rotation',self.paths.rotation))}
+        backups=list((self.root/'backups').iterdir())
+        self.assertTrue(self.paths.logs.resolve().is_relative_to(self.base.resolve()))
+        for name in ('queue','daily','think'):(self.paths.logs/(name+'.log')).unlink()
+        self.paths.logs.rmdir()
+        (self.root/'state/private/mail-cron.log').unlink()
+        self.calls=[]
+        report=self.install()
+        line=next(line for line in self.paths.cron.read_text().splitlines() if 'supervisor.py queue' in line)
+        run=subprocess.run(['/bin/sh','-c',line.split(maxsplit=6)[6]],capture_output=True,text=True)
+        self.assertEqual(run.returncode,0,run.stderr)
+        self.assertEqual(report['changes'],[]);self.assertIsNone(report['backup'])
+        self.assertEqual(set(report['created_logs']),{str(self.paths.logs/(name+'.log')) for name in ('queue','daily','think')}
+                         |{str(self.root/'state/private/mail-cron.log')})
+        self.assertTrue(any(c[0]=='logrotate' for c in self.calls))
+        for name,path in (('cron',self.paths.cron),('rotation',self.paths.rotation)):
+            self.assertEqual((path.read_bytes(),path.stat().st_mtime_ns),previous[name])
+        self.assertEqual(list((self.root/'backups').iterdir()),backups)
+        for name in report['created_logs']:self.assertEqual(pathlib.Path(name).stat().st_mode & 0o777,0o600)
+
+    def test_rerun_repairs_individually_missing_logs_before_any_cycle(self):
+        self.install()
+        for path in (self.paths.logs/'think.log',self.root/'state/private/mail-cron.log'):path.unlink()
+        report=self.install()
+        self.assertEqual(set(report['created_logs']),{str(self.paths.logs/'think.log'),str(self.root/'state/private/mail-cron.log')})
+        for name in report['created_logs']:
+            self.assertTrue(pathlib.Path(name).is_file())
+            self.assertEqual(pathlib.Path(name).stat().st_mode & 0o777,0o600)
+
     @unittest.skipUnless(os.environ.get('GLOBALLAND_LOGROTATE_SMOKE')=='1',
                          'real logrotate requires explicit isolated root verification')
     def test_real_logrotate_preserves_writer_and_private_permissions(self):
         self.assertEqual(os.geteuid(),0,'run this isolated test as root')
         self.assertIsNotNone(shutil.which('logrotate'))
-        self.install()
+        def real_logrotate(command,**kwargs):
+            if command[0]=='logrotate':return subprocess.run(command,**kwargs)
+            return self.run(command,**kwargs)
+        maintenance.install(self.paths,run=real_logrotate)
         self.assertTrue(self.paths.rotation.resolve().is_relative_to(self.base.resolve()))
         config=self.paths.rotation.read_text()
         for name in (self.paths.logs/'queue.log',self.paths.logs/'daily.log',self.paths.logs/'think.log',

@@ -35,11 +35,11 @@
 
 **Interfaces:** `Paths(root, cron, rotation, logs)` contient les chemins absolus d'installation (injection de chemins temporaires dans les tests). `preview(paths, with_mail=None) -> dict` inspecte sans écrire et rend templates, empreintes/états des destinations et prérequis. `install(paths, with_mail=None, run=subprocess.run) -> dict` vérifie cron/logrotate.timer et logrotate --debug, prend le verrou superviseur, sauvegarde et installe ; retourne revision, changements et chemin de sauvegarde, sans données de configuration privée.
 
-- [ ] Écrire d'abord les tests d'installation vierge, aperçu sans mutation, idempotence, mail facultatif/conservé, custom/refus, liens, service inactif, rollback après remplacement et verrou occupé.
-- [ ] Exécuter `python3 -B -m unittest discover -s tests -p test_install_maintenance.py -q` : échec attendu, module absent. Conserver la preuve RED.
-- [ ] Implémenter les deux opérations et le CLI (aperçu par défaut, `--apply`, `--with-mail`). Vérifier SHA installé, source bare présente, exécuteur configuré ; ne lire aucun contenu de credential. Sorties limitées aux fichiers de maintenance et répertoires privés de sauvegarde/logs.
-- [ ] Rejouer les tests, puis les suites start_autonomy/preflight/upgrade existantes. Attendu : succès et invariants conservés.
-- [ ] Commit autonome.
+- [x] Écrire d'abord les tests d'installation vierge, aperçu sans mutation, idempotence, mail facultatif/conservé, custom/refus, liens, service inactif, rollback après remplacement et verrou occupé.
+- [x] Exécuter `python3 -B -m unittest discover -s tests -p test_install_maintenance.py -q` : échec attendu, module absent. Conserver la preuve RED.
+- [x] Implémenter les deux opérations et le CLI (aperçu par défaut, `--apply`, `--with-mail`). Vérifier SHA installé, source bare présente, exécuteur configuré ; ne lire aucun contenu de credential. Sorties limitées aux fichiers de maintenance et répertoires privés de sauvegarde/logs.
+- [x] Rejouer les tests, puis les suites start_autonomy/preflight/upgrade existantes. Attendu : succès et invariants conservés.
+- [x] Commit autonome.
 
 ### Task 2: Procédure d'installation et preuves de reconstruction
 
@@ -47,8 +47,8 @@
 
 **Interfaces:** Utilise le CLI de Task 1 ; aucune nouvelle interface runtime.
 
-- [ ] Documenter ordre : prérequis système → setup SHA/image → deploy key/known_hosts/finalize → cycle manuel queue/daily vérifié → aperçu/apply maintenance → configuration/vérification modèles puis start_autonomy → mail explicite après test.
-- [ ] Remplacer l'hypothèse d'un cron existant par la commande nouvelle pour une installation neuve. Conserver une voie manuelle documentée pour les horaires personnalisés ; ne pas les adopter automatiquement.
-- [ ] Vérifier le fichier avec un vrai `logrotate --debug` et une rotation forcée sur des logs synthétiques dans un environnement isolé si le binaire est disponible. Sinon consigner la vérification manquante et la préparer en CI Ubuntu ; aucun changement de journaux réels.
-- [ ] Suite Python/Node complète et tests Linux ciblés. Relecture indépendante finale ; aucune installation sur le VPS dans cette phase.
-- [ ] Commit documentation/preuves, préparer PR intégrable. Déploiement distinct selon autorisation.
+- [x] Documenter ordre : prérequis système → setup SHA/image → deploy key/known_hosts/finalize → cycle manuel queue/daily vérifié → aperçu/apply maintenance → configuration/vérification modèles puis start_autonomy → mail explicite après test.
+- [x] Remplacer l'hypothèse d'un cron existant par la commande nouvelle pour une installation neuve. Conserver une voie manuelle documentée pour les horaires personnalisés ; ne pas les adopter automatiquement.
+- [x] Vérifier le fichier avec un vrai `logrotate --debug` et une rotation forcée sur des logs synthétiques dans un environnement isolé si le binaire est disponible. Sinon consigner la vérification manquante et la préparer en CI Ubuntu ; aucun changement de journaux réels.
+- [x] Suite Python/Node complète et tests Linux ciblés. Relecture indépendante finale ; aucune installation sur le VPS dans cette phase.
+- [x] Commit documentation/preuves, préparer PR intégrable. Déploiement distinct selon autorisation.
