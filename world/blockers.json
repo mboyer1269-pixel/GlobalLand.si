@@ -81,29 +81,23 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
-    "turns_without_outcome": 2,
+    "stalled_since": "2026-11-05T01:30:58Z",
+    "turns_without_outcome": 3,
     "outcome_threshold": 12,
     "dry_since": "2026-11-05T00:32:58Z",
     "last_outcome_turn": "THINK-1793836802",
     "last_productive_turn": "THINK-1793840405",
-    "last_turn": "THINK-1793840405",
+    "last_turn": "THINK-1793842202",
     "last_change": {
-      "productive": true,
+      "productive": false,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [
-        "products/distribution/invoice-preflight-live.html",
-        "products/services/csv-text-diagnostic/acceptance-results.json",
-        "products/services/csv-text-diagnostic/diagnostic.py",
-        "products/services/csv-text-diagnostic/protocol.md",
-        "products/services/csv-text-diagnostic/run_tests.py"
-      ],
-      "new_product_count": 5,
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
-      "rewritten_count": 2,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
