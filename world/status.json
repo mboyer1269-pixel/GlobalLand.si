@@ -558,6 +558,17 @@
         "products/services/inbound-routing/synthetic-check-results.json",
         "products/services/inbound-routing/synthetic_checks.py"
       ]
+    },
+    {
+      "mission_id": "WELFARE-INTAKE-SCOPE-CORRECTION",
+      "goal": "Correct the verified mismatch between the live welfare offer inviting links and private fulfillment supporting only offline message text. Read docs/AGENTMAIL.md, products/services/inbound-routing/result.json, routing-note-en-fr.md, the current welfare public files and existing source evidence. Prepare a minimal EN/FR revision replacing any invitation to retrieve links with an explicit request for nonconfidential plain text, explaining that incoming attachments and new URL retrieval are unavailable. Preserve delivery of the existing sourced brief, price hypothesis, unavailable orders/payment, AI disclosure and all procurement uncertainties. Add concise welfare fulfillment guidance to the existing public llms.txt using only verified existing capabilities; do not claim the private responder loads it or that private behavior has changed. No new service, research, private correspondence access, outreach, accounts, spending or infrastructure changes. Execute substantive checks that the revision preserves all other offer terms and source facts; save and read a minimal manifest and results under products/services/welfare-tender/intake-correction/. Obtain a fresh PUBLISH_SITE dry_run digest and request independent exact-digest review without deploying. Deployment requires a subsequent eligible turn and host approval. Preserve CSV observation deadline 2026-11-19T01:30:37Z, welfare demand deadline 20 November and mandatory retirement after 2026-12-04T17:00Z. Complete preparation with a valid lease and a lesson; synthetic checks and corrected copy establish neither customer delivery nor demand or revenue.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "BUILDER",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -863,12 +874,6 @@
     }
   ],
   "events": [
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793831446.1200886,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
     {
       "type": "REVIEW_RECORDED",
       "timestamp": 1793832395.0346756,
@@ -1460,6 +1465,11 @@
       "timestamp": 1793881921.491314,
       "from_agent": "ACQUISITION",
       "to_agent": "DIRECTOR"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793883647.479835,
+      "mission_id": "WELFARE-INTAKE-SCOPE-CORRECTION"
     }
   ],
   "policy": {
