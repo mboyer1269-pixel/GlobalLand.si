@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "'Title' 2535 10\n'URL handle' 2593 10\n'Description' 651 10\n'Vendor' 7697 4\n'Product category' 7944 1\n'Type' 8336 1\n'Tags' 8687 3\n'Published on online store' 9197 1\n'Status' 9525 1\n'SKU' 2997 5\n'Barcodes' 10073 3\n'Option1 name' 3152 4\n'Option1 value' 3169 5\n'Option1 Linked To' -1 0\n'Option2 name' -1 0\n'Option2 value' 26181 1\n'Option3 name' -1 0\n'Price' 1562 7\n'Compare-at price' 1588 3\n'Cost per item' 12901 1\n'Charge tax' 13102 1\n'Tax code' -1 0\n'Unit price total measure' -1 0\n'Inventory tracker' 6255 2\n'Inventory quantity' 1328 2\n'Continue selling when out of stock' 6309 2\n'Weight value (grams)' 3004 2\n'Weight unit for display' 15090 1\n'Requires shipping' 15816 2\n'Fulfillment service' 6348 2\n'Product image URL' 19138 2\n'Image position' 19530 1\n'Image alt text' 19819 3\n'Variant image URL' 20312 2\n'Gift card' 17511 2\n'SEO title' 20806 4\n'SEO description' 21166 3\n'Variant Image' -1 0\n'Image Src' -1 0\n'Variant Barcode' -1 0\n'Handle' -1 0\nDescription of the columns in the product CSV file The following table outlines all potential columns in the product CSV. In addition to the Title column, some other columns must have a value. Required columns are noted in the table below. For these columns, a default value will be created if they're left blank or otherwise omitted from the CSV file. Note Some CSV columns are related to other columns , and can't be left blank when the other related columns aren't also left blank. For example, if the Inventory tracker column is set to shopify , then the Continue selling when out of stock and Fulfillment service columns can't be left blank. If they're, then the default values listed in the table below will apply. Trying to import a CSV file with values in only some related columns results in an import error. Refer to the import error message to determine which blank columns must have values based on the content in your CSV file. Learn more about how overwriting existing products affects the data in these columns. Columns for product CSV file Required columns in the product CSV file that must have a value and the default values that are created automatically if no value is present. Column Description, including default behavior for empty cells Title The product name that you want to display to your customers. For example, Women's Snowboard . URL handle The unique identifier for each product. The handle is used in the URL of the product page and is based on the value in the Title column. For example, if the value in the Title column is Black Sunglasses , then the value in the URL handle column is black-sunglasses by default. You can customize the URL handle value if you want a product page URL to be different from the product name. A valid URL handle can contain letters, da\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179390958116.json"
+  ],
+  "request": {
+    "id": "TASK-179390958116",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:13:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "t=open('products/research/shopify-product-csv-official.txt',encoding='utf-8').read()\nc=['Title','URL handle','Description','Vendor','Product category','Type','Tags','Published on online store','Status','SKU','Barcodes','Option1 name','Option1 value','Option1 Linked To','Option2 name','Option2 value','Option3 name','Price','Compare-at price','Cost per item','Charge tax','Tax code','Unit price total measure','Inventory tracker','Inventory quantity','Continue selling when out of stock','Weight value (grams)','Weight unit for display','Requires shipping','Fulfillment service','Product image URL','Image position','Image alt text','Variant image URL','Gift card','SEO title','SEO description','Variant Image','Image Src','Variant Barcode','Handle']\nfor k in c: print(repr(k), t.find(k+' '), t.count(k))\ni=t.find('Description of the columns'); j=t.find('Description of the columns',i+30); print(t[j:j+1800])"
+      ],
+      "inputs": [
+        "products/research/shopify-product-csv-official.txt"
+      ],
+      "outputs": [],
+      "mission_id": "SHOPIFY-LARGE-CATALOGUE-SAMPLE"
+    },
+    "description": "Broker action during THINK-1793909581",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179390958116",
+  "input_sha256": "899e2b9fba69848a2fe033fd687d7a11daf662a43043f8cceb7dff6e741e59c7"
+}
