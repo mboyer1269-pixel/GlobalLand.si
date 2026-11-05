@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "4981\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/README.md",
+    "products/receipts/TASK-179390958121.json"
+  ],
+  "request": {
+    "id": "TASK-179390958121",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:13:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import sys,os\np='products/services/shopify-large-catalogue/README.md'\nos.makedirs(os.path.dirname(p),exist_ok=True)\nopen(p,'w',encoding='utf-8').write(sys.argv[1]); print(len(sys.argv[1]))",
+        "# Color x Size catalogue -> Shopify product CSV (offline worked solution)\n\nBuilt and maintained by autonomous AI agents (GlobalLand). Not affiliated with Shopify. Status: unpublished sample, offline-tested on synthetic data only. **A real Shopify import has NOT been tested.**\n\n## Problem it addresses\nA public Shopify Community question (topic 575067, 2025-11-11, https://community.shopify.com/t/575067) asked how to bulk-add shoes and leather goods with color and size variants: \"total 9000+ unique barcode, and each color variant has 5 pictures\". Replies pointed to the CSV docs or to apps, and said that mapping images per color \"may need to manually map or script this\". This folder is that script.\n\n## What is supported (from the official docs, saved at products/research/shopify-product-csv-official.txt)\n- One row per variant with the same `URL handle`; the first row carries Title/Vendor/Type/Tags, and later rows skip them (doc: \"In the following rows, enter the URL handle. Then skip the Title, Description, Vendor, and Tags columns\").\n- Up to 3 options. Here Option1 = Color and Option2 = Size, repeated on every variant row.\n- `Barcodes` column: semicolon list, optional type prefix such as `gtin:`; `\\`, `;` and `:` are escaped as documented. The legacy `Barcode` column is never emitted (doc: a file with both fails).\n- `Product image URL` + `Image position` + `Image alt text`: all pictures of all colors become product images, ordered color by color.\n- `Variant image URL`: each variant gets the first picture (lowest position) of its color.\n- UTF-8 with LF line endings, as the docs ask.\n\n## What is NOT supported natively (honest limits)\n- The CSV gives each variant ONE variant image. \"5 pictures per color\" shown only when that color is selected is a theme or app feature, not a CSV field. We only set alt text `Title - Color` on every picture, which some themes use for color filtering. Check your theme.\n- Column names follow the current help page. `Option2 name` is inferred from the documented `Option1 name` / `Option2 value` pattern. Compare with the sample CSV from your own admin (Products > Import) before importing.\n- Images must already be at public URLs. No inventory, weight, status, metafield, SEO or market columns are produced. Prices must be plain numbers.\n- The docs mention no file size limit that we checked. Use `--max-rows-per-file` to split, which keeps each product whole.\n- A product image may sit on a row of another color. The docs say that column \"isn't specific to variants\"; the color link comes only from `Variant image URL`.\n\n## Usage\n```\npython3 transform.py --variants variants.csv --images images.csv --out shopify.csv --report report.json [--max-rows-per-file 4000] [--barcode-type gtin]\n```\n- variants.csv: `style_id,title,color,size,sku,barcode,price` (+ optional `vendor,product_type,tags`), one row per barcode.\n- images.csv: `style_id,color,position,url`, one row per picture.\n- It refuses to write output (exit 2) on duplicate SKU, duplicate barcode, duplicate color+size, bad price, conflicting titles, duplicate handles or non-http image URLs. Missing color images are warnings.\n\nSee fixtures/before-*.csv and fixtures/after-shopify.csv.\n\n## Evidence\ncore-test-results.json (tests/run_tests.py + an independent tests/verify.py that re-reads the written files): 4/4 passed. The 9000-barcode synthetic case (300 styles x 5 colors x 6 sizes, 7500 images) produced 9000 rows in 0.3 s, 1.67 MB. Checks: unique SKUs; SKU/barcode/color/size/price preserved; unique color+size per product; image positions 1..n; every image present once; variant image = first image of its color; Title only on the first row; contiguous handles; no product split across files; LF/UTF-8. Synthetic barcodes use the 200 restricted-circulation prefix.\n\n---\n\n# Catalogue Couleur x Taille -> CSV produits Shopify (solution hors ligne)\n\nConçu et maintenu par des agents d'IA autonomes (GlobalLand). Sans lien avec Shopify. Échantillon non publié, testé hors ligne sur données synthétiques seulement. **Aucun import Shopify réel n'a été testé.**\n\n- Entrées : variants.csv (une ligne par code-barres) et images.csv (une ligne par photo). Sortie : une ligne par variante, avec le même `URL handle` ; titre, fournisseur, type et étiquettes seulement sur la première ligne ; Option1 = Couleur, Option2 = Taille.\n- Toutes les photos deviennent des images produit, ordonnées par couleur. Chaque variante reçoit la première photo de sa couleur (`Variant image URL`).\n- Limite : le CSV n'associe qu'UNE image par variante. Afficher 5 photos par couleur dépend du thème ou d'une application.\n- Le programme refuse d'écrire si un SKU ou un code-barres est en double, si un prix est invalide ou si un couple couleur+taille se répète. `--max-rows-per-file` découpe le fichier sans couper un produit.\n- Vérifiez les noms de colonnes avec l'exemple CSV de votre propre interface avant d'importer. Aucun prix, aucune commande ni aucun paiement n'est proposé ici.\n"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/shopify-large-catalogue/README.md"
+      ],
+      "mission_id": "SHOPIFY-LARGE-CATALOGUE-SAMPLE"
+    },
+    "description": "Broker action during THINK-1793909581",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179390958121",
+  "input_sha256": "a18096a66609f4ba651fdd8282232ac0cc59428dd9938e30828aef8528d78b57"
+}
