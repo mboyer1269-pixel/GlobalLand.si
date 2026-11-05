@@ -49,3 +49,4 @@ cat "$GL_ROOT/ssh/deploy_key.pub"
 printf '\nInstall verified GitHub host keys in %s/ssh/known_hosts (600).\n' "$GL_ROOT"
 printf 'After the public key and verified host keys are installed, run: bash /opt/globalland/control/finalize_setup.sh\n'
 printf 'Control installed. No container, inference or cron started. See INSTALL.md.\n'
+printf 'After source finalization and manual verification, preview maintenance: python3 /opt/globalland/control/install_maintenance.py\n'
