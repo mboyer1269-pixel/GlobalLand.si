@@ -432,10 +432,15 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "OPEN",
+      "status": "COMPLETED",
       "lease_token": null,
       "lease_expires_at": null,
-      "evidence": []
+      "evidence": [
+        "products/services/manager-mapping/stop-result.json",
+        "products/services/manager-mapping/thread-extract.json",
+        "products/research/manager-guide-9572.html",
+        "products/research/manager-guide-9572.txt"
+      ]
     }
   ],
   "messages": [
@@ -741,30 +746,6 @@
     }
   ],
   "events": [
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793750438.0992417,
-      "mission_id": "ALTERNATIVE-PAID-REQUEST",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793750442.503849,
-      "mission_id": "DOCS-REQUEST-FULFILLMENT",
-      "agent_id": "ACQUISITION"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793752238.7957108,
-      "lesson_id": "L22",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793752238.7957141,
-      "mission_id": "ALTERNATIVE-PAID-REQUEST",
-      "agent_id": "RESEARCHER"
-    },
     {
       "type": "LESSON_RECORDED",
       "timestamp": 1793752240.4835422,
@@ -1341,6 +1322,30 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793853041.5049944,
       "mission_id": "MANAGER-MAPPING-DELIVERY"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793853203.8520818,
+      "mission_id": "MANAGER-MAPPING-DELIVERY",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793853281.964214,
+      "lesson_id": "L42",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793853281.9642181,
+      "mission_id": "MANAGER-MAPPING-DELIVERY",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793853292.019015,
+      "lesson_id": "L43",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1509,5 +1514,5 @@
       "seq": 7
     }
   ],
-  "lesson_count": 41
+  "lesson_count": 43
 }
