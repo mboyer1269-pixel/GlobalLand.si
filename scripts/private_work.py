@@ -134,7 +134,7 @@ class PrivateResponder:
             raise ValueError('Private work unavailable')
         self.last_provider = None
 
-    def _open(self, message):
+    def _open(self, message, *, continuity_context=None):
         ids = [message.get(k) for k in ('inbox_id', 'message_id')]
         if any(not isinstance(v, str) or not v or len(v) > 2048 for v in ids):
             raise ValueError('Private work unavailable')
@@ -177,10 +177,28 @@ class PrivateResponder:
                         or decision['action'] not in ('reply', 'ignore')
                         or not isinstance(decision['text'], str) or len(decision['text']) > 32000):
                     raise ValueError('Private work unavailable')
+            if continuity_context is not None:
+                import continuity
+                continuity.validate_descriptor(continuity_context, key)
+                continuity.require(continuity.guard(message) == continuity_context['guard'])
+                if 'continuity' in data:
+                    continuity.require(data['continuity'] == continuity_context)
+                    if data['state'] == 'READY': continuity.completion(data)
+                else:
+                    # An old case may only acquire an isolated frozen route guard.
+                    continuity.require(continuity_context['state'] == 'ISOLATED')
+                    data['continuity'] = copy.deepcopy(continuity_context)
+                    if data['state'] == 'READY': continuity.seal(data)
+                    _save(path, data)
             return path, data
         if len(json.dumps(message).encode()) > 256 * 1024:
             raise ValueError('Private work unavailable')
         data = dict(identity=ids, incoming=copy.deepcopy(message), state='WORKING', steps=[])
+        if continuity_context is not None:
+            import continuity
+            continuity.validate_descriptor(continuity_context, key)
+            continuity.require(continuity.guard(message) == continuity_context['guard'])
+            data['continuity'] = copy.deepcopy(continuity_context)
         _save(path, data)
         return path, data
 
@@ -199,6 +217,15 @@ class PrivateResponder:
         for filename, value in [('incoming.json', data['incoming']), ('public.json', public_context(self.root))]:
             target = input_dir / filename
             target.write_text(json.dumps(value, ensure_ascii=False), encoding='utf-8'); target.chmod(0o644)
+        if 'continuity' in data:
+            import continuity
+            view, historical_files = continuity.materialize_history(self.root, data)
+            target = input_dir / 'history.json'
+            target.write_text(json.dumps(view, ensure_ascii=False), encoding='utf-8'); target.chmod(0o644)
+            for name, text in historical_files.items():
+                target = _safe(input_dir / name)
+                target.parent.mkdir(parents=True, exist_ok=True, mode=0o755)
+                target.write_text(text, encoding='utf-8'); target.chmod(0o644)
         for previous in data['steps']:
             if previous['state'] == 'COMPLETE':
                 for name, text in _files(previous['receipt']).items():
@@ -274,23 +301,29 @@ class PrivateResponder:
         check_secrets(text.encode())
         return dict(action='reply', text=text)
 
-    def __call__(self, message):
+    def __call__(self, message, *, history_context=None):
         self.last_observation = None
+        self.last_completion = None
         try:
-            return self._respond(message)
+            import continuity
+            if history_context is None: history_context = continuity.prepare(self.root, message, self.config)
+            return self._respond(message, history_context=history_context)
         except PrivateDeferred:
             raise
         except Exception:
             raise ValueError('Private work unavailable') from None
 
-    def _respond(self, message):
+    def _respond(self, message, *, history_context=None):
         import commercial
-        path, data = self._open(message)
+        import continuity
+        path, data = self._open(message, continuity_context=history_context)
         if data['state'] == 'READY':
             self.last_provider = data.get('provider')
             # Immutable normalized interpretation: never reclassify a replay.
             self.last_observation = copy.deepcopy(data.get('observation'))
+            if 'continuity' in data: self.last_completion = continuity.completion(data)
             return copy.deepcopy(data['decision'])
+        history = continuity.materialize_history(self.root, data)[0] if 'continuity' in data else None
         progressed = False
         for step in data['steps']:
             if step['state'] == 'STARTED':
@@ -310,10 +343,11 @@ class PrivateResponder:
         planner = Controller(self.root, None, None, self.config)
         guide = (PRIVATE_GUIDE.replace('with exactly action', 'with required action')
                  if commercial.settings(self.config)['state'] == 'ENABLED' else PRIVATE_GUIDE)
+        if history is not None: guide += continuity.GUIDE
         planner.tool_guide = guide
         while self.budget > 0:
             from mail_agent import public_context
-            prompt = guide + commercial.prompt(self.root, self.config) + '\n' + json.dumps(dict(private_case=data, public_product_context=public_context(self.root),
+            prompt = guide + commercial.prompt(self.root, self.config) + '\n' + json.dumps(dict(private_case=data, private_history=history, public_product_context=public_context(self.root),
                         remaining_case_actions=max(0, self.case_budget - len(data['steps']))), ensure_ascii=False)
             value = None
             providers = self.config['controller'].get('providers', [])
@@ -348,11 +382,13 @@ class PrivateResponder:
                 data.update(state='READY', decision=decision, provider=provider)
                 if commercial.settings(self.config)['state'] == 'ENABLED':
                     raw = json.loads(value['summary']).get('observation')
-                    data['observation'] = commercial.normalize_observation(raw, data['incoming'],
+                    data['observation'] = commercial.normalize_observation(raw, continuity.observation_message(data),
                         commercial.allowed_experiments(self.root),
                         commercial.host_origin(data['incoming'], self.config), provider)
+                continuity.seal(data)
                 _save(path, data)
                 self.last_observation = copy.deepcopy(data.get('observation'))
+                if 'continuity' in data: self.last_completion = continuity.completion(data)
                 return copy.deepcopy(decision)
             step = dict(id='TASK-' + str(uuid.uuid4().int % 10**12).zfill(12), provider=provider,
                         action=value['actions'][0], state='PENDING')

@@ -161,15 +161,24 @@ class Client:
             raise MailError('Mail identity mismatch')
         return result
 
-    def reply(self, message_id, text, operation_id):
+    def reply(self, message_id, text, operation_id, *, route=None):
         if (not isinstance(text, str) or not text.strip() or len(text) > MAX_TEXT
                 or not isinstance(operation_id, str)
                 or not re.fullmatch(r'[a-zA-Z0-9-]{1,80}', operation_id)):
             raise MailError('Invalid mail reply')
-        result = self._request('POST', '/' + _opaque(message_id) + '/reply', {
+        payload = {
             'text': text, 'reply_all': False,
             'headers': {'X-GlobalLand-Operation': operation_id, 'Auto-Submitted': 'auto-replied'},
-        })
+        }
+        if route is not None:
+            import continuity
+            if (not isinstance(route, dict) or set(route) != {'to', 'cc', 'bcc', 'reply_all'}
+                    or not isinstance(route['to'], list) or len(route['to']) != 1
+                    or route['reply_all'] is not False
+                    or route != dict(to=[continuity.address(route['to'][0])], cc=[], bcc=[], reply_all=False)):
+                raise MailError('Invalid mail route')
+            payload.update(route)
+        result = self._request('POST', '/' + _opaque(message_id) + '/reply', payload)
         _opaque(result.get('message_id'))
         return result
 
@@ -389,6 +398,14 @@ class Mailbox:
                 for path in self.directory.glob('*.json'):
                     try:
                         record = self._read(path)
+                        if (record['state'] == 'ACCEPTED' and record.get('completion')
+                                and record.get('inbox_id') == self.settings['inbox_id']
+                                and self._path(record.get('message_id')) == path):
+                            try:
+                                import continuity
+                                continuity.record_accepted(self.root, record)
+                            except Exception:
+                                pass  # Derived index repair never changes an accepted effect.
                         if record['state'] == 'STARTED':
                             record['state'] = 'UNKNOWN'
                             self._save(path, record)
@@ -477,7 +494,15 @@ class Mailbox:
             if _should_ignore(message, self.settings['inbox_address']):
                 decision = {'action': 'ignore', 'text': ''}
             else:
-                decision = responder(message)
+                import continuity
+                history_context = continuity.prepare(self.root, message, self.config)
+                if history_context is not None:
+                    decision = responder(message, history_context=history_context)
+                    reference = getattr(responder, 'last_completion', None)
+                    route = continuity.verify_completion(self.root, reference, message, decision)
+                    record.update(completion=reference, route=route)
+                else:
+                    decision = responder(message)
                 import commercial
                 if commercial.settings(self.config)['state'] == 'ENABLED':
                     observation = getattr(responder, 'last_observation', None)
@@ -498,14 +523,31 @@ class Mailbox:
                 return
             if not decision['text'].strip():
                 raise MailError('Empty mail reply')
+            if record.get('completion'):
+                # Refresh security/routing metadata after any model or EXEC work.
+                current = self.client.get_message(mid)
+                if _armor_deferred(current) or _should_ignore(current, self.settings['inbox_address']):
+                    raise MailError('Mail route changed')
+                continuity.verify_completion(self.root, record['completion'], current, decision)
             record.update(state='STARTED', operation_id='gl-' + uuid.uuid4().hex)
             self._save(path, record)
             started = True
-            response = self.client.reply(mid, decision['text'], record['operation_id'])
+            if record.get('route') is not None:
+                response = self.client.reply(mid, decision['text'], record['operation_id'], route=record['route'])
+                case = continuity.load_ready(self.root, record['completion'])
+                if response.get('thread_id') != case['continuity']['binding']['thread_id']:
+                    raise MailError('Mail response thread mismatch')
+                record['response_thread_id'] = response['thread_id']
+            else:
+                response = self.client.reply(mid, decision['text'], record['operation_id'])
             _opaque(response.get('message_id'))
             record.update(state='ACCEPTED', outbound_message_id=response['message_id'])
             self._save(path, record)
             result['accepted'] += 1
+            try:
+                if record.get('completion'): continuity.record_accepted(self.root, record)
+            except Exception:
+                pass  # ACCEPTED is durable; index failure cannot cause another POST.
         except Exception as error:
             if not started and getattr(type(error), 'private_deferred', False) is True:
                 result['processed'] -= 1
