@@ -14,8 +14,12 @@
   "position_cents": 0,
   "extinction_reason": null,
   "receivables": {
-    "apify_receivable_usd_cents": 0,
-    "apify_receivable_months": [],
-    "note": "Approved Apify invoices awaiting payout; not cash, never spendable."
+    "state": "UNAVAILABLE",
+    "unavailable_reason": "INVOICE_LEDGER_UNAVAILABLE",
+    "apify_receivable_usd_cents": null,
+    "apify_receivable_months": null,
+    "note": "Approved Apify invoices awaiting payout; not cash, never spendable.",
+    "consistency": "INDEPENDENT_INVOICE_LEDGER_MAY_LAG_SETTLEMENT",
+    "consistency_note": "Invoice records may lag bank settlement; a recorded receivable does not prove payment remains unpaid."
   }
 }

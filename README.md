@@ -180,6 +180,7 @@ Ne pas supprimer l’état ou les journaux pour débloquer une reprise. L’inst
 | Besoin | Référence |
 |---|---|
 | Comprendre le mandat, le capital et l’extinction | [VISION.md](VISION.md) |
+| Développer avec Codex, Claude ou un autre assistant en gardant le cap | [Mandat commun de développement](docs/MANDAT-DEVELOPPEMENT.md) |
 | Installer, mettre à niveau et dépanner | [INSTALL.md](INSTALL.md) |
 | Comprendre les modules et la reprise durable | [CODE.md](CODE.md) |
 | Vérifier les frontières, secrets et publications | [SECURITY.md](SECURITY.md) |
