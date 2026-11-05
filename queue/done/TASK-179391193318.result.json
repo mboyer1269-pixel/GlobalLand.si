@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "ok\n\n",
+  "artifacts": [
+    "products/sites/shopify-catalogue-example/7c2e9a41d86b35f0e1a4c97d2b58e360.txt",
+    "products/services/shopify-large-catalogue/release/release-manifest.json",
+    "products/services/shopify-large-catalogue/release/exposure-test-proposal.json",
+    "products/receipts/TASK-179391193318.json"
+  ],
+  "request": {
+    "id": "TASK-179391193318",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T20:52:13Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib,hashlib\nk='7c2e9a41d86b35f0e1a4c97d2b58e360'\np=pathlib.Path('products/sites/shopify-catalogue-example/'+k+'.txt');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(k,encoding='utf-8')\nm=json.load(open('products/services/shopify-large-catalogue/release/release-manifest.json'))\nm['verify_result']='not run in release check (verify.verify expects test-harness positional rows; KeyError(7)); byte-identical output vs expected fixture is the release check; repaired suite 8/8 per core-test-results.json'\nm['cited_doc_check']={'url':'https://help.shopify.com/en/manual/products/import-export/using-csv','fetch_task':'TASK-179391193314','http_status':200,'title':'Shopify Help Center | Using CSV files to import and export products','contains':['Variant image URL','Option1 name','Published on online store'],'check_task':'TASK-179391193315'}\nm['indexnow_key_file']={'path':p.name,'body_sha256':hashlib.sha256(k.encode()).hexdigest(),'purpose':'IndexNow Option 1 ownership file, public by design, grants no account access'}\nm['superseded_dry_run']={'task':'TASK-179391193316','digest':'500ec81975cf29f329aa64b7b56e2c0d47071be2ec4ef428c9429c1f9b7756cb','reason':'key file added after'}\njson.dump(m,open('products/services/shopify-large-catalogue/release/release-manifest.json','w'),indent=1)\nx={'experiment':'shopify-catalogue-example free self-service exposure','prerequisite':'independent APPROVE of the exact new dry_run digest, then host-gated deploy and FETCH hash verification','action':'one IndexNow GET submission of the root URL using the included key file (same method as L40/L44)','observe_until':'14 days after verified deploy','metrics':{'submission_receipt':'HTTP status of the single IndexNow GET (202 = received only)','indexing':'unknown unless a public search observation shows the URL; not inferred from 202','requests':'commercial_feedback counts (REQUEST/EXPLICIT_INTEREST), aggregate only, attribution uncertain','delivery':'free self-service download; no download telemetry exists, so downloads stay UNKNOWN','revenue':'none possible: no collection route (blocker SERVICE-PAYMENT-COLLECTION)'},'stop_rule':'no further Shopify building unless a classified request appears; missing telemetry is unknown, not zero','excluded':['outreach','accounts','spending','paid orders']}\njson.dump(x,open('products/services/shopify-large-catalogue/release/exposure-test-proposal.json','w'),indent=1)\nprint('ok')"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/release/release-manifest.json"
+      ],
+      "outputs": [
+        "products/sites/shopify-catalogue-example/7c2e9a41d86b35f0e1a4c97d2b58e360.txt",
+        "products/services/shopify-large-catalogue/release/release-manifest.json",
+        "products/services/shopify-large-catalogue/release/exposure-test-proposal.json"
+      ],
+      "mission_id": "SHOPIFY-WORKED-SOLUTION-RELEASE"
+    },
+    "description": "Broker action during THINK-1793911933",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391193318",
+  "input_sha256": "823e6fa864738516c1d1aee5f43fa07c121d2377b62fba5389cf906609d8f2d8"
+}

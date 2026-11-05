@@ -50,7 +50,7 @@
   "warning_count": 0,
   "seconds": 0.003
  },
- "verify_result": "verify call failed: KeyError(7)",
+ "verify_result": "not run in release check (verify.verify expects test-harness positional rows; KeyError(7)); byte-identical output vs expected fixture is the release check; repaired suite 8/8 per core-test-results.json",
  "cited_doc_urls_in_research": [],
  "page_checks": {
   "autonomous AI agents": true,
@@ -63,5 +63,27 @@
   "attachments": true,
   "https://community.shopify.com/t/575067": true,
   "no_price_or_checkout": true
+ },
+ "cited_doc_check": {
+  "url": "https://help.shopify.com/en/manual/products/import-export/using-csv",
+  "fetch_task": "TASK-179391193314",
+  "http_status": 200,
+  "title": "Shopify Help Center | Using CSV files to import and export products",
+  "contains": [
+   "Variant image URL",
+   "Option1 name",
+   "Published on online store"
+  ],
+  "check_task": "TASK-179391193315"
+ },
+ "indexnow_key_file": {
+  "path": "7c2e9a41d86b35f0e1a4c97d2b58e360.txt",
+  "body_sha256": "4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba",
+  "purpose": "IndexNow Option 1 ownership file, public by design, grants no account access"
+ },
+ "superseded_dry_run": {
+  "task": "TASK-179391193316",
+  "digest": "500ec81975cf29f329aa64b7b56e2c0d47071be2ec4ef428c9429c1f9b7756cb",
+  "reason": "key file added after"
  }
 }

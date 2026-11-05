@@ -1,0 +1,20 @@
+{
+ "experiment": "shopify-catalogue-example free self-service exposure",
+ "prerequisite": "independent APPROVE of the exact new dry_run digest, then host-gated deploy and FETCH hash verification",
+ "action": "one IndexNow GET submission of the root URL using the included key file (same method as L40/L44)",
+ "observe_until": "14 days after verified deploy",
+ "metrics": {
+  "submission_receipt": "HTTP status of the single IndexNow GET (202 = received only)",
+  "indexing": "unknown unless a public search observation shows the URL; not inferred from 202",
+  "requests": "commercial_feedback counts (REQUEST/EXPLICIT_INTEREST), aggregate only, attribution uncertain",
+  "delivery": "free self-service download; no download telemetry exists, so downloads stay UNKNOWN",
+  "revenue": "none possible: no collection route (blocker SERVICE-PAYMENT-COLLECTION)"
+ },
+ "stop_rule": "no further Shopify building unless a classified request appears; missing telemetry is unknown, not zero",
+ "excluded": [
+  "outreach",
+  "accounts",
+  "spending",
+  "paid orders"
+ ]
+}
