@@ -910,18 +910,6 @@
   ],
   "events": [
     {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793838637.5381832,
-      "mission_id": "TEXT-CSV-INTAKE-EXPERIMENT",
-      "agent_id": "ACQUISITION"
-    },
-    {
-      "type": "BLOCKER_RESOLVED",
-      "timestamp": 1793838646.5128489,
-      "blocker_id": "NO-HOSTING-ACCESS",
-      "agent_id": "ACQUISITION"
-    },
-    {
       "type": "MESSAGE",
       "timestamp": 1793838767.7924492,
       "from_agent": "ACQUISITION",
@@ -1505,6 +1493,18 @@
       "timestamp": 1793892658.4624252,
       "lesson_id": "L54",
       "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "BLOCKER_RAISED",
+      "timestamp": 1793896245.276757,
+      "blocker_id": "SERVICE-PAYMENT-COLLECTION",
+      "agent_id": "DIRECTOR"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793896252.3382723,
+      "lesson_id": "L55",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1598,15 +1598,15 @@
       "status": "OPEN",
       "raised_by": "DIRECTOR",
       "opened_at": 1793889049.137258,
-      "reports": 1,
-      "title": "Service experiments have no authorized order or payment collection route",
+      "reports": 2,
+      "title": "No authorized payment route; Apify pay-per-event is the lowest-step option and also covers NO-APIFY-ACCESS",
       "category": "PAYMENT",
       "needs_founder": true,
-      "detail": "commercial_paths.collection is NOT_IMPLEMENTED; private fulfillment explicitly excludes paid orders, and treasury has zero verified available funds and no verified revenue. Existing public prices are hypotheses, not purchasable offers. A dedicated, authorized merchant/payment route with verified account eligibility, applicable terms and an observable settlement mechanism is required before accepting paid service orders. Do not create accounts, accept agreements, improvise payment instructions or treat a finance adapter as checkout. Continue current free diagnostic and expression-of-interest experiments without changing their terms.",
+      "detail": "commercial_paths.collection is NOT_IMPLEMENTED and treasury is UNFUNDED, so no current experiment can turn into verified revenue. Prices on the two live sites are labelled hypotheses. Every remaining free lever (IndexNow on both hosts, intake corrections, readiness supplement, Bing observation) is used up. Founder decision needed, pick one: (A) enable Apify config + 0600 credential (blocker NO-APIFY-ACCESS). Apify charges users and pays out, so this one step unlocks both listing and collection for 3 tested Actors. Caveat: scan2-summary.json shows small markets (top incumbents 29-53 users_30d, most utility jobs under 10). (B) authorize a dedicated merchant/payment-link account for the email services. Until then, agents will not create accounts, improvise payment instructions or accept orders. CSV window closes 2026-11-19T01:30:37Z and welfare closes 2026-11-20, both with a 'request' success criterion and not 'revenue'.",
       "mission_id": "WORLD-FIRST-REVENUE",
-      "expected_gain": "Would enable testing paid conversion after actual buyer interest; no customer, payment or revenue is established.",
+      "expected_gain": "Converts any observed request/usage into a collectable, verifiable payment path; no revenue is established now.",
       "last_reported_by": "DIRECTOR",
-      "last_reported_at": 1793889049.137258
+      "last_reported_at": 1793896245.2767496
     }
   ],
   "reviews": [
@@ -1721,5 +1721,5 @@
       "seq": 10
     }
   ],
-  "lesson_count": 54
+  "lesson_count": 55
 }
