@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts'))
-from test_initiative import Fixture, POSIX
+from test_initiative import Fixture, POSIX, seed_admission_archive
 
 
 class Client:
@@ -146,6 +146,25 @@ class SupervisorAdmissionTests(Fixture):
             with patch('supervisor.ROOT',self.root),patch('supervisor.sys.argv',['supervisor.py','wake']),patch('supervisor.Supervisor',side_effect=AssertionError('busy initialization')):
                 self.assertEqual(main()['state'],'BUSY')
 
+    def test_idle_and_throttled_dispatch_ignore_completed_context_archive(self):
+        import initiative
+        import sqlite3
+        app,_,_=self.app();store=initiative.Store(self.root,self.config)
+        history=seed_admission_archive(store)
+        statements=[];connect=sqlite3.connect;receipt=initiative.Store._receipt
+        def traced(*args,**kwargs):
+            db=connect(*args,**kwargs);db.set_trace_callback(statements.append);return db
+        def checked(raw):
+            self.assertFalse(json.loads(raw)['wake_id'] in history,'terminal archive was deserialized')
+            return receipt(raw)
+        with patch('initiative.sqlite3.connect',side_effect=traced),patch.object(initiative.Store,'_receipt',side_effect=checked),patch.object(app,'git',side_effect=AssertionError('idle network')):
+            self.assertEqual(app.dispatch('wake',now=10000)['state'],'IDLE')
+        active=store.claim('think',now=10000,world_state='ACTIVE',bank_state='UNFUNDED')
+        store.start(active['wake_id'],prepared=dict(context={},assessment={},coverage=[],excluded=[]),now=10000)
+        with patch('initiative.sqlite3.connect',side_effect=traced),patch.object(initiative.Store,'_receipt',side_effect=checked),patch.object(app,'git',side_effect=AssertionError('throttled network')):
+            self.assertEqual(app.dispatch('wake',now=10001)['state'],'IDLE')
+        self.assertFalse(any('quick_check' in sql.lower() or 'integrity_check' in sql.lower() for sql in statements))
+
     def test_periodic_and_wake_share_single_admission(self):
         import initiative
         app,world,bank=self.app();initiative.Store(self.root,self.config);self.signal('wake')
@@ -267,6 +286,28 @@ class InstalledEventIntegration(unittest.TestCase):
         for ident,action in ((ordinary,'FETCH'),(financial,'SPEND')):
             saved=json.loads((self.install/'state'/(ident+'.json')).read_text())
             self.assertEqual(saved['metadata'],dict(type='TOOL',action=action))
+
+    def test_controller_broker_reads_exact_active_turn_without_archive_work(self):
+        import initiative
+        import sqlite3
+        from controller import Controller
+        history=seed_admission_archive(self.store)
+        receipt=initiative.Store._receipt;statements=[];connect=sqlite3.connect;effects=[]
+        def checked(raw):
+            self.assertFalse(json.loads(raw)['wake_id'] in history,'broker loaded terminal archive')
+            return receipt(raw)
+        def traced(*args,**kwargs):
+            db=connect(*args,**kwargs);db.set_trace_callback(statements.append);return db
+        def plan(planner,provider,prompt):
+            task=dict(id='TASK-180000000099',type='TOOL',submitted_by='DIRECTOR',created_at='2027-01-15T08:00:00Z',
+                      action='WORLD',args=dict(op='create_mission',mission_id='EXACT-ACTIVE-TURN',goal='Useful effect'),estimated_cost_cad=0,approved_by=None)
+            effects.append(planner.executor(task));return dict(summary='Committed useful work.',actions=[])
+        with patch('initiative.sqlite3.connect',side_effect=traced),patch.object(initiative.Store,'_receipt',side_effect=checked),patch.object(Controller,'plan',plan):
+            result=self.app.dispatch('wake',now=1800000000)
+        self.assertEqual(result['state'],'COMPLETED');self.assertEqual(len(effects),1)
+        self.assertEqual(effects[0]['status'],'DONE')
+        self.assertFalse(any('quick_check' in sql.lower() or 'integrity_check' in sql.lower() for sql in statements))
+        self.assertEqual(self.store.task_cause('TASK-180000000099')['parent_turn'],'THINK-1800000000')
 
 
 if __name__=='__main__':unittest.main()

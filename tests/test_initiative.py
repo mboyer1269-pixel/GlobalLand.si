@@ -19,6 +19,25 @@ CONFIG = dict(initiative=dict(enabled=True, debounce_seconds=0),
                               image='brain@sha256:' + '1' * 64))
 
 
+def admission_record(number, *, phase='ACKED'):
+    import initiative
+    context=dict(archive_text='retained context '*128,record=number)
+    prepared=dict(context=context,assessment={},coverage=[],excluded=[])
+    return dict(schema=1,wake_id=initiative.digest(['archive-receipt',number]),trigger='think',
+                target='DIRECTOR',turn='THINK-'+str(number),cause=dict(root_id='c'*64,parent_turn=None,depth=0),
+                event_ids=[],events=[],parents=[],coverage=[],context_digest=initiative.digest(context),
+                prepared=prepared,phase=phase,started_at=number,finished_at=number if phase=='ACKED' else None,
+                reason='EXACT_COVERAGE' if phase=='ACKED' else 'PROVIDER_START')
+
+
+def seed_admission_archive(store, count=1001):
+    ids=[]
+    with store._db() as db:
+        for number in range(1,count+1):
+            receipt=admission_record(number);store._save_admission(db,receipt);ids.append(receipt['wake_id'])
+    return set(ids)
+
+
 class Fixture(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
@@ -451,6 +470,80 @@ class AdmissionTests(Fixture):
                 self.assertIn('QUEUED_RESULT',admitted)
                 self.assertIn('LEASE_DUE',admitted)
         self.root=original_root
+
+    def test_recovery_does_not_deserialize_or_hash_terminal_archive(self):
+        import initiative
+        store=self.store();history=seed_admission_archive(store)
+        with patch.object(store,'_receipt',wraps=store._receipt) as validate,patch('initiative.digest',wraps=initiative.digest) as hashed:
+            self.assertEqual(store.recover(now=10000),[])
+        self.assertEqual(validate.call_count,0);self.assertEqual(hashed.call_count,0)
+        with store._db() as db:
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM admissions').fetchone()[0],1001)
+        self.assertEqual(store.admission(next(iter(history)))['phase'],'ACKED')
+
+    def test_claim_and_exact_turn_do_not_walk_terminal_history(self):
+        import initiative
+        store=self.store();seed_admission_archive(store)
+        active=store.claim('think',now=10000,world_state='ACTIVE',bank_state='UNFUNDED')
+        store.start(active['wake_id'],prepared=dict(context={},assessment={},coverage=[],excluded=[]),now=10000)
+        with patch.object(store,'_receipt',wraps=store._receipt) as validate:
+            self.assertEqual(store.turn_cause(active['turn']),active['cause'])
+        self.assertEqual(validate.call_count,1)
+        with patch.object(store,'_receipt',wraps=store._receipt) as validate,patch('initiative.digest',wraps=initiative.digest) as hashed:
+            self.assertIsNone(store.turn_cause('THINK-1'))
+            self.assertIsNone(store.turn_cause('THINK-9999999999'))
+            self.assertIsNone(store.claim('wake',now=10001,world_state='ACTIVE',bank_state='UNFUNDED'))
+        self.assertEqual(validate.call_count,0);self.assertEqual(hashed.call_count,0)
+
+    def test_reopen_skips_full_integrity_scan_but_explicit_check_remains(self):
+        import sqlite3
+        store=self.store();seed_admission_archive(store)
+        statements=[];connect=sqlite3.connect
+        def traced(*args,**kwargs):
+            db=connect(*args,**kwargs);db.set_trace_callback(statements.append);return db
+        with patch('initiative.sqlite3.connect',side_effect=traced):self.store()
+        self.assertFalse(any('quick_check' in sql.lower() or 'integrity_check' in sql.lower() for sql in statements))
+        statements.clear()
+        with patch('initiative.sqlite3.connect',side_effect=traced):store.check_integrity()
+        self.assertTrue(any('quick_check' in sql.lower() or 'integrity_check' in sql.lower() for sql in statements))
+
+    def test_active_recovery_pages_make_progress_across_restart(self):
+        store=self.store();seed_admission_archive(store)
+        self.config['initiative']['scan_page_size']=2
+        active=[]
+        with store._db() as db:
+            for number in range(20000,20005):
+                receipt=admission_record(number,phase='CLAIMED')
+                receipt.update(started_at=None,context_digest=None,prepared=None)
+                store._save_admission(db,receipt);active.append(receipt['wake_id'])
+        seen=set()
+        for now in range(30000,30003):
+            store=self.store()
+            with patch.object(store,'_receipt',wraps=store._receipt) as validate:
+                page=store.recover(now=now)
+            self.assertLessEqual(validate.call_count,2)
+            self.assertLessEqual(len(page),2);seen.update(r['wake_id'] for r in page)
+        self.assertEqual(seen,set(active))
+        with store._db() as db:self.assertEqual(db.execute('SELECT COUNT(*) FROM admissions').fetchone()[0],1006)
+
+    def test_corrupt_active_context_and_explicit_archive_check_fail_closed(self):
+        store=self.store();seed_admission_archive(store,3)
+        bad=admission_record(20000,phase='STARTED');bad['context_digest']='0'*64
+        with store._db() as db:store._save_admission(db,bad)
+        with self.assertRaisesRegex(ValueError,'^Initiative storage unavailable$'):store.recover(now=30000)
+        # Logical corruption in terminal history is checked deliberately rather
+        # than reparsing every historical prompt during each idle probe.
+        bad.update(phase='ACKED',finished_at=20000)
+        with store._db() as db:store._save_admission(db,bad)
+        self.assertEqual(store.recover(now=30001),[])
+        with self.assertRaisesRegex(ValueError,'^Initiative storage unavailable$'):store.check_integrity()
+
+    def test_actual_schema_and_storage_errors_still_fail_closed(self):
+        store=self.store()
+        with store._db() as db:store._put(db,'schema',2)
+        with self.assertRaisesRegex(ValueError,'^Initiative storage unavailable$'):self.store()
+        store.path.write_bytes(b'not a sqlite database')
+        with self.assertRaisesRegex(ValueError,'^Initiative storage unavailable$'):self.store()
 
 
 if __name__ == '__main__': unittest.main()

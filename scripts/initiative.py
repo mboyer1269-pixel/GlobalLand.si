@@ -24,6 +24,7 @@ RANGES = dict(debounce_seconds=(0, 3600), director_spacing_seconds=(1, 3600),
               mail_spacing_seconds=(1, 3600), max_chain_depth=(0, 8),
               batch_size=(1, 200), scan_page_size=(1, 2000), lease_notice_seconds=(0, 3600))
 PHASES = ('CLAIMED','STARTED','DECISION_READY','ACKED','INTERRUPTED','OBSOLETE','SUPPRESSED_EXTINCT')
+ACTIVE_ADMISSIONS = "json_extract(data,'$.phase') IN ('CLAIMED','STARTED','DECISION_READY')"
 
 
 def canonical(value):
@@ -159,9 +160,15 @@ class Store:
                         db.execute('INSERT OR IGNORE INTO baseline VALUES (?,?,?)',(kind,key,version))
                     self._put(db, 'schema', 1)
                 if 'meta' not in tables and tables:raise ValueError('Initiative storage unavailable')
-                if self._get(db, 'schema') != 1 or db.execute('PRAGMA quick_check').fetchone()[0] != 'ok':
+                if self._get(db, 'schema') != 1:
                     raise ValueError('Initiative storage unavailable')
                 db.execute("CREATE INDEX IF NOT EXISTS pending_kind_due ON events(status,kind,json_extract(data,'$.not_before'))")
+                # One-time index creation on upgrade; repeated construction only
+                # consults schema metadata, never verifies the prompt archive.
+                db.execute('CREATE INDEX IF NOT EXISTS admission_active ON admissions(id) WHERE '+ACTIVE_ADMISSIONS)
+                db.execute("CREATE INDEX IF NOT EXISTS admission_phase_id ON admissions(json_extract(data,'$.phase'),id)")
+                db.execute("CREATE INDEX IF NOT EXISTS admission_phase_target ON admissions(json_extract(data,'$.phase'),json_extract(data,'$.target'),id)")
+                db.execute("CREATE INDEX IF NOT EXISTS admission_turn ON admissions(json_extract(data,'$.turn'),json_extract(data,'$.phase'),id)")
             if not self.anchor.exists():
                 fd = os.open(self.anchor, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
                 try: os.write(fd, b'1\n'); os.fsync(fd)
@@ -440,23 +447,62 @@ class Store:
     def _save_admission(db, receipt):
         db.execute('INSERT OR REPLACE INTO admissions VALUES (?,?)',(receipt['wake_id'],canonical(receipt)))
 
+    def check_integrity(self):
+        """Explicit physical/database and full receipt verification, off hot paths.
+
+        As with other Store operations, the host caller holds supervisor.lock.
+        No wake, periodic admission or broker action invokes this archive scan.
+        """
+        with self._db() as db:
+            if any(row[0]!='ok' for row in db.execute('PRAGMA quick_check')):
+                raise ValueError('Initiative storage unavailable')
+            for (raw,) in db.execute('SELECT data FROM admissions'):
+                self._receipt(raw)
+
+    def _active_page(self,db):
+        """Bound active recovery with a durable, finite-cycle ID cursor."""
+        cursor=self._get(db,'recovery_cursor',dict(after='',through=''))
+        if (not isinstance(cursor,dict) or set(cursor)!={'after','through'} or any(
+                not isinstance(value,str) or (value and not HEX.fullmatch(value)) for value in cursor.values())):
+            raise ValueError('Initiative storage unavailable')
+        query='SELECT id,data FROM admissions INDEXED BY admission_active WHERE '+ACTIVE_ADMISSIONS
+        if cursor['through']:
+            rows=db.execute(query+' AND id>? AND id<=? ORDER BY id LIMIT ?',
+                (cursor['after'],cursor['through'],self.policy['scan_page_size'])).fetchall()
+        else:rows=[]
+        if not rows:
+            last=db.execute(query+' ORDER BY id DESC LIMIT 1').fetchone()
+            if not last:
+                self._put(db,'recovery_cursor',dict(after='',through=''));return []
+            cursor=dict(after='',through=last[0])
+            rows=db.execute(query+' AND id<=? ORDER BY id LIMIT ?',
+                (cursor['through'],self.policy['scan_page_size'])).fetchall()
+        cursor['after']=rows[-1][0]
+        self._put(db,'recovery_cursor',cursor)
+        return rows
+
     def claim(self, mode, *, now,world_state,bank_state):
         _time(now)
         if mode not in ('wake','think','mail'):raise ValueError('Invalid initiative mode')
         if not self.policy['enabled']:return None
         with self._db() as db:
-            if 'EXTINCT' in (world_state,bank_state):
+            if 'EXTINCT' in (world_state,bank_state) or self._get(db,'extinct',False):
                 self._put(db,'extinct',True)
                 db.execute("UPDATE events SET status='SUPPRESSED_EXTINCT',reservation=NULL WHERE status IN ('PENDING','RESERVED')")
-                for (raw,) in db.execute('SELECT data FROM admissions'):
+                query='SELECT data FROM admissions INDEXED BY admission_active WHERE '+ACTIVE_ADMISSIONS
+                query+=" AND json_extract(data,'$.phase') IN ('CLAIMED','STARTED') ORDER BY id LIMIT ?"
+                for (raw,) in db.execute(query,(self.policy['scan_page_size'],)).fetchall():
                     r=self._receipt(raw)
                     if r['phase'] in ('CLAIMED','STARTED'):
                         r.update(phase='SUPPRESSED_EXTINCT',reason='EXTINCT',finished_at=now);self._save_admission(db,r)
             if self._get(db,'extinct',False) or 'HALTED' in (world_state,bank_state):return None
             requested=None if mode=='wake' else ('DIRECTOR' if mode=='think' else 'PRIVATE_MAIL')
-            for (raw,) in db.execute('SELECT data FROM admissions ORDER BY rowid'):
-                r=self._receipt(raw)
-                if r['phase']=='CLAIMED' and (requested is None or r['target']==requested):return r
+            query="SELECT data FROM admissions WHERE json_extract(data,'$.phase')='CLAIMED'"
+            args=[]
+            if requested is not None:
+                query+=" AND json_extract(data,'$.target')=?";args.append(requested)
+            row=db.execute(query+' ORDER BY id LIMIT 1',args).fetchone()
+            if row:return self._receipt(row[0])
             # A pending old decision must be recovered before admitting a new turn.
             if requested!='PRIVATE_MAIL':
                 for p in (self.root/'state/controller').glob('THINK-*.json'):
@@ -613,11 +659,11 @@ class Store:
             db.execute('UPDATE claim_intents SET pending=1 WHERE id=?',(task_id,))
 
     def turn_cause(self, turn):
+        if not isinstance(turn,str) or not re.fullmatch(r'THINK-[0-9]{1,10}',turn):return None
         with self._db() as db:
-            for (raw,) in db.execute('SELECT data FROM admissions'):
-                receipt=self._receipt(raw)
-                if receipt['turn']==turn and receipt['phase'] in ('STARTED','DECISION_READY'):
-                    return receipt['cause']
+            rows=db.execute("SELECT data FROM admissions WHERE json_extract(data,'$.turn')=? AND json_extract(data,'$.phase') IN ('STARTED','DECISION_READY') ORDER BY id LIMIT 2",(turn,)).fetchall()
+            if len(rows)>1:raise ValueError('Initiative storage unavailable')
+            if rows:return self._receipt(rows[0][0])['cause']
         return None
 
     def suppressed(self):
@@ -693,7 +739,7 @@ class Store:
         _time(now);resume=[];private=[];published=[]
         with self._db() as db:
             self._repair_claims(db)
-            for (raw,) in db.execute('SELECT data FROM admissions ORDER BY rowid').fetchall():
+            for _,raw in self._active_page(db):
                 r=self._receipt(raw)
                 if r['phase']=='CLAIMED':resume.append(r);continue
                 if r['phase'] not in ('STARTED','DECISION_READY'):continue
