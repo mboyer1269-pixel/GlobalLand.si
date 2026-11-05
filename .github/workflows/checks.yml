@@ -34,6 +34,31 @@ jobs:
         env:
           GLOBALLAND_DOCKER_SMOKE: '1'
       - run: for f in scripts/*.sh; do bash -n "$f" || exit 1; done
+  bootstrap-install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare disposable host prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cron logrotate
+          sudo systemctl start cron logrotate.timer
+          docker compose version
+          docker pull node:22-bookworm
+      - name: Verify real bootstrap without productive cycles
+        run: |
+          set -euo pipefail
+          digest=$(docker image inspect node:22-bookworm --format '{{index .RepoDigests 0}}')
+          sudo env PATH="$PATH" GITHUB_ACTIONS="$GITHUB_ACTIONS" \
+            RUNNER_ENVIRONMENT="$RUNNER_ENVIRONMENT" GLOBALLAND_BOOTSTRAP_SMOKE=1 \
+            GLOBALLAND_BOOTSTRAP_IMAGE="node:22-bookworm@${digest##*@}" \
+            python3 tests/bootstrap_install_smoke.py
   actor-products:
     runs-on: ubuntu-latest
     timeout-minutes: 10
