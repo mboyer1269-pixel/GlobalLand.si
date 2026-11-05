@@ -27,7 +27,10 @@ PRIVATE_GUIDE = (
     'Do useful requested work when possible. No public tasks, WORLD, publication, spending, '
     'network, external services, attachments or recipient changes are available. '
     'EXEC is the only permitted action, at most one per decision; use agent BUILDER, '
-    'args argv, outputs and optional cwd using the standard EXEC schema. '
+    'args argv, outputs and optional cwd. Omit public EXEC inputs selectors; '
+    'when the provider schema requires inputs, supply null so normalization removes it. '
+    'An explicit inputs list, including [], is refused: this private route always uses '
+    'the frozen case context, never current public repository selections. '
     'EXEC runs offline in a disposable sandbox, with incoming.json, public.json, complete '
     'versioned public service sources and previous generated artifacts in /workspace. '
     'Source entries marked source_asset contain their exact path, byte count and SHA256; '
@@ -98,6 +101,10 @@ def _exec_args(action):
             or action.get('action') != 'EXEC'):
         raise ValueError('Private work unavailable')
     args = action.get('args')
+    # Public EXEC inputs must never silently replace or bypass the frozen case
+    # sources. Provider nulls have already been removed by normalization.
+    if isinstance(args, dict) and 'inputs' in args:
+        raise ValueError('Private work unavailable')
     if not isinstance(args, dict) or set(args) - {'argv', 'outputs', 'cwd'}:
         raise ValueError('Private work unavailable')
     task = dict(id='TASK-0000', type='TOOL', submitted_by='BUILDER',

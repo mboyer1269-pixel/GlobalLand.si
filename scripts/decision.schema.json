@@ -39,6 +39,7 @@
                 "required": [
                   "argv",
                   "outputs",
+                  "inputs",
                   "cwd",
                   "mission_id"
                 ],
@@ -59,6 +60,17 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "inputs": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "maxItems": 128,
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Public repository files or directory prefixes ending in /. Null preserves legacy whole-source selection subject to the 128 MiB job input budget; [] starts empty. Select only the inputs this program needs."
                   },
                   "cwd": {
                     "type": [

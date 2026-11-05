@@ -76,6 +76,19 @@ class RelevanceTests(unittest.TestCase):
 
 
 class PlaybookTests(unittest.TestCase):
+    def test_oversized_prompt_guide_does_not_hide_later_learning_and_reports_omission(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            books = root / 'agents/playbooks'
+            books.mkdir(parents=True)
+            (books / 'a-large.md').write_text('a' * 9000)
+            (books / 'z-small.md').write_text('Learn from measured outcomes.')
+            loaded = lessons.playbooks(root)
+            self.assertEqual(loaded['z-small'], 'Learn from measured outcomes.')
+            self.assertIn('omitted', loaded['_source_omissions'])
+            self.assertLessEqual(sum(map(len, loaded.values())), 8000)
+
     def test_playbooks_are_loaded_without_the_license_file_and_bounded(self):
         root = pathlib.Path(__file__).resolve().parents[1]
         loaded = lessons.playbooks(root)

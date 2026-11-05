@@ -40,7 +40,7 @@ class FakeHandlers:
 
     def table(self):
         return dict(world_status=lambda: {'world': {'state': 'ACTIVE'}, 'bank': {'state': 'UNFUNDED'}},
-                    list_products=lambda: ['products/a.txt'],
+                    list_products=lambda **args: {'revision': '1' * 40, 'entries': [{'path': 'products/a.txt', 'size': 5, 'oid': '2' * 40}], 'next_cursor': None},
                     read_product=lambda path: {'path': path, 'content': 'hello', 'truncated': False},
                     recent_results=lambda: [], execute=self.execute)
 
@@ -100,7 +100,9 @@ class BrokerTests(unittest.TestCase):
 
     def test_reads_and_submits_through_the_socket_with_journal_first(self):
         with self.broker() as b:
-            self.assertEqual(call(b.socket_path, 'list_products'), {'ok': True, 'result': ['products/a.txt']})
+            page=call(b.socket_path, 'list_products')
+            self.assertTrue(page['ok'])
+            self.assertEqual([entry['path'] for entry in page['result']['entries']], ['products/a.txt'])
             self.assertTrue(call(b.socket_path, 'read_product', {'path': 'products/a.txt'})['ok'])
             first = call(b.socket_path, 'submit_action', {'agent': 'DIRECTOR', 'action': 'STATUS', 'args': {}})
             second = call(b.socket_path, 'submit_action', {'agent': 'BUILDER', 'action': 'WORLD',

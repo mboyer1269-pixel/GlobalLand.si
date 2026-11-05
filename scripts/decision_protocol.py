@@ -78,6 +78,8 @@ _TOOL_SCHEMAS = {
         'argv': {'type': 'array', 'minItems': 1, 'maxItems': 128,
                  'items': {'type': 'string', 'maxLength': 8192, 'pattern': '^[^\u0000]*$'}},
         'outputs': {'type': 'array', 'maxItems': 64, 'items': {'type': 'string'}},
+        'inputs': _nullable({'type': 'array', 'maxItems': 128, 'items': {'type': 'string'},
+            'description': 'Public repository files or directory prefixes ending in /. Null preserves legacy whole-source selection subject to the 128 MiB job input budget; [] starts empty. Select only the inputs this program needs.'}),
         'cwd': _nullable({'type': 'string', 'description':
             'Use null for the /workspace root. Otherwise use a relative directory '
             'inside /workspace, without empty, dot, dot-dot or .git segments '

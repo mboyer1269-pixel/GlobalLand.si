@@ -67,36 +67,38 @@ def validate_public_context(entries):
 
 
 def public_context(root, *, include_service_sources=True):
-    work = pathlib.Path(root) / 'work'
-    products = work / 'products'
-    if not products.is_dir() or products.is_symlink():
-        return []
+    from catalog_views import source_for, entries, bounded_bytes, chunk_bytes
+    catalog = source_for(root)
     result, remaining = [], MAX_CONTEXT
-    paths = sorted(set(products.glob('sites/*/index.html')) | set(products.glob('services/**/*.md')))
-    if include_service_sources:
-        paths = sorted(set(paths) | {path for suffix in SERVICE_SOURCE_SUFFIXES
-                                    for path in products.glob('services/**/*' + suffix)})
-    for path in paths:
+    def selected():
+        # Both prefixes and each catalog page are lexical, preserving the
+        # original selection order without collecting the whole source tree.
+        for prefix in ('products/services/','products/sites/'):
+            for item in entries(catalog,prefix):
+                name = item['path']
+                suffix = pathlib.PurePosixPath(name).suffix
+                if ((name.startswith('products/sites/') and len(name.split('/')) == 4 and name.endswith('/index.html'))
+                        or (name.startswith('products/services/') and (suffix == '.md'
+                            or (include_service_sources and suffix in SERVICE_SOURCE_SUFFIXES)))):
+                    yield item
+    for item in selected():
         if remaining <= 0 or len(result) >= MAX_CONTEXT_FILES:
             break
-        name = path.relative_to(work).as_posix()
-        source = path.suffix in SERVICE_SOURCE_SUFFIXES
+        name = item['path']
+        source = pathlib.PurePosixPath(name).suffix in SERVICE_SOURCE_SUFFIXES
         try:
-            if (not path.is_file() or path.stat().st_nlink != 1
-                    or any(p.is_symlink() for p in (path, *path.parents))):
-                continue
             from tools import product_path
             product_path(name)
             limit = min(remaining, MAX_MESSAGE)
-            with path.open('rb') as stream:
-                raw = stream.read(limit + 1 if source else limit)
-            if source and len(raw) > limit:
+            if source and item['size'] > limit:
                 continue  # A program is complete or absent, never a partial copy.
+            raw = (bounded_bytes(catalog,name,limit) if source else
+                   chunk_bytes(catalog.read(name,offset=0,limit=limit)))
             check_secrets(raw)
             text = raw.decode('utf-8', errors='strict' if source else 'replace')
-        except (OSError, ValueError):
+        except (OSError, ValueError, RuntimeError):
             continue
-        entry = {'path': name, 'text': text, 'possibly_truncated': not source and len(raw) == limit}
+        entry = {'path': name, 'text': text, 'possibly_truncated': not source and item['size'] > len(raw)}
         if source:
             entry.update(source_asset=True, sha256=hashlib.sha256(raw).hexdigest(), bytes=len(raw))
         # Replacement characters can expand invalid non-source UTF-8; keep the

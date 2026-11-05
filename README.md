@@ -135,6 +135,10 @@ Le protocole expose **neuf actions**. Leur présence dans le code ne garantit ni
 | `ACTOR_STATS` | Lire les exécutions Apify et leurs estimations ; aucune recette bancaire déduite. |
 | `PUBLISH_SITE` | Déployer un site statique sur Cloudflare après revue ; permettre sa coupure. |
 
+EXEC sélectionne ses fichiers publics avec `inputs` (chemins exacts ou dossiers terminés par `/`). `inputs: []` commence vide ; un champ absent conserve l'ancienne vue complète sous une limite de **128 Mio d'entrées par tâche**, dans le tmpfs de 256 Mio. Un dépassement refuse la tâche avant exécution : choisir moins de fichiers ou travailler par morceaux. Le corpus et son historique restent dans Git. Les outputs publiés gardent leurs propres limites.
+
+Le contexte `source_catalog` est une page de découverte. Avec le courtier, `list_products` fournit des pages d'au plus 100 entrées et un curseur ; `read_product` fournit des plages d'au plus 64 Kio, en UTF-8 ou base64 explicite. Conserver la même révision pour parcourir les pages et reconstituer un fichier. Un produit omis de la première page reste accessible par le catalogue. Voir le [contrat des entrées et des lectures](queue/PROTOCOL.md).
+
 Le contrôle installé est séparé des produits modifiables. Les secrets d’abonnement, de publication et de paiement restent privés ; ils ne sont pas montés dans l’exécuteur de produits. Les appels incertains, les refus et les échecs de publication conservent leur journal. Un échec Git ne doit pas rejouer un paiement.
 
 Les limites Docker, les quotas et connexions fournisseurs, les comptes externes et la qualité des preuves restent des dépendances réelles. Détails : [sécurité](SECURITY.md) et [protocole des tâches](queue/PROTOCOL.md).

@@ -216,12 +216,22 @@ class Broker:
                         or ('page' in args and (type(args['page']) is not int or args['page']<0))):
                     raise BrokerError('world_status accepts a collection and nonnegative page')
                 return self.handlers[op](**args)
+            if op == 'list_products':
+                if (set(args)-{'prefix','cursor','limit','revision'}
+                        or any(k in args and not isinstance(args[k],str) for k in ('prefix','cursor','revision'))
+                        or ('limit' in args and (type(args['limit']) is not int or not 1 <= args['limit'] <= 100))):
+                    raise BrokerError('list_products accepts prefix, cursor, revision and limit 1..100')
+                return self.handlers[op](**args)
             if op != 'read_product' and args:
                 raise BrokerError(op + ' takes no arguments')
             if op == 'read_product':
-                if set(args) != {'path'} or not isinstance(args['path'], str):
-                    raise BrokerError('read_product requires exactly a path')
-                return self.handlers['read_product'](args['path'])
+                if ('path' not in args or set(args)-{'path','offset','limit','revision'}
+                        or not isinstance(args['path'],str)
+                        or ('revision' in args and not isinstance(args['revision'],str))
+                        or ('offset' in args and (type(args['offset']) is not int or args['offset']<0))
+                        or ('limit' in args and (type(args['limit']) is not int or not 1 <= args['limit'] <= MAX_READ))):
+                    raise BrokerError('read_product requires path; optional revision, offset and limit 1..65536')
+                return self.handlers['read_product'](**args)
             return self.handlers[op]()
         if set(args) != {'agent', 'action', 'args'}:
             raise BrokerError('submit_action requires agent, action and args')
@@ -272,8 +282,8 @@ class Broker:
 
 
 def read_handlers(root, world, treasury, context):
-    """Read-only views over the exported public tree and private snapshots."""
-    work = pathlib.Path(root) / 'work'
+    """Read-only views over the public source catalog and private snapshots."""
+    from catalog_views import source_for, chunk_bytes
 
     def world_status(collection=None,page=0):
         if hasattr(world,'public_page'):
@@ -286,38 +296,30 @@ def read_handlers(root, world, treasury, context):
         value['capabilities'] = context().get('capabilities', {})
         return value
 
-    def list_products():
-        base = work / 'products'
-        if not base.exists():
-            return []
-        return [str(p.relative_to(work)) for p in sorted(base.rglob('*'))
-                if p.is_file() and not p.is_symlink() and 'receipts' not in p.parts][:500]
+    def list_products(prefix='products/', cursor=None, limit=100, revision=None):
+        from catalog_views import _path
+        _path(prefix,prefix=True)
+        if not prefix.startswith('products/'):
+            raise BrokerError('catalog prefix must start with products/')
+        try:
+            page = source_for(root,revision).list(prefix=prefix,cursor=cursor,limit=limit)
+        except RuntimeError as error:
+            raise BrokerError('public catalog unavailable (' + getattr(error,'code','source_error') + ')') from None
+        page['entries'] = [e for e in page['entries'] if 'receipts' not in e['path'].split('/')]
+        return page
 
-    def read_product(name):
+    def read_product(path, offset=0, limit=MAX_READ, revision=None):
         from tools import product_path
-        product_path(name)
-        path = work
-        for part in name.split('/'):
-            path = path / part
-            if path.is_symlink():
-                raise BrokerError('symlinked product refused')
-        if not path.is_file():
-            raise BrokerError('product not found')
-        raw = path.read_bytes()
-        truncated = len(raw) > MAX_READ
-        raw = raw[:MAX_READ]
-        check_secrets(raw)
-        text = None
-        # A cut at MAX_READ may split one UTF-8 character (at most 3 bytes).
-        for cut in range(4 if truncated else 1):
-            try:
-                text = raw[:len(raw) - cut].decode('utf-8')
-                break
-            except UnicodeDecodeError:
-                continue
-        if text is None:
-            raise BrokerError('binary product; publish a base64 text version to read it')
-        return {'path': name, 'content': text, 'truncated': truncated}
+        product_path(path)
+        if 'receipts' in path.split('/'):
+            raise BrokerError('receipt contents are private')
+        try:
+            chunk = source_for(root,revision).read(path,offset=offset,limit=limit)
+        except RuntimeError as error:
+            raise BrokerError('public source unavailable (' + getattr(error,'code','source_error') + ')') from None
+        check_secrets(chunk_bytes(chunk))
+        chunk['truncated'] = chunk['next_offset'] < chunk['total_bytes']
+        return chunk
 
     def recent_results():
         return context()['latest_task_results']

@@ -1,8 +1,8 @@
 # EXE-04: source catalog and selected job inputs
 
-Design proposal, 2026-11-05. This document is not an implementation or a deployed capability. VISION.md remains authoritative: agents choose activities and inputs; a resource bound applies to one operation, never to the number of products the world may retain. Existing Git history and product evidence must remain intact.
+Design and implementation record, 2026-11-05. The interface below is implemented in this development branch; it is not yet deployed. VISION.md remains authoritative: agents choose activities and inputs; a resource bound applies to one operation, never to the number of products the world may retain. Existing Git history and product evidence remain intact. The following diagnosis describes the previous code; the implementation status is recorded at the end.
 
-## Observed failure chain
+## Observed failure chain before this change
 
 The current `Supervisor.refresh_work()` and `_cycle()` call `git archive HEAD` through the generic 20 MiB buffered command runner. `extract_archive()` buffers the tar, enumerates all members, then refuses an individual file above 1 MiB or total content above 16 MiB. Therefore an unrelated large repository file can prevent every cycle from reaching a task.
 
@@ -65,4 +65,12 @@ Every stored product remains addressable through the host catalog, regardless of
 7. Run actor/site dry-run, offline switch, independent review, playbook/context, full progress comparison, queued result feedback and legacy daily worker regression tests using sparse inputs. Verify additions after the old listing cutoff count correctly.
 8. Keep extraction memory bounded in a practical benchmark with a substantially larger temporary corpus. Report actual process/copy counts, wall time and peak memory. Source inspection alone is insufficient performance evidence.
 
-No implementation, migration, production mutation, paid operation or integration activation is authorized by this design document itself.
+## Implementation status
+
+`public_source.PublicSource` resolves the confirmed `refs/globalland/published` revision (legacy HEAD fallback only when the ref is absent), streams tree/blob reads, validates object identities, and exports selected inputs atomically. `iter_entries` provides a single tree walk to whole-catalog consumers. List sessions use revision-bound cursors; byte reads include encoding, numeric next_offset and eof. The protocol documents their complete shapes.
+
+EXEC accepts absent/null inputs for legacy selection, an empty list for an empty workspace, or explicit paths/prefixes under a 128 MiB per-job budget. Selection is preflighted and the public receipt includes its revision, size, file count and manifest digest. A refused oversized job does not stop the next independent job. Existing private fulfillment keeps its frozen case inputs and refuses public selectors.
+
+The supervisor no longer archives the whole source. It reads queued tasks individually, stages the legacy ledger and a fresh private Treasury projection when needed, and stages optional Markdown playbooks with explicit omission notices. Controller, broker, progress, private service context, Actor and site publishers use the catalog. Publishers preserve existing review and content budgets. Pending publication cannot become the ordinary default read revision before the push succeeds.
+
+Whole-branch verification and independent review must complete before integration. This document does not itself authorize deployment, paid operations or integration activation.

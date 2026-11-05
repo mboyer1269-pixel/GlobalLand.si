@@ -1,9 +1,11 @@
 """Offline regression checks; fake Cloudflare and durable executor only."""
 import contextlib
+import importlib
 import importlib.util
 import io
 import json
 import pathlib
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -13,9 +15,27 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / 'scripts'))
 from tools import validate_envelope
 
-spec = importlib.util.spec_from_file_location('contact_publish', HERE.parent / 'ops/publish_welfare_brief.py')
-helper = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(helper)
+def load_repository_operation():
+    """Exercise the operator code against this checkout, without path leakage.
+
+    Production intentionally prepends its installed control path. Pin the real
+    repository dependencies before executing it and restore sys.path afterward,
+    so discovery cannot cache an older installed sites/review implementation.
+    """
+    scripts = HERE.parent / 'scripts'
+    with patch.object(sys, 'path', list(sys.path)):
+        sys.path.insert(0, str(scripts))
+        for name in ('supervisor', 'sites', 'review', 'tools'):
+            module = importlib.import_module(name)
+            if pathlib.Path(module.__file__).resolve() != scripts / (name + '.py'):
+                raise AssertionError('operator test dependency is outside repository: ' + name)
+        spec = importlib.util.spec_from_file_location('contact_publish', HERE.parent / 'ops/publish_welfare_brief.py')
+        operation = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(operation)
+    return operation
+
+
+helper = load_repository_operation()
 
 
 class FakeSupervisor:
@@ -131,6 +151,42 @@ class PublicationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             helper.main('publish')
         self.assertFalse(self.app.calls)
+
+
+class ImportIsolationTests(unittest.TestCase):
+    def test_full_suite_discovery_never_imports_installed_control(self):
+        # Use a fresh process: the test runner's cached modules can conceal the
+        # operator helper loading an older installed sites.py or review.py.
+        script = r'''
+import importlib.machinery
+import pathlib
+import sys
+import unittest
+
+installed = pathlib.Path('/opt/globalland/control')
+class RejectInstalledControl:
+    def find_spec(self, fullname, path=None, target=None):
+        spec = importlib.machinery.PathFinder.find_spec(fullname, path)
+        if spec and spec.origin and pathlib.Path(spec.origin).is_relative_to(installed):
+            raise AssertionError('test discovery attempted installed control import: ' + fullname)
+        return None
+sys.meta_path.insert(0, RejectInstalledControl())
+loader = unittest.TestLoader()
+suite = loader.discover(sys.argv[1])
+assert not loader.errors, '\n'.join(loader.errors)
+assert str(installed) not in sys.path, 'operator import leaked installed control into sys.path'
+for name, module in list(sys.modules.items()):
+    origin = getattr(module, '__file__', None)
+    assert not origin or not pathlib.Path(origin).is_relative_to(installed), name
+scripts = pathlib.Path(sys.argv[1]).parent / 'scripts'
+for name in ('supervisor', 'sites', 'review', 'tools'):
+    assert pathlib.Path(sys.modules[name].__file__).resolve() == scripts / (name + '.py'), name
+print('Isolated discovery: %d tests; installed control imports: 0' % suite.countTestCases())
+'''
+        result = subprocess.run([sys.executable, '-c', script, str(HERE)],
+                                capture_output=True, text=True, timeout=60)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('installed control imports: 0', result.stdout)
 
 
 if __name__ == '__main__':

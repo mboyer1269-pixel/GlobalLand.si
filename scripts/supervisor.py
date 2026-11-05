@@ -196,6 +196,7 @@ class Supervisor:
     identity={'GIT_AUTHOR_NAME':'globalland-supervisor','GIT_AUTHOR_EMAIL':'supervisor@globalland.local','GIT_COMMITTER_NAME':'globalland-supervisor','GIT_COMMITTER_EMAIL':'supervisor@globalland.local'}
     commit=self.git('commit-tree',tree,'-p',parent,input=('ops: durable '+record['id']+'\n').encode(),env=identity).decode().strip();self.git('update-ref','refs/heads/main',commit,parent)
   self.git('push','origin','HEAD:main')
+  self.git('update-ref','refs/globalland/published',self.git('rev-parse','HEAD').decode().strip())
  def worker(self,kind,rel=''):
   # Compose and worker code come only from control/, installed by the administrator.
   r=subprocess.run(['docker','compose','-f',str(self.control/'compose.yml'),'--project-directory',str(self.root),'run','--rm','-T','core','node','/control/worker.js',kind,rel],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=90)
@@ -268,11 +269,50 @@ class Supervisor:
    path.parent.mkdir(parents=True,exist_ok=True,mode=0o755)
    path.write_text(text);path.chmod(0o644)
  def refresh_work(self):
+  from public_source import PublicSource,PublicSourceError
+  from catalog_views import entries
   import shutil
   work=self.root/'work'
   if work.exists():shutil.rmtree(work)
-  work.mkdir(mode=0o755)
-  extract_archive(self.git('archive','--format=tar','HEAD'),work)
+  source=PublicSource(self.root)
+  self.work_revision=source.revision
+  # Product bodies and historical results stay in Git. Agents discover/read
+  # them through the catalog; EXEC and publishers export selected inputs.
+  selectors=[];used=0;omitted=0;examples=[];budget=4*1024*1024
+  for entry in entries(source,'agents/playbooks/'):
+   name=entry['path'].removeprefix('agents/playbooks/')
+   if '/' in name or not name.endswith('.md') or name=='THIRD_PARTY.md':continue
+   if used+entry['size']>budget or len(selectors)>=128:
+    omitted+=1
+    if len(examples)<3:examples.append(entry['path'][:160])
+    continue
+   selectors.append(entry['path']);used+=entry['size']
+  try:source.export(selectors,work,budget)
+  except PublicSourceError:
+   # Optional tactics must not prevent an independent queued job. Retained
+   # source remains authoritative; report the incomplete context explicitly.
+   omitted+=len(selectors);examples=(examples+[name[:160] for name in selectors[:3]])[:3];selectors=[]
+   work.mkdir(parents=True,exist_ok=True)
+  status=work/'agents/playbooks/.catalog-status.json';status.parent.mkdir(parents=True,exist_ok=True)
+  status.write_text(json.dumps(dict(revision=source.revision,selected=len(selectors),omitted=omitted,examples=examples)))
+ def stage_legacy_inputs(self,bank=None):
+  from catalog_views import source_for,bounded_bytes
+  from public_source import PublicSourceError
+  source=source_for(self.root,revision=getattr(self,'work_revision',None))
+  # The worker regenerates transaction history from the ledger; its old log
+  # is optional output history, never a prerequisite for another cycle.
+  for name in ('ledger.json',):
+   try:raw=bounded_bytes(source,name,1024*1024)
+   except PublicSourceError as error:
+    if error.code=='source_path_missing':continue
+    raise
+   target=self.root/'work'/name;target.parent.mkdir(parents=True,exist_ok=True)
+   target.write_bytes(raw);target.chmod(0o644)
+  # refresh_work clears projections after each publication. Legacy audits
+  # still need current Treasury authority, never an upstream bank/status file.
+  import payouts
+  if bank is None:_,bank,_=self.services()
+  self.write_work({'bank/status.json':json.dumps(dict(bank.snapshot(),receivables=payouts.receivables(self.root)),indent=2)+'\n'})
  def cleanup_abandoned_job(self,ident):
   import shutil
   if not re.fullmatch(r'TASK-[0-9]{4,12}',ident):return
@@ -348,12 +388,9 @@ class Supervisor:
    try:self.git('merge-base','--is-ancestor',head,remote)
    except RuntimeError:sync(self.git)  # local commits or divergence: preserve, push or stop
    else:self.git('update-ref','refs/heads/main',remote,head)
+  self.git('update-ref','refs/globalland/published',self.git('rev-parse','HEAD').decode().strip())
   work=self.root/'work'
-  # work is administrator-owned; containers see it read-only and cannot leave links.
-  import shutil
-  if work.exists():shutil.rmtree(work)
-  work.mkdir(mode=0o755)
-  extract_archive(self.git('archive','--format=tar','HEAD'),work)
+  self.refresh_work()
   world,bank,config=self.services()
   if (self.root/'integrations/finance').is_file() and bank.snapshot()['state']!='EXTINCT':
    from gateway import Gateway
@@ -416,13 +453,25 @@ class Supervisor:
   if mode=='daily':jobs=[('DAILY-'+datetime.datetime.now(datetime.timezone.utc).date().isoformat(),None)]
   else:
    jobs=[]
-   for f in sorted((work/'queue/inbox').glob('*.json')):
-    if not re.fullmatch(r'TASK-[0-9]{4,12}\.json',f.name):raise ValueError('invalid inbox filename; operator review required')
-    jobs.append((f.stem,'queue/inbox/'+f.name))
+   from catalog_views import source_for,entries
+   for entry in entries(source_for(self.root,revision=self.work_revision),'queue/inbox/'):
+    name=entry['path'].removeprefix('queue/inbox/')
+    if '/' in name or not name.endswith('.json'):continue
+    if not re.fullmatch(r'TASK-[0-9]{4,12}\.json',name):raise ValueError('invalid inbox filename; operator review required')
+    jobs.append((name[:-5],entry['path']))
   for ident,rel in jobs:
    if bank.snapshot()['state'] in ('HALTED','EXTINCT') or world.snapshot()['state'] in ('HALTED','EXTINCT'):break
-   if rel and not (work/rel).exists():continue
-   raw=(work/rel).read_bytes() if rel else ident.encode();check_secrets(raw);digest=hashlib.sha256(raw).hexdigest();p=self.state/(ident+'.json')
+   if rel:
+    from catalog_views import source_for,bounded_bytes
+    from public_source import PublicSourceError
+    try:raw=bounded_bytes(source_for(self.root,revision=self.work_revision),rel,1024*1024)
+    except PublicSourceError as error:
+     if error.code=='source_path_missing':continue
+     raise
+    target=work/rel;target.parent.mkdir(parents=True,exist_ok=True)
+    target.write_bytes(raw);target.chmod(0o644)
+   else:raw=ident.encode()
+   check_secrets(raw);digest=hashlib.sha256(raw).hexdigest();p=self.state/(ident+'.json')
    if p.exists():
     r=recover(p)
     if r['hash']!=digest:raise ValueError('task ID reused with different bytes')
@@ -452,6 +501,7 @@ class Supervisor:
       result={'status':'REJECTED','output':rejection_reason(error)}
     else:
      atomic_json(p,r)
+     self.stage_legacy_inputs(bank)
      if not rel:world.apply('cycle-'+ident[6:],{'op':'cycle','cycle_id':ident[6:]})
      result=self.worker('task' if rel else 'daily',rel or ident[6:])
     if rel:

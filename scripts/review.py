@@ -13,27 +13,85 @@ nothing: one brain can type any of them.
 """
 import json
 import pathlib
+import re
+
+MAX_RECEIPT = 1024 * 1024
+MAX_JOURNAL = 64 * 1024 * 1024
+RECEIPT = re.compile(r'products/receipts/TASK-[0-9]{4,12}\.json')
 
 
-def authors(root, folder):
-    """Providers (or EXTERNAL) whose tasks wrote files under `folder` (e.g. products/sites/x)."""
+class ReviewSourceError(ValueError):
+    safe_message = True
+
+
+def _record_authors(root, raw, prefix, found):
     from tools import task_origin
+    try:
+        record = json.loads(raw)
+        if not isinstance(record, dict) or not isinstance(record.get('task'), str) or not isinstance(record.get('outputs'), dict):
+            raise ValueError()
+        if any(isinstance(name, str) and name.startswith(prefix) for name in record['outputs']):
+            found.add(task_origin(root, {'id': record['task']})[1])
+    except (TypeError, ValueError):
+        raise ReviewSourceError('Publication author provenance unavailable or invalid') from None
+
+
+def authors(root, folder, revision=None):
+    """Providers (or EXTERNAL) whose tasks wrote files under `folder` (e.g. products/sites/x)."""
     root = pathlib.Path(root)
-    receipts = root / 'work' / 'products' / 'receipts'
     prefix = folder.rstrip('/') + '/'
     found = set()
-    if not receipts.is_dir():
-        return found
-    for path in receipts.glob('TASK-*.json'):
-        if path.is_symlink():
-            continue
-        try:
-            record = json.loads(path.read_text())
-        except (OSError, ValueError):
-            continue
-        outputs = record.get('outputs') if isinstance(record, dict) else None
-        if isinstance(outputs, dict) and any(isinstance(name, str) and name.startswith(prefix) for name in outputs):
-            found.add(task_origin(root, {'id': record.get('task', '')})[1])
+    catalog = (root / 'source.git').exists() or (root / 'source.git').is_symlink()
+    try:
+        if catalog:
+            from catalog_views import source_for, entries, bounded_bytes
+            source = source_for(root, revision=revision)
+            for entry in entries(source, 'products/receipts/'):
+                if RECEIPT.fullmatch(entry['path']):
+                    _record_authors(root, bounded_bytes(source, entry['path'], MAX_RECEIPT), prefix, found)
+        else:
+            receipts = root / 'work' / 'products' / 'receipts'
+            for path in receipts.glob('TASK-*.json'):
+                if path.is_symlink():
+                    continue
+                try:
+                    raw = path.read_text()
+                    record = json.loads(raw)
+                except (OSError, ValueError):
+                    continue  # explicit legacy fixtures retain their old semantics
+                if isinstance(record, dict) and isinstance(record.get('outputs'), dict):
+                    _record_authors(root, raw, prefix, found)
+        # A pending publication lives in its host journal, not in committed Git.
+        # Union its receipt with committed authors; never let an overlay erase them.
+        for path in (root / 'state').glob('TASK-*.json'):
+            if any(p.is_symlink() for p in (path, *path.parents)) or not path.is_file():
+                raise ReviewSourceError('Publication author provenance unavailable or invalid')
+            compact = root / 'state/results' / path.name
+            if compact.exists() or compact.is_symlink():
+                from result_envelope import read_result
+                if read_result(root, path).get('state') == 'PUBLISHED':
+                    continue  # committed receipts are authoritative, no artifact-body read
+            if path.stat().st_size > MAX_JOURNAL:
+                raise ValueError()
+            with path.open('rb') as stream:
+                raw = stream.read(MAX_JOURNAL + 1)
+            if len(raw) > MAX_JOURNAL:
+                raise ValueError()
+            record = json.loads(raw)
+            if not isinstance(record, dict):
+                raise ValueError()
+            if record.get('state') == 'PUBLISHED':
+                continue
+            files = record.get('files') or {}
+            if not isinstance(files, dict):
+                raise ValueError()
+            for name, raw in files.items():
+                if RECEIPT.fullmatch(name):
+                    if not isinstance(raw, str) or len(raw.encode()) > MAX_RECEIPT:
+                        raise ValueError()
+                    _record_authors(root, raw, prefix, found)
+    except (OSError, ValueError, RuntimeError):
+        raise ReviewSourceError('Publication author provenance unavailable or invalid') from None
     return found
 
 

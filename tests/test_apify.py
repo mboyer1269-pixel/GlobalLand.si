@@ -3,6 +3,7 @@ import itertools
 import json
 import os
 import pathlib
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -110,6 +111,67 @@ class ApifyTests(unittest.TestCase):
                     load_source(work / label, 'title-extractor')
         with self.assertRaisesRegex(ApifyError, 'Invalid actor name'):
             load_source(self.root / 'work', '../etc')
+
+    def catalog(self):
+        seed = self.root / 'seed'
+        (self.root / 'work').rename(seed)
+        for args in (['init', str(seed)], ['-C', str(seed), 'add', '.'],
+                     ['-C', str(seed), '-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+                      'commit', '-m', 'actor'], ['clone', '--bare', str(seed), str(self.root / 'source.git')]):
+            subprocess.run(['git'] + args, check=True, capture_output=True, timeout=30)
+        return seed
+
+    def test_catalog_publish_ignores_stale_work_and_preserves_source_digest(self):
+        expected = load_source(self.root / 'work', 'title-extractor')
+        self.catalog()
+        write_actor(self.root / 'work', readme='stale invalid source')
+        result = self.publisher().publish(self.task())
+        self.assertEqual(result['source_digest'], expected[2])
+        self.assertEqual(self.fake.actors['title-extractor']['versions'][0]['sourceFiles'], expected[0])
+        self.assertEqual((self.root / 'work/products/actors/title-extractor/README.md').read_text(), 'stale invalid source')
+
+    def test_catalog_publish_without_work_keeps_review_gate(self):
+        self.catalog()
+        with self.assertRaisesRegex(ApifyError, 'review APPROVE'):
+            self.publisher().publish(self.task(public=True))
+        self.assertEqual(self.fake.calls, [])
+        self.assertFalse((self.root / 'work').exists())
+
+    def test_actor_stats_needs_no_catalog_or_work(self):
+        self.publisher().publish(self.task())
+        shutil.rmtree(self.root / 'work')
+        (self.root / 'source.git').mkdir()  # unusable catalog must not affect stats
+        self.assertEqual(self.publisher().stats({'args': {'actor': 'title-extractor'}})['recent_runs'], 0)
+
+    def test_invalid_catalog_cannot_fall_back_to_valid_work(self):
+        (self.root / 'source.git').mkdir()
+        with self.assertRaisesRegex(ApifyError, 'catalog unavailable or invalid'):
+            self.publisher().publish(self.task())
+        self.assertEqual(self.fake.calls, [])
+
+    def test_catalog_operation_files_are_cleaned_on_validation_failure(self):
+        (self.root / 'work/products/actors/title-extractor/README.md').write_text('Missing disclosure')
+        self.catalog()
+        operations, original = [], apify.load_source
+        def observed(work, actor):
+            operations.append(pathlib.Path(work))
+            return original(work, actor)
+        with patch('apify.load_source', side_effect=observed), self.assertRaisesRegex(ApifyError, 'README.md'):
+            self.publisher().publish(self.task())
+        self.assertTrue(operations)
+        self.assertTrue(all(not path.exists() for path in operations))
+        self.assertEqual(self.fake.calls, [])
+
+    def test_work_fixture_parent_symlink_cannot_escape_actor_source(self):
+        actors = self.root / 'work/products/actors'
+        actors.rename(self.root / 'outside-actors')
+        try:
+            actors.symlink_to(self.root / 'outside-actors', target_is_directory=True)
+        except OSError:
+            self.skipTest('directory symlinks unavailable')
+        with self.assertRaises(ApifyError):
+            self.publisher().publish(self.task())
+        self.assertEqual(self.fake.calls, [])
 
     def test_pricing_is_capped_in_micro_usd(self):
         event = dict(name='result', title='Result', description='One result', price_microusd=2000)
