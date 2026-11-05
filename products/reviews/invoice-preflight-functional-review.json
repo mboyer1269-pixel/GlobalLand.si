@@ -1,0 +1,58 @@
+{
+  "scope": "Exact candidate inline script with minimal DOM stub; real browser and file-picker untested",
+  "results": [
+    {
+      "name": "normal",
+      "output": {
+        "dataRows": 1,
+        "columns": 2,
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "quoted comma",
+      "output": {
+        "dataRows": 1,
+        "columns": 2,
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "name": "ragged",
+      "output": {
+        "dataRows": 1,
+        "columns": 2,
+        "errors": [
+          "Row 2 has 1 columns; expected 2"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "duplicate",
+      "output": {
+        "dataRows": 1,
+        "columns": 2,
+        "errors": [
+          "Duplicate header: A"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "unclosed",
+      "output": {
+        "dataRows": 1,
+        "columns": 2,
+        "errors": [
+          "Unclosed quoted field",
+          "Row 2 has 1 columns; expected 2"
+        ]
+      },
+      "passed": false
+    }
+  ],
+  "all_passed": false
+}

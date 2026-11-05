@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\"scope\":\"Exact candidate inline script with minimal DOM stub; real browser and file-picker untested\",\"results\":[{\"name\":\"normal\",\"output\":{\"dataRows\":1,\"columns\":2,\"errors\":[]},\"passed\":true},{\"name\":\"quoted comma\",\"output\":{\"dataRows\":1,\"columns\":2,\"errors\":[]},\"passed\":true},{\"name\":\"ragged\",\"output\":{\"dataRows\":1,\"columns\":2,\"errors\":[\"Row 2 has 1 columns; expected 2\"]},\"passed\":true},{\"name\":\"duplicate\",\"output\":{\"dataRows\":1,\"columns\":2,\"errors\":[\"Duplicate header: A\"]},\"passed\":true},{\"name\":\"unclosed\",\"output\":{\"dataRows\":1,\"columns\":2,\"errors\":[\"Unclosed quoted field\",\"Row 2 has 1 columns; expected 2\"]},\"passed\":false}],\"all_passed\":false}\n\n",
+  "artifacts": [
+    "products/reviews/invoice-preflight-functional-review.json",
+    "products/receipts/TASK-179383680212.json"
+  ],
+  "request": {
+    "id": "TASK-179383680212",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-05T00:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs=require('fs'),vm=require('vm');const html=fs.readFileSync('products/sites/invoice-preflight/index.html','utf8');const script=html.match(/<script>([\\s\\S]*?)<\\/script>/)[1];const els={run:{},file:{},csv:{value:'A,B\\n1,2'},result:{}};const ctx={document:{getElementById:id=>els[id]}};vm.createContext(ctx);vm.runInContext(script,ctx);let results=[];for(const [name,input,expected] of [['normal','A,B\\n1,2',0],['quoted comma','A,B\\n\"x,y\",2',0],['ragged','A,B\\n1',1],['duplicate','A,A\\n1,2',1],['unclosed','A,B\\n\"x,2',1]]){els.csv.value=input;els.run.onclick();const out=JSON.parse(els.result.textContent);results.push({name,output:out,passed:out.errors.length===expected})}const report={scope:'Exact candidate inline script with minimal DOM stub; real browser and file-picker untested',results,all_passed:results.every(x=>x.passed)};fs.writeFileSync('products/reviews/invoice-preflight-functional-review.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));"
+      ],
+      "outputs": [
+        "products/reviews/invoice-preflight-functional-review.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793836802",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179383680212",
+  "input_sha256": "1ce2c9c7bf240408d9a612eaab1cfeb76373ef9024ebcd86274dc90a2d50d11c"
+}
