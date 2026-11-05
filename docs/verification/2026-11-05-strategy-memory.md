@@ -24,4 +24,12 @@ Les scénarios utilisent World et Treasury temporaires : conclusions répétées
 
 Ces tests prouvent le transport du contexte et la conservation des contrats. Les décisions de modèle sont simulées ; ils ne prouvent ni un raisonnement plus efficace, ni une initiative réelle, ni un revenu. La comparaison comportementale isolée et l'observation en production restent distinctes.
 
+La suite complète sur le code `f4e39fc` passe sous Python 3.12/WSL : **607 tests, dont 8 ignorés**, puis **13 tests Node** réussis. Ces nombres incluent les tests ciblés, ils ne s'y ajoutent pas. Une relecture indépendante de la branche n'a trouvé aucun défaut critique, important ou mineur ; elle a également exécuté les quatre nouveaux tests.
+
+## Comparaison de raisonnement préparée, résultat non établi
+
+Quatre prompts fictifs ont été préparés : avant/après sur un blocage limité, puis avant/après sur une attente justifiée. Ils reprennent les consignes et le contexte du contrôleur, sans mémoire privée de production. Les variantes diffèrent uniquement par la consigne, la date et la sémantique des leçons ; aucun outil d'action n'est autorisé pour l'évaluation. Il s'agit d'une reconstruction contrôlée, pas d'un rejeu exact d'un tour réel.
+
+Les tentatives locales n'ont produit aucune décision exploitable : Codex CLI 0.142.5 a rejeté le modèle par défaut, puis indiqué qu'une version plus récente était requise pour le modèle configuré ; Claude Code 2.1.261 a signalé une session OAuth expirée non renouvelable. Un premier essai Claude a aussi rencontré un verrou Windows pendant le nettoyage du dossier temporaire, avant conservation de sa réponse. Aucun de ces résultats ne mesure l'effet de la correction sur le raisonnement. L'évaluation doit être reprise avec une connexion utilisable ; aucune connexion ni version globale n'a été modifiée pour forcer sa réussite.
+
 Les révisions structurées des leçons sont une phase ultérieure, séparée de cette correction sans migration. Cette branche ne dépend pas du catalogue de sources de la PR #29. Une installation nécessite la sauvegarde habituelle ; le retour à l'ancien contrôle ne demande aucune migration de données.
