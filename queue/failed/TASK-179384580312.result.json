@@ -1,0 +1,29 @@
+{
+  "status": "FAILED",
+  "output": "Sandbox failed; no files published.",
+  "request": {
+    "id": "TASK-179384580312",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T02:30:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,os,re,datetime\nkey=hashlib.sha256(b'globalland-invoice-preflight-indexnow-v1').hexdigest()[:32]\nsite='/workspace/products/sites/invoice-preflight'\nprint(sorted(os.listdir(site)))\nkf=site+'/'+key+'.txt'\nopen(kf,'w',encoding='utf-8').write(key)\nt=open('/workspace/products/research/indexnow-doc-text.txt').read()\nqs=['Your-key should have a minimum of 8 and a maximum of 128 hexadecimal characters','You must host a UTF-8 encoded text key file {your-key}.txt listing the key in the file at the root directory of your website','202 Accepted URL received. IndexNow key validation pending.','403 Forbidden In case of key not valid','422 Unprocessable Entity In case of URLs which don’t belong to the host','The HTTP 200 response code only indicates that']\nfound={q:(q in t) for q in qs}\nhost='https://globalland-invoice-preflight.global-land.workers.dev'\nm={'mission':'CSV-SEARCH-DISCOVERY','observed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':'https://www.indexnow.org/documentation','source_artifact':'products/research/indexnow-official-documentation.html','source_sha256':'e25c5112f3ac869c590b8622f7852b6fbc0fd309e1a4a39b9016cb54eeb16036','quotations_verified_in_saved_text':found,'feasibility':'SUPPORTED: we control the workers.dev host contents via PUBLISH_SITE (llms.txt already served at root); Option 1 needs only a root {key}.txt; submission is an HTTP GET, which FETCH can perform.','key_note':'Key is 32 lowercase hex chars (satisfies both the hexadecimal wording and the a-zA-Z0-9- charset rule), derived deterministically from sha256 of a fixed label. It is public by design once hosted; it only proves host control for IndexNow and grants no account access.','change_manifest':{'added':['products/sites/invoice-preflight/'+key+'.txt'],'content':key,'unchanged':['index.html','llms.txt','offline-checker.js']},'post_approval_plan':['PUBLISH_SITE deploy unchanged reviewed digest','FETCH '+host+'/'+key+'.txt and verify body equals key','FETCH https://api.indexnow.org/indexnow?url='+host+'/&key='+key+' and record HTTP status'],'non_claims':'200/202 means received only; not indexing, traffic, demand or revenue.'}\nos.makedirs('/workspace/products/services/csv-text-diagnostic/search-discovery',exist_ok=True)\njson.dump(m,open('/workspace/products/services/csv-text-diagnostic/search-discovery/indexnow-manifest.json','w'),ensure_ascii=False,indent=1)\nprint(key,found)"
+      ],
+      "outputs": [
+        "products/sites/invoice-preflight/3c4c8d0ae0d2bba0b2d5cd2f0ad0b6c1.txt",
+        "products/services/csv-text-diagnostic/search-discovery/indexnow-manifest.json"
+      ],
+      "mission_id": "CSV-SEARCH-DISCOVERY"
+    },
+    "description": "Broker action during THINK-1793845803",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179384580312",
+  "input_sha256": "c5f86207b38d756818dd8279c304f3e99511974dbef8fca1295dbe99a449dbdd"
+}
