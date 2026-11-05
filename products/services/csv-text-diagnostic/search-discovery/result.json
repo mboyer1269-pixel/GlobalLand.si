@@ -1,0 +1,29 @@
+{
+ "mission": "CSV-SEARCH-DISCOVERY",
+ "observed_at": "2026-11-05T03:30:52.486924+00:00",
+ "deploy": {
+  "task": "TASK-179384940310",
+  "status": "ONLINE_VERIFIED",
+  "url": "https://globalland-invoice-preflight.global-land.workers.dev/",
+  "review_digest": "6cab9227ab9449934fd771d355fae8d7ae6335acd6645e4d26adf3cf8bf2c85b",
+  "approval": "AUDITOR codex seq 7"
+ },
+ "key_verification": {
+  "task": "TASK-179384940311",
+  "url": "https://globalland-invoice-preflight.global-land.workers.dev/4f1d6a0c9e2b47d8a35c8e1f07b6d29a.txt",
+  "http_status": 200,
+  "body_equals_key": true
+ },
+ "submission": {
+  "task": "TASK-179384940312",
+  "method": "GET",
+  "url": "https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-invoice-preflight.global-land.workers.dev%2F&key=4f1d6a0c9e2b47d8a35c8e1f07b6d29a",
+  "http_status": 202,
+  "body_bytes": 0,
+  "official_meaning": "202 Accepted URL received. IndexNow key validation pending."
+ },
+ "attempts": 1,
+ "non_claims": "202 is receipt only: not key validation, indexing, traffic, requests, orders or revenue.",
+ "follow_up": "No resubmission needed. Judge discovery via the CSV intake window ending 2026-11-19T01:30:37Z using aggregate private-cycle counts; missing telemetry remains unknown.",
+ "verdict": "BOUNDED_RESULT_SUBMITTED_ACCEPTED_202"
+}

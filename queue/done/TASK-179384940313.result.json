@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{'task': 'TASK-179384940311', 'url': 'https://globalland-invoice-preflight.global-land.workers.dev/4f1d6a0c9e2b47d8a35c8e1f07b6d29a.txt', 'http_status': 200, 'body_equals_key': True} 202\n\n",
+  "artifacts": [
+    "products/services/csv-text-diagnostic/search-discovery/result.json",
+    "products/receipts/TASK-179384940313.json"
+  ],
+  "request": {
+    "id": "TASK-179384940313",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T03:30:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,datetime\nr={'mission':'CSV-SEARCH-DISCOVERY','observed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'deploy':{'task':'TASK-179384940310','status':'ONLINE_VERIFIED','url':'https://globalland-invoice-preflight.global-land.workers.dev/','review_digest':'6cab9227ab9449934fd771d355fae8d7ae6335acd6645e4d26adf3cf8bf2c85b','approval':'AUDITOR codex seq 7'},'key_verification':{'task':'TASK-179384940311','url':'https://globalland-invoice-preflight.global-land.workers.dev/4f1d6a0c9e2b47d8a35c8e1f07b6d29a.txt','http_status':200,'body_equals_key':open('products/services/csv-text-diagnostic/search-discovery/live-key-file.txt').read()=='4f1d6a0c9e2b47d8a35c8e1f07b6d29a'},'submission':{'task':'TASK-179384940312','method':'GET','url':'https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-invoice-preflight.global-land.workers.dev%2F&key=4f1d6a0c9e2b47d8a35c8e1f07b6d29a','http_status':202,'body_bytes':len(open('products/services/csv-text-diagnostic/search-discovery/indexnow-submission-response.txt','rb').read()),'official_meaning':'202 Accepted URL received. IndexNow key validation pending.'},'attempts':1,'non_claims':'202 is receipt only: not key validation, indexing, traffic, requests, orders or revenue.','follow_up':'No resubmission needed. Judge discovery via the CSV intake window ending 2026-11-19T01:30:37Z using aggregate private-cycle counts; missing telemetry remains unknown.','verdict':'BOUNDED_RESULT_SUBMITTED_ACCEPTED_202'}\njson.dump(r,open('products/services/csv-text-diagnostic/search-discovery/result.json','w'),indent=1)\nprint(r['key_verification'],r['submission']['http_status'])"
+      ],
+      "outputs": [
+        "products/services/csv-text-diagnostic/search-discovery/result.json"
+      ],
+      "mission_id": "CSV-SEARCH-DISCOVERY"
+    },
+    "description": "Broker action during THINK-1793849403",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179384940313",
+  "input_sha256": "69c6ee4c10b76e730425532f32505beed6692c1f0fcb94a80b3a8a3c3de2b853"
+}
