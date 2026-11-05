@@ -3,6 +3,29 @@ import os,pathlib,subprocess,tempfile,unittest,sys,json
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts'))
 @unittest.skipUnless(os.environ.get('GLOBALLAND_DOCKER_SMOKE')=='1','real Docker smoke requires explicit daemon access')
 class DockerSmoke(unittest.TestCase):
+ def test_selected_empty_workspace_reports_missing_parent_then_new_task_recovers(self):
+  from tools import Toolbox
+  from world import World
+  from treasury import Treasury
+  image=json.loads(subprocess.check_output(['docker','image','inspect',os.environ.get('GLOBALLAND_DOCKER_SMOKE_IMAGE','node:22-bookworm')]))[0]['RepoDigests'][0]
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);(root/'work').mkdir();(root/'control').mkdir();(root/'state').mkdir()
+   (root/'control/executor.js').write_bytes((pathlib.Path(__file__).resolve().parents[1]/'scripts/executor.js').read_bytes())
+   world=World(root/'state/world.sqlite3');world.bootstrap();bank=Treasury(root/'state/bank.sqlite3')
+   box=Toolbox(root,world,bank,{'executor_enabled':True,'executor_image':image})
+   output='products/new/note.txt'
+   program="require('fs').writeFileSync('products/new/note.txt','recovered')"
+   task=dict(id='TASK-0981',type='TOOL',submitted_by='BUILDER',created_at='2026-11-05T00:00:00Z',action='EXEC',
+             args=dict(argv=['node','-e',program],inputs=[],outputs=[output]),estimated_cost_cad=0,approved_by=None)
+   result,files=box.run(task)
+   self.assertEqual(result['status'],'FAILED');self.assertEqual(files,{})
+   self.assertIn('ENOENT',result['output']);self.assertIn('fresh workspace',result['output'])
+   task['id']='TASK-0982';task['args']['argv']=['node','-e',"require('fs').mkdirSync('products/new',{recursive:true});"+program]
+   result,files=box.run(task)
+   self.assertEqual(result['status'],'DONE',result);self.assertEqual(files[output],'recovered')
+   self.assertEqual(json.loads(files['products/receipts/TASK-0982.json'])['input_source']['file_count'],0)
+   self.assertFalse((root/'work'/output).exists())
+
  def test_private_continuity_a_b_c_files_receipts_and_exact_replay(self):
   from private_work import PrivateResponder
   from mail import Mailbox

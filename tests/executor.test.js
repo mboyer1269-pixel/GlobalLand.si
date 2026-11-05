@@ -13,6 +13,30 @@ test('UTF-8 collection preserves BOM, Unicode and line endings byte for byte',t=
 });
 test('generated product artifact is collected without host path access',t=>{const d=fs.mkdtempSync(path.join(os.tmpdir(),'gl-exec-'));t.after(()=>fs.rmSync(d,{force:true,recursive:true}));fs.mkdirSync(path.join(d,'products'));fs.writeFileSync(path.join(d,'products/a.txt'),'product');assert.deepEqual(collect(d,['products/a.txt']),{'products/a.txt':'product'});fs.symlinkSync('/etc/passwd',path.join(d,'products/link'));assert.throws(()=>collect(d,['products/link']));fs.linkSync(path.join(d,'products/a.txt'),path.join(d,'products/hard'));assert.throws(()=>collect(d,['products/hard']));});
 test('publication stays inside visible products',()=>{for(const n of ['../oria','products/../x','/products/x','products/.env','scripts/control.py'])assert.throws(()=>safe(n));});
+
+test('missing output directory explains fresh workspaces and preserves failure',t=>{
+ const d=fs.mkdtempSync(path.join(os.tmpdir(),'gl-fresh-exec-'));
+ t.after(()=>fs.rmSync(d,{force:true,recursive:true}));
+ const input=path.join(d,'input'),root=path.join(d,'work'),request=path.join(d,'request.json');
+ fs.mkdirSync(input);fs.mkdirSync(root);
+ fs.writeFileSync(request,JSON.stringify({argv:[process.execPath,'-e',"require('fs').writeFileSync('products/new/note.txt','value')"],outputs:['products/new/note.txt']}));
+ const result=execute(input,root,request);
+ assert.equal(result.status,'FAILED');assert.deepEqual(result.files,{});
+ assert.match(result.output,/ENOENT/);assert.match(result.output,/Each EXEC starts.*fresh workspace/);
+ assert.match(result.output,/create.*directories/i);assert.match(result.output,/public EXEC.*inputs/i);
+ assert.equal(fs.existsSync(path.join(root,'products')),false);
+});
+
+test('missing-file reminder survives verbose diagnostics within output limit',t=>{
+ const d=fs.mkdtempSync(path.join(os.tmpdir(),'gl-missing-exec-'));
+ t.after(()=>fs.rmSync(d,{force:true,recursive:true}));
+ const input=path.join(d,'input'),root=path.join(d,'work'),request=path.join(d,'request.json');
+ fs.mkdirSync(input);fs.mkdirSync(root);
+ fs.writeFileSync(request,JSON.stringify({argv:[process.execPath,'-e',"process.stderr.write('FileNotFoundError: input absent\\n'+'x'.repeat(12000));process.stdout.write('y'.repeat(12000));process.exit(1)"],outputs:[]}));
+ const result=execute(input,root,request);
+ assert.equal(result.status,'FAILED');assert.match(result.output,/Each EXEC starts.*fresh workspace/);
+ assert.match(result.output,/FileNotFoundError/);assert.ok(result.output.length<=8000);
+});
 test('binary artifacts explain how to recover without publishing partial files',t=>{
  const d=fs.mkdtempSync(path.join(os.tmpdir(),'gl-binary-exec-'));
  t.after(()=>fs.rmSync(d,{force:true,recursive:true}));
@@ -35,6 +59,7 @@ test('failed generated program reports its error without publishing partial prod
  assert.match(result.output,/AssertionError: expected 4 issues, got 5/);
  assert.match(result.output,/Process failed: 1/);
  assert.match(result.output,/fixture started/);
+ assert.doesNotMatch(result.output,/Each EXEC starts.*fresh workspace/);
  assert.ok(result.output.length<=8000);
  assert.deepEqual(result.files,{});
  assert.equal(fs.readFileSync(path.join(root,'products/partial.txt'),'utf8'),'unfinished');

@@ -14,7 +14,9 @@ function execute(input='/input',root='/workspace',request='/request.json'){
  const cwd=args.cwd?path.resolve(root,args.cwd):root;if(cwd!==root&&!cwd.startsWith(root+path.sep))throw Error('invalid cwd');
  const run=spawnSync(args.argv[0],args.argv.slice(1),{cwd,timeout:60000,maxBuffer:1024*1024,encoding:'utf8',env:{PATH:process.env.PATH,HOME:'/tmp',TMPDIR:'/tmp'},stdio:['ignore','pipe','pipe']});
  if(run.error||run.status!==0){
-  const output=('Process failed: '+(run.error?.code||run.status)+'\nstderr:\n'+(run.stderr||'').slice(0,6000)+'\nstdout:\n'+(run.stdout||'').slice(0,1500)).slice(0,8000);
+  const missing=run.error?.code==='ENOENT'||/\b(ENOENT|FileNotFoundError)\b/.test(run.stderr||'');
+  const reminder=missing?'\nWorkspace reminder: Each EXEC starts in a fresh workspace. Programs create required directories before writing; outputs only declares files to publish. For public EXEC, include prior published files in inputs to reuse them. Private EXEC uses its supplied case files.':'';
+  const output=('Process failed: '+(run.error?.code||run.status)+reminder+'\nstderr:\n'+(run.stderr||'').slice(0,6000)+'\nstdout:\n'+(run.stdout||'').slice(0,1500)).slice(0,8000);
   return{status:run.error?.code==='ETIMEDOUT'?'TIMEOUT':'FAILED',output,files:{}};
  }
  let files;
