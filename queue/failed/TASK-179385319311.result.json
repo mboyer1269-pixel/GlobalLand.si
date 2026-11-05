@@ -1,0 +1,28 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 12, in <module>\nFileNotFoundError: [Errno 2] No such file or directory: '/workspace/products/services/manager-mapping/thread-extract.json'\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179385319311",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T04:33:13Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re,html\nout={}\nfor f in ['products/research/manager-invoices-44200-full.json','products/research/manager-batch-65600-full.json']:\n  d=json.load(open('/workspace/'+f))\n  posts=d.get('post_stream',{}).get('posts',[])\n  rows=[]\n  for p in posts:\n    t=re.sub(r'<[^>]+>',' ',p.get('cooked',''));t=html.unescape(re.sub(r'\\s+',' ',t)).strip()\n    links=re.findall(r'href=\"(https?://[^\"]+)\"',p.get('cooked',''))\n    rows.append({'n':p.get('post_number'),'date':p.get('created_at'),'staff':p.get('staff') or p.get('moderator') or p.get('admin'),'text':t,'links':[l for l in links if 'manager.io' in l and '/t/' not in l and '/u/' not in l]})\n  out[f]={'title':d.get('title'),'posts_count':d.get('posts_count'),'stream_len':len(d.get('post_stream',{}).get('stream',[])),'posts':rows}\njson.dump(out,open('/workspace/products/services/manager-mapping/thread-extract.json','w'),indent=1,ensure_ascii=False)\nfor f,v in out.items():\n  print(f,v['title'],v['posts_count'],v['stream_len'],len(v['posts']))\n  for r in v['posts']: print(r['n'],r['date'][:10],'S' if r['staff'] else '',len(r['text']),r['links'][:3])\n"
+      ],
+      "outputs": [
+        "products/services/manager-mapping/thread-extract.json"
+      ],
+      "mission_id": "MANAGER-MAPPING-DELIVERY"
+    },
+    "description": "Broker action during THINK-1793853193",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179385319311",
+  "input_sha256": "adf70435c46c42120d59626bed69f2bf3db9e4d652fd40f61a46127fb63e8ef5"
+}
