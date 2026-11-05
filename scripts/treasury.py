@@ -8,6 +8,14 @@ from pathlib import Path
 
 
 MAX_CENTS = 2**63 - 1
+JOURNAL_FIELDS = ('known_funding_cents', 'known_revenue_credits_cents',
+                  'known_spend_debits_cents', 'known_expense_refunds_cents',
+                  'known_customer_reversals_cents')
+
+
+def unavailable_journal():
+    return dict(state='UNAVAILABLE', history_coverage=None, coverage_reason='HISTORY_UNAVAILABLE',
+                **dict.fromkeys(JOURNAL_FIELDS))
 
 
 def _amount(value):
@@ -124,6 +132,87 @@ class Treasury:
     def snapshot(self):
         with self._tx() as db:
             return self._view(db)
+
+    def economic_snapshot(self):
+        """Known admitted flows, commitments and authority from one read-only view.
+
+        Consistent history is never proof of completeness: older databases have
+        no genesis marker. Optional history errors cannot change cash authority.
+        """
+        db = sqlite3.connect(self.db_path.resolve().as_uri() + '?mode=ro', uri=True,
+                             timeout=30, isolation_level=None)
+        db.row_factory = sqlite3.Row
+        try:
+            db.execute('BEGIN')
+            snapshot = self._view(db)  # Authoritative failures still propagate.
+            journal = unavailable_journal()
+            commitments = dict(state='UNAVAILABLE', held_cents=None, unknown_cents=None)
+            try:
+                operations = {}
+                held = unknown = 0
+                for row in db.execute('SELECT id,amount,status FROM operations'):
+                    _identity(row['id']); _amount(row['amount'])
+                    if row['status'] not in ('HELD', 'UNKNOWN', 'SETTLED', 'RELEASED'):
+                        raise ValueError('invalid operation status')
+                    operations[row['id']] = row
+                    if row['status'] == 'HELD': held += row['amount']
+                    if row['status'] == 'UNKNOWN': unknown += row['amount']
+                commitments = dict(state='AVAILABLE', held_cents=held, unknown_cents=unknown)
+                journal = self._economic_journal(db, snapshot, operations)
+            except (sqlite3.Error, ValueError, TypeError, KeyError, OverflowError, RecursionError):
+                # Never publish private bodies or free-form exception details.
+                pass
+            return dict(snapshot=snapshot, journal=journal, commitments=commitments)
+        finally:
+            db.close()
+
+    @staticmethod
+    def _economic_journal(db, snapshot, operations):
+        totals = dict.fromkeys(JOURNAL_FIELDS, 0)
+        kinds = {'FUNDING': ('FUNDING', JOURNAL_FIELDS[0]),
+                 'REVENUE': ('CREDIT', JOURNAL_FIELDS[1]),
+                 'SPEND': ('SPEND', JOURNAL_FIELDS[2]),
+                 'REFUND': ('CREDIT', JOURNAL_FIELDS[3]),
+                 'REVERSAL': ('DEBIT', JOURNAL_FIELDS[4]),
+                 'POSITIONS': ('POSITIONS', None), 'CANCELLED': ('CANCELLED', None)}
+        resolved = set()
+        for row in db.execute('SELECT provider,account,event_id,digest,body,action,operation_id FROM events'):
+            receipt = json.loads(row['body'])
+            if not isinstance(receipt, dict):
+                raise ValueError('invalid history receipt')
+            for key in ('provider', 'account', 'event_id'):
+                if _identity(receipt.get(key)) != row[key]:
+                    raise ValueError('history identity mismatch')
+            amount = _amount(receipt.get('amount_cents'))
+            kind = receipt.get('kind')
+            if (not isinstance(kind, str) or kind not in kinds or receipt.get('currency') != 'CAD'
+                    or receipt.get('settled') is not True or row['action'] != kinds[kind][0]):
+                raise ValueError('invalid history kind or action')
+            body = json.dumps(receipt, sort_keys=True, separators=(',', ':'), allow_nan=False)
+            if hashlib.sha256(body.encode()).hexdigest() != row['digest']:
+                raise ValueError('history digest mismatch')
+            if ((kind == 'FUNDING' and amount != 5000)
+                    or (kind in ('REVENUE', 'REFUND', 'REVERSAL') and amount == 0)
+                    or (kind == 'CANCELLED' and amount != 0)):
+                raise ValueError('invalid history amount')
+            op = row['operation_id']
+            if kind in ('SPEND', 'CANCELLED'):
+                _identity(op)
+                status = 'SETTLED' if kind == 'SPEND' else 'RELEASED'
+                if op not in operations or operations[op]['status'] != status or op in resolved:
+                    raise ValueError('history operation mismatch')
+                resolved.add(op)
+            elif op is not None:
+                raise ValueError('unexpected history operation')
+            field = kinds[kind][1]
+            if field is not None:
+                totals[field] += amount  # Lifetime totals may exceed SQLite int64.
+        funding, revenue, spend, refunds, reversals = (totals[field] for field in JOURNAL_FIELDS)
+        incomplete = ((snapshot['funding_verified'] and funding == 0)
+                      or any(op['status'] == 'SETTLED' and key not in resolved for key, op in operations.items())
+                      or funding + revenue + refunds - spend - reversals != snapshot['cash_cents'])
+        return dict(state='AVAILABLE', history_coverage='INCOMPLETE' if incomplete else 'UNKNOWN',
+                    coverage_reason='KNOWN_HISTORY_INCOMPLETE' if incomplete else 'NO_COMPLETENESS_MARKER', **totals)
 
     def _alive(self, db):
         if self._view(db)['state'] == 'EXTINCT':

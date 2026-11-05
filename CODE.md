@@ -29,6 +29,15 @@ Le capital initial autorisé est 50 CAD (5000 centimes), délégué en totalité
 
 ## Installation hôte
 
+Director and `STATUS` share a read-only `economic_context`: known admitted cash
+flows and unresolved commitments accompany the same authoritative bank snapshot.
+History can be UNKNOWN or INCOMPLETE, never certified complete. Gross revenue
+credits differ from the bank's net revenue. The independent Apify invoice ledger
+may lag settlement; its USD receivables never become CAD cash or spending power.
+Missing or invalid optional data is UNAVAILABLE, not zero. Fees, profit and
+experiment allocations remain unknown; existing founder-provided VPS and model
+subscriptions are outside the 50 CAD capital, with no invented amount or period.
+
 `control` pointe vers un code administrativement installé depuis un SHA revu. `source.git`, `state/private`, `integrations` et `credentials` ne sont jamais montés dans le conteneur de produits. Les données privées ne sont pas publiées. Les credentials d'abonnement sont montés seulement dans le conteneur de réflexion officiel correspondant.
 
 EXEC reçoit uniquement un export public en lecture seule, une requête et son wrapper installé. Son travail est dans un tmpfs de 256 Mio ; son rootfs est readonly, sans réseau direct, sans capacité Linux et sans socket Docker. Il peut choisir toute commande disponible dans son image. FETCH fournit le Web public, y compris téléchargement base64 ; les intégrations authentifiées et financières sont des modules privés. Les limites mémoire/CPU/processus/temps protègent le serveur partagé.

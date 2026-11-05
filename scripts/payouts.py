@@ -115,9 +115,10 @@ def record_payout(root, month, cad_cents, method, reference, evidence=None, forc
     return snapshot
 
 
-def receivables(root):
+def receivables(root, *, entries=None):
     """Public projection: approved invoices not yet received (never money)."""
-    pending = {m: e['invoice_usd_cents'] for m, e in load(root).items() if e.get('status') == 'RECEIVABLE'}
+    entries = load(root) if entries is None else entries
+    pending = {m: e['invoice_usd_cents'] for m, e in entries.items() if e.get('status') == 'RECEIVABLE'}
     return dict(apify_receivable_usd_cents=sum(pending.values()), apify_receivable_months=sorted(pending),
                 note='Approved Apify invoices awaiting payout; not cash, never spendable.')
 

@@ -499,7 +499,9 @@ class Controller:
             relevant=lessons.relevant(self.world.lessons(),world.get('missions',[]))
         import lessons as lessons_module
         from tools import capability_view,commercial_paths
-        bank=self.treasury.snapshot();capabilities=capability_view(self.root,self.tool_config)
+        import economic
+        economy=economic.project(self.root,self.treasury)
+        bank=economy['snapshot'];capabilities=capability_view(self.root,self.tool_config)
         scan=commercial.scan(self.root,self.tool_config,priority=priority)
         excluded.extend(scan.get('excluded',[]))
         for key,observation in scan['rows']:
@@ -514,7 +516,7 @@ class Controller:
             coverage.append(dict(kind='LEASE_DUE',key=key,version=version,representation='WORLD_SNAPSHOT'))
         snapshot=commercial.progress_snapshot(self.root,self.tool_config,scan=scan)
         assessment=progress.assess(self.root,world,bank,dict(self.config,agentmail=self.tool_config.get('agentmail',{})),commercial_snapshot=snapshot)
-        context=dict(world=world,treasury=bank,source_products=products,latest_task_results=results,lessons=relevant,
+        context=dict(world=world,treasury=bank,economic_context=economy['context'],source_products=products,latest_task_results=results,lessons=relevant,
                     commercial_feedback=commercial.project(self.root,self.tool_config,scan=scan),
                     capabilities=capabilities,commercial_paths=commercial_paths(capabilities,bank),
                     playbooks=lessons_module.playbooks(work))
