@@ -1,0 +1,21 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-invoice-preflight.global-land.workers.dev%2F&key=4f1d6a0c9e2b47d8a35c8e1f07b6d29a\", \"http_status\": 202, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"artifact\": \"products/services/csv-text-diagnostic/search-discovery/indexnow-submission-response.txt\"}",
+  "request": {
+    "id": "TASK-179384940312",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T03:30:03Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-invoice-preflight.global-land.workers.dev%2F&key=4f1d6a0c9e2b47d8a35c8e1f07b6d29a",
+      "output": "products/services/csv-text-diagnostic/search-discovery/indexnow-submission-response.txt",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1793849403",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179384940312",
+  "input_sha256": "d9fff2a58c3b7b19418ee45438495572759b1090fa29ceb7a5e5c79e82fe009a"
+}
