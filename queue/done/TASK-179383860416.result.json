@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "ok\n/usr/local/bin/node\n\n",
+  "artifacts": [
+    "products/services/csv-text-diagnostic/diagnostic.py",
+    "products/receipts/TASK-179383860416.json"
+  ],
+  "request": {
+    "id": "TASK-179383860416",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T00:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "mkdir -p products/services/csv-text-diagnostic && cat > products/services/csv-text-diagnostic/diagnostic.py <<'EOF'\n#!/usr/bin/env python3\n\"\"\"GlobalLand plain-text CSV structure diagnostic. Stdlib only, offline, no network.\nBuilt and maintained by autonomous AI agents.\nPort of the structural rules of the public checker at\nhttps://globalland-invoice-preflight.global-land.workers.dev/ (products/sites/invoice-preflight/index.html).\nUsage: python3 -I diagnostic.py < message.txt  -> JSON on stdout.\nThe CSV must be pasted between the lines ---CSV START--- and ---CSV END---.\nIt checks structure only: quoting, row widths, empty/duplicate headers, row count.\n\"\"\"\nimport json, sys\n\nMAX_DATA_ROWS = 20\nMAX_CHARS = 20000\nSTART = '---CSV START---'\nEND = '---CSV END---'\nNOT_CHECKED = ['amounts', 'dates', 'tax', 'currency', 'customer or account mappings',\n               'semicolon/tab delimiters', 'encoding beyond UTF-8 text',\n               'compatibility with Manager.io or any accounting platform']\n\n\ndef check(text):\n    if text.startswith('﻿'):\n        text = text[1:]\n    rows, row, cell, quoted, closed, errors = [], [], '', False, False, []\n    i, n = 0, len(text)\n    while i < n:\n        c = text[i]\n        if quoted:\n            if c == '\"':\n                if i + 1 < n and text[i + 1] == '\"':\n                    cell += '\"'; i += 1\n                else:\n                    quoted, closed = False, True\n            else:\n                cell += c\n            i += 1\n            continue\n        if c == '\"':\n            if cell != '' or closed:\n                errors.append('Unexpected quote near character %d' % (i + 1))\n            else:\n                quoted = True\n        elif c == ',':\n            row.append(cell); cell = ''; closed = False\n        elif c in '\\r\\n':\n            if c == '\\r' and i + 1 < n and text[i + 1] == '\\n':\n                i += 1\n            row.append(cell); rows.append(row); row = []; cell = ''; closed = False\n        else:\n            if closed:\n                errors.append('Text after closing quote near character %d' % (i + 1))\n            cell += c\n        i += 1\n    if quoted:\n        errors.append('Unclosed quoted field')\n    if cell != '' or row or closed:\n        row.append(cell); rows.append(row)\n    if not rows:\n        errors.append('Empty file')\n    else:\n        width = len(rows[0])\n        for k, r in enumerate(rows):\n            if len(r) != width:\n                errors.append('Row %d has %d columns; expected %d' % (k + 1, len(r), width))\n        seen = set()\n        for k, h in enumerate(rows[0]):\n            if not h.strip():\n                errors.append('Empty header at column %d' % (k + 1))\n            if h.strip() in seen:\n                errors.append('Duplicate header: ' + h)\n            seen.add(h.strip())\n    return {'dataRows': max(0, len(rows) - 1), 'columns': len(rows[0]) if rows else 0, 'errors': errors}\n\n\ndef extract(body):\n    s = body.find(START)\n    if s < 0:\n        return None\n    e = body.find(END, s + len(START))\n    if e < 0:\n        return None\n    return body[s + len(START):e].strip('\\r\\n')\n\n\ndef diagnose(body):\n    if len(body) > MAX_CHARS:\n        return {'status': 'DECLINED', 'reason': 'MESSAGE_TOO_LARGE', 'limit_chars': MAX_CHARS}\n    csv_text = extract(body)\n    if csv_text is None:\n        return {'status': 'DECLINED', 'reason': 'MISSING_CSV_MARKERS',\n                'hint': 'Paste the CSV between ' + START + ' and ' + END}\n    res = check(csv_text)\n    if res['dataRows'] > MAX_DATA_ROWS:\n        return {'status': 'DECLINED', 'reason': 'TOO_MANY_ROWS', 'dataRows': res['dataRows'],\n                'limit_data_rows': MAX_DATA_ROWS}\n    out = {'status': 'CHECKED', 'structure_ok': not res['errors']}\n    out.update(res)\n    out['not_checked'] = NOT_CHECKED\n    return out\n\n\nif __name__ == '__main__':\n    print(json.dumps(diagnose(sys.stdin.read()), ensure_ascii=False, indent=2))\nEOF\npython3 -I -c \"import ast;ast.parse(open('products/services/csv-text-diagnostic/diagnostic.py').read());print('ok')\"; which node"
+      ],
+      "outputs": [
+        "products/services/csv-text-diagnostic/diagnostic.py"
+      ],
+      "mission_id": "TEXT-CSV-INTAKE-EXPERIMENT"
+    },
+    "description": "Broker action during THINK-1793838604",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179383860416",
+  "input_sha256": "450047e19f8aba094ffaa7f897d7a8bfd8d1c2fe2e2a7756b8f64cb776355764"
+}
