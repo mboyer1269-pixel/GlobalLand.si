@@ -1,0 +1,32 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nWorkspace reminder: Each EXEC starts in a fresh workspace. Programs create required directories before writing; outputs only declares files to publish. For public EXEC, include prior published files in inputs to reuse them. Private EXEC uses its supplied case files.\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 3, in <module>\n  File \"/usr/lib/python3.11/pathlib.py\", line 1079, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/pathlib.py\", line 1045, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'products/sites/shopify-catalogue-example/52eb39063e45d7022c2489c9918cebbe.txt'\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179391193317",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T20:52:13Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,secrets,pathlib,hashlib\nk=secrets.token_hex(16)\np=pathlib.Path('products/sites/shopify-catalogue-example/'+k+'.txt');p.write_text(k,encoding='utf-8')\nm=json.load(open('products/services/shopify-large-catalogue/release/release-manifest.json'))\nm['verify_result']='not run in release check (verify.verify expects test-harness positional rows; KeyError(7)); byte-identical output vs expected fixture is the release check; repaired suite 8/8 per core-test-results.json'\nm['cited_doc_check']={'url':'https://help.shopify.com/en/manual/products/import-export/using-csv','fetch_task':'TASK-179391193314','http_status':200,'title':'Shopify Help Center | Using CSV files to import and export products','contains':['Variant image URL','Option1 name','Published on online store'],'check_task':'TASK-179391193315'}\nm['indexnow_key_file']={'path':p.name,'body_sha256':hashlib.sha256(k.encode()).hexdigest(),'purpose':'IndexNow Option 1 ownership file, public by design, grants no account access'}\nm['superseded_dry_run']={'task':'TASK-179391193316','digest':'500ec81975cf29f329aa64b7b56e2c0d47071be2ec4ef428c9429c1f9b7756cb','reason':'key file added after'}\njson.dump(m,open('products/services/shopify-large-catalogue/release/release-manifest.json','w'),indent=1)\nx={'experiment':'shopify-catalogue-example free self-service exposure','prerequisite':'independent APPROVE of the exact new dry_run digest, then host-gated deploy and FETCH hash verification','action':'one IndexNow GET submission of the root URL using the included key file (same method as L40/L44)','observe_until':'14 days after verified deploy','metrics':{'submission_receipt':'HTTP status of the single IndexNow GET (202 = received only)','indexing':'unknown unless a public search observation shows the URL; not inferred from 202','requests':'commercial_feedback counts (REQUEST/EXPLICIT_INTEREST) - aggregate only, attribution uncertain','delivery':'not applicable: free self-service download; no download telemetry exists, so downloads stay UNKNOWN','revenue':'none possible: no collection route (blocker SERVICE-PAYMENT-COLLECTION)'},'stop_rule':'no further Shopify building unless a classified request appears; missing telemetry is unknown, not zero','no':['outreach','accounts','spending','paid orders']}\njson.dump(x,open('products/services/shopify-large-catalogue/release/exposure-test-proposal.json','w'),indent=1)\nprint(k,len(json.dumps(m)))"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/release/release-manifest.json"
+      ],
+      "outputs": [
+        "products/sites/shopify-catalogue-example/*.txt",
+        "products/services/shopify-large-catalogue/release/release-manifest.json",
+        "products/services/shopify-large-catalogue/release/exposure-test-proposal.json"
+      ],
+      "mission_id": "SHOPIFY-WORKED-SOLUTION-RELEASE"
+    },
+    "description": "Broker action during THINK-1793911933",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391193317",
+  "input_sha256": "89ef9e9c7ccc1da42964db4d19ffefb56d9ed0ddfdf6cd8345b520b79517c0c4"
+}
