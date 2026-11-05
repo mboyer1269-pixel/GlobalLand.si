@@ -84,23 +84,26 @@
     "stalled_turns": 0,
     "threshold": 3,
     "stalled_since": null,
-    "turns_without_outcome": 1,
+    "turns_without_outcome": 2,
     "outcome_threshold": 12,
     "dry_since": "2026-11-05T00:32:58Z",
     "last_outcome_turn": "THINK-1793836802",
-    "last_productive_turn": "THINK-1793838604",
-    "last_turn": "THINK-1793838604",
+    "last_productive_turn": "THINK-1793840405",
+    "last_turn": "THINK-1793840405",
     "last_change": {
       "productive": true,
       "outcome": false,
       "mission_outcomes": [],
       "new_products": [
-        "products/reviews/invoice-preflight-functional-review.json",
-        "products/reviews/invoice-preflight-script-review.json"
+        "products/distribution/invoice-preflight-live.html",
+        "products/services/csv-text-diagnostic/acceptance-results.json",
+        "products/services/csv-text-diagnostic/diagnostic.py",
+        "products/services/csv-text-diagnostic/protocol.md",
+        "products/services/csv-text-diagnostic/run_tests.py"
       ],
-      "new_product_count": 2,
+      "new_product_count": 5,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 2,
       "revenue_gain_cents": 0
     }
   }
