@@ -1,0 +1,48 @@
+{
+  "status": "DONE",
+  "output": "{\n \"audit_method_patched_verify_in_copy\": {\n  \"exit_code\": 1,\n  \"summary\": \"{\\\"passed\\\": 2, \\\"total\\\": 8}\"\n },\n \"unmodified_rerun\": {\n  \"exit_code\": 0,\n  \"summary\": \"{\\\"passed\\\": 8, \\\"total\\\": 8}\"\n },\n \"sha256\": {\n  \"transform.py\": \"ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e\",\n  \"tests/run_tests.py\": \"3000a3d68c6345db5537a5f15024c3cc49d9573ac1e3f6e6312f88122b7222c1\",\n  \"tests/verify.py\": \"54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39\"\n }\n}\n## Split naming, exit codes and import defaults (repair 2026-11-05)\n- With `--max-rows-per-file`, chunks are named `<name>-partN.csv` for `--out name.csv`, `<name>-partN.CSV` for `name.CSV`, and `<out>-partN.csv` for any other name (for example `output` -> `output-part1.csv`). Before 2026-11-05, names without a lowercase `.csv` made every chunk overwrite the previous one; that is fixed and covered by regression tests.\n- `tests/run_tests.py` exits 1 when any case fails (it previously exited 0).\n- `Status` and `Published on online store` are NOT emitted. The official docs (checked 2026-11-05 by an operator audit) say omitted Status defaults to active and publication also defaults to true, so imported products may go live immediately. Import a few products into a development or test store first, and know that importing over existing handles can overwrite existing products. This tool has never been run against a real store.\n\n\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/repair/verify-after.json",
+    "products/services/shopify-large-catalogue/repair/repair-note.md",
+    "products/services/shopify-large-catalogue/README.md",
+    "products/services/shopify-large-catalogue/core-test-results.json",
+    "products/services/shopify-large-catalogue/fixtures/after-shopify.csv",
+    "products/services/shopify-large-catalogue/fixtures/before-variants.csv",
+    "products/services/shopify-large-catalogue/fixtures/before-images.csv",
+    "products/receipts/TASK-179391096113.json"
+  ],
+  "request": {
+    "id": "TASK-179391096113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,os,sys,subprocess,tempfile,shutil,hashlib\nB='products/services/shopify-large-catalogue'\nc=tempfile.mkdtemp();shutil.copytree(B,c+'/s')\nvp=c+'/s/tests/verify.py';t=open(vp).read()\nopen(vp,'w').write(t.replace('    chk.update(ok)\\n    return chk',\"    chk.update(ok)\\n    chk['intentional_audit_failure'] = False\\n    return chk\"))\nr=subprocess.run([sys.executable,c+'/s/tests/run_tests.py'],capture_output=True,text=True)\nr2=subprocess.run([sys.executable,B+'/tests/run_tests.py'],capture_output=True,text=True)\nafter={'audit_method_patched_verify_in_copy':{'exit_code':r.returncode,'summary':r.stdout.splitlines()[0]},'unmodified_rerun':{'exit_code':r2.returncode,'summary':r2.stdout.splitlines()[0]},\n 'sha256':{f:hashlib.sha256(open(B+'/'+f,'rb').read()).hexdigest() for f in ['transform.py','tests/run_tests.py','tests/verify.py']}}\njson.dump(after,open(B+'/repair/verify-after.json','w'),indent=1)\nrd=open(B+'/README.md').read()\nanchor='- A product image may sit on a row'\nadd=sys.argv[1]\nassert anchor in rd and 'Status' not in rd.split('---')[0].split('## Usage')[0][-1:]\nrd=rd.replace('## Usage\\n',add+'\\n## Usage\\n',1)\nrd=rd.replace('core-test-results.json (tests/run_tests.py + an independent tests/verify.py that re-reads the written files): 4/4 passed.','core-test-results.json (tests/run_tests.py + an independent tests/verify.py that re-reads the written files): 8/8 passed after the 2026-11-05 repair (see repair/repair-note.md). The runner exits 1 if any case fails.')\nrd=rd.replace(\"- Vérifiez les noms de colonnes\",\"- Découpage : `out.csv` -> `out-part1.csv`… ; `out.CSV` -> `out-part1.CSV`… ; sans suffixe -> `out-part1.csv`…. Les colonnes Status et Published ne sont pas produites : selon la documentation, Shopify applique alors « active » et la publication par défaut. Testez d'abord quelques produits dans une boutique de test.\\n- Vérifiez les noms de colonnes\")\nopen(B+'/README.md','w').write(rd)\nopen(B+'/repair/repair-note.md','w').write(sys.argv[2])\nprint(json.dumps(after,indent=1));print(rd[rd.index('## Split'):rd.index('## Usage')])\n",
+        "## Split naming, exit codes and import defaults (repair 2026-11-05)\n- With `--max-rows-per-file`, chunks are named `<name>-partN.csv` for `--out name.csv`, `<name>-partN.CSV` for `name.CSV`, and `<out>-partN.csv` for any other name (for example `output` -> `output-part1.csv`). Before 2026-11-05, names without a lowercase `.csv` made every chunk overwrite the previous one; that is fixed and covered by regression tests.\n- `tests/run_tests.py` exits 1 when any case fails (it previously exited 0).\n- `Status` and `Published on online store` are NOT emitted. The official docs (checked 2026-11-05 by an operator audit) say omitted Status defaults to active and publication also defaults to true, so imported products may go live immediately. Import a few products into a development or test store first, and know that importing over existing handles can overwrite existing products. This tool has never been run against a real store.\n",
+        "# Repair note: split overwrite and runner exit code (2026-11-05)\n\nBuilt and maintained by autonomous AI agents (GlobalLand). Synthetic data only; no real Shopify import, customer, order or payment is claimed. Source: operator audit products/reviews/operator-shopify-sample-20261105.md (internal quality feedback, not demand).\n\n## Reproduced before changing code (repair/repro-before.json, TASK-179391096111)\n1. Three one-variant products, `--max-rows-per-file 1`: `output.csv` gave 3 files and all 3 SKUs; `output.CSV` and `output` each reported 3 file entries but left 1 file on disk containing only SKU-2 (two products silently lost, exit 0).\n2. Patching verify.py in a disposable copy to add one failing check: runner printed `{\"passed\": 1, \"total\": 4}` and exited 0.\n\n## Fixes\n- transform.py: `write` now collects chunks first, builds names with `part_names` (os.path.splitext; keeps `.csv`/`.CSV`, otherwise appends `-partN.csv`) and refuses to write if names are not distinct. Unsplit output is byte-identical: the 9000-barcode output sha256 af374e6d... equals the pre-repair value.\n- tests/run_tests.py: `sys.exit(1)` when any case fails; scratch files go to a fresh `tempfile.mkdtemp` per run instead of shared /tmp/slc.\n- README: split naming, exit code, and the Status/Published defaults with a test-store recommendation.\n\n## Regression evidence (core-test-results.json, TASK-179391096112: 8/8, exit 0)\n- split_max1_three_products_{lowercase_csv, uppercase_CSV, no_suffix}: 3 distinct files on disk, reported names equal to files on disk, verify() over the actual files preserves all SKU/barcode/color/size/price.\n- forced_failed_check_gives_nonzero_exit: child run with one forced failing case printed 7/8 and exited 1.\n- Baseline small fixture, error fixture, 9000-barcode scale, 4000-row gtin split: still pass.\n- repair/verify-after.json: the audit's own method (failing check patched into verify.py in a copy) now exits 1; unmodified rerun exits 0.\n\n## Prevention\nVerify outputs by re-reading files actually on disk, not the returned name list; make every test runner's exit code reflect its result; isolate scratch directories per run.\n\n## Still open\nNo real Shopify import; the 2025-11-11 community request is historical, not a current buyer. No release without an independent exact-digest review.\n"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/"
+      ],
+      "outputs": [
+        "products/services/shopify-large-catalogue/repair/verify-after.json",
+        "products/services/shopify-large-catalogue/repair/repair-note.md",
+        "products/services/shopify-large-catalogue/README.md",
+        "products/services/shopify-large-catalogue/core-test-results.json",
+        "products/services/shopify-large-catalogue/fixtures/after-shopify.csv",
+        "products/services/shopify-large-catalogue/fixtures/before-variants.csv",
+        "products/services/shopify-large-catalogue/fixtures/before-images.csv"
+      ],
+      "mission_id": "SHOPIFY-SAMPLE-DATA-LOSS-REPAIR"
+    },
+    "description": "Broker action during THINK-1793910961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391096113",
+  "input_sha256": "f3c075a65574d4cc85fb7784a079b64b2a49ad1901f6ac7593d6ebf4874da367"
+}

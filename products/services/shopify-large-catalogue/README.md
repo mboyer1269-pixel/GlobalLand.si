@@ -20,6 +20,11 @@ A public Shopify Community question (topic 575067, 2025-11-11, https://community
 - The docs mention no file size limit that we checked. Use `--max-rows-per-file` to split, which keeps each product whole.
 - A product image may sit on a row of another color. The docs say that column "isn't specific to variants"; the color link comes only from `Variant image URL`.
 
+## Split naming, exit codes and import defaults (repair 2026-11-05)
+- With `--max-rows-per-file`, chunks are named `<name>-partN.csv` for `--out name.csv`, `<name>-partN.CSV` for `name.CSV`, and `<out>-partN.csv` for any other name (for example `output` -> `output-part1.csv`). Before 2026-11-05, names without a lowercase `.csv` made every chunk overwrite the previous one; that is fixed and covered by regression tests.
+- `tests/run_tests.py` exits 1 when any case fails (it previously exited 0).
+- `Status` and `Published on online store` are NOT emitted. The official docs (checked 2026-11-05 by an operator audit) say omitted Status defaults to active and publication also defaults to true, so imported products may go live immediately. Import a few products into a development or test store first, and know that importing over existing handles can overwrite existing products. This tool has never been run against a real store.
+
 ## Usage
 ```
 python3 transform.py --variants variants.csv --images images.csv --out shopify.csv --report report.json [--max-rows-per-file 4000] [--barcode-type gtin]
@@ -31,7 +36,7 @@ python3 transform.py --variants variants.csv --images images.csv --out shopify.c
 See fixtures/before-*.csv and fixtures/after-shopify.csv.
 
 ## Evidence
-core-test-results.json (tests/run_tests.py + an independent tests/verify.py that re-reads the written files): 4/4 passed. The 9000-barcode synthetic case (300 styles x 5 colors x 6 sizes, 7500 images) produced 9000 rows in 0.3 s, 1.67 MB. Checks: unique SKUs; SKU/barcode/color/size/price preserved; unique color+size per product; image positions 1..n; every image present once; variant image = first image of its color; Title only on the first row; contiguous handles; no product split across files; LF/UTF-8. Synthetic barcodes use the 200 restricted-circulation prefix.
+core-test-results.json (tests/run_tests.py + an independent tests/verify.py that re-reads the written files): 8/8 passed after the 2026-11-05 repair (see repair/repair-note.md). The runner exits 1 if any case fails. The 9000-barcode synthetic case (300 styles x 5 colors x 6 sizes, 7500 images) produced 9000 rows in 0.3 s, 1.67 MB. Checks: unique SKUs; SKU/barcode/color/size/price preserved; unique color+size per product; image positions 1..n; every image present once; variant image = first image of its color; Title only on the first row; contiguous handles; no product split across files; LF/UTF-8. Synthetic barcodes use the 200 restricted-circulation prefix.
 
 ---
 
@@ -43,4 +48,5 @@ Conçu et maintenu par des agents d'IA autonomes (GlobalLand). Sans lien avec Sh
 - Toutes les photos deviennent des images produit, ordonnées par couleur. Chaque variante reçoit la première photo de sa couleur (`Variant image URL`).
 - Limite : le CSV n'associe qu'UNE image par variante. Afficher 5 photos par couleur dépend du thème ou d'une application.
 - Le programme refuse d'écrire si un SKU ou un code-barres est en double, si un prix est invalide ou si un couple couleur+taille se répète. `--max-rows-per-file` découpe le fichier sans couper un produit.
+- Découpage : `out.csv` -> `out-part1.csv`… ; `out.CSV` -> `out-part1.CSV`… ; sans suffixe -> `out-part1.csv`…. Les colonnes Status et Published ne sont pas produites : selon la documentation, Shopify applique alors « active » et la publication par défaut. Testez d'abord quelques produits dans une boutique de test.
 - Vérifiez les noms de colonnes avec l'exemple CSV de votre propre interface avant d'importer. Aucun prix, aucune commande ni aucun paiement n'est proposé ici.
