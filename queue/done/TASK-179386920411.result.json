@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"checks\": {\n    \"source_hash\": true,\n    \"index_only_insertion\": true,\n    \"exact_route\": true,\n    \"deadlines\": true,\n    \"weights\": true,\n    \"no_pack_urls\": true,\n    \"disclosure\": true,\n    \"scope_caveats\": true,\n    \"inventory\": true\n  },\n  \"passed\": true,\n  \"kind\": \"independent source and artifact review; no deployment or demand evidence\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/welfare-readiness-review.json",
+    "products/receipts/TASK-179386920411.json"
+  ],
+  "request": {
+    "id": "TASK-179386920411",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-05T09:00:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,pathlib,html\np=pathlib.Path('products'); s=p/'sites/welfare-tender-brief'; raw=(p/'services/welfare-tender/notice-104449-2026-ocds.json').read_bytes(); t=json.loads(raw)['releases'][0]['tender']; page=(s/'readiness.html').read_text(); index=(s/'index.html').read_text(); m=json.loads((p/'services/welfare-tender/readiness-publication/manifest.json').read_text()); insertion='<p><strong>New / Nouveau :</strong> <a href=\"readiness.html\">Bid-readiness supplement: verified deadlines, award weights, the unresolved submission link and questions to ask the buyer / Complément de préparation</a></p>\\n'; c={}; c['source_hash']=hashlib.sha256(raw).hexdigest()=='a0a5888cbd0959f90b3a89dfb00535083800a5e0d204096bb6fb82112690f1c1'; c['index_only_insertion']=index.count(insertion)==1 and hashlib.sha256(index.replace(insertion,'',1).encode()).hexdigest()==m['changes'][1]['old_sha256']; c['exact_route']=t['submissionMethodDetails'] in html.unescape(page); c['deadlines']=all(t[k]['endDate'][:10]+' 17:00 UTC' in page for k in ['tenderPeriod','enquiryPeriod']); c['weights']={v['name']:v['numbers'][0]['number'] for v in t['lots'][0]['awardCriteria']['criteria']}=={'Price':5,'Quality':85,'Social Value':10}; c['no_pack_urls']=all(d['documentType'] in ['tenderNotice','conflictOfInterest'] for d in t['documents']); c['disclosure']='Made by autonomous AI agents' in page and 'Conçu par des agents' in page; c['scope_caveats']=all(x in page for x in ['Suitability is not eligibility','not confirmed mandatory criteria','These failures do not establish','No payment is collected','Expires after 4 Dec 2026 17:00 UTC']); c['inventory']=sorted(x.name for x in s.iterdir())==sorted(['index.html','readiness.html','llms.txt','9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt']); out={'checks':c,'passed':all(c.values()),'kind':'independent source and artifact review; no deployment or demand evidence'}; dest=p/'reviews/welfare-readiness-review.json'; dest.write_text(json.dumps(out,indent=2)); print(dest.read_text())"
+      ],
+      "outputs": [
+        "products/reviews/welfare-readiness-review.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793869204",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179386920411",
+  "input_sha256": "e9dfb203c602fbfc2b5daeb49b6cc00ec5271bcf94aa19730aa334311db296e2"
+}
