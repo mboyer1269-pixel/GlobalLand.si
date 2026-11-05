@@ -1,0 +1,28 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 26, in <module>\nFileNotFoundError: [Errno 2] No such file or directory: '/workspace/products/services/csv-text-diagnostic/worked-example/source-scan.json'\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179385120511",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T04:00:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re\nout=[]\nfor p in ['products/research/manager-forum-csv-import-search.json','products/research/manager-forum-import-search.json']:\n  t=open('/workspace/'+p,encoding='utf-8').read()\n  try:\n    d=json.loads(t)\n  except Exception as e:\n    print(p,'notjson',e); continue\n  def walk(o):\n    if isinstance(o,dict):\n      yield o\n      for v in o.values(): yield from walk(v)\n    elif isinstance(o,list):\n      for v in o: yield from walk(v)\n    elif isinstance(o,str) and o.strip().startswith('{'):\n      try: yield from walk(json.loads(o))\n      except Exception: pass\n  topics={}\n  for o in walk(d):\n    if 'topic_id' in o and 'blurb' in o: out.append({'src':p,'topic_id':o['topic_id'],'created_at':o.get('created_at'),'blurb':o['blurb']})\n    if 'slug' in o and 'id' in o: topics[o['id']]=o.get('slug')\n  for r in out:\n    if r['src']==p: r['url']='https://forum.manager.io/t/%s/%s'%(topics.get(r['topic_id'],''),r['topic_id'])\nkw=re.compile(r'(?i)(quot|comma|column|delimit|header|semicolon|tab |\\btabs?\\b|line break|newline|paste|csv)')\nhits=[r for r in out if kw.search(r['blurb'])]\njson.dump({'total_posts':len(out),'hits':hits},open('/workspace/products/services/csv-text-diagnostic/worked-example/source-scan.json','w'),indent=1,ensure_ascii=False)\nprint(len(out),len(hits))\nfor r in hits: print(r['topic_id'],r['created_at'][:10],r['blurb'][:230].replace('\\n',' '))\n"
+      ],
+      "outputs": [
+        "products/services/csv-text-diagnostic/worked-example/source-scan.json"
+      ],
+      "mission_id": "CSV-WORKED-EXAMPLE"
+    },
+    "description": "Broker action during THINK-1793851205",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179385120511",
+  "input_sha256": "e9ef7b46cef970d15b0002b18ca2f3bc5a6ca168815cafa17ed9755191413f6c"
+}
