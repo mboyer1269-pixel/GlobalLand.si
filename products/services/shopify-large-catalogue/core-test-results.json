@@ -1,0 +1,93 @@
+{
+ "synthetic": true,
+ "note": "Synthetic data only. Checks documented CSV layout rules; a live Shopify import was NOT tested.",
+ "cases": [
+  {
+   "case": "small_readable_fixture",
+   "rc": 0,
+   "rows": 12,
+   "products": 2,
+   "checks": {
+    "utf8_no_bom_lf_only": true,
+    "header_matches_documented_names": true,
+    "no_product_split_across_files": true,
+    "handle_rows_contiguous": true,
+    "title_only_on_first_row": true,
+    "sku_unique": true,
+    "identifiers_preserved_sku_barcode_color_size_price": true,
+    "color_size_combo_unique_per_product": true,
+    "image_positions_1_to_n": true,
+    "all_input_images_present_once_per_product": true,
+    "variant_image_is_first_image_of_its_color": true,
+    "image_only_rows_have_no_variant_fields": true
+   },
+   "pass": true
+  },
+  {
+   "case": "error_fixture_dup_sku_dup_barcode_bad_price_missing_color_image",
+   "rc": 2,
+   "errors": [
+    "variants line 3: duplicate SKU SH100-BLA-40 (first line 2)",
+    "variants line 4: duplicate barcode 2000000000015 (first line 2)",
+    "variants line 5: price 'EUR 12' is not a plain number like 9.99"
+   ],
+   "warnings": [
+    "style BL-7 color Tan has no image; Variant image URL left blank"
+   ],
+   "no_output_written": true,
+   "pass": true
+  },
+  {
+   "case": "scale_9000_barcodes_300_styles_5_colors_6_sizes_5_images_per_color",
+   "input_variants": 9000,
+   "input_images": 7500,
+   "rc": 0,
+   "rows": 9000,
+   "products": 300,
+   "output_bytes": 1667113,
+   "output_sha256": "af374e6d487b3bb5cc8ec828072822a829dcf6ae744bd07906edfdc05a9a65cb",
+   "transform_seconds": 0.299,
+   "wall_seconds_incl_startup": 0.389,
+   "checks": {
+    "utf8_no_bom_lf_only": true,
+    "header_matches_documented_names": true,
+    "no_product_split_across_files": true,
+    "handle_rows_contiguous": true,
+    "title_only_on_first_row": true,
+    "sku_unique": true,
+    "identifiers_preserved_sku_barcode_color_size_price": true,
+    "color_size_combo_unique_per_product": true,
+    "image_positions_1_to_n": true,
+    "all_input_images_present_once_per_product": true,
+    "variant_image_is_first_image_of_its_color": true,
+    "image_only_rows_have_no_variant_fields": true
+   },
+   "pass": true
+  },
+  {
+   "case": "split_max_4000_rows_whole_products_gtin_prefix",
+   "rc": 0,
+   "files": 3,
+   "rows": 9000,
+   "checks": {
+    "utf8_no_bom_lf_only": true,
+    "header_matches_documented_names": true,
+    "no_product_split_across_files": true,
+    "handle_rows_contiguous": true,
+    "title_only_on_first_row": true,
+    "sku_unique": true,
+    "identifiers_preserved_sku_barcode_color_size_price": true,
+    "color_size_combo_unique_per_product": true,
+    "image_positions_1_to_n": true,
+    "all_input_images_present_once_per_product": true,
+    "variant_image_is_first_image_of_its_color": true,
+    "image_only_rows_have_no_variant_fields": true
+   },
+   "gtin_prefix_on_all_variants": true,
+   "pass": true
+  }
+ ],
+ "passed": 4,
+ "total": 4,
+ "python": "3.11.2"
+}
