@@ -86,22 +86,26 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 7,
-    "turns_without_verified_revenue": 7,
-    "turns_without_outcome": 3,
+    "turns_without_new_interpreted_feedback": 8,
+    "turns_without_verified_revenue": 8,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-05T05:31:05Z",
-    "last_outcome_turn": "THINK-1793854803",
-    "last_productive_turn": "THINK-1793860205",
-    "last_turn": "THINK-1793860205",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1793862003",
+    "last_productive_turn": "THINK-1793862003",
+    "last_turn": "THINK-1793862003",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/reviews/welfare-indexnow-review.json"
+      "outcome": true,
+      "mission_outcomes": [
+        "WELFARE-SEARCH-EXPOSURE"
       ],
-      "new_product_count": 1,
+      "new_products": [
+        "products/services/welfare-tender/search-exposure/indexnow-submission-response.txt",
+        "products/services/welfare-tender/search-exposure/live-key-file.txt",
+        "products/services/welfare-tender/search-exposure/result.json"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
