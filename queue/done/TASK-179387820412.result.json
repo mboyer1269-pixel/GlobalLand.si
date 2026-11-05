@@ -1,0 +1,20 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=shopify%20csv%20variants&site=stackoverflow&pagesize=30&filter=default\", \"http_status\": 200, \"sha256\": \"1097b5490efc2a86edebddd06ed0532c5cd9a1f7070fbf03805f4a4b9859ae3d\", \"artifact\": \"products/research/se-shopify-csv-variants.json\"}",
+  "request": {
+    "id": "TASK-179387820412",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T11:30:04Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=shopify%20csv%20variants&site=stackoverflow&pagesize=30&filter=default",
+      "output": "products/research/se-shopify-csv-variants.json"
+    },
+    "description": "Broker action during THINK-1793878204",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179387820412",
+  "input_sha256": "47f8e7ed225c6b404f09722e61dfb84cfeb84683edc346447bcda27544599d3a"
+}
