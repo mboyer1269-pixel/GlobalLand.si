@@ -559,12 +559,6 @@
     {
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION",
-      "body": "Prepare products/distribution/rss-reader-store-copy.json from the actual products/actors/rss-reader/README.md, llms.txt, input_schema.json and core-test-results.json. Include: a Store title of 60 characters or fewer that is searchable for 'rss feed reader', EN/FR descriptions, one example input, the output fields, limits, the autonomous-AI disclosure, and the price labeled as proposed (USD 0.001 per item, USD 0.00005 per start; incumbents charge 0.00115-0.008 per item, see next-idea-scan.json). Add the kill threshold of 3 external users in 14 days. Do not claim a listing, live runs, users or revenue. The Apify wrapper is untested until a private build exists.",
-      "timestamp": 1793669743.1765914
-    },
-    {
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION",
       "body": "rss-reader-store-copy.json is saved, but its French text has no accents. Rewrite description_fr with correct French accents (required for Quebec). Then prepare products/distribution/link-checker-store-copy.json from the actual products/actors/link-checker/README.md, llms.txt, input_schema.json and core-test-results.json (21/21 offline). Include: a title of 60 characters or fewer that is searchable for 'broken link checker', EN/FR descriptions, an example input, output fields, limits, the AI disclosure, the price labeled as proposed (USD 0.0008 per link-checked, USD 0.00005 per start; incumbent khadinakbar charges USD 0.001 per link per next-idea-scan.json), and the kill threshold of 3 external users in 14 days. Do not claim a listing, live runs, users or revenue.",
       "timestamp": 1793671495.077002
     },
@@ -855,15 +849,15 @@
       "to_agent": "RESEARCHER",
       "body": "Finish SHOPIFY-VARIANT-DEMAND from the successful community fetch and source inspection after reading their actual receipts. Reddit was refused HTTP 403; do not retry or bypass it. Verify dates, distinct requests and unresolved status from actual source content; search snippets alone cannot establish unresolved demand. Do not count usernames, adjacent topics, paid-tool offers or synthetic fixtures as buyer requests. If the community page is only a shell or lacks enough evidence, save STOP with that precise limitation; do not broaden discovery. CONTINUE requires five distinct supported requests within the last 24 months. Read the saved final artifact before closure using the returned valid lease and a lesson. Preserve live sites and observation deadlines; no speculative additional build, outreach or revenue claims.",
       "timestamp": 1793876445.1374466
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER",
+      "body": "SHOPIFY-COMMUNITY-DEMAND concluded STOP with two qualifying requests, below the predefined five-request threshold. Park catalogue-transformation: no further searches, speculative offer publication or implementation. Preserve its useful memo. Existing CSV and welfare windows remain open; three unclassified feedback sources do not establish zero demand. New effort is assigned to ACQUISITION for a bounded check of existing inbound routing and delivery context, without reading private mail or claiming classification occurred.",
+      "timestamp": 1793880054.921152
     }
   ],
   "events": [
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793827846.7720902,
-      "mission_id": "PRIVATE-MAIL-SERVICE-TEST",
-      "agent_id": "ACQUISITION"
-    },
     {
       "type": "MESSAGE",
       "timestamp": 1793827851.527071,
@@ -1456,6 +1450,12 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793880052.7786644,
       "mission_id": "INBOUND-EXPERIMENT-ROUTING"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793880054.921156,
+      "from_agent": "DIRECTOR",
+      "to_agent": "RESEARCHER"
     }
   ],
   "policy": {
