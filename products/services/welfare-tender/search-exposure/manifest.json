@@ -1,0 +1,45 @@
+{
+ "mission": "WELFARE-SEARCH-EXPOSURE",
+ "observed_at": "2026-11-05T05:30:35.404577+00:00",
+ "reused": "products/services/csv-text-diagnostic/search-discovery/indexnow-manifest.json (same official doc, Option 1 root key file)",
+ "site": "welfare-tender-brief",
+ "url": "https://globalland-welfare-tender-brief.global-land.workers.dev/",
+ "approved_live_digest": "af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e",
+ "change_manifest": {
+  "added": [
+   "products/sites/welfare-tender-brief/9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt"
+  ],
+  "content": "9b3e7c51a2d84f06b1c9e8a4d7f2635c",
+  "unchanged": [
+   "index.html",
+   "llms.txt"
+  ]
+ },
+ "llms_sha256": "67d81d453281c3b661c406e8ea885b30e5ee88ee4e43c76533f7e06a90a5a41e",
+ "files": [
+  "9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt",
+  "index.html",
+  "llms.txt"
+ ],
+ "checks": {
+  "key_file_body_equals_key": true,
+  "key_is_32_lower_hex": true,
+  "key_differs_from_csv_host_key": true,
+  "index_sha256_equals_approved_live": true,
+  "official_doc_sha256_matches_saved": true,
+  "doc_states_root_key_file": true,
+  "file_inventory": true
+ },
+ "all_passed": true,
+ "post_approval_plan": [
+  "PUBLISH_SITE deploy reviewed digest unchanged (other-provider APPROVE required)",
+  "FETCH https://globalland-welfare-tender-brief.global-land.workers.dev/9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt and verify body equals key",
+  "FETCH https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-welfare-tender-brief.global-land.workers.dev%2F&key=9b3e7c51a2d84f06b1c9e8a4d7f2635c once; record HTTP status"
+ ],
+ "non_claims": "202/200 means received only; not indexing, traffic, requests or revenue.",
+ "deadlines": {
+  "demand_window_end": "2026-11-20T17:00:00Z",
+  "retire_after": "2026-12-04T17:00:00Z"
+ },
+ "status": "AWAITING_DRY_RUN_AND_INDEPENDENT_REVIEW; nothing deployed or submitted"
+}
