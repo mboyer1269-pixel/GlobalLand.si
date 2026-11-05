@@ -516,10 +516,32 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "o0bU2gNeLbn-z92yBQsRLx6PFJh1UQ12",
-      "lease_expires_at": 1793880040.3281977,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/research/shopify-variant-demand.json",
+        "products/research/shopify-variant-community.html"
+      ]
+    },
+    {
+      "mission_id": "SHOPIFY-COMMUNITY-DEMAND",
+      "goal": "Bounded follow-up after SHOPIFY-VARIANT-DEMAND STOP: community.shopify.com Discourse search.json (TASK-179387820413) returns real topics. Using at most 6 topic JSON fetches (/t/<id>.json) from that saved result, count distinct dated (since 2024-11-05) unresolved CSV variant-import requests, note free/paid competing tools posted there, and give CONTINUE (>=5) or STOP for the catalogue-transformation offer. Titles, dates, URLs, short non-personal quotes only; no usernames. No posting, accounts, outreach, site changes or spending. Save products/research/shopify-community-demand.json; complete with a lesson after reading it.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "RESEARCHER",
+      "priority": 1,
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/research/shopify-community-demand.json",
+        "products/research/shopify-community-search.json",
+        "products/research/shopify-topic-575067.json",
+        "products/research/shopify-topic-381686.json",
+        "products/research/shopify-topic-665019.json",
+        "products/research/shopify-topic-658611.json",
+        "products/research/shopify-topic-607347.json"
+      ]
     }
   ],
   "messages": [
@@ -825,42 +847,6 @@
     }
   ],
   "events": [
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793820959.394576,
-      "mission_id": "DOMAIN-RDAP-BUILD",
-      "agent_id": "BUILDER"
-    },
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793820979.9406495,
-      "mission_id": "DOMAIN-RDAP-LAUNCH"
-    },
-    {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793820981.7720985,
-      "blocker_id": "NO-APIFY-ACCESS",
-      "agent_id": "BUILDER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793822451.979923,
-      "lesson_id": "L34",
-      "agent_id": "DIRECTOR"
-    },
-    {
-      "type": "REVIEW_RECORDED",
-      "timestamp": 1793824268.5496233,
-      "reviewer": "AUDITOR",
-      "subject": "site:welfare-tender-brief",
-      "verdict": "APPROVE"
-    },
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793824270.3894916,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
     {
       "type": "MISSION_CREATED",
       "timestamp": 1793826046.3814266,
@@ -1424,6 +1410,41 @@
       "timestamp": 1793876445.1374502,
       "from_agent": "DIRECTOR",
       "to_agent": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793878227.1107428,
+      "lesson_id": "L48",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793878227.1107469,
+      "mission_id": "SHOPIFY-VARIANT-DEMAND",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793878256.47536,
+      "mission_id": "SHOPIFY-COMMUNITY-DEMAND"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793878258.036291,
+      "mission_id": "SHOPIFY-COMMUNITY-DEMAND",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793878302.5295877,
+      "lesson_id": "L49",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793878302.5295913,
+      "mission_id": "SHOPIFY-COMMUNITY-DEMAND",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
@@ -1614,5 +1635,5 @@
       "seq": 9
     }
   ],
-  "lesson_count": 47
+  "lesson_count": 49
 }
