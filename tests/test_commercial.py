@@ -289,5 +289,87 @@ class CommercialTests(unittest.TestCase):
         self.assertIsNone(a['new_commercial_feedback'])
         self.assertIsNone(a['turns_without_verified_revenue'])
 
+    def test_board_does_not_publish_unrecognized_private_commercial_state(self):
+        import progress
+        path = self.root / 'state/private/progress.json'
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({'commercial_state': 'PRIVATE-CUSTOMER-SENTINEL'}))
+        board = progress.board(self.root, {'missions': []})
+        self.assertNotIn('PRIVATE-CUSTOMER-SENTINEL', json.dumps(board))
+        self.assertEqual(board['progress']['commercial_state'], 'UNAVAILABLE')
+        # Publication independently closes this field even if a caller supplies
+        # an already-loaded bad value rather than going through state parsing.
+        with patch('progress.load', return_value={'commercial_state': 'PRIVATE-CUSTOMER-SENTINEL'}):
+            self.assertNotIn('PRIVATE-CUSTOMER-SENTINEL', json.dumps(progress.board(self.root, {'missions': []})))
+
+    def test_missing_required_history_cannot_promote_old_source_to_fresh_feedback(self):
+        import progress
+        self.record(self.normalize())
+        path = self.root / 'state/private/progress.json'
+        path.write_text(json.dumps(dict(commercial_baseline=True, commercial_turns=10,
+                                        turns_without_verified_revenue=10, commercial_state='AVAILABLE')))
+        a = progress.assess(self.root, {'missions': []}, {'revenue_cents': 0}, self.config)
+        self.assertIsNone(a['commercial_turns'])
+        self.assertIsNone(a['new_commercial_feedback'])
+        self.assertIsNone(a['turns_without_verified_revenue'])
+
+    def test_deleted_initialized_progress_state_keeps_both_gaps_unknown(self):
+        import progress
+        self.record(self.normalize())
+        world, bank = {'missions': []}, {'revenue_cents': 0}
+        a = progress.assess(self.root, world, bank, self.config)
+        progress.commit(self.root, 'THINK-1', a)
+        (self.root / 'state/private/progress.json').unlink()
+        a = progress.assess(self.root, world, bank, self.config)
+        self.assertIsNone(a['commercial_turns'])
+        self.assertIsNone(a['new_commercial_feedback'])
+        self.assertIsNone(a['turns_without_verified_revenue'])
+
+    def test_malformed_observation_retains_source_identity_before_correction(self):
+        c = self.commercial()
+        path = self.record(self.normalize())
+        value = json.loads(path.read_text()); value['observation'] = {'category': 'PRIVATE-BROKEN'}
+        path.write_text(json.dumps(value))
+        partial = c.progress_snapshot(self.root, self.config)
+        self.assertEqual(partial['state'], 'PARTIAL')
+        self.assertEqual(partial['sources'], [path.stem])
+        self.assertEqual(partial['interpreted_sources'], [])
+
+    def test_corrected_malformed_source_does_not_reset_feedback_gap(self):
+        import progress
+        self.record(self.normalize(category='UNKNOWN', evidence=None), mid='baseline')
+        world, bank = {'missions': []}, {'revenue_cents': 0}
+        progress.commit(self.root, 'THINK-0', progress.assess(self.root, world, bank, self.config))
+        path = self.record(self.normalize())
+        value = json.loads(path.read_text()); value['observation'] = {'category': 'PRIVATE-BROKEN'}
+        path.write_text(json.dumps(value))
+        progress.commit(self.root, 'THINK-1', progress.assess(self.root, world, bank, self.config))
+        self.record(self.normalize())
+        corrected = progress.assess(self.root, world, bank, self.config)
+        self.assertFalse(corrected['new_commercial_feedback'])
+        self.assertEqual(corrected['commercial_turns'], 1)
+
+    def test_site_allowlist_reports_source_iteration_truncation(self):
+        c = self.commercial()
+        sites = self.root / 'work/products/sites'; sites.mkdir(parents=True)
+        # File entries consume the bounded directory scan without adding IDs.
+        for n in range(202): (sites / ('file-%03d' % n)).write_text('')
+        self.assertTrue(c.allowed_experiments(self.root)['truncated'])
+
+    def test_initialization_anchor_survives_interrupted_history_write(self):
+        import progress
+        from supervisor import atomic_json
+        self.record(self.normalize())
+        world, bank = {'missions': []}, {'revenue_cents': 0}
+        assessment = progress.assess(self.root, world, bank, self.config)
+        def interrupted(path, data):
+            if path.name == 'progress.json': raise OSError('interrupted state write')
+            atomic_json(path, data)
+        with patch('progress.atomic_json', interrupted):
+            with self.assertRaises(OSError): progress.commit(self.root, 'THINK-1', assessment)
+        recovered = progress.assess(self.root, world, bank, self.config)
+        self.assertIsNone(recovered['commercial_turns'])
+        self.assertIsNone(recovered['turns_without_verified_revenue'])
+
 
 if __name__ == '__main__': unittest.main()

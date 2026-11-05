@@ -26,6 +26,8 @@ import stat
 from supervisor import atomic_json
 
 STATE = 'state/private/progress.json'
+INITIALIZED = 'state/private/progress.initialized.json'
+COMMERCIAL_STATES = ('AVAILABLE', 'PARTIAL', 'UNAVAILABLE', 'DISABLED')
 MAX_FILES = 5000
 SYSTEM_CARD = 'SYSTEM-NO-PROGRESS'
 OUTCOME_CARD = 'SYSTEM-NO-OUTCOME'
@@ -76,17 +78,45 @@ def delta(previous, current):
                 rewritten_count=len(rewritten), revenue_gain_cents=max(gain, 0))
 
 
+def _commercial_state(value):
+    return value if value in COMMERCIAL_STATES else 'UNAVAILABLE'
+
+
+def _anchor_path(root):
+    path = pathlib.Path(root) / INITIALIZED
+    if any(p.is_symlink() for p in (path, *path.parents)):
+        raise ValueError('Progress storage unavailable')
+    if path.exists():
+        info = path.stat()
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_size > 64:
+            raise ValueError('Progress storage unavailable')
+        marker = json.loads(path.read_text())
+        if (not isinstance(marker, dict) or set(marker) != {'version'}
+                or type(marker['version']) is not int or marker['version'] != 1):
+            raise ValueError('Progress storage unavailable')
+    return path
+
+
 def load(root):
     path = pathlib.Path(root) / STATE
     try:
         if any(p.is_symlink() for p in (path, *path.parents)):
             raise ValueError()
-        if not path.exists(): return {}
+        anchor = _anchor_path(root)
+        if not path.exists():
+            if anchor.exists(): raise ValueError()
+            return {}
         info = path.stat()
         if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_size > 16 * 1024 * 1024:
             raise ValueError()
         value = json.loads(path.read_text())
         if not isinstance(value, dict): raise ValueError()
+        if ('commercial_state' in value and value['commercial_state'] not in COMMERCIAL_STATES):
+            raise ValueError()
+        initialized = (value.get('commercial_baseline') is True
+                       or 'commercial_turns' in value or 'commercial_state' in value)
+        if initialized and ('commercial_seen_sources' not in value or 'turns_without_verified_revenue' not in value):
+            raise ValueError()
         sources = value.get('commercial_seen_sources', [])
         if (not isinstance(sources, list) or len(sources) > 100000
                 or any(not isinstance(s, str) or not re.fullmatch(r'[0-9a-f]{64}', s) for s in sources)
@@ -176,6 +206,10 @@ def commit(root, turn, assessment):
                   last_productive_turn=(turn if assessment['change'].get('productive') else state.get('last_productive_turn')),
                   last_outcome_turn=(turn if assessment['change'].get('outcome') else state.get('last_outcome_turn')),
                   last_change={k: v for k, v in assessment['change'].items()})
+    # Fixed initialization evidence distinguishes loss from a first installation.
+    # Anchor precedes history: a crash between writes is conservatively unknown.
+    anchor = _anchor_path(root)
+    if not anchor.exists(): atomic_json(anchor, {'version': 1})
     atomic_json(pathlib.Path(root) / STATE, record)
     return record
 
@@ -261,7 +295,7 @@ def board(root, world):
                 resolved_recent=resolved[:20],
                 progress=dict(stalled_turns=stalled, threshold=threshold, stalled_since=state.get('stalled_since'),
                               activity_semantics='operational',
-                              commercial_state=state.get('commercial_state', 'UNAVAILABLE'),
+                              commercial_state=_commercial_state(state.get('commercial_state')),
                               turns_without_new_interpreted_feedback=(state.get('commercial_turns')
                                   if state.get('commercial_state') == 'AVAILABLE' else None),
                               turns_without_verified_revenue=state.get('turns_without_verified_revenue'),

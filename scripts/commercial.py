@@ -69,7 +69,8 @@ def allowed_experiments(root):
                     ids.add('mission:' + ident)
         sites = _safe(root / 'work/products/sites')
         if sites.exists():
-            for path in itertools.islice(sites.iterdir(), 201):
+            for index, path in enumerate(itertools.islice(sites.iterdir(), 202)):
+                if index == 201: truncated = True; break
                 if len(ids) > 100: truncated = True; break
                 if (not path.is_symlink() and path.is_dir()
                         and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,99}', path.name)):
@@ -164,7 +165,10 @@ def _scan(root, config):
                 observation = record.get('observation')
                 if observation is not None:
                     if not _valid_observation(observation):
-                        raise ValueError()
+                        # The source identity is valid even when its optional
+                        # interpretation is damaged. Remember it before repair.
+                        observation = None
+                        result['state'] = 'PARTIAL'
                 result['rows'].append((key, observation))
             except (OSError, ValueError, KeyError, TypeError): result['state'] = 'PARTIAL'
         if not allowed.get('available', True): result['state'] = 'PARTIAL'

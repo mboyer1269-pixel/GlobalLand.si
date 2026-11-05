@@ -98,6 +98,18 @@ turns; it is not silently rebuilt into fresh market evidence. Restore an intact
 private history to recover continuity. A revenue gap with lost continuity stays
 unknown until a new verified revenue gain establishes a fresh reference.
 
+`state/private/progress.initialized.json` is a fixed, bounded initialization
+anchor, not a second observation store. The first successful tracking commit
+writes this host-only marker before the history. If the history is subsequently
+missing, or a crash interrupted that first write, both gaps remain unknown.
+An initialized baseline missing its required source-history fields is corrupt,
+not a migration. If **both** the history and its anchor are removed, this local
+implementation cannot distinguish that loss from a first installation; restore
+both private files together when recovering a host. A valid source identity is
+remembered even when its optional interpretation is malformed, so repairing it
+cannot refresh feedback. Public progress states are independently allowlisted
+when projecting the operational blocker board.
+
 This increment adds no CRM, thread continuity, proactive wakeup, new scheduler,
 financial integration, external acquisition channel, independent workers, or
 economic cost attribution. Deployment and controlled real-model validation are
