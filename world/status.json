@@ -4,36 +4,36 @@
     {
       "agent_id": "DIRECTOR",
       "role": "DIRECTOR",
-      "wallet_glc": 96,
-      "debt_glc": 123,
+      "wallet_glc": 95,
+      "debt_glc": 130,
       "status": "ACTIVE"
     },
     {
       "agent_id": "RESEARCHER",
       "role": "RESEARCHER",
-      "wallet_glc": 96,
-      "debt_glc": 123,
+      "wallet_glc": 95,
+      "debt_glc": 130,
       "status": "ACTIVE"
     },
     {
       "agent_id": "BUILDER",
       "role": "BUILDER",
-      "wallet_glc": 96,
-      "debt_glc": 123,
+      "wallet_glc": 95,
+      "debt_glc": 130,
       "status": "ACTIVE"
     },
     {
       "agent_id": "ACQUISITION",
       "role": "ACQUISITION",
-      "wallet_glc": 96,
-      "debt_glc": 123,
+      "wallet_glc": 95,
+      "debt_glc": 130,
       "status": "ACTIVE"
     },
     {
       "agent_id": "AUDITOR",
       "role": "AUDITOR",
-      "wallet_glc": 96,
-      "debt_glc": 123,
+      "wallet_glc": 95,
+      "debt_glc": 130,
       "status": "ACTIVE"
     }
   ],
@@ -778,39 +778,6 @@
   ],
   "events": [
     {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793779206.7618918,
-      "agent_id": "BUILDER",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793779206.7618945,
-      "agent_id": "ACQUISITION",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793779206.7618964,
-      "agent_id": "AUDITOR",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793815847.4336503,
-      "mission_id": "WELFARE-TENDER-DELIVERY",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793815951.1906202,
-      "lesson_id": "L26",
-      "agent_id": "RESEARCHER"
-    },
-    {
       "type": "COMPLETE_MISSION",
       "timestamp": 1793815951.190625,
       "mission_id": "WELFARE-TENDER-DELIVERY",
@@ -1376,6 +1343,41 @@
       "timestamp": 1793863896.5583472,
       "mission_id": "WELFARE-BID-READINESS",
       "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793865605.996387,
+      "agent_id": "DIRECTOR",
+      "interest_glc": 7,
+      "maintenance_glc": 1
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793865605.996395,
+      "agent_id": "RESEARCHER",
+      "interest_glc": 7,
+      "maintenance_glc": 1
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793865605.9963984,
+      "agent_id": "BUILDER",
+      "interest_glc": 7,
+      "maintenance_glc": 1
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793865605.9964006,
+      "agent_id": "ACQUISITION",
+      "interest_glc": 7,
+      "maintenance_glc": 1
+    },
+    {
+      "type": "GLC_CYCLE",
+      "timestamp": 1793865605.9964027,
+      "agent_id": "AUDITOR",
+      "interest_glc": 7,
+      "maintenance_glc": 1
     }
   ],
   "policy": {
