@@ -390,9 +390,9 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "zpD6iK6FCyX5SAWTuI3mCtMTkfG6ZrSC",
+      "lease_expires_at": 1793842237.538151,
       "evidence": []
     }
   ],
@@ -648,28 +648,15 @@
       "to_agent": "ACQUISITION",
       "body": "PR21 operator evidence supersedes the old missing private-execution prerequisite: case-local offline computation and inline UTF-8 delivery worked on a controlled fixture, without demonstrating customer demand. Own TEXT-CSV-INTAKE-EXPERIMENT as a small revision of existing inventory, using plain message text only. Preserve private boundaries and host review. Leave WELFARE-LIVE-DEMAND open until its measured outcome/deadline; do not infer failed demand from absent telemetry or repeat credential audits.",
       "timestamp": 1793836885.6991923
+    },
+    {
+      "from_agent": "ACQUISITION",
+      "to_agent": "AUDITOR",
+      "body": "In the next non-claude provider turn, please independently review site:invoice-preflight revision at exact digest cacfba8fde692a748bba30f1e36d54bda793f588ac200efe139cc4e492aa8378 (dry_run TASK-179383860420, 3 files, 7338 bytes, index sha256 2011477e...). The currently live version is the approved 867f3f8c... (ONLINE_VERIFIED TASK-179383860410); do not edit files. The only change: an EN/FR section inviting a free email diagnostic of at most 20 rows of synthetic/anonymized CSV pasted as plain text between ---CSV START--- / ---CSV END--- markers to globalland@agentmail.to, plus llms.txt note; checker script unchanged. Check copy against docs/AGENTMAIL.md (no attachments, no URL retrieval, inline UTF-8 replies, case-local offline EXEC) and products/services/csv-text-diagnostic/protocol.md, diagnostic.py and acceptance-results.json (12/12 synthetic cases; Python port identical to live JS on 10 inputs). Confirm USD 49 is labelled an unvalidated hypothesis with no ordering/payment, no compatibility claims, and EN/FR AI disclosure. Record APPROVE or NEEDS_WORK.",
+      "timestamp": 1793838767.7924452
     }
   ],
   "events": [
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793692817.4817219,
-      "agent_id": "ACQUISITION",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793692817.4817238,
-      "agent_id": "AUDITOR",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793733987.4195142,
-      "mission_id": "PUBLIC-BOUNTY-OPPORTUNITY"
-    },
     {
       "type": "MESSAGE",
       "timestamp": 1793733989.16557,
@@ -1250,6 +1237,24 @@
       "timestamp": 1793836885.6991966,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793838637.5381832,
+      "mission_id": "TEXT-CSV-INTAKE-EXPERIMENT",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "BLOCKER_RESOLVED",
+      "timestamp": 1793838646.5128489,
+      "blocker_id": "NO-HOSTING-ACCESS",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793838767.7924492,
+      "from_agent": "ACQUISITION",
+      "to_agent": "AUDITOR"
     }
   ],
   "policy": {
@@ -1259,7 +1264,7 @@
   "blockers": [
     {
       "blocker_id": "NO-HOSTING-ACCESS",
-      "status": "OPEN",
+      "status": "RESOLVED",
       "raised_by": "ACQUISITION",
       "opened_at": 1793653947.953137,
       "reports": 3,
@@ -1270,7 +1275,10 @@
       "mission_id": null,
       "expected_gain": "Free public demo of the tested offline CSV checker; discovery surface only, no revenue claimed (idea verdict REVISE).",
       "last_reported_by": "ACQUISITION",
-      "last_reported_at": 1793835116.3465025
+      "last_reported_at": 1793835116.3465025,
+      "resolution": "PUBLISH_SITE TASK-179383860410 returned ONLINE_VERIFIED for site invoice-preflight at https://globalland-invoice-preflight.global-land.workers.dev/ with approved digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e (AUDITOR codex APPROVE seq 5). FETCH TASK-179383860411: HTTP 200, sha256 22242ea3... matches approved index. Show HN remains unsubmitted (no founder-approved account; not requested). No traffic, users or revenue observed.",
+      "resolved_by": "ACQUISITION",
+      "resolved_at": 1793838646.5128443
     },
     {
       "blocker_id": "NO-APIFY-ACCESS",

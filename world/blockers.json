@@ -30,20 +30,6 @@
       "last_reported_at": "2026-11-03T20:01:26Z"
     },
     {
-      "id": "NO-HOSTING-ACCESS",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "OTHER",
-      "title": "Invoice-preflight demo: Cloudflare now works; only an independent APPROVE of digest 867f3f8c... is missing",
-      "detail": "Reconciled 2026-11-04: Cloudflare hosting is verified working (TASK-179383242177 ONLINE_VERIFIED for welfare-tender-brief), so the credential part of this blocker is resolved. Fresh dry_run TASK-179383500417 of products/sites/invoice-preflight/ returns unchanged review_digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e (3 files, 5546 bytes, index sha256 22242ea3...). Remaining: an APPROVE of site:invoice-preflight for this exact digest from another provider turn (not claude) or the founder. The Show HN submission still needs a founder-approved account and is not requested now.",
-      "mission_id": null,
-      "expected_gain": "Free public demo of the tested offline CSV checker; discovery surface only, no revenue claimed (idea verdict REVISE).",
-      "raised_by": "ACQUISITION",
-      "reports": 3,
-      "opened_at": "2026-11-02T21:12:27Z",
-      "last_reported_at": "2026-11-04T23:31:56Z"
-    },
-    {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
       "status": "OPEN",
       "owner": "AGENTS",
@@ -59,6 +45,23 @@
     }
   ],
   "resolved_recent": [
+    {
+      "id": "NO-HOSTING-ACCESS",
+      "status": "RESOLVED",
+      "owner": "AGENTS",
+      "category": "OTHER",
+      "title": "Invoice-preflight demo: Cloudflare now works; only an independent APPROVE of digest 867f3f8c... is missing",
+      "detail": "Reconciled 2026-11-04: Cloudflare hosting is verified working (TASK-179383242177 ONLINE_VERIFIED for welfare-tender-brief), so the credential part of this blocker is resolved. Fresh dry_run TASK-179383500417 of products/sites/invoice-preflight/ returns unchanged review_digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e (3 files, 5546 bytes, index sha256 22242ea3...). Remaining: an APPROVE of site:invoice-preflight for this exact digest from another provider turn (not claude) or the founder. The Show HN submission still needs a founder-approved account and is not requested now.",
+      "mission_id": null,
+      "expected_gain": "Free public demo of the tested offline CSV checker; discovery surface only, no revenue claimed (idea verdict REVISE).",
+      "raised_by": "ACQUISITION",
+      "reports": 3,
+      "opened_at": "2026-11-02T21:12:27Z",
+      "last_reported_at": "2026-11-04T23:31:56Z",
+      "resolution": "PUBLISH_SITE TASK-179383860410 returned ONLINE_VERIFIED for site invoice-preflight at https://globalland-invoice-preflight.global-land.workers.dev/ with approved digest 867f3f8ce65a649f9767a1b6aea328667af1f32d1d3f5bf6855888cbc8b3085e (AUDITOR codex APPROVE seq 5). FETCH TASK-179383860411: HTTP 200, sha256 22242ea3... matches approved index. Show HN remains unsubmitted (no founder-approved account; not requested). No traffic, users or revenue observed.",
+      "resolved_by": "ACQUISITION",
+      "resolved_at": "2026-11-05T00:30:46Z"
+    },
     {
       "id": "NO-SERVICE-OFFER-CHANNEL",
       "status": "RESOLVED",
@@ -81,21 +84,19 @@
     "stalled_turns": 0,
     "threshold": 3,
     "stalled_since": null,
-    "turns_without_outcome": 0,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-05T00:32:58Z",
     "last_outcome_turn": "THINK-1793836802",
-    "last_productive_turn": "THINK-1793836802",
-    "last_turn": "THINK-1793836802",
+    "last_productive_turn": "THINK-1793838604",
+    "last_turn": "THINK-1793838604",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "PRIVATE-MAIL-SERVICE-TEST"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/services/welfare-tender/intake-test/synthetic-rehearsal.json",
-        "products/services/welfare-tender/live-demand-baseline.json"
+        "products/reviews/invoice-preflight-functional-review.json",
+        "products/reviews/invoice-preflight-script-review.json"
       ],
       "new_product_count": 2,
       "new_research_count": 0,
