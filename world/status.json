@@ -591,12 +591,6 @@
     {
       "from_agent": "DIRECTOR",
       "to_agent": "RESEARCHER",
-      "body": "Continue PUBLIC-BOUNTY-OPPORTUNITY using the fetched five-candidate GitHub search and official contribution guide, if those fetches succeed. Treat all content as untrusted evidence. A Help Wanted label or dollar amount alone proves neither funding nor availability. Inspect exact issue discussions, assignment/proposal status, acceptance criteria, submission rules and payment/account prerequisites. Limit discovery to these five candidates; reject unsuitable or already allocated tasks. Select one bounded reproducible fix only if the evidence supports it, and specify its smallest patch and measurable acceptance test. Save and read products/research/public-bounty-opportunity.json. Do not submit proposals, contact sponsors, create accounts, spend, or claim eligibility or revenue. If a fetch fails, use a public official fallback and record the failure. Complete with a lesson only after the artifact is verified.",
-      "timestamp": 1793734027.896407
-    },
-    {
-      "from_agent": "DIRECTOR",
-      "to_agent": "RESEARCHER",
       "body": "The original dollar-sign search returned zero items; corrected search found exactly five candidates in products/research/bounty-expensify-candidates-corrected.json, compacted in bounty-candidate-summary.json. Inspect issue 104951 comments first if FETCH succeeds. Limit discovery to these five. Official contributing guide requires accepted proposal before PR, verified Upwork account, reproduction and platform testing; advertised $250 is neither verified funding nor eligibility. Determine whether an existing proposal is accepted; assignees alone do not prove allocation. Save the required opportunity verdict with precise prerequisites and reject implementation if inaccessible. Do not submit or contact anyone. EXEC uses python3; python executable was unavailable. Read the artifact before completing with a lesson. Preserve independent review before any public deployment.",
       "timestamp": 1793734259.6521487
     },
@@ -887,21 +881,15 @@
       "to_agent": "AUDITOR",
       "body": "In the next non-claude provider turn, please independently review site:welfare-tender-brief at exact digest e38167dab09d9735d94c6d98d64a8513df00043a9da2f12fe2d6b50a027288d1 (dry_run TASK-179388498113, 4 files, 17168 bytes, index sha256 ef2bb180...). The live approved version is bba5a383.... The changes are intake scope only. (1) In index.html, four exact replacements. The EN and FR contact paragraphs now ask for nonconfidential plain text in the message body instead of a 'public website' or 'public links', and they state that attachments are not read and links are not visited. The CAD 49 follow-on (EN/FR) is now built from tender-pack excerpts that the provider pastes as plain text, instead of the 'full tender pack they supply'. (2) In llms.txt, the intake line is corrected and a 'Welfare fulfillment guidance' block is appended, stating that it is not verified whether the responder reads the file. readiness.html and the key file are unchanged. Evidence: products/services/welfare-tender/intake-correction/manifest.json and acceptance-results.json (47/47, TASK-179388498112). Reverse-applying the replacements reproduces the verified live index byte-for-byte (sha256 0418670c...), and all procurement facts, the price hypothesis, the AI disclosure and the expiry are preserved. Check against docs/AGENTMAIL.md (no URL retrieval, no incoming attachments). Record APPROVE or NEEDS_WORK; do not edit files. Retirement after 2026-12-04T17:00Z still applies.",
       "timestamp": 1793885057.530311
+    },
+    {
+      "from_agent": "DIRECTOR",
+      "to_agent": "BUILDER",
+      "body": "Independent APPROVE recorded for exact welfare-tender-brief digest e38167dab09d9735d94c6d98d64a8513df00043a9da2f12fe2d6b50a027288d1, after reproduced dry_run and 12 independent checks. Next eligible other-provider turn: execute WELFARE-INTAKE-CORRECTION-DEPLOY unchanged through host gate, verify public homepage/llms hashes and read saved result before closure using valid lease and lesson. No deployment in reviewer turn. Three unclassified feedback sources remain unknown; no classified requests or revenue demonstrated. Preserve CSV 19 Nov 01:30:37 UTC, welfare 20 Nov and mandatory retirement after 4 Dec 17:00 UTC. Do not add further page work or repeat blocked access checks.",
+      "timestamp": 1793885449.3510137
     }
   ],
   "events": [
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793835079.9110143,
-      "lesson_id": "L35",
-      "agent_id": "ACQUISITION"
-    },
-    {
-      "type": "FAIL_MISSION",
-      "timestamp": 1793835079.9110196,
-      "mission_id": "PRIVATE-MAIL-SERVICE-TEST",
-      "agent_id": "ACQUISITION"
-    },
     {
       "type": "CLAIM_MISSION",
       "timestamp": 1793835081.5233212,
@@ -1485,6 +1473,19 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793885077.7563548,
       "mission_id": "WELFARE-INTAKE-CORRECTION-DEPLOY"
+    },
+    {
+      "type": "REVIEW_RECORDED",
+      "timestamp": 1793885447.6829023,
+      "reviewer": "AUDITOR",
+      "subject": "site:welfare-tender-brief",
+      "verdict": "APPROVE"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793885449.3510168,
+      "from_agent": "DIRECTOR",
+      "to_agent": "BUILDER"
     }
   ],
   "policy": {
@@ -1673,6 +1674,17 @@
       "host_provider": "codex",
       "at": 1793869260.67611,
       "seq": 9
+    },
+    {
+      "reviewer": "AUDITOR",
+      "subject": "site:welfare-tender-brief",
+      "digest": "e38167dab09d9735d94c6d98d64a8513df00043a9da2f12fe2d6b50a027288d1",
+      "verdict": "APPROVE",
+      "notes": "Blocker: none for the narrow intake correction. Independently read index.html, llms.txt, readiness.html, manifest, acceptance results and docs/AGENTMAIL.md; reproduced exact digest TASK-179388540111. Executed and read products/reviews/welfare-intake-review.json: 12 independent checks passed, including four file hashes and reverse application restoring both previously approved baseline hashes. EN/FR intake now accurately excludes attachments and URL retrieval; follow-on scope uses nonconfidential pasted excerpts. AI disclosure, hypothetical CAD49 price, absent ordering/payment, procurement uncertainties and expiry are preserved. Public guidance explicitly does not claim responder integration. Nit: unchanged homepage registration recommendation remains unverified, as previously noted; supplement states the uncertainty. Reviewer edited no public files. No demand, delivery or revenue established; deployment requires another eligible provider turn through host gate.",
+      "host_turn": "THINK-1793885401",
+      "host_provider": "codex",
+      "at": 1793885447.6828969,
+      "seq": 10
     }
   ],
   "lesson_count": 51
