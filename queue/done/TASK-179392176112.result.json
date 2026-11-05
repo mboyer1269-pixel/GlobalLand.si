@@ -1,0 +1,40 @@
+{
+  "status": "DONE",
+  "output": "{\n \"base_index_sha256\": \"f362dc58c2a334b8afa681a2c3348dfd1b6c8cb2d02028a418b8506cf5a6ee9a\",\n \"new_index_sha256\": \"284e37fe349995b86d859b05a6116c3680efdc7d22cf2d290e4b0686444f060c\",\n \"replacements\": 3,\n \"reverse_apply_restores_base\": true,\n \"added_file\": \"verify_example.py\",\n \"verify_example_sha256\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\",\n \"unchanged\": [\n  \"transform.py\",\n  \"verify.py\",\n  \"fixtures/*\",\n  \"llms.txt\",\n  \"key file\"\n ],\n \"ai_disclosure_en_fr_present\": true\n}\n\n",
+  "artifacts": [
+    "products/sites/shopify-catalogue-example/index.html",
+    "products/sites/shopify-catalogue-example/verify_example.py",
+    "products/services/shopify-large-catalogue/reproduction/site-revision-manifest.json",
+    "products/receipts/TASK-179392176112.json"
+  ],
+  "request": {
+    "id": "TASK-179392176112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T23:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import shutil,hashlib,json\nS='products/sites/shopify-catalogue-example/'\nO='products/services/shopify-large-catalogue/reproduction/'\nshutil.copy(O+'verify_example.py',S+'verify_example.py')\nh=open(S+'index.html',encoding='utf-8').read(); base=hashlib.sha256(h.encode()).hexdigest()\nR=[('<li><a href=\"verify.py\">verify.py</a> (independent re-reader used in our tests; a library, not a command)</li>','<li><a href=\"verify.py\">verify.py</a> (independent re-reader used in our tests; a library) and <a href=\"verify_example.py\">verify_example.py</a> (runnable command that calls it)</li>'),\n('# optional: --max-rows-per-file 4000  --barcode-type gtin</pre>','# optional: --max-rows-per-file 4000  --barcode-type gtin\\npython3 verify_example.py fixtures/before-variants.csv fixtures/before-images.csv shopify.csv\\n# prints each check as JSON; exit 0 = all passed, 1 = a check failed (put verify.py in the same folder)</pre>'),\n('ou de prix invalide.</p>','ou de prix invalide. Vérification : <code>python3 verify_example.py fixtures/before-variants.csv fixtures/before-images.csv shopify.csv</code> (code de sortie 0 = toutes les vérifications réussies).</p>')]\nfor a,b in R:\n  assert h.count(a)==1,a\n  h=h.replace(a,b)\nn=h\nfor a,b in R: n=n.replace(b,a)\nrev=hashlib.sha256(n.encode()).hexdigest()==base\nopen(S+'index.html','w',encoding='utf-8').write(h)\nm={'base_index_sha256':base,'new_index_sha256':hashlib.sha256(h.encode()).hexdigest(),'replacements':len(R),'reverse_apply_restores_base':rev,'added_file':'verify_example.py','verify_example_sha256':hashlib.sha256(open(S+'verify_example.py','rb').read()).hexdigest(),'unchanged':['transform.py','verify.py','fixtures/*','llms.txt','key file'],'ai_disclosure_en_fr_present':'Made by autonomous AI agents' in h and 'agents d\\'IA autonomes' in h}\njson.dump(m,open(O+'site-revision-manifest.json','w'),indent=1); print(json.dumps(m,indent=1))"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/services/shopify-large-catalogue/reproduction/verify_example.py"
+      ],
+      "outputs": [
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/sites/shopify-catalogue-example/verify_example.py",
+        "products/services/shopify-large-catalogue/reproduction/site-revision-manifest.json"
+      ],
+      "mission_id": "SHOPIFY-DOWNLOAD-REPRODUCTION"
+    },
+    "description": "Broker action during THINK-1793921761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179392176112",
+  "input_sha256": "12da5c9a66e37f3a117af4f52991dbff62dc6093187040a82c2898d223747862"
+}
