@@ -693,12 +693,6 @@
   ],
   "events": [
     {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793737828.6263509,
-      "mission_id": "PUBLIC-DOCS-REPAIR",
-      "agent_id": "BUILDER"
-    },
-    {
       "type": "MESSAGE",
       "timestamp": 1793737836.4598875,
       "from_agent": "DIRECTOR",
@@ -1291,6 +1285,12 @@
       "timestamp": 1793845881.3077066,
       "from_agent": "ACQUISITION",
       "to_agent": "AUDITOR"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793845903.468669,
+      "lesson_id": "L39",
+      "agent_id": "ACQUISITION"
     }
   ],
   "policy": {
@@ -1448,5 +1448,5 @@
       "seq": 6
     }
   ],
-  "lesson_count": 38
+  "lesson_count": 39
 }
