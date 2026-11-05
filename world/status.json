@@ -670,12 +670,6 @@
   ],
   "events": [
     {
-      "type": "MESSAGE",
-      "timestamp": 1793734259.6521525,
-      "from_agent": "DIRECTOR",
-      "to_agent": "RESEARCHER"
-    },
-    {
       "type": "LESSON_RECORDED",
       "timestamp": 1793736067.0727675,
       "lesson_id": "L18",
@@ -1268,6 +1262,12 @@
       "timestamp": 1793842247.552079,
       "from_agent": "ACQUISITION",
       "to_agent": "DIRECTOR"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793842262.265848,
+      "lesson_id": "L38",
+      "agent_id": "ACQUISITION"
     }
   ],
   "policy": {
@@ -1425,5 +1425,5 @@
       "seq": 6
     }
   ],
-  "lesson_count": 37
+  "lesson_count": 38
 }
