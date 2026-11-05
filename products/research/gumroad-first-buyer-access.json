@@ -1,0 +1,49 @@
+{
+  "mission": "GUMROAD-FIRST-BUYER-ACCESS",
+  "observed_at": "2026-11-05",
+  "source": {
+    "url": "https://gumroad.com/help/article/79-gumroad-discover",
+    "fetch_task": "TASK-179391780400",
+    "http_status": 200,
+    "artifact": "products/research/gumroad-discover-official.html",
+    "sha256": "36e9e36bc2f3dd9fc055557044c06765fad42ce3cbf69e82f09d0bf6b565fff3",
+    "extraction_tasks": [
+      "TASK-179391816111",
+      "TASK-179391816112"
+    ],
+    "note": "Article body is inside the Inertia data-page JSON; only this one official page was used, no linked pages fetched."
+  },
+  "quotations": [
+    "The account level criteria for being eligible for Gumroad Discover is: Your payout settings must be filled in.",
+    "Reach a balance of at least $100 USD from enough genuine sales (not self-purchases or asking your partner/housemates to buy your product).",
+    "Be verified by our risk team in the risk review process , which can take on average 3 weeks after you pass the $100 threshold.",
+    "Once the above criteria are satisfied, a product will be listed on Discover if: Made at least one successful sale (refunded sales don't count) A category has been selected for your product. Ratings are enabled",
+    "Note: Products on Discover are automatically opted into the Gumroad Affiliates Program."
+  ],
+  "fees_from_prior_evidence": {
+    "source": "products/research/gumroad-official-pricing.html (TASK-179391600400)",
+    "direct": "10% + $0.50 per transaction via profile or direct links",
+    "discover": "30% per transaction when new customers find and buy through Discover"
+  },
+  "documented_requirements": [
+    "payout settings completed",
+    "USD 100 balance from genuine third-party sales before account eligibility",
+    "risk-team review averaging ~3 weeks after crossing USD 100",
+    "per product: >=1 non-refunded sale, category selected, ratings enabled"
+  ],
+  "account_specific_unknowns": [
+    "whether a GlobalLand/founder seller account exists (none verified)",
+    "risk review outcome and actual duration",
+    "Discover ranking/traffic once listed",
+    "whether CAD-priced items reach USD 100 balance at the same rate (currency conversion)"
+  ],
+  "verdict": "DO_NOT_RELY_ON_DISCOVER_FOR_FIRST_BUYER",
+  "reasoning": "Discover is gated behind at least USD 100 of genuine sales plus ~3-week risk review, and each product needs its own prior sale. Every first buyer, and enough buyers to reach USD 100 (e.g. 5 sales at USD 20, or 3 at USD 49 before fees), must be acquired outside Gumroad through direct links. A Gumroad account alone supplies a payment page and settlement, not discovery. This corrects any implication in platform-managed-settlement-fit.json that option B provides marketplace exposure at launch.",
+  "implication_for_SERVICE_PAYMENT_COLLECTION": "No material change to the payment blocker: option B remains a collection route only; acquisition must come from our own already-live pages (CSV, welfare, Shopify example) or other direct channels.",
+  "next_experiment": {
+    "status": "NONE_WITH_ACCESSIBLE_PREREQUISITES",
+    "reason": "Any Gumroad experiment requires a founder-owned seller account (not available). The only accessible first-buyer exposure is the three existing live pages whose observation windows end 2026-11-19/20; no new experiment is added.",
+    "reconsideration_trigger": "A founder-provided Gumroad profile URL, or a classified REQUEST in commercial_feedback."
+  },
+  "limits": "One official help page, untrusted content, observed once; Gumroad may change criteria. No account, agreement, contact or credential probe."
+}
