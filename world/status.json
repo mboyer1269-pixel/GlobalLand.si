@@ -411,6 +411,17 @@
         "products/services/csv-text-diagnostic/search-discovery/indexnow-manifest.json",
         "products/reviews/invoice-indexnow-review.json"
       ]
+    },
+    {
+      "mission_id": "CSV-WORKED-EXAMPLE",
+      "goal": "Run one bounded acquisition-content experiment for the existing live CSV diagnostic service. Read lessons L14, L34, L35 and L40, the saved invoice-demand evidence, current site, diagnostic protocol and launch baseline first. Use one exact, previously observed structural CSV problem to prepare a useful EN/FR worked example: synthetic input, actual checker output, minimal correction and actual corrected output. Cite the original public pain evidence without copying personal information; distinguish structural validity from accounting-platform compatibility. If existing sources do not support a structural problem this checker actually detects, save a precise stop result without broader discovery. Add at most one substantive example page and one relevant link from the existing site; preserve approved intake terms, privacy boundaries, disclosures and price hypothesis. This is useful acquisition content, not a new product or another metadata/IndexNow experiment. Execute and read acceptance checks, save source provenance and a minimal change manifest under products/services/csv-text-diagnostic/worked-example/. Obtain a fresh PUBLISH_SITE dry_run digest and request independent review before deployment; do not publish during preparation. Define measurement using only available aggregate feedback, explicitly retaining unknown attribution and distinguishing requests, deliveries, customization interest, orders and receipts. Keep the original CSV observation deadline unchanged. No outreach, new accounts, credentials probes, spending, fabricated traffic or private correspondence access. Complete preparation only after reading artifacts, using a valid lease and including a lesson.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "ACQUISITION",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -710,12 +721,6 @@
     }
   ],
   "events": [
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793743229.836808,
-      "mission_id": "DOCS-REQUEST-FULFILLMENT",
-      "agent_id": "ACQUISITION"
-    },
     {
       "type": "MESSAGE",
       "timestamp": 1793745036.458071,
@@ -1311,6 +1316,11 @@
       "timestamp": 1793849490.1135042,
       "from_agent": "ACQUISITION",
       "to_agent": "DIRECTOR"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793850225.2224865,
+      "mission_id": "CSV-WORKED-EXAMPLE"
     }
   ],
   "policy": {
