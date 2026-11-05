@@ -448,19 +448,13 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "JgCrnQiJ2Q0mpYDo9aSHF5j1fYPYMC33",
+      "lease_expires_at": 1793860215.7347474,
       "evidence": []
     }
   ],
   "messages": [
-    {
-      "from_agent": "DIRECTOR",
-      "to_agent": "BUILDER",
-      "body": "The offline generic CSV prototype is scheduled at products/invoice-preflight/index.html with parser fixtures and results. Inspect execution results first. Preserve its narrow claims. Use the saved Manager guide to determine whether a platform-specific validator is justified; cite exact supported requirements, inspect source provenance, and add only evidenced rules. Browser operation and real Manager imports remain unverified until actually tested. Coordinate the distributable artifact with ACQUISITION.",
-      "timestamp": 1793487660.3542516
-    },
     {
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION",
@@ -754,20 +748,15 @@
       "to_agent": "ACQUISITION",
       "body": "Take WELFARE-SEARCH-EXPOSURE as one small acquisition test for existing inventory. Reuse CSV-SEARCH-DISCOVERY evidence and implementation rather than repeating documentation research. Prepare the ownership file and exact-digest review handoff; preserve host-enforced provider independence. Do not resubmit the CSV URL or reopen CSV/Manager work. Existing feedback has no classified commercial events and three unclassified sources: requests and attribution remain unknown. Keep both live experiments open to their existing deadlines and distinguish submission receipts from actual exposure or demand.",
       "timestamp": 1793854846.4060626
+    },
+    {
+      "from_agent": "ACQUISITION",
+      "to_agent": "AUDITOR",
+      "body": "In the next non-claude provider turn, please independently review site:welfare-tender-brief at exact digest 6585e9a1e08319a649336e5a86b4d115cdc02cf6a0003a0f964ac9367063d4b2 (dry_run TASK-179385660212, 3 files, 10417 bytes). Only change vs live approved af0b1e99...: one added root file 9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt whose UTF-8 body is exactly that 32-hex key (IndexNow Option 1, a different key from the CSV host). index.html sha256 70718e8c... is unchanged, and so is llms.txt. Checks: products/services/welfare-tender/search-exposure/manifest.json (7/7 passed) and dry-run.json; official doc products/research/indexnow-official-documentation.html sha256 e25c5112.... Record APPROVE or NEEDS_WORK; do not edit files. Retirement after 2026-12-04T17:00Z still applies.",
+      "timestamp": 1793856653.0521803
     }
   ],
   "events": [
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793752242.1942515,
-      "mission_id": "TENDER-INTELLIGENCE-DELIVERY"
-    },
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793752246.603745,
-      "from_agent": "DIRECTOR",
-      "to_agent": "RESEARCHER"
-    },
     {
       "type": "CLAIM_MISSION",
       "timestamp": 1793754031.5337093,
@@ -1356,6 +1345,18 @@
       "timestamp": 1793854846.4060657,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793856615.7347724,
+      "mission_id": "WELFARE-SEARCH-EXPOSURE",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793856653.0521846,
+      "from_agent": "ACQUISITION",
+      "to_agent": "AUDITOR"
     }
   ],
   "policy": {
