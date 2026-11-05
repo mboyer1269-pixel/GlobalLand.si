@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "32318 1 1\n[0] Shopify Help Center | Using CSV files to import and export products Help Start for free Log in Contents Using CSV files to import and export products You can use a CSV (comma-separated values) file to import products into your Shopify store, and to export products from your store. When you use a CSV file, you can import or export a large number of products and their details at same time. This can be helpful if you want to exchange product information between Shopify and other platforms. To learn more about how to use CSV files, refer to open and edit a CSV file . On this page Download a sample CSV file Considerations for the product CSV file Description of the columns in the product CSV file\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/doc-extract.txt",
+    "products/receipts/TASK-179390958112.json"
+  ],
+  "request": {
+    "id": "TASK-179390958112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:13:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,os\nt=open('products/research/shopify-product-csv-official.txt',encoding='utf-8').read()\nkeys=['Image Src','Image Position','Variant Image','Variant Barcode','Option1','Option2','Handle','Variant SKU','Image Alt','one row','first row','MB','Status','Variant Inventory','Variant Grams','Variant Weight Unit','Variant Fulfillment','Published','Title']\nparas=re.split(r'\\n+',t)\nout=[]\nfor i,p in enumerate(paras):\n  if any(k.lower() in p.lower() for k in keys):\n    out.append(f'[{i}] '+p.strip()[:700])\nr='\\n'.join(out)\nos.makedirs('products/services/shopify-large-catalogue',exist_ok=True)\nopen('products/services/shopify-large-catalogue/doc-extract.txt','w',encoding='utf-8').write(r)\nprint(len(t),len(paras),len(out)); print(r[:16000])"
+      ],
+      "inputs": [
+        "products/research/shopify-product-csv-official.txt"
+      ],
+      "outputs": [
+        "products/services/shopify-large-catalogue/doc-extract.txt"
+      ],
+      "mission_id": "SHOPIFY-LARGE-CATALOGUE-SAMPLE"
+    },
+    "description": "Broker action during THINK-1793909581",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179390958112",
+  "input_sha256": "dbb9fb2e635ee20cf0a1c165d59f951f5ea8ac7a8391b8c47ad24d8b15c7d5ff"
+}
