@@ -74,6 +74,16 @@ def _stamp(value):
     return value if isinstance(value, str) and STAMP.fullmatch(value) else None
 
 
+def _timestamp(value):
+    if _stamp(value) is None:
+        return None
+    try:
+        parsed = datetime.datetime.fromisoformat(value.replace('Z', '+00:00'))
+        return parsed.timestamp() if parsed.tzinfo is not None else None
+    except (ValueError, OverflowError, OSError):
+        return None
+
+
 def _age_minutes(path, now):
     try:
         return round((now - path.stat().st_mtime) / 60, 1)
@@ -125,9 +135,25 @@ def collect(root, cron=pathlib.Path('/etc/cron.d/globalland-think'), log=pathlib
     facts['unpublished_turns'] = pending
 
     facts['cron_installed'] = cron.is_file()
+    facts['cron_service_active'] = None
+    try:
+        service = run(['systemctl', 'is-active', 'cron'], capture_output=True, text=True, timeout=20)
+        if service.returncode == 0 and service.stdout.strip() == 'active':
+            facts['cron_service_active'] = True
+        elif service.returncode == 3 and service.stdout.strip() in ('inactive', 'failed'):
+            facts['cron_service_active'] = False
+    except (OSError, subprocess.TimeoutExpired):
+        pass
     backups = sorted((root / 'backups').glob('upgrade-*/cron-globalland-think')) if (root / 'backups').is_dir() else []
     facts['cron_backup'] = str(backups[-1]) if backups else None
     facts['log_age_minutes'] = _age_minutes(log, now)
+    last = facts.get('last_turn') or {}
+    last_at = _timestamp(last.get('at'))
+    failure_at = _timestamp((facts.get('failure') or {}).get('at'))
+    facts['last_turn_age_minutes'] = round((now-last_at)/60, 1) if last_at is not None and last_at <= now else None
+    facts['failure_superseded'] = bool(last.get('state') == 'DECISION_READY'
+                                     and last_at is not None and failure_at is not None
+                                     and failure_at < last_at <= now)
 
     lock = root / 'state' / 'supervisor.lock'
     facts['lock_held'] = None
@@ -198,9 +224,20 @@ def diagnose(facts):
                 'Une mise à jour interrompue a laissé les cycles en pause. Restaurer : sudo install -m 644 %s /etc/cron.d/globalland-think' % facts['cron_backup'])
         else:
             add('CRON_MISSING', 'CRITIQUE', 'aucun horaire /etc/cron.d/globalland-think', 'Réactiver les cycles : sudo python3 /opt/globalland/control/start_autonomy.py')
-    elif facts.get('log_age_minutes') is not None and facts['log_age_minutes'] > 45:
-        add('CRON_NOT_RUNNING', 'CRITIQUE', 'journal think.log muet depuis %s min alors que l\'horaire existe' % facts['log_age_minutes'],
-            'Le service cron ne lance plus rien : sudo systemctl status cron, puis sudo systemctl restart cron.')
+    elif facts.get('cron_service_active') is False:
+        add('CRON_NOT_RUNNING', 'CRITIQUE', 'horaire présent mais service cron confirmé inactif ou en échec',
+            'Examiner sudo systemctl status cron et ses journaux avant de rétablir le service partagé.')
+    elif facts.get('cron_service_active') is None:
+        add('CRON_STATUS_UNAVAILABLE', 'INFO', 'état du service cron non vérifié',
+            'Vérifier sudo systemctl status cron ; une erreur de lecture ne prouve pas un arrêt.')
+    age = facts.get('last_turn_age_minutes')
+    if facts.get('cron_installed') and age is not None and age > 45:
+        add('DIRECTOR_ACTIVITY_STALE', 'HAUTE', 'dernier état de planification daté de %s min' % age,
+            'Examiner les processus, le verrou et les derniers résultats ; vérifier les déclenchements de l’horaire. Un service actif ne prouve pas que chaque tâche planifiée réussit.')
+    elif (facts.get('cron_installed') and age is None and facts.get('log_age_minutes') is not None
+          and facts['log_age_minutes'] > 45):
+        add('DIRECTOR_ACTIVITY_UNVERIFIED', 'INFO', 'journal silencieux et aucun état récent de planification vérifiable',
+            'Examiner les états structurés et les déclenchements de l’horaire ; le silence du journal ne prouve pas une panne de cron.')
     if facts.get('docker_ok') is False:
         add('DOCKER_DOWN', 'CRITIQUE', 'docker info échoue', 'Démarrer Docker : sudo systemctl start docker (sans toucher aux conteneurs d\'Oria).')
     if facts.get('brain_containers'):
@@ -213,7 +250,11 @@ def diagnose(facts):
             add('CREDENTIALS_MISSING', 'HAUTE', 'aucune connexion enregistrée pour ' + provider,
                 'Reconnecter : sudo bash /opt/globalland/control/login_subscriptions.sh ' + provider)
     failure = facts.get('failure')
-    if failure and failure.get('reason'):
+    if failure and failure.get('reason') and facts.get('failure_superseded') is True:
+        add('PLANNER_FAILURE_SUPERSEDED', 'INFO', 'échec historique à %s, suivi d’une planification réussie à %s' %
+            (failure.get('at'), (facts.get('last_turn') or {}).get('at')),
+            'Conserver cette trace historique. Le succès de planification ne prouve pas la publication, l’exécution ou un revenu ; vérifier leurs résultats séparément.')
+    elif failure and failure.get('reason'):
         add('PLANNER_' + failure['reason'].upper(), 'CRITIQUE', 'dernier échec du planificateur à %s (%s)' % (failure.get('at'), failure.get('exception_type')),
             FIXES.get(failure['reason'], 'Code inconnu de cet outil : lancer un cycle à la main pour voir le message.'))
     for attempt in (facts.get('last_turn') or {}).get('attempts', []):

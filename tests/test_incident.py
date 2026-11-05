@@ -1,4 +1,5 @@
 import fcntl
+import datetime
 import json
 import os
 import pathlib
@@ -15,7 +16,7 @@ import incident  # noqa: E402
 NOW = 1793520000.0
 
 
-def fake_run(ps='', docker_ok=True, containers=''):
+def fake_run(ps='', docker_ok=True, containers='', cron_state='active'):
     def run(args, **kwargs):
         if args[0] == 'ps':
             return SimpleNamespace(returncode=0, stdout=ps)
@@ -25,6 +26,10 @@ def fake_run(ps='', docker_ok=True, containers=''):
             return SimpleNamespace(returncode=0 if docker_ok else 1, stdout='')
         if args[:2] == ['docker', 'ps']:
             return SimpleNamespace(returncode=0, stdout=containers)
+        if args == ['systemctl', 'is-active', 'cron']:
+            if cron_state is None:
+                raise FileNotFoundError('systemctl')
+            return SimpleNamespace(returncode=0 if cron_state == 'active' else 3, stdout=cron_state)
         raise AssertionError(args)
     return run
 
@@ -110,9 +115,56 @@ class IncidentTests(unittest.TestCase):
         self.assertEqual(findings[0]['code'], 'CRON_PAUSED_BY_UPGRADE')
         self.assertIn('install -m 644', findings[0]['fix'])
 
-    def test_silent_log_with_cron_present_means_cron_not_running(self):
+    def test_silent_log_does_not_prove_cron_is_stopped(self):
         os.utime(self.log, (NOW - 6 * 3600, NOW - 6 * 3600))
-        self.assertIn('CRON_NOT_RUNNING', self.codes(self.facts()))
+        self.assertNotIn('CRON_NOT_RUNNING', self.codes(self.facts()))
+        self.assertIn('DIRECTOR_ACTIVITY_UNVERIFIED', self.codes(self.facts()))
+
+    def status(self, age=600, state='DECISION_READY', at=None):
+        stamp = at or datetime.datetime.fromtimestamp(NOW-age, datetime.timezone.utc).isoformat()
+        (self.root / 'state/private/controller-run.json').write_text(json.dumps(dict(
+            turn='THINK-1793493000', at=stamp, state=state, attempts=[])))
+
+    def failure(self, age=3600):
+        stamp = datetime.datetime.fromtimestamp(NOW-age, datetime.timezone.utc).isoformat()
+        (self.root / 'state/private/controller-failure.json').write_text(json.dumps(dict(
+            at=stamp, stage='planner.tick', exception_type='ValueError', reason='all_subscription_providers_failed')))
+
+    def test_recent_success_supersedes_old_failure_despite_silent_log(self):
+        self.failure(); self.status()
+        os.utime(self.log, (NOW - 6*3600, NOW - 6*3600))
+        facts = self.facts(); codes = self.codes(facts)
+        self.assertNotIn('CRON_NOT_RUNNING', codes)
+        self.assertNotIn('PLANNER_ALL_SUBSCRIPTION_PROVIDERS_FAILED', codes)
+        self.assertIn('PLANNER_FAILURE_SUPERSEDED', codes)
+        self.assertEqual(facts['failure']['reason'], 'all_subscription_providers_failed')
+
+    def test_newer_failure_remains_critical(self):
+        self.status(age=3600); self.failure(age=600)
+        self.assertIn('PLANNER_ALL_SUBSCRIPTION_PROVIDERS_FAILED', self.codes(self.facts()))
+
+    def test_invalid_or_future_success_cannot_prove_recovery(self):
+        self.failure()
+        for at in ('2026-99-99T00:00:00Z', '2026-11-01T00:00:00', '2099-01-01T00:00:00Z'):
+            with self.subTest(at=at):
+                self.status(at=at)
+                self.assertIn('PLANNER_ALL_SUBSCRIPTION_PROVIDERS_FAILED', self.codes(self.facts()))
+
+    def test_actual_stopped_cron_is_reported_even_after_recent_manual_success(self):
+        self.status()
+        self.assertIn('CRON_NOT_RUNNING', self.codes(self.facts(run=fake_run(cron_state='inactive'))))
+
+    def test_unknown_service_state_is_not_reported_as_stopped(self):
+        self.status()
+        facts = self.facts(run=fake_run(cron_state=None))
+        self.assertIsNone(facts['cron_service_active'])
+        self.assertNotIn('CRON_NOT_RUNNING', self.codes(facts))
+
+    def test_stale_planning_is_reported_without_blame_on_active_cron(self):
+        self.status(age=3*3600)
+        codes = self.codes(self.facts())
+        self.assertIn('DIRECTOR_ACTIVITY_STALE', codes)
+        self.assertNotIn('CRON_NOT_RUNNING', codes)
 
     def test_held_lock_and_old_supervisor_process_is_reported_as_stuck(self):
         lock = self.root / 'state' / 'supervisor.lock'
