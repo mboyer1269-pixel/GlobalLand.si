@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "6712\n>> or which URLs are being submitted by hosting at least one text file within the host. Once you submit your URLs to search engines, search engines will crawl the key file to verify ownership and use the key until you change the key. Only you and the search engines should know the key and your file key location. We offer two ways to verify ownership. Option 1 H\n>> ons within the same host and you must tell search engines the location of this text key file in each IndexNow notification by specifying the location using the keyLocation variable. If you submit an URL, specify the key file location as keyLocation URLs parameter value. https://<searchengine>/indexnow? url =http://www.example.com/product.html& key = & keyLoc\n>> d, or deleted. URL must be URL-escaped and encoded and please make sure that your URLs follow the RFC-3986 standard for URIs. Your-key should have a minimum of 8 and a maximum of 128 hexadecimal characters. The key can contain only the following characters: lowercase characters (a-z), uppercase characters (A-Z), numbers (0-9), and dashes (-). For example, if\n>> the key and your file key location. We offer two ways to verify ownership. Option 1 Hosting a text key file at the root directory of your host. You must host a UTF-8 encoded text key file {your-key}.txt listing the key in the file at the root directory of your website. For instance for the previous examples, you will need to host your UTF-8 key file at https\n>> you use Option 1 and place your file key at the root directory of your web server. Response format HTTP Code Response Reasons 200 OK URL submitted successfully 202 Accepted URL received. IndexNow key validation pending. 400 Bad request Invalid format 403 Forbidden In case of key not valid (e.g. key not found, file found but key not in the file) 422 Unprocess\n>> IndexNow key validation pending. 400 Bad request Invalid format 403 Forbidden In case of key not valid (e.g. key not found, file found but key not in the file) 422 Unprocessable Entity In case of URLs which don’t belong to the host or the key is not matching the schema in the protocol 429 Too Many Requests Too Many Requests (potential Spam) Requirement for s\n>>  format HTTP Code Response Reasons 200 OK URL submitted successfully 202 Accepted URL received. IndexNow key validation pending. 400 Bad request Invalid format 403 Forbidden In case of key not valid (e.g. key not found, file found but key not in the file) 422 Unprocessable Entity In case of URLs which don’t belong to the host or the key is not matching the s\n>> ct.html& key = You can issue the HTTP request using your browser, wget, curl, or any other mechanism of your choosing. A successful request will return an HTTP 200 response code; if you receive a different response, verify that you don’t submit too often, that the key and URL are valid and resubmit the request. The HTTP 200 response code only indicates that \n>> ust contain the key Option 2 Hosting a text key file within your host. You can also host one to many UTF-8 encoded text key files in other locations within the same host and you must tell search engines the location of this text key file in each IndexNow notification by specifying the location using the keyLocation variable. If you submit an URL, specify the\n>>  Only you and the search engines should know the key and your file key location. We offer two ways to verify ownership. Option 1 Hosting a text key file at the root directory of your host. You must host a UTF-8 encoded text key file {your-key}.txt listing the key in the file at the root directory of your website. For instance for the previous examples, you w\n\n",
+  "artifacts": [
+    "products/research/indexnow-doc-text.txt",
+    "products/receipts/TASK-179384580311.json"
+  ],
+  "request": {
+    "id": "TASK-179384580311",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T02:30:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html\nt=open('/workspace/products/research/indexnow-official-documentation.html',encoding='utf-8',errors='replace').read()\nt=re.sub(r'(?s)<script.*?</script>|<style.*?</style>','',t)\nt=html.unescape(re.sub(r'<[^>]+>',' ',t))\nt=re.sub(r'\\s+',' ',t)\nopen('/workspace/products/research/indexnow-doc-text.txt','w').write(t)\nprint(len(t))\nfor k in ['key file','keyLocation','8 ','UTF-8','202','422','403','200 ','same host','https://api.indexnow.org','root directory']:\n  for m in re.finditer(re.escape(k),t):\n    print('>>',t[max(0,m.start()-160):m.start()+200]);break"
+      ],
+      "outputs": [
+        "products/research/indexnow-doc-text.txt"
+      ],
+      "mission_id": "CSV-SEARCH-DISCOVERY"
+    },
+    "description": "Broker action during THINK-1793845803",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179384580311",
+  "input_sha256": "0c013c11e5f31f9e72c2d9839529b5b7570685f9e68e69385bc386e92872838f"
+}
