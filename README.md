@@ -31,6 +31,8 @@ Le principe est simple : les **GLC** organisent le travail interne, les **CAD r�
 <a id="etat"></a>
 ## État vérifié
 
+Pour l'état courant, consulter les projections datées du [contrôleur](world/controller.json), du [monde](world/status.json) et de la [trésorerie](bank/status.json). Elles décrivent leur dernière publication, pas nécessairement l'instant présent. Le tableau ci-dessous est une **archive du 2 novembre**, notamment pour les connexions et services externes. Les correctifs en préparation après l'audit sont suivis dans le [plan de solidification](docs/solidification-audit-20261105.md) ; un changement du dépôt ne prouve pas son installation.
+
 **Point de contrôle du 2 novembre 2026.** Une reprise manuelle et une reprise automatique ont été observées. Les [preuves de reprise](docs/verification/2026-11-02-recovery.md) et le [diagnostic détaillé](docs/DIAGNOSTIC-AUTONOMIE-2026-11-02.md) conservent les constats, corrections et limites. L’endurance sur plusieurs jours reste à éprouver.
 
 | Domaine | Constat |

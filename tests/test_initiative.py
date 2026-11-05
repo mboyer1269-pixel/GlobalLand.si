@@ -151,6 +151,21 @@ class CoverageTests(Fixture):
 
 
 class AdmissionTests(Fixture):
+    def test_large_legacy_result_wakes_once_and_remains_current(self):
+        store=self.store()
+        ident,record=self.result(6543,output='123 tests passed')
+        record['files']={'products/a.txt':'a'*600000,'products/b.txt':'b'*600000}
+        (self.root/'state'/(ident+'.json')).write_text(json.dumps(record))
+        store.recorded_result(ident,now=1000)
+        store.reconcile(dict(missions=[]),now=1001)
+        events=store.events(kind='QUEUED_RESULT')
+        self.assertEqual(len(events),1)
+        with store._db() as db:self.assertTrue(store._current(db,events[0]))
+        from result_envelope import write_result_envelope
+        write_result_envelope(self.root,record)
+        store.reconcile(dict(missions=[]),now=1002)
+        self.assertEqual(len(store.events(kind='QUEUED_RESULT')),1)
+
     def store(self):
         import initiative
         return initiative.Store(self.root, self.config)

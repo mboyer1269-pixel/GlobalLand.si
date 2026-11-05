@@ -22,6 +22,19 @@ def fp(products=None, missions=None, revenue=0):
 
 
 class DeltaTests(unittest.TestCase):
+    def test_stall_card_summarizes_large_mission_catalog_without_losing_count(self):
+        missions = [dict(mission_id='M-%05d-' % n + 'x' * 110, status='OPEN') for n in range(10000)]
+        with tempfile.TemporaryDirectory() as directory:
+            path = pathlib.Path(directory) / progress.STATE
+            path.parent.mkdir(parents=True)
+            path.write_text(json.dumps(dict(stalled_turns=3)))
+            result = progress.board(directory, dict(missions=missions))
+        self.assertLess(len(json.dumps(result).encode()), 64 * 1024)
+        card = next(c for c in result['open'] if c['id'] == progress.SYSTEM_CARD)
+        self.assertEqual(card['open_missions_total'], 10000)
+        self.assertEqual(card['missions_collection'], 'missions')
+        self.assertTrue(card['missions_truncated'])
+
     def test_what_counts_as_progress(self):
         base = fp({'products/research/a.json': '1', 'products/app/index.html': '1'}, {'M': 'RUNNING'})
         cases = {

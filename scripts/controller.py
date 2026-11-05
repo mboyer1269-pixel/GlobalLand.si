@@ -391,18 +391,24 @@ class Controller:
     def recent_results(self, *, priority=()):
         """A bounded live result view; it never extends initial turn coverage."""
         from initiative import source_revision, TASK, TERMINAL
+        from result_envelope import read_result, result_paths
         results=[];coverage=[];excluded=[]
         work=self.root/'work'
         candidates=[]
-        for base,pattern,private in ((work/'queue','*.result.json',False),(self.root/'state','TASK-*.json',True)):
+        for base,pattern,private in ((work/'queue','*.result.json',False),):
             if base.exists():candidates.extend((private,p) for p in base.rglob(pattern) if p.is_file() and not p.is_symlink())
+        # Private identities suppress same-ID public replacements even when
+        # their source is corrupt, unavailable or a refused filesystem entry.
+        candidates.extend((True,p) for p in result_paths(self.root))
         def recency(candidate):
             private,p=candidate
             number=re.fullmatch(r'TASK-([0-9]{4,12})(?:\.result)?\.json',p.name)
             # Durable journals retain completion/publication times. Worktree
             # mtimes are recreated by every Git archive extraction, so public
             # fallback uses stable task order, never extraction order.
-            return (private,p.stat().st_mtime_ns if private else 0,int(number[1]) if number else -1,str(p))
+            try:modified=p.stat().st_mtime_ns if private else 0
+            except OSError:modified=0
+            return (private,modified,int(number[1]) if number else -1,str(p))
         order={}
         for e in priority:
             if isinstance(e,dict) and e.get('kind')=='QUEUED_RESULT' and isinstance(e.get('key'),str):
@@ -412,13 +418,13 @@ class Controller:
         seen=set()
         for private,p in candidates:
             if len(results)>=20:break
-            if p.stat().st_size>1024*1024:continue
+            if not private and p.stat().st_size>1024*1024:continue
             try:
-                record=strict_json(p.read_bytes())
                 ident=p.name.removesuffix('.result.json').removesuffix('.json')
                 if not TASK.fullmatch(ident):continue
                 if ident in seen:continue
                 seen.add(ident)
+                record=read_result(self.root,p) if private else strict_json(p.read_bytes())
                 v=record.get('result',record)
                 if not isinstance(v,dict) or v.get('status') not in TERMINAL:
                     excluded.append(dict(kind='QUEUED_RESULT',key=ident,reason='INVALID_RESULT'));continue
@@ -453,6 +459,7 @@ class Controller:
                             if request['id']==ident:action=request['action'];break
                         except (ValueError,TypeError,KeyError):continue
                 redacted=action not in ('EXEC','FETCH','WORLD','STATUS','PUBLISH_ACTOR','ACTOR_STATS','PUBLISH_SITE')
+                if private:redacted=redacted or record.get('output_redacted') is True
                 screened=dict(v)
                 if isinstance(screened.get('artifacts'),list):
                     # EXEC adds this public provenance path to every success.
@@ -464,9 +471,9 @@ class Controller:
                 try:check_secrets(output.encode())
                 except ValueError:redacted=True
                 item=dict(task=ident,status=v['status'],output='[output redacted]' if redacted else output[:2000],
-                          output_truncated=not redacted and len(output)>2000,output_redacted=redacted)
+                          output_truncated=not redacted and (len(output)>2000 or (private and record.get('output_truncated') is True)),output_redacted=redacted)
                 results.append(item)
-                source=dict(record,id=ident)
+                source=record.copy();source['id']=ident
                 if 'result' not in source:source['result']=v
                 try:
                     key,version=source_revision('QUEUED_RESULT',source)
@@ -508,15 +515,42 @@ class Controller:
             if commercial._interpreted(observation):
                 version=digest({k:v for k,v in observation.items() if k!='observed_at'})
                 coverage.append(dict(kind='COMMERCIAL_SIGNAL',key=key,version=version,representation='AGGREGATE_COUNTER'))
-        # Lease facts are represented by the exact world snapshot, not mtime.
+        # The full state remains available for internal assessment. The prompt
+        # gets the bounded overview and exact prioritized lease facts, so a
+        # mission omitted by paging cannot be acknowledged without being seen.
         from initiative import source_revision
-        for mission in world.get('missions',[]):
+        visible_world=self.world.public_page() if hasattr(self.world,'public_page') else world
+        lease_priority={e['key']:e.get('version') for e in priority if isinstance(e,dict)
+                        and e.get('kind')=='LEASE_DUE' and isinstance(e.get('key'),str)}
+        if lease_priority and visible_world is not world:
+            by_id={m.get('mission_id'):m for m in world.get('missions',[])}
+            selected=[];seen_missions=set()
+            budget=192*1024-len(json.dumps(dict(visible_world,missions=[]),ensure_ascii=False).encode())-1024
+            prioritized=[]
+            for key,version in lease_priority.items():
+                mission=by_id.get(key)
+                try:current=source_revision('LEASE_DUE',mission)
+                except ValueError:continue
+                if current==(key,version):prioritized.append(mission)
+            for mission in prioritized+visible_world.get('missions',[]):
+                key=mission.get('mission_id')
+                if key in seen_missions:continue
+                size=len(json.dumps(mission,ensure_ascii=False).encode())+2
+                if size>budget:continue
+                selected.append(mission);seen_missions.add(key);budget-=size
+            visible_world['missions']=selected
+            projection=visible_world.get('projection',{})
+            count=projection.get('collections',{}).get('missions')
+            if count is not None:
+                count['shown']=len(selected)
+                projection['truncated']=any(v['shown']<v['total'] for v in projection['collections'].values())
+        for mission in visible_world.get('missions',[]):
             try:key,version=source_revision('LEASE_DUE',mission)
             except ValueError:continue
             coverage.append(dict(kind='LEASE_DUE',key=key,version=version,representation='WORLD_SNAPSHOT'))
         snapshot=commercial.progress_snapshot(self.root,self.tool_config,scan=scan)
         assessment=progress.assess(self.root,world,bank,dict(self.config,agentmail=self.tool_config.get('agentmail',{})),commercial_snapshot=snapshot)
-        context=dict(world=world,treasury=bank,economic_context=economy['context'],source_products=products,latest_task_results=results,lessons=relevant,
+        context=dict(world=visible_world,treasury=bank,economic_context=economy['context'],source_products=products,latest_task_results=results,lessons=relevant,
                     commercial_feedback=commercial.project(self.root,self.tool_config,scan=scan),
                     capabilities=capabilities,commercial_paths=commercial_paths(capabilities,bank),
                     playbooks=lessons_module.playbooks(work))

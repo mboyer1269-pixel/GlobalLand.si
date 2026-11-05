@@ -53,6 +53,43 @@ class FakeHandlers:
 
 
 class BrokerTests(unittest.TestCase):
+    def test_world_pages_are_complete_bounded_and_validate_arguments(self):
+        from broker import read_handlers
+        from world import World
+        world=World(pathlib.Path(self.tmp.name)/'world.sqlite3');world.bootstrap()
+        for n in range(12):
+            world.apply('page-create-'+str(n),dict(op='create_mission',mission_id='PAGE-'+str(n),goal='x'*10000),actor='DIRECTOR')
+        class Bank:
+            def snapshot(self):return dict(state='UNFUNDED')
+        handlers=read_handlers(pathlib.Path(self.tmp.name),world,Bank(),lambda:dict(capabilities={},latest_task_results=[]))
+        handlers['execute']=self.fake.execute
+        with Broker(self.directory,TURN,handlers,max_calls=40) as b:
+            overview=call(b.socket_path,'world_status')['result']['world']
+            self.assertTrue(overview['projection']['truncated'])
+            pages=overview['projection']['collections']['missions']['pages']
+            items=[]
+            for page in range(pages):
+                response=call(b.socket_path,'world_status',dict(collection='missions',page=page))
+                self.assertTrue(response['ok'])
+                self.assertLess(len(json.dumps(response).encode()),256*1024)
+                value=response['result']['world']
+                self.assertEqual(value['snapshot_sha256'],overview['projection']['snapshot_sha256'])
+                items.extend(value['items'])
+            self.assertEqual({v['mission_id'] for v in items},{v['mission_id'] for v in world.snapshot()['missions']})
+            for args in (dict(page=0),dict(collection='missions',page=True),dict(collection='../missions'),dict(collection='unknown'),dict(collection='missions',page=pages)):
+                self.assertFalse(call(b.socket_path,'world_status',args)['ok'])
+
+    def test_pending_publication_is_visible_to_the_brain(self):
+        table=self.fake.table()
+        table['execute']=lambda task:dict(status='DONE',output='effect recorded',
+            artifacts=['products/recorded.txt'],publication='PENDING: effect recorded; publication retried next cycle. Do not resubmit.')
+        with Broker(self.directory,TURN,table) as b:
+            response=call(b.socket_path,'submit_action',dict(agent='BUILDER',action='EXEC',args=dict(argv=['true'],outputs=[])))
+        self.assertTrue(response['ok'])
+        self.assertEqual(response['result']['status'],'DONE')
+        self.assertIn('Do not resubmit',response['result'].get('publication',''))
+        self.assertFalse(response['result'].get('artifacts_visible',True))
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(dir='/tmp'); self.addCleanup(self.tmp.cleanup)
         self.directory = pathlib.Path(self.tmp.name) / 'THINK'
@@ -81,7 +118,7 @@ class BrokerTests(unittest.TestCase):
             cases = [
                 (call(b.socket_path, None, raw=b'not json\n'), 'one JSON object'),
                 (call(b.socket_path, 'delete_world'), 'unknown broker operation'),
-                (call(b.socket_path, 'world_status', {'x': 1}), 'takes no arguments'),
+                (call(b.socket_path, 'world_status', {'x': 1}), 'world_status accepts'),
                 (call(b.socket_path, 'submit_action', {'agent': 'DIRECTOR', 'action': 'SPEND', 'args': {'request': {}}}), 'SPEND and RECONCILE use the final decision'),
                 (call(b.socket_path, 'submit_action', {'agent': 'DIRECTOR', 'action': 'EXEC', 'args': {'argv': ['true'], 'surprise': 1}}), 'refused'),
                 (call(b.socket_path, 'submit_action', {'agent': 'DIRECTOR', 'action': 'FETCH', 'args': {'url': 'https://example.com/', 'output': '/etc/passwd'}}), 'refused'),

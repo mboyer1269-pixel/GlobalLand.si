@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        actor: [rss-reader, link-checker]
+        actor: [rss-reader, link-checker, domain-availability, csv-preflight]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

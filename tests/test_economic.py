@@ -277,7 +277,7 @@ class EconomicConsumerTests(EconomicFixture):
                 self.assertEqual(receivable['state'], 'UNAVAILABLE')
                 self.assertIsNone(receivable['apify_receivable_usd_cents'])
                 self.assertIsNone(receivable['apify_receivable_months'])
-        with patch.object(Path, 'read_text', side_effect=PermissionError('PRIVATE-ERROR')):
+        with patch.object(Path, 'open', side_effect=PermissionError('PRIVATE-ERROR')):
             result = self.project()
         self.assertEqual(result['context']['receivables']['state'], 'UNAVAILABLE')
         self.assertNotIn('PRIVATE-ERROR', json.dumps(result))
@@ -290,13 +290,13 @@ class EconomicConsumerTests(EconomicFixture):
             self.assertEqual((result['state'], result['apify_receivable_usd_cents'],
                               result['apify_receivable_months']), ('AVAILABLE', 0, []))
         self.ledger('{"2026-11":{"status":"RECEIVABLE","invoice_usd_cents":2340}}')
-        read_text = Path.read_text
+        open_file = Path.open
         reads = []
-        def invoice_read(path, **options):
+        def invoice_read(path, *args, **options):
             reads.append(path)
-            return read_text(path, **options)
+            return open_file(path, *args, **options)
         with (patch('payouts.load', side_effect=AssertionError('second ledger read')),
-              patch.object(Path, 'read_text', autospec=True, side_effect=invoice_read)):
+              patch.object(Path, 'open', autospec=True, side_effect=invoice_read)):
             self.assertEqual(self.project()['context']['receivables']['apify_receivable_usd_cents'], 2340)
             self.assertEqual(payouts.receivables(self.root, entries={})['apify_receivable_usd_cents'], 0)
         self.assertEqual(reads, [self.root / 'state/private/payouts.json'])

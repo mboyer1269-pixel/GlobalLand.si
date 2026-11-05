@@ -76,6 +76,7 @@ def source_revision(kind, source):
             if attempts < 1:raise ValueError('Invalid initiative source')
             version = digest(dict(state='RETRY', attempts=attempts, retry_after=due))
     elif kind == 'QUEUED_RESULT':
+        from result_envelope import ResultSource
         key = source.get('id')
         request = source.get('request')
         if not isinstance(request, dict): request = source.get('task')
@@ -86,7 +87,7 @@ def source_revision(kind, source):
                 or not isinstance(input_hash, str) or not HEX.fullmatch(input_hash)
                 or not isinstance(result, dict) or result.get('status') not in TERMINAL):
             raise ValueError('Invalid initiative source')
-        version = digest([input_hash, result])
+        version = source['source_version'] if isinstance(source,ResultSource) else digest([input_hash, result])
     else:
         key = source.get('mission_id')
         lease = dict(agent_id=source.get('agent_id'), token=source.get('lease_token'),
@@ -254,6 +255,9 @@ class Store:
         db.execute('INSERT OR REPLACE INTO meta VALUES (?,?)', (key,canonical(value)))
 
     def _paths(self, family):
+        if family == 'tasks':
+            from result_envelope import result_paths
+            return result_paths(self.root)
         directory = self.root / ('state/private/agentmail' if family == 'mail' else 'state')
         self._safe(directory)
         return sorted(directory.glob('*.json' if family == 'mail' else 'TASK-*.json'),key=lambda p:p.name)
@@ -269,7 +273,10 @@ class Store:
 
     def _sources(self, family, path, db):
         try:
-            source = self._read(path,128*1024 if family=='mail' else 1024*1024)
+            if family == 'tasks':
+                from result_envelope import read_result
+                source = read_result(self.root,path)
+            else:source = self._read(path,128*1024)
             if family == 'mail':
                 if (self.config.get('agentmail') or {}).get('enabled') is not True:return []
                 if source.get('inbox_id') != (self.config.get('agentmail') or {}).get('inbox_id'): return []
@@ -284,7 +291,7 @@ class Store:
                 return output
             ident=path.stem
             if not TASK.fullmatch(ident) or source.get('origin')=='broker':return []
-            source=dict(source,id=ident)
+            source=source.copy();source['id']=ident
             binding=db.execute('SELECT data FROM bindings WHERE id=?',(ident,)).fetchone() if db is not None else None
             metadata=json.loads(binding[0]) if binding else source.get('request',source.get('task'))
             if not isinstance(metadata,dict):metadata=source.get('metadata',{})

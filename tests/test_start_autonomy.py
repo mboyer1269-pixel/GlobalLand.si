@@ -73,6 +73,16 @@ class StartAutonomyTests(unittest.TestCase):
         self.activate()
         self.assertEqual(self.cron.read_text().count('supervisor.py think'), 1)
 
+    def test_fresh_install_without_backups_creates_private_recovery_copy(self):
+        (self.root / 'backups').rmdir()
+        report = self.activate()
+        backup = pathlib.Path(report['backup'])
+        self.assertEqual(json.loads((backup / 'config-before.json').read_text()), self.config)
+        self.assertEqual(json.loads((backup / 'schedule-before.json').read_text()), {'content': None})
+        self.assertEqual((self.root / 'backups').stat().st_mode & 0o777, 0o700)
+        self.assertEqual(backup.stat().st_mode & 0o777, 0o700)
+        self.assertEqual(self.cron.read_text(), self.module.JOB)
+
     def test_existing_conflicting_schedule_is_preserved(self):
         self.cron.write_text('custom existing schedule\n')
         with self.assertRaisesRegex(ValueError, 'existing schedule'):

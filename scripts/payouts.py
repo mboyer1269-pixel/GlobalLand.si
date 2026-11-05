@@ -33,6 +33,7 @@ from treasury import Treasury
 MONTH = re.compile(r'20[0-9]{2}-(0[1-9]|1[0-2])')
 METHODS = ('WISE', 'PAYPAL', 'BANK')
 MAX_PAYOUT_CENTS = 10_000_000  # 100 000 CAD: far above any plausible early payout
+MAX_LEDGER_BYTES = 1024 * 1024
 RATE_BOUNDS = (1.0, 2.0)       # CAD per USD accepted without --force (typo guard)
 
 
@@ -41,8 +42,48 @@ def _ledger(root):
 
 
 def load(root):
-    path = _ledger(root)
-    return json.loads(path.read_text()) if path.exists() else {}
+    """Strict administrative read; only a missing ledger starts a new one."""
+    try:
+        return _read_entries(root)
+    except FileNotFoundError:
+        return {}
+
+
+def _unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError('duplicate invoice key')
+        result[key] = value
+    return result
+
+
+def _invalid_constant(value):
+    raise ValueError('invalid invoice constant')
+
+
+def _validate_entries(entries):
+    if not isinstance(entries, dict):
+        raise ValueError('invalid invoice ledger')
+    for month, entry in entries.items():
+        if (not isinstance(month, str) or not MONTH.fullmatch(month)
+                or not isinstance(entry, dict) or entry.get('status') not in ('RECEIVABLE', 'PAID')):
+            raise ValueError('invalid invoice entry')
+        if entry['status'] == 'RECEIVABLE' or 'invoice_usd_cents' in entry:
+            amount = entry.get('invoice_usd_cents')
+            if type(amount) is not int or not 0 < amount <= MAX_PAYOUT_CENTS:
+                raise ValueError('invalid invoice amount')
+    return entries
+
+
+def _read_entries(root):
+    # Bound the actual read, including when the file changes while being read.
+    with _ledger(root).open('rb') as source:
+        raw = source.read(MAX_LEDGER_BYTES + 1)
+    if len(raw) > MAX_LEDGER_BYTES:
+        raise ValueError('invoice ledger too large')
+    return _validate_entries(json.loads(raw.decode('utf-8'), object_pairs_hook=_unique_object,
+                                        parse_constant=_invalid_constant))
 
 
 def _month(month):
@@ -116,11 +157,20 @@ def record_payout(root, month, cad_cents, method, reference, evidence=None, forc
 
 
 def receivables(root, *, entries=None):
-    """Public projection: approved invoices not yet received (never money)."""
-    entries = load(root) if entries is None else entries
-    pending = {m: e['invoice_usd_cents'] for m, e in entries.items() if e.get('status') == 'RECEIVABLE'}
-    return dict(apify_receivable_usd_cents=sum(pending.values()), apify_receivable_months=sorted(pending),
-                note='Approved Apify invoices awaiting payout; not cash, never spendable.')
+    """Shared optional projection: missing or invalid evidence is not zero debt."""
+    result = dict(state='UNAVAILABLE', unavailable_reason='INVOICE_LEDGER_UNAVAILABLE',
+                  apify_receivable_usd_cents=None, apify_receivable_months=None,
+                  note='Approved Apify invoices awaiting payout; not cash, never spendable.',
+                  consistency='INDEPENDENT_INVOICE_LEDGER_MAY_LAG_SETTLEMENT',
+                  consistency_note='Invoice records may lag bank settlement; a recorded receivable does not prove payment remains unpaid.')
+    try:
+        entries = _read_entries(root) if entries is None else _validate_entries(entries)
+        pending = {m: e['invoice_usd_cents'] for m, e in entries.items() if e['status'] == 'RECEIVABLE'}
+        result.update(state='AVAILABLE', unavailable_reason=None,
+                      apify_receivable_usd_cents=sum(pending.values()), apify_receivable_months=sorted(pending))
+    except (OSError, ValueError, TypeError, KeyError, OverflowError, RecursionError):
+        pass
+    return result
 
 
 def main(argv=None, root='/opt/globalland', euid=os.geteuid):

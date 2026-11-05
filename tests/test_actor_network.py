@@ -1,4 +1,4 @@
-"""Exercise both actor HTTP paths without contacting any external address."""
+"""Exercise every Actor HTTP path without contacting any external address."""
 import importlib.util
 import io
 import pathlib
@@ -22,7 +22,16 @@ def load_core(actor):
     return importlib.import_module(name + '.core')
 
 
-CORES = {actor: load_core(actor) for actor in ('rss-reader', 'link-checker')}
+ACTOR_NAMES = ('rss-reader', 'link-checker', 'domain-availability', 'csv-preflight')
+CORES = {actor: load_core(actor) for actor in ACTOR_NAMES}
+
+
+def fixture_body(actor):
+    if actor == 'domain-availability':
+        return b'{"objectClassName":"domain"}'
+    if actor == 'csv-preflight':
+        return b'A,B\n1,2\n'
+    return FEED
 
 
 class Wire:
@@ -55,11 +64,18 @@ def addresses(*ips):
 
 
 class ActorNetworkTests(unittest.TestCase):
+    def wire(self, actor):
+        return Wire([(200, {}, fixture_body(actor))])
+
     def result(self, actor, url):
         core = CORES[actor]
         if actor == 'rss-reader':
             row = core.read_feed(url)[0]
             return row['error_code']
+        if actor == 'domain-availability':
+            return core.check_domain('example.com', 'example.com', {'com': url})['error_code']
+        if actor == 'csv-preflight':
+            return core.read_csv(url)['error_code']
         return core.check_url(url)['error_code']
 
     def test_private_mixed_metadata_and_multicast_destinations_are_blocked(self):
@@ -67,7 +83,7 @@ class ActorNetworkTests(unittest.TestCase):
             for ips in [('127.0.0.1',), ('10.0.0.1',), ('169.254.169.254',), ('::1',),
                         ('fc00::1',), ('::ffff:127.0.0.1',), ('224.0.0.1',), ('8.8.8.8', '10.0.0.1')]:
                 with self.subTest(actor=actor, ips=ips):
-                    wire = Wire()
+                    wire = self.wire(actor)
                     with patch.dict('os.environ', {'no_proxy': '*', 'NO_PROXY': '*'}), \
                          patch('socket.getaddrinfo', return_value=addresses(*ips)), patch('socket.socket', wire.socket):
                         self.assertEqual(self.result(actor, 'http://feed.example/rss'), 'blocked_address')
@@ -76,7 +92,7 @@ class ActorNetworkTests(unittest.TestCase):
     def test_connection_uses_the_validated_address_without_second_dns_lookup(self):
         for actor in CORES:
             with self.subTest(actor=actor):
-                wire = Wire()
+                wire = self.wire(actor)
                 with patch.dict('os.environ', {'no_proxy': '*', 'NO_PROXY': '*'}), \
                      patch('socket.getaddrinfo', side_effect=[addresses('8.8.8.8'), addresses('127.0.0.1')]) as dns, \
                      patch('socket.socket', wire.socket):
@@ -89,7 +105,7 @@ class ActorNetworkTests(unittest.TestCase):
     def test_redirect_revalidates_destination_and_does_not_connect_to_private_host(self):
         for actor in CORES:
             with self.subTest(actor=actor):
-                wire = Wire([(302, {'Location': 'http://internal.example/rss'}, b''), (200, {}, FEED)])
+                wire = Wire([(302, {'Location': 'http://internal.example/rss'}, b''), (200, {}, fixture_body(actor))])
                 def resolve(host, *args, **kwargs):
                     return addresses('127.0.0.1' if host == 'internal.example' else '8.8.8.8')
                 with patch.dict('os.environ', {'no_proxy': '*', 'NO_PROXY': '*'}), \
@@ -100,7 +116,7 @@ class ActorNetworkTests(unittest.TestCase):
     def test_https_preserves_certificate_hostname_and_tls_verification(self):
         for actor in CORES:
             with self.subTest(actor=actor):
-                wire = Wire()
+                wire = self.wire(actor)
                 context = ssl.create_default_context()
                 with patch.dict('os.environ', {'no_proxy': '*', 'NO_PROXY': '*'}), \
                      patch('socket.getaddrinfo', return_value=addresses('8.8.8.8')), patch('socket.socket', wire.socket), \
@@ -114,7 +130,7 @@ class ActorNetworkTests(unittest.TestCase):
     def test_unreachable_first_address_falls_back_only_to_validated_answers(self):
         for actor in CORES:
             with self.subTest(actor=actor):
-                wire = Wire()
+                wire = self.wire(actor)
                 def create(*args, **kwargs):
                     sock = wire.socket()
                     connect = sock.connect

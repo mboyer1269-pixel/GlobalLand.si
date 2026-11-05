@@ -298,7 +298,10 @@ def board(root, world):
         cards.append(dict(id=SYSTEM_CARD, status='OPEN', owner='AGENTS', category='PROGRESS',
                           title='%d tours consécutifs sans résultat vérifiable' % stalled,
                           detail='Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, '
-                                 'aucun revenu vérifié. Missions ouvertes : ' + (', '.join(running) or 'aucune') + '.',
+                                 'aucun revenu vérifié. Missions ouvertes : ' + (', '.join(running[:20]) or 'aucune')
+                                 + (' ; consulter la collection missions paginée pour la suite.' if len(running)>20 else '.'),
+                          open_missions_total=len(running), missions_truncated=len(running)>20,
+                          missions_collection='missions',
                           mission_id=None, expected_gain=None, raised_by='PROGRESS-DETECTOR', reports=stalled,
                           opened_at=state.get('stalled_since'), last_reported_at=state.get('last_turn_at')))
     dry, dry_limit = state.get('dry_turns', 0), state.get('outcome_threshold', 12)

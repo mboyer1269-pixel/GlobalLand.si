@@ -59,6 +59,48 @@ class ControllerIsolationTests(unittest.TestCase):
    with self.assertRaises(ValueError):validate_decision(value)
 
 class ControllerRecoveryTests(unittest.TestCase):
+ def test_bounded_world_context_prioritizes_hidden_due_leases_and_only_covers_visible_ones(self):
+  from world import World
+  from controller import Controller
+  from initiative import source_revision
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);(root/'state').mkdir();world=World(root/'state/world.sqlite3');world.bootstrap()
+   for n in range(30):
+    world.apply('create-'+str(n),dict(op='create_mission',mission_id='DUE-'+str(n),goal='x'*10000),actor='DIRECTOR')
+    world.apply('claim-'+str(n),dict(op='claim_mission',mission_id='DUE-'+str(n),agent_id='BUILDER',lease_seconds=600),actor='BUILDER')
+   class Bank:
+    def snapshot(self):return dict(state='UNFUNDED')
+   hidden=world.snapshot()['missions'][-1]
+   key,version=source_revision('LEASE_DUE',hidden)
+   prepared=Controller(root,world,Bank(),{}).prepare_context(priority=[dict(kind='LEASE_DUE',key=key,version=version)])
+   visible=prepared['context']['world']
+   self.assertLessEqual(len(json.dumps(visible,ensure_ascii=False).encode()),192*1024)
+   self.assertTrue(visible['projection']['truncated'])
+   self.assertIn(key,{m['mission_id'] for m in visible['missions']})
+   represented={source_revision('LEASE_DUE',m) for m in visible['missions'] if m.get('status')=='RUNNING'}
+   covered={(c['key'],c['version']) for c in prepared['coverage'] if c['kind']=='LEASE_DUE'}
+   self.assertEqual(covered,represented)
+   self.assertLess(len(covered),30)
+ def test_large_legacy_journal_keeps_classified_feedback_without_loading_blobs(self):
+  from unittest.mock import patch
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);(root/'state').mkdir();(root/'work/queue/done').mkdir(parents=True)
+   ident='TASK-180000000000'
+   record=dict(id=ident,hash='a'*64,state='PUBLISHED',origin='queued',
+    metadata=dict(type='TOOL',action='EXEC'),result=dict(status='DONE',output='123 tests passed'),
+    files={'products/a.txt':'a'*600000,'products/b.txt':'b'*600000})
+   journal=root/'state'/(ident+'.json');journal.write_text(json.dumps(record))
+   (root/'work/queue/done'/(ident+'.result.json')).write_text(json.dumps(record['result']))
+   original=pathlib.Path.read_bytes
+   def bounded_read(path):
+    self.assertNotEqual(path,journal,'large artifact journal must be streamed')
+    return original(path)
+   with patch.object(pathlib.Path,'read_bytes',bounded_read):
+    results,coverage,_=self.controller(root).recent_results()
+   self.assertEqual(len(results),1)
+   self.assertEqual(results[0]['output'],'123 tests passed')
+   self.assertFalse(results[0]['output_redacted'])
+   self.assertEqual(len(coverage),1)
  def controller(self,root):
   from controller import Controller
   class Snapshot:
