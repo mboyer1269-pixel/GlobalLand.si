@@ -118,6 +118,11 @@ def collect(root, cron=pathlib.Path('/etc/cron.d/globalland-think'), log=pathlib
         facts['last_turn'] = dict(turn=status.get('turn') if isinstance(status.get('turn'), str) and re.fullmatch(r'THINK-\d{1,10}', status['turn']) else None,
                                   at=_stamp(status.get('at')), state=status.get('state') if status.get('state') in ('RETRYING', 'BLOCKED', 'DECISION_READY') else None,
                                   attempts=attempts[:3])
+    success = _json(private / 'controller-last-success.json')
+    if success is not None:
+        facts['last_successful_plan'] = dict(
+            turn=success.get('turn') if isinstance(success.get('turn'), str) and re.fullmatch(r'THINK-\d{1,10}', success['turn']) else None,
+            at=_stamp(success.get('at')), state='DECISION_READY' if success.get('state') == 'DECISION_READY' else None)
 
     health = _json(private / 'provider-health.json') or {}
     facts['provider_health'] = {}
@@ -151,9 +156,12 @@ def collect(root, cron=pathlib.Path('/etc/cron.d/globalland-think'), log=pathlib
     last_at = _timestamp(last.get('at'))
     failure_at = _timestamp((facts.get('failure') or {}).get('at'))
     facts['last_turn_age_minutes'] = round((now-last_at)/60, 1) if last_at is not None and last_at <= now else None
-    facts['failure_superseded'] = bool(last.get('state') == 'DECISION_READY'
-                                     and last_at is not None and failure_at is not None
-                                     and failure_at < last_at <= now)
+    successes = [(value, plan['at']) for plan in (last, facts.get('last_successful_plan') or {})
+                 if plan.get('state') == 'DECISION_READY' and plan.get('turn')
+                 and (value := _timestamp(plan.get('at'))) is not None and value <= now]
+    newest_success = max(successes, default=None)
+    facts['failure_superseded'] = bool(newest_success and failure_at is not None and failure_at < newest_success[0])
+    facts['failure_recovered_at'] = newest_success[1] if facts['failure_superseded'] else None
 
     lock = root / 'state' / 'supervisor.lock'
     facts['lock_held'] = None
@@ -252,7 +260,7 @@ def diagnose(facts):
     failure = facts.get('failure')
     if failure and failure.get('reason') and facts.get('failure_superseded') is True:
         add('PLANNER_FAILURE_SUPERSEDED', 'INFO', 'échec historique à %s, suivi d’une planification réussie à %s' %
-            (failure.get('at'), (facts.get('last_turn') or {}).get('at')),
+            (failure.get('at'), facts.get('failure_recovered_at')),
             'Conserver cette trace historique. Le succès de planification ne prouve pas la publication, l’exécution ou un revenu ; vérifier leurs résultats séparément.')
     elif failure and failure.get('reason'):
         add('PLANNER_' + failure['reason'].upper(), 'CRITIQUE', 'dernier échec du planificateur à %s (%s)' % (failure.get('at'), failure.get('exception_type')),

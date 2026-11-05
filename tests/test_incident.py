@@ -166,6 +166,31 @@ class IncidentTests(unittest.TestCase):
         self.assertIn('DIRECTOR_ACTIVITY_STALE', codes)
         self.assertNotIn('CRON_NOT_RUNNING', codes)
 
+    def test_preserved_success_still_supersedes_failure_during_new_retry(self):
+        self.failure(); self.status()
+        saved = json.loads((self.root / 'state/private/controller-run.json').read_text())
+        saved['private_note'] = 'SECRET_SENTINEL'
+        (self.root / 'state/private/controller-last-success.json').write_text(json.dumps(saved))
+        self.status(age=60, state='RETRYING')
+        facts = self.facts(); findings = incident.diagnose(facts)
+        self.assertNotIn('PLANNER_ALL_SUBSCRIPTION_PROVIDERS_FAILED', self.codes(facts))
+        recovered = next(item for item in findings if item['code'] == 'PLANNER_FAILURE_SUPERSEDED')
+        self.assertIn(saved['at'], recovered['evidence'])
+        self.assertNotIn('SECRET_SENTINEL', json.dumps(facts))
+
+    def test_saved_success_cannot_hide_newer_failure_or_use_invalid_evidence(self):
+        for mode in ('newer_failure', 'future_success', 'invalid_date', 'not_success'):
+            with self.subTest(mode=mode):
+                self.status()
+                saved = json.loads((self.root / 'state/private/controller-run.json').read_text())
+                if mode == 'future_success': saved['at'] = '2099-01-01T00:00:00Z'
+                if mode == 'invalid_date': saved['at'] = '2026-99-99T00:00:00Z'
+                if mode == 'not_success': saved['state'] = 'RETRYING'
+                (self.root / 'state/private/controller-last-success.json').write_text(json.dumps(saved))
+                self.status(age=60, state='RETRYING')
+                self.failure(age=30 if mode == 'newer_failure' else 3600)
+                self.assertIn('PLANNER_ALL_SUBSCRIPTION_PROVIDERS_FAILED', self.codes(self.facts()))
+
     def test_held_lock_and_old_supervisor_process_is_reported_as_stuck(self):
         lock = self.root / 'state' / 'supervisor.lock'
         lock.write_text('')
