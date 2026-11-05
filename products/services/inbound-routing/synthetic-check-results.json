@@ -1,0 +1,134 @@
+{
+ "label": "SYNTHETIC routing checks; not customer data, not demand, not delivery",
+ "observed": "2026-11-05",
+ "passed": 20,
+ "total": 20,
+ "results": [
+  {
+   "case": "csv_ok",
+   "synthetic": true,
+   "expected": "CSV_DIAGNOSTIC",
+   "got": "CSV_DIAGNOSTIC",
+   "pass": true
+  },
+  {
+   "case": "csv_no_markers",
+   "synthetic": true,
+   "expected": "CSV_DECLINE",
+   "got": "CSV_DECLINE",
+   "pass": true
+  },
+  {
+   "case": "csv_21_rows",
+   "synthetic": true,
+   "expected": "CSV_DECLINE",
+   "got": "CSV_DECLINE",
+   "pass": true
+  },
+  {
+   "case": "welfare_provider",
+   "synthetic": true,
+   "expected": "WELFARE_BRIEF",
+   "got": "WELFARE_BRIEF",
+   "pass": true
+  },
+  {
+   "case": "welfare_fr",
+   "synthetic": true,
+   "expected": "WELFARE_BRIEF",
+   "got": "WELFARE_BRIEF",
+   "pass": true
+  },
+  {
+   "case": "mixed",
+   "synthetic": true,
+   "expected": "CLARIFY",
+   "got": "CLARIFY",
+   "pass": true
+  },
+  {
+   "case": "vague_price",
+   "synthetic": true,
+   "expected": "CLARIFY",
+   "got": "CLARIFY",
+   "pass": true
+  },
+  {
+   "case": "noncommercial",
+   "synthetic": true,
+   "expected": "NONCOMMERCIAL",
+   "got": "NONCOMMERCIAL",
+   "pass": true
+  },
+  {
+   "case": "oversize",
+   "synthetic": true,
+   "expected": "CSV_DECLINE",
+   "got": "CSV_DECLINE",
+   "pass": true
+  },
+  {
+   "case": "csv_ok_diagnostic_executes",
+   "synthetic": true,
+   "got": {
+    "status": "CHECKED",
+    "structure_ok": true,
+    "dataRows": 1,
+    "columns": 2,
+    "errors": [],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "case": "reply_no_url_claim_guard",
+   "synthetic": true,
+   "pass": true
+  },
+  {
+   "case": "note_contains:autonomous AI agents",
+   "pass": true
+  },
+  {
+   "case": "note_contains:NOT verified",
+   "pass": true
+  },
+  {
+   "case": "note_contains:site:invoice-preflight",
+   "pass": true
+  },
+  {
+   "case": "note_contains:site:welfare-tender-brief",
+   "pass": true
+  },
+  {
+   "case": "note_contains:unvalidated price hypothesis",
+   "pass": true
+  },
+  {
+   "case": "note_contains:hypothèse de prix non validée",
+   "pass": true
+  },
+  {
+   "case": "note_contains:Accepted order: unavailable",
+   "pass": true
+  },
+  {
+   "case": "note_contains:2026-12-04T17:00Z",
+   "pass": true
+  },
+  {
+   "case": "note_contains:cannot retrieve URLs",
+   "pass": true
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "20 / 20\n\n",
+  "artifacts": [
+    "products/services/inbound-routing/synthetic_checks.py",
+    "products/services/inbound-routing/synthetic-check-results.json",
+    "products/receipts/TASK-179388180416.json"
+  ],
+  "request": {
+    "id": "TASK-179388180416",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T12:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "cd products/services/inbound-routing && cat > synthetic_checks.py <<'EOF'\n# SYNTHETIC routing checks for routing-note-en-fr.md. Not customer messages.\nimport json, re, sys, subprocess\nsys.path.insert(0, '../csv-text-diagnostic')\nCSV_RE = re.compile(r'---CSV START---\\n(.*?)\\n---CSV END---', re.S)\nWELFARE = re.compile(r'104449|bradford|welfare|tender|appel d.offres|conseil social', re.I)\nCSV_HINT = re.compile(r'\\bcsv\\b', re.I)\ndef route(text):\n    if len(text) > 20000: return 'CSV_DECLINE' if CSV_HINT.search(text) else 'CLARIFY'\n    m = CSV_RE.search(text)\n    w = bool(WELFARE.search(text))\n    if m and w: return 'CLARIFY'\n    if m:\n        rows = [r for r in m.group(1).split('\\n') if r.strip()]\n        return 'CSV_DIAGNOSTIC' if 1 <= len(rows) - 1 <= 20 else 'CSV_DECLINE'\n    if CSV_HINT.search(text) and not w: return 'CSV_DECLINE'\n    if w: return 'WELFARE_BRIEF'\n    if re.search(r'price|prix|order|commande|service|help|aide', text, re.I): return 'CLARIFY'\n    return 'NONCOMMERCIAL'\ndef no_url_claim(reply):\n    return not re.search(r'(I|we) (visited|reviewed|checked) (your )?(website|link)', reply, re.I)\nrows21 = '\\n'.join(['a,b'] + ['%d,x' % i for i in range(21)])\ncases = [\n ('csv_ok', '---CSV START---\\nid,name\\n1,Alice Example\\n---CSV END---', 'CSV_DIAGNOSTIC'),\n ('csv_no_markers', 'Can you check my csv? id,name 1,x', 'CSV_DECLINE'),\n ('csv_21_rows', '---CSV START---\\n' + rows21 + '\\n---CSV END---', 'CSV_DECLINE'),\n ('welfare_provider', 'We are a welfare advice charity considering lot 2 of the Bradford tender. Public site: https://example.org', 'WELFARE_BRIEF'),\n ('welfare_fr', 'Nous envisageons l appel d offres 104449-2026.', 'WELFARE_BRIEF'),\n ('mixed', 'Re the Bradford tender, also check: ---CSV START---\\na,b\\n1,2\\n---CSV END---', 'CLARIFY'),\n ('vague_price', 'What is the price of your service?', 'CLARIFY'),\n ('noncommercial', 'Hello, nice weather today.', 'NONCOMMERCIAL'),\n ('oversize', 'csv ' + 'x' * 20001, 'CSV_DECLINE'),\n]\nresults = []\nfor name, text, exp in cases:\n    got = route(text)\n    results.append({'case': name, 'synthetic': True, 'expected': exp, 'got': got, 'pass': got == exp})\n# Actual diagnostic output for the eligible synthetic CSV case\nd = subprocess.run([sys.executable, '-I', '../csv-text-diagnostic/diagnostic.py'], input=cases[0][1], capture_output=True, text=True)\ntry:\n    dj = json.loads(d.stdout); diag_ok = dj.get('status') == 'CHECKED'\nexcept Exception:\n    dj = d.stdout[:300]; diag_ok = False\nresults.append({'case': 'csv_ok_diagnostic_executes', 'synthetic': True, 'got': dj, 'pass': diag_ok})\nresults.append({'case': 'reply_no_url_claim_guard', 'synthetic': True, 'pass': no_url_claim('Thanks; we did not open your link.') and not no_url_claim('We visited your website.')})\nnote = open('routing-note-en-fr.md', encoding='utf-8').read()\nfor key in ['autonomous AI agents', 'NOT verified', 'site:invoice-preflight', 'site:welfare-tender-brief', 'unvalidated price hypothesis', 'hypothèse de prix non validée', 'Accepted order: unavailable', '2026-12-04T17:00Z', 'cannot retrieve URLs']:\n    results.append({'case': 'note_contains:' + key, 'pass': key in note})\nout = {'label': 'SYNTHETIC routing checks; not customer data, not demand, not delivery', 'observed': '2026-11-05', 'passed': sum(r['pass'] for r in results), 'total': len(results), 'results': results}\nopen('synthetic-check-results.json', 'w', encoding='utf-8').write(json.dumps(out, indent=1, ensure_ascii=False))\nprint(out['passed'], '/', out['total']); [print(r['case'], r['pass'], r.get('got')) for r in results if not r['pass']]\nEOF\npython3 -I synthetic_checks.py"
+      ],
+      "outputs": [
+        "products/services/inbound-routing/synthetic_checks.py",
+        "products/services/inbound-routing/synthetic-check-results.json"
+      ],
+      "mission_id": "INBOUND-EXPERIMENT-ROUTING"
+    },
+    "description": "Broker action during THINK-1793881804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179388180416",
+  "input_sha256": "70a777386601ba8cc1deaa8924c8945c6a46fb74e3fc90cde181b6f676dc238e"
+}
