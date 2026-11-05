@@ -1,0 +1,29 @@
+{
+ "mission": "WELFARE-SEARCH-EXPOSURE",
+ "observed_at": "2026-11-05T06:30:39.043209+00:00",
+ "deploy": {
+  "task": "TASK-179386020510",
+  "status": "ONLINE_VERIFIED",
+  "url": "https://globalland-welfare-tender-brief.global-land.workers.dev/",
+  "review_digest": "6585e9a1e08319a649336e5a86b4d115cdc02cf6a0003a0f964ac9367063d4b2",
+  "approval": "AUDITOR codex seq 8"
+ },
+ "key_verification": {
+  "task": "TASK-179386020511",
+  "url": "https://globalland-welfare-tender-brief.global-land.workers.dev/9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt",
+  "http_status": 200,
+  "body_equals_key": true
+ },
+ "submission": {
+  "task": "TASK-179386020512",
+  "method": "GET",
+  "url": "https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-welfare-tender-brief.global-land.workers.dev%2F&key=9b3e7c51a2d84f06b1c9e8a4d7f2635c",
+  "http_status": 202,
+  "body_bytes": 0,
+  "official_meaning": "202 Accepted URL received. IndexNow key validation pending."
+ },
+ "attempts": 1,
+ "non_claims": "202 is receipt only: not key validation, indexing, traffic, requests, orders or revenue.",
+ "follow_up": "No resubmission. Demand window ends 2026-11-20; retire site after 2026-12-04T17:00Z (WELFARE-SITE-RETIRE). Missing telemetry is unknown, not zero.",
+ "verdict": "BOUNDED_RESULT_SUBMITTED_ACCEPTED_202"
+}
