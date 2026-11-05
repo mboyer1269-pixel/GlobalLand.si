@@ -77,6 +77,8 @@ class ControllerRecoveryTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    root=pathlib.Path(d);c=self.controller(root);(root/'state').mkdir();(root/'work/queue/done').mkdir(parents=True)
    record={'task':'queue/inbox/TASK-180000000000.json','result':{'status':'DONE','output':'real journal result'}}
+   (root/'work/queue/inbox').mkdir(parents=True)
+   (root/'work/queue/inbox/TASK-180000000000.json').write_text(json.dumps({'type':'TOOL','action':'EXEC','args':{'argv':['node','-p','1'],'outputs':[]}}))
    (root/'state/TASK-180000000000.json').write_text(json.dumps(record))
    (root/'work/queue/done/TASK-180000000000.result.json').write_text(json.dumps(record['result']))
    for i in range(25):

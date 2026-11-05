@@ -148,7 +148,7 @@ def load(root):
         return dict(commercial_history_unavailable=True, turns_without_verified_revenue=None)
 
 
-def assess(root, world, bank, config):
+def assess(root, world, bank, config, *, commercial_snapshot=None):
     """Pure evaluation for the coming turn; nothing is persisted here."""
     state = load(root)
     current = fingerprint(root, world, bank)
@@ -161,7 +161,8 @@ def assess(root, world, bank, config):
         stalled = 0 if change['productive'] else state.get('stalled_turns', 0) + 1
         dry = 0 if change['outcome'] else state.get('dry_turns', 0) + 1
     import commercial
-    snapshot = commercial.progress_snapshot(root, config)
+    snapshot = (commercial.progress_snapshot(root, config) if commercial_snapshot is None
+                else commercial_snapshot)
     seen = set(state.get('commercial_seen_sources', []))
     sources = set(snapshot['sources'])
     complete = (snapshot['state'] == 'AVAILABLE' and not (seen - sources)

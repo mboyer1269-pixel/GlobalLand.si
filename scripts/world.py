@@ -149,6 +149,25 @@ class World:
         if op == 'extinguish':
             raise ValueError('extinction is triggered by verified treasury state')
 
+    def operation_result(self, operation_id):
+        """Read the exact committed operation; lookup never replays an effect."""
+        self._id(operation_id)
+        # A URI read-only connection cannot create/repair a missing database.
+        import pathlib
+        uri = pathlib.Path(self.path).resolve().as_uri() + '?mode=ro'
+        db = sqlite3.connect(uri, uri=True)
+        try:
+            row = db.execute('SELECT result FROM operations WHERE id=?', (operation_id,)).fetchone()
+        finally:
+            db.close()
+        if row is None: return None
+        try:
+            value = json.loads(row[0], parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
+            if not isinstance(value, dict) or len(row[0]) > 1024 * 1024: raise ValueError()
+            return value
+        except (ValueError, TypeError):
+            raise ValueError('Invalid stored WORLD operation result') from None
+
     def apply(self, operation_id, args, *, actor=None):
         self._id(operation_id)
         if type(args) is not dict:

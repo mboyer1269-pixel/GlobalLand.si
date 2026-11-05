@@ -139,7 +139,7 @@ class MailResponder:
         return reply
 
 
-def run_mail_cycle(root, config):
+def run_mail_cycle(root, config, *, on_processed=None):
     from mail import Mailbox
     if (config.get('agentmail') or {}).get('enabled') is not True:
         return {'enabled': False}
@@ -149,7 +149,8 @@ def run_mail_cycle(root, config):
         responder = PrivateResponder(root, config)
     else:
         responder = MailResponder(root, config)
-    result = Mailbox(root, config).cycle(responder)
+    mailbox = Mailbox(root, config)
+    result = mailbox.cycle(responder) if on_processed is None else mailbox.cycle(responder,on_processed=on_processed)
     # Fixed aggregate fields only: normal planners can observe service health,
     # but correspondence and generated replies stay out of the public world.
     observed = {k: v for k, v in result.items()

@@ -156,7 +156,9 @@ class LessonPromptIntegration(unittest.TestCase):
             result = json.loads(self.app.git('show', 'HEAD:' + done[0]))
             self.assertEqual(result['status'], 'DONE')
             expected_feedback = {'task': pathlib.PurePosixPath(done[0]).name.removesuffix('.result.json'),
-                                 'status': 'DONE', 'output': str(result.get('output', ''))[:2000]}
+                                 'status': 'DONE', 'output': str(result.get('output', ''))[:2000],
+                                 'output_truncated': len(str(result.get('output', ''))) > 2000,
+                                 'output_redacted': False}
             with patch('controller.time.time', return_value=1800001800):
                 self.app.cycle('think')
             self.app.cycle('queue')

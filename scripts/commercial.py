@@ -139,16 +139,24 @@ def prompt(root, config):
             'Use UNKNOWN when uncertain. These are unverified interpretations, never financial evidence.\n')
 
 
-def _scan(root, config):
+def scan(root, config, *, priority=()):
     cfg = settings(config)
     if cfg['state'] != 'ENABLED': return dict(state=cfg['state'], rows=[], allowed={'ids': [], 'truncated': False})
     directory = pathlib.Path(root) / 'state/private/agentmail'
     allowed = allowed_experiments(root)
-    result = dict(state='AVAILABLE', rows=[], allowed=allowed)
+    result = dict(state='AVAILABLE', rows=[], allowed=allowed, excluded=[])
     try:
         _safe(directory)
         if not directory.is_dir(): raise ValueError()
-        paths = list(itertools.islice(directory.glob('*.json'), MAX_RECORDS + 1))
+        priorities = []
+        for event in priority:
+            key = event.get('key') if isinstance(event, dict) and event.get('kind') == 'COMMERCIAL_SIGNAL' else None
+            if isinstance(key, str) and re.fullmatch(r'[0-9a-f]{64}', key) and key not in priorities:
+                priorities.append(key)
+        # Enumerate names deterministically, but read at most MAX_RECORDS values.
+        paths = sorted(directory.glob('*.json'), key=lambda p: p.name)
+        order = {key: n for n, key in enumerate(priorities)}
+        paths.sort(key=lambda p: (order.get(p.stem, len(order)), p.name))
         if len(paths) > MAX_RECORDS: result['state'] = 'PARTIAL'
         seen = set()
         for path in paths[:MAX_RECORDS]:
@@ -161,6 +169,8 @@ def _scan(root, config):
                     raise ValueError()
                 key = hashlib.sha256((inbox + '\0' + mid).encode()).hexdigest()
                 if path.name != key + '.json' or key in seen: raise ValueError()
+                current = (config.get('agentmail') or {}).get('inbox_id')
+                if current is not None and inbox != current: continue
                 seen.add(key)
                 observation = record.get('observation')
                 if observation is not None:
@@ -169,11 +179,21 @@ def _scan(root, config):
                         # interpretation is damaged. Remember it before repair.
                         observation = None
                         result['state'] = 'PARTIAL'
+                        result['excluded'].append(dict(kind='COMMERCIAL_SIGNAL',key=key,reason='INVALID_COMMERCIAL_OBSERVATION'))
+                if record['state'] in ('STARTED', 'UNKNOWN'): observation = None
                 result['rows'].append((key, observation))
-            except (OSError, ValueError, KeyError, TypeError): result['state'] = 'PARTIAL'
+            except (OSError, ValueError, KeyError, TypeError):
+                result['state'] = 'PARTIAL'
+                if re.fullmatch(r'[0-9a-f]{64}',path.stem):
+                    result['excluded'].append(dict(kind='COMMERCIAL_SIGNAL',key=path.stem,reason='INVALID_SOURCE'))
         if not allowed.get('available', True): result['state'] = 'PARTIAL'
     except (OSError, ValueError): result['state'] = 'UNAVAILABLE'
     return result
+
+
+def _scan(root, config):
+    """Compatibility for older host callers."""
+    return scan(root, config)
 
 
 def _valid_observation(o):
@@ -200,14 +220,14 @@ def _interpreted(observation):
             and observation['category'] not in ('UNKNOWN', 'NONCOMMERCIAL'))
 
 
-def progress_snapshot(root, config):
-    scan = _scan(root, config)
+def progress_snapshot(root, config, *, scan=None):
+    if scan is None: scan = globals()['scan'](root, config)
     return dict(state=scan['state'], sources=[key for key, _ in scan['rows']],
                 interpreted_sources=[key for key, o in scan['rows'] if _interpreted(o)])
 
 
-def project(root, config):
-    scan = _scan(root, config)
+def project(root, config, *, scan=None):
+    if scan is None: scan = globals()['scan'](root, config)
     view = dict(state=scan['state'], disclaimer=DISCLAIMER,
                 experiment_allowlist_truncated=scan['allowed']['truncated'])
     if scan['state'] not in ('AVAILABLE', 'PARTIAL'): return view
