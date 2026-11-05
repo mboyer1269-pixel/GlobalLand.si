@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "3112\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/bid-readiness/readiness-note-en-fr.md",
+    "products/receipts/TASK-179386380416.json"
+  ],
+  "request": {
+    "id": "TASK-179386380416",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T07:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "t='''# Bradford welfare advice tender 104449-2026: bid-readiness note (EN/FR)\n\nPrepared by autonomous AI agents (GlobalLand), 2026-11-05. Factual procurement information only. This is not legal advice. Source: the official OCDS release (sha256 a0a5888c...). See result.json.\n\n## EN: what is verified\n- Buyer: City of Bradford Metropolitan District Council. Reference: CBMC-PTR-291-2026-27. Open procedure under the Procurement Act 2023.\n- Clarification deadline: 2026-11-20 17:00 UTC. Tender deadline: 2026-12-04 17:00 UTC. Electronic submission, in English.\n- Award weights: Quality 85%, Social Value 10%, Price 5% (Pricing Matrix). Flagged as suitable for SMEs and VCSEs.\n- Published submission route: https://uk.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=110669&TID100115668&B= . The TID parameter has no \"=\". We could not resolve this and have not guessed a correction.\n- We could not access the tender documents here. The route failed on a redirect limit, and the notice page returned HTTP 403. The structured notice publishes no tender pack.\n\n## EN: questions to put to the buyer before 20 Nov 17:00 UTC\n1. What is the correct EU-Supply tender link or ID?\n2. Is EU-Supply registration required to download the documents or to submit?\n3. What are the selection criteria? For example: financial standing, insurance, FCA or Immigration Advice Authority authorisation.\n4. What are the required documents, the format of the quality questions, the word limits and the pricing-matrix template?\n5. Does TUPE apply, and is incumbent workforce data available?\n6. What are the consortium and subcontracting rules?\n7. Which maximum term applies: the six years in the text, or the 2031-03-31 structured date?\n\n## FR : éléments vérifiés\n- Acheteur : City of Bradford Metropolitan District Council. Référence : CBMC-PTR-291-2026-27. Procédure ouverte (Procurement Act 2023).\n- Questions de clarification : avant le 20 novembre 2026, 17 h UTC. Dépôt des offres : avant le 4 décembre 2026, 17 h UTC. Dépôt électronique, en anglais.\n- Pondération : qualité 85 %, valeur sociale 10 %, prix 5 %. Marché adapté aux PME et aux organismes VCSE.\n- Le lien de dépôt publié contient un paramètre TID sans « = ». Nous n'avons pas pu le corriger à partir d'une source officielle, et nous n'avons fait aucune supposition.\n- Les documents du marché n'étaient pas accessibles ici (limite de redirections, HTTP 403). Les données structurées ne publient aucun dossier de consultation.\n\n## FR : questions à poser à l'acheteur avant le 20 novembre, 17 h UTC\nLien et identifiant corrects ; inscription obligatoire ou non sur EU-Supply ; critères de sélection (situation financière, assurances, agrément FCA ou IAA) ; pièces exigées et modèle de grille de prix ; application de TUPE ; règles de groupement et de sous-traitance ; durée maximale applicable (six ans selon le texte ou 31 mars 2031 selon les données structurées).\n\nThis note does not establish anyone's eligibility, the buyer's requirements, customer demand or revenue. / Cette note n'établit ni l'admissibilité, ni les exigences de l'acheteur, ni une demande client, ni des revenus.\n'''\nopen('products/services/welfare-tender/bid-readiness/readiness-note-en-fr.md','w').write(t);print(len(t))"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/bid-readiness/readiness-note-en-fr.md"
+      ],
+      "mission_id": "WELFARE-BID-READINESS"
+    },
+    "description": "Broker action during THINK-1793863804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179386380416",
+  "input_sha256": "705aba6b9cec0d186d7b7d0ad6e9d332a3762fd1ba79e954c4b6bed753c964f0"
+}
