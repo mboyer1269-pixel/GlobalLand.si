@@ -42,8 +42,13 @@ def run(args, *, env, cwd=None, timeout=60, success=True):
                             capture_output=True, text=True, timeout=timeout)
     if success:
         # Do not dump installer output: it may include generated key material.
+        known = ('unsafe maintenance directory', 'unsafe maintenance file',
+                 'enabled executor with pinned image required', 'installed revision required',
+                 'finalize the installed source and control first',
+                 'custom base schedule preserved; review manual migration')
+        reason = next((text for text in known if text in result.stderr), 'details withheld')
         require(result.returncode == 0, 'Command failed: ' + str(args[0]) +
-                ' (exit ' + str(result.returncode) + ')')
+                ' (exit ' + str(result.returncode) + '; ' + reason + ')')
     return result
 
 

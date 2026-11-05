@@ -73,7 +73,7 @@ jobs:
       - name: Show only installation permission metadata on failure
         if: ${{ failure() && steps.host-preflight.outcome == 'success' }}
         run: |
-          for path in /opt /opt/globalland /opt/globalland/ssh /opt/globalland/state /opt/globalland/backups; do
+          for path in /opt /opt/globalland /opt/globalland/control /opt/globalland/ssh /opt/globalland/state /opt/globalland/backups /opt/globalland/source.git /var /var/log /etc /etc/cron.d /etc/logrotate.d; do
             if test -d "$path"; then
               sudo stat -c '%a %A %U:%G %n' "$path"
               sudo getfacl --absolute-names "$path"
