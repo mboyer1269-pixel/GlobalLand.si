@@ -465,10 +465,13 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "OPEN",
+      "status": "COMPLETED",
       "lease_token": null,
       "lease_expires_at": null,
-      "evidence": []
+      "evidence": [
+        "products/services/welfare-tender/bid-readiness/result.json",
+        "products/services/welfare-tender/bid-readiness/readiness-note-en-fr.md"
+      ]
     }
   ],
   "messages": [
@@ -774,26 +777,6 @@
     }
   ],
   "events": [
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793759449.5109951,
-      "lesson_id": "L25",
-      "agent_id": "DIRECTOR"
-    },
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793779206.7618806,
-      "agent_id": "DIRECTOR",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793779206.7618887,
-      "agent_id": "RESEARCHER",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
     {
       "type": "GLC_CYCLE",
       "timestamp": 1793779206.7618918,
@@ -1375,6 +1358,24 @@
       "timestamp": 1793862060.456482,
       "from_agent": "DIRECTOR",
       "to_agent": "RESEARCHER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793863819.3893852,
+      "mission_id": "WELFARE-BID-READINESS",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793863896.5583436,
+      "lesson_id": "L45",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793863896.5583472,
+      "mission_id": "WELFARE-BID-READINESS",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
@@ -1554,5 +1555,5 @@
       "seq": 8
     }
   ],
-  "lesson_count": 44
+  "lesson_count": 45
 }
