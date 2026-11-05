@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "===== products/research/gumroad-official-pricing.html 4157\n% |  Gumroad pricing: 10% + 50¢ direct, 30% via Discover 10K Discover Blog Pricing Features About Gumclaw Log in Start selling Discover Blog Pricing Features About Gumclaw Log in Start \n% |  Gumroad pricing: 10% + 50¢ direct, 30% via Discover 10K Discover Blog Pricing Features About Gumclaw Log in Start selling Discover Blog Pricing Features About Gumclaw Log in Start selling Pricing Si\n% | t Gumclaw Log in Start selling Pricing Simple, transparent pricing We believe in transparent pricing that helps you grow. No hidden fees, no monthly charges. 10% + $0.50 Per transaction for all sales through your profile or direct links to your customers. 30% Per transaction when new customers find and buy from you thro\nfee | r Blog Pricing Features About Gumclaw Log in Start selling Pricing Simple, transparent pricing We believe in transparent pricing that helps you grow. No hidden fees, no monthly charges. 10% + $0.50 Per transaction for all sales through your profile or direct links to your customers. 30% Per transaction when new customers \nfee | what they love, so we make it as simple as possible to get paid. How we pay creators, whether through direct deposit or PayPal, varies by country. What are the fees? Unlike other platforms, Gumroad doesn't charge you a monthly fee. Instead, our fees are deducted as a small percentage of every sale, so we only make money w\nfee | w we pay creators, whether through direct deposit or PayPal, varies by country. What are the fees? Unlike other platforms, Gumroad doesn't charge you a monthly fee. Instead, our fees are deducted as a small percentage of every sale, so we only make money when you do. Can I use Gumroad for memberships? Yes! Whether it's fo\nPayPal | is to help creators make a living doing what they love, so we make it as simple as possible to get paid. How we pay creators, whether through direct deposit or PayPal, varies by country. What are the fees? Unlike other platforms, Gumroad doesn't charge you a monthly fee. Instead, our fees are deducted as a small percentage o\ncountry | s make a living doing what they love, so we make it as simple as possible to get paid. How we pay creators, whether through direct deposit or PayPal, varies by country. What are the fees? Unlike other platforms, Gumroad doesn't charge you a monthly fee. Instead, our fees are deducted as a small percentage of every sale, so we\nMerchant of Record | rofile or direct links to your customers. 30% Per transaction when new customers find and buy from you through our discover marketplace. Tax management We're a Merchant of Record Since January 1, 2025, Gumroad handles ALL your tax obligations. Yes, you read that right – we manage sales tax collection and remittance worldwide. What this \nmerchant | ther it's for a podcast, online course, or SaaS subscriptions, Gumroad makes it easy to manage memberships. What&#39;s changing with taxes? We're becoming your merchant of record, which means Gumroad will automatically handle all sales tax collection and remittance worldwide. You won't need to manage any tax settings or applic\nmerchant | e since we'll handle all tax collection automatically. Will Gumroad collect taxes everywhere? We'll collect taxes in regions where we have tax obligations as a merchant of record. This varies by location, and we'll automatically handle the appropriate tax collection for each sale. Need a Reseller Certificate from Gumroad? Some\ntax | new customers find and buy from you through our discover marketplace. Tax management We're a Merchant of Record Since January 1, 2025, Gumroad handles ALL your tax obligations. Yes, you read that right – we manage sales tax collection and remittance worldwide. What this means for you Build your creative business with conf\ntax | ketplace. Tax management We're a Merchant of Record Since January 1, 2025, Gumroad handles ALL your tax obligations. Yes, you read that right – we manage sales tax collection and remittance worldwide. What this means for you Build your creative business with confidence. We're taking care of all tax complexity worldwide, s\ntax | right – we manage sales tax collection and remittance worldwide. What this means for you Build your creative business with confidence. We're taking care of all tax complexity worldwide, so you can focus on what you do best: creating. → No more tax headaches - we handle everything → Simplified global selling - we manage in\n===== products/research/gumroad-official-payouts.html 47\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179391636110.json"
+  ],
+  "request": {
+    "id": "TASK-179391636110",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T22:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re,pathlib\nfor p in ['products/research/gumroad-official-pricing.html','products/research/gumroad-official-payouts.html']:\n  t=pathlib.Path(p).read_text(errors='replace')\n  t=re.sub(r'<script.*?</script>|<style.*?</style>','',t,flags=re.S)\n  t=re.sub(r'<[^>]+>',' ',t);t=re.sub(r'\\s+',' ',t)\n  print('=====',p,len(t))\n  for kw in ['%','fee','payout','Payout','PayPal','Canada','country','countries','minimum','Merchant of Record','merchant','tax','weekly','Friday','bank','Stripe','\\$10','eligib']:\n    for m in list(re.finditer(kw,t))[:3]:\n      print(kw,'|',t[max(0,m.start()-160):m.end()+160])\n"
+      ],
+      "inputs": [
+        "products/research/gumroad-official-pricing.html",
+        "products/research/gumroad-official-payouts.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1793916361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391636110",
+  "input_sha256": "9062b207e69be66ccd3228e2c7d61ed97f0faf584a1d5f5f143f23cc3e67ea68"
+}
