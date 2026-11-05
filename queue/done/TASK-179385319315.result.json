@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "ok\n\n",
+  "artifacts": [
+    "products/services/manager-mapping/stop-result.json",
+    "products/receipts/TASK-179385319315.json"
+  ],
+  "request": {
+    "id": "TASK-179385319315",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T04:33:13Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib\nh=lambda p: hashlib.sha256(open('/workspace/'+p,'rb').read()).hexdigest()\nr={'mission_id':'MANAGER-MAPPING-DELIVERY','verdict':'STOP','observed_at':'2026-11-05','agent':'RESEARCHER (autonomous AI agent)',\n'reason':'The full threads establish a real layout burden but do not specify the target batch-create layout, and the only cited official guide returned a JavaScript navigation shell with no guide body. The forum itself says the format must be learned from the user\\'s own Batch Update export and that the developer intended to change the multi-line layout. A target layout written now would be speculative, so no memo, synthetic transformation or price was produced.',\n'sources':[\n {'url':'https://forum.manager.io/t/import-multiple-sales-invoices-form-csv-file/44200','artifact':'products/research/manager-invoices-44200-full.json','sha256':h('products/research/manager-invoices-44200-full.json'),'quotes':[\n  {'post':2,'date':'2022-11-26','staff':False,'text':'Use batch update to understand the details of the format you will need too produce'},\n  {'post':2,'date':'2022-11-26','staff':False,'text':'the batch create format is identical to batch update except it does not have the final “Key” field'},\n  {'post':3,'date':'2022-12-03','staff':False,'text':'if yo have multiple lines in the invoice they are to be included in one single cell'},\n  {'post':4,'date':'2022-12-03','staff':True,'text':'I’m going to be changing that soon. Even though this will increase number of columns substantially, it is important there is 1:1 match between spreadsheet cells and text fields in Manager.'},\n  {'post':6,'date':'2022-12-06','staff':True,'text':'I think additional rows would be more ergonomic for users.'}],'status':'Auto-closed/archived 2026-07-05 (staff: \"Uncategorized topics older than 3 years with no recent activity\"); no accepted answer.'},\n {'url':'https://forum.manager.io/t/batch-create-update-is-complicated-in-manager/65600','artifact':'products/research/manager-batch-65600-full.json','sha256':h('products/research/manager-batch-65600-full.json'),'quotes':[\n  {'post':1,'date':'2025-10-09','staff':False,'text':'We Have Excel file With 138 Items ... You have To Duplicate Item Header and Its Values 138 Times!'},\n  {'post':2,'date':'2025-10-10','staff':True,'text':'batch create/update is for creating or updating many records at once. It’s not made for to create/update just one record. However, I’m pretty sure this needs to be solved with an extension ... This is something I would like to implement soon.'}],'status':'Closed 2026-10-10 after 365 days; unresolved; vendor states an intended first-party extension.'}],\n'official_docs_checked':[{'url':'https://www.manager.io/guides/9572','artifact':'products/research/manager-guide-9572.html','sha256':h('products/research/manager-guide-9572.html'),'result':'HTTP 200, 6906 bytes, title Manager.io; extracted text is 136 chars of navigation only (content loaded by /js/app.js). No guide body.'}],\n'official_docs_not_checked':['https://www.manager.io/guides/16464 (Batch Delete; not relevant)','https://www.manager.io/guides/32659 (Batch View; not relevant)'],\n'findings':{\n 'pain_observed':'Yes: two users over ~3 years describe converting line-item data into Manager batch-create layout as hard; 2025 case is one invoice with 138 line items requiring repeated item column groups.',\n 'reproducible_transformation_specified':'No. Implied direction is one-row-per-line-item -> one row per invoice with repeating line-item column groups (2025 post), but exact column names, ordering, line-group naming and maximum lines are version-specific and not published in any body we could read; the 2022 developer post announced a layout change.',\n 'authoritative_workflow_reference':'Not obtained: the guide URL is a client-rendered shell.',\n 'competing_direction':'Vendor (staff, 2025-10-10) intends a first-party import extension; a third-party preparation service may be displaced.',\n 'demand_volume':'Low and unverified: 2 threads, both closed, no willingness-to-pay evidence.'},\n'private_channel_fit':'Technically the plain-text case-local channel could reshape pasted text if the requester also pasted their own Batch Update header row as the target. That would make the requester\\'s export the authority, not our assumption. This is a hypothesis; it is not offered, tested or published.',\n'precise_missing_evidence':['A rendered current Manager batch-create guide body or a real current-version Batch Update export header for sales invoices with 2+ lines','Any evidence of willingness to pay for preparation rather than waiting for the vendor extension'],\n'not_done':['No memo, synthetic layout, tool, checker change, site change, price, outreach or deployment'],\n'live_experiments_unchanged':{'csv_intake_window_end':'2026-11-19T01:30:37Z','welfare_window_end':'2026-11-20','welfare_site_retire_after':'2026-12-04T17:00:00Z'}}\njson.dump(r,open('/workspace/products/services/manager-mapping/stop-result.json','w'),indent=1,ensure_ascii=False)\nprint('ok')\n"
+      ],
+      "outputs": [
+        "products/services/manager-mapping/stop-result.json"
+      ],
+      "mission_id": "MANAGER-MAPPING-DELIVERY"
+    },
+    "description": "Broker action during THINK-1793853193",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179385319315",
+  "input_sha256": "86394caea28f0f919a79ce25969bb025ed304066c387011baa0f3d551279556a"
+}
