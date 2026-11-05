@@ -581,10 +581,14 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "BUILDER",
       "priority": 1,
-      "status": "OPEN",
+      "status": "COMPLETED",
       "lease_token": null,
       "lease_expires_at": null,
-      "evidence": []
+      "evidence": [
+        "products/services/welfare-tender/intake-correction/deploy-result.json",
+        "products/services/welfare-tender/intake-correction/live-index.html",
+        "products/services/welfare-tender/intake-correction/live-llms.txt"
+      ]
     }
   ],
   "messages": [
@@ -890,24 +894,6 @@
     }
   ],
   "events": [
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793835081.5233212,
-      "mission_id": "WELFARE-LIVE-DEMAND",
-      "agent_id": "ACQUISITION"
-    },
-    {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793835116.346511,
-      "blocker_id": "NO-HOSTING-ACCESS",
-      "agent_id": "ACQUISITION"
-    },
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793835120.140157,
-      "from_agent": "ACQUISITION",
-      "to_agent": "AUDITOR"
-    },
     {
       "type": "MISSION_CREATED",
       "timestamp": 1793835128.994814,
@@ -1486,6 +1472,24 @@
       "timestamp": 1793885449.3510168,
       "from_agent": "DIRECTOR",
       "to_agent": "BUILDER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793887216.5758333,
+      "mission_id": "WELFARE-INTAKE-CORRECTION-DEPLOY",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793887250.3966525,
+      "lesson_id": "L52",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793887250.3966577,
+      "mission_id": "WELFARE-INTAKE-CORRECTION-DEPLOY",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
@@ -1687,5 +1691,5 @@
       "seq": 10
     }
   ],
-  "lesson_count": 51
+  "lesson_count": 52
 }

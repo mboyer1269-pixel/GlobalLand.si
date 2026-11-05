@@ -86,27 +86,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 22,
-    "turns_without_verified_revenue": 22,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 23,
+    "turns_without_verified_revenue": 23,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-05T14:00:59Z",
     "last_outcome_turn": "THINK-1793885401",
-    "last_productive_turn": "THINK-1793885401",
-    "last_turn": "THINK-1793885401",
+    "last_productive_turn": "THINK-1793887202",
+    "last_turn": "THINK-1793887202",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "WELFARE-INTAKE-SCOPE-CORRECTION"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/services/welfare-tender/intake-correction/acceptance-results.json",
-        "products/services/welfare-tender/intake-correction/manifest.json"
+        "products/reviews/welfare-intake-review.json"
       ],
-      "new_product_count": 2,
+      "new_product_count": 1,
       "new_research_count": 0,
-      "rewritten_count": 2,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
