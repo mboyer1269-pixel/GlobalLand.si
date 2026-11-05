@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "[3152, 3169, 3532, 3549, 5289, 5361, 5476, 10909, 11288, 11549, 11855, 25737, 25755, 26165, 26181, 26200, 32144]\nX: asion that you export a products CSV file. Your CSV file can't have both the Barcode column and the Barcodes column. A file that has both columns fails to import. Learn more about barcodes and barcode types . Option1 name Create variants for a product that has more than one option, such as size or color, by entering its name. Each combination of option name values for a product can be a variant of that product, such as Size or Color . A product can have up to 3 options. If a product has only one option, then this value should be Default Title . Learn more about creating variants . Option1 value If a product has more than one option, such as size or color, then enter its value. For example, a value for a color option could be Black . A product can have up to 3 options. If linking to a category metafield with the LinkedTo column, then the Option value can be either a metaobject handle or GID (not display name). Caution: Changing data in this column deletes existing variant IDs' values and creates new variant IDs. Any change to variant ID values can break third-party dependencies on variant IDs. Learn more about creating product variants . Option1 LinkedTo If a product option is connected to a category metafield, then this value should be product.metafields.shopify.{taxonomy_attribute} Price The price of the product or variant. Only include the monetary value without a currency symbol. For example, 9.99 . The default value is 0.00 if no value is entered. Learn more about product prices . Price / International A fixed price for that product in the market of the same name and in that market's currency. Learn more about CSV columns for International . Compare-at price The original price of the variant if the price has been reduced and you want to display the price comparison. Only include the monetary value without a currency symbol. For example, 9.99 . Learn more about setting compare-at prices . Compare-at price / International Sets a fixed compare-at price for that product in the market of the same name and in that market's currency. A fixed price for a product in a market is required to use a fixed compare-at price. Learn more about CSV columns for International .\nY: play with those market names. Refer to the considerations section for more information. Product image URL Enter the URL for the product image. Shopify downloads the images during the import and re-uploads them in your store. Ensure that the image file name: is final: you can't edit it after the image has been uploaded to your store Doesn't include _thumb , _small , or _medium suffixes This column isn't specific to variants. Use the variant image column to add variant images. Image position Enter the numbe\nZ:  512 characters the optimal length is 125 characters or fewer Variant image URL Enter the URL for the variant images. Ensure added URLs are functioning image URLs. Gift c\nW: e, but is included in the existing product list, then the value in the product list remains the same. For example, if the Variant image URL column is included in the existing product list, but that column isn't included in the import CSV file, then the value in the product list remains the same. If a non-required column is included in the import CSV file that relies on other column data not included in the file, then existing data is deleted or removed. For example, if the SKU column is included in the import CSV file, but not the Option1 value and Option1 name columns, then the product varian\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179390958117.json"
+  ],
+  "request": {
+    "id": "TASK-179390958117",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:13:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "t=open('products/research/shopify-product-csv-official.txt',encoding='utf-8').read()\nimport re\nprint([m.start() for m in re.finditer('Option',t)])\nprint('X:',t[10700:12900])\nprint('Y:',t[19050:19560])\nprint('Z:',t[20250:20420])\nprint('W:',t[25200:25800])"
+      ],
+      "inputs": [
+        "products/research/shopify-product-csv-official.txt"
+      ],
+      "outputs": [],
+      "mission_id": "SHOPIFY-LARGE-CATALOGUE-SAMPLE"
+    },
+    "description": "Broker action during THINK-1793909581",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179390958117",
+  "input_sha256": "82c7a09b622ad8e02e28a436080396ee4e15b804e6f2cf99eabe2001dfa5486f"
+}
