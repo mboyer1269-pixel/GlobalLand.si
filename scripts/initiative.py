@@ -9,6 +9,7 @@ import sqlite3
 import stat
 import math
 import time
+import tempfile
 
 HEX = re.compile(r'[0-9a-f]{64}')
 TASK = re.compile(r'TASK-[0-9]{4,12}')
@@ -116,16 +117,23 @@ class Store:
         self.directory = self.root / 'state/private'
         self.path = self.directory / 'initiative.sqlite3'
         self.anchor = self.directory / 'initiative.initialized'
+        self.bootstrap = self.directory / 'initiative.bootstrap.json'
         self._safe(self.directory)
         self.directory.mkdir(parents=True, exist_ok=True, mode=0o700)
         self.directory.chmod(0o700)
-        self._safe(self.path); self._safe(self.anchor)
+        self._safe(self.path); self._safe(self.anchor);self._safe(self.bootstrap)
         existed = self.path.exists()
         if self.anchor.exists() and not existed: raise ValueError('Initiative storage unavailable')
         try:
+            # This immutable census is durable before creating the database.
+            # An aborted schema/baseline transaction must reuse this boundary,
+            # never classify subsequent arrivals as historical on restart.
+            inventory=self._bootstrap_inventory() if not existed else None
             with self._db() as db:
-                if not existed:
-                    db.executescript('''
+                tables={row[0] for row in db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
+                if not tables and not self.anchor.exists():
+                    inventory=self._bootstrap_inventory() if inventory is None else inventory
+                    schema='''
                         CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT NOT NULL);
                         CREATE TABLE baseline (kind TEXT, key TEXT, version TEXT,
                             PRIMARY KEY(kind,key,version));
@@ -142,19 +150,18 @@ class Store:
                         CREATE INDEX mission_claims ON claim_intents(mission,pending);
                         CREATE TABLE processed (wake_id TEXT, key TEXT, version TEXT, data TEXT NOT NULL,
                             PRIMARY KEY(wake_id,key,version));
-                    ''')
-                    # Freeze the exact historical revisions before producers are
-                    # admitted. Only this activation inventory is unpaged; later
-                    # scans read bounded pages and never infer history from mtime.
-                    for family in ('mail', 'tasks'):
-                        for path in self._paths(family):
-                            for kind, source in self._sources(family, path, db):
-                                if kind not in ('COMMERCIAL_SIGNAL', 'QUEUED_RESULT'): continue
-                                key, version = source_revision(kind, source)
-                                db.execute('INSERT OR IGNORE INTO baseline VALUES (?,?,?)', (kind,key,version))
+                    '''
+                    # executescript implicitly commits an open transaction.
+                    # Individual DDL keeps schema, baseline and completion atomic.
+                    for statement in schema.split(';'):
+                        if statement.strip():db.execute(statement)
+                    for kind,key,version in inventory:
+                        db.execute('INSERT OR IGNORE INTO baseline VALUES (?,?,?)',(kind,key,version))
                     self._put(db, 'schema', 1)
+                if 'meta' not in tables and tables:raise ValueError('Initiative storage unavailable')
                 if self._get(db, 'schema') != 1 or db.execute('PRAGMA quick_check').fetchone()[0] != 'ok':
                     raise ValueError('Initiative storage unavailable')
+                db.execute("CREATE INDEX IF NOT EXISTS pending_kind_due ON events(status,kind,json_extract(data,'$.not_before'))")
             if not self.anchor.exists():
                 fd = os.open(self.anchor, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
                 try: os.write(fd, b'1\n'); os.fsync(fd)
@@ -165,6 +172,38 @@ class Store:
                     finally: os.close(fd)
         except (sqlite3.Error, OSError, TypeError, KeyError, json.JSONDecodeError):
             raise ValueError('Initiative storage unavailable') from None
+
+    def _bootstrap_inventory(self):
+        if self.bootstrap.exists():
+            record=self._read(self.bootstrap,64*1024*1024)
+            if set(record)!={'schema','sources'} or type(record['schema']) is not int or record['schema']!=1 or not isinstance(record['sources'],list):
+                raise ValueError('Initiative storage unavailable')
+            for item in record['sources']:
+                if (not isinstance(item,list) or len(item)!=3 or item[0] not in ('COMMERCIAL_SIGNAL','QUEUED_RESULT')
+                        or not isinstance(item[1],str) or not (TASK if item[0]=='QUEUED_RESULT' else HEX).fullmatch(item[1])
+                        or not isinstance(item[2],str) or not HEX.fullmatch(item[2])):
+                    raise ValueError('Initiative storage unavailable')
+            return record['sources']
+        sources=[]
+        for family in ('mail','tasks'):
+            for path in self._paths(family):
+                for kind,source in self._sources(family,path,None):
+                    if kind in ('COMMERCIAL_SIGNAL','QUEUED_RESULT'):
+                        key,version=source_revision(kind,source);sources.append([kind,key,version])
+        fd,temporary=tempfile.mkstemp(prefix='.initiative-bootstrap-',dir=self.directory)
+        try:
+            os.chmod(temporary,0o600)
+            with os.fdopen(fd,'w',encoding='utf-8') as stream:
+                stream.write(canonical(dict(schema=1,sources=sources)))
+                stream.flush();os.fsync(stream.fileno())
+            os.replace(temporary,self.bootstrap)
+            if os.name!='nt':
+                directory=os.open(self.directory,os.O_DIRECTORY)
+                try:os.fsync(directory)
+                finally:os.close(directory)
+        finally:
+            if os.path.exists(temporary):os.unlink(temporary)
+        return sources
 
     @staticmethod
     def _safe(path):
@@ -239,7 +278,7 @@ class Store:
             ident=path.stem
             if not TASK.fullmatch(ident) or source.get('origin')=='broker':return []
             source=dict(source,id=ident)
-            binding=db.execute('SELECT data FROM bindings WHERE id=?',(ident,)).fetchone()
+            binding=db.execute('SELECT data FROM bindings WHERE id=?',(ident,)).fetchone() if db is not None else None
             metadata=json.loads(binding[0]) if binding else source.get('request',source.get('task'))
             if not isinstance(metadata,dict):metadata=source.get('metadata',{})
             if metadata.get('input_sha256',source.get('hash'))!=source.get('hash'):return []
@@ -422,31 +461,41 @@ class Store:
             if requested!='PRIVATE_MAIL':
                 for p in (self.root/'state/controller').glob('THINK-*.json'):
                     if self._read(p).get('published') is not True:return None
-            candidates={'DIRECTOR':[],'PRIVATE_MAIL':[]}
-            for raw,periodic in db.execute("SELECT data,periodic FROM events WHERE status='PENDING' ORDER BY rowid"):
-                event=self._event(raw)
-                if event['not_before']>now:continue
-                if mode=='wake' and (periodic or (event['target']=='DIRECTOR' and event['cause']['depth']+1>self.policy['max_chain_depth'])):continue
-                if not self._current(db,event):
-                    db.execute("UPDATE events SET status='OBSOLETE',reservation=NULL WHERE id=?",(event['id'],));continue
-                candidates[event['target']].append(event)
             def ready(target):
                 spacing=self.policy['director_spacing_seconds' if target=='DIRECTOR' else 'mail_spacing_seconds']
                 at=self._get(db,'started:'+target)
                 return at is None or now>=at+spacing
             if mode=='wake':
                 lanes=['PRIVATE_MAIL','DIRECTOR'] if self._get(db,'last_lane')=='DIRECTOR' else ['DIRECTOR','PRIVATE_MAIL']
-                target=next((lane for lane in lanes if candidates[lane] and ready(lane)),None)
+                target=next((lane for lane in lanes if ready(lane) and any(
+                    self._candidate(db,kind,now,mode,()) is not None for kind in KINDS if KINDS[kind]==lane)),None)
                 if target is None:return None
             else:
                 target=requested
                 if not ready(target):return None
-            # Interleave source classes so a mixed backlog reserves both windows.
-            pending=candidates[target];selected=[]
-            groups={kind:[e for e in pending if e['kind']==kind] for kind in KINDS}
-            while len(selected)<self.policy['batch_size'] and any(groups.values()):
-                for kind in KINDS:
-                    if groups[kind] and len(selected)<self.policy['batch_size']:selected.append(groups[kind].pop(0))
+            # A wake probes one eligible lane only. Spacing is checked before
+            # opening any candidate source, including unrelated target backlogs.
+            self._put(db,'last_lane',target)
+            kinds=[kind for kind in KINDS if KINDS[kind]==target]
+            last=self._get(db,'last_kind:'+target)
+            if last in kinds:
+                offset=kinds.index(last)+1;kinds=kinds[offset:]+kinds[:offset]
+            selected=[];validated=0
+            while validated<self.policy['scan_page_size'] and len(selected)<self.policy['batch_size']:
+                excluded=[e['id'] for e in selected]
+                candidate=None
+                for kind in kinds:
+                    candidate=self._candidate(db,kind,now,mode,excluded)
+                    if candidate is not None:break
+                if candidate is None:break
+                validated+=1
+                # Rotate even after an obsolete candidate, so small scan pages
+                # and interrupted/empty probes cannot starve another class.
+                self._put(db,'last_kind:'+target,kind)
+                offset=kinds.index(kind)+1;kinds=kinds[offset:]+kinds[:offset]
+                if self._current(db,candidate):selected.append(candidate)
+                else:db.execute("UPDATE events SET status='OBSOLETE',reservation=NULL WHERE id=?",(candidate['id'],))
+            if mode=='wake' and not selected:return None
             prior=max((int(p.stem.split('-')[1]) for p in (self.root/'state/controller').glob('THINK-*.json')
                        if re.fullmatch(r'THINK-[0-9]{1,10}',p.stem)),default=-1)
             seconds=max(now,self._get(db,'last_turn',-1)+1,prior+1)
@@ -467,6 +516,24 @@ class Store:
             for e in selected:db.execute("UPDATE events SET status='RESERVED',reservation=? WHERE id=?",(ident,e['id']))
             self._put(db,'last_lane',target)
             return receipt
+
+    def _candidate(self,db,kind,now,mode,excluded):
+        # Only bounded host ledger rows are materialized. The due-expression
+        # index supplies oldest due revisions without opening source files.
+        query="SELECT data FROM events WHERE status='PENDING' AND kind=? AND json_extract(data,'$.not_before')<=?"
+        args=[kind,now]
+        if mode=='wake':
+            query+=' AND periodic=0'
+            if KINDS[kind]=='DIRECTOR':
+                query+=" AND json_extract(data,'$.cause.depth')<?";args.append(self.policy['max_chain_depth'])
+        if excluded:
+            query+=' AND id NOT IN ('+','.join('?' for _ in excluded)+')';args.extend(excluded)
+        query+=" ORDER BY json_extract(data,'$.not_before'),rowid LIMIT 1"
+        row=db.execute(query,args).fetchone()
+        if not row:return None
+        event=self._event(row[0])
+        if event['kind']!=kind:raise ValueError('Initiative storage unavailable')
+        return event
 
     def _current(self,db,event):
         if event['kind']=='LEASE_DUE':return True  # validated by reconcile's exact world snapshot

@@ -125,6 +125,51 @@ class ResultFeedbackTests(unittest.TestCase):
                 self.assertNotIn('settled',json.dumps(results))
                 self.assertNotIn('artifacts',json.dumps(results))
 
+    def test_private_financial_metadata_wins_over_same_id_public_replacement(self):
+        ident='TASK-180000000000'
+        private=self.root/'state'/(ident+'.json')
+        sentinel='Silverbirch client routing 0187-PLAIN'
+        private.write_text(json.dumps(dict(id=ident,hash='a'*64,task='queue/inbox/'+ident+'.json',
+            metadata=dict(type='TOOL',action='SPEND'),state='PUBLISHED',result=dict(status='DONE',output=sentinel))))
+        public=self.root/'work/queue/inbox'/(ident+'.json');public.parent.mkdir(parents=True)
+        public.write_text(json.dumps(dict(id=ident,type='TOOL',submitted_by='BUILDER',
+            created_at='2026-11-05T00:00:00Z',action='EXEC',args=dict(argv=['node','-p','1'],outputs=[]),estimated_cost_cad=0,approved_by=None)))
+        results=self.controller.context()['latest_task_results']
+        self.assertEqual(results,[self.summary('[output redacted]',redacted=True)])
+        self.assertNotIn(sentinel,json.dumps(results))
+
+    def test_unknown_or_conflicting_action_is_status_only(self):
+        sentinel='Silverbirch client routing 0187-PLAIN'
+        for changes in (dict(request=dict(action='UNKNOWN_ACTION')),
+                        dict(metadata=dict(type='TOOL',action='EXEC'),request=dict(action='RECONCILE'))):
+            with self.subTest(changes=changes):
+                record=dict(id='TASK-180000000000',task=None,state='PUBLISHED',
+                            result=dict(status='DONE',output=sentinel))
+                record.update(changes)
+                (self.root/'state/TASK-180000000000.json').write_text(json.dumps(record))
+                results=self.controller.context()['latest_task_results']
+                self.assertEqual(results,[self.summary('[output redacted]',redacted=True)])
+                self.assertNotIn(sentinel,json.dumps(results))
+
+    def test_legacy_public_request_requires_exact_hash_and_valid_envelope(self):
+        import hashlib
+        ident='TASK-180000000000'
+        public=self.root/'work/queue/inbox'/(ident+'.json');public.parent.mkdir(parents=True)
+        request=dict(id=ident,type='TOOL',submitted_by='BUILDER',created_at='2026-11-05T00:00:00Z',
+                     action='EXEC',args=dict(argv=['node','-p','1'],outputs=[]),estimated_cost_cad=0,approved_by=None)
+        raw=(json.dumps(request)+'\n').encode();public.write_bytes(raw)
+        private=self.root/'state'/(ident+'.json')
+        def record(input_hash):
+            private.write_text(json.dumps(dict(id=ident,hash=input_hash,task='queue/inbox/'+ident+'.json',
+                result=dict(status='DONE',output='ordinary safe result'))))
+        record('a'*64)
+        self.assertEqual(self.controller.context()['latest_task_results'],[self.summary('[output redacted]',redacted=True)])
+        record(hashlib.sha256(raw).hexdigest())
+        self.assertEqual(self.controller.context()['latest_task_results'],[self.summary('ordinary safe result')])
+        request['submitted_by']='lowercase';raw=json.dumps(request).encode();public.write_bytes(raw)
+        record(hashlib.sha256(raw).hexdigest())
+        self.assertEqual(self.controller.context()['latest_task_results'],[self.summary('[output redacted]',redacted=True)])
+
 
 if __name__ == '__main__':
     unittest.main()

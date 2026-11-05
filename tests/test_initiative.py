@@ -327,5 +327,130 @@ class AdmissionTests(Fixture):
         wake=store.claim('wake',now=1000,world_state='ACTIVE',bank_state='UNFUNDED')
         self.assertEqual(wake['turn'],'THINK-1001')
 
+    def test_bootstrap_crash_preserves_activation_inventory(self):
+        import initiative
+        import sqlite3
+        original_root=self.root
+        for phase in ('after_file','after_schema','partial_baseline'):
+            with self.subTest(phase=phase):
+                self.root=original_root/phase;(self.root/'state/private/agentmail').mkdir(parents=True)
+                for n in range(3):self.signal('historical-%d'%n)
+                connect=sqlite3.connect;inserts=0
+                class InterruptedConnection:
+                    def __init__(inner,*args,**kwargs):
+                        inner.connection=connect(*args,**kwargs)
+                        if phase=='after_file':
+                            inner.connection.close();raise KeyboardInterrupt('bootstrap after file')
+                    def __getattr__(inner,name):return getattr(inner.connection,name)
+                    def executescript(inner,sql):
+                        result=inner.connection.executescript(sql)
+                        if phase=='after_schema':raise KeyboardInterrupt('bootstrap after schema')
+                        return result
+                    def execute(inner,sql,*args):
+                        nonlocal inserts
+                        result=inner.connection.execute(sql,*args)
+                        if phase=='after_schema' and sql.strip().startswith('CREATE TABLE processed'):
+                            raise KeyboardInterrupt('bootstrap after schema')
+                        if sql.startswith('INSERT OR IGNORE INTO baseline'):
+                            inserts+=1
+                            if phase=='partial_baseline' and inserts==2:
+                                raise KeyboardInterrupt('bootstrap partial baseline')
+                        return result
+                with patch('initiative.sqlite3.connect',side_effect=InterruptedConnection):
+                    with self.assertRaises(KeyboardInterrupt):self.store()
+                self.assertTrue((self.root/'state/private/initiative.sqlite3').exists())
+                self.assertFalse((self.root/'state/private/initiative.initialized').exists())
+                key,_=self.signal('post-boundary-arrival')
+                store=self.store();store.reconcile(dict(missions=[]),now=1000)
+                self.assertEqual(len(store.events(status='BASELINED')),3)
+                self.assertFalse(store.events(status='ACKED'))
+                wake=store.claim('wake',now=1001,world_state='ACTIVE',bank_state='UNFUNDED')
+                self.assertEqual([e['key'] for e in wake['events']],[key])
+        self.root=original_root
+
+    def seed_pending_results(self,store,count):
+        # These are real source journals and the same canonical host insertion
+        # used by committed-source callbacks; no validation/read path is faked.
+        with store._db() as db:
+            for n in range(count):
+                _,source=self.result(20000+n)
+                store._insert(db,'QUEUED_RESULT',source,1000)
+
+    def test_claim_source_reads_are_bounded_before_batch_selection(self):
+        self.config['initiative'].update(scan_page_size=2,batch_size=1)
+        store=self.store();self.seed_pending_results(store,501)
+        with patch.object(store,'_current',wraps=store._current) as current,patch.object(store,'_read',wraps=store._read) as read:
+            wake=store.claim('wake',now=1001,world_state='ACTIVE',bank_state='UNFUNDED')
+        self.assertEqual(len(wake['events']),1)
+        self.assertLessEqual(current.call_count,2)
+        self.assertLessEqual(read.call_count,2)
+
+    def test_throttled_claim_does_not_read_pending_sources(self):
+        self.config['initiative'].update(scan_page_size=2,batch_size=1)
+        store=self.store()
+        periodic=store.claim('think',now=1000,world_state='ACTIVE',bank_state='UNFUNDED')
+        store.start(periodic['wake_id'],prepared=dict(context={},assessment={},coverage=[],excluded=[]),now=1000)
+        self.seed_pending_results(store,501)
+        with patch.object(store,'_current',wraps=store._current) as current,patch.object(store,'_read',wraps=store._read) as read:
+            self.assertIsNone(store.claim('wake',now=1001,world_state='ACTIVE',bank_state='UNFUNDED'))
+        self.assertEqual(current.call_count,0);self.assertEqual(read.call_count,0)
+
+    def test_private_claim_does_not_read_director_backlog(self):
+        self.config['initiative'].update(scan_page_size=2,batch_size=1)
+        store=self.store();self.seed_pending_results(store,501)
+        source=dict(inbox_id='inbox',message_id='retry',state='RETRY',attempts=1,retry_after=1000)
+        key=hashlib.sha256(b'inbox\0retry').hexdigest()
+        (self.root/'state/private/agentmail'/(key+'.json')).write_text(json.dumps(source))
+        with store._db() as db:store._insert(db,'PRIVATE_RETRY_DUE',source,1000)
+        with patch.object(store,'_current',wraps=store._current) as current,patch.object(store,'_read',wraps=store._read) as read:
+            wake=store.claim('mail',now=1001,world_state='ACTIVE',bank_state='UNFUNDED')
+        self.assertEqual(wake['target'],'PRIVATE_MAIL')
+        self.assertEqual([e['key'] for e in wake['events']],[key])
+        self.assertLessEqual(current.call_count,2);self.assertLessEqual(read.call_count,2)
+        self.assertTrue(all('TASK-' not in str(call.args[0]) for call in read.call_args_list))
+
+    def test_bounded_stale_candidates_make_durable_progress(self):
+        self.config['initiative'].update(scan_page_size=2,batch_size=1)
+        store=self.store();self.seed_pending_results(store,5)
+        for n in range(4):(self.root/'state'/('TASK-%012d.json'%(20000+n))).unlink()
+        wake=None
+        for now in range(1001,1004):
+            store=self.store()
+            with patch.object(store,'_current',wraps=store._current) as current:
+                wake=store.claim('wake',now=now,world_state='ACTIVE',bank_state='UNFUNDED')
+            self.assertLessEqual(current.call_count,2)
+            if wake:break
+        self.assertIsNotNone(wake)
+        self.assertEqual([e['key'] for e in wake['events']],['TASK-000000020004'])
+        self.assertEqual(len(store.events(status='OBSOLETE')),4)
+
+    def test_small_batches_fairly_admit_old_classes_across_restart(self):
+        original_root=self.root
+        for batch in (1,2):
+            with self.subTest(batch=batch):
+                self.root=original_root/str(batch);(self.root/'state/private/agentmail').mkdir(parents=True)
+                self.config['initiative'].update(scan_page_size=2,batch_size=batch,director_spacing_seconds=1)
+                store=self.store();self.seed_pending_results(store,3)
+                mission=dict(mission_id='OLD-LEASE',status='RUNNING',agent_id='BUILDER',lease_token='private-lease',lease_expires_at=1000)
+                with store._db() as db:store._insert(db,'LEASE_DUE',mission,1000)
+                admitted=[]
+                for turn in range(3):
+                    store=self.store()
+                    _,signal=self.signal('new-commercial-%d'%turn)
+                    _,result=self.result(30000+turn)
+                    with store._db() as db:
+                        store._insert(db,'COMMERCIAL_SIGNAL',signal,1000+turn)
+                        store._insert(db,'QUEUED_RESULT',result,1000+turn)
+                    wake=store.claim('wake',now=1001+turn,world_state='ACTIVE',bank_state='UNFUNDED')
+                    admitted.extend(e['kind'] for e in wake['events'])
+                    coverage=[dict(kind=e['kind'],key=e['key'],version=e['version'],representation='STATUS_ONLY') for e in wake['events']]
+                    store.start(wake['wake_id'],prepared=dict(context={},assessment={},coverage=coverage,excluded=[]),now=1001+turn)
+                    directory=self.root/'state/controller';directory.mkdir(exist_ok=True)
+                    (directory/(wake['turn']+'.json')).write_text(json.dumps(dict(published=True,lineage=wake['cause'],files={})))
+                    store.finish(wake['wake_id'],turn=wake['turn'],now=1001+turn)
+                self.assertIn('QUEUED_RESULT',admitted)
+                self.assertIn('LEASE_DUE',admitted)
+        self.root=original_root
+
 
 if __name__ == '__main__': unittest.main()

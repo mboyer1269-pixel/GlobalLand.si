@@ -6,6 +6,7 @@ import re
 import time
 import subprocess
 import uuid
+import hashlib
 from supervisor import atomic_json, bounded_run, check_secrets, strict_json, failure_details, FAILURE_KINDS, FAILURE_CODES
 
 SCHEMA = {'type':'object','additionalProperties':False,'required':['summary','actions'],'properties':{'summary':{'type':'string'},'actions':{'type':'array','maxItems':5,'items':{'type':'object','additionalProperties':False,'required':['agent','action','args'],'properties':{'agent':{'type':'string','pattern':'^[A-Z0-9_-]{1,64}$'},'action':{'type':'string','enum':['EXEC','FETCH','WORLD','STATUS','SPEND','RECONCILE','PUBLISH_ACTOR','ACTOR_STATS','PUBLISH_SITE']},'args':{'type':'object'}}}}}}
@@ -409,7 +410,7 @@ class Controller:
         candidates.sort(key=recency,reverse=True)
         candidates.sort(key=lambda c: order.get(c[1].name.removesuffix('.result.json').removesuffix('.json'),len(order)))
         seen=set()
-        for _,p in candidates:
+        for private,p in candidates:
             if len(results)>=20:break
             if p.stat().st_size>1024*1024:continue
             try:
@@ -421,19 +422,37 @@ class Controller:
                 v=record.get('result',record)
                 if not isinstance(v,dict) or v.get('status') not in TERMINAL:
                     excluded.append(dict(kind='QUEUED_RESULT',key=ident,reason='INVALID_RESULT'));continue
-                request=record.get('request')
-                if not isinstance(request,dict):request=record.get('task')
-                if not isinstance(request,dict):
-                    request=None
-                    # Only our fixed task identity can select a legacy request.
+                from tools import TOOL_ACTIONS,validate_envelope
+                classifications=[]
+                for field in ('metadata','request','task'):
+                    request=record.get(field)
+                    if field=='metadata' and field in record and not isinstance(request,dict):
+                        classifications.append(None);continue
+                    if not isinstance(request,dict):continue
+                    action=request.get('action')
+                    valid=(isinstance(action,str) and action in TOOL_ACTIONS
+                           and request.get('type','TOOL')=='TOOL' and request.get('id',ident)==ident)
+                    if field=='metadata':valid=valid and request.get('type')=='TOOL'
+                    classifications.append(action if valid else None)
+                action=None
+                if classifications:
+                    # Persisted host classification wins. Missing/unknown or
+                    # conflicting private metadata is never repaired by public
+                    # replacement text bearing the same filename.
+                    if classifications[0] is not None and all(a==classifications[0] for a in classifications):
+                        action=classifications[0]
+                elif private and isinstance(record.get('hash'),str) and re.fullmatch(r'[0-9a-f]{64}',record['hash']):
                     for directory in ('inbox','done','failed'):
                         candidate=work/'queue'/directory/(ident+'.json')
-                        if candidate.exists() and not candidate.is_symlink() and candidate.stat().st_size<=1024*1024:
-                            request=strict_json(candidate.read_bytes());break
-                if not isinstance(request,dict):request=record.get('metadata',{})
-                # Unknown legacy metadata gets the same safe status-only view.
-                action=request.get('action') if isinstance(request,dict) else None
-                redacted=action in ('SPEND','RECONCILE') or action is None
+                        if (not candidate.is_file() or any(v.is_symlink() for v in (candidate,*candidate.parents))
+                                or candidate.stat().st_nlink!=1 or candidate.stat().st_size>1024*1024):continue
+                        raw=candidate.read_bytes()
+                        if hashlib.sha256(raw).hexdigest()!=record['hash']:continue
+                        try:
+                            request=strict_json(raw);validate_envelope(request)
+                            if request['id']==ident:action=request['action'];break
+                        except (ValueError,TypeError,KeyError):continue
+                redacted=action not in ('EXEC','FETCH','WORLD','STATUS','PUBLISH_ACTOR','ACTOR_STATS','PUBLISH_SITE')
                 screened=dict(v)
                 if isinstance(screened.get('artifacts'),list):
                     # EXEC adds this public provenance path to every success.
@@ -444,10 +463,6 @@ class Controller:
                 output=str(v.get('output',''))
                 try:check_secrets(output.encode())
                 except ValueError:redacted=True
-                # Existing metadata-free nonfinancial journals may still expose
-                # screened ordinary text; never infer finance safety from output.
-                if action is None:
-                    redacted=True
                 item=dict(task=ident,status=v['status'],output='[output redacted]' if redacted else output[:2000],
                           output_truncated=not redacted and len(output)>2000,output_redacted=redacted)
                 results.append(item)
