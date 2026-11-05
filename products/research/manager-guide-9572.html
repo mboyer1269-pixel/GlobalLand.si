@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager.io</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://kit.fontawesome.com/0b64f5ae8f.js" crossorigin="anonymous"></script>
+    <script defer data-domain="manager.io" src="/js/script.js"></script>
+</head>
+<body class="flex min-h-full bg-white dark:bg-slate-900">
+    <div id="app" class="flex w-full flex-col">
+        <div id="header">
+            <div class="sticky top-0 z-50 bg-white dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75 shadow-md dark:shadow-none">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between py-4">
+                        <!-- Logo and brand -->
+                        <div class="flex items-center gap-x-4">
+                            <a href="/" class="flex items-center">
+                                <svg class="fill-slate-700 dark:fill-sky-100" height="32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF7F7F"/>
+                                            <stop offset="100%" style="stop-color:#8B0000"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <rect x="0" y="0" width="200" height="200" fill="url(#redGradient)" rx="40" ry="40"/>
+                                    <text x="100" y="50%" dy="0.35em" font-family="Arial" font-size="150" fill="white" text-anchor="middle">M</text>
+                                </svg>
+                                <span class="hidden sm:block mx-2 text-lg font-semibold text-slate-700 dark:text-sky-100">MANAGER</span>
+                            </a>
+                        </div>
+
+                        <!-- Center spacer for desktop -->
+                        <div class="hidden lg:block flex-grow"></div>
+
+                        <!-- Desktop navigation -->
+                        <div class="hidden lg:flex items-center gap-x-2">
+                            <a href="/download" class="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">Download</a>
+                            <a href="/releases" class="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">Releases</a>
+                            <a href="/guides" class="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">Guides</a>
+                            <a href="/accountants" class="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">Accountants</a>
+                            <a href="https://forum.manager.io" target="_blank" class="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md flex gap-2 items-center">
+                                Forum
+                                <i class="fas fa-external-link text-xs"></i>
+                            </a>
+                            <!-- CTA button -->
+                            <a href="https://www.manager.cloud" class="ml-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 flex gap-2 items-center hover:text-white">
+                                Cloud Edition
+                                <i class="fa fa-cloud"></i>
+                            </a>
+                        </div>
+
+                        <!-- Mobile menu button -->
+                        <div class="flex items-center gap-x-3 lg:hidden">
+                            <button type="button" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu -->
+                <div class="hidden lg:hidden" id="mobile-menu">
+                    <div class="px-4 pt-2 pb-4 space-y-1 border-t border-gray-200">
+                        <a href="/download" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">Download</a>
+                        <a href="/releases" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">Releases</a>
+                        <a href="/guides" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">Guides</a>
+                        <a href="/accountants" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">Accountants</a>
+                        <a href="https://forum.manager.io" target="_blank" class="flex items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">
+                            Forum
+                            <i class="fas fa-external-link ml-2 text-xs"></i>
+                        </a>
+                        <!-- Mobile CTA button -->
+                        <div class="pt-4">
+                            <a href="https://www.manager.cloud" class="flex items-center justify-center gap-2 w-full rounded-md bg-indigo-600 px-4 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 hover:text-white">
+                                Cloud Edition
+                                <i class="fa fa-cloud"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="breadcrumb"></div>
+        <div id="content">
+            <!-- Loading spinner -->
+            <div class="flex items-center justify-center min-h-[50vh]">
+                <i class="fa fa-circle-notch fa-spin fa-3x text-neutral-200"></i>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>
