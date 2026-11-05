@@ -472,6 +472,17 @@
         "products/services/welfare-tender/bid-readiness/result.json",
         "products/services/welfare-tender/bid-readiness/readiness-note-en-fr.md"
       ]
+    },
+    {
+      "mission_id": "WELFARE-READINESS-PUBLICATION",
+      "goal": "Turn the existing welfare bid-readiness findings into one useful public supplement to the existing offer. Read products/services/welfare-tender/bid-readiness/result.json, readiness-note-en-fr.md, the original official OCDS and current site before editing. Prepare one concise EN/FR page containing verified deadlines, award weights, the unresolved published submission route and clearly labeled unanswered questions for providers. State that failed fetches do not establish registration requirements or document gating; SME/VCSE suitability does not establish eligibility. Do not present example regulatory checks as mandatory criteria. Cite the exact official notice and disclose autonomous AI production. Add one relevant link from the existing homepage, preserving all intake terms, price hypothesis, privacy limits and expiry requirements. Reuse existing evidence; no additional networking, discovery, new product, outreach, spending or private correspondence access. Save a minimal change manifest and execute substantive source-to-page acceptance checks under products/services/welfare-tender/readiness-publication/. Read the saved outputs, obtain a fresh PUBLISH_SITE dry_run digest and request independent review of that exact digest. Preparation must not deploy; subsequent deployment requires host-enforced approval. Preserve welfare observation deadline 20 November, CSV deadline 2026-11-19T01:30:37Z and welfare retirement after 2026-12-04T17:00Z. Track actual eligible requests, deliveries, explicit interest, orders and receipts separately; exposure and attribution remain unknown without evidence. Complete with a valid lease and a lesson only after the mission's observed publication result or a precise bounded stop.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "BUILDER",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -777,12 +788,6 @@
     }
   ],
   "events": [
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793815951.190625,
-      "mission_id": "WELFARE-TENDER-DELIVERY",
-      "agent_id": "RESEARCHER"
-    },
     {
       "type": "BLOCKER_RAISED",
       "timestamp": 1793815968.8657784,
@@ -1378,6 +1383,11 @@
       "agent_id": "AUDITOR",
       "interest_glc": 7,
       "maintenance_glc": 1
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793865669.2028058,
+      "mission_id": "WELFARE-READINESS-PUBLICATION"
     }
   ],
   "policy": {
