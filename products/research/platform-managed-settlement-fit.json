@@ -1,0 +1,110 @@
+{
+ "mission": "PLATFORM-MANAGED-SETTLEMENT-FIT",
+ "platform": "Gumroad",
+ "observed_at": "2026-11-05",
+ "sources": [
+  {
+   "url": "https://gumroad.com/pricing",
+   "task": "TASK-179391600400",
+   "http": 200,
+   "sha256": "146a752d84527afcfb7145a43c0bd164360a278818f634e9117ab687c3f10384",
+   "artifact": "products/research/gumroad-official-pricing.html"
+  },
+  {
+   "url": "https://gumroad.com/help/article/13-getting-paid",
+   "task": "TASK-179391600401",
+   "http": 200,
+   "sha256": "14cda290ec4d48d421a7eab02cdd560138096b1414bbcf75c094eca3989a1e0b",
+   "artifact": "products/research/gumroad-official-payouts.html"
+  },
+  {
+   "url": "https://gumroad.com/terms",
+   "task": "TASK-179391636114",
+   "http": 200,
+   "sha256": "fb3edfba0b00fb13962f091aa867eac7b8ff9d01e225465ab277c0bf4615f111",
+   "artifact": "products/research/gumroad-official-terms.html"
+  }
+ ],
+ "quotations": {
+  "fees": {
+   "url": "https://gumroad.com/pricing",
+   "quote": "10% + $0.50 Per transaction for all sales through your profile or direct links to your customers. 30% Per transaction when new customers find and buy from you through our discover marketplace."
+  },
+  "merchant_of_record": {
+   "url": "https://gumroad.com/pricing",
+   "quote": "We're a Merchant of Record Since January 1, 2025, Gumroad handles ALL your tax obligations."
+  },
+  "canada_bank_payout": {
+   "url": "https://gumroad.com/help/article/13-getting-paid",
+   "quote": "Canada CAD (bank payout country table; no higher local minimum shown)"
+  },
+  "minimum_payout": {
+   "url": "https://gumroad.com/help/article/13-getting-paid",
+   "quote": "You need a minimum balance of $100 USD to receive a payout."
+  },
+  "holding_period": {
+   "url": "https://gumroad.com/help/article/13-getting-paid",
+   "quote": "On the weekly, monthly, and quarterly schedules, a sale has a minimum 7-day holding period in your Gumroad balance before it becomes eligible for payout."
+  },
+  "payout_day_canada": {
+   "url": "https://gumroad.com/help/article/13-getting-paid",
+   "quote": "Wednesday Euro bank accounts, and bank accounts in Australia, Bulgaria, Canada, ..."
+  },
+  "kyc": {
+   "url": "https://gumroad.com/help/article/13-getting-paid",
+   "quote": "Our payment processor, Stripe, requires additional information to verify the identity of the account holder after a certain amount of time has passed and sales accrued."
+  },
+  "paypal_fee": {
+   "url": "https://gumroad.com/help/article/13-getting-paid",
+   "quote": "PayPal payouts have a 2% payout fee."
+  },
+  "product_scope": {
+   "url": "https://gumroad.com/terms",
+   "quote": "none of your Digital Products is listed as Prohibited Products and Activities on the Website"
+  },
+  "no_own_invoicing": {
+   "url": "https://gumroad.com/terms",
+   "quote": "you shall not issue any invoice or make any demand for payment to any Buyer in relation to any completed resale of your Products through the Services."
+  },
+  "refunds": {
+   "url": "https://gumroad.com/terms",
+   "quote": "Gumroad will handle Buyers' requests for refunds, chargebacks and other disputes with Buyers in Gumroad's sole discretion."
+  }
+ },
+ "findings": {
+  "documented_possibility": "Gumroad documents CAD bank payouts for Canada, acts as merchant of record (collects/remits sales tax), and sells digital products under its own checkout. Collection therefore operates on the platform, independent of GlobalLand's missing generic collection/finance adapter.",
+  "not_established": [
+   "No founder Gumroad account is known to exist or be authorized for GlobalLand",
+   "Stripe KYC acceptance of the founder is unverified",
+   "The Prohibited Products and Activities page was not read (bounded to 3 pages); scope of an AI-built script/guide is presumed but unverified",
+   "Whether Treasury can verify a Gumroad payout (settlement path NOT_CONFIGURED; would need founder payout attestation or a reconciliation adapter)",
+   "Any demand: the Shopify worked example has 0 classified requests; downloads UNKNOWN"
+  ],
+  "economics_example_hypothesis": {
+   "note": "Arithmetic on documented fees only; prices are hypotheses, no sales observed",
+   "price_usd_9_direct": {
+    "fee_usd": 1.4,
+    "net_usd": 7.6
+   },
+   "price_usd_9_discover": {
+    "fee_usd": 2.7,
+    "net_usd": 6.3
+   },
+   "price_usd_29_direct": {
+    "fee_usd": 3.4,
+    "net_usd": 25.6
+   },
+   "sales_needed_for_first_payout_at_100_usd_min": {
+    "usd_9_direct": 14,
+    "usd_29_direct": 4
+   },
+   "earliest_settlement": "sale + >=7-day hold, then next weekly Wednesday CAD payout once balance >= USD 100"
+  },
+  "comparison_with_apify": "Both need one founder account step. Gumroad: 10%+$0.50 direct, MoR tax handling (relevant to Quebec GST/QST question), optional Discover marketplace at 30% for discovery; payout threshold USD 100. Apify PPE: 80% of event revenue minus platform costs, free-plan users excluded (L6/L7). Gumroad fits one-off digital deliverables; Apify fits per-use utilities."
+ },
+ "verdict": "PURSUE_IF",
+ "condition": "Pursue only if the founder chooses to create/authorize a dedicated Gumroad seller account (founder identity, Stripe KYC, CAD bank account). Do not price the existing free Shopify sample until a classified request or download signal exists; the USD 100 payout minimum means a single small sale cannot become verified revenue.",
+ "smallest_founder_step": "Create or designate a Gumroad seller account for GlobalLand in the founder's name, complete Payments Settings with a Canadian CAD bank account, and tell agents only the public profile URL (no credentials). Agents would then prepare one digital product package and listing copy for independent review; the founder (or an authorized integration) uploads it.",
+ "service_payment_collection_reconsideration": "Narrows, does not resolve, SERVICE-PAYMENT-COLLECTION: option B (merchant link) can concretely be a Gumroad product link, which also handles sales tax as MoR. Blocker remains OPEN.",
+ "not_done": "No account created, no agreement accepted, no credentials probed, no listing, no outreach, no prices published."
+}
