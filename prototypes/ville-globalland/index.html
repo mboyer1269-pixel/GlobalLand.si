@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0e202b">
+  <title>La ville de GlobalLand</title>
+  <link rel="icon" href="ville-crepuscule.png">
+  <link rel="stylesheet" href="ville.css">
+  <script src="ville.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="frame masthead-inner">
+      <a class="brand" href="#carte" aria-label="GlobalLand, carte de la ville">
+        <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><path fill="#f1cd86" d="M20 3 37 12 20 21 3 12Z"/><path fill="none" stroke="#f1cd86" stroke-width="2" d="m3 19 17 9 17-9M3 26l17 9 17-9"/></svg>
+        <span>GlobalLand<small>ATLAS DU MONDE</small></span>
+      </a>
+      <nav aria-label="Navigation principale" class="top-nav">
+        <a href="#carte" id="nav-map">Carte</a>
+        <a href="#journal" id="nav-journal">Journal</a>
+      </nav>
+      <span class="demo-tag" id="data-mode">Lecture du dépôt…</span>
+    </div>
+  </header>
+  <main class="frame">
+    <section class="intro" aria-labelledby="title">
+      <div><p class="eyebrow">ATLAS DU MONDE <span></span> LE SECTEUR CENTRAL</p>
+        <h1 id="title">Les lumières <em>de GlobalLand.</em></h1>
+        <p class="intro-copy">Explore les lieux de la ville ou suis une mission, de la première décision à la preuve publiée.</p>
+      </div>
+      <dl class="world-summary">
+        <div><dt>État du monde</dt><dd><span class="state-dot" id="world-dot"></span><span id="world-state">À vérifier</span></dd></div>
+        <div><dt>Dernier événement</dt><dd id="last-event">Aucune donnée</dd></div>
+        <div><dt id="watch-label">À surveiller</dt><dd><a id="watch-link" href="#missions">Missions →</a></dd></div>
+      </dl>
+    </section>
+    <div class="explorer">
+      <section class="map-card" aria-label="Carte des lieux" tabindex="-1">
+        <div class="map-header"><span class="map-caption"><span class="map-compass" aria-hidden="true">✧</span> CARTE AU CRÉPUSCULE</span><button id="journey-toggle" disabled class="journey-toggle" type="button" aria-pressed="false" aria-controls="journey"><span aria-hidden="true">⌁</span> Suivre une mission</button></div>
+        <div class="map-canvas">
+          <img src="ville-crepuscule.png" width="1536" height="1024" alt="Ville miniature au crépuscule, avec un marché autour d’une tour d’horloge, une maison des missions et un atelier éclairé au bord de la rivière">
+          <svg class="journey-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs><path id="street-route" d="M31 61 C36 66 42 68 47 64 S54 58 56 53 59 46 62 44 C64 48 62 54 59 58 S59 66 65 70 71 72 76 70"/></defs>
+            <use href="#street-route" class="journey-track"/>
+            <use href="#street-route" class="journey-dashes"/>
+            <circle cx="31" cy="61" r=".65"/><circle cx="62" cy="44" r=".65"/><circle cx="76" cy="70" r=".65"/>
+          </svg>
+          <a class="map-pin pin-agents" href="#agents" data-place="agents" aria-label="Place des agents"><b>A</b><span>Place des agents</span></a>
+          <a class="map-pin pin-missions" href="#missions" data-place="missions" aria-label="Maison des missions"><b>M</b><span>Maison des missions</span></a>
+          <a class="map-pin pin-artifacts" href="#livrables" data-place="livrables" aria-label="Atelier des livrables"><b>L</b><span>Atelier des livrables</span></a>
+        </div>
+        <nav class="place-list" aria-label="Les lieux de la ville">
+          <a href="#agents" data-place="agents"><b>A</b><span>Agents</span></a>
+          <a href="#missions" data-place="missions"><b>M</b><span>Missions</span></a>
+          <a href="#livrables" data-place="livrables"><b>L</b><span>Livrables</span></a>
+        </nav>
+        <div id="journey" class="journey" hidden>
+          <p>ITINÉRAIRE <strong id="journey-title">Aucun itinéraire vérifié</strong></p>
+          <ol id="journey-stops"></ol>
+        </div>
+        <div class="map-footer"><span><i></i> Trois lieux à explorer</span><span>GLOBAL LAND · SECTEUR CENTRAL</span></div>
+      </section>
+      <section id="panel" class="detail-panel" aria-labelledby="panel-title"></section>
+    </div>
+    <footer class="page-footer">
+      <p><strong id="footer-mode">Lecture seule</strong> <span id="demo-time">Chargement des publications…</span></p>
+
+    </footer>
+    <p class="visually-hidden" role="status" id="announcement"></p>
+  </main>
+</body>
+</html>
