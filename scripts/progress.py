@@ -113,10 +113,26 @@ def load(root):
         if not isinstance(value, dict): raise ValueError()
         if ('commercial_state' in value and value['commercial_state'] not in COMMERCIAL_STATES):
             raise ValueError()
-        initialized = (value.get('commercial_baseline') is True
-                       or 'commercial_turns' in value or 'commercial_state' in value)
-        if initialized and ('commercial_seen_sources' not in value or 'turns_without_verified_revenue' not in value):
-            raise ValueError()
+        tracking_fields = {'commercial_baseline', 'commercial_history_unavailable',
+                           'commercial_seen_sources', 'commercial_turns', 'commercial_state',
+                           'turns_without_verified_revenue'}
+        initialized = anchor.exists() or bool(tracking_fields & value.keys())
+        if initialized:
+            if not tracking_fields.issubset(value) or 'last' not in value:
+                raise ValueError()
+            if (type(value['commercial_baseline']) is not bool
+                    or type(value['commercial_history_unavailable']) is not bool):
+                raise ValueError()
+            prior = value['last']
+            if (not isinstance(prior, dict) or not isinstance(prior.get('products'), dict)
+                    or not isinstance(prior.get('missions'), dict)
+                    or type(prior.get('revenue_cents')) is not int or prior['revenue_cents'] < 0):
+                raise ValueError()
+            if (not value['commercial_baseline']
+                    and (value['commercial_turns'] != 0 or value['commercial_state'] == 'AVAILABLE')):
+                raise ValueError()
+            if value['commercial_history_unavailable'] and value['commercial_state'] == 'AVAILABLE':
+                raise ValueError()
         sources = value.get('commercial_seen_sources', [])
         if (not isinstance(sources, list) or len(sources) > 100000
                 or any(not isinstance(s, str) or not re.fullmatch(r'[0-9a-f]{64}', s) for s in sources)

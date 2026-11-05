@@ -371,5 +371,63 @@ class CommercialTests(unittest.TestCase):
         self.assertIsNone(recovered['commercial_turns'])
         self.assertIsNone(recovered['turns_without_verified_revenue'])
 
+    def test_initialized_history_requires_complete_typed_consistent_tracking_schema(self):
+        import progress
+        source = self.record(self.normalize()).stem
+        path = self.root / 'state/private/progress.json'
+        anchor = self.root / 'state/private/progress.initialized.json'
+        fingerprint = dict(products={}, missions={}, revenue_cents=0)
+        valid = dict(last=fingerprint, commercial_baseline=True,
+                     commercial_seen_sources=[source], commercial_history_unavailable=False,
+                     commercial_turns=10, commercial_state='AVAILABLE', turns_without_verified_revenue=10)
+        cases = [({}, True), ({'last': fingerprint, 'stalled_turns': 4}, True)]
+        for key in ('last', 'commercial_baseline', 'commercial_seen_sources',
+                    'commercial_history_unavailable', 'commercial_turns', 'commercial_state',
+                    'turns_without_verified_revenue'):
+            incomplete = dict(valid); incomplete.pop(key)
+            cases.extend([(incomplete, True), (incomplete, False)])
+        for key, value in [('commercial_baseline', 1), ('commercial_baseline', 'false'),
+                           ('commercial_baseline', False), ('commercial_history_unavailable', 0),
+                           ('commercial_history_unavailable', 'false'), ('commercial_history_unavailable', True),
+                           ('commercial_turns', None), ('turns_without_verified_revenue', False),
+                           ('last', {'products': {}, 'missions': {}})]:
+            malformed = dict(valid); malformed[key] = value
+            cases.append((malformed, True))
+        for record, anchored in cases:
+            with self.subTest(record=record, anchored=anchored):
+                path.write_text(json.dumps(record))
+                if anchored: anchor.write_text('{"version":1}')
+                elif anchor.exists(): anchor.unlink()
+                a = progress.assess(self.root, {'missions': []}, {'revenue_cents': 0}, self.config)
+                self.assertIsNone(a['commercial_turns'])
+                self.assertIsNone(a['new_commercial_feedback'])
+                self.assertIsNone(a['turns_without_verified_revenue'])
+
+    def test_no_anchor_legacy_migration_and_valid_initialized_history_remain_supported(self):
+        import progress
+        source = self.record(self.normalize()).stem
+        path = self.root / 'state/private/progress.json'
+        fingerprint = dict(products={}, missions={}, revenue_cents=0)
+        path.write_text(json.dumps(dict(last=fingerprint, stalled_turns=4, dry_turns=4)))
+        migrated = progress.assess(self.root, {'missions': []}, {'revenue_cents': 0}, self.config)
+        self.assertEqual(migrated['commercial_turns'], 0)
+        self.assertFalse(migrated['new_commercial_feedback'])
+        self.assertEqual(migrated['turns_without_verified_revenue'], 0)
+        self.assertEqual(migrated['stalled_turns'], 5)
+        valid = dict(last=fingerprint, commercial_baseline=True, commercial_seen_sources=[source],
+                     commercial_history_unavailable=False, commercial_turns=10,
+                     commercial_state='AVAILABLE', turns_without_verified_revenue=10)
+        path.write_text(json.dumps(valid))
+        (self.root / 'state/private/progress.initialized.json').write_text('{"version":1}')
+        continued = progress.assess(self.root, {'missions': []}, {'revenue_cents': 0}, self.config)
+        self.assertEqual(continued['commercial_turns'], 11)
+        self.assertFalse(continued['new_commercial_feedback'])
+        self.assertEqual(continued['turns_without_verified_revenue'], 11)
+        # A complete record from the pre-anchor increment remains valid too.
+        (self.root / 'state/private/progress.initialized.json').unlink()
+        continued = progress.assess(self.root, {'missions': []}, {'revenue_cents': 0}, self.config)
+        self.assertEqual(continued['commercial_turns'], 11)
+        self.assertEqual(continued['turns_without_verified_revenue'], 11)
+
 
 if __name__ == '__main__': unittest.main()
