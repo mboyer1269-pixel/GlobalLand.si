@@ -75,13 +75,32 @@ Vérifier une décision THINK, des tâches produites et leurs résultats/artefac
 python3 scripts/start_autonomy.py
 ```
 
-Le script recontrôle le service cron, la version installée, les tours publiés et les connexions CLI. Il conserve les attestations d'usage existantes, sauvegarde la configuration puis sélectionne codex/claude. L'image et la connexion Cursor restent en place ; Cursor n'est pas sélectionné pour ces tours automatiques. Il écrit atomiquement un unique horaire toutes les30 minutes, sans remplacer un horaire différent existant et sans toucher aux tâches queue/daily ou Oria. Un échec d'installation de l'horaire avant sa publication restaure la configuration précédente. Le cron appelle exclusivement le contrôle installé, jamais le checkout administratif. Aucune mise à niveau du contrôle ou de l'image n'est nécessaire pour cette opération.
+Le script recontrôle le service cron, la version installée, les tours publiés et les connexions CLI. Il conserve les attestations d'usage existantes, sauvegarde configuration et horaire puis sélectionne codex/claude. L'image et la connexion Cursor restent en place ; Cursor n'est pas sélectionné pour ces tours automatiques. Il reconnaît exclusivement l'ancien horaire géré ci-dessous et le nouvel horaire événementiel ; tout contenu personnalisé est conservé et refusé. Il ne touche pas aux tâches mail/queue/daily ou Oria. Un échec de remplacement ou de synchronisation disque restaure le couple configuration/horaire précédent ; les sauvegardes privées permettent une restauration opérateur si le disque refuse aussi le retour arrière. Le cron appelle exclusivement le contrôle installé, jamais le checkout administratif.
 
 L'horaire dédié `/etc/cron.d/globalland-think` mode644 contient :
 
 ```cron
 */30 * * * * root /usr/bin/python3 /opt/globalland/control/supervisor.py think >> /var/log/globalland/think.log 2>&1 && /usr/bin/python3 /opt/globalland/control/supervisor.py queue >> /var/log/globalland/think.log 2>&1
 ```
+
+L'initiative événementielle est **désactivée par défaut**. Après installation du contrôle revu, sa configuration privée optionnelle est :
+
+```json
+{"initiative":{"enabled":true,"debounce_seconds":60,"director_spacing_seconds":300,"mail_spacing_seconds":300,"max_chain_depth":1,"batch_size":64,"scan_page_size":200,"lease_notice_seconds":300}}
+```
+
+Les nombres sont des entiers stricts : debounce et préavis de bail 0–3600 secondes, espacements directeur/mail 1–3600, profondeur 0–8, lot 1–200, page 1–2000. Une valeur invalide bloque l'admission. Ces limites règlent les ressources ; elles ne choisissent aucun marché et n'accordent aucune nouvelle autorité financière ou de publication. Réexécuter `start_autonomy.py` avec cette configuration migre le **même** fichier `globalland-think` vers :
+
+```cron
+*/30 * * * * root /usr/bin/python3 /opt/globalland/control/supervisor.py think >> /var/log/globalland/think.log 2>&1
+* * * * * root /usr/bin/python3 /opt/globalland/control/supervisor.py wake >> /var/log/globalland/think.log 2>&1
+```
+
+Le chemin directeur enchaîne think puis queue dans le même processus et sous le verrou partagé. Un wake occupé ou sans événement admissible n'appelle ni Git, ni finance, ni modèle, ni transport mail. Les tours périodiques partagent l'espacement persistant et peuvent consommer le backlog limité en profondeur ; queue conserve sa récupération et son exécution indépendantes d'une nouvelle inférence. `cron_pause.sh` suspend toujours tous ces réveils via le fichier existant. Revenir à `enabled:false` puis réactiver restaure l'horaire historique, sans supprimer les reçus.
+
+Le journal privé `state/private/initiative.sqlite3` conserve identités, inventaire historique, causalité, réservations, couverture exacte et incertitudes. Ne jamais le supprimer pour réinitialiser un réveil. L'historique initial est BASELINED, pas lu/acquitté par un modèle. Seules les révisions effectivement représentées dans le contexte initial figé sont acquittées après publication durable ; un résumé borné ou un compteur ne prouve ni compréhension intégrale ni résultat commercial. Les réponses mail suivent leur sélection équitable habituelle et leurs reçus par révision : ACCEPTED n'est pas une livraison, UNKNOWN n'est jamais renvoyé automatiquement, READY reste réutilisable sans nouveau calcul. Un tour directeur commencé sans décision durable devient INTERRUPTED et ne relance pas une nouvelle inférence de ce réveil ; ses sources restent réservées aux tours périodiques. Une décision déjà durable reprend uniquement publication/acquittement et les effets connus restent récupérables dans leurs journaux existants.
+
+Le délai réel comprend la minute de découverte, les pages de scan, le debounce, l'échéance privée, les espacements, l'occupation du verrou et la disponibilité du fournisseur. Un préavis de bail ne garantit pas une action avant expiration. HALTED dans le monde **ou** la trésorerie diffère la production ; EXTINCT dans l'un des deux la supprime définitivement, tout en conservant les preuves et la récupération comptable/publication autorisée. Ces tests de code ne constituent ni une installation, ni une preuve de fonctionnement en production, ni un revenu externe vérifié.
 
 Le script effectue ensuite un lancement immédiat think/queue. Son retour sans erreur ne suffit pas à qualifier chaque tâche de réussie : vérifier les nouveaux résultats et leurs artefacts dans GitHub, puis un tour ultérieur déclenché à :00 ou :30 avec le journal `/var/log/globalland/think.log`. Les connexions et quotas restent des dépendances réelles ; aucun résultat commercial n'est garanti. Le verrou est commun aux trois cycles et la rotation `/var/log/globalland/*.log` couvre le nouveau journal. Pour arrêter la réflexion périodique, déplacer seulement ce fichier cron dans le dossier de sauvegarde privée ; garder queue/daily pour la reprise des travaux déjà soumis. La configuration antérieure se trouve dans le dossier backups/autonomy-* annoncé par le script ; ne pas restaurer un ancien solde ou rejouer des opérations financières.
 

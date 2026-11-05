@@ -76,7 +76,12 @@ class ControllerRecoveryTests(unittest.TestCase):
  def test_context_handles_actual_journal_path_and_deduplicates(self):
   with tempfile.TemporaryDirectory() as d:
    root=pathlib.Path(d);c=self.controller(root);(root/'state').mkdir();(root/'work/queue/done').mkdir(parents=True)
-   record={'task':'queue/inbox/TASK-180000000000.json','result':{'status':'DONE','output':'real journal result'}}
+   task={'id':'TASK-180000000000','type':'TOOL','submitted_by':'BUILDER','created_at':'2026-11-05T00:00:00Z','action':'EXEC','args':{'argv':['node','-p','1'],'outputs':[]},'estimated_cost_cad':0,'approved_by':None}
+   raw=json.dumps(task).encode()
+   import hashlib
+   record={'task':'queue/inbox/TASK-180000000000.json','hash':hashlib.sha256(raw).hexdigest(),'result':{'status':'DONE','output':'real journal result'}}
+   (root/'work/queue/inbox').mkdir(parents=True)
+   (root/'work/queue/inbox/TASK-180000000000.json').write_bytes(raw)
    (root/'state/TASK-180000000000.json').write_text(json.dumps(record))
    (root/'work/queue/done/TASK-180000000000.result.json').write_text(json.dumps(record['result']))
    for i in range(25):

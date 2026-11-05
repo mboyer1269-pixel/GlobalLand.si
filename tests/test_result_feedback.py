@@ -16,6 +16,10 @@ class Snapshot:
 
 
 class ResultFeedbackTests(unittest.TestCase):
+    def summary(self,output,*,redacted=False):
+        return dict(task='TASK-180000000000',status='DONE',output=output,
+                    output_truncated=False,output_redacted=redacted)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
@@ -34,8 +38,7 @@ class ResultFeedbackTests(unittest.TestCase):
                            'artifacts': ['products/tool/result.txt',
                                          'products/receipts/TASK-180000000000.json']})
         self.assertEqual(self.controller.context()['latest_task_results'],
-                         [{'task': 'TASK-180000000000', 'status': 'DONE',
-                           'output': '21 tests passed'}])
+                         [self.summary('21 tests passed')])
 
     def test_private_receipt_content_is_still_excluded(self):
         for private in ('receipt private-bank-data', 'access_token private-data',
@@ -43,7 +46,9 @@ class ResultFeedbackTests(unittest.TestCase):
             with self.subTest(private=private.split()[0]):
                 self.write_result({'status': 'DONE', 'output': private,
                                    'artifacts': ['products/receipts/TASK-180000000000.json']})
-                self.assertEqual(self.controller.context()['latest_task_results'], [])
+                results=self.controller.context()['latest_task_results']
+                self.assertEqual(results,[self.summary('[output redacted]',redacted=True)])
+                self.assertNotIn(private,json.dumps(results))
 
     def test_reconstructed_public_history_cannot_evict_latest_private_result(self):
         self.write_result({'status': 'DONE', 'output': '1728\n',
@@ -64,7 +69,7 @@ class ResultFeedbackTests(unittest.TestCase):
         os.utime(duplicate, (300, 300))
         results = self.controller.context()['latest_task_results']
         self.assertEqual(len(results), 20)
-        self.assertEqual(results[0], {'task': 'TASK-180000000000', 'status': 'DONE', 'output': '1728\n'})
+        self.assertEqual(results[0],self.summary('1728\n'))
 
     def test_private_completion_order_wins_over_task_number_and_public_duplicates(self):
         self.write_result({'status': 'DONE', 'output': 'earlier completion'})
@@ -77,7 +82,11 @@ class ResultFeedbackTests(unittest.TestCase):
         (public / 'TASK-0001.result.json').write_text(json.dumps({'status': 'DONE', 'output': 'public copy'}))
         results = self.controller.context()['latest_task_results']
         self.assertEqual([r['task'] for r in results], ['TASK-0001', 'TASK-180000000000'])
-        self.assertEqual(results[0]['output'], 'latest completion')
+        # The private journal still wins order/deduplication, but without known
+        # action metadata its output is conservatively status-only.
+        self.assertEqual(results[0]['output'],'[output redacted]')
+        self.assertTrue(results[0]['output_redacted'])
+        self.assertNotIn('public copy',json.dumps(results))
 
     def test_public_only_fallback_uses_task_order_independent_of_extraction_times(self):
         public = self.root / 'work/queue/done'
@@ -94,7 +103,9 @@ class ResultFeedbackTests(unittest.TestCase):
                      'products/credential.txt'):
             with self.subTest(path=path):
                 self.write_result({'status': 'DONE', 'output': 'finished', 'artifacts': [path]})
-                self.assertEqual(self.controller.context()['latest_task_results'], [])
+                results=self.controller.context()['latest_task_results']
+                self.assertEqual(results,[self.summary('[output redacted]',redacted=True)])
+                self.assertNotIn(path,json.dumps(results))
 
     def test_malformed_results_do_not_break_the_next_context(self):
         for result in (None, [], 'invalid'):
@@ -102,14 +113,62 @@ class ResultFeedbackTests(unittest.TestCase):
                 self.write_result(result)
                 self.assertEqual(self.controller.context()['latest_task_results'], [])
 
-    def test_finance_task_results_remain_excluded(self):
+    def test_finance_task_results_are_safe_status_only(self):
         path = self.root / 'state/TASK-180000000000.json'
         for action in ('SPEND', 'RECONCILE'):
             with self.subTest(action=action):
                 path.write_text(json.dumps({'task': {'action': action},
                     'result': {'status': 'DONE', 'output': 'settled',
                                'artifacts': ['products/receipts/TASK-180000000000.json']}}))
-                self.assertEqual(self.controller.context()['latest_task_results'], [])
+                results=self.controller.context()['latest_task_results']
+                self.assertEqual(results,[self.summary('[output redacted]',redacted=True)])
+                self.assertNotIn('settled',json.dumps(results))
+                self.assertNotIn('artifacts',json.dumps(results))
+
+    def test_private_financial_metadata_wins_over_same_id_public_replacement(self):
+        ident='TASK-180000000000'
+        private=self.root/'state'/(ident+'.json')
+        sentinel='Silverbirch client routing 0187-PLAIN'
+        private.write_text(json.dumps(dict(id=ident,hash='a'*64,task='queue/inbox/'+ident+'.json',
+            metadata=dict(type='TOOL',action='SPEND'),state='PUBLISHED',result=dict(status='DONE',output=sentinel))))
+        public=self.root/'work/queue/inbox'/(ident+'.json');public.parent.mkdir(parents=True)
+        public.write_text(json.dumps(dict(id=ident,type='TOOL',submitted_by='BUILDER',
+            created_at='2026-11-05T00:00:00Z',action='EXEC',args=dict(argv=['node','-p','1'],outputs=[]),estimated_cost_cad=0,approved_by=None)))
+        results=self.controller.context()['latest_task_results']
+        self.assertEqual(results,[self.summary('[output redacted]',redacted=True)])
+        self.assertNotIn(sentinel,json.dumps(results))
+
+    def test_unknown_or_conflicting_action_is_status_only(self):
+        sentinel='Silverbirch client routing 0187-PLAIN'
+        for changes in (dict(request=dict(action='UNKNOWN_ACTION')),
+                        dict(metadata=dict(type='TOOL',action='EXEC'),request=dict(action='RECONCILE'))):
+            with self.subTest(changes=changes):
+                record=dict(id='TASK-180000000000',task=None,state='PUBLISHED',
+                            result=dict(status='DONE',output=sentinel))
+                record.update(changes)
+                (self.root/'state/TASK-180000000000.json').write_text(json.dumps(record))
+                results=self.controller.context()['latest_task_results']
+                self.assertEqual(results,[self.summary('[output redacted]',redacted=True)])
+                self.assertNotIn(sentinel,json.dumps(results))
+
+    def test_legacy_public_request_requires_exact_hash_and_valid_envelope(self):
+        import hashlib
+        ident='TASK-180000000000'
+        public=self.root/'work/queue/inbox'/(ident+'.json');public.parent.mkdir(parents=True)
+        request=dict(id=ident,type='TOOL',submitted_by='BUILDER',created_at='2026-11-05T00:00:00Z',
+                     action='EXEC',args=dict(argv=['node','-p','1'],outputs=[]),estimated_cost_cad=0,approved_by=None)
+        raw=(json.dumps(request)+'\n').encode();public.write_bytes(raw)
+        private=self.root/'state'/(ident+'.json')
+        def record(input_hash):
+            private.write_text(json.dumps(dict(id=ident,hash=input_hash,task='queue/inbox/'+ident+'.json',
+                result=dict(status='DONE',output='ordinary safe result'))))
+        record('a'*64)
+        self.assertEqual(self.controller.context()['latest_task_results'],[self.summary('[output redacted]',redacted=True)])
+        record(hashlib.sha256(raw).hexdigest())
+        self.assertEqual(self.controller.context()['latest_task_results'],[self.summary('ordinary safe result')])
+        request['submitted_by']='lowercase';raw=json.dumps(request).encode();public.write_bytes(raw)
+        record(hashlib.sha256(raw).hexdigest())
+        self.assertEqual(self.controller.context()['latest_task_results'],[self.summary('[output redacted]',redacted=True)])
 
 
 if __name__ == '__main__':

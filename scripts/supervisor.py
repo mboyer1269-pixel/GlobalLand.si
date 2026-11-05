@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Installed control plane. Never run the mutable repository copy from cron."""
-import base64, datetime, fcntl, hashlib, io, json, os, pathlib, re, subprocess, sys, tarfile, tempfile
+import base64, datetime, fcntl, hashlib, io, json, os, pathlib, re, subprocess, sys, tarfile, tempfile, time
 ROOT=pathlib.Path('/opt/globalland')
 SECRET=re.compile(rb'(?<![A-Za-z0-9_])sk-[A-Za-z0-9_-]{10,}|(?:ghp_|github_pat_)[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(?:API_KEY|TOKEN|PASSWORD)\s*[=:]\s*[^\s#]{8,}',re.I)
 FAILURE_KINDS=('TimeoutError','FileNotFoundError','PermissionError','ValueError','OSError','RuntimeError','Exception')
@@ -216,6 +216,16 @@ class Supervisor:
    r=recover(p)
    if r['hash']!=digest:raise ValueError('task ID reused with different bytes')
    return r.get('result') or {'status':'INTERRUPTED','output':'No recorded result; no automatic retry.'}
+  if world.snapshot()['state'] in ('HALTED','EXTINCT') or bank.snapshot()['state'] in ('HALTED','EXTINCT'):
+   return {'status':'REJECTED','output':'GlobalLand is stopped'}
+  from initiative import Store,settings
+  store=Store(self.root,config) if settings(config)['enabled'] else None
+  if store:
+   turn=origin[0] if isinstance(origin,tuple) and len(origin)==2 else None
+   cause=store.turn_cause(turn)
+   if cause is None:raise ValueError('Broker admission lineage unavailable')
+   store.bind_task(task,turn=turn,cause=cause,origin='broker')
+   store.bind_input(task['id'],digest)
   r={'id':ident,'hash':digest,'task':None,'origin':'broker','request':task,'state':'RUNNING','files':{},'base_sha':self.git('rev-parse','HEAD').decode().strip()};atomic_json(p,r)
   try:
    try:result,generated=Toolbox(self.root,world,bank,config).run(task,origin=origin)
@@ -267,6 +277,53 @@ class Supervisor:
    if code:raise RuntimeError('Cannot stop abandoned GlobalLand container')
   shutil.rmtree(job)
  def cycle(self,mode):
+  """Compatibility entry; native CLI dispatch already holds this same lock."""
+  self.state.mkdir(parents=True,exist_ok=True)
+  with (self.state/'supervisor.lock').open('a') as lock:
+   try:fcntl.flock(lock,fcntl.LOCK_EX | (fcntl.LOCK_NB if mode=='wake' else 0))
+   except BlockingIOError:return {'state':'BUSY'}
+   return self.dispatch(mode)
+ def dispatch(self,mode,*,now=None):
+  """Local admission under supervisor.lock, before any cycle network work."""
+  if mode not in ('wake','think','mail','queue','daily'):raise ValueError('invalid supervisor mode')
+  seconds=int(time.time() if now is None else now)
+  world,bank,config=self.services()
+  from initiative import Store,settings
+  policy=settings(config)
+  ws,bs=world.snapshot()['state'],bank.snapshot()['state']
+  stopped=ws in ('HALTED','EXTINCT') or bs in ('HALTED','EXTINCT')
+  if not policy['enabled']:
+   if mode=='wake':return {'state':'DISABLED'}
+   self._cycle(mode,now=seconds,productive=not stopped)
+   return {'state':'DEFERRED' if stopped else 'COMPLETED'}
+  store=Store(self.root,config)
+  stopped=stopped or store.suppressed()
+  resumable=store.recover(now=seconds)
+  store.reconcile(world.snapshot(),now=seconds)
+  if stopped:
+   store.claim('wake',now=seconds,world_state=ws,bank_state=bs)
+   if mode!='wake':self._cycle(mode,store=store,now=seconds,productive=False)
+   return {'state':'SUPPRESSED_EXTINCT' if store.suppressed() else 'DEFERRED'}
+  if mode in ('queue','daily'):
+   self._cycle(mode,store=store,now=seconds)
+   return {'state':'COMPLETED'}
+  target=None if mode=='wake' else ('DIRECTOR' if mode=='think' else 'PRIVATE_MAIL')
+  admission=next((r for r in resumable if target is None or r['target']==target),None)
+  if admission is None:admission=store.claim(mode,now=seconds,world_state=ws,bank_state=bs)
+  if admission is None:
+   # Periodic think retains orphan decision/publication recovery and queue work.
+   # Idle wake does absolutely no cycle network/recovery work.
+   if mode=='think':
+    self._cycle('think',store=store,now=seconds,productive=False)
+    self._cycle('queue',store=store,now=seconds)
+   return {'state':'IDLE'}
+  lane='think' if admission['target']=='DIRECTOR' else 'mail'
+  self._cycle(lane,store=store,admission=admission,now=seconds,
+              productive=admission['phase']=='CLAIMED')
+  if lane=='think':self._cycle('queue',store=store,now=seconds)
+  store.reconcile(world.snapshot(),now=seconds)
+  return {'state':'COMPLETED','wake_id':admission['wake_id'],'target':admission['target']}
+ def _cycle(self,mode,*,store=None,admission=None,now=None,productive=True):
   self.state.mkdir(parents=True,exist_ok=True)
   # First finish every local terminal journal, then retry local Git commits and fetch.
   for p in sorted(self.state.glob('*.json')):
@@ -302,19 +359,31 @@ class Supervisor:
    target=work/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_text(text);target.chmod(0o644)
   if mode=='mail':
    # Private correspondence never enters task journals, WORLD or Git output.
-   if bank.snapshot()['state']=='HALTED':return
+   if not productive or bank.snapshot()['state'] in ('HALTED','EXTINCT') or world.snapshot()['state'] in ('HALTED','EXTINCT'):return
    from mail_agent import run_mail_cycle
-   try:run_mail_cycle(self.root,config)
+   if admission:store.start(admission['wake_id'],prepared=None,now=now)
+   try:
+    if admission:run_mail_cycle(self.root,config,on_processed=lambda receipt:store.processed(admission['wake_id'],receipt))
+    else:run_mail_cycle(self.root,config)
    except Exception:raise RuntimeError('Private mail cycle failed; inspect private mail status') from None
+   if admission:store.finish(admission['wake_id'],turn=None,now=now)
    return
   if mode=='think':
    from controller import Controller
    planner=Controller(self.root,world,bank,config)
    planner.executor=lambda task:self.execute_tool(task,world,bank,config,origin=('THINK-%d'%planner.turn_seconds,getattr(planner,'current_provider',None) or 'unknown'))
+   pending=any(json.loads(p.read_text()).get('published') is not True for p in (self.state/'controller').glob('THINK-*.json'))
+   if not pending and (not productive or bank.snapshot()['state'] in ('HALTED','EXTINCT') or world.snapshot()['state'] in ('HALTED','EXTINCT')):return
    if not planner.readiness().get('configured'):
     self.publish({'id':'READINESS','files':self.projections(world,bank,config),'base_sha':self.git('rev-parse','HEAD').decode().strip()});return
    try:
-    turn,files=planner.tick()
+    if admission:
+     planner.initiative_lineage=admission['cause']
+     prepared=(admission.get('prepared') if admission['phase']=='DECISION_READY' else
+               planner.prepare_context(priority=admission['events']))
+     turn,files=planner.tick(int(admission['turn'].split('-')[1]),prepared=prepared,
+                            before_plan=lambda:store.start(admission['wake_id'],prepared=prepared,now=now))
+    else:turn,files=planner.tick()
    except Exception as error:
     message='Controller planning failed; inspect state/private/controller-failure.json'
     try:
@@ -330,7 +399,10 @@ class Supervisor:
     raise RuntimeError(message) from None
    p=self.state/(turn+'.json')
    r={'id':turn,'hash':hashlib.sha256(json.dumps(files,sort_keys=True).encode()).hexdigest(),'task':None,'state':'COMPLETED','files':{**files,**self.projections(world,bank,config,planner)},'base_sha':self.git('rev-parse','HEAD').decode().strip()}
-   atomic_json(p,r);self.finish(p,r);return
+   atomic_json(p,r);self.finish(p,r)
+   if admission:store.finish(admission['wake_id'],turn=turn,now=now)
+   return
+  if not productive or bank.snapshot()['state'] in ('HALTED','EXTINCT') or world.snapshot()['state'] in ('HALTED','EXTINCT'):return
   if mode=='daily':jobs=[('DAILY-'+datetime.datetime.now(datetime.timezone.utc).date().isoformat(),None)]
   else:
    jobs=[]
@@ -338,6 +410,7 @@ class Supervisor:
     if not re.fullmatch(r'TASK-[0-9]{4,12}\.json',f.name):raise ValueError('invalid inbox filename; operator review required')
     jobs.append((f.stem,'queue/inbox/'+f.name))
   for ident,rel in jobs:
+   if bank.snapshot()['state'] in ('HALTED','EXTINCT') or world.snapshot()['state'] in ('HALTED','EXTINCT'):break
    if rel and not (work/rel).exists():continue
    raw=(work/rel).read_bytes() if rel else ident.encode();check_secrets(raw);digest=hashlib.sha256(raw).hexdigest();p=self.state/(ident+'.json')
    if p.exists():
@@ -345,18 +418,30 @@ class Supervisor:
     if r['hash']!=digest:raise ValueError('task ID reused with different bytes')
     if rel:raise ValueError('published task replayed; operator review required')
     continue
-   r={'id':ident,'hash':digest,'task':rel,'state':'RUNNING','files':{},'base_sha':self.git('rev-parse','HEAD').decode().strip()};atomic_json(p,r)
+   r={'id':ident,'hash':digest,'task':rel,'state':'RUNNING','files':{},'base_sha':self.git('rev-parse','HEAD').decode().strip()}
    try:
     generated={}
     try:task_data=strict_json(raw) if rel else None
     except (ValueError,UnicodeError):task_data={'type':'TOOL'}
     if task_data and task_data.get('type')=='TOOL':
-     from tools import Toolbox
+     from tools import Toolbox,TOOL_ACTIONS
+     action=task_data.get('action')
+     if isinstance(action,str) and action in TOOL_ACTIONS:
+      # Keep ordinary next-turn feedback usable with initiative disabled too.
+      # Only the validated action/type are retained, never request arguments.
+      r['metadata']={'type':'TOOL','action':action}
+     if store:
+      from initiative import digest as initiative_digest
+      cause=store.task_cause(ident) or {'root_id':initiative_digest(['external-task',ident,digest]),'parent_turn':None,'depth':0}
+      store.bind_task(task_data,turn=None,cause=cause,origin='external')
+      store.bind_input(ident,digest)
+     atomic_json(p,r)  # Claim intent and journal precede every productive effect.
      try:result,generated=Toolbox(self.root,world,bank,config).run(task_data)
      except (ValueError,UnicodeError) as error:
       from tools import rejection_reason
       result={'status':'REJECTED','output':rejection_reason(error)}
     else:
+     atomic_json(p,r)
      if not rel:world.apply('cycle-'+ident[6:],{'op':'cycle','cycle_id':ident[6:]})
      result=self.worker('task' if rel else 'daily',rel or ident[6:])
     if rel:
@@ -373,17 +458,20 @@ class Supervisor:
     r['state']='INTERRUPTED'
     if rel:r['result']={'status':'INTERRUPTED','output':'Worker failed; inspect host journal. No automatic retry.'}
     else:atomic_json(p,r);raise
-   atomic_json(p,r);self.finish(p,r)
+   atomic_json(p,r)
+   if store and rel:store.recorded_result(ident,now=int(time.time() if now is None else now))
+   self.finish(p,r)
    self.refresh_work()
 def main():
- if len(sys.argv)!=2 or sys.argv[1] not in ('queue','daily','think','mail','status'):raise ValueError('usage: supervisor.py queue|daily|think|mail|status')
+ if len(sys.argv)!=2 or sys.argv[1] not in ('queue','daily','think','mail','wake','status'):raise ValueError('usage: supervisor.py queue|daily|think|mail|wake|status')
  ROOT.joinpath('state').mkdir(parents=True,exist_ok=True)
  with open(ROOT/'state/supervisor.lock','a') as lock:
-  fcntl.flock(lock,fcntl.LOCK_EX)
+  try:fcntl.flock(lock,fcntl.LOCK_EX | (fcntl.LOCK_NB if sys.argv[1]=='wake' else 0))
+  except BlockingIOError:return {'state':'BUSY'}
   app=Supervisor()
   if sys.argv[1]=='status':
    w,b,c=app.services();print(json.dumps({'bank':b.snapshot(),'world':w.snapshot(),'controller_config':c.get('controller',{}).get('mode','external_grok')},indent=2))
-  else:app.cycle(sys.argv[1])
+  else:return app.dispatch(sys.argv[1])
 if __name__=='__main__':
  try:main()
  except Exception as e:print('GlobalLand stopped: '+str(e),file=sys.stderr);sys.exit(1)

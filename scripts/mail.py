@@ -385,7 +385,7 @@ class Mailbox:
                 return candidates[index+1:] + candidates[:index+1]
         return candidates
 
-    def cycle(self, responder):
+    def cycle(self, responder, *, on_processed=None):
         result = dict(enabled=self.settings is not None, processed=0, accepted=0,
                       ignored=0, unknown=0, failed=0, skipped=0)
         if not self.settings:
@@ -471,9 +471,33 @@ class Mailbox:
                     attempts += 1
                     result['processed'] += 1
                     self._process(mid, path, responder, result, previous)
+                    # Bookkeeping is deliberately outside _process's send
+                    # uncertainty handler. ACCEPTED can never be downgraded by
+                    # a failed host callback, and selection/fairness is unchanged.
+                    if on_processed is not None:
+                        try:
+                            receipt = self._processing_receipt(path, previous)
+                            if receipt is not None: on_processed(receipt)
+                        except Exception:
+                            pass  # Local reconciliation repairs callback loss.
         except Exception:
             result['failed'] += 1
         return result
+
+    def _processing_receipt(self, path, previous):
+        from initiative import source_revision
+        current = self._read(path)
+        if current is None or current.get('state') not in ('RETRY','ACCEPTED','IGNORED','FAILED','UNKNOWN'):
+            return None
+        if (current.get('inbox_id') != self.settings['inbox_id']
+                or self._path(current.get('message_id')) != path): return None
+        before = (source_revision('PRIVATE_RETRY_DUE', previous)[1]
+                  if previous and previous.get('state') == 'RETRY' else None)
+        after = (source_revision('PRIVATE_RETRY_DUE', current)[1]
+                 if current['state'] == 'RETRY' else None)
+        if previous and before == after: return None
+        return dict(key=path.stem,before_version=before,after_version=after,
+                    after_state=current['state'],disposition='REPLACED' if after else 'CONSUMED')
 
     def _process(self, mid, path, responder, result, previous=None):
         record = {'message_id': mid, 'inbox_id': self.settings['inbox_id']}

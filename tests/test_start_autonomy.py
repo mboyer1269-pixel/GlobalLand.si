@@ -118,6 +118,50 @@ class StartAutonomyTests(unittest.TestCase):
         self.assertEqual(json.loads(backups[0].read_text()), self.config)
         self.assertEqual(list(self.cron.parent.glob('.globalland-think-*')), [])
 
+    def test_event_schedule_refuses_custom_and_rolls_back(self):
+        self.config['initiative'] = {'enabled': True}
+        self.config_path.write_text(json.dumps(self.config))
+        self.cron.write_text(self.module.JOB)
+        self.activate()
+        schedule = self.cron.read_text()
+        self.assertEqual(schedule.count('supervisor.py think'), 1)
+        self.assertEqual(schedule.count('supervisor.py wake'), 1)
+        self.assertNotIn('supervisor.py queue', schedule)
+        self.assertIn('* * * * * root', schedule)
+        self.activate(); self.assertEqual(self.cron.read_text(), schedule)
+        self.config['initiative']['enabled'] = False
+        self.config_path.write_text(json.dumps(self.config)); self.activate()
+        self.assertEqual(self.cron.read_text(), self.module.JOB)
+        self.cron.write_text('custom wake schedule\n')
+        before=self.config_path.read_bytes()
+        with self.assertRaisesRegex(ValueError,'existing schedule'):self.activate()
+        self.assertEqual(self.config_path.read_bytes(),before)
+        self.assertEqual(self.cron.read_text(),'custom wake schedule\n')
+        # Fail directory durability after the replacement became visible. Both
+        # previous usable files must be restored, including a preexisting JOB.
+        self.cron.write_text(self.module.JOB)
+        self.config['initiative']['enabled']=True
+        self.config_path.write_text(json.dumps(self.config));before=self.config_path.read_bytes()
+        real_fsync=self.module.os.fsync
+        replaced=False
+        real_replace=self.module.os.replace
+        def replace(source,destination):
+            nonlocal replaced
+            result=real_replace(source,destination)
+            if pathlib.Path(destination)==self.cron:replaced=True
+            return result
+        failed=False
+        def fsync(fd):
+            nonlocal failed
+            if replaced and not failed:
+                failed=True;raise OSError('fixture directory fsync failed')
+            return real_fsync(fd)
+        with patch.object(self.module.os,'replace',side_effect=replace),patch.object(self.module.os,'fsync',side_effect=fsync):
+            with self.assertRaisesRegex(OSError,'fsync failed'):self.activate()
+        self.assertEqual(json.loads(self.config_path.read_text()),json.loads(before))
+        self.assertEqual(self.cron.read_text(),self.module.JOB)
+        self.assertEqual(self.existing.read_text(),'existing queue and daily jobs\n')
+
 
 if __name__ == '__main__':
     unittest.main()
