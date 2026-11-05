@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "203587 b54405fa03cf0ae94c80a526c59549b23c3c0b6abf7230258eeda1529f17ca65\n32318\nHandle 0\nOption1 name 4\nVariant SKU 0\nImage Src 0\nVariant Price 0\nTitle 10\nPublished 1\nStatus 1\nURL handle 10\nOption1 value 5\n Shopify Help Center | Using CSV files to import and export products Help Start for free Log in Contents Using CSV files to import and export products You can use a CSV (comma-separated values) file to import products into your Shopify store, and to export products from your store. When you use a CSV file, you can import or export a large number of products and their details at same time. This can be helpful if you want to exchange product information between Shopify and other platforms. To learn more about how to use CSV files, refer to open and edit a CSV file . On this page Download a sample CSV file Considerations for the product CSV file Description of the columns in the product CSV file Overwriting product details using an import CSV file Collection column exception Create your product CSV file Prepare your images Adding multiple product images in a CSV file Download a sample CSV file You can download and view a sample product CSV file to use as a template. If you use the sample file, then be aware of the following details: The sample file contains two example products, and include some variants. Your import file probably contains more products and variants. If you use the sample file to create your own import file, then make sure that you remove all the example products. The sample file includes the Inventory quantity column, which is used only for stores that have a single location. If you use multiple locations and you want to import or export inventory quantities, then use the inventory CSV file . The sample file includes the Price / International and Compare-at price / International Columns, but they're left blank as there isn't any unique pricing for the example products when being sold internationally. Learn more about International CSV columns . Considerations for the product CSV file Before you use a product CSV file, review the following considerations. Formatting the product CSV file For your product CSV file to function correctly, verify the that it meets the following criteria: The first line of your product CSV file must be the column headers as specified in the product CSV description table . Each column must be separated by a comma. Note If you use Excel to edit your CSV, then check Excel's export settings when you export the CSV to ensure that your file uses commas between values. Required columns in the product CSV file These columns must be present under the following conditions: When you create a product CSV file to import new products, the only required column is Title . If you're adding variants for a product, then the URL handle column is also required. When you update products using a CSV file, the only required columns are URL handle and Title . Data dependencies Even though the Title and URL handle columns are the only required columns when you update products using a CSV file, the data in some columns depends on the data in other columns. For example, if you update a column that is related to variants, such as SKU\n\n",
+  "artifacts": [
+    "products/research/shopify-product-csv-official.txt",
+    "products/receipts/TASK-179387460211.json"
+  ],
+  "request": {
+    "id": "TASK-179387460211",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T10:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,hashlib\nb=open('/workspace/products/research/shopify-product-csv-official.html','rb').read()\nprint(len(b),hashlib.sha256(b).hexdigest())\nt=b.decode('utf-8','replace')\nt=re.sub(r'(?s)<script.*?</script>|<style.*?</style>','',t)\nt=re.sub(r'<[^>]+>',' ',t);t=html.unescape(t);t=re.sub(r'\\s+',' ',t)\nopen('/workspace/products/research/shopify-product-csv-official.txt','w').write(t)\nprint(len(t))\nfor k in ['Handle','Option1 name','Variant SKU','Image Src','Variant Price','Title','Published','Status','URL handle','Option1 value']:\n  print(k, t.count(k))\nprint(t[:3000])"
+      ],
+      "outputs": [
+        "products/research/shopify-product-csv-official.txt"
+      ],
+      "mission_id": "SHOPIFY-CATALOGUE-TRANSFORMATION"
+    },
+    "description": "Broker action during THINK-1793874602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179387460211",
+  "input_sha256": "3b506013178d0cf7cd9139b719245590381662d4f9622cf2a6ed3e2ca67b5c15"
+}
