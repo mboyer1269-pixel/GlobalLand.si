@@ -62,31 +62,31 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "14 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "15 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 14,
+      "reports": 15,
       "opened_at": "2026-11-05T15:31:08Z",
-      "last_reported_at": "2026-11-05T20:08:27Z"
+      "last_reported_at": "2026-11-05T20:18:22Z"
     },
     {
       "id": "SYSTEM-NO-PROGRESS",
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "8 tours consécutifs sans résultat vérifiable",
-      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, LINK-CHECK-LAUNCH, RSS-ACTOR-LAUNCH, SHOPIFY-LARGE-CATALOGUE-SAMPLE, TEXT-CSV-INTAKE-EXPERIMENT, WELFARE-LIVE-DEMAND, WELFARE-SITE-RETIRE, WORLD-FIRST-REVENUE.",
-      "open_missions_total": 9,
+      "title": "9 tours consécutifs sans résultat vérifiable",
+      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, LINK-CHECK-LAUNCH, RSS-ACTOR-LAUNCH, TEXT-CSV-INTAKE-EXPERIMENT, WELFARE-LIVE-DEMAND, WELFARE-SITE-RETIRE, WORLD-FIRST-REVENUE.",
+      "open_missions_total": 8,
       "missions_truncated": false,
       "missions_collection": "missions",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 8,
+      "reports": 9,
       "opened_at": "2026-11-05T18:05:54Z",
-      "last_reported_at": "2026-11-05T20:08:27Z"
+      "last_reported_at": "2026-11-05T20:18:22Z"
     }
   ],
   "resolved_recent": [
@@ -126,19 +126,19 @@
     }
   ],
   "progress": {
-    "stalled_turns": 8,
+    "stalled_turns": 9,
     "threshold": 3,
     "stalled_since": "2026-11-05T18:05:54Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 40,
-    "turns_without_verified_revenue": 40,
-    "turns_without_outcome": 14,
+    "turns_without_new_interpreted_feedback": 41,
+    "turns_without_verified_revenue": 41,
+    "turns_without_outcome": 15,
     "outcome_threshold": 12,
     "dry_since": "2026-11-05T15:31:08Z",
     "last_outcome_turn": "THINK-1793890803",
     "last_productive_turn": "THINK-1793901606",
-    "last_turn": "THINK-1793909248",
+    "last_turn": "THINK-1793909581",
     "last_change": {
       "productive": false,
       "outcome": false,
@@ -146,7 +146,7 @@
       "new_products": [],
       "new_product_count": 0,
       "new_research_count": 0,
-      "rewritten_count": 250,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
