@@ -15,6 +15,7 @@ jobs:
           python-version: '3.12'
       - run: node tests/runtime.test.js
       - run: node tests/executor.test.js
+      - run: node --check prototypes/ville-globalland/ville.js
       - run: python3 -m unittest discover -s tests -p 'test_*.py'
       - name: Verify private log rotation with an open writer in an isolated directory
         run: |

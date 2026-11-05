@@ -179,6 +179,7 @@ Ne pas supprimer l’état ou les journaux pour débloquer une reprise. L’inst
 
 | Besoin | Référence |
 |---|---|
+| Explorer les agents, missions et preuves publiées | [La ville de GlobalLand](prototypes/ville-globalland/README.md) |
 | Comprendre le mandat, le capital et l’extinction | [VISION.md](VISION.md) |
 | Développer avec Codex, Claude ou un autre assistant en gardant le cap | [Mandat commun de développement](docs/MANDAT-DEVELOPPEMENT.md) |
 | Installer, mettre à niveau et dépanner | [INSTALL.md](INSTALL.md) |
