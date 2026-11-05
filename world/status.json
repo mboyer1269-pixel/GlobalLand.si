@@ -479,10 +479,17 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "BUILDER",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "-DEyIBoL0h1Dd8mkkeMpMGVutGh_En6E",
-      "lease_expires_at": 1793871020.0001826,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/services/welfare-tender/readiness-publication/publication-result.json",
+        "products/services/welfare-tender/readiness-publication/live-index.html",
+        "products/services/welfare-tender/readiness-publication/live-readiness.html",
+        "products/services/welfare-tender/readiness-publication/manifest.json",
+        "products/services/welfare-tender/readiness-publication/acceptance-results.json",
+        "products/reviews/welfare-readiness-review.json"
+      ]
     }
   ],
   "messages": [
@@ -788,24 +795,6 @@
     }
   ],
   "events": [
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793816535.84528,
-      "lesson_id": "L29",
-      "agent_id": "DIRECTOR"
-    },
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793816718.9245129,
-      "from_agent": "DIRECTOR",
-      "to_agent": "AUDITOR"
-    },
-    {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793817103.8714979,
-      "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
-      "agent_id": "RESEARCHER"
-    },
     {
       "type": "MESSAGE",
       "timestamp": 1793817106.822139,
@@ -1389,6 +1378,24 @@
       "timestamp": 1793869262.2864075,
       "from_agent": "DIRECTOR",
       "to_agent": "BUILDER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793871048.745552,
+      "mission_id": "WELFARE-READINESS-PUBLICATION",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793871062.7045047,
+      "lesson_id": "L46",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793871062.7045095,
+      "mission_id": "WELFARE-READINESS-PUBLICATION",
+      "agent_id": "BUILDER"
     }
   ],
   "policy": {
@@ -1579,5 +1586,5 @@
       "seq": 9
     }
   ],
-  "lesson_count": 45
+  "lesson_count": 46
 }
