@@ -278,6 +278,49 @@ def capability_view(root, config):
     return result
 
 
+def commercial_paths(capabilities, bank_snapshot):
+    """Bounded factual routes; pure projection, not an authorization decision.
+
+    Only known capability/treasury enums cross this boundary. Configuration,
+    private correspondence, costs and successful remote effects are not inferred.
+    """
+    capabilities = capabilities if isinstance(capabilities, dict) else {}
+    bank_snapshot = bank_snapshot if isinstance(bank_snapshot, dict) else {}
+    bank_state = bank_snapshot.get('state')
+    if bank_state not in ('UNFUNDED', 'ACTIVE', 'RECONCILING', 'HALTED', 'EXTINCT'):
+        bank_state = 'UNKNOWN'
+    stopped = bank_state in ('HALTED', 'EXTINCT')
+
+    def prerequisite(action, nested=None):
+        value = capabilities.get(action)
+        if nested is not None:
+            value = value.get(nested) if isinstance(value, dict) else None
+        state = value.get('state') if isinstance(value, dict) else None
+        return state if state in ('BUILT_IN', 'CONFIGURED_UNVERIFIED', 'NOT_CONFIGURED', 'DISABLED') else 'UNKNOWN'
+
+    def route(action, detail, nested=None):
+        state = prerequisite(action, nested)
+        return dict(state='STOPPED' if stopped else state, detail=detail)
+
+    paths = {
+        'public_research': route('FETCH', 'Public HTTP(S) reading only; no authenticated session or outgoing contact.'),
+        'offline_build': route('EXEC', 'Requires enabled executor and pinned image. Offline installed programs and declared product outputs; no bank deposit prerequisite imposed by this engine.'),
+        'public_publication': route('PUBLISH_SITE', 'Requires enabled Cloudflare configuration and private credential. Existing independent review and host gates apply. Configuration is not working auth or deployment; publication is not traffic or buyers.'),
+        'marketplace_listing': dict(route('PUBLISH_ACTOR', 'Requires enabled Apify configuration and private credential for private publication; public listing permission remains subject to the existing host gate. Listing is not paid usage; estimated charges are not settled revenue.'),
+                                   public_permission='UNKNOWN_HOST_GATE', usage_observation_state=prerequisite('ACTOR_STATS')),
+        'private_correspondence': route('PRIVATE_MAIL', 'Requires enabled private AgentMail inbox and credential with a separate incoming-mail cycle. Replies to original senders only; no director send action, recipient selection or public customer data.'),
+        'private_fulfillment': route('PRIVATE_MAIL', 'Requires private mail, enabled fulfillment, valid case limits and configured executor. Existing private case work is offline and replies with inline text; no authenticated retrieval, arbitrary contact or binding commitment.', 'fulfillment'),
+        'outgoing_acquisition': dict(state='NOT_IMPLEMENTED', detail='No generic outgoing contact or advertising operation in this software path. SPEND prerequisites do not implement a channel or purchase.'),
+        'collection': dict(state='NOT_IMPLEMENTED', platform_managed_monetization='NOT_ASSESSED',
+                           detail='No generic order-acceptance or checkout operation in this software path. This does not assess founder accounts or platform-managed monetization outside it.'),
+        'settlement': route('RECONCILE', 'Trusted reconciliation requires authentic receipts and Treasury verification. A finance executable is not checkout, a paid order or verified revenue; administrative platform payout attestation is a separate path.'),
+    }
+    return dict(treasury_state=bank_state,
+                work_state='STOPPED' if stopped else 'UNKNOWN' if bank_state == 'UNKNOWN' else 'CONTINUE_WITH_AVAILABLE_TOOLS',
+                service_costs='UNKNOWN', spend_prerequisite_state=prerequisite('SPEND'), paths=paths,
+                constraints='Configured prerequisites do not verify auth, execution or remote success. Missing collection blocks paid order acceptance in this path, while available research, building, offer improvement, permitted publication and authorized incoming private work remain possible. Service costs are unknown; debits require verified available funds. HALTED/EXTINCT remains authoritative; this view grants no new authority.')
+
+
 class Toolbox:
     def __init__(self,root,world,treasury,config=None):
         self.root=pathlib.Path(root);self.world=world;self.treasury=treasury;self.config=config or {}
@@ -335,7 +378,10 @@ class Toolbox:
                 args=dict(args,host_turn=origin[0],host_provider=origin[1])
             value=self.world.apply(task['id'],args,actor=task['submitted_by'])
             return {'status':'DONE','output':json.dumps(value,ensure_ascii=False)},{}
-        if action=='STATUS':return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':self.treasury.snapshot(),'capabilities':capability_view(self.root,self.config)},ensure_ascii=False)},{}
+        if action=='STATUS':
+            bank=self.treasury.snapshot();capabilities=capability_view(self.root,self.config)
+            return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':bank,'capabilities':capabilities,
+                    'commercial_paths':commercial_paths(capabilities,bank)},ensure_ascii=False)},{}
         if action=='PUBLISH_SITE':
             from sites import Publisher as SitePublisher
             result=SitePublisher(self.root,self.config,reviews=self.world.reviews() if hasattr(self.world,'reviews') else [],origin=origin).publish(task)

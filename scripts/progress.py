@@ -246,17 +246,20 @@ def for_prompt(assessment):
 
 
 ALERT = ('PROGRESS ALERT: {n} consecutive turns produced no completed or failed mission, no new product '
-         'outside products/research/ and no verified revenue. Do not repeat audits, access probes or status '
-         'messages. This turn must do at least one of: complete a stalled mission with evidence; fail it '
-         'with a reason and create a different mission (pivot); build and publish a new product file. If an '
-         'external account, credential or capability is missing, record it once with WORLD raise_blocker '
-         '(needs_founder true, a stable blocker_id) and continue with work that does not need it.')
+         'outside products/research/ and no verified revenue. This measures operational activity, not '
+         'commercial success: mission closure and files do not prove demand, acquisition or revenue. '
+         'Avoid repeated audits, access probes or status messages. Consider the observed feedback and '
+         'available commercial paths to choose useful evidence, an executable experiment or an improvement. '
+         'Reuse a stable precise WORLD blocker for a missing dependency, with needs_founder only when '
+         'founder account, identity or authority is actually required, and continue independent useful work.')
 
 
 DROUGHT = ('OUTCOME ALERT: {n} consecutive turns without a completed or failed mission or verified revenue. '
-           'New files no longer count as progress. This turn must close a mission with evidence (complete it, or '
-           'fail it with a reason and pivot to a different mission), or put a product in front of real buyers. '
-           'Record any missing external capability once with WORLD raise_blocker.')
+           'This is an operational outcome counter, not commercial success. Neither additional files nor '
+           'closing a mission establishes demand, customers or verified revenue. Use feedback with its '
+           'evidence limits and existing commercial paths to consider a useful experiment, improvement '
+           'or feasible exposure. Choose the strategy; no automatic pivot is required. Reuse a stable '
+           'precise WORLD blocker for an absent prerequisite and continue independent useful work.')
 
 
 def prompt_alerts(assessment):
