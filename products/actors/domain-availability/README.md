@@ -19,7 +19,7 @@ Checks whether domain names are registered, using only the official public **RDA
 
 **Proposed pricing (not active):** USD 0.0015 per `domain-checked` event, charged only when `available` is true or false (errors are free), plus USD 0.00005 per run start. For comparison, one incumbent listed USD 0.035 per start and USD 0.0023 per domain (Apify Store, observed 2026-11-03).
 
-**Status:** the core logic passes 22/22 offline tests against a local test server on Python 3.11 (`core-test-results.json`). The Apify wrapper (Python 3.12 image) and live registry behaviour have not been tested yet, and the Actor is not listed yet.
+**Local verification (2026-11-05):** the core passes 22/22 offline cases against a local test server. CI now includes this Actor, common public-network restrictions and `python3 tests/actor_sdk_smoke.py --actor domain-availability`. The real pinned Apify SDK wrapper was executed locally with Python 3.12.3, synthetic RDAP sockets and local test charging: registered/unregistered rows are charged; HTTP 429 and invalid input are not. This does not verify a deployed image, live registries, account access, listing or real billing. `core-test-results.json` remains the earlier core-only report.
 
 ## Français
 Vérifie si des noms de domaine sont enregistrés, uniquement au moyen du service public officiel **RDAP** de chaque registre, trouvé grâce au fichier d’amorçage de l’IANA (instantané du 2026-11-04). Aucun WHOIS, aucune extraction de pages Web.
@@ -38,4 +38,4 @@ Vérifie si des noms de domaine sont enregistrés, uniquement au moyen du servic
 
 **Tarif proposé (non actif) :** 0,0015 USD par événement `domain-checked`, facturé seulement si `available` vaut true ou false (les erreurs sont gratuites), plus 0,00005 USD par démarrage.
 
-**État :** la logique principale réussit 22 tests hors ligne sur 22 avec un serveur local (Python 3.11). L’enveloppe Apify (image Python 3.12) et le comportement réel des registres ne sont pas encore testés. L’Actor n’est pas encore publié.
+**Vérification locale (2026-11-05) :** 22 cas hors ligne réussissent avec un serveur local. La CI inclut désormais cet Actor, les restrictions réseau et l'enveloppe du SDK Apify épinglé, exécutée localement sous Python 3.12.3 avec des réponses RDAP synthétiques et une facturation de test. Les réponses définitives sont facturées ; les erreurs HTTP 429 et les entrées invalides ne le sont pas. Ni image déployée, ni registres réels, ni accès au compte, publication ou facturation réelle ne sont prouvés. Le fichier `core-test-results.json` conserve l'ancien rapport du cœur seul.

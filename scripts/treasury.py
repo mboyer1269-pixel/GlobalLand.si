@@ -1,6 +1,7 @@
 """Local durable CAD-cent accounting. No payment or network capability."""
 import hashlib
 import json
+import re
 import sqlite3
 import time
 from contextlib import contextmanager
@@ -237,6 +238,7 @@ class Treasury:
             raise ValueError('receipt must be JSON evidence') from None
         digest = hashlib.sha256(body.encode()).hexdigest()
         key = tuple(receipt[k] for k in ('provider', 'account', 'event_id'))
+        self._payout_settlement(db, receipt)
         prior = db.execute('SELECT * FROM events WHERE provider=? AND account=? AND event_id=?', key).fetchone()
         if prior:
             if prior['digest'] != digest or prior['action'] != action or prior['operation_id'] != op:
@@ -246,6 +248,45 @@ class Treasury:
             raise ValueError('trusted receipt verification required')
         db.execute('INSERT INTO events(provider,account,event_id,digest,body,action,operation_id) VALUES(?,?,?,?,?,?,?)', (*key, digest, body, action, op))
         return True
+
+    @staticmethod
+    def _payout_settlement(db, receipt):
+        """One founder-attested transfer, independent of its invoice assignment.
+
+        Legacy receipts already contain the canonical reference digest. Inspect
+        them inside the credit transaction rather than rewriting their IDs or
+        evidence. A second invoice assignment requires explicit reconciliation;
+        rejecting it also keeps that invoice from being falsely marked PAID.
+        """
+        if (receipt['provider'], receipt['account'], receipt.get('kind'), receipt.get('attestation')) != (
+                'apify', 'payouts', 'REVENUE', 'FOUNDER'):
+            return
+        reference = receipt.get('reference_sha256')
+        if not isinstance(reference, str) or not re.fullmatch(r'[0-9a-f]{64}', reference):
+            raise ValueError('canonical payout settlement reference required')
+        matches = []
+        for row in db.execute("SELECT * FROM events WHERE provider='apify' AND account='payouts'"):
+            try:
+                previous = json.loads(row['body'])
+                if not isinstance(previous, dict):
+                    raise ValueError('invalid payout history')
+                body = json.dumps(previous, sort_keys=True, separators=(',', ':'), allow_nan=False)
+                if (hashlib.sha256(body.encode()).hexdigest() != row['digest']
+                        or any(previous.get(k) != row[k] for k in ('provider', 'account', 'event_id'))):
+                    raise ValueError('invalid payout history')
+                if previous.get('kind') == 'REVENUE' and previous.get('attestation') == 'FOUNDER':
+                    prior_reference = previous.get('reference_sha256')
+                    if (not isinstance(prior_reference, str) or not re.fullmatch(r'[0-9a-f]{64}', prior_reference)
+                            or row['action'] != 'CREDIT' or row['operation_id'] is not None):
+                        raise ValueError('incomplete payout settlement history')
+            except (TypeError, ValueError):
+                raise ValueError('payout history requires reconciliation') from None
+            if previous.get('reference_sha256') == reference:
+                matches.append(row['event_id'])
+        if len(matches) > 1:
+            raise ValueError('duplicate legacy payout settlement requires reconciliation')
+        if matches and matches[0] != receipt['event_id']:
+            raise ValueError('payout settlement already assigned to another invoice; reconcile allocations explicitly')
 
     def _apply_account_receipt(self, db, receipt):
         if not isinstance(receipt, dict):

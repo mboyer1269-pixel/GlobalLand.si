@@ -65,6 +65,7 @@ def activate(root, cron, log):
         controller = Controller(root, None, None, config)
         for provider in ('codex', 'claude'):
             controller.check_provider(provider)
+        (root / 'backups').mkdir(mode=0o700, exist_ok=True)
         backup = pathlib.Path(tempfile.mkdtemp(prefix='autonomy-', dir=root / 'backups'))
         atomic_json(backup / 'config-before.json', old)
         atomic_json(backup / 'schedule-before.json', {'content':previous_schedule})

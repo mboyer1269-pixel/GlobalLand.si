@@ -129,6 +129,8 @@ def main():
     for x in res:
         if not x['pass']:
             print('FAIL', x['test'], str(x['detail'])[:300])
+    return 0 if passed == len(res) else 1
 
 
-main()
+if __name__ == '__main__':
+    sys.exit(main())

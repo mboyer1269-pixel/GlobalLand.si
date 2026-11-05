@@ -368,7 +368,10 @@ class Toolbox:
             return result,files
         if action=='FETCH':
             raw,url,status=fetch_public(args['url'])
+            check_secrets(raw)
             text=base64.b64encode(raw).decode() if args.get('encoding')=='base64' else raw.decode('utf-8')
+            if len(text.encode('utf-8'))>1024*1024:raise ValueError('artifact size limit')
+            check_secrets(text.encode('utf-8'))
             files[args['output']]=text
             return {'status':'DONE','output':json.dumps({'source':url,'http_status':status,'sha256':hashlib.sha256(raw).hexdigest(),'artifact':args['output']})},files
         if action=='WORLD':
@@ -382,7 +385,7 @@ class Toolbox:
             import economic
             economy=economic.project(self.root,self.treasury)
             bank=economy['snapshot'];capabilities=capability_view(self.root,self.config)
-            return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':bank,'economic_context':economy['context'],'capabilities':capabilities,
+            return {'status':'DONE','output':json.dumps({'world':self.world.public_page(),'bank':bank,'economic_context':economy['context'],'capabilities':capabilities,
                     'commercial_paths':commercial_paths(capabilities,bank)},ensure_ascii=False)},{}
         if action=='PUBLISH_SITE':
             from sites import Publisher as SitePublisher

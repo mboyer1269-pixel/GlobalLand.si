@@ -13,7 +13,7 @@ docker compose version >/dev/null
 GL_ROOT=/opt/globalland
 [[ ! -e $GL_ROOT ]] || { echo 'Existing installation: stop and follow INSTALL.md upgrade/rollback procedure'; exit 1; }
 umask 077
-mkdir -p "$GL_ROOT"/{control,ssh,state,work}
+mkdir -p "$GL_ROOT"/{control,ssh,state,work,backups}
 chmod 755 "$GL_ROOT" "$GL_ROOT/control" "$GL_ROOT/work"
 for file in "$HERE"/scripts/*.py "$HERE"/scripts/*.js "$HERE"/scripts/*.sh "$HERE"/scripts/*.json; do
  install -m 644 "$file" "$GL_ROOT/control/$(basename "$file")"

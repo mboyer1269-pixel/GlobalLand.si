@@ -1,10 +1,14 @@
 """Sprint 2-B: Apify payouts reach the bank only by explicit founder attestation."""
+import concurrent.futures
 import json
+import hashlib
 import pathlib
+import sqlite3
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'scripts'))
 import payouts
@@ -63,6 +67,114 @@ class PayoutTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             bank.credit(forged)  # the same Treasury still carries the closure verifier
         self.assertEqual(bank.snapshot()['cash_cents'], 3180)
+
+    def test_same_settlement_cannot_pay_a_second_month_even_with_force(self):
+        for month in ('2026-10', '2026-11'):
+            payouts.record_invoice(self.root, month, 1000)
+        payouts.record_payout(self.root, '2026-10', 1400, 'WISE', ' SAME-TRANSFER ')
+        for changes in ({}, {'cad_cents': 1500}, {'method': 'BANK'}, {'evidence': b'changed'}):
+            args = dict(cad_cents=1400, method='WISE', reference='SAME-TRANSFER', force=True)
+            args.update(changes)
+            with self.subTest(changes=changes), self.assertRaises(ValueError):
+                payouts.record_payout(self.root, '2026-11', **args)
+        self.assertEqual((self.bank()['cash_cents'], self.bank()['founder_attested_revenue_cents']), (1400, 1400))
+        self.assertEqual(payouts.load(self.root)['2026-11']['status'], 'RECEIVABLE')
+        self.assertEqual(payouts.receivables(self.root)['apify_receivable_usd_cents'], 1000)
+
+    def test_legacy_settlement_evidence_survives_restart_and_rejects_reattribution(self):
+        # Literal pre-fix event format: the identity was only the invoice month.
+        legacy = dict(provider='apify', account='payouts', event_id='apify-payout-2026-10',
+                      amount_cents=1400, currency='CAD', kind='REVENUE', settled=True,
+                      attestation='FOUNDER', method='WISE',
+                      reference_sha256=hashlib.sha256(b'LEGACY-TRANSFER').hexdigest())
+        Treasury(self.db, verifier=lambda r: r == legacy).credit(legacy)
+        with sqlite3.connect(self.db) as db:
+            original = db.execute('SELECT * FROM events').fetchall()
+        payouts.record_invoice(self.root, '2026-11', 1000)
+        with self.assertRaises(ValueError):
+            payouts.record_payout(self.root, '2026-11', 1400, 'WISE', 'LEGACY-TRANSFER')
+        self.assertEqual(payouts.record_payout(self.root, '2026-10', 1400, 'WISE', 'LEGACY-TRANSFER', force=True)['cash_cents'], 1400)
+        with sqlite3.connect(self.db) as db:
+            self.assertEqual(db.execute('SELECT * FROM events').fetchall(), original)
+
+    def test_old_double_credit_requires_reconciliation_without_silent_cash_repair(self):
+        first = payouts.payout_receipt('2026-10', 1400, 'WISE', 'OLD-DOUBLE')
+        bank = Treasury(self.db, verifier=lambda r: True)
+        bank.credit(first)
+        second = dict(first, event_id='apify-payout-2026-11')
+        body = json.dumps(second, sort_keys=True, separators=(',', ':'))
+        with sqlite3.connect(self.db) as db:
+            db.execute('INSERT INTO events(provider,account,event_id,digest,body,action) VALUES(?,?,?,?,?,?)',
+                       ('apify', 'payouts', second['event_id'], hashlib.sha256(body.encode()).hexdigest(), body, 'CREDIT'))
+            db.execute('UPDATE treasury SET cash=2800,revenue=2800,attested=2800')
+        with self.assertRaises(ValueError):
+            payouts.record_payout(self.root, '2026-10', 1400, 'WISE', 'OLD-DOUBLE', force=True)
+        self.assertEqual(bank.snapshot()['cash_cents'], 2800)
+        with sqlite3.connect(self.db) as db:
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM events').fetchone()[0], 2)
+
+    def test_retry_after_invoice_write_failure_does_not_recredit(self):
+        payouts.record_invoice(self.root, '2026-11', 1000)
+        with patch('payouts.atomic_json', side_effect=OSError('invoice write failed')):
+            with self.assertRaises(OSError):
+                payouts.record_payout(self.root, '2026-11', 1400, 'WISE', 'RETRY')
+        self.assertEqual(payouts.record_payout(self.root, '2026-11', 1400, 'WISE', 'RETRY')['cash_cents'], 1400)
+
+    def test_concurrent_month_assignments_credit_one_settlement_only(self):
+        bank = Treasury(self.db, verifier=lambda r: True)
+        receipts = [payouts.payout_receipt(month, 1400, 'WISE', 'CONCURRENT')
+                    for month in ('2026-10', '2026-11')]
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+            results = [pool.submit(bank.credit, receipt) for receipt in receipts]
+            succeeded = rejected = 0
+            for result in results:
+                try:
+                    result.result()
+                    succeeded += 1
+                except ValueError:
+                    rejected += 1
+        self.assertEqual((succeeded, rejected), (1, 1))
+        self.assertEqual(bank.snapshot()['cash_cents'], 1400)
+
+    def test_incomplete_legacy_settlement_history_cannot_authorize_another_credit(self):
+        receipt = payouts.payout_receipt('2026-10', 1400, 'WISE', 'INCOMPLETE')
+        bank = Treasury(self.db, verifier=lambda r: True)
+        bank.credit(receipt)
+        del receipt['reference_sha256']
+        body = json.dumps(receipt, sort_keys=True, separators=(',', ':'))
+        with sqlite3.connect(self.db) as db:
+            db.execute('UPDATE events SET body=?,digest=?', (body, hashlib.sha256(body.encode()).hexdigest()))
+        with self.assertRaises(ValueError):
+            payouts.record_payout(self.root, '2026-11', 1400, 'WISE', 'INCOMPLETE', force=True)
+        self.assertEqual(bank.snapshot()['cash_cents'], 1400)
+
+    def test_receivable_projection_is_shared_and_unavailable_for_invalid_optional_data(self):
+        import economic
+        path = self.root / 'state/private/payouts.json'
+        for raw in (None, '[]', '{', '{"2026-11":false}',
+                    '{"2026-11":{"status":"RECEIVABLE","invoice_usd_cents":true}}',
+                    '{"2026-11":{"status":"RECEIVABLE","invoice_usd_cents":1,"invoice_usd_cents":2}}',
+                    '{"2026-11":{"status":"RECEIVABLE","invoice_usd_cents":NaN}}'):
+            if raw is not None:
+                path.write_text(raw)
+            with self.subTest(raw=raw):
+                result = payouts.receivables(self.root)
+                self.assertEqual(result['state'], 'UNAVAILABLE')
+                self.assertIsNone(result['apify_receivable_usd_cents'])
+                self.assertEqual(result, economic.project(self.root, Treasury(self.db))['context']['receivables'])
+        path.write_bytes(b'\xff')
+        self.assertEqual(payouts.receivables(self.root)['state'], 'UNAVAILABLE')
+        path.write_text(' ' * (1024 * 1024 + 1))
+        self.assertEqual(payouts.receivables(self.root)['state'], 'UNAVAILABLE')
+
+    def test_unavailable_projection_does_not_expose_read_errors_or_change_cash(self):
+        bank = Treasury(self.db)
+        before = bank.snapshot()
+        with patch.object(pathlib.Path, 'open', side_effect=PermissionError('PRIVATE-READ-ERROR')):
+            result = payouts.receivables(self.root)
+        self.assertEqual(result['state'], 'UNAVAILABLE')
+        self.assertNotIn('PRIVATE-READ-ERROR', json.dumps(result))
+        self.assertEqual(bank.snapshot(), before)
 
     def test_cli_requires_administrator_and_parses_usd(self):
         with self.assertRaisesRegex(ValueError, 'administrator'):

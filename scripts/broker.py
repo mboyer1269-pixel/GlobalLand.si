@@ -14,6 +14,7 @@ import hashlib
 import json
 import os
 import pathlib
+import re
 import socket
 import threading
 
@@ -208,6 +209,13 @@ class Broker:
 
     def _dispatch(self, op, args):
         if op != 'submit_action':
+            if op == 'world_status':
+                if (set(args)-{'collection','page'} or ('page' in args and 'collection' not in args)
+                        or ('collection' in args and (not isinstance(args['collection'],str)
+                            or not re.fullmatch(r'[a-z][a-z_]{0,63}',args['collection'])))
+                        or ('page' in args and (type(args['page']) is not int or args['page']<0))):
+                    raise BrokerError('world_status accepts a collection and nonnegative page')
+                return self.handlers[op](**args)
             if op != 'read_product' and args:
                 raise BrokerError(op + ' takes no arguments')
             if op == 'read_product':
@@ -239,8 +247,15 @@ class Broker:
         if not isinstance(result, dict) or not isinstance(result.get('status'), str):
             raise BrokerError('executor returned no result')
         output = str(result.get('output', ''))
-        return dict(task_id=ident, status=result['status'], output=output[:8000],
-                    artifacts=result.get('artifacts', []))
+        response=dict(task_id=ident, status=result['status'], output=output[:8000],
+                      artifacts=result.get('artifacts', []))
+        # Publication is host-derived transport state. Never forward arbitrary
+        # exception text; the effect stays recorded and must not be resubmitted.
+        publication=result.get('publication')
+        if isinstance(publication,str) and publication.startswith('PENDING'):
+            response.update(publication='PENDING: effect recorded; publication retried next cycle. Do not resubmit.',
+                            artifacts_visible=False)
+        return response
 
     @staticmethod
     def _digest(value):
@@ -260,8 +275,13 @@ def read_handlers(root, world, treasury, context):
     """Read-only views over the exported public tree and private snapshots."""
     work = pathlib.Path(root) / 'work'
 
-    def world_status():
-        value = {'world': world.snapshot(), 'bank': treasury.snapshot()}
+    def world_status(collection=None,page=0):
+        if hasattr(world,'public_page'):
+            snapshot=world.public_page(collection,page)
+        elif collection is not None:
+            raise BrokerError('world pagination unavailable')
+        else:snapshot=world.snapshot()
+        value = {'world': snapshot, 'bank': treasury.snapshot()}
         # Share the planner's capability observation without exposing config.
         value['capabilities'] = context().get('capabilities', {})
         return value

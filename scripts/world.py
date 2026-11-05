@@ -56,8 +56,8 @@ class World:
             raise ValueError('Unknown ' + key)
         return found
 
-    # Bounded state: world/status.json must stay far below the 1 MiB
-    # publication limit, or every publication (and so the world) would stop.
+    # Retention is independent of the public transport. Open missions are
+    # never discarded to fit a message; public_files() paginates them.
     MAX_EVENTS, MAX_MESSAGES, MAX_CLOSED_MISSIONS, MAX_AGENTS = 2000, 100, 200, 100
 
     def _event(self, s, kind, **data):
@@ -123,6 +123,79 @@ class World:
         # Lessons are retrieved by relevance for prompts, not dumped wholesale.
         view['lesson_count'] = len(s.get('lessons', []))
         return view
+
+    PUBLIC_PAGE_BYTES = 192 * 1024
+
+    @staticmethod
+    def _public_json(value):
+        return json.dumps(value, ensure_ascii=False, separators=(',', ':')) + '\n'
+
+    def _public_view(self):
+        """One consistent snapshot, full fidelity pages and a bounded overview.
+
+        Internal callers retain snapshot() for scheduling/leases. The overview
+        advertises every collection's total and page count, never a false full
+        list. Pages are deterministic within snapshot_sha256; callers can spot
+        a concurrent change rather than combining different world versions.
+        """
+        snapshot = self.snapshot()
+        version = hashlib.sha256(self._public_json(snapshot).encode()).hexdigest()
+        collections = {key: value for key, value in snapshot.items() if isinstance(value, list)}
+        pages, counts = {}, {}
+        # Leave room for the page envelope and escaped Unicode in clients.
+        budget = self.PUBLIC_PAGE_BYTES - 4096
+        for key, values in collections.items():
+            chunks, chunk, size = [], [], 2
+            for item in values:
+                item_size = len(self._public_json(item).encode()) + 1
+                if item_size > budget:
+                    raise ValueError('World item exceeds page budget')
+                if chunk and size + item_size > budget:
+                    chunks.append(chunk)
+                    chunk, size = [], 2
+                chunk.append(item)
+                size += item_size
+            if chunk or not chunks:
+                chunks.append(chunk)
+            counts[key] = dict(total=len(values), pages=len(chunks), path='world/pages/' + key + '-{page}.json')
+            for page, items in enumerate(chunks):
+                pages[(key, page)] = dict(collection=key, page=page, total=len(values),
+                    pages=len(chunks), next_page=page + 1 if page + 1 < len(chunks) else None,
+                    snapshot_sha256=version, items=items)
+        overview = {key: value for key, value in snapshot.items() if key not in collections}
+        overview['projection'] = dict(snapshot_sha256=version, collections=counts, truncated=False)
+        # Reserve a fair portion per collection so mission size cannot hide
+        # agent identity, leases, blockers or messages from the overview.
+        remaining = budget - len(self._public_json(overview).encode())
+        share = max(0, remaining // max(1, len(collections)))
+        for key, values in collections.items():
+            preview, size = [], 2
+            for item in values:
+                item_size = len(self._public_json(item).encode()) + 1
+                if size + item_size > share:
+                    break
+                preview.append(item)
+                size += item_size
+            overview[key] = preview
+            counts[key]['shown'] = len(preview)
+            overview['projection']['truncated'] |= len(preview) != len(values)
+        return overview, pages
+
+    def public_page(self, collection=None, page=0):
+        overview, pages = self._public_view()
+        if collection is None:
+            if page != 0: raise ValueError('Invalid world page')
+            return overview
+        if not isinstance(collection, str) or type(page) is not int or (collection, page) not in pages:
+            raise ValueError('Invalid world page')
+        return pages[(collection, page)]
+
+    def public_files(self):
+        overview, pages = self._public_view()
+        files = {'world/status.json': self._public_json(overview)}
+        for (collection, page), value in pages.items():
+            files['world/pages/%s-%d.json' % (collection, page)] = self._public_json(value)
+        return files
 
     def require_active(self, actor):
         """Admission for every productive tool, before any external effect."""
