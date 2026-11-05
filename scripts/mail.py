@@ -244,6 +244,7 @@ def _should_ignore(message, own_address):
 class Mailbox:
     def __init__(self, root, config, client=None):
         self.root = Path(root)
+        self.config = config
         self.settings = settings(config)
         self.client = client if client is not None else Client(root, config)
         self.directory = self.root / 'state/private/agentmail'
@@ -262,12 +263,12 @@ class Mailbox:
         return self.directory / (hashlib.sha256(key.encode('utf-8')).hexdigest() + '.json')
 
     def _read(self, path):
-        if path.is_symlink():
+        if any(p.is_symlink() for p in (path, *path.parents)):
             raise MailError('Unsafe mail journal record')
         if not path.exists():
             return None
         try:
-            if path.stat().st_size > MAX_RESPONSE:
+            if not path.is_file() or path.stat().st_nlink != 1 or path.stat().st_size > MAX_RESPONSE:
                 raise ValueError()
             data = json.loads(path.read_text(encoding='utf-8'))
             if not isinstance(data, dict) or data.get('state') not in STATES:
@@ -281,7 +282,8 @@ class Mailbox:
             raise MailError('Invalid mail journal record') from None
 
     def _save(self, path, data):
-        if path.is_symlink():
+        if (any(p.is_symlink() for p in (path, *path.parents))
+                or (path.exists() and (not path.is_file() or path.stat().st_nlink != 1))):
             raise MailError('Unsafe mail journal record')
         fd, temporary = tempfile.mkstemp(prefix='.pending-', dir=self.directory)
         try:
@@ -458,6 +460,8 @@ class Mailbox:
 
     def _process(self, mid, path, responder, result, previous=None):
         record = {'message_id': mid, 'inbox_id': self.settings['inbox_id']}
+        if previous and 'observation' in previous:
+            record['observation'] = previous['observation']
         started = False
         try:
             message = self.client.get_message(mid)
@@ -474,6 +478,11 @@ class Mailbox:
                 decision = {'action': 'ignore', 'text': ''}
             else:
                 decision = responder(message)
+                import commercial
+                if commercial.settings(self.config)['state'] == 'ENABLED':
+                    observation = getattr(responder, 'last_observation', None)
+                    if observation is not None:
+                        record['observation'] = observation
                 provider = getattr(responder, 'last_provider', None)
                 if provider in ('codex', 'claude', 'cursor'):
                     record['provider'] = provider

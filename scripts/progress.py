@@ -20,10 +20,14 @@ import datetime
 import hashlib
 import json
 import pathlib
+import re
+import stat
 
 from supervisor import atomic_json
 
 STATE = 'state/private/progress.json'
+INITIALIZED = 'state/private/progress.initialized.json'
+COMMERCIAL_STATES = ('AVAILABLE', 'PARTIAL', 'UNAVAILABLE', 'DISABLED')
 MAX_FILES = 5000
 SYSTEM_CARD = 'SYSTEM-NO-PROGRESS'
 OUTCOME_CARD = 'SYSTEM-NO-OUTCOME'
@@ -74,9 +78,74 @@ def delta(previous, current):
                 rewritten_count=len(rewritten), revenue_gain_cents=max(gain, 0))
 
 
+def _commercial_state(value):
+    return value if value in COMMERCIAL_STATES else 'UNAVAILABLE'
+
+
+def _anchor_path(root):
+    path = pathlib.Path(root) / INITIALIZED
+    if any(p.is_symlink() for p in (path, *path.parents)):
+        raise ValueError('Progress storage unavailable')
+    if path.exists():
+        info = path.stat()
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_size > 64:
+            raise ValueError('Progress storage unavailable')
+        marker = json.loads(path.read_text())
+        if (not isinstance(marker, dict) or set(marker) != {'version'}
+                or type(marker['version']) is not int or marker['version'] != 1):
+            raise ValueError('Progress storage unavailable')
+    return path
+
+
 def load(root):
     path = pathlib.Path(root) / STATE
-    return json.loads(path.read_text()) if path.exists() else {}
+    try:
+        if any(p.is_symlink() for p in (path, *path.parents)):
+            raise ValueError()
+        anchor = _anchor_path(root)
+        if not path.exists():
+            if anchor.exists(): raise ValueError()
+            return {}
+        info = path.stat()
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_size > 16 * 1024 * 1024:
+            raise ValueError()
+        value = json.loads(path.read_text())
+        if not isinstance(value, dict): raise ValueError()
+        if ('commercial_state' in value and value['commercial_state'] not in COMMERCIAL_STATES):
+            raise ValueError()
+        tracking_fields = {'commercial_baseline', 'commercial_history_unavailable',
+                           'commercial_seen_sources', 'commercial_turns', 'commercial_state',
+                           'turns_without_verified_revenue'}
+        initialized = anchor.exists() or bool(tracking_fields & value.keys())
+        if initialized:
+            if not tracking_fields.issubset(value) or 'last' not in value:
+                raise ValueError()
+            if (type(value['commercial_baseline']) is not bool
+                    or type(value['commercial_history_unavailable']) is not bool):
+                raise ValueError()
+            prior = value['last']
+            if (not isinstance(prior, dict) or not isinstance(prior.get('products'), dict)
+                    or not isinstance(prior.get('missions'), dict)
+                    or type(prior.get('revenue_cents')) is not int or prior['revenue_cents'] < 0):
+                raise ValueError()
+            if (not value['commercial_baseline']
+                    and (value['commercial_turns'] != 0 or value['commercial_state'] == 'AVAILABLE')):
+                raise ValueError()
+            if value['commercial_history_unavailable'] and value['commercial_state'] == 'AVAILABLE':
+                raise ValueError()
+        sources = value.get('commercial_seen_sources', [])
+        if (not isinstance(sources, list) or len(sources) > 100000
+                or any(not isinstance(s, str) or not re.fullmatch(r'[0-9a-f]{64}', s) for s in sources)
+                or ('last' in value and not isinstance(value['last'], dict))):
+            raise ValueError()
+        for key in ('stalled_turns', 'dry_turns', 'commercial_turns', 'turns_without_verified_revenue'):
+            count = value.get(key, 0)
+            if count is None and key == 'turns_without_verified_revenue': continue
+            if type(count) is not int or count < 0: raise ValueError()
+        return value
+    except (OSError, ValueError, TypeError):
+        # A destroyed history cannot establish whether a restored source is new.
+        return dict(commercial_history_unavailable=True, turns_without_verified_revenue=None)
 
 
 def assess(root, world, bank, config):
@@ -91,7 +160,33 @@ def assess(root, world, bank, config):
         change = delta(state['last'], current)
         stalled = 0 if change['productive'] else state.get('stalled_turns', 0) + 1
         dry = 0 if change['outcome'] else state.get('dry_turns', 0) + 1
+    import commercial
+    snapshot = commercial.progress_snapshot(root, config)
+    seen = set(state.get('commercial_seen_sources', []))
+    sources = set(snapshot['sources'])
+    complete = (snapshot['state'] == 'AVAILABLE' and not (seen - sources)
+                and not state.get('commercial_history_unavailable'))
+    new_feedback = bool(set(snapshot['interpreted_sources']) - seen) if complete else None
+    history = seen | sources
+    if len(history) > 100000:
+        # Retain the previous baseline rather than forgetting old identities.
+        complete = False; history = seen; new_feedback = None
+    commercial_turns = None
+    commercial_baseline = state.get('commercial_baseline', False)
+    if complete and not commercial_baseline:
+        new_feedback = False
+    if complete:
+        commercial_turns = (0 if not commercial_baseline or new_feedback
+                            else state.get('commercial_turns', 0) + 1)
+    prior_revenue_turns = state.get('turns_without_verified_revenue')
+    revenue_turns = (0 if 'turns_without_verified_revenue' not in state or change.get('revenue_gain_cents', 0) > 0
+                     else None if prior_revenue_turns is None else prior_revenue_turns + 1)
     return dict(current=current, change=change, stalled_turns=stalled, threshold=threshold,
+                commercial_turns=commercial_turns, new_commercial_feedback=new_feedback,
+                commercial_seen_sources=sorted(history), commercial_baseline=commercial_baseline or complete,
+                commercial_history_unavailable=bool(state.get('commercial_history_unavailable')),
+                commercial_state=snapshot['state'] if complete or snapshot['state'] != 'AVAILABLE' else 'UNAVAILABLE',
+                revenue_turns=revenue_turns, turns_without_verified_revenue=revenue_turns,
                 dry_turns=dry, outcome_threshold=dry_limit,
                 alert=stalled >= threshold, drought=dry >= dry_limit,
                 stalled_since=(state.get('stalled_since') if stalled and state.get('stalled_turns') else None),
@@ -104,9 +199,22 @@ def commit(root, turn, assessment):
     """Persist once per successful turn so retries are never double-counted."""
     now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     state = load(root)
+    if state.get('last_turn') == turn:
+        return state
+    path = pathlib.Path(root) / STATE
+    if (any(p.is_symlink() for p in (path, *path.parents))
+            or (path.exists() and (not path.is_file() or path.stat().st_nlink != 1))):
+        raise ValueError('Progress storage unavailable')
     stalled = assessment['stalled_turns']
     dry = assessment['dry_turns']
     record = dict(last=assessment['current'], stalled_turns=stalled, threshold=assessment['threshold'],
+                  commercial_turns=(assessment['commercial_turns'] if assessment['commercial_turns'] is not None
+                                    else state.get('commercial_turns', 0)),
+                  commercial_seen_sources=assessment['commercial_seen_sources'],
+                  commercial_history_unavailable=assessment['commercial_history_unavailable'],
+                  commercial_baseline=assessment['commercial_baseline'],
+                  commercial_state=assessment['commercial_state'],
+                  turns_without_verified_revenue=assessment['turns_without_verified_revenue'],
                   dry_turns=dry, outcome_threshold=assessment['outcome_threshold'],
                   last_turn=turn, last_turn_at=now,
                   stalled_since=(assessment['stalled_since'] or now) if stalled else None,
@@ -114,6 +222,10 @@ def commit(root, turn, assessment):
                   last_productive_turn=(turn if assessment['change'].get('productive') else state.get('last_productive_turn')),
                   last_outcome_turn=(turn if assessment['change'].get('outcome') else state.get('last_outcome_turn')),
                   last_change={k: v for k, v in assessment['change'].items()})
+    # Fixed initialization evidence distinguishes loss from a first installation.
+    # Anchor precedes history: a crash between writes is conservatively unknown.
+    anchor = _anchor_path(root)
+    if not anchor.exists(): atomic_json(anchor, {'version': 1})
     atomic_json(pathlib.Path(root) / STATE, record)
     return record
 
@@ -121,6 +233,11 @@ def commit(root, turn, assessment):
 def for_prompt(assessment):
     """The part of the assessment the brain sees (no hashes)."""
     return dict(stalled_turns=assessment['stalled_turns'], threshold=assessment['threshold'],
+                activity_semantics='operational progress; mission conclusions and files are not market or financial evidence',
+                commercial_state=assessment['commercial_state'],
+                turns_without_new_interpreted_feedback=assessment['commercial_turns'],
+                new_interpreted_feedback=assessment['new_commercial_feedback'],
+                turns_without_verified_revenue=assessment['turns_without_verified_revenue'],
                 turns_without_outcome=assessment['dry_turns'], outcome_threshold=assessment['outcome_threshold'],
                 alert=assessment['alert'], drought=assessment['drought'],
                 last_productive_turn=assessment['last_productive_turn'],
@@ -193,6 +310,11 @@ def board(root, world):
     return dict(founder_actions=sum(1 for c in cards if c['owner'] == 'FOUNDER'), open=cards,
                 resolved_recent=resolved[:20],
                 progress=dict(stalled_turns=stalled, threshold=threshold, stalled_since=state.get('stalled_since'),
+                              activity_semantics='operational',
+                              commercial_state=_commercial_state(state.get('commercial_state')),
+                              turns_without_new_interpreted_feedback=(state.get('commercial_turns')
+                                  if state.get('commercial_state') == 'AVAILABLE' else None),
+                              turns_without_verified_revenue=state.get('turns_without_verified_revenue'),
                               turns_without_outcome=dry, outcome_threshold=dry_limit, dry_since=state.get('dry_since'),
                               last_outcome_turn=state.get('last_outcome_turn'),
                               last_productive_turn=state.get('last_productive_turn'),
