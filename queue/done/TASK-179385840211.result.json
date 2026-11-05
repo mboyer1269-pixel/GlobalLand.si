@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"exact_key\": true,\n  \"key_format\": true,\n  \"index_unchanged\": true,\n  \"llms_unchanged\": true,\n  \"inventory\": true,\n  \"official_doc_hash_actual\": \"e25c5112f3ac869c590b8622f7852b6fbc0fd309e1a4a39b9016cb54eeb16036\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/welfare-indexnow-review.json",
+    "products/receipts/TASK-179385840211.json"
+  ],
+  "request": {
+    "id": "TASK-179385840211",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-05T06:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,hashlib,json,re\np=pathlib.Path('products/sites/welfare-tender-brief'); k='9b3e7c51a2d84f06b1c9e8a4d7f2635c'; h=lambda x:hashlib.sha256(x.read_bytes()).hexdigest()\nc={'exact_key':(p/(k+'.txt')).read_bytes()==k.encode(),'key_format':bool(re.fullmatch('[0-9a-f]{32}',k)),'index_unchanged':h(p/'index.html')=='70718e8c49ac20a31d48ba4ea9d5aafbbc552561ba9809d10814a7c75aee668c','llms_unchanged':h(p/'llms.txt')=='67d81d453281c3b661c406e8ea885b30e5ee88ee4e43c76533f7e06a90a5a41e','inventory':sorted(x.name for x in p.iterdir())==sorted(['index.html','llms.txt',k+'.txt']),'official_doc_hash':h(pathlib.Path('products/research/indexnow-official-documentation.html'))=='e25c5112b0'}\nc['official_doc_hash_actual']=h(pathlib.Path('products/research/indexnow-official-documentation.html')); del c['official_doc_hash']\no=pathlib.Path('products/reviews/welfare-indexnow-review.json');o.write_text(json.dumps(c,indent=2));print(o.read_text())"
+      ],
+      "outputs": [
+        "products/reviews/welfare-indexnow-review.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793858402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179385840211",
+  "input_sha256": "0a5a3dbd494ab26e301b5cd4a90ad920f2832b8eae884c65179cfdf7dd972219"
+}
