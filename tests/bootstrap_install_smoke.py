@@ -12,6 +12,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 
 ROOT = pathlib.Path('/opt/globalland')
 CRON = pathlib.Path('/etc/cron.d/globalland')
@@ -51,12 +52,51 @@ def fingerprint(path):
     return (hashlib.sha256(path.read_bytes()).hexdigest(), info.st_mode & 0o777, info.st_mtime_ns)
 
 
+def pause_scheduler(env):
+    """Pause the real daemon before it can ever observe a GlobalLand schedule.
+
+    Never resume it on this disposable runner, including driver failure. The
+    workflow also stops the entire service after this step, successful or not.
+    """
+    pid = int(run(['systemctl', 'show', '--property=MainPID', '--value', 'cron.service'], env=env).stdout)
+    require(pid > 1 and not CRON.exists(), 'Cron must be active before new schedules exist')
+    group = run(['systemctl', 'show', '--property=ControlGroup', '--value', 'cron.service'], env=env).stdout.strip()
+    require(group == '/system.slice/cron.service', 'Unexpected disposable cron cgroup')
+    run(['systemctl', 'kill', '--kill-whom=main', '--signal=SIGSTOP', 'cron.service'], env=env)
+    for attempt in range(100):
+        state = pathlib.Path('/proc/%d/status' % pid).read_text()
+        if re.search(r'^State:\s+T\b', state, re.M):
+            return pathlib.Path('/sys/fs/cgroup' + group + '/cgroup.procs')
+        time.sleep(.01)
+    raise RuntimeError('Cron daemon did not stop before schedule installation')
+
+
+def delayed_child(base, group):
+    """A harmless launched child waits until cleanup before trying a lock.
+
+    Its only possible effect is a synthetic marker, never a supervisor call.
+    Put it in the cron cgroup to exercise draining already launched children.
+    """
+    code = ('import fcntl,pathlib,sys; signal=sys.stdin.buffer.read(1); '
+            'lock=open(sys.argv[1],"a"); '
+            'fcntl.flock(lock,fcntl.LOCK_EX); '
+            'pathlib.Path(sys.argv[2]).write_text("late") if signal==b"x" else None')
+    marker = base / 'late-child'
+    child = subprocess.Popen([sys.executable, '-c', code,
+        str(ROOT / 'state/queue-schedule.lock'), str(marker)], stdin=subprocess.PIPE)
+    group.write_text(str(child.pid))
+    require(str(child.pid) in group.read_text().split(), 'Delayed child not in scheduler group')
+    return child, marker
+
+
 def main():
     image = guard()
     import fcntl
     source = pathlib.Path(__file__).resolve().parents[1]
     handles = []
     owned_cron = None
+    delayed = None
+    group = pause_scheduler(os.environ)
     with tempfile.TemporaryDirectory(prefix='globalland-bootstrap-ci-') as temporary:
         base = pathlib.Path(temporary)
         config = base / 'gitconfig'
@@ -129,9 +169,10 @@ def main():
             require(fingerprint(ROOT / 'control/config.json') == initial_config, 'Maintenance changed configuration')
             require(run([*bare, 'rev-parse', 'HEAD'], env=env).stdout.strip() == revision,
                     'An unexpected cycle changed the source')
-            print(json.dumps(dict(state='VERIFIED', revision=revision, control_files=len(controls),
+            delayed, marker = delayed_child(base, group)
+            report = dict(state='VERIFIED', revision=revision, control_files=len(controls),
                 bank='UNFUNDED', git_transport='local_fixture', maintenance='idempotent',
-                productive_cycles=0, production_restore='NOT_TESTED')))
+                productive_cycles=0, production_restore='NOT_TESTED')
         finally:
             # Remove only the schedule this test reviewed, before unlocking.
             # Never delete a previous installation or any unrelated cron.
@@ -141,6 +182,14 @@ def main():
                 CRON.unlink()
             for handle in handles:
                 handle.close()
+        if delayed is not None:
+            try:
+                delayed.stdin.write(b'x'); delayed.stdin.flush()
+            except BrokenPipeError:
+                pass
+            delayed.wait(timeout=5)
+            require(not marker.exists(), 'Delayed cron child ran after cleanup released its lock')
+        print(json.dumps(report))
 
 
 if __name__ == '__main__':

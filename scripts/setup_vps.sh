@@ -8,13 +8,18 @@ IMAGE=${2:?Supply an independently verified Node 22 image digest}
 HERE=$(cd -- "$(dirname -- "$0")/.." && pwd)
 [[ $(git -C "$HERE" rev-parse HEAD) == "$REV" ]] || { echo 'Checkout SHA mismatch'; exit 1; }
 [[ -z $(git -C "$HERE" status --porcelain) ]] || { echo 'Checkout must be clean'; exit 1; }
-for tool in git docker python3 ssh-keygen; do command -v "$tool" >/dev/null; done
+for tool in git docker python3 ssh-keygen setfacl; do command -v "$tool" >/dev/null; done
 docker compose version >/dev/null
 GL_ROOT=/opt/globalland
 [[ ! -e $GL_ROOT ]] || { echo 'Existing installation: stop and follow INSTALL.md upgrade/rollback procedure'; exit 1; }
 umask 077
+# Parent default ACLs override umask. Create an inaccessible new root first,
+# then remove inherited ACLs before creating any configuration or key material.
+mkdir -m 700 "$GL_ROOT"
+setfacl --remove-all --remove-default "$GL_ROOT"
 mkdir -p "$GL_ROOT"/{control,ssh,state,work,backups}
 chmod 755 "$GL_ROOT" "$GL_ROOT/control" "$GL_ROOT/work"
+chmod 700 "$GL_ROOT/ssh" "$GL_ROOT/state" "$GL_ROOT/backups"
 for file in "$HERE"/scripts/*.py "$HERE"/scripts/*.js "$HERE"/scripts/*.sh "$HERE"/scripts/*.json; do
  install -m 644 "$file" "$GL_ROOT/control/$(basename "$file")"
 done

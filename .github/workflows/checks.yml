@@ -68,6 +68,11 @@ jobs:
               sudo getfacl --absolute-names "$path"
             fi
           done
+      - name: Stop disposable scheduler and all children
+        if: always()
+        run: |
+          sudo systemctl kill --kill-whom=all --signal=SIGKILL cron.service || true
+          sudo systemctl stop cron.service
   actor-products:
     runs-on: ubuntu-latest
     timeout-minutes: 10

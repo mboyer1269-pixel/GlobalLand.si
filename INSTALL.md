@@ -1,6 +1,6 @@
 # Installer GlobalLand v3
 
-Prérequis : Ubuntu/Debian avec systemd, Python3.12+, Git, Docker Compose, cron, logrotate, image Node22 vérifiée et environ1Go disponible pour une tâche isolée. Les services Oria restent séparés. Ne lancer aucun code depuis un checkout modifiable par les agents dans le cron.
+Prérequis : Ubuntu/Debian avec systemd, Python3.12+, Git, Docker Compose, cron, logrotate, le paquet `acl` (commande `setfacl`), image Node22 vérifiée et environ1Go disponible pour une tâche isolée. Les services Oria restent séparés. Ne lancer aucun code depuis un checkout modifiable par les agents dans le cron. Le bootstrap supprime les ACL héritées uniquement sur sa nouvelle racine avant de créer les dossiers privés ; `umask` seul ne neutralise pas les ACL par défaut du parent.
 
 Pour une nouvelle installation, télécharger un SHA complet revu, vérifier un arbre Git propre et exécuter `sudo bash scripts/setup_vps.sh SHA_COMPLET node:22-bookworm@sha256:DIGEST_VERIFIE`. L'installeur crée `/opt/globalland`, le contrôle séparé et la clé dédiée ; il ne démarre ni modèle ni cron. Après cette préparation, enregistrer uniquement la clé publique `ssh/deploy_key.pub` comme Deploy Key d'écriture sur ce dépôt. Installer les clés hôte GitHub vérifiées dans `ssh/known_hosts` mode600 avec StrictHostKeyChecking=yes ; ne jamais publier la clé privée. Finaliser ensuite avec `sudo bash /opt/globalland/control/finalize_setup.sh`, qui initialise le Git bare ; le clone SSH fonctionne aussi pour un dépôt privé.
 
