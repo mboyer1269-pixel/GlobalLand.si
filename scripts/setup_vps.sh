@@ -16,7 +16,7 @@ umask 077
 # Parent default ACLs override umask. Create an inaccessible new root first,
 # then remove inherited ACLs before creating any configuration or key material.
 mkdir -m 700 "$GL_ROOT"
-setfacl --remove-all --remove-default "$GL_ROOT"
+setfacl --set=user::rwx,group::---,other::--- --remove-default "$GL_ROOT"
 mkdir -p "$GL_ROOT"/{control,ssh,state,work,backups}
 chmod 755 "$GL_ROOT" "$GL_ROOT/control" "$GL_ROOT/work"
 chmod 700 "$GL_ROOT/ssh" "$GL_ROOT/state" "$GL_ROOT/backups"

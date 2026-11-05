@@ -94,6 +94,16 @@ def delayed_child(base, group):
     return child, marker
 
 
+def drain_scheduler(group, env):
+    # Kill the complete service cgroup, including a shell that has been launched
+    # but has not reached flock yet. Stop the unit before releasing any lock so
+    # a service restart cannot create a new invocation during cleanup.
+    run(['systemctl', 'kill', '--kill-whom=all', '--signal=SIGKILL', 'cron.service'],
+        env=env, success=False)
+    run(['systemctl', 'stop', 'cron.service'], env=env)
+    require(not group.exists() or not group.read_text().split(), 'Scheduler children remain')
+
+
 def main():
     image = guard()
     import fcntl
@@ -179,6 +189,9 @@ def main():
                 bank='UNFUNDED', git_transport='local_fixture', maintenance='idempotent',
                 productive_cycles=0, production_restore='NOT_TESTED')
         finally:
+            drain_scheduler(group, env)
+            if delayed is not None:
+                delayed.wait(timeout=5)
             # Remove only the schedule this test reviewed, before unlocking.
             # Never delete a previous installation or any unrelated cron.
             if owned_cron is not None and CRON.exists():
