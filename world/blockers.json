@@ -34,14 +34,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "PAYMENT",
-      "title": "No authorized payment route; Apify pay-per-event is the lowest-step option and also covers NO-APIFY-ACCESS",
-      "detail": "commercial_paths.collection is NOT_IMPLEMENTED and treasury is UNFUNDED, so no current experiment can turn into verified revenue. Prices on the two live sites are labelled hypotheses. Every remaining free lever (IndexNow on both hosts, intake corrections, readiness supplement, Bing observation) is used up. Founder decision needed, pick one: (A) enable Apify config + 0600 credential (blocker NO-APIFY-ACCESS). Apify charges users and pays out, so this one step unlocks both listing and collection for 3 tested Actors. Caveat: scan2-summary.json shows small markets (top incumbents 29-53 users_30d, most utility jobs under 10). (B) authorize a dedicated merchant/payment-link account for the email services. Until then, agents will not create accounts, improvise payment instructions or accept orders. CSV window closes 2026-11-19T01:30:37Z and welfare closes 2026-11-20, both with a 'request' success criterion and not 'revenue'.",
+      "title": "No authorized payment route; founder picks Apify (A) or a Gumroad seller account (B)",
+      "detail": "commercial_paths.collection is NOT_IMPLEMENTED and the treasury is UNFUNDED. Option B is now concrete (products/research/platform-managed-settlement-fit.json, verdict PURSUE_IF, observed 2026-11-05). Gumroad documents Canada CAD bank payouts and acts as merchant of record (it collects sales tax). Fees are 10%+$0.50 direct or 30% via Discover. Payout needs a USD 100 minimum and a 7-day hold, with Stripe KYC on the founder. Smallest founder step for B: create or designate a GlobalLand Gumroad seller account in the founder's name and add a CAD bank account. Share only the public profile URL; agents then prepare one product package for independent review, and the founder uploads it. Option A is unchanged: an Apify config plus a 0600 credential (NO-APIFY-ACCESS) unlocks 3 tested Actors with PPE billing. Either option still needs a payout-attestation or reconciliation path before Treasury can verify revenue. Agents will not create accounts, accept terms or take orders.",
       "mission_id": "WORLD-FIRST-REVENUE",
-      "expected_gain": "Converts any observed request/usage into a collectable, verifiable payment path; no revenue is established now.",
+      "expected_gain": "Turns any observed request or usage into collectable, platform-settled payment. No demand or revenue is established now.",
       "raised_by": "DIRECTOR",
-      "reports": 2,
+      "reports": 3,
       "opened_at": "2026-11-05T14:30:49Z",
-      "last_reported_at": "2026-11-05T16:30:45Z"
+      "last_reported_at": "2026-11-05T22:07:34Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -95,32 +95,26 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-05T22:07:48Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 48,
-    "turns_without_verified_revenue": 48,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 49,
+    "turns_without_verified_revenue": 49,
+    "turns_without_outcome": 3,
     "outcome_threshold": 12,
     "dry_since": "2026-11-05T21:31:04Z",
     "last_outcome_turn": "THINK-1793912274",
     "last_productive_turn": "THINK-1793916004",
-    "last_turn": "THINK-1793916004",
+    "last_turn": "THINK-1793916361",
     "last_change": {
-      "productive": true,
+      "productive": false,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [
-        "products/services/shopify-large-catalogue/release/indexnow-receipt.txt",
-        "products/services/shopify-large-catalogue/release/launch-baseline.json",
-        "products/services/shopify-large-catalogue/release/live-index.html",
-        "products/services/shopify-large-catalogue/release/live-key.txt",
-        "products/services/shopify-large-catalogue/release/live-transform.py.txt"
-      ],
-      "new_product_count": 5,
-      "new_research_count": 0,
+      "new_products": [],
+      "new_product_count": 0,
+      "new_research_count": 2,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
