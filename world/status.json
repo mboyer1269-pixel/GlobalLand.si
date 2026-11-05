@@ -497,10 +497,18 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "OPEN",
+      "status": "COMPLETED",
       "lease_token": null,
       "lease_expires_at": null,
-      "evidence": []
+      "evidence": [
+        "products/services/catalogue-transformation/result.json",
+        "products/services/catalogue-transformation/memo-en-fr.md",
+        "products/services/catalogue-transformation/acceptance-results.json",
+        "products/services/catalogue-transformation/output.csv",
+        "products/services/catalogue-transformation/bad-errors.json",
+        "products/services/catalogue-transformation/worked_example.py",
+        "products/research/shopify-product-csv-official.txt"
+      ]
     }
   ],
   "messages": [
@@ -806,24 +814,6 @@
     }
   ],
   "events": [
-    {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793817228.7347195,
-      "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
-      "agent_id": "RESEARCHER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793817231.9809573,
-      "lesson_id": "L31",
-      "agent_id": "AUDITOR"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793817310.606708,
-      "lesson_id": "L32",
-      "agent_id": "DIRECTOR"
-    },
     {
       "type": "MISSION_CREATED",
       "timestamp": 1793820657.3141394,
@@ -1405,6 +1395,24 @@
       "timestamp": 1793872902.1924512,
       "from_agent": "DIRECTOR",
       "to_agent": "RESEARCHER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793874613.2505524,
+      "mission_id": "SHOPIFY-CATALOGUE-TRANSFORMATION",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793874734.746569,
+      "lesson_id": "L47",
+      "agent_id": "RESEARCHER"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793874734.7465723,
+      "mission_id": "SHOPIFY-CATALOGUE-TRANSFORMATION",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
@@ -1595,5 +1603,5 @@
       "seq": 9
     }
   ],
-  "lesson_count": 46
+  "lesson_count": 47
 }
