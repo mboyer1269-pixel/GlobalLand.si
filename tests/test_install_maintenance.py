@@ -209,6 +209,37 @@ class MaintenanceTests(unittest.TestCase):
             maintenance.preview(self.paths)
             self.install()
 
+    def test_cron_recreates_a_missing_log_privately_even_with_default_host_umask(self):
+        self.paths.logs.mkdir(parents=True,mode=0o700)
+        cron=maintenance.preview(self.paths)['templates']['cron']
+        line=next(line for line in cron.splitlines() if 'supervisor.py queue' in line)
+        command=line.split(maxsplit=6)[6]
+        self.assertIn(str(self.root/'control/supervisor.py'),command)
+        subprocess.run(['/bin/sh','-c','umask 022; '+command],check=True,capture_output=True)
+        self.assertEqual((self.paths.logs/'queue.log').stat().st_mode & 0o777,0o600)
+
+    def test_versioned_installed_control_is_supported_but_outside_link_is_refused(self):
+        release=self.root/'releases'/self.revision
+        release.parent.mkdir();(self.root/'control').rename(release)
+        (self.root/'control').symlink_to(release,target_is_directory=True)
+        self.install()
+        (self.root/'control').unlink()
+        (self.root/'control').symlink_to(self.base,target_is_directory=True)
+        with self.assertRaises(ValueError):maintenance.preview(self.paths)
+
+    def test_image_changed_before_lock_is_rechecked_before_scheduling(self):
+        changed=False
+        def concurrent_admin(command,**kwargs):
+            nonlocal changed
+            if command[:3]==['docker','image','inspect']:
+                if changed:return subprocess.CompletedProcess(command,1,stdout='',stderr='image absent')
+                changed=True
+                self.config['executor_image']='node:22-bookworm@sha256:'+'2'*64
+                self.save_config()
+            return self.run(command,**kwargs)
+        with self.assertRaises(ValueError):maintenance.install(self.paths,run=concurrent_admin)
+        self.assertFalse(self.paths.cron.exists());self.assertFalse(self.paths.rotation.exists())
+
     @unittest.skipUnless(os.environ.get('GLOBALLAND_LOGROTATE_SMOKE')=='1',
                          'real logrotate requires explicit isolated root verification')
     def test_real_logrotate_preserves_writer_and_private_permissions(self):

@@ -19,10 +19,12 @@ Cette intégration traite les courriels reçus dans une boîte dédiée et perme
 
 Le traitement est effectué par lots configurables pour que les autres activités continuent à progresser. Il ne crée ni plafond financier inventé ni approbation humaine par réponse. Les limites et conditions du fournisseur restent applicables.
 
-Après vérification, placer la ligne suivante dans le fichier existant `/etc/cron.d/globalland`, après sauvegarde. Ce fichier est déjà suspendu et restauré par la procédure de mise à jour. Précréer le journal privé en mode `0600` ; le verrou supplémentaire évite d'accumuler des processus en attente du superviseur.
+Après vérification, une installation neuve ou déjà gérée par l'outil de maintenance utilise `sudo python3 /opt/globalland/control/install_maintenance.py --with-mail` pour examiner l'aperçu, puis la même commande avec `--apply --with-mail`. Voir [les prérequis et horaires de base](../INSTALL.md#horaires-de-base-et-rotation-sur-une-installation-neuve). Le journal privé et sa rotation sont préparés par cet outil.
+
+Si `/etc/cron.d/globalland` contient des horaires personnalisés, l'outil les conserve et refuse de les remplacer. Après sauvegarde et revue, l'administrateur peut y ajouter manuellement la ligne suivante sous le verrou du superviseur, en conservant queue/daily et les autres lignes ; préparer le journal privé en `0600` et sa rotation. Ce fichier est suspendu et restauré par la procédure de mise à jour. Le verrou supplémentaire évite d'accumuler des processus en attente du superviseur.
 
 ```cron
-*/5 * * * * root /usr/bin/flock -n /opt/globalland/state/mail-schedule.lock /usr/bin/python3 /opt/globalland/control/supervisor.py mail >> /opt/globalland/state/private/mail-cron.log 2>&1
+*/5 * * * * root umask 077; /usr/bin/flock -n /opt/globalland/state/mail-schedule.lock /usr/bin/python3 /opt/globalland/control/supervisor.py mail >> /opt/globalland/state/private/mail-cron.log 2>&1
 ```
 
 ## Confidentialité et comportement

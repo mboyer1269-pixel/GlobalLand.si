@@ -15,3 +15,4 @@ git --git-dir="$ROOT/source.git" update-ref refs/heads/main "$REV"
 git --git-dir="$ROOT/source.git" symbolic-ref HEAD refs/heads/main
 git --git-dir="$ROOT/source.git" config core.hooksPath /dev/null
 printf 'Source ready at %s. No models or schedules started.\n' "$REV"
+printf 'Next: verify authorized queue/daily cycles, then preview install_maintenance.py; see INSTALL.md.\n'

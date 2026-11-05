@@ -56,7 +56,7 @@ def _templates(paths,mail):
     for mode,schedule,log in (('queue','*/5 * * * *',logs+'/queue.log'),
                               ('daily','0 8 * * *',logs+'/daily.log'),
                               *([('mail','*/5 * * * *',root+'/state/private/mail-cron.log')] if mail else [])):
-        cron+=f'{schedule} root /usr/bin/flock -n {root}/state/{mode}-schedule.lock /usr/bin/python3 {root}/control/supervisor.py {mode} >> {log} 2>&1\n'
+        cron+=f'{schedule} root umask 077; /usr/bin/flock -n {root}/state/{mode}-schedule.lock /usr/bin/python3 {root}/control/supervisor.py {mode} >> {log} 2>&1\n'
     logfiles=[logs+'/'+name+'.log' for name in ('queue','daily','think')]+[root+'/state/private/mail-cron.log']
     rotation=('# GlobalLand diagnostic logs v1; no runtime databases or receipts.\n'
               +' '.join('"'+name+'"' for name in logfiles)+' {\n'
@@ -135,16 +135,20 @@ def _check(run,command,reason):
     return result
 
 
-def install(paths=Paths(),with_mail=None,run=subprocess.run):
-    revision,image,_,_,_=_inspect(paths,with_mail)
-    for service in ('cron','logrotate.timer'):
-        _check(run,['systemctl','is-active','--quiet',service],'required maintenance service is inactive: '+service)
+def _verify_source_image(paths,revision,image,run):
     bare=_check(run,['git','--git-dir='+str(paths.root/'source.git'),'rev-parse','--is-bare-repository'],
                 'initialized bare source required')
     if bare.stdout.strip()!='true':raise ValueError('initialized bare source required')
     _check(run,['git','--git-dir='+str(paths.root/'source.git'),'cat-file','-e',revision+'^{commit}'],
            'installed revision not found in initialized source')
     _check(run,['docker','image','inspect',image,'--format','{{.Id}}'],'executor image missing locally')
+
+
+def install(paths=Paths(),with_mail=None,run=subprocess.run):
+    revision,image,_,_,_=_inspect(paths,with_mail)
+    for service in ('cron','logrotate.timer'):
+        _check(run,['systemctl','is-active','--quiet',service],'required maintenance service is inactive: '+service)
+    _verify_source_image(paths,revision,image,run)
     lockpath=paths.root/'state/supervisor.lock'
     _read(lockpath)
     descriptor=os.open(lockpath,os.O_CREAT|os.O_WRONLY|os.O_NOFOLLOW,0o600)
@@ -152,6 +156,9 @@ def install(paths=Paths(),with_mail=None,run=subprocess.run):
         try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:raise ValueError('supervisor busy; retry after the current cycle') from None
         revision,image,previous,templates,enabled=_inspect(paths,with_mail)
+        # An administrative upgrade may have completed between preflight and
+        # lock acquisition. Validate the current protected configuration too.
+        _verify_source_image(paths,revision,image,run)
         changes=[name for name in ('rotation','cron') if previous[name]!=templates[name].encode()]
         if not changes:return dict(revision=revision,mail_enabled=enabled,changes=[],backup=None)
         with tempfile.NamedTemporaryFile(prefix='globalland-logrotate-',mode='w',encoding='utf-8') as candidate:
