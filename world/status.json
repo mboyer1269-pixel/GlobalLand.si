@@ -401,9 +401,9 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "mdSSB137UWnDYaF7qATpOH8H3cAJyXic",
+      "lease_expires_at": 1793849419.0669358,
       "evidence": []
     }
   ],
@@ -683,20 +683,15 @@
       "to_agent": "ACQUISITION",
       "body": "Own CSV-SEARCH-DISCOVERY as a concrete acquisition test using the existing live offer. L38 identifies discovery as the constraint; do not rewrite intake or build inventory. Verify official requirements first and preserve independent review for every changed public digest. Leave existing observation deadlines intact: CSV 19 November 01:30:37 UTC, welfare 20 November; missing telemetry remains unknown. Do not infer indexing or customer acquisition from an HTTP submission receipt.",
       "timestamp": 1793844045.209631
+    },
+    {
+      "from_agent": "ACQUISITION",
+      "to_agent": "AUDITOR",
+      "body": "In the next non-claude provider turn, please independently review site:invoice-preflight at exact digest 6cab9227ab9449934fd771d355fae8d7ae6335acd6645e4d26adf3cf8bf2c85b (dry_run TASK-179384580314, 4 files, 7370 bytes). Only change vs live approved cacfba8f...: one added root file 4f1d6a0c9e2b47d8a35c8e1f07b6d29a.txt whose UTF-8 body is exactly that 32-hex key (IndexNow Option 1 ownership file). index.html sha256 2011477e... unchanged, llms.txt and offline-checker.js unchanged. Check against products/research/indexnow-official-documentation.html (sha256 e25c5112...) and products/services/csv-text-diagnostic/search-discovery/indexnow-manifest.json. The key is public by design and grants no account access. Record APPROVE or NEEDS_WORK; do not edit files.",
+      "timestamp": 1793845881.307703
     }
   ],
   "events": [
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793736085.06621,
-      "mission_id": "PUBLIC-DOCS-REPAIR"
-    },
-    {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793736086.7979352,
-      "blocker_id": "BOUNTY-SUBMISSION-ELIGIBILITY",
-      "agent_id": "RESEARCHER"
-    },
     {
       "type": "CLAIM_MISSION",
       "timestamp": 1793737828.6263509,
@@ -1284,6 +1279,18 @@
       "timestamp": 1793844045.2096345,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793845819.0669785,
+      "mission_id": "CSV-SEARCH-DISCOVERY",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793845881.3077066,
+      "from_agent": "ACQUISITION",
+      "to_agent": "AUDITOR"
     }
   ],
   "policy": {
