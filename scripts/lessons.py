@@ -8,6 +8,19 @@ the most recent failures.
 """
 import re
 import sqlite3
+import copy
+
+SEMANTICS = dict(
+    sources=dict(lessons='AGENT_CONCLUSIONS', blocker_descriptions='AGENT_REPORTS',
+                 products_and_plans='AGENT_REPORTS',
+                 capabilities_treasury_and_receipts='HOST_OBSERVATIONS_WITH_SPECIFIC_LIMITS'),
+    guidance=('Agent conclusions are revisable, not host rules. Preserve useful observations and check their '
+              'scope and conditions before applying advice. A mission ID is provenance, not proof of global '
+              'scope; its outcome does not validate every claim. Repetition in lessons, blockers or products '
+              'is not independent evidence. Host observations establish only their specific facts and limits, '
+              'not a general strategy. A missing prerequisite blocks dependent operations; waiting on one '
+              'experiment does not automatically suspend independent possibilities. Maintain, narrow or '
+              'revise conclusions when evidence or conditions warrant, within the existing mandate.'))
 
 WORD = re.compile(r'[A-Za-zÀ-ÿ0-9]{3,}')
 STOP = frozenset('the and for with that this from into your you are was were have has not but all any can use '
@@ -28,7 +41,16 @@ def _terms(texts, limit=40):
 
 
 def _view(lesson):
-    return {k: lesson.get(k) for k in ('lesson_id', 'agent_id', 'mission_id', 'outcome', 'text', 'tags')}
+    return {k: lesson.get(k) for k in ('lesson_id', 'agent_id', 'mission_id', 'outcome', 'text', 'tags', 'at')}
+
+
+def prompt_context(stored_lessons, missions, limit=8, recent_failures=3):
+    """Host provenance labels; never mutate stored lessons or infer their truth."""
+    items = copy.deepcopy(relevant(stored_lessons, missions, limit, recent_failures))
+    for item in items:
+        item['memory_meta'] = dict(kind='AGENT_CONCLUSION', scope_status='UNSPECIFIED',
+                                   validation='NOT_HOST_VALIDATED')
+    return dict(items=items, semantics=copy.deepcopy(SEMANTICS))
 
 
 def relevant(lessons, missions, limit=8, recent_failures=3):

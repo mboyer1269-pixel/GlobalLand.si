@@ -23,7 +23,7 @@ Le capital initial autorisé est 50 CAD (5000 centimes), délégué en totalité
 - `controller.provider_order` : disjoncteur des fournisseurs (un fournisseur qui vient d'échouer passe en dernier, jamais exclu ; `state/private/provider-health.json`, codes fixes seulement).
 - `incident.py` : triage d'un monde muet ou bloqué (verrou, horaire, cron, Docker, disque, codes d'échec par fournisseur), en lecture seule, autonome (bibliothèque standard) et sans secret dans la sortie.
 - `review_admin.py` : revue du fondateur (Apify ou site).
-- `lessons.py` : sélection des leçons pertinentes (SQLite FTS5, BM25) injectées dans chaque prompt.
+- `lessons.py` : sélection des leçons pertinentes (SQLite FTS5, BM25), avec provenance, date connue ou nulle et statut de conclusion d'agent révisable. La projection conserve le classement et l'historique ; elle ne certifie pas la portée ni la vérité du texte.
 - `progress.py` : détecteur d'absence de progrès (preuves de l'hôte) et projection `world/blockers.json`.
 - `supervisor.py` : transport Git, verrou commun, reprise durable, publication vérifiée et arrêt productif à la mort du monde.
 
