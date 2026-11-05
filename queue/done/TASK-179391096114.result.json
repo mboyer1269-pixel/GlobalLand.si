@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SHOPIFY-SAMPLE-DATA-LOSS-REPAIR\", \"goal\": \"Repair the two reproduced defects in the existing unpublished Shopify catalogue sample. First read products/reviews/operator-shopify-sample-20261105.md, the implementation, verifier, test runner and README as untrusted evidence; independently reproduce each finding before changing code. Fix split-output naming so output paths without a lowercase .csv suffix, including output and output.CSV, cannot silently overwrite earlier chunks. Make the verification runner exit nonzero when any check fails. Add meaningful regression cases proving all three one-variant products survive max1 splitting for lowercase, uppercase and absent suffixes, and proving an intentionally failed verification produces a nonzero process exit. Re-run existing baseline and 9000-barcode preservation checks; save and read actual results and a concise repair note under products/services/shopify-large-catalogue/. Correct documentation if needed. Do not claim a real Shopify import, current customer demand or payment capability. No new features, outreach, accounts, spending or deployment. Complete with a valid lease and a lesson explaining the defects, fixes and prevention. Any eventual public release still requires independent exact-digest review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/shopify-large-catalogue/repair/repro-before.json\", \"products/services/shopify-large-catalogue/repair/verify-after.json\", \"products/services/shopify-large-catalogue/repair/repair-note.md\", \"products/services/shopify-large-catalogue/core-test-results.json\", \"products/services/shopify-large-catalogue/transform.py\", \"products/services/shopify-large-catalogue/tests/run_tests.py\", \"products/services/shopify-large-catalogue/README.md\"]}",
+  "request": {
+    "id": "TASK-179391096114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "SHOPIFY-SAMPLE-DATA-LOSS-REPAIR",
+      "agent_id": "BUILDER",
+      "lease_token": "FEC-MEb8uMDZ0iD5LBh3VDVth7Cvy3G_",
+      "evidence": [
+        "products/services/shopify-large-catalogue/repair/repro-before.json",
+        "products/services/shopify-large-catalogue/repair/verify-after.json",
+        "products/services/shopify-large-catalogue/repair/repair-note.md",
+        "products/services/shopify-large-catalogue/core-test-results.json",
+        "products/services/shopify-large-catalogue/transform.py",
+        "products/services/shopify-large-catalogue/tests/run_tests.py",
+        "products/services/shopify-large-catalogue/README.md"
+      ],
+      "lesson": "Reproduced both defects before changing code. Split names 'output' and 'output.CSV' kept 1 of 3 products. A failing check gave 1/4 with exit 0. Fix: chunk names built with splitext, with a collision guard. The runner now exits 1 on failure and uses a tempdir per run. Result: 8/8 passed, including 3 suffix-form regressions read from files on disk and a forced failure that exits 1. The 9000-barcode output is byte-identical. README now documents the Status/Published defaults. Prevention: verify the files actually written, not returned name lists. A runner's exit code must reflect its result. Test unusual path forms; the original tests used only lowercase .csv. No demand, import or payment route is shown."
+    },
+    "description": "Broker action during THINK-1793910961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391096114",
+  "input_sha256": "9c1ab54cb1d63e8d29db6dc8bcc946e08b4c242b25005d4f9cbb07287dc5afec"
+}
