@@ -252,6 +252,40 @@ class CityTests(unittest.TestCase):
         self.assertEqual([a['title'] for a in snapshot['artifacts'].values()], ['example.txt'])
         self.assertEqual(len(snapshot['coverage']['warnings']), 1)
 
+    def test_malformed_world_update_preserves_last_valid_view(self):
+        for mode in ('empty_document', 'missing_projection', 'null_projection'):
+            with self.subTest(mode=mode):
+                self.put('fixture-mode.txt', mode)
+                self.world(); self.commit('valid world ' + mode)
+                self.git('update-ref', 'refs/remotes/origin/main', 'HEAD')
+                reader = city.SnapshotReader(False)
+                with patch.object(city.time, 'monotonic', return_value=0):
+                    original = reader.read()
+                world = json.loads((self.repo / 'world/status.json').read_bytes())
+                if mode == 'empty_document':
+                    world = {}
+                elif mode == 'missing_projection':
+                    del world['projection']
+                else:
+                    world['projection'] = None
+                self.put('world/status.json', world); self.commit('malformed world ' + mode)
+                self.git('update-ref', 'refs/remotes/origin/main', 'HEAD')
+                with patch.object(city.time, 'monotonic', return_value=60):
+                    later = reader.read()
+                self.assertEqual(later['missions'], original['missions'])
+                self.assertEqual(later['revision'], original['revision'])
+                self.assertTrue(later['stale'])
+
+    def test_explicit_legacy_collections_without_pages_remain_readable(self):
+        self.git('rm', '-r', 'world/pages')
+        self.put('world/status.json', dict(agents=self.agents, missions=self.missions, blockers=[]))
+        self.commit('valid legacy projection')
+        self.assertEqual(set(self.snapshot()['missions']), {'OLD', 'NEW'})
+        self.put('world/status.json', dict(agents=self.agents, missions=self.missions))
+        self.commit('legacy collection missing')
+        with self.assertRaises(ValueError):
+            self.snapshot()
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -16,7 +16,9 @@ Les échecs ont été observés avant les corrections : `StopIteration` sur un m
 
 Le contrôle Playwright local a passé 15 assertions sur le second instantané : mission récente et tâche du courtier présentes ; parcours agent → mission → fichier avec SHA dans le lien ; navigation clavier ; filtre et focus conservés au rafraîchissement ; instantané mal formé et HTTP 503 conservant la vue ; monde vide sans activité inventée ; texte de mission traité comme texte ; largeur mobile 390 × 844 sans débordement horizontal ; nouvelle destination positionnée à son titre ; aucune erreur JavaScript. Les captures ordinateur et mobile ont été examinées. L'erreur réseau 503 volontaire apparaît dans la console, conformément au test.
 
-Suite Linux complète : **711 tests Python, 11 ignorés**, suites Node du runtime et de l’exécuteur réussies, syntaxe JavaScript et scripts shell valides. Les tests ignorés nécessitent notamment Docker et des droits système ; ils restent couverts séparément par les contrôles GitHub.
+Avant relecture, suite Linux complète : **711 tests Python, 11 ignorés**, suites Node du runtime et de l’exécuteur réussies, syntaxe JavaScript et scripts shell valides. Les tests ignorés nécessitent notamment Docker et des droits système ; ils restent couverts séparément par les contrôles GitHub.
+
+La relecture indépendante a reproduit un dernier défaut : un aperçu sans métadonnées de pagination pouvait remplacer les missions par une liste incomplète ou vide. Deux tests supplémentaires couvrent maintenant le document vide, les métadonnées absentes/nulles et la compatibilité des véritables collections anciennes. Les échecs ont été observés puis corrigés. Les contrôles GitHub exécutent la suite complète sur la version corrigée.
 
 ## Limites
 

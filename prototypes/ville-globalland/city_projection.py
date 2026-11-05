@@ -68,9 +68,9 @@ def source_url(revision, path):
 
 def collection(repo, revision, overview, name):
     projection = overview.get('projection')
-    if projection is None:
-        values = overview.get(name, [])
-        if not isinstance(values, list):
+    if 'projection' not in overview:
+        values = overview.get(name)
+        if not isinstance(values, list) or any(not isinstance(item, dict) for item in values):
             raise ValueError('Collection invalide.')
         return values
     if not isinstance(projection, dict) or not re.fullmatch(r'[a-f0-9]{64}', str(projection.get('snapshot_sha256', ''))):
@@ -158,6 +158,8 @@ def snapshot(repo, revision=None):
     if not SHA.fullmatch(revision):
         raise ValueError('Révision invalide.')
     world = document(repo, revision, 'world/status.json')
+    if 'projection' not in world and git(repo, 'ls-tree', revision, '--', 'world/pages').strip():
+        raise ValueError('Métadonnées de pagination absentes.')
     controller = document(repo, revision, 'world/controller.json')
     agents = {}; missions = {}; warnings = []
     for item in collection(repo, revision, world, 'agents'):
