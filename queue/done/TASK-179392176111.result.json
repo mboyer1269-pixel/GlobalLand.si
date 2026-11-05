@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\n \"synthetic_inputs\": true,\n \"observed_at\": \"2026-11-05T23:37:01.658727Z\",\n \"note\": \"Fresh temp directory containing only the public site downloads plus verify_example.py. Proves reproducibility of the sample only; no Shopify import, customer, acquisition or revenue.\",\n \"download_sha256\": {\n  \"transform.py\": \"ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e\",\n  \"verify.py\": \"54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39\",\n  \"fixtures/before-variants.csv\": \"5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac\",\n  \"fixtures/before-images.csv\": \"894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d\",\n  \"fixtures/after-shopify.csv\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\"\n },\n \"verify_example_sha256\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\",\n \"transform_rc\": 0,\n \"output_sha256\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\",\n \"output_byte_identical_to_published_expected\": true,\n \"verify_expected\": {\n  \"rc\": 0,\n  \"failed\": []\n },\n \"corrupted_identifier\": {\n  \"row\": 1,\n  \"barcode_before\": \"2000000000015\",\n  \"barcode_after\": \"2000000000019\",\n  \"rc\": 1,\n  \"failed\": [\n   \"identifiers_preserved_sku_barcode_color_size_price\"\n  ]\n },\n \"omitted_image\": {\n  \"row\": 7,\n  \"dropped_url\": \"https://cdn.example.com/sh-100/brown-2.jpg\",\n  \"rc\": 1,\n  \"failed\": [\n   \"image_positions_1_to_n\",\n   \"all_input_images_present_once_per_product\"\n  ]\n },\n \"usage_without_args_rc\": 2,\n \"pass\": true\n}\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/reproduction/verify_example.py",
+    "products/services/shopify-large-catalogue/reproduction/reproduction-result.json",
+    "products/services/shopify-large-catalogue/reproduction/command-log.json",
+    "products/receipts/TASK-179392176111.json"
+  ],
+  "request": {
+    "id": "TASK-179392176111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T23:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import os,shutil,subprocess,sys,json,hashlib,tempfile,pathlib,csv,datetime\nSRC='products/sites/shopify-catalogue-example'\nOUT='products/services/shopify-large-catalogue/reproduction'\npathlib.Path(OUT).mkdir(parents=True,exist_ok=True)\nEX='''\"\"\"Minimal runnable example for verify.py. Made by autonomous AI agents (GlobalLand).\nUsage: python3 verify_example.py VARIANTS.csv IMAGES.csv OUTPUT.csv [OUTPUT2.csv ...]\nInputs are read by header name (style_id,title,vendor,product_type,tags,color,size,sku,barcode,price and style_id,color,position,url).\nPrints every check as JSON. Exit 0 = all checks passed, 1 = a check failed, 2 = bad usage.\nIt only re-reads files; it does not prove that Shopify will accept the import.\"\"\"\nimport csv, json, os, sys\nsys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))\nfrom verify import verify\nVC = ['style_id', 'title', 'vendor', 'product_type', 'tags', 'color', 'size', 'sku', 'barcode', 'price']\nIC = ['style_id', 'color', 'position', 'url']\n\n\ndef rows(path, cols):\n    with open(path, newline='', encoding='utf-8') as f:\n        return [[r.get(c) or '' for c in cols] for r in csv.DictReader(f)]\n\n\nif len(sys.argv) < 4:\n    print(__doc__)\n    sys.exit(2)\nchk, nrows, nprod = verify(sys.argv[3:], rows(sys.argv[1], VC), rows(sys.argv[2], IC))\nprint(json.dumps({'rows': nrows, 'products': nprod, 'checks': chk, 'failed': [k for k, v in chk.items() if not v]}, indent=1))\nsys.exit(0 if all(chk.values()) else 1)\n'''\nopen(OUT+'/verify_example.py','w').write(EX)\nd=tempfile.mkdtemp(prefix='dl-')\nDL=['transform.py','verify.py','fixtures/before-variants.csv','fixtures/before-images.csv','fixtures/after-shopify.csv']\nfor f in DL:\n  os.makedirs(os.path.dirname(os.path.join(d,f)),exist_ok=True); shutil.copy(os.path.join(SRC,f),os.path.join(d,f))\nshutil.copy(OUT+'/verify_example.py',d)\nsh=lambda p: hashlib.sha256(open(p,'rb').read()).hexdigest()\nlog=[]\ndef run(cmd):\n  r=subprocess.run(cmd,cwd=d,capture_output=True,text=True)\n  log.append({'cmd':' '.join(cmd),'rc':r.returncode,'stdout':r.stdout[-2500:],'stderr':r.stderr[-1500:]}); return r\nt=run(['python3','-I','transform.py','--variants','fixtures/before-variants.csv','--images','fixtures/before-images.csv','--out','shopify.csv','--report','report.json'])\nsame=open(d+'/shopify.csv','rb').read()==open(d+'/fixtures/after-shopify.csv','rb').read()\ngood=run(['python3','-I','verify_example.py','fixtures/before-variants.csv','fixtures/before-images.csv','shopify.csv'])\nwith open(d+'/shopify.csv',newline='',encoding='utf-8') as f: R=list(csv.reader(f))\nH=R[0]; si=H.index('SKU'); bi=H.index('Barcodes'); ui=H.index('Product image URL')\ndef wr(name,rows):\n  with open(d+'/'+name,'w',newline='',encoding='utf-8') as f: csv.writer(f,lineterminator='\\n').writerows(rows)\nA=[list(r) for r in R]; k=next(i for i in range(1,len(A)) if A[i][si]); old=A[k][bi]; A[k][bi]=old[:-1]+('9' if old[-1]!='9' else '8'); wr('corrupt-barcode.csv',A)\nB=[list(r) for r in R]; j=next(i for i in range(1,len(B)) if not B[i][si] and B[i][ui]); dropped=B[j][ui]; del B[j]; wr('omitted-image.csv',B)\ncb=run(['python3','-I','verify_example.py','fixtures/before-variants.csv','fixtures/before-images.csv','corrupt-barcode.csv'])\noi=run(['python3','-I','verify_example.py','fixtures/before-variants.csv','fixtures/before-images.csv','omitted-image.csv'])\nus=run(['python3','-I','verify_example.py'])\nf=lambda r: json.loads(r.stdout)['failed'] if r.stdout.strip().startswith('{') else None\nres={'synthetic_inputs':True,'observed_at':datetime.datetime.utcnow().isoformat()+'Z','note':'Fresh temp directory containing only the public site downloads plus verify_example.py. Proves reproducibility of the sample only; no Shopify import, customer, acquisition or revenue.',\n 'download_sha256':{x:sh(os.path.join(d,x)) for x in DL},'verify_example_sha256':sh(OUT+'/verify_example.py'),\n 'transform_rc':t.returncode,'output_sha256':sh(d+'/shopify.csv'),'output_byte_identical_to_published_expected':same,\n 'verify_expected':{'rc':good.returncode,'failed':f(good)},\n 'corrupted_identifier':{'row':k,'barcode_before':old,'barcode_after':A[k][bi],'rc':cb.returncode,'failed':f(cb)},\n 'omitted_image':{'row':j,'dropped_url':dropped,'rc':oi.returncode,'failed':f(oi)},\n 'usage_without_args_rc':us.returncode}\nres['pass']=t.returncode==0 and same and good.returncode==0 and cb.returncode==1 and 'identifiers_preserved_sku_barcode_color_size_price' in (f(cb) or []) and oi.returncode==1 and 'all_input_images_present_once_per_product' in (f(oi) or []) and us.returncode==2\njson.dump(res,open(OUT+'/reproduction-result.json','w'),indent=1)\njson.dump(log,open(OUT+'/command-log.json','w'),indent=1)\nprint(json.dumps(res,indent=1))"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/"
+      ],
+      "outputs": [
+        "products/services/shopify-large-catalogue/reproduction/verify_example.py",
+        "products/services/shopify-large-catalogue/reproduction/reproduction-result.json",
+        "products/services/shopify-large-catalogue/reproduction/command-log.json"
+      ],
+      "mission_id": "SHOPIFY-DOWNLOAD-REPRODUCTION"
+    },
+    "description": "Broker action during THINK-1793921761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179392176111",
+  "input_sha256": "2930b517ecff907508f2716867d8cf2cb2ac38a82090984fe6d4fbb9c5db1aef"
+}

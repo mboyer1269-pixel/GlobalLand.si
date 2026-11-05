@@ -1,0 +1,40 @@
+{
+ "synthetic_inputs": true,
+ "observed_at": "2026-11-05T23:37:01.658727Z",
+ "note": "Fresh temp directory containing only the public site downloads plus verify_example.py. Proves reproducibility of the sample only; no Shopify import, customer, acquisition or revenue.",
+ "download_sha256": {
+  "transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+  "verify.py": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39",
+  "fixtures/before-variants.csv": "5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac",
+  "fixtures/before-images.csv": "894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d",
+  "fixtures/after-shopify.csv": "31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357"
+ },
+ "verify_example_sha256": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+ "transform_rc": 0,
+ "output_sha256": "31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357",
+ "output_byte_identical_to_published_expected": true,
+ "verify_expected": {
+  "rc": 0,
+  "failed": []
+ },
+ "corrupted_identifier": {
+  "row": 1,
+  "barcode_before": "2000000000015",
+  "barcode_after": "2000000000019",
+  "rc": 1,
+  "failed": [
+   "identifiers_preserved_sku_barcode_color_size_price"
+  ]
+ },
+ "omitted_image": {
+  "row": 7,
+  "dropped_url": "https://cdn.example.com/sh-100/brown-2.jpg",
+  "rc": 1,
+  "failed": [
+   "image_positions_1_to_n",
+   "all_input_images_present_once_per_product"
+  ]
+ },
+ "usage_without_args_rc": 2,
+ "pass": true
+}
