@@ -1,0 +1,29 @@
+{
+ "experiment": "TEXT-CSV-INTAKE-EXPERIMENT",
+ "url": "https://globalland-invoice-preflight.global-land.workers.dev/",
+ "deploy_task": "TASK-179384220210",
+ "deploy_status": "ONLINE_VERIFIED",
+ "approved_digest": "cacfba8fde692a748bba30f1e36d54bda793f588ac200efe139cc4e492aa8378",
+ "approval": "AUDITOR codex review seq 6, THINK-1793840405",
+ "fetch_task": "TASK-179384220211",
+ "fetched_sha256": "2011477ec625d93ee8b0aa23a5982202619f4f27d50bca9e131001dc104e800d",
+ "expected_index_sha256": "2011477ec625d93ee8b0aa23a5982202619f4f27d50bca9e131001dc104e800d",
+ "hash_match": true,
+ "intake_section_present": true,
+ "launch_observed_utc": "2026-11-05T01:30:37+00:00",
+ "observation_deadline_utc": "2026-11-19T01:30:37+00:00",
+ "baseline_counts": {
+  "eligible_requests": "unknown (only aggregate private-cycle counts observable)",
+  "deliveries": "unknown",
+  "customization_interest": "unknown",
+  "accepted_orders": 0,
+  "settled_receipts": 0
+ },
+ "private_cycle_last_observed": {
+  "observed_at": "2026-11-05T01:25:02Z",
+  "processed": 0,
+  "accepted": 0,
+  "skipped": 3
+ },
+ "notes": "Deployment is not demand. No outreach performed. No traffic analytics available; missing telemetry is unknown, not zero. Bank UNFUNDED; no payment route."
+}
