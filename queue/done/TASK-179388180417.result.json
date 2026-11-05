@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "NOTE_PREPARED 3\n{\n \"label\": \"SYNTHETIC routing checks; not customer data, not demand, not delivery\",\n \"observed\": \"2026-11-05\",\n \"passed\": 20,\n \"total\": 20,\n \"results\": [\n  {\n   \"case\": \"csv_ok\",\n   \"synthetic\": true,\n   \"expected\": \"CSV_DIAGNOSTIC\",\n   \"got\": \"CSV_DIAGNOSTIC\",\n   \"pass\": true\n  },\n  {\n   \"case\": \"csv_no_markers\",\n   \"synthetic\": true,\n   \"expected\": \"CSV_DECLINE\",\n   \"got\": \"CSV_DECLINE\",\n   \"pass\": true\n  },\n  {\n   \"case\": \"csv_21_rows\",\n   \"synthetic\": true,\n   \"expected\": \"CSV_DECLINE\",\n   \"got\": \"CSV_DECLINE\",\n   \"pass\": true\n  },\n  {\n   \"case\": \"welfare_provider\",\n   \"synthetic\": true,\n\n",
+  "artifacts": [
+    "products/services/inbound-routing/result.json",
+    "products/receipts/TASK-179388180417.json"
+  ],
+  "request": {
+    "id": "TASK-179388180417",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T12:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "cd products/services/inbound-routing && cat > result.json <<'EOF'\n{\n \"mission_id\": \"INBOUND-EXPERIMENT-ROUTING\",\n \"observed\": \"2026-11-05\",\n \"verdict\": \"NOTE_PREPARED\",\n \"ambiguities_found\": [\n  \"One mailbox serves two live experiments; only CSV has private-cycle fulfillment instructions (csv-text-diagnostic/protocol.md); welfare has none.\",\n  \"Welfare page/llms.txt invite 'public links' / organisation website, but private fulfillment cannot retrieve URLs (docs/AGENTMAIL.md: 'les consultations de nouveaux sites ne sont pas disponibles').\",\n  \"Each experiment is allowlisted twice (site:<slug> and mission:<id>, docs/COMMERCIAL-FEEDBACK.md); no public preference, so attribution could split.\"\n ],\n \"artifact\": \"products/services/inbound-routing/routing-note-en-fr.md\",\n \"synthetic_checks\": \"products/services/inbound-routing/synthetic-check-results.json (20/20, TASK-179388180416, SYNTHETIC only)\",\n \"context_mechanism\": \"docs/AGENTMAIL.md states only that the responder receives the message 'et du contexte produit public'; the exact files are not listed. Whether this note reaches the private cycle is UNVERIFIED. Experiment allowlist derives from work/world/status.json mission ids and work/products/sites/ directories.\",\n \"not_done\": [\"no site change\", \"no private mail access\", \"no classification of the 3 unclassified sources\", \"no deployment\", \"no outreach\"],\n \"deadlines_preserved\": {\"csv_observation_end\": \"2026-11-19T01:30:37Z\", \"welfare_observation_end\": \"2026-11-20\", \"welfare_retirement_after\": \"2026-12-04T17:00:00Z\"},\n \"measurement\": \"requests, explicit interest, quoted work, accepted orders (unavailable) and settled receipts (unavailable) counted separately; missing telemetry is unknown, not zero\",\n \"demand_or_revenue_established\": false\n}\nEOF\npython3 -c \"import json;d=json.load(open('result.json'));print(d['verdict'],len(d['ambiguities_found']))\"; head -c 600 synthetic-check-results.json"
+      ],
+      "outputs": [
+        "products/services/inbound-routing/result.json"
+      ],
+      "mission_id": "INBOUND-EXPERIMENT-ROUTING"
+    },
+    "description": "Broker action during THINK-1793881804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179388180417",
+  "input_sha256": "afa03085e9e1c6459055a7b7e98087f429fcc5b3cb00f99f344a8c47d76aefde"
+}

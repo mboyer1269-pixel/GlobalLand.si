@@ -1,0 +1,17 @@
+{
+ "mission_id": "INBOUND-EXPERIMENT-ROUTING",
+ "observed": "2026-11-05",
+ "verdict": "NOTE_PREPARED",
+ "ambiguities_found": [
+  "One mailbox serves two live experiments; only CSV has private-cycle fulfillment instructions (csv-text-diagnostic/protocol.md); welfare has none.",
+  "Welfare page/llms.txt invite 'public links' / organisation website, but private fulfillment cannot retrieve URLs (docs/AGENTMAIL.md: 'les consultations de nouveaux sites ne sont pas disponibles').",
+  "Each experiment is allowlisted twice (site:<slug> and mission:<id>, docs/COMMERCIAL-FEEDBACK.md); no public preference, so attribution could split."
+ ],
+ "artifact": "products/services/inbound-routing/routing-note-en-fr.md",
+ "synthetic_checks": "products/services/inbound-routing/synthetic-check-results.json (20/20, TASK-179388180416, SYNTHETIC only)",
+ "context_mechanism": "docs/AGENTMAIL.md states only that the responder receives the message 'et du contexte produit public'; the exact files are not listed. Whether this note reaches the private cycle is UNVERIFIED. Experiment allowlist derives from work/world/status.json mission ids and work/products/sites/ directories.",
+ "not_done": ["no site change", "no private mail access", "no classification of the 3 unclassified sources", "no deployment", "no outreach"],
+ "deadlines_preserved": {"csv_observation_end": "2026-11-19T01:30:37Z", "welfare_observation_end": "2026-11-20", "welfare_retirement_after": "2026-12-04T17:00:00Z"},
+ "measurement": "requests, explicit interest, quoted work, accepted orders (unavailable) and settled receipts (unavailable) counted separately; missing telemetry is unknown, not zero",
+ "demand_or_revenue_established": false
+}
