@@ -1,0 +1,91 @@
+{
+ "mission_id": "SHOPIFY-COMMUNITY-DEMAND",
+ "observation_date": "2026-11-05",
+ "window_since": "2024-11-05",
+ "search_source": {
+  "url": "https://community.shopify.com/search.json?q=csv%20import%20variants",
+  "task": "TASK-179387820413",
+  "sha256": "c582ebd5659010e7fc4724b882cb6bac43be1810d1ccf4c51137424634c9dd70",
+  "topics_returned": 40
+ },
+ "topic_fetches": [
+  "TASK-179387820417",
+  "TASK-179387820418",
+  "TASK-179387820419",
+  "TASK-179387820420",
+  "TASK-179387820421"
+ ],
+ "requests": [
+  {
+   "id": 575067,
+   "url": "https://community.shopify.com/t/575067",
+   "title": "What is the best way to add products in bulk with color and size variant and different pictures for each color, around 9000+ unique Barcode",
+   "created": "2025-11-11",
+   "accepted_answer": false,
+   "quote": "total 9000+ unique barcode, and each color variant has 5 pictures",
+   "counted": true,
+   "note": "Unresolved; replies only point to CSV import docs or PIM/apps. Scale (9000+ SKUs) far exceeds a 20-row email diagnostic."
+  },
+  {
+   "id": 381686,
+   "url": "https://community.shopify.com/t/381686",
+   "title": "Import Products with Variant Metafields via CSV",
+   "created": "2024-12-18",
+   "accepted_answer": false,
+   "quote": "when I opened the CSV, there were no metafield columns or values",
+   "counted": true,
+   "note": "Workaround worked at product level; variant-level and rich-text remained unresolved. Replies recommend paid Matrixify. Partly a native platform limitation, not a transformation we can deliver."
+  },
+  {
+   "id": 607347,
+   "url": "https://community.shopify.com/t/607347",
+   "title": "Feature Request - Native CSV Import Support for Variant Metafields",
+   "created": "2026-04-12",
+   "accepted_answer": false,
+   "counted": false,
+   "note": "Platform feature request; not solvable by file preparation."
+  }
+ ],
+ "distinct_unresolved_transformable_requests_in_window": 2,
+ "competing_offers": [
+  {
+   "id": 665019,
+   "url": "https://community.shopify.com/t/665019",
+   "created": "2026-08-11",
+   "title": "Free Shopify CSV checker - catches the import that silently deletes your variants",
+   "kind": "free competing tool covering the exact Option1 name/value deletion rule our memo uses"
+  },
+  {
+   "id": 658611,
+   "url": "https://community.shopify.com/t/658611",
+   "created": "2026-07-29",
+   "title": "Built a browser-only listing pack generator - looking for 3 Shopify sellers with messy supplier files",
+   "kind": "free beta: rebuilds parent/variant groups, Color x Size variants, duplicate SKUs, import-ready rows"
+  },
+  {
+   "id": 666762,
+   "created": "2026-08-15",
+   "title": "I built a Shopify CSV alt-text preview. Looking for feedback",
+   "kind": "free tool (title only, from search)"
+  },
+  {
+   "id": 658716,
+   "created": "2026-07-29",
+   "title": "Looking for 3 multi-brand Shopify retailers to test a free read-only supplier-price check",
+   "kind": "free tool (title only, from search)"
+  },
+  {
+   "name": "Matrixify",
+   "kind": "paid app repeatedly recommended in replies (381686)"
+  }
+ ],
+ "observation": "In the window, indie builders offering free Shopify CSV/variant tools and asking for testers (at least 4 topics, Jul-Aug 2026) outnumber unresolved transformable merchant requests (2). The one large request concerns 9000+ SKUs, outside a 20-row plain-text email diagnostic.",
+ "verdict": "STOP",
+ "reason": "2 < 5 threshold; supply of free equivalent tools already exceeds observed requests; strongest paid alternative (Matrixify) handles scale we cannot.",
+ "limits": [
+  "search.json returns at most ~50 posts for one query; other queries not run (bounded)",
+  "views are not buyers; accepted_answer absence is not proof of unresolved need",
+  "no posting or contact possible without a founder-approved account"
+ ],
+ "implication": "Do not publish a Shopify catalogue-transformation offer. Keep catalogue-transformation memo as unpublished sample."
+}
