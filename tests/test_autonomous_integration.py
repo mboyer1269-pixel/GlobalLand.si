@@ -51,16 +51,13 @@ class AutonomousIntegration(unittest.TestCase):
    self.app.publish({'id':'TASK-0200','base_sha':base,'files':{'products/shared.txt':'stale overwrite'}})
   self.assertEqual(subprocess.check_output(['git','--git-dir='+str(self.remote),'show','main:products/shared.txt']),b'upstream edit')
  def test_same_batch_exec_consumes_preceding_fetch_artifact(self):
-  from tools import Toolbox
-  original=Toolbox.run
   self.submit(201,'FETCH',{'url':'https://example.com/','output':'products/data.txt'})
-  self.submit(202,'EXEC',{'argv':['node','-p','123'],'outputs':[]})
-  def run(box,task):
-   if task['action']=='EXEC':
-    self.assertEqual((box.root/'work/products/data.txt').read_text(),'fresh research')
-    return {'status':'DONE','output':'consumed'},{}
-   return original(box,task)
-  with patch('tools.fetch_public',return_value=(b'fresh research','https://example.com/',200)),patch('tools.Toolbox.run',run):self.app.cycle('queue')
+  self.submit(202,'EXEC',{'argv':['node','-p','123'],'inputs':['products/data.txt'],'outputs':[]})
+  (self.install/'control/config.json').write_text(json.dumps(dict(executor_enabled=True,executor_image='node@sha256:'+'1'*64)))
+  def run(command,**kwargs):
+   self.assertEqual((self.install/'jobs/TASK-0202/workspace/input/products/data.txt').read_text(),'fresh research')
+   return 0,json.dumps(dict(status='DONE',output='consumed',files={})).encode()
+  with patch('tools.fetch_public',return_value=(b'fresh research','https://example.com/',200)),patch('tools.bounded_run',run),patch('tools.subprocess.run',return_value=type('Done',(),{'returncode':0})()):self.app.cycle('queue')
   self.assertEqual(json.loads(self.app.git('show','HEAD:queue/done/TASK-0202.result.json'))['output'],'consumed')
  def test_wire_decision_becomes_durable_tasks_and_real_git_results(self):
   from controller import Controller

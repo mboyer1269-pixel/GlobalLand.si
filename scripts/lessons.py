@@ -68,17 +68,49 @@ def playbooks(work, limit_chars=8000):
     They are short on purpose (about 850 words): reliable rules beat retrieval
     that might miss the one that matters this turn.
     """
+    import json
     import pathlib
     base = pathlib.Path(work) / 'agents' / 'playbooks'
-    out, used = {}, 0
+    out, used, omitted = {}, 0, 0
     if not base.is_dir():
         return out
+    status = {}
+    marker = base / '.catalog-status.json'
+    if marker.is_file() and not marker.is_symlink() and marker.stat().st_size <= 4096:
+        try:
+            value = json.loads(marker.read_text())
+            if isinstance(value, dict):
+                status = value
+        except (OSError, ValueError):
+            pass
     for path in sorted(base.glob('*.md')):
         if path.name == 'THIRD_PARTY.md' or path.is_symlink():
             continue
-        text = path.read_text(encoding='utf-8', errors='replace').strip()
+        try:
+            if path.stat().st_size > max(0, limit_chars) * 4:
+                omitted += 1
+                continue
+            text = path.read_text(encoding='utf-8', errors='replace').strip()
+        except OSError:
+            omitted += 1
+            continue
         if used + len(text) > limit_chars:
-            break
+            omitted += 1
+            continue
         out[path.stem] = text
         used += len(text)
+    staged = status.get('omitted', 0)
+    if omitted or (type(staged) is int and staged > 0):
+        examples = status.get('examples')
+        examples = [name[:160] for name in examples[:3] if isinstance(name, str)] if isinstance(examples, list) else []
+        notice = ('Optional playbooks omitted: %s during staging, %d at the prompt budget. '
+                  'Retained source is unchanged. Source revision: %s. Examples: %s. '
+                  'Use EXEC inputs with explicit agents/playbooks/<name>.md paths to inspect selected guides; '
+                  'these optional tactics do not replace lessons from prior outcomes.' %
+                  (staged, omitted, status.get('revision', 'filesystem fixture'), ', '.join(examples)))
+        notice = notice[:max(0, limit_chars)]
+        while out and used + len(notice) > limit_chars:
+            _, text = out.popitem()
+            used -= len(text)
+        out['_source_omissions'] = notice
     return out

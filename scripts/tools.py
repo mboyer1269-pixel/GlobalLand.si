@@ -10,11 +10,28 @@ import re
 import shutil
 import socket
 import ssl
+import stat
 import subprocess
+import time
 import urllib.parse
 from supervisor import bounded_run, check_secrets, safe_path
 
 TOOL_ACTIONS = {'EXEC', 'FETCH', 'WORLD', 'STATUS', 'SPEND', 'RECONCILE', 'PUBLISH_ACTOR', 'ACTOR_STATS', 'PUBLISH_SITE'}
+INPUT_BUDGET = 128 * 1024 * 1024  # Leave room for execution and outputs in 256 MiB tmpfs.
+
+
+class InputCapacityError(ValueError):
+    """Only fixed text and host-measured integers may cross the public boundary."""
+    safe_message = True
+    code = 'EXEC_INPUT_CAPACITY'
+
+    def __init__(self, selected_bytes, budget):
+        self.selected_bytes = selected_bytes
+        self.budget = budget
+        super().__init__('selected inputs exceed job capacity (EXEC_INPUT_CAPACITY; selected_bytes=%d; budget_bytes=%d); '
+                         'use inputs to select fewer files or process chunks' % (selected_bytes, budget))
+
+
 _RULE_MODULES = ('tools.py', 'world.py', 'treasury.py', 'gateway.py', 'supervisor.py', 'decision_protocol.py', 'broker.py')
 # 'Invalid ' + name / 'Unknown ' + key in world.py take code-defined names only.
 _RULE_PATTERN = re.compile(r'(?:Invalid|Unknown) [A-Za-z_]{1,30}(?: [A-Za-z_]{1,30}){0,3}|HTTP [1-5][0-9][0-9]')
@@ -75,7 +92,7 @@ def validate_envelope(t):
     if not isinstance(args,dict):raise ValueError('tool arguments must be object')
     action=t['action']
     if action=='EXEC':
-        if set(args)-{'argv','cwd','outputs','mission_id'}:raise ValueError('unknown exec argument')
+        if set(args)-{'argv','cwd','outputs','mission_id','inputs'}:raise ValueError('unknown exec argument')
         argv=args.get('argv')
         if not isinstance(argv,list) or not 1<=len(argv)<=128 or any(not isinstance(a,str) or len(a)>8192 or '\x00' in a for a in argv) or not argv[0]:raise ValueError('invalid argv')
         cwd=args.get('cwd','')
@@ -83,6 +100,13 @@ def validate_envelope(t):
         outputs=args.get('outputs',[])
         if not isinstance(outputs,list) or len(outputs)>64:raise ValueError('output count limit')
         for name in outputs:product_path(name)
+        inputs=args.get('inputs')
+        if inputs is not None:
+            if not isinstance(inputs,list) or len(inputs)>128:raise ValueError('input selection limit')
+            from public_source import validate_public_path
+            try:
+                for name in inputs:validate_public_path(name)
+            except RuntimeError:raise ValueError('invalid public input path') from None
     elif action=='FETCH':
         if set(args)-{'url','output','encoding'}:raise ValueError('unknown fetch argument')
         if not isinstance(args.get('url'),str) or len(args['url'])>8192:raise ValueError('invalid URL')
@@ -321,6 +345,131 @@ def commercial_paths(capabilities, bank_snapshot):
                 constraints='Configured prerequisites do not verify auth, execution or remote success. Missing collection blocks paid order acceptance in this path, while available research, building, offer improvement, permitted publication and authorized incoming private work remain possible. Service costs are unknown; debits require verified available funds. HALTED/EXTINCT remains authoritative; this view grants no new authority.')
 
 
+def _stage_fixture_inputs(work,destination,inputs):
+    """Bounded compatibility export for offline fixtures without source.git.
+
+    No-follow descriptor traversal and a pre/post-copy identity check keep a
+    mutable fixture from swapping a checked regular file for a private link or
+    growing it beyond the preflight budget. Explicit selectors avoid walking an
+    unrelated corpus; [] does not touch the source at all.
+    """
+    from public_source import (MAX_EXPORT_ENTRIES, OPERATION_TIMEOUT, PublicSourceError,
+                               public_export_directory, validate_public_path)
+    if inputs is not None and (not isinstance(inputs,list) or len(inputs)>128):
+        raise PublicSourceError('source_inputs_invalid')
+    selectors=None if inputs is None else list(dict.fromkeys(validate_public_path(p) for p in inputs))
+    selected={};total=0;root_fd=None;deadline=time.monotonic()+OPERATION_TIMEOUT
+    directory_flags=os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW
+
+    def check_time():
+        if time.monotonic()>=deadline:raise PublicSourceError('source_timeout')
+
+    def open_relative(name,directory=False):
+        validate_public_path(name)
+        parent=os.dup(root_fd)
+        parts=name.rstrip('/').split('/')
+        try:
+            for part in parts[:-1]:
+                child=os.open(part,directory_flags,dir_fd=parent)
+                os.close(parent);parent=child
+            flags=directory_flags if directory else os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK
+            return os.open(parts[-1],flags,dir_fd=parent)
+        finally:os.close(parent)
+
+    def identity(value):
+        return (value.st_dev,value.st_ino,value.st_size,value.st_mtime_ns,value.st_ctime_ns)
+
+    def add(name):
+        nonlocal total
+        check_time();validate_public_path(name)
+        if name in selected:return
+        fd=open_relative(name)
+        try:info=os.fstat(fd)
+        finally:os.close(fd)
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink!=1:
+            raise PublicSourceError('source_mode_invalid')
+        total+=info.st_size
+        if total>INPUT_BUDGET or len(selected)>=MAX_EXPORT_ENTRIES:
+            raise PublicSourceError('source_budget_exceeded',total)
+        selected[name]=identity(info)
+
+    def walk(directory,name='',depth=0):
+        # Bound open descriptors/recursion independently of retained world size.
+        if depth>128:raise PublicSourceError('source_export_entries_exceeded',total)
+        with os.scandir(directory) as items:
+            for item in items:
+                check_time()
+                child_name=name+item.name
+                validate_public_path(child_name)
+                if item.is_dir(follow_symlinks=False):
+                    child_fd=os.open(item.name,directory_flags,dir_fd=directory)
+                    try:walk(child_fd,child_name+'/',depth+1)
+                    finally:os.close(child_fd)
+                else:add(child_name)
+
+    try:
+        if selectors!=[]:
+            # Opening components separately prevents a symlink at work/ itself
+            # or any ancestor from changing the source boundary.
+            absolute=pathlib.Path(os.path.abspath(work))
+            root_fd=os.open(absolute.anchor,directory_flags)
+            for component in absolute.parts[1:]:
+                child=os.open(component,directory_flags,dir_fd=root_fd)
+                os.close(root_fd);root_fd=child
+            if selectors is None:walk(root_fd)
+            else:
+                directories=[p for p in selectors if p.endswith('/')]
+                for selector in selectors:
+                    if any(selector!=parent and selector.startswith(parent) for parent in directories):continue
+                    if selector.endswith('/'):
+                        fd=open_relative(selector,directory=True)
+                        try:walk(fd,selector)
+                        finally:os.close(fd)
+                    else:add(selector)
+                if any(not any(name==p or (p.endswith('/') and name.startswith(p)) for name in selected)
+                       for p in selectors):raise PublicSourceError('source_path_missing')
+        manifest=[]
+        with public_export_directory(destination,forbidden=[work]) as staging:
+            for name,expected in sorted(selected.items()):
+                check_time();fd=open_relative(name)
+                try:
+                    before=os.fstat(fd)
+                    if not stat.S_ISREG(before.st_mode) or before.st_nlink!=1 or identity(before)!=expected:
+                        raise PublicSourceError('source_input_changed')
+                    target=staging/name;target.parent.mkdir(parents=True,exist_ok=True)
+                    copied=0;digest=hashlib.sha256()
+                    with target.open('xb') as output:
+                        while True:
+                            check_time();chunk=os.read(fd,min(65536,expected[2]-copied+1))
+                            if not chunk:break
+                            copied+=len(chunk)
+                            if copied>expected[2]:raise PublicSourceError('source_input_changed')
+                            output.write(chunk);digest.update(chunk)
+                    if copied!=expected[2] or identity(os.fstat(fd))!=expected:
+                        raise PublicSourceError('source_input_changed')
+                    target.chmod(0o644)
+                    manifest.append(dict(path=name,size=copied,oid=digest.hexdigest()))
+                finally:os.close(fd)
+        return dict(revision=None,entries=manifest,total_bytes=total)
+    except OSError as error:raise PublicSourceError('source_input_unavailable') from error
+    finally:
+        if root_fd is not None:os.close(root_fd)
+
+
+def stage_inputs(root,destination,inputs):
+    """Stage only public input bytes; never mount the host Git object database."""
+    from public_source import PublicSource,PublicSourceError
+    root=pathlib.Path(root)
+    try:
+        if (root/'source.git').exists() or (root/'source.git').is_symlink():
+            return PublicSource(root).export(inputs,destination,INPUT_BUDGET)
+        return _stage_fixture_inputs(root/'work',destination,inputs)
+    except PublicSourceError as error:
+        if error.code in ('source_budget_exceeded','source_export_entries_exceeded'):
+            raise InputCapacityError(error.selected_bytes or 0,INPUT_BUDGET) from None
+        raise ValueError('selected public inputs unavailable; inspect catalog paths and retry with a new task') from None
+
+
 class Toolbox:
     def __init__(self,root,world,treasury,config=None):
         self.root=pathlib.Path(root);self.world=world;self.treasury=treasury;self.config=config or {}
@@ -335,7 +484,10 @@ class Toolbox:
             job=self.root/'jobs'/task['id'];workspace=job/'workspace'
             if job.exists():raise ValueError('workspace exists after uncertain execution; use a new task ID')
             workspace.mkdir(parents=True,mode=0o755)
-            shutil.copytree(self.root/'work',workspace/'input')
+            try:input_source=stage_inputs(self.root,workspace/'input',args.get('inputs'))
+            except Exception:
+                shutil.rmtree(job)
+                raise
             (workspace/'request.json').write_text(json.dumps(args));(workspace/'request.json').chmod(0o644)
             command=sandbox_command(task['id'],workspace,self.config['executor_image'],args)
             try:
@@ -354,7 +506,9 @@ class Toolbox:
                     raw=text.encode();total+=len(raw)
                     if len(raw)>1024*1024 or total>8*1024*1024:raise ValueError('artifact size limit')
                     check_secrets(raw)
-                provenance={'task':task['id'],'outputs':{n:hashlib.sha256(v.encode()).hexdigest() for n,v in files.items()}}
+                provenance={'task':task['id'],'outputs':{n:hashlib.sha256(v.encode()).hexdigest() for n,v in files.items()},
+                            'input_source':dict(revision=input_source['revision'],total_bytes=input_source['total_bytes'],
+                                file_count=len(input_source['entries']),manifest_sha256=hashlib.sha256(json.dumps(input_source['entries'],sort_keys=True).encode()).hexdigest())}
                 files['products/receipts/'+task['id']+'.json']=json.dumps(provenance,indent=2)+'\n'
                 result={'status':'DONE','output':str(value.get('output',''))[:8000],'artifacts':list(files)}
             finally:

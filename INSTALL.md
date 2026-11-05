@@ -23,6 +23,12 @@ Le script suspend temporairement uniquement les fichiers cron globalland (queue/
 
 ## Smoke test gratuit de v3
 
+La release installée doit inclure `public_source.py` et `catalog_views.py`, ainsi que les versions concordantes du superviseur, des outils, du contrôleur, du courtier/MCP et du schéma de décision. Les scripts d'installation copient ces modules depuis le SHA revu. Le dépôt bare `source.git` reste complet ; `work/` devient une projection réduite. Ne pas y recréer une copie intégrale des produits ni supprimer des objets ou références Git pour satisfaire la capacité d'une tâche.
+
+Pour qualifier le catalogue, parcourir plusieurs pages `list_products` avec le même `prefix` et la même `revision`, puis lire un fichier par plages `read_product` jusqu'à `eof`. Vérifier les octets après décodage de l'encodage annoncé. `refs/globalland/published` désigne la vue confirmée ; un push en attente ne doit pas faire avancer les lectures ordinaires. Les playbooks `agents/playbooks/*.md` doivent encore apparaître dans le contexte. Le protocole complet est dans [queue/PROTOCOL.md](queue/PROTOCOL.md).
+
+Pour le smoke EXEC ci-dessous, déclarer `inputs: []` si aucun ancien fichier n'est nécessaire. Une sélection précise doit rester sous **128 Mio par tâche**, tout en conservant les chemins relatifs du programme. Sans `inputs`, la vue publique complète est essayée sous cette même limite et peut être refusée avant exécution ; ce refus demande une sélection plus petite, pas un nettoyage du corpus. Les tests Git locaux `test_public_source.py`, `test_catalog_consumers.py` et `test_catalog_supervisor.py` vérifient ces contrats sans appel à un fournisseur ; ils ne remplacent pas le smoke Docker de la release installée.
+
 Après la mise à niveau : `status` doit montrer le monde et ses agents, une Banque UNFUNDED si aucune preuve réelle n'a été intégrée et un contrôleur en attente. Soumettre une tâche TOOL/WORLD créant une mission, puis une tâche EXEC produisant un petit README sous products/. Vérifier le produit et son reçu de hash sur GitHub ; le solde CAD ne doit pas être inventé. Le test `tests/test_docker_smoke.py` peut également être exécuté avec `GLOBALLAND_DOCKER_SMOKE=1` depuis le checkout après téléchargement de Node22.
 
 ## Codex et Claude Code avec les abonnements

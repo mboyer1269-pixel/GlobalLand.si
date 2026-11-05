@@ -20,6 +20,12 @@ jobs:
       - run: python3 -m unittest discover -s tests -p 'test_docker_smoke.py'
         env:
           GLOBALLAND_DOCKER_SMOKE: '1'
+      - run: python3 -m unittest discover -s tests -p 'test_private_service_assets.py'
+        env:
+          GLOBALLAND_DOCKER_SMOKE: '1'
+      - run: python3 -m unittest discover -s tests -p 'test_catalog_supervisor.py'
+        env:
+          GLOBALLAND_DOCKER_SMOKE: '1'
       - run: for f in scripts/*.sh; do bash -n "$f" || exit 1; done
   actor-products:
     runs-on: ubuntu-latest

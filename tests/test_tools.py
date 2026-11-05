@@ -61,4 +61,108 @@ class ToolsTests(unittest.TestCase):
      else:
       result,files=box.run(task);self.assertEqual(result,{'status':'FAILED','output':output});self.assertEqual(files,{})
     self.assertFalse((root/'jobs/TASK-0100').exists())
+class InputStagingTests(unittest.TestCase):
+ def test_empty_selection_never_enumerates_unrelated_corpus_and_is_public(self):
+  import os
+  from unittest.mock import patch
+  from tools import stage_inputs
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);(root/'work').mkdir()
+   previous=os.umask(0o077)
+   try:
+    with patch('pathlib.Path.rglob',side_effect=AssertionError('empty selection scanned corpus')):
+     manifest=stage_inputs(root,root/'input',[])
+   finally:os.umask(previous)
+   self.assertEqual(manifest['total_bytes'],0)
+   self.assertEqual((root/'input').stat().st_mode & 0o777,0o755)
+
+ def test_fallback_selected_files_do_not_scan_unrelated_paths(self):
+  from unittest.mock import patch
+  from tools import stage_inputs
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);(root/'work/products').mkdir(parents=True)
+   (root/'work/products/safe').write_text('safe')
+   with patch('pathlib.Path.rglob',side_effect=AssertionError('selected file scanned corpus')):
+    manifest=stage_inputs(root,root/'input',['products/safe'])
+   self.assertEqual(manifest['total_bytes'],4)
+   self.assertEqual((root/'input/products/safe').read_text(),'safe')
+
+ def test_fallback_rejects_invalid_legacy_paths_and_destination_links_before_copy(self):
+  from tools import stage_inputs
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);(root/'work/.git').mkdir(parents=True)
+   (root/'work/.git/config').write_text('private git config')
+   with self.assertRaises(ValueError):stage_inputs(root,root/'input',None)
+   self.assertFalse((root/'input').exists())
+   (root/'work/safe').write_text('safe')
+   (root/'outside').mkdir();(root/'linked').symlink_to(root/'outside',target_is_directory=True)
+   with self.assertRaises(ValueError):stage_inputs(root,root/'linked/input',['safe'])
+   self.assertEqual(list((root/'outside').iterdir()),[])
+
+ def test_fallback_growth_during_copy_is_refused_and_staging_removed(self):
+  import os
+  from unittest.mock import patch
+  from tools import stage_inputs
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);(root/'work').mkdir()
+   source=root/'work/safe';source.write_bytes(b'safe')
+   original_read=os.read;changed=False
+   def growing_read(fd,limit):
+    nonlocal changed
+    if not changed:
+     changed=True
+     with source.open('ab') as stream:stream.write(b'grew beyond preflight')
+    return original_read(fd,limit)
+   with patch('tools.os.read',side_effect=growing_read):
+    with self.assertRaises(ValueError):stage_inputs(root,root/'input',['safe'])
+   self.assertFalse((root/'input').exists())
+   self.assertEqual(list(root.glob('.public-source-*')),[])
+
+ def test_fallback_budget_is_checked_before_any_copy_and_overlaps_are_deduplicated(self):
+  import os
+  from unittest.mock import patch
+  from tools import stage_inputs
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);(root/'work/products/nested').mkdir(parents=True)
+   (root/'work/products/nested/a').write_bytes(b'1234')
+   (root/'work/products/b').write_bytes(b'5678')
+   with patch('tools.INPUT_BUDGET',7),patch('tools.os.read',side_effect=AssertionError('overflow read body')):
+    with self.assertRaisesRegex(ValueError,'selected inputs exceed job capacity') as caught:
+     stage_inputs(root,root/'input',['products/'])
+   self.assertEqual(caught.exception.code,'EXEC_INPUT_CAPACITY')
+   self.assertEqual(caught.exception.selected_bytes,8)
+   from tools import rejection_reason
+   message=rejection_reason(caught.exception)
+   self.assertIn('selected_bytes=8',message)
+   self.assertIn('budget_bytes=7',message)
+   self.assertFalse((root/'input').exists())
+   previous=os.umask(0o077)
+   try:manifest=stage_inputs(root,root/'input',['products/','products/nested/','products/nested/a'])
+   finally:os.umask(previous)
+   self.assertEqual(manifest['total_bytes'],8)
+   self.assertEqual(len(manifest['entries']),2)
+   for part in ['input','input/products','input/products/nested']:
+    self.assertEqual((root/part).stat().st_mode & 0o777,0o755)
+
+ def test_fallback_rejects_source_symlink_swap_after_preflight_without_partial_input(self):
+  import os
+  from unittest.mock import patch
+  from tools import stage_inputs
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);(root/'work/products').mkdir(parents=True)
+   source=root/'work/products/safe';source.write_text('safe')
+   (root/'private').write_text('host secret')
+   original_open=os.open;opens=0
+   def racing_open(path,*args,**kwargs):
+    nonlocal opens
+    if str(path)=='safe':
+     opens+=1
+     if opens==2:
+      source.unlink();source.symlink_to(root/'private')
+    return original_open(path,*args,**kwargs)
+   with patch('tools.os.open',side_effect=racing_open):
+    with self.assertRaises(ValueError):stage_inputs(root,root/'input',['products/safe'])
+   self.assertFalse((root/'input').exists())
+
+
 if __name__=='__main__':unittest.main()

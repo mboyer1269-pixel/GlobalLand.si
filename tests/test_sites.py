@@ -3,10 +3,12 @@ import base64
 import hashlib
 import json
 import pathlib
+import shutil
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'scripts'))
 import sites
@@ -91,6 +93,79 @@ class SiteTests(unittest.TestCase):
         for bad in ('../etc', 'UPPER', 'a' * 41):
             with self.subTest(bad=bad), self.assertRaisesRegex(SiteError, 'Invalid site name'):
                 load_site(self.root / 'work', bad)
+
+    def catalog(self):
+        seed = self.root / 'seed'
+        (self.root / 'work').rename(seed)
+        for args in (['init', str(seed)], ['-C', str(seed), 'add', '.'],
+                     ['-C', str(seed), '-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+                      'commit', '-m', 'site'], ['clone', '--bare', str(seed), str(self.root / 'source.git')]):
+            subprocess.run(['git'] + args, check=True, capture_output=True, timeout=30)
+        return seed
+
+    def test_catalog_dry_run_without_work_preserves_digest_and_binary_content(self):
+        expected = load_site(self.root / 'work', 'chronicle')
+        self.catalog()
+        result = Publisher(self.root, {}).publish(self.task(dry_run=True))
+        self.assertEqual(result['review_digest'], expected[1])
+        self.assertFalse((self.root / 'work').exists())
+
+    def test_catalog_online_ignores_stale_work_and_keeps_review_gate(self):
+        _, digest = load_site(self.root / 'work', 'chronicle')
+        self.catalog()
+        write_site(self.root / 'work', index='stale invalid source')
+        with self.assertRaisesRegex(SiteError, 'review APPROVE'):
+            self.publisher().publish(self.task())
+        self.assertEqual(self.fake.calls, [])
+        result = self.publisher(reviews=self.founder_review(digest)).publish(self.task())
+        self.assertEqual(result['status'], 'ONLINE_VERIFIED')
+        self.assertIn(b'logo.png', self.fake.scripts['globalland-chronicle'])
+        self.assertEqual((self.root / 'work/products/sites/chronicle/index.html').read_text(), 'stale invalid source')
+
+    def test_offline_ignores_unusable_catalog_and_absent_work(self):
+        shutil.rmtree(self.root / 'work')
+        (self.root / 'source.git').mkdir()
+        result = self.publisher().publish(self.task(online=False))
+        self.assertEqual(result['status'], 'OFFLINE')
+        self.assertFalse(self.fake.enabled['globalland-chronicle'])
+
+    def test_catalog_preserves_existing_encoded_asset_size_allowance(self):
+        (self.root / 'work/products/sites/chronicle/img/logo.png.b64').write_bytes(base64.b64encode(b'\0' * 800_000))
+        expected = load_site(self.root / 'work', 'chronicle')[1]
+        self.catalog()
+        self.assertEqual(Publisher(self.root, {}).publish(self.task(dry_run=True))['review_digest'], expected)
+
+    def test_invalid_catalog_cannot_fall_back_to_valid_work(self):
+        (self.root / 'source.git').mkdir()
+        with self.assertRaisesRegex(SiteError, 'catalog unavailable or invalid'):
+            self.publisher().publish(self.task(dry_run=True))
+        self.assertEqual(self.fake.calls, [])
+
+    def test_catalog_operation_files_are_cleaned_after_loading(self):
+        self.catalog()
+        operations, original = [], sites.load_site
+        def observed(work, site):
+            operations.append(pathlib.Path(work))
+            return original(work, site)
+        with patch('sites.load_site', side_effect=observed):
+            Publisher(self.root, {}).publish(self.task(dry_run=True))
+        self.assertTrue(operations)
+        self.assertTrue(all(not path.exists() for path in operations))
+
+    def test_unrelated_large_product_does_not_block_site_export(self):
+        (self.root / 'work/products/unrelated.bin').write_bytes(b'z' * (17 * 1024 * 1024))
+        self.catalog()
+        self.assertEqual(Publisher(self.root, {}).publish(self.task(dry_run=True))['status'], 'DRY_RUN')
+
+    def test_work_fixture_parent_symlink_cannot_escape_site_source(self):
+        folder = self.root / 'work/products/sites'
+        folder.rename(self.root / 'outside-sites')
+        try:
+            folder.symlink_to(self.root / 'outside-sites', target_is_directory=True)
+        except OSError:
+            self.skipTest('directory symlinks unavailable')
+        with self.assertRaises(SiteError):
+            Publisher(self.root, {}).publish(self.task(dry_run=True))
 
     def test_generated_worker_serves_the_site_in_node(self):
         files, _ = load_site(self.root / 'work', 'chronicle')
@@ -196,6 +271,59 @@ class AuditRegressionTests(SiteTests):
         # codex approves, claude (the author) publishes in another turn: independent second key.
         ok = self.publisher(reviews=self.review(digest, 'codex', 'THINK-1793490500'), origin=('THINK-1793491000', 'claude')).publish(self.task())
         self.assertEqual(ok['status'], 'ONLINE_VERIFIED')
+
+    def test_catalog_receipts_keep_content_authors_when_work_is_absent(self):
+        _, digest = load_site(self.root / 'work', 'chronicle')
+        self.receipt('TASK-179349000010', 'claude')
+        self.catalog()
+        from review import authors
+        self.assertEqual(authors(self.root, 'products/sites/chronicle'), {'claude'})
+        with self.assertRaisesRegex(SiteError, 'review APPROVE'):
+            self.publisher(reviews=self.review(digest, 'claude', 'THINK-1793490500'),
+                           origin=('THINK-1793491000', 'codex')).publish(self.task())
+        self.assertEqual(self.fake.calls, [])
+
+    def test_pending_private_receipt_cannot_erase_content_authors(self):
+        _, digest = load_site(self.root / 'work', 'chronicle')
+        self.receipt('TASK-179349000010', 'claude')
+        receipt_path = self.root / 'work/products/receipts/TASK-179349000010.json'
+        record = {'id': 'TASK-179349000010', 'state': 'COMPLETED', 'files': {
+            'products/receipts/TASK-179349000010.json': receipt_path.read_text()}}
+        (self.root / 'state/TASK-179349000010.json').write_text(json.dumps(record))
+        receipt_path.unlink()
+        self.catalog()
+        from review import authors
+        self.assertEqual(authors(self.root, 'products/sites/chronicle'), {'claude'})
+        with self.assertRaisesRegex(SiteError, 'review APPROVE'):
+            self.publisher(reviews=self.review(digest, 'claude', 'THINK-1793490500'),
+                           origin=('THINK-1793491000', 'codex')).publish(self.task())
+        self.assertEqual(self.fake.calls, [])
+
+    def test_malformed_catalog_receipt_fails_closed_but_offline_still_works(self):
+        _, digest = load_site(self.root / 'work', 'chronicle')
+        self.receipt('TASK-179349000010', 'claude')
+        (self.root / 'work/products/receipts/TASK-179349000010.json').write_text('{')
+        self.catalog()
+        with self.assertRaisesRegex(ValueError, 'provenance unavailable or invalid'):
+            self.publisher(reviews=self.founder_review(digest)).publish(self.task())
+        self.assertEqual(self.fake.calls, [])
+        self.assertEqual(self.publisher().publish(self.task(online=False))['status'], 'OFFLINE')
+
+    def test_published_journal_payload_is_skipped_with_identity_checked_sidecar(self):
+        from result_envelope import write_result_envelope
+        from review import authors, MAX_JOURNAL
+        self.receipt('TASK-179349000010', 'claude')
+        self.catalog()
+        record = {'id': 'TASK-179349000010', 'hash': 'a' * 64, 'state': 'PUBLISHED',
+                  'result': {'status': 'DONE', 'output': ''}}
+        path = self.root / 'state/TASK-179349000010.json'
+        with path.open('w') as stream:
+            stream.write(json.dumps(record)[:-1] + ',"retained_artifact":"')
+            for _ in range(MAX_JOURNAL // (1024 * 1024) + 1):
+                stream.write('x' * (1024 * 1024))
+            stream.write('"}')
+        write_result_envelope(self.root, record)
+        self.assertEqual(authors(self.root, 'products/sites/chronicle'), {'claude'})
 
     def test_hidden_files_and_receipts_are_never_published(self):
         base = self.root / 'work/products/sites/chronicle'

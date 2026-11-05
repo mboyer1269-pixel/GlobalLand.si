@@ -33,6 +33,7 @@ import json
 import mimetypes
 import pathlib
 import re
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -86,7 +87,7 @@ def load_site(work, site):
     if not isinstance(site, str) or not NAME.fullmatch(site):
         raise SiteError('Invalid site name: lowercase letters, digits and hyphens, at most 40')
     base = pathlib.Path(work) / 'products' / 'sites' / site
-    if base.is_symlink() or not base.is_dir():
+    if any(p.is_symlink() for p in (base, *base.parents)) or not base.is_dir():
         raise SiteError('Site source not found under products/sites/' + site)
     files, total = {}, 0
     for path in sorted(base.rglob('*')):
@@ -158,6 +159,24 @@ export default {
 def build_module(files):
     # ensure_ascii escapes U+2028/U+2029 too, so the literal is always valid JS.
     return WORKER % json.dumps(files, sort_keys=True, ensure_ascii=True)
+
+
+def catalog_site(root, site):
+    """Use a bounded operation directory, never the mutable sparse work view."""
+    if not isinstance(site, str) or not NAME.fullmatch(site):
+        raise SiteError('Invalid site name: lowercase letters, digits and hyphens, at most 40')
+    root = pathlib.Path(root)
+    if not (root / 'source.git').exists() and not (root / 'source.git').is_symlink():
+        return (*load_site(root / 'work', site), None)
+    from public_source import PublicSource, PublicSourceError
+    try:
+        source = PublicSource(root)
+        with tempfile.TemporaryDirectory(prefix='globalland-site-') as operation:
+            # Encoded binary assets can exceed the decoded publication limit.
+            source.export(['products/sites/' + site + '/'], operation, MAX_TOTAL * 2)
+            return (*load_site(operation, site), source.revision)
+    except PublicSourceError:
+        raise SiteError('Site source catalog unavailable or invalid') from None
 
 
 class Client:
@@ -233,7 +252,7 @@ class Publisher:
             self._client().call('POST', '/accounts/%s/workers/scripts/%s/subdomain' % (self.settings['account_id'], script),
                                 {'enabled': False, 'previews_enabled': False})
             return dict(status='OFFLINE', site=site, script=script)
-        files, digest = load_site(self.root / 'work', site)
+        files, digest, revision = catalog_site(self.root, site)
         if args.get('dry_run') is True:
             index = files['/index.html']['t'].encode()
             return dict(status='DRY_RUN', site=site, review_digest=digest, files=len(files),
@@ -248,7 +267,7 @@ class Publisher:
         if self.settings['require_review']:
             from review import approved, authors
             if not approved(self.reviews, 'site:' + site, digest, task.get('submitted_by'), self.origin,
-                            authors(self.root, 'products/sites/' + site)):
+                            authors(self.root, 'products/sites/' + site, revision=revision)):
                 raise SiteError('Going online needs a WORLD review APPROVE of site:%s for the review_digest returned by a dry_run, recorded in another turn by a provider that neither wrote the site nor asks to publish it, by Grok through GitHub or by the founder' % site)
         path = self.root / 'state' / 'sites' / ('%s-%s.json' % (site, digest[:24]))
         path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)

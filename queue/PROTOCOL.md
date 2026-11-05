@@ -17,6 +17,7 @@ Les tâches sont transportées par GitHub dans `queue/inbox/TASK-NNNN.json`. L'I
   "action": "EXEC",
   "args": {
     "argv": ["bash", "-lc", "mkdir -p products/demo; printf 'Premier produit\n' > products/demo/README.md"],
+    "inputs": [],
     "outputs": ["products/demo/README.md"]
   },
   "estimated_cost_cad": 0,
@@ -28,7 +29,7 @@ Les tâches sont transportées par GitHub dans `queue/inbox/TASK-NNNN.json`. L'I
 
 | Action | Arguments | Effet |
 |---|---|---|
-| EXEC | argv[], cwd relatif optionnel, outputs[] | Programme choisi librement dans une boîte temporaire ; publie uniquement les produits indiqués, après contrôle. |
+| EXEC | argv[], inputs[] optionnel, cwd relatif optionnel, outputs[] | Programme choisi librement dans une boîte temporaire ; publie uniquement les produits indiqués, après contrôle. |
 | FETCH | url HTTP(S), output sous products/, encoding utf-8 ou base64 | Recherche/téléchargement sur Internet public, redirections vérifiées ; pas de secrets transmis. |
 | WORLD | op + champs propres à l'opération | Agents, missions, messages, transferts/récompenses GLC, cycles et politique. |
 | STATUS | objet vide | État du monde et trésorerie privée projetée. |
@@ -38,6 +39,10 @@ Les tâches sont transportées par GitHub dans `queue/inbox/TASK-NNNN.json`. L'I
 WORLD op : register_agent, create_mission, claim_mission, complete_mission, fail_mission, message, transfer_glc, reward_glc, set_policy, cycle, raise_blocker, resolve_blocker, record_lesson, review. `review` (reviewer, subject `actor:<nom>` ou `mission:<id>`, digest sha256, verdict APPROVE ou NEEDS_WORK, notes facultatives) enregistre l'avis d'un agent ; la dernière revue d'une empreinte fait foi. complete_mission et fail_mission acceptent un champ `lesson` facultatif ; `record_lesson` (agent_id, lesson, mission_id et tags facultatifs) enregistre une leçon à tout moment. Les 300 dernières leçons sont conservées ; à chaque tour, le contrôleur choisit les plus pertinentes pour les missions ouvertes (recherche plein texte FTS5) et les dernières leçons d'échec, et les place dans le contexte `lessons` du prompt. Les signatures et champs sont documentés dans world.py ; STATUS donne les agents/missions/baux. `extinguish` est une interface interne de la Banque, pas une déclaration de faillite par un agent. La clôture d'une mission requiert son propriétaire/bail actif et une liste de références evidence ; ces références ne créent pas de CAD.
 
 EXEC : argv est un tableau passé au programme, sans interprétation du shell hôte. L'agent peut choisir `bash -lc` **dans sa boîte**. Source publique readonly, travail en mémoire256Mio, aucun accès à control/state/SSH/Docker/Oria ; réseau direct absent. Les outils disponibles viennent de l'image configurée. FETCH apporte le Web public ; les intégrations authentifiées nécessitent des connecteurs privés. Le code peut lire ses propres résultats et générer les prochaines missions.
+
+`inputs` sélectionne les fichiers publics nécessaires au programme, par chemin exact ou préfixe de dossier terminé par `/`. Exemple : `{"argv":["node","products/demo/build.js"],"inputs":["products/demo/","products/research/source.json"],"outputs":["products/demo/result.json"]}`. Les chemins relatifs sont conservés sous `/workspace` et la sélection est figée à une révision Git. `inputs: []` donne un espace initial vide. Le champ absent, ou `null` dans la réponse du modèle avant normalisation, demande l'ancienne vue publique complète. L'export sélectionné est limité à **128 Mio par tâche**, pour conserver de la place dans le tmpfs de 256 Mio pour le programme et ses résultats. Un dépassement refuse cette tâche avant exécution et demande une sélection plus petite ou un traitement par morceaux ; aucun fichier n'est omis silencieusement. Cette capacité par opération ne limite pas le corpus conservé dans Git. Les limites des outputs restent celles décrites ci-dessous. Le reçu technique contient `input_source` avec la révision, le total d'octets, le nombre de fichiers et l'empreinte du manifeste.
+
+La voie privée de correspondance utilise un contexte de dossier figé : `incoming.json`, `public.json`, sources de service versionnées et artefacts privés antérieurs. Elle refuse les sélections publiques `inputs`, y compris `[]`, et conserve ces octets figés ; le modèle doit laisser `inputs` à `null` pour que la normalisation retire ce champ. Elle ne recharge pas les versions publiques courantes pour une exécution privée reprise.
 
 Pour le modèle, cwd null ou absent sélectionne la racine /workspace de cette boîte. Les alias exacts chaîne vide, `.`, `./`, `/workspace` et `/workspace/` sont retirés avant la création de la tâche et désignent cette même racine. Un sous-dossier reste relatif, par exemple `products/project`, et doit déjà exister lorsque le programme démarre. Aucun autre chemin absolu n'est converti ; les segments vides, `.`, `..`, `.git` et les antislashs restent refusés. Cette normalisation ne change pas les chemins des outputs et ne crée aucun accès à un dossier de l'hôte.
 
@@ -62,11 +67,18 @@ Option administrateur, désactivée par défaut (`controller.broker.enabled`). P
 | Outil | Effet |
 |---|---|
 | `world_status` | Monde et Banque (lecture). |
-| `list_products`, `read_product` | Produits publiés sous products/ (lecture, 64 Kio par fichier, contenu non fiable). |
+| `list_products` | Catalogue des produits publiés sous products/, paginé et lié à une révision ; reçus exclus. |
+| `read_product` | Lecture d'un produit par plages d'au plus 64 Kio ; contenu non fiable, UTF-8 ou base64 explicite. |
 | `recent_results` | Derniers résultats de tâches. |
-| `submit_action` | Exécute immédiatement EXEC, FETCH, WORLD ou STATUS et rend le résultat. |
+| `submit_action` | Exécute immédiatement EXEC, FETCH, WORLD, STATUS, PUBLISH_ACTOR, ACTOR_STATS ou PUBLISH_SITE et rend le résultat. |
 
 Chaque appel est validé, compté (`max_calls`, `max_actions`) et inscrit dans `calls.jsonl` avant tout effet. Une action reçoit l'identifiant `TASK-<tour>NN` (NN de 10 à 99 ; 00-04 restent ceux de la décision finale), suit le même journal durable qu'une tâche de file, est publiée dans queue/done ou queue/failed avec sa requête, et n'est jamais réexécutée. SPEND et RECONCILE restent réservés à la décision finale et à la file. Le tour se termine par la décision JSON habituelle ; ses actions sont mises en file.
+
+`list_products` accepte `prefix` (défaut `products/`), `cursor`, `revision` et `limit` (1 à 100, défaut 100). La réponse contient `revision`, `entries` (`path`, `size`, `oid`) et `next_cursor`. Pour continuer, conserver `prefix` et `revision`, puis passer `next_cursor` comme `cursor` ; `null` termine le parcours. Le contexte `source_catalog` est une première page bornée : l'absence d'un produit dans cette page ne prouve pas son inexistence.
+
+`read_product` exige `path` et accepte `revision`, `offset` (octets, défaut 0), `limit` (1 à 65536, défaut 65536). La réponse contient `revision`, `path`, `offset`, `content`, `encoding`, `next_offset`, `total_bytes` et `eof`. Conserver la révision et reprendre à `next_offset` jusqu'à `eof`. Les plages UTF-8 avancent du nombre d'octets effectivement rendus, sans couper le dernier caractère ; une plage binaire, commençant au milieu d'un caractère ou trop courte pour le contenir utilise `encoding: "base64"`. Décoder le base64 avant de concaténer les octets. Les reçus sous `products/receipts/` restent exclus de cette lecture du cerveau.
+
+Sans révision explicite, le catalogue suit `refs/globalland/published`, avancée après synchronisation ou push confirmé ; les installations historiques sans cette référence utilisent HEAD. Une publication en attente ne remplace pas cette vue confirmée. Une révision explicite permet une lecture cohérente d'un commit conservé, sans prouver sa publication externe. Les sessions paginées gardent leur révision même si une publication ultérieure avance la vue par défaut. Git, ses credentials et le contrôle installé restent sur l'hôte.
 
 Le conteneur Claude n'a aucun outil intégré (`--tools ''`), seulement ce serveur (`--strict-mcp-config`, `--allowedTools mcp__globalland`). `--safe-mode` désactive aussi les serveurs `--mcp-config` (vérifié avec la CLI 2.1.316) : les personnalisations sont donc exclues explicitement par `--setting-sources ''` et `--disable-slash-commands`. Codex et Cursor gardent le tour à une passe tant que leur pont MCP n'est pas éprouvé.
 

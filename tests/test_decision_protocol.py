@@ -25,6 +25,12 @@ class DecisionProtocolTests(unittest.TestCase):
     def variants(self):
         return self.protocol.MODEL_SCHEMA['properties']['actions']['items']['anyOf']
 
+    def test_exec_selected_inputs_roundtrip_and_legacy_default(self):
+        args = dict(argv=['node', '-p', '1'], outputs=[], inputs=['products/project/', 'README.md'])
+        self.assertEqual(self.normalize('EXEC', args)['args'], args)
+        self.assertEqual(self.normalize('EXEC', dict(args, inputs=[]))['args']['inputs'], [])
+        self.assertNotIn('inputs', self.normalize('EXEC', dict(args, inputs=None))['args'])
+
     def test_embedded_javascript_round_trips_without_a_second_json_parser(self):
         # The old transport can have valid outer JSON and invalid JSON inside
         # args_json when the model emits JS string quotes without another escape.

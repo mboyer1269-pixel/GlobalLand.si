@@ -116,6 +116,26 @@ class PrivateWorkTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     self.responder()(dict(self.message, message_id=str(index)))
 
+    def test_public_exec_input_selectors_cannot_replace_frozen_private_inputs(self):
+        # Global EXEC selectors address mutable public source; this private
+        # route must keep its case snapshot, even for an explicit empty list.
+        for index, selector in enumerate(([], ['products/services/demo/'], None)):
+            decision = execute()
+            decision['actions'][0]['args']['inputs'] = selector
+            with self.subTest(selector=selector), patch('controller.Controller.plan', return_value=decision), patch('private_work.bounded_run') as run:
+                with self.assertRaisesRegex(ValueError,'^Private work unavailable$'):
+                    self.responder()(dict(self.message,message_id='selector-'+str(index)))
+                run.assert_not_called()
+
+    def test_nullable_provider_inputs_normalize_to_the_private_frozen_default(self):
+        from decision_protocol import normalize_model_action
+        from private_work import _exec_args
+        action = execute()['actions'][0]
+        action['args']['inputs'] = None
+        normalized = normalize_model_action(action)
+        self.assertNotIn('inputs', normalized['args'])
+        self.assertEqual(_exec_args(normalized),normalized['args'])
+
     def test_corrupt_or_symlinked_case_does_not_read_external_data(self):
         with patch('controller.Controller.plan', return_value=finish()):
             self.responder()(self.message)

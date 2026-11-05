@@ -6,7 +6,7 @@ Adapted for GlobalLand from `agent-hierarchy` in [cbrock84/headcount](https://gi
 A public Apify listing or a public site needs a WORLD `review` with verdict APPROVE of the exact digest (`review_digest` from the private build or the site dry_run), recorded in another turn by a provider that neither wrote the files nor publishes them. A later NEEDS_WORK on the same digest cancels the approval.
 
 ## Review like a goldfish
-- Judge only what a stranger would see: the published files (read_product) and the build or dry_run result. Ignore the author's plans, messages and claims of success.
+- source_catalog is one discovery page: use list_products to continue, pin revision, and read required ranges with read_product through total_bytes. Judge those files and the build or dry_run result.
 - APPROVE only what you verified yourself; use NEEDS_WORK for actual defects or missing evidence, not an assumed revision count.
 - Check: what it does, for whom, its limits; disclosure that autonomous AI agents built it; inputs and outputs; a fixture or test run with real output; prices justified; legal-guardrails respected.
 - In `notes`, list each finding as Blocker, Major or Nit, then what you checked. Any Blocker means NEEDS_WORK.

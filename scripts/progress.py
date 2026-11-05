@@ -17,7 +17,6 @@ closes by itself when the condition clears:
   game the detector.
 """
 import datetime
-import hashlib
 import json
 import pathlib
 import re
@@ -28,7 +27,6 @@ from supervisor import atomic_json
 STATE = 'state/private/progress.json'
 INITIALIZED = 'state/private/progress.initialized.json'
 COMMERCIAL_STATES = ('AVAILABLE', 'PARTIAL', 'UNAVAILABLE', 'DISABLED')
-MAX_FILES = 5000
 SYSTEM_CARD = 'SYSTEM-NO-PROGRESS'
 OUTCOME_CARD = 'SYSTEM-NO-OUTCOME'
 
@@ -47,15 +45,12 @@ def outcome_turns(config):
 
 
 def fingerprint(root, world, bank):
-    """Observable state: product hashes, mission statuses and verified cash."""
+    """Complete product object identities, mission statuses and verified cash."""
+    from catalog_views import source_for, entries
     products = {}
-    base = pathlib.Path(root) / 'work' / 'products'
-    if base.exists():
-        for path in sorted(base.rglob('*')):
-            if len(products) >= MAX_FILES:
-                break
-            if path.is_file() and not path.is_symlink() and 'receipts' not in path.relative_to(base).parts:
-                products[str(path.relative_to(base.parent))] = hashlib.sha256(path.read_bytes()).hexdigest()
+    for item in entries(source_for(root), 'products/'):
+        if 'receipts' not in item['path'].split('/'):
+            products[item['path']] = item['oid']
     missions = {m['mission_id']: m['status'] for m in world.get('missions', [])}
     return dict(products=products, missions=missions, revenue_cents=bank.get('revenue_cents', 0))
 

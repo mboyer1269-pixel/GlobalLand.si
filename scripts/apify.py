@@ -26,6 +26,7 @@ import hashlib
 import json
 import pathlib
 import re
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -96,7 +97,7 @@ def load_source(work, actor):
     if not isinstance(actor, str) or not NAME.fullmatch(actor):
         raise ApifyError('Invalid actor name: lowercase letters, digits and hyphens')
     base = pathlib.Path(work) / 'products' / 'actors' / actor
-    if base.is_symlink() or not base.is_dir():
+    if any(p.is_symlink() for p in (base, *base.parents)) or not base.is_dir():
         raise ApifyError('Actor source not found under products/actors/' + actor)
     files, total = [], 0
     for path in sorted(base.rglob('*')):
@@ -158,6 +159,23 @@ def pricing(events, max_price_micro, min_price_micro=1):
     return [{'pricingModel': 'PAY_PER_EVENT', 'pricingPerEvent': {'actorChargeEvents': charge}}]
 
 
+def catalog_source(root, actor):
+    """Materialize only this Actor; keep legacy work-only fixtures explicit."""
+    if not isinstance(actor, str) or not NAME.fullmatch(actor):
+        raise ApifyError('Invalid actor name: lowercase letters, digits and hyphens')
+    root = pathlib.Path(root)
+    if not (root / 'source.git').exists() and not (root / 'source.git').is_symlink():
+        return (*load_source(root / 'work', actor), None)
+    from public_source import PublicSource, PublicSourceError
+    try:
+        source = PublicSource(root)
+        with tempfile.TemporaryDirectory(prefix='globalland-actor-') as operation:
+            source.export(['products/actors/' + actor + '/'], operation, MAX_TOTAL)
+            return (*load_source(operation, actor), source.revision)
+    except PublicSourceError:
+        raise ApifyError('Actor source catalog unavailable or invalid') from None
+
+
 class Client:
     """Minimal Apify REST client. The token never leaves this object."""
 
@@ -208,7 +226,7 @@ class Publisher:
     def publish(self, task):
         args = task['args']
         api = self._client()
-        files, version, digest = load_source(self.root / 'work', args['actor'])
+        files, version, digest, revision = catalog_source(self.root, args['actor'])
         prices = pricing(args.get('events'), self.settings['max_price_micro'], self.settings['min_price_micro'])
         want_public = args.get('public') is True
         if want_public and not self.settings['allow_public']:
@@ -216,7 +234,7 @@ class Publisher:
         listing = review_digest(digest, args)
         if want_public and self.settings['require_review'] and not approved_by_other(
                 self.reviews, args['actor'], listing, task.get('submitted_by'), self.origin,
-                __import__('review').authors(self.root, 'products/actors/' + args['actor'])):
+                __import__('review').authors(self.root, 'products/actors/' + args['actor'], revision=revision)):
             raise ApifyError('Public listing needs a WORLD review APPROVE of actor:%s for the review_digest returned by the private build with the same title, description and events, recorded in another turn by a provider that neither wrote the Actor nor asks to publish it, by Grok through GitHub or by the founder'
                              % args['actor'])
         path = self._journal(args['actor'], digest)
