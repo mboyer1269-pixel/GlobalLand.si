@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\"passed\": 12, \"total\": 12, \"js_parity_with_live_checker\": {\"cases\": 10, \"identical\": true, \"mismatches\": []}, \"python\": \"3.11.2\"}\n[]\n\n",
+  "artifacts": [
+    "products/services/csv-text-diagnostic/run_tests.py",
+    "products/services/csv-text-diagnostic/acceptance-results.json",
+    "products/receipts/TASK-179383860417.json"
+  ],
+  "request": {
+    "id": "TASK-179383860417",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T00:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "cat > products/services/csv-text-diagnostic/run_tests.py <<'EOF'\n#!/usr/bin/env python3\n# Synthetic acceptance tests (no customer data). Writes acceptance-results.json.\nimport json, os, subprocess, sys, tempfile\nD = os.path.dirname(os.path.abspath(__file__))\nsys.path.insert(0, D)\nimport diagnostic as dg\nS, E = dg.START, dg.END\ndef wrap(c): return 'Hello,\\nplease check this synthetic sample.\\n' + S + '\\n' + c + '\\n' + E + '\\nThanks'\nrows21 = 'Invoice,Amount\\n' + '\\n'.join('INV-%03d,1.00' % k for k in range(21))\nrows20 = 'Invoice,Amount\\n' + '\\n'.join('INV-%03d,1.00' % k for k in range(20))\ncases = [\n ('normal', wrap('Invoice,Customer,Amount\\nINV-001,Example,125.00'), {'status':'CHECKED','structure_ok':True,'dataRows':1,'columns':3,'errors':[]}),\n ('quoted comma', wrap('A,B\\n\"x, y\",2'), {'status':'CHECKED','structure_ok':True,'dataRows':1,'columns':2,'errors':[]}),\n ('ragged', wrap('A,B\\n1'), {'status':'CHECKED','structure_ok':False,'errors':['Row 2 has 1 columns; expected 2']}),\n ('duplicate header', wrap('A,A\\n1,2'), {'status':'CHECKED','errors':['Duplicate header: A']}),\n ('empty header', wrap('A,,C\\n1,2,3'), {'status':'CHECKED','errors':['Empty header at column 2']}),\n ('unclosed quote', wrap('A,B\\n\"1,2'), {'status':'CHECKED','errors':['Unclosed quoted field','Row 2 has 1 columns; expected 2']}),\n ('crlf + bom', 'x\\r\\n' + S + '\\r\\n﻿A,B\\r\\n1,2\\r\\n' + E, {'status':'CHECKED','structure_ok':True,'dataRows':1,'columns':2}),\n ('exactly 20 rows', wrap(rows20), {'status':'CHECKED','dataRows':20}),\n ('21 rows declined', wrap(rows21), {'status':'DECLINED','reason':'TOO_MANY_ROWS','dataRows':21}),\n ('missing markers', 'A,B\\n1,2', {'status':'DECLINED','reason':'MISSING_CSV_MARKERS'}),\n ('too large', wrap('A\\n' + 'x' * 20001), {'status':'DECLINED','reason':'MESSAGE_TOO_LARGE'}),\n ('empty block', wrap(''), {'status':'CHECKED','structure_ok':False,'errors':['Empty file']}),\n]\nresults = []\nfor name, body, exp in cases:\n    out = dg.diagnose(body)\n    ok = all(out.get(k) == v for k, v in exp.items())\n    if out.get('status') == 'CHECKED':\n        ok = ok and 'compatibility with Manager.io or any accounting platform' in out['not_checked']\n    results.append({'name': name, 'expected_subset': exp, 'output': out, 'passed': ok})\n# Parity with the live public JS checker on the same CSV texts\nparity_inputs = [dg.extract(b) for n, b, e in cases if dg.extract(b) is not None and len(b) <= dg.MAX_CHARS]\njs = r'''const fs=require('fs');const h=fs.readFileSync(process.argv[1],'utf8');const s=h.indexOf('function check(');const e=h.indexOf('document.getElementById(\"run\")');eval(h.slice(s,e));const inp=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));console.log(JSON.stringify(inp.map(check)));'''\nsite = os.path.join(D, '..', '..', 'sites', 'invoice-preflight', 'index.html')\nwith tempfile.NamedTemporaryFile('w', suffix='.json', delete=False) as f:\n    json.dump(parity_inputs, f)\ntry:\n    js_out = json.loads(subprocess.run(['node', '-e', js, site, f.name], capture_output=True, text=True, timeout=30).stdout)\n    py_out = [dg.check(t) for t in parity_inputs]\n    parity = {'cases': len(parity_inputs), 'identical': js_out == py_out,\n              'mismatches': [i for i, (a, b) in enumerate(zip(js_out, py_out)) if a != b]}\nexcept Exception as ex:\n    parity = {'cases': len(parity_inputs), 'identical': None, 'error': repr(ex)}\nsummary = {'scope': 'Synthetic messages only; private mail cycle not exercised by these tests',\n           'passed': sum(r['passed'] for r in results), 'total': len(results),\n           'js_parity_with_live_checker': parity, 'python': sys.version.split()[0], 'results': results}\njson.dump(summary, open(os.path.join(D, 'acceptance-results.json'), 'w'), ensure_ascii=False, indent=1)\nprint(json.dumps({k: summary[k] for k in ('passed', 'total', 'js_parity_with_live_checker', 'python')}))\nprint([r['name'] for r in results if not r['passed']])\nEOF\npython3 -I products/services/csv-text-diagnostic/run_tests.py"
+      ],
+      "outputs": [
+        "products/services/csv-text-diagnostic/run_tests.py",
+        "products/services/csv-text-diagnostic/acceptance-results.json"
+      ],
+      "mission_id": "TEXT-CSV-INTAKE-EXPERIMENT"
+    },
+    "description": "Broker action during THINK-1793838604",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179383860417",
+  "input_sha256": "2fe6a95b97caa659264c86bf9bc44f18fd4ebbd44965e59e9f653d66b550d02b"
+}

@@ -1,0 +1,311 @@
+{
+ "scope": "Synthetic messages only; private mail cycle not exercised by these tests",
+ "passed": 12,
+ "total": 12,
+ "js_parity_with_live_checker": {
+  "cases": 10,
+  "identical": true,
+  "mismatches": []
+ },
+ "python": "3.11.2",
+ "results": [
+  {
+   "name": "normal",
+   "expected_subset": {
+    "status": "CHECKED",
+    "structure_ok": true,
+    "dataRows": 1,
+    "columns": 3,
+    "errors": []
+   },
+   "output": {
+    "status": "CHECKED",
+    "structure_ok": true,
+    "dataRows": 1,
+    "columns": 3,
+    "errors": [],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "name": "quoted comma",
+   "expected_subset": {
+    "status": "CHECKED",
+    "structure_ok": true,
+    "dataRows": 1,
+    "columns": 2,
+    "errors": []
+   },
+   "output": {
+    "status": "CHECKED",
+    "structure_ok": true,
+    "dataRows": 1,
+    "columns": 2,
+    "errors": [],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "name": "ragged",
+   "expected_subset": {
+    "status": "CHECKED",
+    "structure_ok": false,
+    "errors": [
+     "Row 2 has 1 columns; expected 2"
+    ]
+   },
+   "output": {
+    "status": "CHECKED",
+    "structure_ok": false,
+    "dataRows": 1,
+    "columns": 2,
+    "errors": [
+     "Row 2 has 1 columns; expected 2"
+    ],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "name": "duplicate header",
+   "expected_subset": {
+    "status": "CHECKED",
+    "errors": [
+     "Duplicate header: A"
+    ]
+   },
+   "output": {
+    "status": "CHECKED",
+    "structure_ok": false,
+    "dataRows": 1,
+    "columns": 2,
+    "errors": [
+     "Duplicate header: A"
+    ],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "name": "empty header",
+   "expected_subset": {
+    "status": "CHECKED",
+    "errors": [
+     "Empty header at column 2"
+    ]
+   },
+   "output": {
+    "status": "CHECKED",
+    "structure_ok": false,
+    "dataRows": 1,
+    "columns": 3,
+    "errors": [
+     "Empty header at column 2"
+    ],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "name": "unclosed quote",
+   "expected_subset": {
+    "status": "CHECKED",
+    "errors": [
+     "Unclosed quoted field",
+     "Row 2 has 1 columns; expected 2"
+    ]
+   },
+   "output": {
+    "status": "CHECKED",
+    "structure_ok": false,
+    "dataRows": 1,
+    "columns": 2,
+    "errors": [
+     "Unclosed quoted field",
+     "Row 2 has 1 columns; expected 2"
+    ],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "name": "crlf + bom",
+   "expected_subset": {
+    "status": "CHECKED",
+    "structure_ok": true,
+    "dataRows": 1,
+    "columns": 2
+   },
+   "output": {
+    "status": "CHECKED",
+    "structure_ok": true,
+    "dataRows": 1,
+    "columns": 2,
+    "errors": [],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "name": "exactly 20 rows",
+   "expected_subset": {
+    "status": "CHECKED",
+    "dataRows": 20
+   },
+   "output": {
+    "status": "CHECKED",
+    "structure_ok": true,
+    "dataRows": 20,
+    "columns": 2,
+    "errors": [],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "name": "21 rows declined",
+   "expected_subset": {
+    "status": "DECLINED",
+    "reason": "TOO_MANY_ROWS",
+    "dataRows": 21
+   },
+   "output": {
+    "status": "DECLINED",
+    "reason": "TOO_MANY_ROWS",
+    "dataRows": 21,
+    "limit_data_rows": 20
+   },
+   "passed": true
+  },
+  {
+   "name": "missing markers",
+   "expected_subset": {
+    "status": "DECLINED",
+    "reason": "MISSING_CSV_MARKERS"
+   },
+   "output": {
+    "status": "DECLINED",
+    "reason": "MISSING_CSV_MARKERS",
+    "hint": "Paste the CSV between ---CSV START--- and ---CSV END---"
+   },
+   "passed": true
+  },
+  {
+   "name": "too large",
+   "expected_subset": {
+    "status": "DECLINED",
+    "reason": "MESSAGE_TOO_LARGE"
+   },
+   "output": {
+    "status": "DECLINED",
+    "reason": "MESSAGE_TOO_LARGE",
+    "limit_chars": 20000
+   },
+   "passed": true
+  },
+  {
+   "name": "empty block",
+   "expected_subset": {
+    "status": "CHECKED",
+    "structure_ok": false,
+    "errors": [
+     "Empty file"
+    ]
+   },
+   "output": {
+    "status": "CHECKED",
+    "structure_ok": false,
+    "dataRows": 0,
+    "columns": 0,
+    "errors": [
+     "Empty file"
+    ],
+    "not_checked": [
+     "amounts",
+     "dates",
+     "tax",
+     "currency",
+     "customer or account mappings",
+     "semicolon/tab delimiters",
+     "encoding beyond UTF-8 text",
+     "compatibility with Manager.io or any accounting platform"
+    ]
+   },
+   "passed": true
+  }
+ ]
+}
