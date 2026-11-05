@@ -78,7 +78,8 @@ def main():
             run(['bash', checkout / 'scripts/setup_vps.sh', revision, image], env=env)
             require((ROOT / 'backups').is_dir(), 'Fresh bootstrap omitted backups')
             for name in ('ssh', 'state', 'backups'):
-                require((ROOT / name).stat().st_mode & 0o777 == 0o700, 'Private directory mode: ' + name)
+                mode = (ROOT / name).stat().st_mode & 0o777
+                require(mode == 0o700, 'Private directory mode: ' + name + ' got ' + oct(mode))
             for name in ('ssh/deploy_key', 'control/config.json'):
                 require((ROOT / name).stat().st_mode & 0o077 == 0, 'Private file exposed: ' + name)
             controls = [p for p in (checkout / 'scripts').iterdir()

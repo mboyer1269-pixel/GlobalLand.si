@@ -47,7 +47,7 @@ jobs:
       - name: Prepare disposable host prerequisites
         run: |
           sudo apt-get update
-          sudo apt-get install -y cron logrotate
+          sudo apt-get install -y cron logrotate acl
           sudo systemctl start cron logrotate.timer
           docker compose version
           docker pull node:22-bookworm
@@ -59,6 +59,15 @@ jobs:
             RUNNER_ENVIRONMENT="$RUNNER_ENVIRONMENT" GLOBALLAND_BOOTSTRAP_SMOKE=1 \
             GLOBALLAND_BOOTSTRAP_IMAGE="node:22-bookworm@${digest##*@}" \
             python3 tests/bootstrap_install_smoke.py
+      - name: Show only installation permission metadata on failure
+        if: failure()
+        run: |
+          for path in /opt /opt/globalland /opt/globalland/ssh /opt/globalland/state /opt/globalland/backups; do
+            if test -d "$path"; then
+              sudo stat -c '%a %A %U:%G %n' "$path"
+              sudo getfacl --absolute-names "$path"
+            fi
+          done
   actor-products:
     runs-on: ubuntu-latest
     timeout-minutes: 10
