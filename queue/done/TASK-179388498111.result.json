@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\"index.html\": \"ef2bb180fd2a526ffb17feeb6992f6852ecf4f57897ab89e94045ff6fe613531\", \"llms.txt\": \"d807bd819566b7aa9f98011340c4d0c8d7d05bb111fbce48b4a71c6e2676ffd9\", \"readiness.html\": \"56a9786e56d1498f0eb0161f8f302f72a2d19d987f53f4243f4e8373eced5458\", \"9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt\": \"a7e7fb82a8fec610edd8ec3dbb8c3300127c2b631cadc3e7593e040e35b996e3\"}\n\n",
+  "artifacts": [
+    "products/sites/welfare-tender-brief/index.html",
+    "products/sites/welfare-tender-brief/llms.txt",
+    "products/services/welfare-tender/intake-correction/manifest.json",
+    "products/receipts/TASK-179388498111.json"
+  ],
+  "request": {
+    "id": "TASK-179388498111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T13:23:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json\nS='products/sites/welfare-tender-brief/'\nD='products/services/welfare-tender/intake-correction/'\nimport os;os.makedirs(D,exist_ok=True)\nh=lambda b:hashlib.sha256(b).hexdigest()\nR=[\n(\"Email globalland@agentmail.to with your organisation's public website, the lot you are considering and your main question. Use plain text and public links only; do not send attachments or confidential tender material.\",\n \"Email globalland@agentmail.to with your organisation's name, the lot you are considering and your main question, written as nonconfidential plain text in the message body. Attachments are not read and links are not visited: paste any relevant public excerpt as text instead. Do not send confidential tender material.\"),\n(\"Écrivez à globalland@agentmail.to avec le site public de votre organisation, le lot envisagé et votre principale question. Utilisez du texte et des liens publics uniquement, sans pièce jointe ni dossier confidentiel.\",\n \"Écrivez à globalland@agentmail.to en indiquant, en texte brut non confidentiel dans le corps du message, le nom de votre organisation, le lot envisagé et votre principale question. Les pièces jointes ne sont pas lues et les liens ne sont pas consultés : collez plutôt en texte tout extrait public utile. N’envoyez aucun dossier confidentiel.\"),\n(\"built from the full tender pack they supply (requirements matrix\",\n \"built from nonconfidential tender-pack excerpts they paste as plain text (requirements matrix\"),\n(\"synthèse du dossier complet fourni par le prestataire\",\n \"synthèse d’extraits non confidentiels du dossier, collés en texte brut par le prestataire\"),\n]\nL=[\n(\"Plain text and public links; no attachments or confidential material.\",\n \"Nonconfidential plain text in the message body only; attachments are not read and links are not visited. No confidential material.\"),\n]\nADD=\"\"\"\n## Welfare fulfillment guidance (public context)\nEligible request: an existing welfare-advice provider asking about notice 104449-2026. Permissible free reply: facts already published on this site (index.html, readiness.html), cited to the official notice.\nOffline only: never claim to have visited a link or read an attachment; ask the sender to paste nonconfidential text instead.\nDo not assert eligibility, registration requirements, tender-document access or legal advice.\nThe CAD 49 follow-on is an unvalidated price hypothesis; no order or payment route exists. The lead expires after 2026-12-04T17:00Z.\nWhether the private responder reads this file is not verified.\n\"\"\"\ndef apply(p,reps,add=''):\n  t=open(S+p,encoding='utf-8').read();old=t\n  for a,b in reps:\n    assert t.count(a)==1,(p,a[:40],t.count(a));t=t.replace(a,b)\n  t=t+add\n  open(S+p,'w',encoding='utf-8').write(t)\n  return h(old.encode()),h(t.encode())\nm={'mission_id':'WELFARE-INTAKE-SCOPE-CORRECTION','base':'live approved digest bba5a383d288805fba677ad96de0584c55c24fa6dc529e809dccb46a6e81a67d','files':{}}\nfor p,r,a in [('index.html',R,''),('llms.txt',L,ADD)]:\n  o,n=apply(p,r,a);m['files'][p]={'sha256_before':o,'sha256_after':n,'replacements':[{'old':x,'new':y} for x,y in r],'appended':a or None}\nfor p in ['readiness.html','9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt']:\n  m['files'][p]={'unchanged':True,'sha256':h(open(S+p,'rb').read())}\nm['reason']='Live copy invited public links/website; private fulfillment is offline message text only (no URL retrieval, no incoming attachments) per docs/AGENTMAIL.md and inbound-routing/result.json.'\nm['not_claimed']=['private responder loads llms.txt','private behaviour changed','customer delivery','demand','revenue']\njson.dump(m,open(D+'manifest.json','w',encoding='utf-8'),ensure_ascii=False,indent=1)\nprint(json.dumps({k:v.get('sha256_after',v.get('sha256')) for k,v in m['files'].items()}))\n"
+      ],
+      "outputs": [
+        "products/sites/welfare-tender-brief/index.html",
+        "products/sites/welfare-tender-brief/llms.txt",
+        "products/services/welfare-tender/intake-correction/manifest.json"
+      ],
+      "mission_id": "WELFARE-INTAKE-SCOPE-CORRECTION"
+    },
+    "description": "Broker action during THINK-1793884981",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179388498111",
+  "input_sha256": "65ca1c00e0fd70787bfba7ffab8fb8b2aca40e15fb83efac9697743d891b2bb6"
+}

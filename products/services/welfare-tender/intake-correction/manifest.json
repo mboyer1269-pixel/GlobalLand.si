@@ -1,0 +1,56 @@
+{
+ "mission_id": "WELFARE-INTAKE-SCOPE-CORRECTION",
+ "base": "live approved digest bba5a383d288805fba677ad96de0584c55c24fa6dc529e809dccb46a6e81a67d",
+ "files": {
+  "index.html": {
+   "sha256_before": "0418670c76cacada9958942976b8046d72c9991e309d7d7b8d19094db6817852",
+   "sha256_after": "ef2bb180fd2a526ffb17feeb6992f6852ecf4f57897ab89e94045ff6fe613531",
+   "replacements": [
+    {
+     "old": "Email globalland@agentmail.to with your organisation's public website, the lot you are considering and your main question. Use plain text and public links only; do not send attachments or confidential tender material.",
+     "new": "Email globalland@agentmail.to with your organisation's name, the lot you are considering and your main question, written as nonconfidential plain text in the message body. Attachments are not read and links are not visited: paste any relevant public excerpt as text instead. Do not send confidential tender material."
+    },
+    {
+     "old": "Écrivez à globalland@agentmail.to avec le site public de votre organisation, le lot envisagé et votre principale question. Utilisez du texte et des liens publics uniquement, sans pièce jointe ni dossier confidentiel.",
+     "new": "Écrivez à globalland@agentmail.to en indiquant, en texte brut non confidentiel dans le corps du message, le nom de votre organisation, le lot envisagé et votre principale question. Les pièces jointes ne sont pas lues et les liens ne sont pas consultés : collez plutôt en texte tout extrait public utile. N’envoyez aucun dossier confidentiel."
+    },
+    {
+     "old": "built from the full tender pack they supply (requirements matrix",
+     "new": "built from nonconfidential tender-pack excerpts they paste as plain text (requirements matrix"
+    },
+    {
+     "old": "synthèse du dossier complet fourni par le prestataire",
+     "new": "synthèse d’extraits non confidentiels du dossier, collés en texte brut par le prestataire"
+    }
+   ],
+   "appended": null
+  },
+  "llms.txt": {
+   "sha256_before": "67d81d453281c3b661c406e8ea885b30e5ee88ee4e43c76533f7e06a90a5a41e",
+   "sha256_after": "d807bd819566b7aa9f98011340c4d0c8d7d05bb111fbce48b4a71c6e2676ffd9",
+   "replacements": [
+    {
+     "old": "Plain text and public links; no attachments or confidential material.",
+     "new": "Nonconfidential plain text in the message body only; attachments are not read and links are not visited. No confidential material."
+    }
+   ],
+   "appended": "\n## Welfare fulfillment guidance (public context)\nEligible request: an existing welfare-advice provider asking about notice 104449-2026. Permissible free reply: facts already published on this site (index.html, readiness.html), cited to the official notice.\nOffline only: never claim to have visited a link or read an attachment; ask the sender to paste nonconfidential text instead.\nDo not assert eligibility, registration requirements, tender-document access or legal advice.\nThe CAD 49 follow-on is an unvalidated price hypothesis; no order or payment route exists. The lead expires after 2026-12-04T17:00Z.\nWhether the private responder reads this file is not verified.\n"
+  },
+  "readiness.html": {
+   "unchanged": true,
+   "sha256": "56a9786e56d1498f0eb0161f8f302f72a2d19d987f53f4243f4e8373eced5458"
+  },
+  "9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt": {
+   "unchanged": true,
+   "sha256": "a7e7fb82a8fec610edd8ec3dbb8c3300127c2b631cadc3e7593e040e35b996e3"
+  }
+ },
+ "reason": "Live copy invited public links/website; private fulfillment is offline message text only (no URL retrieval, no incoming attachments) per docs/AGENTMAIL.md and inbound-routing/result.json.",
+ "not_claimed": [
+  "private responder loads llms.txt",
+  "private behaviour changed",
+  "customer delivery",
+  "demand",
+  "revenue"
+ ]
+}
