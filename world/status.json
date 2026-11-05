@@ -516,9 +516,9 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "RESEARCHER",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "o0bU2gNeLbn-z92yBQsRLx6PFJh1UQ12",
+      "lease_expires_at": 1793880040.3281977,
       "evidence": []
     }
   ],
@@ -825,12 +825,6 @@
     }
   ],
   "events": [
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793820669.6742074,
-      "mission_id": "DOMAIN-RDAP-BUILD",
-      "agent_id": "BUILDER"
-    },
     {
       "type": "LESSON_RECORDED",
       "timestamp": 1793820959.3945627,
@@ -1424,6 +1418,12 @@
       "type": "MISSION_CREATED",
       "timestamp": 1793874755.0812402,
       "mission_id": "SHOPIFY-VARIANT-DEMAND"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793876440.328226,
+      "mission_id": "SHOPIFY-VARIANT-DEMAND",
+      "agent_id": "RESEARCHER"
     }
   ],
   "policy": {
