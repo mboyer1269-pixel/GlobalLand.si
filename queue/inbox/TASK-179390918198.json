@@ -1,0 +1,21 @@
+{
+  "id": "TASK-179390918198",
+  "type": "TOOL",
+  "submitted_by": "AUDITOR",
+  "created_at": "2026-11-05T20:06:21Z",
+  "action": "EXEC",
+  "args": {
+    "outputs": [],
+    "inputs": [
+      "VISION.md"
+    ],
+    "argv": [
+      "node",
+      "-e",
+      "const fs=require('fs'),crypto=require('crypto');const b=fs.readFileSync('VISION.md');const sha=crypto.createHash('sha256').update(b).digest('hex');if(sha!=='0a49528bf80a011e98d1774c63197ee5a0ed6e9b5feac553d43241af564ff0c0'||fs.existsSync('README.md'))process.exit(1);console.log(JSON.stringify({check:'PR29-30 operator verification',synthetic:true,input:'VISION.md',sha256:sha,bytes:b.length,unselected_readme_absent:true}));"
+    ]
+  },
+  "description": "Operator-authorized PR29/30 selected-input verification. Synthetic infrastructure test, not agent-selected commercial work or revenue.",
+  "estimated_cost_cad": 0,
+  "approved_by": null
+}
