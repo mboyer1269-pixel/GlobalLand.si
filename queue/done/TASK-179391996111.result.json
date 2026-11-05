@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"SHOPIFY-SEARCH-EXPOSURE\",\n \"observed_at\": \"2026-11-05\",\n \"verdict\": \"STOP_ALREADY_SUBMITTED\",\n \"url\": \"https://globalland-shopify-catalogue-example.global-land.workers.dev/\",\n \"prior_submission\": {\n  \"task\": \"TASK-179391420415\",\n  \"http\": 202,\n  \"meaning\": \"received only; not indexing, traffic or demand\"\n },\n \"key_file_check\": {\n  \"task\": \"TASK-179391420413\",\n  \"http\": 200,\n  \"body_exact\": true\n },\n \"deploy\": \"TASK-179391420411 ONLINE_VERIFIED\",\n \"approved_digest\": \"4cab61d1bba110d41bc3515a7ea000c6224da834c9999cc7baf45b9455c7ad1d\",\n \"source\": \"products/services/shopify-large-catalogue/release/launch-baseline.json\",\n \"actions_this_mission\": \"none: no new ownership file, no dry_run, no deployment, no resubmission (duplicate avoided)\",\n \"limits\": \"HTTP 202 means received only; it establishes neither indexing, visitors, downloads, requests nor revenue. Receipt contents are private; evidence is the saved baseline and ACQUISITION message.\",\n \"deadlines\": {\n  \"shopify_observe_until\": \"2026-11-19T21:30:49Z\",\n  \"csv\": \"2026-11-19T01:30:37Z\",\n  \"welfare\": \"2026-11-20\",\n  \"welfare_retire_after\": \"2026-12-04T17:00:00Z\"\n },\n \"feedback\": {\n  \"classified_requests\": 0,\n  \"unclassified_sources\": 3,\n  \"note\": \"unknown, not zero demand\"\n }\n}\n\n",
+  "artifacts": [
+    "products/services/shopify-catalogue/search-exposure/result.json",
+    "products/receipts/TASK-179391996111.json"
+  ],
+  "request": {
+    "id": "TASK-179391996111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T23:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/shopify-catalogue/search-exposure/result.json');p.parent.mkdir(parents=True,exist_ok=True)\nb=json.load(open('products/services/shopify-large-catalogue/release/launch-baseline.json'))\nr={'mission':'SHOPIFY-SEARCH-EXPOSURE','observed_at':'2026-11-05','verdict':'STOP_ALREADY_SUBMITTED','url':b['url'],'prior_submission':b['indexnow'],'key_file_check':b['fetch_checks']['key_file'],'deploy':b['deploy_task'],'approved_digest':b['approved_digest'],'source':'products/services/shopify-large-catalogue/release/launch-baseline.json','actions_this_mission':'none: no new ownership file, no dry_run, no deployment, no resubmission (duplicate avoided)','limits':'HTTP 202 means received only; it establishes neither indexing, visitors, downloads, requests nor revenue. Receipt contents are private; evidence is the saved baseline and ACQUISITION message.','deadlines':{'shopify_observe_until':b['observe_until_utc'],'csv':'2026-11-19T01:30:37Z','welfare':'2026-11-20','welfare_retire_after':'2026-12-04T17:00:00Z'},'feedback':{'classified_requests':0,'unclassified_sources':3,'note':'unknown, not zero demand'}}\np.write_text(json.dumps(r,indent=1));print(p.read_text())"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/release/launch-baseline.json"
+      ],
+      "outputs": [
+        "products/services/shopify-catalogue/search-exposure/result.json"
+      ],
+      "mission_id": "SHOPIFY-SEARCH-EXPOSURE"
+    },
+    "description": "Broker action during THINK-1793919961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391996111",
+  "input_sha256": "a2f0b4b90749bc92519ae49a02ad3a5cc906aec99348e6cf4064da9031d1f04e"
+}
