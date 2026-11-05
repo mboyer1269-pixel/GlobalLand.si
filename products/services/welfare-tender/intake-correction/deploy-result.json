@@ -1,0 +1,41 @@
+{
+ "mission": "WELFARE-INTAKE-CORRECTION-DEPLOY",
+ "observed_utc": "2026-11-05",
+ "approved_digest": "e38167dab09d9735d94c6d98d64a8513df00043a9da2f12fe2d6b50a027288d1",
+ "approval": "AUDITOR codex review seq 10 (THINK-1793885401)",
+ "dry_run_task": "TASK-179388720211 digest unchanged",
+ "deploy_task": "TASK-179388720212 ONLINE_VERIFIED",
+ "url": "https://globalland-welfare-tender-brief.global-land.workers.dev/",
+ "fetch_tasks": {
+  "index": "TASK-179388720213 HTTP 200",
+  "llms": "TASK-179388720214 HTTP 200"
+ },
+ "hash_checks": {
+  "index": {
+   "source": "ef2bb180fd2a526ffb17feeb6992f6852ecf4f57897ab89e94045ff6fe613531",
+   "live": "ef2bb180fd2a526ffb17feeb6992f6852ecf4f57897ab89e94045ff6fe613531",
+   "match": true
+  },
+  "llms": {
+   "source": "d807bd819566b7aa9f98011340c4d0c8d7d05bb111fbce48b4a71c6e2676ffd9",
+   "live": "d807bd819566b7aa9f98011340c4d0c8d7d05bb111fbce48b4a71c6e2676ffd9",
+   "match": true
+  }
+ },
+ "all_match": true,
+ "live_mentions_attachments_not_read": true,
+ "not_established": [
+  "traffic",
+  "provider requests",
+  "delivery",
+  "orders",
+  "receipts",
+  "revenue"
+ ],
+ "commercial_feedback_at_deploy": "0 classified events, 3 unclassified sources (unknown, not zero demand)",
+ "deadlines": {
+  "csv_observation_end": "2026-11-19T01:30:37Z",
+  "welfare_demand_end": "2026-11-20",
+  "welfare_retirement_after": "2026-12-04T17:00:00Z"
+ }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"WELFARE-INTAKE-CORRECTION-DEPLOY\",\n \"observed_utc\": \"2026-11-05\",\n \"approved_digest\": \"e38167dab09d9735d94c6d98d64a8513df00043a9da2f12fe2d6b50a027288d1\",\n \"approval\": \"AUDITOR codex review seq 10 (THINK-1793885401)\",\n \"dry_run_task\": \"TASK-179388720211 digest unchanged\",\n \"deploy_task\": \"TASK-179388720212 ONLINE_VERIFIED\",\n \"url\": \"https://globalland-welfare-tender-brief.global-land.workers.dev/\",\n \"fetch_tasks\": {\n  \"index\": \"TASK-179388720213 HTTP 200\",\n  \"llms\": \"TASK-179388720214 HTTP 200\"\n },\n \"hash_checks\": {\n  \"index\": {\n   \"source\": \"ef2bb180fd2a526ffb17feeb6992f6852ecf4f57897ab89e94045ff6fe613531\",\n   \"live\": \"ef2bb180fd2a526ffb17feeb6992f6852ecf4f57897ab89e94045ff6fe613531\",\n   \"match\": true\n  },\n  \"llms\": {\n   \"source\": \"d807bd819566b7aa9f98011340c4d0c8d7d05bb111fbce48b4a71c6e2676ffd9\",\n   \"live\": \"d807bd819566b7aa9f98011340c4d0c8d7d05bb111fbce48b4a71c6e2676ffd9\",\n   \"match\": true\n  }\n },\n \"all_match\": true,\n \"live_mentions_attachments_not_read\": true,\n \"not_established\": [\n  \"traffic\",\n  \"provider requests\",\n  \"delivery\",\n  \"orders\",\n  \"receipts\",\n  \"revenue\"\n ],\n \"commercial_feedback_at_deploy\": \"0 classified events, 3 unclassified sources (unknown, not zero demand)\",\n \"deadlines\": {\n  \"csv_observation_end\": \"2026-11-19T01:30:37Z\",\n  \"welfare_demand_end\": \"2026-11-20\",\n  \"welfare_retirement_after\": \"2026-12-04T17:00:00Z\"\n }\n}\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/intake-correction/deploy-result.json",
+    "products/receipts/TASK-179388720215.json"
+  ],
+  "request": {
+    "id": "TASK-179388720215",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T14:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json\nb='/workspace/products/'\nh=lambda p:hashlib.sha256(open(b+p,'rb').read()).hexdigest()\nd='services/welfare-tender/intake-correction/'\nchk={'index':{'source':h('sites/welfare-tender-brief/index.html'),'live':h(d+'live-index.html')},'llms':{'source':h('sites/welfare-tender-brief/llms.txt'),'live':h(d+'live-llms.txt')}}\nfor v in chk.values(): v['match']=v['source']==v['live']\nlive=open(b+d+'live-index.html',encoding='utf-8').read()\nr={'mission':'WELFARE-INTAKE-CORRECTION-DEPLOY','observed_utc':'2026-11-05','approved_digest':'e38167dab09d9735d94c6d98d64a8513df00043a9da2f12fe2d6b50a027288d1','approval':'AUDITOR codex review seq 10 (THINK-1793885401)','dry_run_task':'TASK-179388720211 digest unchanged','deploy_task':'TASK-179388720212 ONLINE_VERIFIED','url':'https://globalland-welfare-tender-brief.global-land.workers.dev/','fetch_tasks':{'index':'TASK-179388720213 HTTP 200','llms':'TASK-179388720214 HTTP 200'},'hash_checks':chk,'all_match':all(v['match'] for v in chk.values()),'live_mentions_attachments_not_read':('attach' in live.lower()),'not_established':['traffic','provider requests','delivery','orders','receipts','revenue'],'commercial_feedback_at_deploy':'0 classified events, 3 unclassified sources (unknown, not zero demand)','deadlines':{'csv_observation_end':'2026-11-19T01:30:37Z','welfare_demand_end':'2026-11-20','welfare_retirement_after':'2026-12-04T17:00:00Z'}}\nopen(b+d+'deploy-result.json','w').write(json.dumps(r,indent=1))\nprint(json.dumps(r,indent=1))"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/intake-correction/deploy-result.json"
+      ],
+      "mission_id": "WELFARE-INTAKE-CORRECTION-DEPLOY"
+    },
+    "description": "Broker action during THINK-1793887202",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179388720215",
+  "input_sha256": "a22cd6a3fb31491db86d537dad38f225452b779b5da6f833e23a4392d4a9f9cd"
+}
