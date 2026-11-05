@@ -73,6 +73,11 @@ class ContinuityPureTests(unittest.TestCase):
         self.assertEqual(c.observation_message(data), {'extracted_text': 'Thanks.'})
         data['incoming']['extracted_text'] = ' '
         self.assertEqual(c.observation_message(data), {})
+        raw = dict(category='NONCOMMERCIAL', audience='ORDINARY', experiment_id=None, evidence=None)
+        for current in ({'text': 'quoted'}, {'text': 'quoted', 'extracted_text': ' '}):
+            linked = dict(incoming=current, continuity=data['continuity'])
+            self.assertEqual(c.normalize_observation(raw, linked, {'ids': []}, 'INBOUND_UNVERIFIED', 'claude')['category'], 'UNKNOWN')
+        self.assertEqual(c.normalize_observation(raw, dict(incoming={}), {'ids': []}, 'INBOUND_UNVERIFIED', 'claude')['category'], 'NONCOMMERCIAL')
 
     def test_self_reference_duplicate_refs_and_invalid_versions_are_rejected(self):
         c = self.module(); key = 'a' * 64
@@ -83,6 +88,16 @@ class ContinuityPureTests(unittest.TestCase):
                        dict(history=[dict(case_key='b' * 64, ready_digest='c' * 64, outbound_id='out')] * 2)]:
             with self.subTest(change=change), self.assertRaises(ValueError):
                 c.validate_descriptor(dict(desc, **change), key)
+
+    def test_administrative_labels_do_not_change_frozen_identity_route_auth_parent(self):
+        c = self.module()
+        original = message(labels=['received', 'unread', 'custom-label'])
+        for labels in (['received', 'custom-label'], ['custom-label', 'unread', 'received']):
+            self.assertEqual(c.guard(original), c.guard(dict(original, labels=labels)))
+        for field, value in [('from', 'Other@example.test'), ('reply_to', ['Other@example.test']),
+                             ('to', ['Other@example.test']), ('thread_id', 'different'),
+                             ('in_reply_to', 'different'), ('authentication_results', {})]:
+            self.assertNotEqual(c.guard(original), c.guard(dict(original, **{field: value})))
 
 
 class ContinuityIntegrationTests(unittest.TestCase):
@@ -344,6 +359,74 @@ class ContinuityIntegrationTests(unittest.TestCase):
         client.reply('A', 'A private reply', 'gl-fixture', route=route)
         self.assertEqual({k: calls[0][k] for k in route}, route)
         with self.assertRaises(ValueError): client.reply('A', 'reply', 'gl-fixture', route=dict(route, reply_all=0))
+
+    def test_administrative_label_changes_replay_exact_ready_without_model_or_second_post(self):
+        original_root = self.root
+        for n, labels in enumerate((['received'], ['custom', 'unread', 'received'])):
+            with self.subTest(labels=labels):
+                self.root = original_root / str(n); self.root.mkdir(); self.sent = []
+                self.messages = [message(labels=['received', 'unread', 'custom'])]
+                box = self.box(); save = box._save
+                def fail_started(path, data):
+                    if data.get('state') == 'STARTED': raise OSError('transient disk failure')
+                    save(path, data)
+                with patch.object(box, '_save', fail_started), patch('controller.Controller.plan', return_value=self.reply('FROZEN-READY')):
+                    self.assertEqual(box.cycle(self.tool_free())['failed'], 1)
+                frozen = json.loads(self.case('A').read_text())
+                self.messages[0]['labels'] = labels
+                with patch('mail.time.time', return_value=10**12), \
+                     patch('controller.Controller.plan', side_effect=AssertionError('READY must not replan')), \
+                     patch('private_work.PrivateResponder._execute', side_effect=AssertionError('READY must not execute')):
+                    self.assertEqual(self.box().cycle(self.tool_free())['accepted'], 1)
+                self.assertEqual(len(self.sent), 1)
+                self.assertEqual(self.sent[0][1], frozen['decision']['text'])
+                self.assertEqual(self.sent[0][2], frozen['continuity']['route'])
+                self.assertEqual(json.loads(self.case('A').read_text()), frozen)
+        self.root = original_root
+
+    def test_two_get_label_change_is_allowed_but_spam_and_held_still_block_sending(self):
+        original_root = self.root
+        cases = [('administrative', dict(labels=['received']), 1),
+                 ('spam', dict(labels=['received', 'spam']), 0),
+                 ('held', dict(agent_armor={'status': 'pending'}), 0)]
+        for name, change, accepted in cases:
+            with self.subTest(name=name):
+                self.root = original_root / name; self.root.mkdir(); self.sent = []
+                self.messages = [message(labels=['received', 'unread'])]
+                initial = copy.deepcopy(self.messages[0]); checked = dict(initial, **change)
+                with patch.object(self.client, 'get_message', side_effect=[initial, checked]), \
+                     patch('controller.Controller.plan', return_value=self.reply('Useful reply')):
+                    self.assertEqual(self.box().cycle(self.tool_free())['accepted'], accepted)
+                self.assertEqual(len(self.sent), accepted)
+                if not accepted:
+                    self.messages[0].update(change)
+                    with patch('mail.time.time', return_value=10**12), \
+                         patch('controller.Controller.plan', side_effect=AssertionError('security gate precedes work')):
+                        self.box().cycle(self.tool_free())
+                    self.assertEqual(self.sent, [])
+        self.root = original_root
+
+    def test_linked_noncommercial_without_current_extracted_text_is_unknown_in_both_responders(self):
+        from mail_agent import MailResponder
+        from private_work import PrivateResponder
+        original_root = self.root
+        self.config['agentmail']['commercial'] = {'enabled': True}
+        for responder_class in (MailResponder, PrivateResponder):
+            for extracted in (None, ' \n '):
+                with self.subTest(responder=responder_class.__name__, extracted=extracted):
+                    self.root = original_root / (responder_class.__name__ + ('missing' if extracted is None else 'blank'))
+                    self.root.mkdir(); self.sent = []; self.seed_a()
+                    incoming = message('B', in_reply_to='out-A', text='quoted prior request', extracted_text=extracted)
+                    if extracted is None: incoming.pop('extracted_text')
+                    self.messages.append(incoming)
+                    summary = dict(action='reply', text='Still a useful private answer.', observation=dict(
+                        category='NONCOMMERCIAL', audience='ORDINARY', experiment_id=None, evidence=None))
+                    if responder_class is PrivateResponder: summary['artifacts'] = []
+                    with patch('controller.Controller.plan', return_value=dict(actions=[], summary=json.dumps(summary))):
+                        self.assertEqual(self.box().cycle(responder_class(self.root, self.config))['accepted'], 1)
+                    self.assertEqual(json.loads(self.case('B').read_text())['observation']['category'], 'UNKNOWN')
+                    self.assertIn('Still a useful private answer.', self.sent[-1][1])
+        self.root = original_root
 
 
 if __name__ == '__main__': unittest.main()

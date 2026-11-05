@@ -382,7 +382,7 @@ class PrivateResponder:
                 data.update(state='READY', decision=decision, provider=provider)
                 if commercial.settings(self.config)['state'] == 'ENABLED':
                     raw = json.loads(value['summary']).get('observation')
-                    data['observation'] = commercial.normalize_observation(raw, continuity.observation_message(data),
+                    data['observation'] = continuity.normalize_observation(raw, data,
                         commercial.allowed_experiments(self.root),
                         commercial.host_origin(data['incoming'], self.config), provider)
                 continuity.seal(data)

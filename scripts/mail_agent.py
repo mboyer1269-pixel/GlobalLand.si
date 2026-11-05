@@ -119,9 +119,8 @@ class MailResponder:
                     reply['text'] = ''
                 self.last_provider = provider
                 if commercial.settings(self.config)['state'] == 'ENABLED':
-                    observation_input = continuity.observation_message(dict(incoming=private,
-                        continuity=case_data.get('continuity', {}) if case_data else {}))
-                    self.last_observation = commercial.normalize_observation(observation, observation_input,
+                    observation_input = dict(incoming=private, continuity=case_data.get('continuity', {}) if case_data else {})
+                    self.last_observation = continuity.normalize_observation(observation, observation_input,
                         commercial.allowed_experiments(self.root), commercial.host_origin(incoming, self.config), provider)
                 break
             except (ValueError, KeyError, TypeError, OSError, RuntimeError):

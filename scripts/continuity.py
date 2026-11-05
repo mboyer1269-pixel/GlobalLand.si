@@ -80,8 +80,11 @@ def authorize_message(message, inbox_config):
 
 
 def guard(message):
+    # Administrative labels (read/unread, custom labels and their order) are not
+    # identity evidence. Mailbox checks current security labels/Armor separately
+    # before work and again before sending; routing/auth/parent stay immutable.
     keys = ('inbox_id', 'message_id', 'thread_id', 'from', 'to', 'cc', 'bcc', 'reply_to',
-            'authentication_results', 'in_reply_to', 'labels', 'agent_armor')
+            'authentication_results', 'in_reply_to', 'agent_armor')
     return hashlib.sha256(canonical({k: message[k] for k in keys if k in message})).hexdigest()
 
 
@@ -330,3 +333,12 @@ def observation_message(data):
         text = incoming.get('extracted_text')
         return {'extracted_text': text} if isinstance(text, str) and text.strip() else {}
     return incoming
+
+
+def normalize_observation(raw, data, allowed_experiments, host_origin, provider):
+    import commercial
+    source = observation_message(data)
+    if data.get('continuity', {}).get('history') and not source:
+        # Even evidence-free NONCOMMERCIAL is uncertain without current text.
+        raw = None
+    return commercial.normalize_observation(raw, source, allowed_experiments, host_origin, provider)
