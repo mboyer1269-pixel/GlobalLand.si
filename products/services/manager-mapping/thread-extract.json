@@ -1,0 +1,97 @@
+{
+ "products/research/manager-invoices-44200-full.json": {
+  "title": "Import Multiple Sales Invoices Form .csv file",
+  "posts_count": 7,
+  "stream_len": 8,
+  "posts": [
+   {
+    "n": 1,
+    "date": "2022-11-26T04:26:20.229Z",
+    "staff": false,
+    "text": "Hi, is there any way to import sales invoices from .csv file?",
+    "links": []
+   },
+   {
+    "n": 2,
+    "date": "2022-11-26T04:40:51.004Z",
+    "staff": false,
+    "text": "Probably not as easily as you will have hoped but if you wanted to persue that approach read this section of the guides Batch Operations: Use Batch Create and Batch Update functions | Use the Batch Delete function | Use the Batch View function You will need to create some representative invoices in Manager manually Use batch update to understand the details of the format you will need too produce Use an external program to format your data to that required to import it into Manager (the batch create format is identical to batch update except it does not have the final “Key” field). Use batch create to import your invoices into Manager",
+    "links": [
+     "https://www.manager.io/guides/9572",
+     "https://www.manager.io/guides/16464",
+     "https://www.manager.io/guides/32659"
+    ]
+   },
+   {
+    "n": 3,
+    "date": "2022-12-03T18:16:20.093Z",
+    "staff": false,
+    "text": "also keep in mind that if yo have multiple lines in the invoice they are to be included in one single cell @patch patch has shown you how to do them",
+    "links": []
+   },
+   {
+    "n": 4,
+    "date": "2022-12-03T22:32:47.043Z",
+    "staff": true,
+    "text": "Genti_Ge: also keep in mind that if yo have multiple lines in the invoice they are to be included in one single cell I’m going to be changing that soon. Even though this will increase number of columns substantially, it is important there is 1:1 match between spreadsheet cells and text fields in Manager.",
+    "links": []
+   },
+   {
+    "n": 5,
+    "date": "2022-12-06T21:08:13.429Z",
+    "staff": false,
+    "text": "This will be a blessing, it will facilitate migration to Manager, POS users will be able to choose between making a single invoice for the day or exporting from POS and import all in Manager etc but i dont understand why should the number of columns increase ? maybe you meant rows ?",
+    "links": []
+   },
+   {
+    "n": 6,
+    "date": "2022-12-06T23:07:08.070Z",
+    "staff": true,
+    "text": "Genti_Ge: but i dont understand why should the number of columns increase ? maybe you meant rows ? I think additional rows would be more ergonomic for users.",
+    "links": []
+   },
+   {
+    "n": 7,
+    "date": "2022-12-06T23:29:59.730Z",
+    "staff": false,
+    "text": "with multiple lines in a record the options are Multiple sets of columns for each line. This solution is used by the Australian tax office for single touch payroll “Other expenses”. Separate end of line and end of record markers. This is what Manager has used in the past. However if < cr > is used for an end of line marker, then a different marker well be required for end of record together with a protocol and error handling mechanism. In my opinion, despite option 1 looking a bit messy, it is actually cleaner as it avoids an inter-record protocol and associated error handling. Maybe put “Key” field at start and repeating groups of invoice line fields at the end of each cvs line. That would mean blank lined could not be used at the bottom of an invoice (without a space in description or similar).",
+    "links": []
+   },
+   {
+    "n": 8,
+    "date": "2026-07-05T20:09:19.095Z",
+    "staff": true,
+    "text": "Uncategorized topics older than 3 years with no recent activity",
+    "links": []
+   }
+  ]
+ },
+ "products/research/manager-batch-65600-full.json": {
+  "title": "Batch Create , Update is Complicated In Manager",
+  "posts_count": 2,
+  "stream_len": 3,
+  "posts": [
+   {
+    "n": 1,
+    "date": "2025-10-09T09:06:35.422Z",
+    "staff": false,
+    "text": "Hello Dears We Have Excel file With 138 Items it Has A lot Of details we want to Create Invoice from this File But Batch Create Is very Complicated You have To Duplicate Item Header and Its Values 138 Times! Please Update importing Excel , CSV files Way because it is Very Important. Thanks and Best Wishes for Manager Developers and @lubos",
+    "links": []
+   },
+   {
+    "n": 2,
+    "date": "2025-10-10T04:49:42.314Z",
+    "staff": true,
+    "text": "Yeah, batch create/update is for creating or updating many records at once. It’s not made for to create/update just one record. However, I’m pretty sure this needs to be solved with an extension where extension can take your PDF, CSV or even scanned image and try to extract as much information as possible into Manager form such as sales invoice. This is something I would like to implement soon. It will be definitely an extension though.",
+    "links": []
+   },
+   {
+    "n": 3,
+    "date": "2026-10-10T04:50:33.561Z",
+    "staff": true,
+    "text": "This topic was automatically closed 365 days after the last reply. New replies are no longer allowed.",
+    "links": []
+   }
+  ]
+ }
+}
