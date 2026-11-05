@@ -1,0 +1,43 @@
+{
+  "status": "DONE",
+  "output": "URL handle,Title,Description,Vendor,Type,Tags,Status,SKU,Option1 name,Option1 value,Option2 name,Option2 value,Price,Product image URL,Image position\ntee-shirt-ete-bio,Tee-shirt Été Bio,Synthetic organic cotton tee.,Synthetic Co,T-shirt,\"organic, summer\",draft,SYN-TEE-BLK-S,Color,Black,Size,S,24.00,https://example.com/img/tee.jpg,1\ntee-shirt-ete-bio,,,,,,,SYN-TEE-BLK-M,,Black,,M,24.00,,\ntee-shirt-ete-bio,,,,,,,SYN-TEE-WHT-S,,White,,S,24.00,,\ncanvas-tote-bag,Canvas Tote Bag,Synthetic canvas tote.,Synthetic Co,Bag,canvas,draft,SYN-TOTE-NAT,Color,Natural,Size,One size,18.50,https://example.com/img/tote.jpg,1\ncanvas-tote-bag,,,,,,,SYN-TOTE-NVY,,Navy,,One size,18.50,,\n[]\nURL handle,Title,Description,Vendor,Type,Tags,Status,SKU,Option1 name,Option1 value,Option2 name,Option2 value,Price,Product image URL,Image position\nwool-cap,Wool Cap,,,,,draft,SYN-CAP-2,Color,Grey,Size,M,12.00,,\n[\"line 2: unparseable price 'twelve'\", \"line 5: empty product name\", \"wool-cap: duplicate option combination ('Grey', 'M')\"]\n",
+  "artifacts": [
+    "products/services/catalogue-transformation/worked_example.py",
+    "products/services/catalogue-transformation/synthetic-input.csv",
+    "products/services/catalogue-transformation/synthetic-bad-input.csv",
+    "products/services/catalogue-transformation/output.csv",
+    "products/services/catalogue-transformation/output-errors.json",
+    "products/services/catalogue-transformation/bad-output.csv",
+    "products/services/catalogue-transformation/bad-errors.json",
+    "products/receipts/TASK-179387460215.json"
+  ],
+  "request": {
+    "id": "TASK-179387460215",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T10:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "mkdir -p /workspace/products/services/catalogue-transformation && cd /workspace/products/services/catalogue-transformation && cat > worked_example.py <<'EOF'\n# Worked-example transformation (not a product): flat supplier variant list -> Shopify product CSV row layout.\n# Source rules: https://help.shopify.com/en/manual/products/import-export/using-csv (fetched 2026-11-05, sha256 b54405fa...).\nimport csv, io, json, re, sys, unicodedata\nOUT_COLS = ['URL handle','Title','Description','Vendor','Type','Tags','Status','SKU','Option1 name','Option1 value','Option2 name','Option2 value','Price','Product image URL','Image position']\nPRODUCT_ONLY = ['Title','Description','Vendor','Tags']  # doc: later variant rows skip these\ndef handle(title):\n    s = unicodedata.normalize('NFKD', title).encode('ascii','ignore').decode().lower()\n    return re.sub(r'-+','-', re.sub(r'[^a-z0-9]+','-', s)).strip('-')\ndef price(raw):\n    s = raw.strip().replace('$','').replace('CAD','').replace('USD','').replace('€','').strip()\n    if re.fullmatch(r'\\d+,\\d{1,2}', s): s = s.replace(',','.')\n    if not re.fullmatch(r'\\d+(\\.\\d{1,2})?', s): raise ValueError('unparseable price %r' % raw)\n    return '%.2f' % float(s)\ndef transform(text):\n    rows = list(csv.DictReader(io.StringIO(text)))\n    errors, groups, order = [], {}, []\n    for n, r in enumerate(rows, 2):\n        t = (r.get('product') or '').strip()\n        if not t: errors.append('line %d: empty product name' % n); continue\n        h = handle(t)\n        if h not in groups: groups[h] = []; order.append(h)\n        try: p = price(r.get('price',''))\n        except ValueError as e: errors.append('line %d: %s' % (n, e)); continue\n        groups[h].append((t, r, p))\n    out = []\n    for h in order:\n        seen = set(); first = True\n        for t, r, p in groups[h]:\n            combo = (r.get('colour','').strip(), r.get('size','').strip())\n            if combo in seen: errors.append('%s: duplicate option combination %r' % (h, combo)); continue\n            seen.add(combo)\n            row = dict.fromkeys(OUT_COLS, '')\n            row.update({'URL handle': h, 'SKU': r.get('sku','').strip(), 'Option1 value': combo[0], 'Option2 value': combo[1], 'Price': p})\n            if first:\n                row.update({'Title': t, 'Description': r.get('description','').strip(), 'Vendor': r.get('vendor','').strip(), 'Type': r.get('type','').strip(), 'Tags': r.get('tags','').strip(), 'Status': 'draft', 'Option1 name': 'Color', 'Option2 name': 'Size'})\n                if r.get('image','').strip(): row.update({'Product image URL': r['image'].strip(), 'Image position': '1'})\n            out.append(row); first = False\n    buf = io.StringIO(); w = csv.DictWriter(buf, OUT_COLS, lineterminator='\\n'); w.writeheader(); w.writerows(out)\n    return buf.getvalue(), errors\nif __name__ == '__main__':\n    o, e = transform(open(sys.argv[1], encoding='utf-8').read())\n    sys.stdout.write(o); sys.stderr.write(json.dumps(e))\nEOF\ncat > synthetic-input.csv <<'EOF'\nproduct,colour,size,price,sku,vendor,type,tags,description,image\nTee-shirt Été Bio,Black,S,$24.00,SYN-TEE-BLK-S,Synthetic Co,T-shirt,\"organic, summer\",Synthetic organic cotton tee.,https://example.com/img/tee.jpg\nTee-shirt Été Bio,Black,M,$24.00,SYN-TEE-BLK-M,Synthetic Co,T-shirt,\"organic, summer\",Synthetic organic cotton tee.,\nTee-shirt Été Bio,White,S,\"24,00\",SYN-TEE-WHT-S,Synthetic Co,T-shirt,\"organic, summer\",Synthetic organic cotton tee.,\nCanvas Tote Bag,Natural,One size,18.5,SYN-TOTE-NAT,Synthetic Co,Bag,canvas,Synthetic canvas tote.,https://example.com/img/tote.jpg\nCanvas Tote Bag,Navy,One size,CAD 18.50,SYN-TOTE-NVY,Synthetic Co,Bag,canvas,Synthetic canvas tote.,\nEOF\ncat > synthetic-bad-input.csv <<'EOF'\nproduct,colour,size,price,sku\nWool Cap,Grey,M,twelve,SYN-CAP-1\nWool Cap,Grey,M,12.00,SYN-CAP-2\nWool Cap,Grey,M,12.00,SYN-CAP-3\n,Red,L,5.00,SYN-X\nEOF\npython3 -I worked_example.py synthetic-input.csv > output.csv 2> output-errors.json; cat output.csv; cat output-errors.json; echo; python3 -I worked_example.py synthetic-bad-input.csv > bad-output.csv 2> bad-errors.json; cat bad-output.csv; cat bad-errors.json"
+      ],
+      "outputs": [
+        "products/services/catalogue-transformation/worked_example.py",
+        "products/services/catalogue-transformation/synthetic-input.csv",
+        "products/services/catalogue-transformation/synthetic-bad-input.csv",
+        "products/services/catalogue-transformation/output.csv",
+        "products/services/catalogue-transformation/output-errors.json",
+        "products/services/catalogue-transformation/bad-output.csv",
+        "products/services/catalogue-transformation/bad-errors.json"
+      ],
+      "mission_id": "SHOPIFY-CATALOGUE-TRANSFORMATION"
+    },
+    "description": "Broker action during THINK-1793874602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179387460215",
+  "input_sha256": "ce5321203bd41a199d3697ea68f1beb859e74fb9b9c969282aecebb97c8d0cb8"
+}
