@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "8162\nhttp://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/\nhttps://raw.githubusercontent.com/cabinetoffice/ocds_uk_extension/main/extension.json\nhttps://raw.githubusercontent.com/open-contracting-extensions/ocds_amendment_rationale_classifications_extension/master/extension.json\nhttps://raw.githubusercontent.com/open-contracting-extensions/ocds_budget_breakdown_extension/master/extension.json\nhttps://raw.githubusercontent.com/open-contracting-extensions/ocds_contract_completion_extension/master/extension.json\nhttps://raw.githubusercontent.com/open-contracting-extensions/ocds_documentation_extension/master/extension.json\nhttps://raw.githubusercontent.com/open-contracting-extensions/ocds_pagination_extension/master/extension.json\nhttps://raw.githubusercontent.com/open-contracting-extensions/ocds_performance_failures_extension/master/extension.json\nhttps://raw.githubusercontent.com/open-contracting-extensions/ocds_suitability_extension/master/extension.json\nhttps://raw.githubusercontent.com/portaledcahn/ocds_Links_extension/main/extension.json\nhttps://standard.open-contracting.org/profiles/eu/latest/en/extension.json\nhttps://uk.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=110669&TID100115668&B=\nhttps://www.bradford.gov.uk/\nhttps://www.find-tender.service.gov.uk/Notice/104449-2026\nhttps://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026?limit=100&updatedTo=2026-11-04T18:10:55\nhttps://www.gov.uk/government/organisations/cabinet-office\nhttps://www.gov.uk/government/publications/open-contracting\nhttps://www.legislation.gov.uk/ukpga/2023/54/contents\nsubmissionMethodDetails \"submissionMethodDetails\": \"https://uk.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=110669&TID100115668&B=\", \"submissionTerms\": {\"electronicSubmissionPolicy\": \"allowed\", \"languages\": [\"en\"]}, \"tenderPeriod\": {\"endDate\": \"2026-12-04T17:00:00+00:00\"}, \"enquiryPeriod\": {\"endDate\": \"2026-11-20T17:00:00+00:00\"}, \"awardPeriod\": {\"endDate\": \"2027-01-18T23:59:59Z\"}, \"lots\": [{\"id\": \"LOT-0000\", \"status\": \"active\", \"value\": {\"amountGross\": 25323110.4, \"amount\": 21102592, \"currency\": \"GBP\"}, \"awardCriteria\"\ndocuments \"documents\": [{\"id\": \"conflictOfInterest\", \"documentType\": \"conflictOfInterest\", \"description\": \"Not published\"}, {\"id\": \"104449-2026\", \"documentType\": \"tenderNotice\", \"noticeType\": \"UK4\", \"description\": \"Tender notice on Find a Tender\", \"url\": \"https://www.find-tender.service.gov.uk/Notice/104449-2026\", \"datePublished\": \"2026-11-03T20:30:59Z\", \"format\": \"text/html\"}]}, \"language\": \"en\"}]}\nenquiryPeriod \"enquiryPeriod\": {\"endDate\": \"2026-11-20T17:00:00+00:00\"}, \"awardPeriod\": {\"endDate\": \"2027-01-18T23:59:59Z\"}, \"lots\": [{\"id\": \"LOT-0000\", \"status\": \"active\", \"value\": {\"amountGross\": 25323110.4, \"amount\": 21102592, \"currency\": \"GBP\"}, \"awardCriteria\": {\"criteria\": [{\"type\": \"price\", \"name\": \"Price\", \"description\": \"Evaluation of the Tenderer's submitted pricing in accordance with the Pricing Matrix.\", \"numbers\": [{\"number\": 5, \"weight\": \"percentageExact\"}]}, {\"type\": \"quality\", \"name\": \"Quality\ntenderPeriod \"tenderPeriod\": {\"endDate\": \"2026-12-04T17:00:00+00:00\"}, \"enquiryPeriod\": {\"endDate\": \"2026-11-20T17:00:00+00:00\"}, \"awardPeriod\": {\"endDate\": \"2027-01-18T23:59:59Z\"}, \"lots\": [{\"id\": \"LOT-0000\", \"status\": \"active\", \"value\": {\"amountGross\": 25323110.4, \"amount\": 21102592, \"currency\": \"GBP\"}, \"awardCriteria\": {\"criteria\": [{\"type\": \"price\", \"name\": \"Price\", \"description\": \"Evaluation of the Tenderer's submitted pricing in accordance with the Pricing Matrix.\", \"numbers\": [{\"number\": 5, \"weight\": \nsubmissionTerms \"submissionTerms\": {\"electronicSubmissionPolicy\": \"allowed\", \"languages\": [\"en\"]}, \"tenderPeriod\": {\"endDate\": \"2026-12-04T17:00:00+00:00\"}, \"enquiryPeriod\": {\"endDate\": \"2026-11-20T17:00:00+00:00\"}, \"awardPeriod\": {\"endDate\": \"2027-01-18T23:59:59Z\"}, \"lots\": [{\"id\": \"LOT-0000\", \"status\": \"active\", \"value\": {\"amountGross\": 25323110.4, \"amount\": 21102592, \"currency\": \"GBP\"}, \"awardCriteria\": {\"criteria\": [{\"type\": \"price\", \"name\": \"Price\", \"description\": \"Evaluation of the Tenderer's submitted pr\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179386380411.json"
+  ],
+  "request": {
+    "id": "TASK-179386380411",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T07:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,re\nd=json.load(open('products/services/welfare-tender/notice-104449-2026-ocds.json'))\ns=json.dumps(d)\nurls=sorted(set(re.findall(r'https?://[^\"\\\\ ]+',s)))\nprint(len(s));print('\\n'.join(urls))\nfor k in ['submissionMethodDetails','documents','enquiryPeriod','tenderPeriod','submissionTerms','participationFees','eligibilityCriteria','selectionCriteria','otherRequirements']:\n  for m in re.finditer('\"'+k+'\"',s): print(k, s[m.start():m.start()+500]); break"
+      ],
+      "outputs": [],
+      "mission_id": "WELFARE-BID-READINESS"
+    },
+    "description": "Broker action during THINK-1793863804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179386380411",
+  "input_sha256": "f6ee50a36f27c8d81e8a757be33304101bf99aadaafdc81156296a07c3c718d2"
+}
