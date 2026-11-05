@@ -57,6 +57,8 @@ class PrivateDeferred(ValueError):
 def _safe(path):
     if any(p.is_symlink() for p in (path, *path.parents)):
         raise ValueError('Private work unavailable')
+    if path.exists() and path.is_file() and path.stat().st_nlink != 1:
+        raise ValueError('Private work unavailable')
     return path
 
 
@@ -241,6 +243,8 @@ class PrivateResponder:
     def _final(self, value, data):
         from mail_agent import SIGNATURE
         reply = json.loads(value['summary'])
+        if isinstance(reply, dict):
+            reply.pop('observation', None)
         if (not isinstance(reply, dict) or set(reply) != {'action', 'text', 'artifacts'}
                 or reply['action'] not in ('reply', 'ignore') or not isinstance(reply['text'], str)
                 or not isinstance(reply['artifacts'], list) or len(reply['artifacts']) > 16
@@ -271,6 +275,7 @@ class PrivateResponder:
         return dict(action='reply', text=text)
 
     def __call__(self, message):
+        self.last_observation = None
         try:
             return self._respond(message)
         except PrivateDeferred:
@@ -279,9 +284,12 @@ class PrivateResponder:
             raise ValueError('Private work unavailable') from None
 
     def _respond(self, message):
+        import commercial
         path, data = self._open(message)
         if data['state'] == 'READY':
             self.last_provider = data.get('provider')
+            # Immutable normalized interpretation: never reclassify a replay.
+            self.last_observation = copy.deepcopy(data.get('observation'))
             return copy.deepcopy(data['decision'])
         progressed = False
         for step in data['steps']:
@@ -303,7 +311,7 @@ class PrivateResponder:
         planner.tool_guide = PRIVATE_GUIDE
         while self.budget > 0:
             from mail_agent import public_context
-            prompt = PRIVATE_GUIDE + '\n' + json.dumps(dict(private_case=data, public_product_context=public_context(self.root),
+            prompt = PRIVATE_GUIDE + commercial.prompt(self.root, self.config) + '\n' + json.dumps(dict(private_case=data, public_product_context=public_context(self.root),
                         remaining_case_actions=max(0, self.case_budget - len(data['steps']))), ensure_ascii=False)
             value = None
             providers = self.config['controller'].get('providers', [])
@@ -336,7 +344,13 @@ class PrivateResponder:
             self.last_provider = provider
             if not value['actions']:
                 data.update(state='READY', decision=decision, provider=provider)
+                if commercial.settings(self.config)['state'] == 'ENABLED':
+                    raw = json.loads(value['summary']).get('observation')
+                    data['observation'] = commercial.normalize_observation(raw, data['incoming'],
+                        commercial.allowed_experiments(self.root),
+                        commercial.host_origin(data['incoming'], self.config), provider)
                 _save(path, data)
+                self.last_observation = copy.deepcopy(data.get('observation'))
                 return copy.deepcopy(decision)
             step = dict(id='TASK-' + str(uuid.uuid4().int % 10**12).zfill(12), provider=provider,
                         action=value['actions'][0], state='PENDING')

@@ -91,7 +91,28 @@ def assess(root, world, bank, config):
         change = delta(state['last'], current)
         stalled = 0 if change['productive'] else state.get('stalled_turns', 0) + 1
         dry = 0 if change['outcome'] else state.get('dry_turns', 0) + 1
+    import commercial
+    snapshot = commercial.progress_snapshot(root, config)
+    seen = set(state.get('commercial_seen_sources', []))
+    sources = set(snapshot['sources'])
+    complete = snapshot['state'] == 'AVAILABLE' and not (seen - sources)
+    new_feedback = bool(set(snapshot['interpreted_sources']) - seen) if complete else None
+    history = seen | sources
+    if len(history) > 100000:
+        # Retain the previous baseline rather than forgetting old identities.
+        complete = False; history = seen; new_feedback = None
+    commercial_turns = None
+    commercial_baseline = state.get('commercial_baseline', False)
+    if complete:
+        commercial_turns = (0 if not commercial_baseline or new_feedback
+                            else state.get('commercial_turns', 0) + 1)
+    revenue_turns = (0 if 'turns_without_verified_revenue' not in state or change.get('revenue_gain_cents', 0) > 0
+                     else state['turns_without_verified_revenue'] + 1)
     return dict(current=current, change=change, stalled_turns=stalled, threshold=threshold,
+                commercial_turns=commercial_turns, new_commercial_feedback=new_feedback,
+                commercial_seen_sources=sorted(history), commercial_baseline=commercial_baseline or complete,
+                commercial_state=snapshot['state'] if complete or snapshot['state'] != 'AVAILABLE' else 'UNAVAILABLE',
+                revenue_turns=revenue_turns, turns_without_verified_revenue=revenue_turns,
                 dry_turns=dry, outcome_threshold=dry_limit,
                 alert=stalled >= threshold, drought=dry >= dry_limit,
                 stalled_since=(state.get('stalled_since') if stalled and state.get('stalled_turns') else None),
@@ -104,9 +125,17 @@ def commit(root, turn, assessment):
     """Persist once per successful turn so retries are never double-counted."""
     now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     state = load(root)
+    if state.get('last_turn') == turn:
+        return state
     stalled = assessment['stalled_turns']
     dry = assessment['dry_turns']
     record = dict(last=assessment['current'], stalled_turns=stalled, threshold=assessment['threshold'],
+                  commercial_turns=(assessment['commercial_turns'] if assessment['commercial_turns'] is not None
+                                    else state.get('commercial_turns', 0)),
+                  commercial_seen_sources=assessment['commercial_seen_sources'],
+                  commercial_baseline=assessment['commercial_baseline'],
+                  commercial_state=assessment['commercial_state'],
+                  turns_without_verified_revenue=assessment['turns_without_verified_revenue'],
                   dry_turns=dry, outcome_threshold=assessment['outcome_threshold'],
                   last_turn=turn, last_turn_at=now,
                   stalled_since=(assessment['stalled_since'] or now) if stalled else None,
@@ -121,6 +150,11 @@ def commit(root, turn, assessment):
 def for_prompt(assessment):
     """The part of the assessment the brain sees (no hashes)."""
     return dict(stalled_turns=assessment['stalled_turns'], threshold=assessment['threshold'],
+                activity_semantics='operational progress; mission conclusions and files are not market or financial evidence',
+                commercial_state=assessment['commercial_state'],
+                turns_without_new_interpreted_feedback=assessment['commercial_turns'],
+                new_interpreted_feedback=assessment['new_commercial_feedback'],
+                turns_without_verified_revenue=assessment['turns_without_verified_revenue'],
                 turns_without_outcome=assessment['dry_turns'], outcome_threshold=assessment['outcome_threshold'],
                 alert=assessment['alert'], drought=assessment['drought'],
                 last_productive_turn=assessment['last_productive_turn'],

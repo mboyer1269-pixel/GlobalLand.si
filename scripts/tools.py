@@ -259,6 +259,8 @@ def capability_view(root, config):
             'configured is not proof of execution or recipient delivery')
     else:
         result['PRIVATE_MAIL']['fulfillment'] = {'state': 'DISABLED'}
+    import commercial
+    result['PRIVATE_MAIL']['commercial_feedback'] = {'state': commercial.settings(config)['state']}
     mail_status = root / 'state/private/agentmail-status.json'
     try:
         if (configured_mail and not any(p.is_symlink() for p in (root/'state', mail_status.parent, mail_status))
