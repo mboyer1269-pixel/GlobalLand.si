@@ -418,10 +418,13 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 1,
-      "status": "OPEN",
+      "status": "COMPLETED",
       "lease_token": null,
       "lease_expires_at": null,
-      "evidence": []
+      "evidence": [
+        "products/services/csv-text-diagnostic/worked-example/stop-result.json",
+        "products/services/csv-text-diagnostic/worked-example/source-scan.json"
+      ]
     }
   ],
   "messages": [
@@ -727,23 +730,6 @@
     }
   ],
   "events": [
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793745042.427593,
-      "lesson_id": "L21",
-      "agent_id": "DIRECTOR"
-    },
-    {
-      "type": "MESSAGE",
-      "timestamp": 1793746852.8513603,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793746857.0171244,
-      "mission_id": "ALTERNATIVE-PAID-REQUEST"
-    },
     {
       "type": "MESSAGE",
       "timestamp": 1793748652.7611408,
@@ -1327,6 +1313,24 @@
       "timestamp": 1793850227.0644403,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793851294.7282884,
+      "mission_id": "CSV-WORKED-EXAMPLE",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793851324.0524645,
+      "lesson_id": "L41",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793851324.0524685,
+      "mission_id": "CSV-WORKED-EXAMPLE",
+      "agent_id": "ACQUISITION"
     }
   ],
   "policy": {
@@ -1495,5 +1499,5 @@
       "seq": 7
     }
   ],
-  "lesson_count": 40
+  "lesson_count": 41
 }
