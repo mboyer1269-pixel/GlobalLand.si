@@ -163,15 +163,31 @@ def _scan(root, config):
                 seen.add(key)
                 observation = record.get('observation')
                 if observation is not None:
-                    if (not isinstance(observation, dict) or observation.get('category') not in CATEGORIES
-                            or observation.get('audience') not in AUDIENCES or observation.get('origin') not in ORIGINS
-                            or observation.get('attribution') not in ('MODEL_INFERRED', 'UNATTRIBUTED')):
+                    if not _valid_observation(observation):
                         raise ValueError()
                 result['rows'].append((key, observation))
             except (OSError, ValueError, KeyError, TypeError): result['state'] = 'PARTIAL'
         if not allowed.get('available', True): result['state'] = 'PARTIAL'
     except (OSError, ValueError): result['state'] = 'UNAVAILABLE'
     return result
+
+
+def _valid_observation(o):
+    if (not isinstance(o, dict) or set(o) != {'category', 'audience', 'experiment_id', 'evidence',
+            'origin', 'attribution', 'provider', 'observed_at'}
+            or o['category'] not in CATEGORIES or o['audience'] not in AUDIENCES
+            or o['origin'] not in ORIGINS or o['attribution'] not in ('MODEL_INFERRED', 'UNATTRIBUTED')
+            or o['provider'] not in (None, 'claude', 'codex', 'cursor')
+            or (o['experiment_id'] is not None and (not isinstance(o['experiment_id'], str)
+                or len(o['experiment_id']) > 110))
+            or not isinstance(o['observed_at'], str)
+            or not re.fullmatch(r'[0-9T:+.Z-]{20,40}', o['observed_at'])):
+        return False
+    evidence = o['evidence']
+    if o['category'] in ('UNKNOWN', 'NONCOMMERCIAL'): return evidence is None
+    return (isinstance(evidence, dict) and set(evidence) == {'field', 'quote'}
+            and evidence['field'] in ('text', 'extracted_text')
+            and isinstance(evidence['quote'], str) and 1 <= len(evidence['quote']) <= 240)
 
 
 def _interpreted(observation):

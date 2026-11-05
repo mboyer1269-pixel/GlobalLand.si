@@ -172,6 +172,14 @@ class CommercialTests(unittest.TestCase):
         self.record(self.normalize(), mid='new-source')
         self.assertEqual(turn(4)['commercial_turns'], 0)
         self.assertEqual(turn(5)['commercial_turns'], 1)
+        self.record(self.normalize(category='UNKNOWN', evidence=None), mid='late-unknown')
+        broken = self.record(self.normalize(), mid='corrupt-source')
+        broken.write_text('{corrupt')
+        self.assertIsNone(turn(6)['commercial_turns'])
+        self.record(self.normalize(category='UNKNOWN', evidence=None), mid='corrupt-source')
+        self.record(self.normalize(), mid='late-unknown')
+        self.assertFalse(turn(7)['new_commercial_feedback'])
+        self.assertGreater(turn(7)['commercial_turns'], 0)
 
     def test_tool_free_ready_and_mixed_batch_never_reuse_previous_observation(self):
         self.commercial()
@@ -204,6 +212,11 @@ class CommercialTests(unittest.TestCase):
         Mailbox(self.root, self.config, Client()).cycle(responder)
         record = json.loads(next((self.root / 'state/private/agentmail').glob('*.json')).read_text())
         self.assertNotIn('observation', record)
+        from private_work import PrivateResponder
+        deferred = PrivateResponder(self.root, self.config)
+        deferred.last_observation = self.normalize(); deferred.budget = 0
+        with self.assertRaises(PrivateDeferred): deferred(self.message)
+        self.assertIsNone(deferred.last_observation)
 
     def test_partial_scan_remembers_unknown_sources_and_rejects_corrupt_normalized_data(self):
         c = self.commercial()
@@ -226,6 +239,55 @@ class CommercialTests(unittest.TestCase):
             self.assertIn('Legacy reply', responder(self.message)['text'])
         self.assertIsNone(responder.last_observation)
         self.assertFalse((self.root / 'state/private/fulfillment').exists())
+
+    def test_historical_interpretation_is_baseline_not_new_feedback(self):
+        self.commercial()
+        import progress
+        self.record(self.normalize())
+        baseline = progress.assess(self.root, {'missions': []}, {'revenue_cents': 0}, self.config)
+        self.assertFalse(baseline['new_commercial_feedback'])
+        self.assertEqual(baseline['commercial_turns'], 0)
+
+    def test_enabled_private_prompts_allow_optional_observation_without_exact_key_conflict(self):
+        self.commercial()
+        from mail_agent import MailResponder
+        from private_work import PrivateResponder
+        for responder in (MailResponder(self.root, self.config), PrivateResponder(self.root, self.config)):
+            self.message['message_id'] = type(responder).__name__
+            def plan(planner, provider, prompt):
+                self.assertIn('observation', prompt)
+                self.assertNotIn('with exactly action', prompt)
+                self.assertNotIn('with exactly action', getattr(planner, 'tool_guide', ''))
+                extra = {'artifacts': []} if isinstance(responder, PrivateResponder) else {}
+                return dict(actions=[], summary=json.dumps(dict(action='ignore', text='', **extra)))
+            with patch('controller.Controller.plan', plan): responder(self.message)
+
+    def test_scan_limit_and_hardlinked_records_are_partial(self):
+        c = self.commercial()
+        import os
+        path = self.record(self.normalize())
+        link = self.root / 'private-hardlink'
+        os.link(path, link)
+        self.assertEqual(c.project(self.root, self.config)['state'], 'PARTIAL')
+        link.unlink()
+        for n in range(1, 2001): self.record(None, mid='source-' + str(n))
+        view = c.project(self.root, self.config)
+        self.assertEqual(view['state'], 'PARTIAL')
+        self.assertLessEqual(view['unclassified_sources'], 2000)
+
+    def test_corrupt_progress_history_stays_unknown_instead_of_rebaselining_sources(self):
+        self.commercial()
+        import progress
+        self.record(self.normalize())
+        path = self.root / 'state/private/progress.json'; path.write_text('{broken')
+        a = progress.assess(self.root, {'missions': []}, {'revenue_cents': 0}, self.config)
+        self.assertIsNone(a['commercial_turns'])
+        self.assertIsNone(a['turns_without_verified_revenue'])
+        progress.commit(self.root, 'THINK-1', a)
+        a = progress.assess(self.root, {'missions': []}, {'revenue_cents': 0}, self.config)
+        self.assertIsNone(a['commercial_turns'])
+        self.assertIsNone(a['new_commercial_feedback'])
+        self.assertIsNone(a['turns_without_verified_revenue'])
 
 
 if __name__ == '__main__': unittest.main()

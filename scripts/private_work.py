@@ -308,10 +308,12 @@ class PrivateResponder:
                 step.update(state='COMPLETE', receipt=receipt); _save(path, data)
                 progressed = True
         planner = Controller(self.root, None, None, self.config)
-        planner.tool_guide = PRIVATE_GUIDE
+        guide = (PRIVATE_GUIDE.replace('with exactly action', 'with required action')
+                 if commercial.settings(self.config)['state'] == 'ENABLED' else PRIVATE_GUIDE)
+        planner.tool_guide = guide
         while self.budget > 0:
             from mail_agent import public_context
-            prompt = PRIVATE_GUIDE + commercial.prompt(self.root, self.config) + '\n' + json.dumps(dict(private_case=data, public_product_context=public_context(self.root),
+            prompt = guide + commercial.prompt(self.root, self.config) + '\n' + json.dumps(dict(private_case=data, public_product_context=public_context(self.root),
                         remaining_case_actions=max(0, self.case_budget - len(data['steps']))), ensure_ascii=False)
             value = None
             providers = self.config['controller'].get('providers', [])

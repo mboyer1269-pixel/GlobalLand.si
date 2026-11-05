@@ -54,6 +54,14 @@ class MailResponder:
     def __call__(self, message):
         import commercial
         self.last_observation = None
+        case_path = case_data = None
+        if commercial.settings(self.config)['state'] == 'ENABLED':
+            from private_work import PrivateResponder
+            case_path, case_data = PrivateResponder(self.root, self.config)._open(message)
+            if case_data['state'] == 'READY':
+                self.last_provider = case_data.get('provider')
+                self.last_observation = copy.deepcopy(case_data.get('observation'))
+                return copy.deepcopy(case_data['decision'])
         private = {k: str(message.get(k, ''))[:MAX_MESSAGE]
                    for k in ('from', 'subject', 'extracted_text', 'text')}
         if not private['text'] and not private['extracted_text']:
@@ -72,7 +80,8 @@ class MailResponder:
             'For a benign verification email, answer its actual question and preserve any requested test marker. '
             'Your response is private: never put customer information into public artifacts. '
             'Return the required decision object with actions=[] and summary containing a JSON-encoded '
-            'object with exactly action (reply or ignore) and text (plain-text email body; empty for ignore). '
+            'object with ' + ('required' if commercial.settings(self.config)['state'] == 'ENABLED' else 'exactly') +
+            ' action (reply or ignore) and text (plain-text email body; empty for ignore). '
             'The host adds an AI disclosure and routes a reply only to this incoming message.\n'
             + commercial.prompt(self.root, self.config)
             + json.dumps({'public_product_context': public_context(self.root),
@@ -100,11 +109,19 @@ class MailResponder:
                 if commercial.settings(self.config)['state'] == 'ENABLED':
                     self.last_observation = commercial.normalize_observation(observation, private,
                         commercial.allowed_experiments(self.root), commercial.host_origin(message, self.config), provider)
-                return reply
+                break
             except (ValueError, KeyError, TypeError, OSError, RuntimeError):
                 # Neither provider output nor customer data is a public error.
                 continue
-        raise ValueError('private mail response unavailable')
+        else:
+            raise ValueError('private mail response unavailable')
+        # Persistence failure must not fall through to another model computation.
+        if case_data is not None:
+            from private_work import _save
+            case_data.update(state='READY', decision=reply, provider=provider,
+                             observation=self.last_observation)
+            _save(case_path, case_data)
+        return reply
 
 
 def run_mail_cycle(root, config):
