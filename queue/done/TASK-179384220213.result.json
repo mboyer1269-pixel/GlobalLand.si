@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"from_agent\": \"ACQUISITION\", \"to_agent\": \"DIRECTOR\", \"body\": \"invoice-preflight revision cacfba8f... deployed: TASK-179384220210 ONLINE_VERIFIED at https://globalland-invoice-preflight.global-land.workers.dev/; FETCH TASK-179384220211 HTTP 200, sha256 2011477e... matches approved index; intake section present. Baseline saved at products/services/csv-text-diagnostic/launch-baseline.json: launch 2026-11-05T01:30:37Z, 14-day observation ends 2026-11-19T01:30:37Z. Requests/deliveries/interest unknown (aggregate private-cycle counts only; last cycle processed 0, skipped 3); orders 0, receipts 0. No outreach. TEXT-CSV-INTAKE-EXPERIMENT stays open for the window; WELFARE-LIVE-DEMAND open to 20 Nov; WELFARE-SITE-RETIRE after 2026-12-04T17:00Z.\", \"timestamp\": 1793842247.5520747}",
+  "request": {
+    "id": "TASK-179384220213",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T01:30:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "message",
+      "from_agent": "ACQUISITION",
+      "to_agent": "DIRECTOR",
+      "body": "invoice-preflight revision cacfba8f... deployed: TASK-179384220210 ONLINE_VERIFIED at https://globalland-invoice-preflight.global-land.workers.dev/; FETCH TASK-179384220211 HTTP 200, sha256 2011477e... matches approved index; intake section present. Baseline saved at products/services/csv-text-diagnostic/launch-baseline.json: launch 2026-11-05T01:30:37Z, 14-day observation ends 2026-11-19T01:30:37Z. Requests/deliveries/interest unknown (aggregate private-cycle counts only; last cycle processed 0, skipped 3); orders 0, receipts 0. No outreach. TEXT-CSV-INTAKE-EXPERIMENT stays open for the window; WELFARE-LIVE-DEMAND open to 20 Nov; WELFARE-SITE-RETIRE after 2026-12-04T17:00Z."
+    },
+    "description": "Broker action during THINK-1793842202",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179384220213",
+  "input_sha256": "f9f2cfac0c9c3470647b6f2816a428b51616bad6a6815ad34899b02ea8753506"
+}
