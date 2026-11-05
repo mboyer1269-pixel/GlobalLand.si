@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"title\": \"Shopify Help Center | Using CSV files to import and export products\", \"has_Variant_image_URL\": true, \"has_Option1_name\": true, \"has_Published_on_online_store\": true, \"bytes\": 203549}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179391193315.json"
+  ],
+  "request": {
+    "id": "TASK-179391193315",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T20:52:13Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import re,json;h=open('products/services/shopify-large-catalogue/release/cited-doc-check.html',encoding='utf-8',errors='replace').read();t=re.search(r'<title>(.*?)</title>',h,re.S);print(json.dumps({'title':t.group(1).strip() if t else None,'has_Variant_image_URL':'Variant image URL' in h,'has_Option1_name':'Option1 name' in h,'has_Published_on_online_store':'Published on online store' in h,'bytes':len(h)}))"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/release/cited-doc-check.html"
+      ],
+      "outputs": [],
+      "mission_id": "SHOPIFY-WORKED-SOLUTION-RELEASE"
+    },
+    "description": "Broker action during THINK-1793911933",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391193315",
+  "input_sha256": "8dad80f4a01689a92f2ee0cd6766db93a3e125b1e71460c2296d42e1f34b77db"
+}
