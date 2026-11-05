@@ -18,6 +18,8 @@ AUDIENCES = ('UNKNOWN', 'ORDINARY', 'TEST', 'AUTOMATED')
 ORIGINS = ('SYNTHETIC', 'AUTOMATED', 'INBOUND_UNVERIFIED', 'UNKNOWN')
 MAX_RECORDS = 2000
 MAX_RECORD = 128 * 1024
+MAX_MISSION_PAGES = 64
+MAX_SITE_ENTRIES = 10000
 DISCLAIMER = ('Unverified message interpretations, not verified humans, customers, orders, '
               'delivery, payments or profit. Synthetic and automated sources are excluded. '
               'Treasury alone supplies verified revenue. Partial/unavailable is not zero demand.')
@@ -55,28 +57,97 @@ def _read(path, limit):
     return json.loads(raw)
 
 
-def allowed_experiments(root):
-    root = pathlib.Path(root); ids = set(); truncated = False; available = True
-    try:
-        path = _safe(root / 'work/world/status.json')
-        if path.exists():
-            world = _read(path, 1024 * 1024)
-            missions = world['missions']
-            if not isinstance(missions, list): raise ValueError()
-            for m in missions:
-                ident = m.get('mission_id') if isinstance(m, dict) else None
-                if isinstance(ident, str) and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,99}', ident):
-                    ids.add('mission:' + ident)
+def _mission_experiments(root):
+    path = _safe(root / 'work/world/status.json')
+    if not path.exists():
+        if (root / 'source.git').exists() or (root / 'source.git').is_symlink():
+            raise ValueError('World projection unavailable')
+        return set(), False
+    world = _read(path, 1024 * 1024)
+    if not isinstance(world, dict): raise ValueError('Invalid world')
+    ids = set()
+
+    def collect(missions):
+        if not isinstance(missions, list): raise ValueError('Invalid missions')
+        for mission in missions:
+            ident = mission.get('mission_id') if isinstance(mission, dict) else None
+            if isinstance(ident, str) and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,99}', ident):
+                ids.add('mission:' + ident)
+
+    if 'projection' not in world:
+        if (root / 'source.git').exists() or (root / 'source.git').is_symlink():
+            raise ValueError('Installed world projection metadata unavailable')
+        collect(world['missions'])  # Historical/offline fixtures only.
+        return ids, False
+    projection = world['projection']
+    if not isinstance(projection, dict): raise ValueError('Invalid projection')
+    version = projection.get('snapshot_sha256')
+    collections = projection.get('collections')
+    if (not isinstance(version, str) or not re.fullmatch(r'[0-9a-f]{64}', version)
+            or not isinstance(collections, dict)):
+        raise ValueError('Invalid projection')
+    meta = collections.get('missions')
+    if not isinstance(meta, dict): raise ValueError('Missing missions metadata')
+    total, pages = meta.get('total'), meta.get('pages')
+    if (type(total) is not int or total < 0 or type(pages) is not int or pages < 1
+            or meta.get('path') != 'world/pages/missions-{page}.json'):
+        raise ValueError('Invalid missions metadata')
+    count = 0
+    for number in range(min(pages, MAX_MISSION_PAGES)):
+        page = _read(root / ('work/world/pages/missions-%d.json' % number), 192 * 1024)
+        if (not isinstance(page, dict) or page.get('snapshot_sha256') != version
+                or page.get('collection') != 'missions' or type(page.get('page')) is not int
+                or page['page'] != number or type(page.get('total')) is not int
+                or page['total'] != total or type(page.get('pages')) is not int
+                or page['pages'] != pages
+                or page.get('next_page') != (number + 1 if number + 1 < pages else None)):
+            raise ValueError('Inconsistent missions page')
+        collect(page.get('items'))
+        count += len(page['items'])
+        if count > total: raise ValueError('Invalid missions count')
+    if pages <= MAX_MISSION_PAGES and count != total:
+        raise ValueError('Incomplete missions')
+    return ids, pages > MAX_MISSION_PAGES
+
+
+def _site_experiments(root):
+    from catalog_views import entries, source_for
+    ids = set()
+    if (root / 'source.git').exists() or (root / 'source.git').is_symlink():
+        # Source pins the confirmed published commit. No product bodies are read
+        # or restored into sparse work/, and a broken Git source cannot fall back.
+        source = source_for(root)
+        stream = entries(source, 'products/sites/')
+        try:
+            for index, entry in enumerate(itertools.islice(stream, MAX_SITE_ENTRIES + 1)):
+                if index == MAX_SITE_ENTRIES: return ids, True
+                parts = entry['path'].split('/')
+                if len(parts) >= 4 and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,99}', parts[2]):
+                    ids.add('site:' + parts[2])
+        finally:
+            stream.close()
+    else:
+        # Explicit compatibility for filesystem fixtures without source.git.
         sites = _safe(root / 'work/products/sites')
         if sites.exists():
             for index, path in enumerate(itertools.islice(sites.iterdir(), 202)):
-                if index == 201: truncated = True; break
-                if len(ids) > 100: truncated = True; break
+                if index == 201 or len(ids) > 100: return ids, True
                 if (not path.is_symlink() and path.is_dir()
                         and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,99}', path.name)):
                     ids.add('site:' + path.name)
-    except (OSError, ValueError, KeyError, TypeError):
-        available = False
+    return ids, False
+
+
+def allowed_experiments(root):
+    from public_source import PublicSourceError
+    root = pathlib.Path(root); ids = set(); truncated = False; available = True
+    for discover in (_mission_experiments, _site_experiments):
+        try:
+            found, partial = discover(root)
+            ids.update(found)
+            truncated |= partial
+        except (OSError, ValueError, KeyError, TypeError, PublicSourceError):
+            available = False
     return dict(ids=sorted(ids)[:100], truncated=truncated or len(ids) > 100, available=available)
 
 
