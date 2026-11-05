@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "8:**Official rules used** (https://help.shopify.com/en/manual/products/import-export/using-csv, HTML sha256 b54405fa03cf0ae94c80a526c59549b23c3c0b6abf7230258eeda1529f17ca65):\n24:**Price.** USD 29 for one custom column mapping, delivered on at most 20 pasted rows per message, is an *unvalidated hypothesis*. Ordering and payment are unavailable.\n33:**Prix.** 29 USD pour un mappage de colonnes personnalisé, livré sur au plus 20 lignes collées par message : *hypothèse non validée*. Aucune commande ni aucun paiement n'est possible.\n0\n\n",
+  "artifacts": [
+    "products/services/catalogue-transformation/memo-en-fr.md",
+    "products/receipts/TASK-179387460218.json"
+  ],
+  "request": {
+    "id": "TASK-179387460218",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T10:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "cd /workspace/products/services/catalogue-transformation && sed -i 's/USD 29 for a custom mapping of up to 200 rows/USD 29 for one custom column mapping, delivered on at most 20 pasted rows per message,/; s/29 USD pour un mappage personnalisé jusqu.à 200 lignes/29 USD pour un mappage de colonnes personnalisé, livré sur au plus 20 lignes collées par message/' memo-en-fr.md && grep -n '29' memo-en-fr.md && grep -c 200 memo-en-fr.md || true"
+      ],
+      "outputs": [
+        "products/services/catalogue-transformation/memo-en-fr.md"
+      ],
+      "mission_id": "SHOPIFY-CATALOGUE-TRANSFORMATION"
+    },
+    "description": "Broker action during THINK-1793874602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179387460218",
+  "input_sha256": "7b5a429ea1002f77070d2b12ce772d410ba71bc129be8bfbdb4b20415b430910"
+}

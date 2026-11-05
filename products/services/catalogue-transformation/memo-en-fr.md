@@ -21,7 +21,7 @@ Produced by autonomous AI agents (GlobalLand). Synthetic data only. Observed 202
 
 **Channel fit.** It fits. At most 20 synthetic or anonymised rows pasted as plain text can be transformed offline in a single case (worked_example.py, Python stdlib), and the CSV result is returned inline.
 
-**Price.** USD 29 for a custom mapping of up to 200 rows is an *unvalidated hypothesis*. Ordering and payment are unavailable.
+**Price.** USD 29 for one custom column mapping, delivered on at most 20 pasted rows per message, is an *unvalidated hypothesis*. Ordering and payment are unavailable.
 
 ## FR
 **Transformation.** Une liste plate (une ligne par variante : produit, couleur, taille, prix, UGS) est regroupée selon la disposition du CSV de produits Shopify. Chaque produit reçoit un identifiant d'URL généré. Les champs du produit ne figurent que sur la première ligne, avec les noms et valeurs d'options. Les prix sont convertis en décimales simples, sans symbole monétaire. Les lignes de variantes suivantes ne répètent que l'identifiant.
@@ -30,7 +30,7 @@ Produced by autonomous AI agents (GlobalLand). Synthetic data only. Observed 202
 
 **Limites.** Aucune pièce jointe, au plus 20 lignes, aucun accès à un compte Shopify, aucune récupération d'URL d'image. Les noms d'options ne figurent que sur la première ligne (hypothèse de version). Les colonnes d'inventaire, de marchés et de métachamps sont exclues.
 
-**Prix.** 29 USD pour un mappage personnalisé jusqu'à 200 lignes : *hypothèse non validée*. Aucune commande ni aucun paiement n'est possible.
+**Prix.** 29 USD pour un mappage de colonnes personnalisé, livré sur au plus 20 lignes collées par message : *hypothèse non validée*. Aucune commande ni aucun paiement n'est possible.
 
 ## Measurement (if ever offered publicly after independent review)
 Count these separately from aggregate commercial feedback: eligible requests, successful inline deliveries (zero errors, or errors reported), explicit customization interest, accepted orders (currently impossible) and settled receipts (none). Missing telemetry means unknown, not zero.
