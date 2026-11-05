@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "44200 2022-11-26T04:26:20.229Z https://forum.manager.io/t/import-multiple-sales-invoices-form-csv-file/44200 | Hi, is there any way to import sales invoices from .csv file?\n\n2014 2015-01-01T12:58:20.401Z https://forum.manager.io/t/importing-invoices/2014 | I use this exportfile in Csv format. Its the total of all the products in that invoice, split in 21% and 6% Tax and costs. However I can put more or less colums in the exportfile. I will respond to the needs of Manager. Regarding your question: indeed 2 tax codes in one line. Costs are mend for a...\n\n65600 2025-10-09T09:06:35.422Z https://forum.manager.io/t/batch-create-update-is-complicated-in-manager/65600 | Hello Dears We Have Excel file With 138 Items it Has A lot Of details we want to Create Invoice from this File But Batch Create Is very Complicated You have To Duplicate Item Header and Its Values 138 Times! Please Update importing Excel , CSV files Way because it is Very Important. Thanks and Be...\n\n4023 2017-07-23T00:46:21.980Z https://forum.manager.io/t/paypal-fees/4023 | Another screen shot is below (customer name changed). It was the direct result of a fairly recent PayPal CSV import into a cash account. Again, the column headings on the CSV used were \"Name\", \"Date\", \"Transaction ID\" (Reference), \"Type\" (Description), \"Gross amount\", \"Fee\" and \"Net\". Since I use...\n\n67123 2026-02-24T03:03:57.175Z https://forum.manager.io/t/importing-multiple-entries-through-batch-create/67123 | Manager uses a particular format of CSV for batch operations. You can get the sample format by first batch selecting entries (like Sales Orders), batch operations, batch update, copy. Once you paste it in a spreadsheet, you can see the format and headers. Note that batch operations uses additiona...\n\n69214 2026-08-10T11:03:00.544Z https://forum.manager.io/t/api2-always-returns-401-unauthorized-with-valid-access-tokens/69214 | import sys import os import csv import io import json import threading import webbrowser import requests import webview from datetime import datetime from flask import Flask, render_template_string, request, jsonify, Response, send_file from num2words import num2words # ReportLab for PDF receipt ...\n\n44200 2022-12-06T23:29:59.730Z https://forum.manager.io/t/import-multiple-sales-invoices-form-csv-file/44200 | with multiple lines in a record the options are Multiple sets of columns for each line. This solution is used by the Australian tax office for single touch payroll \"Other expenses\". Separate end of line and end of record markers. This is what Manager has used in the past. However if &lt; cr &gt; is use...\n\n4023 2017-07-24T00:11:40.203Z https://forum.manager.io/t/paypal-fees/4023 | Thanks again for your help. To answer your previous question, all spreadsheet columns, including \"Net\", are provided by PayPal and Etsy in Values format. You are correct in noting that \"Gross amount\" should be \"Gross\". My mistake. After reviewing the bank rules and seeing the former, I changed th...\n\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179385120514.json"
+  ],
+  "request": {
+    "id": "TASK-179385120514",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T04:00:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nd=json.load(open('/workspace/products/services/csv-text-diagnostic/worked-example/source-scan.json',encoding='utf-8'))\nfor r in d['hits']:\n  if r['topic_id'] in (4023,67123,44200,69214,2014,65600):\n    print(r['topic_id'],r['created_at'],r.get('url'),'|',r['blurb'][:600].replace('\\n',' '));print()\n"
+      ],
+      "outputs": [],
+      "mission_id": "CSV-WORKED-EXAMPLE"
+    },
+    "description": "Broker action during THINK-1793851205",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179385120514",
+  "input_sha256": "722b18af1e978691313fd7ccba5a50553db95cc8ac5cbb8c507fcdd4fe487478"
+}
