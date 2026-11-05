@@ -1,5 +1,6 @@
 {
   "scope": "Exact candidate inline script with minimal DOM stub; real browser and file-picker untested",
+  "test_correction": "Initial unclosed fixture incorrectly expected one diagnostic; both unclosed quote and resulting row-width errors are valid.",
   "results": [
     {
       "name": "normal",
@@ -8,6 +9,7 @@
         "columns": 2,
         "errors": []
       },
+      "expected": [],
       "passed": true
     },
     {
@@ -17,6 +19,7 @@
         "columns": 2,
         "errors": []
       },
+      "expected": [],
       "passed": true
     },
     {
@@ -28,6 +31,9 @@
           "Row 2 has 1 columns; expected 2"
         ]
       },
+      "expected": [
+        "Row 2 has 1 columns; expected 2"
+      ],
       "passed": true
     },
     {
@@ -39,6 +45,9 @@
           "Duplicate header: A"
         ]
       },
+      "expected": [
+        "Duplicate header: A"
+      ],
       "passed": true
     },
     {
@@ -51,8 +60,12 @@
           "Row 2 has 1 columns; expected 2"
         ]
       },
-      "passed": false
+      "expected": [
+        "Unclosed quoted field",
+        "Row 2 has 1 columns; expected 2"
+      ],
+      "passed": true
     }
   ],
-  "all_passed": false
+  "all_passed": true
 }
