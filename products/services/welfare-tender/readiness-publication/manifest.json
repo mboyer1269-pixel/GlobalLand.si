@@ -1,0 +1,35 @@
+{
+ "mission": "WELFARE-READINESS-PUBLICATION",
+ "site": "welfare-tender-brief",
+ "live_approved_digest": "6585e9a1e08319a649336e5a86b4d115cdc02cf6a0003a0f964ac9367063d4b2",
+ "changes": [
+  {
+   "file": "readiness.html",
+   "action": "added",
+   "sha256": "56a9786e56d1498f0eb0161f8f302f72a2d19d987f53f4243f4e8373eced5458",
+   "bytes": 5613
+  },
+  {
+   "file": "index.html",
+   "action": "one paragraph link inserted before Bid / no-bid checklist heading",
+   "old_sha256": "70718e8c49ac20a31d48ba4ea9d5aafbbc552561ba9809d10814a7c75aee668c",
+   "new_sha256": "0418670c76cacada9958942976b8046d72c9991e309d7d7b8d19094db6817852",
+   "inserted": "<p><strong>New / Nouveau :</strong> <a href=\"readiness.html\">Bid-readiness supplement: verified deadlines, award weights, the unresolved submission link and questions to ask the buyer / Complément de préparation</a></p>\n"
+  }
+ ],
+ "unchanged": [
+  "llms.txt",
+  "9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt"
+ ],
+ "evidence_reused": [
+  "products/services/welfare-tender/bid-readiness/result.json",
+  "products/services/welfare-tender/notice-104449-2026-ocds.json"
+ ],
+ "corrections_vs_saved_note": [
+  "suitability explicitly not eligibility",
+  "fetch failures explicitly do not establish registration or gating",
+  "FCA/IAA marked examples, not mandatory criteria"
+ ],
+ "networking": "none",
+ "deployed": false
+}

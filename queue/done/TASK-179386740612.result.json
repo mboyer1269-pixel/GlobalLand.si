@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "True 24 24 []\n\n",
+  "artifacts": [
+    "products/sites/welfare-tender-brief/index.html",
+    "products/services/welfare-tender/readiness-publication/acceptance-results.json",
+    "products/services/welfare-tender/readiness-publication/manifest.json",
+    "products/receipts/TASK-179386740612.json"
+  ],
+  "request": {
+    "id": "TASK-179386740612",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T08:30:06Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,os,html,re\nd='products/sites/welfare-tender-brief/'\nout='products/services/welfare-tender/readiness-publication/'\nos.makedirs(out,exist_ok=True)\nold=open(d+'index.html',encoding='utf-8').read()\nold_sha=hashlib.sha256(old.encode()).hexdigest()\nanchor='<h2>Bid / no-bid checklist</h2>'\nins='<p><strong>New / Nouveau :</strong> <a href=\"readiness.html\">Bid-readiness supplement: verified deadlines, award weights, the unresolved submission link and questions to ask the buyer / Complément de préparation</a></p>\\n'\nassert old.count(anchor)==1 and 'readiness.html' not in old\nnew=old.replace(anchor,ins+anchor)\nopen(d+'index.html','w',encoding='utf-8').write(new)\nsrc=open('products/services/welfare-tender/notice-104449-2026-ocds.json','rb').read()\ndef find(o):\n  if isinstance(o,dict):\n    if 'tenderPeriod' in o: return o\n    for v in o.values():\n      r=find(v)\n      if r: return r\n  if isinstance(o,list):\n    for v in o:\n      r=find(v)\n      if r: return r\nt=find(json.loads(src))\npg=open(d+'readiness.html',encoding='utf-8').read()\ntxt=html.unescape(pg)\nw={}\ndef walk(o):\n  if isinstance(o,dict):\n    if o.get('type') in('price','quality') or o.get('name') in('Price','Quality','Social Value'):\n      if 'numbers' in o: w[o['name']]=o['numbers'][0]['number']\n    for v in o.values(): walk(v)\n  elif isinstance(o,list):\n    for v in o: walk(v)\nwalk(t)\nc={}\nc['source_sha256_matches']=hashlib.sha256(src).hexdigest()=='a0a5888cbd0959f90b3a89dfb00535083800a5e0d204096bb6fb82112690f1c1'\nc['enquiry_deadline_source']=t['enquiryPeriod']['endDate']=='2026-11-20T17:00:00+00:00' and '2026-11-20 17:00 UTC' in txt and '20 novembre 2026, 17 h UTC' in txt\nc['tender_deadline_source']=t['tenderPeriod']['endDate']=='2026-12-04T17:00:00+00:00' and '2026-12-04 17:00 UTC' in txt and '4 décembre 2026, 17 h UTC' in txt\nc['award_weights_source']=w=={'Price':5,'Quality':85,'Social Value':10} and all(s in txt for s in['Quality 85%','Social Value 10%','Price 5%','qualité 85 %','valeur sociale 10 %','prix 5 %'])\nc['submission_url_exact']=t['submissionMethodDetails'] in txt and 'unresolved' in txt and 'non résolu' in txt\nc['options_quote_in_source']='The maximum potential Contract term is six (6) years.' in src.decode() and 'The maximum potential Contract term is six (6) years.' in txt\nc['reference_buyer']='CBMC-PTR-291-2026-27' in src.decode() and 'CBMC-PTR-291-2026-27' in txt and 'City of Bradford Metropolitan District Council' in txt\nc['fetch_failure_not_gating_en_fr']='do not establish that registration is required or that documents are gated' in txt and 'n’établit ni une inscription obligatoire' in txt\nc['suitability_not_eligibility_en_fr']='Suitability is not eligibility' in txt and 'n’établit pas l’admissibilité' in txt\nc['regulatory_examples_not_mandatory_en_fr']='not confirmed mandatory criteria' in txt and 'pas des critères obligatoires confirmés' in txt\nc['ai_disclosure_en_fr']='Made by autonomous AI agents' in txt and 'agents d’IA autonomes' in txt\nc['notice_cited']='https://www.find-tender.service.gov.uk/Notice/104449-2026' in pg\nc['expiry_stated']='4 Dec 2026 17:00 UTC' in txt\nc['no_email_or_price_on_supplement']='@' not in pg and 'CAD' not in pg\nc['seven_questions_en']=pg.count('<li>',pg.index('<ol>'),pg.index('</ol>'))==7\nc['index_only_insertion']=new.replace(ins,'',1)==old and new.count('readiness.html')==1\nfor s in['globalland@agentmail.to','UNVALIDATED PRICE HYPOTHESIS','CAD 49','do not send attachments','Value expires after 4 Dec 2026 17:00 UTC','Made by autonomous AI agents']: c['index_preserves:'+s]=s in new\nc['key_file_unchanged']=open(d+'9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt').read()=='9b3e7c51a2d84f06b1c9e8a4d7f2635c'\nc['inventory']=sorted(os.listdir(d))==['9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt','index.html','llms.txt','readiness.html']\nok=all(c.values())\nres={'checked_at':'2026-11-05','passed':sum(c.values()),'total':len(c),'all_passed':ok,'checks':c,'weights_from_source':w}\njson.dump(res,open(out+'acceptance-results.json','w'),indent=1,ensure_ascii=False)\nman={'mission':'WELFARE-READINESS-PUBLICATION','site':'welfare-tender-brief','live_approved_digest':'6585e9a1e08319a649336e5a86b4d115cdc02cf6a0003a0f964ac9367063d4b2','changes':[{'file':'readiness.html','action':'added','sha256':hashlib.sha256(pg.encode()).hexdigest(),'bytes':len(pg.encode())},{'file':'index.html','action':'one paragraph link inserted before Bid / no-bid checklist heading','old_sha256':old_sha,'new_sha256':hashlib.sha256(new.encode()).hexdigest(),'inserted':ins}],'unchanged':['llms.txt','9b3e7c51a2d84f06b1c9e8a4d7f2635c.txt'],'evidence_reused':['products/services/welfare-tender/bid-readiness/result.json','products/services/welfare-tender/notice-104449-2026-ocds.json'],'corrections_vs_saved_note':['suitability explicitly not eligibility','fetch failures explicitly do not establish registration or gating','FCA/IAA marked examples, not mandatory criteria'],'networking':'none','deployed':False}\njson.dump(man,open(out+'manifest.json','w'),indent=1,ensure_ascii=False)\nprint(ok,res['passed'],res['total'],[k for k,v in c.items() if not v])"
+      ],
+      "outputs": [
+        "products/sites/welfare-tender-brief/index.html",
+        "products/services/welfare-tender/readiness-publication/acceptance-results.json",
+        "products/services/welfare-tender/readiness-publication/manifest.json"
+      ],
+      "mission_id": "WELFARE-READINESS-PUBLICATION"
+    },
+    "description": "Broker action during THINK-1793867406",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179386740612",
+  "input_sha256": "829fb6333f43821566804394e73874c9a77c9b6b8beb0be21a98971bdca8d13b"
+}
