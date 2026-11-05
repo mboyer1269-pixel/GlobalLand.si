@@ -401,10 +401,16 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "ACQUISITION",
       "priority": 1,
-      "status": "RUNNING",
-      "lease_token": "mdSSB137UWnDYaF7qATpOH8H3cAJyXic",
-      "lease_expires_at": 1793849419.0669358,
-      "evidence": []
+      "status": "COMPLETED",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": [
+        "products/services/csv-text-diagnostic/search-discovery/result.json",
+        "products/services/csv-text-diagnostic/search-discovery/live-key-file.txt",
+        "products/services/csv-text-diagnostic/search-discovery/indexnow-submission-response.txt",
+        "products/services/csv-text-diagnostic/search-discovery/indexnow-manifest.json",
+        "products/reviews/invoice-indexnow-review.json"
+      ]
     }
   ],
   "messages": [
@@ -698,23 +704,6 @@
     }
   ],
   "events": [
-    {
-      "type": "COMPLETE_MISSION",
-      "timestamp": 1793739691.9995592,
-      "mission_id": "PUBLIC-DOCS-REPAIR",
-      "agent_id": "BUILDER"
-    },
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793741451.710587,
-      "lesson_id": "L20",
-      "agent_id": "DIRECTOR"
-    },
-    {
-      "type": "MISSION_CREATED",
-      "timestamp": 1793741455.925955,
-      "mission_id": "DOCS-REQUEST-FULFILLMENT"
-    },
     {
       "type": "MESSAGE",
       "timestamp": 1793741457.7204635,
@@ -1298,6 +1287,24 @@
       "timestamp": 1793847653.6549885,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793849460.6533046,
+      "mission_id": "CSV-SEARCH-DISCOVERY",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "COMPLETE_MISSION",
+      "timestamp": 1793849466.2475536,
+      "mission_id": "CSV-SEARCH-DISCOVERY",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793849473.9075446,
+      "lesson_id": "L40",
+      "agent_id": "ACQUISITION"
     }
   ],
   "policy": {
@@ -1466,5 +1473,5 @@
       "seq": 7
     }
   ],
-  "lesson_count": 39
+  "lesson_count": 40
 }
