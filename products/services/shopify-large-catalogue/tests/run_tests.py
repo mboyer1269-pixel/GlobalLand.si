@@ -1,11 +1,13 @@
-import csv, json, os, subprocess, sys, time, hashlib
+import csv, json, os, shutil, subprocess, sys, tempfile, time, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from verify import verify
 B = os.path.dirname(HERE); T = os.path.join(B, 'transform.py')
-FX = os.path.join(B, 'fixtures'); W = '/tmp/slc'
-os.makedirs(FX, exist_ok=True); os.makedirs(W, exist_ok=True)
+FX = os.path.join(B, 'fixtures'); W = tempfile.mkdtemp(prefix='slc-')  # isolated scratch per run
+FORCE = os.environ.get('GL_SELFTEST_FORCE_FAIL') == '1'
+os.makedirs(FX, exist_ok=True)
 VH = ['style_id', 'title', 'vendor', 'product_type', 'tags', 'color', 'size', 'sku', 'barcode', 'price']
 IH = ['style_id', 'color', 'position', 'url']
+PRE_REPAIR_SCALE_SHA = 'af374e6d487b3bb5cc8ec828072822a829dcf6ae744bd07906edfdc05a9a65cb'
 
 
 def ean(n):  # synthetic EAN-13 in the 200-299 restricted-circulation prefix (not real GTINs)
@@ -33,9 +35,9 @@ def gen(styles, colors, sizes, nimg):
 
 
 def run(vp, ip, out, extra=()):
-    t0 = time.time()
-    r = subprocess.run([sys.executable, '-I', T, '--variants', vp, '--images', ip, '--out', out, '--report', out + '.report.json'] + list(extra), capture_output=True, text=True)
-    rep = json.load(open(out + '.report.json')); os.remove(out + '.report.json')
+    t0 = time.time(); rp = os.path.join(W, 'report.json')
+    r = subprocess.run([sys.executable, '-I', T, '--variants', vp, '--images', ip, '--out', out, '--report', rp] + list(extra), capture_output=True, text=True)
+    rep = json.load(open(rp)); os.remove(rp)
     return r.returncode, rep, round(time.time() - t0, 3)
 
 
@@ -61,17 +63,41 @@ v, im = gen(300, ['Black', 'Brown', 'Tan', 'Navy', 'Red'], ['39', '40', '41', '4
 wcsv(W + '/v.csv', VH, v); wcsv(W + '/i.csv', IH, im)
 rc, rep, sec = run(W + '/v.csv', W + '/i.csv', W + '/out.csv')
 chk, nrows, nprod = verify([W + '/out.csv'], v, im)
+sha = hashlib.sha256(open(W + '/out.csv', 'rb').read()).hexdigest()
 res['cases'].append({'case': 'scale_9000_barcodes_300_styles_5_colors_6_sizes_5_images_per_color', 'input_variants': len(v), 'input_images': len(im), 'rc': rc,
-                     'rows': nrows, 'products': nprod, 'output_bytes': os.path.getsize(W + '/out.csv'),
-                     'output_sha256': hashlib.sha256(open(W + '/out.csv', 'rb').read()).hexdigest(), 'transform_seconds': rep['seconds'],
+                     'rows': nrows, 'products': nprod, 'output_bytes': os.path.getsize(W + '/out.csv'), 'output_sha256': sha,
+                     'output_identical_to_pre_repair': sha == PRE_REPAIR_SCALE_SHA, 'transform_seconds': rep['seconds'],
                      'wall_seconds_incl_startup': sec, 'checks': chk, 'pass': rc == 0 and all(chk.values()) and nrows == 9000 and nprod == 300})
 rc, rep, sec = run(W + '/v.csv', W + '/i.csv', W + '/sp.csv', ['--max-rows-per-file', '4000', '--barcode-type', 'gtin'])
 chk, nrows, nprod = verify(rep['files'], v, im)
 pref = all(r['Barcodes'].startswith('gtin:') for f in rep['files'] for r in csv.DictReader(open(f, newline='', encoding='utf-8')) if r['SKU'])
 res['cases'].append({'case': 'split_max_4000_rows_whole_products_gtin_prefix', 'rc': rc, 'files': len(rep['files']), 'rows': nrows, 'checks': chk,
-                     'gtin_prefix_on_all_variants': pref, 'pass': rc == 0 and all(chk.values()) and len(rep['files']) == 3 and pref})
+                     'gtin_prefix_on_all_variants': pref, 'pass': rc == 0 and all(chk.values()) and len(rep['files']) == 3 and nrows == 9000 and pref})
+# Regression (audit defect 1): three one-variant products, max 1 row per file, three output-name forms
+v3 = [['P%d' % i, 'Prod %d' % i, 'V', 'T', 't', 'Black', '40', 'SKU-%d' % i, ean(500 + i), '10.00'] for i in range(3)]
+i3 = [['P%d' % i, 'Black', '1', 'https://cdn.example.com/p%d.jpg' % i] for i in range(3)]
+wcsv(W + '/v3.csv', VH, v3); wcsv(W + '/i3.csv', IH, i3)
+for label, name in (('lowercase_csv', 'output.csv'), ('uppercase_CSV', 'output.CSV'), ('no_suffix', 'output')):
+    d = tempfile.mkdtemp(dir=W)
+    rc, rep, sec = run(W + '/v3.csv', W + '/i3.csv', os.path.join(d, name), ['--max-rows-per-file', '1'])
+    disk = sorted(os.listdir(d))
+    chk, nrows, nprod = verify([os.path.join(d, f) for f in disk], v3, i3) if disk else ({'files_exist': False}, 0, 0)
+    res['cases'].append({'case': 'split_max1_three_products_' + label, 'rc': rc, 'files_on_disk': disk, 'reported': [os.path.basename(f) for f in rep['files']],
+                         'rows': nrows, 'products': nprod, 'checks': chk,
+                         'pass': rc == 0 and len(disk) == 3 and sorted(os.path.basename(f) for f in rep['files']) == disk and all(chk.values()) and nrows == 3 and nprod == 3})
+# Regression (audit defect 2): a failing check must give a nonzero process exit
+if FORCE:
+    res['cases'].append({'case': 'forced_failure_for_exit_code_selftest', 'pass': False})
+else:
+    r = subprocess.run([sys.executable, os.path.abspath(__file__)], capture_output=True, text=True, env=dict(os.environ, GL_SELFTEST_FORCE_FAIL='1'))
+    first = r.stdout.splitlines()[0] if r.stdout else ''
+    res['cases'].append({'case': 'forced_failed_check_gives_nonzero_exit', 'child_exit': r.returncode, 'child_summary': first,
+                         'pass': r.returncode != 0 and '"passed"' in first and json.loads(first)['passed'] < json.loads(first)['total']})
 res['passed'] = sum(c['pass'] for c in res['cases']); res['total'] = len(res['cases']); res['python'] = sys.version.split()[0]
-json.dump(res, open(os.path.join(B, 'core-test-results.json'), 'w'), indent=1)
+if not FORCE:
+    json.dump(res, open(os.path.join(B, 'core-test-results.json'), 'w'), indent=1)
 print(json.dumps({'passed': res['passed'], 'total': res['total']}))
 for c in res['cases']:
     print(c['case'], c['pass'], {k: x for k, x in c.items() if k not in ('case', 'pass', 'checks')}, [k for k, x in c.get('checks', {}).items() if not x])
+shutil.rmtree(W, ignore_errors=True)
+sys.exit(0 if res['passed'] == res['total'] else 1)

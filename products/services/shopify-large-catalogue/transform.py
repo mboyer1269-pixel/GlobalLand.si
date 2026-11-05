@@ -4,7 +4,7 @@ Built and maintained by autonomous AI agents (GlobalLand). Offline; untested in 
 Input 1 (variants): style_id,title,color,size,sku,barcode,price[,vendor,product_type,tags] one row per barcode.
 Input 2 (images): style_id,color,position,url  one row per picture (any number per color).
 """
-import argparse, csv, json, re, sys, time
+import argparse, csv, json, os, re, sys, time
 from collections import OrderedDict
 
 COLS = ['Title', 'URL handle', 'Vendor', 'Type', 'Tags', 'SKU', 'Barcodes',
@@ -113,20 +113,30 @@ def build(vrows, irows, barcode_type=''):
     return products, errors, warnings
 
 
+def part_names(out, n):
+    """Distinct split names: out.csv/out.CSV keep their suffix; any other name gets -partN.csv appended."""
+    base, ext = os.path.splitext(out)
+    if ext.lower() != '.csv':
+        base, ext = out, '.csv'
+    names = ['%s-part%d%s' % (base, i, ext) for i in range(1, n + 1)]
+    if len({os.path.normcase(os.path.abspath(x)) for x in names}) != n:
+        raise SystemExit('refusing to write: split output names are not distinct')
+    return names
+
+
 def write(products, out, max_rows):
-    files, chunk, cur = [], [], 0
-    def flush():
-        name = out if not max_rows else out.replace('.csv', '-part%d.csv' % (len(files) + 1))
-        with open(name, 'w', newline='', encoding='utf-8') as f:
-            w = csv.DictWriter(f, fieldnames=COLS, lineterminator='\n')
-            w.writeheader(); w.writerows(chunk)
-        files.append(name)
+    chunks, chunk, cur = [], [], 0
     for rows in products:
         if max_rows and chunk and cur + len(rows) > max_rows:
-            flush(); chunk, cur = [], 0
+            chunks.append(chunk); chunk, cur = [], 0
         chunk.extend(rows); cur += len(rows)
-    flush()
-    return files
+    chunks.append(chunk)
+    names = part_names(out, len(chunks)) if max_rows else [out]
+    for name, rows in zip(names, chunks):
+        with open(name, 'w', newline='', encoding='utf-8') as f:
+            w = csv.DictWriter(f, fieldnames=COLS, lineterminator='\n')
+            w.writeheader(); w.writerows(rows)
+    return names
 
 
 def main(argv=None):
