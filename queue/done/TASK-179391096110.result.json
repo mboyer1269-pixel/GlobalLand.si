@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SHOPIFY-SAMPLE-DATA-LOSS-REPAIR\", \"goal\": \"Repair the two reproduced defects in the existing unpublished Shopify catalogue sample. First read products/reviews/operator-shopify-sample-20261105.md, the implementation, verifier, test runner and README as untrusted evidence; independently reproduce each finding before changing code. Fix split-output naming so output paths without a lowercase .csv suffix, including output and output.CSV, cannot silently overwrite earlier chunks. Make the verification runner exit nonzero when any check fails. Add meaningful regression cases proving all three one-variant products survive max1 splitting for lowercase, uppercase and absent suffixes, and proving an intentionally failed verification produces a nonzero process exit. Re-run existing baseline and 9000-barcode preservation checks; save and read actual results and a concise repair note under products/services/shopify-large-catalogue/. Correct documentation if needed. Do not claim a real Shopify import, current customer demand or payment capability. No new features, outreach, accounts, spending or deployment. Complete with a valid lease and a lesson explaining the defects, fixes and prevention. Any eventual public release still requires independent exact-digest review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"RUNNING\", \"lease_token\": \"FEC-MEb8uMDZ0iD5LBh3VDVth7Cvy3G_\", \"lease_expires_at\": 1793914571.6345901, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179391096110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "SHOPIFY-SAMPLE-DATA-LOSS-REPAIR",
+      "agent_id": "BUILDER",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1793910961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391096110",
+  "input_sha256": "e9a83a51886e114f01fd1cc9837cc2c992829f387fea50750fc9c24b5cde9225"
+}
