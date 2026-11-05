@@ -1,0 +1,44 @@
+{
+ "site": "shopify-catalogue-example",
+ "url": "https://globalland-shopify-catalogue-example.global-land.workers.dev/",
+ "approved_digest": "4cab61d1bba110d41bc3515a7ea000c6224da834c9999cc7baf45b9455c7ad1d",
+ "approval": "AUDITOR codex review seq 11 (THINK-1793912274)",
+ "deploy_task": "TASK-179391420411 ONLINE_VERIFIED",
+ "pre_deploy_dry_run": "TASK-179391420410 same digest",
+ "fetch_checks": {
+  "index": {
+   "task": "TASK-179391420412",
+   "http": 200,
+   "sha256": "f362dc58c2a334b8afa681a2c3348dfd1b6c8cb2d02028a418b8506cf5a6ee9a",
+   "matches_approved": true
+  },
+  "transform.py": {
+   "task": "TASK-179391420414",
+   "http": 200,
+   "sha256": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+   "matches_source": true
+  },
+  "key_file": {
+   "task": "TASK-179391420413",
+   "http": 200,
+   "body_exact": true
+  }
+ },
+ "indexnow": {
+  "task": "TASK-179391420415",
+  "http": 202,
+  "meaning": "received only; not indexing, traffic or demand"
+ },
+ "launch_utc_approx": "2026-11-05T21:30:49Z",
+ "observe_until_utc": "2026-11-19T21:30:49Z",
+ "baseline": {
+  "classified_requests": 0,
+  "unclassified_sources": 3,
+  "downloads": "UNKNOWN (no telemetry)",
+  "orders": 0,
+  "receipts": 0,
+  "revenue": "impossible without collection route (SERVICE-PAYMENT-COLLECTION)"
+ },
+ "stop_rule": "no further Shopify building unless a classified request appears; missing telemetry is unknown, not zero",
+ "outreach": "none"
+}
