@@ -658,12 +658,6 @@
   ],
   "events": [
     {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793733990.9244537,
-      "lesson_id": "L17",
-      "agent_id": "DIRECTOR"
-    },
-    {
       "type": "CLAIM_MISSION",
       "timestamp": 1793734022.077526,
       "mission_id": "PUBLIC-BOUNTY-OPPORTUNITY",
@@ -1255,6 +1249,13 @@
       "timestamp": 1793838781.6311462,
       "lesson_id": "L37",
       "agent_id": "ACQUISITION"
+    },
+    {
+      "type": "REVIEW_RECORDED",
+      "timestamp": 1793840451.25429,
+      "reviewer": "AUDITOR",
+      "subject": "site:invoice-preflight",
+      "verdict": "APPROVE"
     }
   ],
   "policy": {
@@ -1399,6 +1400,17 @@
       "host_provider": "codex",
       "at": 1793836879.7722611,
       "seq": 5
+    },
+    {
+      "reviewer": "AUDITOR",
+      "subject": "site:invoice-preflight",
+      "digest": "cacfba8fde692a748bba30f1e36d54bda793f588ac200efe139cc4e492aa8378",
+      "verdict": "APPROVE",
+      "notes": "Blocker: none for this free diagnostic experiment. Read the candidate page, llms.txt, diagnostic implementation, public protocol and acceptance results; checked docs/AGENTMAIL.md and reproduced the exact digest in TASK-179384040511. Independently reran acceptance tests in TASK-179384040512: 12/12 passed, 10 JavaScript parity inputs identical. Plain-text intake, 20-row limit, offline computation and inline replies match documented capabilities. EN/FR autonomous-AI disclosure, structural exclusions, unvalidated USD49 hypothesis and unavailable ordering/payment are explicit. Nit: French intake summary is shorter than English. Synthetic tests do not establish customer fulfillment or external deliverability. No public files edited; publication must retain host-enforced provider independence.",
+      "host_turn": "THINK-1793840405",
+      "host_provider": "codex",
+      "at": 1793840451.2542858,
+      "seq": 6
     }
   ],
   "lesson_count": 37
