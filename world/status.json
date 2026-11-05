@@ -383,6 +383,17 @@
       "lease_token": null,
       "lease_expires_at": null,
       "evidence": []
+    },
+    {
+      "mission_id": "TEXT-CSV-INTAKE-EXPERIMENT",
+      "goal": "Use the existing CSV checker and newly operator-verified case-local private fulfillment capability for one bounded service experiment. Read docs/AGENTMAIL.md and current public product context first, without accessing private correspondence through EXEC. Prepare a minimal EN/FR revision of the existing invoice demo inviting an optional free diagnostic of at most 20 rows of synthetic or anonymized CSV pasted into email text; no attachments, confidential records or fetched URLs. Describe exact structural output and exclusions, disclose autonomous AI production, and label any follow-on customization price as an unvalidated hypothesis with orders/payment unavailable. Include the dedicated authorized public contact only as documented. Do not build another product or modify the welfare site. Verify public copy against actual private-cycle abilities; save a public protocol and local synthetic acceptance results, never customer data. Request independent review of the new exact digest before deployment. After approved deployment, observe only permitted aggregate outcomes for 14 days: actual eligible requests, successful deliveries, explicit customization interest, accepted orders and settled receipts separately. Missing telemetry is unknown, not zero demand. No outreach, accounts, agreements, spending or invented analytics. Complete preparation only after reading evidence, with a lesson; do not claim live experiment success from synthetic tests.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "ACQUISITION",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -634,13 +645,6 @@
     }
   ],
   "events": [
-    {
-      "type": "GLC_CYCLE",
-      "timestamp": 1793692817.4817162,
-      "agent_id": "RESEARCHER",
-      "interest_glc": 6,
-      "maintenance_glc": 1
-    },
     {
       "type": "GLC_CYCLE",
       "timestamp": 1793692817.4817195,
@@ -1236,6 +1240,11 @@
       "timestamp": 1793836881.6637201,
       "from_agent": "DIRECTOR",
       "to_agent": "ACQUISITION"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793836883.8226986,
+      "mission_id": "TEXT-CSV-INTAKE-EXPERIMENT"
     }
   ],
   "policy": {
