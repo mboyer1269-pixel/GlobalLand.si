@@ -1,0 +1,54 @@
+{
+ "note": "Reproduction against UNMODIFIED code (commit before repair). Synthetic data.",
+ "defect1_split_overwrite": {
+  "output.csv": {
+   "rc": 0,
+   "report_ok": true,
+   "reported_file_entries": 3,
+   "distinct_reported_paths": 3,
+   "files_on_disk": [
+    "output-part1.csv",
+    "output-part2.csv",
+    "output-part3.csv"
+   ],
+   "skus_on_disk": [
+    "SKU-0",
+    "SKU-1",
+    "SKU-2"
+   ],
+   "all_3_preserved": true
+  },
+  "output.CSV": {
+   "rc": 0,
+   "report_ok": true,
+   "reported_file_entries": 3,
+   "distinct_reported_paths": 1,
+   "files_on_disk": [
+    "output.CSV"
+   ],
+   "skus_on_disk": [
+    "SKU-2"
+   ],
+   "all_3_preserved": false
+  },
+  "output": {
+   "rc": 0,
+   "report_ok": true,
+   "reported_file_entries": 3,
+   "distinct_reported_paths": 1,
+   "files_on_disk": [
+    "output"
+   ],
+   "skus_on_disk": [
+    "SKU-2"
+   ],
+   "all_3_preserved": false
+  }
+ },
+ "defect2_runner_exit": {
+  "patched_copy_only": true,
+  "exit_code": 0,
+  "stdout_first_line": "{\"passed\": 1, \"total\": 4}",
+  "stderr_tail": ""
+ }
+}

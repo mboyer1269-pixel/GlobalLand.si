@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n \"note\": \"Reproduction against UNMODIFIED code (commit before repair). Synthetic data.\",\n \"defect1_split_overwrite\": {\n  \"output.csv\": {\n   \"rc\": 0,\n   \"report_ok\": true,\n   \"reported_file_entries\": 3,\n   \"distinct_reported_paths\": 3,\n   \"files_on_disk\": [\n    \"output-part1.csv\",\n    \"output-part2.csv\",\n    \"output-part3.csv\"\n   ],\n   \"skus_on_disk\": [\n    \"SKU-0\",\n    \"SKU-1\",\n    \"SKU-2\"\n   ],\n   \"all_3_preserved\": true\n  },\n  \"output.CSV\": {\n   \"rc\": 0,\n   \"report_ok\": true,\n   \"reported_file_entries\": 3,\n   \"distinct_reported_paths\": 1,\n   \"files_on_disk\": [\n    \"output.CSV\"\n   ],\n   \"skus_on_disk\": [\n    \"SKU-2\"\n   ],\n   \"all_3_preserved\": false\n  },\n  \"output\": {\n   \"rc\": 0,\n   \"report_ok\": true,\n   \"reported_file_entries\": 3,\n   \"distinct_reported_paths\": 1,\n   \"files_on_disk\": [\n    \"output\"\n   ],\n   \"skus_on_disk\": [\n    \"SKU-2\"\n   ],\n   \"all_3_preserved\": false\n  }\n },\n \"defect2_runner_exit\": {\n  \"patched_copy_only\": true,\n  \"exit_code\": 0,\n  \"stdout_first_line\": \"{\\\"passed\\\": 1, \\\"total\\\": 4}\",\n  \"stderr_tail\": \"\"\n }\n}\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/repair/repro-before.json",
+    "products/receipts/TASK-179391096111.json"
+  ],
+  "request": {
+    "id": "TASK-179391096111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import csv,json,os,sys,subprocess,tempfile,shutil\nB='products/services/shopify-large-catalogue'\nVH=['style_id','title','vendor','product_type','tags','color','size','sku','barcode','price']\nIH=['style_id','color','position','url']\ndef wc(p,h,rows):\n    with open(p,'w',newline='',encoding='utf-8') as f:\n        x=csv.writer(f,lineterminator='\\n');x.writerow(h);x.writerows(rows)\nsrc=tempfile.mkdtemp()\nv=[['P%d'%i,'Prod %d'%i,'V','T','t','Black','40','SKU-%d'%i,'20000000000%d'%i,'10.00'] for i in range(3)]\nim=[['P%d'%i,'Black','1','https://cdn.example.com/p%d.jpg'%i] for i in range(3)]\nwc(src+'/v.csv',VH,v);wc(src+'/i.csv',IH,im)\nres={'note':'Reproduction against UNMODIFIED code (commit before repair). Synthetic data.','defect1_split_overwrite':{},'defect2_runner_exit':{}}\nfor name in ['output.csv','output.CSV','output']:\n    d=tempfile.mkdtemp();out=os.path.join(d,name)\n    r=subprocess.run([sys.executable,'-I',B+'/transform.py','--variants',src+'/v.csv','--images',src+'/i.csv','--out',out,'--report',src+'/rep.json','--max-rows-per-file','1'],capture_output=True,text=True)\n    rep=json.load(open(src+'/rep.json'))\n    disk=sorted(os.listdir(d))\n    skus=sorted(row['SKU'] for f in disk for row in csv.DictReader(open(os.path.join(d,f),newline='',encoding='utf-8')) if row['SKU'])\n    res['defect1_split_overwrite'][name]={'rc':r.returncode,'report_ok':rep['ok'],'reported_file_entries':len(rep['files']),'distinct_reported_paths':len(set(rep['files'])),'files_on_disk':disk,'skus_on_disk':skus,'all_3_preserved':skus==['SKU-0','SKU-1','SKU-2']}\nc=tempfile.mkdtemp();shutil.copytree(B,c+'/s')\nvp=c+'/s/tests/verify.py';t=open(vp).read()\nassert '    chk.update(ok)\\n    return chk' in t\nopen(vp,'w').write(t.replace('    chk.update(ok)\\n    return chk',\"    chk.update(ok)\\n    chk['intentional_audit_failure'] = False\\n    return chk\"))\nr=subprocess.run([sys.executable,c+'/s/tests/run_tests.py'],capture_output=True,text=True)\nres['defect2_runner_exit']={'patched_copy_only':True,'exit_code':r.returncode,'stdout_first_line':r.stdout.splitlines()[0] if r.stdout else '','stderr_tail':r.stderr[-300:]}\nos.makedirs(B+'/repair',exist_ok=True)\njson.dump(res,open(B+'/repair/repro-before.json','w'),indent=1)\nprint(json.dumps(res,indent=1))\n"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/"
+      ],
+      "outputs": [
+        "products/services/shopify-large-catalogue/repair/repro-before.json"
+      ],
+      "mission_id": "SHOPIFY-SAMPLE-DATA-LOSS-REPAIR"
+    },
+    "description": "Broker action during THINK-1793910961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391096111",
+  "input_sha256": "474251dd354e0b726419f3c1da4f847d5768ed039c797567f43f4fcf1f2bb43c"
+}
