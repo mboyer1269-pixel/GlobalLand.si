@@ -910,12 +910,6 @@
   ],
   "events": [
     {
-      "type": "MESSAGE",
-      "timestamp": 1793836885.6991966,
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION"
-    },
-    {
       "type": "CLAIM_MISSION",
       "timestamp": 1793838637.5381832,
       "mission_id": "TEXT-CSV-INTAKE-EXPERIMENT",
@@ -1505,6 +1499,12 @@
       "timestamp": 1793889408.354499,
       "from_agent": "ACQUISITION",
       "to_agent": "DIRECTOR"
+    },
+    {
+      "type": "LESSON_RECORDED",
+      "timestamp": 1793892658.4624252,
+      "lesson_id": "L54",
+      "agent_id": "DIRECTOR"
     }
   ],
   "policy": {
@@ -1721,5 +1721,5 @@
       "seq": 10
     }
   ],
-  "lesson_count": 53
+  "lesson_count": 54
 }
