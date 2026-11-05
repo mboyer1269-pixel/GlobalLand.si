@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "utf8_no_bom_lf_only": true,
+    "header_matches_documented_names": true,
+    "no_product_split_across_files": true,
+    "handle_rows_contiguous": true,
+    "title_only_on_first_row": true,
+    "sku_unique": true,
+    "identifiers_preserved_sku_barcode_color_size_price": true,
+    "color_size_combo_unique_per_product": true,
+    "image_positions_1_to_n": true,
+    "all_input_images_present_once_per_product": true,
+    "variant_image_is_first_image_of_its_color": true,
+    "image_only_rows_have_no_variant_fields": true,
+    "command_exit_zero": true,
+    "fixture_bytes_equal": true,
+    "public_key_exact": true,
+    "transform.py_source_equal": true,
+    "verify.py_source_equal": true
+  },
+  "all_passed": true,
+  "rows": 12,
+  "products": 2,
+  "stdout": "{\"ok\": true, \"products\": 2, \"rows\": 12, \"error_count\": 0, \"warning_count\": 0, \"seconds\": 0.001}\n",
+  "note": "Synthetic offline release verification only; no live import or customer demand."
+}

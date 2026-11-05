@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"checks\": {\n    \"utf8_no_bom_lf_only\": true,\n    \"header_matches_documented_names\": true,\n    \"no_product_split_across_files\": true,\n    \"handle_rows_contiguous\": true,\n    \"title_only_on_first_row\": true,\n    \"sku_unique\": true,\n    \"identifiers_preserved_sku_barcode_color_size_price\": true,\n    \"color_size_combo_unique_per_product\": true,\n    \"image_positions_1_to_n\": true,\n    \"all_input_images_present_once_per_product\": true,\n    \"variant_image_is_first_image_of_its_color\": true,\n    \"image_only_rows_have_no_variant_fields\": true,\n    \"command_exit_zero\": true,\n    \"fixture_bytes_equal\": true,\n    \"public_key_exact\": true,\n    \"transform.py_source_equal\": true,\n    \"verify.py_source_equal\": true\n  },\n  \"all_passed\": true,\n  \"rows\": 12,\n  \"products\": 2,\n  \"stdout\": \"{\\\"ok\\\": true, \\\"products\\\": 2, \\\"rows\\\": 12, \\\"error_count\\\": 0, \\\"warning_count\\\": 0, \\\"seconds\\\": 0.001}\\n\",\n  \"note\": \"Synthetic offline release verification only; no live import or customer demand.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/shopify-release-review.json",
+    "products/receipts/TASK-179391227412.json"
+  ],
+  "request": {
+    "id": "TASK-179391227412",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-05T20:57:54Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport subprocess,csv,json,importlib.util,hashlib\np=Path('products/sites/shopify-catalogue-example').resolve()\nr=subprocess.run(['python3','transform.py','--variants','fixtures/before-variants.csv','--images','fixtures/before-images.csv','--out','review.csv','--report','review-report.json'],cwd=p,capture_output=True,text=True)\nspec=importlib.util.spec_from_file_location('verifier',p/'verify.py'); m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nwith (p/'fixtures/before-variants.csv').open() as f: v=list(csv.reader(f))[1:]\nwith (p/'fixtures/before-images.csv').open() as f: im=list(csv.reader(f))[1:]\nchecks,rows,products=m.verify([str(p/'review.csv')],v,im)\nchecks['command_exit_zero']=r.returncode==0\nchecks['fixture_bytes_equal']=(p/'review.csv').read_bytes()==(p/'fixtures/after-shopify.csv').read_bytes()\nchecks['public_key_exact']=(p/'7c2e9a41d86b35f0e1a4c97d2b58e360.txt').read_text()=='7c2e9a41d86b35f0e1a4c97d2b58e360'\nfor name in ['transform.py','verify.py']:\n source=Path('products/services/shopify-large-catalogue')/('tests/verify.py' if name=='verify.py' else name)\n checks[name+'_source_equal']=(p/name).read_bytes()==source.read_bytes()\nout={'checks':checks,'all_passed':all(checks.values()),'rows':rows,'products':products,'stdout':r.stdout,'note':'Synthetic offline release verification only; no live import or customer demand.'}\nf=Path('products/reviews/shopify-release-review.json');f.parent.mkdir(parents=True,exist_ok=True);f.write_text(json.dumps(out,indent=2));print(f.read_text())"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/",
+        "products/services/shopify-large-catalogue/transform.py",
+        "products/services/shopify-large-catalogue/tests/verify.py"
+      ],
+      "outputs": [
+        "products/reviews/shopify-release-review.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793912274",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391227412",
+  "input_sha256": "69e6856479d6568f238e0f10902b0f5b2b8b9026589ffd18c5ec4616fdff531e"
+}
