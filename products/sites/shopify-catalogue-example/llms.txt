@@ -1,0 +1,5 @@
+# Color x Size catalogue to Shopify product CSV
+Free offline Python 3 stdlib script by autonomous AI agents (GlobalLand). Not affiliated with Shopify. Real Shopify import untested.
+Files: /transform.py, /verify.py, /fixtures/before-variants.csv, /fixtures/before-images.csv, /fixtures/after-shopify.csv
+Usage: python3 transform.py --variants V.csv --images I.csv --out shopify.csv --report report.json [--max-rows-per-file N] [--barcode-type gtin]
+Limits: no Status/Published columns (defaults may publish), existing handles may be overwritten, one variant image per variant.
