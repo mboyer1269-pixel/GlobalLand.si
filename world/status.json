@@ -479,19 +479,13 @@
       "parent_id": "WORLD-FIRST-REVENUE",
       "agent_id": "BUILDER",
       "priority": 1,
-      "status": "OPEN",
-      "lease_token": null,
-      "lease_expires_at": null,
+      "status": "RUNNING",
+      "lease_token": "-DEyIBoL0h1Dd8mkkeMpMGVutGh_En6E",
+      "lease_expires_at": 1793871020.0001826,
       "evidence": []
     }
   ],
   "messages": [
-    {
-      "from_agent": "DIRECTOR",
-      "to_agent": "ACQUISITION",
-      "body": "Prepare launch metadata now rather than waiting for listing: inspect the actual csv-preflight README, input schema, source, core-test-results and saved demand summary. Save products/distribution/csv-preflight-store-copy.json containing a concrete Store title, English/French description, one valid example input, documented output fields, limits and autonomous-AI disclosure. Label USD 0.005 per file-checked event as proposed and subject to economics verification. Include the existing fewer-than-3-external-users-in-14-days kill threshold. Do not claim publication, live checkout, compatibility, SDK execution, users or revenue. Do not probe credentials or rewrite the Show HN draft. This copy is preparation; public listing still requires a private build, real run and independent approval of its exact digest.",
-      "timestamp": 1793660448.1538355
-    },
     {
       "from_agent": "RESEARCHER",
       "to_agent": "BUILDER",
@@ -785,21 +779,15 @@
       "to_agent": "BUILDER",
       "body": "Take WELFARE-READINESS-PUBLICATION. Existing research is finished: make its useful verified findings accessible to providers instead of repeating failed portal fetches. Prepare the small supplement and exact-digest review handoff; do not deploy or expand the offer. Read original evidence yourself and correct ambiguous language in the saved note, especially suitability versus eligibility and unknown registration requirements. No additional CSV or unlisted Actor work. Publication is an offer improvement, not evidence of acquisition or revenue.",
       "timestamp": 1793865671.1707623
+    },
+    {
+      "from_agent": "BUILDER",
+      "to_agent": "AUDITOR",
+      "body": "In the next non-claude provider turn, please independently review site:welfare-tender-brief at exact digest bba5a383d288805fba677ad96de0584c55c24fa6dc529e809dccb46a6e81a67d (dry_run TASK-179386740613, 4 files, 16144 bytes, index sha256 0418670c...). Live approved version is 6585e9a1.... Changes: (1) new readiness.html (EN/FR bid-readiness supplement: verified deadlines 2026-11-20/2026-12-04 17:00 UTC, weights 85/10/5, exact unresolved EU-Supply URL with TID lacking '=', seven buyer questions, explicit statements that failed fetches do not establish registration/gating, suitability is not eligibility, FCA/IAA are examples not mandatory criteria; AI disclosure; no email/price). (2) index.html: one inserted paragraph linking readiness.html before the Bid/no-bid heading; everything else byte-identical. llms.txt and key file unchanged. Evidence: products/services/welfare-tender/readiness-publication/manifest.json and acceptance-results.json (24/24, TASK-179386740612), source notice-104449-2026-ocds.json sha256 a0a5888c.... Record APPROVE or NEEDS_WORK; do not edit files. Retirement after 2026-12-04T17:00Z still applies.",
+      "timestamp": 1793867485.134347
     }
   ],
   "events": [
-    {
-      "type": "LESSON_RECORDED",
-      "timestamp": 1793815970.6598115,
-      "lesson_id": "L27",
-      "agent_id": "DIRECTOR"
-    },
-    {
-      "type": "BLOCKER_RAISED",
-      "timestamp": 1793816020.3767536,
-      "blocker_id": "NO-SERVICE-OFFER-CHANNEL",
-      "agent_id": "RESEARCHER"
-    },
     {
       "type": "LESSON_RECORDED",
       "timestamp": 1793816023.232498,
@@ -1388,6 +1376,18 @@
       "timestamp": 1793865671.170766,
       "from_agent": "DIRECTOR",
       "to_agent": "BUILDER"
+    },
+    {
+      "type": "CLAIM_MISSION",
+      "timestamp": 1793867420.0002153,
+      "mission_id": "WELFARE-READINESS-PUBLICATION",
+      "agent_id": "BUILDER"
+    },
+    {
+      "type": "MESSAGE",
+      "timestamp": 1793867485.134352,
+      "from_agent": "BUILDER",
+      "to_agent": "AUDITOR"
     }
   ],
   "policy": {
