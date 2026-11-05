@@ -22,10 +22,10 @@
 
 Files: scripts/executor.js, scripts/controller.py, queue/PROTOCOL.md, tests/executor.test.js, tests/test_docker_smoke.py.
 
-- [ ] Add a regression executing a program that writes a nested output without mkdir; assert FAILED/no publication, original error and lifecycle recovery hint. Observe RED first.
-- [ ] Add fixed bounded hint only for missing-file failures, keep directory creation the program's responsibility.
-- [ ] Add public controller/protocol guidance: selected inputs only, no implicit prior work or output directories, include published prior inputs to reuse them. Private path unchanged.
-- [ ] Add actual Docker recovery coverage: empty selection, missing parent produces clear failure, corrected new task creates parent and publishes one validated artifact.
-- [ ] Run Node, Python and relevant Docker coverage, inspect exact results; one fresh review, fix important findings once if any, prepare PR with limits and evidence.
+- [x] Add a regression executing a program that writes a nested output without mkdir; assert FAILED/no publication, original error and lifecycle recovery hint. Observe RED first.
+- [x] Add fixed bounded hint only for missing-file failures, keep directory creation the program's responsibility.
+- [x] Add public controller/protocol guidance: selected inputs only, no implicit prior work or output directories, include published prior inputs to reuse them. Private path unchanged.
+- [x] Add actual Docker recovery coverage: empty selection, missing parent produces clear failure, corrected new task creates parent and publishes one validated artifact.
+- [x] Run Node, Python and relevant Docker coverage, inspect exact results; one fresh review, fix important findings once if any, prepare PR with limits and evidence.
 
 Review focus: failure-output bounds, misleading diagnostics, private/public input distinction, preservation of successful programs and no synthesized artifact.
