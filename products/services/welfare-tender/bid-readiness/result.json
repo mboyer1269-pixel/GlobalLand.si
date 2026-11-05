@@ -1,0 +1,101 @@
+{
+ "mission": "WELFARE-BID-READINESS",
+ "verdict": "BOUNDED_STOP_DOCUMENTS_NOT_ACCESSIBLE",
+ "observed_at_utc": "2026-11-05",
+ "prepared_by": "autonomous AI agents (GlobalLand); factual procurement information, not legal advice",
+ "source": {
+  "path": "products/services/welfare-tender/notice-104449-2026-ocds.json",
+  "sha256": "a0a5888cbd0959f90b3a89dfb00535083800a5e0d204096bb6fb82112690f1c1",
+  "official_url": "https://www.find-tender.service.gov.uk/Notice/104449-2026"
+ },
+ "fetch_attempts": [
+  {
+   "url": "https://uk.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=110669&TID100115668&B=",
+   "task": "TASK-179386380412",
+   "result": "REJECTED: redirect limit (host FETCH). No page body obtained."
+  },
+  {
+   "url": "https://www.find-tender.service.gov.uk/Notice/104449-2026",
+   "task": "TASK-179386380413",
+   "result": "REJECTED: HTTP 403. Same outcome as earlier TASK-179381583711."
+  }
+ ],
+ "submission_url_defect": {
+  "published_value": "https://uk.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=110669&TID100115668&B=",
+  "observation": "Query parameter appears as 'TID100115668' with no '=' separator, unlike PID=110669 and B=.",
+  "resolved": false,
+  "reason": "No authoritative source fetched shows the corrected URL; guessing TID=100115668 is not permitted. The route fails in this sandbox by redirect limit, which may reflect session/cookie redirects rather than the defect; cause unknown."
+ },
+ "documents_public": {
+  "answer": "UNKNOWN / not accessible here",
+  "evidence": "OCDS documents array lists only the Find a Tender notice and conflictOfInterest = 'Not published'; no tender pack, specification, selection questionnaire or pricing matrix URL is published in the structured release.",
+  "quote_conflict": [
+   {
+    "id": "conflictOfInterest",
+    "documentType": "conflictOfInterest",
+    "description": "Not published"
+   }
+  ]
+ },
+ "verified_facts": {
+  "buyer": "City of Bradford Metropolitan District Council",
+  "reference": "CBMC-PTR-291-2026-27",
+  "title": "Welfare Advice Services and Advice Network Support & Training Services",
+  "procedure": "Open procedure",
+  "legal_basis": "Procurement Act 2023 (ukpga/2023/54)",
+  "clarification_deadline": "2026-11-20T17:00:00+00:00",
+  "tender_deadline": "2026-12-04T17:00:00+00:00",
+  "award_period_end": "2027-01-18T23:59:59Z",
+  "language": [
+   "en"
+  ],
+  "electronic_submission": "allowed",
+  "suitability": {
+   "sme": true,
+   "vcse": true
+  },
+  "value": {
+   "amountGross": 25323110.4,
+   "amount": 21102592,
+   "currency": "GBP"
+  },
+  "award_criteria": [
+   {
+    "name": "Price",
+    "weight_pct": 5,
+    "description": "Evaluation of the Tenderer's submitted pricing in accordance with the Pricing Matrix."
+   },
+   {
+    "name": "Quality",
+    "weight_pct": 85,
+    "description": "Evaluation of the Tenderer's response to the quality requirements and service delivery proposals."
+   },
+   {
+    "name": "Social Value",
+    "weight_pct": 10,
+    "description": "Evaluation of the Tenderer's proposed social value commitments, community benefits and added value to Bradford District."
+   }
+  ],
+  "contract_period": {
+   "startDate": "2027-04-01T00:00:00Z",
+   "endDate": "2029-03-31T23:59:59+01:00",
+   "maxExtentDate": "2031-03-31T23:59:59+01:00"
+  },
+  "options_quote": "The Contract will commence on 1 April 2027 for an initial period of two (2) years. The Council reserves the right, at its sole discretion, to extend the Contract for up to two (2) further periods of up to twenty-four (24) months each, subject to satisfactory performance, continued service need, available funding and all necessary approvals. The maximum potential Contract term is six (6) years."
+ },
+ "unanswered_questions_for_providers_to_resolve_via_portal_or_clarification": [
+  "Correct EU-Supply tender URL/TID (published value lacks '='); ask the buyer before 2026-11-20T17:00Z.",
+  "Is supplier registration on EU-Supply required to download documents and to submit? (not stated in OCDS)",
+  "Which selection/conditions-of-participation criteria apply (financial standing, insurance levels, regulatory authorisation such as FCA debt-advice permission or Immigration Advice Authority registration)? Not in OCDS; earlier brief only lists these as possible checks.",
+  "Required submission materials: quality questions, pricing matrix format, social value method statement, word limits.",
+  "TUPE applicability and incumbent staff information.",
+  "Consortium/subcontracting rules for VCSE/SME bidders (suitability sme=true, vcse=true).",
+  "Which contract maximum governs: options text six years vs structured maxExtentDate 2031-03-31?"
+ ],
+ "not_established": [
+  "provider eligibility",
+  "that documents are gated (only that they were not reachable here)",
+  "customer demand",
+  "revenue"
+ ]
+}

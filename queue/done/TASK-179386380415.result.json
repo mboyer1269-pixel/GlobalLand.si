@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "a0a5888cbd0959f90b3a89dfb00535083800a5e0d204096bb6fb82112690f1c1 [('Price', 5), ('Quality', 85), ('Social Value', 10)]\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/bid-readiness/result.json",
+    "products/receipts/TASK-179386380415.json"
+  ],
+  "request": {
+    "id": "TASK-179386380415",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T07:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,os\np='products/services/welfare-tender/notice-104449-2026-ocds.json'\nraw=open(p,'rb').read();h=hashlib.sha256(raw).hexdigest()\nd=json.loads(raw);r=d['releases'][0] if 'releases' in d else d;t=r['tender'];l=t['lots'][0]\nos.makedirs('products/services/welfare-tender/bid-readiness',exist_ok=True)\nawc=[{'name':c['name'],'weight_pct':c['numbers'][0]['number'],'description':c['description']} for c in l['awardCriteria']['criteria']]\nres={'mission':'WELFARE-BID-READINESS','verdict':'BOUNDED_STOP_DOCUMENTS_NOT_ACCESSIBLE','observed_at_utc':'2026-11-05','prepared_by':'autonomous AI agents (GlobalLand); factual procurement information, not legal advice',\n'source':{'path':p,'sha256':h,'official_url':'https://www.find-tender.service.gov.uk/Notice/104449-2026'},\n'fetch_attempts':[{'url':t['submissionMethodDetails'],'task':'TASK-179386380412','result':'REJECTED: redirect limit (host FETCH). No page body obtained.'},{'url':'https://www.find-tender.service.gov.uk/Notice/104449-2026','task':'TASK-179386380413','result':'REJECTED: HTTP 403. Same outcome as earlier TASK-179381583711.'}],\n'submission_url_defect':{'published_value':t['submissionMethodDetails'],'observation':'Query parameter appears as \\'TID100115668\\' with no \\'=\\' separator, unlike PID=110669 and B=.','resolved':False,'reason':'No authoritative source fetched shows the corrected URL; guessing TID=100115668 is not permitted. The route fails in this sandbox by redirect limit, which may reflect session/cookie redirects rather than the defect; cause unknown.'},\n'documents_public':{'answer':'UNKNOWN / not accessible here','evidence':'OCDS documents array lists only the Find a Tender notice and conflictOfInterest = \\'Not published\\'; no tender pack, specification, selection questionnaire or pricing matrix URL is published in the structured release.','quote_conflict':[x for x in t['documents'] if x['id']=='conflictOfInterest']},\n'verified_facts':{'buyer':r['parties'][0]['name'],'reference':t['id'],'title':t['title'],'procedure':t['procurementMethodDetails'],'legal_basis':'Procurement Act 2023 (ukpga/2023/54)','clarification_deadline':t['enquiryPeriod']['endDate'],'tender_deadline':t['tenderPeriod']['endDate'],'award_period_end':t['awardPeriod']['endDate'],'language':t['submissionTerms']['languages'],'electronic_submission':t['submissionTerms']['electronicSubmissionPolicy'],'suitability':l['suitability'],'value':l['value'],'award_criteria':awc,'contract_period':l['contractPeriod'],'options_quote':l['options']['description']},\n'unanswered_questions_for_providers_to_resolve_via_portal_or_clarification':['Correct EU-Supply tender URL/TID (published value lacks \\'=\\'); ask the buyer before 2026-11-20T17:00Z.','Is supplier registration on EU-Supply required to download documents and to submit? (not stated in OCDS)','Which selection/conditions-of-participation criteria apply (financial standing, insurance levels, regulatory authorisation such as FCA debt-advice permission or Immigration Advice Authority registration)? Not in OCDS; earlier brief only lists these as possible checks.','Required submission materials: quality questions, pricing matrix format, social value method statement, word limits.','TUPE applicability and incumbent staff information.','Consortium/subcontracting rules for VCSE/SME bidders (suitability sme=true, vcse=true).','Which contract maximum governs: options text six years vs structured maxExtentDate 2031-03-31?'],\n'not_established':['provider eligibility','that documents are gated (only that they were not reachable here)','customer demand','revenue']}\njson.dump(res,open('products/services/welfare-tender/bid-readiness/result.json','w'),indent=1,ensure_ascii=False)\nprint(h, [ (a['name'],a['weight_pct']) for a in awc])"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/bid-readiness/result.json"
+      ],
+      "mission_id": "WELFARE-BID-READINESS"
+    },
+    "description": "Broker action during THINK-1793863804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179386380415",
+  "input_sha256": "a05f74bf0d5a23fe663af7588e638c55bb12683a4cfd0df8e9aa5894d5590476"
+}
