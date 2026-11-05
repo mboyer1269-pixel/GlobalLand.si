@@ -1,0 +1,31 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 9, in <module>\nFileNotFoundError: [Errno 2] No such file or directory: 'products/services/shopify-large-catalogue/doc-extract.txt'\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179390958113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:13:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re\nt=open('products/research/shopify-product-csv-official.txt',encoding='utf-8').read()\nkeys=['Image Src','Image Position','Variant Image','Variant Barcode','Option1 name','Option1 value','Option2','URL handle','Variant SKU','Image Alt','15 MB','Status','first row','each variant','Variant Grams','Variant Inventory Tracker','Variant Fulfillment','Product image URL','Variant image URL','SKU','Barcode','Position']\nout=[]\nfor k in keys:\n  for m in list(re.finditer(re.escape(k),t,re.I))[:3]:\n    s=max(0,m.start()-200); out.append(f'== {k} @{m.start()}: '+t[s:m.end()+450])\nr='\\n'.join(out)\nopen('products/services/shopify-large-catalogue/doc-extract.txt','w',encoding='utf-8').write(r)\nprint(r[:30000])"
+      ],
+      "inputs": [
+        "products/research/shopify-product-csv-official.txt"
+      ],
+      "outputs": [
+        "products/services/shopify-large-catalogue/doc-extract.txt"
+      ],
+      "mission_id": "SHOPIFY-LARGE-CATALOGUE-SAMPLE"
+    },
+    "description": "Broker action during THINK-1793909581",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179390958113",
+  "input_sha256": "f9cd745f4893e1d1bca1624877ac69d4275c674d22b53c73e6d41723522faa5e"
+}
