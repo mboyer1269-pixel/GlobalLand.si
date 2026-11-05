@@ -56,9 +56,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y cron logrotate acl
-          # Hosted runners make /opt writable for tool caches. The installer
-          # requires a trusted ancestor; retain its default ACL to test the bug.
-          sudo chmod 755 /opt
+          # Prepare trusted ancestors on this disposable host only. Keep /opt's
+          # default ACL so the fresh-root isolation regression stays exercised.
+          sudo chmod 755 /opt /var/log
           sudo systemctl start cron logrotate.timer
           docker compose version
           docker pull node:22-bookworm

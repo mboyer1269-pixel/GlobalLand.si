@@ -10,6 +10,8 @@ Sur une installation existante v2, suivre la mise à niveau ci-dessous ; ne pas 
 
 Sur un nouveau serveur, préparer les paquets `cron` et `logrotate` et vérifier `systemctl is-active cron` et `systemctl is-active logrotate.timer`. Leur activation relève de l'administration du serveur ; l'outil GlobalLand ne modifie aucun service système. Vérifier aussi que l'image d'exécution est présente localement. Après finalisation des sources, effectuer et vérifier les cycles manuels autorisés `supervisor.py queue` puis `supervisor.py daily` avant l'activation périodique : ces commandes peuvent exécuter des tâches et publier, elles ne sont pas de simples contrôles en lecture seule.
 
+Les dossiers parents utilisés par la maintenance, notamment `/opt` et `/var/log`, doivent être détenus par l'administrateur et non modifiables par un autre groupe ou utilisateur. Certains systèmes livrent `/var/log` en `775` pour `syslog` : l'outil refuse alors cette précondition, même si les fichiers GlobalLand sont privés. Faire revoir l'organisation des journaux et les permissions de l'hôte avant application ; ne pas modifier automatiquement les dossiers partagés d'un VPS existant. Le test CI prépare ces prérequis sur son runner jetable, sans appliquer ces changements au VPS.
+
 L'outil installé permet ensuite de relire les fichiers proposés avant application :
 
 ```bash
