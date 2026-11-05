@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "id \"CBMC-PTR-291-2026-27\"\nlegalBasis {\"id\": \"2023/54\", \"scheme\": \"UKPGA\", \"uri\": \"https://www.legislation.gov.uk/ukpga/2023/54/contents\"}\ntitle \"Welfare Advice Services and Advice Network Support & Training Services\"\ndescription \"The City of Bradford Metropolitan District Council is procuring Welfare Advice Services and Advice Network Support and Training Services to support residents experiencing financial hardship, poverty and barriers to accessing support across Bradford District. The service is funded through the Crisis and Resilience Fund and aims to improve financial wellbeing, resilience and access to welfare suppo\nstatus \"active\"\nitems [{\"id\": \"LOT-0000\", \"additionalClassifications\": [{\"scheme\": \"CPV\", \"id\": \"85312400\", \"description\": \"Welfare services not delivered through residential institutions\"}, {\"scheme\": \"CPV\", \"id\": \"85311100\", \"description\": \"Welfare services for the elderly\"}, {\"scheme\": \"CPV\", \"id\": \"85311200\", \"description\": \"Welfare services for disabled people\"}, {\"scheme\": \"CPV\", \"id\": \"85311300\", \"description\": \nvalue {\"amountGross\": 25323110.4, \"amount\": 21102592, \"currency\": \"GBP\"}\nprocurementMethod \"open\"\nprocurementMethodDetails \"Open procedure\"\nmainProcurementCategory \"services\"\nadditionalProcurementCategories [\"goods\"]\naboveThreshold true\nsubmissionMethodDetails \"https://uk.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=110669&TID100115668&B=\"\nsubmissionTerms {\"electronicSubmissionPolicy\": \"allowed\", \"languages\": [\"en\"]}\ntenderPeriod {\"endDate\": \"2026-12-04T17:00:00+00:00\"}\nenquiryPeriod {\"endDate\": \"2026-11-20T17:00:00+00:00\"}\nawardPeriod {\"endDate\": \"2027-01-18T23:59:59Z\"}\nLOT id \"LOT-0000\"\nLOT status \"active\"\nLOT value {\"amountGross\": 25323110.4, \"amount\": 21102592, \"currency\": \"GBP\"}\nLOT awardCriteria {\"criteria\": [{\"type\": \"price\", \"name\": \"Price\", \"description\": \"Evaluation of the Tenderer's submitted pricing in accordance with the Pricing Matrix.\", \"numbers\": [{\"number\": 5, \"weight\": \"percentageExact\"}]}, {\"type\": \"quality\", \"name\": \"Quality\", \"description\": \"Evaluation of the Tenderer's response to the quality requirements and service delivery proposals.\", \"numbers\": [{\"number\": 85, \"weight\": \"percentageExact\"}]}, {\"type\": \"quality\", \"name\": \"Social Value\", \"description\": \"Evaluation of t\nLOT suitability {\"sme\": true, \"vcse\": true}\nLOT contractPeriod {\"startDate\": \"2027-04-01T00:00:00Z\", \"endDate\": \"2029-03-31T23:59:59+01:00\", \"maxExtentDate\": \"2031-03-31T23:59:59+01:00\"}\nLOT hasRenewal true\nLOT renewal {\"description\": \"The Contract may be extended by up to two (2) periods of twenty-four (24) months each at the Council's discretion, subject to performance, funding and service requirements.\"}\nLOT hasOptions true\nLOT options {\"description\": \"The Contract will commence on 1 April 2027 for an initial period of two (2) years. The Council reserves the right, at its sole discretion, to extend the Contract for up to two (2) further periods of up to twenty-four (24) months each, subject to satisfactory performance, continued service need, available funding and all necessary approvals. The maximum potential Contract term is six (6) years.\"}\nLOT description null\nPARTIES [{\"roles\": [\"buyer\"], \"name\": \"City of Bradford Metropolitan District Council\", \"contact\": [\"name\", \"email\", \"telephone\"]}]\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179386380414.json"
+  ],
+  "request": {
+    "id": "TASK-179386380414",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T07:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json\nd=json.load(open('products/services/welfare-tender/notice-104449-2026-ocds.json'))\nr=d['releases'][0] if 'releases' in d else d\nt=r['tender']\nfor k,v in t.items():\n  if k in ('lots','documents','awardCriteria'): continue\n  print(k, json.dumps(v)[:400])\nfor l in t.get('lots',[]):\n  for k,v in l.items(): print('LOT',k,json.dumps(v)[:500])\nprint('PARTIES',json.dumps([{'roles':p.get('roles'),'name':p.get('name'),'contact':list((p.get('contactPoint') or {}).keys())} for p in r.get('parties',[])]))"
+      ],
+      "outputs": [],
+      "mission_id": "WELFARE-BID-READINESS"
+    },
+    "description": "Broker action during THINK-1793863804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179386380414",
+  "input_sha256": "94ba26a8467bae3a19ba74a7fccf0a6413b2c767f3c0e40a5fd7e02fe9bfddf7"
+}
