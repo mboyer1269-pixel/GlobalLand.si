@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "ok 4032\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/tests/verify.py",
+    "products/receipts/TASK-179390958119.json"
+  ],
+  "request": {
+    "id": "TASK-179390958119",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:13:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import sys,os\nb='products/services/shopify-large-catalogue/tests/'\nos.makedirs(b,exist_ok=True)\nopen(b+'verify.py','w',encoding='utf-8').write(sys.argv[1])\nimport py_compile; py_compile.compile(b+'verify.py',doraise=True); print('ok',len(sys.argv[1]))",
+        "\"\"\"Independent verifier for transform.py output (re-reads written CSV files).\"\"\"\nimport csv\nEXP = ['Title', 'URL handle', 'Vendor', 'Type', 'Tags', 'SKU', 'Barcodes', 'Option1 name', 'Option1 value', 'Option2 name', 'Option2 value', 'Price', 'Product image URL', 'Image position', 'Image alt text', 'Variant image URL']\n\n\ndef unesc(b):\n    out, i = '', 0\n    while i < len(b):\n        if b[i] == '\\\\' and i + 1 < len(b):\n            out += b[i + 1]; i += 2\n        else:\n            out += b[i]; i += 1\n    return out\n\n\ndef strip_type(b):\n    for p in ('gtin:', 'upc:', 'ean:'):\n        if b.startswith(p):\n            return b[len(p):]\n    return b\n\n\ndef verify(files, v, im):\n    \"\"\"v rows: style_id,title,vendor,type,tags,color,size,sku,barcode,price; im rows: style_id,color,position,url\"\"\"\n    chk = {}\n    raw = b''.join(open(f, 'rb').read() for f in files)\n    chk['utf8_no_bom_lf_only'] = (not raw.startswith(b'\\xef\\xbb\\xbf')) and b'\\r' not in raw and bool(raw.decode('utf-8'))\n    rows, fileof, hdr_ok, split_ok = [], {}, True, True\n    for f in files:\n        with open(f, newline='', encoding='utf-8') as fh:\n            r = csv.DictReader(fh)\n            hdr_ok = hdr_ok and r.fieldnames == EXP\n            for row in r:\n                h = row['URL handle']\n                if h in fileof and fileof[h] != f:\n                    split_ok = False\n                fileof[h] = f\n                rows.append(row)\n    chk['header_matches_documented_names'] = hdr_ok\n    chk['no_product_split_across_files'] = split_ok\n    contiguous, title_first, prev, seen, groups = True, True, None, set(), {}\n    for row in rows:\n        h = row['URL handle']\n        if h != prev:\n            if h in seen:\n                contiguous = False\n            seen.add(h)\n            title_first = title_first and bool(row['Title'])\n        elif row['Title']:\n            title_first = False\n        prev = h\n        groups.setdefault(h, []).append(row)\n    chk['handle_rows_contiguous'] = contiguous\n    chk['title_only_on_first_row'] = title_first\n    var = [r for r in rows if r['SKU']]\n    skus = [r['SKU'] for r in var]\n    chk['sku_unique'] = len(skus) == len(set(skus))\n    inmap = {x[7]: (x[8], x[5], x[6], x[9]) for x in v}\n    outmap = {r['SKU']: (unesc(strip_type(r['Barcodes'])), r['Option1 value'], r['Option2 value'], r['Price']) for r in var}\n    chk['identifiers_preserved_sku_barcode_color_size_price'] = inmap == outmap and len(var) == len(v)\n    want, sid_of = {}, {x[7]: x[0] for x in v}\n    for x in im:\n        want.setdefault(x[0], []).append(x)\n    ok = dict.fromkeys(['color_size_combo_unique_per_product', 'image_positions_1_to_n', 'all_input_images_present_once_per_product',\n                        'variant_image_is_first_image_of_its_color', 'image_only_rows_have_no_variant_fields'], True)\n    for h, g in groups.items():\n        cmb = [(r['Option1 value'], r['Option2 value']) for r in g if r['SKU']]\n        ok['color_size_combo_unique_per_product'] &= len(cmb) == len(set(cmb))\n        pos = [int(r['Image position']) for r in g if r['Product image URL']]\n        ok['image_positions_1_to_n'] &= pos == list(range(1, len(pos) + 1))\n        sid = sid_of[next(r['SKU'] for r in g if r['SKU'])]\n        urls = [r['Product image URL'] for r in g if r['Product image URL']]\n        ok['all_input_images_present_once_per_product'] &= sorted(urls) == sorted(x[3] for x in want.get(sid, []))\n        firsts = {}\n        for x in sorted(want.get(sid, []), key=lambda x: int(x[2]), reverse=True):\n            firsts[x[1]] = x[3]\n        for r in g:\n            if r['SKU']:\n                ok['variant_image_is_first_image_of_its_color'] &= r['Variant image URL'] == firsts.get(r['Option1 value'], '') and (r['Variant image URL'] in urls or not r['Variant image URL'])\n            else:\n                ok['image_only_rows_have_no_variant_fields'] &= not any(r[c] for c in ('Option1 value', 'Option2 value', 'Price', 'Barcodes', 'Variant image URL', 'Title'))\n    chk.update(ok)\n    return chk, len(rows), len(groups)\n"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/shopify-large-catalogue/tests/verify.py"
+      ],
+      "mission_id": "SHOPIFY-LARGE-CATALOGUE-SAMPLE"
+    },
+    "description": "Broker action during THINK-1793909581",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179390958119",
+  "input_sha256": "b6eba7a18bf9ce57eba65f39b4c91e2043c72274449b203c0507b5ae430d010c"
+}
