@@ -379,8 +379,10 @@ class Toolbox:
             value=self.world.apply(task['id'],args,actor=task['submitted_by'])
             return {'status':'DONE','output':json.dumps(value,ensure_ascii=False)},{}
         if action=='STATUS':
-            bank=self.treasury.snapshot();capabilities=capability_view(self.root,self.config)
-            return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':bank,'capabilities':capabilities,
+            import economic
+            economy=economic.project(self.root,self.treasury)
+            bank=economy['snapshot'];capabilities=capability_view(self.root,self.config)
+            return {'status':'DONE','output':json.dumps({'world':self.world.snapshot(),'bank':bank,'economic_context':economy['context'],'capabilities':capabilities,
                     'commercial_paths':commercial_paths(capabilities,bank)},ensure_ascii=False)},{}
         if action=='PUBLISH_SITE':
             from sites import Publisher as SitePublisher
