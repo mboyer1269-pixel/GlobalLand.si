@@ -69,6 +69,54 @@ Vérification du 4 novembre 2026 : un message envoyé depuis une boîte de test 
 
 Audit complémentaire du 4 novembre : une demande de test a reçu une synthèse substantielle de la fiche publique, avec sources et limites de vérification, dans le même fil. La réponse a été lue dans la boîte destinataire et un nouveau cycle n'a pas créé de doublon. **Ce message entrant avait d'abord été classé comme spam et a nécessité un reclassement manuel ciblé.** Le test ne prouve donc pas un parcours entièrement sans intervention. La liste normale des messages reçus exclut ces messages ; aucun accès automatisé à leur lecture n'a été validé avec la clé actuelle. Aucun filtre global ni droit de la clé n'a été élargi. Voir le [rapport et les limites restantes](verification/2026-11-04-commercial-channel.md).
 
+## Continuité locale facultative
+
+Activer uniquement dans la configuration privée de l'hôte, après installation
+d'une révision revue : `{"agentmail":{"continuity":{"enabled":true}}}`. Le champ
+doit être un booléen strict ; absence ou configuration invalide n'active pas
+l'historique. Ce réglage n'a pas été appliqué en production par cet incrément.
+Il fonctionne aussi pour le répondant sans outils, avec classification commerciale
+désactivée. Les anciens dossiers restent isolés ; aucun ancien courrier n'est
+automatiquement promu en conversation autorisée.
+
+Un lien requiert les métadonnées structurées du fournisseur : boîte et message
+exacts, fil borné, un seul From, To limité à la boîte configurée, aucun CC/BCC
+observé et Reply-To absent ou identique. Les noms d'affichage et la casse du
+domaine sont acceptés ; casse locale, points et suffixes `+` restent distincts.
+Exiger DMARC `pass` avec domaine aligné au From, puis `in_reply_to` égal à une
+réponse locale durablement `ACCEPTED` pour la même boîte, le même fil et le même
+correspondant. Objet, References, texte et headers bruts n'accordent aucun accès.
+DMARC n'authentifie ni une personne, ni un contrat, ni une autorité bancaire.
+Sans ces preuves, le service isolé peut continuer sans approbation par message.
+
+La liaison, la route et les références sont figées avant tout calcul. Une reprise
+ne peut ni les élargir ni envoyer une réponse READY à un destinataire modifié.
+L'hôte fixe `to=[peer], cc=[], bcc=[], reply_all=false` pour la route liée.
+READY possède une empreinte canonique versionnée ; le journal STARTED conserve
+sa référence exacte. Les index sous `state/private/reply-links/` sont dérivés
+des journaux ACCEPTED validés : une panne d'index ne relance jamais l'envoi.
+Un conflit d'index reste fermé, et une réponse au fil incohérent reste incertaine.
+
+L'historique est une fenêtre locale de huit ancêtres au plus, sélectionnés parmi
+les plus récents puis présentés chronologiquement, sans téléchargement du fil
+distant ni dossiers imbriqués. Limites séparées : 128 Kio UTF-8 de texte, 64 Kio
+de fichiers historiques et 128 fichiers au plus. Les omissions portent sur des
+éléments entiers, avec manifeste et empreintes exactes. Le sandbox reçoit des
+copies sous `history/<case_key>/products/...`, sans montage privé global.
+Seuls les fichiers DONE du dossier courant peuvent être choisis comme livrables.
+Pendant WORKING, un ancêtre sélectionné manquant ou corrompu ne peut pas être
+remplacé silencieusement ; une READY intacte peut être réutilisée sans relire
+les corps ancestraux. Les limites et budgets du message courant sont conservés.
+
+Pour un message lié, une nouvelle observation commerciale doit être fondée sur
+le seul `extracted_text` courant non blanc. Une citation seulement présente dans
+l'historique ou dans le texte complet cité devient UNKNOWN pour ce classement,
+sans empêcher le travail privé utile. L'extraction ne prouve pas la nouveauté
+sémantique ni la vérité du propos. Historique et reçus restent des données non
+fiables pour les instructions ; ACCEPTED ne prouve toujours ni livraison ni vente.
+Les tests simulés et Docker ne remplacent pas une future vérification fournisseur
+A/B/C avec preuve des métadonnées, destinataires et réceptions réelles.
+
 ## Références fournisseur
 
 - [Formule gratuite](https://www.agentmail.to/pricing)
