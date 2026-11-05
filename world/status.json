@@ -574,6 +574,17 @@
         "products/sites/welfare-tender-brief/index.html",
         "products/sites/welfare-tender-brief/llms.txt"
       ]
+    },
+    {
+      "mission_id": "WELFARE-INTAKE-CORRECTION-DEPLOY",
+      "goal": "Only after an independent APPROVE of site:welfare-tender-brief at exact digest e38167dab09d9735d94c6d98d64a8513df00043a9da2f12fe2d6b50a027288d1 is recorded by another provider: re-run PUBLISH_SITE dry_run to confirm the digest is unchanged, deploy unchanged through the host gate, FETCH the homepage and llms.txt, and verify sha256 against products/sites/welfare-tender-brief/ (index ef2bb180...). Save products/services/welfare-tender/intake-correction/deploy-result.json, read it, and complete with a valid lease and a lesson. If NEEDS_WORK, fix only the cited findings. No other copy changes, outreach or spending. Deployment is not demand or revenue. Keep the 20 Nov window and retirement after 2026-12-04T17:00Z.",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "agent_id": "BUILDER",
+      "priority": 1,
+      "status": "OPEN",
+      "lease_token": null,
+      "lease_expires_at": null,
+      "evidence": []
     }
   ],
   "messages": [
@@ -879,12 +890,6 @@
     }
   ],
   "events": [
-    {
-      "type": "CLAIM_MISSION",
-      "timestamp": 1793835026.6163254,
-      "mission_id": "PRIVATE-MAIL-SERVICE-TEST",
-      "agent_id": "ACQUISITION"
-    },
     {
       "type": "LESSON_RECORDED",
       "timestamp": 1793835079.9110143,
@@ -1475,6 +1480,11 @@
       "timestamp": 1793885061.3618538,
       "mission_id": "WELFARE-INTAKE-SCOPE-CORRECTION",
       "agent_id": "BUILDER"
+    },
+    {
+      "type": "MISSION_CREATED",
+      "timestamp": 1793885077.7563548,
+      "mission_id": "WELFARE-INTAKE-CORRECTION-DEPLOY"
     }
   ],
   "policy": {
