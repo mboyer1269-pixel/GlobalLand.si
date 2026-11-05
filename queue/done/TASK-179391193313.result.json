@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n \"observed_utc\": \"2026-11-05T20:53:23.863130Z\",\n \"files\": [\n  {\n   \"site\": \"transform.py\",\n   \"source\": \"products/services/shopify-large-catalogue/transform.py\",\n   \"sha256\": \"ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e\",\n   \"matches_source\": true\n  },\n  {\n   \"site\": \"verify.py\",\n   \"source\": \"products/services/shopify-large-catalogue/tests/verify.py\",\n   \"sha256\": \"54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39\",\n   \"matches_source\": true\n  },\n  {\n   \"site\": \"fixtures/before-variants.csv\",\n   \"source\": \"products/services/shopify-large-catalogue/fixtures/before-variants.csv\",\n   \"sha256\": \"5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac\",\n   \"matches_source\": true\n  },\n  {\n   \"site\": \"fixtures/before-images.csv\",\n   \"source\": \"products/services/shopify-large-catalogue/fixtures/before-images.csv\",\n   \"sha256\": \"894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d\",\n   \"matches_source\": true\n  },\n  {\n   \"site\": \"fixtures/after-shopify.csv\",\n   \"source\": \"products/services/shopify-large-catalogue/fixtures/after-shopify.csv\",\n   \"sha256\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\",\n   \"matches_source\": true\n  }\n ],\n \"documented_command\": \"python3 transform.py --variants fixtures/before-variants.csv --images fixtures/before-images.csv --out shopify.csv --report report.json\",\n \"exit_code\": 0,\n \"stderr_tail\": \"\",\n \"output_sha256\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\",\n \"output_identical_to_expected_fixture\": true,\n \"report\": {\n  \"ok\": true,\n  \"products\": 2,\n  \"rows\": 12,\n  \"files\": [\n   \"shopify.csv\"\n  ],\n  \"errors\": [],\n  \"error_count\": 0,\n  \"warnings\": [],\n  \"warning_count\": 0,\n  \"seconds\": 0.003\n },\n \"verify_result\": \"verify call failed: KeyError(7)\",\n \"cited_doc_urls_in_research\": [],\n \"page_checks\": {\n  \"autonomous AI agents\": true,\n  \"agents d'IA autonomes\": true,\n  \"never been tested\": true,\n  \"historical\": true,\n  \"overwrite\": true,\n  \"ONE variant image\": true,\n  \"No paid orders\": true,\n  \"attachments\": true,\n  \"https://community.shopify.com/t/575067\": true,\n  \"no_price_or_checkout\": true\n }\n}\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/release/release-manifest.json",
+    "products/receipts/TASK-179391193313.json"
+  ],
+  "request": {
+    "id": "TASK-179391193313",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T20:52:13Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,subprocess,sys,os,re,csv,pathlib,tempfile,shutil\nS='products/services/shopify-large-catalogue/';D='products/sites/shopify-catalogue-example/'\nh=lambda p:hashlib.sha256(open(p,'rb').read()).hexdigest()\npairs=[('transform.py','transform.py'),('tests/verify.py','verify.py'),('fixtures/before-variants.csv','fixtures/before-variants.csv'),('fixtures/before-images.csv','fixtures/before-images.csv'),('fixtures/after-shopify.csv','fixtures/after-shopify.csv')]\nm={'observed_utc':__import__('datetime').datetime.utcnow().isoformat()+'Z','files':[]}\nfor a,b in pairs: m['files'].append({'site':b,'source':S+a,'sha256':h(D+b),'matches_source':h(D+b)==h(S+a)})\nt=tempfile.mkdtemp();\nfor x in ['transform.py','verify.py','fixtures/before-variants.csv','fixtures/before-images.csv','fixtures/after-shopify.csv']:\n  os.makedirs(os.path.dirname(os.path.join(t,x)) or t,exist_ok=True);shutil.copyfile(D+x,os.path.join(t,x))\ncmd=['python3','transform.py','--variants','fixtures/before-variants.csv','--images','fixtures/before-images.csv','--out','shopify.csv','--report','report.json']\nr=subprocess.run(cmd,cwd=t,capture_output=True,text=True)\nout=os.path.join(t,'shopify.csv')\nm['documented_command']=' '.join(cmd);m['exit_code']=r.returncode;m['stderr_tail']=r.stderr[-300:]\nm['output_sha256']=h(out) if os.path.exists(out) else None\nm['output_identical_to_expected_fixture']=os.path.exists(out) and open(out,'rb').read()==open(os.path.join(t,'fixtures/after-shopify.csv'),'rb').read()\nm['report']=json.load(open(os.path.join(t,'report.json'))) if os.path.exists(os.path.join(t,'report.json')) else None\nsys.path.insert(0,t)\ntry:\n  import verify\n  v=[dict(rw,type=rw.get('product_type',''),vendor=rw.get('vendor',''),tags=rw.get('tags','')) for rw in csv.DictReader(open(os.path.join(t,'fixtures/before-variants.csv'),encoding='utf-8'))]\n  im=list(csv.DictReader(open(os.path.join(t,'fixtures/before-images.csv'),encoding='utf-8')))\n  m['verify_result']=verify.verify([out],v,im)\nexcept Exception as e: m['verify_result']='verify call failed: %r'%e\nres=open('products/research/shopify-product-csv-official.txt',encoding='utf-8',errors='replace').read() if os.path.exists('products/research/shopify-product-csv-official.txt') else ''\nm['cited_doc_urls_in_research']=sorted(set(re.findall(r'https://help\\.shopify\\.com[^\\s\"<>)]*',res)))[:10]\nhtml=open(D+'index.html',encoding='utf-8').read()\nm['page_checks']={k:(k in html) for k in ['autonomous AI agents','agents d\\'IA autonomes','never been tested','historical','overwrite','ONE variant image','No paid orders','attachments','https://community.shopify.com/t/575067']}\nm['page_checks']['no_price_or_checkout']=not re.search(r'(USD|CAD|\\$|EUR)\\s?\\d',html)\npathlib.Path(D.replace('sites/shopify-catalogue-example/','services/shopify-large-catalogue/release/')).mkdir(parents=True,exist_ok=True)\njson.dump(m,open('products/services/shopify-large-catalogue/release/release-manifest.json','w'),indent=1,default=str)\nprint(json.dumps(m,indent=1,default=str)[:3500])"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/",
+        "products/sites/shopify-catalogue-example/",
+        "products/research/shopify-product-csv-official.txt"
+      ],
+      "outputs": [
+        "products/services/shopify-large-catalogue/release/release-manifest.json"
+      ],
+      "mission_id": "SHOPIFY-WORKED-SOLUTION-RELEASE"
+    },
+    "description": "Broker action during THINK-1793911933",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179391193313",
+  "input_sha256": "c79a859031900271315a529359e1fa0910fda90cfd750552f68a7fb3997dcb92"
+}
