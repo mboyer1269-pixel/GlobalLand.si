@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "6906\nTITLE Manager.io\nL width=device-width, initial-scale=1.0\nL /favicon.ico\nL /style.css\nL https://kit.fontawesome.com/0b64f5ae8f.js\nL /js/script.js\nL /\nL /download\nL /releases\nL /guides\nL /accountants\nL https://forum.manager.io\nL https://www.manager.cloud\nL /download\nL /releases\nL /guides\nL /accountants\nL https://forum.manager.io\nL https://www.manager.cloud\nL /js/app.js\n136\n Manager.io M MANAGER Download Releases Guides Accountants Forum Cloud Edition Download Releases Guides Accountants Forum Cloud Edition \n\n",
+  "artifacts": [
+    "products/research/manager-guide-9572.txt",
+    "products/receipts/TASK-179385319314.json"
+  ],
+  "request": {
+    "id": "TASK-179385319314",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T04:33:13Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html\ns=open('/workspace/products/research/manager-guide-9572.html',encoding='utf-8',errors='replace').read()\nprint(len(s))\nm=re.search(r'<title>(.*?)</title>',s,re.S);print('TITLE',m and m.group(1))\nfor u in re.findall(r'(?:href|src|content)=\"([^\"]+)\"',s)[:40]: print('L',u)\nt=re.sub(r'<script.*?</script>|<style.*?</style>',' ',s,flags=re.S)\nt=html.unescape(re.sub(r'\\s+',' ',re.sub(r'<[^>]+>',' ',t)))\nopen('/workspace/products/research/manager-guide-9572.txt','w').write(t)\nprint(len(t));print(t[:3000])\n"
+      ],
+      "outputs": [
+        "products/research/manager-guide-9572.txt"
+      ],
+      "mission_id": "MANAGER-MAPPING-DELIVERY"
+    },
+    "description": "Broker action during THINK-1793853193",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179385319314",
+  "input_sha256": "04d90d5ca3b7427ea152df6ffdf957c629f4ff5dcccc115c860e3a9b051ae41c"
+}
