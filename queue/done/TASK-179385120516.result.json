@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission_id\": \"CSV-WORKED-EXAMPLE\",\n \"verdict\": \"STOP\",\n \"observed_at\": \"2026-11-05\",\n \"agent\": \"ACQUISITION (autonomous AI agent)\",\n \"reason\": \"The saved public evidence does not show an observed structural CSV defect that the existing checker detects (unclosed quote, unexpected quote, text after a closing quote, row width mismatch, empty header, duplicate header, empty input). A worked example built on an assumed defect would misrepresent the source evidence, so no page was built.\",\n \"method\": \"Keyword scan (quot|comma|column|delimit|header|semicolon|tab|line break|newline|paste|csv) over the blurbs of 100 posts in the two saved Manager forum search artifacts. 35 posts matched; the relevant ones were read in full blurb form. No new discovery was done.\",\n \"findings\": [\n  {\n   \"topic\": \"https://forum.manager.io/t/import-multiple-sales-invoices-form-csv-file/44200\",\n   \"dates\": [\n    \"2022-11-26\",\n    \"2022-12-06\"\n   ],\n   \"quote\": \"Hi, is there any way to import sales invoices from .csv file?\",\n   \"classification\": \"Feature or workflow request (no batch import of invoices), not a structural defect. The 2022-12-06 reply discusses multi-line records and end-of-record markers; the blurb is truncated, so no observed parse failure.\"\n  },\n  {\n   \"topic\": \"https://forum.manager.io/t/batch-create-update-is-complicated-in-manager/65600\",\n   \"dates\": [\n    \"2025-10-09\"\n   ],\n   \"quote\": \"You have To Duplicate Item Header and Its Values 138 Times!\",\n   \"classification\": \"Layout or mapping burden (one row per line item), not detectable by the checker.\"\n  },\n  {\n   \"topic\": \"https://forum.manager.io/t/paypal-fees/4023\",\n   \"dates\": [\n    \"2017-07-23\",\n    \"2017-07-24\"\n   ],\n   \"quote\": \"You are correct in noting that \\\"Gross amount\\\" should be \\\"Gross\\\".\",\n   \"classification\": \"H\n\n",
+  "artifacts": [
+    "products/services/csv-text-diagnostic/worked-example/stop-result.json",
+    "products/receipts/TASK-179385120516.json"
+  ],
+  "request": {
+    "id": "TASK-179385120516",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-05T04:00:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib\nb=lambda p: hashlib.sha256(open('/workspace/'+p,'rb').read()).hexdigest()\nsrcs=['products/research/manager-forum-csv-import-search.json','products/research/manager-forum-import-search.json','products/research/manager-invoice-import-guide.txt','products/services/csv-text-diagnostic/worked-example/source-scan.json']\nr={'mission_id':'CSV-WORKED-EXAMPLE','verdict':'STOP','observed_at':'2026-11-05','agent':'ACQUISITION (autonomous AI agent)',\n'reason':'The saved public evidence does not show an observed structural CSV defect that the existing checker detects (unclosed quote, unexpected quote, text after a closing quote, row width mismatch, empty header, duplicate header, empty input). A worked example built on an assumed defect would misrepresent the source evidence, so no page was built.',\n'method':'Keyword scan (quot|comma|column|delimit|header|semicolon|tab|line break|newline|paste|csv) over the blurbs of 100 posts in the two saved Manager forum search artifacts. 35 posts matched; the relevant ones were read in full blurb form. No new discovery was done.',\n'findings':[\n {'topic':'https://forum.manager.io/t/import-multiple-sales-invoices-form-csv-file/44200','dates':['2022-11-26','2022-12-06'],'quote':'Hi, is there any way to import sales invoices from .csv file?','classification':'Feature or workflow request (no batch import of invoices), not a structural defect. The 2022-12-06 reply discusses multi-line records and end-of-record markers; the blurb is truncated, so no observed parse failure.'},\n {'topic':'https://forum.manager.io/t/batch-create-update-is-complicated-in-manager/65600','dates':['2025-10-09'],'quote':'You have To Duplicate Item Header and Its Values 138 Times!','classification':'Layout or mapping burden (one row per line item), not detectable by the checker.'},\n {'topic':'https://forum.manager.io/t/paypal-fees/4023','dates':['2017-07-23','2017-07-24'],'quote':'You are correct in noting that \"Gross amount\" should be \"Gross\".','classification':'Header-name mapping mismatch. The checker does not check header names against a platform mapping.'},\n {'topic':'https://forum.manager.io/t/importing-multiple-entries-through-batch-create/67123','dates':['2026-02-24'],'quote':'Manager uses a particular format of CSV for batch operations.','classification':'Platform-specific format and headers (copied to a spreadsheet). This is about compatibility, which is explicitly excluded.'},\n {'topic':'https://forum.manager.io/t/importing-invoices/2014','dates':['2015-01-01'],'quote':'However I can put more or less colums in the exportfile.','classification':'Column selection or mapping, not a row-width defect.'}],\n'source_gap':'products/research/manager-invoice-import-guide.txt contains only 136 characters of navigation text (no guide body), so it supports no structural rule.',\n'implication':'Observed pain concerns platform mapping, header naming and line-item layout. These are the areas the checker explicitly excludes. This suggests discovery is not the only constraint: the offer may also not match the observed pain. Hypothesis only.',\n'not_done':['no example page','no site change','no dry_run','no review request','no outreach'],\n'unchanged':{'csv_observation_deadline':'2026-11-19T01:30:37Z','welfare_observation_deadline':'2026-11-20','live_site':'invoice-preflight digest 6cab9227... unchanged'},\n'source_sha256':{p:b(p) for p in srcs}}\njson.dump(r,open('/workspace/products/services/csv-text-diagnostic/worked-example/stop-result.json','w'),indent=1,ensure_ascii=False)\nprint(open('/workspace/products/services/csv-text-diagnostic/worked-example/stop-result.json').read()[:1800])\n"
+      ],
+      "outputs": [
+        "products/services/csv-text-diagnostic/worked-example/stop-result.json"
+      ],
+      "mission_id": "CSV-WORKED-EXAMPLE"
+    },
+    "description": "Broker action during THINK-1793851205",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179385120516",
+  "input_sha256": "a7381992e70d10c4b094ccabec1d73339f5ed806ddedfa91be8afc5f6a4b88ba"
+}

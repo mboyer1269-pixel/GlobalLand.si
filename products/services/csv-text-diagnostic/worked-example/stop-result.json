@@ -1,0 +1,72 @@
+{
+ "mission_id": "CSV-WORKED-EXAMPLE",
+ "verdict": "STOP",
+ "observed_at": "2026-11-05",
+ "agent": "ACQUISITION (autonomous AI agent)",
+ "reason": "The saved public evidence does not show an observed structural CSV defect that the existing checker detects (unclosed quote, unexpected quote, text after a closing quote, row width mismatch, empty header, duplicate header, empty input). A worked example built on an assumed defect would misrepresent the source evidence, so no page was built.",
+ "method": "Keyword scan (quot|comma|column|delimit|header|semicolon|tab|line break|newline|paste|csv) over the blurbs of 100 posts in the two saved Manager forum search artifacts. 35 posts matched; the relevant ones were read in full blurb form. No new discovery was done.",
+ "findings": [
+  {
+   "topic": "https://forum.manager.io/t/import-multiple-sales-invoices-form-csv-file/44200",
+   "dates": [
+    "2022-11-26",
+    "2022-12-06"
+   ],
+   "quote": "Hi, is there any way to import sales invoices from .csv file?",
+   "classification": "Feature or workflow request (no batch import of invoices), not a structural defect. The 2022-12-06 reply discusses multi-line records and end-of-record markers; the blurb is truncated, so no observed parse failure."
+  },
+  {
+   "topic": "https://forum.manager.io/t/batch-create-update-is-complicated-in-manager/65600",
+   "dates": [
+    "2025-10-09"
+   ],
+   "quote": "You have To Duplicate Item Header and Its Values 138 Times!",
+   "classification": "Layout or mapping burden (one row per line item), not detectable by the checker."
+  },
+  {
+   "topic": "https://forum.manager.io/t/paypal-fees/4023",
+   "dates": [
+    "2017-07-23",
+    "2017-07-24"
+   ],
+   "quote": "You are correct in noting that \"Gross amount\" should be \"Gross\".",
+   "classification": "Header-name mapping mismatch. The checker does not check header names against a platform mapping."
+  },
+  {
+   "topic": "https://forum.manager.io/t/importing-multiple-entries-through-batch-create/67123",
+   "dates": [
+    "2026-02-24"
+   ],
+   "quote": "Manager uses a particular format of CSV for batch operations.",
+   "classification": "Platform-specific format and headers (copied to a spreadsheet). This is about compatibility, which is explicitly excluded."
+  },
+  {
+   "topic": "https://forum.manager.io/t/importing-invoices/2014",
+   "dates": [
+    "2015-01-01"
+   ],
+   "quote": "However I can put more or less colums in the exportfile.",
+   "classification": "Column selection or mapping, not a row-width defect."
+  }
+ ],
+ "source_gap": "products/research/manager-invoice-import-guide.txt contains only 136 characters of navigation text (no guide body), so it supports no structural rule.",
+ "implication": "Observed pain concerns platform mapping, header naming and line-item layout. These are the areas the checker explicitly excludes. This suggests discovery is not the only constraint: the offer may also not match the observed pain. Hypothesis only.",
+ "not_done": [
+  "no example page",
+  "no site change",
+  "no dry_run",
+  "no review request",
+  "no outreach"
+ ],
+ "unchanged": {
+  "csv_observation_deadline": "2026-11-19T01:30:37Z",
+  "welfare_observation_deadline": "2026-11-20",
+  "live_site": "invoice-preflight digest 6cab9227... unchanged"
+ },
+ "source_sha256": {
+  "products/research/manager-forum-csv-import-search.json": "ebf2aa535f9b12914daf4860d5cd13d40360fa18583bdbf39b010886c0589c80",
+  "products/research/manager-forum-import-search.json": "a74fe9b49df364fdc2e66ba221ef3aff7438fe173a0d563b42e9da83fd0bacde",
+  "products/research/manager-invoice-import-guide.txt": "95ed0fb4df6b53171c856fa57008ebad7fd816ba22dd1c5eb1f1aa6854a4d554",
+  "products/services/csv-text-diagnostic/worked-example/source-scan.json": "2dc609ea138ef632715b81e5278f1b2b7bf67b41b938ec472b5e531381212539"
+ }
+}
