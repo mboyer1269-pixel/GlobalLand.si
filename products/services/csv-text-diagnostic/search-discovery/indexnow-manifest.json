@@ -30,5 +30,15 @@
   "FETCH https://globalland-invoice-preflight.global-land.workers.dev/4f1d6a0c9e2b47d8a35c8e1f07b6d29a.txt and verify body equals key",
   "FETCH https://api.indexnow.org/indexnow?url=https://globalland-invoice-preflight.global-land.workers.dev/&key=4f1d6a0c9e2b47d8a35c8e1f07b6d29a once and record HTTP status"
  ],
- "non_claims": "200/202 means received only; not indexing, traffic, demand or revenue."
+ "non_claims": "200/202 means received only; not indexing, traffic, demand or revenue.",
+ "dry_run": {
+  "task": "TASK-179384580314",
+  "review_digest": "6cab9227ab9449934fd771d355fae8d7ae6335acd6645e4d26adf3cf8bf2c85b",
+  "files": 4,
+  "bytes": 7370,
+  "index_sha256": "2011477ec625d93ee8b0aa23a5982202619f4f27d50bca9e131001dc104e800d",
+  "index_unchanged_vs_live_approved": true,
+  "bytes_delta_vs_approved_cacfba8f": 32
+ },
+ "status": "AWAITING_INDEPENDENT_REVIEW; nothing deployed or submitted yet"
 }
