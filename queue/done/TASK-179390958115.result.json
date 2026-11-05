@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "A: er all the fields for the product in the first row along with the URL for the first image. In the following rows, only enter the handle and the URL for each additional image. Product with variants: If you upload a product that has variants, then enter all the fields for the product in the first row along with the URL for the first image. In the following rows, enter the URL handle. Then skip the Title , Description , Vendor , and Tags columns. Fill out the rest of the variants' details and each image URL. After you've added all your products and images, save your CSV file in UTF-8 format using LF-style linefeeds. If you're not familiar with encodings, then review your spreadsheet or text editor program's documentation. To view an example CSV file, download this sample product CSV file , and then open it in Google Sheets or another spreadsheet program. Prepare your images A CSV file can only contain text, therefore, you need to make sure that all product images are on an existing website. Those image URLs are only used during the CSV file importing process. You can delete the URLs after your import is complete. You can use only image URLs in CSV files. 3D models and videos aren't supported for the CSV, but you can upload them to Content > Files . Learn more about product media types . Image URLs from external sources need to be publicly accessible. Uploading your images to Content > Files helps ensure your product images are all accurate. Depending on the location of your image file, take one of following actions: If the files are only on your computer, then you must upload \n\n## Variant image [20312, 25322]\n\n## Barcode [10073, 10639, 10676, 10777, 10800]\n\n## Product image URL [19138, 32026]\n\n## Option1 linked []\n\n## SKU  [2997, 9928, 10005, 25678]\nB: and descriptive: the maximum length is 512 characters the optimal length is 125 characters or fewer Variant image URL Enter the URL for the variant images. Ensure added URLs are functioning image URLs. Gift card Indicates whether the product is a gift card. Valid values are: false (default): the product isn't a gift card true : the product is a gift card This column also allows you to edit other gift card details in bulk, such as the Description or Tags , but you can't create a gift card by importing a product CSV file. A gift card can only be created and activated in the Shopify admin. SEO title The product name that is displayed in search engine results. The SEO title that you enter can be alphanumeric and include up to 70 characters. Valid SEO titles are: alphanumeric up to 70 character\nC:  available to sell Learn more about product statuses . SKU The Stock Keeping Unit (SKU) of a variant, used to track inventory . The SKU column can't be blank if you use a custom fulfillment service . Barcodes All of the barcodes, up to a maximum of 20, for the product or variant. This can be a single barcode, or multiple barcodes. Separate multiple barcodes with a semicolon. To set the industry standard that a barcode applies to, enter the barcode type and a colon before the value. A barcode that has no type is imported as a Custom barcode. For example: gtin:00012345678905; upc:012345678905; INTERNAL-123 . To use a backslash, a semicolon, or a colon inside a barcode value, enter \\\\ , \\; , or\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179390958115.json"
+  ],
+  "request": {
+    "id": "TASK-179390958115",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-05T20:13:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re\nt=open('products/research/shopify-product-csv-official.txt',encoding='utf-8').read()\nprint('A:',t[27600:29200])\nfor k in ['Variant image','Barcode','Product image URL','Option1 linked','SKU ']:\n  ms=[m.start() for m in re.finditer(k,t)]\n  print('\\n##',k,ms[:8])\nm=t.find('Variant image URL'); print('B:',t[m-100:m+700] if m>=0 else 'none')\nm=t.find('Barcode'); print('C:',t[m-200:m+500])"
+      ],
+      "inputs": [
+        "products/research/shopify-product-csv-official.txt"
+      ],
+      "outputs": [],
+      "mission_id": "SHOPIFY-LARGE-CATALOGUE-SAMPLE"
+    },
+    "description": "Broker action during THINK-1793909581",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179390958115",
+  "input_sha256": "c8ff65129a1cad21b47dcce6079fdc647634347afeaa41faab0308933f4203c7"
+}
