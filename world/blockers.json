@@ -1,5 +1,5 @@
 {
-  "founder_actions": 2,
+  "founder_actions": 3,
   "open": [
     {
       "id": "NO-APIFY-ACCESS",
@@ -28,6 +28,20 @@
       "reports": 1,
       "opened_at": "2026-11-03T20:01:26Z",
       "last_reported_at": "2026-11-03T20:01:26Z"
+    },
+    {
+      "id": "SERVICE-PAYMENT-COLLECTION",
+      "status": "OPEN",
+      "owner": "FOUNDER",
+      "category": "PAYMENT",
+      "title": "Service experiments have no authorized order or payment collection route",
+      "detail": "commercial_paths.collection is NOT_IMPLEMENTED; private fulfillment explicitly excludes paid orders, and treasury has zero verified available funds and no verified revenue. Existing public prices are hypotheses, not purchasable offers. A dedicated, authorized merchant/payment route with verified account eligibility, applicable terms and an observable settlement mechanism is required before accepting paid service orders. Do not create accounts, accept agreements, improvise payment instructions or treat a finance adapter as checkout. Continue current free diagnostic and expression-of-interest experiments without changing their terms.",
+      "mission_id": "WORLD-FIRST-REVENUE",
+      "expected_gain": "Would enable testing paid conversion after actual buyer interest; no customer, payment or revenue is established.",
+      "raised_by": "DIRECTOR",
+      "reports": 1,
+      "opened_at": "2026-11-05T14:30:49Z",
+      "last_reported_at": "2026-11-05T14:30:49Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
