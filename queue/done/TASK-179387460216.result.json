@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\n \"observed\": \"2026-11-05\",\n \"kind\": \"synthetic acceptance checks against official-guide rules; NOT a Shopify import\",\n \"source_txt_sha256\": \"2950ce87ddb048a90846307f28ea2c474880387c98c6146ab8226367b43357db\",\n \"output_sha256\": \"f2687950f6e1aa53de25c1d7d0ec50d1621f1dd8f71c6fff0c64b6c0c690e012\",\n \"checks\": {\n  \"quotes_present_in_source\": true,\n  \"utf8_lf_no_crlf\": true,\n  \"handles_valid\": true,\n  \"one_row_per_input_variant\": true,\n  \"handles_contiguous\": true,\n  \"product_fields_first_row_only\": true,\n  \"price_no_currency_two_decimals\": true,\n  \"status_valid\": true,\n  \"max_3_options\": true,\n  \"unique_option_combos\": true,\n  \"skus_preserved\": true,\n  \"bad_input_rejected_with_3_errors\": true\n },\n \"passed\": true,\n \"not_verified\": [\n  \"actual Shopify import acceptance\",\n  \"whether Option names must repeat on variant rows (guide silent; sample file not fetched)\",\n  \"image URL reachability (not retrieved by design)\"\n ]\n}\n\n",
+  "artifacts": [
+    "products/services/catalogue-transformation/acceptance-results.json",
+    "products/receipts/TASK-179387460216.json"
+  ],
+  "request": {
+    "id": "TASK-179387460216",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-05T10:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import csv,io,json,re,hashlib\nd='/workspace/products/services/catalogue-transformation/'\nraw=open(d+'output.csv','rb').read();txt=raw.decode('utf-8');rows=list(csv.DictReader(io.StringIO(txt)))\nsrc=open('/workspace/products/research/shopify-product-csv-official.txt').read()\ninp=list(csv.DictReader(open(d+'synthetic-input.csv',encoding='utf-8')))\nbad=json.load(open(d+'bad-errors.json'))\nc={}\nc['quotes_present_in_source']=all(q in src for q in ['A valid URL handle can contain letters, dashes, and numbers, but it can\\'t contain any spaces','In the following rows, enter the URL handle. Then skip the Title , Description , Vendor , and Tags columns','Only include the monetary value without a currency symbol','A product can have up to 3 options','save your CSV file in UTF-8 format using LF-style linefeeds','If you\\'re adding variants for a product, then the URL handle column is also required'])\nc['utf8_lf_no_crlf']=b'\\r' not in raw\nc['handles_valid']=all(re.fullmatch(r'[a-z0-9-]+',r['URL handle']) for r in rows)\nc['one_row_per_input_variant']=len(rows)==len(inp)\nhs=[r['URL handle'] for r in rows];c['handles_contiguous']=all(hs.index(h)+hs.count(h)-1==max(i for i,x in enumerate(hs) if x==h) for h in set(hs))\nok=True;seen=set()\nfor r in rows:\n  f=r['URL handle'] not in seen;seen.add(r['URL handle'])\n  if f and not r['Title']: ok=False\n  if not f and any(r[k] for k in ['Title','Description','Vendor','Tags']): ok=False\nc['product_fields_first_row_only']=ok\nc['price_no_currency_two_decimals']=all(re.fullmatch(r'\\d+\\.\\d{2}',r['Price']) for r in rows)\nc['status_valid']=all(r['Status'] in ('','active','draft','archived') for r in rows) and all(r['Status']=='draft' for r in rows if r['Title'])\nc['max_3_options']=sum(1 for k in rows[0] if re.fullmatch(r'Option\\d name',k))<=3\ncombos=[(r['URL handle'],r['Option1 value'],r['Option2 value']) for r in rows];c['unique_option_combos']=len(combos)==len(set(combos))\nc['skus_preserved']=[r['SKU'] for r in rows]==[r['sku'] for r in inp]\nc['bad_input_rejected_with_3_errors']=len(bad)==3\nres={'observed':'2026-11-05','kind':'synthetic acceptance checks against official-guide rules; NOT a Shopify import','source_txt_sha256':hashlib.sha256(src.encode()).hexdigest(),'output_sha256':hashlib.sha256(raw).hexdigest(),'checks':c,'passed':all(c.values()),'not_verified':['actual Shopify import acceptance','whether Option names must repeat on variant rows (guide silent; sample file not fetched)','image URL reachability (not retrieved by design)']}\njson.dump(res,open(d+'acceptance-results.json','w'),indent=1);print(json.dumps(res,indent=1))"
+      ],
+      "outputs": [
+        "products/services/catalogue-transformation/acceptance-results.json"
+      ],
+      "mission_id": "SHOPIFY-CATALOGUE-TRANSFORMATION"
+    },
+    "description": "Broker action during THINK-1793874602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179387460216",
+  "input_sha256": "60d078e3743d1a15408f36d66f35e4384fb78a3e9bdee3e4435409669c5e4cf9"
+}

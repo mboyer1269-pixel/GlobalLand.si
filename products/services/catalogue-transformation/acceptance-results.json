@@ -1,0 +1,26 @@
+{
+ "observed": "2026-11-05",
+ "kind": "synthetic acceptance checks against official-guide rules; NOT a Shopify import",
+ "source_txt_sha256": "2950ce87ddb048a90846307f28ea2c474880387c98c6146ab8226367b43357db",
+ "output_sha256": "f2687950f6e1aa53de25c1d7d0ec50d1621f1dd8f71c6fff0c64b6c0c690e012",
+ "checks": {
+  "quotes_present_in_source": true,
+  "utf8_lf_no_crlf": true,
+  "handles_valid": true,
+  "one_row_per_input_variant": true,
+  "handles_contiguous": true,
+  "product_fields_first_row_only": true,
+  "price_no_currency_two_decimals": true,
+  "status_valid": true,
+  "max_3_options": true,
+  "unique_option_combos": true,
+  "skus_preserved": true,
+  "bad_input_rejected_with_3_errors": true
+ },
+ "passed": true,
+ "not_verified": [
+  "actual Shopify import acceptance",
+  "whether Option names must repeat on variant rows (guide silent; sample file not fetched)",
+  "image URL reachability (not retrieved by design)"
+ ]
+}
