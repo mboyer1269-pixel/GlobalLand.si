@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "18610 45\n\n",
+  "artifacts": [
+    "products/research/catalogue-alt/litextension-extract.txt",
+    "products/receipts/TASK-179392536114.json"
+  ],
+  "request": {
+    "id": "TASK-179392536114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-06T00:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,pathlib\nt=pathlib.Path('products/research/catalogue-alt/litextension-pricing.html').read_text(errors='replace')\nt=re.sub(r'(?s)<script.*?</script>|<style.*?</style>','',t)\ns=html.unescape(re.sub(r'<[^>]+>',' ',t))\ns=re.sub(r'\\s+',' ',s)\nout=[]\nfor kw in ['\\$','USD','product','Product','CSV','variant','image','exclud','not include','All-in-One','Basic','Fully','refund','entities','per ']:\n  for m in re.finditer(kw,s):\n    out.append(kw+' | '+s[max(0,m.start()-160):m.end()+160])\nseen=set();res=[]\nfor o in out:\n  k=o[-200:]\n  if k in seen: continue\n  seen.add(k);res.append(o)\np=pathlib.Path('products/research/catalogue-alt/litextension-extract.txt');p.write_text('LEN '+str(len(s))+'\\n'+'\\n'.join(res[:120]))\nprint(len(s),len(res))"
+      ],
+      "inputs": [
+        "products/research/catalogue-alt/litextension-pricing.html"
+      ],
+      "outputs": [
+        "products/research/catalogue-alt/litextension-extract.txt"
+      ],
+      "mission_id": "CATALOGUE-PAID-ALTERNATIVE-TEST"
+    },
+    "description": "Broker action during THINK-1793925361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179392536114",
+  "input_sha256": "8b121a1e76c5fff180edf987ec8fcf1e17d899970fd117426ce1eae945653d8f"
+}
