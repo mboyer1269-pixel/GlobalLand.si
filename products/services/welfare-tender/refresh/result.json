@@ -1,0 +1,71 @@
+{
+ "mission": "WELFARE-OFFICIAL-AMENDMENT-CHECK",
+ "observed_at": "2026-11-06T11:36:32Z (package updatedTo in fetched uri)",
+ "verdict": "UNCHANGED",
+ "source": {
+  "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026",
+  "fetch_task": "TASK-179396496111",
+  "http_status": 200,
+  "sha256": "2769b4385a786f4a4fc98d6e043507a6e878311a84dd8b4aa94a8b955a2c7d89",
+  "artifact": "products/services/welfare-tender/refresh/notice-104449-2026-ocds-20261106.json"
+ },
+ "baseline": {
+  "artifact": "products/services/welfare-tender/notice-104449-2026-ocds.json",
+  "sha256": "a0a5888cbd0959f90b3a89dfb00535083800a5e0d204096bb6fb82112690f1c1",
+  "observed_at": "2026-11-04T18:11:55Z"
+ },
+ "comparison_task": "TASK-179396496112",
+ "structural_diff_count": 1,
+ "only_difference": [
+  {
+   "path": "/uri",
+   "old": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026?limit=100&updatedTo=2026-11-04T18:10:55",
+   "new": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026?limit=100&updatedTo=2026-11-06T11:36:32"
+  }
+ ],
+ "difference_meaning": "Package-level uri query parameter updatedTo reflects retrieval time; no release field changed. Byte length identical (13614).",
+ "current_fields": {
+  "id": "104449-2026",
+  "date": "2026-11-03T20:30:59Z",
+  "tag": [
+   "tender"
+  ],
+  "tender_status": "active",
+  "tenderPeriod": {
+   "endDate": "2026-12-04T17:00:00+00:00"
+  },
+  "enquiryPeriod": {
+   "endDate": "2026-11-20T17:00:00+00:00"
+  },
+  "value": {
+   "amountGross": 25323110.4,
+   "amount": 21102592,
+   "currency": "GBP"
+  },
+  "amendments": null,
+  "lots": [
+   "LOT-0000"
+  ]
+ },
+ "checked_fields_unchanged": [
+  "release id/date 2026-11-03T20:30:59Z",
+  "tag tender (no amendment/cancellation tag)",
+  "tender.status active",
+  "tenderPeriod.endDate 2026-12-04T17:00:00+00:00",
+  "enquiryPeriod.endDate 2026-11-20T17:00:00+00:00",
+  "value GBP 21102592 excl / 25323110.4 gross",
+  "lots, description, award criteria, suitability, submission route (all release content byte-equal)"
+ ],
+ "amendment_record": "None: tender.amendments absent and only one release in package; no directly linked amendment record to fetch.",
+ "limits": [
+  "Only the OCDS API route was read; HTML notice previously returned 403 and was not retried.",
+  "Unchanged OCDS data does not prove tender documents on EU-Supply are unchanged.",
+  "Malformed submission URL (TID lacks =) remains as published."
+ ],
+ "action": "No correction note; live site unchanged; bounded refresh stopped.",
+ "globalland_position": {
+  "customer_interest_observed": false,
+  "revenue_observed": false,
+  "outreach": false
+ }
+}
