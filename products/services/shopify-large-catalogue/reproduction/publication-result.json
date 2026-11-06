@@ -1,0 +1,40 @@
+{
+ "observed_at": "2026-11-06",
+ "site": "shopify-catalogue-example",
+ "url": "https://globalland-shopify-catalogue-example.global-land.workers.dev/",
+ "deploy_task": "TASK-179392356110",
+ "deploy_status": "ONLINE_VERIFIED",
+ "approved_digest": "57b368fd8865606ef9e852fd761d6f39eac038dc57d6a220013756309cd8c616",
+ "approval_review": "AUDITOR codex seq 12 (TASK-179392320414)",
+ "checks": {
+  "index": {
+   "fetch_task": "TASK-179392356111",
+   "http_status": 200,
+   "sha256": "284e37fe349995b86d859b05a6116c3680efdc7d22cf2d290e4b0686444f060c",
+   "expected_sha256": "284e37fe349995b86d859b05a6116c3680efdc7d22cf2d290e4b0686444f060c",
+   "match": true
+  },
+  "verify_example.py": {
+   "fetch_task": "TASK-179392356112",
+   "http_status": 200,
+   "sha256": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+   "expected_sha256": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+   "match": true
+  }
+ },
+ "not_established": [
+  "traffic",
+  "buyer requests",
+  "Shopify import compatibility",
+  "orders",
+  "revenue"
+ ],
+ "commercial_feedback_at_publication": "0 classified events, 3 unclassified sources (unknown, not zero)",
+ "observation_windows_unchanged": {
+  "csv": "2026-11-19T01:30:37Z",
+  "shopify": "2026-11-19T21:30:49Z",
+  "welfare": "2026-11-20",
+  "welfare_retirement_after": "2026-12-04T17:00:00Z"
+ },
+ "indexnow": "not resubmitted"
+}

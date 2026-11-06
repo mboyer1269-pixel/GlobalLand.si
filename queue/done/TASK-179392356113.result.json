@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\n \"observed_at\": \"2026-11-06\",\n \"site\": \"shopify-catalogue-example\",\n \"url\": \"https://globalland-shopify-catalogue-example.global-land.workers.dev/\",\n \"deploy_task\": \"TASK-179392356110\",\n \"deploy_status\": \"ONLINE_VERIFIED\",\n \"approved_digest\": \"57b368fd8865606ef9e852fd761d6f39eac038dc57d6a220013756309cd8c616\",\n \"approval_review\": \"AUDITOR codex seq 12 (TASK-179392320414)\",\n \"checks\": {\n  \"index\": {\n   \"fetch_task\": \"TASK-179392356111\",\n   \"http_status\": 200,\n   \"sha256\": \"284e37fe349995b86d859b05a6116c3680efdc7d22cf2d290e4b0686444f060c\",\n   \"expected_sha256\": \"284e37fe349995b86d859b05a6116c3680efdc7d22cf2d290e4b0686444f060c\",\n   \"match\": true\n  },\n  \"verify_example.py\": {\n   \"fetch_task\": \"TASK-179392356112\",\n   \"http_status\": 200,\n   \"sha256\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\",\n   \"expected_sha256\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\",\n   \"match\": true\n  }\n },\n \"not_established\": [\n  \"traffic\",\n  \"buyer requests\",\n  \"Shopify import compatibility\",\n  \"orders\",\n  \"revenue\"\n ],\n \"commercial_feedback_at_publication\": \"0 classified events, 3 unclassified sources (unknown, not zero)\",\n \"observation_windows_unchanged\": {\n  \"csv\": \"2026-11-19T01:30:37Z\",\n  \"shopify\": \"2026-11-19T21:30:49Z\",\n  \"welfare\": \"2026-11-20\",\n  \"welfare_retirement_after\": \"2026-12-04T17:00:00Z\"\n },\n \"indexnow\": \"not resubmitted\"\n}\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/reproduction/publication-result.json",
+    "products/receipts/TASK-179392356113.json"
+  ],
+  "request": {
+    "id": "TASK-179392356113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-06T00:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/shopify-large-catalogue/reproduction/publication-result.json');p.parent.mkdir(parents=True,exist_ok=True)\nd={'observed_at':'2026-11-06','site':'shopify-catalogue-example','url':'https://globalland-shopify-catalogue-example.global-land.workers.dev/','deploy_task':'TASK-179392356110','deploy_status':'ONLINE_VERIFIED','approved_digest':'57b368fd8865606ef9e852fd761d6f39eac038dc57d6a220013756309cd8c616','approval_review':'AUDITOR codex seq 12 (TASK-179392320414)','checks':{'index':{'fetch_task':'TASK-179392356111','http_status':200,'sha256':'284e37fe349995b86d859b05a6116c3680efdc7d22cf2d290e4b0686444f060c','expected_sha256':'284e37fe349995b86d859b05a6116c3680efdc7d22cf2d290e4b0686444f060c','match':True},'verify_example.py':{'fetch_task':'TASK-179392356112','http_status':200,'sha256':'e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30','expected_sha256':'e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30','match':True}},'not_established':['traffic','buyer requests','Shopify import compatibility','orders','revenue'],'commercial_feedback_at_publication':'0 classified events, 3 unclassified sources (unknown, not zero)','observation_windows_unchanged':{'csv':'2026-11-19T01:30:37Z','shopify':'2026-11-19T21:30:49Z','welfare':'2026-11-20','welfare_retirement_after':'2026-12-04T17:00:00Z'},'indexnow':'not resubmitted'}\np.write_text(json.dumps(d,indent=1));print(p.read_text())"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/shopify-large-catalogue/reproduction/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793923561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179392356113",
+  "input_sha256": "48a73a45766530e02622115d886dacf0b197ffedf038f64bacf154e1aa98f1b7"
+}
