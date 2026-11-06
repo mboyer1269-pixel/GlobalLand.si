@@ -1,0 +1,292 @@
+{
+ "test": "differential JS core vs transform.py",
+ "runtime": "node v22.23.4 (V8) + python3; NOT a browser",
+ "passed": 20,
+ "total": 20,
+ "results": [
+  {
+   "case": "fixture",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 12,
+   "error_count": 0,
+   "warning_count": 0,
+   "files": [
+    "shopify-products.csv"
+   ],
+   "fatal": null,
+   "js_ms": 3,
+   "diffs": []
+  },
+  {
+   "case": "crlf_bom",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 12,
+   "error_count": 0,
+   "warning_count": 0,
+   "files": [
+    "shopify-products.csv"
+   ],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "quoted_fields",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 2,
+   "error_count": 0,
+   "warning_count": 0,
+   "files": [
+    "shopify-products.csv"
+   ],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "blank_lines_whitespace",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 1,
+   "error_count": 0,
+   "warning_count": 1,
+   "files": [
+    "shopify-products.csv"
+   ],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "bad_price",
+   "pass": true,
+   "py_exit": 2,
+   "ok": false,
+   "rows": 12,
+   "error_count": 1,
+   "warning_count": 0,
+   "files": [],
+   "fatal": null,
+   "js_ms": 1,
+   "diffs": []
+  },
+  {
+   "case": "dup_sku_barcode",
+   "pass": true,
+   "py_exit": 2,
+   "ok": false,
+   "rows": 13,
+   "error_count": 2,
+   "warning_count": 0,
+   "files": [],
+   "fatal": null,
+   "js_ms": 6,
+   "diffs": []
+  },
+  {
+   "case": "dup_combo_case",
+   "pass": true,
+   "py_exit": 2,
+   "ok": false,
+   "rows": 12,
+   "error_count": 1,
+   "warning_count": 0,
+   "files": [],
+   "fatal": null,
+   "js_ms": 1,
+   "diffs": []
+  },
+  {
+   "case": "two_titles",
+   "pass": true,
+   "py_exit": 2,
+   "ok": false,
+   "rows": 13,
+   "error_count": 1,
+   "warning_count": 0,
+   "files": [],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "empty_fields",
+   "pass": true,
+   "py_exit": 2,
+   "ok": false,
+   "rows": 12,
+   "error_count": 2,
+   "warning_count": 0,
+   "files": [],
+   "fatal": null,
+   "js_ms": 1,
+   "diffs": []
+  },
+  {
+   "case": "bad_position_url",
+   "pass": true,
+   "py_exit": 2,
+   "ok": false,
+   "rows": 13,
+   "error_count": 2,
+   "warning_count": 0,
+   "files": [],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "orphan_and_missing_images",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 13,
+   "error_count": 0,
+   "warning_count": 2,
+   "files": [
+    "shopify-products.csv"
+   ],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "same_image_twice",
+   "pass": true,
+   "py_exit": 2,
+   "ok": false,
+   "rows": 13,
+   "error_count": 1,
+   "warning_count": 0,
+   "files": [],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "handle_collision",
+   "pass": true,
+   "py_exit": 2,
+   "ok": false,
+   "rows": 2,
+   "error_count": 1,
+   "warning_count": 2,
+   "files": [],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "position_ties",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 12,
+   "error_count": 0,
+   "warning_count": 0,
+   "files": [
+    "shopify-products.csv"
+   ],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "barcode_type",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 12,
+   "error_count": 0,
+   "warning_count": 0,
+   "files": [
+    "shopify-products.csv"
+   ],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "split_max1_noext",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 3,
+   "error_count": 0,
+   "warning_count": 3,
+   "files": [
+    "output-part1.csv",
+    "output-part2.csv",
+    "output-part3.csv"
+   ],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "split_max1_upper",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 3,
+   "error_count": 0,
+   "warning_count": 3,
+   "files": [
+    "output-part1.CSV",
+    "output-part2.CSV",
+    "output-part3.CSV"
+   ],
+   "fatal": null,
+   "js_ms": 1,
+   "diffs": []
+  },
+  {
+   "case": "split_fixture_11",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 12,
+   "error_count": 0,
+   "warning_count": 0,
+   "files": [
+    "out-part1.csv",
+    "out-part2.csv"
+   ],
+   "fatal": null,
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "missing_column",
+   "pass": true,
+   "py_exit": 1,
+   "files": null,
+   "fatal": "variants: missing columns [\"barcode\"]",
+   "js_ms": 0,
+   "diffs": []
+  },
+  {
+   "case": "scale_9000",
+   "pass": true,
+   "py_exit": 0,
+   "ok": true,
+   "rows": 9000,
+   "error_count": 0,
+   "warning_count": 0,
+   "files": [
+    "big-part1.csv",
+    "big-part2.csv"
+   ],
+   "fatal": null,
+   "js_ms": 400,
+   "diffs": []
+  }
+ ]
+}

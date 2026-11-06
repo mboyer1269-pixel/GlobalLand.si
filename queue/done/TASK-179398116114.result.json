@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "{\"passed\":20,\"total\":20,\"failing\":[]}\nexit=0\n\n",
+  "artifacts": [
+    "products/services/shopify-browser-delivery/tests/differential.js",
+    "products/services/shopify-browser-delivery/differential-results.json",
+    "products/receipts/TASK-179398116114.json"
+  ],
+  "request": {
+    "id": "TASK-179398116114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/shopify-browser-delivery; mkdir -p $D/tests; cat > $D/tests/differential.js <<'EOF'\n// Differential test: JS port (src/core.js) vs reference transform.py on identical inputs. Node + python3, offline.\nconst fs = require('fs'), os = require('os'), path = require('path'), cp = require('child_process');\nconst D = process.argv[2], PY = process.argv[3], FX = process.argv[4];\nconst core = require(path.resolve(D, 'src/core.js'));\nconst V = fs.readFileSync(FX + '/before-variants.csv', 'utf8'), I = fs.readFileSync(FX + '/before-images.csv', 'utf8');\nconst H = 'style_id,title,vendor,product_type,tags,color,size,sku,barcode,price\\n', IH = 'style_id,color,position,url\\n';\nfunction big(n) { let v = H, im = IH, k = 0; for (let s = 0; k < n; s++) { for (const c of ['Black','Brown','Navy']) { for (let z = 36; z < 46 && k < n; z++, k++) v += `S${s},Style ${s},V,T,t,${c},${z},S${s}-${c}-${z},${4000000000000 + k},19.99\\n`; for (let p = 1; p <= 5; p++) im += `S${s},${c},${p},https://cdn.example.com/s${s}/${c}-${p}.jpg\\n`; } } return [v, im]; }\nconst cases = [\n ['fixture', V, I, {}],\n ['crlf_bom', '﻿' + V.replace(/\\n/g, '\\r\\n'), I.replace(/\\n/g, '\\r\\n'), {}],\n ['quoted_fields', H + 'Q1,\"Shoe, \"\"Deluxe\"\"\",\"V, Inc\",T,\"a,b\",Red,40,Q1-R,111,9.5\\nQ1,\"Shoe, \"\"Deluxe\"\"\",\"V, Inc\",T,\"a,b\",Red,41,Q1-R2,\"11;2:3\",9.5\\n', IH + 'Q1,red,1,https://x.example/a.jpg\\n', {}],\n ['blank_lines_whitespace', H + '\\n S1 ,Tee, V ,T,t, Red ,S, A1 ,1, 5 \\n\\n', IH + '\\n', {}],\n ['bad_price', V.replace('120.00', '120,00').replace('45.00', '$45'), I, {}],\n ['dup_sku_barcode', V + 'BL-7,Leather Belt,Example Vendor,Belts,leather,Tan,110,BL7-TAN-90,2000000001005,45.00\\n', I, {}],\n ['dup_combo_case', V + 'BL-7,Leather Belt,Example Vendor,Belts,leather,TAN,90,X1,999,45.00\\n', I, {}],\n ['two_titles', V + 'BL-7,Belt 2,Example Vendor,Belts,leather,Tan,110,X2,998,45.00\\n', I, {}],\n ['empty_fields', V + 'BL-7,,Example Vendor,Belts,leather,Tan,,X3,997,45.00\\n', I + 'BL-7,Tan,,https://a.example/x.jpg\\n', {}],\n ['bad_position_url', V, I + 'BL-7,Tan,x,https://a.example/x.jpg\\nBL-7,Tan,3,ftp://a.example/y.jpg\\n', {}],\n ['orphan_and_missing_images', V + 'BL-7,Leather Belt,Example Vendor,Belts,leather,Black,90,X4,996,45.00\\n', I + 'ZZ-1,Red,1,https://a.example/z.jpg\\n', {}],\n ['same_image_twice', V, I + 'BL-7,Tan,3,https://cdn.example.com/bl-7/tan-1.jpg\\n', {}],\n ['handle_collision', H + 'A-1,Tee,V,T,t,Red,S,K1,1,5\\nA 1,Tee,V,T,t,Red,S,K2,2,5\\n', IH, {}],\n ['position_ties', V, I.replace('black-2.jpg', 'black-0.jpg').replace('Black,2,', 'Black,1,'), {}],\n ['barcode_type', V, I, { barcodeType: 'gtin' }],\n ['split_max1_noext', H + 'P1,One,V,T,t,Red,S,P1-R,1,5\\nP2,Two,V,T,t,Red,S,P2-R,2,5\\nP3,Three,V,T,t,Red,S,P3-R,3,5\\n', IH, { maxRows: 1, out: 'output' }],\n ['split_max1_upper', H + 'P1,One,V,T,t,Red,S,P1-R,1,5\\nP2,Two,V,T,t,Red,S,P2-R,2,5\\nP3,Three,V,T,t,Red,S,P3-R,3,5\\n', IH, { maxRows: 1, out: 'output.CSV' }],\n ['split_fixture_11', V, I, { maxRows: 11, out: 'out.csv' }],\n ['missing_column', V.replace('barcode', 'ean'), I, {}],\n ['scale_9000', ...big(9000), { maxRows: 5000, out: 'big.csv' }],\n];\nconst results = []; let pass = 0;\nfor (const [name, v, im, o] of cases) {\n  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'd-')); fs.writeFileSync(tmp + '/v.csv', v); fs.writeFileSync(tmp + '/i.csv', im);\n  const out = o.out || 'shopify-products.csv';\n  const args = [PY, '--variants', 'v.csv', '--images', 'i.csv', '--out', out, '--report', 'rep.json'];\n  if (o.maxRows) args.push('--max-rows-per-file', String(o.maxRows)); if (o.barcodeType) args.push('--barcode-type', o.barcodeType);\n  const p = cp.spawnSync('python3', args, { cwd: tmp, encoding: 'utf8' });\n  let py; try { py = JSON.parse(fs.readFileSync(tmp + '/rep.json', 'utf8')); } catch (e) { py = { fatal: (p.stderr || '').trim().split('\\n').pop() }; }\n  let js, t0 = Date.now(); try { js = core.run(v, im, { out, maxRows: o.maxRows || 0, barcodeType: o.barcodeType || '' }); } catch (e) { js = { fatal: e.message }; }\n  const ms = Date.now() - t0; const d = [];\n  if (py.fatal || js.fatal) { if (!(py.fatal && js.fatal)) d.push('fatal mismatch py=' + py.fatal + ' js=' + js.fatal); }\n  else {\n    for (const k of ['ok', 'products', 'rows', 'error_count', 'warning_count']) if (py[k] !== js[k]) d.push(k + ' py=' + py[k] + ' js=' + js[k]);\n    if (JSON.stringify(py.errors) !== JSON.stringify(js.errors)) d.push('errors differ');\n    if (JSON.stringify(py.warnings) !== JSON.stringify(js.warnings)) d.push('warnings differ');\n    if (JSON.stringify(py.files) !== JSON.stringify(js.files.map(f => f.name))) d.push('file names differ py=' + JSON.stringify(py.files) + ' js=' + JSON.stringify(js.files.map(f => f.name)));\n    else js.files.forEach(f => { if (fs.readFileSync(path.join(tmp, f.name), 'utf8') !== f.text) d.push('bytes differ ' + f.name); });\n  }\n  if (!d.length) pass++;\n  results.push({ case: name, pass: !d.length, py_exit: p.status, ok: js.ok, rows: js.rows, error_count: js.error_count, warning_count: js.warning_count, files: js.files ? js.files.map(f => f.name) : null, fatal: js.fatal || null, js_ms: ms, diffs: d });\n}\nconst summary = { test: 'differential JS core vs transform.py', runtime: 'node ' + process.version + ' (V8) + python3; NOT a browser', passed: pass, total: cases.length, results };\nfs.writeFileSync(path.join(D, 'differential-results.json'), JSON.stringify(summary, null, 1));\nconsole.log(JSON.stringify({ passed: pass, total: cases.length, failing: results.filter(r => !r.pass) }));\nprocess.exit(pass === cases.length ? 0 : 1);\nEOF\nnode $D/tests/differential.js $D $PWD/products/services/shopify-large-catalogue/transform.py $PWD/products/services/shopify-large-catalogue/fixtures; echo exit=$?"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/fixtures/",
+        "products/services/shopify-large-catalogue/transform.py",
+        "products/services/shopify-browser-delivery/src/core.js"
+      ],
+      "outputs": [
+        "products/services/shopify-browser-delivery/tests/differential.js",
+        "products/services/shopify-browser-delivery/differential-results.json"
+      ],
+      "mission_id": "SHOPIFY-BROWSER-DELIVERY-TEST"
+    },
+    "description": "Broker action during THINK-1793981161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398116114",
+  "input_sha256": "655d2d65e26cc5afb9a3e2456e04b82c93c51d262a9bf045c186f4234b3b8862"
+}
