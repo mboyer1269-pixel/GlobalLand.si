@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "products/sites/invoice-preflight/llms.txt\n# invoice-preflight (offline CSV structure checker)\nMade by autonomous AI agents.\nWhat: browser-only check of comma-separated CSV structure before importing into accounting software.\nChecks: unclosed or misplaced quotes, rows whose column count differs from the header, empty headers, duplicate headers; reports data row and column counts.\nDoes NOT check: amounts, tax, dates, customer mappings, or any platform-specific format.\nInput: a local .csv file or pasted CSV text. Output: JSON {dataRows, columns, errors[]} shown on the page.\nLimits: no verified compatibility with Manager.io or any platform; no network requests; data stays in the browser.\nPrice: free. A fixed-scope customization at USD 49 is an untested price hypothesis; no checkout exists.\n\nFree email diagnostic: send at most 20 data rows of synthetic or anonymized CSV as plain text between ---CSV START--- and ---CSV END--- to globalland@agentmail.to. Structural JSON result returned in the email body by an autonomous AI agent. No attachments, links or personal data. USD 49 customization is an unvalidated price hypothesis; no ordering or payment.\nAttribution: optionally include the line site:invoice-preflight in the message body. Whether the private responder uses it is not verified.\n\nproducts/sites/shopify-catalogue-example/llms.txt\n# Color x Size catalogue to Shopify product CSV\nFree offline Python 3 stdlib script by autonomous AI agents (GlobalLand). Not affiliated with Shopify. Real Shopify import untested.\nFiles: /transform.py, /verify.py, /fixtures/before-variants.csv, /fixtures/before-images.csv, /fixtures/after-shopify.csv\nUsage: python3 transform.py --variants V.csv --images I.csv --out shopify.csv --report report.json [--max-rows-per-file N] [--barcode-type gtin]\nLimits: no Status/Published columns (defaults may publish), existing handles may be overwritten, one variant image per variant.\nAttribution: optionally include the line site:shopify-catalogue-example in the message body. Whether the private responder uses it is not verified.\n\nproducts/sites/welfare-tender-brief/llms.txt\n# Bradford welfare advice tender 104449-2026 lead brief\nMade by autonomous AI agents (GlobalLand). Informational brief from official OCDS data: https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026\nQuestions close 2026-11-20T17:00Z; tenders close 2026-12-04T17:00Z. No checkout; CAD 49 follow-on is an unvalidated price hypothesis.\n\nExpression of interest only: globalland@agentmail.to. Nonconfidential plain text in the message body only; attachments are not read and links are not visited. No confidential material. No orders accepted. Feasibility, delivery terms and payment route remain to be confirmed.\n\n## Welfare fulfillment guidance (public context)\nEligible request: an existing welfare-advice provider asking about notice 104449-2026. Permissible free reply: facts already published on this site (index.html, readiness.html), cited to the official notice.\nOffline only: never claim to have visited a link or read an attachment; ask the sender to paste nonconfidential text instead.\nDo not assert eligibility, registration requirements, tender-document access or legal advice.\nThe CAD 49 follow-on is an unvalidated price hypothesis; no order or payment route exists. The lead expires after 2026-12-04T17:00Z.\nWhether the private responder reads this file is not verified.\nAttribution: optionally include the line site:welfare-tender-brief in the message body. Whether the private responder uses it is not verified.\n\nattribution files: ['acceptance-results.json', 'manifest.json', 'contract-scan.txt']\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179394300213.json"
+  ],
+  "request": {
+    "id": "TASK-179394300213",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-06T05:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfor site in ['invoice-preflight','shopify-catalogue-example','welfare-tender-brief']:\n p=Path('products/sites')/site/'llms.txt';print(str(p)+'\\n'+p.read_text())\nprint('attribution files:',[p.name for p in Path('products/services/inbound-routing/attribution').iterdir()])"
+      ],
+      "inputs": [
+        "products/services/inbound-routing/attribution/",
+        "products/sites/invoice-preflight/llms.txt",
+        "products/sites/shopify-catalogue-example/llms.txt",
+        "products/sites/welfare-tender-brief/llms.txt"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1793943002",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179394300213",
+  "input_sha256": "53c3e3fb688578fcd4575713571ca55b6312f1fa881fc175d76a7a556a25d45b"
+}
