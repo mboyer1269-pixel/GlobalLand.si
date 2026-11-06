@@ -1,0 +1,73 @@
+{
+ "mission": "TECHNICAL-TRANSLATION-REQUEST-TEST",
+ "observed_at": "2026-11-06T01:06Z",
+ "question": "Is there a current public paid request for EN>FR translation of software documentation/product instructions deliverable via plain-text offline correspondence?",
+ "channels_attempted": [
+  {
+   "url": "https://www.proz.com/translation-jobs",
+   "task": "TASK-179392716111",
+   "result": "REJECTED HTTP 403; not bypassed"
+  },
+  {
+   "url": "https://www.translatorscafe.com/cafe/SearchJobs.asp",
+   "task": "TASK-179392716112",
+   "result": "HTTP 200, sha256 9325b5de...; page states 200 most recent jobs; first page 9 jobs, none software documentation"
+  },
+  {
+   "url": "https://www.translatorscafe.com/tcUtils/EN/jobs/rss.aspx",
+   "task": "TASK-179392716114",
+   "result": "HTTP 200, 25 items; only 2 items mention French (filter TASK-179392716115)"
+  },
+  {
+   "url": "https://algora.io/bounties",
+   "task": "TASK-179392716117",
+   "result": "REJECTED HTTP 404"
+  }
+ ],
+ "candidates": [
+  {
+   "id": "TC-378724",
+   "url": "https://www.translatorscafe.com/cafe/SelectedJob.asp?Job=378724",
+   "date": "2026-11-05T10:06Z",
+   "title_quote": "[Flitto] Western Europe Pairs | Freelance Linguists for AI Training Data",
+   "pairs": "English-French (France) among others",
+   "deliverable": "unknown; recruitment of freelance linguists for AI training data, not a software-documentation translation request",
+   "payment_evidence": "none observed",
+   "status": "unknown",
+   "ai_rules": "not observable; producing AI training data with AI output is likely contrary to purpose (inference, unverified)",
+   "access": "detail FETCH TASK-179392716116 redirected to busy.htm; job detail not observed",
+   "verdict": "REJECT: labor recruitment by an agency, not buyer demand for documentation; payment, rules and route unobserved"
+  },
+  {
+   "id": "TC-378728",
+   "url": "https://www.translatorscafe.com/cafe/SelectedJob.asp?Job=378728",
+   "date": "2026-11-05T14:12Z",
+   "title_quote": "Only registered users can view this job.",
+   "pairs": "Sinhala-French, Sinhala-English",
+   "verdict": "REJECT: source language not English, subject unknown, registered-only access (no account; not bypassed)"
+  },
+  {
+   "id": "ALGORA",
+   "url": "https://algora.io/bounties",
+   "verdict": "REJECT: listing not retrievable (HTTP 404); no candidate observed"
+  }
+ ],
+ "selected": null,
+ "verdict": "STOP",
+ "reasoning": "Within the three-candidate bound, no current public request explicitly seeks paid EN>FR translation of software documentation. Accessible translation job boards mainly carry agency recruitment and interpreting jobs, and their detail pages and bidding need registered accounts. No payment evidence, AI-use permission or submission route was observed for any candidate.",
+ "observed_facts": [
+  "ProZ jobs returns 403 to FETCH",
+  "TranslatorsCafe list and RSS are public; job detail redirected to busy.htm for an anonymous fetch",
+  "Of 25 RSS items on 2026-11-06, 2 mention French and none concern software documentation"
+ ],
+ "not_established": [
+  "absence of demand for technical translation generally",
+  "prices or willingness to pay",
+  "eligibility of AI-produced translation on any platform"
+ ],
+ "unchanged_dependencies": [
+  "SERVICE-PAYMENT-COLLECTION open: no collection route",
+  "no authorized job-board or freelance account"
+ ],
+ "reconsideration_trigger": "A classified inbound request for translation via private correspondence, or a founder-authorized freelance account with documented AI-use permission."
+}
