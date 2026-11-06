@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\"pass\": true, \"transform_rc\": 0, \"verify_rc\": 0, \"output_byte_identical_to_downloaded_expected\": true, \"homepage_matches_repo_source\": true, \"homepage_sha256_live\": \"dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5\", \"homepage_sha256_repo_site_source\": \"dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5\"}\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/live-delivery/result.json",
+    "products/receipts/TASK-179398656218.json"
+  ],
+  "request": {
+    "id": "TASK-179398656218",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-06T17:36:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,os,shutil,subprocess,tempfile,datetime,pathlib\nB='products/services/shopify-large-catalogue/live-delivery/'\nD=B+'dl/'\nh=lambda p:hashlib.sha256(open(p,'rb').read()).hexdigest()\nexp={'transform.py':'ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e','verify.py':'54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39','verify_example.py':'e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30','fixtures/before-variants.csv':'5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac','fixtures/before-images.csv':'894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d','fixtures/after-shopify.csv':'31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357'}\nsrcmap={'transform.py':'transform.py.txt','verify.py':'verify.py.txt','verify_example.py':'verify_example.py.txt','fixtures/before-variants.csv':'before-variants.csv','fixtures/before-images.csv':'before-images.csv','fixtures/after-shopify.csv':'after-shopify.csv'}\nt=tempfile.mkdtemp();os.makedirs(t+'/fixtures')\nfiles={}\nfor k,v in srcmap.items():\n  p=D+v\n  if not os.path.exists(p): files[k]={'missing':True};continue\n  shutil.copyfile(p,t+'/'+k); hh=h(t+'/'+k); files[k]={'sha256':hh,'matches_approved_source':hh==exp[k]}\nidx_live=h(D+'index.html'); idx_repo=h('products/sites/shopify-catalogue-example/index.html')\nlisting=sorted(str(x.relative_to(t)) for x in pathlib.Path(t).rglob('*') if x.is_file())\nc1=['python3','transform.py','--variants','fixtures/before-variants.csv','--images','fixtures/before-images.csv','--out','shopify.csv','--report','report.json']\nr1=subprocess.run(c1,cwd=t,capture_output=True,text=True,timeout=60)\nout_h=h(t+'/shopify.csv') if os.path.exists(t+'/shopify.csv') else None\nc2=['python3','verify_example.py','fixtures/before-variants.csv','fixtures/before-images.csv','shopify.csv']\nr2=subprocess.run(c2,cwd=t,capture_output=True,text=True,timeout=60)\nrep=json.load(open(t+'/report.json')) if os.path.exists(t+'/report.json') else None\nres={'observed_at':datetime.datetime.utcnow().isoformat()+'Z','mission':'SHOPIFY-LIVE-DOWNLOAD-DELIVERY','synthetic_inputs':True,'fetch_receipts':{'index.html':'TASK-179398656211','transform.py':'TASK-179398656212','verify.py':'TASK-179398656213','verify_example.py':'TASK-179398656214','fixtures/before-variants.csv':'TASK-179398656215','fixtures/before-images.csv':'TASK-179398656216','fixtures/after-shopify.csv':'TASK-179398656217'},'all_http_status':200,'homepage_sha256_live':idx_live,'homepage_sha256_repo_site_source':idx_repo,'homepage_matches_repo_source':idx_live==idx_repo,'fresh_dir_contents_before_run':listing,'downloads':files,'transform_cmd':' '.join(c1),'transform_rc':r1.returncode,'transform_stderr':r1.stderr[-800:],'report':rep,'output_sha256':out_h,'output_byte_identical_to_downloaded_expected':out_h==h(t+'/fixtures/after-shopify.csv'),'verify_cmd':' '.join(c2),'verify_rc':r2.returncode,'verify_stdout':r2.stdout[-3000:],'verify_stderr':r2.stderr[-800:],'scope':'Proves only that the public downloads reproduce the documented synthetic example offline. Not browser operation, not a Shopify import, not users, demand or revenue.'}\nres['pass']=all(f.get('matches_approved_source') for f in files.values()) and r1.returncode==0 and res['output_byte_identical_to_downloaded_expected'] and r2.returncode==0\nos.makedirs(B,exist_ok=True);json.dump(res,open(B+'result.json','w'),indent=1)\nprint(json.dumps({k:res[k] for k in ['pass','transform_rc','verify_rc','output_byte_identical_to_downloaded_expected','homepage_matches_repo_source','homepage_sha256_live','homepage_sha256_repo_site_source']}))"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/live-delivery/dl/",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "outputs": [
+        "products/services/shopify-large-catalogue/live-delivery/result.json"
+      ],
+      "mission_id": "SHOPIFY-LIVE-DOWNLOAD-DELIVERY"
+    },
+    "description": "Broker action during THINK-1793986562",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398656218",
+  "input_sha256": "7e479c48f1724a5655b0fd22962e7fec454bba42eb3b915463f6b81b672b89f8"
+}

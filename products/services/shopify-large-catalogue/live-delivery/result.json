@@ -1,0 +1,76 @@
+{
+ "observed_at": "2026-11-06T17:36:53.677439Z",
+ "mission": "SHOPIFY-LIVE-DOWNLOAD-DELIVERY",
+ "synthetic_inputs": true,
+ "fetch_receipts": {
+  "index.html": "TASK-179398656211",
+  "transform.py": "TASK-179398656212",
+  "verify.py": "TASK-179398656213",
+  "verify_example.py": "TASK-179398656214",
+  "fixtures/before-variants.csv": "TASK-179398656215",
+  "fixtures/before-images.csv": "TASK-179398656216",
+  "fixtures/after-shopify.csv": "TASK-179398656217"
+ },
+ "all_http_status": 200,
+ "homepage_sha256_live": "dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5",
+ "homepage_sha256_repo_site_source": "dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5",
+ "homepage_matches_repo_source": true,
+ "fresh_dir_contents_before_run": [
+  "fixtures/after-shopify.csv",
+  "fixtures/before-images.csv",
+  "fixtures/before-variants.csv",
+  "transform.py",
+  "verify.py",
+  "verify_example.py"
+ ],
+ "downloads": {
+  "transform.py": {
+   "sha256": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+   "matches_approved_source": true
+  },
+  "verify.py": {
+   "sha256": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39",
+   "matches_approved_source": true
+  },
+  "verify_example.py": {
+   "sha256": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+   "matches_approved_source": true
+  },
+  "fixtures/before-variants.csv": {
+   "sha256": "5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac",
+   "matches_approved_source": true
+  },
+  "fixtures/before-images.csv": {
+   "sha256": "894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d",
+   "matches_approved_source": true
+  },
+  "fixtures/after-shopify.csv": {
+   "sha256": "31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357",
+   "matches_approved_source": true
+  }
+ },
+ "transform_cmd": "python3 transform.py --variants fixtures/before-variants.csv --images fixtures/before-images.csv --out shopify.csv --report report.json",
+ "transform_rc": 0,
+ "transform_stderr": "",
+ "report": {
+  "ok": true,
+  "products": 2,
+  "rows": 12,
+  "files": [
+   "shopify.csv"
+  ],
+  "errors": [],
+  "error_count": 0,
+  "warnings": [],
+  "warning_count": 0,
+  "seconds": 0.001
+ },
+ "output_sha256": "31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357",
+ "output_byte_identical_to_downloaded_expected": true,
+ "verify_cmd": "python3 verify_example.py fixtures/before-variants.csv fixtures/before-images.csv shopify.csv",
+ "verify_rc": 0,
+ "verify_stdout": "{\n \"rows\": 12,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": []\n}\n",
+ "verify_stderr": "",
+ "scope": "Proves only that the public downloads reproduce the documented synthetic example offline. Not browser operation, not a Shopify import, not users, demand or revenue.",
+ "pass": true
+}
