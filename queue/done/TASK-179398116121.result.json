@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "1\n{\"passed\":11,\"total\":11,\"failing\":[]}\n4d4e3a87b381ebf00041da92cdba48f586af093c7d98f552abff6da2aa4920a2  products/services/shopify-browser-delivery/index.html\n616ece0832b72424e68f5db4788f201bfbe1b5a3f575b7f797cef942779a2ed9  products/services/shopify-browser-delivery/src/core.js\n20/20 [[\"fixture\",true,0,0,1,3],[\"crlf_bom\",true,0,0,1,0],[\"quoted_fields\",true,0,0,1,0],[\"blank_lines_whitespace\",true,0,1,1,0],[\"bad_price\",false,1,0,0,1],[\"dup_sku_barcode\",false,2,0,0,6],[\"dup_combo_case\",false,1,0,0,1],[\"two_titles\",false,1,0,0,0],[\"empty_fields\",false,2,0,0,1],[\"bad_position_url\",false,2,0,0,0],[\"orphan_and_missing_images\",true,0,2,1,0],[\"same_image_twice\",false,1,0,0,0],[\"handle_collision\",false,1,2,0,0],[\"position_ties\",true,0,0,1,0],[\"barcode_type\",true,0,0,1,0],[\"split_max1_noext\",true,0,3,3,0],[\"split_max1_upper\",true,0,3,3,1],[\"split_fixture_11\",true,0,0,2,0],[\"missing_column\",null,null,null,null,0],[\"scale_9000\",true,0,0,2,400]]\n\n",
+  "artifacts": [
+    "products/services/shopify-browser-delivery/tests/run_dom_checks.js",
+    "products/services/shopify-browser-delivery/dom-stub-results.json",
+    "products/services/shopify-browser-delivery/dom-run-log.txt",
+    "products/receipts/TASK-179398116121.json"
+  ],
+  "request": {
+    "id": "TASK-179398116121",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/shopify-browser-delivery; sed -i \"s/V.replace('120.00', '120,00')/V.replace('120.00', '12.345')/\" $D/tests/run_dom_checks.js && grep -c \"12.345\" $D/tests/run_dom_checks.js; node $D/tests/run_dom_checks.js $D products/services/shopify-large-catalogue/fixtures > $D/dom-run-log.txt 2>&1; cat $D/dom-run-log.txt; sha256sum $D/index.html $D/src/core.js | tee -a $D/dom-run-log.txt; node -e \"const r=require('./$D/differential-results.json');console.log(r.passed+'/'+r.total, JSON.stringify(r.results.map(x=>[x.case,x.ok,x.error_count,x.warning_count,x.files&&x.files.length,x.js_ms])))\""
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/fixtures/",
+        "products/services/shopify-browser-delivery/"
+      ],
+      "outputs": [
+        "products/services/shopify-browser-delivery/tests/run_dom_checks.js",
+        "products/services/shopify-browser-delivery/dom-stub-results.json",
+        "products/services/shopify-browser-delivery/dom-run-log.txt"
+      ],
+      "mission_id": "SHOPIFY-BROWSER-DELIVERY-TEST"
+    },
+    "description": "Broker action during THINK-1793981161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398116121",
+  "input_sha256": "3505fda98b5b5e16c4163a3c0b4463301fae9b92e374f9487930c829632dd568"
+}
