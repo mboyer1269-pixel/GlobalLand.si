@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "2486 products/services/shopify-browser-delivery/tests/dom_stub_smoke.js\n\n",
+  "artifacts": [
+    "products/services/shopify-browser-delivery/tests/dom_stub_smoke.js",
+    "products/receipts/TASK-179398116119.json"
+  ],
+  "request": {
+    "id": "TASK-179398116119",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/shopify-browser-delivery; mkdir -p $D/tests; cat > $D/tests/dom_stub_smoke.js <<'EOF'\n// Runs the actual inline scripts of index.html in Node's vm with a minimal DOM/FileReader/Blob stub.\n// This is NOT browser execution: real rendering, file picker and download behaviour remain untested.\nconst fs = require('fs'), vm = require('vm'), path = require('path');\nconst D = process.argv[2], FX = process.argv[3];\nconst html = fs.readFileSync(path.join(D, 'index.html'), 'utf8');\nconst scripts = [...html.matchAll(/<script>([\\s\\S]*?)<\\/script>/g)].map(m => m[1]);\nconst V = fs.readFileSync(FX + '/before-variants.csv', 'utf8'), I = fs.readFileSync(FX + '/before-images.csv', 'utf8'), A = fs.readFileSync(FX + '/after-shopify.csv', 'utf8');\nfunction el(id) { return { id, value: '', files: null, textContent: '', children: [], listeners: {}, get firstChild() { return this.children[0] || null; }, removeChild(c) { this.children.splice(this.children.indexOf(c), 1); }, appendChild(c) { this.children.push(c); }, addEventListener(t, f) { this.listeners[t] = f; } }; }\nasync function scenario(v, im, opts) {\n  const ids = {}; ['v', 'i', 'o', 'm', 'b', 'go', 'rep', 'dl'].forEach(k => ids[k] = el(k));\n  ids.o.value = opts.out || 'shopify-products.csv'; ids.m.value = String(opts.max || 0); ids.b.value = '';\n  ids.v.files = v === null ? [] : [{ name: 'v.csv', text: v }]; ids.i.files = [{ name: 'i.csv', text: im }];\n  const blobs = new Map(); let n = 0; const net = [];\n  const sandbox = { document: { getElementById: k => ids[k], createElement: t => ({ tag: t, children: [], appendChild(c) { this.children.push(c); } }) },\n    FileReader: function () { this.readAsText = f => setTimeout(() => { this.result = f.text; this.onload(); }, 0); },\n    Blob: function (parts, o) { this.text = parts.join(''); this.type = o.type; },\n    URL: { createObjectURL: b => { const u = 'blob:' + (++n); blobs.set(u, b); return u; } },\n    fetch: () => net.push('fetch'), XMLHttpRequest: function () { net.push('xhr'); }, Promise, setTimeout };\n  sandbox.window = sandbox; vm.createContext(sandbox);\n  scripts.forEach(s => vm.runInContext(s, sandbox));\n  ids.go.listeners.click(); await new Promise(r => setTimeout(r, 100));\n  const links = ids.dl.children.flatMap(p => p.children || []).filter(c => c.tag === 'a');\n  return { report: ids.rep.textContent, links: links.map(a => ({ name: a.download, text: blobs.get(a.href).text })), notes: ids.dl.children.filter(p => !(p.children && p.children.length)).map(p => p.textContent), net };\n}\nmodule.exports = { scenario, html, scripts, V, I, A, D };\nEOF\nwc -c $D/tests/dom_stub_smoke.js"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/shopify-browser-delivery/tests/dom_stub_smoke.js"
+      ],
+      "mission_id": "SHOPIFY-BROWSER-DELIVERY-TEST"
+    },
+    "description": "Broker action during THINK-1793981161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398116119",
+  "input_sha256": "088612152bf6ac608ae1d95cfc60914a5250b690175bff26aa662acf14e76041"
+}
