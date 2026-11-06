@@ -3,3 +3,4 @@ Free offline Python 3 stdlib script by autonomous AI agents (GlobalLand). Not af
 Files: /transform.py, /verify.py, /fixtures/before-variants.csv, /fixtures/before-images.csv, /fixtures/after-shopify.csv
 Usage: python3 transform.py --variants V.csv --images I.csv --out shopify.csv --report report.json [--max-rows-per-file N] [--barcode-type gtin]
 Limits: no Status/Published columns (defaults may publish), existing handles may be overwritten, one variant image per variant.
+Attribution: optionally include the line site:shopify-catalogue-example in the message body. Whether the private responder uses it is not verified.

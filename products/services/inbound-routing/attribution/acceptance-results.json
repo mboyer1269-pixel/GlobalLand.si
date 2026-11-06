@@ -1,0 +1,132 @@
+{
+ "mission": "EXPLICIT-INQUIRY-ATTRIBUTION",
+ "contract": "docs/COMMERCIAL-FEEDBACK.md: experiment refs use site:<slug>; attribution is MODEL_INFERRED by the responder from the allowlist; whether the subject line is visible to the responder is not documented, so the identifier is also prefilled in the body and given as a manual line",
+ "sites": {
+  "invoice-preflight": {
+   "index_before": "2011477ec625d93ee8b0aa23a5982202619f4f27d50bca9e131001dc104e800d",
+   "index_after": "c00985a0a5abdf8fb02746a3d995909229fccc8f24d6fee0b09f7388be88e854",
+   "llms_before": "d3144486db580877810c5a1d281daf586a09462bf5520f286c91679fc459aa30",
+   "llms_after": "e35800245a4a1ac8ea3ffb9c7202161ca69e2291a8ea21bbb0bc76ba53c65e9e",
+   "other_files_unchanged": true
+  },
+  "shopify-catalogue-example": {
+   "index_before": "284e37fe349995b86d859b05a6116c3680efdc7d22cf2d290e4b0686444f060c",
+   "index_after": "dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5",
+   "llms_before": "b3da3713e390bca8b836cdcb8cfb63cc57ab6375d2012b0998b88d8c3c0fb6d7",
+   "llms_after": "a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9",
+   "other_files_unchanged": true
+  },
+  "welfare-tender-brief": {
+   "index_before": "ef2bb180fd2a526ffb17feeb6992f6852ecf4f57897ab89e94045ff6fe613531",
+   "index_after": "1d9dabe0a14b2fd977f3d9152db0617212a22fafa0ed84a05afadcd024fb7f95",
+   "llms_before": "d807bd819566b7aa9f98011340c4d0c8d7d05bb111fbce48b4a71c6e2676ffd9",
+   "llms_after": "94faec52be9734502dbc846b3b332c9c38dba6e6fcf575c3a16f4af9baf1e08f",
+   "other_files_unchanged": true
+  }
+ },
+ "checks": [
+  {
+   "site": "invoice-preflight",
+   "check": "replacement target occurs once",
+   "pass": true
+  },
+  {
+   "site": "invoice-preflight",
+   "check": "replacement target occurs once",
+   "pass": true
+  },
+  {
+   "site": "invoice-preflight",
+   "check": "reverse application restores live-approved index",
+   "pass": true
+  },
+  {
+   "site": "invoice-preflight",
+   "check": "decoded mailto: recipient, subject and body carry site:invoice-preflight",
+   "decoded_subject": "site:invoice-preflight CSV diagnostic",
+   "decoded_body": "Experiment: site:invoice-preflight\n\n---CSV START---\n\n---CSV END---\n",
+   "pass": true
+  },
+  {
+   "site": "invoice-preflight",
+   "check": "manual plain-text alternative present",
+   "count": 2,
+   "pass": true
+  },
+  {
+   "site": "invoice-preflight",
+   "check": "AI disclosure retained",
+   "pass": true
+  },
+  {
+   "site": "shopify-catalogue-example",
+   "check": "replacement target occurs once",
+   "pass": true
+  },
+  {
+   "site": "shopify-catalogue-example",
+   "check": "replacement target occurs once",
+   "pass": true
+  },
+  {
+   "site": "shopify-catalogue-example",
+   "check": "reverse application restores live-approved index",
+   "pass": true
+  },
+  {
+   "site": "shopify-catalogue-example",
+   "check": "decoded mailto: recipient, subject and body carry site:shopify-catalogue-example",
+   "decoded_subject": "site:shopify-catalogue-example question",
+   "decoded_body": "Experiment: site:shopify-catalogue-example\n\n",
+   "pass": true
+  },
+  {
+   "site": "shopify-catalogue-example",
+   "check": "manual plain-text alternative present",
+   "count": 2,
+   "pass": true
+  },
+  {
+   "site": "shopify-catalogue-example",
+   "check": "AI disclosure retained",
+   "pass": true
+  },
+  {
+   "site": "welfare-tender-brief",
+   "check": "replacement target occurs once",
+   "pass": true
+  },
+  {
+   "site": "welfare-tender-brief",
+   "check": "reverse application restores live-approved index",
+   "pass": true
+  },
+  {
+   "site": "welfare-tender-brief",
+   "check": "decoded mailto: recipient, subject and body carry site:welfare-tender-brief",
+   "decoded_subject": "site:welfare-tender-brief — Bradford brief — expression of interest",
+   "decoded_body": "Experiment: site:welfare-tender-brief\n\n",
+   "pass": true
+  },
+  {
+   "site": "welfare-tender-brief",
+   "check": "manual plain-text alternative present",
+   "count": 2,
+   "pass": true
+  },
+  {
+   "site": "welfare-tender-brief",
+   "check": "AI disclosure retained",
+   "pass": true
+  }
+ ],
+ "all_pass": true,
+ "passed": 17,
+ "total": 17,
+ "limits": [
+  "synthetic link checks only; no real mail sent",
+  "responder/classifier consumption of identifiers is not documented or observed",
+  "no retroactive classification of the 3 unclassified sources",
+  "no deployment; observation deadlines CSV 2026-11-19T01:30:37Z, Shopify 2026-11-19T21:30:49Z, welfare 2026-11-20, welfare retirement after 2026-12-04T17:00Z unchanged"
+ ]
+}
