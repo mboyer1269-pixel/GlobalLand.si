@@ -1,0 +1,41 @@
+{
+  "status": "DONE",
+  "output": "{\"passed\":10,\"total\":11,\"failing\":[{\"name\":\"bad_price_no_download\",\"ok\":false,\"detail\":\"{\\n \\\"ok\\\": true,\\n \\\"products\\\": 2,\\n \\\"rows\\\": 12,\\n \\\"files\\\": [\\n  \\\"shopify-products.csv\\\"\\n ],\\n \\\"error_count\\\": 0,\\n \\\"errors\\\": [],\\n \\\"warning_count\\\": 0,\\n \\\"warnings\\\": []\\n}\"}]}\n4d4e3a87b381ebf00041da92cdba48f586af093c7d98f552abff6da2aa4920a2  products/services/shopify-browser-delivery/index.html\n616ece0832b72424e68f5db4788f201bfbe1b5a3f575b7f797cef942779a2ed9  products/services/shopify-browser-delivery/src/core.js\n\n",
+  "artifacts": [
+    "products/services/shopify-browser-delivery/tests/run_dom_checks.js",
+    "products/services/shopify-browser-delivery/dom-stub-results.json",
+    "products/services/shopify-browser-delivery/dom-run-log.txt",
+    "products/receipts/TASK-179398116120.json"
+  ],
+  "request": {
+    "id": "TASK-179398116120",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/shopify-browser-delivery; cat > $D/tests/run_dom_checks.js <<'EOF'\n// Usage: node run_dom_checks.js <delivery dir> <fixtures dir>. NOT a real browser.\nconst fs = require('fs'), path = require('path');\nconst S = require('./dom_stub_smoke.js');\nconst { scenario, html, scripts, V, I, A, D } = S;\nconst checks = [];\nconst c = (name, ok, detail) => checks.push({ name, ok: !!ok, detail: detail === undefined ? null : detail });\n(async () => {\n  let r = await scenario(V, I, {});\n  c('fixture_download_byte_identical', r.links.length === 1 && r.links[0].text === A && r.links[0].name === 'shopify-products.csv', r.links.map(l => l.name));\n  c('no_network_calls', r.net.length === 0, r.net);\n  r = await scenario(V.replace('120.00', '120,00'), I, {});\n  c('bad_price_no_download', r.links.length === 0 && /price/.test(r.report) && r.notes.length === 1, r.report.slice(0, 160));\n  r = await scenario(V, I, { max: 11, out: 'out' });\n  c('split_two_distinct_files', r.links.length === 2 && r.links[0].name === 'out-part1.csv' && r.links[1].name === 'out-part2.csv' && (r.links[0].text + r.links[1].text.split('\\n').slice(1).join('\\n')) === A, r.links.map(l => l.name));\n  r = await scenario(null, I, {});\n  c('missing_file_message', /Choose both CSV files/.test(r.report) && r.links.length === 0, r.report);\n  r = await scenario(V.replace('barcode', 'ean'), I, {});\n  c('missing_column_message', /missing columns/.test(r.report) && r.links.length === 0, r.report);\n  c('static_no_network_apis', !/\\bfetch\\(|XMLHttpRequest|WebSocket|sendBeacon|import\\(|<script src|<link /.test(html));\n  c('csp_connect_none', /connect-src 'none'/.test(html) && /default-src 'none'/.test(html));\n  c('ai_disclosure_en_fr', /autonomous AI agents/.test(html) && /agents d'IA autonomes/.test(html));\n  c('limits_present', ['historical', 'not</strong> been tested', 'overwritten', 'Status and Published', 'one image per variant'].every(s => html.includes(s)));\n  c('inline_core_matches_src', scripts[0].includes(fs.readFileSync(path.join(D, 'src/core.js'), 'utf8')));\n})().catch(e => c('harness_exception', false, String(e.stack))).finally(() => {\n  const passed = checks.filter(x => x.ok).length;\n  fs.writeFileSync(path.join(D, 'dom-stub-results.json'), JSON.stringify({ test: 'index.html inline scripts under Node vm DOM stub', runtime: 'node ' + process.version + '; NOT a real browser', passed, total: checks.length, checks }, null, 1));\n  console.log(JSON.stringify({ passed, total: checks.length, failing: checks.filter(x => !x.ok) }));\n});\nEOF\necho '{}' > $D/dom-stub-results.json; node $D/tests/run_dom_checks.js $D products/services/shopify-large-catalogue/fixtures > $D/dom-run-log.txt 2>&1; cat $D/dom-run-log.txt | tail -c 2500; sha256sum $D/index.html $D/src/core.js | tee -a $D/dom-run-log.txt"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/fixtures/",
+        "products/services/shopify-browser-delivery/index.html",
+        "products/services/shopify-browser-delivery/src/core.js",
+        "products/services/shopify-browser-delivery/tests/dom_stub_smoke.js"
+      ],
+      "outputs": [
+        "products/services/shopify-browser-delivery/tests/run_dom_checks.js",
+        "products/services/shopify-browser-delivery/dom-stub-results.json",
+        "products/services/shopify-browser-delivery/dom-run-log.txt"
+      ],
+      "mission_id": "SHOPIFY-BROWSER-DELIVERY-TEST"
+    },
+    "description": "Broker action during THINK-1793981161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398116120",
+  "input_sha256": "b209ca6dda36798f190671a900f5472832a5ec30da9f3ca0dfc888faf828ea96"
+}

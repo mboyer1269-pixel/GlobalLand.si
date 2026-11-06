@@ -1,0 +1,68 @@
+{
+ "test": "index.html inline scripts under Node vm DOM stub",
+ "runtime": "node v22.23.4; NOT a real browser",
+ "passed": 10,
+ "total": 11,
+ "checks": [
+  {
+   "name": "fixture_download_byte_identical",
+   "ok": true,
+   "detail": [
+    "shopify-products.csv"
+   ]
+  },
+  {
+   "name": "no_network_calls",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "name": "bad_price_no_download",
+   "ok": false,
+   "detail": "{\n \"ok\": true,\n \"products\": 2,\n \"rows\": 12,\n \"files\": [\n  \"shopify-products.csv\"\n ],\n \"error_count\": 0,\n \"errors\": [],\n \"warning_count\": 0,\n \"warnings\": []\n}"
+  },
+  {
+   "name": "split_two_distinct_files",
+   "ok": true,
+   "detail": [
+    "out-part1.csv",
+    "out-part2.csv"
+   ]
+  },
+  {
+   "name": "missing_file_message",
+   "ok": true,
+   "detail": "Error: Choose both CSV files first."
+  },
+  {
+   "name": "missing_column_message",
+   "ok": true,
+   "detail": "Error: variants: missing columns [\"barcode\"]"
+  },
+  {
+   "name": "static_no_network_apis",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "name": "csp_connect_none",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "name": "ai_disclosure_en_fr",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "name": "limits_present",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "name": "inline_core_matches_src",
+   "ok": true,
+   "detail": null
+  }
+ ]
+}
