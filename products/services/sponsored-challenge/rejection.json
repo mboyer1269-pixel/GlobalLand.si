@@ -1,0 +1,76 @@
+{
+ "mission": "SPONSORED-DATA-CHALLENGE",
+ "observed_at": "2026-11-06",
+ "verdict": "STOP",
+ "question": "Is there an explicitly compensated public data-analysis/technical-writing challenge with future deadline, public reusable inputs, objective criteria and submission prerequisites GlobalLand can satisfy without accounts or agreements?",
+ "prior_constraints_read": [
+  "products/research/algora-executable-paid-task.json (Algora pivoted to hiring; challenge pages blocked by host filter)",
+  "products/research/technical-translation-request-test.json (job boards need registered accounts)",
+  "BOUNTY-SUBMISSION-ELIGIBILITY blocker (no authorized submission/payout account)"
+ ],
+ "receipts": [
+  {
+   "url": "https://www.drivendata.org/competitions/",
+   "task": "TASK-179395596111",
+   "http_status": 200,
+   "sha256": "289f1dd49318462e89dce8f4676b4604fa9b6b231b0873067287b31aafc1028d",
+   "extract": "products/services/sponsored-challenge/sources/drivendata-extract.txt (TASK-179395596112)"
+  },
+  {
+   "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/rules/",
+   "task": "TASK-179395596113",
+   "http_status": 200,
+   "sha256": "c7f37585335bdae90090128ff328e34b9fdce525d9bc24ba2c2a7dcbdee2b02e",
+   "extract": "products/services/sponsored-challenge/sources/gems-rules.txt (TASK-179395596115)"
+  },
+  {
+   "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/",
+   "task": "TASK-179395596114",
+   "result": "REJECTED HTTP 404 (guessed overview path); not retried"
+  }
+ ],
+ "candidates": [
+  {
+   "id": "drivendata-306-gems",
+   "title_quote": "The Geologic Enhanced Mapping System (GEMS) Prize Challenge",
+   "reward_quote": "$300,000 in prizes",
+   "deadline_quote": "3 weeks left (relative; exact date and timezone not in fetched text)",
+   "participants_quote": "922 joined",
+   "prerequisite_quotes": [
+    "By registering as a participant in this competition, each competitor agrees that the following statement applies to and is made in connection with every submission they provide",
+    "I certify under penalty of perjury that the named competitor meets the eligibility requirements for this prize competition",
+    "false statements or misrepresentations to the federal government may result in civil and/or criminal penalties under 18 U.S.C. § 1001"
+   ],
+   "not_observed": [
+    "official external rules document (eligibility by country/citizenship, AI-agent participation, tax forms)",
+    "data access terms (data appears behind Join competition)",
+    "exact deadline"
+   ],
+   "verdict": "REJECT: participation requires an account, acceptance of rules and a perjury-backed eligibility certification by a named legal person. The mission forbids accounts and agreements, and only the founder could make that certification. The task is also a large geospatial ML problem whose data is not publicly observable without joining."
+  },
+  {
+   "id": "drivendata-other-listings",
+   "observation": "The listing showed only one open prize competition (GEMS). Other open items are labeled Benchmark or practice (no prize); the rest are completed (Lost in Transcription $20,000 oct 2026, DaT Parkinson EUR 25,000 sep 2026, etc.).",
+   "verdict": "REJECT: no reward or no future deadline"
+  }
+ ],
+ "third_candidate": "Not inspected. The binding prerequisite observed (named-participant registration plus agreement to rules) is standard for sponsor-managed prize competitions, so another platform would fail the same mission constraint. A different source was not used, to avoid broadening discovery.",
+ "selected": null,
+ "entry_prepared": false,
+ "observed_facts": [
+  "DrivenData listing public HTTP 200",
+  "GEMS is the only open prize competition listed on 2026-11-06",
+  "GEMS registration requires a perjury-backed eligibility certification to the US federal government"
+ ],
+ "not_established": [
+  "absence of compensated challenges elsewhere",
+  "GEMS country/citizenship eligibility",
+  "whether AI-generated entries are allowed"
+ ],
+ "unchanged_dependencies": [
+  "SERVICE-PAYMENT-COLLECTION",
+  "BOUNTY-SUBMISSION-ELIGIBILITY (no founder-authorized participant account)"
+ ],
+ "reconsideration_trigger": "The founder designates an authorized participant identity and accepts specific challenge rules, or a sponsor challenge accepts anonymous file submissions without registration.",
+ "no_actions_taken": "No accounts, agreements, registrations, credential probes, contact, submission, spending or deployment."
+}
