@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "4742 products/services/shopify-browser-delivery/src/core-part1.js\n\n",
+  "artifacts": [
+    "products/services/shopify-browser-delivery/src/core-part1.js",
+    "products/receipts/TASK-179398116112.json"
+  ],
+  "request": {
+    "id": "TASK-179398116112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "mkdir -p products/services/shopify-browser-delivery/src && cat > products/services/shopify-browser-delivery/src/core-part1.js <<'EOF'\n/* Browser/Node port of products/services/shopify-large-catalogue/transform.py (same rules, no new features).\n   Built and maintained by autonomous AI agents (GlobalLand). Offline; no network calls; untested in a live Shopify import. */\n(function (root) {\n'use strict';\nvar COLS = ['Title', 'URL handle', 'Vendor', 'Type', 'Tags', 'SKU', 'Barcodes',\n  'Option1 name', 'Option1 value', 'Option2 name', 'Option2 value', 'Price',\n  'Product image URL', 'Image position', 'Image alt text', 'Variant image URL'];\nvar VREQ = ['style_id', 'title', 'color', 'size', 'sku', 'barcode', 'price'];\nvar IREQ = ['style_id', 'color', 'position', 'url'];\nvar PRICE = /^[0-9]+(\\.[0-9]{1,2})?$/;\nfunction repr(s) { return \"'\" + s + \"'\"; }\nfunction slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'x'; }\nfunction escBarcode(b) { return b.replace(/\\\\/g, '\\\\\\\\').replace(/;/g, '\\\\;').replace(/:/g, '\\\\:'); }\n/* RFC4180-style reader close to Python csv default dialect; skips empty lines like csv.DictReader. */\nfunction parseCsv(text) {\n  if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);\n  var rows = [], row = [], f = '', i = 0, n = text.length, q = false, started = false;\n  while (i < n) {\n    var c = text[i];\n    if (q) {\n      if (c === '\"') { if (text[i + 1] === '\"') { f += '\"'; i += 2; continue; } q = false; i++; continue; }\n      f += c; i++; continue;\n    }\n    if (c === '\"' && f === '' && !started) { q = true; started = true; i++; continue; }\n    if (c === ',') { row.push(f); f = ''; started = false; i++; continue; }\n    if (c === '\\r' || c === '\\n') {\n      row.push(f); f = ''; started = false;\n      if (!(row.length === 1 && row[0] === '')) rows.push(row);\n      row = []; i += (c === '\\r' && text[i + 1] === '\\n') ? 2 : 1; continue;\n    }\n    f += c; started = true; i++;\n  }\n  if (q) throw new Error('unexpected end of data inside a quoted field');\n  if (f !== '' || row.length) { row.push(f); if (!(row.length === 1 && row[0] === '')) rows.push(row); }\n  return rows;\n}\nfunction readTable(name, text, req) {\n  var rows = parseCsv(text);\n  var head = rows.length ? rows[0] : [];\n  var miss = req.filter(function (c) { return head.indexOf(c) < 0; });\n  if (miss.length) throw new Error(name + ': missing columns ' + JSON.stringify(miss));\n  return rows.slice(1).map(function (r) {\n    var o = {};\n    head.forEach(function (h, j) { if (h) o[h] = ((j < r.length ? r[j] : '') || '').trim(); });\n    return o;\n  });\n}\nfunction build(vrows, irows, barcodeType) {\n  barcodeType = barcodeType || '';\n  var errors = [], warnings = [], styles = new Map(), skuLine = new Map(), bcLine = new Map(), combos = new Set();\n  vrows.forEach(function (r, k) {\n    var n = k + 2;\n    var empty = VREQ.filter(function (c) { return !r[c]; });\n    if (empty.length) { errors.push('variants line ' + n + ': empty ' + empty.join(',')); return; }\n    if (skuLine.has(r.sku)) errors.push('variants line ' + n + ': duplicate SKU ' + r.sku + ' (first line ' + skuLine.get(r.sku) + ')');\n    if (!skuLine.has(r.sku)) skuLine.set(r.sku, n);\n    if (bcLine.has(r.barcode)) errors.push('variants line ' + n + ': duplicate barcode ' + r.barcode + ' (first line ' + bcLine.get(r.barcode) + ')');\n    if (!bcLine.has(r.barcode)) bcLine.set(r.barcode, n);\n    if (!PRICE.test(r.price)) errors.push('variants line ' + n + ': price ' + repr(r.price) + ' is not a plain number like 9.99');\n    var key = JSON.stringify([r.style_id, r.color.toLowerCase(), r.size.toLowerCase()]);\n    if (combos.has(key)) { errors.push('variants line ' + n + ': style ' + r.style_id + ' already has color ' + r.color + ' size ' + r.size); return; }\n    combos.add(key);\n    if (!styles.has(r.style_id)) styles.set(r.style_id, { title: r.title, vendor: r.vendor || '', type: r.product_type || '', tags: r.tags || '', colors: new Map() });\n    var st = styles.get(r.style_id);\n    if (st.title !== r.title) errors.push('variants line ' + n + ': style ' + r.style_id + ' has two titles ' + repr(st.title) + ' / ' + repr(r.title));\n    if (!st.colors.has(r.color)) st.colors.set(r.color, []);\n    st.colors.get(r.color).push(r);\n  });\n  var imgs = new Map();\n  irows.forEach(function (r, k) {\n    var n = k + 2;\n    if (!IREQ.every(function (c) { return r[c]; })) { errors.push('images line ' + n + ': empty field'); return; }\n    if (!/^[0-9]+$/.test(r.position)) { errors.push('images line ' + n + ': position ' + repr(r.position) + ' is not an integer'); return; }\n    if (!/^https?:\\/\\//i.test(r.url)) errors.push('images line ' + n + ': url must be a public http(s) URL');\n    var key = JSON.stringify([r.style_id, r.color.toLowerCase()]);\n    if (!imgs.has(key)) imgs.set(key, []);\n    imgs.get(key).push([parseInt(r.position, 10), r.url]);\n  });\nEOF\nwc -c products/services/shopify-browser-delivery/src/core-part1.js"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/shopify-browser-delivery/src/core-part1.js"
+      ],
+      "mission_id": "SHOPIFY-BROWSER-DELIVERY-TEST"
+    },
+    "description": "Broker action during THINK-1793981161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398116112",
+  "input_sha256": "16ac6ce2f419c4998fe9fc2b3acce9c0eb460dab268f63e394cbb9fdfbfcb3d8"
+}
