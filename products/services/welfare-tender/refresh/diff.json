@@ -1,0 +1,59 @@
+{
+ "old_sha256": "a0a5888cbd0959f90b3a89dfb00535083800a5e0d204096bb6fb82112690f1c1",
+ "new_sha256": "2769b4385a786f4a4fc98d6e043507a6e878311a84dd8b4aa94a8b955a2c7d89",
+ "old_bytes": 13614,
+ "new_bytes": 13614,
+ "n_diffs": 1,
+ "diffs": [
+  {
+   "path": "/uri",
+   "old": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026?limit=100&updatedTo=2026-11-04T18:10:55",
+   "new": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026?limit=100&updatedTo=2026-11-06T11:36:32"
+  }
+ ],
+ "new_release_summary": [
+  {
+   "id": "104449-2026",
+   "date": "2026-11-03T20:30:59Z",
+   "tag": [
+    "tender"
+   ],
+   "tender_status": "active",
+   "tenderPeriod": {
+    "endDate": "2026-12-04T17:00:00+00:00"
+   },
+   "enquiryPeriod": {
+    "endDate": "2026-11-20T17:00:00+00:00"
+   },
+   "value": {
+    "amountGross": 25323110.4,
+    "amount": 21102592,
+    "currency": "GBP"
+   },
+   "amendments": null,
+   "lots": [
+    "LOT-0000"
+   ]
+  }
+ ],
+ "top_keys_old": [
+  "uri",
+  "version",
+  "extensions",
+  "publishedDate",
+  "publisher",
+  "license",
+  "publicationPolicy",
+  "releases"
+ ],
+ "top_keys_new": [
+  "uri",
+  "version",
+  "extensions",
+  "publishedDate",
+  "publisher",
+  "license",
+  "publicationPolicy",
+  "releases"
+ ]
+}

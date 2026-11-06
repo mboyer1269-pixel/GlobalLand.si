@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\"old_sha256\": \"a0a5888cbd0959f90b3a89dfb00535083800a5e0d204096bb6fb82112690f1c1\", \"new_sha256\": \"2769b4385a786f4a4fc98d6e043507a6e878311a84dd8b4aa94a8b955a2c7d89\", \"old_bytes\": 13614, \"new_bytes\": 13614, \"n_diffs\": 1, \"diffs\": [{\"path\": \"/uri\", \"old\": \"https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026?limit=100&updatedTo=2026-11-04T18:10:55\", \"new\": \"https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026?limit=100&updatedTo=2026-11-06T11:36:32\"}], \"new_release_summary\": [{\"id\": \"104449-2026\", \"date\": \"2026-11-03T20:30:59Z\", \"tag\": [\"tender\"], \"tender_status\": \"active\", \"tenderPeriod\": {\"endDate\": \"2026-12-04T17:00:00+00:00\"}, \"enquiryPeriod\": {\"endDate\": \"2026-11-20T17:00:00+00:00\"}, \"value\": {\"amountGross\": 25323110.4, \"amount\": 21102592, \"currency\": \"GBP\"}, \"amendments\": null, \"lots\": [\"LOT-0000\"]}], \"top_keys_old\": [\"uri\", \"version\", \"extensions\", \"publishedDate\", \"publisher\", \"license\", \"publicationPolicy\", \"releases\"], \"top_keys_new\": [\"uri\", \"version\", \"extensions\", \"publishedDate\", \"publisher\", \"license\", \"publicationPolicy\", \"releases\"]}\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/refresh/diff.json",
+    "products/receipts/TASK-179396496112.json"
+  ],
+  "request": {
+    "id": "TASK-179396496112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-06T11:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib,datetime\nA='products/services/welfare-tender/notice-104449-2026-ocds.json'\nB='products/services/welfare-tender/refresh/notice-104449-2026-ocds-20261106.json'\nra=pathlib.Path(A).read_bytes();rb=pathlib.Path(B).read_bytes()\na=json.loads(ra);b=json.loads(rb)\ndiffs=[]\ndef walk(x,y,p):\n  if type(x)!=type(y): diffs.append({'path':p,'old':x,'new':y});return\n  if isinstance(x,dict):\n    for k in sorted(set(x)|set(y)):\n      if k not in x: diffs.append({'path':p+'/'+k,'old':'<absent>','new':y[k]})\n      elif k not in y: diffs.append({'path':p+'/'+k,'old':x[k],'new':'<absent>'})\n      else: walk(x[k],y[k],p+'/'+k)\n  elif isinstance(x,list):\n    if len(x)!=len(y): diffs.append({'path':p,'old_len':len(x),'new_len':len(y),'old':x if len(json.dumps(x))<3000 else '<large>','new':y if len(json.dumps(y))<3000 else '<large>'});return\n    for i,(u,v) in enumerate(zip(x,y)): walk(u,v,p+'/'+str(i))\n  elif x!=y: diffs.append({'path':p,'old':x,'new':y})\nwalk(a,b,'')\nrels=b.get('releases',[])\nsumm=[]\nfor r in rels:\n  t=r.get('tender',{})\n  summ.append({'id':r.get('id'),'date':r.get('date'),'tag':r.get('tag'),'tender_status':t.get('status'),'tenderPeriod':t.get('tenderPeriod'),'enquiryPeriod':t.get('enquiryPeriod'),'value':t.get('value'),'amendments':t.get('amendments'),'lots':[l.get('id') for l in t.get('lots',[])]})\nout={'old_sha256':hashlib.sha256(ra).hexdigest(),'new_sha256':hashlib.sha256(rb).hexdigest(),'old_bytes':len(ra),'new_bytes':len(rb),'n_diffs':len(diffs),'diffs':diffs[:80],'new_release_summary':summ,'top_keys_old':list(a),'top_keys_new':list(b)}\np=pathlib.Path('products/services/welfare-tender/refresh/diff.json');p.parent.mkdir(parents=True,exist_ok=True)\np.write_text(json.dumps(out,indent=1,ensure_ascii=False,default=str))\nprint(json.dumps(out,ensure_ascii=False,default=str)[:6000])"
+      ],
+      "inputs": [
+        "products/services/welfare-tender/notice-104449-2026-ocds.json",
+        "products/services/welfare-tender/refresh/notice-104449-2026-ocds-20261106.json"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/refresh/diff.json"
+      ],
+      "mission_id": "WELFARE-OFFICIAL-AMENDMENT-CHECK"
+    },
+    "description": "Broker action during THINK-1793964961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179396496112",
+  "input_sha256": "b63187a061f4fc8d3a47f554712f73a8c125f6ec0dbf8b7d7d9289a1591c8daf"
+}
