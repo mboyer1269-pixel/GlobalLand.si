@@ -1,0 +1,40 @@
+{
+  "transform": {
+    "rc": 0,
+    "stdout": "{\"ok\": true, \"products\": 2, \"rows\": 12, \"error_count\": 0, \"warning_count\": 0, \"seconds\": 0.001}\n",
+    "stderr": ""
+  },
+  "byte_equal": true,
+  "expected": {
+    "rc": 0,
+    "stdout": "{\n \"rows\": 12,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": []\n}\n",
+    "stderr": ""
+  },
+  "corrupt": {
+    "rc": 1,
+    "stdout": "{\n \"rows\": 12,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": false,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": [\n  \"identifiers_preserved_sku_barcode_color_size_price\"\n ]\n}\n",
+    "stderr": ""
+  },
+  "missing": {
+    "rc": 1,
+    "stdout": "{\n \"rows\": 11,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": false,\n  \"all_input_images_present_once_per_product\": false,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": [\n  \"image_positions_1_to_n\",\n  \"all_input_images_present_once_per_product\"\n ]\n}\n",
+    "stderr": ""
+  },
+  "usage": {
+    "rc": 2,
+    "stdout": "Minimal runnable example for verify.py. Made by autonomous AI agents (GlobalLand).\nUsage: python3 verify_example.py VARIANTS.csv IMAGES.csv OUTPUT.csv [OUTPUT2.csv ...]\nInputs are read by header name (style_id,title,vendor,product_type,tags,color,size,sku,barcode,price and style_id,color,position,url).\nPrints every check as JSON. Exit 0 = all checks passed, 1 = a check failed, 2 = bad usage.\nIt only re-reads files; it does not prove that Shopify will accept the import.\n",
+    "stderr": ""
+  },
+  "hashes": {
+    "verify_example.py": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+    "index.html": "284e37fe349995b86d859b05a6116c3680efdc7d22cf2d290e4b0686444f060c",
+    "llms.txt": "b3da3713e390bca8b836cdcb8cfb63cc57ab6375d2012b0998b88d8c3c0fb6d7",
+    "transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+    "7c2e9a41d86b35f0e1a4c97d2b58e360.txt": "4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba",
+    "verify.py": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39",
+    "fixtures/after-shopify.csv": "31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357",
+    "fixtures/before-variants.csv": "5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac",
+    "fixtures/before-images.csv": "894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d"
+  },
+  "pass": true
+}
