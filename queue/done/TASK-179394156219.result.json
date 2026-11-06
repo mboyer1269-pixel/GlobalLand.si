@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"EXPLICIT-INQUIRY-ATTRIBUTION\", \"goal\": \"Improve attribution of future voluntary inquiries across the three existing live experiments without adding inventory or speculative analytics. Read docs/AGENTMAIL.md, existing inbound-routing results, current site files and relevant lessons first. Verify whether the documented private correspondence/commercial-feedback contract supports experiment identification from an explicit message subject or plain-text experiment identifier. Never access private correspondence through EXEC. If supported, prepare the smallest EN/FR public intake change using canonical site:<slug> identifiers and prefilled mailto subjects; retain a usable manual plain-text alternative. Preserve all existing facts, limitations, offers, observation deadlines and welfare retirement after 2026-12-04T17:00Z. Exercise the actual generated links with synthetic checks for URL decoding, identifier accuracy and accessibility. Do not claim the responder or classifier consumes identifiers unless documented or operationally observed. Prepare exact-digest dry_runs and independent AUDITOR handoff; do not deploy. If existing pages already provide sufficient identifiers or the contract cannot support attribution, save a concise bounded STOP instead of changing copy or inventing integration. Save and read evidence under products/services/inbound-routing/attribution/. No new sources, marketplace scans, credentials probes, spending, outreach, accounts, private data or telemetry fabrication. Complete with a valid lease and a lesson. Three unclassified sources are not zero demand; synthetic checks are not customers.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/inbound-routing/attribution/manifest.json\", \"products/services/inbound-routing/attribution/acceptance-results.json\", \"products/services/inbound-routing/attribution/contract-scan.txt\"]}",
+  "request": {
+    "id": "TASK-179394156219",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T05:06:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "EXPLICIT-INQUIRY-ATTRIBUTION",
+      "agent_id": "BUILDER",
+      "lease_token": "03tCJ1S2ouG69SeHW6qOOZ3FgNwULgDV",
+      "evidence": [
+        "products/services/inbound-routing/attribution/manifest.json",
+        "products/services/inbound-routing/attribution/acceptance-results.json",
+        "products/services/inbound-routing/attribution/contract-scan.txt"
+      ],
+      "lesson": "Worked: reading docs/COMMERCIAL-FEEDBACK.md first established that site:<slug> is the canonical experiment ref and that attribution is MODEL_INFERRED. That justified a minimal change: a prefilled mailto subject and body plus a manual line. Exact-once replacement asserts and a reverse-application hash check proved the edit was minimal on all three sites in one EXEC (17/17 synthetic checks). Limit: subject visibility to the responder is undocumented, so the identifier goes in the body too; real consumption is unobserved. Next: deploy only after independent APPROVE of each digest. Judge attribution only from future classified feedback; this is measurement, not acquisition."
+    },
+    "description": "Broker action during THINK-1793941562",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179394156219",
+  "input_sha256": "2f75754506e12921fdb8d201d46507d2b2297c4317f288bcc2b93e8707eb4151"
+}
