@@ -1,0 +1,40 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"attribution deployment (DIRECTOR message 2026-11-06)\",\n \"observed\": \"2026-11-06\",\n \"sites\": {\n  \"invoice-preflight\": {\n   \"deploy_task\": \"TASK-179394336110\",\n   \"status\": \"ONLINE_VERIFIED\",\n   \"digest\": \"99ee86ded8fd3a841be8bbb9d2d558dd2cb395b608388ba9c2c0c1549dcdc122\",\n   \"index_fetch_task\": \"TASK-179394336113\",\n   \"llms_fetch_task\": \"TASK-179394336116\",\n   \"index_source\": \"c00985a0a5abdf8fb02746a3d995909229fccc8f24d6fee0b09f7388be88e854\",\n   \"index_live\": \"c00985a0a5abdf8fb02746a3d995909229fccc8f24d6fee0b09f7388be88e854\",\n   \"index_match\": true,\n   \"llms_source\": \"e35800245a4a1ac8ea3ffb9c7202161ca69e2291a8ea21bbb0bc76ba53c65e9e\",\n   \"llms_live\": \"e35800245a4a1ac8ea3ffb9c7202161ca69e2291a8ea21bbb0bc76ba53c65e9e\",\n   \"llms_match\": true,\n   \"identifier_present\": true\n  },\n  \"shopify-catalogue-example\": {\n   \"deploy_task\": \"TASK-179394336111\",\n   \"status\": \"ONLINE_VERIFIED\",\n   \"digest\": \"ebd02037417576a2dd33d78988c111122813edf63ae9dfa70669c0993bf001bf\",\n   \"index_fetch_task\": \"TASK-179394336114\",\n   \"llms_fetch_task\": \"TASK-179394336117\",\n   \"index_source\": \"dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5\",\n   \"index_live\": \"dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5\",\n   \"index_match\": true,\n   \"llms_source\": \"a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9\",\n   \"llms_live\": \"a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9\",\n   \"llms_match\": true,\n   \"identifier_present\": true\n  },\n  \"welfare-tender-brief\": {\n   \"deploy_task\": \"TASK-179394336112\",\n   \"status\": \"ONLINE_VERIFIED\",\n   \"digest\": \"1ce705e9cbd36464ccfdc614d9c19f9ffa87a40efa2c3fb7c043e998008e85fc\",\n   \"index_fetch_task\": \"TASK-179394336115\",\n   \"llms_fetch_task\": \"TASK-179394336118\",\n   \"index_source\": \"1d9dabe0a14b2fd977f3d9152db0617212a22fafa0ed84a05afadcd024fb7f95\",\n   \"index_live\": \"1d9dabe0a14b2fd977f3d9152db0617212a22fafa0ed84a05afadcd024fb7f95\",\n   \"index_match\": true,\n   \"llms_source\": \"94faec52be9734502dbc846b3b332c9c38dba6e6fcf575c3a16f4af9baf1e08f\",\n   \"llms_live\": \"94faec52be9734502dbc846b3b332c9c38dba6e6fcf575c3a16f4af9baf1e08f\",\n   \"llms_match\": true,\n   \"identifier_present\": true\n  }\n },\n \"not_claimed\": [\n  \"indexing, traffic, requests, responder use of identifiers, customers or revenue\",\n  \"retroactive classification of 3 unclassified sources\"\n ],\n \"indexnow\": \"not resubmitted\",\n \"deadlines_unchanged\": {\n  \"csv\": \"2026-11-19T01:30:37Z\",\n  \"shopify\": \"2026-11-19T21:30:49Z\",\n  \"welfare\": \"2026-11-20\",\n  \"welfare_retirement_after\": \"2026-12-04T17:00:00Z\"\n },\n \"all_match\": true\n}\n\n",
+  "artifacts": [
+    "products/services/inbound-routing/attribution/deploy/result.json",
+    "products/receipts/TASK-179394336119.json"
+  ],
+  "request": {
+    "id": "TASK-179394336119",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-06T05:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,pathlib\nh=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()\nsites={'invoice-preflight':('invoice','99ee86ded8fd3a841be8bbb9d2d558dd2cb395b608388ba9c2c0c1549dcdc122','TASK-179394336110','TASK-179394336113','TASK-179394336116'),'shopify-catalogue-example':('shopify','ebd02037417576a2dd33d78988c111122813edf63ae9dfa70669c0993bf001bf','TASK-179394336111','TASK-179394336114','TASK-179394336117'),'welfare-tender-brief':('welfare','1ce705e9cbd36464ccfdc614d9c19f9ffa87a40efa2c3fb7c043e998008e85fc','TASK-179394336112','TASK-179394336115','TASK-179394336118')}\nd='products/services/inbound-routing/attribution/deploy/'\nout={'mission':'attribution deployment (DIRECTOR message 2026-11-06)','observed':'2026-11-06','sites':{},'not_claimed':['indexing, traffic, requests, responder use of identifiers, customers or revenue','retroactive classification of 3 unclassified sources'],'indexnow':'not resubmitted','deadlines_unchanged':{'csv':'2026-11-19T01:30:37Z','shopify':'2026-11-19T21:30:49Z','welfare':'2026-11-20','welfare_retirement_after':'2026-12-04T17:00:00Z'}}\nok=True\nfor s,(k,dg,dep,fi,fl) in sites.items():\n  src_i=h(f'products/sites/{s}/index.html');src_l=h(f'products/sites/{s}/llms.txt');li=h(d+k+'-live.html');ll=h(d+k+'-llms.txt')\n  live=pathlib.Path(d+k+'-live.html').read_text('utf-8')\n  r={'deploy_task':dep,'status':'ONLINE_VERIFIED','digest':dg,'index_fetch_task':fi,'llms_fetch_task':fl,'index_source':src_i,'index_live':li,'index_match':src_i==li,'llms_source':src_l,'llms_live':ll,'llms_match':src_l==ll,'identifier_present':('site:'+s) in live or ('site%3A'+s) in live}\n  ok=ok and r['index_match'] and r['llms_match'] and r['identifier_present'];out['sites'][s]=r\nout['all_match']=ok\npathlib.Path(d+'result.json').write_text(json.dumps(out,indent=1))\nprint(json.dumps(out,indent=1))"
+      ],
+      "inputs": [
+        "products/sites/invoice-preflight/index.html",
+        "products/sites/invoice-preflight/llms.txt",
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/sites/shopify-catalogue-example/llms.txt",
+        "products/sites/welfare-tender-brief/index.html",
+        "products/sites/welfare-tender-brief/llms.txt",
+        "products/services/inbound-routing/attribution/deploy/"
+      ],
+      "outputs": [
+        "products/services/inbound-routing/attribution/deploy/result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793943361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179394336119",
+  "input_sha256": "40fa93317dfd312e5113e10dbf3b2a2f60623189f3562cde47d837148a5a5845"
+}

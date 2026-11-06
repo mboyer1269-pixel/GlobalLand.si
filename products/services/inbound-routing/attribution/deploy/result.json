@@ -1,0 +1,60 @@
+{
+ "mission": "attribution deployment (DIRECTOR message 2026-11-06)",
+ "observed": "2026-11-06",
+ "sites": {
+  "invoice-preflight": {
+   "deploy_task": "TASK-179394336110",
+   "status": "ONLINE_VERIFIED",
+   "digest": "99ee86ded8fd3a841be8bbb9d2d558dd2cb395b608388ba9c2c0c1549dcdc122",
+   "index_fetch_task": "TASK-179394336113",
+   "llms_fetch_task": "TASK-179394336116",
+   "index_source": "c00985a0a5abdf8fb02746a3d995909229fccc8f24d6fee0b09f7388be88e854",
+   "index_live": "c00985a0a5abdf8fb02746a3d995909229fccc8f24d6fee0b09f7388be88e854",
+   "index_match": true,
+   "llms_source": "e35800245a4a1ac8ea3ffb9c7202161ca69e2291a8ea21bbb0bc76ba53c65e9e",
+   "llms_live": "e35800245a4a1ac8ea3ffb9c7202161ca69e2291a8ea21bbb0bc76ba53c65e9e",
+   "llms_match": true,
+   "identifier_present": true
+  },
+  "shopify-catalogue-example": {
+   "deploy_task": "TASK-179394336111",
+   "status": "ONLINE_VERIFIED",
+   "digest": "ebd02037417576a2dd33d78988c111122813edf63ae9dfa70669c0993bf001bf",
+   "index_fetch_task": "TASK-179394336114",
+   "llms_fetch_task": "TASK-179394336117",
+   "index_source": "dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5",
+   "index_live": "dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5",
+   "index_match": true,
+   "llms_source": "a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9",
+   "llms_live": "a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9",
+   "llms_match": true,
+   "identifier_present": true
+  },
+  "welfare-tender-brief": {
+   "deploy_task": "TASK-179394336112",
+   "status": "ONLINE_VERIFIED",
+   "digest": "1ce705e9cbd36464ccfdc614d9c19f9ffa87a40efa2c3fb7c043e998008e85fc",
+   "index_fetch_task": "TASK-179394336115",
+   "llms_fetch_task": "TASK-179394336118",
+   "index_source": "1d9dabe0a14b2fd977f3d9152db0617212a22fafa0ed84a05afadcd024fb7f95",
+   "index_live": "1d9dabe0a14b2fd977f3d9152db0617212a22fafa0ed84a05afadcd024fb7f95",
+   "index_match": true,
+   "llms_source": "94faec52be9734502dbc846b3b332c9c38dba6e6fcf575c3a16f4af9baf1e08f",
+   "llms_live": "94faec52be9734502dbc846b3b332c9c38dba6e6fcf575c3a16f4af9baf1e08f",
+   "llms_match": true,
+   "identifier_present": true
+  }
+ },
+ "not_claimed": [
+  "indexing, traffic, requests, responder use of identifiers, customers or revenue",
+  "retroactive classification of 3 unclassified sources"
+ ],
+ "indexnow": "not resubmitted",
+ "deadlines_unchanged": {
+  "csv": "2026-11-19T01:30:37Z",
+  "shopify": "2026-11-19T21:30:49Z",
+  "welfare": "2026-11-20",
+  "welfare_retirement_after": "2026-12-04T17:00:00Z"
+ },
+ "all_match": true
+}
