@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "## which\nnode: /usr/local/bin/node\ndeno: missing\nchromium: missing\nchromium-browser: missing\ngoogle-chrome: missing\nfirefox: missing\nheadless_shell: missing\npython3: /usr/bin/python3\njsdom: missing\n## node version\nv22.23.4\n## node modules\nls: cannot access '/usr/lib/node_modules': No such file or directory\n/usr/local/lib/node_modules:\ncorepack\nnpm\n## playwright cache\nls: cannot access '/tmp/.cache/ms-playwright': No such file or directory\n\n",
+  "artifacts": [
+    "products/services/shopify-browser-delivery/capability-check.txt",
+    "products/receipts/TASK-179398116111.json"
+  ],
+  "request": {
+    "id": "TASK-179398116111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "mkdir -p products/services/shopify-browser-delivery; { echo '## which'; for b in node deno chromium chromium-browser google-chrome firefox headless_shell python3 jsdom; do printf '%s: ' $b; command -v $b || echo missing; done; echo '## node version'; node --version 2>&1; echo '## node modules'; ls /usr/lib/node_modules /usr/local/lib/node_modules 2>&1; echo '## playwright cache'; ls ~/.cache/ms-playwright 2>&1; } > products/services/shopify-browser-delivery/capability-check.txt 2>&1; cat products/services/shopify-browser-delivery/capability-check.txt"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/shopify-browser-delivery/capability-check.txt"
+      ],
+      "mission_id": "SHOPIFY-BROWSER-DELIVERY-TEST"
+    },
+    "description": "Broker action during THINK-1793981161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398116111",
+  "input_sha256": "7a29152b6b71ce5f97a1295feb6dba9f7490805b8484cc8a9cd485dbcf5cca11"
+}
