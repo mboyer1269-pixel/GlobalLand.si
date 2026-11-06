@@ -1,0 +1,76 @@
+{
+ "mission": "SHOPIFY-BROWSER-DELIVERY-TEST",
+ "observed": "2026-11-06",
+ "verdict": "PARTIAL_READY_UNPUBLISHED",
+ "summary": "Self-contained offline browser page (index.html, inline JS port of transform.py, no dependencies, CSP connect-src none) reproduces the synthetic example byte-for-byte and matches transform.py on 20 differential cases; its UI scripts pass 11/11 checks under a Node vm DOM stub. It has NOT been executed in a real browser: no browser is installed in the sandbox.",
+ "capability_check": {
+  "artifact": "capability-check.txt",
+  "task": "TASK-179398116111",
+  "node": "v22.23.4",
+  "browsers": "chromium/chrome/firefox/headless_shell/playwright/jsdom all missing"
+ },
+ "evidence": {
+  "differential": {
+   "artifact": "differential-results.json",
+   "task": "TASK-179398116114",
+   "passed": 20,
+   "total": 20,
+   "compared": "ok, counts, exact error and warning text, output file names and output bytes vs python3 transform.py",
+   "cases_include": [
+    "fixture",
+    "CRLF+BOM",
+    "quoted commas/quotes",
+    "bad price",
+    "duplicate SKU/barcode",
+    "case-insensitive duplicate combo",
+    "two titles",
+    "empty fields",
+    "bad position/url",
+    "orphan and missing images",
+    "same image twice",
+    "handle collision",
+    "position ties",
+    "barcode type",
+    "split max1 without .csv",
+    "split max1 .CSV",
+    "split at 11",
+    "missing column (both fatal)",
+    "9000 barcodes split at 5000 (JS 400 ms in Node)"
+   ]
+  },
+  "dom_stub": {
+   "artifact": "dom-stub-results.json",
+   "task": "TASK-179398116121",
+   "passed": 11,
+   "total": 11,
+   "note": "Runs actual inline scripts with stubbed document/FileReader/Blob/URL; first run 10/11 failed because the test input 120,00 splits into two CSV fields (test fixture defect, corrected to 12.345, code unchanged)."
+  }
+ },
+ "hashes": {
+  "index.html": "4d4e3a87b381ebf00041da92cdba48f586af093c7d98f552abff6da2aa4920a2",
+  "src/core.js": "616ece0832b72424e68f5db4788f201bfbe1b5a3f575b7f797cef942779a2ed9",
+  "reference transform.py": "oid 409b44fd77a32a99aa2afacfe4f8faca9037f890"
+ },
+ "not_verified": [
+  "execution in any real browser (rendering, file picker, FileReader encoding, Blob download naming)",
+  "real Shopify import",
+  "memory/speed in browsers for very large files",
+  "non-ASCII digit and astral-character sort edge cases (Python and JS can differ; not tested)"
+ ],
+ "limitations_disclosed_on_page": [
+  "EN/FR autonomous AI disclosure",
+  "historical 2025-11-11 request, no current buyer",
+  "real import untested",
+  "handle overwrite risk",
+  "Status/Published defaults",
+  "one image per variant"
+ ],
+ "not_done": [
+  "no deployment, no site change, no outreach, no price, no demand or revenue claim"
+ ],
+ "intermediate_files": [
+  "src/core-part1.js (build intermediate, superseded by src/core.js)",
+  "debug.txt (script-load probe)"
+ ],
+ "next_step_if_continued": "Someone with a real browser (founder or reviewer) opens index.html locally, loads the two fixture CSVs, and confirms the downloaded file equals fixtures/after-shopify.csv; only then propose adding it to site shopify-catalogue-example via exact-digest independent review."
+}
