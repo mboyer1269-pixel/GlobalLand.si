@@ -95,27 +95,35 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-05T23:37:44Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 55,
-    "turns_without_verified_revenue": 55,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 56,
+    "turns_without_verified_revenue": 56,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-05T23:37:44Z",
-    "last_outcome_turn": "THINK-1793921401",
-    "last_productive_turn": "THINK-1793921401",
-    "last_turn": "THINK-1793921761",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1793923204",
+    "last_productive_turn": "THINK-1793923204",
+    "last_turn": "THINK-1793923204",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "SHOPIFY-DOWNLOAD-REPRODUCTION"
+      ],
+      "new_products": [
+        "products/services/shopify-large-catalogue/reproduction/command-log.json",
+        "products/services/shopify-large-catalogue/reproduction/reproduction-result.json",
+        "products/services/shopify-large-catalogue/reproduction/site-revision-manifest.json",
+        "products/services/shopify-large-catalogue/reproduction/verify_example.py",
+        "products/sites/shopify-catalogue-example/verify_example.py"
+      ],
+      "new_product_count": 5,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
