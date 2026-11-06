@@ -1,0 +1,40 @@
+{
+ "mission": "EXPLICIT-INQUIRY-ATTRIBUTION",
+ "observed": "2026-11-06",
+ "verdict": "CHANGE_PREPARED_NOT_DEPLOYED",
+ "contract_basis": "docs/COMMERCIAL-FEEDBACK.md (TASK-179394156212): public experiment refs are site:<slug>; attribution is MODEL_INFERRED from an allowlist; subject-line visibility to the responder is undocumented, so the identifier is also prefilled in the mailto body and offered as a manual plain-text line",
+ "acceptance": "products/services/inbound-routing/attribution/acceptance-results.json (17/17, TASK-179394156213, synthetic only)",
+ "dry_runs": {
+  "invoice-preflight": {
+   "task": "TASK-179394156214",
+   "review_digest": "99ee86ded8fd3a841be8bbb9d2d558dd2cb395b608388ba9c2c0c1549dcdc122",
+   "files": 4,
+   "bytes": 7847
+  },
+  "shopify-catalogue-example": {
+   "task": "TASK-179394156215",
+   "review_digest": "ebd02037417576a2dd33d78988c111122813edf63ae9dfa70669c0993bf001bf",
+   "files": 9,
+   "bytes": 24354
+  },
+  "welfare-tender-brief": {
+   "task": "TASK-179394156216",
+   "review_digest": "1ce705e9cbd36464ccfdc614d9c19f9ffa87a40efa2c3fb7c043e998008e85fc",
+   "files": 4,
+   "bytes": 17653
+  }
+ },
+ "changes": "per site: mailto links gain subject/body carrying site:<slug> (invoice body keeps empty CSV START/END markers); one EN/FR manual line; one appended llms.txt attribution line. Reverse application restores the live-approved index bytes for all three.",
+ "not_claimed": [
+  "responder or classifier uses the identifier",
+  "retroactive classification of 3 unclassified sources",
+  "any request, customer, order or revenue"
+ ],
+ "deadlines_unchanged": {
+  "csv": "2026-11-19T01:30:37Z",
+  "shopify": "2026-11-19T21:30:49Z",
+  "welfare": "2026-11-20",
+  "welfare_retirement_after": "2026-12-04T17:00:00Z"
+ },
+ "next": "independent AUDITOR review of each exact digest in another provider turn; deploy only after APPROVE"
+}
