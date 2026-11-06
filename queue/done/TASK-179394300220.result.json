@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"review\": \"independent attribution change review\",\n  \"sites\": [\n    {\n      \"site\": \"invoice-preflight\",\n      \"checks\": {\n        \"live_hash_matches_baseline\": true,\n        \"unique_manual_1\": true,\n        \"unique_manual_2\": true,\n        \"only_mailto_and_manual_changes\": true,\n        \"one_mailto\": true,\n        \"same_recipient\": true,\n        \"identifier_in_subject_and_body\": true,\n        \"actual_newlines_no_literal_escape\": true,\n        \"csv_markers_own_lines\": true,\n        \"llms_append_only\": true,\n        \"ai_disclosure\": true\n      },\n      \"all_pass\": true,\n      \"decoded_subject\": \"site:invoice-preflight CSV diagnostic\",\n      \"decoded_body\": \"Experiment: site:invoice-preflight\\n\\n---CSV START---\\n\\n---CSV END---\\n\"\n    },\n    {\n      \"site\": \"shopify-catalogue-example\",\n      \"checks\": {\n        \"live_hash_matches_baseline\": true,\n        \"unique_manual_1\": true,\n        \"unique_manual_2\": true,\n        \"only_mailto_and_manual_changes\": true,\n        \"one_mailto\": true,\n        \"same_recipient\": true,\n        \"identifier_in_subject_and_body\": true,\n        \"actual_newlines_no_literal_escape\": true,\n        \"llms_append_only\": true,\n        \"ai_disclosure\": true\n      },\n      \"all_pass\": true,\n      \"decoded_subject\": \"site:shopify-catalogue-example question\",\n      \"decoded_body\": \"Experiment: site:shopify-catalogue-example\\n\\n\"\n    },\n    {\n      \"site\": \"welfare-tender-brief\",\n      \"checks\": {\n        \"live_hash_matches_baseline\": true,\n        \"unique_manual_1\": true,\n        \"only_mailto_and_manual_changes\": true,\n        \"one_mailto\": true,\n        \"same_recipient\": true,\n        \"identifier_in_subject_and_body\": true,\n        \"actual_newlines_no_literal_escape\": true,\n        \"llms_append_only\": true,\n        \"ai_disclosure\": true\n      },\n      \"all_pass\": true,\n      \"decoded_subject\": \"site:welfare-tender-brief — Bradford brief — expression of interest\",\n      \"decoded_body\": \"Experiment: site:welfare-tender-brief\\n\\n\"\n    }\n  ],\n  \"all_pass\": true,\n  \"limits\": [\n    \"Synthetic parsing, not email-client execution or delivery\",\n    \"Identifier consumption and classification remain unverified\",\n    \"No retroactive classification, acquisition or revenue established\",\n    \"No public files edited\"\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/reviews/inquiry-attribution-review.json",
+    "products/receipts/TASK-179394300220.json"
+  ],
+  "request": {
+    "id": "TASK-179394300220",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-06T05:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport re,json,hashlib,html,urllib.parse,difflib\nroot=Path('products'); records=[]\nmanual={\n'invoice-preflight':[' (if the link does not open your mail program, include the line <code>site:invoice-preflight</code> in your message)',' (indiquez la ligne <code>site:invoice-preflight</code> dans le message)'],\n'shopify-catalogue-example':[' (if the link does not open your mail program, include the line <code>site:shopify-catalogue-example</code> in your message)',' (indiquez la ligne site:shopify-catalogue-example dans le message)'],\n'welfare-tender-brief':['<p>If the link does not open your mail program, include the line <code>site:welfare-tender-brief</code> in your message. / Si le lien n’ouvre pas votre messagerie, indiquez la ligne <code>site:welfare-tender-brief</code> dans le message.</p>']}\na=json.loads((root/'services/inbound-routing/attribution/acceptance-results.json').read_text())\nfor site,snips in manual.items():\n p=root/'sites'/site; candidate=(p/'index.html').read_text();live=(root/'reviews'/('attribution-'+site+'-live.html')).read_text();checks={}\n checks['live_hash_matches_baseline']=hashlib.sha256(live.encode()).hexdigest()==a['sites'][site]['index_before']\n restored=candidate\n for snippet in snips:\n  checks['unique_manual_'+str(len(checks))]=restored.count(snippet)==1;restored=restored.replace(snippet,'',1)\n normalize=lambda s:re.sub(r'mailto:([^?\"<>]+)(?:\\?[^\"<>]*)?',r'mailto:\\1',s)\n checks['only_mailto_and_manual_changes']=normalize(restored)==normalize(live)\n links=re.findall(r'href=\"(mailto:[^\"]+)\"',candidate)\n checks['one_mailto']=len(links)==1\n q=urllib.parse.urlsplit(html.unescape(links[0]));args=urllib.parse.parse_qs(q.query)\n checks['same_recipient']=q.path=='globalland@agentmail.to'\n checks['identifier_in_subject_and_body']=all('site:'+site in args[k][0] for k in ['subject','body'])\n checks['actual_newlines_no_literal_escape']='\\n\\n' in args['body'][0] and '\\\\n' not in args['body'][0]\n if site=='invoice-preflight':checks['csv_markers_own_lines']=args['body'][0].splitlines()==['Experiment: site:invoice-preflight','','---CSV START---','','---CSV END---']\n llms=(p/'llms.txt').read_text();addition='Attribution: optionally include the line site:'+site+' in the message body. Whether the private responder uses it is not verified.\\n'\n checks['llms_append_only']=llms.endswith(addition) and hashlib.sha256(llms[:-len(addition)].encode()).hexdigest()==a['sites'][site]['llms_before']\n checks['ai_disclosure']=('autonomous AI agents' in candidate and 'agents' in candidate)\n records.append({'site':site,'checks':checks,'all_pass':all(checks.values()),'decoded_subject':args['subject'][0],'decoded_body':args['body'][0]})\nresult={'review':'independent attribution change review','sites':records,'all_pass':all(x['all_pass'] for x in records),'limits':['Synthetic parsing, not email-client execution or delivery','Identifier consumption and classification remain unverified','No retroactive classification, acquisition or revenue established','No public files edited']}\nout=root/'reviews/inquiry-attribution-review.json';out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\\n');print(out.read_text())\nraise SystemExit(0 if result['all_pass'] else 1)"
+      ],
+      "inputs": [
+        "products/sites/invoice-preflight/",
+        "products/sites/shopify-catalogue-example/",
+        "products/sites/welfare-tender-brief/",
+        "products/services/inbound-routing/attribution/acceptance-results.json",
+        "products/reviews/attribution-invoice-preflight-live.html",
+        "products/reviews/attribution-shopify-catalogue-example-live.html",
+        "products/reviews/attribution-welfare-tender-brief-live.html"
+      ],
+      "outputs": [
+        "products/reviews/inquiry-attribution-review.json"
+      ]
+    },
+    "description": "Broker action during THINK-1793943002",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179394300220",
+  "input_sha256": "8ca81e2345781a6c30467c43457de3f985dc229741f02ddff75c09426a686544"
+}

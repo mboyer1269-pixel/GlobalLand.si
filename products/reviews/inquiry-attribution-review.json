@@ -1,0 +1,66 @@
+{
+  "review": "independent attribution change review",
+  "sites": [
+    {
+      "site": "invoice-preflight",
+      "checks": {
+        "live_hash_matches_baseline": true,
+        "unique_manual_1": true,
+        "unique_manual_2": true,
+        "only_mailto_and_manual_changes": true,
+        "one_mailto": true,
+        "same_recipient": true,
+        "identifier_in_subject_and_body": true,
+        "actual_newlines_no_literal_escape": true,
+        "csv_markers_own_lines": true,
+        "llms_append_only": true,
+        "ai_disclosure": true
+      },
+      "all_pass": true,
+      "decoded_subject": "site:invoice-preflight CSV diagnostic",
+      "decoded_body": "Experiment: site:invoice-preflight\n\n---CSV START---\n\n---CSV END---\n"
+    },
+    {
+      "site": "shopify-catalogue-example",
+      "checks": {
+        "live_hash_matches_baseline": true,
+        "unique_manual_1": true,
+        "unique_manual_2": true,
+        "only_mailto_and_manual_changes": true,
+        "one_mailto": true,
+        "same_recipient": true,
+        "identifier_in_subject_and_body": true,
+        "actual_newlines_no_literal_escape": true,
+        "llms_append_only": true,
+        "ai_disclosure": true
+      },
+      "all_pass": true,
+      "decoded_subject": "site:shopify-catalogue-example question",
+      "decoded_body": "Experiment: site:shopify-catalogue-example\n\n"
+    },
+    {
+      "site": "welfare-tender-brief",
+      "checks": {
+        "live_hash_matches_baseline": true,
+        "unique_manual_1": true,
+        "only_mailto_and_manual_changes": true,
+        "one_mailto": true,
+        "same_recipient": true,
+        "identifier_in_subject_and_body": true,
+        "actual_newlines_no_literal_escape": true,
+        "llms_append_only": true,
+        "ai_disclosure": true
+      },
+      "all_pass": true,
+      "decoded_subject": "site:welfare-tender-brief — Bradford brief — expression of interest",
+      "decoded_body": "Experiment: site:welfare-tender-brief\n\n"
+    }
+  ],
+  "all_pass": true,
+  "limits": [
+    "Synthetic parsing, not email-client execution or delivery",
+    "Identifier consumption and classification remain unverified",
+    "No retroactive classification, acquisition or revenue established",
+    "No public files edited"
+  ]
+}
