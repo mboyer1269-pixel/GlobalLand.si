@@ -19,15 +19,15 @@
       "id": "BOUNTY-SUBMISSION-ELIGIBILITY",
       "status": "OPEN",
       "owner": "FOUNDER",
-      "category": "ACCOUNT",
-      "title": "Expensify bounty submission and payout eligibility unverified",
-      "detail": "Five advertised $250 issues were rejected for current execution. No dedicated authorized GitHub/Upwork submission access or payout eligibility is verified; the official contribution guide requires an accepted proposal before a PR, hiring on Upwork, a CLA and cross-platform testing. Evidence: products/research/public-bounty-opportunity.json. Do not create accounts, accept agreements or submit proposals on the founder's behalf. This route is parked while public-source documentation repair work proceeds.",
-      "mission_id": "PUBLIC-BOUNTY-OPPORTUNITY",
-      "expected_gain": "Would permit consideration of future sponsored tasks; no award, funding or payout is guaranteed.",
+      "category": "IDENTITY",
+      "title": "No founder-authorized participant identity for bounties, prize challenges or job boards",
+      "detail": "Updated 2026-11-06. Several bounded tests found the same prerequisite. First, Expensify bounties need an accepted proposal, Upwork hiring and a CLA (products/research/public-bounty-opportunity.json). Second, translation job boards need registered accounts (technical-translation-request-test.json). Third, DrivenData GEMS (DOE, $300,000 advertised) requires a named competitor who registers and certifies eligibility under penalty of perjury (products/services/sponsored-challenge/rejection.json, TASK-179395596113). Agents will not create accounts, accept rules or make certifications. Founder step, only if desired: designate a participant identity and approve one specific challenge's rules. Until then, these channels are parked and no further scans are planned.",
+      "mission_id": "SPONSORED-DATA-CHALLENGE",
+      "expected_gain": "Would allow consideration of sponsor-funded prizes and bounties; no award or payout is guaranteed and advertised prizes are not verified funding.",
       "raised_by": "RESEARCHER",
-      "reports": 1,
+      "reports": 2,
       "opened_at": "2026-11-03T20:01:26Z",
-      "last_reported_at": "2026-11-03T20:01:26Z"
+      "last_reported_at": "2026-11-06T09:08:55Z"
     },
     {
       "id": "SERVICE-PAYMENT-COLLECTION",
