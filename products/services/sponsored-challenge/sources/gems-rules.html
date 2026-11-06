@@ -1,0 +1,786 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Competition: The Geologic Enhanced Mapping System (GEMS) Prize Challenge
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="DrivenData" />
+    
+    <link rel="icon" href="https://drivendata-prod-public.s3.amazonaws.com/favicon.d9d9c8790050.ico">
+    
+    <meta property="og:site_name" content="DrivenData Competitions" />
+    
+  <meta name="description"
+        content="Data science competition for social good: The Geologic Enhanced Mapping System (GEMS) Prize Challenge. Join now and compete!">
+  <meta property="og:title" content="The Geologic Enhanced Mapping System (GEMS) Prize Challenge" />
+  <meta property="og:description"
+        content="Identify hidden geologic faults to discover new geothermal resources.
+" />
+  <meta property="og:image" content="https://drivendata-prod-public.s3.amazonaws.com/comp_images/Geo-GTO_GEMS_HeroX-FY26-DB-v1-noText_1_1.jpg" />
+
+    
+  
+      
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/dist/assets/app-CId6t1mQ.9e34094dbb76.css" rel="stylesheet">
+      
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/vendor/fontawesome/css/fontawesome.min.63ea6c496f8c.css"
+            rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/vendor/fontawesome/css/solid.min.a1961264a2c1.css"
+            rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/vendor/fontawesome/css/regular.min.c0ac0aef9cad.css"
+            rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/vendor/fontawesome/css/brands.min.d4c355f1930b.css"
+            rel="stylesheet">
+      
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/css/global.300167c006cf.css?v=3" rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/css/global_base.fab7c41c201f.css?v=2" rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/css/global_utils.6b7b89c57d9c.css?v=1" rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/css/global_components.ba7b851408ed.css?v=2" rel="stylesheet">
+      
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/css/project.b23e047f83aa.css?v=1" rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/css/accessible-colors.d41d8cd98f00.css?v=1" rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/css/homepage.f01af6bef058.css?v=1" rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/css/components.3b5994b7e938.css?v=1" rel="stylesheet">
+      <link href="https://drivendata-prod-public.s3.amazonaws.com/css/animations.20c827374947.css?v=1" rel="stylesheet">
+    
+  
+
+    
+<meta name="htmx-config" content='{"historyCacheSize": 0, "refreshOnHistoryMiss": true}'>
+
+    
+<script id="app-config" type="application/json">{"sentryDsn": "https://b6cf330367d97d356b38446834aa0b95@o15121.ingest.us.sentry.io/4511632688414720", "environment": "production", "release": "154ba9df767bdff574b8daf62856790940e26f9e", "gaKey": "G-Z4K0VQDRX2", "posthogToken": "", "posthogHost": "https://us.i.posthog.com", "user": null}</script>
+<script>window.__APP__ = JSON.parse(document.getElementById("app-config").textContent);</script>
+
+    
+    <script type="module" src="https://drivendata-prod-public.s3.amazonaws.com/dist/assets/sentry-cUn97kn2.a91543ccfcc1.js"></script>
+    
+      
+
+<script>
+  (function () {
+    var cfg = window.__APP__ || {};
+    if (!cfg.gaKey) return;
+    var tag = document.createElement("script");
+    tag.async = true;
+    tag.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(cfg.gaKey);
+    document.head.appendChild(tag);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", cfg.gaKey, cfg.user && cfg.user.id ? { user_id: cfg.user.id } : {});
+  })();
+</script>
+
+
+
+
+    
+    
+    <script defer src="https://drivendata-prod-public.s3.amazonaws.com/js/alpine.3.15.12.min.422c7d8cfa8b.js"></script>
+    
+    <script defer src="https://drivendata-prod-public.s3.amazonaws.com/js/_hyperscript.0.9.91.min.61f8f97e7bb0.js"></script>
+  </head>
+  <body class="">
+    
+      
+
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 border-bottom bg-white"
+     aria-label="Primary"
+     _="on keydown[key=='Escape'] from window call bootstrap.Collapse.getOrCreateInstance(#navbarSupportedContent, {toggle: false}).hide()">
+  <div class="container-fluid">
+    <a class="skip-to-main-content-link"
+       href="#main-container">Skip to main content</a>
+    <a class="navbar-brand"
+       href="/"
+       aria-label="Go to DrivenData homepage"
+       aria-current="">
+      <img src="https://drivendata-prod-public.s3.amazonaws.com/images/drivendata-logo.58f94dd407ef.svg" height="24px" alt="" />
+    </a>
+    <div class="me-3"></div>
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-3 mb-lg-0 d-flex gap-2 gap-lg-4 align-items-lg-center w-100">
+        <li aria-current="page">
+          <a href="/competitions/">Competitions</a>
+        </li>
+        <li >
+          <a href="/partners/">Partner with us</a>
+        </li>
+        <li 
+            class="flex-grow-1">
+          <a href="/competitors/">How it works</a>
+        </li>
+        
+        <li>
+          <a href="https://drivendata.co/" target="_blank" rel="noopener">DrivenData<sup>LABS</sup></a>
+        </li>
+        <li>
+          <a href="https://drivendata.co/blog.html" target="_blank" rel="noopener">Blog</a>
+        </li>
+        
+          <li>
+            <a href="/accounts/login/?next=/competitions/306/competition-doe-gems/rules/">Log in</a>
+          </li>
+          <li class="highlight sign-up">
+            <a href="/accounts/signup/?next=/competitions/306/competition-doe-gems/rules/">Sign up</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+    
+  <header>
+    
+      
+
+
+<div class="competition-header">
+  <hr class="my-0"
+      style="border-color: var(--color-accent);
+             border-width: 5px">
+  <div class="container-fluid">
+    <div class="d-flex align-items-stretch" style="width:100%; height:100%;">
+      <div class="w-100">
+        <div class="py-4 d-flex align-items-center h-100 gap-4">
+          <div class="w-100">
+            <div class="d-flex flex-column"  style="max-width: 100ch;">
+              <div class="pt-3"></div>
+              <div class="d-flex gap-3 align-items-center w-100">
+                <div class="d-flex gap-1 text-uppercase align-items-center">
+                  <a class="text-category text-sm font-body" href="/competitions/search/?category=energy">energy</a>
+
+                </div>
+              </div>
+              <h1 class="text-3xl">The Geologic Enhanced Mapping System (GEMS) Prize Challenge</h1>
+              <div class="pt-1"></div>
+              <div>
+                <p class="text-muted m-0 text-sm">
+                  
+                  
+                  Identify hidden geologic faults to discover new geothermal resources.
+
+                  <span class="pe-1"></span>
+                  
+  <span class="d-none">
+    
+      <a href="/competitions/search/?type=energy"
+         class="rounded text-lowercase fw-bold text-body">#energy</a>
+    
+      <a href="/competitions/search/?type=science"
+         class="rounded text-lowercase fw-bold text-body">#science</a>
+    
+  </span>
+
+
+                </p>
+                <div class="pt-2"></div>
+              </div>
+              <div class="pt-3"></div>
+              <div class="d-flex flex-column-reverse flex-wrap-reverse flex-md-row gap-4">
+                
+                
+                <div class="d-flex gap-3 gap-lg-4 text-sm flex-column flex-md-row align-items-md-center">
+                  
+<div class="d-flex align-items-center gap-2">
+  
+    <div class="svg-icon-circle text-4xl text-primary">
+      <i class="fa-solid fa-fw fa-trophy"></i>
+    </div>
+  
+  <div>
+    
+      <span class="prize">
+        <strong>$300,000</strong>
+      </span>
+      <span>
+        
+          in prizes
+        
+      </span>
+    
+  </div>
+</div>
+
+                  
+<div class="d-flex align-items-center gap-2">
+  
+    <div class="svg-icon-circle text-4xl text-primary">
+      <i class="fa-solid fa-fw fa-calendar"></i>
+    </div>
+  
+  <div>
+    
+      <span class="end-date" title="Dec. 3, 2026, 10 p.m. UTC"><strong>3 weeks</strong> <span class="">left</span></span>
+    
+  </div>
+</div>
+
+                  
+<div class="d-flex align-items-center gap-2">
+  <div class="svg-icon-circle text-4xl text-primary">
+    <i class="fa-solid fa-fw fa-users"></i>
+  </div>
+  <div>
+    <span class="participants"
+          title="848 solo participants and 40 teams">
+      <strong>922</strong> joined
+    </span>
+  </div>
+</div>
+
+                </div>
+              </div>
+              <div class="pt-3"></div>
+            </div>
+          </div>
+          <div class="flex-shrink-0 d-none d-lg-block border"
+               style="width: 400px;
+                      aspect-ratio: 3/2;
+                      border-radius: 3px;
+                      background-size: cover;
+                      background-color: #ddd;
+                      position: relative;
+                      background-image: url(https://drivendata-prod-public.s3.amazonaws.com/comp_images/Geo-GTO_GEMS_HeroX-FY26-DB-v1-noText_1_1.jpg )">
+            <div class="position-absolute" style="right: 8px; bottom: 8px">
+              
+  <div class="panel-logo p-2 bg-white rounded border">
+    <img src="https://drivendata-prod-public.s3.amazonaws.com/hosts/american-made.png"
+         height="26px"
+         alt="Hosted by DOE" />
+  </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="my-0">
+</div>
+
+    
+  </header>
+
+    <main class="main">
+      <div id="wrapper">
+        <div id="main-container">
+          
+          
+          <div class="container-fluid">
+            
+
+            
+  <div class="pt-5"></div>
+  <div class="d-flex justify-content-between gap-3 gap-lg-5 flex-wrap flex-lg-nowrap">
+    
+      <div class="sidebar sticky-lg-top align-self-start" style="top: 1rem;">
+        
+
+  
+    <div class="mb-3">
+      
+        <a class="btn btn-primary w-100 py-3"
+           href="/accounts/signup/?next=/competitions/306/competition-doe-gems/rules/">
+          
+            Join competition
+          
+          <span class="opacity-50 ps-2">
+            <i class="fa-solid fa-fw fa-arrow-right"></i>
+          </span>
+        </a>
+      
+      
+    </div>
+  
+
+<div class="nav-subpages">
+  <h2 class="text-base">Navigation</h2>
+  <ul class="list-unstyled m-0" id="competition-sidebar-nav">
+  
+    <li>
+      <a href="/competitions/306/competition-doe-gems/page/966/"
+         >Home</a>
+    </li>
+  
+    <li>
+      <a href="/competitions/306/competition-doe-gems/page/967/"
+         >Problem description</a>
+    </li>
+  
+    <li>
+      <a href="/competitions/306/competition-doe-gems/page/968/"
+         >About</a>
+    </li>
+  
+  
+    
+    <li>
+      <a href="/competitions/306/competition-doe-gems/rules/"
+         
+         aria-current="page">
+        Official rules
+        
+      </a>
+    </li>
+  
+    
+    <li>
+      <a href="/competitions/306/competition-doe-gems/leaderboard/"
+         
+         >
+        Leaderboard
+        
+      </a>
+    </li>
+  
+</ul>
+
+</div>
+
+<div class="pt-5"></div>
+
+      </div>
+    
+    
+    <div class="d-flex flex-column flex-grow-1"
+         id="content-page"
+         style="min-width: 0">
+      <div class="js-messages">
+  
+  <div id="inline-messages"
+       class="d-flex flex-column messages-container gap-2">
+    
+  </div>
+  
+  <div id="toast-container"
+       class="toast-container position-fixed start-0 bottom-0 m-3">
+    
+  </div>
+  
+  <template id="toast-template">
+    
+<div class="toast animate-slide-in-left"
+     role="alert"
+     aria-live="assertive"
+     aria-atomic="true"
+     data-bs-delay="6000"
+     style="max-width: fit-content;
+            --bs-toast-max-width: 80ch;
+            --bs-toast-font-size: 1rem;
+            --bs-toast-border-width: 0">
+  <div data-toast-variant
+       class=" m-0 d-flex align-items-center gap-3 justify-content-between">
+    <div class="toast-message"></div>
+    <div>
+      <button type="button"
+              class="bg-transparent border-0 text-xl float-end text-current-color"
+              data-bs-dismiss="toast"
+              aria-label="Dismiss">×</button>
+    </div>
+  </div>
+</div>
+
+  </template>
+</div>
+
+      
+        <div class="prose">
+          <h1 id="gems-prize-rules">GEMS Prize Rules</h1>
+<p>Participation in this challenge is subject to the official GEMS Prize rules. <a href="https://www.herox.com/GEMSPrize/resource/2274">Please review here</a>.</p>
+        </div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="modal fade"
+         id="signupModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="signupModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-base" id="signupModalLabel">The Geologic Enhanced Mapping System (GEMS) Prize Challenge: Rules and Terms of Data Use</h4>
+          </div>
+          <div class="modal-body prose"><h1>GEMS Prize Rules</h1>
+
+<p>Participation in this challenge is subject to the official GEMS Prize rules. <a href="https://www.herox.com/GEMSPrize/resource/2274">Please review here</a>.</p>
+</div>
+          <div class="modal-footer">
+            
+              <button type="button"
+                      class="btn btn-primary"
+                      data-bs-dismiss="modal"
+                      data-bs-toggle="modal"
+                      data-bs-target="#vettingModal">I agree</button>
+              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Cancel</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      
+
+
+  <div class="modal fade"
+       id="vettingModal"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="vettingModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog">
+      <form method="post"
+            id="vetting-form"
+            novalidate
+            enctype="multipart/form-data"
+            hx-post="/competitions/306/submissions/vetting-form/"
+            hx-ext="response-targets"
+            hx-target="#vetting-form-fields-container"
+            hx-target-error="#vetting-form-fields-container"
+            hx-swap="innerHTML"
+            hx-disabled-elt="find button[type=submit]">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-base" id="vettingModalLabel">The Geologic Enhanced Mapping System (GEMS) Prize Challenge: Pre-registration Form</h4>
+          </div>
+          <div class="modal-body prose">
+            <p>By registering as a participant in this competition, each competitor agrees that the following statement applies to and is made in connection with every submission they provide:</p>
+
+<blockquote>
+  <p>I am providing this submission package as part of my participation in this prize. I understand that the information contained in this submission will be relied on by the federal government to determine whether to issue a prize to the named competitor. I certify under penalty of perjury that the named competitor meets the eligibility requirements for this prize competition and complies with all other rules contained in the official rules document. I further represent that the information contained in the submission is true and contains no misrepresentations. I understand false statements or misrepresentations to the federal government may result in civil and/or criminal penalties under 18 U.S.C. § 1001 and § 287, and 31 U.S.C. §§ 3729-3733 and 3801-3812.</p>
+</blockquote>
+
+            <div id="vetting-form-fields-container"
+                 hx-get="/competitions/306/submissions/vetting-form/"
+                 hx-trigger="show.bs.modal from:#vettingModal"
+                 hx-swap="innerHTML">Loading form...</div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Submit and join</button>
+            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </form>
+      
+      <button type="button"
+              id="vetting-join-trigger"
+              class="d-none"
+              hx-post="/competitions/306/competition-doe-gems/join/"
+              hx-trigger="vettingApproved from:body"></button>
+    </div>
+  </div>
+
+
+    
+  
+  <div class="pt-5"></div>
+  <div class="pt-5"></div>
+  <div class="pt-5"></div>
+
+            
+            
+          </div>
+        </div>
+      </div>
+    </main>
+    
+      
+<footer class="site-footer">
+  <div class="container-fluid">
+    <div class="row g-5">
+      <div class="col-xl-4">
+        <a href="/"
+           class="site-footer__brand d-inline-block"
+           aria-label="DrivenData">
+          <img src="https://drivendata-prod-public.s3.amazonaws.com/images/logo-white.46fdfa256aa3.svg"
+               class="img-fluid"
+               alt="DrivenData"
+               width="968"
+               height="156" />
+        </a>
+        <p class="site-footer__tagline mb-0">
+          We use data science &amp; AI to help mission-driven organizations offer more impactful services.
+        </p>
+      </div>
+      <div class="col-xl-8">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+          
+          <div class="col">
+            <h3 class="site-footer__heading">
+              <a href="https://drivendata.co/team/" target="_blank" rel="noopener">About</a>
+            </h3>
+            <div class="site-footer__links">
+              <a href="https://drivendata.co/team/" target="_blank" rel="noopener">Meet the team</a>
+              <a href="/contact/">Contact us</a>
+              <a href="https://apply.workable.com/drivendata/"
+                 target="_blank"
+                 rel="noopener noreferrer">Careers</a>
+              <a href="https://drivendata.co/#faq" target="_blank" rel="noopener">FAQ</a>
+            </div>
+          </div>
+          <div class="col">
+            <h3 class="site-footer__heading">
+              <a href="https://drivendata.co/#services" target="_blank" rel="noopener">Services</a>
+            </h3>
+            <div class="site-footer__links">
+              <a href="https://drivendata.co/#data-science-and-ai"
+                 target="_blank"
+                 rel="noopener">Data science &amp; AI</a>
+              <a href="https://drivendata.co/#software-engineering"
+                 target="_blank"
+                 rel="noopener">Software engineering</a>
+              <a href="https://drivendata.co/#data-engineering"
+                 target="_blank"
+                 rel="noopener">Data engineering</a>
+              <a href="https://drivendata.co/#data-strategy"
+                 target="_blank"
+                 rel="noopener">Data strategy</a>
+            </div>
+          </div>
+          <div class="col">
+            <h3 class="site-footer__heading">
+              <a href="https://drivendata.co/open-source/"
+                 target="_blank"
+                 rel="noopener">Open source</a>
+            </h3>
+            <div class="site-footer__links">
+              <a href="https://cookiecutter-data-science.drivendata.org/"
+                 target="_blank"
+                 rel="noopener">Cookiecutter Data Science</a>
+              <a href="https://deon.drivendata.org/" target="_blank" rel="noopener">Deon: Ethics checklist</a>
+              <a href="https://zamba.drivendata.org/" target="_blank" rel="noopener">Zamba: Wildlife monitoring</a>
+              <a href="https://github.com/drivendataorg/competition-winners"
+                 target="_blank"
+                 rel="noopener noreferrer">Models from competitions</a>
+              <a href="https://drivendata.co/open-source/"
+                 target="_blank"
+                 rel="noopener">All open source projects</a>
+            </div>
+          </div>
+          <div class="col">
+            <h3 class="site-footer__heading">
+              <a href="https://drivendata.co/blog/" target="_blank" rel="noopener">Resources</a>
+            </h3>
+            <div class="site-footer__links">
+              <a href="https://drivendata.co/blog/" target="_blank" rel="noopener">Blog</a>
+              <a href="https://drivendata.co/projects/" target="_blank" rel="noopener">Projects</a>
+              <a href="https://drivendata.co/insights/" target="_blank" rel="noopener">Insights</a>
+              <a href="https://drivendata.co/case-studies/"
+                 target="_blank"
+                 rel="noopener">Case studies</a>
+            </div>
+          </div>
+          <div class="col">
+            <h3 class="site-footer__heading">
+              <a href="/competitions/">Competitions</a>
+            </h3>
+            <div class="site-footer__links">
+              <a href="/competitions/">Join a competition</a>
+              <a href="/partners/">Run a competition</a>
+              <a href="/competitors/">How competitions work</a>
+              <a href="/competitions/search/">Past competitions</a>
+            </div>
+          </div>
+          <div class="col">
+            <h3 class="site-footer__heading">
+              <a href="https://drivendata.co/government/"
+                 target="_blank"
+                 rel="noopener">Government</a>
+            </h3>
+            <div class="site-footer__links">
+              <a href="https://drivendata.co/government/"
+                 target="_blank"
+                 rel="noopener">Contract Vehicles</a>
+              <a href="https://drivendata.co/government/DrivenData,%20Inc%20-%20Capability%20Statement%20-%20Federal%20(2025).pdf"
+                 target="_blank"
+                 rel="noopener">Capability Statement</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4 align-items-end site-footer__meta">
+      <div class="col-lg-6">
+        <ul class="site-footer__social list-unstyled mb-3">
+          <li>
+            <a aria-label="X (Twitter)"
+               target="_blank"
+               rel="noopener noreferrer"
+               href="https://x.com/drivendataorg"><i class="fa-brands fa-x-twitter site-footer__social-icon"
+   aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a aria-label="Bluesky"
+               target="_blank"
+               rel="noopener noreferrer"
+               href="https://bsky.app/profile/drivendata.org"><i class="fa-brands fa-bluesky site-footer__social-icon"
+   aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a aria-label="LinkedIn"
+               target="_blank"
+               rel="noopener noreferrer"
+               href="https://www.linkedin.com/company/9202422/"><i class="fa-brands fa-linkedin site-footer__social-icon"
+   aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a aria-label="GitHub"
+               target="_blank"
+               rel="noopener noreferrer"
+               href="https://github.com/drivendataorg"><i class="fa-brands fa-github site-footer__social-icon"
+   aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a aria-label="RSS" href="https://drivendata.co/feeds/all.atom.xml"><i class="fa-solid fa-rss site-footer__social-icon" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+        <p class="site-footer__newsletter mb-0">
+          <a href="/#mailing-list"
+             class="text-decoration-underline">Subscribe to our newsletter</a>
+          <span>or follow us for updates</span>
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <div class="site-footer__address small">
+          <div class="d-flex gap-2 gap-lg-3 flex-column flex-lg-row justify-content-lg-end mb-3 mb-lg-2 mt-3 mt-lg-0">
+            <a href="mailto:info@drivendata.org"
+               target="_blank"
+               rel="noopener noreferrer">info@drivendata.org</a>
+            <a href="/termsofuse/">Terms</a>
+            <a href="/privacypolicy/">Privacy</a>
+            <a href="/copyrightpolicy/">Copyright policy</a>
+          </div>
+          <div class="opacity-75">
+            © 2026 DrivenData LLC, <span class="text-nowrap">700 Colorado Blvd #611, Denver, CO 80206</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    
+    
+    
+    
+  
+      
+      <script src="https://drivendata-prod-public.s3.amazonaws.com/js/jquery.min.5ca7582261c4.js"></script>
+      
+      <script src="https://drivendata-prod-public.s3.amazonaws.com/vendor/bootstrap/bootstrap.bundle.min.b7ef46c92e06.js"></script>
+      
+      <script src="https://drivendata-prod-public.s3.amazonaws.com/js/global.f763136173fc.js"></script>
+      
+      <script src="https://drivendata-prod-public.s3.amazonaws.com/js/project.d41d8cd98f00.js"></script>
+      
+      <script src="https://drivendata-prod-public.s3.amazonaws.com/js/htmx.2.0.10.min.6b99da76b7f7.js"></script>
+      <script src="https://drivendata-prod-public.s3.amazonaws.com/js/htmx-ext-response-targets.2.0.4.min.b6f8377a9941.js"></script>
+      
+      
+      
+      <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+          event.detail.headers['X-CSRFToken'] = '6wIiGve4NAJHSWg6R7BMaLJl1tdYTaIvH7HknEOXjxDpQXhEeiU6zPzvNWTtM5Sa';
+        });
+      </script>
+    
+  <script>
+    // Open external content-page links in a new tab (skip internal, in-page, and drivendata links)
+    document.querySelectorAll('#content-page a').forEach(function (link) {
+      var href = link.getAttribute('href') || '';
+      if (href.includes('drivendata')) return;
+      if (href.startsWith('#')) return;
+      if (href.startsWith('/')) return;
+      if (link.getAttribute('target') === '_self') return;
+      link.setAttribute('target', '_blank');
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js"
+          integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"></script>
+  <style>
+      a.anchorjs-link {
+          color: var(--color-muted);
+          text-decoration: none;
+          vertical-align: -0.075em;
+      }
+
+      a.anchorjs-link:hover {
+          text-decoration: none;
+      }
+  </style>
+  <script>
+      anchors.add('.anchored');
+      anchors.add('#content-page .prose :where(h2, h3, h4, h5, h6)').remove('.tooltiptext h4');
+
+      // Don't allow heading anchor links to take keyboard focus as it hinders keyboard navigation
+      document.querySelectorAll('a.anchorjs-link').forEach(anchorLink => {
+        anchorLink.tabIndex = -1;
+      });
+  </script>
+  
+    
+<script>
+  window.MathJax = {
+    options: {
+      enableMenu: false,
+      enableSpeech: false,
+      enableBraille: false,
+      enableExplorer: false,
+      menuOptions: {
+        settings: {
+          // v4 overwrites the enable* flags above from these; enrich: false is
+          // what stops the speech worker from ever starting.
+          enrich: false,
+          speech: false,
+          braille: false,
+          inTabOrder: false,
+        },
+      },
+    },
+    tex: {
+      inlineMath: [["|$", "$|"]],
+      displayMath: [["$$", "$$"]],
+      processEscapes: true,
+    },
+  };
+</script>
+<script defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"
+        integrity="sha512-D0eU0TwZjXn2FsQXymdhToKse0yD7CFS6dQhhBQe5sUKYVp1hufw6lQtXxpvwBRj7dDjVJ858l2HEfktsOBv0A=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+  
+  
+
+    
+    
+  </body>
+</html>
