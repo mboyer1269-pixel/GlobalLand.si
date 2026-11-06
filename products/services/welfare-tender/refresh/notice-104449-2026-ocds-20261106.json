@@ -1,0 +1,238 @@
+{
+    "uri": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026?limit=100&updatedTo=2026-11-06T11:36:32",
+    "version": "1.1",
+    "extensions": [
+        "https://standard.open-contracting.org/profiles/eu/latest/en/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_amendment_rationale_classifications_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_budget_breakdown_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_contract_completion_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_documentation_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_pagination_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_suitability_extension/master/extension.json",
+        "https://raw.githubusercontent.com/portaledcahn/ocds_Links_extension/main/extension.json",
+        "https://raw.githubusercontent.com/cabinetoffice/ocds_uk_extension/main/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_performance_failures_extension/master/extension.json"
+    ],
+    "publishedDate": "2026-11-03T20:30:59Z",
+    "publisher": {
+        "name": "Cabinet Office",
+        "scheme": "GB-GOR",
+        "uid": "D2",
+        "uri": "https://www.gov.uk/government/organisations/cabinet-office"
+    },
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "publicationPolicy": "https://www.gov.uk/government/publications/open-contracting",
+    "releases": [
+        {
+            "ocid": "ocds-h6vhtk-07971f",
+            "id": "104449-2026",
+            "tag": [
+                "tender"
+            ],
+            "date": "2026-11-03T20:30:59Z",
+            "initiationType": "tender",
+            "parties": [
+                {
+                    "name": "City of Bradford Metropolitan District Council",
+                    "id": "GB-PPON-PBWW-4714-TBHN",
+                    "identifier": {
+                        "scheme": "GB-PPON",
+                        "id": "PBWW-4714-TBHN"
+                    },
+                    "address": {
+                        "streetAddress": "Britannia House, Hall Ings",
+                        "locality": "Bradford",
+                        "postalCode": "BD1 1HX",
+                        "country": "GB",
+                        "countryName": "United Kingdom",
+                        "region": "UKE41"
+                    },
+                    "contactPoint": {
+                        "name": "Fumni Allison",
+                        "email": "Funmi.Allison@bradford.gov.uk",
+                        "telephone": "+44 1274432111"
+                    },
+                    "roles": [
+                        "buyer"
+                    ],
+                    "details": {
+                        "url": "https://www.bradford.gov.uk/",
+                        "classifications": [
+                            {
+                                "scheme": "UK_CA_TYPE",
+                                "id": "publicAuthorityCentralGovernment",
+                                "description": "Public authority - central government"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "buyer": {
+                "id": "GB-PPON-PBWW-4714-TBHN",
+                "name": "City of Bradford Metropolitan District Council"
+            },
+            "tender": {
+                "id": "CBMC-PTR-291-2026-27",
+                "legalBasis": {
+                    "id": "2023/54",
+                    "scheme": "UKPGA",
+                    "uri": "https://www.legislation.gov.uk/ukpga/2023/54/contents"
+                },
+                "title": "Welfare Advice Services and Advice Network Support & Training Services",
+                "description": "The City of Bradford Metropolitan District Council is procuring Welfare Advice Services and Advice Network Support and Training Services to support residents experiencing financial hardship, poverty and barriers to accessing support across Bradford District. The service is funded through the Crisis and Resilience Fund and aims to improve financial wellbeing, resilience and access to welfare support. The procurement comprises two lots. Lot 1 – Welfare Advice Services will provide free, independent, impartial and confidential welfare advice, casework and representation for Bradford District residents. The service will support residents with welfare benefits, debt, housing, employment, health-related welfare issues, fuel poverty, consumer matters and immigration advice within the provider's authorised competence. The Lead Provider will deliver services directly and coordinate a network of subcontracted locality-based organisations to ensure access across all five Bradford localities. The service will operate on a \"no wrong front door\" basis, ensuring residents receive timely support, active referrals and appropriate advocacy where required. Lot 2 – Advice Network Support and Training Services will support workforce development, quality improvement, collaboration and network coordination across the Bradford District Resilience and Advice Network. The Provider will facilitate partnership working, deliver a district-wide training programme, support consistent reporting and quality standards, strengthen safeguarding awareness and develop pathways into accredited welfare advice roles. The services will contribute to the Council's Anti-Poverty Strategy, support prevention of homelessness, improve financial resilience, increase benefit uptake, strengthen partnership working and improve outcomes for vulnerable residents across the district. The initial contract term is two years with options to extend for up to two further periods of 24 months.",
+                "status": "active",
+                "items": [
+                    {
+                        "id": "LOT-0000",
+                        "additionalClassifications": [
+                            {
+                                "scheme": "CPV",
+                                "id": "85312400",
+                                "description": "Welfare services not delivered through residential institutions"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85311100",
+                                "description": "Welfare services for the elderly"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85311200",
+                                "description": "Welfare services for disabled people"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85311300",
+                                "description": "Welfare services for children and young people"
+                            }
+                        ],
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKE41",
+                                "country": "GB",
+                                "countryName": "United Kingdom"
+                            },
+                            {
+                                "region": "UKE4",
+                                "country": "GB",
+                                "countryName": "United Kingdom"
+                            }
+                        ],
+                        "relatedLot": "LOT-0000"
+                    }
+                ],
+                "value": {
+                    "amountGross": 25323110.40,
+                    "amount": 21102592,
+                    "currency": "GBP"
+                },
+                "procurementMethod": "open",
+                "procurementMethodDetails": "Open procedure",
+                "mainProcurementCategory": "services",
+                "additionalProcurementCategories": [
+                    "goods"
+                ],
+                "aboveThreshold": true,
+                "submissionMethodDetails": "https://uk.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=110669&TID100115668&B=",
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed",
+                    "languages": [
+                        "en"
+                    ]
+                },
+                "tenderPeriod": {
+                    "endDate": "2026-12-04T17:00:00+00:00"
+                },
+                "enquiryPeriod": {
+                    "endDate": "2026-11-20T17:00:00+00:00"
+                },
+                "awardPeriod": {
+                    "endDate": "2027-01-18T23:59:59Z"
+                },
+                "lots": [
+                    {
+                        "id": "LOT-0000",
+                        "status": "active",
+                        "value": {
+                            "amountGross": 25323110.40,
+                            "amount": 21102592,
+                            "currency": "GBP"
+                        },
+                        "awardCriteria": {
+                            "criteria": [
+                                {
+                                    "type": "price",
+                                    "name": "Price",
+                                    "description": "Evaluation of the Tenderer's submitted pricing in accordance with the Pricing Matrix.",
+                                    "numbers": [
+                                        {
+                                            "number": 5,
+                                            "weight": "percentageExact"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "quality",
+                                    "name": "Quality",
+                                    "description": "Evaluation of the Tenderer's response to the quality requirements and service delivery proposals.",
+                                    "numbers": [
+                                        {
+                                            "number": 85,
+                                            "weight": "percentageExact"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "quality",
+                                    "name": "Social Value",
+                                    "description": "Evaluation of the Tenderer's proposed social value commitments, community benefits and added value to Bradford District.",
+                                    "numbers": [
+                                        {
+                                            "number": 10,
+                                            "weight": "percentageExact"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "suitability": {
+                            "sme": true,
+                            "vcse": true
+                        },
+                        "contractPeriod": {
+                            "startDate": "2027-04-01T00:00:00Z",
+                            "endDate": "2029-03-31T23:59:59+01:00",
+                            "maxExtentDate": "2031-03-31T23:59:59+01:00"
+                        },
+                        "hasRenewal": true,
+                        "renewal": {
+                            "description": "The Contract may be extended by up to two (2) periods of twenty-four (24) months each at the Council's discretion, subject to performance, funding and service requirements."
+                        },
+                        "hasOptions": true,
+                        "options": {
+                            "description": "The Contract will commence on 1 April 2027 for an initial period of two (2) years. The Council reserves the right, at its sole discretion, to extend the Contract for up to two (2) further periods of up to twenty-four (24) months each, subject to satisfactory performance, continued service need, available funding and all necessary approvals. The maximum potential Contract term is six (6) years."
+                        },
+                        "description": null
+                    }
+                ],
+                "documents": [
+                    {
+                        "id": "conflictOfInterest",
+                        "documentType": "conflictOfInterest",
+                        "description": "Not published"
+                    },
+                    {
+                        "id": "104449-2026",
+                        "documentType": "tenderNotice",
+                        "noticeType": "UK4",
+                        "description": "Tender notice on Find a Tender",
+                        "url": "https://www.find-tender.service.gov.uk/Notice/104449-2026",
+                        "datePublished": "2026-11-03T20:30:59Z",
+                        "format": "text/html"
+                    }
+                ]
+            },
+            "language": "en"
+        }
+    ]
+}
