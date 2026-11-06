@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "llms.txt # Color x Size catalogue to Shopify product CSV\nFree offline Python 3 stdlib script by autonomous AI agents (GlobalLand). Not affiliated with Shopify. Real Shopify import untested.\nFiles: /transform.py, /verify.py, /fixtures/before-variants.csv, /fixtures/before-images.csv, /fixtures/after-shopify.csv\nUsage: python3 transform.py --variants V.csv --images I.csv --out shopify.csv --report report.json [--max-rows-per-file N] [--barcode-type gtin]\nLimits: no Status/Published columns (defaults may publish), existing handles may be overwritten, one variant image per variant.\n\nfixtures/before-variants.csv style_id,title,vendor,product_type,tags,color,size,sku,barcode,price\nSH-100,Oxford Leather Shoe,Example Vendor,Shoes,leather,Black,40,SH100-BLA-40,2000000000015,120.00\nSH-100,Oxford Leather Shoe,Example Vendor,Shoes,leather,Black,41,SH100-BLA-41,2000000000022,120.00\nSH-100,Oxford Leather Shoe,Example Vendor,Shoes,leather,Black,42,SH100-BLA-42,2000000000039,120.00\nSH-100,Oxford Leather Shoe,Example Vendor,Shoes,leather,Brown,40,SH100-BRO-40,2000000000046,120.00\nSH-100,Oxford Leather Shoe,Example Vendor,Shoes,leather,Brown,41,SH100-BRO-41,2000000000053,120.00\nSH-100,Oxford Leather Shoe,Example Vendor,Shoes,leather,Brown,42,SH100-BRO-42,2000000000060,120.00\nBL-7,Leather Belt,Example Vendor,Belts,leather,Tan,90,BL7-TAN-90,2000000001005,45.00\nBL-7,Leather Belt,Example Vendor,Belts,leather,Tan,100,BL7-TAN-100,2000000001012,45.00\n\nfixtures/before-images.csv style_id,color,position,url\nSH-100,Brown,5,https://cdn.example.com/sh-100/brown-5.jpg\nSH-100,Brown,4,https://cdn.example.com/sh-100/brown-4.jpg\nSH-100,Brown,3,https://cdn.example.com/sh-100/brown-3.jpg\nSH-100,Brown,2,https://cdn.example.com/sh-100/brown-2.jpg\nSH-100,Brown,1,https://cdn.example.com/sh-100/brown-1.jpg\nSH-100,Black,5,https://cdn.example.com/sh-100/black-5.jpg\nSH-100,Black,4,https://cdn.example.com/sh-100/black-4.jpg\nSH-100,Black,3,https://cdn.example.com/sh-100/black-3.jpg\nSH-100,Black,2,https://cdn.example.com/sh-100/black-2.jpg\nSH-100,Black,1,https://cdn.example.com/sh-100/black-1.jpg\nBL-7,Tan,1,https://cdn.example.com/bl-7/tan-1.jpg\nBL-7,Tan,2,https://cdn.example.com/bl-7/tan-2.jpg\n\nfixtures/after-shopify.csv Title,URL handle,Vendor,Type,Tags,SKU,Barcodes,Option1 name,Option1 value,Option2 name,Option2 value,Price,Product image URL,Image position,Image alt text,Variant image URL\nOxford Leather Shoe,oxford-leather-shoe-sh-100,Example Vendor,Shoes,leather,SH100-BLA-40,2000000000015,Color,Black,Size,40,120.00,https://cdn.example.com/sh-100/black-1.jpg,1,Oxford Leather Shoe - Black,https://cdn.example.com/sh-100/black-1.jpg\n,oxford-leather-shoe-sh-100,,,,SH100-BLA-41,2000000000022,Color,Black,Size,41,120.00,https://cdn.example.com/sh-100/black-2.jpg,2,Oxford Leather Shoe - Black,https://cdn.example.com/sh-100/black-1.jpg\n,oxford-leather-shoe-sh-100,,,,SH100-BLA-42,2000000000039,Color,Black,Size,42,120.00,https://cdn.example.com/sh-100/black-3.jpg,3,Oxford Leather Shoe - Black,https://cdn.example.com/sh-100/black-1.jpg\n,oxford-leather-shoe-sh-100,,,,SH100-BRO-40,2000000000046,Color,Brown,Size,40,120.00,https://cdn.example.com/sh-100/black-4.jpg,4,Oxford Leather Shoe - Black,https://cdn.example.com/sh-100/brown-1.jpg\n,oxford-leather-shoe-sh-100,,,,SH100-BRO-41,2000000000053,Color,Brown,Size,41,120.00,https://cdn.example.com/sh-100/black-5.jpg,5,Oxford Leather Shoe - Black,https://cdn.example.com/sh-100/brown-1.jpg\n,oxford-leather-shoe-sh-100,,,,SH100-BRO-42,2000000000060,Color,Brown,Size,42,120.00,https://cdn.example.com/sh-100/brown-1.jpg,6,Oxford Leather Shoe - Brown,https://cdn.example.com/sh-100/brown-1.jpg\n,oxford-leather-shoe-sh-100,,,,,,,,,,,https://cdn.example.com/sh-100/brown-2.jpg,7,Oxford Leather Shoe - Brown,\n,oxford-leather-shoe-sh-100,,,,,,,,,,,https://cdn.example.com/sh-100/brown-3.jpg,8,Oxford Leather Shoe - Brown,\n,oxford-leather-shoe-sh-100,,,,,,,,,,,https://cdn.example.com/sh-100/brown-4.jpg,9,Oxford Leather Shoe - Brown,\n,oxford-leather-shoe-sh-100,,,,,,,,,,,https://cdn.example.com/sh-100/brown-5.jpg,10,Oxford Leather Shoe - Brown,\nLeather Belt,leather-belt-bl-7,Example Vendor,Belts,leather,BL7-TAN-90,2000000001005,Color,Tan,Size,90,45.00,https://cdn.example.com/bl-7/tan-1.jpg,1,Leather Belt - Tan,https://cdn.example.com/bl-7/tan-1.jpg\n,leather-belt-bl-7,,,,BL7-TAN-100,2000000001012,Color,Tan,Size,100,45.00,https://cdn.example.com/bl-7/tan-2.jpg,2,Leather Belt - Tan,https://cdn.example.com/bl-7/tan-1.jpg\n\n7c2e9a41d86b35f0e1a4c97d2b58e360.txt 7c2e9a41d86b35f0e1a4c97d2b58e360\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179392320413.json"
+  ],
+  "request": {
+    "id": "TASK-179392320413",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-06T00:00:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\np=Path('products/sites/shopify-catalogue-example')\nfor f in ['llms.txt','fixtures/before-variants.csv','fixtures/before-images.csv','fixtures/after-shopify.csv','7c2e9a41d86b35f0e1a4c97d2b58e360.txt']:\n print(f,(p/f).read_text())"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1793923204",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179392320413",
+  "input_sha256": "91ab2d8b75a7b4556c6d2aaab2e58d1422e1369661597e5e791e5669aaaf9c2c"
+}
