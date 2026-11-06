@@ -100,28 +100,27 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 72,
-    "turns_without_verified_revenue": 72,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 73,
+    "turns_without_verified_revenue": 73,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-06T05:37:28Z",
     "last_outcome_turn": "THINK-1793943002",
-    "last_productive_turn": "THINK-1793943002",
-    "last_turn": "THINK-1793943002",
+    "last_productive_turn": "THINK-1793943361",
+    "last_turn": "THINK-1793943361",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "EXPLICIT-INQUIRY-ATTRIBUTION"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/services/inbound-routing/attribution/acceptance-results.json",
-        "products/services/inbound-routing/attribution/contract-scan.txt",
-        "products/services/inbound-routing/attribution/manifest.json"
+        "products/reviews/attribution-invoice-preflight-live.html",
+        "products/reviews/attribution-shopify-catalogue-example-live.html",
+        "products/reviews/attribution-welfare-tender-brief-live.html",
+        "products/reviews/inquiry-attribution-review.json"
       ],
-      "new_product_count": 3,
+      "new_product_count": 4,
       "new_research_count": 0,
-      "rewritten_count": 6,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
