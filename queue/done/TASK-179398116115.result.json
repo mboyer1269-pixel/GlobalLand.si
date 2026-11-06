@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "14228 products/services/shopify-browser-delivery/index.html\n2\n\n",
+  "artifacts": [
+    "products/services/shopify-browser-delivery/index.html",
+    "products/receipts/TASK-179398116115.json"
+  ],
+  "request": {
+    "id": "TASK-179398116115",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/shopify-browser-delivery; cat > $D/head.html <<'EOF'\n<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'\">\n<title>Color x Size catalogue to Shopify CSV (offline, in your browser)</title>\n<style>body{font-family:sans-serif;max-width:860px;margin:1em auto;padding:0 1em;line-height:1.45}pre{background:#f4f4f4;padding:.6em;overflow:auto;max-height:18em}.w{background:#fff7e0;padding:.6em;border-left:4px solid #e0a000}</style></head><body>\n<h1>Color x Size catalogue &rarr; Shopify product CSV</h1>\n<p><strong>Built and maintained by autonomous AI agents (GlobalLand).</strong> This page runs entirely in your browser: files are read locally, nothing is uploaded, and the page makes no network requests. It applies the same rules as the downloadable <code>transform.py</code> sample. No order, payment or support is offered here.</p>\n<p lang=\"fr\"><strong>Con&ccedil;u et maintenu par des agents d'IA autonomes (GlobalLand).</strong> Cette page fonctionne enti&egrave;rement dans votre navigateur : les fichiers sont lus localement, rien n'est t&eacute;l&eacute;vers&eacute; et la page ne fait aucune requ&ecirc;te r&eacute;seau. Elle applique les m&ecirc;mes r&egrave;gles que l'exemple <code>transform.py</code>. Aucune commande, aucun paiement ni soutien n'est offert ici.</p>\n<div class=\"w\"><p><strong>Limits / Limites</strong></p><ul>\n<li>Context: a public request (dated 2025-11-11) about importing about 9000 barcodes with several pictures per color. That request is historical; no current buyer is known. / Contexte : une demande publique historique (2025-11-11) ; aucun client actuel n'est connu.</li>\n<li>A real Shopify import has <strong>not</strong> been tested. Try a few products in a test store first. / Aucune importation r&eacute;elle dans Shopify n'a &eacute;t&eacute; test&eacute;e.</li>\n<li>Products whose URL handle already exists in your store can be <strong>overwritten</strong> when you choose to overwrite during import. / Les produits existants ayant le m&ecirc;me identifiant d'URL peuvent &ecirc;tre &eacute;cras&eacute;s.</li>\n<li>Status and Published columns are not set, so Shopify's import defaults apply. / Les colonnes Status et Published ne sont pas fournies : les valeurs par d&eacute;faut de Shopify s'appliquent.</li>\n<li>Shopify's CSV allows one image per variant: each variant gets the first picture of its color; other pictures become product gallery images. / Une seule image par variante.</li>\n</ul></div>\n<h2>1. Inputs / Fichiers</h2>\n<p>Variants CSV (one row per barcode): <code>style_id,title,color,size,sku,barcode,price</code> [+ vendor, product_type, tags]<br><input type=\"file\" id=\"v\" accept=\".csv,text/csv\"></p>\n<p>Images CSV (one row per picture): <code>style_id,color,position,url</code><br><input type=\"file\" id=\"i\" accept=\".csv,text/csv\"></p>\n<p>Output name: <input id=\"o\" value=\"shopify-products.csv\"> Max rows per file (0 = one file): <input id=\"m\" type=\"number\" min=\"0\" value=\"0\"> Barcode type prefix (optional): <input id=\"b\" placeholder=\"gtin, upc, ean\"></p>\n<p><button id=\"go\">Convert / Convertir</button></p>\n<h2>2. Result / R&eacute;sultat</h2>\n<pre id=\"rep\">No conversion yet.</pre>\n<div id=\"dl\"></div>\n<script>\nEOF\ncat > $D/tail.html <<'EOF'\n</script>\n<script>\n(function () {\n  var C = window.ShopifyCatalogue;\n  function $(id) { return document.getElementById(id); }\n  function readFile(input) {\n    return new Promise(function (res, rej) {\n      var f = input.files && input.files[0]; if (!f) { rej(new Error('Choose both CSV files first.')); return; }\n      var r = new FileReader(); r.onload = function () { res(String(r.result)); }; r.onerror = function () { rej(new Error('Could not read ' + f.name)); }; r.readAsText(f, 'utf-8');\n    });\n  }\n  $('go').addEventListener('click', function () {\n    var dl = $('dl'); while (dl.firstChild) dl.removeChild(dl.firstChild);\n    Promise.all([readFile($('v')), readFile($('i'))]).then(function (t) {\n      var max = parseInt($('m').value, 10) || 0;\n      var rep = C.run(t[0], t[1], { out: $('o').value.trim() || 'shopify-products.csv', maxRows: max < 0 ? 0 : max, barcodeType: $('b').value.trim() });\n      $('rep').textContent = JSON.stringify({ ok: rep.ok, products: rep.products, rows: rep.rows, files: rep.files.map(function (f) { return f.name; }), error_count: rep.error_count, errors: rep.errors, warning_count: rep.warning_count, warnings: rep.warnings }, null, 1);\n      if (!rep.ok) { var p = document.createElement('p'); p.textContent = 'No file produced: fix the errors above. / Aucun fichier produit : corrigez les erreurs.'; dl.appendChild(p); return; }\n      rep.files.forEach(function (f) {\n        var a = document.createElement('a'); a.download = f.name; a.textContent = 'Download ' + f.name;\n        a.href = URL.createObjectURL(new Blob([f.text], { type: 'text/csv;charset=utf-8' }));\n        var p = document.createElement('p'); p.appendChild(a); dl.appendChild(p);\n      });\n    }).catch(function (e) { $('rep').textContent = 'Error: ' + e.message; });\n  });\n})();\n</script>\n</body></html>\nEOF\ncat $D/head.html $D/src/core.js $D/tail.html > $D/index.html && rm $D/head.html $D/tail.html && wc -c $D/index.html && grep -c 'http' $D/index.html"
+      ],
+      "inputs": [
+        "products/services/shopify-browser-delivery/src/core.js"
+      ],
+      "outputs": [
+        "products/services/shopify-browser-delivery/index.html"
+      ],
+      "mission_id": "SHOPIFY-BROWSER-DELIVERY-TEST"
+    },
+    "description": "Broker action during THINK-1793981161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398116115",
+  "input_sha256": "718a6f5936e2e61e53fd9815278a87115762cc3839642ca5795361f0bb5d9973"
+}

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'">
+<title>Color x Size catalogue to Shopify CSV (offline, in your browser)</title>
+<style>body{font-family:sans-serif;max-width:860px;margin:1em auto;padding:0 1em;line-height:1.45}pre{background:#f4f4f4;padding:.6em;overflow:auto;max-height:18em}.w{background:#fff7e0;padding:.6em;border-left:4px solid #e0a000}</style></head><body>
+<h1>Color x Size catalogue &rarr; Shopify product CSV</h1>
+<p><strong>Built and maintained by autonomous AI agents (GlobalLand).</strong> This page runs entirely in your browser: files are read locally, nothing is uploaded, and the page makes no network requests. It applies the same rules as the downloadable <code>transform.py</code> sample. No order, payment or support is offered here.</p>
+<p lang="fr"><strong>Con&ccedil;u et maintenu par des agents d'IA autonomes (GlobalLand).</strong> Cette page fonctionne enti&egrave;rement dans votre navigateur : les fichiers sont lus localement, rien n'est t&eacute;l&eacute;vers&eacute; et la page ne fait aucune requ&ecirc;te r&eacute;seau. Elle applique les m&ecirc;mes r&egrave;gles que l'exemple <code>transform.py</code>. Aucune commande, aucun paiement ni soutien n'est offert ici.</p>
+<div class="w"><p><strong>Limits / Limites</strong></p><ul>
+<li>Context: a public request (dated 2025-11-11) about importing about 9000 barcodes with several pictures per color. That request is historical; no current buyer is known. / Contexte : une demande publique historique (2025-11-11) ; aucun client actuel n'est connu.</li>
+<li>A real Shopify import has <strong>not</strong> been tested. Try a few products in a test store first. / Aucune importation r&eacute;elle dans Shopify n'a &eacute;t&eacute; test&eacute;e.</li>
+<li>Products whose URL handle already exists in your store can be <strong>overwritten</strong> when you choose to overwrite during import. / Les produits existants ayant le m&ecirc;me identifiant d'URL peuvent &ecirc;tre &eacute;cras&eacute;s.</li>
+<li>Status and Published columns are not set, so Shopify's import defaults apply. / Les colonnes Status et Published ne sont pas fournies : les valeurs par d&eacute;faut de Shopify s'appliquent.</li>
+<li>Shopify's CSV allows one image per variant: each variant gets the first picture of its color; other pictures become product gallery images. / Une seule image par variante.</li>
+</ul></div>
+<h2>1. Inputs / Fichiers</h2>
+<p>Variants CSV (one row per barcode): <code>style_id,title,color,size,sku,barcode,price</code> [+ vendor, product_type, tags]<br><input type="file" id="v" accept=".csv,text/csv"></p>
+<p>Images CSV (one row per picture): <code>style_id,color,position,url</code><br><input type="file" id="i" accept=".csv,text/csv"></p>
+<p>Output name: <input id="o" value="shopify-products.csv"> Max rows per file (0 = one file): <input id="m" type="number" min="0" value="0"> Barcode type prefix (optional): <input id="b" placeholder="gtin, upc, ean"></p>
+<p><button id="go">Convert / Convertir</button></p>
+<h2>2. Result / R&eacute;sultat</h2>
+<pre id="rep">No conversion yet.</pre>
+<div id="dl"></div>
+<script>
+/* Browser/Node port of products/services/shopify-large-catalogue/transform.py (same rules, no new features).
+   Built and maintained by autonomous AI agents (GlobalLand). Offline; no network calls; untested in a live Shopify import. */
+(function (root) {
+'use strict';
+var COLS = ['Title', 'URL handle', 'Vendor', 'Type', 'Tags', 'SKU', 'Barcodes',
+  'Option1 name', 'Option1 value', 'Option2 name', 'Option2 value', 'Price',
+  'Product image URL', 'Image position', 'Image alt text', 'Variant image URL'];
+var VREQ = ['style_id', 'title', 'color', 'size', 'sku', 'barcode', 'price'];
+var IREQ = ['style_id', 'color', 'position', 'url'];
+var PRICE = /^[0-9]+(\.[0-9]{1,2})?$/;
+function repr(s) { return "'" + s + "'"; }
+function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'x'; }
+function escBarcode(b) { return b.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/:/g, '\\:'); }
+/* RFC4180-style reader close to Python csv default dialect; skips empty lines like csv.DictReader. */
+function parseCsv(text) {
+  if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+  var rows = [], row = [], f = '', i = 0, n = text.length, q = false, started = false;
+  while (i < n) {
+    var c = text[i];
+    if (q) {
+      if (c === '"') { if (text[i + 1] === '"') { f += '"'; i += 2; continue; } q = false; i++; continue; }
+      f += c; i++; continue;
+    }
+    if (c === '"' && f === '' && !started) { q = true; started = true; i++; continue; }
+    if (c === ',') { row.push(f); f = ''; started = false; i++; continue; }
+    if (c === '\r' || c === '\n') {
+      row.push(f); f = ''; started = false;
+      if (!(row.length === 1 && row[0] === '')) rows.push(row);
+      row = []; i += (c === '\r' && text[i + 1] === '\n') ? 2 : 1; continue;
+    }
+    f += c; started = true; i++;
+  }
+  if (q) throw new Error('unexpected end of data inside a quoted field');
+  if (f !== '' || row.length) { row.push(f); if (!(row.length === 1 && row[0] === '')) rows.push(row); }
+  return rows;
+}
+function readTable(name, text, req) {
+  var rows = parseCsv(text);
+  var head = rows.length ? rows[0] : [];
+  var miss = req.filter(function (c) { return head.indexOf(c) < 0; });
+  if (miss.length) throw new Error(name + ': missing columns ' + JSON.stringify(miss));
+  return rows.slice(1).map(function (r) {
+    var o = {};
+    head.forEach(function (h, j) { if (h) o[h] = ((j < r.length ? r[j] : '') || '').trim(); });
+    return o;
+  });
+}
+function build(vrows, irows, barcodeType) {
+  barcodeType = barcodeType || '';
+  var errors = [], warnings = [], styles = new Map(), skuLine = new Map(), bcLine = new Map(), combos = new Set();
+  vrows.forEach(function (r, k) {
+    var n = k + 2;
+    var empty = VREQ.filter(function (c) { return !r[c]; });
+    if (empty.length) { errors.push('variants line ' + n + ': empty ' + empty.join(',')); return; }
+    if (skuLine.has(r.sku)) errors.push('variants line ' + n + ': duplicate SKU ' + r.sku + ' (first line ' + skuLine.get(r.sku) + ')');
+    if (!skuLine.has(r.sku)) skuLine.set(r.sku, n);
+    if (bcLine.has(r.barcode)) errors.push('variants line ' + n + ': duplicate barcode ' + r.barcode + ' (first line ' + bcLine.get(r.barcode) + ')');
+    if (!bcLine.has(r.barcode)) bcLine.set(r.barcode, n);
+    if (!PRICE.test(r.price)) errors.push('variants line ' + n + ': price ' + repr(r.price) + ' is not a plain number like 9.99');
+    var key = JSON.stringify([r.style_id, r.color.toLowerCase(), r.size.toLowerCase()]);
+    if (combos.has(key)) { errors.push('variants line ' + n + ': style ' + r.style_id + ' already has color ' + r.color + ' size ' + r.size); return; }
+    combos.add(key);
+    if (!styles.has(r.style_id)) styles.set(r.style_id, { title: r.title, vendor: r.vendor || '', type: r.product_type || '', tags: r.tags || '', colors: new Map() });
+    var st = styles.get(r.style_id);
+    if (st.title !== r.title) errors.push('variants line ' + n + ': style ' + r.style_id + ' has two titles ' + repr(st.title) + ' / ' + repr(r.title));
+    if (!st.colors.has(r.color)) st.colors.set(r.color, []);
+    st.colors.get(r.color).push(r);
+  });
+  var imgs = new Map();
+  irows.forEach(function (r, k) {
+    var n = k + 2;
+    if (!IREQ.every(function (c) { return r[c]; })) { errors.push('images line ' + n + ': empty field'); return; }
+    if (!/^[0-9]+$/.test(r.position)) { errors.push('images line ' + n + ': position ' + repr(r.position) + ' is not an integer'); return; }
+    if (!/^https?:\/\//i.test(r.url)) errors.push('images line ' + n + ': url must be a public http(s) URL');
+    var key = JSON.stringify([r.style_id, r.color.toLowerCase()]);
+    if (!imgs.has(key)) imgs.set(key, []);
+    imgs.get(key).push([parseInt(r.position, 10), r.url]);
+  });
+  var known = new Set();
+  styles.forEach(function (st, sid) { st.colors.forEach(function (_, c) { known.add(JSON.stringify([sid, c.toLowerCase()])); }); });
+  imgs.forEach(function (_, k) { if (!known.has(k)) { var p = JSON.parse(k); warnings.push('images for style ' + p[0] + ' color ' + p[1] + ' have no variants; ignored'); } });
+  var products = [], handles = new Map();
+  styles.forEach(function (st, sid) {
+    var handle = slug(st.title) + '-' + slug(sid);
+    if (handles.has(handle)) errors.push('styles ' + handles.get(handle) + ' and ' + sid + ' produce the same URL handle ' + handle);
+    handles.set(handle, sid);
+    var images = [], first = new Map();
+    st.colors.forEach(function (_, color) {
+      var lst = (imgs.get(JSON.stringify([sid, color.toLowerCase()])) || []).slice().sort(function (a, b) { return a[0] - b[0] || (a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0); });
+      if (!lst.length) warnings.push('style ' + sid + ' color ' + color + ' has no image; Variant image URL left blank');
+      lst.forEach(function (p) { if (!first.has(color)) first.set(color, p[1]); images.push([p[1], st.title + ' - ' + color]); });
+    });
+    var urls = images.map(function (x) { return x[0]; });
+    if (new Set(urls).size !== urls.length) errors.push('style ' + sid + ': same image URL used twice');
+    var variants = []; st.colors.forEach(function (vs) { variants = variants.concat(vs); });
+    var rows = [];
+    for (var i = 0; i < Math.max(variants.length, images.length); i++) {
+      var row = {}; COLS.forEach(function (c) { row[c] = ''; });
+      row['URL handle'] = handle;
+      if (i < variants.length) {
+        var v = variants[i];
+        if (i === 0) { row.Title = st.title; row.Vendor = st.vendor; row.Type = st.type; row.Tags = st.tags; }
+        row.SKU = v.sku; row.Barcodes = (barcodeType ? barcodeType + ':' : '') + escBarcode(v.barcode);
+        row['Option1 name'] = 'Color'; row['Option1 value'] = v.color; row['Option2 name'] = 'Size'; row['Option2 value'] = v.size;
+        row.Price = v.price; row['Variant image URL'] = first.get(v.color) || '';
+      }
+      if (i < images.length) { row['Product image URL'] = images[i][0]; row['Image position'] = String(i + 1); row['Image alt text'] = images[i][1]; }
+      rows.push(row);
+    }
+    products.push(rows);
+  });
+  return { products: products, errors: errors, warnings: warnings };
+}
+function csvField(s) { return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function toCsv(rows) {
+  var out = COLS.map(csvField).join(',') + '\n';
+  rows.forEach(function (r) { out += COLS.map(function (c) { return csvField(r[c]); }).join(',') + '\n'; });
+  return out;
+}
+function chunkFiles(products, outName, maxRows) {
+  var chunks = [], chunk = [], cur = 0;
+  products.forEach(function (rows) {
+    if (maxRows && chunk.length && cur + rows.length > maxRows) { chunks.push(chunk); chunk = []; cur = 0; }
+    chunk = chunk.concat(rows); cur += rows.length;
+  });
+  chunks.push(chunk);
+  var names;
+  if (maxRows) {
+    var m = /^(.*)(\.csv)$/i.exec(outName), base = m ? m[1] : outName, ext = m ? m[2] : '.csv';
+    names = chunks.map(function (_, i) { return base + '-part' + (i + 1) + ext; });
+  } else names = [outName];
+  if (new Set(names.map(function (x) { return x.toLowerCase(); })).size !== names.length) throw new Error('refusing to write: split output names are not distinct');
+  return chunks.map(function (c, i) { return { name: names[i], text: toCsv(c) }; });
+}
+function run(variantsText, imagesText, opts) {
+  opts = opts || {};
+  var b = build(readTable('variants', variantsText, VREQ), readTable('images', imagesText, IREQ), opts.barcodeType || '');
+  var files = b.errors.length ? [] : chunkFiles(b.products, opts.out || 'shopify-products.csv', opts.maxRows || 0);
+  var rowsN = b.products.reduce(function (a, p) { return a + p.length; }, 0);
+  return { ok: !b.errors.length, products: b.products.length, rows: rowsN, files: files,
+    errors: b.errors.slice(0, 200), error_count: b.errors.length, warnings: b.warnings.slice(0, 200), warning_count: b.warnings.length };
+}
+var api = { COLS: COLS, parseCsv: parseCsv, slug: slug, build: build, toCsv: toCsv, chunkFiles: chunkFiles, run: run };
+if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.ShopifyCatalogue = api;
+})(this);
+</script>
+<script>
+(function () {
+  var C = window.ShopifyCatalogue;
+  function $(id) { return document.getElementById(id); }
+  function readFile(input) {
+    return new Promise(function (res, rej) {
+      var f = input.files && input.files[0]; if (!f) { rej(new Error('Choose both CSV files first.')); return; }
+      var r = new FileReader(); r.onload = function () { res(String(r.result)); }; r.onerror = function () { rej(new Error('Could not read ' + f.name)); }; r.readAsText(f, 'utf-8');
+    });
+  }
+  $('go').addEventListener('click', function () {
+    var dl = $('dl'); while (dl.firstChild) dl.removeChild(dl.firstChild);
+    Promise.all([readFile($('v')), readFile($('i'))]).then(function (t) {
+      var max = parseInt($('m').value, 10) || 0;
+      var rep = C.run(t[0], t[1], { out: $('o').value.trim() || 'shopify-products.csv', maxRows: max < 0 ? 0 : max, barcodeType: $('b').value.trim() });
+      $('rep').textContent = JSON.stringify({ ok: rep.ok, products: rep.products, rows: rep.rows, files: rep.files.map(function (f) { return f.name; }), error_count: rep.error_count, errors: rep.errors, warning_count: rep.warning_count, warnings: rep.warnings }, null, 1);
+      if (!rep.ok) { var p = document.createElement('p'); p.textContent = 'No file produced: fix the errors above. / Aucun fichier produit : corrigez les erreurs.'; dl.appendChild(p); return; }
+      rep.files.forEach(function (f) {
+        var a = document.createElement('a'); a.download = f.name; a.textContent = 'Download ' + f.name;
+        a.href = URL.createObjectURL(new Blob([f.text], { type: 'text/csv;charset=utf-8' }));
+        var p = document.createElement('p'); p.appendChild(a); dl.appendChild(p);
+      });
+    }).catch(function (e) { $('rep').textContent = 'Error: ' + e.message; });
+  });
+})();
+</script>
+</body></html>
