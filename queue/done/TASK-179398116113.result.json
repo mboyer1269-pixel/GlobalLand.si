@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "9067 products/services/shopify-browser-delivery/src/core.js\n{\"ok\":true,\"rows\":12,\"warn\":[],\"match\":true}\n\n",
+  "artifacts": [
+    "products/services/shopify-browser-delivery/src/core.js",
+    "products/receipts/TASK-179398116113.json"
+  ],
+  "request": {
+    "id": "TASK-179398116113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/shopify-browser-delivery/src; cat > $D/core-part2.js <<'EOF'\n  var known = new Set();\n  styles.forEach(function (st, sid) { st.colors.forEach(function (_, c) { known.add(JSON.stringify([sid, c.toLowerCase()])); }); });\n  imgs.forEach(function (_, k) { if (!known.has(k)) { var p = JSON.parse(k); warnings.push('images for style ' + p[0] + ' color ' + p[1] + ' have no variants; ignored'); } });\n  var products = [], handles = new Map();\n  styles.forEach(function (st, sid) {\n    var handle = slug(st.title) + '-' + slug(sid);\n    if (handles.has(handle)) errors.push('styles ' + handles.get(handle) + ' and ' + sid + ' produce the same URL handle ' + handle);\n    handles.set(handle, sid);\n    var images = [], first = new Map();\n    st.colors.forEach(function (_, color) {\n      var lst = (imgs.get(JSON.stringify([sid, color.toLowerCase()])) || []).slice().sort(function (a, b) { return a[0] - b[0] || (a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0); });\n      if (!lst.length) warnings.push('style ' + sid + ' color ' + color + ' has no image; Variant image URL left blank');\n      lst.forEach(function (p) { if (!first.has(color)) first.set(color, p[1]); images.push([p[1], st.title + ' - ' + color]); });\n    });\n    var urls = images.map(function (x) { return x[0]; });\n    if (new Set(urls).size !== urls.length) errors.push('style ' + sid + ': same image URL used twice');\n    var variants = []; st.colors.forEach(function (vs) { variants = variants.concat(vs); });\n    var rows = [];\n    for (var i = 0; i < Math.max(variants.length, images.length); i++) {\n      var row = {}; COLS.forEach(function (c) { row[c] = ''; });\n      row['URL handle'] = handle;\n      if (i < variants.length) {\n        var v = variants[i];\n        if (i === 0) { row.Title = st.title; row.Vendor = st.vendor; row.Type = st.type; row.Tags = st.tags; }\n        row.SKU = v.sku; row.Barcodes = (barcodeType ? barcodeType + ':' : '') + escBarcode(v.barcode);\n        row['Option1 name'] = 'Color'; row['Option1 value'] = v.color; row['Option2 name'] = 'Size'; row['Option2 value'] = v.size;\n        row.Price = v.price; row['Variant image URL'] = first.get(v.color) || '';\n      }\n      if (i < images.length) { row['Product image URL'] = images[i][0]; row['Image position'] = String(i + 1); row['Image alt text'] = images[i][1]; }\n      rows.push(row);\n    }\n    products.push(rows);\n  });\n  return { products: products, errors: errors, warnings: warnings };\n}\nfunction csvField(s) { return /[\",\\r\\n]/.test(s) ? '\"' + s.replace(/\"/g, '\"\"') + '\"' : s; }\nfunction toCsv(rows) {\n  var out = COLS.map(csvField).join(',') + '\\n';\n  rows.forEach(function (r) { out += COLS.map(function (c) { return csvField(r[c]); }).join(',') + '\\n'; });\n  return out;\n}\nfunction chunkFiles(products, outName, maxRows) {\n  var chunks = [], chunk = [], cur = 0;\n  products.forEach(function (rows) {\n    if (maxRows && chunk.length && cur + rows.length > maxRows) { chunks.push(chunk); chunk = []; cur = 0; }\n    chunk = chunk.concat(rows); cur += rows.length;\n  });\n  chunks.push(chunk);\n  var names;\n  if (maxRows) {\n    var m = /^(.*)(\\.csv)$/i.exec(outName), base = m ? m[1] : outName, ext = m ? m[2] : '.csv';\n    names = chunks.map(function (_, i) { return base + '-part' + (i + 1) + ext; });\n  } else names = [outName];\n  if (new Set(names.map(function (x) { return x.toLowerCase(); })).size !== names.length) throw new Error('refusing to write: split output names are not distinct');\n  return chunks.map(function (c, i) { return { name: names[i], text: toCsv(c) }; });\n}\nfunction run(variantsText, imagesText, opts) {\n  opts = opts || {};\n  var b = build(readTable('variants', variantsText, VREQ), readTable('images', imagesText, IREQ), opts.barcodeType || '');\n  var files = b.errors.length ? [] : chunkFiles(b.products, opts.out || 'shopify-products.csv', opts.maxRows || 0);\n  var rowsN = b.products.reduce(function (a, p) { return a + p.length; }, 0);\n  return { ok: !b.errors.length, products: b.products.length, rows: rowsN, files: files,\n    errors: b.errors.slice(0, 200), error_count: b.errors.length, warnings: b.warnings.slice(0, 200), warning_count: b.warnings.length };\n}\nvar api = { COLS: COLS, parseCsv: parseCsv, slug: slug, build: build, toCsv: toCsv, chunkFiles: chunkFiles, run: run };\nif (typeof module !== 'undefined' && module.exports) module.exports = api; else root.ShopifyCatalogue = api;\n})(this);\nEOF\ncat $D/core-part1.js $D/core-part2.js > $D/core.js && rm $D/core-part2.js && wc -c $D/core.js && node -e \"const c=require('./'+process.argv[1]+'/core.js');const fs=require('fs');const d='products/services/shopify-large-catalogue/fixtures/';const r=c.run(fs.readFileSync(d+'before-variants.csv','utf8'),fs.readFileSync(d+'before-images.csv','utf8'),{out:'after-shopify.csv'});console.log(JSON.stringify({ok:r.ok,rows:r.rows,warn:r.warnings,match:r.files[0].text===fs.readFileSync(d+'after-shopify.csv','utf8')}))\" $D"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/fixtures/",
+        "products/services/shopify-browser-delivery/src/core-part1.js"
+      ],
+      "outputs": [
+        "products/services/shopify-browser-delivery/src/core.js"
+      ],
+      "mission_id": "SHOPIFY-BROWSER-DELIVERY-TEST"
+    },
+    "description": "Broker action during THINK-1793981161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398116113",
+  "input_sha256": "cab7b18924510f394d9988bb83e49e724dbbf17b85bc95f7a36af59a889660a6"
+}
