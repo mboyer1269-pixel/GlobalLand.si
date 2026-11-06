@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "14701 67\n\n",
+  "artifacts": [
+    "products/research/catalogue-alt/matrixify-extract.txt",
+    "products/receipts/TASK-179392536117.json"
+  ],
+  "request": {
+    "id": "TASK-179392536117",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-06T00:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,pathlib\nt=pathlib.Path('products/research/catalogue-alt/matrixify-appstore.html').read_text(errors='replace')\nt=re.sub(r'(?s)<script.*?</script>|<style.*?</style>','',t)\ns=html.unescape(re.sub(r'<[^>]+>',' ',t))\ns=re.sub(r'\\s+',' ',s)\nres=[];seen=set()\nfor kw in ['\\$','/month','Free plan','Demo','Basic','Big','Enterprise','products','variant','image','CSV','Excel','limit','rows','Rating','reviews']:\n  for m in re.finditer(kw,s):\n    o=kw+' | '+s[max(0,m.start()-150):m.end()+150]\n    k=s[max(0,m.start()-60):m.end()+60]\n    if k in seen: continue\n    seen.add(k);res.append(o)\npathlib.Path('products/research/catalogue-alt/matrixify-extract.txt').write_text('LEN '+str(len(s))+'\\n'+'\\n'.join(res[:90]))\nprint(len(s),len(res))"
+      ],
+      "inputs": [
+        "products/research/catalogue-alt/matrixify-appstore.html"
+      ],
+      "outputs": [
+        "products/research/catalogue-alt/matrixify-extract.txt"
+      ],
+      "mission_id": "CATALOGUE-PAID-ALTERNATIVE-TEST"
+    },
+    "description": "Broker action during THINK-1793925361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179392536117",
+  "input_sha256": "cd2e5303bde3346e66c0355adb880a6afc9def12650f20f2f6e7f3a7669678c8"
+}
