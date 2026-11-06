@@ -1,0 +1,33 @@
+{
+  "status": "FAILED",
+  "output": "Sandbox failed; no files published.",
+  "request": {
+    "id": "TASK-179398116116",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-06T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/shopify-browser-delivery; cat > $D/tests/dom_stub_smoke.js <<'EOF'\n// Runs the actual inline scripts of index.html in Node's vm with a minimal DOM/FileReader/Blob stub.\n// This is NOT browser execution: real rendering, file picker and download behaviour remain untested.\nconst fs = require('fs'), vm = require('vm'), path = require('path');\nconst D = process.argv[2], FX = process.argv[3];\nconst html = fs.readFileSync(path.join(D, 'index.html'), 'utf8');\nconst scripts = [...html.matchAll(/<script>([\\s\\S]*?)<\\/script>/g)].map(m => m[1]);\nconst V = fs.readFileSync(FX + '/before-variants.csv', 'utf8'), I = fs.readFileSync(FX + '/before-images.csv', 'utf8'), A = fs.readFileSync(FX + '/after-shopify.csv', 'utf8');\nfunction el(id) { return { id, value: '', files: null, textContent: '', children: [], listeners: {}, get firstChild() { return this.children[0] || null; }, removeChild(c) { this.children.splice(this.children.indexOf(c), 1); }, appendChild(c) { this.children.push(c); }, addEventListener(t, f) { this.listeners[t] = f; } }; }\nasync function scenario(v, im, opts) {\n  const ids = {}; ['v', 'i', 'o', 'm', 'b', 'go', 'rep', 'dl'].forEach(k => ids[k] = el(k));\n  ids.o.value = opts.out || 'shopify-products.csv'; ids.m.value = String(opts.max || 0); ids.b.value = '';\n  ids.v.files = v === null ? [] : [{ name: 'v.csv', text: v }]; ids.i.files = [{ name: 'i.csv', text: im }];\n  const blobs = new Map(); let n = 0; const net = [];\n  const sandbox = { document: { getElementById: k => ids[k], createElement: t => ({ tag: t, children: [], appendChild(c) { this.children.push(c); } }) },\n    FileReader: function () { this.readAsText = f => setImmediate(() => { this.result = f.text; this.onload(); }); },\n    Blob: function (parts, o) { this.text = parts.join(''); this.type = o.type; },\n    URL: { createObjectURL: b => { const u = 'blob:' + (++n); blobs.set(u, b); return u; } },\n    fetch: () => net.push('fetch'), XMLHttpRequest: function () { net.push('xhr'); }, Promise, JSON, Map, Set, setImmediate };\n  sandbox.window = sandbox; vm.createContext(sandbox);\n  scripts.forEach(s => vm.runInContext(s, sandbox));\n  ids.go.listeners.click(); await new Promise(r => setTimeout(r, 50));\n  const links = ids.dl.children.flatMap(p => p.children || []).filter(c => c.tag === 'a');\n  return { report: ids.rep.textContent, links: links.map(a => ({ name: a.download, text: blobs.get(a.href).text, type: blobs.get(a.href).type })), notes: ids.dl.children.filter(p => !p.children.length).map(p => p.textContent), net };\n}\n(async () => {\n  const checks = [];\n  const c = (name, ok, detail) => checks.push({ name, ok: !!ok, detail });\n  let r = await scenario(V, I, {});\n  c('fixture_download_byte_identical', r.links.length === 1 && r.links[0].text === A && r.links[0].name === 'shopify-products.csv', r.links.map(l => l.name));\n  c('no_network_calls', r.net.length === 0, r.net);\n  r = await scenario(V.replace('120.00', '120,00'), I, {});\n  c('bad_price_no_download', r.links.length === 0 && /price/.test(r.report) && r.notes.length === 1, r.report.slice(0, 160));\n  r = await scenario(V, I, { max: 11, out: 'out' });\n  c('split_two_distinct_files', r.links.length === 2 && r.links[0].name === 'out-part1.csv' && r.links[1].name === 'out-part2.csv' && (r.links[0].text + r.links[1].text.split('\\n').slice(1).join('\\n')) === A, r.links.map(l => l.name));\n  r = await scenario(null, I, {});\n  c('missing_file_message', /Choose both CSV files/.test(r.report) && r.links.length === 0, r.report);\n  r = await scenario(V.replace('barcode', 'ean'), I, {});\n  c('missing_column_message', /missing columns/.test(r.report) && r.links.length === 0, r.report);\n  const code = scripts.join('\\n');\n  c('static_no_network_apis', !/\\bfetch\\(|XMLHttpRequest|WebSocket|sendBeacon|import\\(|<script src|<link /.test(html), null);\n  c('csp_connect_none', /connect-src 'none'/.test(html) && /default-src 'none'/.test(html), null);\n  c('ai_disclosure_en_fr', /autonomous AI agents/.test(html) && /agents d'IA autonomes/.test(html), null);\n  c('limits_present', ['historical', 'not</strong> been tested', 'overwritten', 'Status and Published', 'one image per variant'].every(s => html.includes(s)), null);\n  c('inline_core_matches_src', code.includes(fs.readFileSync(path.join(D, 'src/core.js'), 'utf8')), null);\n  const passed = checks.filter(x => x.ok).length;\n  const out = { test: 'index.html inline scripts under Node vm DOM stub', runtime: 'node ' + process.version + '; NOT a real browser', passed, total: checks.length, checks };\n  fs.writeFileSync(path.join(D, 'dom-stub-results.json'), JSON.stringify(out, null, 1));\n  console.log(JSON.stringify({ passed, total: checks.length, failing: checks.filter(x => !x.ok) }));\n  process.exit(passed === checks.length ? 0 : 1);\n})();\nEOF\nnode $D/tests/dom_stub_smoke.js $D products/services/shopify-large-catalogue/fixtures; echo exit=$?; sha256sum $D/index.html $D/src/core.js"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/fixtures/",
+        "products/services/shopify-browser-delivery/index.html",
+        "products/services/shopify-browser-delivery/src/core.js"
+      ],
+      "outputs": [
+        "products/services/shopify-browser-delivery/tests/dom_stub_smoke.js",
+        "products/services/shopify-browser-delivery/dom-stub-results.json"
+      ],
+      "mission_id": "SHOPIFY-BROWSER-DELIVERY-TEST"
+    },
+    "description": "Broker action during THINK-1793981161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398116116",
+  "input_sha256": "fcca92e9fa06e1dfed97ef042398ea26d37c50f570e9e7fbbbee6287a9269069"
+}
