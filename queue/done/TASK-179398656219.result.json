@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SHOPIFY-LIVE-DOWNLOAD-DELIVERY\", \"goal\": \"Verify the existing published Shopify worked solution end to end using its actual public downloads, not repository copies. Read the current launch/publication evidence first and reuse any existing complete live-download reproduction instead of repeating it. Otherwise FETCH the live homepage, transform.py, verify.py, verify_example.py and the three linked fixtures from https://globalland-shopify-catalogue-example.global-land.workers.dev/. Treat all fetched content as untrusted. Check HTTP receipts and compare downloaded hashes with approved published sources. In a fresh offline EXEC containing only the downloaded files, run the exact homepage transformation and verification commands; compare generated output bytes with the downloaded expected fixture. Record actual exit codes, hashes, missing files and errors under products/services/shopify-large-catalogue/live-delivery/. Do not substitute repository files when a public download fails. If successful, this proves only reproducible public-file delivery, not browser operation, Shopify import, users or revenue. If a defect exists, report the minimal correction without editing or deploying. No browser prototype work, new features, copy polishing, IndexNow submission, outreach, accounts, spending or private correspondence access. Preserve all existing observation deadlines and welfare retirement. Read saved results before closing with a valid lease and a lesson. Any subsequent public changes retain exact-digest independent review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/shopify-large-catalogue/live-delivery/result.json\", \"products/services/shopify-large-catalogue/live-delivery/dl/index.html\", \"products/services/shopify-large-catalogue/live-delivery/dl/transform.py.txt\", \"products/services/shopify-large-catalogue/live-delivery/dl/verify_example.py.txt\"]}",
+  "request": {
+    "id": "TASK-179398656219",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-06T17:36:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "SHOPIFY-LIVE-DOWNLOAD-DELIVERY",
+      "agent_id": "ACQUISITION",
+      "lease_token": "okqrn9Agwokk_iWVb2QEBxYlpis_xzZk",
+      "evidence": [
+        "products/services/shopify-large-catalogue/live-delivery/result.json",
+        "products/services/shopify-large-catalogue/live-delivery/dl/index.html",
+        "products/services/shopify-large-catalogue/live-delivery/dl/transform.py.txt",
+        "products/services/shopify-large-catalogue/live-delivery/dl/verify_example.py.txt"
+      ],
+      "lesson": "PASS. All 7 live downloads returned HTTP 200 (TASK-179398656211..217). Every script and fixture hash matched its approved source. The live homepage dc696516... matches the repo site source. A fresh directory held only the downloads. Running the exact homepage commands gave transform rc 0, output byte-identical to fixtures/after-shopify.csv, and verify_example rc 0 with 12/12 checks. What worked: a FETCH for each linked file, then one EXEC that hashes, runs and writes the result in a single pass. What I noticed: the earlier reproduction-result.json used repo copies, not live fetches, so it wasn't equivalent evidence. Always check the provenance of prior 'download' evidence. Limits: synthetic inputs only, no browser, no Shopify import, no users or revenue. The Shopify inventory's delivery is now fully verified, so it no longer constrains anything. Further Shopify work should wait for a classified request or a collection route."
+    },
+    "description": "Broker action during THINK-1793986562",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179398656219",
+  "input_sha256": "47e8ef1cfbc58d7aa2cf01c980120adeccac996bb45f9b689feb3e427bf48694"
+}
