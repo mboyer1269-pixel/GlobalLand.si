@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "href https://github.com/MarginaliaSearch/submit-site-to-marginalia-search\nonsole) require an account.\"\n  },\n  {\n   \"name\": \"Marginalia Search (small independent search engine)\",\n   \"rules_url\": \"https://www.marginalia.nu/marginalia-search/for-webmasters/\",\n   \"fetch_task\": \"TASK-179408916114\",\n   \"sha256\": \"16302b11d30b698c8b7829973254aaf3b348e99d869b71dce03b39f847b05139\",\n   \"quote\": \"This information is outdated ... You can expedite the discovery by submitting it here .\",\n   \"submit_link_href\": \"https://github.com/MarginaliaSearch/submit-site-to-marginalia-search\",\n   \"decision\": \"REJECT\",\n   \"reason\": \"Page self-declares outdated and points to a submission destination (href recorded) rather than a documented automated GET API; inspecting it would exceed the three-candidate bound. It also notes the crawler is sometimes blocked by CloudFlare-hosted sites (our hosting). FETCH is GET-only; nothing was submitted and no restriction was bypassed.\"\n  }\n ],\n \"submissions_made\": 0,\n \"not_established\": [\n  \"listing\",\n  \"indexing\",\n  \"exposure\",\n  \"traffic\",\n  \"requests\",\n  \"revenue\"\n ],\n \"scope_of_conclusion\": \"Only these three routes under GET-only, accountless constraints. Not a conclusion about distribution generally.\",\n \"reconsider_when\": \"A founder-authorized webmaster account (Search Console/Bing) or a POST-capable sanctioned submission tool becomes available, or a directory publishes an explicit automated GET submission API.\",\n \"preserved_deadlines\": {\n  \"csv\": \"2026-11-19T01:30:37Z\",\n  \"shopify\": \"2026-11-19T21:30:49Z\",\n  \"welfare\": \"2026-11-20\",\n  \"software_award\": \"2026-11-21T05:00:35Z\",\n  \"welfare_retirement_after\": \"2026-12-04T17:00:00Z\"\n }\n}\n\n",
+  "artifacts": [
+    "products/distribution/accountless-route/bounded-rejection.json",
+    "products/receipts/TASK-179408916118.json"
+  ],
+  "request": {
+    "id": "TASK-179408916118",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T22:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,json\nR='products/distribution/accountless-route/'\nraw=open(R+'raw/marginalia-for-webmasters.html',encoding='utf-8',errors='replace').read()\ni=raw.find('submitting it here</a>')\nseg=raw[max(0,i-400):i]\nhs=re.findall(r'href=[\"\\']?([^\"\\' >]+)',seg)\nhref=hs[-1] if hs else None\nprint('href',href)\nd=json.load(open(R+'bounded-rejection.json'))\nc=d['candidates'][2]\nc['submit_link_href']=href\nc['reason']=c['reason'].replace('(href recorded)','(href recorded)' if href else '(href not extracted)')\nopen(R+'bounded-rejection.json','w').write(json.dumps(d,indent=1,ensure_ascii=False))\nprint(open(R+'bounded-rejection.json').read()[-1600:])\n"
+      ],
+      "inputs": [
+        "products/distribution/accountless-route/"
+      ],
+      "outputs": [
+        "products/distribution/accountless-route/bounded-rejection.json"
+      ],
+      "mission_id": "ACCOUNTLESS-RESOURCE-DISTRIBUTION"
+    },
+    "description": "Broker action during THINK-1794089161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408916118",
+  "input_sha256": "ac7c4985f9d7ddd0a9e6306a7540e941a1531826f3660f888a5dcb282d9d4bd8"
+}
