@@ -125,6 +125,7 @@ def case_path(root, key):
 
 def ready_digest(data):
     keys = ('identity', 'incoming', 'continuity', 'steps', 'decision', 'provider', 'observation')
+    if 'order_context_guard' in data: keys += ('order_context_guard',)
     return hashlib.sha256(canonical(dict(version=1, **{k: data.get(k) for k in keys}))).hexdigest()
 
 

@@ -190,6 +190,23 @@ def _addresses(value):
     return [address.lower() for _, address in getaddresses(values) if address]
 
 
+def _financial_notice(message):
+    """Protective routing hold only: sender domains never authenticate a deposit.
+
+    Fixed provider roots cover registration and payment notices, including
+    catch@payments.interac.ca and notifications@o.wealthsimple.com. Match an
+    exact DNS root or its dot-delimited subdomains, not lookalike suffixes.
+    Provider reference: help.wealthsimple.com/hc/en-ca/articles/5984295977243
+    No body/subject keywords: ordinary customers may discuss payment freely.
+    """
+    roots = ('wealthsimple.com', 'interac.ca', 'interac.com')
+    for address in _addresses(message.get('from', '')) + _addresses(message.get('reply_to', [])):
+        domain = address.rsplit('@', 1)[-1].rstrip('.')
+        if any(domain == root or domain.endswith('.' + root) for root in roots):
+            return True
+    return False
+
+
 def _armor_deferred(message):
     """Polling also sees held mail; wait for a clear result or verified release.
 
@@ -499,6 +516,17 @@ class Mailbox:
         return dict(key=path.stem,before_version=before,after_version=after,
                     after_state=current['state'],disposition='REPLACED' if after else 'CONSUMED')
 
+    def _hold_financial(self, message, path, result):
+        if not _financial_notice(message):
+            return False
+        # Preserve the provider's original mail for administrative review. Only
+        # a fixed private disposition is stored here; no model observation or
+        # previously saved reply may survive as a customer/payment signal.
+        self._save(path, dict(message_id=message['message_id'], inbox_id=message['inbox_id'],
+                              state='IGNORED', hold_reason='FINANCIAL_NOTICE'))
+        result['ignored'] += 1
+        return True
+
     def _process(self, mid, path, responder, result, previous=None):
         record = {'message_id': mid, 'inbox_id': self.settings['inbox_id']}
         if previous and 'observation' in previous:
@@ -515,10 +543,14 @@ class Mailbox:
                 result['processed'] -= 1
                 result['skipped'] += 1
                 return
+            if self._hold_financial(message, path, result):
+                return
             if _should_ignore(message, self.settings['inbox_address']):
                 decision = {'action': 'ignore', 'text': ''}
             else:
                 import continuity
+                import order_context
+                initial_order_guard = order_context.current_guard(self.root, message, self.config)
                 history_context = continuity.prepare(self.root, message, self.config)
                 if history_context is not None:
                     decision = responder(message, history_context=history_context)
@@ -547,12 +579,29 @@ class Mailbox:
                 return
             if not decision['text'].strip():
                 raise MailError('Empty mail reply')
+            # Refresh every path, including legacy and saved READY replies which
+            # have no continuity descriptor. A financial destination is never
+            # eligible merely because the original message passed the guard.
+            current = self.client.get_message(mid)
+            if (current.get('message_id') != mid
+                    or current.get('inbox_id') != self.settings['inbox_id']):
+                raise MailError('Mail identity mismatch')
+            if self._hold_financial(current, path, result):
+                return
+            if _armor_deferred(current) or _should_ignore(current, self.settings['inbox_address']):
+                raise MailError('Mail route changed')
             if record.get('completion'):
-                # Refresh security/routing metadata after any model or EXEC work.
-                current = self.client.get_message(mid)
-                if _armor_deferred(current) or _should_ignore(current, self.settings['inbox_address']):
-                    raise MailError('Mail route changed')
                 continuity.verify_completion(self.root, record['completion'], current, decision)
+            supplied_guard = getattr(responder, 'last_order_context_guard', initial_order_guard)
+            if supplied_guard is None:
+                # Legacy cached replies have no payment snapshot. They remain
+                # eligible only when no linked private orders can be exposed.
+                if order_context.for_message(self.root,current,self.config).get('orders'):
+                    raise MailError('Legacy order context unavailable')
+                supplied_guard = initial_order_guard
+            if (supplied_guard != initial_order_guard
+                    or order_context.current_guard(self.root,current,self.config) != supplied_guard):
+                raise MailError('Order context or recipient changed')
             record.update(state='STARTED', operation_id='gl-' + uuid.uuid4().hex)
             self._save(path, record)
             started = True

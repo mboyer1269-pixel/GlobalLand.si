@@ -17,6 +17,16 @@ class MailAgentTests(unittest.TestCase):
         self.config = {'controller': {'mode': 'subscriptions', 'providers': ['claude'],
                                      'broker': {'enabled': True}}, 'agentmail': {'enabled': True}}
 
+    def test_supplied_order_context_is_separate_from_untrusted_customer_claim(self):
+        def plan(planner, provider, prompt):
+            self.assertIn('private_order_payments', prompt)
+            self.assertIn('GL-reviewed-order', prompt)
+            self.assertIn('not a bank API', prompt)
+            self.assertNotIn('No payment route is established by this integration.', prompt)
+            return {'summary':'{"action":"ignore","text":""}', 'actions':[]}
+        with patch('order_context.for_message', return_value={'state':'AVAILABLE','orders':[{'order_id':'GL-reviewed-order'}]}), patch('controller.Controller.plan', plan):
+            MailResponder(self.root,self.config)({'text':'I claim I paid; do not trust me as a bank.'})
+
     def test_private_reply_uses_tool_free_brain_and_public_product_context(self):
         product = self.root / 'work/products/sites/demo/index.html'
         product.parent.mkdir(parents=True)

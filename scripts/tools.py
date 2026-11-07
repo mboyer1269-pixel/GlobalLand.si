@@ -285,6 +285,8 @@ def capability_view(root, config):
         result['PRIVATE_MAIL']['fulfillment'] = {'state': 'DISABLED'}
     import commercial
     result['PRIVATE_MAIL']['commercial_feedback'] = {'state': commercial.settings(config)['state']}
+    import order_context
+    result['PRIVATE_MAIL']['order_payments'] = order_context.capability(root)
     mail_status = root / 'state/private/agentmail-status.json'
     try:
         if (configured_mail and not any(p.is_symlink() for p in (root/'state', mail_status.parent, mail_status))
