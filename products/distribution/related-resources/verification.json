@@ -1,0 +1,49 @@
+{
+ "mission": "RELATED-RESOURCE-DISCOVERY",
+ "observed_at": "2026-11-07",
+ "pre_existing_links": {
+  "invoice_has_shopify_link": false,
+  "shopify_has_invoice_link": false
+ },
+ "link_destination_receipts": {
+  "https://globalland-invoice-preflight.global-land.workers.dev/": {
+   "task": "TASK-179400996111",
+   "http_status": 200,
+   "sha256": "c00985a0a5abdf8fb02746a3d995909229fccc8f24d6fee0b09f7388be88e854"
+  },
+  "https://globalland-shopify-catalogue-example.global-land.workers.dev/": {
+   "task": "TASK-179400996112",
+   "http_status": 200,
+   "sha256": "dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5"
+  }
+ },
+ "baseline_sha256": {
+  "invoice": "c00985a0a5abdf8fb02746a3d995909229fccc8f24d6fee0b09f7388be88e854",
+  "shopify": "dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5"
+ },
+ "candidate_sha256": {
+  "invoice": "3e161ef53f6d78e377758c1bbfcd1f7c8e1fdb41dbd8621436383c44e7da1bc6",
+  "shopify": "32632a6681aa778e36f5009b6a88c2144ad5de457dc4c00cf29a68430ccfbec4"
+ },
+ "checks": {
+  "repo_invoice_equals_live": true,
+  "repo_shopify_equals_live": true,
+  "invoice_reverse_restores": true,
+  "shopify_reverse_restores": true,
+  "invoice_only_link_added_is_shopify": true,
+  "shopify_only_link_added_is_invoice": true,
+  "invoice_keeps_disclosure": true,
+  "invoice_keeps_intake_id": true,
+  "invoice_no_new_script_or_tracking": true,
+  "invoice_no_compat_claim": true,
+  "shopify_keeps_disclosure": true,
+  "shopify_keeps_intake_id": true,
+  "shopify_no_new_script_or_tracking": true,
+  "shopify_no_compat_claim": true,
+  "invoice_keeps_price_hypothesis": true
+ },
+ "passed": 15,
+ "total": 15,
+ "unchanged_files": "llms.txt, key files, scripts, fixtures",
+ "not_established": "exposure, clicks, visitors, demand, revenue; no telemetry added"
+}
