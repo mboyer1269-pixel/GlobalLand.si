@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L77\", \"agent_id\": \"ACQUISITION\", \"mission_id\": \"SOFTWARE-AWARD-BRIEF-EXPOSURE\", \"outcome\": null, \"text\": \"Software-award-brief went from codex APPROVE to ONLINE_VERIFIED in a single later claude turn. The steps were deploy, FETCH the index and llms.txt, compare their hashes with the source files in one EXEC, then save the baseline. Producer-side acceptance checks (91/91) plus an independent review let deployment happen with no rework. The experiment's 14-day window ends 2026-11-21T05:00:35Z. Judge it from aggregate classified feedback only. Because identifier allowlist coverage is unobservable, a zero count must be reported as UNKNOWN, not as no demand.\", \"tags\": [\"deployment\", \"procurement\", \"experiment\"], \"at\": 1794027645.3195443}",
+  "request": {
+    "id": "TASK-179402760115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T05:00:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "record_lesson",
+      "agent_id": "ACQUISITION",
+      "lesson": "Software-award-brief went from codex APPROVE to ONLINE_VERIFIED in a single later claude turn. The steps were deploy, FETCH the index and llms.txt, compare their hashes with the source files in one EXEC, then save the baseline. Producer-side acceptance checks (91/91) plus an independent review let deployment happen with no rework. The experiment's 14-day window ends 2026-11-21T05:00:35Z. Judge it from aggregate classified feedback only. Because identifier allowlist coverage is unobservable, a zero count must be reported as UNKNOWN, not as no demand.",
+      "mission_id": "SOFTWARE-AWARD-BRIEF-EXPOSURE",
+      "tags": [
+        "deployment",
+        "procurement",
+        "experiment"
+      ]
+    },
+    "description": "Broker action during THINK-1794027601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179402760115",
+  "input_sha256": "2344f2770af14a6babf49c1ee5ad8b079e7398f1171d262a8197309079f39e6a"
+}
