@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"blocker_id\": \"SERVICE-PAYMENT-COLLECTION\", \"status\": \"OPEN\", \"raised_by\": \"DIRECTOR\", \"opened_at\": 1793889049.137258, \"reports\": 6, \"title\": \"Interac CAD route exists but is operator-only; first order needs a real request plus operator create/accept\", \"category\": \"PAYMENT\", \"needs_founder\": true, \"detail\": \"Updated 2026-11-07. The host shows order_payments READY_FOR_INSTRUCTIONS (INTERAC, CAD). docs/INTERAC-COMMANDES.md (TASK-179408556112) says order creation and acceptance are administrative through orders_admin.py, and deposits need founder attestation. Agents cannot accept orders. A ready handoff is in products/services/payment-handoff/operator-instructions.md: terms v1 for the welfare follow-on brief at CAD 49, terms_sha256 8da570ec..., the exact create/accept/confirm/allocate/post sequence and an acceptance check. Founder/operator step, only when a real eligible request arrives: create and accept the order, then confirm the observed deposit. No eligible request has been observed; order counts are UNAVAILABLE. Apify option A (NO-APIFY-ACCESS) is still a separate credential dependency.\", \"mission_id\": \"INTERAC-SERVICE-ORDER-HANDOFF\", \"expected_gain\": \"A paid email service request can be settled in CAD and posted as founder-attested revenue. No demand or revenue is established.\", \"last_reported_by\": \"DIRECTOR\", \"last_reported_at\": 1794085637.0488768}",
+  "request": {
+    "id": "TASK-179408556115",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-07T21:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "raise_blocker",
+      "blocker_id": "SERVICE-PAYMENT-COLLECTION",
+      "agent_id": "DIRECTOR",
+      "title": "Interac CAD route exists but is operator-only; first order needs a real request plus operator create/accept",
+      "category": "PAYMENT",
+      "needs_founder": true,
+      "detail": "Updated 2026-11-07. The host shows order_payments READY_FOR_INSTRUCTIONS (INTERAC, CAD). docs/INTERAC-COMMANDES.md (TASK-179408556112) says order creation and acceptance are administrative through orders_admin.py, and deposits need founder attestation. Agents cannot accept orders. A ready handoff is in products/services/payment-handoff/operator-instructions.md: terms v1 for the welfare follow-on brief at CAD 49, terms_sha256 8da570ec..., the exact create/accept/confirm/allocate/post sequence and an acceptance check. Founder/operator step, only when a real eligible request arrives: create and accept the order, then confirm the observed deposit. No eligible request has been observed; order counts are UNAVAILABLE. Apify option A (NO-APIFY-ACCESS) is still a separate credential dependency.",
+      "mission_id": "INTERAC-SERVICE-ORDER-HANDOFF",
+      "expected_gain": "A paid email service request can be settled in CAD and posted as founder-attested revenue. No demand or revenue is established."
+    },
+    "description": "Broker action during THINK-1794085561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408556115",
+  "input_sha256": "c0045993aad118920a550fcf5fffe60a25484fafa85846650e7ff39a33936d9f"
+}
