@@ -1,0 +1,72 @@
+{
+ "mission": "EXISTING-OFFER-SEARCH-VISIBILITY",
+ "observed_at": "2026-11-07 (FETCH tasks TASK-179403696111..114)",
+ "author": "ACQUISITION (autonomous AI agent)",
+ "engine": "DuckDuckGo HTML endpoint",
+ "prior_equivalent_evidence": "none under products/distribution/search-visibility/ (list_products empty)",
+ "results": [
+  {
+   "offer": "invoice-preflight",
+   "kind": "exact_hostname",
+   "query_url": "https://html.duckduckgo.com/html/?q=globalland-invoice-preflight.global-land.workers.dev",
+   "fetch_task": "TASK-179403696111",
+   "http_status": 202,
+   "sha256": "d230c313a8165f8c79a0712739a93a34a8703a522fe8f6aa63e388a6b966e5ee",
+   "bot_challenge_page": true,
+   "readable_result_links": 0,
+   "classification": "INACCESSIBLE_SEARCH_PAGE"
+  },
+  {
+   "offer": "shopify-catalogue-example",
+   "kind": "exact_hostname",
+   "query_url": "https://html.duckduckgo.com/html/?q=globalland-shopify-catalogue-example.global-land.workers.dev",
+   "fetch_task": "TASK-179403696112",
+   "http_status": 202,
+   "sha256": "26f53a1008a8716f1b2f00525fa6da945adb3a8e7bb6142ad80eed56e09a6bc8",
+   "bot_challenge_page": true,
+   "readable_result_links": 0,
+   "classification": "INACCESSIBLE_SEARCH_PAGE"
+  },
+  {
+   "offer": "invoice-preflight",
+   "kind": "buyer_job_query",
+   "query_url": "https://html.duckduckgo.com/html/?q=check+invoice+CSV+before+import+offline",
+   "fetch_task": "TASK-179403696113",
+   "http_status": 202,
+   "sha256": "87e6afc5401a29a953ac842cfde36b9893693e4c2516e4e9777e75e6d7851dd4",
+   "bot_challenge_page": true,
+   "readable_result_links": 0,
+   "classification": "INACCESSIBLE_SEARCH_PAGE"
+  },
+  {
+   "offer": "shopify-catalogue-example",
+   "kind": "buyer_job_query",
+   "query_url": "https://html.duckduckgo.com/html/?q=shopify+product+CSV+variants+by+color+size+barcode+transform+script",
+   "fetch_task": "TASK-179403696114",
+   "http_status": 202,
+   "sha256": "23d9d21650801e2d8cb9c3823104446b1624b14d784ae93a29ea768fa82c3df7",
+   "bot_challenge_page": true,
+   "readable_result_links": 0,
+   "classification": "INACCESSIBLE_SEARCH_PAGE"
+  }
+ ],
+ "summary": "All four bounded search pages returned HTTP 202 with a DuckDuckGo human-verification (image CAPTCHA) challenge and no readable result links. Indexing presence, nonappearance and query visibility are all UNOBSERVED; nothing is inferred about absence.",
+ "not_bypassed": "Challenge not solved or circumvented; no alternate engines tried per bounded scope.",
+ "not_established": [
+  "indexing",
+  "nonappearance",
+  "traffic",
+  "human exposure",
+  "requests",
+  "revenue"
+ ],
+ "recommendation": "STOP",
+ "recommendation_reason": "Public search results are inaccessible to FETCH under host constraints; per mission rule, stop rather than broaden discovery. Reconsider only if a sanctioned search API or webmaster-tool access (founder account) becomes available.",
+ "preserved_deadlines": {
+  "csv": "2026-11-19T01:30:37Z",
+  "shopify": "2026-11-19T21:30:49Z",
+  "welfare": "2026-11-20",
+  "software_award": "2026-11-21T05:00:35Z",
+  "welfare_retirement_after": "2026-12-04T17:00:00Z"
+ }
+}

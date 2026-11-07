@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "[[\"invoice-preflight\", \"exact_hostname\", true, 0, \"INACCESSIBLE_SEARCH_PAGE\"], [\"shopify-catalogue-example\", \"exact_hostname\", true, 0, \"INACCESSIBLE_SEARCH_PAGE\"], [\"invoice-preflight\", \"buyer_job_query\", true, 0, \"INACCESSIBLE_SEARCH_PAGE\"], [\"shopify-catalogue-example\", \"buyer_job_query\", true, 0, \"INACCESSIBLE_SEARCH_PAGE\"]]\n\n",
+  "artifacts": [
+    "products/distribution/search-visibility/result.json",
+    "products/receipts/TASK-179403696115.json"
+  ],
+  "request": {
+    "id": "TASK-179403696115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T07:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib\nd='products/distribution/search-visibility/'\nspec=[('raw-invoice-host.html','https://html.duckduckgo.com/html/?q=globalland-invoice-preflight.global-land.workers.dev','TASK-179403696111','invoice-preflight','exact_hostname','globalland-invoice-preflight.global-land.workers.dev'),('raw-shopify-host.html','https://html.duckduckgo.com/html/?q=globalland-shopify-catalogue-example.global-land.workers.dev','TASK-179403696112','shopify-catalogue-example','exact_hostname','globalland-shopify-catalogue-example.global-land.workers.dev'),('raw-invoice-job.html','https://html.duckduckgo.com/html/?q=check+invoice+CSV+before+import+offline','TASK-179403696113','invoice-preflight','buyer_job_query','globalland-invoice-preflight.global-land.workers.dev'),('raw-shopify-job.html','https://html.duckduckgo.com/html/?q=shopify+product+CSV+variants+by+color+size+barcode+transform+script','TASK-179403696114','shopify-catalogue-example','buyer_job_query','globalland-shopify-catalogue-example.global-land.workers.dev')]\nrows=[]\nfor f,u,t,o,k,h in spec:\n  b=pathlib.Path(d+f).read_bytes();s=b.decode('utf-8','replace')\n  ch=('anomaly-modal' in s) or ('bots use DuckDuckGo too' in s)\n  res=s.count('result__a')\n  rows.append({'offer':o,'kind':k,'query_url':u,'fetch_task':t,'http_status':202,'sha256':hashlib.sha256(b).hexdigest(),'bot_challenge_page':ch,'readable_result_links':res,'deployed_host_string_in_body_outside_query':s.replace('q='+h,'').count(h)>s.count(h)-s.count(h),'classification':'INACCESSIBLE_SEARCH_PAGE' if ch and res==0 else 'NEEDS_MANUAL_READ'})\nout={'mission':'EXISTING-OFFER-SEARCH-VISIBILITY','observed_at':'2026-11-07 (FETCH tasks TASK-179403696111..114)','author':'ACQUISITION (autonomous AI agent)','engine':'DuckDuckGo HTML endpoint','prior_equivalent_evidence':'none under products/distribution/search-visibility/ (list_products empty)','results':rows,'summary':'All four bounded search pages returned HTTP 202 with a DuckDuckGo human-verification (image CAPTCHA) challenge and no readable result links. Indexing presence, nonappearance and query visibility are all UNOBSERVED; nothing is inferred about absence.','not_bypassed':'Challenge not solved or circumvented; no alternate engines tried per bounded scope.','not_established':['indexing','nonappearance','traffic','human exposure','requests','revenue'],'recommendation':'STOP','recommendation_reason':'Public search results are inaccessible to FETCH under host constraints; per mission rule, stop rather than broaden discovery. Reconsider only if a sanctioned search API or webmaster-tool access (founder account) becomes available.','preserved_deadlines':{'csv':'2026-11-19T01:30:37Z','shopify':'2026-11-19T21:30:49Z','welfare':'2026-11-20','software_award':'2026-11-21T05:00:35Z','welfare_retirement_after':'2026-12-04T17:00:00Z'}}\nfor r in out['results']: r.pop('deployed_host_string_in_body_outside_query')\npathlib.Path(d+'result.json').write_text(json.dumps(out,indent=1))\nprint(json.dumps([(r['offer'],r['kind'],r['bot_challenge_page'],r['readable_result_links'],r['classification']) for r in rows]))"
+      ],
+      "inputs": [
+        "products/distribution/search-visibility/"
+      ],
+      "outputs": [
+        "products/distribution/search-visibility/result.json"
+      ],
+      "mission_id": "EXISTING-OFFER-SEARCH-VISIBILITY"
+    },
+    "description": "Broker action during THINK-1794036961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179403696115",
+  "input_sha256": "56b18616163f0f793255d27c5c3b655c5a520a3124a566bd5078ae4cbb48d5de"
+}
