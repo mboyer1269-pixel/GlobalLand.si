@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "tre normalise les références : des\nempreintes différentes ne prouvent donc pas que deux anciens justificatifs\ndécrivent deux virements distincts. Leur migration exige un rapprochement privé,\nsans reclasser le même versement comme une nouvelle vente.\n\nSources : [configuration Wealthsimple](https://help.wealthsimple.com/hc/en-ca/articles/51594844256155-Set-up-a-business-email-for-account-notifications-and-Interac-e-Transfer-transactions),\n[entreprise individuelle](https://help.wealthsimple.com/hc/en-ca/articles/56351394961563-Open-a-Business-chequing-account-for-your-sole-proprietorship).\n=====\n37:  les engagements contractuels et ne déclarent pas de route de paiement active.\n47:Configuration hôte privée et désactivée par défaut. États de route :\n61:centimes, une devise, la version de l'offre et une association au dossier client\n72:Un avis sans référence, un montant différent, une devise différente ou un dépôt\n79:réutilisation avec montant, devise ou affectation contradictoires est refusée.\n101:appartiennent. Le directeur reçoit un résumé borné : commandes en attente,\n119:4. Montant partiel, excédent, devise inattendue, référence absente ou commande\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179408556113.json"
+  ],
+  "request": {
+    "id": "TASK-179408556113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T21:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "tail -c 600 docs/INTERAC-COMMANDES.md; echo =====; grep -n -i -e 'route' -e 'terms' -e 'quote' -e 'devis' -e 'price' -e 'prix' -e 'director' -e 'directeur' docs/superpowers/specs/2026-11-07-interac-orders-design.md | head -50"
+      ],
+      "inputs": [
+        "docs/INTERAC-COMMANDES.md",
+        "docs/superpowers/specs/2026-11-07-interac-orders-design.md"
+      ],
+      "outputs": [],
+      "mission_id": "INTERAC-SERVICE-ORDER-HANDOFF"
+    },
+    "description": "Broker action during THINK-1794085561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408556113",
+  "input_sha256": "757e5917a09ef7edbe5078838087fc0bef6b3356ddbe5d916796ec5ab751f6ef"
+}
