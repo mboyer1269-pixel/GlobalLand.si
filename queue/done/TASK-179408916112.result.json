@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "## Save Page Now : tinue to exist even after the original page changes or is removed from the web. There are several ways to save pages and whole sites so that they appear in the Wayback Machine. Here are 5 of them. 1. Save Page Now Put a URL into the form , press the button, and we save the page. You will instantly have a permanent URL for your page. Please note, this method only saves a single page , not the whole site. At the moment, there are a few exceptions f\n## anonymous : e page you enter including the images and CSS. It does not save any of the outlinks, and can’t be used to initiate a crawl of an entire web site. We do not keep your IP address, so your submission is anonymous. 2. Browser extensions and add-ons Install the Wayback Machine Chrome extension in your browser. Go to a page you want to archive, click the icon in your toolbar, and select Save Page Now. We will save the page and give you a permanent URL.\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179408916112.json"
+  ],
+  "request": {
+    "id": "TASK-179408916112",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T22:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html\nt=open('products/distribution/accountless-route/raw/archive-help-save-pages.html',encoding='utf-8',errors='replace').read()\nt=re.sub(r'(?s)<script.*?</script>|<style.*?</style>','',t)\nx=html.unescape(re.sub(r'<[^>]+>',' ',t))\nx=re.sub(r'\\s+',' ',x)\nfor k in ['Save Page Now','log','account','anonymous','automat','robot','API','/save']:\n  for m in re.finditer(re.escape(k),x):\n    print('##',k,':',x[max(0,m.start()-200):m.start()+250]);break\n"
+      ],
+      "inputs": [
+        "products/distribution/accountless-route/raw/archive-help-save-pages.html"
+      ],
+      "outputs": [],
+      "mission_id": "ACCOUNTLESS-RESOURCE-DISTRIBUTION"
+    },
+    "description": "Broker action during THINK-1794089161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408916112",
+  "input_sha256": "79c522a1d4d5ed26e8423598d196df7de6523d9e9b0967b5b00a6790e9b06891"
+}
