@@ -1,0 +1,59 @@
+{
+ "mission": "FEEDBACK-OBSERVABILITY-REPAIR",
+ "observed": "2026-11-07",
+ "inputs_observed": {
+  "last_cycle": {
+   "processed": 0,
+   "accepted": 0,
+   "ignored": 0,
+   "unknown": 0,
+   "failed": 0,
+   "skipped": 5,
+   "observed_at": "2026-11-07T02:35:02Z"
+  },
+  "commercial_feedback": {
+   "state": "AVAILABLE",
+   "classified_total": 0,
+   "unclassified_sources": 3,
+   "excluded_sources": 2
+  }
+ },
+ "sources": [
+  "docs/AGENTMAIL.md (TASK-179401896211, TASK-179401896212)",
+  "docs/COMMERCIAL-FEEDBACK.md (TASK-179401896211, TASK-179401896214)",
+  "products/services/inbound-routing/result.json",
+  "products/services/inbound-routing/observability-doc-extract.txt"
+ ],
+ "documented_meanings": {
+  "exclusions": "AGENTMAIL.md:36 - messages sent by the inbox itself, lists, bounces, auto-replies and blocked messages are excluded to avoid loops.",
+  "deferrals": "AGENTMAIL.md:36 - messages held by Agent Armor or with analysis pending/unavailable/to-review are deferred without being marked processed; a later cycle may process them.",
+  "resumption": "AGENTMAIL.md:62 - pending ids and pagination cursor persist in a private .schedule journal; the inbox alternates new requests and resumptions.",
+  "public_exposure_limit": "AGENTMAIL.md:35 - only counters and last-cycle date may be exposed to the public controller.",
+  "unclassified": "COMMERCIAL-FEEDBACK.md:57-58 - legacy READY cases remain unclassified; interpretation can be delayed until private work finishes. Lines 34,109 - malformed observations become UNKNOWN; a remembered source identity is not refreshed by repair.",
+  "excluded_sources": "COMMERCIAL-FEEDBACK.md:37-41 - SYNTHETIC/AUTOMATED origins do not count as interpreted feedback."
+ },
+ "findings": {
+  "skipped_5": "UNDETERMINED. No public document maps the last_cycle skipped counter to a reason. Documented candidates are loop exclusions (self/list/bounce/auto-reply/blocked), Agent Armor or analysis deferrals, or already-seen messages; the public counters cannot distinguish them. No reason is claimed.",
+  "unclassified_3": "UNDETERMINED. Documented candidates are legacy READY cases created before classification, interpretation pending until private work finishes, or malformed interpretations. Not evidence of requests, rejections or zero demand.",
+  "observation_gap": "The public projection has category counts and aggregate cycle counters but no per-reason breakdown, so normal skips cannot be separated from an observation gap such as Armor holds that are never released.",
+  "end_to_end_verification": "AGENTMAIL.md:42 requires a real benign test from an authorized test mailbox; no public receipt shows that it has been done. Unknown, not failed."
+ },
+ "authorized_repair_available": false,
+ "repair_reason": "Both missing observables are produced by host-private mail/projection code that the agents cannot modify. Site, llms.txt or attribution edits cannot change them (attribution edits are already deployed). No public configuration repair exists.",
+ "technical_handoff": {
+  "owner": "host operator",
+  "missing_observable": "Fixed-enum, count-only reason breakdown in the public last_cycle and commercial projection: skipped_{loop_excluded, armor_or_analysis_deferred, already_seen, budget_deferred}; unclassified_{legacy_ready, interpretation_pending, malformed}. Counts only - no ids, addresses, bodies or timestamps (allowed under AGENTMAIL.md:35).",
+  "operator_check_without_code": "Optionally attest privately whether the AGENTMAIL.md:42 real benign test has passed, and whether any Armor-held messages are pending release.",
+  "dependent_effects": "Verdicts at CSV 2026-11-19T01:30:37Z, Shopify 2026-11-19T21:30:49Z and welfare 2026-11-20 must report requests as UNKNOWN rather than zero while this gap persists.",
+  "reconsideration_trigger": "A reason breakdown appears in the projection, any classified category count becomes non-zero, unclassified_sources changes, or the operator attests the real-mail test."
+ },
+ "not_done": [
+  "no private mail or case access",
+  "no forced classification",
+  "no site or llms change",
+  "no credential probe",
+  "no synthetic rehearsal",
+  "no outreach"
+ ],
+ "demand_statement": "Requests are unknown, not zero. No revenue."
+}
