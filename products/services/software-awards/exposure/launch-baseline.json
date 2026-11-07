@@ -1,0 +1,41 @@
+{
+ "site": "software-award-brief",
+ "url": "https://globalland-software-award-brief.global-land.workers.dev/",
+ "approved_digest": "1c3f5a19e6904490d2770523bed327ae689c016a508d29e51b0a5edf29fb9455",
+ "review": "AUDITOR codex APPROVE seq 18 (THINK-1794025804)",
+ "deploy_task": "TASK-179402760110 ONLINE_VERIFIED",
+ "fetch": {
+  "index": {
+   "task": "TASK-179402760111",
+   "http": 200,
+   "live_sha256": "fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6",
+   "source_sha256": "fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6"
+  },
+  "llms": {
+   "task": "TASK-179402760112",
+   "http": 200,
+   "live_sha256": "aed09c85322be9430cce86608d9833013f8fcb655384417294d15d1888d7ccf7",
+   "source_sha256": "aed09c85322be9430cce86608d9833013f8fcb655384417294d15d1888d7ccf7"
+  }
+ },
+ "baseline_recorded_at": "2026-11-07T05:00:35+00:00",
+ "observation_window_end": "2026-11-21T05:00:35+00:00",
+ "success_criterion": ">=1 classified relevant REQUEST/EXPLICIT_INTEREST attributable to site:software-award-brief within window",
+ "baseline_feedback": {
+  "classified_total": 0,
+  "unclassified_sources": 3,
+  "excluded_sources": 2,
+  "inferred_experiments": {}
+ },
+ "identifier_allowlist_coverage": "UNKNOWN (not observable from public context); FEEDBACK-REASON-OBSERVABILITY applies",
+ "indexnow": "not submitted",
+ "not_established": [
+  "traffic",
+  "requests",
+  "customers",
+  "orders",
+  "revenue",
+  "responder use of llms.txt"
+ ],
+ "hashes_match": true
+}

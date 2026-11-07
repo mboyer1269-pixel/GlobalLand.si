@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"site\": \"software-award-brief\",\n \"url\": \"https://globalland-software-award-brief.global-land.workers.dev/\",\n \"approved_digest\": \"1c3f5a19e6904490d2770523bed327ae689c016a508d29e51b0a5edf29fb9455\",\n \"review\": \"AUDITOR codex APPROVE seq 18 (THINK-1794025804)\",\n \"deploy_task\": \"TASK-179402760110 ONLINE_VERIFIED\",\n \"fetch\": {\n  \"index\": {\n   \"task\": \"TASK-179402760111\",\n   \"http\": 200,\n   \"live_sha256\": \"fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6\",\n   \"source_sha256\": \"fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6\"\n  },\n  \"llms\": {\n   \"task\": \"TASK-179402760112\",\n   \"http\": 200,\n   \"live_sha256\": \"aed09c85322be9430cce86608d9833013f8fcb655384417294d15d1888d7ccf7\",\n   \"source_sha256\": \"aed09c85322be9430cce86608d9833013f8fcb655384417294d15d1888d7ccf7\"\n  }\n },\n \"baseline_recorded_at\": \"2026-11-07T05:00:35+00:00\",\n \"observation_window_end\": \"2026-11-21T05:00:35+00:00\",\n \"success_criterion\": \">=1 classified relevant REQUEST/EXPLICIT_INTEREST attributable to site:software-award-brief within window\",\n \"baseline_feedback\": {\n  \"classified_total\": 0,\n  \"unclassified_sources\": 3,\n  \"excluded_sources\": 2,\n  \"inferred_experiments\": {}\n },\n \"identifier_allowlist_coverage\": \"UNKNOWN (not observable from public context); FEEDBACK-REASON-OBSERVABILITY applies\",\n \"indexnow\": \"not submitted\",\n \"not_established\": [\n  \"traffic\",\n  \"requests\",\n  \"customers\",\n  \"orders\",\n  \"revenue\",\n  \"responder use of llms.txt\"\n ],\n \"hashes_match\": true\n}\n\n",
+  "artifacts": [
+    "products/services/software-awards/exposure/launch-baseline.json",
+    "products/receipts/TASK-179402760113.json"
+  ],
+  "request": {
+    "id": "TASK-179402760113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T05:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,datetime,pathlib\nd='products/services/software-awards/exposure/'\nh=lambda p:hashlib.sha256(open(p,'rb').read()).hexdigest()\nnow=datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)\nb={'site':'software-award-brief','url':'https://globalland-software-award-brief.global-land.workers.dev/','approved_digest':'1c3f5a19e6904490d2770523bed327ae689c016a508d29e51b0a5edf29fb9455','review':'AUDITOR codex APPROVE seq 18 (THINK-1794025804)','deploy_task':'TASK-179402760110 ONLINE_VERIFIED','fetch':{'index':{'task':'TASK-179402760111','http':200,'live_sha256':h(d+'live-index.html'),'source_sha256':h('products/sites/software-award-brief/index.html')},'llms':{'task':'TASK-179402760112','http':200,'live_sha256':h(d+'live-llms.txt'),'source_sha256':h('products/sites/software-award-brief/llms.txt')}},'baseline_recorded_at':now.isoformat(),'observation_window_end':(now+datetime.timedelta(days=14)).isoformat(),'success_criterion':'>=1 classified relevant REQUEST/EXPLICIT_INTEREST attributable to site:software-award-brief within window','baseline_feedback':{'classified_total':0,'unclassified_sources':3,'excluded_sources':2,'inferred_experiments':{}},'identifier_allowlist_coverage':'UNKNOWN (not observable from public context); FEEDBACK-REASON-OBSERVABILITY applies','indexnow':'not submitted','not_established':['traffic','requests','customers','orders','revenue','responder use of llms.txt']}\nb['hashes_match']=all(v['live_sha256']==v['source_sha256'] for v in b['fetch'].values())\npathlib.Path(d+'launch-baseline.json').write_text(json.dumps(b,indent=1))\nprint(json.dumps(b,indent=1))"
+      ],
+      "inputs": [
+        "products/sites/software-award-brief/",
+        "products/services/software-awards/exposure/live-index.html",
+        "products/services/software-awards/exposure/live-llms.txt"
+      ],
+      "outputs": [
+        "products/services/software-awards/exposure/launch-baseline.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794027601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179402760113",
+  "input_sha256": "8a5f4922f290f6ca7aad4c03ca92f7bbdfecd889c202c9183dd7aa3b5edd5abb"
+}
