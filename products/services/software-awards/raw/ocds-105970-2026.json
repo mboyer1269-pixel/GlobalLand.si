@@ -1,0 +1,214 @@
+{
+    "uri": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/105970-2026?limit=100&updatedTo=2026-11-07T03:36:27",
+    "version": "1.1",
+    "extensions": [
+        "https://standard.open-contracting.org/profiles/eu/latest/en/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_amendment_rationale_classifications_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_budget_breakdown_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_contract_completion_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_documentation_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_pagination_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_suitability_extension/master/extension.json",
+        "https://raw.githubusercontent.com/portaledcahn/ocds_Links_extension/main/extension.json",
+        "https://raw.githubusercontent.com/cabinetoffice/ocds_uk_extension/main/extension.json"
+    ],
+    "publishedDate": "2026-11-07T01:40:04Z",
+    "publisher": {
+        "name": "Cabinet Office",
+        "scheme": "GB-GOR",
+        "uid": "D2",
+        "uri": "https://www.gov.uk/government/organisations/cabinet-office"
+    },
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "publicationPolicy": "https://www.gov.uk/government/publications/open-contracting",
+    "releases": [
+        {
+            "ocid": "ocds-h6vhtk-07b70d",
+            "id": "105970-2026",
+            "date": "2026-11-07T01:40:04Z",
+            "tag": [
+                "award",
+                "contract"
+            ],
+            "initiationType": "tender",
+            "tender": {
+                "id": "26-270",
+                "legalBasis": {
+                    "id": "32014L0024",
+                    "scheme": "CELEX"
+                },
+                "title": "Housing Mobile Workforce Management Technology (Totalmobile)",
+                "status": "complete",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "48100000",
+                    "description": "Industry specific software package"
+                },
+                "mainProcurementCategory": "goods",
+                "description": "For the provision of a mobile workforce management system for Housing Repairs and Maintenance.",
+                "lots": [
+                    {
+                        "id": "1",
+                        "description": "For the provision of a mobile workforce management system for Housing Repairs and Maintenance.",
+                        "awardCriteria": {
+                            "criteria": [
+                                {
+                                    "type": "price"
+                                }
+                            ]
+                        },
+                        "hasOptions": true,
+                        "options": {
+                            "description": "Contract Extension"
+                        },
+                        "status": "cancelled"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "1",
+                        "additionalClassifications": [
+                            {
+                                "scheme": "CPV",
+                                "id": "72261000",
+                                "description": "Software support services"
+                            }
+                        ],
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKI43"
+                            }
+                        ],
+                        "relatedLot": "1"
+                    }
+                ],
+                "procurementMethod": "limited",
+                "procurementMethodDetails": "Award procedure without prior publication of a call for competition",
+                "procurementMethodRationaleClassifications": [
+                    {
+                        "scheme": "TED_PT_AWARD_CONTRACT_WITHOUT_CALL",
+                        "id": "D_OUTSIDE_SCOPE",
+                        "description": "The procurement falls outside the scope of application of the directive"
+                    }
+                ],
+                "procurementMethodRationale": "The contract was awarded under Regulation 33(8)(a) of the Public Contracts Regulations 2015 as a direct award under a framework agreement. The framework terms and award methodology permitted award without reopening competition"
+            },
+            "awards": [
+                {
+                    "id": "105970-2026-1",
+                    "relatedLots": [
+                        "1"
+                    ],
+                    "status": "active",
+                    "suppliers": [
+                        {
+                            "id": "GB-COH-NI018486",
+                            "name": "TOTALMOBILE LIMITED"
+                        }
+                    ]
+                }
+            ],
+            "parties": [
+                {
+                    "name": "London Borough of Haringey",
+                    "id": "GB-COH-PBHY-1866-HTLD",
+                    "identifier": {
+                        "legalName": "London Borough of Haringey",
+                        "id": "PBHY-1866-HTLD",
+                        "scheme": "GB-COH"
+                    },
+                    "address": {
+                        "streetAddress": "7th Floor Alexandra House, 10 Station Road, Wood Green",
+                        "locality": "London",
+                        "region": "UKI43",
+                        "postalCode": "N227TR",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "name": "Habeeb Animashaun",
+                        "email": "habeeb.animashaun@haringey.gov.uk"
+                    },
+                    "roles": [
+                        "buyer"
+                    ],
+                    "details": {
+                        "url": "https://www.haringey.gov.uk",
+                        "classifications": [
+                            {
+                                "scheme": "TED_CA_TYPE",
+                                "id": "REGIONAL_AUTHORITY",
+                                "description": "Regional or local authority"
+                            },
+                            {
+                                "scheme": "COFOG",
+                                "id": "01",
+                                "description": "General public services"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "TOTALMOBILE LIMITED",
+                    "id": "GB-COH-NI018486",
+                    "identifier": {
+                        "legalName": "TOTALMOBILE LIMITED",
+                        "id": "NI018486",
+                        "scheme": "GB-COH"
+                    },
+                    "address": {
+                        "locality": "BELFAST",
+                        "region": "UKN06",
+                        "countryName": "United Kingdom"
+                    },
+                    "roles": [
+                        "supplier"
+                    ],
+                    "details": {
+                        "scale": "large"
+                    }
+                },
+                {
+                    "name": "Procurement Review Unit",
+                    "id": "GB-FTS-126190",
+                    "identifier": {
+                        "legalName": "Procurement Review Unit"
+                    },
+                    "address": {
+                        "locality": "London",
+                        "countryName": "United Kingdom"
+                    },
+                    "roles": [
+                        "reviewBody"
+                    ]
+                }
+            ],
+            "buyer": {
+                "id": "GB-COH-PBHY-1866-HTLD",
+                "name": "London Borough of Haringey"
+            },
+            "contracts": [
+                {
+                    "id": "105970-2026-1",
+                    "awardID": "105970-2026-1",
+                    "status": "active",
+                    "value": {
+                        "amount": 406605.60,
+                        "currency": "GBP"
+                    },
+                    "dateSigned": "2026-10-03T00:00:00+01:00"
+                }
+            ],
+            "bids": {
+                "statistics": [
+                    {
+                        "id": "1",
+                        "measure": "bids",
+                        "relatedLot": "1",
+                        "value": 1
+                    }
+                ]
+            },
+            "language": "en"
+        }
+    ]
+}
