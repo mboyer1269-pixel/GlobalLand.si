@@ -1,0 +1,160 @@
+{
+ "mission": "OPEN-SOFTWARE-TENDER-BRIEF",
+ "observed_at": "2026-11-07",
+ "author": "RESEARCHER (autonomous AI agent)",
+ "source": {
+  "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=tender&limit=25",
+  "fetch_task": "TASK-179409420110",
+  "artifact": "products/services/open-software-tender/raw/feed-page1.json",
+  "sha256": "afd0af5622f84ce77e3e66a8651916cf6837a8fdc9ecc3d7a6afc1bf47615590"
+ },
+ "prior_failure": "TASK-179409276101 rejected (fetch size limit); retried with limit=25",
+ "selection": "One feed page of 25 tender-stage releases; 3 with 48xxxxxx/72xxxxxx CPV and future deadline. 105513-2026 telephony (CPV 32500000/64210000) excluded as telecoms.",
+ "notices": {
+  "105838-2026": {
+   "buyer": "London Luton Airport Operations Limited",
+   "title": "Retail Data Management, Analytics and Automation",
+   "deadline": "2027-01-08T12:00:00Z",
+   "status": "active",
+   "tag": [
+    "tender"
+   ],
+   "value": null,
+   "method": "Open procedure",
+   "submission": "https://london-luton.ukp.app.jaggaer.com/go/29502076019E2741C182",
+   "published": "2026-11-06T15:17:51Z"
+  },
+  "105246-2026": {
+   "buyer": "North Ayrshire Council",
+   "title": "Supply and Support of Integrated Workplace Management System",
+   "deadline": "2026-12-07T12:00:00Z",
+   "status": "active",
+   "tag": [
+    "tender"
+   ],
+   "value": null,
+   "method": "Open procedure",
+   "submission": "https://www.publictendersscotland.publiccontractsscotland.gov.uk",
+   "published": "2026-11-05T14:08:39Z"
+  },
+  "104444-2026": {
+   "buyer": "Lincolnshire County Council",
+   "title": "EMMS Cyber Security SME Support Programme",
+   "deadline": "2026-11-18T09:00:00Z",
+   "status": "active",
+   "tag": [
+    "tender"
+   ],
+   "value": {
+    "amount": 65000.0,
+    "currency": "GBP"
+   },
+   "method": "Open procedure",
+   "submission": "https://www.lincolnshire.gov.uk/supply-council-goods-services/find-tender-opportunities",
+   "published": "2026-11-03T18:50:26Z"
+  }
+ },
+ "checks": [
+  {
+   "notice": "105838-2026",
+   "quote": "automated, scalable sales and analytics solution for Duty Free and terminal retail, integrating with multiple POS systems",
+   "in_source": true,
+   "on_page": true,
+   "ok": true
+  },
+  {
+   "notice": "105838-2026",
+   "quote": "LLA does not consider to be subject to the Procurement Act 2023",
+   "in_source": true,
+   "on_page": true,
+   "ok": true
+  },
+  {
+   "notice": "105838-2026",
+   "quote": "https://london-luton.ukp.app.jaggaer.com/go/29502076019E2741C182",
+   "in_source": true,
+   "on_page": true,
+   "ok": true
+  },
+  {
+   "notice": "105246-2026",
+   "quote": "cloud-hosted Integrated Workplace Management System (IWMS) to replace its existing Computer Aided Facilities Management (CAFM) solution",
+   "in_source": true,
+   "on_page": true,
+   "ok": true
+  },
+  {
+   "notice": "105246-2026",
+   "quote": "asset management, maintenance management, statutory compliance, financial monitoring, reporting and governance",
+   "in_source": true,
+   "on_page": true,
+   "ok": true
+  },
+  {
+   "notice": "105246-2026",
+   "quote": "https://www.publictendersscotland.publiccontractsscotland.gov.uk",
+   "in_source": true,
+   "on_page": true,
+   "ok": true
+  },
+  {
+   "notice": "104444-2026",
+   "quote": "Industrial Cyber Security pilot programme aimed at improving cyber resilience readiness within SME manufacturing businesses",
+   "in_source": true,
+   "on_page": true,
+   "ok": true
+  },
+  {
+   "notice": "104444-2026",
+   "quote": "https://www.lincolnshire.gov.uk/supply-council-goods-services/find-tender-opportunities",
+   "in_source": true,
+   "on_page": true,
+   "ok": true
+  },
+  {
+   "notice": "105246-2026",
+   "deadline": "2026-12-07 12:00 UTC",
+   "ok": true
+  },
+  {
+   "notice": "105838-2026",
+   "deadline": "2027-01-08 12:00 UTC",
+   "ok": true
+  },
+  {
+   "notice": "104444-2026",
+   "deadline": "2026-11-18 09:00 UTC",
+   "ok": true
+  },
+  {
+   "check": "value_104444",
+   "ok": true
+  },
+  {
+   "check": "weights_105246",
+   "ok": true
+  },
+  {
+   "check": "ai_disclosure_en_fr",
+   "ok": true
+  },
+  {
+   "check": "no_price_no_orders",
+   "ok": true
+  }
+ ],
+ "all_pass": true,
+ "site_files": {
+  "index.html": "be35d1310bd2bbe1360931cde64f8d2e78568716b014f3c1f762367af2aaa202",
+  "llms.txt": "c0e33d7dcae807945d7319c848eb210c13a312d4bade806f0de4126c1cdb253a"
+ },
+ "not_established": [
+  "tender documents read",
+  "eligibility",
+  "portal registration requirements",
+  "buyer interest",
+  "demand",
+  "revenue"
+ ],
+ "expiry_rule": "104444-2026 closes 2026-11-18T09:00Z; if not deployed before then, remove or mark closed before review. Whole page stale after 2026-12-07T12:00Z except 105838."
+}
