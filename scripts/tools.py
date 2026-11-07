@@ -328,6 +328,26 @@ def commercial_paths(capabilities, bank_snapshot):
         state = prerequisite(action, nested)
         return dict(state='STOPPED' if stopped else state, detail=detail)
 
+    mail_capability = capabilities.get('PRIVATE_MAIL')
+    payment = mail_capability.get('order_payments') if isinstance(mail_capability, dict) else None
+    collection = dict(state='STOPPED' if stopped else 'NOT_IMPLEMENTED',
+                      platform_managed_monetization='NOT_ASSESSED',
+                      detail='No generic order-acceptance or checkout operation in this software path. This does not assess founder accounts or platform-managed monetization outside it.')
+    if isinstance(payment, dict):
+        payment_state = payment.get('state')
+        if payment_state not in ('UNAVAILABLE', 'CONFIGURING', 'READY_FOR_INSTRUCTIONS'):
+            payment_state = 'UNKNOWN'
+        collection.update(state='STOPPED' if stopped else
+                          'ADMINISTRATIVE' if payment_state == 'READY_FOR_INSTRUCTIONS' else payment_state,
+                          payment_instructions=payment_state, method='INTERAC', currency='CAD',
+                          order_creation='ADMINISTRATIVE', order_acceptance='NOT_AUTOMATED',
+                          settlement_verification='FOUNDER_REQUIRED', bank_api_connected=False,
+                          detail='The installed private order register supports administrative creation and acceptance. '
+                          'When READY_FOR_INSTRUCTIONS, accepted CAD orders can receive Interac instructions in their authenticated customer conversation. '
+                          'An administrator must record the order and its acceptance first; agents have no create/accept action. '
+                          'Founder confirmation of a received deposit and Treasury posting are separate administrative operations. '
+                          'Route readiness is not a customer order, received payment or bank API verification.')
+
     paths = {
         'public_research': route('FETCH', 'Public HTTP(S) reading only; no authenticated session or outgoing contact.'),
         'offline_build': route('EXEC', 'Requires enabled executor and pinned image. Offline installed programs and declared product outputs; no bank deposit prerequisite imposed by this engine.'),
@@ -337,14 +357,13 @@ def commercial_paths(capabilities, bank_snapshot):
         'private_correspondence': route('PRIVATE_MAIL', 'Requires enabled private AgentMail inbox and credential with a separate incoming-mail cycle. Replies to original senders only; no director send action, recipient selection or public customer data.'),
         'private_fulfillment': route('PRIVATE_MAIL', 'Requires private mail, enabled fulfillment, valid case limits and configured executor. Existing private case work is offline and replies with inline text; no authenticated retrieval, arbitrary contact or binding commitment.', 'fulfillment'),
         'outgoing_acquisition': dict(state='NOT_IMPLEMENTED', detail='No generic outgoing contact or advertising operation in this software path. SPEND prerequisites do not implement a channel or purchase.'),
-        'collection': dict(state='NOT_IMPLEMENTED', platform_managed_monetization='NOT_ASSESSED',
-                           detail='No generic order-acceptance or checkout operation in this software path. This does not assess founder accounts or platform-managed monetization outside it.'),
+        'collection': collection,
         'settlement': route('RECONCILE', 'Trusted reconciliation requires authentic receipts and Treasury verification. A finance executable is not checkout, a paid order or verified revenue; administrative platform payout attestation is a separate path.'),
     }
     return dict(treasury_state=bank_state,
                 work_state='STOPPED' if stopped else 'UNKNOWN' if bank_state == 'UNKNOWN' else 'CONTINUE_WITH_AVAILABLE_TOOLS',
                 service_costs='UNKNOWN', spend_prerequisite_state=prerequisite('SPEND'), paths=paths,
-                constraints='Configured prerequisites do not verify auth, execution or remote success. Missing collection blocks paid order acceptance in this path, while available research, building, offer improvement, permitted publication and authorized incoming private work remain possible. Service costs are unknown; debits require verified available funds. HALTED/EXTINCT remains authoritative; this view grants no new authority.')
+                constraints='Configured prerequisites do not verify auth, execution or remote success. Collection instructions, order acceptance and settlement are distinct: an administrative payment route does not grant autonomous contract acceptance. Available research, building, offer improvement, permitted publication and authorized incoming private work remain possible. Service costs are unknown; debits require verified available funds. HALTED/EXTINCT remains authoritative; this view grants no new authority.')
 
 
 def _stage_fixture_inputs(work,destination,inputs):

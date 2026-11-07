@@ -56,6 +56,37 @@ class PathProjectionTests(unittest.TestCase):
         self.assertEqual(result['spend_prerequisite_state'], 'UNKNOWN')
         self.assertEqual(result['paths']['private_fulfillment']['state'], 'UNKNOWN')
 
+    def test_ready_interac_is_visible_without_inventing_autonomous_checkout(self):
+        caps = self.capabilities()
+        caps['PRIVATE_MAIL']['order_payments'] = {
+            'state': 'READY_FOR_INSTRUCTIONS', 'method': 'INTERAC', 'currency': 'CAD',
+            'order_creation': 'ADMINISTRATIVE', 'contract_acceptance': 'NOT_AUTOMATED',
+            'settlement_verification': 'FOUNDER_REQUIRED', 'bank_api_connected': False,
+            'recipient_email': 'PRIVATE-SENTINEL', 'account_alias': 'PRIVATE-SENTINEL'}
+        view = self.paths(caps, {'state': 'UNFUNDED'})
+        collection = view['paths']['collection']
+        self.assertEqual(collection['state'], 'ADMINISTRATIVE')
+        self.assertEqual(collection['payment_instructions'], 'READY_FOR_INSTRUCTIONS')
+        self.assertEqual(collection['order_acceptance'], 'NOT_AUTOMATED')
+        self.assertEqual(collection['settlement_verification'], 'FOUNDER_REQUIRED')
+        self.assertFalse(collection['bank_api_connected'])
+        self.assertNotIn('PRIVATE-SENTINEL', json.dumps(view))
+        self.assertNotIn('Missing collection blocks paid order acceptance', view['constraints'])
+
+    def test_order_route_states_and_stopped_world_do_not_invent_ready_instructions(self):
+        for route_state in ('UNAVAILABLE', 'CONFIGURING', 'READY_FOR_INSTRUCTIONS', 'PRIVATE-SENTINEL'):
+            caps = self.capabilities()
+            caps['PRIVATE_MAIL']['order_payments'] = {'state': route_state}
+            for treasury in ('UNFUNDED', 'HALTED', 'EXTINCT'):
+                with self.subTest(route=route_state, treasury=treasury):
+                    collection = self.paths(caps, {'state': treasury})['paths']['collection']
+                    self.assertEqual(collection['payment_instructions'],
+                        route_state if route_state != 'PRIVATE-SENTINEL' else 'UNKNOWN')
+                    self.assertEqual(collection['state'], 'STOPPED' if treasury != 'UNFUNDED' else
+                        'ADMINISTRATIVE' if route_state == 'READY_FOR_INSTRUCTIONS' else
+                        route_state if route_state != 'PRIVATE-SENTINEL' else 'UNKNOWN')
+                    self.assertNotIn('PRIVATE-SENTINEL', json.dumps(collection))
+
     def test_stopped_and_unknown_treasury_are_explicit_and_unknown_capabilities_do_not_become_available(self):
         for state in ('HALTED', 'EXTINCT'):
             view = self.paths(self.capabilities(), {'state': state})
@@ -80,6 +111,32 @@ class CommercialDecisionWiringTests(unittest.TestCase):
             'executor_enabled': True, 'executor_image': 'node@sha256:' + '1' * 64,
             'cloudflare': {'enabled': True, 'account_id': 'a' * 32},
             'agentmail': {'commercial': {'enabled': True}}}
+
+    def test_confirmed_route_reaches_status_and_director_without_crediting_funds(self):
+        from controller import Controller
+        from tools import Toolbox
+        private = self.root / 'state/private'
+        private.mkdir(parents=True, exist_ok=True)
+        route = private / 'payment-route.json'
+        route.write_text(json.dumps(dict(version=1, state='READY_FOR_INSTRUCTIONS',
+            method='INTERAC', currency='CAD', recipient_email='private@example.test',
+            account_alias='PRIVATE-ACCOUNT', confirmed_at='2026-11-07T19:00:00Z',
+            confirmation='FOUNDER_OBSERVED')))
+        route.chmod(0o600)
+        before = self.bank.snapshot()
+        context = Controller(self.root, self.world, self.bank, self.config).context()
+        task = dict(id='TASK-9101', type='TOOL', submitted_by='DIRECTOR',
+                    created_at='2026-11-07T20:00:00Z', action='STATUS', args={},
+                    estimated_cost_cad=0, approved_by=None)
+        result, _ = Toolbox(self.root, self.world, self.bank, self.config).run(task)
+        wire = json.loads(result['output'])
+        collection = context['commercial_paths']['paths']['collection']
+        self.assertEqual(collection['state'], 'ADMINISTRATIVE')
+        self.assertEqual(collection, wire['commercial_paths']['paths']['collection'])
+        self.assertEqual(before, self.bank.snapshot())
+        self.assertFalse((private/'orders.sqlite3').exists())
+        self.assertNotIn('private@example.test', json.dumps(context))
+        self.assertNotIn('PRIVATE-ACCOUNT', json.dumps(wire))
 
     def test_status_and_context_share_paths_and_finance_changes_no_checkout_or_revenue(self):
         from controller import Controller
