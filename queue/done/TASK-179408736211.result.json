@@ -1,0 +1,21 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=pdf%20table&site=opendata&filter=withbody&pagesize=15\", \"http_status\": 200, \"sha256\": \"f3deaf7da4c486ef3cf048406c01563db619dca8fa46b2904a279f7ace0795e0\", \"artifact\": \"products/services/table-extraction/raw/opendata-se-search.json\"}",
+  "request": {
+    "id": "TASK-179408736211",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T21:36:02Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=pdf%20table&site=opendata&filter=withbody&pagesize=15",
+      "output": "products/services/table-extraction/raw/opendata-se-search.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794087362",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408736211",
+  "input_sha256": "4b33d48259ef3943a7de992e1ef5b3a382439a3038b167fa49a93b5b9a95869e"
+}
