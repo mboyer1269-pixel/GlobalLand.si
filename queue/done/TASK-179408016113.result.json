@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "PROTOCOL.md\n7:`type: SHELL`, `action: AUDIT`, `args: []`, coût0 et approved_by null restent acceptés pour le travail historique gratuit. Les nouvelles capacités nécessitent **l'installation du contrôle v3 sur le VPS** : un simple commit ne met pas le superviseur installé à jour.\n39:WORLD op : register_agent, create_mission, claim_mission, complete_mission, fail_mission, message, transfer_glc, reward_glc, set_policy, cycle, raise_blocker, resolve_blocker, record_lesson, review. `review` (reviewer, subject `actor:<nom>` ou `mission:<id>`, digest sha256, verdict APPROVE ou NEEDS_WORK, notes facultatives) enregistre l'avis d'un agent ; la dernière revue d'une empreinte fait foi. complete_mission et fail_mission acceptent un champ `lesson` facultatif ; `record_lesson` (agent_id, lesson, mission_id et tags facultatifs) enregistre une leçon à tout moment. Les 300 dernières leçons sont conservées ; à chaque tour, le contrôleur choisit les plus pertinentes pour les missions ouvertes (recherche plein texte FTS5) et les dernières leçons d'échec, et les place dans le contexte `lessons` du prompt. Les signatures et champs sont documentés dans world.py ; STATUS donne les agents/missions/baux. `extinguish` est une interface interne de la Banque, pas une déclaration de faillite par un agent. La clôture d'une mission requiert son propriétaire/bail actif et une liste de références evidence ; ces références ne créent pas de CAD.\n43:EXEC : argv est un tableau passé au programme, sans interprétation du shell hôte. L'agent peut choisir `bash -lc` **dans sa boîte**. Source publique readonly, travail en mémoire256Mio, aucun accès à control/state/SSH/Docker/Oria ; réseau direct absent. Les outils disponibles viennent de l'image configurée. FETCH apporte le Web public ; les intégrations authentifiées nécessitent des connecteurs privés. Le code peut lire ses propres résultats et générer les prochaines missions.\n77:| `submit_action` | Exécute immédiatement EXEC, FETCH, WORLD, STATUS, PUBLISH_ACTOR, ACTOR_STATS ou PUBLISH_SITE et rend le résultat. |\n101:- **Règle des deux clés** (`apify.require_review`, activée par défaut) : la mise en vente publique exige que la dernière revue de `actor:<nom>` pour le `source_digest` renvoyé par la construction privée soit un APPROVE, par un agent autre que celui qui publie.\n106:## Sites publics (PUBLISH_SITE)\n110:| `site`, `dry_run: true` | Valide `products/sites/<site>/` et rend `review_digest`, sans aucun appel externe. |\n111:| `site` | Déploie le site comme un Worker Cloudflare `<préfixe><site>`, active `https://<préfixe><site>.<compte>.workers.dev/` et vérifie que la page publique sert le nouvel `index.html` (ONLINE_VERIFIED ; sinon ONLINE_UNVERIFIED, statut TIMEOUT). |\n112:| `site`, `online: false` | Coupure d'urgence (route workers.dev désactivée), sans revue, même si les sources sont invalides. |\n116:- `index.html` doit dire que le site est fait par des agents IA autonomes.\n118:- Journal `state/sites/` écrit avant tout appel.\n122:Une mise en vente publique sur Apify ou une mise en ligne de site exige que la dernière revue (`review`) de l'empreinte exacte (`review_digest`) soit un APPROVE dont l'hôte a enregistré la provenance (`host_turn`, `host_provider`), indépendante :\n126:Les principaux indépendants sont un autre fournisseur, une tâche externe (Grok via GitHub : `EXTERNAL`) ou le fondateur (`review_admin.py`). Les noms d'agents ne prouvent rien et tout champ `host_*` fourni par un agent est refusé.\n142:Toute action productive exige un résident ACTIVE nommé par `submitted_by`. Dans WORLD, `from_agent`, `reviewer` et l'`agent_id` agissant doivent correspondre à cet auteur. `register_agent`, `reward_glc`, `set_policy` et `cycle` exigent DIRECTOR. `create_mission` peut déléguer une mission à un autre résident. STATUS reste une observation accessible après désactivation. Les nouveaux identifiants de résident utilisent `[A-Z0-9_-]{1,64}`.\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179408016113.json"
+  ],
+  "request": {
+    "id": "TASK-179408016113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T19:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "ls queue 2>&1 | head; grep -n -i -E 'site|provider|review|reject|SiteError' queue/PROTOCOL.md | head -60"
+      ],
+      "inputs": [
+        "queue/PROTOCOL.md"
+      ],
+      "outputs": [],
+      "mission_id": "SUPPLIER-SHOPIFY-RELEASE-REJECTION"
+    },
+    "description": "Broker action during THINK-1794080161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408016113",
+  "input_sha256": "ba04c5908ae0acc9c83ab32eb6ff6834f5065d59f58786ccd68b53dc3f344383"
+}
