@@ -1,0 +1,105 @@
+{
+ "mission": "SOFTWARE-RENEWAL-CALENDAR",
+ "observed": "2026-11-07",
+ "verdict": "STOP_BOUNDED_NO_QUALIFYING_NOTICE",
+ "sources": [
+  {
+   "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=award&updatedFrom=2026-11-01T00:00:00&limit=20",
+   "fetch_task": "TASK-179402076112",
+   "sha256": "cba85cac569e2d0287459415d4559e77c76ee8dacf9d756f567075b4813e5c77",
+   "releases": 20
+  },
+  {
+   "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=award&updatedFrom=2025-03-03T09:00:00&updatedTo=2025-03-03T17:00:00&limit=40",
+   "fetch_task": "TASK-179402076115",
+   "sha256": "10af76660286c3d2d7057157a4d38b4a81ddca9ea21ec35fc185235fe5611e94",
+   "releases": 40,
+   "software_cpv_notices": [
+    {
+     "notice_id": "007707-2025",
+     "title": "IT Capabilities Framework",
+     "buyer": "Post Office"
+    }
+   ],
+   "releases_with_any_endDate_field": 0
+  }
+ ],
+ "candidates_inspected_in_detail": [
+  {
+   "notice_id": "105970-2026",
+   "ocid": "ocds-h6vhtk-07b70d",
+   "url": "https://www.find-tender.service.gov.uk/Notice/105970-2026",
+   "release_date": "2026-11-07T01:40:04Z",
+   "buyer": "London Borough of Haringey",
+   "title": "Housing Mobile Workforce Management Technology (Totalmobile)",
+   "cpv": "48100000",
+   "supplier": [
+    "TOTALMOBILE LIMITED"
+   ],
+   "contract_value": {
+    "amount": 406605.6,
+    "currency": "GBP"
+   },
+   "date_signed": "2026-10-03T00:00:00+01:00",
+   "procurement_method_details": "Award procedure without prior publication of a call for competition",
+   "options_quote": "Contract Extension",
+   "lot_description_quote": "For the provision of a mobile workforce management system for Housing Repairs and Maintenance.",
+   "end_date_fields_found": [],
+   "qualifies": false,
+   "reason": "No contract end date in the release; direct framework call-off signed 2026-10-03; end date unknown."
+  },
+  {
+   "notice_id": "105806-2026",
+   "ocid": "ocds-h6vhtk-07b6b8",
+   "url": "https://www.find-tender.service.gov.uk/Notice/105806-2026",
+   "release_date": "2026-11-06T14:49:06Z",
+   "buyer": "Croydon Health Services NHS Trust",
+   "title": "CHS - Acute Electronic Patient Record (EPR) Contract Extension",
+   "cpv": "72268000",
+   "supplier": [
+    "Oracle Health"
+   ],
+   "contract_value": {
+    "amount": 17549439.0,
+    "currency": "GBP"
+   },
+   "date_signed": "2026-11-05T00:00:00Z",
+   "procurement_method_details": "Award procedure without prior publication of a call for competition",
+   "options_quote": "The Trust has the option to extend the contract for a further 12 months following the initial three-year extension period.  The optional fourth year recognises the complexity and timescales associated with a major clinical system procurement and transition, allowing additional time, if required, for implementation, data migration and integration activities whilst maintaining continuity of essentia",
+   "lot_description_quote": "Croydon Health Services NHS Trust proposes to extend its existing contract with Oracle Health for the provision of its acute Electronic Patient Record (EPR) system, commencing on 29th December 2026 for an initial period of three years, with an option to extend for a further 12 months.<br/><br/>The proposed arrangements cover the continued provision of the core EPR software and associated clinical ",
+   "end_date_fields_found": [],
+   "qualifies": false,
+   "reason": "Extension commencing 29 December 2026 for three years plus optional 12 months (quoted); implied end about December 2029 or 2030, outside Feb-Nov 2027. Structured end date absent."
+  },
+  {
+   "notice_id": "105743-2026",
+   "ocid": "ocds-h6vhtk-066241",
+   "url": "https://www.find-tender.service.gov.uk/Notice/105743-2026",
+   "release_date": "2026-11-06T13:56:01Z",
+   "buyer": "Scottish Police Authority",
+   "title": "PROC 26-3336 Back-Office Solution for the Police Scotland EV Charging Infrastructure",
+   "cpv": "75100000",
+   "supplier": [
+    "Hanger19 Limited"
+   ],
+   "contract_value": {
+    "amount": 600000,
+    "currency": "GBP"
+   },
+   "date_signed": "2026-10-23T00:00:00+01:00",
+   "procurement_method_details": "Open procedure",
+   "options_quote": "",
+   "lot_description_quote": "Police Scotland currently have in place back-office services with two separate Suppliers, due to expire within the next 12 months. Police Scotland require a single Supplier to migrate all chargers from existing Contracts to a new single Contract.\nPolice Scotland require a Supplier to provide a Single Back-Office Solution for the Police Scotland EV Charging Infrastructure; this will involve transit",
+   "end_date_fields_found": [],
+   "qualifies": false,
+   "reason": "New award; no structured end date; core CPV 75100000 administration services (software-related additional CPV only)."
+  }
+ ],
+ "finding": "In both sampled official award feeds (60 releases), zero releases exposed a structured contract endDate. The three software-related 2026 awards inspected give no end date in Feb-Nov 2027. The required field is therefore not reliably available from this award-stage feed, and no calendar entry could be sourced without inference.",
+ "not_claimed": [
+  "no future tender, reprocurement or bidding window is inferred",
+  "no buyer interest, customer, price or accessible funding",
+  "no personal contact data recorded"
+ ],
+ "reconsider_if": "An official source exposing structured contract end dates (e.g. Procurement Act contract-details or Contracts Finder awarded-contract records with end dates) is shown accessible within FETCH limits; then one bounded retry with five candidates."
+}
