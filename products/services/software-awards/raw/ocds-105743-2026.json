@@ -1,0 +1,298 @@
+{
+    "uri": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/105743-2026?limit=100&updatedTo=2026-11-07T03:36:29",
+    "version": "1.1",
+    "extensions": [
+        "https://standard.open-contracting.org/profiles/eu/latest/en/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_amendment_rationale_classifications_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_budget_breakdown_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_contract_completion_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_documentation_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_pagination_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_suitability_extension/master/extension.json",
+        "https://raw.githubusercontent.com/portaledcahn/ocds_Links_extension/main/extension.json",
+        "https://raw.githubusercontent.com/cabinetoffice/ocds_uk_extension/main/extension.json"
+    ],
+    "publishedDate": "2026-11-06T13:56:01Z",
+    "publisher": {
+        "name": "Cabinet Office",
+        "scheme": "GB-GOR",
+        "uid": "D2",
+        "uri": "https://www.gov.uk/government/organisations/cabinet-office"
+    },
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "publicationPolicy": "https://www.gov.uk/government/publications/open-contracting",
+    "releases": [
+        {
+            "ocid": "ocds-h6vhtk-066241",
+            "id": "105743-2026",
+            "date": "2026-11-06T13:56:01Z",
+            "tag": [
+                "award",
+                "contract"
+            ],
+            "description": "Please refer to Contract Notice Document within the attachments area of Public Contract Scotland Tender which details the minimum requirements that bidders must submit as part of their tender submission.\nSPD Question 4C.12 Quality Control Requirements as defined within the SPD on PCST\nSPD Question 4D.1 Quality Assurance/Health and Safety Requirements as defined within the SPD on PCST\nLiving Wage\nTenderers will be asked to confirm if they pay all employees as a minimum the Real Living Wage as published by the Living Wage Foundation for statistical information gathering purposes only.\nEquality and Diversity\nTenderers will be required to comply with the statutory obligations under the Equality Act 2010.\nDeclaration of Non-Involvement in Serious Organised Crime\nTenderers must complete and sign a Declaration of Non-Involvement in Serious Organised Crime\n(SC Ref:847826)",
+            "initiationType": "tender",
+            "tender": {
+                "id": "PROC 26-3336",
+                "legalBasis": {
+                    "id": "32014L0024",
+                    "scheme": "CELEX"
+                },
+                "title": "PROC 26-3336 Back-Office Solution for the Police Scotland EV Charging Infrastructure",
+                "status": "complete",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "75100000",
+                    "description": "Administration services"
+                },
+                "mainProcurementCategory": "services",
+                "description": "Police Scotland currently have in place back-office services with two separate Suppliers, due to expire within the next 12 months. Police Scotland require a single Supplier to migrate all chargers from existing Contract to a new single Contract.\nPolice Scotland require a Supplier to provide a Single Back-Office Solution for the Police Scotland EV Charging Infrastructure; this will involve transitioning groups of chargers from these current solutions as well as adding any newly installed chargers added to the Estate during the Contract term, placed immediately on to this new Contract.",
+                "lots": [
+                    {
+                        "id": "1",
+                        "description": "Police Scotland currently have in place back-office services with two separate Suppliers, due to expire within the next 12 months. Police Scotland require a single Supplier to migrate all chargers from existing Contracts to a new single Contract.\nPolice Scotland require a Supplier to provide a Single Back-Office Solution for the Police Scotland EV Charging Infrastructure; this will involve transitioning groups of chargers from these current solutions as well as adding any newly installed chargers added to the Estate during the Contract term, placed immediately on to this new Contract.\nThe Back Office functionality must provide a solution to manage the Authority’s electric vehicle charging infrastructure to allow control, visibility and development of the back-office solution. Software supplied must be able to provide data in-line with a standard back office system as well as allow utilisation of data as detailed within the Back Office section above. Software must provide charge point management software. Including live monitoring of charge point network, including charge sessions, access controls, management of tariffs and payments, maintenance and reporting.\nFurther information can be found within the Schedule of Requirements within the ITT document.",
+                        "awardCriteria": {
+                            "criteria": [
+                                {
+                                    "name": "Quality",
+                                    "type": "quality",
+                                    "description": "60"
+                                },
+                                {
+                                    "type": "price",
+                                    "description": "40"
+                                }
+                            ]
+                        },
+                        "hasOptions": false,
+                        "status": "cancelled"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "1",
+                        "additionalClassifications": [
+                            {
+                                "scheme": "CPV",
+                                "id": "31158000",
+                                "description": "Chargers"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "09310000",
+                                "description": "Electricity"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "34144900",
+                                "description": "Electric vehicles"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "31610000",
+                                "description": "Electrical equipment for engines and vehicles"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "72260000",
+                                "description": "Software-related services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "71314200",
+                                "description": "Energy-management services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "31680000",
+                                "description": "Electrical supplies and accessories"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "48444100",
+                                "description": "Billing system"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "50324100",
+                                "description": "System maintenance services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "65300000",
+                                "description": "Electricity distribution and related services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "72267100",
+                                "description": "Maintenance of information technology software"
+                            }
+                        ],
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKM"
+                            }
+                        ],
+                        "relatedLot": "1"
+                    }
+                ],
+                "procurementMethod": "open",
+                "procurementMethodDetails": "Open procedure",
+                "coveredBy": [
+                    "GPA"
+                ]
+            },
+            "awards": [
+                {
+                    "id": "105743-2026-PROC 26-3336-1",
+                    "relatedLots": [
+                        "1"
+                    ],
+                    "status": "active",
+                    "suppliers": [
+                        {
+                            "id": "GB-FTS-188234",
+                            "name": "Hanger19 Limited"
+                        }
+                    ]
+                }
+            ],
+            "parties": [
+                {
+                    "name": "Scottish Police Authority",
+                    "id": "GB-FTS-163120",
+                    "identifier": {
+                        "legalName": "Scottish Police Authority"
+                    },
+                    "address": {
+                        "streetAddress": "2 French Street, Dalmarnock",
+                        "locality": "Glasgow",
+                        "region": "UKM",
+                        "postalCode": "G40 4EH",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "name": "Stuart Newton",
+                        "telephone": "+44 3004248662",
+                        "email": "stuart.newton@scotland.police.uk"
+                    },
+                    "roles": [
+                        "buyer"
+                    ],
+                    "details": {
+                        "url": "http://www.spa.police.uk",
+                        "buyerProfile": "https://www.publiccontractsscotland.gov.uk/search/Search_AuthProfile.aspx?ID=AA19762",
+                        "classifications": [
+                            {
+                                "scheme": "TED_CA_TYPE",
+                                "id": "BODY_PUBLIC",
+                                "description": "Body governed by public law"
+                            },
+                            {
+                                "scheme": "COFOG",
+                                "id": "03",
+                                "description": "Public order and safety"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Hanger19 Limited",
+                    "id": "GB-FTS-188234",
+                    "identifier": {
+                        "legalName": "Hanger19 Limited"
+                    },
+                    "address": {
+                        "streetAddress": "4 Grovelands, Boundary Way",
+                        "locality": "Hemel Hempstead",
+                        "region": "UKH3",
+                        "postalCode": "HP2 7TE",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "telephone": "+44 8081861851"
+                    },
+                    "roles": [
+                        "supplier"
+                    ],
+                    "details": {
+                        "scale": "sme"
+                    }
+                },
+                {
+                    "name": "Glasgow Sheriff Court and Justice of the Peace Court",
+                    "id": "GB-FTS-3525",
+                    "identifier": {
+                        "legalName": "Glasgow Sheriff Court and Justice of the Peace Court"
+                    },
+                    "address": {
+                        "streetAddress": "1 Carlton Place",
+                        "locality": "Glasgow",
+                        "postalCode": "G5 9DA",
+                        "countryName": "United Kingdom"
+                    },
+                    "roles": [
+                        "reviewBody"
+                    ]
+                }
+            ],
+            "buyer": {
+                "id": "GB-FTS-163120",
+                "name": "Scottish Police Authority"
+            },
+            "contracts": [
+                {
+                    "id": "105743-2026-PROC 26-3336-1",
+                    "awardID": "105743-2026-PROC 26-3336-1",
+                    "status": "active",
+                    "value": {
+                        "amount": 600000,
+                        "currency": "GBP"
+                    },
+                    "dateSigned": "2026-10-23T00:00:00+01:00"
+                }
+            ],
+            "bids": {
+                "statistics": [
+                    {
+                        "id": "1",
+                        "measure": "bids",
+                        "relatedLot": "1",
+                        "value": 9
+                    },
+                    {
+                        "id": "2",
+                        "measure": "smeBids",
+                        "relatedLot": "1",
+                        "value": 9
+                    },
+                    {
+                        "id": "3",
+                        "measure": "foreignBidsFromEU",
+                        "relatedLot": "1",
+                        "value": 0
+                    },
+                    {
+                        "id": "4",
+                        "measure": "foreignBidsFromNonEU",
+                        "relatedLot": "1",
+                        "value": 9
+                    },
+                    {
+                        "id": "5",
+                        "measure": "electronicBids",
+                        "relatedLot": "1",
+                        "value": 9
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "rel": "canonical",
+                    "href": "https://api.publiccontractsscotland.gov.uk/v1/Notice?id=ocds-r6ebe6-0000825529"
+                }
+            ],
+            "language": "en"
+        }
+    ]
+}
