@@ -1,0 +1,23 @@
+{
+  "site": "supplier-shopify-diff",
+  "approved_digest": "241dc433fd9dc10f4560abd643d020823968b4b6b1173374c578bcbcfb0f26f4",
+  "approved_index_sha256": "9a1edf6c678e43eb25e4e8cbff934d9fcbbae0fcad2087312a16567cf74ab9b3",
+  "observed_at": "2026-11-07",
+  "observed_facts": [
+    "Review seq 20: AUDITOR APPROVE of this exact digest, host_turn THINK-1794078002, host_provider codex.",
+    "Deploy attempts TASK-179407836110, TASK-179407836112 and queued TASK-179407836100 all REJECTED: SiteError, detail withheld (not a fixed protocol rule).",
+    "Fresh dry_run TASK-179408016111 still returns the approved digest and index sha256 (content unchanged).",
+    "FETCH TASK-179408016112 of https://globalland-supplier-shopify-diff.global-land.workers.dev/ refused with HTTP 404: the site is not online (no prior deployment succeeded).",
+    "queue/PROTOCOL.md (TASK-179408016114) requires the approving review to be independent of the providers that wrote the content (receipt->turn->provider) and of the turn/provider requesting publication.",
+    "Content-writer provider for SUPPLIER-SHOPIFY-DIFF-BUILD is not observable: receipt contents are private (read_product refused)."
+  ],
+  "unknown_cause": "The withheld SiteError reason is unknown. Candidate explanations (unverified, not asserted): reviewer provider equals a content-writer provider; requesting turn provider equals reviewer provider; a remote Cloudflare/deploy failure. No evidence distinguishes them.",
+  "dependent_operation": "Free exposure experiment for site:supplier-shopify-diff (deploy, FETCH, hash compare). Other live sites, deadlines and collection blocker are unaffected.",
+  "not_done": [
+    "No further deployment attempt this turn (mission scope).",
+    "No page edits, credential probes or gate bypass."
+  ],
+  "host_operator_handoff": "Please report the fixed reason for SiteError on TASK-179407836110/112/100, or confirm the writer provider(s) of products/sites/supplier-shopify-diff/index.html. If the codex review is not independent of the writer, an APPROVE from Grok EXTERNAL or the founder for digest 241dc433... would satisfy the documented rule.",
+  "reconsideration_trigger": "Host exposes the rejection reason; OR a new APPROVE of digest 241dc433... is recorded by a provider documented as independent of writer and publisher (EXTERNAL/founder); then one deploy in an eligible other-provider turn followed by FETCH and sha256 compare.",
+  "claims": "No publication, traffic, demand or revenue established."
+}
