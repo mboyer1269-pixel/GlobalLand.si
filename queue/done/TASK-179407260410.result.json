@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"blocker_id\": \"SERVICE-PAYMENT-COLLECTION\", \"status\": \"OPEN\", \"raised_by\": \"DIRECTOR\", \"opened_at\": 1793889049.137258, \"reports\": 4, \"title\": \"No authorized payment route; founder picks Apify (A) or a Gumroad seller account (B)\", \"category\": \"PAYMENT\", \"needs_founder\": true, \"detail\": \"Updated 2026-11-07. commercial_paths.collection is NOT_IMPLEMENTED and the treasury is UNFUNDED. There is now a concrete candidate for option B: products/sites/supplier-shopify-diff (an offline browser tool that compares a supplier CSV with a Shopify CSV; 17/17 synthetic tests including Python parity at 10000 rows; dry_run digest 241dc433...). An independent review is pending. Browser execution and real Shopify imports are untested. The problem evidence comes from forum replies in Shopify Community thread 683136 (at least 5 participants compare these files by hand in Excel). That is stated interest, not purchases, and a free competitor was reported. USD 19 one-time is an unvalidated hypothesis (products/services/supplier-shopify-diff/gumroad-package-notes.md). Option B, the smallest founder step: create or designate a GlobalLand Gumroad seller account in the founder's name with CAD bank payouts (Stripe KYC; USD 100 minimum payout; 10%+$0.50 fee on direct sales) and share only its public profile URL. Agents then prepare the package for independent review and the founder uploads it. Option A is unchanged: an Apify config plus a 0600 credential (NO-APIFY-ACCESS) unlocks 3 tested Actors. Agents will not create accounts, accept terms or take orders.\", \"mission_id\": \"WORLD-FIRST-REVENUE\", \"expected_gain\": \"Turns the first concrete package, or Actor usage, into collectable platform-settled payment. No demand or revenue is established.\", \"last_reported_by\": \"DIRECTOR\", \"last_reported_at\": 1794072626.2558727}",
+  "request": {
+    "id": "TASK-179407260410",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-07T17:30:04Z",
+    "action": "WORLD",
+    "args": {
+      "op": "raise_blocker",
+      "blocker_id": "SERVICE-PAYMENT-COLLECTION",
+      "agent_id": "DIRECTOR",
+      "title": "No authorized payment route; founder picks Apify (A) or a Gumroad seller account (B)",
+      "category": "PAYMENT",
+      "needs_founder": true,
+      "detail": "Updated 2026-11-07. commercial_paths.collection is NOT_IMPLEMENTED and the treasury is UNFUNDED. There is now a concrete candidate for option B: products/sites/supplier-shopify-diff (an offline browser tool that compares a supplier CSV with a Shopify CSV; 17/17 synthetic tests including Python parity at 10000 rows; dry_run digest 241dc433...). An independent review is pending. Browser execution and real Shopify imports are untested. The problem evidence comes from forum replies in Shopify Community thread 683136 (at least 5 participants compare these files by hand in Excel). That is stated interest, not purchases, and a free competitor was reported. USD 19 one-time is an unvalidated hypothesis (products/services/supplier-shopify-diff/gumroad-package-notes.md). Option B, the smallest founder step: create or designate a GlobalLand Gumroad seller account in the founder's name with CAD bank payouts (Stripe KYC; USD 100 minimum payout; 10%+$0.50 fee on direct sales) and share only its public profile URL. Agents then prepare the package for independent review and the founder uploads it. Option A is unchanged: an Apify config plus a 0600 credential (NO-APIFY-ACCESS) unlocks 3 tested Actors. Agents will not create accounts, accept terms or take orders.",
+      "mission_id": "WORLD-FIRST-REVENUE",
+      "expected_gain": "Turns the first concrete package, or Actor usage, into collectable platform-settled payment. No demand or revenue is established."
+    },
+    "description": "Broker action during THINK-1794072604",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179407260410",
+  "input_sha256": "04cf5a18fa0139ed1779c560df4ae26f37747ca7dbc6dceac601067f2fbcbb6a"
+}
