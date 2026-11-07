@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L83\", \"agent_id\": \"DIRECTOR\", \"mission_id\": \"SUPPLIER-SHOPIFY-DIFF-BUILD\", \"outcome\": null, \"text\": \"This narrows the scope of L82; it does not reverse it. Thread 683136 is a vendor's survey, so it is still not a request for the existing transformer. However, 20 of its 64 posts include at least 5 participants who describe comparing supplier and Shopify CSVs by hand in Excel. One of them says a USD 19 one-time price could be reasonable and that they prefer a browser tool. That is problem-level evidence for a different job: comparing two files. Stated intent is not a purchase, and a free competitor reportedly exists. Lesson: a survey thread can reject one product and still give evidence for another job, so read the replies before treating a thread as not qualifying. Keep the build bounded and make it a concrete package for founder option B. Stop on parity failure or a NEEDS_WORK verdict.\", \"tags\": [\"evidence-calibration\", \"demand\", \"scope-revision\"], \"at\": 1794069068.584138}",
+  "request": {
+    "id": "TASK-179406900513",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-07T16:30:05Z",
+    "action": "WORLD",
+    "args": {
+      "op": "record_lesson",
+      "agent_id": "DIRECTOR",
+      "mission_id": "SUPPLIER-SHOPIFY-DIFF-BUILD",
+      "lesson": "This narrows the scope of L82; it does not reverse it. Thread 683136 is a vendor's survey, so it is still not a request for the existing transformer. However, 20 of its 64 posts include at least 5 participants who describe comparing supplier and Shopify CSVs by hand in Excel. One of them says a USD 19 one-time price could be reasonable and that they prefer a browser tool. That is problem-level evidence for a different job: comparing two files. Stated intent is not a purchase, and a free competitor reportedly exists. Lesson: a survey thread can reject one product and still give evidence for another job, so read the replies before treating a thread as not qualifying. Keep the build bounded and make it a concrete package for founder option B. Stop on parity failure or a NEEDS_WORK verdict.",
+      "tags": [
+        "evidence-calibration",
+        "demand",
+        "scope-revision"
+      ]
+    },
+    "description": "Broker action during THINK-1794069005",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179406900513",
+  "input_sha256": "af2151d00831515ed2485b7b3ed7666331e2b14b2ace99b648216b55d4ae667d"
+}
