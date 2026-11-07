@@ -377,6 +377,7 @@ class PrivateResponder:
     def _respond(self, message, *, history_context=None):
         import commercial
         import continuity
+        import order_context
         path, data = self._open(message, continuity_context=history_context)
         if data['state'] == 'READY':
             self.last_provider = data.get('provider')
@@ -405,10 +406,12 @@ class PrivateResponder:
         guide = (PRIVATE_GUIDE.replace('with exactly action', 'with required action')
                  if commercial.settings(self.config)['state'] == 'ENABLED' else PRIVATE_GUIDE)
         if history is not None: guide += continuity.GUIDE
+        guide += order_context.GUIDE
         planner.tool_guide = guide
         while self.budget > 0:
             prompt = guide + commercial.prompt(self.root, self.config) + '\n' + json.dumps(dict(private_case={k: v for k, v in data.items() if k != 'public_context'},
                         private_history=history, public_product_context=self._public_context(data),
+                        private_order_payments=order_context.for_message(self.root, data['incoming'], self.config),
                         remaining_case_actions=max(0, self.case_budget - len(data['steps']))), ensure_ascii=False)
             value = None
             providers = self.config['controller'].get('providers', [])

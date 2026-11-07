@@ -559,9 +559,11 @@ class Controller:
             except ValueError:continue
             coverage.append(dict(kind='LEASE_DUE',key=key,version=version,representation='WORLD_SNAPSHOT'))
         snapshot=commercial.progress_snapshot(self.root,self.tool_config,scan=scan)
+        import orders
         assessment=progress.assess(self.root,world,bank,dict(self.config,agentmail=self.tool_config.get('agentmail',{})),commercial_snapshot=snapshot)
         context=dict(world=visible_world,treasury=bank,economic_context=economy['context'],source_products=products,latest_task_results=results,lessons=memory['items'],lesson_semantics=memory['semantics'],
                     commercial_feedback=commercial.project(self.root,self.tool_config,scan=scan),
+                    order_payments=orders.project(self.root),
                     capabilities=capabilities,commercial_paths=commercial_paths(capabilities,bank),
                     playbooks=lessons_module.playbooks(work))
         context['source_catalog']=dict(catalog,discovery='Bounded catalog page; omitted products are not absent. Use list_products with prefix, next_cursor as cursor, and revision to continue. read_product accepts revision, byte offset and limit; concatenate decoded chunks using next_offset.')
