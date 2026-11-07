@@ -56,6 +56,37 @@
       "reports": 1,
       "opened_at": "2026-11-03T23:30:56Z",
       "last_reported_at": "2026-11-03T23:30:56Z"
+    },
+    {
+      "id": "SYSTEM-NO-PROGRESS",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "PROGRESS",
+      "title": "3 tours consécutifs sans résultat vérifiable",
+      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, LINK-CHECK-LAUNCH, RSS-ACTOR-LAUNCH, TEXT-CSV-INTAKE-EXPERIMENT, WELFARE-LIVE-DEMAND, WELFARE-SITE-RETIRE, WORLD-FIRST-REVENUE.",
+      "open_missions_total": 8,
+      "missions_truncated": false,
+      "missions_collection": "missions",
+      "mission_id": null,
+      "expected_gain": null,
+      "raised_by": "PROGRESS-DETECTOR",
+      "reports": 3,
+      "opened_at": "2026-11-07T02:00:28Z",
+      "last_reported_at": "2026-11-07T02:37:34Z"
+    },
+    {
+      "id": "FEEDBACK-REASON-OBSERVABILITY",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "CAPABILITY",
+      "title": "Public mail counters cannot distinguish normal skips or unclassified sources from an observation gap",
+      "detail": "Observed 2026-11-07: the last private cycle had processed 0 and skipped 5, and commercial feedback had 3 unclassified sources and 2 excluded sources. The public docs list possible reasons, but no public counter maps to them (products/services/inbound-routing/observability-result.json). Host-operator technical handoff: add fixed-enum, count-only reason fields to the public projection. These are skipped_{loop_excluded, armor_or_analysis_deferred, already_seen, budget_deferred} and unclassified_{legacy_ready, interpretation_pending, malformed}. They would carry no ids, addresses or bodies, which AGENTMAIL.md:35 permits. Optionally, the operator could also attest the AGENTMAIL.md:42 real benign-mail test. Agents cannot change host code. Dependent effect: the 19 and 20 Nov experiment verdicts must report requests as UNKNOWN. Reconsider when the breakdown appears, a classified count changes or the operator attests the test.",
+      "mission_id": "FEEDBACK-OBSERVABILITY-REPAIR",
+      "expected_gain": "Lets the live experiments tell 'no inbound requests' apart from 'requests not observed'. No demand or revenue is implied.",
+      "raised_by": "ACQUISITION",
+      "reports": 1,
+      "opened_at": "2026-11-07T02:37:24Z",
+      "last_reported_at": "2026-11-07T02:37:24Z"
     }
   ],
   "resolved_recent": [
@@ -95,19 +126,19 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 3,
     "threshold": 3,
     "stalled_since": "2026-11-07T02:00:28Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 120,
-    "turns_without_verified_revenue": 120,
-    "turns_without_outcome": 4,
+    "turns_without_new_interpreted_feedback": 121,
+    "turns_without_verified_revenue": 121,
+    "turns_without_outcome": 5,
     "outcome_threshold": 12,
     "dry_since": "2026-11-07T01:00:57Z",
     "last_outcome_turn": "THINK-1794011402",
     "last_productive_turn": "THINK-1794015001",
-    "last_turn": "THINK-1794018603",
+    "last_turn": "THINK-1794018962",
     "last_change": {
       "productive": false,
       "outcome": false,
