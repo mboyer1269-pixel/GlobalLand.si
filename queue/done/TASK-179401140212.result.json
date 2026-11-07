@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"invoice-preflight\": {\n    \"reverse_restores_live\": true,\n    \"script_blocks_unchanged\": true,\n    \"sha256\": \"3e161ef53f6d78e377758c1bbfcd1f7c8e1fdb41dbd8621436383c44e7da1bc6\",\n    \"baseline_sha256\": \"c00985a0a5abdf8fb02746a3d995909229fccc8f24d6fee0b09f7388be88e854\"\n  },\n  \"shopify-catalogue-example\": {\n    \"reverse_restores_live\": true,\n    \"script_blocks_unchanged\": true,\n    \"sha256\": \"32632a6681aa778e36f5009b6a88c2144ad5de457dc4c00cf29a68430ccfbec4\",\n    \"baseline_sha256\": \"dc696516ea49e05c4d0d36ac71c329147a9a10d722658e4720d7bc86303e45e5\"\n  }\n}\n\n",
+  "artifacts": [
+    "products/reviews/related-resource-independent-review.json",
+    "products/receipts/TASK-179401140212.json"
+  ],
+  "request": {
+    "id": "TASK-179401140212",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-07T00:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,hashlib,json,re\nroot=pathlib.Path('products'); results={}\nfor slug,base in [('invoice-preflight','invoice'),('shopify-catalogue-example','shopify')]:\n p=root/'sites'/slug/'index.html'; s=p.read_text(); old=(root/'distribution/related-resources'/('live-'+base+'-index.html')).read_text()\n if base=='invoice':\n  cleaned=re.sub(r'<h2>Related free resource</h2>.*?(?=<script>)','',s,flags=re.S)\n else:\n  cleaned=re.sub(r'<h2>Related free resource</h2>.*?(?=<hr lang=\"fr\">)','',s,flags=re.S)\n  cleaned=re.sub(r'<p>Ressource connexe : .*?</p>','',cleaned,flags=re.S)\n results[slug]={'reverse_restores_live':cleaned==old,'script_blocks_unchanged':re.findall(r'<script.*?</script>',s,re.S)==re.findall(r'<script.*?</script>',old,re.S),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'baseline_sha256':hashlib.sha256((root/'distribution/related-resources'/('live-'+base+'-index.html')).read_bytes()).hexdigest()}\nout=root/'reviews/related-resource-independent-review.json';out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(results,indent=2));print(out.read_text())\nassert all(v['reverse_restores_live'] and v['script_blocks_unchanged'] for v in results.values())\n"
+      ],
+      "inputs": [
+        "products/sites/invoice-preflight/",
+        "products/sites/shopify-catalogue-example/",
+        "products/distribution/related-resources/"
+      ],
+      "outputs": [
+        "products/reviews/related-resource-independent-review.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794011402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179401140212",
+  "input_sha256": "d8d381bd55955c140ab76eac46151549915368ffa235a4e58986bf14c5096a76"
+}
