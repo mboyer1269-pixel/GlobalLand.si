@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "[\n[\n\"continued provision of the core EPR software and associated \",\ntrue\n],\n[\n\"Award procedure without prior publication of a call for comp\",\ntrue\n],\n[\n\"technical compatibility, interoperability and the significan\",\ntrue\n],\n[\n\"commencing on 29th December 2026 for an initial period of th\",\ntrue\n],\n[\n\" was selected \",\nfalse\n],\n[\n\"No competitive evaluation has been undertaken\",\ntrue\n],\n[\n\"a major clinical system procurement and transition\",\ntrue\n],\n[\n\"For the provision of a mobile workforce management system fo\",\ntrue\n],\n[\n\"Regulation 33(8)(a) of the Public Contracts Regulations 2015\",\ntrue\n],\n[\n\"Contract Extension\",\ntrue\n],\n[\n\"a Single Back-Office Solution for the Police Scotland EV Cha\",\ntrue\n],\n[\n\" in notices 2 and 3 while the awards are \",\nfalse\n],\n[\n\"; we do not interpret this.\\n\\n### Proposed experiment (unvali\",\nfalse\n],\n[\n\"evidence_profiles\",\n3\n],\n[\n\"no_email\",\ntrue\n]\n]\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179402256120.json"
+  ],
+  "request": {
+    "id": "TASK-179402256120",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T03:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,json,pathlib\nb=pathlib.Path('products/services/software-awards/buyer-brief-en-fr.md').read_text()\nraw=''.join(json.dumps(json.load(open('products/services/software-awards/raw/ocds-%s.json'%n)),ensure_ascii=False) for n in ['105806-2026','105970-2026','105743-2026'])\nraw=raw.replace('\\\\\"','\"')\nqs=[q for q in re.findall(r'\"([^\"]{12,})\"',b)]\nres=[[q[:60],q in raw] for q in qs]\nev=json.load(open('products/services/software-awards/evidence.json'))\nres.append(['evidence_profiles',len(ev['profiles'])])\nres.append(['no_email', '@' not in b and '@' not in json.dumps(ev)])\nprint(json.dumps(res,indent=0))"
+      ],
+      "inputs": [
+        "products/services/software-awards/"
+      ],
+      "outputs": [],
+      "mission_id": "SOFTWARE-AWARD-BUYER-BRIEF"
+    },
+    "description": "Broker action during THINK-1794022561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179402256120",
+  "input_sha256": "7052b85258aa5463dd81908fda1b23e123afc4149cca790a75eb6bea7530b7ea"
+}
