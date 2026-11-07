@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Independent ownership-file addition review only\",\n  \"checks\": [\n    {\n      \"check\": \"index.html hash\",\n      \"pass\": true\n    },\n    {\n      \"check\": \"llms.txt hash\",\n      \"pass\": true\n    },\n    {\n      \"check\": \"3d8f1b6e2a9c4057e1b4d6a8c0f29e73.txt hash\",\n      \"pass\": true\n    },\n    {\n      \"check\": \"approved index baseline\",\n      \"pass\": true\n    },\n    {\n      \"check\": \"approved llms baseline\",\n      \"pass\": true\n    },\n    {\n      \"check\": \"exact key bytes\",\n      \"pass\": true\n    },\n    {\n      \"check\": \"key format\",\n      \"pass\": true\n    },\n    {\n      \"check\": \"exact inventory\",\n      \"pass\": true\n    },\n    {\n      \"check\": \"no prior submission in baseline\",\n      \"pass\": true\n    },\n    {\n      \"check\": \"window unchanged\",\n      \"pass\": true\n    }\n  ],\n  \"passed\": 10,\n  \"total\": 10,\n  \"not_established\": [\n    \"submission\",\n    \"indexing\",\n    \"traffic\",\n    \"requests\",\n    \"revenue\"\n  ]\n}\n\n",
+  "artifacts": [
+    "products/reviews/software-award-discovery-review.json",
+    "products/receipts/TASK-179403120111.json"
+  ],
+  "request": {
+    "id": "TASK-179403120111",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-07T06:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,hashlib,json,re\np=pathlib.Path('products/sites/software-award-brief'); m=json.loads(pathlib.Path('products/services/software-awards/discovery/manifest.json').read_text()); b=json.loads(pathlib.Path('products/services/software-awards/exposure/launch-baseline.json').read_text()); checks=[]\ndef ck(n,v): checks.append({'check':n,'pass':bool(v)})\nfor f,k in [('index.html','index_sha256'),('llms.txt','llms_sha256'),(m['key_file'],'key_sha256')]: ck(f+' hash',hashlib.sha256((p/f).read_bytes()).hexdigest()==m[k])\nck('approved index baseline',m['index_sha256']==b['fetch']['index']['live_sha256']); ck('approved llms baseline',m['llms_sha256']==b['fetch']['llms']['live_sha256']); ck('exact key bytes',(p/m['key_file']).read_bytes()==m['key'].encode()); ck('key format',re.fullmatch('[a-f0-9]{32}',m['key']) is not None); ck('exact inventory',sorted(x.name for x in p.iterdir())==sorted(['index.html','llms.txt',m['key_file']])); ck('no prior submission in baseline',b['indexnow']=='not submitted'); ck('window unchanged',m['observation_window_end']=='2026-11-21T05:00:35Z')\nr={'scope':'Independent ownership-file addition review only','checks':checks,'passed':sum(x['pass'] for x in checks),'total':len(checks),'not_established':['submission','indexing','traffic','requests','revenue']}; out=pathlib.Path('products/reviews/software-award-discovery-review.json');out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(r,indent=2)); print(out.read_text()); assert all(x['pass'] for x in checks)"
+      ],
+      "inputs": [
+        "products/sites/software-award-brief/",
+        "products/services/software-awards/discovery/manifest.json",
+        "products/services/software-awards/exposure/launch-baseline.json"
+      ],
+      "outputs": [
+        "products/reviews/software-award-discovery-review.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794031201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179403120111",
+  "input_sha256": "bc73e24f9d8a80dfbf9090219171ea38ecc11ab64e6fc3fcf328784a1fd15c7f"
+}

@@ -1,0 +1,54 @@
+{
+  "scope": "Independent ownership-file addition review only",
+  "checks": [
+    {
+      "check": "index.html hash",
+      "pass": true
+    },
+    {
+      "check": "llms.txt hash",
+      "pass": true
+    },
+    {
+      "check": "3d8f1b6e2a9c4057e1b4d6a8c0f29e73.txt hash",
+      "pass": true
+    },
+    {
+      "check": "approved index baseline",
+      "pass": true
+    },
+    {
+      "check": "approved llms baseline",
+      "pass": true
+    },
+    {
+      "check": "exact key bytes",
+      "pass": true
+    },
+    {
+      "check": "key format",
+      "pass": true
+    },
+    {
+      "check": "exact inventory",
+      "pass": true
+    },
+    {
+      "check": "no prior submission in baseline",
+      "pass": true
+    },
+    {
+      "check": "window unchanged",
+      "pass": true
+    }
+  ],
+  "passed": 10,
+  "total": 10,
+  "not_established": [
+    "submission",
+    "indexing",
+    "traffic",
+    "requests",
+    "revenue"
+  ]
+}
