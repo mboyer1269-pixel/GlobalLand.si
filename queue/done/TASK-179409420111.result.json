@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "n 25 next {'next': 'https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=tender&limit=25&updatedTo=2026-11-07T23:30:28&cursor=dXBkYXRlZFRvPTIwMjYtMTEtMDdUMjM6MzA6Mjh8bmV4dEN1cnNvcj03NTYzOTA='}\n105838-2026 ['tender'] active 2027-01-08T12:00:00Z | Retail Data Management, Analytics and Automation | ['48000000', '72000000'] | London Luton Airport Operations Limited\n105826-2026 ['tender'] active 2026-12-07T12:00:00Z | 26055 Child Weight Management | ['85323000'] | Cambridgeshire County Council\n105666-2026 ['planning', 'tender'] active 2026-11-20 | Universal Stop Smoking Service | ['85100000'] | London Borough of Ealing Council\n105665-2026 ['tender'] active 2026-12-04T17:00:00Z | Neighbourhood Plan Consultancy Services | ['71356400'] | Thrapston Town Council\n105634-2026 ['tender'] active 2026-12-18 | Chilton Grove | ['45000000', '45200000', '45260000', '45261000', '45261100', '45261200'] | London Borough of Southwark\n105516-2026 ['tender'] active 2026-12-07T11:00:00Z | Temporary Traffic Management Services | ['34996100', '45316212', '63712700'] | Falkirk Council\n105515-2026 ['tender'] active 2027-01-11T12:00:00Z | Provision of Roofing Services | ['45261900', '45261910'] | UHI North,West and Hebrides\n105513-2026 ['tender'] active 2026-11-23T12:00:00Z | Replacement of Corporate Telephony and Contact Centre Environment | ['32500000', '64210000'] | Link Group\n105436-2026 ['tender'] active 2026-12-10T12:00:00Z | Sight Testing and Dispensing of Spectacles to Children and Young People in Special Educati | ['85100000', '85160000'] | NHS Devon Integrated Care Board\n105326-2026 ['tender'] active 2026-12-03T12:00:00Z | Supply and Delivery of Hygiene Services and Equipment 0226 | ['19640000', '24455000', '33141118', '33141123', '33631600', '33711430'] | Scotland Excel\n105246-2026 ['tender'] active 2026-12-07T12:00:00Z | Supply and Support of Integrated Workplace Management System | ['72250000', '72263000', '72267100', '72268000'] | North Ayrshire Council\n105109-2026 ['tender'] active 2026-12-21T12:00:00Z | Shropshire 0-25 Public Health Nursing Service (PHNS) | ['85100000', '85141200', '85323000'] | Shropshire Council\n105076-2026 ['tender'] active 2026-12-03T15:00:00Z | Crane Provision Framework | ['42414100', '45510000'] | KBS Maritime Ltd\n105055-2026 ['tender'] active 2026-12-02T12:00:00Z | Healthy Lives Dynamic Purchasing Vehicle - Category 4 Round 14 - Onboarding | ['85000000'] | London Borough of Newham\n105050-2026 ['tender'] active 2026-12-02T12:00:00Z | Healthy Lives Dynamic Purchasing Vehicle - Category 3 Round 15 - Onboarding | ['85000000'] | London Borough of Newham\n105048-2026 ['tender'] active 2026-12-02T12:00:00Z | Healthy Lives Dynamic Purchasing Vehicle - Category 2 Round 15 - Onboarding | ['85000000'] | London Borough of Newham\n105046-2026 ['tender'] active 2026-12-02T12:00:00Z | Healthy Lives Dynamic Purchasing Vehicle - Category 1 Round 15 - Onboarding | ['85000000'] | London Borough of Newham\n104855-2026 ['tender'] active 2026-12-04T12:00:00Z | Provision of Conversion Support Services for Student Recruitment for Glasgow Caledonian Un | ['79411100'] | Glasgow Caledonian University\n104835-2026 ['tender'] active 2026-12-04T17:00:00Z | Multi-Supplier Framework Agreement for Management Systems Audit Services, Services Relatin | ['71242000', '71244000', '71246000', '71310000', '71311000', '71311100'] | Transport Scotland\n104700-2026 ['tender'] active 2026-12-04T12:00:00Z | Provision of Conversion Support Services for Student Recruitment for Glasgow Caledonian Un | ['79411100'] | Glasgow Caledonian University\n104619-2026 ['tender'] active 2026-12-08T12:00:00Z | Digital Connectivity Programme - 1gb Broadband Install and Service Delivery | ['32412100', '32412110', '32571000', '45314000', '45314320', '50332000'] | North Lanarkshire Council\n104526-2026 ['tender'] active 2028-10-01T17:00:00+01:00 | EEAST - DPS Framework for Learning and Training Services (24-T23) | ['80000000'] | East of England Ambulance Service NHS Trust\n104515-2026 ['tender'] active 2026-12-07T11:00:00Z | Large Grants Due Diligence Framework | ['73000000', '73110000', '73210000'] | Scottish Enterprise\n104444-2026 ['tender'] active 2026-11-18T09:00:00Z | EMMS Cyber Security SME Support Programme | ['72800000'] | Lincolnshire County Council\n104375-2026 ['planning', 'tender'] active 2026-11-16T17:00:00Z | PME Opportunity for NDP Assessments | ['85141000'] | University Hospitals Birmingham NHS Foundation Trust\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179409420111.json"
+  ],
+  "request": {
+    "id": "TASK-179409420111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T23:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,datetime\nd=json.load(open('products/services/open-software-tender/raw/feed-page1.json'))\nrels=d.get('releases',[])\nprint('n',len(rels),'next',d.get('links',{}))\nnow=datetime.datetime(2026,11,7,tzinfo=datetime.timezone.utc)\nfor r in rels:\n  t=r.get('tender',{})\n  cl=t.get('classification',{}) or {}\n  cpvs=[cl.get('id','')]+[c.get('classification',{}).get('id','') for it in t.get('items',[]) for c in [it] ]+[a.get('id','') for it in t.get('items',[]) for a in it.get('additionalClassifications',[])]\n  dl=(t.get('tenderPeriod') or {}).get('endDate')\n  print(r.get('id'),r.get('tag'),t.get('status'),dl,'|',(t.get('title') or '')[:90],'|',sorted(set(x for x in cpvs if x))[:6],'|',(r.get('buyer') or {}).get('name'))\n"
+      ],
+      "inputs": [
+        "products/services/open-software-tender/raw/feed-page1.json"
+      ],
+      "outputs": [],
+      "mission_id": "OPEN-SOFTWARE-TENDER-BRIEF"
+    },
+    "description": "Broker action during THINK-1794094201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179409420111",
+  "input_sha256": "dbb09c75e8076110960dbde30cd57837600f90fd69dbfd2ae338e88d594d180c"
+}
