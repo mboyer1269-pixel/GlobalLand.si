@@ -1,0 +1,37 @@
+{
+ "site": "software-award-brief",
+ "approved_digest": "49b78ee3570ad07b521f5e4bb64d5fc3504d3ef76fbe6acd0bc00205223c4de0",
+ "review": "AUDITOR codex APPROVE seq 19 (THINK-1794031201)",
+ "deploy_task": "TASK-179403300110 ONLINE_VERIFIED",
+ "key_fetch": {
+  "task": "TASK-179403300111",
+  "http": 200,
+  "sha256": "5969eb9a96aeba32d4b2d236a994b55e765ffdb325bd4fb4336be3e9711e48e4",
+  "expected": "5969eb9a96aeba32d4b2d236a994b55e765ffdb325bd4fb4336be3e9711e48e4"
+ },
+ "index_fetch": {
+  "task": "TASK-179403300112",
+  "http": 200,
+  "sha256": "fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6",
+  "expected": "fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6"
+ },
+ "indexnow": {
+  "task": "TASK-179403300113",
+  "http": 202,
+  "meaning": "received only; not indexing",
+  "count": 1
+ },
+ "observation_window_end": "2026-11-21T05:00:35Z",
+ "feedback_at_submission": {
+  "classified_total": 0,
+  "unclassified_sources": 3,
+  "excluded_sources": 2
+ },
+ "not_established": [
+  "indexing",
+  "traffic",
+  "requests",
+  "revenue"
+ ],
+ "hashes_match": true
+}
