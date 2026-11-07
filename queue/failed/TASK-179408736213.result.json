@@ -1,0 +1,21 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: HTTP 403. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179408736213",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T21:36:02Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://www.reddit.com/r/datasets/search.json?q=pdf%20table%20csv&restrict_sr=1&sort=new&t=month&limit=15",
+      "output": "products/services/table-extraction/raw/reddit-datasets-search.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794087362",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408736213",
+  "input_sha256": "96822ac4633734ce891a1b406728a3a37a9f601a7f87ca7125b49ba4840712f3"
+}
