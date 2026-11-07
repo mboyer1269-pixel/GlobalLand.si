@@ -1,0 +1,58 @@
+{
+ "mission": "ACCOUNTLESS-RESOURCE-DISTRIBUTION",
+ "observed_at": "2026-11-07",
+ "author": "ACQUISITION (autonomous AI agent)",
+ "verdict": "STOP_NO_AUTHORIZED_ACCOUNTLESS_ROUTE",
+ "excluded_prior_work": [
+  "IndexNow (already submitted once per live site; not repeated)",
+  "DuckDuckGo search visibility (products/distribution/search-visibility/result.json, CAPTCHA, STOP)"
+ ],
+ "candidates": [
+  {
+   "name": "Internet Archive Save Page Now",
+   "rules_url": "https://help.archive.org/help/save-pages-in-the-wayback-machine/",
+   "fetch_task": "TASK-179408916111",
+   "sha256": "537a71097fe35671a6610a483b59e86513b62b0539bbcf09a99206f0b2090295",
+   "quote": "Put a URL into the form , press the button, and we save the page. ... this method only saves a single page , not the whole site.",
+   "decision": "REJECT",
+   "reason": "Archival service, not a topical discovery directory. The documented anonymous route is a human web form; no published rule found permitting automated GET submission, and a GET /save/ call would be an endpoint side effect not documented on this page. Not used."
+  },
+  {
+   "name": "Google sitemaps ping endpoint",
+   "rules_url": "https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping",
+   "fetch_task": "TASK-179408916113",
+   "sha256": "eabb5c4df6e6beb87ff69019766407bfd9359cc03d521a2536cf5eaefe86f0ed",
+   "quote": "Sitemaps ping endpoint is going away ... The sitemaps ping endpoint deprecation is complete. Monday, June 26, 2023",
+   "decision": "REJECT",
+   "reason": "Official source states the accountless ping route is retired; remaining routes (Search Console) require an account."
+  },
+  {
+   "name": "Marginalia Search (small independent search engine)",
+   "rules_url": "https://www.marginalia.nu/marginalia-search/for-webmasters/",
+   "fetch_task": "TASK-179408916114",
+   "sha256": "16302b11d30b698c8b7829973254aaf3b348e99d869b71dce03b39f847b05139",
+   "quote": "This information is outdated ... You can expedite the discovery by submitting it here .",
+   "submit_link_href": null,
+   "decision": "REJECT",
+   "reason": "Page self-declares outdated; submission is via a linked web form, not a documented automated GET API. It also notes the crawler is sometimes blocked by CloudFlare-hosted sites (our hosting). FETCH is GET-only; no form POST or bypass attempted. Candidate limit (3) reached; no further fetches."
+  }
+ ],
+ "submissions_made": 0,
+ "not_established": [
+  "listing",
+  "indexing",
+  "exposure",
+  "traffic",
+  "requests",
+  "revenue"
+ ],
+ "scope_of_conclusion": "Only these three routes under GET-only, accountless constraints. Not a conclusion about distribution generally.",
+ "reconsider_when": "A founder-authorized webmaster account (Search Console/Bing) or a POST-capable sanctioned submission tool becomes available, or a directory publishes an explicit automated GET submission API.",
+ "preserved_deadlines": {
+  "csv": "2026-11-19T01:30:37Z",
+  "shopify": "2026-11-19T21:30:49Z",
+  "welfare": "2026-11-20",
+  "software_award": "2026-11-21T05:00:35Z",
+  "welfare_retirement_after": "2026-12-04T17:00:00Z"
+ }
+}
