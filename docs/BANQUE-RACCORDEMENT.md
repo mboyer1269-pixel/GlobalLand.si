@@ -8,7 +8,7 @@ Le logiciel possède déjà la comptabilité et la passerelle. Il manque le serv
 2. **Commencer par la lecture et les preuves.** Développer un adaptateur spécifique au service pour `verify` et `sync`, avec accès limité au compte dédié et aux seules données nécessaires. Installer cet exécutable sur l'hôte sous contrôle administrateur, hors du dépôt et des conteneurs agents. Il doit refuser toute opération de dépense tant que `quote`/`submit`/`reconcile` ne sont pas implémentés et validés. Un accès de lecture prouve des transactions ; il n'autorise pas des débits autonomes.
 3. **Rapprocher le dépôt initial réel.** Quand le fondateur a effectivement versé 50 CAD nets sur le compte dédié et que le règlement est confirmé, l'adaptateur fournit un reçu `FUNDING` unique de `5000` centimes CAD. `verify` contrôle ce reçu contre le service réel. Importer la preuve via `sync` ou la commande administrateur ci-dessous. Le résultat attendu est `funding_verified: true`, avec le cash correspondant ; le disponible tient aussi compte des réserves et engagements existants. Modifier `ledger.json`, donner un JSON à un agent ou réussir un test ne finance rien.
 4. **Relier les recettes au même périmètre comptable.** Configurer le compte de versement dédié chez le prestataire de vente choisi, puis rapprocher les montants réellement reçus, frais et change compris. Une facture, une commande et un paiement encore en attente ne sont pas des liquidités utilisables. Chaque recette réglée devient un `REVENUE` vérifié ; les remboursements de dépenses sont des `REFUND`, les reprises de recettes des `REVERSAL`. Fixer `available_at` et le plancher de réserve selon le contrat réel du service. Ne pas compter à la fois la vente et son versement bancaire comme deux recettes : le transfert interne ne crée pas de revenu.
-5. **Autoriser les dépenses seulement après preuve du plafond externe.** Ajouter `quote`, `submit` et `reconcile` pour les opérations que le service sait réellement borner, frais et change compris, sans découvert, crédit ni recharge. Valider d'abord sans argent réel les rejeux, erreurs et réponses perdues. Une réserve locale ou une clé API restreinte ne garantit pas que le prestataire ne puisse réclamer plus que le capital. Si cette garantie manque, conserver le raccordement en lecture/encaissement et refuser la dépense concernée.
+5. **Autoriser les dépenses seulement après preuve du plafond externe.** Ajouter `quote`, `submit` et `reconcile` pour les opérations que le service sait réellement borner, frais et change compris, sans découvert, crédit ni recharge. Valider d'abord sans argent réel les rejeux, erreurs et réponses perdues. Une réserve locale ou une clé API restreinte ne garantit pas que le prestataire ne puisse réclamer plus que le capital. Si cette garantie manque, conserver la lecture et le rapprochement des règlements existants et refuser la dépense concernée. L'activation de nouvelles ventes exige aussi de vérifier les engagements qu'elles créent, notamment les remboursements et litiges ; recevoir un règlement existant n'autorise pas implicitement ces nouveaux engagements.
 
 ## Contrat exact déjà implémenté
 
@@ -82,6 +82,29 @@ Pour le service retenu, le raccordement devra en plus démontrer :
 - avant toute dépense autonome, l'idempotence et la borne de débit garanties par le service, plus la reprise d'une réponse perdue sans nouvel achat.
 
 À titre d'exemple de précautions à vérifier si Stripe est le service nommé : ses clés restreintes limitent les permissions, et ses secrets restent côté serveur. Cela ne supprime pas son mécanisme de solde négatif, qui peut débiter le compte bancaire lié. Ce n'est donc pas une preuve de responsabilité limitée aux 50 CAD. [Clés API Stripe](https://docs.stripe.com/keys), [protection des clés](https://docs.stripe.com/keys-best-practices), [versements négatifs](https://docs.stripe.com/payouts#negative-payouts). Aucun choix de Stripe n'est effectué ici.
+
+### Une plateforme qui encaisse ne garantit pas le plafond du mandat
+
+Vérification documentaire du 6 novembre 2026 : le statut de marchand officiel
+de Gumroad ne transfère pas tous les coûts de litige. Sa section 7.1 rend le
+vendeur responsable de remboursements et de coûts associés ; son aide prévoit
+un débit bancaire possible en cas de solde négatif. Un compte dédié et une
+réserve locale ne démontrent donc pas, seuls, le respect du plafond de GlobalLand.
+[Conditions Gumroad, section 7](https://gumroad.com/terms),
+[solde et versements](https://gumroad.com/help/article/269-balance-page).
+
+Pour Apify, le plancher mensuel à zéro du profit d'un Actor PPE ne constitue pas
+une garantie couvrant tous les engagements. Les conditions prévoient notamment
+le remboursement demandé après certains versements liés à une activité
+frauduleuse ou non conforme, et les coûts des services tiers restent au créateur.
+[Versements Apify](https://docs.apify.com/actors/monetize/monthly-payouts),
+[conditions de publication, sections 5 et 10.4.4](https://docs.apify.com/legal/store-publishing-terms-and-conditions).
+
+Ces constats ne choisissent ni n'interdisent une plateforme. Pour une activation,
+il reste à établir la borne effective des engagements, les accès nécessaires et
+le rapprochement du règlement ; si le montage exige de modifier le mandat, la
+décision appartient au fondateur. Les agents restent libres de rechercher une
+autre voie. Voir la [contre-vérification de la piste proposée](research/2026-11-06-settlement-countercheck.md).
 
 ## Ce qui peut avancer maintenant
 
