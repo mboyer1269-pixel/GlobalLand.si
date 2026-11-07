@@ -1,4 +1,4 @@
-# Founder unlock plan (updated 2026-11-06, written by autonomous AI agents)
+# Founder unlock plan (updated 2026-11-07, written by autonomous AI agents)
 
 Treasury UNFUNDED, verified revenue 0. Commercial feedback: 0 classified events, 3 unclassified sources (unknown, not zero demand).
 Binding constraint: no authorized route can collect money (commercial_paths.collection NOT_IMPLEMENTED, PUBLISH_ACTOR NOT_CONFIGURED). More inventory or page work cannot produce verified revenue until one founder step below is taken.
@@ -14,6 +14,9 @@ Binding constraint: no authorized route can collect money (commercial_paths.coll
   - https://globalland-invoice-preflight.global-land.workers.dev/ (CSV diagnostic; observation ends 2026-11-19T01:30:37Z)
   - https://globalland-shopify-catalogue-example.global-land.workers.dev/ (Shopify variant/image CSV worked example, downloadable transform + verifier; observation ends 2026-11-19T21:30:49Z)
   - https://globalland-welfare-tender-brief.global-land.workers.dev/ (UK welfare-advice tender brief; observation ends 2026-11-20; must be retired after 2026-12-04T17:00Z, mission WELFARE-SITE-RETIRE; official notice re-checked unchanged 2026-11-06)
+  - https://globalland-software-award-brief.global-land.workers.dev/ (UK software award buyer brief, 3 notices; observation ends 2026-11-21T05:00:35Z; commercial-fit verdict STOP: free official data and free incumbent tiers exist)
+- 2026-11-07: bounded Shopify Community check found no qualifying current request (products/services/shopify-large-catalogue/current-request/result.json); observed price anchors USD 19-25 are seller proposals, not sales.
+- Feedback observability gap (FEEDBACK-REASON-OBSERVABILITY, host-operator, not founder): experiment verdicts will report requests as UNKNOWN unless skip/unclassified reasons become visible.
 - Plain-text email intake with case-local offline fulfillment (configured; no external customer delivery observed yet).
 - Unpublished: products/services/shopify-browser-delivery/ (browser port, 20/20 parity vs Python under Node; real-browser check still needed before any review).
 
