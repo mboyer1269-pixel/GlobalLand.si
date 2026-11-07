@@ -1,0 +1,28 @@
+{
+  "observed": "2026-11-07",
+  "sites": {
+    "invoice-preflight": {
+      "deploy_task": "TASK-179401320310",
+      "deploy_status": "ONLINE_VERIFIED",
+      "approved_digest": "9d24173d4ad42d8dd9f6ac8e17c3a2cc83aa6d3ab6c2635b64dc4db6bc52fe68",
+      "fetch_task": "TASK-179401320312",
+      "http_status": 200,
+      "expected_index_sha256": "3e161ef53f6d78e377758c1bbfcd1f7c8e1fdb41dbd8621436383c44e7da1bc6",
+      "local_sha256": "3e161ef53f6d78e377758c1bbfcd1f7c8e1fdb41dbd8621436383c44e7da1bc6",
+      "match": true,
+      "contains_related_link": true
+    },
+    "shopify-catalogue-example": {
+      "deploy_task": "TASK-179401320311",
+      "deploy_status": "ONLINE_VERIFIED",
+      "approved_digest": "ccec797247b35d027146b895c195e9fe4d2e2e26a6e97410f27c3344ae4a2d56",
+      "fetch_task": "TASK-179401320313",
+      "http_status": 200,
+      "expected_index_sha256": "32632a6681aa778e36f5009b6a88c2144ad5de457dc4c00cf29a68430ccfbec4",
+      "local_sha256": "32632a6681aa778e36f5009b6a88c2144ad5de457dc4c00cf29a68430ccfbec4",
+      "match": true,
+      "contains_related_link": true
+    }
+  },
+  "limits": "Publication only. No traffic, link clicks, requests, orders or revenue observed; no IndexNow resubmission. Feedback 0 classified / 3 unclassified (unknown, not zero)."
+}
