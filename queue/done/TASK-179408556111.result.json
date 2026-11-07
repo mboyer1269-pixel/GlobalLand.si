@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "total 160\ndrwxr-xr-x 8 nobody nogroup   440 Nov  7 21:06 .\ndrwxr-xr-x 5 nobody nogroup   100 Nov  7 21:06 ..\n-rw-r--r-- 1 nobody nogroup 16148 Nov  7 21:06 AGENTMAIL.md\n-rw-r--r-- 1 nobody nogroup 10917 Nov  7 21:06 AUDIT-2026-11-01.md\n-rw-r--r-- 1 nobody nogroup 14190 Nov  7 21:06 BANQUE-RACCORDEMENT.md\n-rw-r--r-- 1 nobody nogroup  7264 Nov  7 21:06 COMMERCIAL-FEEDBACK.md\n-rw-r--r-- 1 nobody nogroup  6663 Nov  7 21:06 DIAGNOSTIC-AUTONOMIE-2026-11-02.md\n-rw-r--r-- 1 nobody nogroup  4459 Nov  7 21:06 GRAPHIFY.md\n-rw-r--r-- 1 nobody nogroup  5411 Nov  7 21:06 GROK.md\n-rw-r--r-- 1 nobody nogroup  9854 Nov  7 21:06 HISTORIQUE.md\n-rw-r--r-- 1 nobody nogroup  4657 Nov  7 21:06 IMAGE-RETENTION.md\n-rw-r--r-- 1 nobody nogroup 23629 Nov  7 21:06 INTEGRATIONS.md\n-rw-r--r-- 1 nobody nogroup  8552 Nov  7 21:06 INTERAC-COMMANDES.md\n-rw-r--r-- 1 nobody nogroup  5267 Nov  7 21:06 MANDAT-DEVELOPPEMENT.md\ndrwxr-xr-x 2 nobody nogroup    60 Nov  7 21:06 assets\ndrwxr-xr-x 2 nobody nogroup    60 Nov  7 21:06 designs\ndrwxr-xr-x 2 nobody nogroup    60 Nov  7 21:06 plans\ndrwxr-xr-x 2 nobody nogroup   140 Nov  7 21:06 research\n-rw-r--r-- 1 nobody nogroup  5222 Nov  7 21:06 solidification-audit-20261105.md\n-rw-r--r-- 1 nobody nogroup 12210 Nov  7 21:06 solidification-source-catalog.md\ndrwxr-xr-x 4 nobody nogroup    80 Nov  7 21:06 superpowers\ndrwxr-xr-x 2 nobody nogroup   500 Nov  7 21:06 verification\ndocs/INTERAC-COMMANDES.md\ndocs/superpowers/specs/2026-10-31-grok-world-loop-design.md\ndocs/superpowers/specs/2026-11-07-interac-orders-design.md\ndocs/superpowers/plans/2026-11-07-interac-orders.md\ndocs/INTEGRATIONS.md\n\n",
+  "artifacts": [
+    "products/services/interac-order/docs-list.txt",
+    "products/receipts/TASK-179408556111.json"
+  ],
+  "request": {
+    "id": "TASK-179408556111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T21:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "mkdir -p products/services/interac-order; ls -la docs > products/services/interac-order/docs-list.txt 2>&1; grep -ril -e interac -e order_payments -e 'ORDER_REGISTER' docs queue 2>/dev/null >> products/services/interac-order/docs-list.txt; cat products/services/interac-order/docs-list.txt"
+      ],
+      "inputs": [
+        "docs/",
+        "queue/PROTOCOL.md"
+      ],
+      "outputs": [
+        "products/services/interac-order/docs-list.txt"
+      ],
+      "mission_id": "INTERAC-SERVICE-ORDER-HANDOFF"
+    },
+    "description": "Broker action during THINK-1794085561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408556111",
+  "input_sha256": "4cd2cac0d6d7485885e713497e09bc65629eeebba96b97b45670ba257525d140"
+}
