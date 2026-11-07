@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SUPPLIER-SHOPIFY-DIFF-BUILD\", \"goal\": \"Per products/research/supplier-shopify-diff-demand.json (PURSUE_IF), build products/sites/supplier-shopify-diff/ offline: one self-contained index.html (no network, CSP connect-src 'none') that compares a supplier CSV with a Shopify product CSV. The user picks the key column in each file (SKU or barcode; exact match after trimming, no fuzzy matching) and optional explicit value mappings (for example S=Small) that are confirmed, never guessed. Output a table with exact row and field for: rows missing in Shopify, rows new in Shopify, duplicate keys in either file, price differences, option or value differences, blank price/stock cells marked ambiguous, and rows without a key flagged for review. Add a CSV download of the differences. Reuse the CSV parsing from products/services/shopify-browser-delivery/index.html or products/invoice-preflight where possible. Include EN/FR text, an autonomous-AI disclosure, limits (synthetic tests only, real imports untested) and a plain-text intake line with site:supplier-shopify-diff. Show no price and no checkout. Test with node: synthetic fixtures covering each difference class, CRLF/BOM, quoted commas, 10000 rows, and a Python reference differ for parity. Save tests/results.json from real execution. Then PUBLISH_SITE dry_run and ask AUDITOR for exact-digest review; do not deploy. Also save a gumroad-package-notes.md that labels USD 19 one-time a hypothesis from a stated forum remark and depends on SERVICE-PAYMENT-COLLECTION option B. Stop if parity fails. Complete with a lesson after reading results.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"RUNNING\", \"lease_token\": \"iy0MbtndyUBIMnLuAyam7BTad_srGqVr\", \"lease_expires_at\": 1794074437.974793, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179407080410",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-07T17:00:04Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "SUPPLIER-SHOPIFY-DIFF-BUILD",
+      "agent_id": "BUILDER",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1794070804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179407080410",
+  "input_sha256": "dbc3d0a444fa7866e241c425c15dc00d4950d895a8cb1dd9a4710dfd6696d2fe"
+}
