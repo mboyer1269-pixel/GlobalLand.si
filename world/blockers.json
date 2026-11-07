@@ -35,13 +35,13 @@
       "owner": "FOUNDER",
       "category": "PAYMENT",
       "title": "No authorized payment route; founder picks Apify (A) or a Gumroad seller account (B)",
-      "detail": "Updated 2026-11-07. commercial_paths.collection is NOT_IMPLEMENTED and the treasury is UNFUNDED. There is now a concrete candidate for option B: products/sites/supplier-shopify-diff (an offline browser tool that compares a supplier CSV with a Shopify CSV; 17/17 synthetic tests including Python parity at 10000 rows; dry_run digest 241dc433...). An independent review is pending. Browser execution and real Shopify imports are untested. The problem evidence comes from forum replies in Shopify Community thread 683136 (at least 5 participants compare these files by hand in Excel). That is stated interest, not purchases, and a free competitor was reported. USD 19 one-time is an unvalidated hypothesis (products/services/supplier-shopify-diff/gumroad-package-notes.md). Option B, the smallest founder step: create or designate a GlobalLand Gumroad seller account in the founder's name with CAD bank payouts (Stripe KYC; USD 100 minimum payout; 10%+$0.50 fee on direct sales) and share only its public profile URL. Agents then prepare the package for independent review and the founder uploads it. Option A is unchanged: an Apify config plus a 0600 credential (NO-APIFY-ACCESS) unlocks 3 tested Actors. Agents will not create accounts, accept terms or take orders.",
+      "detail": "Updated 2026-11-07. commercial_paths.collection is NOT_IMPLEMENTED and the treasury is UNFUNDED. Correction: supplier-shopify-diff is NO LONGER a paid option-B candidate. SUPPLIER-COMPARER-COMMERCIAL-DIFFERENCE found STOP (products/services/supplier-shopify-diff/commercial-difference/verdict.json): a free equivalent is live (itsallsame), the only agency participant declined a USD 19 pilot, and no purchase was observed. Option B therefore has no ready package now; it stays useful only if a classified paid request appears. Option A is unchanged: an Apify config plus a 0600 credential (NO-APIFY-ACCESS) unlocks 3 tested Actors with platform billing. Agents will not create accounts, accept terms or take orders.",
       "mission_id": "WORLD-FIRST-REVENUE",
-      "expected_gain": "Turns the first concrete package, or Actor usage, into collectable platform-settled payment. No demand or revenue is established.",
+      "expected_gain": "Option A makes Actor usage collectable through platform-settled payment. No demand or revenue is established.",
       "raised_by": "DIRECTOR",
-      "reports": 4,
+      "reports": 5,
       "opened_at": "2026-11-05T14:30:49Z",
-      "last_reported_at": "2026-11-07T17:30:26Z"
+      "last_reported_at": "2026-11-07T20:08:21Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -123,29 +123,25 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-07T20:08:37Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 168,
-    "turns_without_verified_revenue": 168,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 169,
+    "turns_without_verified_revenue": 169,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-07T20:08:37Z",
     "last_outcome_turn": "THINK-1794081601",
     "last_productive_turn": "THINK-1794081601",
-    "last_turn": "THINK-1794081601",
+    "last_turn": "THINK-1794081961",
     "last_change": {
-      "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "SUPPLIER-SHOPIFY-RELEASE-REJECTION"
-      ],
-      "new_products": [
-        "products/services/supplier-shopify-diff/release/rejection-handoff.json"
-      ],
-      "new_product_count": 1,
+      "productive": false,
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
