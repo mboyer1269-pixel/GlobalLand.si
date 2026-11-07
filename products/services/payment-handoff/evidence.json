@@ -1,0 +1,25 @@
+{
+  "mission": "INTERAC-SERVICE-ORDER-HANDOFF",
+  "observed": "2026-11-07",
+  "sources": {
+    "doc": "docs/INTERAC-COMMANDES.md",
+    "read_task": "TASK-179408556112",
+    "doc_sha256": "af8cedf9efdd402906ccdd10febc2b1b2ca90130e12071327e996f1d33223072"
+  },
+  "capability_observed": {
+    "order_payments": "READY_FOR_INSTRUCTIONS",
+    "method": "INTERAC",
+    "currency": "CAD",
+    "order_creation": "ADMINISTRATIVE",
+    "contract_acceptance": "NOT_AUTOMATED",
+    "settlement_verification": "FOUNDER_REQUIRED",
+    "orders_count": "UNAVAILABLE"
+  },
+  "mechanism": "orders_admin.py create/accept/claim/confirm/allocate/post via private JSON (operator only)",
+  "terms_file": "products/services/payment-handoff/terms-welfare-followon-v1.md",
+  "terms_sha256": "8da570ec00daaead3172576d80a5dfd535b0f6c4496ec6c15d0f154d5ff1f64a",
+  "agent_actions_taken": "none on register; no order, outreach, payment details or customer data",
+  "revenue": 0,
+  "verdict": "HANDOFF_READY_PENDING_REAL_REQUEST",
+  "collection_scope_change": "SERVICE-PAYMENT-COLLECTION narrows: a founder-operated CAD Interac route exists for administratively accepted email service orders; agents still cannot accept orders; Apify option unchanged."
+}
