@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "bytes 10444\nTEXT: Catalog comparison · itsallsame itsallsame / working prototype Check the file before it becomes the catalog. Compare a supplier CSV with a Shopify-ready CSV. Review exact SKU matches, field differences and records that need a closer look. Files are read in this browser; this page sends no file contents to a server. Try synthetic example No client data. Nothing imports into Shopify. 1. Supplier source Choose UTF-8, comma-separated CSV Up to 2 MB and 1,000 data records. 2. Shopify-ready file Choose UTF-8, comma-separated CSV SKU values stay text, including leading zeroes. 3. Confirm matching and fields Choose a unique identifier on each side. Keys are case-sensitive. Duplicate, blank or padded identifiers go to review; this prototype never guesses a match. Purpose Supplier column Shopify column Compare files Clear files Comparison report “Equal” means only the selected raw fields agree. “Different” can include harmless formatting differences, such as 10.00 vs 10. This is not Shopify import validation, currency conversion or a check of tax and pack units. Show All Review Different Supplier only Shopify only Equal Download JSON report Result Identifier Source lines Reason / field values Need the comparison prepared for you? A one-supplier pilot starts at US$19 for two CSVs of up to 1,000 records each, after agreeing on fields and matching rules. Delivery: a difference/review report; store changes remain subject to your review. Discuss a batch by email . This is a self-built prototype with synthetic demonstration data. No client case or paid results are claimed. Other small services\nJSLEN 4881 False False False\nduplicate 0\nDuplicate 0\nblank 1\nmapping 1\ndownload 2\ncsv 0\nCSV 3\njson 2\nJSON 3\nbarcode 1\nnormaliz 0\ntrim 0\ntoUpperCase 0\nlocalStorage 0\nexport 0\nprice 2\nPrice 3\n  > download').onclick=()=>{if(!report)return;const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'applicat\n  > download='catalog-comparison.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};\nSRC <script src=\"catalog-diff-core.js\"\n\n",
+  "artifacts": [
+    "products/services/supplier-shopify-diff/commercial-difference/raw/itsallsame-extract.txt",
+    "products/receipts/TASK-179408196116.json"
+  ],
+  "request": {
+    "id": "TASK-179408196116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T20:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,pathlib\ns=open('products/services/supplier-shopify-diff/commercial-difference/raw/itsallsame-catalog-diff.html',encoding='utf-8').read()\nprint('bytes',len(s))\nbody=re.sub(r'<style.*?</style>','',s,flags=re.S)\nscripts=re.findall(r'<script[^>]*>(.*?)</script>',body,flags=re.S)\ntext=re.sub(r'<script.*?</script>','',body,flags=re.S)\ntext=html.unescape(re.sub(r'<[^>]+>',' ',text));text=' '.join(text.split())\nprint('TEXT:',text[:3500])\njs='\\n'.join(scripts)\nprint('JSLEN',len(js),'fetch' in js,'XMLHttpRequest' in js,'sendBeacon' in js)\nfor k in ['duplicate','Duplicate','blank','mapping','download','csv','CSV','json','JSON','barcode','normaliz','trim','toUpperCase','localStorage','export','price','Price']:\n  print(k,js.count(k))\nfor m in re.findall(r'(?:download|\\.json|\\.csv|Blob)[^\\n]{0,120}',js)[:12]: print('  >',m)\nfor m in re.findall(r'<script[^>]*src=\"[^\"]+\"',s): print('SRC',m)\npathlib.Path('products/services/supplier-shopify-diff/commercial-difference/raw/itsallsame-extract.txt').write_text(text[:8000])"
+      ],
+      "inputs": [
+        "products/services/supplier-shopify-diff/commercial-difference/raw/itsallsame-catalog-diff.html"
+      ],
+      "outputs": [
+        "products/services/supplier-shopify-diff/commercial-difference/raw/itsallsame-extract.txt"
+      ],
+      "mission_id": "SUPPLIER-COMPARER-COMMERCIAL-DIFFERENCE"
+    },
+    "description": "Broker action during THINK-1794081961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408196116",
+  "input_sha256": "9ab28988f09d898b4d481070afcfc2600f51525adfcf688ec5187527045e87a3"
+}
