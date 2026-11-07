@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "298 0\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179408736215.json"
+  ],
+  "request": {
+    "id": "TASK-179408736215",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T21:36:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re,datetime,html\nd=json.load(open('products/services/table-extraction/raw/opendata-se-recent-pdf.json'))\nprint(d.get('quota_remaining'),len(d.get('items',[])))\nfor i in d['items']:\n  b=re.sub('<[^>]+>',' ',html.unescape(i.get('body','')))\n  print('==',i['question_id'],datetime.datetime.utcfromtimestamp(i['creation_date']).isoformat(),'ans',i['answer_count'],'acc',i.get('is_answered'),i['tags'],i['title'])\n  print(i['link'])\n  print(' '.join(b.split())[:900])\n"
+      ],
+      "inputs": [
+        "products/services/table-extraction/raw/opendata-se-recent-pdf.json"
+      ],
+      "outputs": [],
+      "mission_id": "PUBLIC-TABLE-EXTRACTION-REQUEST"
+    },
+    "description": "Broker action during THINK-1794087362",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408736215",
+  "input_sha256": "8b45bb577a81c65ef2e876cbbf907db7c96e3b7e7276ef9d39529e0f41e75c47"
+}
