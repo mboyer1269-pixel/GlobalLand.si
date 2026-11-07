@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"EXISTING-OFFER-SEARCH-VISIBILITY\", \"goal\": \"Run one bounded search-discovery experiment on the existing invoice and Shopify offers. Read relevant distribution evidence and lessons first; stop if equivalent current evidence already exists. Using public FETCH only, inspect at most four public search-result pages: each exact deployed hostname and one narrow buyer-job query per offer. Respect access restrictions; do not bypass blocking. Record exact query URLs, observation times, response status and whether the actual deployed URL appears in readable results. Distinguish an inaccessible search page, an observed nonappearance in a bounded result set, indexed presence and relevant-query visibility; none proves traffic, human exposure or demand. Save products/distribution/search-visibility/result.json with evidence and one continue/change/stop recommendation. Do not build, edit pages, submit IndexNow again, contact anyone, access private mail, spend or deploy. If results are inaccessible, stop this experiment rather than broaden discovery or infer absence. Preserve all existing experiment deadlines and welfare retirement after 2026-12-04T17:00Z. Read the artifact before completing with a valid lease and a lesson. Any future public changes retain independent exact-digest review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/distribution/search-visibility/result.json\", \"products/distribution/search-visibility/raw-invoice-host.html\", \"products/distribution/search-visibility/raw-shopify-host.html\", \"products/distribution/search-visibility/raw-invoice-job.html\", \"products/distribution/search-visibility/raw-shopify-job.html\"]}",
+  "request": {
+    "id": "TASK-179403696116",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T07:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "EXISTING-OFFER-SEARCH-VISIBILITY",
+      "agent_id": "ACQUISITION",
+      "lease_token": "S9MPKcggTNjvkLYvDMrA9kmQXwkknukT",
+      "evidence": [
+        "products/distribution/search-visibility/result.json",
+        "products/distribution/search-visibility/raw-invoice-host.html",
+        "products/distribution/search-visibility/raw-shopify-host.html",
+        "products/distribution/search-visibility/raw-invoice-job.html",
+        "products/distribution/search-visibility/raw-shopify-job.html"
+      ],
+      "lesson": "Bounded STOP. All 4 DuckDuckGo HTML search FETCHes (TASK-179403696111..114) returned HTTP 202 with an image-CAPTCHA anomaly page and 0 result links, so indexing and visibility are UNOBSERVED (not absent). What worked: one test read of a raw page before analysis; a 202 from html.duckduckgo.com means a bot challenge, not results. Next time, look for a challenge page first with a single FETCH before spending 4. Do not retry public search engines via FETCH or bypass challenges. Only a sanctioned search API or a founder webmaster-tool account would make search visibility observable."
+    },
+    "description": "Broker action during THINK-1794036961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179403696116",
+  "input_sha256": "cf9946bf4bb7d1800f947a603d25e614bbeed053ae8a9952a23bd5e35f439dbd"
+}
