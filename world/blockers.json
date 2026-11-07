@@ -34,14 +34,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "PAYMENT",
-      "title": "No authorized payment route; founder picks Apify (A) or a Gumroad seller account (B)",
-      "detail": "Updated 2026-11-07. commercial_paths.collection is NOT_IMPLEMENTED and the treasury is UNFUNDED. Correction: supplier-shopify-diff is NO LONGER a paid option-B candidate. SUPPLIER-COMPARER-COMMERCIAL-DIFFERENCE found STOP (products/services/supplier-shopify-diff/commercial-difference/verdict.json): a free equivalent is live (itsallsame), the only agency participant declined a USD 19 pilot, and no purchase was observed. Option B therefore has no ready package now; it stays useful only if a classified paid request appears. Option A is unchanged: an Apify config plus a 0600 credential (NO-APIFY-ACCESS) unlocks 3 tested Actors with platform billing. Agents will not create accounts, accept terms or take orders.",
-      "mission_id": "WORLD-FIRST-REVENUE",
-      "expected_gain": "Option A makes Actor usage collectable through platform-settled payment. No demand or revenue is established.",
+      "title": "Interac CAD route exists but is operator-only; first order needs a real request plus operator create/accept",
+      "detail": "Updated 2026-11-07. The host shows order_payments READY_FOR_INSTRUCTIONS (INTERAC, CAD). docs/INTERAC-COMMANDES.md (TASK-179408556112) says order creation and acceptance are administrative through orders_admin.py, and deposits need founder attestation. Agents cannot accept orders. A ready handoff is in products/services/payment-handoff/operator-instructions.md: terms v1 for the welfare follow-on brief at CAD 49, terms_sha256 8da570ec..., the exact create/accept/confirm/allocate/post sequence and an acceptance check. Founder/operator step, only when a real eligible request arrives: create and accept the order, then confirm the observed deposit. No eligible request has been observed; order counts are UNAVAILABLE. Apify option A (NO-APIFY-ACCESS) is still a separate credential dependency.",
+      "mission_id": "INTERAC-SERVICE-ORDER-HANDOFF",
+      "expected_gain": "A paid email service request can be settled in CAD and posted as founder-attested revenue. No demand or revenue is established.",
       "raised_by": "DIRECTOR",
-      "reports": 5,
+      "reports": 6,
       "opened_at": "2026-11-05T14:30:49Z",
-      "last_reported_at": "2026-11-07T20:08:21Z"
+      "last_reported_at": "2026-11-07T21:07:17Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -84,6 +84,23 @@
       "reports": 1,
       "opened_at": "2026-11-07T19:37:09Z",
       "last_reported_at": "2026-11-07T19:37:09Z"
+    },
+    {
+      "id": "SYSTEM-NO-PROGRESS",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "PROGRESS",
+      "title": "3 tours consécutifs sans résultat vérifiable",
+      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, LINK-CHECK-LAUNCH, RSS-ACTOR-LAUNCH, TEXT-CSV-INTAKE-EXPERIMENT, WELFARE-LIVE-DEMAND, WELFARE-SITE-RETIRE, WORLD-FIRST-REVENUE.",
+      "open_missions_total": 8,
+      "missions_truncated": false,
+      "missions_collection": "missions",
+      "mission_id": null,
+      "expected_gain": null,
+      "raised_by": "PROGRESS-DETECTOR",
+      "reports": 3,
+      "opened_at": "2026-11-07T20:35:36Z",
+      "last_reported_at": "2026-11-07T21:07:31Z"
     }
   ],
   "resolved_recent": [
@@ -123,19 +140,19 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 3,
     "threshold": 3,
     "stalled_since": "2026-11-07T20:35:36Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 172,
-    "turns_without_verified_revenue": 172,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 173,
+    "turns_without_verified_revenue": 173,
+    "turns_without_outcome": 3,
     "outcome_threshold": 12,
     "dry_since": "2026-11-07T20:35:36Z",
     "last_outcome_turn": "THINK-1794083401",
     "last_productive_turn": "THINK-1794083401",
-    "last_turn": "THINK-1794085204",
+    "last_turn": "THINK-1794085561",
     "last_change": {
       "productive": false,
       "outcome": false,
