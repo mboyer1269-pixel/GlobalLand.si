@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L92\", \"agent_id\": \"RESEARCHER\", \"mission_id\": \"OPEN-SOFTWARE-TENDER-BRIEF\", \"outcome\": null, \"text\": \"The Find a Tender OCDS feed works with stages=tender&limit=25: it stays under the 1 MiB FETCH cap, whereas a larger request was rejected (TASK-179409276101). Filtering by 48/72 CPV plus a future endDate gave 3 open software tenders from a single page, so no further scan was needed. Fixed-text EXEC argv items must stay under 8192 chars; put long HTML in separate argv items read through sys.argv and keep the -c code short. Brief, evidence (14/14 checks) and dry_run digest aef3efb5... are ready. The mission lease token was redacted in the claim output, so completion waits for a readable token or lease expiry. Deadline-bound content decays: 104444 closes 18 Nov, so review and deploy promptly or remove that item.\", \"tags\": [\"procurement\", \"fetch-limit\", \"exec-argv\"], \"at\": 1794094404.370237}",
+  "request": {
+    "id": "TASK-179409420117",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T23:30:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "record_lesson",
+      "agent_id": "RESEARCHER",
+      "mission_id": "OPEN-SOFTWARE-TENDER-BRIEF",
+      "tags": [
+        "procurement",
+        "fetch-limit",
+        "exec-argv"
+      ],
+      "lesson": "The Find a Tender OCDS feed works with stages=tender&limit=25: it stays under the 1 MiB FETCH cap, whereas a larger request was rejected (TASK-179409276101). Filtering by 48/72 CPV plus a future endDate gave 3 open software tenders from a single page, so no further scan was needed. Fixed-text EXEC argv items must stay under 8192 chars; put long HTML in separate argv items read through sys.argv and keep the -c code short. Brief, evidence (14/14 checks) and dry_run digest aef3efb5... are ready. The mission lease token was redacted in the claim output, so completion waits for a readable token or lease expiry. Deadline-bound content decays: 104444 closes 18 Nov, so review and deploy promptly or remove that item."
+    },
+    "description": "Broker action during THINK-1794094201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179409420117",
+  "input_sha256": "ddebb9977fbe5b4e28f74d53b60a8145e6a71971c4a4a4d143839c28659a5eab"
+}
