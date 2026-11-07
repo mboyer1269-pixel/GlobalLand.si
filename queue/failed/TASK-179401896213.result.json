@@ -1,0 +1,29 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: selected public inputs unavailable; inspect catalog paths and retry with a new task. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179401896213",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T02:36:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,re\nc=pathlib.Path('docs/COMMERCIAL-FEEDBACK.md').read_text().splitlines()\nprint('\\n'.join('%d: %s'%(i+37,l) for i,l in enumerate(c[36:116])))\nprint('=== code grep skipped')\nfor f in sorted(pathlib.Path('.').rglob('*.py')):\n  if 'products' in f.parts: continue\n  try: t=f.read_text(errors='replace').splitlines()\n  except Exception: continue\n  for i,l in enumerate(t):\n    if re.search(r'[\\\"\\']skipped[\\\"\\']|skipped\\s*\\+=|skipped\\s*=',l): print('%s:%d: %s'%(f,i+1,l.strip()[:200]))"
+      ],
+      "inputs": [
+        "docs/COMMERCIAL-FEEDBACK.md",
+        "control/"
+      ],
+      "outputs": [],
+      "mission_id": "FEEDBACK-OBSERVABILITY-REPAIR"
+    },
+    "description": "Broker action during THINK-1794018962",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179401896213",
+  "input_sha256": "12efeef935a299454e6c2f6b74a67b052f8b1ac2fb8cdea44b680a6ed41ed490"
+}
