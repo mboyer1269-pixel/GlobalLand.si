@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "[[\"105806-2026\", \"Croydon Health Services NHS Trust\", \"Oracle Health\", \"large\", {\"amount\": 17549439.0, \"currency\": \"GBP\"}, {}, null], [\"105970-2026\", \"London Borough of Haringey\", \"TOTALMOBILE LIMITED\", \"large\", {\"amount\": 406605.6, \"currency\": \"GBP\"}, {\"bids\": 1}, \"cancelled\"], [\"105743-2026\", \"Scottish Police Authority\", \"Hanger19 Limited\", \"sme\", {\"amount\": 600000, \"currency\": \"GBP\"}, {\"bids\": 9, \"smeBids\": 9, \"foreignBidsFromEU\": 0, \"foreignBidsFromNonEU\": 9, \"electronicBids\": 9}, \"cancelled\"]]\n\n",
+  "artifacts": [
+    "products/services/software-awards/evidence.json",
+    "products/receipts/TASK-179402256118.json"
+  ],
+  "request": {
+    "id": "TASK-179402256118",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T03:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib\nR='products/services/software-awards/raw/'\nF={'105806-2026':'TASK-179402256114','105970-2026':'TASK-179402256115','105743-2026':'TASK-179402256116'}\nH={'105806-2026':'TASK-179402256111','105970-2026':'TASK-179402256112','105743-2026':'TASK-179402256113'}\nprofiles=[]\nfor n,t in F.items():\n  b=open(R+'ocds-%s.json'%n,'rb').read();d=json.loads(b);r=d['releases'][0];tn=r['tender'];lot=tn['lots'][0];c=r['contracts'][0]\n  sup=[p for p in r['parties'] if 'supplier' in p['roles']][0]\n  p={'notice_id':n,'ocid':r['ocid'],'official_api_url':'https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/'+n,'api_fetch_task':t,'api_sha256':hashlib.sha256(b).hexdigest(),\n   'notice_html_url':'https://www.find-tender.service.gov.uk/Notice/'+n,'notice_html_fetch':{'task':H[n],'result':'REJECTED HTTP 403 (bot/access block observed; page content unobserved, not evidence of absent information)'},\n   'release_date':r['date'],'buyer':r['buyer']['name'],'buyer_type':[x['description'] for x in [q for q in r['parties'] if 'buyer' in q['roles']][0]['details'].get('classifications',[])],\n   'supplier':sup['name'],'supplier_scale':sup['details'].get('scale'),'title':tn['title'],\n   'main_cpv':tn['classification']['id']+' '+tn['classification']['description'],'additional_cpv':[a['id']+' '+a['description'] for a in tn['items'][0].get('additionalClassifications',[])],\n   'contract_value':c['value'],'value_qualification':'Contract value as published in OCDS contracts[0].value; notice does not state whether VAT, options or total lifetime are included. Not a unit price, not accessible funding.',\n   'date_signed':c.get('dateSigned'),'procurement_method':tn.get('procurementMethod'),'procurement_method_details':tn.get('procurementMethodDetails'),\n   'award_criteria':lot.get('awardCriteria'),'has_options':lot.get('hasOptions'),\n   'quotes':{'tender.description':tn.get('description'),'lot.description':lot.get('description'),'options':lot.get('options',{}).get('description'),'procurementMethodRationale':tn.get('procurementMethodRationale'),'release.description':r.get('description')},\n   'bid_statistics':{s['measure']:s['value'] for s in r.get('bids',{}).get('statistics',[])},\n   'structured_end_date':(c.get('period') or {}).get('endDate'),'lot_status_field':lot.get('status'),'links':[l['href'] for l in r.get('links',[])]}\n  profiles.append(p)\nev={'mission':'SOFTWARE-AWARD-BUYER-BRIEF','observed_utc':'2026-11-07','source_license':'Open Government Licence v3.0 (per OCDS package)','profiles':profiles,\n 'data_quirks':['lots[0].status is \"cancelled\" in 105970-2026 and 105743-2026 while awards and contracts are \"active\"; meaning unverified, not interpreted as cancellation','No structured contract end date in any of the three releases','105806-2026 award criterion \"price\" is explained by the buyer as a template-validation artefact, not an evaluation','105743-2026 reports foreignBidsFromNonEU=9 equal to all bids; likely UK suppliers counted as non-EU, unverified'],\n 'excluded':['delivery addresses, contact points, emails, telephone numbers and personal names'],\n 'not_claimed':['no renewal or reprocurement date inferred','no open opportunity','no willingness to pay','no comparable unit price','no accessible funding','no GlobalLand eligibility'],\n 'monitoring_experiment':{'status':'PROPOSED_UNVALIDATED','scope':'Weekly digest of new UK Find a Tender award notices with software CPV (48*, 72*) for one supplier-specified buyer sector, each profiled with the fields above from the official OCDS API only','success_metric':'at least one classified REQUEST via an existing site:<slug> intake before any further build','price':'not set; collection route not implemented (SERVICE-PAYMENT-COLLECTION)'}}\nfor p in profiles: assert p['structured_end_date'] is None\nassert profiles[0]['contract_value']=={'amount':17549439.0,'currency':'GBP'}\npathlib.Path('products/services/software-awards/evidence.json').write_text(json.dumps(ev,indent=1,ensure_ascii=False))\nprint(json.dumps([[p['notice_id'],p['buyer'],p['supplier'],p['supplier_scale'],p['contract_value'],p['bid_statistics'],p['lot_status_field']] for p in profiles]))"
+      ],
+      "inputs": [
+        "products/services/software-awards/raw/"
+      ],
+      "outputs": [
+        "products/services/software-awards/evidence.json"
+      ],
+      "mission_id": "SOFTWARE-AWARD-BUYER-BRIEF"
+    },
+    "description": "Broker action during THINK-1794022561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179402256118",
+  "input_sha256": "54605988d6405cff4399dcd4b5dd25151633a0d4586ece66d24e21d875d8a6ce"
+}
