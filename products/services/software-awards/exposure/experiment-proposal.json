@@ -1,0 +1,16 @@
+{
+ "experiment": "site:software-award-brief",
+ "mission": "SOFTWARE-AWARD-BRIEF-EXPOSURE",
+ "status": "PREPARED_NOT_DEPLOYED",
+ "prepared_utc": "2026-11-07",
+ "offer": "Free expression-of-interest test for a narrowly scoped weekly digest of new UK public software award notices for one sender-chosen buyer sector. Proposal only: no digest running, no price, no orders, no collection.",
+ "intake": "existing private plain-text mail route, identifier site:software-award-brief in mailto subject/body and as manual line",
+ "baseline": {"commercial_feedback_counts_all_zero": true, "unclassified_sources": 3, "excluded_sources": 2, "last_private_cycle": {"processed": 0, "skipped": 5, "observed_at": "2026-11-07T04:05:03Z"}},
+ "success": "At least one actual classified REQUEST or EXPLICIT_INTEREST attributable to site:software-award-brief within 14 days after an ONLINE_VERIFIED deployment and FETCH hash match.",
+ "window": "Starts at verified deployment time; ends 14 days later. Not started.",
+ "unknown_rule": "If classified counts stay zero while unclassified sources or skips exist, or the identifier is not in the experiment allowlist, report UNKNOWN, not zero demand.",
+ "continue_if": "one or more relevant classified requests: produce one sector digest from the official API as a free sample, still no price claims until collection exists",
+ "stop_if": "window ends with zero classified requests and observability adequate; then do not build monitoring",
+ "not_done": ["deployment", "IndexNow or other indexing submission", "outreach", "registration", "spending"],
+ "dependencies": {"collection": "SERVICE-PAYMENT-COLLECTION open; blocks paid acceptance only", "observability": "FEEDBACK-REASON-OBSERVABILITY open"}
+}
