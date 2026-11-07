@@ -1,0 +1,42 @@
+{
+ "mission": "SOFTWARE-AWARD-INITIAL-DISCOVERY",
+ "site": "software-award-brief",
+ "key": "3d8f1b6e2a9c4057e1b4d6a8c0f29e73",
+ "key_file": "3d8f1b6e2a9c4057e1b4d6a8c0f29e73.txt",
+ "key_sha256": "5969eb9a96aeba32d4b2d236a994b55e765ffdb325bd4fb4336be3e9711e48e4",
+ "index_sha256": "fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6",
+ "llms_sha256": "aed09c85322be9430cce86608d9833013f8fcb655384417294d15d1888d7ccf7",
+ "checks": [
+  {
+   "check": "index unchanged vs live",
+   "pass": true
+  },
+  {
+   "check": "llms unchanged vs live",
+   "pass": true
+  },
+  {
+   "check": "key body exact 32 lowercase hex, no newline",
+   "pass": true
+  },
+  {
+   "check": "file inventory",
+   "pass": true
+  },
+  {
+   "check": "baseline records no prior IndexNow submission",
+   "pass": true
+  }
+ ],
+ "passed": 5,
+ "total": 5,
+ "planned_submission_after_approval_and_deploy": "GET https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-software-award-brief.global-land.workers.dev%2F&key=3d8f1b6e2a9c4057e1b4d6a8c0f29e73 exactly once, after FETCH of the public key file returns the exact 32-byte body",
+ "not_established": [
+  "submission",
+  "indexing",
+  "traffic",
+  "requests",
+  "revenue"
+ ],
+ "observation_window_end": "2026-11-21T05:00:35Z"
+}

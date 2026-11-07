@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"SOFTWARE-AWARD-INITIAL-DISCOVERY\",\n \"site\": \"software-award-brief\",\n \"key\": \"3d8f1b6e2a9c4057e1b4d6a8c0f29e73\",\n \"key_file\": \"3d8f1b6e2a9c4057e1b4d6a8c0f29e73.txt\",\n \"key_sha256\": \"5969eb9a96aeba32d4b2d236a994b55e765ffdb325bd4fb4336be3e9711e48e4\",\n \"index_sha256\": \"fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6\",\n \"llms_sha256\": \"aed09c85322be9430cce86608d9833013f8fcb655384417294d15d1888d7ccf7\",\n \"checks\": [\n  {\n   \"check\": \"index unchanged vs live\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"llms unchanged vs live\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"key body exact 32 lowercase hex, no newline\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"file inventory\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"baseline records no prior IndexNow submission\",\n   \"pass\": true\n  }\n ],\n \"passed\": 5,\n \"total\": 5,\n \"planned_submission_after_approval_and_deploy\": \"GET https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-software-award-brief.global-land.workers.dev%2F&key=3d8f1b6e2a9c4057e1b4d6a8c0f29e73 exactly once, after FETCH of the public key file returns the exact 32-byte body\",\n \"not_established\": [\n  \"submission\",\n  \"indexing\",\n  \"traffic\",\n  \"requests\",\n  \"revenue\"\n ],\n \"observation_window_end\": \"2026-11-21T05:00:35Z\"\n}\n\n",
+  "artifacts": [
+    "products/sites/software-award-brief/3d8f1b6e2a9c4057e1b4d6a8c0f29e73.txt",
+    "products/services/software-awards/discovery/manifest.json",
+    "products/receipts/TASK-179402976111.json"
+  ],
+  "request": {
+    "id": "TASK-179402976111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T05:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,sys,pathlib,re\nkey=sys.argv[1]\nsite=pathlib.Path('products/sites/software-award-brief')\nlive=pathlib.Path('products/services/software-awards/exposure')\nexisting=[p.name for p in site.iterdir()]\nassert not any(re.fullmatch(r'[0-9a-f]{32}\\.txt',n) for n in existing), existing\nkf=site/(key+'.txt'); kf.write_bytes(key.encode())\nh=lambda p: hashlib.sha256(p.read_bytes()).hexdigest()\nchecks=[]\nchecks.append(('index unchanged vs live',h(site/'index.html')==h(live/'live-index.html')=='fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6'))\nchecks.append(('llms unchanged vs live',h(site/'llms.txt')==h(live/'live-llms.txt')=='aed09c85322be9430cce86608d9833013f8fcb655384417294d15d1888d7ccf7'))\nb=kf.read_bytes(); checks.append(('key body exact 32 lowercase hex, no newline',b==key.encode() and len(b)==32 and re.fullmatch(rb'[0-9a-f]{32}',b) is not None))\nchecks.append(('file inventory',sorted(p.name for p in site.iterdir())==sorted(['index.html','llms.txt',key+'.txt'])))\nbase=json.loads((live/'launch-baseline.json').read_text())\nchecks.append(('baseline records no prior IndexNow submission',base.get('indexnow')=='not submitted'))\nout={'mission':'SOFTWARE-AWARD-INITIAL-DISCOVERY','site':'software-award-brief','key':key,'key_file':kf.name,'key_sha256':h(kf),'index_sha256':h(site/'index.html'),'llms_sha256':h(site/'llms.txt'),'checks':[{'check':c,'pass':bool(v)} for c,v in checks],'passed':sum(bool(v) for _,v in checks),'total':len(checks),'planned_submission_after_approval_and_deploy':'GET https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-software-award-brief.global-land.workers.dev%2F&key='+key+' exactly once, after FETCH of the public key file returns the exact 32-byte body','not_established':['submission','indexing','traffic','requests','revenue'],'observation_window_end':'2026-11-21T05:00:35Z'}\np=pathlib.Path('products/services/software-awards/discovery/manifest.json'); p.parent.mkdir(parents=True,exist_ok=True); p.write_text(json.dumps(out,indent=1))\nprint(json.dumps(out,indent=1))",
+        "3d8f1b6e2a9c4057e1b4d6a8c0f29e73"
+      ],
+      "inputs": [
+        "products/sites/software-award-brief/",
+        "products/services/software-awards/exposure/"
+      ],
+      "outputs": [
+        "products/sites/software-award-brief/3d8f1b6e2a9c4057e1b4d6a8c0f29e73.txt",
+        "products/services/software-awards/discovery/manifest.json"
+      ],
+      "mission_id": "SOFTWARE-AWARD-INITIAL-DISCOVERY"
+    },
+    "description": "Broker action during THINK-1794029761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179402976111",
+  "input_sha256": "9f1ef197f781924b045d6f29fe05120e0180dd5e401c1323c2292409d8efc06c"
+}
