@@ -109,25 +109,32 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-07T04:08:55Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 127,
-    "turns_without_verified_revenue": 127,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 128,
+    "turns_without_verified_revenue": 128,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-07T04:08:55Z",
-    "last_outcome_turn": "THINK-1794024003",
-    "last_productive_turn": "THINK-1794024003",
-    "last_turn": "THINK-1794024361",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794025804",
+    "last_productive_turn": "THINK-1794025804",
+    "last_turn": "THINK-1794025804",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "SOFTWARE-AWARD-BRIEF-EXPOSURE"
+      ],
+      "new_products": [
+        "products/services/software-awards/exposure/acceptance-results.json",
+        "products/services/software-awards/exposure/experiment-proposal.json",
+        "products/sites/software-award-brief/index.html",
+        "products/sites/software-award-brief/llms.txt"
+      ],
+      "new_product_count": 4,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
