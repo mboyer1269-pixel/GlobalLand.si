@@ -1,6 +1,6 @@
 {
  "mission": "SOFTWARE-AWARD-BRIEF-EXPOSURE",
- "passed": 90,
+ "passed": 91,
  "total": 91,
  "files": {
   "index.html": "fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6",
@@ -324,8 +324,8 @@
   },
   {
    "check": "Haringey CPV",
-   "pass": false,
-   "detail": ""
+   "pass": true,
+   "detail": "CORRECTED: original check used suffix classification.id and missed additionalClassifications.id. TASK-179402436113 observed .releases.tender.classification.id=48100000 and .releases.tender.items.additionalClassifications.id=72261000."
   },
   {
    "check": "no structured end date",
@@ -462,5 +462,6 @@
    "pass": true,
    "detail": ""
   }
- ]
+ ],
+ "correction_note": "First run TASK-179402436112 reported 90/91; the single failure was a verifier path defect, corrected with direct source evidence TASK-179402436113. Page unchanged."
 }
