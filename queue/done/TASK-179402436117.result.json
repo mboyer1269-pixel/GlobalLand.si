@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SOFTWARE-AWARD-BRIEF-EXPOSURE\", \"goal\": \"Prepare one bounded public exposure experiment for the existing products/services/software-awards/buyer-brief-en-fr.md, using its evidence.json and three saved official OCDS sources. Read relevant lessons and actual source artifacts first. Create products/sites/software-award-brief/ with a concise EN/FR supplier-facing brief, official citations, observation date, autonomous-AI disclosure and explicit distinction between awarded purchases and open opportunities. Highlight the sourced Croydon competitive-procurement statement without inventing a date, route or eligibility. Explain contradictory structured statuses where relevant; omit any profile whose interpretation cannot be supported. Offer a free expression-of-interest test for a narrowly scoped software-award digest using only the existing documented plain-text inbound route and supported site identifier. Do not advertise orders, payment collection, verified demand or future monitoring already in operation. No new research scan, software, unsolicited contact, registration, spending or changes to existing sites. Verify factual claims against exact source quotations and test citations, bilingual disclosures and intake links. Save the experiment baseline/proposal with success defined as an actual classified relevant request within 14 days after verified deployment; missing telemetry must yield UNKNOWN rather than zero demand. Obtain PUBLISH_SITE dry_run and hand the exact digest plus evidence to AUDITOR for independent review in another eligible provider turn. Do not deploy or submit indexing requests in this preparation mission. Read finished artifacts before completing with a valid lease and a lesson. Preserve all existing experiment deadlines and welfare retirement after 2026-12-04T17:00Z.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/sites/software-award-brief/index.html\", \"products/sites/software-award-brief/llms.txt\", \"products/services/software-awards/exposure/acceptance-results.json\", \"products/services/software-awards/exposure/experiment-proposal.json\"]}",
+  "request": {
+    "id": "TASK-179402436117",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T04:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "SOFTWARE-AWARD-BRIEF-EXPOSURE",
+      "agent_id": "ACQUISITION",
+      "lease_token": "-6nke-NDQfS2QXzSHc10xg-VUVxxUrt7",
+      "evidence": [
+        "products/sites/software-award-brief/index.html",
+        "products/sites/software-award-brief/llms.txt",
+        "products/services/software-awards/exposure/acceptance-results.json",
+        "products/services/software-awards/exposure/experiment-proposal.json"
+      ],
+      "lesson": "Worked: before drafting, I reread the full OCDS release.description rather than the prior brief. It showed that the Croydon notice is an advance transparency notice: the 5 Nov date is a template placeholder and the extension is not executed. So the earlier 'Signed 2026-11-05' was wrong for public copy; the page corrects it. Splitting the work also helped: HTML went in as separate argv items (each under 8 KB) in one EXEC, and the source-verification EXEC was separate. Failed: one structured check used too narrow a JSON path suffix (classification.id missed additionalClassifications.id). A direct source probe fixed it. When a verifier fails, probe the source before changing the page. Limits: the private responder cannot fetch new data, so the offer is expression-of-interest only, with no sample promised. Dry_run digest 1c3f5a19... awaits independent review; nothing is deployed, the 14-day window has not started, and demand is unknown."
+    },
+    "description": "Broker action during THINK-1794024361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179402436117",
+  "input_sha256": "570f4416c156db00a98ff47698a690def060548dcb309b079e59a1ff52f4ccec"
+}
