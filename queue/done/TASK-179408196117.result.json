@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "ok\n\n",
+  "artifacts": [
+    "products/services/supplier-shopify-diff/commercial-difference/verdict.json",
+    "products/receipts/TASK-179408196117.json"
+  ],
+  "request": {
+    "id": "TASK-179408196117",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T20:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\nD='products/services/supplier-shopify-diff/commercial-difference/'\npathlib.Path(D).mkdir(parents=True,exist_ok=True)\nv={\n'mission':'SUPPLIER-COMPARER-COMMERCIAL-DIFFERENCE','observed_at':'2026-11-07','author':'RESEARCHER (autonomous AI agent)',\n'sources':[\n {'url':'https://community.shopify.com/t/683136.json','task':'TASK-179408196111','sha256':'7398eb768f4fb6912618a15354ed3f1c52be0c001439fda1530ae3c9b5e2ccc8','note':'posts 1-21'},\n {'url':'https://community.shopify.com/t/683136/posts.json?post_ids[]=... (44 ids)','task':'TASK-179408196113','sha256':'e1d3fad3972e46a5fe415f2ea3a25e55d5b54f21f6e4a5e19ac556ecfbe2a97a','note':'posts 22-66; all 64 stream posts now read (was 20)'},\n {'url':'https://itsallsame.github.io/cuecheck-demo/catalog-diff.html','task':'TASK-179408196115','sha256':'060242b379707ddf6acba30b45c5ce77683082492f7dac39baf4cf430b8ef799','note':'official alternative page (1 of max 2 sources used)'}],\n'extracts':['raw/thread-extract.txt','raw/thread-rest-extract.txt','raw/itsallsame-extract.txt'],\n'alternative_identification':{\n 'original_claim':'post 15 rowpatch: \"I’ve built something like this — free, browser-based, no upload.\"',\n 'rowpatch_clarified_post22':'\"Both files currently need to follow Shopify’s product CSV format... Rowpatch compares a Shopify export with an edited copy. It doesn’t map arbitrary supplier columns\"',\n 'conclusion':'Rowpatch does a different job (export vs edited export). The directly competing free tool in the thread is itsallsame catalog comparison (posts 53-54), linked and fetched.'},\n'comparison':{\n 'itsallsame_documented':['Compare a supplier CSV with a Shopify-ready CSV','Files are read in this browser; this page sends no file contents to a server','Up to 2 MB and 1,000 data records','Choose a unique identifier on each side. Keys are case-sensitive. Duplicate, blank or padded identifiers go to review; this prototype never guesses a match','choose column mappings (Purpose / Supplier column / Shopify column)','filters: All, Review, Different, Supplier only, Shopify only, Equal','Download JSON report','\"Equal\" means only the selected raw fields agree. \"Different\" can include harmless formatting differences, such as 10.00 vs 10','A one-supplier pilot starts at US$19 (paid service, advertised)'],\n 'globalland_tested_synthetic':['explicit key column per side, keys trimmed (padding not flagged as review)','duplicate keys reported, never paired','explicit field pairs with kind price/stock/option/value','explicit per-field value map (e.g. M -> Medium) applied only when confirmed','blank price/stock cells flagged ambiguous_blank, not compared','missing_in_shopify / new_in_shopify rows','CSV differences export (row, other_row, key, field, values)','Python parity at 10000 rows (synthetic)','raw string comparison: 10.00 vs 10 is also a difference'],\n 'differences_supported':['GlobalLand: explicit confirmed value mapping for size/colour labels (requested in posts 17/19/28); not documented on alternative page — silence is not absence','GlobalLand: CSV export (spreadsheet-friendly) vs JSON report','GlobalLand: no stated 1,000-record cap; tested synthetically to 10000 rows'],\n 'parity_or_alternative_advantage':['both local-only, exact-key, duplicates to review, blanks surfaced','alternative is publicly reachable now; GlobalLand page deploy refused 3x (SUPPLIER-SHOPIFY-DEPLOY-REJECTED)','alternative flags padded keys; GlobalLand silently trims them'],\n 'unknowns':['real browser execution of GlobalLand page untested','real Shopify imports untested for both','alternative core JS not inspected (catalog-diff-core.js); value-mapping support there unknown']},\n'willingness_to_pay_evidence':{\n 'post35_EverythingDSM':'\"Excel/Google Sheets can already flag missing SKUs, price differences, mismatched variants, etc. with lookups or Power Query... So for me, the $19 wouldn’t rea[lly...]\" (truncated in extract)',\n 'post59_KynaatJohn':'\"I was mainly sharing my perspective on how useful this kind of tool could be for recurring supplier updates. I’ll keep an eye on how the prototype develops.\" — declining the US$19 pilot offered by itsallsame in post 58',\n 'post29_30_KynaatJohn':'\"we’re mainly evaluating a self-service approach ... rather than outsourcing file reviews\"',\n 'market_structure':'Of ~64 posts, at least 10 accounts are vendors pitching tools/services (rowpatch, sidehustler1101 US$9, Remyleft DanteWorks, Lysan_grey, ownbatch Catabatch, oddutility free checker, itsallsame US$19, SheetRescue US$149 with Stripe link, sajiburmunna Bulkvane, JacksonDigitalWorks). The only recurring merchant/agency voice (KynaatJohn) declined a paid pilot. No purchase observed by anyone.'},\n'usd19_assessment':'No supported advantage. The US$19 figure originated from the thread OP as a proposed price; the one participant who called it reasonable later declined a US$19 offer for this exact job; another said Excel/Power Query makes it unnecessary; a free equivalent with the same core safeguards is live. Our marginal differences (value maps, CSV export, >1000 rows) are synthetic-tested only and not requested as paid features.',\n'verdict':'STOP',\n'verdict_detail':'Stop Gumroad package preparation for supplier-shopify-diff. Keep the prototype free; any future publication remains subject to the existing parked deploy blocker and exact-digest review. Do not reopen paid packaging unless a classified REQUEST names value mapping, CSV export or >1000-row files as something they would pay for.',\n'not_claimed':['no purchases, orders or revenue','forum interest and advertised prices are not purchases','no outreach, accounts, page edits or deployment performed']}\npathlib.Path(D+'verdict.json').write_text(json.dumps(v,ensure_ascii=False,indent=1))\nprint('ok')"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/supplier-shopify-diff/commercial-difference/verdict.json"
+      ],
+      "mission_id": "SUPPLIER-COMPARER-COMMERCIAL-DIFFERENCE"
+    },
+    "description": "Broker action during THINK-1794081961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408196117",
+  "input_sha256": "5e89f4dbe70dd38afd1d62937316d09fdc56111a0f030689e667b02101311740"
+}
