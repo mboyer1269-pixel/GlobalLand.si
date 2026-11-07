@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "n 40\n007719-2025 | DfI Transport and Road Asset Management TRAM | DfI TRAM T-1142 Term Contract for Environmental Maintenance  | ends []\n007713-2025 | NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust) | Provision of Eye Care Liaison Officer  | ends []\n007707-2025 | Post Office | IT Capabilities Framework | sw | ends []\n007706-2025 | Post Office | Digital Capabilities Framework  | ends []\n007704-2025 | Peabody Trust | PE0603 BS8414/EN13501-1 Fire Testing Services  | ends []\n007702-2025 | The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS) | SNBTS Supply of Van Refrigeration Units and Maintenance  | ends []\n007699-2025 | Dudley Metropolitan Borough Council | Provision of a CCTV Control Room Monitoring Service  | ends []\n007694-2025 | Belfast City Council | T2567 PEACEPLUS From Multiculturalism to Interculturalism Project  | ends []\n007692-2025 | ENVIRONMENT AGENCY | CL:AIRE -Contaminated Land Advisory Services Contract  | ends []\n007691-2025 | Halton Borough Council | Provision of Domiciliary Care Service  | ends []\n007690-2025 | Thames Valley Police | Custodial Healthcare Service Provision  | ends []\n007689-2025 | Tees Valley Combined Authority | Specialist Legal Advice to South Tees Development Corporation  | ends []\n007688-2025 | NHS BIRMINGHAM AND SOLIHULL INTEGRATED CARE BOARD | BSOL_MMCG (4) Limited_2024-25_IFPCHC  | ends []\n007686-2025 | Tees Valley Combined Authority | Specialist Legal Advice to South Tees Development Corporation  | ends []\n007685-2025 | Tees Valley Combined Authority | Specialist Legal Advice to South Tees Development Corporation  | ends []\n007683-2025 | BLACKPOOL COUNCIL | Holiday Activity and Food Programme  | ends []\n007682-2025 | University of Glasgow | PURCH2639 - PPE1002911 Direct Award for the Provision of Ophthalmology service  | ends []\n007681-2025 | Staffordshire County Council | Advertising of Statutory Public Notices - Call-off from YPO Local Government Resourcing Pa  | ends []\n007679-2025 | Lincolnshire County Council | BPB000090 - SEND - Lincoln St Christopher's Schools & Grantham Greenfields School  | ends []\n007671-2025 | Cambridgeshire County Council | Cambridgeshire Coroners – Direct Award B awards.  | ends []\n007669-2025 | Nottingham City Council | CPU 6935 Highways Minor Works Framework  | ends []\n007668-2025 | Belfast City Council | Framework Agreement for the Supply and Delivery of Various Goods for Resale to Belfast Zoo  | ends []\n007667-2025 | Bernicia Group | Fleet Services  | ends []\n007662-2025 | Birmingham City Council | Speech and language therapy and occupational therapy services  | ends []\n007661-2025 | NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust) | D2RA Beds  | ends []\n007660-2025 | Ministry of Defence |   | ends []\n007659-2025 | NHS England | Overseas Sponsorship - Doctors and Dentists  | ends []\n007658-2025 | The Council of the Borough of Kirklees | KMCPH-040 Drug & Alcohol Dependency Advisor in Hospital  | ends []\n007657-2025 | The Council of the Borough of Kirklees | KMCPH-042 Drug & Alcohol Dependency Advisor  | ends []\n007656-2025 | Westmorland and Furness Council | Barrow Levelling Up Fund –  Market Hall and Forum Refurbishment  Including Public Realm Wo  | ends []\n007655-2025 | Health and Safety Executive | Services Concession Agreement for the operation of the Gas Safe Register in Great Britain   | ends []\n007653-2025 | NHS DEVON INTEGRATED CARE BOARD | Adult ADHD assessment and titration  | ends []\n007651-2025 | UK Research & Innovation | UKRI-4864 - FESTIVAL OF TOMORROW  | ends []\n007645-2025 | N H S Shared Business Services | Mental Health, Learning Disability and Autism: Assessment and Diagnosis, NHS Talking Thera  | ends []\n007642-2025 | Merthyr Tydfil County Borough Council | Mini Competition 7 - Greenfield Special School  | ends []\n007641-2025 | Ferguson Marine (Port Glasgow) Ltd | FMPG-2025-010 Electrical Commissioning Services  | ends []\n007639-2025 | Islington Council | 2425-0002 Special Educational Needs and / or Disabilities, Information, Advice & Support S  | ends []\n007637-2025 | Sussex Partnership NHS Foundation Trust | Adult ED beds  | ends []\n007632-2025 | POOL REINSURANCE COMPANY LIMITED | MSCI ESG UK  | ends []\n007631-2025 | West Berkshire Council | Supported Employment  | ends []\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179402076116.json"
+  ],
+  "request": {
+    "id": "TASK-179402076116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T03:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re\nd=json.load(open('products/services/software-renewals/raw/fts-awards-2025-03-03.json'))\ndef walk(o,p=''):\n  if isinstance(o,dict):\n    for k,v in o.items(): yield from walk(v,p+'.'+k)\n  elif isinstance(o,list):\n    for i,v in enumerate(o): yield from walk(v,p+'[%d]'%i)\n  else: yield p,o\nrs=d.get('releases',[])\nprint('n',len(rs))\nfor r in rs:\n  t=r.get('tender',{})\n  cpvs=[v for p,v in walk(t) if p.endswith('classification.id') or (p.endswith('.id') and 'Classifications' in p)]\n  ends=[(p,v) for p,v in walk(r) if p.endswith('endDate')]\n  sw=any(str(c).startswith(('72','48')) for c in cpvs)\n  print(r['id'],'|',r.get('buyer',{}).get('name'),'|',t.get('title','')[:90],'| sw' if sw else '','| ends',ends[:3])\n"
+      ],
+      "inputs": [
+        "products/services/software-renewals/raw/fts-awards-2025-03-03.json"
+      ],
+      "outputs": [],
+      "mission_id": "SOFTWARE-RENEWAL-CALENDAR"
+    },
+    "description": "Broker action during THINK-1794020761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179402076116",
+  "input_sha256": "5c40dcc3c099a8d7e48cc3d3f39a5ac56965493d1f76b062e02b3fcc25eacbdb"
+}
