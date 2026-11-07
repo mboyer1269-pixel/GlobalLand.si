@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "Clothing stores: how do you check supplier files before importing to Shopify? 2026-09-17T11:01:58.734Z 64 False False\n--- 1 2026-09-17T11:01:58.854Z accepted False \n  Hi everyone, I’m Matko. I’m looking into a small tool for clothing stores that get product spreadsheets from suppliers. The idea is to compare the original supplier file with the CSV you’re preparing for Shopify. Flag missing products, differences in sizes and colours, changed SKUs or prices. You’d get a list to check before importing anything. But before building it, I’d like to understand how people actually handle this. If you’ve done an import recently, how did it go? Are you checking everything in Excel, using another tool, or is Shopify’s importer enough? Roughly how often do you do this and how long does the checking take? I’m considering around $19 as a one-time price. Nothing built or for sale yet. Would this save you some work, or is it something your current setup already handles? Even “we don’t have this problem” would be useful to hear. Thank you \n--- 2 2026-09-17T11:54:16.269Z accepted False \n  Hi @matko We’ve seen this kind of issue come up with Shopify store setups, especially when supplier files have a lot of variants. The part I’d find most useful is catching SKU, price, and variant differences before the import rather than finding them after the products are already in Shopify. If you end up building it, I’d be curious to see how you handle large CSVs and whether the comparison can also show exactly which row or field changed. That would make it much easier to review before importing. \n--- 3 2026-09-17T12:55:01.757Z accepted False \n  Thanks Kynaat, that helps. Showing which row and field changed makes sense. Are these imports you handle yourself, for your own store or for clients? Could you share a recent example, roughly how many products or variants were involved and how you checked the files? I’m curious what took the most time. Also, does this come up regularly when suppliers send updates, or mainly when setting up a new store? \n--- 4 2026-09-18T05:21:55.216Z accepted False \n  They’re mostly imports we handle as part of Shopify store setups for clients, rather than for our own store. The size varies depending on the catalog, but clothing stores with lots of variants are where it can get pretty time-consuming. Usually the supplier file is checked against the Shopify-ready CSV in Excel, mainly looking at SKUs, variant values and prices. The most time-consuming part is usually finding small differences when there are a lot of rows. It can also come up again when suppliers send updated files, so I’d say it’s not limited to new store setups. \nlater posts: [(5, '2026-09-18'), (6, '2026-09-18'), (7, '2026-09-18'), (8, '2026-09-18'), (10, '2026-09-18'), (11, '2026-09-18'), (12, '2026-09-18'), (13, '2026-09-18'), (14, '2026-09-18'), (15, '2026-09-20'), (16, '2026-09-21'), (17, '2026-09-22'), (18, '2026-09-22'), (19, '2026-09-22'), (20, '2026-09-22'), (21, '2026-09-22')]\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179406036114.json"
+  ],
+  "request": {
+    "id": "TASK-179406036114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-07T14:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re,html\nd=json.load(open('products/services/shopify-large-catalogue/current-request/candidate-683136.json'))\nprint(d.get('title'),d.get('created_at'),d.get('posts_count'),d.get('closed'),d.get('archived'))\nps=d['post_stream']['posts']\nfor p in ps[:4]:\n  t=re.sub('<[^>]+>',' ',p['cooked']);t=html.unescape(re.sub('\\s+',' ',t))\n  print('---',p['post_number'],p['created_at'],'accepted',p.get('accepted_answer'),'\\n',t[:1500])\nimport collections\nprint('later posts:',[(p['post_number'],p['created_at'][:10]) for p in ps[4:]])\n"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/current-request/candidate-683136.json"
+      ],
+      "outputs": [],
+      "mission_id": "EXISTING-SOLUTION-CURRENT-REQUEST"
+    },
+    "description": "Broker action during THINK-1794060361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179406036114",
+  "input_sha256": "c1ae6195d195e4ecd8b70a33af1bbd88833296e93b3a0878f359ef7183a83f6b"
+}
