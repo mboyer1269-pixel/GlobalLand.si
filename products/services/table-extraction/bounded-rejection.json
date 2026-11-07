@@ -1,0 +1,34 @@
+{
+  "mission_id": "PUBLIC-TABLE-EXTRACTION-REQUEST",
+  "observed_at": "2026-11-07",
+  "verdict": "STOP_NO_QUALIFYING_REQUEST",
+  "sources_checked": [
+    {
+      "source": "https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=pdf%20table&site=opendata&filter=withbody&pagesize=15",
+      "task": "TASK-179408736211",
+      "sha256": "f3deaf7da4c486ef3cf048406c01563db619dca8fa46b2904a279f7ace0795e0",
+      "result": "15 items. The newest was created 2021-07-02. Every PDF-table extraction request is from 2013-2020 (e.g. q/13867 from 2019-02-06, q/6005 from 2015-09-14, q/1527 from 2014-02-10). None is recent, so none qualifies as a current unresolved request."
+    },
+    {
+      "source": "https://www.reddit.com/r/datasets/search.json?q=pdf%20table%20csv&restrict_sr=1&sort=new&t=month&limit=15",
+      "task": "TASK-179408736213",
+      "result": "REJECTED HTTP 403. Not observed; this is not evidence that no requests exist."
+    },
+    {
+      "source": "https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=pdf&site=opendata&fromdate=1777593600&filter=withbody&pagesize=10",
+      "task": "TASK-179408736214",
+      "sha256": "abcf10eade98d36068af6de7b75d0220ec6400e0f5c6a8b96470e96663dc89e8",
+      "result": "0 items created since 2026-05-01 (TASK-179408736215)."
+    }
+  ],
+  "candidates_qualifying": 0,
+  "work_produced": "none; no sample was built without a request",
+  "uncertainties": [
+    "Only one accessible public request venue was observed. Its activity is low, so its silence does not show market-wide absence of demand.",
+    "Requests on Reddit, forums and freelance boards were not observed. Boards are excluded by the mission and parked under BOUNTY-SUBMISSION-ELIGIBILITY.",
+    "Even a qualifying request would not show willingness to pay. Collection is still blocked (SERVICE-PAYMENT-COLLECTION)."
+  ],
+  "competitive_note": "Old requests were answered by pointing to free tools such as tabula and tabulizer. No concrete advantage over the free alternatives was established.",
+  "reopen_trigger": "A classified inbound request to reconstruct a specific public PDF table, or a newly accessible public request venue.",
+  "no_actions": "No accounts, outreach, submissions, spending or deployment."
+}

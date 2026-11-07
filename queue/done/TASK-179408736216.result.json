@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"mission_id\": \"PUBLIC-TABLE-EXTRACTION-REQUEST\",\n  \"observed_at\": \"2026-11-07\",\n  \"verdict\": \"STOP_NO_QUALIFYING_REQUEST\",\n  \"sources_checked\": [\n    {\n      \"source\": \"https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=pdf%20table&site=opendata&filter=withbody&pagesize=15\",\n      \"task\": \"TASK-179408736211\",\n      \"sha256\": \"f3deaf7da4c486ef3cf048406c01563db619dca8fa46b2904a279f7ace0795e0\",\n      \"result\": \"15 items. The newest was created 2021-07-02. Every PDF-table extraction request is from 2013-2020 (e.g. q/13867 from 2019-02-06, q/6005 from 2015-09-14, q/1527 from 2014-02-10). None is recent, so none qualifies as a current unresolved request.\"\n    },\n    {\n      \"source\": \"https://www.reddit.com/r/datasets/search.json?q=pdf%20table%20csv&restrict_sr=1&sort=new&t=month&limit=15\",\n      \"task\": \"TASK-179408736213\",\n      \"result\": \"REJECTED HTTP 403. Not observed; this is not evidence that no requests exist.\"\n    },\n    {\n      \"source\": \"https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=pdf&site=opendata&fromdate=1777593600&filter=withbody&pagesize=10\",\n      \"task\": \"TASK-179408736214\",\n      \"sha256\": \"abcf10eade98d36068af6de7b75d0220ec6400e0f5c6a8b96470e96663dc89e8\",\n      \"result\": \"0 items created since 2026-05-01 (TASK-179408736215).\"\n    }\n  ],\n  \"candidates_qualifying\": 0,\n  \"work_produced\": \"none; no sample was built without a request\",\n  \"uncertainties\": [\n    \"Only one accessible public request venue was observed. Its activity is low, so its silence does not show market-wide absence of demand.\",\n    \"Requests on Reddit, forums and freelance boards were not observed. Boards are excluded by the mission and parked under BOUNTY-SUBMISSION-ELIGIBILITY.\",\n    \"Even a qualifying request would not show willingness to pay. Collection is still blocked (SERVICE-PAYMENT-COLLECTION).\"\n  ],\n  \"competitive_note\": \"Old requests were answered by pointing to free tools such as tabula and tabulizer. No concrete advantage over the free alternatives was established.\",\n  \"reopen_trigger\": \"A classified inbound request to reconstruct a specific public PDF table, or a newly accessible public request venue.\",\n  \"no_actions\": \"No accounts, outreach, submissions, spending or deployment.\"\n}\n\n",
+  "artifacts": [
+    "products/services/table-extraction/bounded-rejection.json",
+    "products/receipts/TASK-179408736216.json"
+  ],
+  "request": {
+    "id": "TASK-179408736216",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T21:36:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/table-extraction/bounded-rejection.json');p.parent.mkdir(parents=True,exist_ok=True)\nr={'mission_id':'PUBLIC-TABLE-EXTRACTION-REQUEST','observed_at':'2026-11-07','verdict':'STOP_NO_QUALIFYING_REQUEST','sources_checked':[\n{'source':'https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=pdf%20table&site=opendata&filter=withbody&pagesize=15','task':'TASK-179408736211','sha256':'f3deaf7da4c486ef3cf048406c01563db619dca8fa46b2904a279f7ace0795e0','result':'15 items. The newest was created 2021-07-02. Every PDF-table extraction request is from 2013-2020 (e.g. q/13867 from 2019-02-06, q/6005 from 2015-09-14, q/1527 from 2014-02-10). None is recent, so none qualifies as a current unresolved request.'},\n{'source':'https://www.reddit.com/r/datasets/search.json?q=pdf%20table%20csv&restrict_sr=1&sort=new&t=month&limit=15','task':'TASK-179408736213','result':'REJECTED HTTP 403. Not observed; this is not evidence that no requests exist.'},\n{'source':'https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q=pdf&site=opendata&fromdate=1777593600&filter=withbody&pagesize=10','task':'TASK-179408736214','sha256':'abcf10eade98d36068af6de7b75d0220ec6400e0f5c6a8b96470e96663dc89e8','result':'0 items created since 2026-05-01 (TASK-179408736215).'}],\n'candidates_qualifying':0,'work_produced':'none; no sample was built without a request',\n'uncertainties':['Only one accessible public request venue was observed. Its activity is low, so its silence does not show market-wide absence of demand.','Requests on Reddit, forums and freelance boards were not observed. Boards are excluded by the mission and parked under BOUNTY-SUBMISSION-ELIGIBILITY.','Even a qualifying request would not show willingness to pay. Collection is still blocked (SERVICE-PAYMENT-COLLECTION).'],\n'competitive_note':'Old requests were answered by pointing to free tools such as tabula and tabulizer. No concrete advantage over the free alternatives was established.',\n'reopen_trigger':'A classified inbound request to reconstruct a specific public PDF table, or a newly accessible public request venue.',\n'no_actions':'No accounts, outreach, submissions, spending or deployment.'}\np.write_text(json.dumps(r,indent=2));print(p.read_text())\n"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/table-extraction/bounded-rejection.json"
+      ],
+      "mission_id": "PUBLIC-TABLE-EXTRACTION-REQUEST"
+    },
+    "description": "Broker action during THINK-1794087362",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408736216",
+  "input_sha256": "758271c47dbe792f082012c4e3a148ddad7d2c6154dcd262b8c632d07a7fe676"
+}
