@@ -239,6 +239,7 @@ class Treasury:
         digest = hashlib.sha256(body.encode()).hexdigest()
         key = tuple(receipt[k] for k in ('provider', 'account', 'event_id'))
         self._payout_settlement(db, receipt)
+        self._bank_settlement(db, receipt)
         prior = db.execute('SELECT * FROM events WHERE provider=? AND account=? AND event_id=?', key).fetchone()
         if prior:
             if prior['digest'] != digest or prior['action'] != action or prior['operation_id'] != op:
@@ -287,6 +288,47 @@ class Treasury:
             raise ValueError('duplicate legacy payout settlement requires reconciliation')
         if matches and matches[0] != receipt['event_id']:
             raise ValueError('payout settlement already assigned to another invoice; reconcile allocations explicitly')
+
+    @staticmethod
+    def _bank_settlement(db, receipt):
+        """Reject a known bank transfer reused across orders and Apify BANK.
+
+        Legacy Apify receipts omit the destination account and preserve case in
+        their reference digest, while orders canonicalizes case. Equal digests
+        prove a collision across these adapters, conservatively regardless of
+        account alias. Unequal legacy digests cannot prove distinct transfers:
+        the original reference is unavailable, so case variants still require
+        private reconciliation. Never rewrite historical evidence or claim
+        universal matching. WISE/PAYPAL remain in their separate namespaces.
+        """
+        def bank_receipt(value):
+            return (value.get('kind') == 'REVENUE' and value.get('attestation') == 'FOUNDER'
+                    and (value.get('provider') == 'orders'
+                         or (value.get('provider') == 'apify' and value.get('account') == 'payouts'
+                             and value.get('method') == 'BANK')))
+
+        if not bank_receipt(receipt): return
+        reference = receipt.get('reference_sha256')
+        if not isinstance(reference, str) or not re.fullmatch(r'[0-9a-f]{64}', reference):
+            raise ValueError('bank settlement reference digest required')
+        other_provider = 'apify' if receipt['provider'] == 'orders' else 'orders'
+        for row in db.execute('SELECT * FROM events WHERE provider=?', (other_provider,)):
+            try:
+                previous = json.loads(row['body'])
+                if not isinstance(previous, dict): raise ValueError('invalid bank history')
+                body = json.dumps(previous, sort_keys=True, separators=(',', ':'), allow_nan=False)
+                if (hashlib.sha256(body.encode()).hexdigest() != row['digest']
+                        or any(previous.get(k) != row[k] for k in ('provider', 'account', 'event_id'))):
+                    raise ValueError('invalid bank history')
+                if not bank_receipt(previous): continue
+                prior_reference = previous.get('reference_sha256')
+                if (not isinstance(prior_reference, str) or not re.fullmatch(r'[0-9a-f]{64}', prior_reference)
+                        or row['action'] != 'CREDIT' or row['operation_id'] is not None):
+                    raise ValueError('incomplete bank history')
+            except (TypeError, ValueError):
+                raise ValueError('bank settlement history requires reconciliation') from None
+            if prior_reference == reference:
+                raise ValueError('bank settlement already credited through another adapter; reconcile explicitly')
 
     def _apply_account_receipt(self, db, receipt):
         if not isinstance(receipt, dict):

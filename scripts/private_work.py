@@ -365,6 +365,7 @@ class PrivateResponder:
     def __call__(self, message, *, history_context=None):
         self.last_observation = None
         self.last_completion = None
+        self.last_order_context_guard = None
         try:
             import continuity
             if history_context is None: history_context = continuity.prepare(self.root, message, self.config)
@@ -380,6 +381,7 @@ class PrivateResponder:
         import order_context
         path, data = self._open(message, continuity_context=history_context)
         if data['state'] == 'READY':
+            self.last_order_context_guard = data.get('order_context_guard')
             self.last_provider = data.get('provider')
             # Immutable normalized interpretation: never reclassify a replay.
             self.last_observation = copy.deepcopy(data.get('observation'))
@@ -409,9 +411,11 @@ class PrivateResponder:
         guide += order_context.GUIDE
         planner.tool_guide = guide
         while self.budget > 0:
+            order_data = order_context.for_message(self.root,data['incoming'],self.config)
+            self.last_order_context_guard = order_context.guard(data['incoming'],order_data)
             prompt = guide + commercial.prompt(self.root, self.config) + '\n' + json.dumps(dict(private_case={k: v for k, v in data.items() if k != 'public_context'},
                         private_history=history, public_product_context=self._public_context(data),
-                        private_order_payments=order_context.for_message(self.root, data['incoming'], self.config),
+                        private_order_payments=order_data,
                         remaining_case_actions=max(0, self.case_budget - len(data['steps']))), ensure_ascii=False)
             value = None
             providers = self.config['controller'].get('providers', [])
@@ -444,7 +448,8 @@ class PrivateResponder:
                 raise ValueError('Private work unavailable')
             self.last_provider = provider
             if not value['actions']:
-                data.update(state='READY', decision=decision, provider=provider)
+                data.update(state='READY', decision=decision, provider=provider,
+                            order_context_guard=self.last_order_context_guard)
                 if commercial.settings(self.config)['state'] == 'ENABLED':
                     raw = json.loads(value['summary']).get('observation')
                     data['observation'] = continuity.normalize_observation(raw, data,

@@ -85,6 +85,15 @@ def _case_orders(root,key):
     return orders.case_orders(root,key)
 
 
+def guard(message, context):
+    import continuity
+    return hashlib.sha256(continuity.canonical({'mail':continuity.guard(message),'orders':context})).hexdigest()
+
+
+def current_guard(root,message,config):
+    return guard(message,for_message(root,message,config))
+
+
 def for_message(root,message,config):
     key = case_key(message,config)
     if key is None: return {'state':'ISOLATED','orders':[]}

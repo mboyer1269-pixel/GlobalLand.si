@@ -549,6 +549,8 @@ class Mailbox:
                 decision = {'action': 'ignore', 'text': ''}
             else:
                 import continuity
+                import order_context
+                initial_order_guard = order_context.current_guard(self.root, message, self.config)
                 history_context = continuity.prepare(self.root, message, self.config)
                 if history_context is not None:
                     decision = responder(message, history_context=history_context)
@@ -590,6 +592,16 @@ class Mailbox:
                 raise MailError('Mail route changed')
             if record.get('completion'):
                 continuity.verify_completion(self.root, record['completion'], current, decision)
+            supplied_guard = getattr(responder, 'last_order_context_guard', initial_order_guard)
+            if supplied_guard is None:
+                # Legacy cached replies have no payment snapshot. They remain
+                # eligible only when no linked private orders can be exposed.
+                if order_context.for_message(self.root,current,self.config).get('orders'):
+                    raise MailError('Legacy order context unavailable')
+                supplied_guard = initial_order_guard
+            if (supplied_guard != initial_order_guard
+                    or order_context.current_guard(self.root,current,self.config) != supplied_guard):
+                raise MailError('Order context or recipient changed')
             record.update(state='STARTED', operation_id='gl-' + uuid.uuid4().hex)
             self._save(path, record)
             started = True

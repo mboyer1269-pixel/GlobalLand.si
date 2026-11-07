@@ -124,5 +124,20 @@ ne nécessite ni achat ni virement test. Pour la première vente réelle, contr�
 les conditions de l'offre, rapprocher le dépôt, puis vérifier la reprise du
 résultat par le dossier client et le directeur.
 
+### Reprises et limites historiques
+
+Avant tout envoi, l'hôte compare à nouveau le destinataire et le contexte de
+commande utilisé pour rédiger la réponse. Une ancienne réponse préparée avec
+des instructions devenues périmées est refusée, même si elle était déjà prête.
+Elle n'est pas réécrite implicitement ; un nouveau message ou une reprise
+administrative explicite permet de préparer une réponse actuelle.
+
+Le rapprochement refuse aussi les références bancaires identiques déjà
+enregistrées par le chemin historique Apify BANK. Les anciennes empreintes Apify
+conservaient la casse alors que ce registre normalise les références : des
+empreintes différentes ne prouvent donc pas que deux anciens justificatifs
+décrivent deux virements distincts. Leur migration exige un rapprochement privé,
+sans reclasser le même versement comme une nouvelle vente.
+
 Sources : [configuration Wealthsimple](https://help.wealthsimple.com/hc/en-ca/articles/51594844256155-Set-up-a-business-email-for-account-notifications-and-Interac-e-Transfer-transactions),
 [entreprise individuelle](https://help.wealthsimple.com/hc/en-ca/articles/56351394961563-Open-a-Business-chequing-account-for-your-sole-proprietorship).

@@ -46,6 +46,7 @@ class FinancialHoldTests(unittest.TestCase):
         self.transport = Transport(message())
         self.box = Mailbox(self.root, self.config, self.transport)
         self.responder = Mock(return_value=dict(action='reply', text='Reply'))
+        self.responder.last_order_context_guard = None
 
     def receipt(self):
         return json.loads(self.box._path('incoming').read_text())
