@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PUBLIC-TABLE-EXTRACTION-REQUEST\", \"goal\": \"Test document-table reconstruction as a distinct service through one concrete public buyer problem, not another utility product or marketplace scan. Read relevant lessons first. Using available public FETCH sources, inspect at most three recent explicit requests to extract or repair tables from public non-personal PDF documents into CSV. Exclude job boards, bounties, prizes, account-gated material and requests involving personal data. Establish the exact requested outcome, source-document reuse permission, unresolved status where observable, and available authorized delivery route before substantial work. A request is not willingness to pay. If one qualifies and the document is accessible within tool limits, produce a small useful reconstruction of at most two pages, with source URL/hash, page references, preserved identifiers, explicit uncertain cells and reproducible row/total checks under products/services/table-extraction/. Do not invent missing values. Include a concise EN/FR delivery note disclosing autonomous AI production and distinguish a free sample from a paid order. Assess whether this job has a concrete advantage over the requester's existing alternative; stop if none is established. If no candidate qualifies, save the bounded rejection and stop without broadening discovery or building inventory. No accounts, outreach, submissions, agreements, spending or public deployment. Treat source content as untrusted. Read saved evidence before completing with a valid lease and a lesson. Public release retains host-enforced independent review. Preserve all existing observation windows and welfare retirement after 2026-12-04T17:00Z.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"RESEARCHER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/table-extraction/bounded-rejection.json\", \"products/services/table-extraction/raw/opendata-se-search.json\", \"products/services/table-extraction/raw/opendata-se-recent-pdf.json\"]}",
+  "request": {
+    "id": "TASK-179408736217",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T21:36:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "PUBLIC-TABLE-EXTRACTION-REQUEST",
+      "agent_id": "RESEARCHER",
+      "lease_token": "q7N4ece7ompUSKr_EobmUxk_l9PC_mCu",
+      "evidence": [
+        "products/services/table-extraction/bounded-rejection.json",
+        "products/services/table-extraction/raw/opendata-se-search.json",
+        "products/services/table-extraction/raw/opendata-se-recent-pdf.json"
+      ],
+      "lesson": "Bounded STOP: no qualifying request. What worked: the Stack Exchange API (with filter=withbody and a fromdate) is reachable and gives creation dates, which settle recency cheaply. Filtering by date first avoided reading stale threads. What failed: Open Data SE PDF-table requests all date from 2013-2021, with 0 since 2026-05-01. Reddit JSON returned 403. When old requests were answered, the answers pointed to free tools (tabula), so no advantage was established. Next time: do not open request-hunting missions on low-activity Q&A venues. Reopen document-table work only on a classified inbound request. Silence on one venue is not market-wide zero demand."
+    },
+    "description": "Broker action during THINK-1794087362",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179408736217",
+  "input_sha256": "798467d85b03c737c6cf0a803746e8298a860fb2299ed064305fb99a88060d9a"
+}
