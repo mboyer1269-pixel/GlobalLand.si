@@ -1,0 +1,82 @@
+{
+  "synthetic_only": true,
+  "browser_execution": "UNTESTED",
+  "shopify_import": "UNTESTED",
+  "checks": [
+    {
+      "name": "node_exit",
+      "pass": true,
+      "stderr": ""
+    },
+    {
+      "name": "python_csv_parity_0",
+      "pass": true
+    },
+    {
+      "name": "python_differ_parity_0",
+      "pass": true,
+      "findings": 8
+    },
+    {
+      "name": "download_roundtrip_0",
+      "pass": true
+    },
+    {
+      "name": "python_csv_parity_1",
+      "pass": true
+    },
+    {
+      "name": "python_differ_parity_1",
+      "pass": true,
+      "findings": 0
+    },
+    {
+      "name": "download_roundtrip_1",
+      "pass": true
+    },
+    {
+      "name": "python_csv_parity_2",
+      "pass": true
+    },
+    {
+      "name": "python_differ_parity_2",
+      "pass": true,
+      "findings": 0
+    },
+    {
+      "name": "download_roundtrip_2",
+      "pass": true
+    },
+    {
+      "name": "python_csv_parity_3",
+      "pass": true
+    },
+    {
+      "name": "python_differ_parity_3",
+      "pass": true,
+      "findings": 6
+    },
+    {
+      "name": "download_roundtrip_3",
+      "pass": true
+    },
+    {
+      "name": "expected_classes",
+      "pass": true
+    },
+    {
+      "name": "explicit_mapping_equal",
+      "pass": true
+    },
+    {
+      "name": "10000_records",
+      "pass": true
+    },
+    {
+      "name": "five_malformed_rejected",
+      "pass": true
+    }
+  ],
+  "passed": 17,
+  "total": 17
+}

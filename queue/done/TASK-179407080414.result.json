@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "{\"synthetic_only\": true, \"browser_execution\": \"UNTESTED\", \"shopify_import\": \"UNTESTED\", \"checks\": [{\"name\": \"node_exit\", \"pass\": true, \"stderr\": \"\"}, {\"name\": \"python_csv_parity_0\", \"pass\": true}, {\"name\": \"python_differ_parity_0\", \"pass\": true, \"findings\": 8}, {\"name\": \"download_roundtrip_0\", \"pass\": true}, {\"name\": \"python_csv_parity_1\", \"pass\": true}, {\"name\": \"python_differ_parity_1\", \"pass\": true, \"findings\": 0}, {\"name\": \"download_roundtrip_1\", \"pass\": true}, {\"name\": \"python_csv_parity_2\", \"pass\": true}, {\"name\": \"python_differ_parity_2\", \"pass\": true, \"findings\": 0}, {\"name\": \"download_roundtrip_2\", \"pass\": true}, {\"name\": \"python_csv_parity_3\", \"pass\": true}, {\"name\": \"python_differ_parity_3\", \"pass\": true, \"findings\": 6}, {\"name\": \"download_roundtrip_3\", \"pass\": true}, {\"name\": \"expected_classes\", \"pass\": true}, {\"name\": \"explicit_mapping_equal\", \"pass\": true}, {\"name\": \"10000_records\", \"pass\": true}, {\"name\": \"five_malformed_rejected\", \"pass\": true}], \"passed\": 17, \"total\": 17}\n\n",
+  "artifacts": [
+    "products/services/supplier-shopify-diff/tests/results.json",
+    "products/services/supplier-shopify-diff/tests/supplier.csv",
+    "products/services/supplier-shopify-diff/tests/shopify.csv",
+    "products/receipts/TASK-179407080414.json"
+  ],
+  "request": {
+    "id": "TASK-179407080414",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-07T17:00:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "products/services/supplier-shopify-diff/tests/run.py"
+      ],
+      "inputs": [
+        "products/services/supplier-shopify-diff/",
+        "products/sites/supplier-shopify-diff/"
+      ],
+      "outputs": [
+        "products/services/supplier-shopify-diff/tests/results.json",
+        "products/services/supplier-shopify-diff/tests/supplier.csv",
+        "products/services/supplier-shopify-diff/tests/shopify.csv"
+      ],
+      "mission_id": "SUPPLIER-SHOPIFY-DIFF-BUILD"
+    },
+    "description": "Broker action during THINK-1794070804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179407080414",
+  "input_sha256": "3b200697e727c7ce6055642db59b9fc92b8d0aeafce0c21e3ce24814d43dfe8e"
+}
