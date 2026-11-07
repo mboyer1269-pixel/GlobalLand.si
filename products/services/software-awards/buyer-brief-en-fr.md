@@ -8,11 +8,11 @@ Sources: api/1.0/ocdsReleasePackages/<notice> (FETCH TASK-179402256114/115/116).
 
 ### 1. Croydon Health Services NHS Trust -> Oracle Health (notice 105806-2026)
 - Scope (quoted): "continued provision of the core EPR software and associated clinical applications, application management, hosting, software licensing, maintenance and technical support services".
-- Value: GBP 17,549,439 (contracts[0].value; VAT/options inclusion not stated). Signed 2026-11-05.
+- Value: GBP 17,549,439 (contracts[0].value). The lot text adds: "The estimated total value of the proposed extension, including the optional fourth year, is approximately £17,549,439 excluding VAT." Signed 2026-11-05.
 - Route: "Award procedure without prior publication of a call for competition"; rationale cites "technical compatibility, interoperability and the significant technical and operational difficulties associated with introducing an alternative supplier".
 - Dates/options (quoted): extension "commencing on 29th December 2026 for an initial period of three years, with an option to extend for a further 12 months". No structured end date.
 - Note: the buyer states that "Price Only" was selected "solely to satisfy the mandatory validation requirements" and "No competitive evaluation has been undertaken".
-- Supplier lesson: an embedded clinical system was extended without competition on lock-in grounds; the optional fourth year is explicitly linked to "a major clinical system procurement and transition". Whether a procurement will follow is NOT stated.
+- Supplier lesson: an embedded clinical system was extended without competition on lock-in grounds; the optional fourth year is explicitly linked to "a major clinical system procurement and transition". The buyer also states: "The Trust is separately progressing its longer-term EPR strategy, which will include a competitive procurement for its longer-term EPR requirements." No date or route for that procurement is given in this release, and we infer none. Scope additions include upgrade management and "A trial of AI-enabled clinical functionality will also be included".
 
 ### 2. London Borough of Haringey -> TOTALMOBILE LIMITED (notice 105970-2026)
 - Scope (quoted): "For the provision of a mobile workforce management system for Housing Repairs and Maintenance." CPV 48100000 industry-specific software; additional 72261000 software support services.
@@ -35,7 +35,7 @@ A weekly digest of new software-CPV award notices for one supplier-chosen sector
 
 ## FR
 
-1. Croydon Health Services NHS Trust -> Oracle Health (105806-2026) : prolongation sans mise en concurrence du dossier patient electronique (logiciel, hebergement, licences, maintenance, support). Montant publie 17 549 439 GBP ; signe le 2026-11-05 ; debut cite 29 decembre 2026, trois ans plus option de 12 mois. Motif : compatibilite technique et difficulte a changer de fournisseur. Aucune date de fin structuree.
+1. Croydon Health Services NHS Trust -> Oracle Health (105806-2026) : prolongation sans mise en concurrence du dossier patient electronique (logiciel, hebergement, licences, maintenance, support). Montant publie 17 549 439 GBP ; signe le 2026-11-05 ; debut cite 29 decembre 2026, trois ans plus option de 12 mois. Motif : compatibilite technique et difficulte a changer de fournisseur. L'acheteur indique preparer separement une future procedure concurrentielle pour son DPI, sans date publiee ici. Aucune date de fin structuree.
 2. London Borough of Haringey -> TOTALMOBILE LIMITED (105970-2026) : systeme de gestion mobile des equipes de reparation de logements. 406 605,60 GBP ; signe le 2026-10-03 ; attribution directe dans un accord-cadre (non nomme), 1 offre. Option : "Contract Extension" sans detail.
 3. Scottish Police Authority -> Hanger19 Limited, PME (105743-2026) : plateforme back-office pour les bornes de recharge de vehicules electriques. 600 000 GBP ; procedure ouverte, qualite 60 / prix 40, 9 offres ; signe le 2026-10-23 ; sans option.
 

@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "VALUE_SENTENCE: The estimated total value of the proposed extension, including the optional fourth year, is approximately £17,549,439 excluding VAT.\nAMT £17,549,439\nok 5796\n\n",
+  "artifacts": [
+    "products/services/software-awards/buyer-brief-en-fr.md",
+    "products/services/software-awards/evidence.json",
+    "products/receipts/TASK-179402256121.json"
+  ],
+  "request": {
+    "id": "TASK-179402256121",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-07T03:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re,pathlib\nr=json.load(open('products/services/software-awards/raw/ocds-105806-2026.json'))['releases'][0]\nld=r['tender']['lots'][0]['description']\ni=ld.find('The estimated total value');vs=ld[i:].split('<br/>')[0]\nprint('VALUE_SENTENCE:',vs)\nq1='The Trust is separately progressing its longer-term EPR strategy, which will include a competitive procurement for its longer-term EPR requirements.'\nq2='A trial of AI-enabled clinical functionality will also be included'\nassert q1 in ld and q2 in ld\nm=re.search(r'GBP ?[0-9,.]+|£ ?[0-9,.]+',vs)\nprint('AMT',m.group(0) if m else None)\nbp=pathlib.Path('products/services/software-awards/buyer-brief-en-fr.md');b=bp.read_text()\nold='Whether a procurement will follow is NOT stated.'\nassert old in b\nnew='The buyer also states: \"'+q1+'\" No date or route for that procurement is given in this release, and we infer none. Scope additions include upgrade management and \"'+q2+'\".'\nb=b.replace(old,new)\nold2='- Value: GBP 17,549,439 (contracts[0].value; VAT/options inclusion not stated). Signed 2026-11-05.'\nassert old2 in b\nb=b.replace(old2,'- Value: GBP 17,549,439 (contracts[0].value). The lot text adds: \"'+vs.strip()+'\" Signed 2026-11-05.')\nold3='Motif : compatibilite technique et difficulte a changer de fournisseur.'\nassert old3 in b\nb=b.replace(old3,old3+' L\\'acheteur indique preparer separement une future procedure concurrentielle pour son DPI, sans date publiee ici.')\nbp.write_text(b)\nep=pathlib.Path('products/services/software-awards/evidence.json');e=json.loads(ep.read_text())\ne['profiles'][0]['quotes']['explicit_future_procurement']=q1\ne['profiles'][0]['quotes']['value_sentence']=vs.strip()\ne['profiles'][0]['value_qualification']='See value_sentence quotation from the lot description; not a unit price, not accessible funding.'\ne['correction']='Initial brief draft said a future procurement was not stated; corrected after reading full lot description (explicit statement, no date).'\nep.write_text(json.dumps(e,indent=1,ensure_ascii=False))\nprint('ok',len(b.encode()))"
+      ],
+      "inputs": [
+        "products/services/software-awards/"
+      ],
+      "outputs": [
+        "products/services/software-awards/buyer-brief-en-fr.md",
+        "products/services/software-awards/evidence.json"
+      ],
+      "mission_id": "SOFTWARE-AWARD-BUYER-BRIEF"
+    },
+    "description": "Broker action during THINK-1794022561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179402256121",
+  "input_sha256": "e38335b2c5ab48169fee306a92c6497fa33dce2ad8d53398c8e7d76c983061b7"
+}
