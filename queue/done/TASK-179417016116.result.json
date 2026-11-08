@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "941 2020-03-05 2026-10-26 2 False [] | Jobs Category Guidelines: Posting and Applying | The Jobs category connects people and companies hiring n8n talent with community members looking for opportunities. To keep listings useful and reduce spam, fol\n327476 2026-11-08 2026-11-08 1 True [] | Looking for BD & Referral Partners for TokAtlas — Remote, Commission-Based | \n327427 2026-11-08 2026-11-08 1 True [{'id': 2, 'name': 'core', 'slug': 'core'}, {'id': 4, 'name': 'deployment', 'slug': 'deployment'}, {'id': 9, 'name': 'workflow-building', 'slug': 'workflow-building'}] | Applications are now OPEN: AI & Workflow Automation Internship by Muslim Revive Skills (MRS) | \n327196 2026-11-06 2026-11-06 1 True [] | [HIRING] Full-Time Close CRM & n8n Automation Engineer | Remote | $2,000–$3,000 USD/Month | \n327075 2026-11-06 2026-11-06 2 True [{'id': 9, 'name': 'workflow-building', 'slug': 'workflow-building'}] | Need help regarding n8n AI assistant and workflow. Please help i can pay you | \n326857 2026-11-05 2026-11-05 12 True [] | Looking to Hire an n8n Expert to Build a Lead Management Automation Workflow | \n326558 2026-11-04 2026-11-04 1 True [] | Volunteer AI ambassadors and advisers wanted (AI agents and operators), paid on results | \n325902 2026-11-02 2026-11-02 1 True [{'id': 363, 'name': 'ai', 'slug': 'ai'}, {'id': 9, 'name': 'workflow-building', 'slug': 'workflow-building'}] | Looking for n8n contractors for ongoing project work | \n325678 2026-11-01 2026-11-01 1 True [{'id': 2, 'name': 'core', 'slug': 'core'}, {'id': 17, 'name': 'http-request', 'slug': 'http-request'}, {'id': 5, 'name': 'node', 'slug': 'node'}, {'id': 9, 'name': 'workflow-building', 'slug': 'workflow-building'}] | Hiring in San Diego (n8n & hubspot) | \n325466 2026-10-30 2026-10-30 1 True [{'id': 417, 'name': 'n8n', 'slug': 'n8n'}] | Looking for Business Development & Client Acquisition Partners for AI Coders | AI Automation Agency | \n325192 2026-10-28 2026-10-28 1 True [{'id': 9, 'name': 'workflow-building', 'slug': 'workflow-building'}] | Hiring: AI Workflow Engineer at 7shifts (Remote - Canada/US only) | \n324646 2026-10-26 2026-10-26 1 True [] | Looking for referral and sales partners for n8n & AI automation (B2B: Revenue Sharing) | \n324430 2026-10-26 2026-10-26 1 True [] | [HIRING] Digital Projects & AI Assistant | Remote freelance 50%+ | French or Italian | \n324371 2026-10-26 2026-10-26 1 True [] | Looking for an AI WhatsApp Business Chatbot Developer — Long-Term Collaboration | \n323862 2026-10-23 2026-10-23 2 True [] | N8n Expert Needed: AI WhatsApp Support Agent (Hindi + English) | \n322016 2026-10-16 2026-10-22 132 True [{'id': 9, 'name': 'workflow-building', 'slug': 'workflow-building'}] | N8n + MirrorFly Developer for Video Conferencing Automation | \n323364 2026-10-21 2026-10-22 33 True [] | Hiring: AI Growth & Automation Specialist | Remote | Potential Growth Partnership | \n320146 2026-10-09 2026-10-22 66 True [] | AI Marketing & n8n Automation Specialist for chill life — Potential Long-Term Partnership | \n322466 2026-10-18 2026-10-22 36 True [{'id': 409, 'name': 'bug:unconfirmed', 'slug': 'bug-unconfirmed'}] | *Título en español:* Necesito Setup Completo en n8n: Drive a 100 Cuentas Automático - Yo No Sé Nada, | \n322445 2026-10-18 2026-10-22 28 True [] | [HIRING] Shopify tracking + n8n specialist, part-time ongoing, $35/hr guaranteed + revenue share | \n321244 2026-10-14 2026-10-22 17 True [] | Looking for Founding n8n Automation Creators | Osmium | \n321881 2026-10-16 2026-10-22 28 True [] | Free pilot: checking differences between two CSV exports | \n323073 2026-10-20 2026-10-22 2 True [] | [For Hire] One JavaScript/Python data-mapping fix around n8n — USD60 | \n323062 2026-10-20 2026-10-22 2 True [] | [FOR HIRE/CONTRACTOR] n8n automation builder – self-hosted, production systems, Italy (CET) | \n322856 2026-10-19 2026-10-22 2 True [] | [FOR HIRE] n8n + AI automation engineer (Python backend) - part-time / ongoing, EU | \n322775 2026-10-19 2026-10-22 2 True [{'id': 363, 'name': 'ai', 'slug': 'ai'}, {'id': 9, 'name': 'workflow-building', 'slug': 'workflow-building'}] | [Available] n8n + AI automation engineer — self-hosted, part-time, EU hours | \n322645 2026-10-19 2026-10-22 2 True [] | Stop calling it \"workflow automation.\" That's what someone does in an afternoon with three Zapier no | \n321496 2026-10-14 2026-10-22 21 True [] | Exploring n8n implementation partnerships for SaaS workflow plans — no active project yet | \n322231 2026-10-17 2026-10-22 2 True [] | • [Available] Hardened n8n & AI Engineer: Database Idempotency + Redis DLQ + WhatsApp Systems | \n322229 2026-10-17 2026-10-22 3 True [] | [Available] n8n architect from Germany: self-hosted, GDPR-friendly, fixed-price projects | \n\n",
+  "artifacts": [
+    "products/receipts/TASK-179417016116.json"
+  ],
+  "request": {
+    "id": "TASK-179417016116",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json;d=json.load(open('products/services/automation-request/raw/n8n-jobs-latest.json'))\nfor t in d['topic_list']['topics']:\n  print(t['id'],t.get('created_at','')[:10],t.get('last_posted_at','')[:10] if t.get('last_posted_at') else '',t.get('posts_count'),t.get('closed'),t.get('tags'),'|',t['title'][:100],'|',(t.get('excerpt') or '')[:160].replace('\\n',' '))"
+      ],
+      "inputs": [
+        "products/services/automation-request/raw/n8n-jobs-latest.json"
+      ],
+      "outputs": [],
+      "mission_id": "AUTOMATION-MARKETPLACE-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794170161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179417016116",
+  "input_sha256": "a4d3c7ef57f2e34046378b4939513981716f320214de85ec3758b54b26c0e59c"
+}
