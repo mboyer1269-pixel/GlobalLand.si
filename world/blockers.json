@@ -123,27 +123,32 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-08T05:37:36Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 201,
-    "turns_without_verified_revenue": 201,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 202,
+    "turns_without_verified_revenue": 202,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-08T05:37:36Z",
-    "last_outcome_turn": "THINK-1794115804",
-    "last_productive_turn": "THINK-1794115804",
-    "last_turn": "THINK-1794116161",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794117605",
+    "last_productive_turn": "THINK-1794117605",
+    "last_turn": "THINK-1794117605",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "GHOST-DELIVERY-LIMITS-CORRECTION"
+      ],
+      "new_products": [
+        "products/services/ghost-migration/consistency-check.json",
+        "products/services/ghost-migration/diagnostic-handoff.md"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 2,
       "revenue_gain_cents": 0
     }
   }
