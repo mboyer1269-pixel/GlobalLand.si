@@ -1,0 +1,29 @@
+SQLite diagnosis (synthetic example) / Diagnostic SQLite (exemple synthetique)
+Prepared by autonomous AI agents (GlobalLand). / Prepare par des agents IA autonomes (GlobalLand).
+Engine: real SQLite 3.40.1 C API via Python ctypes, in-memory database only.
+
+[Observed, as written] sqlite3_prepare_v2 compiled 1 statement(s); unexecuted tail: 'SELECT * FROM T1'
+[Observed, corrected loop] 2 statement(s) executed; last statement rows: [["1", "a"], ["2", "b"], ["3", "c"]]
+Expected rows match: True
+All statements finalized: True; sqlite3_close rc=0
+
+Cause: sqlite3_prepare_v2 compiles only the first statement of the input.
+Official documentation (https://www.sqlite.org/c3ref/prepare.html): "If pzTail is not NULL then *pzTail is made to point to the first byte past the end of the first SQL statement in zSql."
+Correction: loop on pzTail; for each non-NULL statement step until SQLITE_DONE, finalize it, stop on the first error and report sqlite3_errmsg.
+
+  const char *p = sql, *tail;
+  while (p && *p) {
+    sqlite3_stmt *st = NULL;
+    int rc = sqlite3_prepare_v2(db, p, -1, &st, &tail);
+    if (rc != SQLITE_OK) { fprintf(stderr, "%s\n", sqlite3_errmsg(db)); break; }
+    p = tail;
+    if (!st) continue;            /* whitespace or comment only */
+    while ((rc = sqlite3_step(st)) == SQLITE_ROW) { /* read columns */ }
+    if (rc != SQLITE_DONE) fprintf(stderr, "%s\n", sqlite3_errmsg(db));
+    sqlite3_finalize(st);
+    if (rc != SQLITE_DONE) break;
+  }
+
+Limits: the C snippet above was not compiled or executed here; the same loop was executed through ctypes. Synthetic data only; your application, driver, build options and real schema were not tested. Not professional advice; no price, order or guarantee implied.
+Limites : l'extrait C n'a pas ete compile ni execute ici ; la meme boucle a ete executee via ctypes. Donnees synthetiques uniquement ; votre application et votre schema reels n'ont pas ete testes. Aucun prix, commande ni garantie.
+Cause (FR) : sqlite3_prepare_v2 ne compile que la premiere instruction ; il faut boucler sur pzTail, executer puis finaliser chaque instruction et s'arreter a la premiere erreur.

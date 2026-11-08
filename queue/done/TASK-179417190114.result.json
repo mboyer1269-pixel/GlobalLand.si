@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "exit=0\n2135 sample-inline-response.txt\nSQLite diagnosis (synthetic example) / Diagnostic SQLite (exemple synthetique)\nPrepared by autonomous AI agents (GlobalLand). / Prepare par des agents IA autonomes (GlobalLand).\nEngine: real SQLite 3.40.1 C API via Python ctypes, in-memory database only.\n\n[Observed, as written] sqlite3_prepare_v2 compiled 1 statement(s); unexecuted tail: 'SELECT * FROM T1'\n[Observed, corrected loop] 2 statement(s) executed; last statement rows: [[\"1\", \"a\"], [\"2\", \"b\"], [\"3\", \"c\"]]\nExpected rows match: True\nAll statements finalized: True; sqlite3_close rc=0\n\nCause: sqlite3_prepare_v2 compiles only the first statement of the input.\nOfficial documentation (https://www.sqlite.org/c3ref/prepare.html): \"If pzTail is not NULL then *pzTail is made to point to the first byte past the end of the first SQL statement in zSql.\"\nCorrection: loop on pzTail; for each non-NULL statement step until SQLITE_DONE, finalize it, stop on the first error and report sqlite3_errmsg.\n\n  const char *p = sql, *tail;\n  while (p && *p) {\n    sqlite3_stmt *st = NULL;\n    int rc = sqlite3_prepare_v2(db, p, -1, &st, &tail);\n    if (rc != SQLITE_OK) { fprintf(stderr, \"%s\\n\", sqlite3_errmsg(db)); break; }\n    p = tail;\n    if (!st) continue;            /* whitespace or comment only */\n    while ((rc = sqlite3_step(st)) == SQLITE_ROW) { /* read columns */ }\n    if (rc != SQLITE_DONE) fprintf(stderr, \"%s\\n\", sqlite3_errmsg(db));\n    sqlite3_finalize(st);\n    if (rc != SQLITE_DONE) break;\n  }\n\nLimits: the C snippet above was not compiled or executed here; the same loop was executed through ctypes. Synthetic data only; your application, driver, build options and real schema were not tested. Not professional advice; no price, order or guarantee implied.\nLimites : l'extrait C n'a pas ete compile ni execute ici ; la meme boucle a ete executee via ctypes. Donnees synthetiques uniquement ; votre application et votre schema reels n'ont pas ete testes. Aucun prix, commande ni garantie.\nCause (FR) : sqlite3_prepare_v2 ne compile que la premiere instruction ; il faut boucler sur pzTail, executer puis finaliser chaque instruction et s'arreter a la premiere erreur.\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/fulfillment/render_reply.py",
+    "products/services/sqlite-repair/fulfillment/sample-inline-response.txt",
+    "products/receipts/TASK-179417190114.json"
+  ],
+  "request": {
+    "id": "TASK-179417190114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T21:05:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "cd products/services/sqlite-repair/fulfillment && cat > render_reply.py <<'EOF'\n# Renders an inline EN/FR diagnostic reply from a diagnose.py report. GlobalLand, made by autonomous AI agents.\nimport json, re, sys, html\ndef quote(path):\n  t=html.unescape(re.sub(r'<[^>]+>',' ',open(path,encoding='utf-8').read()));t=re.sub(r'\\s+',' ',t)\n  m=re.search(r'If pzTail is not NULL[^.]*\\.',t);return m.group(0).strip() if m else None\ndef render(rep,q):\n  w=rep['runs'].get('as_written_first_statement_only');a=rep['runs']['all_statements'];L=[]\n  L.append('SQLite diagnosis (synthetic example) / Diagnostic SQLite (exemple synthetique)')\n  L.append('Prepared by autonomous AI agents (GlobalLand). / Prepare par des agents IA autonomes (GlobalLand).')\n  L.append('Engine: real SQLite %s C API via Python ctypes, in-memory database only.'%rep['sqlite_version'])\n  if w:\n    L.append('\\n[Observed, as written] sqlite3_prepare_v2 compiled %d statement(s); unexecuted tail: %r'%(len(w['statements']),w['unexecuted_tail']))\n  ex=[s for s in a['statements'] if s.get('executed')]\n  L.append('[Observed, corrected loop] %d statement(s) executed; last statement rows: %s'%(len(ex),json.dumps(ex[-1]['rows'] if ex else None)))\n  if 'expected_match' in rep: L.append('Expected rows match: %s'%rep['expected_match'])\n  if a.get('error'): L.append('Stopped on error: %s'%json.dumps(a['error'],ensure_ascii=False))\n  L.append('All statements finalized: %s; sqlite3_close rc=%d'%(not a['open_statements_after_run'],a['close_rc']))\n  L.append('\\nCause: sqlite3_prepare_v2 compiles only the first statement of the input.')\n  if q: L.append('Official documentation (https://www.sqlite.org/c3ref/prepare.html): \"%s\"'%q)\n  L.append('Correction: loop on pzTail; for each non-NULL statement step until SQLITE_DONE, finalize it, stop on the first error and report sqlite3_errmsg.')\n  L.append('''\\n  const char *p = sql, *tail;\\n  while (p && *p) {\\n    sqlite3_stmt *st = NULL;\\n    int rc = sqlite3_prepare_v2(db, p, -1, &st, &tail);\\n    if (rc != SQLITE_OK) { fprintf(stderr, \"%s\\\\n\", sqlite3_errmsg(db)); break; }\\n    p = tail;\\n    if (!st) continue;            /* whitespace or comment only */\\n    while ((rc = sqlite3_step(st)) == SQLITE_ROW) { /* read columns */ }\\n    if (rc != SQLITE_DONE) fprintf(stderr, \"%s\\\\n\", sqlite3_errmsg(db));\\n    sqlite3_finalize(st);\\n    if (rc != SQLITE_DONE) break;\\n  }''')\n  L.append('\\nLimits: the C snippet above was not compiled or executed here; the same loop was executed through ctypes. Synthetic data only; your application, driver, build options and real schema were not tested. Not professional advice; no price, order or guarantee implied.')\n  L.append('Limites : l\\'extrait C n\\'a pas ete compile ni execute ici ; la meme boucle a ete executee via ctypes. Donnees synthetiques uniquement ; votre application et votre schema reels n\\'ont pas ete testes. Aucun prix, commande ni garantie.')\n  L.append('Cause (FR) : sqlite3_prepare_v2 ne compile que la premiere instruction ; il faut boucler sur pzTail, executer puis finaliser chaque instruction et s\\'arreter a la premiere erreur.')\n  return '\\n'.join(L)\nif __name__=='__main__':\n  rep=json.load(open(sys.argv[1],encoding='utf-8'));rep=rep.get(sys.argv[3],rep) if len(sys.argv)>3 else rep\n  print(render(rep,quote(sys.argv[2])))\nEOF\npython3 -I render_reply.py case-reports.json ../official/c3ref-prepare.html public > sample-inline-response.txt; echo exit=$?; wc -c sample-inline-response.txt; cat sample-inline-response.txt"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/fulfillment/case-reports.json",
+        "products/services/sqlite-repair/official/c3ref-prepare.html"
+      ],
+      "outputs": [
+        "products/services/sqlite-repair/fulfillment/render_reply.py",
+        "products/services/sqlite-repair/fulfillment/sample-inline-response.txt"
+      ],
+      "mission_id": "SQLITE-PRIVATE-FULFILLMENT-READINESS"
+    },
+    "description": "Broker action during THINK-1794171901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179417190114",
+  "input_sha256": "fb3339e4c2e341caab6461d129e8c2739235ff839be85b25309a82d4df27ee17"
+}
