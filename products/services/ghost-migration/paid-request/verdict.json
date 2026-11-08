@@ -1,0 +1,72 @@
+{
+ "mission": "GHOST-PAID-SERVICE-REQUEST",
+ "observed_at": "2026-11-08",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "hypothesis": "Ghost users commission bounded migration/import repairs that our existing diagnostic work could support.",
+ "access_and_rules": {
+  "categories": {
+   "url": "https://forum.ghost.org/categories.json",
+   "fetch": "TASK-179416116111",
+   "http": 200
+  },
+  "marketplace_rule": {
+   "url": "https://forum.ghost.org/t/22.json",
+   "fetch": "TASK-179416116115",
+   "quote": "Advertise or request commercial services for Ghost, like apps, jobs, premium themes, hosting or consulting."
+  },
+  "marketplace_listing": {
+   "url": "https://forum.ghost.org/c/marketplace/12.json",
+   "fetch": "TASK-179416116113",
+   "observation": "Of 30 latest topics, 28 are vendor/theme/hosting advertisements; buyer-authored requests: 63458 (2026-07-29). Latest buyer migration request found by search is 57157 (2025-04-28); earlier ones date 2019-2021."
+  },
+  "search": {
+   "url": "https://forum.ghost.org/search.json?q=migration%20%23marketplace%20order%3Alatest",
+   "fetch": "TASK-179416116116"
+  },
+  "submission_prerequisite": "Replying or messaging needs a forum account; blocker NO-COMMUNITY-ANSWER-ACCOUNT (open, needs_founder). Not probed."
+ },
+ "candidates": [
+  {
+   "id": 63656,
+   "url": "https://forum.ghost.org/t/63656",
+   "date": "2026-08-27",
+   "author": "dan",
+   "quote": "$999/year gets you ongoing help (calls plus small fixes), or project work for themes, migrations, and custom stuff.",
+   "verdict": "REJECT",
+   "reason": "Vendor advertisement (supply side), not buyer demand. Shows that an incumbent prices migration work inside a USD 999/year retainer."
+  },
+  {
+   "id": 57157,
+   "url": "https://forum.ghost.org/t/57157",
+   "date": "2025-04-28",
+   "author": "pops",
+   "quote": "I’m looking for someone with experience to assist me in implementing the best strategy to merge two websites together in Ghost.",
+   "requested_outcome": "Theme/homepage build plus a domain merge of a WP site onto an existing Ghost stack (18K+ subs, Stripe); the author says “I don’t want to migrate them over”.",
+   "budget": "none stated",
+   "status": "open topic, last post 2025-04-28 (over 18 months old; resolution unobservable)",
+   "verdict": "REJECT",
+   "reason": "Stale. The scope is theme/design/DNS/proxy work, not an import repair; it needs live site access and design work outside our offline tools."
+  },
+  {
+   "id": 63458,
+   "url": "https://forum.ghost.org/t/63458",
+   "date": "2026-07-29",
+   "author": "jujujampada",
+   "quote": "Embed a checkout/buy-button system (e.g. Payhip or Snipcart) into individual Ghost book pages via code injection",
+   "requested_outcome": "E-book storefront and checkout integration with member coupon logic",
+   "budget": "not quoted; a reply mentions a “bonus-based compensation plan”",
+   "status": "open, 2 posts, last 2026-07-29",
+   "verdict": "REJECT",
+   "reason": "Not migration/import. Needs third-party checkout accounts and live site access; compensation is unclear and contingent."
+  }
+ ],
+ "selected": null,
+ "verdict": "STOP",
+ "summary": "0 of 3 buyer-side candidates is a paid Ghost migration/import repair we could deliver offline. On the public Marketplace, supply (vendors, Ghost Experts, hosting firms that offer migrations) far outnumbers buyer requests. Observed buyer requests are theme/integration builds needing live access.",
+ "uncertainties": [
+  "Only public Marketplace topics and one search were read; private DMs, the Ghost Experts directory and off-forum hiring are unobserved.",
+  "Topic resolution is not observable from the public JSON.",
+  "Our Ghost converter remains unvalidated upstream (upstream-execution/result.json); this limits any import-repair offer regardless of demand."
+ ],
+ "next": "Close this bounded experiment; do not widen Ghost discovery. Reopen only on a classified inbound request or an approved forum account."
+}
