@@ -1,0 +1,75 @@
+{
+ "mission": "WORDPRESS-PAID-DATA-REQUEST",
+ "observed_at": "2026-11-08",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "verdict": "STOP",
+ "channel": "https://jobs.wordpress.net/",
+ "access_and_rules": {
+  "feed": {
+   "url": "https://jobs.wordpress.net/feed/",
+   "fetch": "TASK-179416296111",
+   "http": 200,
+   "items": 6,
+   "newest": "2026-11-05",
+   "oldest": "2026-10-19"
+  },
+  "faq": {
+   "url": "https://jobs.wordpress.net/faq/",
+   "fetch": "TASK-179416296112",
+   "quotes": [
+    "Jobs must offer monetary compensation in exchange for work.",
+    "Your job posting will be displayed for a period of 21 days",
+    "All job postings are moderated prior to appearing on the site."
+   ]
+  }
+ },
+ "candidates": [
+  {
+   "title": "Migration of an Existing Platform to WordPress",
+   "url": "https://jobs.wordpress.net/job/migration-of-an-existing-platform-to-wordpress/",
+   "posted": "2026-10-31",
+   "fetch": "TASK-179416296114",
+   "buyer": "International Association of Project Managers (IAPM), Liechtenstein",
+   "requested_outcome": "gradual rebuild of custom PHP/MySQL CMS, certification system and learning platform on WordPress/WooCommerce, old and new systems in parallel",
+   "quotes": [
+    "We are looking for an experienced, German-speaking WordPress developer (m/f/d) with excellent PHP skills",
+    "During the migration, the old and new systems will operate in parallel."
+   ],
+   "compensation": "not stated on listing (detailed PDF not read)",
+   "application_route": "Apply via Email (outgoing contact not implemented; no authorized identity)",
+   "live_access_required": true,
+   "reject_reasons": [
+    "long-running engagement requiring live system and database access",
+    "requires experienced German-speaking developer; we cannot claim that experience",
+    "no bounded public input or acceptance criteria for an offline deliverable",
+    "compensation unknown; application needs outgoing email"
+   ]
+  },
+  {
+   "title": "WordPress & WooCommerce Developer - Project-Based",
+   "url": "https://jobs.wordpress.net/job/wordpress-woocommerce-developer-project-based/",
+   "posted": "2026-11-03",
+   "evidence": "feed description only",
+   "reject_reasons": [
+    "site/store building and third-party integration, not data conversion or CSV cleanup",
+    "requires live site access"
+   ]
+  },
+  {
+   "title": "WordPress website developer",
+   "url": "https://jobs.wordpress.net/job/wordpress-website-developer-18/",
+   "posted": "2026-11-05",
+   "evidence": "feed description only",
+   "reject_reasons": [
+    "six-page build from storyboards; not data conversion",
+    "requires live hosting/CMS access and design implementation"
+   ]
+  }
+ ],
+ "not_counted": [
+  "web development (2026-11-03), WordPress / UX Technical Lead (2026-10-31), Lead Web Developer (2026-10-19): employment/general development roles, out of scope"
+ ],
+ "conclusion": "0 of 6 current listings is a bounded, offline-deliverable data-conversion, CSV cleanup or content-migration request. The single migration listing is a long live-system engagement. No application draft prepared; no posting, contact, registration or spending. Board volume (~6 listings over 3 weeks) is too low for a repeatable channel for this scope.",
+ "reconsider_if": "a listing appears that supplies a public sample file and explicit acceptance criteria for a one-off conversion; and an authorized application identity exists (BOUNTY-SUBMISSION-ELIGIBILITY).",
+ "revenue": "none"
+}
