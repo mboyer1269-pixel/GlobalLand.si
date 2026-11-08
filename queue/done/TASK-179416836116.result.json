@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "220062 2026-10-28 72 False | Hi, does anyone know how to update R studio specifically posit. I just paid my subscription. However, it's saying credits are depleted. Does anyone know what to do to change this? | ...ing RStudio wont change the credits, those sit on your Posit account, not the install. check youre signed in inside RStudio with the same account you paid for, thats usually why it still says deple\n218542 2026-09-30 67 False | Usage credit enforcement and migrated app sizing after shinyapps.io → Connect Cloud auto-migration | ...nks for the post and for testing this with your own usage numbers. On enforcement: we plan to enforce limits for free users starting in November. For paid users, we'll likely not enforce it until t\n218143 2026-09-18 24 False | chrome fails when trying to download generated reports from shiny app on posit connect cloud | Are you on a free plan? You need a paid plan to run chromote see e.g. https://forum.posit.co/t/how-to-set-up-chromote-chrome-environment-variable-to-the-executable-of-a-chromium-based-brows...\n216854 2026-08-12 14 True | Account suspended for \"use of paid process\" — teaching account, need reinstatement | This topic was automatically closed 7 days after the last reply. New replies are no longer allowed. If you have a query related to it or one of the replies, start a new topic and refer back with a lin\n211341 2026-05-03 14 True | use of prohibited process | ...the Posit Cloud forum here: Posit Cloud - Posit Community I noticed another similar question asked a few months ago: Account Suspended due to use of paid process .\nFAQ spam :: r. Don’t harass or grief anyone, impersonate people, or expose their private information. Respect our forum. Don’t post spam or otherwise vandalize the forum. Discussions here are public, be careful about what personal information (emails, phone numbers, full names) you reveal. T\nFAQ homework :: p. Whats the difference between R and RStudio? Policy FAQs Homework Policy : Is this a good place to ask questions from homework problem sets? Duplicate Posts : Is it cool if I cross-post? @name mentioning other users : Should I mention other users in my post? ps://community.rstu\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179416836116.json"
+  ],
+  "request": {
+    "id": "TASK-179416836116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T20:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re,html\nd=json.load(open('products/services/r-data-repair/raw/posit-search-paid.json'))\nts={t['id']:t for t in d.get('topics',[])}\nfor p in d.get('posts',[])[:25]:\n  t=ts.get(p['topic_id'],{})\n  print(p['topic_id'],p['created_at'][:10],t.get('category_id'),t.get('closed'),'|',t.get('title'),'|',p.get('blurb','')[:200].replace('\\n',' '))\nh=open('products/services/r-data-repair/raw/posit-faq.html').read()\ntx=html.unescape(re.sub(r'<[^>]+>',' ',h))\ntx=re.sub(r'\\s+',' ',tx)\nfor k in ['job','hire','paid','commercial','advertis','spam','AI','generat','LLM','ChatGPT','homework']:\n  for m in re.finditer(k,tx):\n    print('FAQ',k,'::',tx[max(0,m.start()-120):m.start()+160]); break\n"
+      ],
+      "inputs": [
+        "products/services/r-data-repair/raw/posit-search-paid.json",
+        "products/services/r-data-repair/raw/posit-faq.html"
+      ],
+      "outputs": [],
+      "mission_id": "PUBLIC-R-DATA-REPAIR-REQUEST"
+    },
+    "description": "Broker action during THINK-1794168361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179416836116",
+  "input_sha256": "7ef3099e991afe742875985e12ae36ce801cbeb56892f675bf54b785c6b2a035"
+}
