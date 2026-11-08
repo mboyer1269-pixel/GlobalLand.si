@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "{\n \"synthetic_fixtures_only\": true,\n \"ghost_import_tested\": false,\n \"passed\": 10,\n \"total\": 10,\n \"checks\": [\n  {\n   \"check\": \"posts changed == 2 (s1, s4)\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"s1 wrapped in p\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"s2 unchanged (no br)\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"s3 unchanged (already p)\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"s4 both quotes wrapped, attrs kept\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"s5 untouched\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"visible text preserved in every post\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"br count preserved\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"idempotent\",\n   \"pass\": true\n  },\n  {\n   \"check\": \"non-post fields unchanged\",\n   \"pass\": true\n  }\n ],\n \"script_sha256\": \"726205bd7008bb481ab8b4976eaaf9fea156f87f88ca2ed87bcdd9ffb6ef3e2d\"\n}\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/wrap_blockquote_br.py",
+    "products/services/ghost-migration/acceptance_check.py",
+    "products/services/ghost-migration/fixtures/synthetic-import.json",
+    "products/services/ghost-migration/acceptance-results.json",
+    "products/receipts/TASK-179411256124.json"
+  ],
+  "request": {
+    "id": "TASK-179411256124",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "set -e\nD=products/services/ghost-migration\nmkdir -p $D/fixtures\ncat > $D/wrap_blockquote_br.py <<'EOF'\n#!/usr/bin/env python3\n\"\"\"Workaround candidate for forum.ghost.org/t/60053 (built by autonomous AI agents).\nWraps the inline content of <blockquote> elements that contain <br> but no block\nchildren in a single <p>, inside the \"html\" field of every post in a Ghost\nuniversal-import JSON file. Stdlib only. Ghost importer effect is UNTESTED.\nUsage: python3 wrap_blockquote_br.py in.json out.json\"\"\"\nimport json, re, sys\nBQ = re.compile(r'(<blockquote\\b[^>]*>)(.*?)(</blockquote>)', re.I | re.S)\nBLOCK = re.compile(r'<(p|div|ul|ol|h[1-6]|blockquote|figure|pre|table)\\b', re.I)\nBR = re.compile(r'<br\\s*/?>', re.I)\ndef fix_html(h):\n    def rep(m):\n        inner = m.group(2)\n        if not BR.search(inner) or BLOCK.search(inner):\n            return m.group(0)\n        return m.group(1) + '<p>' + inner.strip() + '</p>' + m.group(3)\n    return BQ.sub(rep, h)\ndef fix_doc(doc):\n    n = 0\n    dbs = doc.get('db', [doc]) if isinstance(doc, dict) else []\n    for db in dbs:\n        for post in (db.get('data', {}) or {}).get('posts', []) or []:\n            h = post.get('html')\n            if isinstance(h, str):\n                new = fix_html(h)\n                if new != h:\n                    n += 1\n                    post['html'] = new\n    return n\nif __name__ == '__main__':\n    doc = json.load(open(sys.argv[1], encoding='utf-8'))\n    n = fix_doc(doc)\n    json.dump(doc, open(sys.argv[2], 'w', encoding='utf-8'), ensure_ascii=False, indent=2)\n    print(f'posts changed: {n}')\nEOF\ncat > $D/fixtures/synthetic-import.json <<'EOF'\n{\"db\":[{\"meta\":{\"version\":\"6.0.0\"},\"data\":{\"posts\":[\n{\"title\":\"SYNTHETIC br quote\",\"slug\":\"s1\",\"html\":\"<p>Intro</p><blockquote>Line one<br>Line two<br/>Line three</blockquote><p>End</p>\"},\n{\"title\":\"SYNTHETIC plain quote\",\"slug\":\"s2\",\"html\":\"<blockquote>No breaks here</blockquote>\"},\n{\"title\":\"SYNTHETIC already p\",\"slug\":\"s3\",\"html\":\"<blockquote><p>A<br>B</p></blockquote>\"},\n{\"title\":\"SYNTHETIC attrs and inline\",\"slug\":\"s4\",\"html\":\"<blockquote class=\\\"q\\\"> <em>Ital</em><br><a href=\\\"https://example.com/\\\">link</a> </blockquote><blockquote>x<br>y</blockquote>\"},\n{\"title\":\"SYNTHETIC no html\",\"slug\":\"s5\",\"mobiledoc\":null}\n]}}]}\nEOF\ncat > $D/acceptance_check.py <<'EOF'\nimport json, re, sys, copy, hashlib, importlib.util\nsp = importlib.util.spec_from_file_location('w', 'products/services/ghost-migration/wrap_blockquote_br.py'); w = importlib.util.module_from_spec(sp); sp.loader.exec_module(w)\ndef text(h): return re.sub(r'\\s+', ' ', re.sub(r'<[^>]+>', ' ', h)).strip()\nsrc = json.load(open('products/services/ghost-migration/fixtures/synthetic-import.json'))\nout = copy.deepcopy(src); n = w.fix_doc(out)\nP0 = src['db'][0]['data']['posts']; P1 = out['db'][0]['data']['posts']\nchecks = []\ndef c(name, ok): checks.append({'check': name, 'pass': bool(ok)})\nc('posts changed == 2 (s1, s4)', n == 2)\nc('s1 wrapped in p', P1[0]['html'] == '<p>Intro</p><blockquote><p>Line one<br>Line two<br/>Line three</p></blockquote><p>End</p>')\nc('s2 unchanged (no br)', P1[1]['html'] == P0[1]['html'])\nc('s3 unchanged (already p)', P1[2]['html'] == P0[2]['html'])\nc('s4 both quotes wrapped, attrs kept', P1[3]['html'] == '<blockquote class=\"q\"><p><em>Ital</em><br><a href=\"https://example.com/\">link</a></p></blockquote><blockquote><p>x<br>y</p></blockquote>')\nc('s5 untouched', P1[4] == P0[4])\nc('visible text preserved in every post', all(text(a.get('html') or '') == text(b.get('html') or '') for a, b in zip(P0, P1)))\nc('br count preserved', all(len(w.BR.findall(a.get('html') or '')) == len(w.BR.findall(b.get('html') or '')) for a, b in zip(P0, P1)))\nagain = copy.deepcopy(out); c('idempotent', w.fix_doc(again) == 0 and again == out)\nc('non-post fields unchanged', out['db'][0]['meta'] == src['db'][0]['meta'])\nres = {'synthetic_fixtures_only': True, 'ghost_import_tested': False, 'passed': sum(x['pass'] for x in checks), 'total': len(checks), 'checks': checks, 'script_sha256': hashlib.sha256(open('products/services/ghost-migration/wrap_blockquote_br.py','rb').read()).hexdigest()}\njson.dump(res, open('products/services/ghost-migration/acceptance-results.json', 'w'), indent=2)\nprint(json.dumps(res, indent=1)); sys.exit(0 if res['passed'] == res['total'] else 1)\nEOF\npython3 -I $D/acceptance_check.py"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/ghost-migration/wrap_blockquote_br.py",
+        "products/services/ghost-migration/acceptance_check.py",
+        "products/services/ghost-migration/fixtures/synthetic-import.json",
+        "products/services/ghost-migration/acceptance-results.json"
+      ],
+      "mission_id": "GHOST-MIGRATION-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794112561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411256124",
+  "input_sha256": "7660619a1ac47b5391531e7b41e8efb26383d90666de7b3f482fc811224a6151"
+}

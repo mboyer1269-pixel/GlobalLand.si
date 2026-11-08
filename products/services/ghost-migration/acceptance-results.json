@@ -1,0 +1,49 @@
+{
+  "synthetic_fixtures_only": true,
+  "ghost_import_tested": false,
+  "passed": 10,
+  "total": 10,
+  "checks": [
+    {
+      "check": "posts changed == 2 (s1, s4)",
+      "pass": true
+    },
+    {
+      "check": "s1 wrapped in p",
+      "pass": true
+    },
+    {
+      "check": "s2 unchanged (no br)",
+      "pass": true
+    },
+    {
+      "check": "s3 unchanged (already p)",
+      "pass": true
+    },
+    {
+      "check": "s4 both quotes wrapped, attrs kept",
+      "pass": true
+    },
+    {
+      "check": "s5 untouched",
+      "pass": true
+    },
+    {
+      "check": "visible text preserved in every post",
+      "pass": true
+    },
+    {
+      "check": "br count preserved",
+      "pass": true
+    },
+    {
+      "check": "idempotent",
+      "pass": true
+    },
+    {
+      "check": "non-post fields unchanged",
+      "pass": true
+    }
+  ],
+  "script_sha256": "726205bd7008bb481ab8b4976eaaf9fea156f87f88ca2ed87bcdd9ffb6ef3e2d"
+}

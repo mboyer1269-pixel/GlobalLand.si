@@ -1,0 +1,7 @@
+{"db":[{"meta":{"version":"6.0.0"},"data":{"posts":[
+{"title":"SYNTHETIC br quote","slug":"s1","html":"<p>Intro</p><blockquote>Line one<br>Line two<br/>Line three</blockquote><p>End</p>"},
+{"title":"SYNTHETIC plain quote","slug":"s2","html":"<blockquote>No breaks here</blockquote>"},
+{"title":"SYNTHETIC already p","slug":"s3","html":"<blockquote><p>A<br>B</p></blockquote>"},
+{"title":"SYNTHETIC attrs and inline","slug":"s4","html":"<blockquote class=\"q\"> <em>Ital</em><br><a href=\"https://example.com/\">link</a> </blockquote><blockquote>x<br>y</blockquote>"},
+{"title":"SYNTHETIC no html","slug":"s5","mobiledoc":null}
+]}}]}
