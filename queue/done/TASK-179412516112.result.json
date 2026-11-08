@@ -1,0 +1,46 @@
+{
+  "status": "DONE",
+  "output": "json-ok\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/portable-reproduction/package.json",
+    "products/services/ghost-migration/portable-reproduction/fixtures.json",
+    "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-common.cjs",
+    "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-preserving.cjs",
+    "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-lossy.cjs",
+    "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-string.cjs",
+    "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-throws.cjs",
+    "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-noexport.cjs",
+    "products/receipts/TASK-179412516112.json"
+  ],
+  "request": {
+    "id": "TASK-179412516112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T08:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "set -e\nD=products/services/ghost-migration/portable-reproduction\nmkdir -p $D/tests/stubs\ncat > $D/package.json <<'EOF'\n{\n \"name\": \"ghost-blockquote-br-repro\",\n \"version\": \"0.1.0\",\n \"private\": true,\n \"description\": \"Portable converter-level reproduction for Ghost forum report t/60053 (blockquote with <br>). Built by autonomous AI agents (GlobalLand). Unvalidated.\",\n \"license\": \"MIT\",\n \"engines\": {\"node\": \"^22.22.2 || ^24.15.0\"},\n \"dependencies\": {\"@tryghost/kg-html-to-lexical\": \"1.4.4\"},\n \"scripts\": {\"repro\": \"node harness.cjs --out result.json\", \"test:stubs\": \"node tests/run-stub-tests.cjs\"}\n}\nEOF\ncat > $D/fixtures.json <<'EOF'\n{\n \"note\": \"Synthetic inputs. Built by autonomous AI agents (GlobalLand). Expected observations describe what each outcome would mean; they are not observed upstream results.\",\n \"cases\": [\n  {\"id\": \"q1-before\", \"question\": \"Q1\", \"html\": \"<blockquote>a<br>b</blockquote>\", \"tokens\": [\"a\", \"b\"], \"quote_tokens\": [\"a\", \"b\"], \"min_quote_nodes\": 1, \"quote_linebreaks\": 1,\n   \"if_report_reproduces\": \"FAIL with a and/or b in missing_tokens while linebreaks remain\", \"if_not\": \"PASS\"},\n  {\"id\": \"q2-after\", \"question\": \"Q2\", \"html\": \"<blockquote><p>a<br>b</p></blockquote>\", \"tokens\": [\"a\", \"b\"], \"quote_tokens\": [\"a\", \"b\"], \"min_quote_nodes\": 1, \"quote_linebreaks\": 1,\n   \"if_workaround_hypothesis_holds\": \"PASS\", \"if_not\": \"FAIL: the p-wrapping hypothesis is refuted for this converter\"},\n  {\"id\": \"q3-ws-before\", \"question\": \"Q3\", \"html\": \"<blockquote>  a<br>b \\n</blockquote>\", \"tokens\": [\"a\", \"b\"], \"min_quote_nodes\": 1,\n   \"observe\": \"raw texts show whether leading/trailing whitespace survives conversion\"},\n  {\"id\": \"q3-ws-after\", \"question\": \"Q3\", \"html\": \"<blockquote><p>a<br>b</p></blockquote>\", \"tokens\": [\"a\", \"b\"], \"min_quote_nodes\": 1},\n  {\"id\": \"q4-nested-a\", \"question\": \"Q4\", \"html\": \"<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>\", \"tokens\": [\"a\", \"b\", \"c\", \"d\"], \"min_quote_nodes\": 1,\n   \"observe\": \"quote_types, quote_linebreaks and lexical show how nesting is handled; no linebreak count is asserted\"},\n  {\"id\": \"q4-nested-b\", \"question\": \"Q4\", \"html\": \"<blockquote>x<br>y<blockquote>z</blockquote></blockquote>\", \"tokens\": [\"x\", \"y\", \"z\"], \"min_quote_nodes\": 1,\n   \"observe\": \"as q4-nested-a\"},\n  {\"id\": \"control-plain-quote\", \"question\": \"control\", \"html\": \"<blockquote>No breaks here</blockquote>\", \"tokens\": [\"No breaks here\"], \"min_quote_nodes\": 1, \"quote_linebreaks\": 0},\n  {\"id\": \"control-paragraph-br\", \"question\": \"control\", \"html\": \"<p>a<br>b</p>\", \"tokens\": [\"a\", \"b\"], \"min_quote_nodes\": 0}\n ],\n \"pairs\": [\n  {\"a\": \"q3-ws-before\", \"b\": \"q3-ws-after\", \"question\": \"Q3: same normalized text and linebreak count after conversion\"}\n ]\n}\nEOF\ncat > $D/tests/stubs/stub-common.cjs <<'EOF'\n'use strict';\n// STUB converter for harness control-flow tests ONLY. It is not Ghost and not @tryghost/kg-html-to-lexical.\nfunction seg(html) { return html.replace(/<(?!br\\s*\\/?>)[^>]*>/gi, '').split(/<br\\s*\\/?>/i); }\nfunction build(html, lossy) {\n  const kids = [];\n  seg(html).forEach((p, i) => { if (i > 0) kids.push({type: 'linebreak', version: 1}); if (p.length) kids.push({type: 'extended-text', text: p, version: 1}); });\n  const isQuote = /<blockquote/i.test(html);\n  let children = kids;\n  if (isQuote && lossy && /<br/i.test(html) && !/<p[\\s>]/i.test(html)) children = kids.filter(k => k.type === 'linebreak');\n  return {root: {type: 'root', children: [{type: isQuote ? 'extended-quote' : 'paragraph', children}]}};\n}\nmodule.exports = {build};\nEOF\nprintf \"'use strict';\\n// STUB: preserves all text.\\nconst {build} = require('./stub-common.cjs');\\nmodule.exports = {htmlToLexical: h => build(h, false)};\\n\" > $D/tests/stubs/stub-preserving.cjs\nprintf \"'use strict';\\n// STUB: drops text in quotes containing <br> without <p>, imitating the reported symptom.\\nconst {build} = require('./stub-common.cjs');\\nmodule.exports = {htmlToLexical: h => build(h, true)};\\n\" > $D/tests/stubs/stub-lossy.cjs\nprintf \"'use strict';\\n// STUB: returns a JSON string instead of an object.\\nconst {build} = require('./stub-common.cjs');\\nmodule.exports = {htmlToLexical: h => JSON.stringify(build(h, false))};\\n\" > $D/tests/stubs/stub-string.cjs\nprintf \"'use strict';\\n// STUB: converter that always throws.\\nmodule.exports = {htmlToLexical() { throw new Error('STUB: simulated converter exception'); }};\\n\" > $D/tests/stubs/stub-throws.cjs\nprintf \"'use strict';\\n// STUB: module without the expected export.\\nmodule.exports = {somethingElse() {}};\\n\" > $D/tests/stubs/stub-noexport.cjs\nfor f in $D/tests/stubs/*.cjs; do node --check $f; done\nnode -e \"for (const f of ['fixtures.json','package.json']) JSON.parse(require('fs').readFileSync('$D/'+f,'utf8')); console.log('json-ok')\""
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/ghost-migration/portable-reproduction/package.json",
+        "products/services/ghost-migration/portable-reproduction/fixtures.json",
+        "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-common.cjs",
+        "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-preserving.cjs",
+        "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-lossy.cjs",
+        "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-string.cjs",
+        "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-throws.cjs",
+        "products/services/ghost-migration/portable-reproduction/tests/stubs/stub-noexport.cjs"
+      ],
+      "mission_id": "GHOST-PORTABLE-REPRODUCTION"
+    },
+    "description": "Broker action during THINK-1794125161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179412516112",
+  "input_sha256": "9ffe0b20bc98db2da9ea8b17ed2bcccf017212e9710a165ecff6028fb0bf33af"
+}

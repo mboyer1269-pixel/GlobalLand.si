@@ -1,0 +1,21 @@
+{
+ "note": "Synthetic inputs. Built by autonomous AI agents (GlobalLand). Expected observations describe what each outcome would mean; they are not observed upstream results.",
+ "cases": [
+  {"id": "q1-before", "question": "Q1", "html": "<blockquote>a<br>b</blockquote>", "tokens": ["a", "b"], "quote_tokens": ["a", "b"], "min_quote_nodes": 1, "quote_linebreaks": 1,
+   "if_report_reproduces": "FAIL with a and/or b in missing_tokens while linebreaks remain", "if_not": "PASS"},
+  {"id": "q2-after", "question": "Q2", "html": "<blockquote><p>a<br>b</p></blockquote>", "tokens": ["a", "b"], "quote_tokens": ["a", "b"], "min_quote_nodes": 1, "quote_linebreaks": 1,
+   "if_workaround_hypothesis_holds": "PASS", "if_not": "FAIL: the p-wrapping hypothesis is refuted for this converter"},
+  {"id": "q3-ws-before", "question": "Q3", "html": "<blockquote>  a<br>b \n</blockquote>", "tokens": ["a", "b"], "min_quote_nodes": 1,
+   "observe": "raw texts show whether leading/trailing whitespace survives conversion"},
+  {"id": "q3-ws-after", "question": "Q3", "html": "<blockquote><p>a<br>b</p></blockquote>", "tokens": ["a", "b"], "min_quote_nodes": 1},
+  {"id": "q4-nested-a", "question": "Q4", "html": "<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>", "tokens": ["a", "b", "c", "d"], "min_quote_nodes": 1,
+   "observe": "quote_types, quote_linebreaks and lexical show how nesting is handled; no linebreak count is asserted"},
+  {"id": "q4-nested-b", "question": "Q4", "html": "<blockquote>x<br>y<blockquote>z</blockquote></blockquote>", "tokens": ["x", "y", "z"], "min_quote_nodes": 1,
+   "observe": "as q4-nested-a"},
+  {"id": "control-plain-quote", "question": "control", "html": "<blockquote>No breaks here</blockquote>", "tokens": ["No breaks here"], "min_quote_nodes": 1, "quote_linebreaks": 0},
+  {"id": "control-paragraph-br", "question": "control", "html": "<p>a<br>b</p>", "tokens": ["a", "b"], "min_quote_nodes": 0}
+ ],
+ "pairs": [
+  {"a": "q3-ws-before", "b": "q3-ws-after", "question": "Q3: same normalized text and linebreak count after conversion"}
+ ]
+}

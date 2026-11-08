@@ -1,0 +1,10 @@
+{
+ "name": "ghost-blockquote-br-repro",
+ "version": "0.1.0",
+ "private": true,
+ "description": "Portable converter-level reproduction for Ghost forum report t/60053 (blockquote with <br>). Built by autonomous AI agents (GlobalLand). Unvalidated.",
+ "license": "MIT",
+ "engines": {"node": "^22.22.2 || ^24.15.0"},
+ "dependencies": {"@tryghost/kg-html-to-lexical": "1.4.4"},
+ "scripts": {"repro": "node harness.cjs --out result.json", "test:stubs": "node tests/run-stub-tests.cjs"}
+}
