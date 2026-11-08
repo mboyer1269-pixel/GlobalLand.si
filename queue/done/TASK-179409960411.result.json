@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"checks\": {\n    \"inventory\": true,\n    \"key_format\": true,\n    \"key_bytes\": true,\n    \"key_hash\": true,\n    \"index.html manifest\": true,\n    \"index.html live_baseline\": true,\n    \"llms.txt manifest\": true,\n    \"llms.txt live_baseline\": true,\n    \"prior_online\": true,\n    \"no_prior_submission\": true\n  },\n  \"passed\": 10,\n  \"total\": 10,\n  \"all_pass\": true,\n  \"scope\": \"ownership-file addition only; no acquisition or revenue evidence\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/open-software-tenders-discovery-review.json",
+    "products/receipts/TASK-179409960411.json"
+  ],
+  "request": {
+    "id": "TASK-179409960411",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-08T01:00:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,hashlib,re\np=pathlib.Path('products/sites/open-software-tenders'); m=json.loads(pathlib.Path('products/services/open-software-tender/discovery/manifest.json').read_text()); b=json.loads(pathlib.Path('products/services/open-software-tender/launch/launch-baseline.json').read_text()); h=lambda x:hashlib.sha256(x).hexdigest(); c={}; c['inventory']=sorted(x.name for x in p.iterdir())==sorted(m['inventory']); k=m['key']; c['key_format']=bool(re.fullmatch('[0-9a-f]{32}',k)); c['key_bytes']=(p/(k+'.txt')).read_bytes()==k.encode(); c['key_hash']=h((p/(k+'.txt')).read_bytes())==m['key_sha256'];\nfor f,n in [('index.html','index'),('llms.txt','llms')]:\n s=h((p/f).read_bytes()); c[f+' manifest']=s==m['index_sha256' if n=='index' else 'llms_sha256']; c[f+' live_baseline']=s==b['fetch'][n]['sha256']\nc['prior_online']=b['deploy_status']=='ONLINE_VERIFIED'; c['no_prior_submission']=b['indexnow']=='not submitted'; out={'checks':c,'passed':sum(c.values()),'total':len(c),'all_pass':all(c.values()),'scope':'ownership-file addition only; no acquisition or revenue evidence'}; q=pathlib.Path('products/reviews/open-software-tenders-discovery-review.json'); q.parent.mkdir(parents=True,exist_ok=True); q.write_text(json.dumps(out,indent=2)); print(q.read_text())"
+      ],
+      "inputs": [
+        "products/sites/open-software-tenders/",
+        "products/services/open-software-tender/discovery/manifest.json",
+        "products/services/open-software-tender/launch/launch-baseline.json"
+      ],
+      "outputs": [
+        "products/reviews/open-software-tenders-discovery-review.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794099604",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179409960411",
+  "input_sha256": "be13d944c4e5a90316a4e8a0f04679926ea582a04965eca0c03a051df0a6de3c"
+}
