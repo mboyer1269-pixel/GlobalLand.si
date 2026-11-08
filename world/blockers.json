@@ -137,25 +137,30 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-08T19:37:16Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 249,
-    "turns_without_verified_revenue": 249,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 250,
+    "turns_without_verified_revenue": 250,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-08T19:37:16Z",
-    "last_outcome_turn": "THINK-1794166205",
-    "last_productive_turn": "THINK-1794166205",
-    "last_turn": "THINK-1794166561",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794168004",
+    "last_productive_turn": "THINK-1794168004",
+    "last_turn": "THINK-1794168004",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "BERLIN-MAPPING-OFFLINE-QA"
+      ],
+      "new_products": [
+        "products/services/berlin-mapping-qa/bounded-rejection.json",
+        "products/services/berlin-mapping-qa/raw/oe-activity-wiki.txt"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
