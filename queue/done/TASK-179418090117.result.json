@@ -1,0 +1,45 @@
+{
+  "status": "DONE",
+  "output": "{\n \"as-written-fk-off\": {\n  \"version\": \"3.40.1\",\n  \"seed_error\": null,\n  \"error\": null,\n  \"stmts\": [\n   [\n    1,\n    101,\n    0,\n    []\n   ],\n   [\n    2,\n    101,\n    1,\n    [\n     [\n      \"1\",\n      \"Zophie\",\n      \"rabies\"\n     ]\n    ]\n   ]\n  ],\n  \"expected_match\": true,\n  \"open\": false,\n  \"close\": 0,\n  \"denied\": []\n },\n \"as-written-fk-on\": {\n  \"version\": \"3.40.1\",\n  \"seed_error\": null,\n  \"error\": {\n   \"phase\": \"prepare\",\n   \"kind\": \"PREPARE_ERROR\",\n   \"statement_index\": 1,\n   \"start_byte\": 0,\n   \"rc\": 1,\n   \"message\": \"foreign key mismatch - \\\"vaccinations\\\" referencing \\\"cats\\\"\",\n   \"error_offset\": -1\n  },\n  \"stmts\": [],\n  \"expected_match\": false,\n  \"open\": false,\n  \"close\": 0,\n  \"denied\": []\n },\n \"fixed\": {\n  \"version\": \"3.40.1\",\n  \"seed_error\": null,\n  \"error\": {\n   \"phase\": \"step\",\n   \"kind\": \"STEP_ERROR\",\n   \"statement_index\": 3,\n   \"rc\": 19,\n   \"message\": \"FOREIGN KEY constraint failed\",\n   \"rows_before_error\": 0\n  },\n  \"stmts\": [\n   [\n    1,\n    101,\n    0,\n    []\n   ],\n   [\n    2,\n    101,\n    1,\n    [\n     [\n      \"1\",\n      \"1\",\n      \"Zophie\",\n      \"rabies\"\n     ]\n    ]\n   ],\n   [\n    3,\n    19,\n    0,\n    []\n   ]\n  ],\n  \"expected_match\": null,\n  \"open\": false,\n  \"close\": 0,\n  \"denied\": []\n }\n}\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/cases/fk-mismatch-rowid/case-as-written-fk-off.json",
+    "products/services/sqlite-repair/cases/fk-mismatch-rowid/case-as-written-fk-on.json",
+    "products/services/sqlite-repair/cases/fk-mismatch-rowid/case-fixed.json",
+    "products/services/sqlite-repair/cases/fk-mismatch-rowid/report-as-written-fk-off.json",
+    "products/services/sqlite-repair/cases/fk-mismatch-rowid/report-as-written-fk-on.json",
+    "products/services/sqlite-repair/cases/fk-mismatch-rowid/report-fixed.json",
+    "products/receipts/TASK-179418090117.json"
+  ],
+  "request": {
+    "id": "TASK-179418090117",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T23:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import sys,json,pathlib\nsys.path.insert(0,'products/services/sqlite-repair/fulfillment')\nimport diagnose as D\nout=pathlib.Path('products/services/sqlite-repair/cases/fk-mismatch-rowid');out.mkdir(parents=True,exist_ok=True)\ncats=\"CREATE TABLE cats (name TEXT NOT NULL, birthdate TEXT, fur TEXT, weight_kg REAL) STRICT;\\nINSERT INTO cats VALUES ('Zophie','2021-01-24','gray tabby',5.6),('Miyuki','2016-12-24','siamese',6.2);\\n\"\nvac=\"CREATE TABLE IF NOT EXISTS vaccinations (vaccine TEXT, date_administered TEXT, administered_by TEXT, cat_id INTEGER, FOREIGN KEY(cat_id) REFERENCES cats(rowid)) STRICT;\\n\"\nq_as=\"INSERT INTO vaccinations VALUES ('rabies','2023-06-06','Dr. Echo',1);\\nSELECT cats.rowid, cats.name, vaccinations.vaccine FROM cats INNER JOIN vaccinations ON cats.rowid = vaccinations.cat_id;\"\ncases={\n 'as-written-fk-off':dict(case_id='so79846840-as-written-fk-off',seed_sql='PRAGMA foreign_keys = OFF;\\n'+cats+vac,query_sql=q_as,expected_last_rows=[['1','Zophie','rabies']]),\n 'as-written-fk-on':dict(case_id='so79846840-as-written-fk-on',seed_sql='PRAGMA foreign_keys = ON;\\n'+cats+vac,query_sql=q_as,expected_last_rows=[['1','Zophie','rabies']]),\n 'fixed':dict(case_id='so79846840-fixed-rebuild',seed_sql='PRAGMA foreign_keys = OFF;\\n'+cats+vac+\n  \"CREATE TABLE cats_new (id INTEGER PRIMARY KEY, name TEXT NOT NULL, birthdate TEXT, fur TEXT, weight_kg REAL) STRICT;\\nINSERT INTO cats_new (id,name,birthdate,fur,weight_kg) SELECT rowid,name,birthdate,fur,weight_kg FROM cats;\\nDROP TABLE cats;\\nALTER TABLE cats_new RENAME TO cats;\\n\"+\n  \"CREATE TABLE vaccinations_new (vaccine TEXT, date_administered TEXT, administered_by TEXT, cat_id INTEGER, FOREIGN KEY(cat_id) REFERENCES cats(id)) STRICT;\\nINSERT INTO vaccinations_new SELECT * FROM vaccinations;\\nDROP TABLE vaccinations;\\nALTER TABLE vaccinations_new RENAME TO vaccinations;\\nPRAGMA foreign_keys = ON;\\n\",\n  query_sql=\"INSERT INTO vaccinations VALUES ('rabies','2023-06-06','Dr. Echo',1);\\nSELECT cats.id, cats.rowid, cats.name, vaccinations.vaccine FROM cats INNER JOIN vaccinations ON cats.id = vaccinations.cat_id;\\nINSERT INTO vaccinations VALUES ('rabies','2023-06-06','Dr. Echo',99);\",\n  expected_last_rows=None)}\nsumm={}\nfor k,c in cases.items():\n  c={a:b for a,b in c.items() if b is not None}\n  (out/('case-'+k+'.json')).write_text(json.dumps(c,indent=1),encoding='utf-8')\n  r=D.diagnose(c);(out/('report-'+k+'.json')).write_text(json.dumps(r,indent=1,ensure_ascii=False),encoding='utf-8')\n  a=r['runs']['all_statements']\n  summ[k]=dict(version=r['sqlite_version'],seed_error=a.get('seed_error'),error=a.get('error'),stmts=[(s['index'],s.get('step_rc'),s.get('row_count'),s.get('rows')) for s in a.get('statements',[])],expected_match=r.get('expected_match'),open=a['open_statements_after_run'],close=a['close_rc'],denied=a['denied'])\nprint(json.dumps(summ,indent=1))\n"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/fulfillment/diagnose.py"
+      ],
+      "outputs": [
+        "products/services/sqlite-repair/cases/fk-mismatch-rowid/case-as-written-fk-off.json",
+        "products/services/sqlite-repair/cases/fk-mismatch-rowid/case-as-written-fk-on.json",
+        "products/services/sqlite-repair/cases/fk-mismatch-rowid/case-fixed.json",
+        "products/services/sqlite-repair/cases/fk-mismatch-rowid/report-as-written-fk-off.json",
+        "products/services/sqlite-repair/cases/fk-mismatch-rowid/report-as-written-fk-on.json",
+        "products/services/sqlite-repair/cases/fk-mismatch-rowid/report-fixed.json"
+      ],
+      "mission_id": "SQLITE-CASE-LIBRARY"
+    },
+    "description": "Broker action during THINK-1794180901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179418090117",
+  "input_sha256": "18adf81affd22d71a6c57862db4bade2d15730f6154e97a7dbeef0d95e39a20b"
+}
