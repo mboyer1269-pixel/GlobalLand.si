@@ -1,0 +1,22 @@
+{
+ "mission": "SQLITE-REQUEST-FULFILLMENT",
+ "observed_at": "2026-11-08",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "source_query": "https://api.stackexchange.com/2.3/questions/no-answers?order=desc&sort=creation&tagged=sqlite&site=stackoverflow&pagesize=15&filter=withbody",
+ "source_fetch": "TASK-179414136112",
+ "source_sha256": "a545c313abf6bb98b50f729532b1d22f41a6a3e58cd4d2745a8f964375fd1a17",
+ "candidates_inspected": [
+  {"id": 79919860, "title": "Enumerate last query result when I pass several to sqlite3_prepare_v2() in one string", "asked_unix": 1775247216, "answer_count_at_fetch": 0, "license": "CC BY-SA 4.0", "author": "LUN", "verdict": "SELECTED: self-contained SQLite C API behavior, reproducible with synthetic data"},
+  {"id": 79846840, "title": "Why am I getting a foreign key mismatch when trying to join 2 tables using foreign keys?", "verdict": "NOT_EVALUATED_IN_DEPTH: title only; first qualifying candidate already selected"},
+  {"id": 79973922, "title": "Update a database table from a dataset", "verdict": "REJECTED: VB.NET ADO.NET DataGridView binding, not reproducible with SQLite alone"}
+ ],
+ "sqlite_version": "3.40.1",
+ "reproduced": true,
+ "before": "prepare=0, step=101 (SQLITE_DONE), tail=' SELECT * FROM T1' unexecuted",
+ "after": "loop on pzTail returns rows (1,a),(2,b),(3,c)",
+ "acceptance": "acceptance.json 6/6 (TASK-179414136117)",
+ "execution_limits": "compiled C binary not executable (noexec; c-loader-attempt.txt); C API exercised via ctypes on system libsqlite3; C++ snippet in answer uncompiled",
+ "artifacts": ["capability.txt", "multi_stmt.c", "build-output.txt", "run-output.txt", "c-loader-attempt.txt", "ctypes_repro.py", "ctypes-run-output.txt", "acceptance.json", "proposed-answer.md"],
+ "posted": false,
+ "distinctions": "An unanswered public question is not a buyer. A local answer is not customer delivery. Correctness is not willingness to pay. No account exists for posting (NO-COMMUNITY-ANSWER-ACCOUNT). No revenue."
+}
