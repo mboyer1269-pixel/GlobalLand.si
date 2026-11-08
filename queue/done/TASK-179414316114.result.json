@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "4310 3034\n\n",
+  "artifacts": [
+    "products/sites/sqlite-statement-diagnostic/repro/ctypes_repro.py",
+    "products/sites/sqlite-statement-diagnostic/repro/multi_stmt.c",
+    "products/sites/sqlite-statement-diagnostic/repro/c-loader-attempt.txt",
+    "products/receipts/TASK-179414316114.json"
+  ],
+  "request": {
+    "id": "TASK-179414316114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T13:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import sys,pathlib\nsrc=pathlib.Path('products/services/sqlite-repair/ctypes_repro.py').read_text()\nold=\"pathlib.Path('products/services/sqlite-repair/acceptance.json')\"\nassert src.count(old)==1\nsrc=src.replace(old,\"pathlib.Path(sys.argv[1] if len(sys.argv)>1 else 'acceptance.json')\").replace('import json,pathlib','import json,pathlib,sys')\nsrc=src.replace('# Exercises the real C API','# Usage: python3 -I ctypes_repro.py [acceptance.json]   (Linux, system libsqlite3.so.0)\\n# License: CC BY-SA 4.0 (adapts SQL from the question below).\\n# Exercises the real C API',1)\nd=pathlib.Path('products/sites/sqlite-statement-diagnostic/repro');d.mkdir(parents=True,exist_ok=True)\n(d/'ctypes_repro.py').write_text(src)\nc=pathlib.Path('products/services/sqlite-repair/multi_stmt.c').read_text()\n(d/'multi_stmt.c').write_text(c)\n(d/'c-loader-attempt.txt').write_text(pathlib.Path('products/services/sqlite-repair/c-loader-attempt.txt').read_text())\nprint(len(src),len(c))\n"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/"
+      ],
+      "outputs": [
+        "products/sites/sqlite-statement-diagnostic/repro/ctypes_repro.py",
+        "products/sites/sqlite-statement-diagnostic/repro/multi_stmt.c",
+        "products/sites/sqlite-statement-diagnostic/repro/c-loader-attempt.txt"
+      ],
+      "mission_id": "SQLITE-DIAGNOSTIC-RELEASE-PREPARATION"
+    },
+    "description": "Broker action during THINK-1794143161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179414316114",
+  "input_sha256": "4e89762284c546053a7a2d8d44164338473c7c4a8ec4eea3b733ab2831f861dd"
+}
