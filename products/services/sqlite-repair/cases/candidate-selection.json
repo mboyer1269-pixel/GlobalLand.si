@@ -1,0 +1,22 @@
+{
+ "mission": "SQLITE-CASE-LIBRARY",
+ "observed_at": "2026-11-08",
+ "source_fetch": "TASK-179418090111",
+ "candidates_inspected": 3,
+ "selected": [
+  "79846840 -> cases/fk-mismatch-rowid"
+ ],
+ "rejected": [
+  {
+   "id": 79973922,
+   "url": "https://stackoverflow.com/questions/79973922",
+   "reason": "Asks how ADO.NET/DataGridView changes are transferred to the database; the defect is in application data-binding code, not reproducible with pure SQL in diagnose.py. A one-statement reorder UPDATE would require inventing a schema column the question does not show."
+  },
+  {
+   "id": 79923338,
+   "url": "https://stackoverflow.com/questions/79923338",
+   "reason": "Error comes from the Hanami structure-dump tooling passing a file path to sqlite3 (\"near \\\"projects\\\": syntax error\" points at a path); not a pure-SQL defect, needs Ruby/Hanami and the CLI, outside diagnose.py scope."
+  }
+ ],
+ "second_case": "none; bound of three candidates reached"
+}

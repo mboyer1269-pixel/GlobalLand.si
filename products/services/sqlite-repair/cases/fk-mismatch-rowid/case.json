@@ -1,0 +1,53 @@
+{
+ "case": "fk-mismatch-rowid",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "observed_at": "2026-11-08",
+ "source": {
+  "url": "https://stackoverflow.com/questions/79846840",
+  "author": "Wpythonic",
+  "author_url": "https://stackoverflow.com/users/32006481/wpythonic",
+  "license": "CC BY-SA 4.0",
+  "answer_count_observed": 0,
+  "api_fetch": "TASK-179418090111",
+  "api_sha256": "f7b72557435206f23c25bf5fb3376eb027befb400b8c6fbb60a4ec0eeb8d5c5a",
+  "quotes": [
+   "sqlite3.OperationalError: foreign key mismatch - \"vaccinations\" referencing \"cats\"",
+   "FOREIGN KEY(cat_id) REFERENCES cats(rowid)) STRICT",
+   "Earlier today for whatever reason that error didn't happen when I inserted the values"
+  ]
+ },
+ "official": {
+  "url": "https://www.sqlite.org/foreignkeys.html",
+  "fetch": "TASK-179418090115",
+  "sha256": "cf9c6701a2bcc3b6407900c46d83c81818adb6467cd8fe11f8edfe9b93229041",
+  "quotes": [
+   "The parent key must be a named column or columns in the parent table, not the rowid.",
+   "Foreign key constraints are disabled by default (for backwards compatibility), so must be enabled separately for each database connection."
+  ]
+ },
+ "execution": {
+  "engine": "SQLite 3.40.1 C API via Python ctypes (diagnose.py, :memory:)",
+  "task": "TASK-179418090117",
+  "results": {
+   "as-written-fk-off": "INSERT and JOIN succeed; 1 row [1,Zophie,rabies]; expected_match true",
+   "as-written-fk-on": "prepare of INSERT fails rc=1: foreign key mismatch - \"vaccinations\" referencing \"cats\"",
+   "fixed": "after rebuild with id INTEGER PRIMARY KEY: INSERT ok, JOIN 1 row [1,1,Zophie,rabies]; INSERT with cat_id 99 fails rc=19 FOREIGN KEY constraint failed (enforcement works)"
+  },
+  "all_statements_finalized": true,
+  "close_rc": 0
+ },
+ "not_executed": [
+  "Python sqlite3 module and iterdump()",
+  "the asker's actual sweigartcats.db and pastebin schema (not fetched; cats reconstructed from the PRAGMA table_info output in the question)",
+  "what enabled foreign_keys on the asker's connection",
+  "other SQLite versions or build flags"
+ ],
+ "files": {
+  "case-as-written-fk-off.json": "16f3efb8e1346fb0726ce38feafa8fc435837d2f576ef38d45c6a62f38cc56a4",
+  "case-as-written-fk-on.json": "85d8dfd5a2e16386a1a28521e27f0932c7c514076e255ff582c5b29abcb54d75",
+  "case-fixed.json": "cb488d80aebd9fb6351e29c6aa645ddb3128a2a483892bb0a6f42e5363cb2f37",
+  "report-as-written-fk-off.json": "eba5e666e3f22e1fab451622ac5c5e3d6778fe7c28eeaed6f3a58fbaf032d500",
+  "report-as-written-fk-on.json": "702f5f8b3f045426e479d49b121aad151c406e52b348f2a7edcb88e4ea521df9",
+  "report-fixed.json": "71ba5004baeade36bb3b92210e0eb9315089c3f6ff4fc084d259f2fa238c77c2"
+ }
+}
