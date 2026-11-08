@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "nbHits 3\n43150841 2025-02-23 | It is no longer safe to move our governments and societies t | rketing name and unleash the salespeople\". They can't even contemplate the idea hiring somebody with FAANG-level skills, paying it FAANG-level money and let it do FAANG-level work. They hire a few underpaid 20-somethings and have them manage, at best, an OpenStack installation. Thank you! As a german that saw how the sauce is made in public sector tenders it's exactly this! This is not restricted to hosting / cloud sector. It's a good summary for most german IT companies. Arrogance and incompetence are rampant. Programmers and their managers need to go en masse to have some substantial change. Everyone is so full of themselves and disconnected from reality it's scary.\n--\n34122634 2022-12-25 | How to write unmantainable code (2015) | I've done big government contracts for many years as a consultant in Norway, and haven't really seen this. Guess it's because Java is so much better than those .NET monoliths ;) But seriously, I guess it depends on the maturity of those writing the tender / anbud. Too often they get bamboozled by big4 like consultancies (Accenture, Sopra Steria etc..) that act more like project managers and sales people than developers. The company I used to work for actually stopped giving offers on lots of these kind of projects. None of us wanted to work on these kind of bureaucratic nightmares where one is set up to fail. It's much more fun to deliver something of value, even if one doing something else\n--\n14341504 2017-05-15 | NHSbuntu – an OS for the NHS [video] | If it works with XP, chances are it will work with Wine or VirtualBox. Where there is a will, there is a way. But it would mean giving a huge F* YOU to established networks of parasi- er, vendors specialised in public sector tenders - Microsoft being the king of them all.\n--\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179411076117.json"
+  ],
+  "request": {
+    "id": "TASK-179411076117",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re,html\nd=json.load(open('products/services/tender-intelligence/buyer-guide/raw/hn-public-sector-tenders.json'))\nprint('nbHits',d.get('nbHits'))\nfor h in d.get('hits',[]):\n  t=h.get('comment_text') or ''\n  t=re.sub(r'<[^>]+>',' ',html.unescape(t)); t=re.sub(r'\\s+',' ',t)\n  i=t.lower().find('tender')\n  print(h.get('objectID'),h.get('created_at')[:10],'|',(h.get('story_title') or '')[:60],'|',t[max(0,i-350):i+450])\n  print('--')"
+      ],
+      "inputs": [
+        "products/services/tender-intelligence/buyer-guide/raw/hn-public-sector-tenders.json"
+      ],
+      "outputs": [],
+      "mission_id": "TENDER-INTELLIGENCE-BUYER-GUIDE"
+    },
+    "description": "Broker action during THINK-1794110761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411076117",
+  "input_sha256": "36f81dbac06c0610f4b6a7b40b5b65aa9fc7f17fc06651b389929a332fe5f3d8"
+}
