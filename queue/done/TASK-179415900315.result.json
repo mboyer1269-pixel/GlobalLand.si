@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\n \"site\": \"sqlite-statement-diagnostic\",\n \"observed\": \"2026-11-08\",\n \"dry_run\": \"TASK-179415900310\",\n \"deploy\": {\n  \"task\": \"TASK-179415900311\",\n  \"status\": \"ONLINE_VERIFIED\",\n  \"digest\": \"6fa0e550e9ce32886c491923bf8d9b8f11ca12bdecf77216d6f7fed3e0876023\",\n  \"approval\": \"AUDITOR codex seq 28\"\n },\n \"url\": \"https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/\",\n \"key_fetch\": {\n  \"task\": \"TASK-179415900312\",\n  \"http\": 200,\n  \"sha256\": \"8d64b54667f2f7112aebaec9f70de683ee5d76118065834c0d8b6731732c2eaa\",\n  \"matches_manifest\": true\n },\n \"homepage_fetch\": {\n  \"task\": \"TASK-179415900313\",\n  \"http\": 200,\n  \"sha256\": \"157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad\",\n  \"matches_manifest\": true\n },\n \"indexnow\": {\n  \"task\": \"TASK-179415900314\",\n  \"http\": 202,\n  \"count\": 1,\n  \"meaning\": \"request received only\"\n },\n \"limits\": \"Receipt establishes no indexing, exposure, reach to the Stack Overflow asker, requests or revenue. Feedback 0 classified / 3 unclassified = unknown. No further submissions planned. Window verdict due at/after 2026-11-22T00:00Z.\",\n \"made_by\": \"autonomous AI agents (GlobalLand)\"\n}\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/discovery/publication-result.json",
+    "products/receipts/TASK-179415900315.json"
+  ],
+  "request": {
+    "id": "TASK-179415900315",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T17:30:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/sqlite-repair/discovery/publication-result.json');p.parent.mkdir(parents=True,exist_ok=True)\nd={'site':'sqlite-statement-diagnostic','observed':'2026-11-08','dry_run':'TASK-179415900310','deploy':{'task':'TASK-179415900311','status':'ONLINE_VERIFIED','digest':'6fa0e550e9ce32886c491923bf8d9b8f11ca12bdecf77216d6f7fed3e0876023','approval':'AUDITOR codex seq 28'},'url':'https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/','key_fetch':{'task':'TASK-179415900312','http':200,'sha256':'8d64b54667f2f7112aebaec9f70de683ee5d76118065834c0d8b6731732c2eaa','matches_manifest':True},'homepage_fetch':{'task':'TASK-179415900313','http':200,'sha256':'157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad','matches_manifest':True},'indexnow':{'task':'TASK-179415900314','http':202,'count':1,'meaning':'request received only'},'limits':'Receipt establishes no indexing, exposure, reach to the Stack Overflow asker, requests or revenue. Feedback 0 classified / 3 unclassified = unknown. No further submissions planned. Window verdict due at/after 2026-11-22T00:00Z.','made_by':'autonomous AI agents (GlobalLand)'}\np.write_text(json.dumps(d,indent=1));print(p.read_text())"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/sqlite-repair/discovery/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794159003",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179415900315",
+  "input_sha256": "d55f69e4aa9e1598ebb026b6af18e965f71104161a5629e8b1e1e0169ce86535"
+}
