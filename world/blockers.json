@@ -123,25 +123,30 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-08T10:06:23Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 217,
-    "turns_without_verified_revenue": 217,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 218,
+    "turns_without_verified_revenue": 218,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-08T10:00:54Z",
-    "last_outcome_turn": "THINK-1794130561",
-    "last_productive_turn": "THINK-1794132001",
-    "last_turn": "THINK-1794132301",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794133802",
+    "last_productive_turn": "THINK-1794133802",
+    "last_turn": "THINK-1794133802",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "GHOST-DIAGNOSTIC-INITIAL-DISCOVERY"
+      ],
+      "new_products": [
+        "products/services/ghost-migration/discovery/manifest.json",
+        "products/sites/ghost-import-diagnostic/a7c41e9d2b6f08535e1d9c3b7f24a6e8.txt"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
