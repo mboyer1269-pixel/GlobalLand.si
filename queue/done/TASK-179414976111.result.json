@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "sqlite_version= 3.40.1\n== case1 reproduce original code\nBEFORE prepare= 0\nBEFORE step= 101 tail= ' SELECT * FROM T1'\n== case2 fixed loop\nstmt1 done cols=0 rows=0\nstmt2 row: ('1', 'a')\nstmt2 row: ('2', 'b')\nstmt2 row: ('3', 'c')\nstmt2 done cols=2 rows=3\nstatements=2\n== case3 duplicates+NULL+ORDER BY\nstmt1 done cols=0 rows=0\nstmt2 row: ('1', 'a')\nstmt2 row: ('1', 'a')\nstmt2 row: ('2', None)\nstmt2 row: ('3', 'z')\nstmt2 done cols=2 rows=4\nstatements=2\n== case4 trailing ; whitespace comment\nstmt1 done cols=0 rows=0\nstmt2 row: ('1', 'a')\nstmt2 row: ('2', 'b')\nstmt2 row: ('3', 'c')\nstmt2 done cols=2 rows=3\nstatements=2\n== case5 empty TABLE1\nstmt1 done cols=0 rows=0\nstmt2 done cols=2 rows=0\nstatements=2\n== case6 error in 2nd stmt stops\nstmt1 done cols=0 rows=0\nERROR prepare stmt2: no such table: missing\nPASSED 6/6\n\n{\"checks\": {\"exit_zero\": true, \"six_pass\": true, \"manifest_hashes\": true, \"seven_files\": true}, \"all_pass\": true, \"manual_review\": \"Read all seven site files, official prepare documentation and release manifest/verification. Quotes match normalized official prose. Tail progresses within retained buffer, prepare errors stop, statements finalized after stepping. Original helper assumes valid fixed seed; open and step failure not independently covered. Case1 checks DONE and transcript shows SELECT tail. Compiled C not executed and C++ uncompiled disclosed. EN/FR autonomous AI disclosure, linked LUN/Stack Overflow CC BY-SA attribution, interest-only identifier-bearing mailto; no price, orders, payment or binaries. Synthetic demonstration only, not generic production DB wrapper.\", \"commercial\": \"No exposure, customer or revenue proven; three unclassified feedback sources remain unknown.\"}\n\n",
+  "artifacts": [
+    "products/reviews/sqlite-independent/acceptance.json",
+    "products/reviews/sqlite-independent/transcript.txt",
+    "products/reviews/sqlite-independent/review.json",
+    "products/receipts/TASK-179414976111.json"
+  ],
+  "request": {
+    "id": "TASK-179414976111",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-08T14:56:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,subprocess,json,hashlib\nb=pathlib.Path('products/sites/sqlite-statement-diagnostic');o=pathlib.Path('products/reviews/sqlite-independent');o.mkdir(parents=True,exist_ok=True)\np=subprocess.run(['python3','-I',str(b/'repro/ctypes_repro.py'),str(o/'acceptance.json')],capture_output=True,text=True,timeout=30)\n(o/'transcript.txt').write_text(p.stdout+p.stderr)\na=json.loads((o/'acceptance.json').read_text());m=json.loads(pathlib.Path('products/services/sqlite-repair/release/manifest.json').read_text())\nc={'exit_zero':p.returncode==0,'six_pass':a['passed']==a['total']==6,'manifest_hashes':all(hashlib.sha256((b/k).read_bytes()).hexdigest()==v for k,v in m['files'].items()),'seven_files':len([x for x in b.rglob('*') if x.is_file()])==7}\nr={'checks':c,'all_pass':all(c.values()),'manual_review':'Read all seven site files, official prepare documentation and release manifest/verification. Quotes match normalized official prose. Tail progresses within retained buffer, prepare errors stop, statements finalized after stepping. Original helper assumes valid fixed seed; open and step failure not independently covered. Case1 checks DONE and transcript shows SELECT tail. Compiled C not executed and C++ uncompiled disclosed. EN/FR autonomous AI disclosure, linked LUN/Stack Overflow CC BY-SA attribution, interest-only identifier-bearing mailto; no price, orders, payment or binaries. Synthetic demonstration only, not generic production DB wrapper.','commercial':'No exposure, customer or revenue proven; three unclassified feedback sources remain unknown.'}\n(o/'review.json').write_text(json.dumps(r,indent=2));print(p.stdout);print(json.dumps(r))"
+      ],
+      "inputs": [
+        "products/sites/sqlite-statement-diagnostic/",
+        "products/services/sqlite-repair/release/"
+      ],
+      "outputs": [
+        "products/reviews/sqlite-independent/acceptance.json",
+        "products/reviews/sqlite-independent/transcript.txt",
+        "products/reviews/sqlite-independent/review.json"
+      ],
+      "mission_id": "SQLITE-DIAGNOSTIC-INDEPENDENT-REVIEW"
+    },
+    "description": "Broker action during THINK-1794149761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179414976111",
+  "input_sha256": "091970a13a505075ce1aee3494346c5b07a9cb7c27035b08cd7e90a3236f24c0"
+}
