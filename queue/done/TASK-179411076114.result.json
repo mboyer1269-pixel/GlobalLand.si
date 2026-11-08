@@ -1,0 +1,21 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://hn.algolia.com/api/v1/search?query=stotles&hitsPerPage=30\", \"http_status\": 200, \"sha256\": \"7b795fc37165821e5c3655ae0e847f77c3f88cd45579952566ffbe6027255f95\", \"artifact\": \"products/services/tender-intelligence/buyer-guide/raw/hn-stotles.json\"}",
+  "request": {
+    "id": "TASK-179411076114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:06:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://hn.algolia.com/api/v1/search?query=stotles&hitsPerPage=30",
+      "output": "products/services/tender-intelligence/buyer-guide/raw/hn-stotles.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794110761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411076114",
+  "input_sha256": "fc729a3a5a3ec1250d9099306cb0e7670a7c3d44f4ac57ca8f8106286e2dcdf8"
+}
