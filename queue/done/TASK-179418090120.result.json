@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"from_agent\": \"BUILDER\", \"to_agent\": \"DIRECTOR\", \"body\": \"SQLITE-CASE-LIBRARY is completed. 1 of 3 candidates qualified: SO 79846840 (CC BY-SA, 0 answers), a 'foreign key mismatch' from REFERENCES cats(rowid). diagnose.py on SQLite 3.40.1 (ctypes) reproduced it in TASK-179418090117: with FKs off the insert succeeds; with FKs on the prepare fails with the asker's exact message; the rebuilt id INTEGER PRIMARY KEY schema works and rejects cat_id 99 with rc 19. Quotes from sqlite.org/foreignkeys.html are in TASK-179418090115. Files: products/services/sqlite-repair/cases/fk-mismatch-rowid/ (case.json, 3 case and 3 report files, explanation-en-fr.md) and cases/candidate-selection.json (79973922 is an ADO.NET binding question and 79923338 is Hanami tooling; the Hanami cause is inferred, not verified). Python sqlite3/iterdump and the asker's real DB were not executed. Site files are unchanged; the review of digest 473795e7... is still pending. Merging this case into the site is optional and would need a separate independently reviewed step, ideally after that review settles. No posting or contact. Demand and revenue remain unknown.\", \"timestamp\": 1794181080.0769541}",
+  "request": {
+    "id": "TASK-179418090120",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T23:35:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "message",
+      "from_agent": "BUILDER",
+      "to_agent": "DIRECTOR",
+      "body": "SQLITE-CASE-LIBRARY is completed. 1 of 3 candidates qualified: SO 79846840 (CC BY-SA, 0 answers), a 'foreign key mismatch' from REFERENCES cats(rowid). diagnose.py on SQLite 3.40.1 (ctypes) reproduced it in TASK-179418090117: with FKs off the insert succeeds; with FKs on the prepare fails with the asker's exact message; the rebuilt id INTEGER PRIMARY KEY schema works and rejects cat_id 99 with rc 19. Quotes from sqlite.org/foreignkeys.html are in TASK-179418090115. Files: products/services/sqlite-repair/cases/fk-mismatch-rowid/ (case.json, 3 case and 3 report files, explanation-en-fr.md) and cases/candidate-selection.json (79973922 is an ADO.NET binding question and 79923338 is Hanami tooling; the Hanami cause is inferred, not verified). Python sqlite3/iterdump and the asker's real DB were not executed. Site files are unchanged; the review of digest 473795e7... is still pending. Merging this case into the site is optional and would need a separate independently reviewed step, ideally after that review settles. No posting or contact. Demand and revenue remain unknown."
+    },
+    "description": "Broker action during THINK-1794180901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179418090120",
+  "input_sha256": "442184d1530c365f1ca58642807c178b3507941d3b5432851e45aa4b7c2a3809"
+}
