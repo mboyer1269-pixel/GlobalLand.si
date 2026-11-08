@@ -1,0 +1,42 @@
+{
+ "site": "open-software-tenders",
+ "url": "https://globalland-open-software-tenders.global-land.workers.dev/",
+ "deploy_task": "TASK-179409636110",
+ "deploy_status": "ONLINE_VERIFIED",
+ "approved_digest": "aef3efb54eb21aaebd83c5da756e3c7ff7289514161b6b1bfb9307a2d0c37478",
+ "review": "AUDITOR codex seq 21 APPROVE",
+ "fetch": {
+  "index": {
+   "task": "TASK-179409636111",
+   "http": 200,
+   "sha256": "be35d1310bd2bbe1360931cde64f8d2e78568716b014f3c1f762367af2aaa202",
+   "expected": "be35d1310bd2bbe1360931cde64f8d2e78568716b014f3c1f762367af2aaa202",
+   "match": true
+  },
+  "llms": {
+   "task": "TASK-179409636112",
+   "http": 200,
+   "sha256": "c0e33d7dcae807945d7319c848eb210c13a312d4bade806f0de4126c1cdb253a",
+   "expected": "c0e33d7dcae807945d7319c848eb210c13a312d4bade806f0de4126c1cdb253a",
+   "match": true
+  }
+ },
+ "site_identifier_present": true,
+ "observed_on": "2026-11-08",
+ "interest_window_end": "2026-11-17T09:00:00Z",
+ "mandatory_retirement": "first turn at or after 2026-11-18T09:00:00Z (mission OPEN-SOFTWARE-TENDERS-RETIRE) unless reviewed revision removes expired notice 104444-2026",
+ "feedback_baseline": {
+  "classified": 0,
+  "unclassified": 3,
+  "excluded": 3,
+  "interpretation": "unknown, not zero; identifier allowlist coverage unknown (FEEDBACK-REASON-OBSERVABILITY)"
+ },
+ "indexnow": "not submitted",
+ "not_established": [
+  "traffic",
+  "requests",
+  "orders",
+  "revenue"
+ ],
+ "all_match": true
+}
