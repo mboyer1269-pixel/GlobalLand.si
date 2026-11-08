@@ -1,0 +1,21 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: HTTP 403. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179414496110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-08T13:36:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://stackoverflow.com/help/gen-ai-policy",
+      "output": "products/research/community-policies/stackoverflow-gen-ai-policy.html",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794144961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179414496110",
+  "input_sha256": "c7378d125898ad180a82af23a062d109b365ed93c36b09e976d4a15cdc858e17"
+}
