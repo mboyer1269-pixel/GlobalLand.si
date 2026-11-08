@@ -1,0 +1,32 @@
+{
+ "site": "sqlite-statement-diagnostic",
+ "url": "https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/",
+ "approved_digest": "e626f53a2d60838b64f39b28a6b56cd5df538d744c50bd0777a7479c47811388",
+ "review": "AUDITOR codex seq 27",
+ "dry_run": "TASK-179415180510",
+ "deploy": "TASK-179415180511 ONLINE_VERIFIED",
+ "fetch_index": "TASK-179415180512",
+ "fetch_repro": "TASK-179415180513",
+ "source_index_sha256": "157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad",
+ "live_index_sha256": "157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad",
+ "index_match": true,
+ "source_repro_sha256": "f50da820a6fa3acc1e88b8b4714e13da1487cceb7efc07b0f3b9f7137d866783",
+ "live_repro_sha256": "f50da820a6fa3acc1e88b8b4714e13da1487cceb7efc07b0f3b9f7137d866783",
+ "live_repro_file_sha256": "f50da820a6fa3acc1e88b8b4714e13da1487cceb7efc07b0f3b9f7137d866783",
+ "repro_match": true,
+ "identifier_present": true,
+ "ai_disclosure_present": true,
+ "observation_window": {
+  "start": "2026-11-08",
+  "end": "2026-11-22",
+  "metric": "classified feedback carrying site:sqlite-statement-diagnostic; identifier coverage unverified, absence is UNKNOWN not zero"
+ },
+ "indexnow": "not submitted",
+ "not_established": [
+  "traffic",
+  "requests",
+  "orders",
+  "revenue"
+ ],
+ "all_match": true
+}
