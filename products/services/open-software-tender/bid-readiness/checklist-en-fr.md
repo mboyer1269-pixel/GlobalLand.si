@@ -10,7 +10,7 @@ Source: Find a Tender OCDS release 105246-2026 (https://www.find-tender.service.
 - Term: "The initial contract term will be 3 years with an option to extend for up to an additional 60 months".
 - Contract basis: "The contract will be awarded under the Council's Conditions of Contract for ICT Services".
 - Award weighting: quality 40, price 60.
-- Selection (suitability), **mandatory as stated**: "Where it is required, within a bidder's country of establishment they must confirm which authorisation or memberships of the relevant organisation(s) are required in order to perform this service. Bidders must confirm if they hold the particular authorisation or memberships".
+- Selection (suitability), **mandatory as stated**: "Where it is required, within a bidder’s country of establishment they must confirm which authorisation or memberships of the relevant organisation(s) are required in order to perform this service. / Bidders must confirm if they hold the particular authorisation or memberships".
 - Submission route: PCS-Tender (https://www.publictendersscotland.publiccontractsscotland.gov.uk); supplier registration required (portal text above).
 
 ## Unknown until the tender pack is read (behind registration)
