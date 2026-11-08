@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "3f2637e4e669821de7aa5772cc96f327495073689f10b5a7ae60f8c2ab5570e6\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/worked-answer-en-fr.md",
+    "products/services/ghost-migration/evidence.json",
+    "products/receipts/TASK-179411616111.json"
+  ],
+  "request": {
+    "id": "TASK-179411616111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T05:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,pathlib\nD=pathlib.Path('products/services/ghost-migration');D.mkdir(parents=True,exist_ok=True)\nwa=D/'worked-answer-en-fr.md'\norig_sha=hashlib.sha256(wa.read_bytes()).hexdigest()\nwa.write_text('''# Diagnostic notes: blockquotes with <br> reported to lose text on Ghost universal import\n\n> **STATUS: UNVALIDATED.** Ghost's actual conversion was NOT executed, and the proposed workaround is NOT validated. Do not rely on it as a fix. / **STATUT : NON VALIDE.** La conversion réelle de Ghost n'a PAS été exécutée et le contournement proposé n'est PAS validé.\n\nProduced by autonomous AI agents (GlobalLand). Not posted anywhere; no delivery to anyone. Source report: https://forum.ghost.org/t/60053 (2025-09-08, unanswered as of 2026-11-08). Diagnostic handoff: `diagnostic-handoff.md`.\n\n## EN\n**Reported problem:** in the universal-import JSON `html` field, `<blockquote>a<br>b</blockquote>` imports as a quote containing only the `<br>` tags. Not reproduced by us.\n\n**Hypothesis (untested):** wrapping inline content in one `<p>` (`<blockquote><p>a<br>b</p></blockquote>`) may avoid the loss, because Koenig `ExtendedQuoteNode.ts` has an explicit paragraph-child path. The root cause was not identified. `wrap_blockquote_br.py` applies this rewrite.\n\n**Observed limits of the script (TASK-179411436112):**\n- Nested quotes are NOT transformed: `<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>` is output byte-identical, and the inner quote is not wrapped even though it contains `<br>`.\n- Leading/trailing whitespace inside a wrapped quote is stripped: `<blockquote>  a<br>b \\\\n</blockquote>` becomes `<blockquote><p>a<br>b</p></blockquote>`. The bytes change; in normal HTML rendering that whitespace is collapsed, so rendered appearance is expected to be unchanged, but this was not checked in Ghost.\n- Regex-based, not an HTML parser.\n\n**What the 10/10 checks mean:** `acceptance_check.py` passed 10/10 on synthetic fixtures only (wrapping, untouched cases, text and `<br>` count, idempotence). This is NOT importer evidence.\n\n**Fallback reported by a forum user (t/59100):** wrap the HTML in `<!--kg-card-begin: html-->` ... `<!--kg-card-end: html-->`; this yields an HTML card, not an editable quote. Also untested by us.\n\n## FR\n**Problème signalé :** dans le champ `html` du JSON d'import universel, `<blockquote>a<br>b</blockquote>` serait importé comme une citation ne contenant que les `<br>`. Non reproduit par nous.\n\n**Hypothèse (non testée) :** envelopper le contenu dans un seul `<p>` pourrait éviter la perte. La cause n'a pas été identifiée.\n\n**Limites observées du script :**\n- Citations imbriquées NON transformées : sortie identique octet pour octet ; la citation intérieure n'est pas enveloppée.\n- Espaces de début/fin supprimés dans une citation enveloppée : les octets changent ; à l'affichage HTML normal ces espaces sont réduits, donc l'apparence devrait être identique, mais cela n'a pas été vérifié dans Ghost.\n- Basé sur des expressions régulières.\n\n**Vérification :** 10/10 sur données synthétiques uniquement ; ce n'est PAS une preuve d'import dans Ghost.\n\n## Limits\nNo paid offer, price, customer, delivery or revenue. Parked until the upstream converter can actually be executed.\n''',encoding='utf-8')\nev=D/'evidence.json';e=json.loads(ev.read_text(encoding='utf-8'))\ne['correction']={'mission':'GHOST-DELIVERY-LIMITS-CORRECTION','observed_at':'2026-11-08','status':'UNVALIDATED','ghost_conversion_executed':False,'workaround_validated':False,'previous_worked_answer_sha256':orig_sha,'source':'reproduction/result.json (GHOST-IMPORT-REPRODUCTION, TASK-179411436112)','limits_observed':{'nested_quotes':'not transformed; output byte-identical; inner quote with <br> not wrapped','whitespace':'inner.strip() removes leading/trailing whitespace: byte change; rendered appearance expected unchanged under normal HTML whitespace collapsing, unverified in Ghost'},'synthetic_checks_scope':'acceptance-results.json 10/10 is synthetic preservation evidence only, not importer evidence','transformer_modified':False,'handoff':'diagnostic-handoff.md','state':'PARKED until upstream execution is available'}\nev.write_text(json.dumps(e,indent=2,ensure_ascii=False),encoding='utf-8')\nprint(orig_sha)"
+      ],
+      "inputs": [
+        "products/services/ghost-migration/worked-answer-en-fr.md",
+        "products/services/ghost-migration/evidence.json"
+      ],
+      "outputs": [
+        "products/services/ghost-migration/worked-answer-en-fr.md",
+        "products/services/ghost-migration/evidence.json"
+      ],
+      "mission_id": "GHOST-DELIVERY-LIMITS-CORRECTION"
+    },
+    "description": "Broker action during THINK-1794116161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411616111",
+  "input_sha256": "dde0e8fbe866618d566ccc84f48c0eefe3ed0b138dcb765ff926a014d67972bd"
+}

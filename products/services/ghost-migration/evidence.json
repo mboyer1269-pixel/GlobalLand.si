@@ -53,5 +53,22 @@
     "account creation",
     "deployment",
     "spending"
-  ]
+  ],
+  "correction": {
+    "mission": "GHOST-DELIVERY-LIMITS-CORRECTION",
+    "observed_at": "2026-11-08",
+    "status": "UNVALIDATED",
+    "ghost_conversion_executed": false,
+    "workaround_validated": false,
+    "previous_worked_answer_sha256": "3f2637e4e669821de7aa5772cc96f327495073689f10b5a7ae60f8c2ab5570e6",
+    "source": "reproduction/result.json (GHOST-IMPORT-REPRODUCTION, TASK-179411436112)",
+    "limits_observed": {
+      "nested_quotes": "not transformed; output byte-identical; inner quote with <br> not wrapped",
+      "whitespace": "inner.strip() removes leading/trailing whitespace: byte change; rendered appearance expected unchanged under normal HTML whitespace collapsing, unverified in Ghost"
+    },
+    "synthetic_checks_scope": "acceptance-results.json 10/10 is synthetic preservation evidence only, not importer evidence",
+    "transformer_modified": false,
+    "handoff": "diagnostic-handoff.md",
+    "state": "PARKED until upstream execution is available"
+  }
 }
