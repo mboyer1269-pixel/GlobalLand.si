@@ -1,0 +1,66 @@
+{
+ "mission": "AUTOMATION-MARKETPLACE-REQUEST-DELIVERY",
+ "observed_at": "2026-11-08",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "verdict": "STOP",
+ "capability": {
+  "task": "TASK-179417016112",
+  "observed": "node v22.23.4 installed (structuredClone, fetch present); no n8n runtime"
+ },
+ "channel": {
+  "categories_url": "https://community.n8n.io/categories.json",
+  "fetch": "TASK-179417016111",
+  "sha256": "02b36a67899e3a1c1ee613b40aef9d59b2a8291a80c5b32df407c60408ad30fe",
+  "observation": "Explicit Jobs category exists (id 13, 42 topics) (TASK-179417016113)"
+ },
+ "rules": {
+  "url": "https://community.n8n.io/t/941.json",
+  "fetch": "TASK-179417016117",
+  "sha256": "0ed067965d292103bbef9a30c4e6a44dcd2734722deca3b52ea5c8b2f455ba35",
+  "quotes": [
+   "Hiring posts only. Post here if you are hiring for a role or project.",
+   "“For hire,” “open to work,” and service-promotion posts are not allowed.",
+   "Include an email address or application form . If neither is available, explicitly invite applicants to contact you by direct/private message (DM/PM).",
+   "Brand new accounts can’t send direct messages yet"
+  ],
+  "consequence": "Responding requires contacting the poster by email/form/DM from an account; agents may not contact or create accounts. Advertising a service in this category is prohibited."
+ },
+ "listing": {
+  "url": "https://community.n8n.io/c/jobs/13.json",
+  "fetch": "TASK-179417016114",
+  "sha256": "ec2126536699fd011db62a58870129f3d024013e0e5c504271d3659819a352fb",
+  "observation": "30 latest topics (TASK-179417016116); every topic except the guidelines is closed to replies. Most are employment/ongoing roles, partner/referral recruitment, or seller self-promotion. No title describes a bounded data transformation or Code-node fix with example inputs."
+ },
+ "candidates": [
+  {
+   "topic": "https://community.n8n.io/t/327075",
+   "fetch": "TASK-179417016118",
+   "sha256": "bdaa5082ef7a966303a4f98c068080ed43913399830054c15848d07bba795672",
+   "buyer_text": "Please help me regarding n8n Workflows and AI assistant . I can pay your fee",
+   "compensation": "unstated amount (\"I can pay your fee\")",
+   "status": "closed; staff: contact the author using email, application form or direct message",
+   "reject": "No concrete task, inputs or expected output; contact-only route"
+  },
+  {
+   "topic": "https://community.n8n.io/t/326857",
+   "fetch": "TASK-179417016119",
+   "sha256": "024d1898f10c43985e97177849e989ded6f358dac2e3569d7375e124d887e4ed",
+   "buyer_text_excerpt": "collect leads from forms and other sources, validate their information, identify duplicates, and use AI to categorize them",
+   "compensation": "\"paid opportunity\", no amount",
+   "status": "closed, 12 posts incl. competing applicants",
+   "reject": "Processes personal data (lead emails/phones), needs authenticated CRM/AI integrations and real n8n execution; all excluded"
+  },
+  {
+   "topic": "https://community.n8n.io/t/322466",
+   "fetch": "none (title-level screen only, saved listing)",
+   "title": "Necesito Setup Completo en n8n: Drive a 100 Cuentas Automático",
+   "reject": "Authenticated Google Drive multi-account setup; closed; excluded by scope"
+  }
+ ],
+ "adjacent_observation": "Seller-side posts in the same listing advertise data-mapping/CSV-diff services (e.g. topic 323073 \"[For Hire] One JavaScript/Python data-mapping fix around n8n — USD60\", topic 321881 \"Free pilot: checking differences between two CSV exports\"). These are supply-side advertisements in breach of the category rule, not demand evidence; authorship not verified.",
+ "fetch_budget": "5 of 8 used",
+ "deliverable": "none produced (no qualifying request; no generic sample per mission)",
+ "not_concluded": "Does not show n8n users never pay for small transformations; only that this channel contains no open, bounded, input-bearing paid request reachable without contact.",
+ "submission_and_settlement": "Any response needs an approved account and DM/email contact (NO-COMMUNITY-ANSWER-ACCOUNT); settlement would need operator Interac order acceptance (SERVICE-PAYMENT-COLLECTION).",
+ "no_actions": "No contact, posting, accounts, agreements, credential probes, spending, installation or deployment."
+}
