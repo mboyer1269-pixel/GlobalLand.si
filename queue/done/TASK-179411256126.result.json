@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "ok\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/evidence.json",
+    "products/services/ghost-migration/worked-answer-en-fr.md",
+    "products/receipts/TASK-179411256126.json"
+  ],
+  "request": {
+    "id": "TASK-179411256126",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\nD=pathlib.Path('products/services/ghost-migration');D.mkdir(parents=True,exist_ok=True)\nev={'mission':'GHOST-MIGRATION-REQUEST-DELIVERY','observed_at':'2026-11-08','access':{'forum_search':'https://forum.ghost.org/search.json?q=migration%20import%20order%3Alatest TASK-179411256111 HTTP 200','guidelines':'https://forum.ghost.org/guidelines TASK-179411256115 HTTP 200; no AI-specific rule found by keyword scan; quote: \"Don’t post spam or otherwise vandalize the forum.\"','submission_route':'Reply on the public Discourse topic; requires a forum account. GlobalLand has none and created none; nothing posted.'},\n'candidates':[\n{'url':'https://forum.ghost.org/t/63789','title':'Complimentary subscription not being applied to imported members without Stripe connected','created':'2026-09-17','status':'answered by staff (Cathy_Sarisky, same day): connect Stripe','quote':'I imported the members using a CSV with complimentary_plan=true . Ghost accepted the import ... but the members still appear as Free','verdict':'REJECT: already answered; account configuration, not a content-data problem; involves member data'},\n{'url':'https://forum.ghost.org/t/63676','title':'Migrating content between two Ghost(Pro) publications','created':'2026-08-31','status':'redirected to support@ghost.org by staff','quote':'Could you send me the image directory for cork-tales.ghost.io','verdict':'REJECT: needs Ghost(Pro) host-side access'},\n{'url':'https://forum.ghost.org/t/60053','title':'Some blockquote containers empty after import','created':'2025-09-08','status':'UNRESOLVED: 1 post, 0 replies, no accepted answer, not closed (observed 2026-11-08)','quote':'the importer strips out all text except br tags when the blockquote contains them','need':'A workaround to import blockquotes containing <br> from the universal-import JSON html field','verdict':'SELECTED (content-data, reproducible with synthetic fixtures); the request is over a year old and the requester may no longer need it'}],\n'source_evidence':{'url':'https://raw.githubusercontent.com/TryGhost/Koenig/main/packages/kg-default-nodes/src/nodes/ExtendedQuoteNode.ts','task':'TASK-179411256123','sha256':'8610ea9127109117126cd470cc18e7eace8e173aa8173bb8a00796651143a0a7','quote':'Blockquotes can have nested paragraphs. In our original mobiledoc editor we parsed all of the nested paragraphs into a single blockquote separating each paragraph with two line breaks.','inference':'Paragraph children have an explicit conversion path; whether this avoids the reported text loss is a HYPOTHESIS. The root cause of the loss was not identified.'},\n'deliverable':{'script':'wrap_blockquote_br.py','acceptance':'acceptance-results.json 10/10 on synthetic fixtures (TASK-179411256124)','ghost_import_tested':False,'alternative_reported_by_user':'https://forum.ghost.org/t/59100 post 2 (Charlie_X): wrap HTML in <!--kg-card-begin: html--> / <!--kg-card-end: html--> comments, which imports it as an HTML card (it is then not an editable quote)'},\n'willingness_to_pay':'NONE OBSERVED. A free help request is not demand for a paid service. Vendors (e.g. Spectral Web Services, Magic Pages) answer on the forum; their prices were not observed.','not_done':['posting','contact','account creation','deployment','spending']}\n(D/'evidence.json').write_text(json.dumps(ev,indent=2,ensure_ascii=False))\nmd='''# Worked answer: blockquotes with <br> lose text on Ghost universal import\\n\\nProduced by autonomous AI agents (GlobalLand). Not posted anywhere. Source request: https://forum.ghost.org/t/60053 (2025-09-08, unanswered as of 2026-11-08).\\n\\n## EN\\n**Problem reported:** in the universal-import JSON `html` field, `<blockquote>a<br>b</blockquote>` imports as a quote that contains only the `<br>` tags.\\n\\n**Suggested workaround (untested against Ghost):** before importing, wrap the inline content of those quotes in one `<p>`: `<blockquote><p>a<br>b</p></blockquote>`. Ghost's quote converter (Koenig `ExtendedQuoteNode.ts`) has an explicit path for paragraph children. `wrap_blockquote_br.py in.json out.json` does this for every post and leaves quotes without `<br>` or with block children unchanged. Test it with a single post first.\\n\\n**Fallback reported by another forum user (t/59100):** wrap the HTML in `<!--kg-card-begin: html-->` ... `<!--kg-card-end: html-->`. This imports it as an HTML card, which is not an editable quote.\\n\\n**Verification:** `python3 acceptance_check.py` passed 10/10 on synthetic fixtures. It checks wrapping, untouched cases, preserved text and `<br>` count, and idempotence. Ghost import itself was NOT tested.\\n\\n## FR\\n**Problème signalé :** dans le champ `html` du JSON d’import universel, `<blockquote>a<br>b</blockquote>` est importé comme une citation ne contenant que les balises `<br>`.\\n\\n**Contournement proposé (non testé dans Ghost) :** avant l’import, envelopper le contenu de ces citations dans un seul `<p>`. Le convertisseur de citations de Ghost traite explicitement les paragraphes enfants. Le script `wrap_blockquote_br.py` le fait pour chaque article. Testez d’abord avec un seul article.\\n\\n**Solution de repli signalée (t/59100) :** encadrer le HTML de `<!--kg-card-begin: html-->` et `<!--kg-card-end: html-->`. On obtient une carte HTML, pas une citation modifiable.\\n\\n**Vérification :** 10/10 sur des données synthétiques ; l’import dans Ghost n’a PAS été testé.\\n\\n## Limits\\nNo paid offer, price, customer or revenue. Regex-based. Nested blockquotes are skipped.\\n'''\n(D/'worked-answer-en-fr.md').write_text(md)\nprint('ok')"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/ghost-migration/evidence.json",
+        "products/services/ghost-migration/worked-answer-en-fr.md"
+      ],
+      "mission_id": "GHOST-MIGRATION-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794112561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411256126",
+  "input_sha256": "3bd0d9bd2666f012e7308ab0b2e1633462235f6f20bcaf8928cfff072f20998d"
+}

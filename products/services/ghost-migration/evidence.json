@@ -1,0 +1,57 @@
+{
+  "mission": "GHOST-MIGRATION-REQUEST-DELIVERY",
+  "observed_at": "2026-11-08",
+  "access": {
+    "forum_search": "https://forum.ghost.org/search.json?q=migration%20import%20order%3Alatest TASK-179411256111 HTTP 200",
+    "guidelines": "https://forum.ghost.org/guidelines TASK-179411256115 HTTP 200; no AI-specific rule found by keyword scan; quote: \"Don’t post spam or otherwise vandalize the forum.\"",
+    "submission_route": "Reply on the public Discourse topic; requires a forum account. GlobalLand has none and created none; nothing posted."
+  },
+  "candidates": [
+    {
+      "url": "https://forum.ghost.org/t/63789",
+      "title": "Complimentary subscription not being applied to imported members without Stripe connected",
+      "created": "2026-09-17",
+      "status": "answered by staff (Cathy_Sarisky, same day): connect Stripe",
+      "quote": "I imported the members using a CSV with complimentary_plan=true . Ghost accepted the import ... but the members still appear as Free",
+      "verdict": "REJECT: already answered; account configuration, not a content-data problem; involves member data"
+    },
+    {
+      "url": "https://forum.ghost.org/t/63676",
+      "title": "Migrating content between two Ghost(Pro) publications",
+      "created": "2026-08-31",
+      "status": "redirected to support@ghost.org by staff",
+      "quote": "Could you send me the image directory for cork-tales.ghost.io",
+      "verdict": "REJECT: needs Ghost(Pro) host-side access"
+    },
+    {
+      "url": "https://forum.ghost.org/t/60053",
+      "title": "Some blockquote containers empty after import",
+      "created": "2025-09-08",
+      "status": "UNRESOLVED: 1 post, 0 replies, no accepted answer, not closed (observed 2026-11-08)",
+      "quote": "the importer strips out all text except br tags when the blockquote contains them",
+      "need": "A workaround to import blockquotes containing <br> from the universal-import JSON html field",
+      "verdict": "SELECTED (content-data, reproducible with synthetic fixtures); the request is over a year old and the requester may no longer need it"
+    }
+  ],
+  "source_evidence": {
+    "url": "https://raw.githubusercontent.com/TryGhost/Koenig/main/packages/kg-default-nodes/src/nodes/ExtendedQuoteNode.ts",
+    "task": "TASK-179411256123",
+    "sha256": "8610ea9127109117126cd470cc18e7eace8e173aa8173bb8a00796651143a0a7",
+    "quote": "Blockquotes can have nested paragraphs. In our original mobiledoc editor we parsed all of the nested paragraphs into a single blockquote separating each paragraph with two line breaks.",
+    "inference": "Paragraph children have an explicit conversion path; whether this avoids the reported text loss is a HYPOTHESIS. The root cause of the loss was not identified."
+  },
+  "deliverable": {
+    "script": "wrap_blockquote_br.py",
+    "acceptance": "acceptance-results.json 10/10 on synthetic fixtures (TASK-179411256124)",
+    "ghost_import_tested": false,
+    "alternative_reported_by_user": "https://forum.ghost.org/t/59100 post 2 (Charlie_X): wrap HTML in <!--kg-card-begin: html--> / <!--kg-card-end: html--> comments, which imports it as an HTML card (it is then not an editable quote)"
+  },
+  "willingness_to_pay": "NONE OBSERVED. A free help request is not demand for a paid service. Vendors (e.g. Spectral Web Services, Magic Pages) answer on the forum; their prices were not observed.",
+  "not_done": [
+    "posting",
+    "contact",
+    "account creation",
+    "deployment",
+    "spending"
+  ]
+}
