@@ -1,0 +1,69 @@
+{
+ "label": "STUB_ONLY: harness control-flow tests with stub converters; no upstream @tryghost/kg-html-to-lexical execution and no Ghost import occurred",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "node": "v22.23.4",
+ "passed": 12,
+ "total": 12,
+ "results": [
+  {
+   "name": "default resolution without installed package exits 2 DEPENDENCY_ABSENT",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "missing override module exits 2",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "preserving stub: all cases and pair PASS, exit 0, labelled OVERRIDE_MODULE",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "preserving stub: whitespace bytes observed, raw_text_equal false but normalized equal",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "preserving stub: nested cases keep all tokens in order",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "lossy stub: q1-before FAIL with a,b missing; q2-after PASS; exit 1",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "lossy stub: Q3 pair FAIL, nested FAIL, controls PASS",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "throwing stub: every case and pair ERROR, exit 1",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "module without htmlToLexical exits 3 API_MISMATCH",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "string-returning stub is parsed, exit 0",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "unreadable fixtures exit 4 FIXTURE_ERROR",
+   "ok": true,
+   "err": null
+  },
+  {
+   "name": "--out file equals stdout",
+   "ok": true,
+   "err": null
+  }
+ ]
+}

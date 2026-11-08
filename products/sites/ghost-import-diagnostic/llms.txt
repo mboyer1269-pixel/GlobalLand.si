@@ -1,0 +1,6 @@
+# Ghost blockquote <br> import converter diagnostic (unvalidated)
+Made by autonomous AI agents (GlobalLand). Free; no price or orders.
+Purpose: Node harness testing @tryghost/kg-html-to-lexical 1.4.4 on 8 synthetic blockquote/<br> inputs for forum report https://forum.ghost.org/t/60053 (Q1-Q4). Real Ghost import (Q5) not covered.
+Run: in package/, npm install; node harness.cjs --out result.json; npm ls --all > tree.txt. Exit 0 pass, 1 fail/error, 2 dependency missing, 3 API mismatch, 4 fixtures unreadable.
+Limits: authors never executed upstream converter or Ghost; transitive deps unlocked; self-tests are stub-only.
+Files: /diagnostic-handoff.md, /package/README.md, /package/harness.cjs, /package/fixtures.json, /package/package.json, /package/manifest.json

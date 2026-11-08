@@ -1,0 +1,107 @@
+{
+ "package": "ghost-blockquote-br-repro 0.1.0",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "mission": "GHOST-PORTABLE-REPRODUCTION",
+ "observed_at": "2026-11-08",
+ "upstream_pin": {
+  "name": "@tryghost/kg-html-to-lexical",
+  "version": "1.4.4",
+  "integrity": "sha512-XC7Ci4LmTxxzE+lLaIlC/ywH/FuM+ozsMSi+DTPW/+aEbuoNOFnDkaRbvJZYqs8VsApvJZj4WdR0LkgGBt6i0w=="
+ },
+ "transitive_dependencies_locked": false,
+ "upstream_execution": false,
+ "ghost_import_execution": false,
+ "stub_tests": {
+  "passed": 12,
+  "total": 12,
+  "task": "TASK-179412516114",
+  "label": "STUB_ONLY: harness control-flow tests with stub converters; no upstream @tryghost/kg-html-to-lexical execution and no Ghost import occurred"
+ },
+ "sandbox_default_run": {
+  "exit_code": 2,
+  "status": "DEPENDENCY_ABSENT",
+  "task": "TASK-179412516114"
+ },
+ "questions_covered": [
+  "Q1",
+  "Q2",
+  "Q3",
+  "Q4"
+ ],
+ "questions_not_covered": [
+  "Q5 real Ghost universal import"
+ ],
+ "not_established": [
+  "upstream defect reproduction",
+  "workaround validity",
+  "demand",
+  "revenue"
+ ],
+ "files": [
+  {
+   "path": "README.md",
+   "bytes": 3927,
+   "sha256": "baf417cc751bb8099475718f7eda3773df9175cb1c78814bf0cacca6f92257ec"
+  },
+  {
+   "path": "fixtures.json",
+   "bytes": 2073,
+   "sha256": "ba2c421119367c3a16a7aa70c47bbe29ef8a6a4953d4708f9a1a2edee8706d44"
+  },
+  {
+   "path": "harness.cjs",
+   "bytes": 5949,
+   "sha256": "78070ce635e403ce6c2bf88fdb6e5dfa88ed47de02f0ace2a17538773b3d5d64"
+  },
+  {
+   "path": "package.json",
+   "bytes": 482,
+   "sha256": "626b8855b2429d3f3d9c333c066b07291e6545671922360354ccda073fd54cdc"
+  },
+  {
+   "path": "sandbox-default-run.json",
+   "bytes": 456,
+   "sha256": "213a68612e15e73aaa72bc41d6045e573c82d10c5c0462c473f3c5c82b3ed526"
+  },
+  {
+   "path": "stub-test-results.json",
+   "bytes": 1552,
+   "sha256": "c4da95b947e8e0ca5c8e50091998a9a8856f5bd0d5cb2a3f7dcc39169e5fa2d7"
+  },
+  {
+   "path": "tests/run-stub-tests.cjs",
+   "bytes": 4468,
+   "sha256": "8eaf607e7e715a651aaae663cba211432b29764173d2afeef0202bff6f7659e4"
+  },
+  {
+   "path": "tests/stubs/stub-common.cjs",
+   "bytes": 754,
+   "sha256": "e725df64fb24a7f1a4eb40617b1470bd178e3ff74274033e3540d77f87b340db"
+  },
+  {
+   "path": "tests/stubs/stub-lossy.cjs",
+   "bytes": 206,
+   "sha256": "4112134a501ad3f76d13c4ad3a02dc7e64e2799dd7e16a71ad4d1778dd27a89c"
+  },
+  {
+   "path": "tests/stubs/stub-noexport.cjs",
+   "bytes": 98,
+   "sha256": "3abc96dc5b31c8ec08279882e494130a2fe629001f0ac2def010988793e84bb1"
+  },
+  {
+   "path": "tests/stubs/stub-preserving.cjs",
+   "bytes": 145,
+   "sha256": "c2fdac11c1542def88fc766c55a0cd614d262e975fa849664fdd661c91943089"
+  },
+  {
+   "path": "tests/stubs/stub-string.cjs",
+   "bytes": 185,
+   "sha256": "82fe00c21cec2b6ac3e30f9be1fbea98d017aa70a4543ebe0ab5cb826a95b86c"
+  },
+  {
+   "path": "tests/stubs/stub-throws.cjs",
+   "bytes": 149,
+   "sha256": "65ecccb394aaa646b7c3200921586e8aa13200d576232151babb44afc6d89db0"
+  }
+ ]
+}
