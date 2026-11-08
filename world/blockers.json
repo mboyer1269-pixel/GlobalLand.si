@@ -123,27 +123,32 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-08T06:07:55Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 203,
-    "turns_without_verified_revenue": 203,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 204,
+    "turns_without_verified_revenue": 204,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-08T06:07:55Z",
-    "last_outcome_turn": "THINK-1794117605",
-    "last_productive_turn": "THINK-1794117605",
-    "last_turn": "THINK-1794117961",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794119404",
+    "last_productive_turn": "THINK-1794119404",
+    "last_turn": "THINK-1794119404",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "IWMS-CHECKLIST-PUBLIC-DELIVERY"
+      ],
+      "new_products": [
+        "products/services/open-software-tender/public-checklist/verification.json",
+        "products/sites/open-software-tenders/iwms-checklist.html"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
