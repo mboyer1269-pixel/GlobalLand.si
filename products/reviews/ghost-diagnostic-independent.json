@@ -1,0 +1,34 @@
+{
+  "stub_run": {
+    "exit": 0,
+    "stdout": "{\n \"label\": \"STUB_ONLY: harness control-flow tests with stub converters; no upstream @tryghost/kg-html-to-lexical execution and no Ghost import occurred\",\n \"made_by\": \"autonomous AI agents (GlobalLand)\",\n \"node\": \"v22.23.4\",\n \"passed\": 12,\n \"total\": 12,\n \"results\": [\n  {\n   \"name\": \"default resolution without installed package exits 2 DEPENDENCY_ABSENT\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"missing override module exits 2\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"preserving stub: all cases and pair PASS, exit 0, labelled OVERRIDE_MODULE\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"preserving stub: whitespace bytes observed, raw_text_equal false but normalized equal\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"preserving stub: nested cases keep all tokens in order\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"lossy stub: q1-before FAIL with a,b missing; q2-after PASS; exit 1\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"lossy stub: Q3 pair FAIL, nested FAIL, controls PASS\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"throwing stub: every case and pair ERROR, exit 1\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"module without htmlToLexical exits 3 API_MISMATCH\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"string-returning stub is parsed, exit 0\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"unreadable fixtures exit 4 FIXTURE_ERROR\",\n   \"ok\": true,\n   \"err\": null\n  },\n  {\n   \"name\": \"--out file equals stdout\",\n   \"ok\": true,\n   \"err\": null\n  }\n ]\n}\n",
+    "stderr": ""
+  },
+  "default_run": {
+    "exit": 2,
+    "stdout": "{\n \"tool\": \"ghost-blockquote-br-repro harness\",\n \"made_by\": \"autonomous AI agents (GlobalLand)\",\n \"node\": \"v22.23.4\",\n \"package\": \"@tryghost/kg-html-to-lexical\",\n \"pinned_version\": \"1.4.4\",\n \"execution_kind\": \"INSTALLED_PACKAGE\",\n \"status\": \"DEPENDENCY_ABSENT\",\n \"error_code\": \"MODULE_NOT_FOUND\",\n \"error\": \"Cannot find module '@tryghost/kg-html-to-lexical'\",\n \"hint\": \"Run npm install in this directory with Node ^22.22.2 || ^24.15.0.\",\n \"exit_code\": 2\n}\n",
+    "stderr": ""
+  },
+  "integrity": {
+    "README.md": true,
+    "fixtures.json": true,
+    "harness.cjs": true,
+    "package.json": true,
+    "sandbox-default-run.json": true,
+    "stub-test-results.json": true,
+    "tests/run-stub-tests.cjs": true,
+    "tests/stubs/stub-common.cjs": true,
+    "tests/stubs/stub-lossy.cjs": true,
+    "tests/stubs/stub-noexport.cjs": true,
+    "tests/stubs/stub-preserving.cjs": true,
+    "tests/stubs/stub-string.cjs": true,
+    "tests/stubs/stub-throws.cjs": true,
+    "local_links_exist": true,
+    "package_matches_original": true
+  },
+  "whitespace_probe": {
+    "repr": "'<blockquote>  a<br>b \\n</blockquote>'",
+    "contains_newline": true,
+    "contains_literal_backslash_n": false
+  }
+}

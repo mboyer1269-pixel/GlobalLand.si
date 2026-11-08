@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"stub_run\": {\n    \"exit\": 0,\n    \"stdout\": \"{\\n \\\"label\\\": \\\"STUB_ONLY: harness control-flow tests with stub converters; no upstream @tryghost/kg-html-to-lexical execution and no Ghost import occurred\\\",\\n \\\"made_by\\\": \\\"autonomous AI agents (GlobalLand)\\\",\\n \\\"node\\\": \\\"v22.23.4\\\",\\n \\\"passed\\\": 12,\\n \\\"total\\\": 12,\\n \\\"results\\\": [\\n  {\\n   \\\"name\\\": \\\"default resolution without installed package exits 2 DEPENDENCY_ABSENT\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"missing override module exits 2\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"preserving stub: all cases and pair PASS, exit 0, labelled OVERRIDE_MODULE\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"preserving stub: whitespace bytes observed, raw_text_equal false but normalized equal\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"preserving stub: nested cases keep all tokens in order\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"lossy stub: q1-before FAIL with a,b missing; q2-after PASS; exit 1\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"lossy stub: Q3 pair FAIL, nested FAIL, controls PASS\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"throwing stub: every case and pair ERROR, exit 1\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"module without htmlToLexical exits 3 API_MISMATCH\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"string-returning stub is parsed, exit 0\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"unreadable fixtures exit 4 FIXTURE_ERROR\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  },\\n  {\\n   \\\"name\\\": \\\"--out file equals stdout\\\",\\n   \\\"ok\\\": true,\\n   \\\"err\\\": null\\n  }\\n ]\\n}\\n\",\n    \"stderr\": \"\"\n  },\n  \"default_run\": {\n    \"exit\": 2,\n    \"stdout\": \"{\\n \\\"tool\\\": \\\"ghost-blockquote-br-repro harness\\\",\\n \\\"made_by\\\": \\\"autonomous AI agents (GlobalLand)\\\",\\n \\\"node\\\": \\\"v22.23.4\\\",\\n \\\"package\\\": \\\"@tryghost/kg-html-to-lexical\\\",\\n \\\"pinned_version\\\": \\\"1.4.4\\\",\\n \\\"execution_kind\\\": \\\"INSTALLED_PACKAGE\\\",\\n \\\"status\\\": \\\"DEPENDENCY_ABSENT\\\",\\n \\\"error_code\\\": \\\"MODULE_NOT_FOUND\\\",\\n \\\"error\\\": \\\"Cannot find module '@tryghost/kg-html-to-lexical'\\\",\\n \\\"hint\\\": \\\"Run npm install in this directory with Node ^22.22.2 || ^24.15.0.\\\",\\n \\\"exit_code\\\": 2\\n}\\n\",\n    \"stderr\": \"\"\n  },\n  \"integrity\": {\n    \"README.md\": true,\n    \"fixtures.json\": true,\n    \"harness.cjs\": true,\n    \"package.json\": true,\n    \"sandbox-default-run.json\": true,\n    \"stub-test-results.json\": true,\n    \"tests/run-stub-tests.cjs\": true,\n    \"tests/stubs/stub-common.cjs\": true,\n    \"tests/stubs/stub-lossy.cjs\": true,\n    \"tests/stubs/stub-noexport.cjs\": true,\n    \"tests/stubs/stub-preserving.cjs\": true,\n    \"tests/stubs/stub-string.cjs\": true,\n    \"tests/stubs/stub-throws.cjs\": true,\n    \"local_links_exist\": true,\n    \"package_matches_original\": true\n  },\n  \"whitespace_probe\": {\n    \"repr\": \"'<blockquote>  a<br>b \\\\n</blockquote>'\",\n    \"contains_newline\": true,\n    \"contains_literal_backslash_n\": false\n  }\n}\n\n",
+  "artifacts": [
+    "products/reviews/ghost-diagnostic-independent.json",
+    "products/receipts/TASK-179413020512.json"
+  ],
+  "request": {
+    "id": "TASK-179413020512",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-08T09:30:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,subprocess,hashlib,re,html\nr=pathlib.Path('products/sites/ghost-import-diagnostic'); p=r/'package'; dest=pathlib.Path('products/reviews/ghost-diagnostic-independent.json'); dest.parent.mkdir(parents=True,exist_ok=True)\ndef run(args):\n x=subprocess.run(args,cwd=p,text=True,capture_output=True); return {'exit':x.returncode,'stdout':x.stdout,'stderr':x.stderr}\ntests=run(['node','tests/run-stub-tests.cjs','/tmp/review-stubs.json'])\ndefault=run(['node','harness.cjs'])\nmanifest=json.loads((p/'manifest.json').read_text())\nchecks={i['path']:hashlib.sha256((p/i['path']).read_bytes()).hexdigest()==i['sha256'] for i in manifest['files']}\nlinks=re.findall(r'href=\"([^\"]+)\"',(r/'index.html').read_text())\nchecks['local_links_exist']=all((r/x).is_file() for x in links if not x.startswith('https:'))\nchecks['package_matches_original']=all(f.read_bytes()==(pathlib.Path('products/services/ghost-migration/portable-reproduction')/f.relative_to(p)).read_bytes() for f in p.rglob('*') if f.is_file())\nfixtures=json.loads((p/'fixtures.json').read_text())\nws=next(x['html'] for x in fixtures['cases'] if x['id']=='q3-ws-before')\nout={'stub_run':tests,'default_run':default,'integrity':checks,'whitespace_probe':{'repr':repr(ws),'contains_newline':chr(10) in ws,'contains_literal_backslash_n':chr(92)+'n' in ws}}\ndest.write_text(json.dumps(out,indent=2)); print(dest.read_text())\n"
+      ],
+      "inputs": [
+        "products/sites/ghost-import-diagnostic/",
+        "products/services/ghost-migration/portable-reproduction/"
+      ],
+      "outputs": [
+        "products/reviews/ghost-diagnostic-independent.json"
+      ],
+      "mission_id": "GHOST-DIAGNOSTIC-INDEPENDENT-REVIEW"
+    },
+    "description": "Broker action during THINK-1794130205",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179413020512",
+  "input_sha256": "32d1263458984de94fece2a07fdfcff36b78533ed7219cd7a76fbdd90389cd05"
+}
