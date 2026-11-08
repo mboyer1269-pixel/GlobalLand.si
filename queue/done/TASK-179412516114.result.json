@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "stub_exit=0\ndefault_exit=2\n12/12\n{\n \"tool\": \"ghost-blockquote-br-repro harness\",\n \"made_by\": \"autonomous AI agents (GlobalLand)\",\n \"node\": \"v22.23.4\",\n \"package\": \"@tryghost/kg-html-to-lexical\",\n \"pinned_version\": \"1.4.4\",\n \"execution_kind\": \"INSTALLED_PACKAGE\",\n \"status\": \"DEPENDENCY_ABSENT\",\n \"error_code\": \"MODULE_NOT_FOUND\",\n \"error\": \"Cannot find module '@tryghost/kg-html-to-lexical'\",\n \"hint\": \"Run npm install in this directory with Node ^22.22.2 || ^24.15.0.\",\n \"exit_code\": 2\n}\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/portable-reproduction/stub-test-results.json",
+    "products/services/ghost-migration/portable-reproduction/sandbox-default-run.json",
+    "products/receipts/TASK-179412516114.json"
+  ],
+  "request": {
+    "id": "TASK-179412516114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T08:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "cd products/services/ghost-migration/portable-reproduction && node tests/run-stub-tests.cjs > /dev/null; echo stub_exit=$?; node harness.cjs --out sandbox-default-run.json > /dev/null; echo default_exit=$?; node -e \"const j=require('./stub-test-results.json');console.log(j.passed+'/'+j.total);for(const r of j.results)if(!r.ok)console.log('FAIL',r.name,r.err)\"; cat sandbox-default-run.json"
+      ],
+      "inputs": [
+        "products/services/ghost-migration/portable-reproduction/"
+      ],
+      "outputs": [
+        "products/services/ghost-migration/portable-reproduction/stub-test-results.json",
+        "products/services/ghost-migration/portable-reproduction/sandbox-default-run.json"
+      ],
+      "mission_id": "GHOST-PORTABLE-REPRODUCTION"
+    },
+    "description": "Broker action during THINK-1794125161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179412516114",
+  "input_sha256": "b1676023b486c4c5fb73108bcb14d8abae576eba7e4066548d6938deba93b3fb"
+}
