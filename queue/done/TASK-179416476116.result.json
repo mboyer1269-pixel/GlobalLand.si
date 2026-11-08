@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "Leute für bezahltes Mappen (Erfassung von Radinfra) gesucht - 2026 2026-09-15T13:45:17.595Z closed False posts 2 last 2026-09-30T13:25:46.720Z\n-- FMC-Henri 2026-09-15  Hallo zusammen, wir planen das Rad-Ergänzungsnetz in Berlin in OSM zu erfassen, nachdem wir unser Projekt zur Erfassung des Radvorrangnetzes für die Stadt Berlin im vergangenen Jahr erfolgreich abschließen konnten. An dieser Stelle möchten wir uns noch einmal herzlich bei der OSM-Community für den konstruktiven Austausch und die wertvolle Unterstützung im Rahmen des vergangenen Projekts bedanken. Wir suchen nun weitere Hilfe aus der Community für bezahlte Mapping-Aufgaben: Radinfrastruktur in Berlin erfassen Bei diesem Projekt wird es darum gehen, entlang des sogenannten Rad-Ergänzungsnetzes und weiteren Teilen des Radnetzes die Rad- und Straßeninfrastruktur in OSM zu prüfen und zu vervollständigen. Das Rad-Ergänzungsnetz umfasst etwa 1.500 km Netz und ist zusammen mit den Hauptverkehrsstraßen etwa 2.100 km lang. Die Daten in OSM werden nach der Erfassung in unserer Open-Source-Software TILDA Radverkehr prozessiert (Ergebnisse vgl. auch https://radinfra.de ) und danach weiter von uns aufbereitet. Die aufbereiteten Daten werden anschließend von der Stadt Berlin für Planungs- und Priorisierungsaufgaben und weitere Analysen verwendet. Wir würden uns sehr freuen, mit diesem Projekt die Stärken von OSM für Radverkehrsdaten zeigen zu können und sichtbar zu machen: hochwertige Geometrien, detaillierte Attribute und nicht zuletzt die gute Aktualisierbarkeit der Daten, die wir in einem möglichen Folgeprojekt weiter nutzen könnten. Mehr findet ihr in der formalen Organized Editing-Dok\n-- FMC-Henri 2026-09-30  Als kurzer Nachtrag: Wir suchen mehrere Personen, insofern gerne noch bewerben. Für neue Bewerbungen, schreibt gerne auch, ob ihr aus Berlin kommt. Wir suchen auch noch eine Person, welche mit dem Fahrrad durch Berlin fährt und 360° Bilder erstellt. \n\n",
+  "artifacts": [
+    "products/receipts/TASK-179416476116.json"
+  ],
+  "request": {
+    "id": "TASK-179416476116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T19:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,re,html;d=json.load(open('products/services/geospatial-request/raw/osm-topic-147703.json'))\nprint(d['title'],d['created_at'],'closed',d.get('closed'),'posts',d.get('posts_count'),'last',d.get('last_posted_at'))\nfor p in d['post_stream']['posts'][:8]:\n  t=html.unescape(re.sub('<[^>]+>',' ',p['cooked']));print('--',p['username'],p['created_at'][:10],re.sub(r'\\s+',' ',t)[:1500])"
+      ],
+      "inputs": [
+        "products/services/geospatial-request/raw/osm-topic-147703.json"
+      ],
+      "outputs": [],
+      "mission_id": "GEOSPATIAL-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794164761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179416476116",
+  "input_sha256": "e3ebca649469645b59b053b0a8666d9c2f4e8c6df3f6f104598128ec1f89ec31"
+}
