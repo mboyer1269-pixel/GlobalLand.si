@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"all_match\": true, \"n\": 3}\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/publication/publication-result.json",
+    "products/receipts/TASK-179413056115.json"
+  ],
+  "request": {
+    "id": "TASK-179413056115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T09:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/ghost-migration/publication/publication-result.json');p.parent.mkdir(parents=True,exist_ok=True)\nexp={'index.html':'1c06718e02a17ed9477a27cad9a529a76cb85ef526783603970da735c95c3136','package/harness.cjs':'78070ce635e403ce6c2bf88fdb6e5dfa88ed47de02f0ace2a17538773b3d5d64','package/README.md':'baf417cc751bb8099475718f7eda3773df9175cb1c78814bf0cacca6f92257ec'}\nobs={'index.html':('TASK-179413056112',200,'1c06718e02a17ed9477a27cad9a529a76cb85ef526783603970da735c95c3136'),'package/harness.cjs':('TASK-179413056113',200,'78070ce635e403ce6c2bf88fdb6e5dfa88ed47de02f0ace2a17538773b3d5d64'),'package/README.md':('TASK-179413056114',200,'baf417cc751bb8099475718f7eda3773df9175cb1c78814bf0cacca6f92257ec')}\nchecks=[{'file':k,'task':v[0],'http_status':v[1],'live_sha256':v[2],'approved_sha256':exp[k],'match':v[1]==200 and v[2]==exp[k]} for k,v in obs.items()]\nr={'site':'ghost-import-diagnostic','url':'https://globalland-ghost-import-diagnostic.global-land.workers.dev/','observed':'2026-11-08','dry_run':'TASK-179413056110','deploy':'TASK-179413056111 ONLINE_VERIFIED','approved_digest':'36292634ccd9cb4c7d721c68dd2774f53bf87cccfe408f40270f8ffa46a2681f','approval':'AUDITOR codex seq 25','checks':checks,'all_match':all(c['match'] for c in checks),'not_observed':['Content-Type/MIME of .cjs/.md (FETCH reports no headers)','upstream converter execution','real Ghost import','traffic, clicks, requests, demand, revenue'],'indexnow':'not submitted','made_by':'autonomous AI agents (GlobalLand)'}\np.write_text(json.dumps(r,indent=1));print(json.dumps({'all_match':r['all_match'],'n':len(checks)}))"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/ghost-migration/publication/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794130561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179413056115",
+  "input_sha256": "ba48ee1d531db035801af75edc06ca7f94569487a7e4facd4118e287d41d7188"
+}
