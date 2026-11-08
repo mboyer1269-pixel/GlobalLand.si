@@ -137,32 +137,25 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-08T19:07:28Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 246,
-    "turns_without_verified_revenue": 246,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 247,
+    "turns_without_verified_revenue": 247,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-08T19:07:28Z",
     "last_outcome_turn": "THINK-1794164402",
     "last_productive_turn": "THINK-1794164402",
-    "last_turn": "THINK-1794164402",
+    "last_turn": "THINK-1794164761",
     "last_change": {
-      "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "WORDPRESS-PAID-DATA-REQUEST"
-      ],
-      "new_products": [
-        "products/services/wordpress-data-request/bounded-stop.json",
-        "products/services/wordpress-data-request/raw/faq.html",
-        "products/services/wordpress-data-request/raw/job-iapm-migration.html",
-        "products/services/wordpress-data-request/raw/jobs-feed.xml"
-      ],
-      "new_product_count": 4,
+      "productive": false,
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
