@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{'wiki_quotes_verbatim': True, 'topic_quotes_verbatim': True}\n\n",
+  "artifacts": [
+    "products/services/berlin-mapping-qa/bounded-rejection.json",
+    "products/receipts/TASK-179416656113.json"
+  ],
+  "request": {
+    "id": "TASK-179416656113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T19:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib\nw=pathlib.Path('products/services/berlin-mapping-qa/raw/oe-activity-wiki.txt').read_bytes();t=pathlib.Path('products/services/geospatial-request/raw/osm-topic-147703.json').read_bytes()\nws=w.decode()\nquotes=['Every OSM editor has their own person-specific account. They do not use their private accounts, but company-related accounts.','The images are not accessible to third parties.','The hired persons are skilled in OSM and are active OpenStreetMap editors.','Beyond that, FixMyCity provides training and support.','based on the processing done in [[FixMyCity_GmbH#TILDA_Radverkehr|TILDA]], which is publicly available as part of https://radinfra.de/','The editors are summoned to use the hashtag <code>#fmc-nebennetz</code> on all changesets.']\nts=t.decode('utf-8')\ntq=['Mappen von Zuhause, mit privatem Laptop','Individuell, je nach Qualifikation, pro Stunde','bis zum 11. Oktober','ca. 20 h / Woche Zeit','Deutsch auf mindestens Niveau B2','Wir werden euch natürlich im Radinfrastruktur-Mappen schulen und Tools bereitstellen, mit denen wir den Mapping-Prozess und -Fortschritt und die Qualität begleiten.']\nchk={'wiki_quotes_verbatim':all(q in ws for q in quotes),'topic_quotes_verbatim':all(q in ts for q in tq)}\nr={'mission':'BERLIN-MAPPING-OFFLINE-QA','observed_at':'2026-11-08','made_by':'autonomous AI agents (GlobalLand)','verdict':'STOP','reconsidered_conclusion':'offline-delivery rejection in products/services/geospatial-request/bounded-rejection.json','sources':{'topic':{'url':'https://community.openstreetmap.org/t/147703.json','fetch':'TASK-179416476115','sha256':hashlib.sha256(t).hexdigest(),'quotes':tq},'organised_editing_spec':{'url':'https://wiki.openstreetmap.org/w/index.php?title=Organised_Editing/Activities/Berlin_Radinfrastruktur_(Erg%C3%A4nzungsnetz)&action=raw','fetch':'TASK-179416656112','sha256':hashlib.sha256(w).hexdigest(),'quotes':quotes}},'specs_inspected':1,'spec_limit':2,'findings':{'requested_output':'live OSM edits (tagging of cycle and road infrastructure) by hired hourly editors, ~20 h/week for ~1 year from Oct 2026, under person-specific company accounts and hashtag #fmc-nebennetz','remote_role':'remote work is explicitly allowed (Mappen von Zuhause), so physical presence was NOT a valid reason for the mapper role; it applies only to the separate 360-degree cycling-photo role','quality_assurance':'performed in-house: FixMyCity provides training and its own tools to monitor process, progress and quality; TILDA processing is already public at radinfra.de. No outsourced offline QA/processing deliverable is described.','inputs':'public: OSM, Mapillary, aerial imagery; key private input: Berlin street-level images not accessible to third parties','application':'email with OSM profile name, German B2, deadline preferably 11 Oct 2026 (passed; topic says several persons still sought as of 30 Sep)'},'reject_reasons':['buyer purchases editor hours producing live OSM edits through company-issued accounts, not an offline analysis; an unrequested QA report would be a generic sample','QA tooling is in-house (TILDA/radinfra.de), so an external offline QA duplicates buyer capability without evidence of demand','authoritative inputs include private city imagery unavailable to us; imagery interpretation is excluded by mission','application needs outgoing email, an OSM identity and German B2 claims; outgoing contact not implemented, no authorized identity'],'corrected_prior_reasoning':['physical presence is not required for the mapper role (remote stated)','compensation is hourly, individually set; amount not stated'],'dependencies_separate':{'submission_account':'founder-authorized identity + email application + company-issued OSM account (BOUNTY-SUBMISSION-ELIGIBILITY / NO-COMMUNITY-ANSWER-ACCOUNT)','settlement':'hourly employment/contract payment to a person; no GlobalLand settlement route'},'no_output_produced':'no dataset, analysis or sample created, per mission rules','checks':chk,'feedback':'0 classified / 3 unclassified = unknown, not zero','revenue_cents':0}\np=pathlib.Path('products/services/berlin-mapping-qa/bounded-rejection.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,ensure_ascii=False,indent=1));print(chk)"
+      ],
+      "inputs": [
+        "products/services/berlin-mapping-qa/raw/oe-activity-wiki.txt",
+        "products/services/geospatial-request/raw/osm-topic-147703.json"
+      ],
+      "outputs": [
+        "products/services/berlin-mapping-qa/bounded-rejection.json"
+      ],
+      "mission_id": "BERLIN-MAPPING-OFFLINE-QA"
+    },
+    "description": "Broker action during THINK-1794166561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179416656113",
+  "input_sha256": "bee44dbfa2a8248af91ac29712e91391a0835baf15587db3a4473219b1e01a01"
+}
