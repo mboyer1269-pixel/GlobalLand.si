@@ -1,0 +1,33 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 3, in <module>\nAssertionError\n\nstdout:\n{\"17 previous files unchanged\": true, \"only key added\": true, \"manifest hashes match\": true, \"key exact bytes\": true, \"key hash\": true, \"key syntax\": true, \"baseline approved digest\": true, \"live probes match\": true, \"no prior submission recorded\": true, \"18 files 32087 bytes\": false}\n",
+  "request": {
+    "id": "TASK-179413560413",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-08T11:00:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,hashlib,re\nroot=pathlib.Path('products/sites/ghost-import-diagnostic');base=pathlib.Path('products/services/ghost-migration');m=json.loads((base/'discovery/manifest.json').read_text());old=json.loads((base/'public-handoff/verification.json').read_text())['site_hashes'];pub=json.loads((base/'publication/publication-result.json').read_text());files={str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()};key=m['key_file'];checks={};checks['17 previous files unchanged']=len(old)==17 and all(files.get(k)==v for k,v in old.items());checks['only key added']=set(files)==set(old)|{key};checks['manifest hashes match']=files==m['files'];checks['key exact bytes']=(root/key).read_bytes()==b'a7c41e9d2b6f08535e1d9c3b7f24a6e8';checks['key hash']=files[key]=='e715dd5970f162646467a3f214c6f576d7716468677a85d98611513af7d21df5';checks['key syntax']=bool(re.fullmatch('[0-9a-f]{32}\\\\.txt',key));checks['baseline approved digest']=pub['approved_digest']=='36292634ccd9cb4c7d721c68dd2774f53bf87cccfe408f40270f8ffa46a2681f';checks['live probes match']=all(files[c['file']]==c['live_sha256']==c['approved_sha256'] for c in pub['checks']);checks['no prior submission recorded']=pub['indexnow']=='not submitted';checks['18 files 32087 bytes']=len(files)==18 and sum(p.stat().st_size for p in root.rglob('*') if p.is_file())==32087\nout={'scope':'IndexNow key addition only','dry_run':'TASK-179413560411','digest':'1d66fd9cc17938d76076c4e7eac0bda8271304bc998c286bdde0a888b2ecd13c','checks':checks,'passed':sum(checks.values()),'total':len(checks),'baseline_hashes':old,'limits':['No deployment or submission in review','No upstream converter validation','No acquisition or revenue established']};dest=pathlib.Path('products/reviews/ghost-discovery-independent.json');dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(json.dumps(out,indent=2));print(json.dumps(checks));assert all(checks.values())"
+      ],
+      "inputs": [
+        "products/sites/ghost-import-diagnostic/",
+        "products/services/ghost-migration/discovery/manifest.json",
+        "products/services/ghost-migration/public-handoff/verification.json",
+        "products/services/ghost-migration/publication/publication-result.json"
+      ],
+      "outputs": [
+        "products/reviews/ghost-discovery-independent.json"
+      ],
+      "mission_id": "GHOST-DISCOVERY-INDEPENDENT-REVIEW"
+    },
+    "description": "Broker action during THINK-1794135604",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179413560413",
+  "input_sha256": "21712b3ca29e3eb315c8883e819a2b38e56d6bb28262dd396f51c25f1fd56e46"
+}
