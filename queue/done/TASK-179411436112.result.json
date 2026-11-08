@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\"mods\": \"jsdom ABSENT\\nlexical ABSENT\\n@tryghost/kg-html-to-lexical ABSENT\\n\", \"obs\": {\"nested\": {\"input\": \"<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>\", \"output\": \"<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>\", \"changed\": false}, \"nested_inner_first\": {\"input\": \"<blockquote>x<br>y<blockquote>z</blockquote></blockquote>\", \"output\": \"<blockquote>x<br>y<blockquote>z</blockquote></blockquote>\", \"changed\": false}, \"leading_trailing_ws\": {\"input\": \"<blockquote>  a<br>b \\n</blockquote>\", \"output\": \"<blockquote><p>a<br>b</p></blockquote>\", \"changed\": true}, \"plain\": {\"input\": \"<blockquote>a<br>b</blockquote>\", \"output\": \"<blockquote><p>a<br>b</p></blockquote>\", \"changed\": true}}}\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/reproduction/result.json",
+    "products/receipts/TASK-179411436112.json"
+  ],
+  "request": {
+    "id": "TASK-179411436112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T05:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib,subprocess,sys\nsys.path.insert(0,'products/services/ghost-migration')\nimport wrap_blockquote_br as w\nmeta=json.load(open('products/services/ghost-migration/reproduction/npm-kg-html-to-lexical-latest.json'))\ncases={'nested':'<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>','nested_inner_first':'<blockquote>x<br>y<blockquote>z</blockquote></blockquote>','leading_trailing_ws':'<blockquote>  a<br>b \\n</blockquote>','plain':'<blockquote>a<br>b</blockquote>'}\nobs={k:{'input':v,'output':w.fix_html(v),'changed':w.fix_html(v)!=v} for k,v in cases.items()}\nnpm=subprocess.run(['npm','ls','-g','--depth=0'],capture_output=True,text=True).stdout\nmods=subprocess.run(['node','-e','for (const m of [\"jsdom\",\"lexical\",\"@tryghost/kg-html-to-lexical\"]) { try { require.resolve(m); console.log(m+\" present\") } catch(e) { console.log(m+\" ABSENT\") } }'],capture_output=True,text=True).stdout\nr={'mission':'GHOST-IMPORT-REPRODUCTION','observed_at':'2026-11-08','verdict':'STOPPED_PREREQUISITE_MISSING','upstream_execution':False,'workaround_validated':False,\n'upstream':{'package':'@tryghost/kg-html-to-lexical','version':meta['version'],'tarball':meta['dist']['tarball'],'integrity':meta['dist']['integrity'],'registry_fetch':'TASK-179411436111 HTTP 200 sha256 f0e56a33778459bb84d31abc2c869471977a4eae7d568651d6b571acca34b583','engines':meta['engines'],'dependencies':meta['dependencies']},\n'sandbox_capability':{'node':subprocess.run(['node','-v'],capture_output=True,text=True).stdout.strip(),'npm_global':npm.strip(),'module_resolution':mods.strip(),'network':'none in EXEC; FETCH is single-URL GET, 1 MiB cap, text/base64 output'},\n'missing_prerequisite':'An installed dependency tree for @tryghost/kg-html-to-lexical 1.4.4: jsdom 30.0.1 (dozens of transitive packages), lexical 0.13.1 and six @lexical/* packages, @tryghost/kg-default-nodes ~2.3.0 and kg-default-transforms ~1.3.9 with their own deps. None is installed and EXEC has no registry access. Reassembling the tree from per-tarball FETCHes would be the speculative platform install the mission forbids. A pinned image with these modules, or a Ghost instance, would remove the blocker.',\n'regex_limit_observations':obs,\n'regex_findings':['Nested quotes: the outer quote is left unchanged because the inner <blockquote matches the block-child check. The inner quote is also never wrapped, even when it contains <br>.','Whitespace: inner.strip() removes leading and trailing whitespace inside wrapped quotes. Visible text is unchanged in HTML rendering, but the bytes are not preserved.'],\n'unknowns':['Whether upstream conversion loses text on <blockquote>a<br>b</blockquote> today (report dated 2025-09-08, Ghost versions since then)','Whether the <p>-wrapped input preserves the text in upstream conversion'],\n'next_decision':'Do not expose or recommend the workaround as working. Park unless an image with the upstream converter, or a Ghost instance, becomes available. No paid demand observed.'}\nout=pathlib.Path('products/services/ghost-migration/reproduction/result.json');out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(r,indent=1,ensure_ascii=False))\nprint(json.dumps({'mods':mods,'obs':obs},ensure_ascii=False))"
+      ],
+      "inputs": [
+        "products/services/ghost-migration/wrap_blockquote_br.py",
+        "products/services/ghost-migration/reproduction/npm-kg-html-to-lexical-latest.json"
+      ],
+      "outputs": [
+        "products/services/ghost-migration/reproduction/result.json"
+      ],
+      "mission_id": "GHOST-IMPORT-REPRODUCTION"
+    },
+    "description": "Broker action during THINK-1794114361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411436112",
+  "input_sha256": "b8d4ce30f0708398d3edb7d844c3deaa6a09c8c67e421e479e3d4bf7a4585a81"
+}

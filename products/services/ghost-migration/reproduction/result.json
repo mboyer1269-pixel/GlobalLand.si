@@ -1,0 +1,67 @@
+{
+ "mission": "GHOST-IMPORT-REPRODUCTION",
+ "observed_at": "2026-11-08",
+ "verdict": "STOPPED_PREREQUISITE_MISSING",
+ "upstream_execution": false,
+ "workaround_validated": false,
+ "upstream": {
+  "package": "@tryghost/kg-html-to-lexical",
+  "version": "1.4.4",
+  "tarball": "https://registry.npmjs.org/@tryghost/kg-html-to-lexical/-/kg-html-to-lexical-1.4.4.tgz",
+  "integrity": "sha512-XC7Ci4LmTxxzE+lLaIlC/ywH/FuM+ozsMSi+DTPW/+aEbuoNOFnDkaRbvJZYqs8VsApvJZj4WdR0LkgGBt6i0w==",
+  "registry_fetch": "TASK-179411436111 HTTP 200 sha256 f0e56a33778459bb84d31abc2c869471977a4eae7d568651d6b571acca34b583",
+  "engines": {
+   "node": "^22.22.2 || ^24.15.0"
+  },
+  "dependencies": {
+   "jsdom": "30.0.1",
+   "lexical": "0.13.1",
+   "@lexical/html": "0.13.1",
+   "@lexical/link": "0.13.1",
+   "@lexical/list": "0.13.1",
+   "@lexical/headless": "0.13.1",
+   "@lexical/clipboard": "0.13.1",
+   "@lexical/rich-text": "0.13.1",
+   "@tryghost/kg-default-nodes": "~2.3.0",
+   "@tryghost/kg-default-transforms": "~1.3.9"
+  }
+ },
+ "sandbox_capability": {
+  "node": "v22.23.4",
+  "npm_global": "/usr/local/lib\n├── corepack@0.36.0\n└── npm@10.9.9",
+  "module_resolution": "jsdom ABSENT\nlexical ABSENT\n@tryghost/kg-html-to-lexical ABSENT",
+  "network": "none in EXEC; FETCH is single-URL GET, 1 MiB cap, text/base64 output"
+ },
+ "missing_prerequisite": "An installed dependency tree for @tryghost/kg-html-to-lexical 1.4.4: jsdom 30.0.1 (dozens of transitive packages), lexical 0.13.1 and six @lexical/* packages, @tryghost/kg-default-nodes ~2.3.0 and kg-default-transforms ~1.3.9 with their own deps. None is installed and EXEC has no registry access. Reassembling the tree from per-tarball FETCHes would be the speculative platform install the mission forbids. A pinned image with these modules, or a Ghost instance, would remove the blocker.",
+ "regex_limit_observations": {
+  "nested": {
+   "input": "<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>",
+   "output": "<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>",
+   "changed": false
+  },
+  "nested_inner_first": {
+   "input": "<blockquote>x<br>y<blockquote>z</blockquote></blockquote>",
+   "output": "<blockquote>x<br>y<blockquote>z</blockquote></blockquote>",
+   "changed": false
+  },
+  "leading_trailing_ws": {
+   "input": "<blockquote>  a<br>b \n</blockquote>",
+   "output": "<blockquote><p>a<br>b</p></blockquote>",
+   "changed": true
+  },
+  "plain": {
+   "input": "<blockquote>a<br>b</blockquote>",
+   "output": "<blockquote><p>a<br>b</p></blockquote>",
+   "changed": true
+  }
+ },
+ "regex_findings": [
+  "Nested quotes: the outer quote is left unchanged because the inner <blockquote matches the block-child check. The inner quote is also never wrapped, even when it contains <br>.",
+  "Whitespace: inner.strip() removes leading and trailing whitespace inside wrapped quotes. Visible text is unchanged in HTML rendering, but the bytes are not preserved."
+ ],
+ "unknowns": [
+  "Whether upstream conversion loses text on <blockquote>a<br>b</blockquote> today (report dated 2025-09-08, Ghost versions since then)",
+  "Whether the <p>-wrapped input preserves the text in upstream conversion"
+ ],
+ "next_decision": "Do not expose or recommend the workaround as working. Park unless an image with the upstream converter, or a Ghost instance, becomes available. No paid demand observed."
+}
