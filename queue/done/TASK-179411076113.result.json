@@ -1,0 +1,21 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://hn.algolia.com/api/v1/search?query=government%20tenders%20alerts&tags=comment&hitsPerPage=30\", \"http_status\": 200, \"sha256\": \"da8d265fddb7209d021a7b4ab5c774c6af2a70134a6199b1268ad661dcc8fbcc\", \"artifact\": \"products/services/tender-intelligence/buyer-guide/raw/hn-tender-alerts-comments.json\"}",
+  "request": {
+    "id": "TASK-179411076113",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:06:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://hn.algolia.com/api/v1/search?query=government%20tenders%20alerts&tags=comment&hitsPerPage=30",
+      "output": "products/services/tender-intelligence/buyer-guide/raw/hn-tender-alerts-comments.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794110761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411076113",
+  "input_sha256": "c52c02afae8274cbc18f1a770657a877dd0c2260a2aebd71b130c0bf13fd730b"
+}
