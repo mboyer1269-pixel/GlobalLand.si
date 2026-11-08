@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "79896872 ['linux', 'asp.net', 'service', 'sqlite'] How can I package a .NET server app running on Linux as a service with SQLite?\n79893386 ['python', 'sqlite', 'database-migration', 'alembic'] Manual edits to Alembic migration file are not being implemented\n79878251 ['php', 'sqlite', 'leaf-php'] Database locked on insert() in Leaf PHP\n79874327 ['sqlite', 'gambas'] How to connect the database to databrowser?\n79870480 ['ios', 'macos', 'sqlite', 'swiftdata'] Any issue using a SwiftData store with a different Persistence number?\n79859287 ['python', 'sqlite', 'transactions', 'fastapi'] How do transactions with FastAPI Depends() work?\n79846840 ['python', 'sqlite', 'sqlite3-python'] Why am I getting a foreign key mismatch when trying to join 2 tables using foreign keys?\n<p>I prepare an SQLite query:</p>\n<pre><code>std::string sql = &quot;CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ; SELECT * FROM T1&quot;;\n</code></pre>\n<p><code>TABLE1</code> isn't empty. I enumerate rows of the 2nd query (<code>SELECT FROM T1</code>) using:</p>\n<pre><code>int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &amp;ppStmt, &amp;pzTail);\nrc = sqlite3_step(ppStmt);\n</code></pre>\n<p>I get return code 101 from <code>sqlite3_step</code> as if the result is empty (<code>SQLITE_DONE</code>). At the same time <code>pzTail</code> points to string <code>&quot;SELECT * FROM T1&quot;</code>, as if it didn't compile and therefore, didn't run.</p>\n<p>How can I enumerate result rows of the 2nd part of my query?</p>\n\nowner LUN https://stackoverflow.com/users/5485517/lun license CC BY-SA 4.0 score 0 views 117\n==\n/usr/bin/gcc\n/usr/bin/cc\n/usr/include/sqlite3.h\nlibsqlite3.a\nlibsqlite3.so\nlibsqlite3.so.0\nlibsqlite3.so.0.8.6\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179414136114.json"
+  ],
+  "request": {
+    "id": "TASK-179414136114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T12:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "python3 -I -c \"import json,html\nd=json.load(open('products/services/sqlite-repair/raw/no-answers.json'))\nfor q in d['items'][8:]:\n  print(q['question_id'],q['tags'],html.unescape(q['title']))\nq=[x for x in d['items'] if x['question_id']==79919860][0]\nprint(q.get('body'))\nprint('owner',q['owner'].get('display_name'),q['owner'].get('link'),'license',q.get('content_license'),'score',q['score'],'views',q['view_count'])\"; echo ==; which gcc cc tcc clang; ls /usr/include/sqlite3.h; ls /usr/lib/x86_64-linux-gnu/ | grep -i sqlite"
+      ],
+      "outputs": [],
+      "inputs": [
+        "products/services/sqlite-repair/raw/no-answers.json"
+      ],
+      "mission_id": "SQLITE-REQUEST-FULFILLMENT"
+    },
+    "description": "Broker action during THINK-1794141361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179414136114",
+  "input_sha256": "a5c2ebf75a51b677afd0bd23752cd36b53fa22fe182e480457ffd8e29dc08f4d"
+}
