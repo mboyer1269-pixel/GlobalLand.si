@@ -1,0 +1,231 @@
+{
+ "mission": "GHOST-DIAGNOSTIC-PUBLIC-HANDOFF",
+ "observed_at": "2026-11-08",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "site": "ghost-import-diagnostic",
+ "node": "v22.23.4",
+ "passed": 26,
+ "total": 27,
+ "checks": [
+  {
+   "check": "package files match manifest sha256 and bytes",
+   "ok": true,
+   "detail": {
+    "mismatch": [],
+    "count": 13
+   }
+  },
+  {
+   "check": "manifest.json byte-identical to source",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "diagnostic-handoff.md byte-identical to source",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "README ../diagnostic-handoff.md resolves within site",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "node --check all .cjs",
+   "ok": true,
+   "detail": [
+    [
+     "harness.cjs",
+     0
+    ],
+    [
+     "tests/run-stub-tests.cjs",
+     0
+    ],
+    [
+     "tests/stubs/stub-string.cjs",
+     0
+    ],
+    [
+     "tests/stubs/stub-noexport.cjs",
+     0
+    ],
+    [
+     "tests/stubs/stub-throws.cjs",
+     0
+    ],
+    [
+     "tests/stubs/stub-lossy.cjs",
+     0
+    ],
+    [
+     "tests/stubs/stub-preserving.cjs",
+     0
+    ],
+    [
+     "tests/stubs/stub-common.cjs",
+     0
+    ]
+   ]
+  },
+  {
+   "check": "direct dependency pinned exactly 1.4.4",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "no lockfile present (disclosed as unlocked)",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "8 fixture cases",
+   "ok": true,
+   "detail": [
+    "q1-before",
+    "q2-after",
+    "q3-ws-before",
+    "q3-ws-after",
+    "q4-nested-a",
+    "q4-nested-b",
+    "control-plain-quote",
+    "control-paragraph-br"
+   ]
+  },
+  {
+   "check": "STUB_ONLY self-tests from site copy",
+   "ok": true,
+   "detail": {
+    "exit": 0,
+    "passed": 12,
+    "total": 12,
+    "label": "STUB_ONLY: harness control-flow tests with stub converters; no upstream @tryghost/kg-html-to-lexical execution and no Ghost import occurred"
+   }
+  },
+  {
+   "check": "documented command node harness.cjs without npm install exits 2 DEPENDENCY_ABSENT",
+   "ok": true,
+   "detail": {
+    "exit": 2,
+    "status": "DEPENDENCY_ABSENT"
+   }
+  },
+  {
+   "check": "site copy unmodified by tests",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: EN AI disclosure",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: FR AI disclosure",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: unvalidated EN",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: unvalidated FR",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: pin 1.4.4",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: transitive unlocked",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: dependency absent",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: stub-only",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: Q5 not covered",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: source citation",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: no reproduction claim",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "index contains: no workaround endorsement",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "verbatim forum quote present in saved topic",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "check": "no currency or checkout terms",
+   "ok": false,
+   "detail": null
+  },
+  {
+   "check": "all relative links resolve",
+   "ok": true,
+   "detail": {
+    "links": 20,
+    "missing": []
+   }
+  },
+  {
+   "check": "no script tags",
+   "ok": true,
+   "detail": null
+  }
+ ],
+ "site_hashes": {
+  "diagnostic-handoff.md": "657b220fc227a76c64ac4eaf6ec6d22821edeca5523ac32712e4f840f5b12677",
+  "index.html": "1c06718e02a17ed9477a27cad9a529a76cb85ef526783603970da735c95c3136",
+  "llms.txt": "85dc0f161503d80b6ab76057bd422da91d2c1fd5984851ff6f368f49f9ba228d",
+  "package/README.md": "baf417cc751bb8099475718f7eda3773df9175cb1c78814bf0cacca6f92257ec",
+  "package/fixtures.json": "ba2c421119367c3a16a7aa70c47bbe29ef8a6a4953d4708f9a1a2edee8706d44",
+  "package/harness.cjs": "78070ce635e403ce6c2bf88fdb6e5dfa88ed47de02f0ace2a17538773b3d5d64",
+  "package/manifest.json": "1bf3c1e15e72bfeea2c0649aab04954698a54f094c29901dfeb34a87ccc063fb",
+  "package/package.json": "626b8855b2429d3f3d9c333c066b07291e6545671922360354ccda073fd54cdc",
+  "package/sandbox-default-run.json": "213a68612e15e73aaa72bc41d6045e573c82d10c5c0462c473f3c5c82b3ed526",
+  "package/stub-test-results.json": "c4da95b947e8e0ca5c8e50091998a9a8856f5bd0d5cb2a3f7dcc39169e5fa2d7",
+  "package/tests/run-stub-tests.cjs": "8eaf607e7e715a651aaae663cba211432b29764173d2afeef0202bff6f7659e4",
+  "package/tests/stubs/stub-common.cjs": "e725df64fb24a7f1a4eb40617b1470bd178e3ff74274033e3540d77f87b340db",
+  "package/tests/stubs/stub-lossy.cjs": "4112134a501ad3f76d13c4ad3a02dc7e64e2799dd7e16a71ad4d1778dd27a89c",
+  "package/tests/stubs/stub-noexport.cjs": "3abc96dc5b31c8ec08279882e494130a2fe629001f0ac2def010988793e84bb1",
+  "package/tests/stubs/stub-preserving.cjs": "c2fdac11c1542def88fc766c55a0cd614d262e975fa849664fdd661c91943089",
+  "package/tests/stubs/stub-string.cjs": "82fe00c21cec2b6ac3e30f9be1fbea98d017aa70a4543ebe0ab5cb826a95b86c",
+  "package/tests/stubs/stub-throws.cjs": "65ecccb394aaa646b7c3200921586e8aa13200d576232151babb44afc6d89db0"
+ },
+ "reuse": "Harness/fixtures are GlobalLand MIT (package.json); upstream package not redistributed; forum cited by URL with one short quotation, no usernames",
+ "not_established": [
+  "upstream conversion",
+  "reported defect reproduction",
+  "workaround validity",
+  "real Ghost import",
+  "exposure",
+  "demand",
+  "revenue"
+ ]
+}
