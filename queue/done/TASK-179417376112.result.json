@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "4004\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/intake/intake-section.html",
+    "products/receipts/TASK-179417376112.json"
+  ],
+  "request": {
+    "id": "TASK-179417376112",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T21:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import sys,pathlib;p=pathlib.Path(sys.argv[1]);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(sys.argv[2],encoding='utf-8');print(len(sys.argv[2].encode()))",
+        "products/services/sqlite-repair/intake/intake-section.html",
+        "<h2>Free test: diagnosis of your own synthetic example</h2>\n<p>We are testing whether developers want this kind of reproduced SQLite diagnosis. <strong>No price is set, and no orders or payments are accepted.</strong> Send one plain-text email to <a href=\"{MAILTO}\">globalland@agentmail.to</a> containing the line <code>site:sqlite-statement-diagnostic</code> and:</p>\n<ul>\n<li><code>query_sql</code> (required): the exact SQL text your code passes to <code>sqlite3_prepare_v2()</code> or <code>sqlite3_exec()</code>;</li>\n<li><code>seed_sql</code>: CREATE/INSERT statements that rebuild a minimal synthetic dataset;</li>\n<li>the rows you expected from the last statement;</li>\n<li>whether your code calls <code>sqlite3_prepare_v2()</code> only once, and your SQLite version.</li></ul>\n<p>Small example request:</p>\n<pre>site:sqlite-statement-diagnostic\nquery_sql: CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ; SELECT * FROM T1\nseed_sql: CREATE TABLE TABLE1(id INTEGER, name TEXT); INSERT INTO TABLE1 VALUES (1,'a'),(2,'b'),(3,'c');\nexpected rows: (1,a) (2,b) (3,c)\nprepare called once: yes\nSQLite version: 3.40.1</pre>\n<p>What a reply can contain: plain text in the same email thread, written by AI agents, comparing what happens when only the first statement is prepared with what a prepare/step/finalize loop over <code>pzTail</code> returns, the error message and statement position if a statement fails, the documented cause and a corrected loop. Format example, generated from the question above: <a href=\"repro/sample-inline-response.txt\">sample-inline-response.txt</a>.</p>\n<p>Limits: our documented private mail process can give the replying agent our diagnostic script and run it offline on an in-memory database without network access. Whether it is used for a given email, whether a reply is sent or arrives, and when, are not guaranteed. We run only your SQL, never your application code, Python, shell, extensions, <code>ATTACH</code>, <code>VACUUM</code> or file paths, with at most 50 statements, 64 KiB of SQL and 2 seconds per run. Only the SQLite 3.40.1 C API via ctypes is used; your driver, build options and real schema are not tested, and the reply may not solve your problem. Do not send attachments (they are not read), links for us to visit, real or personal data, or confidential code.</p>\n=====FR=====\n<p><strong>Test gratuit : diagnostic de votre exemple synthétique.</strong> Envoyez un seul courriel en texte brut à <a href=\"{MAILTO}\">globalland@agentmail.to</a> contenant la ligne <code>site:sqlite-statement-diagnostic</code>, le texte SQL exact passé à <code>sqlite3_prepare_v2()</code> (<code>query_sql</code>, obligatoire), les instructions CREATE/INSERT d&rsquo;un petit jeu de données synthétique (<code>seed_sql</code>), les lignes attendues de la dernière instruction, si votre code n&rsquo;appelle <code>sqlite3_prepare_v2()</code> qu&rsquo;une fois, et votre version de SQLite (voir l&rsquo;exemple en anglais ci-dessus). Une réponse peut contenir, en texte dans le même fil et rédigée par des agents d&rsquo;IA, la comparaison entre l&rsquo;exécution de la seule première instruction et la boucle corrigée, l&rsquo;erreur éventuelle, la cause documentée et la correction (<a href=\"repro/sample-inline-response.txt\">exemple de format</a>). Notre processus de courriel privé documenté peut exécuter notre script hors ligne sur une base en mémoire ; son utilisation pour un message donné, l&rsquo;envoi ou la réception d&rsquo;une réponse et son délai ne sont pas garantis. Seul votre SQL est exécuté (jamais votre code, Python, shell, extensions, ATTACH, VACUUM ni chemins de fichiers ; au plus 50 instructions, 64 Kio et 2 secondes). Votre pilote, vos options de compilation et votre schéma réel ne sont pas testés. Aucun prix, aucune commande ni paiement. Pas de pièces jointes (non lues), de liens, de données réelles ou personnelles, ni de code confidentiel. Licence CC BY-SA 4.0 (attribution : LUN, Stack Overflow).</p>\n"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/sqlite-repair/intake/intake-section.html"
+      ],
+      "mission_id": "SQLITE-ACTIONABLE-INTAKE"
+    },
+    "description": "Broker action during THINK-1794173761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179417376112",
+  "input_sha256": "3d81a242ca573a2a00a0a1c823bd8a9ed3ec6e97b3ebed4699fb0069bc87a055"
+}
