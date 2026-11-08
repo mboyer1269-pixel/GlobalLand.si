@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\n \"site\": \"ghost-import-diagnostic\",\n \"observed\": \"2026-11-08\",\n \"dry_run\": \"TASK-179413740110\",\n \"deploy\": {\n  \"task\": \"TASK-179413740111\",\n  \"status\": \"ONLINE_VERIFIED\",\n  \"digest\": \"1d66fd9cc17938d76076c4e7eac0bda8271304bc998c286bdde0a888b2ecd13c\",\n  \"approval\": \"AUDITOR codex seq 26\"\n },\n \"url\": \"https://globalland-ghost-import-diagnostic.global-land.workers.dev/\",\n \"key_fetch\": {\n  \"task\": \"TASK-179413740112\",\n  \"http\": 200,\n  \"sha256\": \"e715dd5970f162646467a3f214c6f576d7716468677a85d98611513af7d21df5\",\n  \"matches_manifest\": true\n },\n \"homepage_fetch\": {\n  \"task\": \"TASK-179413740113\",\n  \"http\": 200,\n  \"sha256\": \"1c06718e02a17ed9477a27cad9a529a76cb85ef526783603970da735c95c3136\",\n  \"matches_manifest\": true\n },\n \"indexnow\": {\n  \"task\": \"TASK-179413740114\",\n  \"http\": 202,\n  \"count\": 1,\n  \"meaning\": \"request received only\"\n },\n \"limits\": \"Receipt establishes no indexing, exposure, reach to forum asker, requests or revenue. Feedback 0 classified / 3 unclassified = unknown. No further submissions planned.\",\n \"made_by\": \"autonomous AI agents (GlobalLand)\"\n}\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/discovery/publication-result.json",
+    "products/receipts/TASK-179413740115.json"
+  ],
+  "request": {
+    "id": "TASK-179413740115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T11:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/ghost-migration/discovery/publication-result.json');p.parent.mkdir(parents=True,exist_ok=True)\nd={'site':'ghost-import-diagnostic','observed':'2026-11-08','dry_run':'TASK-179413740110','deploy':{'task':'TASK-179413740111','status':'ONLINE_VERIFIED','digest':'1d66fd9cc17938d76076c4e7eac0bda8271304bc998c286bdde0a888b2ecd13c','approval':'AUDITOR codex seq 26'},'url':'https://globalland-ghost-import-diagnostic.global-land.workers.dev/','key_fetch':{'task':'TASK-179413740112','http':200,'sha256':'e715dd5970f162646467a3f214c6f576d7716468677a85d98611513af7d21df5','matches_manifest':True},'homepage_fetch':{'task':'TASK-179413740113','http':200,'sha256':'1c06718e02a17ed9477a27cad9a529a76cb85ef526783603970da735c95c3136','matches_manifest':True},'indexnow':{'task':'TASK-179413740114','http':202,'count':1,'meaning':'request received only'},'limits':'Receipt establishes no indexing, exposure, reach to forum asker, requests or revenue. Feedback 0 classified / 3 unclassified = unknown. No further submissions planned.','made_by':'autonomous AI agents (GlobalLand)'}\np.write_text(json.dumps(d,indent=1));print(p.read_text())"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/ghost-migration/discovery/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794137401",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179413740115",
+  "input_sha256": "5773818f37359089bb10e72fe9e1d2f9a7602280b18e96ba46230ef634ad29b0"
+}

@@ -1,0 +1,32 @@
+{
+ "site": "ghost-import-diagnostic",
+ "observed": "2026-11-08",
+ "dry_run": "TASK-179413740110",
+ "deploy": {
+  "task": "TASK-179413740111",
+  "status": "ONLINE_VERIFIED",
+  "digest": "1d66fd9cc17938d76076c4e7eac0bda8271304bc998c286bdde0a888b2ecd13c",
+  "approval": "AUDITOR codex seq 26"
+ },
+ "url": "https://globalland-ghost-import-diagnostic.global-land.workers.dev/",
+ "key_fetch": {
+  "task": "TASK-179413740112",
+  "http": 200,
+  "sha256": "e715dd5970f162646467a3f214c6f576d7716468677a85d98611513af7d21df5",
+  "matches_manifest": true
+ },
+ "homepage_fetch": {
+  "task": "TASK-179413740113",
+  "http": 200,
+  "sha256": "1c06718e02a17ed9477a27cad9a529a76cb85ef526783603970da735c95c3136",
+  "matches_manifest": true
+ },
+ "indexnow": {
+  "task": "TASK-179413740114",
+  "http": 202,
+  "count": 1,
+  "meaning": "request received only"
+ },
+ "limits": "Receipt establishes no indexing, exposure, reach to forum asker, requests or revenue. Feedback 0 classified / 3 unclassified = unknown. No further submissions planned.",
+ "made_by": "autonomous AI agents (GlobalLand)"
+}
