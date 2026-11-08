@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "## first statement :  sqlite3_prepare16_v2() interfaces, the nByte value must be even or undefined behavior can result. If pzTail is not NULL then *pzTail is made to point to the first byte past the end of the first SQL statement in zSql. These routines only compile the first statement in zSql, so *pzTail is left pointing to what remains uncompiled. *ppStmt is left pointing to a compiled prepared statement that can be executed using sqlite3_step() . If there is an error, *ppStmt is set to NULL. If the input text contains no SQL (i\n## pzTail : Compiling An SQL Statement int sqlite3_prepare( sqlite3 *db, /* Database handle */ const char *zSql, /* SQL statement, UTF-8 encoded */ int nByte, /* Maximum length of zSql in bytes. */ sqlite3_stmt **ppStmt, /* OUT: Statement handle */ const char **pzTail /* OUT: Pointer to unused portion of zSql */ ); int sqlite3_prepare_v2( sqlite3 *db, /* Database handle */ const char *zSql, /* SQL statement, UTF-8 encoded */ int nByte, /* Maximum length of zSql in bytes. */ sqlite3_stmt **ppStmt, /* OUT: Statemen\n## SQLITE_OK : nt) then *ppStmt is set to NULL. The calling procedure is responsible for deleting the compiled SQL statement using sqlite3_finalize() after it has finished with it. ppStmt may not be NULL. On success, the sqlite3_prepare() family of routines return SQLITE_OK ; otherwise an error code is returned. The sqlite3_prepare_v2(), sqlite3_prepare_v3(), sqlite3_prepare16_v2(), and sqlite3_prepare16_v3() interfaces are recommended for all new programs. The older interfaces (sqlite3_prepare() and sqlite3_prepare16(\n## sqlite3_finalize : 3_step() . If there is an error, *ppStmt is set to NULL. If the input text contains no SQL (if the input is an empty string or a comment) then *ppStmt is set to NULL. The calling procedure is responsible for deleting the compiled SQL statement using sqlite3_finalize() after it has finished with it. ppStmt may not be NULL. On success, the sqlite3_prepare() family of routines return SQLITE_OK ; otherwise an error code is returned. The sqlite3_prepare_v2(), sqlite3_prepare_v3(), sqlite3_prepare16_v2(), and sqlite3\n## comment : g to what remains uncompiled. *ppStmt is left pointing to a compiled prepared statement that can be executed using sqlite3_step() . If there is an error, *ppStmt is set to NULL. If the input text contains no SQL (if the input is an empty string or a comment) then *ppStmt is set to NULL. The calling procedure is responsible for deleting the compiled SQL statement using sqlite3_finalize() after it has finished with it. ppStmt may not be NULL. On success, the sqlite3_prepare() family of routines return SQ\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179414316112.json"
+  ],
+  "request": {
+    "id": "TASK-179414316112",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T13:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,pathlib\nt=pathlib.Path('products/services/sqlite-repair/official/c3ref-prepare.html').read_text()\nt=re.sub(r'<script.*?</script>|<style.*?</style>','',t,flags=re.S)\ns=html.unescape(re.sub(r'<[^>]+>',' ',t));s=re.sub(r'\\s+',' ',s)\nfor k in ['first statement','pzTail','ppStmt to NULL','only one statement','SQLITE_OK','sqlite3_finalize','comment']:\n  for m in re.finditer(re.escape(k),s):\n    print('##',k,':',s[max(0,m.start()-250):m.end()+250]);break\n"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/official/c3ref-prepare.html"
+      ],
+      "outputs": [],
+      "mission_id": "SQLITE-DIAGNOSTIC-RELEASE-PREPARATION"
+    },
+    "description": "Broker action during THINK-1794143161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179414316112",
+  "input_sha256": "6bc2be10e90ba62f3271f5e6d534dbae3ca162ba908338d0313199bfe3b73a53"
+}
