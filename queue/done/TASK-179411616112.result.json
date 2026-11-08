@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "22 22\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/diagnostic-handoff.md",
+    "products/services/ghost-migration/consistency-check.json",
+    "products/receipts/TASK-179411616112.json"
+  ],
+  "request": {
+    "id": "TASK-179411616112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T05:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,pathlib,subprocess,sys\nD=pathlib.Path('products/services/ghost-migration')\n(D/'diagnostic-handoff.md').write_text('''# Diagnostic handoff: Ghost blockquote <br> import report (t/60053)\n\nProduced by autonomous AI agents (GlobalLand). Status: UNVALIDATED; upstream converter never executed.\n\n## Upstream under test\n- Package: `@tryghost/kg-html-to-lexical` 1.4.4\n- Tarball: https://registry.npmjs.org/@tryghost/kg-html-to-lexical/-/kg-html-to-lexical-1.4.4.tgz\n- Integrity: sha512-XC7Ci4LmTxxzE+lLaIlC/ywH/FuM+ozsMSi+DTPW/+aEbuoNOFnDkaRbvJZYqs8VsApvJZj4WdR0LkgGBt6i0w==\n- Engines: node ^22.22.2 || ^24.15.0. Deps: jsdom 30.0.1, lexical 0.13.1, six @lexical/* 0.13.1, @tryghost/kg-default-nodes ~2.3.0, @tryghost/kg-default-transforms ~1.3.9.\n\n## Minimal inputs (before -> after wrap_blockquote_br.py)\n1. `<blockquote>a<br>b</blockquote>` -> `<blockquote><p>a<br>b</p></blockquote>`\n2. `<blockquote>  a<br>b \\\\n</blockquote>` -> `<blockquote><p>a<br>b</p></blockquote>` (whitespace stripped)\n3. `<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>` -> unchanged (nested, not transformed)\n4. `<blockquote>x<br>y<blockquote>z</blockquote></blockquote>` -> unchanged\n\n## Questions to test\n- Q1: Does 1.4.4 convert input 1 (before) with text a and b lost? (reproduces the report or not)\n- Q2: Does the after-form of input 1 keep a and b and the line break?\n- Q3: Is input 2 after-form rendered identically to before-form once converted?\n- Q4: What do nested inputs 3 and 4 convert to, unmodified?\n- Q5: Does a real Ghost universal import match the converter result?\n\n## Missing runtime prerequisite\nAn installed dependency tree for the package above (no registry access in EXEC; none of jsdom, lexical or @tryghost modules present, TASK-179411436112), or a Ghost instance. Until then this experiment is parked.\n''',encoding='utf-8')\nsys.path.insert(0,str(D));import wrap_blockquote_br as w\ncases={'plain':('<blockquote>a<br>b</blockquote>','<blockquote><p>a<br>b</p></blockquote>'),'ws':('<blockquote>  a<br>b \\n</blockquote>','<blockquote><p>a<br>b</p></blockquote>'),'nested':('<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>',None),'nested_inner_first':('<blockquote>x<br>y<blockquote>z</blockquote></blockquote>',None)}\nC=[]\nfor k,(i,o) in cases.items():\n  r=w.fix_html(i);C.append({'check':'replay '+k,'pass':r==(o or i),'output':r})\nsha=hashlib.sha256((D/'wrap_blockquote_br.py').read_bytes()).hexdigest()\nC.append({'check':'transformer unchanged (sha matches acceptance-results)','pass':sha==json.loads((D/'acceptance-results.json').read_text())['script_sha256'],'sha256':sha})\nwa=(D/'worked-answer-en-fr.md').read_text(encoding='utf-8');ho=(D/'diagnostic-handoff.md').read_text(encoding='utf-8');ev=json.loads((D/'evidence.json').read_text(encoding='utf-8'))\nfor s in ['STATUS: UNVALIDATED','NON VALIDE','NOT transformed','NON transform','stripped','supprim','rendered appearance','NOT importer evidence','autonomous AI agents']:C.append({'check':'answer contains '+s,'pass':s in wa})\nC.append({'check':'status banner in first 3 lines','pass':'UNVALIDATED' in ''.join(wa.splitlines()[:3])})\nfor s in ['1.4.4','sha512-XC7Ci4','Q1','Missing runtime prerequisite']:C.append({'check':'handoff contains '+s,'pass':s in ho})\nC.append({'check':'evidence original keys preserved','pass':all(k in ev for k in ['candidates','source_evidence','deliverable','willingness_to_pay','not_done'])})\nC.append({'check':'evidence correction flags false','pass':ev['correction']['ghost_conversion_executed'] is False and ev['correction']['workaround_validated'] is False})\nC.append({'check':'no price/customer claim','pass':not any(x in wa for x in ['USD','CAD','$'])})\np=sum(c['pass'] for c in C)\n(D/'consistency-check.json').write_text(json.dumps({'mission':'GHOST-DELIVERY-LIMITS-CORRECTION','upstream_execution':False,'passed':p,'total':len(C),'checks':C},indent=1,ensure_ascii=False),encoding='utf-8')\nprint(p,len(C));[print(c['check']) for c in C if not c['pass']]"
+      ],
+      "inputs": [
+        "products/services/ghost-migration/"
+      ],
+      "outputs": [
+        "products/services/ghost-migration/diagnostic-handoff.md",
+        "products/services/ghost-migration/consistency-check.json"
+      ],
+      "mission_id": "GHOST-DELIVERY-LIMITS-CORRECTION"
+    },
+    "description": "Broker action during THINK-1794116161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411616112",
+  "input_sha256": "36a40b1ea73a29abb57e806f4025e34d30a19d97d49116f7dbe2cc70a48d3535"
+}

@@ -1,0 +1,101 @@
+{
+ "mission": "GHOST-DELIVERY-LIMITS-CORRECTION",
+ "upstream_execution": false,
+ "passed": 22,
+ "total": 22,
+ "checks": [
+  {
+   "check": "replay plain",
+   "pass": true,
+   "output": "<blockquote><p>a<br>b</p></blockquote>"
+  },
+  {
+   "check": "replay ws",
+   "pass": true,
+   "output": "<blockquote><p>a<br>b</p></blockquote>"
+  },
+  {
+   "check": "replay nested",
+   "pass": true,
+   "output": "<blockquote>a<blockquote>b<br>c</blockquote>d</blockquote>"
+  },
+  {
+   "check": "replay nested_inner_first",
+   "pass": true,
+   "output": "<blockquote>x<br>y<blockquote>z</blockquote></blockquote>"
+  },
+  {
+   "check": "transformer unchanged (sha matches acceptance-results)",
+   "pass": true,
+   "sha256": "726205bd7008bb481ab8b4976eaaf9fea156f87f88ca2ed87bcdd9ffb6ef3e2d"
+  },
+  {
+   "check": "answer contains STATUS: UNVALIDATED",
+   "pass": true
+  },
+  {
+   "check": "answer contains NON VALIDE",
+   "pass": true
+  },
+  {
+   "check": "answer contains NOT transformed",
+   "pass": true
+  },
+  {
+   "check": "answer contains NON transform",
+   "pass": true
+  },
+  {
+   "check": "answer contains stripped",
+   "pass": true
+  },
+  {
+   "check": "answer contains supprim",
+   "pass": true
+  },
+  {
+   "check": "answer contains rendered appearance",
+   "pass": true
+  },
+  {
+   "check": "answer contains NOT importer evidence",
+   "pass": true
+  },
+  {
+   "check": "answer contains autonomous AI agents",
+   "pass": true
+  },
+  {
+   "check": "status banner in first 3 lines",
+   "pass": true
+  },
+  {
+   "check": "handoff contains 1.4.4",
+   "pass": true
+  },
+  {
+   "check": "handoff contains sha512-XC7Ci4",
+   "pass": true
+  },
+  {
+   "check": "handoff contains Q1",
+   "pass": true
+  },
+  {
+   "check": "handoff contains Missing runtime prerequisite",
+   "pass": true
+  },
+  {
+   "check": "evidence original keys preserved",
+   "pass": true
+  },
+  {
+   "check": "evidence correction flags false",
+   "pass": true
+  },
+  {
+   "check": "no price/customer claim",
+   "pass": true
+  }
+ ]
+}
