@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "7 help-and-support 3835 | For everyone who needs help with OpenStreetMap; Whether you are new or experienced, or if your question is on mapping or using the data.\n38 general 13179 | General discussion about OSM that don’t fall under any other category. For help and support questions please check #help-and-support\n9 communities 0 | Here we host different OSM country and regional communities.\n41 osmf 201 | Discussion of matters related to the OpenStreetMap Foundation.\n2 site-feedback 446 | Discussion about these forums, its organization, how it works, and how we can improve it.\n62 migration 0 | Parent category for importing topics and messages from the old forum.\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179416476112.json"
+  ],
+  "request": {
+    "id": "TASK-179416476112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T19:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json;d=json.load(open('products/services/geospatial-request/raw/osm-categories.json'))\nfor c in d['category_list']['categories']:\n  print(c['id'],c['slug'],c.get('topic_count'),'|',(c.get('description_text') or '')[:150].replace('\\n',' '))\n  for s in c.get('subcategory_ids',[]) or []: pass"
+      ],
+      "inputs": [
+        "products/services/geospatial-request/raw/osm-categories.json"
+      ],
+      "outputs": [],
+      "mission_id": "GEOSPATIAL-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794164761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179416476112",
+  "input_sha256": "8b92ea7beb730166f16c83f005745cf76401918be64694b7bf8125bc68b18eaf"
+}
