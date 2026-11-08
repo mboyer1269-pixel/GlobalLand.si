@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "['kg-card-factory', 'kg-clean-basic-html', 'kg-converters', 'kg-default-cards', 'kg-default-nodes', 'kg-default-transforms', 'kg-html-to-lexical', 'kg-lexical-html-renderer', 'kg-markdown-html-renderer', 'kg-simplemde', 'kg-unsplash-selector', 'kg-utils', 'koenig-lexical']\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179411256120.json"
+  ],
+  "request": {
+    "id": "TASK-179411256120",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json;d=json.load(open('products/services/ghost-migration/raw/koenig-packages.json'));print([x['name'] for x in d])"
+      ],
+      "inputs": [
+        "products/services/ghost-migration/raw/koenig-packages.json"
+      ],
+      "outputs": [],
+      "mission_id": "GHOST-MIGRATION-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794112561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411256120",
+  "input_sha256": "d4013979a43379c52d24b3e29feba96395dea432321f01b1a4f92e1ee5c3162f"
+}
