@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "Hits returned: 7 (government tenders alerts, comments), 30 shown of a fuzzy stotles query (mostly unrelated spotless matches), 3 (public sector tenders, comments); see raw/hn-extract.json, TASK-179411076115/117. None is a buyer account of buying or using procurement intelligence. The only on-topic item is a 2020 Stotles hiring post (a vendor statement).\nall-portal opportunity finding (Free: \"Automatically find tender opportunities from every public sector portal in one place\"); expiring-contract forecasting (Basic); buyer/competitor intel and AI notice summaries (Growth)\n\n",
+  "artifacts": [
+    "products/services/tender-intelligence/buyer-guide/decision-table.json",
+    "products/receipts/TASK-179411076119.json"
+  ],
+  "request": {
+    "id": "TASK-179411076119",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/tender-intelligence/buyer-guide/decision-table.json');t=json.loads(p.read_text())\nt['buyer_account_search']['results'][2]['result']='Hits returned: 7 (government tenders alerts, comments), 30 shown of a fuzzy stotles query (mostly unrelated spotless matches), 3 (public sector tenders, comments); see raw/hn-extract.json, TASK-179411076115/117. None is a buyer account of buying or using procurement intelligence. The only on-topic item is a 2020 Stotles hiring post (a vendor statement).'\nr=t['decision_table'][1];r['satisfies']='all-portal opportunity finding (Free: \"Automatically find tender opportunities from every public sector portal in one place\"); expiring-contract forecasting (Basic); buyer/competitor intel and AI notice summaries (Growth)'\nt['corrections']=['2026-11-08: replaced an inaccurate count (13 relevant hits) with the actual returned counts; removed an unquoted alerts claim for the Stotles Free tier']\np.write_text(json.dumps(t,indent=1,ensure_ascii=False))\nprint(t['buyer_account_search']['results'][2]['result']);print(r['satisfies'])"
+      ],
+      "inputs": [
+        "products/services/tender-intelligence/buyer-guide/decision-table.json"
+      ],
+      "outputs": [
+        "products/services/tender-intelligence/buyer-guide/decision-table.json"
+      ],
+      "mission_id": "TENDER-INTELLIGENCE-BUYER-GUIDE"
+    },
+    "description": "Broker action during THINK-1794110761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411076119",
+  "input_sha256": "c2e1724f8019bb57f9993cb6e4065f8855693eddac9ec5a2f6ee17b6cd3daa0e"
+}

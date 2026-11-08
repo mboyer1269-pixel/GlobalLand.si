@@ -22,7 +22,7 @@
      "TASK-179411076114",
      "TASK-179411076116"
     ],
-    "result": "13 relevant-looking hits read (raw/hn-extract.json, TASK-179411076115/117); none is a buyer account of buying or using procurement intelligence. The only on-topic item is a 2020 hiring post by Stotles (a vendor statement, not a customer one)."
+    "result": "Hits returned: 7 (government tenders alerts, comments), 30 shown of a fuzzy stotles query (mostly unrelated spotless matches), 3 (public sector tenders, comments); see raw/hn-extract.json, TASK-179411076115/117. None is a buyer account of buying or using procurement intelligence. The only on-topic item is a 2020 Stotles hiring post (a vendor statement)."
    }
   ],
   "buyer_authored_accounts_found": 0,
@@ -38,7 +38,7 @@
   },
   {
    "option": "Stotles Free / Basic / Growth",
-   "satisfies": "all-portal aggregation and alerts (Free); expiring-contract forecasting (Basic); buyer/competitor intel and AI notice summaries (Growth)",
+   "satisfies": "all-portal opportunity finding (Free: \"Automatically find tender opportunities from every public sector portal in one place\"); expiring-contract forecasting (Basic); buyer/competitor intel and AI notice summaries (Growth)",
    "evidence": "pricing page TASK-179403516211 quotes in products/research/award-intelligence-commercial-fit.json",
    "gaps": "the page shows two Basic from-prices (GBP 75 and GBP 50); purchases unobserved",
    "cost": "GBP 0 / from 50-75 / from 475 per month"
@@ -67,5 +67,8 @@
   "purchases",
   "revenue",
   "eligibility"
+ ],
+ "corrections": [
+  "2026-11-08: replaced an inaccurate count (13 relevant hits) with the actual returned counts; removed an unquoted alerts claim for the Stotles Free tier"
  ]
 }
