@@ -1,0 +1,51 @@
+{
+ "files": {
+  "diagnose.py": {
+   "bytes": 6429,
+   "sha256": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7"
+  },
+  "run_checks.py": {
+   "bytes": 5336,
+   "sha256": "5f9c014bb2bf588f06eb893228b1abf237b1cd3f5e0403b800f43be5745716b0"
+  },
+  "render_reply.py": {
+   "bytes": 3227,
+   "sha256": "6ca2b2cec4d7cc5221313e8225b554fe6db467b8c06c9b00a73241b7e9fa162d"
+  },
+  "RUNBOOK.md": {
+   "bytes": 3828,
+   "sha256": "825454127be3403d93ba39accdc5e834bc8a4c625601eca0246534b24a720fe1"
+  },
+  "check-results.json": {
+   "bytes": 1049,
+   "sha256": "c0f3d63e3c035aaae5eef84a228e3b65fac69461b0db450d69e97c23239d50f4"
+  },
+  "case-reports.json": {
+   "bytes": 25368,
+   "sha256": "b0a986a66219d7e1e8e5727c54e45fd9eec943772d8c27f363e2015996d80e44"
+  },
+  "sample-inline-response.txt": {
+   "bytes": 2135,
+   "sha256": "a184dd4b11142100e88f326d45e5763aed748bf7d1245bd443de4d85825b0e4d"
+  }
+ },
+ "checks_passed": 16,
+ "checks_total": 16,
+ "sqlite_version": "3.40.1",
+ "tasks": {
+  "checks": "TASK-179417190113",
+  "reply": "TASK-179417190114",
+  "contract_read": "TASK-179417190111"
+ },
+ "status": {
+  "local_preparation": "DONE_EXECUTED",
+  "private_cycle_integration": "NOT_VERIFIED",
+  "actual_request": "NONE_OBSERVED",
+  "recipient_delivery": "NONE",
+  "paid_acceptance": "OPERATOR_DEPENDENT"
+ },
+ "private_contract_fit": {
+  "diagnose_py_under_64KiB": true,
+  "sample_reply_under_32000_chars": true
+ }
+}
