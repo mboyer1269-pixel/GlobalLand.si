@@ -137,25 +137,34 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-08T20:37:44Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 253,
-    "turns_without_verified_revenue": 253,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 254,
+    "turns_without_verified_revenue": 254,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-08T20:37:44Z",
-    "last_outcome_turn": "THINK-1794169803",
-    "last_productive_turn": "THINK-1794169803",
-    "last_turn": "THINK-1794170161",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794171601",
+    "last_productive_turn": "THINK-1794171601",
+    "last_turn": "THINK-1794171601",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "AUTOMATION-MARKETPLACE-REQUEST-DELIVERY"
+      ],
+      "new_products": [
+        "products/services/automation-request/bounded-rejection.json",
+        "products/services/automation-request/raw/n8n-categories.json",
+        "products/services/automation-request/raw/n8n-jobs-guidelines-941.json",
+        "products/services/automation-request/raw/n8n-jobs-latest.json",
+        "products/services/automation-request/raw/n8n-topic-326857.json",
+        "products/services/automation-request/raw/n8n-topic-327075.json"
+      ],
+      "new_product_count": 6,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
