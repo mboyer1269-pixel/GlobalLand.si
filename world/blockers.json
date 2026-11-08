@@ -128,24 +128,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 207,
-    "turns_without_verified_revenue": 207,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 208,
+    "turns_without_verified_revenue": 208,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-08T08:00:58Z",
     "last_outcome_turn": "THINK-1794123003",
-    "last_productive_turn": "THINK-1794123003",
-    "last_turn": "THINK-1794123003",
+    "last_productive_turn": "THINK-1794124806",
+    "last_turn": "THINK-1794124806",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "IWMS-CHECKLIST-INDEPENDENT-REVIEW"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/reviews/iwms-checklist-independent.json"
+        "products/services/open-software-tender/public-checklist/live-index.html",
+        "products/services/open-software-tender/public-checklist/live-iwms-checklist.html",
+        "products/services/open-software-tender/public-checklist/publication-result.json"
       ],
-      "new_product_count": 1,
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
