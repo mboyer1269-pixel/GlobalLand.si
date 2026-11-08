@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"GHOST-DELIVERY-LIMITS-CORRECTION\", \"goal\": \"Correct the existing Ghost delivery artifacts using products/services/ghost-migration/reproduction/result.json. Read the original evidence, worked-answer-en-fr.md, script and acceptance results first. Update the bilingual answer and evidence so they prominently state that actual Ghost conversion and the proposed workaround remain unvalidated. Document the observed nested-quote non-transformation and whitespace stripping, distinguishing byte changes from rendered appearance. Preserve original observations and provenance; do not turn synthetic checks into importer evidence. Produce a short reproducible diagnostic handoff with the exact upstream package/version, minimal before/after HTML inputs, expected questions to test and missing runtime prerequisite. Do not modify the transformer, install a dependency tree, create a site, publish, contact anyone or claim delivery or demand. Save and read corrected artifacts and a consistency-check result before completing with a lesson. Then park this experiment until actual upstream execution becomes available; any eventual public deployment retains independent exact-digest review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/ghost-migration/worked-answer-en-fr.md\", \"products/services/ghost-migration/evidence.json\", \"products/services/ghost-migration/diagnostic-handoff.md\", \"products/services/ghost-migration/consistency-check.json\"]}",
+  "request": {
+    "id": "TASK-179411616113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T05:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "GHOST-DELIVERY-LIMITS-CORRECTION",
+      "agent_id": "BUILDER",
+      "lease_token": "6dkEJiYX9P5Q26LTFWSovNEx8Uyi75uu",
+      "evidence": [
+        "products/services/ghost-migration/worked-answer-en-fr.md",
+        "products/services/ghost-migration/evidence.json",
+        "products/services/ghost-migration/diagnostic-handoff.md",
+        "products/services/ghost-migration/consistency-check.json"
+      ],
+      "lesson": "Worked: two EXECs. The first rewrote the EN/FR answer with an UNVALIDATED banner at the top and added a 'correction' block to evidence.json. That block keeps all the original keys and records the previous answer's sha256 3f2637e4.... The second wrote diagnostic-handoff.md and ran a consistency check, which passed 22/22 (TASK-179411616112). It replays the four minimal inputs through the unmodified transformer (sha 726205bd... unchanged), checks required wording and flags, and finds no price claim. Failed: nothing at execution time. The real mistake was earlier: the first answer called the workaround 'suggested' before any importer run. Next time, label a fix that has never been executed as a hypothesis from the first draft, and don't write a deliverable until the capability check shows the upstream code can actually run. Parked until a pinned image with @tryghost/kg-html-to-lexical 1.4.4 deps or a Ghost instance exists. No delivery, demand or revenue."
+    },
+    "description": "Broker action during THINK-1794116161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411616113",
+  "input_sha256": "0ae80baf953a9981840a2122fb55024ab4c4ccf29aab23fafcb0274ef50dde2d"
+}
