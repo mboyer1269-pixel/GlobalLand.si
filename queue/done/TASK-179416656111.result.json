@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "FMC-Henri 2026-09-15T13:45:17.766Z\nef=\"https://wiki.openstreetmap.org/wiki/Organised_Editing/Activities/Berlin_Radinfrastruktur_(Erg%C3%A4nzungsnetz)\">Organised Editing/Activities/Berlin Radinfrastruktur (Ergänzungsnetz) - OpenStreetMap Wiki</a></p>\n<p><strong>Wen suchen wir:</strong></p>\n<ul>\n<li>\n<p>OSM-Mapper:innen mit guter Kenntnis im Mappen von Radinfrastruktur</p>\n</li>\n<li>\n<p><strong>Erfahrung</strong> mit dem iD Editor oder JOSM</p>\n</li>\n<li>\n<p><strong>Umfang</strong>: ca. 20 h / Woche Zeit – mehr ist auch möglich</p>\n</li>\n<li>\n<p><strong>Zeitraum</strong>: Ab Oktober 2026 für ca. ein Jahr</p>\n</li>\n<li>\n<p><strong>Ort:</strong> Mappen von Zuhause, mit privatem Laptop</p>\n</li>\n<li>\n<p><strong>Verdienst</strong>: Individuell, je nach Qualifikation, pro Stunde</p>\n</li>\n<li>\n<p><strong>Bewerbungsfrist</strong>: möglichst <strong>bis zum 11. Oktober</strong></p>\n</li>\n</ul>\n<p>Wir werden euch natürlich im Radinfrastruktur-Mappen schulen und Tools bereitstellen, mit denen wir den Mapping-Prozess und -Fortschritt und die Qualität begleiten. Falls du dir unsicher bist, ob du ausreichend qualifiziert bist, <strong>melde dich trotzdem</strong>.</p>\n<p>Wir suchen (erstmal) nur Mapper:innen, die Deutsch auf mindestens Niveau B2 verstehen und sprechen. Wenn du gut Englisch sprichst, kannst du dich auch gerne melden; eventuell kommen wir auf dich zurück.</p>\n<p>Melde dich gerne unter <a href=\"mailto:jobs@fixmycity.de?subject=Bewerbung%20Radinfra%20OSM-Mapping\">jobs@fixmycity.de</a>, wenn du Interesse hast und schreibe uns:</p>\n<ul>\n<li>\n<p>Dein OSM-Profilname: …</p>\n</li>\n<li>\n<p>Wie viel Zeit pro Woche hättest du? …</p>\n</li>\n<li>\n<p>Welche Erfahrung bringst du mit? …</p>\n</li>\n</ul>\n<p>Wir melden uns dann bei dir, in jedem Fall, ob du dabei bist oder nicht.</p>\n<p><strong>Über uns</strong></p>\n<p>Wir bei <a href=\"https://fixmycity.de/\" rel=\"noopener nofollow ugc\">FixMyCity</a> beschäftigen uns tagtäglich mit OpenStreetMap Daten und wie wir damit die Verkehrswende voranbringen können. Wir entwickeln digitale Tools, mit denen Planer:innen z. B. Rad- und Fußwege schneller und besser planen können.</p>\n<p>Wir freuen uns über deine Bewerbung!</p>\n<p>Viele Grüße<br>\nHenri (<a href=\"https://www.openstreetmap.org/user/FMC-Henri\">@FMC-Henri</a>) und Tobias (<a href=\"https://community.openstreetmap.org/u/tordans\">@tordans</a>)</p>\n<hr>\n<p><em>Impressum von FixMyCity GmbH:</em> <a href=\"https://fixmycity.de/impressum/\" class=\"inline-onebox\" rel=\"noopener nofollow ugc\">Impressum - FixMyCity</a></p>\n['https://community.openstreetmap.org/t/leute-gesucht-fur-bezahltes-radinfrastruktur-mapping-remote-resolved/131247', 'https://radinfra.de/', 'https://wiki.openstreetmap.org/wiki/Organised_Editing/Activities/Berlin_Radinfrastruktur_(Erg%C3%A4nzungsnetz)', 'mailto:jobs@fixmycity.de?subject=Bewerbung%20Radinfra%20OSM-Mapping', 'https://fixmycity.de/', 'https://www.openstreetmap.org/user/FMC-Henri', 'https://community.openstreetmap.org/u/tordans', 'https://fixmycity.de/impressum/']\nFMC-Henri 2026-09-30T13:25:46.720Z\n<p>Als kurzer Nachtrag:</p>\n<ul>\n<li>Wir suchen mehrere Personen, insofern gerne noch bewerben.</li>\n<li>Für neue Bewerbungen, schreibt gerne auch, ob ihr aus Berlin kommt. Wir suchen auch noch eine Person, welche mit dem Fahrrad durch Berlin fährt und 360° Bilder erstellt.</li>\n</ul>\n[]\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179416656111.json"
+  ],
+  "request": {
+    "id": "TASK-179416656111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T19:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re;d=json.load(open('products/services/geospatial-request/raw/osm-topic-147703.json'));\nfor p in d['post_stream']['posts']:\n  print(p['username'],p['created_at']);print(p['cooked'][-2500:]);print(re.findall(r'href=\"([^\"]+)\"',p['cooked']))"
+      ],
+      "inputs": [
+        "products/services/geospatial-request/raw/osm-topic-147703.json"
+      ],
+      "outputs": [],
+      "mission_id": "BERLIN-MAPPING-OFFLINE-QA"
+    },
+    "description": "Broker action during THINK-1794166561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179416656111",
+  "input_sha256": "7046646c4fcbf88f1e1e29a5432b0003bb7e974ca5ff1a71cd542271f3dfc517"
+}
