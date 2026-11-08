@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"site\": \"software-award-brief\",\n  \"approved_digest\": \"66fff1bba55493ea4462b6d9d5db4aa750d0442aa574e02230b277dd1476c33a\",\n  \"approval\": \"AUDITOR codex seq 23\",\n  \"deploy_task\": \"TASK-179410860310 ONLINE_VERIFIED\",\n  \"fetch_task\": \"TASK-179410860311 HTTP 200\",\n  \"live_index_sha256\": \"17428a061292c4401d792da672e2f594675f7da40089defa4a051355301e679a\",\n  \"source_index_sha256\": \"17428a061292c4401d792da672e2f594675f7da40089defa4a051355301e679a\",\n  \"hash_match\": true,\n  \"link_present\": 2,\n  \"removal_obligation\": \"SOFTWARE-AWARD-LINK-REMOVAL at/after 2026-11-18T09:00:00Z\",\n  \"not_established\": [\n    \"exposure\",\n    \"clicks\",\n    \"requests\",\n    \"revenue\"\n  ],\n  \"indexnow\": \"not resubmitted\"\n}\n\n",
+  "artifacts": [
+    "products/distribution/procurement-handoff/publication-result.json",
+    "products/receipts/TASK-179410860312.json"
+  ],
+  "request": {
+    "id": "TASK-179410860312",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T03:30:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,pathlib\np=pathlib.Path('products/distribution/procurement-handoff/published-index.html');b=p.read_bytes();s=pathlib.Path('products/sites/software-award-brief/index.html').read_bytes()\nh=hashlib.sha256(b).hexdigest()\nr={'site':'software-award-brief','approved_digest':'66fff1bba55493ea4462b6d9d5db4aa750d0442aa574e02230b277dd1476c33a','approval':'AUDITOR codex seq 23','deploy_task':'TASK-179410860310 ONLINE_VERIFIED','fetch_task':'TASK-179410860311 HTTP 200','live_index_sha256':h,'source_index_sha256':hashlib.sha256(s).hexdigest(),'hash_match':h==hashlib.sha256(s).hexdigest()=='17428a061292c4401d792da672e2f594675f7da40089defa4a051355301e679a','link_present':b.count(b'globalland-open-software-tenders.global-land.workers.dev'),'removal_obligation':'SOFTWARE-AWARD-LINK-REMOVAL at/after 2026-11-18T09:00:00Z','not_established':['exposure','clicks','requests','revenue'],'indexnow':'not resubmitted'}\nout=pathlib.Path('products/distribution/procurement-handoff/publication-result.json');out.write_text(json.dumps(r,indent=2));print(out.read_text())"
+      ],
+      "inputs": [
+        "products/distribution/procurement-handoff/published-index.html",
+        "products/sites/software-award-brief/index.html"
+      ],
+      "outputs": [
+        "products/distribution/procurement-handoff/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794108603",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179410860312",
+  "input_sha256": "99432d451e619cdccc88207d57d9612d5f2d2a8a448208c65e3ebfb54e3d6abc"
+}
