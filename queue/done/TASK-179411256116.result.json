@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "=== 63789 | Complimentary subscription not being applied to imported members without Stripe connected | created 2026-09-17T17:04:05.897Z | posts 2 | closed False | accepted None\n#1 david1 staff=False 2026-09-17T17:04:05.970Z accepted=False:  I’m migrating an existing paid publication to Ghost(Pro) and have about 445 existing subscribers. These subscribers are billed outside Ghost (enterprise/site licenses, invoices, and our existing payment processor), so I don’t want to use Stripe for these existing accounts. I need these members to have access to posts set to Paid-members only . I imported the members using a CSV with complimentary_plan=true . Ghost accepted the import and mapped the field to Complimentary plan , but the members still appear as Free and cannot access Paid-members-only posts. To troubleshoot, I re-imported a single existing member with: subscribed_to_emails=false complimentary_plan=true Ghost reported that the member was successfully updated. However, when I impersonate that member and visit a Paid-members-only post, the member still receives the “This post is for paying subscribers only” / “Upgrade your account” message. The member’s admin profile also does not show an “+ Add Complimentary Subscription” option. I currently have only the standard Free tier configured and Stripe is not connected . Does Ghost require Stripe to be connected and/or a paid tier to be configured before complimentary subscriptions can be created? If so, can Stripe be connected solely to enable complimentary subscriptions while continuing to bill these 445 existing subscribers externally and without displaying paid self-service pricing publicly? Ultimately I need externally billed enterprise subscribers to have Paid-me\n#2 Cathy_Sarisky staff=True 2026-09-17T17:39:56.163Z accepted=False:  You’re going to need to connect Stripe before it’ll be possible to add complimentary subscriptions. You don’t have to actually use it, but you do have to connect it. You can turn off pricing display by unchecking the tiers in the portal settings. You will probably also want to edit partials/content-cta.hbs to tell your free members how to become paid, since they can’t do it through the portal. \n=== 63676 | Migrating content between two Ghost(Pro) publications | created 2026-08-31T16:24:38.332Z | posts 2 | closed False | accepted None\n#1 Navarone66 staff=False 2026-08-31T16:24:38.457Z accepted=False:  Hi Ghost team, I have two Ghost(Pro) publications on my account and I’d like to move the content from one to the other: Source: cork-tales.ghost.io Destination: cork-tales-1.ghost.io (newly created, currently empty) I’ve already exported the content JSON and the members CSV from the source site, but I understand images aren’t included in the export. Could you send me the image directory for cork-tales.ghost.io so I can import it into the new site? If it’s simpler on your side to migrate the whole publication across directly, I’d be glad to go that route instead — the destination site has no content yet, so there’s nothing to overwrite. thanks! \n#2 vikaspotluri123 staff=True 2026-08-31T16:25:28.622Z accepted=False:  Since you’re moving within the same managed hosting provider, I reccommend reaching out to them directly via support@ghost.org \n=== 60053 | Some blockquote containers empty after import | created 2025-09-08T13:33:45.711Z | posts 1 | closed False | accepted None\n#1 bilmo staff=False 2025-09-08T13:33:45.764Z accepted=False:  I’m getting a weird result when I do a universal import of a JSON file exported from my old blog. I am importing the contents of old posts using the “html” field. Containers using blockquote tags only import correctly when they do not contain any br tags. If a blockquote does contain br tags, it renders empty in the resulting post. Looking at the source HTML for the resulting post, I can see that the “empty” blockquote actually contains a single br tag and nothing else. Using br inside blockquote is valid HTML, so I’m assuming this is a bug in the universal importer. Does anyone know of a workaround? UPDATE: To clarify, I’ve been able to determine that the importer strips out all text except br tags when the blockquote contains them. If the blockquote contains four br tags, the four br tags will be all that remains in the container after import. (If the blockquote contains no br tags, the content makes it through fine.) \nGUIDE[spam]: ep it clean. Don’t post anything obscene or sexually explicit. Respect each other. Don’t harass or grief anyone, impersonate people, or expose their private information. Respect our forum. Don’t post spam or otherwise vandalize the forum. These are not concrete terms with precise definitions — avoid even the appearance of any of these things. If you’re unsure, ask yourself how you would feel if your post was featured on the front page of the New \n\n",
+  "artifacts": [
+    "products/services/ghost-migration/candidate-extract.txt",
+    "products/receipts/TASK-179411256116.json"
+  ],
+  "request": {
+    "id": "TASK-179411256116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,re,html,pathlib\nout=[]\nfor t in ['63789','63676','60053']:\n d=json.load(open(f'products/services/ghost-migration/raw/topic-{t}.json'))\n out.append(f\"=== {t} | {d.get('title')} | created {d.get('created_at')} | posts {d.get('posts_count')} | closed {d.get('closed')} | accepted {d.get('accepted_answer')}\")\n for p in d['post_stream']['posts']:\n  txt=html.unescape(re.sub(r'<[^>]+>',' ',p['cooked']));txt=re.sub(r'\\s+',' ',txt)\n  out.append(f\"#{p['post_number']} {p['username']} staff={p.get('staff')} {p['created_at']} accepted={p.get('accepted_answer')}: {txt[:1500]}\")\ng=open('products/services/ghost-migration/raw/forum-guidelines.html').read()\ngt=re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',g)))\nfor k in ['AI','artificial','ChatGPT','generated','advertis','promot','spam','commercial','self-promotion','sell']:\n for m in re.finditer(k,gt):\n  out.append(f'GUIDE[{k}]: '+gt[max(0,m.start()-200):m.start()+250]);break\npathlib.Path('products/services/ghost-migration/candidate-extract.txt').write_text('\\n'.join(out))\nprint('\\n'.join(out)[:12000])"
+      ],
+      "inputs": [
+        "products/services/ghost-migration/raw/"
+      ],
+      "outputs": [
+        "products/services/ghost-migration/candidate-extract.txt"
+      ],
+      "mission_id": "GHOST-MIGRATION-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794112561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411256116",
+  "input_sha256": "b37f319024d75140b2f8b0e53d648b4e06e06aafa11d26e8b1ccfdae067ff37c"
+}
