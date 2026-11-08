@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "[('ExtendedHeadingNode.ts', 'file'), ('ExtendedQuoteNode.ts', 'file'), ('ExtendedTextNode.ts', 'file'), ('TKNode.ts', 'file'), ('aside', 'dir'), ('at-link', 'dir'), ('audio', 'dir'), ('bookmark', 'dir'), ('button', 'dir'), ('call-to-action', 'dir'), ('callout', 'dir'), ('codeblock', 'dir'), ('email-cta', 'dir'), ('email', 'dir'), ('embed', 'dir'), ('file', 'dir'), ('gallery', 'dir'), ('header', 'dir'), ('horizontalrule', 'dir'), ('html', 'dir'), ('image', 'dir'), ('markdown', 'dir'), ('paywall', 'dir'), ('product', 'dir'), ('signup', 'dir'), ('toggle', 'dir'), ('transistor', 'dir'), ('video', 'dir'), ('zwnj', 'dir')]\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179411256122.json"
+  ],
+  "request": {
+    "id": "TASK-179411256122",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json;d=json.load(open('products/services/ghost-migration/raw/koenig-default-nodes.json'));print([(x['name'],x['type']) for x in d])"
+      ],
+      "inputs": [
+        "products/services/ghost-migration/raw/koenig-default-nodes.json"
+      ],
+      "outputs": [],
+      "mission_id": "GHOST-MIGRATION-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794112561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411256122",
+  "input_sha256": "03103ec74df7bf531f77510e6fb34fda674c56071cafaf0e4562ba6311ab2f9d"
+}
