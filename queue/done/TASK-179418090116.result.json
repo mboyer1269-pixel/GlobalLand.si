@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "[parent key must]  section uses the track table as the child table. Other books and articles refer to this as the referencing table. The parent key is the column or set of columns in the parent table that the foreign key constraint refers to. This is normally, but not always, the primary key of the parent table. The parent key must be a named column or columns in the parent table, not the rowid. The child key is the column or set of columns in the child table that are constrained by the foreign key constraint and which hold the REFERENCES clause. The foreign key constraint is satisfied if for each row in the child table eithe\n\n[PRIMARY KEY or] . The parent key definitions of foreign key constraints are not checked when a table is created. There is nothing stopping the user from creating a foreign key definition that refers to a parent table that does not exist, or to parent key columns that do not exist or are not collectively bound by a PRIMARY KEY or UNIQUE constraint. The ALTER TABLE command works differently in two respects when foreign key constraints are enabled: It is not possible to use the \"ALTER TABLE ... ADD COLUMN\" syntax to add a column that includes a REFERENCES clause, unless the default value of the new column is NULL. Attempting \n\n[foreign key mismatch]  content is changed are \"DML errors\" and errors reported when the schema is changed are \"DDL errors\". So, in other words, misconfigured foreign key constraints that require looking at both the child and parent are DML errors. The English language error message for foreign key DML errors is usually \"foreign key mismatch\" but can also be \"no such table\" if the parent table does not exist. Foreign key DML errors are reported if: The parent table does not exist, or The parent key columns named in the foreign key constraint do not exist, or The parent key columns named in the foreign key constraint are not the primary\n\n[disabled by default] ced in SQLite version 3.6.19 (2009-10-14). The first section introduces the concept of an SQL foreign key by example and defines the terminology used for the remainder of the document. Section 2 describes the steps an application must take in order to enable foreign key constraints in SQLite (it is disabled by default). The next section, section 3, describes the indexes that the user must create in order to use foreign key constraints, and those that should be created in order for foreign key constraints to function efficiently. Section 4 describes the advanced foreign key related features supported by SQLite an\n\n[separately for each database connection] e library is compiled with foreign key constraints enabled, it must still be enabled by the application at runtime, using the PRAGMA foreign_keys command. For example: sqlite> PRAGMA foreign_keys = ON; Foreign key constraints are disabled by default (for backwards compatibility), so must be enabled separately for each database connection. (Note, however, that future releases of SQLite might change so that foreign key constraints enabled by default. Careful developers will not make any assumptions about whether or not foreign keys are enabled by default but will instead enable or disable them as necessary.) The application can also \n\n[rowid]  refer to this as the referencing table. The parent key is the column or set of columns in the parent table that the foreign key constraint refers to. This is normally, but not always, the primary key of the parent table. The parent key must be a named column or columns in the parent table, not the rowid. The child key is the column or set of columns in the child table that are constrained by the foreign key constraint and which hold the REFERENCES clause. The foreign key constraint is satisfied if for each row in the child table either one or more of the child key columns are NULL, or there exists\n\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179418090116.json"
+  ],
+  "request": {
+    "id": "TASK-179418090116",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T23:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html\nt=open('products/services/sqlite-repair/cases/raw/sqlite-foreignkeys.html',encoding='utf-8').read()\nt=html.unescape(re.sub(r'<[^>]+>','',t));t=re.sub(r'\\s+',' ',t)\nfor k in ['parent key must','PRIMARY KEY or','foreign key mismatch','disabled by default','separately for each database connection','rowid']:\n  for m in re.finditer(re.escape(k),t):\n    print('['+k+']',t[max(0,m.start()-300):m.end()+300]);print()\n    break\n"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/cases/raw/sqlite-foreignkeys.html"
+      ],
+      "outputs": [],
+      "mission_id": "SQLITE-CASE-LIBRARY"
+    },
+    "description": "Broker action during THINK-1794180901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179418090116",
+  "input_sha256": "269eae680f1fe74daf78b6b68e573603bf8dcfda2369f788be79b20efabf3f0e"
+}
