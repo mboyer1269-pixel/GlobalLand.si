@@ -1,0 +1,62 @@
+{
+ "mission": "GHOST-UPSTREAM-EXECUTION",
+ "observed_at": "2026-11-08",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "verdict": "NO_FEASIBLE_ROUTE",
+ "upstream_execution": false,
+ "ghost_import_execution": false,
+ "workaround_validated": false,
+ "previously_attempted": [
+  "TASK-179411436111/112: npm registry metadata + local module resolution (jsdom, lexical, @tryghost/* ABSENT; no registry in EXEC)",
+  "GHOST-PORTABLE-REPRODUCTION: portable harness + 12 STUB_ONLY tests; default run DEPENDENCY_ABSENT (exit 2)"
+ ],
+ "new_route_tried": {
+  "idea": "single prebuilt dependency-inlined bundle from esm.sh instead of reassembling ~40 npm tarballs",
+  "requests": [
+   {
+    "task": "TASK-179413950111",
+    "url": "https://esm.sh/@tryghost/kg-html-to-lexical@1.4.4?bundle&target=node",
+    "result": "HTTP 200 216-byte entry stub re-exporting /@tryghost/kg-html-to-lexical@1.4.4/node/kg-html-to-lexical.bundle.mjs",
+    "sha256": "c09d2ccffd3453a634dc912b4ff4077902f84757bde50d04a678632368cf32e3"
+   },
+   {
+    "task": "TASK-179413950112",
+    "url": "https://esm.sh/@tryghost/kg-html-to-lexical@1.4.4/node/kg-html-to-lexical.bundle.mjs",
+    "result": "REJECTED: fetch size limit (response exceeds 1 MiB FETCH cap)"
+   },
+   {
+    "task": "TASK-179413950113",
+    "url": "https://cdn.jsdelivr.net/npm/@tryghost/kg-html-to-lexical@1.4.4/build/cjs/index.js",
+    "result": "HTTP 200, re-exports ./html-to-lexical.js",
+    "sha256": "47838c4338ea9d2225729dd1dd7668967ad19ad18592c8eafddfa7ef4927cefa"
+   },
+   {
+    "task": "TASK-179413950114",
+    "url": "https://cdn.jsdelivr.net/npm/@tryghost/kg-html-to-lexical@1.4.4/build/cjs/html-to-lexical.js",
+    "result": "HTTP 200, upstream source read",
+    "sha256": "c7b40cc5514c329660276bfe8d0d220b9cf1eb3dfcd8616d6cf9564c791f2dc8"
+   }
+  ],
+  "public_requests_used": 4,
+  "limit": 12
+ },
+ "source_findings": {
+  "jsdom_hard_required": true,
+  "no_dom_injection_option": true,
+  "quote": "const dom = new jsdom_1.JSDOM(`<body>${html.trim()}</body>`);",
+  "html_trim_note": "upstream trims the whole input string before parsing (html.trim()), so leading/trailing whitespace of the whole document is not preserved by upstream either; whitespace inside a blockquote is not affected by this trim"
+ },
+ "technical_conclusion": "The converter unconditionally constructs a jsdom 30.0.1 DOM and accepts no DOM injection, so jsdom cannot be avoided without substituting a different DOM (forbidden as upstream evidence). The only single-request transfer (esm.sh dependency-inlined bundle) exceeds the 1 MiB FETCH cap; FETCH supports no byte ranges. Per-tarball reassembly requires jsdom plus roughly 30 transitive packages plus lexical/@lexical/* and @tryghost deps, far beyond the 12-request limit. Upstream execution is not achievable with current tools.",
+ "reconsider_when": [
+  "an EXEC image with @tryghost/kg-html-to-lexical 1.4.4 and its deps installed",
+  "FETCH cap raised above the bundle size or byte-range support added",
+  "registry access inside EXEC",
+  "a Ghost instance available for a real import"
+ ],
+ "not_established": [
+  "upstream defect reproduction",
+  "workaround validity",
+  "demand",
+  "revenue"
+ ]
+}
