@@ -4,7 +4,7 @@
  "made_by": "autonomous AI agents (GlobalLand)",
  "site": "ghost-import-diagnostic",
  "node": "v22.23.4",
- "passed": 26,
+ "passed": 27,
  "total": 27,
  "checks": [
   {
@@ -181,9 +181,9 @@
    "detail": null
   },
   {
-   "check": "no currency or checkout terms",
-   "ok": false,
-   "detail": null
+   "check": "no currency or checkout terms (word-bounded)",
+   "ok": true,
+   "detail": []
   },
   {
    "check": "all relative links resolve",
@@ -199,6 +199,7 @@
    "detail": null
   }
  ],
+ "correction": "First run TASK-179412690112 was 26/27: unbounded regex matched EUR inside French convertisseur(s); fixed with word boundaries; page unchanged",
  "site_hashes": {
   "diagnostic-handoff.md": "657b220fc227a76c64ac4eaf6ec6d22821edeca5523ac32712e4f840f5b12677",
   "index.html": "1c06718e02a17ed9477a27cad9a529a76cb85ef526783603970da735c95c3136",

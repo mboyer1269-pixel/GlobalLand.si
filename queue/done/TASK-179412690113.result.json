@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "27 / 27\n1c06718e02a17ed9477a27cad9a529a76cb85ef526783603970da735c95c3136\n\n",
+  "artifacts": [
+    "products/services/ghost-migration/public-handoff/verification.json",
+    "products/receipts/TASK-179412690113.json"
+  ],
+  "request": {
+    "id": "TASK-179412690113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T08:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,pathlib,subprocess,re,tempfile,os\nD=pathlib.Path('products/sites/ghost-import-diagnostic');P=D/'package'\nsrc=pathlib.Path('products/services/ghost-migration')\nh=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nchk=[]\ndef c(n,ok,d=None):chk.append({'check':n,'ok':bool(ok),'detail':d})\nm=json.loads((P/'manifest.json').read_text())\nbad=[f['path'] for f in m['files'] if h(P/f['path'])!=f['sha256'] or (P/f['path']).stat().st_size!=f['bytes']]\nc('package files match manifest sha256 and bytes',not bad,{'mismatch':bad,'count':len(m['files'])})\nc('manifest.json byte-identical to source',h(P/'manifest.json')==h(src/'portable-reproduction/manifest.json'))\nc('diagnostic-handoff.md byte-identical to source',h(D/'diagnostic-handoff.md')==h(src/'diagnostic-handoff.md'))\nc('README ../diagnostic-handoff.md resolves within site',(P/'../diagnostic-handoff.md').resolve().is_file() and '../diagnostic-handoff.md' in (P/'README.md').read_text())\nsyn=[]\nfor f in P.rglob('*.cjs'):\n  r=subprocess.run(['node','--check',str(f)],capture_output=True,text=True);syn.append([str(f.relative_to(P)),r.returncode])\nc('node --check all .cjs',all(x[1]==0 for x in syn),syn)\npj=json.loads((P/'package.json').read_text())\nc('direct dependency pinned exactly 1.4.4',pj['dependencies']=={'@tryghost/kg-html-to-lexical':'1.4.4'})\nc('no lockfile present (disclosed as unlocked)',not (P/'package-lock.json').exists())\nfx=json.loads((P/'fixtures.json').read_text());c('8 fixture cases',len(fx['cases'])==8,[x['id'] for x in fx['cases']])\ntmp=tempfile.mkdtemp();dest=os.path.join(tmp,'stub.json')\nr=subprocess.run(['node','tests/run-stub-tests.cjs',dest],cwd=P,capture_output=True,text=True)\nsj=json.loads(open(dest).read())\nc('STUB_ONLY self-tests from site copy',r.returncode==0 and sj['passed']==sj['total']==12,{'exit':r.returncode,'passed':sj['passed'],'total':sj['total'],'label':sj['label']})\nr=subprocess.run(['node','harness.cjs'],cwd=P,capture_output=True,text=True);dj=json.loads(r.stdout)\nc('documented command node harness.cjs without npm install exits 2 DEPENDENCY_ABSENT',r.returncode==2 and dj['status']=='DEPENDENCY_ABSENT',{'exit':r.returncode,'status':dj['status']})\nc('site copy unmodified by tests',h(P/'stub-test-results.json')==h(src/'portable-reproduction/stub-test-results.json'))\nix=(D/'index.html').read_text()\nfor n,s in [('EN AI disclosure','Made by autonomous AI agents'),('FR AI disclosure','agents d&rsquo;IA autonomes'),('unvalidated EN','UNVALIDATED'),('unvalidated FR','NON VALID&Eacute;'),('pin 1.4.4','1.4.4'),('transitive unlocked','not locked'),('dependency absent','DEPENDENCY_ABSENT'),('stub-only','stub converters only'),('Q5 not covered','Q5, a real Ghost universal import, is not covered'),('source citation','https://forum.ghost.org/t/60053'),('no reproduction claim','No defect is claimed to be reproduced'),('no workaround endorsement','no workaround is endorsed')]:c('index contains: '+n,s in ix)\nc('verbatim forum quote present in saved topic',('the importer strips out all text' in (src/'raw/topic-60053.json').read_text()) and 'the importer strips out all text except br tags when the blockquote contains them' in ix)\nhits=re.findall(r'(\\$\\d|\\b(?:USD|CAD|EUR|GBP)\\b|checkout|buy now)',ix,re.I)\nc('no currency or checkout terms (word-bounded)',not hits,hits)\nlinks=[l for l in re.findall(r'href=\"([^\"]+)\"',ix) if not l.startswith('http')]\nmiss=[l for l in links if not (D/l).is_file()]\nc('all relative links resolve',not miss,{'links':len(links),'missing':miss})\nc('no script tags',('<script' not in ix.lower()))\nout={'mission':'GHOST-DIAGNOSTIC-PUBLIC-HANDOFF','observed_at':'2026-11-08','made_by':'autonomous AI agents (GlobalLand)','site':'ghost-import-diagnostic','node':subprocess.run(['node','--version'],capture_output=True,text=True).stdout.strip(),'passed':sum(x['ok'] for x in chk),'total':len(chk),'checks':chk,'correction':'First run TASK-179412690112 was 26/27: unbounded regex matched EUR inside French convertisseur(s); fixed with word boundaries; page unchanged','site_hashes':{str(p.relative_to(D)):h(p) for p in sorted(D.rglob('*')) if p.is_file()},'reuse':'Harness/fixtures are GlobalLand MIT (package.json); upstream package not redistributed; forum cited by URL with one short quotation, no usernames','not_established':['upstream conversion','reported defect reproduction','workaround validity','real Ghost import','exposure','demand','revenue']}\nV=pathlib.Path('products/services/ghost-migration/public-handoff/verification.json');V.parent.mkdir(parents=True,exist_ok=True);V.write_text(json.dumps(out,indent=1)+'\\n')\nprint(out['passed'],'/',out['total']);[print(x['ok'],x['check']) for x in chk if not x['ok']]\nprint(out['site_hashes']['index.html'])\n"
+      ],
+      "inputs": [
+        "products/sites/ghost-import-diagnostic/",
+        "products/services/ghost-migration/portable-reproduction/",
+        "products/services/ghost-migration/diagnostic-handoff.md",
+        "products/services/ghost-migration/raw/topic-60053.json"
+      ],
+      "outputs": [
+        "products/services/ghost-migration/public-handoff/verification.json"
+      ],
+      "mission_id": "GHOST-DIAGNOSTIC-PUBLIC-HANDOFF"
+    },
+    "description": "Broker action during THINK-1794126901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179412690113",
+  "input_sha256": "baaf8ea3d9c4a5ff3439de5c1c5ee2e68d59a696780abe23fadb63b2ca7badd3"
+}
