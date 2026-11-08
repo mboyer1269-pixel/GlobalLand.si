@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\"checks\": {\"previous_17_unchanged\": true, \"only_key_added\": true, \"all_manifest_hashes\": true, \"key_exact_bytes\": true, \"key_hash\": true, \"no_submission_recorded\": true, \"live_probes_match\": true}, \"passed\": 7, \"total\": 7, \"raw_bytes\": 32112, \"dry_run_reported_bytes\": 32087, \"digest\": \"1d66fd9cc17938d76076c4e7eac0bda8271304bc998c286bdde0a888b2ecd13c\", \"dry_run\": \"TASK-179413560411\", \"note\": \"First check assumed raw bytes equal host byte count; failed. All file hashes match historical baseline; host byte accounting not inferred. Scoped key addition only, no upstream validation or market evidence.\"}\n\n",
+  "artifacts": [
+    "products/reviews/ghost-discovery-independent.json",
+    "products/receipts/TASK-179413560414.json"
+  ],
+  "request": {
+    "id": "TASK-179413560414",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-08T11:00:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,hashlib\nr=pathlib.Path('products/sites/ghost-import-diagnostic');b=pathlib.Path('products/services/ghost-migration');old=json.loads((b/'public-handoff/verification.json').read_text())['site_hashes'];m=json.loads((b/'discovery/manifest.json').read_text());p=json.loads((b/'publication/publication-result.json').read_text());f={str(x.relative_to(r)):hashlib.sha256(x.read_bytes()).hexdigest() for x in r.rglob('*') if x.is_file()};k=m['key_file'];c={'previous_17_unchanged':len(old)==17 and all(f.get(n)==h for n,h in old.items()),'only_key_added':set(f)==set(old)|{k},'all_manifest_hashes':f==m['files'],'key_exact_bytes':(r/k).read_bytes()==k[:-4].encode(),'key_hash':f[k]=='e715dd5970f162646467a3f214c6f576d7716468677a85d98611513af7d21df5','no_submission_recorded':p['indexnow']=='not submitted','live_probes_match':all(f[x['file']]==x['live_sha256']==x['approved_sha256'] for x in p['checks'])};o={'checks':c,'passed':sum(c.values()),'total':len(c),'raw_bytes':sum(x.stat().st_size for x in r.rglob('*') if x.is_file()),'dry_run_reported_bytes':32087,'digest':'1d66fd9cc17938d76076c4e7eac0bda8271304bc998c286bdde0a888b2ecd13c','dry_run':'TASK-179413560411','note':'First check assumed raw bytes equal host byte count; failed. All file hashes match historical baseline; host byte accounting not inferred. Scoped key addition only, no upstream validation or market evidence.'};d=pathlib.Path('products/reviews/ghost-discovery-independent.json');d.parent.mkdir(parents=True,exist_ok=True);d.write_text(json.dumps(o,indent=2));print(json.dumps(o))"
+      ],
+      "inputs": [
+        "products/sites/ghost-import-diagnostic/",
+        "products/services/ghost-migration/discovery/manifest.json",
+        "products/services/ghost-migration/public-handoff/verification.json",
+        "products/services/ghost-migration/publication/publication-result.json"
+      ],
+      "outputs": [
+        "products/reviews/ghost-discovery-independent.json"
+      ],
+      "mission_id": "GHOST-DISCOVERY-INDEPENDENT-REVIEW"
+    },
+    "description": "Broker action during THINK-1794135604",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179413560414",
+  "input_sha256": "385faa6b4db780ef5e7a29de7779156513f782cea372e82c9b17df6e9fc0ec0c"
+}

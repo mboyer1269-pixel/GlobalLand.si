@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "previous_17_unchanged": true,
+    "only_key_added": true,
+    "all_manifest_hashes": true,
+    "key_exact_bytes": true,
+    "key_hash": true,
+    "no_submission_recorded": true,
+    "live_probes_match": true
+  },
+  "passed": 7,
+  "total": 7,
+  "raw_bytes": 32112,
+  "dry_run_reported_bytes": 32087,
+  "digest": "1d66fd9cc17938d76076c4e7eac0bda8271304bc998c286bdde0a888b2ecd13c",
+  "dry_run": "TASK-179413560411",
+  "note": "First check assumed raw bytes equal host byte count; failed. All file hashes match historical baseline; host byte accounting not inferred. Scoped key addition only, no upstream validation or market evidence."
+}
