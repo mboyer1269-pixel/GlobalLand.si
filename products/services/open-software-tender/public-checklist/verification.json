@@ -1,0 +1,154 @@
+{
+ "mission": "IWMS-CHECKLIST-PUBLIC-DELIVERY",
+ "observed": "2026-11-08",
+ "prior_equivalent_delivery": "none: live index (sha256 be35d1310bd2) had no checklist link",
+ "corrections_vs_internal_checklist": [
+  "removed \"One compliant bid\" as mandatory: source states only variantPolicy notAllowed; one-offer advice moved to recommendations",
+  "removed \"Accept bidding under ICT conditions\": source states only that the contract will be awarded under those conditions",
+  "registration recast as a portal statement, not a notice requirement",
+  "suitability criterion marked conditional (\"Where it is required\")"
+ ],
+ "hashes": {
+  "index": "3ff1a14f4c8f3f1abd8cb34097a1611b2e39bd8bb6ead9d091f49cb76b046937",
+  "iwms-checklist": "56c79b638aa377222e34aae5b2da58c94fd0520fd1b0015adaf73c2ea137508b",
+  "baseline_index": "be35d1310bd2bbe1360931cde64f8d2e78568716b014f3c1f762367af2aaa202"
+ },
+ "passed": 32,
+ "total": 32,
+ "checks": [
+  {
+   "check": "feed sha256 matches evidence",
+   "pass": true
+  },
+  {
+   "check": "notice quotations found: 5",
+   "pass": true
+  },
+  {
+   "check": "verbatim in OCDS: software licensing, implementation, configuration,",
+   "pass": true
+  },
+  {
+   "check": "verbatim in OCDS: The initial contract term will be 3 years with an ",
+   "pass": true
+  },
+  {
+   "check": "verbatim in OCDS: The contract will be awarded under the Council's C",
+   "pass": true
+  },
+  {
+   "check": "verbatim in OCDS: Where it is required, within a bidder’s country of",
+   "pass": true
+  },
+  {
+   "check": "verbatim in OCDS: Bidders must confirm if they hold the particular a",
+   "pass": true
+  },
+  {
+   "check": "portal quote verbatim in saved portal page",
+   "pass": true
+  },
+  {
+   "check": "deadline matches",
+   "pass": true
+  },
+  {
+   "check": "variants notAllowed in source",
+   "pass": true
+  },
+  {
+   "check": "language en, GPA, open, 1 lot",
+   "pass": true
+  },
+  {
+   "check": "weights 40/60",
+   "pass": true
+  },
+  {
+   "check": "no enquiryPeriod in source",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: One compliant bid",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: Accept bidding",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: registration required",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: must register",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: Mandatory (from the notice)",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: GBP",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: USD",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: CAD",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: £",
+   "pass": true
+  },
+  {
+   "check": "unsupported/price wording absent: $",
+   "pass": true
+  },
+  {
+   "check": "recommendations labelled as ours",
+   "pass": true
+  },
+  {
+   "check": "EN/FR AI disclosure in checklist",
+   "pass": true
+  },
+  {
+   "check": "checklist links back to index",
+   "pass": true
+  },
+  {
+   "check": "index links to checklist twice (EN+FR)",
+   "pass": true
+  },
+  {
+   "check": "removing additions restores live baseline byte-for-byte",
+   "pass": true
+  },
+  {
+   "check": "index intake and disclosure preserved",
+   "pass": true
+  },
+  {
+   "check": "llms.txt unchanged",
+   "pass": true
+  },
+  {
+   "check": "no script tags in checklist",
+   "pass": true
+  },
+  {
+   "check": "site inventory",
+   "pass": true
+  }
+ ],
+ "not_established": [
+  "exposure",
+  "demand",
+  "eligibility",
+  "revenue"
+ ]
+}

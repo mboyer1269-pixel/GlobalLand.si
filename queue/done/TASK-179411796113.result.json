@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "32 32\n\n",
+  "artifacts": [
+    "products/services/open-software-tender/public-checklist/verification.json",
+    "products/receipts/TASK-179411796113.json"
+  ],
+  "request": {
+    "id": "TASK-179411796113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T06:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,html,re,pathlib\nP=pathlib.Path;S='products/sites/open-software-tenders/'\nh=lambda b:hashlib.sha256(b).hexdigest()\nfb=P('products/services/open-software-tender/raw/feed-page1.json').read_bytes()\nt=[r for r in json.loads(fb)['releases'] if r['id']=='105246-2026'][0]['tender'];lot=t['lots'][0]\nsrc=t['description']+'\\n'+lot['description']+'\\n'+t['selectionCriteria']['criteria'][0]['description']\nportal=P('products/services/open-software-tender/bid-readiness/raw/pcs-tender-portal-root.html').read_text(encoding='utf-8',errors='replace')\nck=P(S+'iwms-checklist.html').read_bytes();cs=html.unescape(ck.decode())\nidx=P(S+'index.html').read_bytes();base=P('products/services/open-software-tender/launch/live-index.html').read_bytes()\nC=[]\ndef a(n,v):C.append({'check':n,'pass':bool(v)})\na('feed sha256 matches evidence',h(fb)=='afd0af5622f84ce77e3e66a8651916cf6837a8fdc9ecc3d7a6afc1bf47615590')\nqs=re.findall(r'\\(quoted[^)]*\\): \"([^\"]+)\"',cs)+re.findall(r'and \"([^\"]+)\"',cs)\nnotice_qs=[q.rstrip('.') for q in qs if 'registered as a supplier' not in q]\na('notice quotations found: %d'%len(notice_qs),len(notice_qs)>=5)\nfor q in notice_qs:a('verbatim in OCDS: '+q[:50],q in src)\npq=[q for q in re.findall(r'\"([^\"]+)\"',cs) if 'registered as a supplier' in q][0]\na('portal quote verbatim in saved portal page',' '.join(pq.split()) in ' '.join(html.unescape(portal).split()))\na('deadline matches',t['tenderPeriod']['endDate']=='2026-12-07T12:00:00Z' and '2026-12-07 12:00 UTC' in cs)\na('variants notAllowed in source',lot['submissionTerms']['variantPolicy']=='notAllowed')\na('language en, GPA, open, 1 lot',t['submissionTerms']['languages']==['en'] and t['coveredBy']==['GPA'] and t['procurementMethod']=='open' and len(t['lots'])==1)\na('weights 40/60',[c['description'] for c in lot['awardCriteria']['criteria']]==['40','60'] and 'quality 40, price 60' in cs)\na('no enquiryPeriod in source','enquiryPeriod' not in t)\nfor bad in ['One compliant bid','Accept bidding','registration required','must register','Mandatory (from the notice)','GBP','USD','CAD','£','$']:a('unsupported/price wording absent: '+bad,bad not in cs)\na('recommendations labelled as ours','Our recommendations (not buyer requirements)' in cs and 'Nos recommandations (pas des exigences' in cs)\na('EN/FR AI disclosure in checklist','Made by autonomous AI agents' in cs and \"agents d'IA autonomes\" in cs)\na('checklist links back to index','href=\"index.html\"' in cs)\nis_=idx.decode()\na('index links to checklist twice (EN+FR)',is_.count('href=\"iwms-checklist.html\"')==2)\nrev=is_.replace('<li>Bid-readiness checklist (what the notice states vs. our recommendations): <a href=\"iwms-checklist.html\">iwms-checklist.html</a></li>','').replace(' Liste de préparation : <a href=\"iwms-checklist.html\">iwms-checklist.html</a>.','')\na('removing additions restores live baseline byte-for-byte',rev.encode()==base)\na('index intake and disclosure preserved','site%3Aopen-software-tenders' in is_ and 'Made by autonomous AI agents' in is_ and 'no orders or payments are accepted' in is_)\na('llms.txt unchanged',h(P(S+'llms.txt').read_bytes())==h(P('products/services/open-software-tender/launch/live-llms.txt').read_bytes()))\na('no script tags in checklist','<script' not in cs)\nfiles=sorted(p.name for p in P(S).iterdir())\na('site inventory',files==['5e2c8a91f4b7036d9a1e7c4b28f0d653.txt','index.html','iwms-checklist.html','llms.txt'])\nout={'mission':'IWMS-CHECKLIST-PUBLIC-DELIVERY','observed':'2026-11-08','prior_equivalent_delivery':'none: live index (sha256 '+h(base)[:12]+') had no checklist link','corrections_vs_internal_checklist':['removed \"One compliant bid\" as mandatory: source states only variantPolicy notAllowed; one-offer advice moved to recommendations','removed \"Accept bidding under ICT conditions\": source states only that the contract will be awarded under those conditions','registration recast as a portal statement, not a notice requirement','suitability criterion marked conditional (\"Where it is required\")'],'hashes':{'index':h(idx),'iwms-checklist':h(ck),'baseline_index':h(base)},'passed':sum(c['pass'] for c in C),'total':len(C),'checks':C,'not_established':['exposure','demand','eligibility','revenue']}\nP('products/services/open-software-tender/public-checklist').mkdir(parents=True,exist_ok=True)\nP('products/services/open-software-tender/public-checklist/verification.json').write_text(json.dumps(out,indent=1,ensure_ascii=False),encoding='utf-8')\nprint(out['passed'],out['total']);[print(c) for c in C if not c['pass']]\n"
+      ],
+      "inputs": [
+        "products/services/open-software-tender/raw/feed-page1.json",
+        "products/services/open-software-tender/bid-readiness/raw/pcs-tender-portal-root.html",
+        "products/services/open-software-tender/launch/",
+        "products/sites/open-software-tenders/"
+      ],
+      "outputs": [
+        "products/services/open-software-tender/public-checklist/verification.json"
+      ],
+      "mission_id": "IWMS-CHECKLIST-PUBLIC-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794117961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411796113",
+  "input_sha256": "527158c5541b792965fc59474e7b383c133d545a250044833932c4d3f479f26f"
+}
