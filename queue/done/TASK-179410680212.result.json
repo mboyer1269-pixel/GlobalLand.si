@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"checks\": {\n    \"two_blocks\": true,\n    \"reverse_exact\": true,\n    \"original_hash\": true,\n    \"candidate_hash\": true,\n    \"no_scripts_added\": true,\n    \"two_links\": true,\n    \"expiry_both\": true\n  },\n  \"passed\": 7,\n  \"total\": 7,\n  \"scope\": \"Scoped link review only; no traffic or demand established\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/procurement-handoff-independent.json",
+    "products/receipts/TASK-179410680212.json"
+  ],
+  "request": {
+    "id": "TASK-179410680212",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-08T03:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json,re\np=Path('products/sites/software-award-brief/index.html').read_bytes(); o=Path('products/distribution/procurement-handoff/original-index.html').read_bytes(); s=p.decode(); blocks=re.findall(r'<p><strong>(?:Related free resource:|Ressource gratuite connexe :).*?</p>',s)\nr=s\nfor b in blocks:r=r.replace(b,'')\nc={'two_blocks':len(blocks)==2,'reverse_exact':r.encode()==o,'original_hash':hashlib.sha256(o).hexdigest()=='fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6','candidate_hash':hashlib.sha256(p).hexdigest()=='17428a061292c4401d792da672e2f594675f7da40089defa4a051355301e679a','no_scripts_added':s.count('<script')==o.decode().count('<script'),'two_links':sum('https://globalland-open-software-tenders.global-land.workers.dev/' in b for b in blocks)==2,'expiry_both':all('18' in b and '2026 09:00 UTC' in b for b in blocks)}\n# English insertion includes its following newline; remove that insertion separator when comparing.\nc['reverse_exact']=r.replace('\\n\\n<h2>What this brief','\\n<h2>What this brief').encode()==o\nout={'checks':c,'passed':sum(c.values()),'total':len(c),'scope':'Scoped link review only; no traffic or demand established'}\nf=Path('products/reviews/procurement-handoff-independent.json');f.parent.mkdir(parents=True,exist_ok=True);f.write_text(json.dumps(out,indent=2));print(f.read_text())"
+      ],
+      "inputs": [
+        "products/sites/software-award-brief/",
+        "products/distribution/procurement-handoff/"
+      ],
+      "outputs": [
+        "products/reviews/procurement-handoff-independent.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794106802",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179410680212",
+  "input_sha256": "9061f5e172f79e7e877a306529113f387ff7ee44bac290060335ff10d7c061ae"
+}
