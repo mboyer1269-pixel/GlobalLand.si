@@ -1,0 +1,44 @@
+{
+  "status": "DONE",
+  "output": "1\n{\n \"index.html\": {\n  \"before\": \"389c137a2782b830dd20bb0ec174bfd2dacea49be1d1663413ba32914209938f\",\n  \"after\": \"fde833b52380366f0e2559a18cc5e48a544ae9bda97dd7053627266af97fb91d\",\n  \"replacements\": 2,\n  \"reverse_restores_pending_baseline\": true\n },\n \"llms.txt\": {\n  \"before\": \"1a42a487ef5e7317461d3b333089fa2bf8f61f22f5f904c29e0e7677e702d97b\",\n  \"after\": \"bd49df9fffa475d93a08043e25ed47a894df56e90b49e35d3a26548ca55a3da7\",\n  \"replacements\": 1,\n  \"reverse_restores_pending_baseline\": true\n },\n \"checks\": {\n  \"mailto_recipient_subject_count\": 2,\n  \"identifier_present\": true,\n  \"ai_disclosure_en\": true,\n  \"ai_disclosure_fr\": true,\n  \"ai_disclosure_llms\": true,\n  \"no_price_tokens_added\": true,\n  \"no_script_tag\": true,\n  \"no_time_promise_added\": true,\n  \"per_phase_en\": true,\n  \"per_phase_fr\": true,\n  \"per_phase_llms\": true,\n  \"not_hard_wallclock_en\": true,\n  \"not_hard_wallclock_fr\": true,\n  \"separate_mode_en\": true,\n  \"separate_mode_fr\": true,\n  \"old_aggregate_wording_removed\": true\n },\n \"hashes\": {\n  \"index\": \"fde833b52380366f0e2559a18cc5e48a544ae9bda97dd7053627266af97fb91d\",\n  \"llms\": \"bd49df9fffa475d93a08043e25ed47a894df56e90b49e35d3a26548ca55a3da7\",\n  \"sample\": \"a184dd4b11142100e88f326d45e5763aed748bf7d1245bd443de4d85825b0e4d\"\n }\n}\n===\n{\n \"T1_seed50_plus_query50\": {\n  \"result\": {\n   \"seed_error\": null,\n   \"error\": null,\n   \"n\": 50,\n   \"elapsed_s\": 0.003,\n   \"close_rc\": 0\n  },\n  \"accepted\": true\n },\n \"T2_query51\": {\n  \"result\": {\n   \"seed_error\": null,\n   \"error\": {\n    \"phase\": \"limit\",\n    \"kind\": \"STATEMENT_LIMIT\"\n   },\n   \"n\": 50,\n   \"elapsed_s\": 0.001,\n   \"close_rc\": 0\n  },\n  \"statement_limit\": true\n },\n \"T2b_seed51\": {\n  \"result\": {\n   \"seed_error\": {\n    \"phase\": \"limit\",\n    \"kind\": \"STATEMENT_LIMIT\"\n   },\n   \"error\": null,\n   \"n\": 0,\n   \"elapsed_s\": 0.001,\n   \"close_rc\": 0\n  },\n  \"seed_statement_limit\": true\n },\n \"T3_seed64KiB_plus_query64KiB\": {\n  \"status\": \"OK\",\n  \"result\": {\n   \"seed_error\": null,\n   \"error\": null,\n   \"n\": 1,\n   \"elapsed_s\": 0.0,\n   \"close_rc\": 0\n  },\n  \"accepted\": true,\n  \"total_bytes\": 131072\n },\n \"T4_query_65537\": {\n  \"status\": \"INVALID_CASE\",\n  \"detail\": \"query_sql must be text <= 65536 bytes\",\n  \"rejected\": true\n },\n \"T5_vm_budget_shared_across_phases\": {\n  \"N\": 70588,\n  \"ops_counted_one_phase\": 1200000,\n  \"alone_error\": null,\n  \"combined\": {\n   \"seed_error\": null,\n   \"error\": {\n    \"phase\": \"step\",\n    \"kind\": \"INTERRUPTED_BY_LIMIT\",\n    \"statement_index\": 1,\n    \"rc\": 9,\n    \"message\": \"interrupted\",\n    \"rows_before_error\": 0\n   },\n   \"n\": 1,\n   \"elapsed_s\": 0.082,\n   \"close_rc\": 0\n  },\n  \"shared\": true\n },\n \"T6_deadline_reset_per_phase\": {\n  \"second_deadline_later_s\": 0.05,\n  \"reset\": true\n },\n \"T7_separate_modes\": {\n  \"modes\": [\n   \"all_statements\",\n   \"as_written_first_statement_only\"\n  ],\n  \"first_only_n\": 1,\n  \"full_n\": 2,\n  \"close_rcs\": [\n   0,\n   0\n  ],\n  \"separate\": true\n },\n \"T8_cooperative_timing\": {\n  \"basis\": \"code inspection of diagnose.py: progress handler registered with N=1000 VM ops; deadline compared only inside that callback; deadline reset at the start of each run() call. No wall-clock overrun was induced in this test.\",\n  \"progress_interval_ops\": 1000\n },\n \"all_pass\": true,\n \"sqlite_version\": \"3.40.1\",\n \"limits\": {\n  \"sql_bytes\": 65536,\n  \"statements\": 50,\n  \"rows_kept\": 50,\n  \"vm_steps\": 2000000,\n  \"seconds\": 2.0\n }\n}\n",
+  "artifacts": [
+    "products/services/sqlite-repair/intake/limits-correction/boundary_checks.py",
+    "products/services/sqlite-repair/intake/limits-correction/boundary-results.json",
+    "products/services/sqlite-repair/intake/limits-correction/apply-result.json",
+    "products/sites/sqlite-statement-diagnostic/index.html",
+    "products/sites/sqlite-statement-diagnostic/llms.txt",
+    "products/receipts/TASK-179417916114.json"
+  ],
+  "request": {
+    "id": "TASK-179417916114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T23:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "set -e; F=products/services/sqlite-repair/intake/limits-correction/boundary_checks.py; sed -i \"s/dict(seed_sql='SELECT 2;'\\*51)/dict(seed_sql='SELECT 2;'*51,query_sql='SELECT 3;')/\" $F; grep -c \"query_sql='SELECT 3;'\" $F; python3 -I $F > /dev/null; python3 -I products/services/sqlite-repair/intake/limits-correction/apply.py; echo ===; head -c 5000 products/services/sqlite-repair/intake/limits-correction/boundary-results.json"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/intake/limits-correction/",
+        "products/services/sqlite-repair/fulfillment/diagnose.py",
+        "products/sites/sqlite-statement-diagnostic/"
+      ],
+      "outputs": [
+        "products/services/sqlite-repair/intake/limits-correction/boundary_checks.py",
+        "products/services/sqlite-repair/intake/limits-correction/boundary-results.json",
+        "products/services/sqlite-repair/intake/limits-correction/apply-result.json",
+        "products/sites/sqlite-statement-diagnostic/index.html",
+        "products/sites/sqlite-statement-diagnostic/llms.txt"
+      ],
+      "mission_id": "SQLITE-INTAKE-LIMITS-CORRECTION"
+    },
+    "description": "Broker action during THINK-1794179161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179417916114",
+  "input_sha256": "06049147afae930af2db4f70ce3a8cadf12b3385f8273df8a98b42af3c70d6de"
+}

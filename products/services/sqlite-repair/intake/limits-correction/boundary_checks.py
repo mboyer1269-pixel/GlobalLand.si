@@ -9,7 +9,7 @@ def err(r,m='all_statements'):
 seed50=' '.join('CREATE TABLE t%d(x);'%i for i in range(50));q50='SELECT 1;'*50
 r=d.diagnose(dict(seed_sql=seed50,query_sql=q50));out['T1_seed50_plus_query50']=dict(result=err(r),accepted=r['runs']['all_statements']['error'] is None and 'seed_error' not in r['runs']['all_statements'])
 r=d.diagnose(dict(query_sql='SELECT 1;'*51));e=err(r);out['T2_query51']=dict(result=e,statement_limit=(e['error'] or {}).get('kind')=='STATEMENT_LIMIT' and e['n']==50)
-r=d.diagnose(dict(seed_sql='SELECT 2;'*51));e=err(r);out['T2b_seed51']=dict(result=e,seed_statement_limit=(e['seed_error'] or {}).get('kind')=='STATEMENT_LIMIT')
+r=d.diagnose(dict(seed_sql='SELECT 2;'*51,query_sql='SELECT 3;'));e=err(r);out['T2b_seed51']=dict(result=e,seed_statement_limit=(e['seed_error'] or {}).get('kind')=='STATEMENT_LIMIT')
 pad=lambda s,n:s+' '*(n-len(s.encode()))
 r=d.diagnose(dict(seed_sql=pad('SELECT 1;',65536),query_sql=pad('SELECT 2;',65536)));e=err(r)
 out['T3_seed64KiB_plus_query64KiB']=dict(status=r.get('status'),result=e,accepted=r.get('status')=='OK' and e['error'] is None and e['seed_error'] is None,total_bytes=131072)

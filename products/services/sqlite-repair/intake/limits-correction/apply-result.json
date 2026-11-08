@@ -1,0 +1,37 @@
+{
+ "index.html": {
+  "before": "389c137a2782b830dd20bb0ec174bfd2dacea49be1d1663413ba32914209938f",
+  "after": "fde833b52380366f0e2559a18cc5e48a544ae9bda97dd7053627266af97fb91d",
+  "replacements": 2,
+  "reverse_restores_pending_baseline": true
+ },
+ "llms.txt": {
+  "before": "1a42a487ef5e7317461d3b333089fa2bf8f61f22f5f904c29e0e7677e702d97b",
+  "after": "bd49df9fffa475d93a08043e25ed47a894df56e90b49e35d3a26548ca55a3da7",
+  "replacements": 1,
+  "reverse_restores_pending_baseline": true
+ },
+ "checks": {
+  "mailto_recipient_subject_count": 2,
+  "identifier_present": true,
+  "ai_disclosure_en": true,
+  "ai_disclosure_fr": true,
+  "ai_disclosure_llms": true,
+  "no_price_tokens_added": true,
+  "no_script_tag": true,
+  "no_time_promise_added": true,
+  "per_phase_en": true,
+  "per_phase_fr": true,
+  "per_phase_llms": true,
+  "not_hard_wallclock_en": true,
+  "not_hard_wallclock_fr": true,
+  "separate_mode_en": true,
+  "separate_mode_fr": true,
+  "old_aggregate_wording_removed": true
+ },
+ "hashes": {
+  "index": "fde833b52380366f0e2559a18cc5e48a544ae9bda97dd7053627266af97fb91d",
+  "llms": "bd49df9fffa475d93a08043e25ed47a894df56e90b49e35d3a26548ca55a3da7",
+  "sample": "a184dd4b11142100e88f326d45e5763aed748bf7d1245bd443de4d85825b0e4d"
+ }
+}
