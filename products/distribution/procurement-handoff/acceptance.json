@@ -1,0 +1,33 @@
+{
+ "mission": "PROCUREMENT-RESOURCE-HANDOFF",
+ "observed_on": "2026-11-08",
+ "checks": {
+  "source_index_equals_verified_live_fc271294": true,
+  "llms_unchanged_aed09c85": true,
+  "reverse_restores_original_bytes": true,
+  "destination_live_fetch_matches_source": true,
+  "destination_url_in_destination_receipt": true,
+  "link_count_to_destination_is_2": true,
+  "no_prior_equivalent_link": true,
+  "removal_date_EN_FR": true,
+  "unverified_eligibility_EN_FR": true,
+  "offer_section_unchanged": true,
+  "no_script_or_tracking_added": true,
+  "no_monitoring_promise": true,
+  "ai_disclosure_preserved": true
+ },
+ "passed": 13,
+ "total": 13,
+ "original_index_sha256": "fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6",
+ "candidate_index_sha256": "17428a061292c4401d792da672e2f594675f7da40089defa4a051355301e679a",
+ "llms_sha256": "aed09c85322be9430cce86608d9833013f8fcb655384417294d15d1888d7ccf7",
+ "destination": "https://globalland-open-software-tenders.global-land.workers.dev/",
+ "destination_evidence": "TASK-179410140212 HTTP 200 sha256 be35d131... equals products/sites/open-software-tenders/index.html",
+ "removal_plan": "On first turn at/after 2026-11-18T09:00:00Z restore index.html to original bytes (sha256 fc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6); the resulting site digest must equal the already independently APPROVED live digest 49b78ee3570ad07b521f5e4bb64d5fc3504d3ef76fbe6acd0bc00205223c4de0 (verify by dry_run before deploy). Coordinate with OPEN-SOFTWARE-TENDERS-RETIRE.",
+ "not_established": [
+  "exposure",
+  "clicks",
+  "requests",
+  "revenue"
+ ]
+}

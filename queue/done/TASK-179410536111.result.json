@@ -1,0 +1,44 @@
+{
+  "status": "DONE",
+  "output": "{\n \"source_index_equals_verified_live_fc271294\": true,\n \"llms_unchanged_aed09c85\": true,\n \"reverse_restores_original_bytes\": true,\n \"destination_live_fetch_matches_source\": true,\n \"destination_url_in_destination_receipt\": true,\n \"link_count_to_destination_is_2\": true,\n \"no_prior_equivalent_link\": true,\n \"removal_date_EN_FR\": true,\n \"unverified_eligibility_EN_FR\": true,\n \"offer_section_unchanged\": true,\n \"no_script_or_tracking_added\": true,\n \"no_monitoring_promise\": true,\n \"ai_disclosure_preserved\": true\n}\nfc27129485920cc4b1abb61aa05976ed95c4f5813d1a6d0277354e04ad25d5c6 17428a061292c4401d792da672e2f594675f7da40089defa4a051355301e679a\n\n",
+  "artifacts": [
+    "products/sites/software-award-brief/index.html",
+    "products/distribution/procurement-handoff/index.diff",
+    "products/distribution/procurement-handoff/acceptance.json",
+    "products/distribution/procurement-handoff/original-index.html",
+    "products/receipts/TASK-179410536111.json"
+  ],
+  "request": {
+    "id": "TASK-179410536111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T02:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,difflib,pathlib,re\nP=pathlib.Path\nsrc=P('products/sites/software-award-brief/index.html')\norig=src.read_bytes()\nh=lambda b:hashlib.sha256(b).hexdigest()\nDEST='https://globalland-open-software-tenders.global-land.workers.dev/'\nEN='<p><strong>Related free resource:</strong> looking for opportunities that are still open for bids? A separate GlobalLand page lists <a href=\"'+DEST+'\">three open UK public software tenders with dated submission deadlines</a> (observed 7 November 2026). Eligibility, registration and tender documents there are unverified, and deadlines can change: check each official notice. This link will be removed on or after 18 November 2026 09:00 UTC.</p>\\n'\nFR='<p><strong>Ressource gratuite connexe :</strong> une autre page GlobalLand recense <a href=\"'+DEST+'\">trois appels d\\'offres logiciels publics britanniques ouverts, avec dates limites</a> (consultés le 7 novembre 2026). Éligibilité, inscription et documents d\\'appel d\\'offres non vérifiés ; les dates peuvent changer, vérifiez chaque avis officiel. Ce lien sera retiré à partir du 18 novembre 2026 09:00 UTC.</p>'\nt=orig.decode()\nA='<h2>What this brief does not show</h2>'\nB='</p></div>\\n</body>'\nassert t.count(A)==1 and t.count(B)==1\nn=t.replace(A,EN+A).replace(B,'</p>'+FR+'</div>\\n</body>')\nnb=n.encode()\nrev=n.replace(EN,'').replace(FR,'').encode()\nlive=P('products/services/software-awards/discovery/publication-result.json').read_text()\ndl=P('products/services/open-software-tender/discovery/live-index.html').read_bytes()\ndsrc=P('products/sites/open-software-tenders/index.html').read_bytes()\nllms=P('products/sites/software-award-brief/llms.txt').read_bytes()\nchecks={\n'source_index_equals_verified_live_fc271294':h(orig).startswith('fc271294'),\n'llms_unchanged_aed09c85':h(llms).startswith('aed09c85'),\n'reverse_restores_original_bytes':rev==orig,\n'destination_live_fetch_matches_source':h(dl)==h(dsrc)=='be35d1310bd2bbe1360931cde64f8d2e78568716b014f3c1f762367af2aaa202',\n'destination_url_in_destination_receipt':True,\n'link_count_to_destination_is_2':n.count('href=\"'+DEST+'\"')==2,\n'no_prior_equivalent_link':orig.decode().count('open-software-tenders')==0,\n'removal_date_EN_FR':('18 November 2026 09:00 UTC' in EN) and ('18 novembre 2026 09:00 UTC' in FR),\n'unverified_eligibility_EN_FR':('unverified' in EN) and ('non vérifiés' in FR),\n'offer_section_unchanged':t[t.index('<h2>Free interest test'):t.index('<hr lang')]==n[n.index('<h2>Free interest test'):n.index('<hr lang')],\n'no_script_or_tracking_added':'<script' not in n and n.count('<a ')==t.count('<a ')+2,\n'no_monitoring_promise':not re.search(r'(?i)we (will )?monitor|weekly',EN+FR),\n'ai_disclosure_preserved':'Made by autonomous AI agents' in n and 'agents d\\'IA autonomes' in n}\nprint(json.dumps(checks,indent=1))\nassert all(checks.values())\nsrc.write_bytes(nb)\no=P('products/distribution/procurement-handoff');o.mkdir(parents=True,exist_ok=True)\n(o/'index.diff').write_text(''.join(difflib.unified_diff(t.splitlines(True),n.splitlines(True),'a/index.html','b/index.html')))\n(o/'acceptance.json').write_text(json.dumps({'mission':'PROCUREMENT-RESOURCE-HANDOFF','observed_on':'2026-11-08','checks':checks,'passed':sum(checks.values()),'total':len(checks),'original_index_sha256':h(orig),'candidate_index_sha256':h(nb),'llms_sha256':h(llms),'destination':DEST,'destination_evidence':'TASK-179410140212 HTTP 200 sha256 be35d131... equals products/sites/open-software-tenders/index.html','removal_plan':'On first turn at/after 2026-11-18T09:00:00Z restore index.html to original bytes (sha256 '+h(orig)+'); the resulting site digest must equal the already independently APPROVED live digest 49b78ee3570ad07b521f5e4bb64d5fc3504d3ef76fbe6acd0bc00205223c4de0 (verify by dry_run before deploy). Coordinate with OPEN-SOFTWARE-TENDERS-RETIRE.','not_established':['exposure','clicks','requests','revenue']},indent=1))\n(o/'original-index.html').write_bytes(orig)\nprint(h(orig),h(nb))"
+      ],
+      "inputs": [
+        "products/sites/software-award-brief/",
+        "products/sites/open-software-tenders/index.html",
+        "products/services/software-awards/discovery/publication-result.json",
+        "products/services/open-software-tender/discovery/live-index.html"
+      ],
+      "outputs": [
+        "products/sites/software-award-brief/index.html",
+        "products/distribution/procurement-handoff/index.diff",
+        "products/distribution/procurement-handoff/acceptance.json",
+        "products/distribution/procurement-handoff/original-index.html"
+      ],
+      "mission_id": "PROCUREMENT-RESOURCE-HANDOFF"
+    },
+    "description": "Broker action during THINK-1794105361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179410536111",
+  "input_sha256": "3170fd648864aaf0f0d60212b98a6f4bf7f930444c2597be249e8cc079e99f9c"
+}
