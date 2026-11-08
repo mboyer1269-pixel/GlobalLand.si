@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "149854 2026-11-07 7 | How to add photos of a business | We could go into a separate topic without interrupting the main topic here, if you like, to respect the intention of the ooster. As a brief aside, it’s a fair question for anyone in the data ecosystem who needs to make f\n138617 2026-10-06 38 | CoMaps: OSM-related feature updates | ...Support roadshields in Kyrgyzstan, Uzbekistan, Tajikistan, Kazakhstan, Georgia and Morocco. Fixed them for Romania and in Augsburg, Germany Add tool hire shops and tool libraries to map Distinguish abandoned buildings\n147239 2026-09-03 86 | Splitting footways at crossings with islands | ...d be. Discussing the edits before starting to make them is also a requirement of organised editing and Uber didn’t follow that either. Uber’s private hire and delivery vehicles don’t rely on pedestrian routing, so doi\n147243 2026-09-03 50 | Bulk edit: IHM & Mapeak images change | ...s and avoid the “closed garden” problem that exists with a lot of similar applications. To make sure we follow the legal requirements of wikimedia we hired an IP specialist law firm and paid a decent amount of money f\n146552 2026-08-27 41 | Purchasing satellite imagery from Maxar Technologies | then you should not be surprised when others have not found free time for that either it is not like someone is hired right now to do this and failing to do their job\n121379 2026-08-17 75 | Каса на EasyPay | In my home country the Netherlands such shops have disappeared long ago because someone running the shop can’t make enough profit from it to have a good standard of living. I think the same thing is happening in Bulgaria\n146179 2026-08-09 38 | Uber Pedestrian Data Improvements Around Key Venues (Organised Editing) | Robot8A: Could a driver mapping program help? Uber could access a lot of local knowledge this way. When Uber add missing roads, they’re presumably adding information from their PHV and delivery drivers, who have actually\n145933 2026-07-31 70 | \"Disused shop\" or \"vacant shop\"? | ...eady ordered ( shop=outpost ) #footnote-1237237-1 [1] places where you can pay to get stuff but have to bring it back later ( shop=rental , shop=tool_hire , shop=plant_hire ) places where you can pay to have your appe\n145727 2026-07-26 38 | Linking OSM objects to Structured Data on Commons (MediaInfo entities) | ...d in combination with trees. network:wikidata=* is a machine-readable form of network=* used in combination with highway and cycle networks, and bike hire and ATM networks. Could we complement commons with a machine-r\n119214 2026-07-13 7 | Osmium: Is there a compiled .exe for Windows available? | ...hough whether it is beneficial to OpenStreetMap is a different topic) if you want something mapped and you are unable to do this you can encourage or hire someone (just follow https://wiki.osmfoundation.org/wiki/Organ\n120228 2026-07-05 86 | Open UK Address Data | ...re campaign to embarrass the government to make it so? OS https://www.theguardian.com/technology/2008/aug/21/politicsandtechnology have been known to hire lobbyists before and the Geospatial Commission seems to exist \n113561 2026-06-28 95 | Addr:postcode in Canada | ...argument that manually collecting postal code data ( not copying from Canada Post) violates any kind of database rights that might exist? Did anyone hire a lawyer and ask them for a professional opinion? Was there a c\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179416476118.json"
+  ],
+  "request": {
+    "id": "TASK-179416476118",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T19:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json;d=json.load(open('products/services/geospatial-request/raw/osm-search-hire.json'))\nt={x['id']:x for x in d.get('topics',[])}\nfor p in d.get('posts',[])[:25]:\n  tp=t.get(p['topic_id'],{})\n  print(p['topic_id'],p['created_at'][:10],tp.get('category_id'),'|',tp.get('title'),'|',p.get('blurb','')[:220].replace('\\n',' '))"
+      ],
+      "inputs": [
+        "products/services/geospatial-request/raw/osm-search-hire.json"
+      ],
+      "outputs": [],
+      "mission_id": "GEOSPATIAL-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794164761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179416476118",
+  "input_sha256": "1ea1f855362f8e5ff002329b1dacbfefe62ede79ae2cbac9d6ec9cb37a9dacba"
+}
