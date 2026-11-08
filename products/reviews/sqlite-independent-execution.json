@@ -1,0 +1,63 @@
+{
+  "scope": "Independent execution only; publication review not yet concluded",
+  "returncode": 0,
+  "stdout": "sqlite_version= 3.40.1\n== case1 reproduce original code\nBEFORE prepare= 0\nBEFORE step= 101 tail= ' SELECT * FROM T1'\n== case2 fixed loop\nstmt1 done cols=0 rows=0\nstmt2 row: ('1', 'a')\nstmt2 row: ('2', 'b')\nstmt2 row: ('3', 'c')\nstmt2 done cols=2 rows=3\nstatements=2\n== case3 duplicates+NULL+ORDER BY\nstmt1 done cols=0 rows=0\nstmt2 row: ('1', 'a')\nstmt2 row: ('1', 'a')\nstmt2 row: ('2', None)\nstmt2 row: ('3', 'z')\nstmt2 done cols=2 rows=4\nstatements=2\n== case4 trailing ; whitespace comment\nstmt1 done cols=0 rows=0\nstmt2 row: ('1', 'a')\nstmt2 row: ('2', 'b')\nstmt2 row: ('3', 'c')\nstmt2 done cols=2 rows=3\nstatements=2\n== case5 empty TABLE1\nstmt1 done cols=0 rows=0\nstmt2 done cols=2 rows=0\nstatements=2\n== case6 error in 2nd stmt stops\nstmt1 done cols=0 rows=0\nERROR prepare stmt2: no such table: missing\nPASSED 6/6\n",
+  "stderr": "",
+  "acceptance": {
+    "checks": {
+      "case1_step_is_SQLITE_DONE_and_tail_unexecuted": true,
+      "case2_second_stmt_returns_3_rows": true,
+      "case3_dups_kept_null_preserved_ordered": true,
+      "case4_terminates_two_statements": true,
+      "case5_zero_rows": true,
+      "case6_error_reported_third_not_run": true
+    },
+    "passed": 6,
+    "total": 6,
+    "transcript": [
+      "sqlite_version= 3.40.1",
+      "== case1 reproduce original code",
+      "BEFORE prepare= 0",
+      "BEFORE step= 101 tail= ' SELECT * FROM T1'",
+      "== case2 fixed loop",
+      "stmt1 done cols=0 rows=0",
+      "stmt2 row: ('1', 'a')",
+      "stmt2 row: ('2', 'b')",
+      "stmt2 row: ('3', 'c')",
+      "stmt2 done cols=2 rows=3",
+      "statements=2",
+      "== case3 duplicates+NULL+ORDER BY",
+      "stmt1 done cols=0 rows=0",
+      "stmt2 row: ('1', 'a')",
+      "stmt2 row: ('1', 'a')",
+      "stmt2 row: ('2', None)",
+      "stmt2 row: ('3', 'z')",
+      "stmt2 done cols=2 rows=4",
+      "statements=2",
+      "== case4 trailing ; whitespace comment",
+      "stmt1 done cols=0 rows=0",
+      "stmt2 row: ('1', 'a')",
+      "stmt2 row: ('2', 'b')",
+      "stmt2 row: ('3', 'c')",
+      "stmt2 done cols=2 rows=3",
+      "statements=2",
+      "== case5 empty TABLE1",
+      "stmt1 done cols=0 rows=0",
+      "stmt2 done cols=2 rows=0",
+      "statements=2",
+      "== case6 error in 2nd stmt stops",
+      "stmt1 done cols=0 rows=0",
+      "ERROR prepare stmt2: no such table: missing"
+    ],
+    "note": "C API exercised via ctypes on system libsqlite3; compiled C binary could not execute (noexec)"
+  },
+  "site_sha256": {
+    "index.html": "157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad",
+    "llms.txt": "32baf084aa173195438f0a59f218f0e49ce2a461b246ec3c643f1aa75b156d56",
+    "repro/acceptance.json": "42461f41c15022e4818d7c9707e0e03af7f11abea5a4159af24ab5d1bf683c95",
+    "repro/c-loader-attempt.txt": "44e56547f761eaca609c786e70300aaeb7b16fdca96332572f88bc720c6f2d63",
+    "repro/ctypes_repro.py": "f50da820a6fa3acc1e88b8b4714e13da1487cceb7efc07b0f3b9f7137d866783",
+    "repro/multi_stmt.c": "ca11940e50f4ff72665e538463a0da0cb7084c2bf3a606b171f6a35447220fa0",
+    "repro/run-output.txt": "7cdacd357e65cb566ea9d036d04cdef6c8f80de680050ee458e7453c4ee83baa"
+  }
+}
