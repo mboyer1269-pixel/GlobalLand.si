@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "11 announcements 189 | Stay up to date on the most recent n8n updates and news. | subs: []\n12 questions 36897 | For troubleshooting issues, understanding nodes, or reporting bugs—if you’re building a workflow and need help shaping it, post in Help me Build my Workflow instead. | subs: []\n36 help-me-build-my-workflow 1634 | Need help creating an n8n workflow? Stuck on a tricky automation? This is the place to collaborate with other community members and build your workflows in public! | subs: []\n41 n8n-academy 3 | Welcome to the n8n Academy category. This is the home for everything related to learning n8n through our courses on learn.n8n.io. | subs: [42, 43, 44, 45, 46]\n48 n8n-labs 1 | Questions, bugs and ideas for n8n Labs experiments. They’re early and may change. | subs: []\n28 tutorials 14 |  | subs: [29, 30, 31, 34, 32, 37, 39]\n27 known-issues 10 | Issues that came up in the Questions category and that were identified as bugs. | subs: []\n16 feature-requests-done 488 | Feature Requests that have been resolved. | subs: []\n40 security-advisories 10 | Updates will be posted here. | subs: []\n5 feature-requests 2603 | Suggest or vote for features you would like to have in n8n! | subs: [7, 8, 9, 10]\n17 getting-started-with-n8n 34 | Useful resources for those new to n8n | subs: [6, 19]\n15 built-with-n8n 1974 | This is a category for showing off the projects that you’ve built with n8n. | subs: []\n14 tips 642 | A place to share knowledge and ask for the best techniques when using n8n to get the most out of it. | subs: []\n13 jobs 42 | The Jobs category connects people and companies hiring n8n talent with community members looking for opportunities. To keep listings useful and reduce spam, follow these rules when posting a role or a | subs: []\n1 uncategorized 40 |  | subs: []\n2 site-feedback 362 | Discussion about n8n, your thoughts, feedback and ideas | subs: [18]\n38 community-highlights 70 |  | subs: []\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179417016113.json"
+  ],
+  "request": {
+    "id": "TASK-179417016113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json;d=json.load(open('products/services/automation-request/raw/n8n-categories.json'))\nfor c in d['category_list']['categories']:\n  print(c['id'],c['slug'],c.get('topic_count'),'|',(c.get('description_text') or '')[:200].replace('\\n',' '), '| subs:', c.get('subcategory_ids'))"
+      ],
+      "inputs": [
+        "products/services/automation-request/raw/n8n-categories.json"
+      ],
+      "outputs": [],
+      "mission_id": "AUTOMATION-MARKETPLACE-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794170161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179417016113",
+  "input_sha256": "dea811aac4658adbd9127a373cd128545717ac20bc64e86433decd678e94d046"
+}
