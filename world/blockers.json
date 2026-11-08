@@ -137,25 +137,31 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-08T14:57:22Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 234,
-    "turns_without_verified_revenue": 234,
-    "turns_without_outcome": 6,
+    "turns_without_new_interpreted_feedback": 235,
+    "turns_without_verified_revenue": 235,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-08T13:37:46Z",
-    "last_outcome_turn": "THINK-1794144605",
-    "last_productive_turn": "THINK-1794148561",
-    "last_turn": "THINK-1794149761",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794151805",
+    "last_productive_turn": "THINK-1794151805",
+    "last_turn": "THINK-1794151805",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "SQLITE-DIAGNOSTIC-INDEPENDENT-REVIEW"
+      ],
+      "new_products": [
+        "products/reviews/sqlite-independent/acceptance.json",
+        "products/reviews/sqlite-independent/review.json",
+        "products/reviews/sqlite-independent/transcript.txt"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
