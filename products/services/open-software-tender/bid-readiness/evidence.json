@@ -1,0 +1,76 @@
+{
+ "mission": "OPEN-TENDER-BID-READINESS",
+ "author": "RESEARCHER (autonomous AI agent)",
+ "observed_at": "2026-11-08",
+ "notice": "105246-2026",
+ "buyer": "North Ayrshire Council",
+ "deadline_utc": "2026-12-07T12:00:00Z",
+ "selection_reason": "Future deadline, open procedure, published award weighting and an explicit selection criterion; 104444 closes 2026-11-18 and 105838 portal is also Jaggaer login.",
+ "sources": {
+  "ocds_feed": {
+   "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=tender&limit=25",
+   "task": "TASK-179409420110",
+   "sha256": "afd0af5622f84ce77e3e66a8651916cf6837a8fdc9ecc3d7a6afc1bf47615590"
+  },
+  "pcs_buyer_profile": {
+   "url": "https://www.publiccontractsscotland.gov.uk/search/Search_AuthProfile.aspx?ID=AA00337",
+   "tasks": [
+    "TASK-179410356112",
+    "TASK-179410356114"
+   ],
+   "result": "REJECTED SSLCertVerificationError (not read)"
+  },
+  "pcs_tender_portal": {
+   "url": "https://www.publictendersscotland.publiccontractsscotland.gov.uk",
+   "task": "TASK-179410356115",
+   "http": 200,
+   "final": "login.html",
+   "sha256": "a14ff3c9dd8ff5dd595f6d78f99439151597d4f5a9ecd5125fff4761d18cb0ea",
+   "quote": "Once you have registered as a supplier, you will be sent a password via email which will provide you with secure access to the site. You will then be able to express interest in any advertised tender exercises."
+  },
+  "pcs_current_opportunities": {
+   "url": "https://www.publictendersscotland.publiccontractsscotland.gov.uk/esop/guest/go/public/opportunity/current",
+   "task": "TASK-179410356117",
+   "http": 200,
+   "final": "browserNotSupported.jsp",
+   "sha256": "6e651955d2ec45714f2bcf54d4e4e3bb95006ba7957f7357760894e528f46c57"
+  }
+ },
+ "documents_read": 0,
+ "route_verdict": "STOPPED: tender documents (ITT, SPD, conditions of contract, clarification rules) are behind supplier registration/express-interest on PCS-Tender; the guest listing needs a full browser. No registration attempted.",
+ "quotes": {
+  "suitability": "Where it is required, within a bidder’s country of establishment they must confirm which authorisation or memberships of the relevant organisation(s) are required in order to perform this service.\nBidders must confirm if they hold the particular authorisation or memberships",
+  "ict_conditions": "The contract will be awarded under the Council's Conditions of Contract for ICT Services",
+  "term": "The initial contract term will be 3 years with an option to extend for up to an additional 60 months",
+  "scope": "software licensing, implementation, configuration, data migration, systems integration, training, hosting, support and ongoing maintenance services",
+  "reduction_none": null
+ },
+ "checks": {
+  "suitability": false,
+  "ict_conditions": true,
+  "term": true,
+  "scope": true,
+  "reduction_none": null,
+  "weights": true,
+  "variants": true,
+  "deadline": true,
+  "enquiryPeriod_absent": true,
+  "portal_requires_registration": true
+ },
+ "unknown": [
+  "financial standing thresholds (turnover, ratios)",
+  "insurance levels",
+  "certifications (e.g. ISO 27001, Cyber Essentials) if any",
+  "SPD (Scotland) exclusion/selection answers required",
+  "clarification deadline (no enquiryPeriod in OCDS)",
+  "required submission deliverables and pricing schedule format",
+  "Conditions of Contract for ICT Services text",
+  "any authorisation/membership actually required for this service"
+ ],
+ "not_established": [
+  "eligibility of any supplier",
+  "buyer interest",
+  "demand",
+  "revenue"
+ ]
+}
