@@ -1,0 +1,55 @@
+{
+ "checks": {
+  "two_mailto": true,
+  "recipient_unchanged": true,
+  "subject_unchanged": true,
+  "body_identifier_and_fields": true,
+  "identifier_code_en_fr": true,
+  "no_price_tokens_new": true,
+  "no_time_promise": true,
+  "not_guaranteed_en_fr": true,
+  "ai_disclosure_en_fr": true,
+  "no_script_tag": true,
+  "diagnose_limits_present": {
+   "50_statements": true,
+   "64KiB": true,
+   "2s": true
+  },
+  "example_diagnose_exit0": true,
+  "example_report_keys": [
+   "case_id",
+   "expected_match",
+   "limits",
+   "runs",
+   "sqlite_version",
+   "status",
+   "tool"
+  ],
+  "sample_file_identical": true,
+  "reverse_restores_original": true
+ },
+ "source_envelope": {
+  "py_js_files": 23,
+  "py_js_bytes": 101452,
+  "over_128KiB": false,
+  "over_128_files": false,
+  "diagnose_py_bytes": 6429,
+  "render_reply_py_bytes": 3227,
+  "note": "Selection order when the envelope is exceeded is not documented; inclusion of diagnose.py in a given case snapshot is UNVERIFIED."
+ },
+ "hashes": {
+  "orig_index": "157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad",
+  "new_index": "389c137a2782b830dd20bb0ec174bfd2dacea49be1d1663413ba32914209938f",
+  "orig_llms": "32baf084aa173195438f0a59f218f0e49ce2a461b246ec3c643f1aa75b156d56",
+  "new_llms": "1a42a487ef5e7317461d3b333089fa2bf8f61f22f5f904c29e0e7677e702d97b",
+  "sample": "a184dd4b11142100e88f326d45e5763aed748bf7d1245bd443de4d85825b0e4d"
+ },
+ "diagnose_stderr": "",
+ "status": {
+  "source_eligibility": "DOCUMENTED (.py under products/services, <=64KiB)",
+  "private_cycle_use_of_diagnose": "NOT_OBSERVED",
+  "actual_request": "NONE_OBSERVED",
+  "recipient_delivery": "NONE",
+  "paid_acceptance": "NOT_OFFERED"
+ }
+}

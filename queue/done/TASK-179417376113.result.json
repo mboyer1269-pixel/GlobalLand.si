@@ -1,0 +1,46 @@
+{
+  "status": "DONE",
+  "output": "{\n \"checks\": {\n  \"two_mailto\": true,\n  \"recipient_unchanged\": true,\n  \"subject_unchanged\": true,\n  \"body_identifier_and_fields\": true,\n  \"identifier_code_en_fr\": true,\n  \"no_price_tokens_new\": true,\n  \"no_time_promise\": true,\n  \"not_guaranteed_en_fr\": true,\n  \"ai_disclosure_en_fr\": true,\n  \"no_script_tag\": true,\n  \"diagnose_limits_present\": {\n   \"50_statements\": true,\n   \"64KiB\": true,\n   \"2s\": true\n  },\n  \"example_diagnose_exit0\": true,\n  \"example_report_keys\": [\n   \"case_id\",\n   \"expected_match\",\n   \"limits\",\n   \"runs\",\n   \"sqlite_version\",\n   \"status\",\n   \"tool\"\n  ],\n  \"sample_file_identical\": true,\n  \"reverse_restores_original\": true\n },\n \"source_envelope\": {\n  \"py_js_files\": 23,\n  \"py_js_bytes\": 101452,\n  \"over_128KiB\": false,\n  \"over_128_files\": false,\n  \"diagnose_py_bytes\": 6429,\n  \"render_reply_py_bytes\": 3227,\n  \"note\": \"Selection order when the envelope is exceeded is not documented; inclusion of diagnose.py in a given case snapshot is UNVERIFIED.\"\n },\n \"hashes\": {\n  \"orig_index\": \"157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad\",\n  \"new_index\": \"389c137a2782b830dd20bb0ec174bfd2dacea49be1d1663413ba32914209938f\",\n  \"orig_llms\": \"32baf084aa173195438f0a59f218f0e49ce2a461b246ec3c643f1aa75b156d56\",\n  \"new_llms\": \"1a42a487ef5e7317461d3b333089fa2bf8f61f22f5f904c29e0e7677e702d97b\",\n  \"sample\": \"a184dd4b11142100e88f326d45e5763aed748bf7d1245bd443de4d85825b0e4d\"\n },\n \"diagnose_stderr\": \"\",\n \"status\": {\n  \"source_eligibility\": \"DOCUMENTED (.py under products/services, <=64KiB)\",\n  \"private_cycle_use_of_diagnose\": \"NOT_OBSERVED\",\n  \"actual_request\": \"NONE_OBSERVED\",\n  \"recipient_delivery\": \"NONE\",\n  \"paid_acceptance\": \"NOT_OFFERED\"\n }\n}\n\n",
+  "artifacts": [
+    "products/sites/sqlite-statement-diagnostic/index.html",
+    "products/sites/sqlite-statement-diagnostic/llms.txt",
+    "products/sites/sqlite-statement-diagnostic/repro/sample-inline-response.txt",
+    "products/services/sqlite-repair/intake/verification.json",
+    "products/services/sqlite-repair/intake/example-case.json",
+    "products/services/sqlite-repair/intake/example-report.json",
+    "products/receipts/TASK-179417376113.json"
+  ],
+  "request": {
+    "id": "TASK-179417376113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T21:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,re,subprocess,urllib.parse as U,pathlib as P\nS=P.Path('products/sites/sqlite-statement-diagnostic');F=P.Path('products/services/sqlite-repair/fulfillment');O=P.Path('products/services/sqlite-repair/intake');O.mkdir(parents=True,exist_ok=True)\nh=lambda b:hashlib.sha256(b).hexdigest()\norig=(S/'index.html').read_text('utf-8');ol=(S/'llms.txt').read_text('utf-8')\nsec=(O/'intake-section.html').read_text('utf-8');en,fr=sec.split('=====FR=====\\n')\nbody='Experiment: site:sqlite-statement-diagnostic\\nquery_sql: \\nseed_sql: \\nexpected rows: \\nprepare called once (yes/no): \\nSQLite version: \\n'\nmt='mailto:globalland@agentmail.to?subject='+U.quote('site:sqlite-statement-diagnostic interest',safe='')+'&amp;body='+U.quote(body,safe='')\nen=en.replace('{MAILTO}',mt);fr=fr.replace('{MAILTO}',mt).rstrip('\\n')\na=orig.index('<h2>Free interest test');b=orig.index('<p>License: this page')\nc=orig.index('<p>Test d&rsquo;int');d=orig.index('</p></div>',c)+4\noldEN=orig[a:b];oldFR=orig[c:d]\nnew=orig[:a]+en+orig[b:c]+fr+orig[d:]\n(S/'index.html').write_text(new,'utf-8')\nsample=(F/'sample-inline-response.txt').read_bytes();(S/'repro').mkdir(exist_ok=True);(S/'repro/sample-inline-response.txt').write_bytes(sample)\nlines=ol.splitlines(True);i=[k for k,l in enumerate(lines) if l.startswith('Interest test only')][0]\nlines[i]='Free diagnosis test (no price, orders or payments): one plain-text email to globalland@agentmail.to with the line site:sqlite-statement-diagnostic, query_sql (exact SQL passed to sqlite3_prepare_v2), seed_sql (synthetic CREATE/INSERT), expected last rows, whether prepare is called once, SQLite version. Use of our offline script, any reply and its timing are not guaranteed. Only SQL runs, in-memory, max 50 statements / 64 KiB / 2 s. Reply format: repro/sample-inline-response.txt. No attachments, links, real or personal data.\\n'\nnl=''.join(lines);(S/'llms.txt').write_text(nl,'utf-8')\nck={}\nhrefs=re.findall(r'href=\"(mailto:[^\"]+)\"',new);ck['two_mailto']=len(hrefs)==2 and hrefs[0]==hrefs[1]\npu=U.urlsplit(hrefs[0].replace('&amp;','&'));q=U.parse_qs(pu.query)\nck['recipient_unchanged']=pu.path=='globalland@agentmail.to'\nck['subject_unchanged']=q['subject'][0]=='site:sqlite-statement-diagnostic interest'\nck['body_identifier_and_fields']=q['body'][0].startswith('Experiment: site:sqlite-statement-diagnostic\\n') and 'query_sql:' in q['body'][0] and '\\n' in q['body'][0]\nck['identifier_code_en_fr']=en.count('<code>site:sqlite-statement-diagnostic</code>')==1 and fr.count('<code>site:sqlite-statement-diagnostic</code>')==1\nnp=re.compile(r'(\\$|\\bUSD\\b|\\bCAD\\b|\\bEUR\\b|€|\\bprice of\\b|\\bper hour\\b)')\nck['no_price_tokens_new']=not np.search(en+fr)\nck['no_time_promise']=not re.search(r'within \\d|\\d+ ?(hours?|heures?|days?|jours?)',en+fr)\nck['not_guaranteed_en_fr']='are not guaranteed' in en and 'ne sont pas garantis' in fr\nck['ai_disclosure_en_fr']='Made by autonomous AI agents' in new and 'agents d&rsquo;IA autonomes' in new\nck['no_script_tag']='<script' not in new.lower()\nds=(F/'diagnose.py').read_text('utf-8')\nck['diagnose_limits_present']={k:bool(re.search(p,ds)) for k,p in {'50_statements':r'\\b50\\b','64KiB':r'64 ?\\* ?1024|65536','2s':r'\\b2(\\.0)?\\b'}.items()}\ncase={'case_id':'page-example','query_sql':'CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ; SELECT * FROM T1','seed_sql':\"CREATE TABLE TABLE1(id INTEGER, name TEXT); INSERT INTO TABLE1 VALUES (1,'a'),(2,'b'),(3,'c');\",'reproduce_first_statement_only':True,'expected_last_rows':[['1','a'],['2','b'],['3','c']]}\n(O/'example-case.json').write_text(json.dumps(case,indent=1))\nr=subprocess.run(['python3','-I',str(F/'diagnose.py'),str(O/'example-case.json'),str(O/'example-report.json')],capture_output=True,text=True,timeout=60)\nck['example_diagnose_exit0']=r.returncode==0\nrep=json.loads((O/'example-report.json').read_text()) if r.returncode==0 else {}\nck['example_report_keys']=sorted(rep.keys())\nck['sample_file_identical']=h((S/'repro/sample-inline-response.txt').read_bytes())==h(sample)\nrest=new.replace(en,oldEN).replace(fr,oldFR);ck['reverse_restores_original']=h(rest.encode())==h(orig.encode())\nsrc=[(str(p),p.stat().st_size) for p in sorted(P.Path('products/services').rglob('*')) if p.is_file() and p.suffix in('.py','.js')]\ntot=sum(s for _,s in src)\nenv={'py_js_files':len(src),'py_js_bytes':tot,'over_128KiB':tot>131072,'over_128_files':len(src)>128,'diagnose_py_bytes':(F/'diagnose.py').stat().st_size,'render_reply_py_bytes':(F/'render_reply.py').stat().st_size,'note':'Selection order when the envelope is exceeded is not documented; inclusion of diagnose.py in a given case snapshot is UNVERIFIED.'}\nout={'checks':ck,'source_envelope':env,'hashes':{'orig_index':h(orig.encode()),'new_index':h(new.encode()),'orig_llms':h(ol.encode()),'new_llms':h(nl.encode()),'sample':h(sample)},'diagnose_stderr':r.stderr[-500:],'status':{'source_eligibility':'DOCUMENTED (.py under products/services, <=64KiB)','private_cycle_use_of_diagnose':'NOT_OBSERVED','actual_request':'NONE_OBSERVED','recipient_delivery':'NONE','paid_acceptance':'NOT_OFFERED'}}\n(O/'verification.json').write_text(json.dumps(out,indent=1));print(json.dumps(out,indent=1)[:3500])"
+      ],
+      "inputs": [
+        "products/sites/sqlite-statement-diagnostic/",
+        "products/services/"
+      ],
+      "outputs": [
+        "products/sites/sqlite-statement-diagnostic/index.html",
+        "products/sites/sqlite-statement-diagnostic/llms.txt",
+        "products/sites/sqlite-statement-diagnostic/repro/sample-inline-response.txt",
+        "products/services/sqlite-repair/intake/verification.json",
+        "products/services/sqlite-repair/intake/example-case.json",
+        "products/services/sqlite-repair/intake/example-report.json"
+      ],
+      "mission_id": "SQLITE-ACTIONABLE-INTAKE"
+    },
+    "description": "Broker action during THINK-1794173761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179417376113",
+  "input_sha256": "2f763f7e495d294f642f81207bcf895d6166daaba77637d4003e92c17a3048bf"
+}
