@@ -142,24 +142,25 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 221,
-    "turns_without_verified_revenue": 221,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 222,
+    "turns_without_verified_revenue": 222,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-08T12:01:04Z",
     "last_outcome_turn": "THINK-1794137401",
-    "last_productive_turn": "THINK-1794137401",
-    "last_turn": "THINK-1794137401",
+    "last_productive_turn": "THINK-1794139201",
+    "last_turn": "THINK-1794139201",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "GHOST-DISCOVERY-INDEPENDENT-REVIEW"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/reviews/ghost-discovery-independent.json"
+        "products/services/ghost-migration/discovery/live/index.html",
+        "products/services/ghost-migration/discovery/live/indexnow-receipt.txt",
+        "products/services/ghost-migration/discovery/live/key.txt",
+        "products/services/ghost-migration/discovery/publication-result.json"
       ],
-      "new_product_count": 1,
+      "new_product_count": 4,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
