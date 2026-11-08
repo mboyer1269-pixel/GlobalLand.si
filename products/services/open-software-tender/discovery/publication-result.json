@@ -1,0 +1,38 @@
+{
+ "site": "open-software-tenders",
+ "deploy_task": "TASK-179410140210",
+ "deploy_status": "ONLINE_VERIFIED",
+ "approved_digest": "b77e66c1c6141ddd1b17258fdcf96e8506d36f0c28f1eb6ad6b3592860348d85",
+ "review": "AUDITOR codex seq 22 APPROVE",
+ "key_fetch": {
+  "task": "TASK-179410140211",
+  "http": 200,
+  "sha256": "de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f",
+  "expected": "de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f",
+  "body_exact": true
+ },
+ "index_fetch": {
+  "task": "TASK-179410140212",
+  "http": 200,
+  "sha256": "be35d1310bd2bbe1360931cde64f8d2e78568716b014f3c1f762367af2aaa202",
+  "expected": "be35d1310bd2bbe1360931cde64f8d2e78568716b014f3c1f762367af2aaa202"
+ },
+ "indexnow": {
+  "task": "TASK-179410140213",
+  "http": 202,
+  "meaning": "received only",
+  "count": 1
+ },
+ "observed_on": "2026-11-08",
+ "not_established": [
+  "indexing",
+  "traffic",
+  "requests",
+  "orders",
+  "revenue"
+ ],
+ "feedback": "0 classified / 3 unclassified = unknown, not zero",
+ "interest_window_end": "2026-11-17T09:00:00Z",
+ "mandatory_retirement": "first turn at/after 2026-11-18T09:00:00Z (OPEN-SOFTWARE-TENDERS-RETIRE)",
+ "all_match": true
+}
