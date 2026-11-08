@@ -137,30 +137,25 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-08T16:30:28Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 238,
-    "turns_without_verified_revenue": 238,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 239,
+    "turns_without_verified_revenue": 239,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-08T16:30:28Z",
     "last_outcome_turn": "THINK-1794153961",
     "last_productive_turn": "THINK-1794153961",
-    "last_turn": "THINK-1794153961",
+    "last_turn": "THINK-1794155401",
     "last_change": {
-      "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "SQLITE-DIAGNOSTIC-INITIAL-DISCOVERY"
-      ],
-      "new_products": [
-        "products/services/sqlite-repair/discovery/manifest.json",
-        "products/sites/sqlite-statement-diagnostic/3d8f1b6a92c04e7f5a1b8c2d9e6f4a07.txt"
-      ],
-      "new_product_count": 2,
+      "productive": false,
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
