@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "22 2018-03-29 2018-03-29 1 False [] About the Marketplace category\n64170 2026-11-08 2026-11-08 1 False [] Ghost Websites Inspiration #87\n64142 2026-11-05 2026-11-05 1 False [] Glass — Blog & Newsletter Ghost Theme\n54813 2025-01-29 2026-11-04 29 False [] Managed Hosting with Synaps Media\n47742 2024-05-29 2026-11-01 76 False [] Ghost Hosting at Magic Pages\n64095 2026-10-29 2026-10-29 1 False [] Elsewhere — A Travel & Photography Ghost Theme\n63727 2026-09-08 2026-10-27 2 False [] Jotter, a text-focused theme that works well without images\n64079 2026-10-27 2026-10-27 1 False [] Introducing Margin — an editorial Ghost theme for independent writers\n64074 2026-10-27 2026-10-27 1 False [] Creator Dunning: emails members in your name when a renewal fails (free up to 100 members)\n64056 2026-10-24 2026-10-26 6 False [] Coming Soon: LetterHarbor — A Ghost Theme for Newsletters & Resource Libraries\n64020 2026-10-20 2026-10-20 1 False [] Say Hello to Aura - A Modern Ghost Theme by Pina 🎉\n63959 2026-10-11 2026-10-11 1 False [] Ghost Websites Inspiration #86\n62984 2026-05-28 2026-10-10 14 False [] Fantasma: visual Ghost theme builder\n63904 2026-10-02 2026-10-02 3 False [] Ghost setup, migrations, managed hosting and custom themes — from the team behind Vanta & Faro\n62908 2026-05-20 2026-09-29 5 False [] After Enova, I built a Ghost theme that reads like a newspaper front page: meet Meridian\n63759 2026-09-13 2026-09-13 1 False [] Ghost Websites Inspiration #85\n63661 2026-08-28 2026-09-11 10 False [] Wire — Ghost theme for multi-author newsrooms\n63513 2026-08-05 2026-09-10 7 False [] Verse – Premium Ghost Theme\n63691 2026-09-02 2026-09-02 1 False [] 🎉 Say Hello to Drift - A Modern Ghost Theme by Pina\n58520 2025-07-02 2026-09-01 16 False [] : 🛠️ Coming Soon: No-Code Ghost Site Builder (Prototype → Beta!)\n63656 2026-08-27 2026-08-27 1 False [] Ghost support for a year\n63504 2026-08-04 2026-08-16 3 False [] Search for free! (BYO Algolia, but you probably fit their free tier)\n63575 2026-08-16 2026-08-16 1 False [] Ghost Websites Inspiration #84\n63559 2026-08-12 2026-08-12 1 False [] Mews - A Magazine Ghost Theme\n63329 2026-07-12 2026-08-07 10 False [] Pod − an open source theme that hosts your podcast, not just links to one\n63292 2026-07-08 2026-08-06 4 False [] After Enova and Meridian, I built a Ghost theme for podcasters: meet Signal\n63142 2026-06-18 2026-08-04 11 False [] You're invited... a set of tools for Ghost (Apple News, Advanced Search, Editorial Calendar, and more!)\n32576 2022-09-05 2026-08-04 12 False [] 🔥 Learn - Premium LMS Theme for Ghost CMS\n63458 2026-07-29 2026-07-29 2 False [] DEVELOPER WANTED: Ghost CMS Integration for a Literary Subscription Site\n63439 2026-07-26 2026-07-26 1 False [] Introducing Hanoi — a visual magazine theme for Ghost\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179416116114.json"
+  ],
+  "request": {
+    "id": "TASK-179416116114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T18:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json;d=json.load(open('products/services/ghost-migration/paid-request/raw/marketplace-latest.json'))\nfor t in d['topic_list']['topics']:\n  print(t['id'],t['created_at'][:10],t.get('last_posted_at','')[:10],t['posts_count'],t.get('closed'),t.get('tags'),t['title'][:110])"
+      ],
+      "inputs": [
+        "products/services/ghost-migration/paid-request/raw/marketplace-latest.json"
+      ],
+      "outputs": [],
+      "mission_id": "GHOST-PAID-SERVICE-REQUEST"
+    },
+    "description": "Broker action during THINK-1794161161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179416116114",
+  "input_sha256": "59adf2f084b3983a857a1759ac1779f9ef56596b3a1719a8426707830e1aff52"
+}
