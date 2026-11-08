@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "{\"mission\": \"OPEN-SOFTWARE-TENDERS-INITIAL-DISCOVERY\", \"site\": \"open-software-tenders\", \"key\": \"5e2c8a91f4b7036d9a1e7c4b28f0d653\", \"key_file\": \"5e2c8a91f4b7036d9a1e7c4b28f0d653.txt\", \"key_sha256\": \"de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f\", \"index_sha256\": \"be35d1310bd2bbe1360931cde64f8d2e78568716b014f3c1f762367af2aaa202\", \"llms_sha256\": \"c0e33d7dcae807945d7319c848eb210c13a312d4bade806f0de4126c1cdb253a\", \"inventory\": [\"5e2c8a91f4b7036d9a1e7c4b28f0d653.txt\", \"index.html\", \"llms.txt\"], \"checks\": [{\"check\": \"index unchanged vs live FETCH\", \"pass\": true}, {\"check\": \"llms unchanged vs live FETCH\", \"pass\": true}, {\"check\": \"key body exact 32 lowercase hex, no newline\", \"pass\": true}, {\"check\": \"file inventory\", \"pass\": true}, {\"check\": \"baseline records no prior IndexNow submission\", \"pass\": true}], \"passed\": 5, \"total\": 5, \"planned_submission_after_approval_and_deploy\": \"GET https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-open-software-tenders.global-land.workers.dev%2F&key=5e2c8a91f4b7036d9a1e7c4b28f0d653 exactly once, after FETCH of the public key file returns the exact 32-byte body\", \"not_established\": [\"submission\", \"indexing\", \"traffic\", \"requests\", \"revenue\"], \"interest_window_end\": \"2026-11-17T09:00:00Z\", \"mandatory_retirement\": \"first turn at or after 2026-11-18T09:00:00Z (OPEN-SOFTWARE-TENDERS-RETIRE)\"}\n\n",
+  "artifacts": [
+    "products/sites/open-software-tenders/5e2c8a91f4b7036d9a1e7c4b28f0d653.txt",
+    "products/services/open-software-tender/discovery/manifest.json",
+    "products/receipts/TASK-179409816111.json"
+  ],
+  "request": {
+    "id": "TASK-179409816111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T00:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,os,pathlib,re\nS='products/sites/open-software-tenders/'\nL='products/services/open-software-tender/launch/'\nkey='5e2c8a91f4b7036d9a1e7c4b28f0d653'\nkp=S+key+'.txt'\nopen(kp,'w').write(key)\nh=lambda p:hashlib.sha256(open(p,'rb').read()).hexdigest()\nb=json.load(open(L+'launch-baseline.json'))\nidx=h(S+'index.html');ll=h(S+'llms.txt')\nkb=open(kp,'rb').read()\ninv=sorted(os.listdir(S))\nchecks=[\n {'check':'index unchanged vs live FETCH','pass':idx==h(L+'live-index.html')==b['fetch']['index']['sha256']},\n {'check':'llms unchanged vs live FETCH','pass':ll==h(L+'live-llms.txt')==b['fetch']['llms']['sha256']},\n {'check':'key body exact 32 lowercase hex, no newline','pass':bool(re.fullmatch(rb'[0-9a-f]{32}',kb))},\n {'check':'file inventory','pass':inv==sorted(['index.html','llms.txt',key+'.txt'])},\n {'check':'baseline records no prior IndexNow submission','pass':b.get('indexnow')=='not submitted'}]\nm={'mission':'OPEN-SOFTWARE-TENDERS-INITIAL-DISCOVERY','site':'open-software-tenders','key':key,'key_file':key+'.txt','key_sha256':hashlib.sha256(kb).hexdigest(),'index_sha256':idx,'llms_sha256':ll,'inventory':inv,'checks':checks,'passed':sum(c['pass'] for c in checks),'total':len(checks),'planned_submission_after_approval_and_deploy':'GET https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-open-software-tenders.global-land.workers.dev%2F&key='+key+' exactly once, after FETCH of the public key file returns the exact 32-byte body','not_established':['submission','indexing','traffic','requests','revenue'],'interest_window_end':'2026-11-17T09:00:00Z','mandatory_retirement':'first turn at or after 2026-11-18T09:00:00Z (OPEN-SOFTWARE-TENDERS-RETIRE)'}\npathlib.Path('products/services/open-software-tender/discovery').mkdir(parents=True,exist_ok=True)\njson.dump(m,open('products/services/open-software-tender/discovery/manifest.json','w'),indent=1)\nprint(json.dumps(m))"
+      ],
+      "inputs": [
+        "products/sites/open-software-tenders/",
+        "products/services/open-software-tender/launch/"
+      ],
+      "outputs": [
+        "products/sites/open-software-tenders/5e2c8a91f4b7036d9a1e7c4b28f0d653.txt",
+        "products/services/open-software-tender/discovery/manifest.json"
+      ],
+      "mission_id": "OPEN-SOFTWARE-TENDERS-INITIAL-DISCOVERY"
+    },
+    "description": "Broker action during THINK-1794098161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179409816111",
+  "input_sha256": "e65333079ba441f348922d2ffdfcb17558337ffb99c5a0b8eb306d314777d92b"
+}

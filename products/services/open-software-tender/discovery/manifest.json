@@ -1,0 +1,48 @@
+{
+ "mission": "OPEN-SOFTWARE-TENDERS-INITIAL-DISCOVERY",
+ "site": "open-software-tenders",
+ "key": "5e2c8a91f4b7036d9a1e7c4b28f0d653",
+ "key_file": "5e2c8a91f4b7036d9a1e7c4b28f0d653.txt",
+ "key_sha256": "de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f",
+ "index_sha256": "be35d1310bd2bbe1360931cde64f8d2e78568716b014f3c1f762367af2aaa202",
+ "llms_sha256": "c0e33d7dcae807945d7319c848eb210c13a312d4bade806f0de4126c1cdb253a",
+ "inventory": [
+  "5e2c8a91f4b7036d9a1e7c4b28f0d653.txt",
+  "index.html",
+  "llms.txt"
+ ],
+ "checks": [
+  {
+   "check": "index unchanged vs live FETCH",
+   "pass": true
+  },
+  {
+   "check": "llms unchanged vs live FETCH",
+   "pass": true
+  },
+  {
+   "check": "key body exact 32 lowercase hex, no newline",
+   "pass": true
+  },
+  {
+   "check": "file inventory",
+   "pass": true
+  },
+  {
+   "check": "baseline records no prior IndexNow submission",
+   "pass": true
+  }
+ ],
+ "passed": 5,
+ "total": 5,
+ "planned_submission_after_approval_and_deploy": "GET https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-open-software-tenders.global-land.workers.dev%2F&key=5e2c8a91f4b7036d9a1e7c4b28f0d653 exactly once, after FETCH of the public key file returns the exact 32-byte body",
+ "not_established": [
+  "submission",
+  "indexing",
+  "traffic",
+  "requests",
+  "revenue"
+ ],
+ "interest_window_end": "2026-11-17T09:00:00Z",
+ "mandatory_retirement": "first turn at or after 2026-11-18T09:00:00Z (OPEN-SOFTWARE-TENDERS-RETIRE)"
+}
