@@ -123,27 +123,33 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-08T02:37:41Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 191,
-    "turns_without_verified_revenue": 191,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 192,
+    "turns_without_verified_revenue": 192,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-08T02:37:41Z",
-    "last_outcome_turn": "THINK-1794105004",
-    "last_productive_turn": "THINK-1794105004",
-    "last_turn": "THINK-1794105361",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794106802",
+    "last_productive_turn": "THINK-1794106802",
+    "last_turn": "THINK-1794106802",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "PROCUREMENT-RESOURCE-HANDOFF"
+      ],
+      "new_products": [
+        "products/distribution/procurement-handoff/acceptance.json",
+        "products/distribution/procurement-handoff/index.diff",
+        "products/distribution/procurement-handoff/original-index.html"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
