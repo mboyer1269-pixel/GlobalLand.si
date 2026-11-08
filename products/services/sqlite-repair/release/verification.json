@@ -1,0 +1,37 @@
+{
+ "all_pass": true,
+ "checks": {
+  "official_quotes_verbatim": true,
+  "quotes_found": [
+   "These routines only compile the first statement in zSql, so *pzTail is left pointing to what remains uncompiled.",
+   "contains no SQL (if the input is an empty string or a comment) then *ppStmt is set to NULL"
+  ],
+  "mailto_recipient": true,
+  "mailto_identifier_subject_body": true,
+  "local_links_exist": true,
+  "local_links": [
+   "repro/ctypes_repro.py",
+   "repro/run-output.txt",
+   "repro/acceptance.json",
+   "repro/multi_stmt.c",
+   "repro/c-loader-attempt.txt"
+  ],
+  "en_ai_disclosure": true,
+  "fr_ai_disclosure": true,
+  "no_price_currency": true,
+  "no_payment_acceptance": true,
+  "attribution_links": true,
+  "no_script_tags": true,
+  "acceptance_6_of_6": true,
+  "repro_diff_lines": [
+   "+# Usage: python3 -I ctypes_repro.py [acceptance.json]   (Linux, system libsqlite3.so.0)",
+   "+# License: CC BY-SA 4.0 (adapts SQL from the question below).",
+   "-import json,pathlib",
+   "+import json,pathlib,sys",
+   "-pathlib.Path('products/services/sqlite-repair/acceptance.json').write_text(json.dumps(r,indent=1))",
+   "+pathlib.Path(sys.argv[1] if len(sys.argv)>1 else 'acceptance.json').write_text(json.dumps(r,indent=1))"
+  ],
+  "repro_diff_only_path_and_header": true,
+  "all_text_no_binaries": true
+ }
+}

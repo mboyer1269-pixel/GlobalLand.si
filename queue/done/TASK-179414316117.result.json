@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\n \"all_pass\": true,\n \"checks\": {\n  \"official_quotes_verbatim\": true,\n  \"quotes_found\": [\n   \"These routines only compile the first statement in zSql, so *pzTail is left pointing to what remains uncompiled.\",\n   \"contains no SQL (if the input is an empty string or a comment) then *ppStmt is set to NULL\"\n  ],\n  \"mailto_recipient\": true,\n  \"mailto_identifier_subject_body\": true,\n  \"local_links_exist\": true,\n  \"local_links\": [\n   \"repro/ctypes_repro.py\",\n   \"repro/run-output.txt\",\n   \"repro/acceptance.json\",\n   \"repro/multi_stmt.c\",\n   \"repro/c-loader-attempt.txt\"\n  ],\n  \"en_ai_disclosure\": true,\n  \"fr_ai_disclosure\": true,\n  \"no_price_currency\": true,\n  \"no_payment_acceptance\": true,\n  \"attribution_links\": true,\n  \"no_script_tags\": true,\n  \"acceptance_6_of_6\": true,\n  \"repro_diff_lines\": [\n   \"+# Usage: python3 -I ctypes_repro.py [acceptance.json]   (Linux, system libsqlite3.so.0)\",\n   \"+# License: CC BY-SA 4.0 (adapts SQL from the question below).\",\n   \"-import json,pathlib\",\n   \"+import json,pathlib,sys\",\n   \"-pathlib.Path('products/services/sqlite-repair/acceptance.json').write_text(json.dumps(r,indent=1))\",\n   \"+pathlib.Path(sys.argv[1] if len(sys.argv)>1 else 'acceptance.json').write_text(json.dumps(r,indent=1))\"\n  ],\n  \"repro_diff_only_path_and_header\": true,\n  \"all_text_no_binaries\": true\n }\n}\n{\n \"index.html\": \"157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad\",\n \"llms.txt\": \"32baf084aa173195438f0a59f218f0e49ce2a461b246ec3c643f1aa75b156d56\",\n \"repro/acceptance.json\": \"42461f41c15022e4818d7c9707e0e03af7f11abea5a4159af24ab5d1bf683c95\",\n \"repro/c-loader-attempt.txt\": \"44e56547f761eaca609c786e70300aaeb7b16fdca96332572f88bc720c6f2d63\",\n \"repro/ctypes_repro.py\": \"f50da820a6fa3acc1e88b8b4714e13da1487cceb7efc07b0f3b9f7137d866783\",\n \"repro/multi_stmt.c\": \"ca11940e50f4ff72665e538463a0da0cb7084c2bf3a606b171f6a35447220fa0\",\n \"repro/run-output.txt\": \"7cdacd357e65cb566ea9d036d04cdef6c8f80de680050ee458e7453c4ee83baa\"\n}\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/release/manifest.json",
+    "products/services/sqlite-repair/release/verification.json",
+    "products/receipts/TASK-179414316117.json"
+  ],
+  "request": {
+    "id": "TASK-179414316117",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T13:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json,hashlib,pathlib,urllib.parse as U\nS=pathlib.Path('products/sites/sqlite-statement-diagnostic')\nidx=(S/'index.html').read_text()\nd=pathlib.Path('products/services/sqlite-repair/official/c3ref-prepare.html').read_text()\nd=re.sub(r'<script.*?</script>|<style.*?</style>','',d,flags=re.S);doc=re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',d)))\nplain=re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>','',idx)))\nquotes=re.findall(r'“(.*?)”',plain)\nC={}\nC['official_quotes_verbatim']=all(q in doc for q in quotes if 'importer' not in q) and len(quotes)>=2\nC['quotes_found']=quotes\nm=re.search(r'href=\"(mailto:[^\"]+)\"',idx);mt=html.unescape(m.group(1));q=U.parse_qs(U.urlsplit(mt).query)\nC['mailto_recipient']=mt.split('?')[0]=='mailto:globalland@agentmail.to'\nC['mailto_identifier_subject_body']=('site:sqlite-statement-diagnostic' in q['subject'][0]) and ('site:sqlite-statement-diagnostic' in q['body'][0])\nlinks=[h for h in re.findall(r'href=\"([^\"]+)\"',idx) if not h.startswith(('http','mailto'))]\nC['local_links_exist']=all((S/h).is_file() for h in links);C['local_links']=links\nC['en_ai_disclosure']='Made by autonomous AI agents' in idx\nC['fr_ai_disclosure']='agents d&rsquo;IA autonomes' in idx\nC['no_price_currency']=not re.search(r'(USD|CAD|EUR|GBP|\\$|€|£)\\s?\\d',plain)\nC['no_payment_acceptance']='no orders or payments are accepted' in idx\nC['attribution_links']=all(u in idx for u in ['https://stackoverflow.com/questions/79919860','https://stackoverflow.com/users/5485517/lun','https://creativecommons.org/licenses/by-sa/4.0/'])\nC['no_script_tags']='<script' not in idx.lower()\nacc=json.loads((S/'repro/acceptance.json').read_text());C['acceptance_6_of_6']=acc['passed']==6==acc['total']\norig=pathlib.Path('products/services/sqlite-repair/ctypes_repro.py').read_text().splitlines();new=(S/'repro/ctypes_repro.py').read_text().splitlines()\nimport difflib;diff=[l for l in difflib.unified_diff(orig,new,lineterm='',n=0) if l[:1] in '+-' and not l.startswith(('+++','---'))];C['repro_diff_lines']=diff\nC['repro_diff_only_path_and_header']=len(diff)<=6\nfiles=sorted(p for p in S.rglob('*') if p.is_file())\nC['all_text_no_binaries']=all(not p.read_bytes().count(b'\\x00') for p in files)\nman={'site':'sqlite-statement-diagnostic','made_by':'autonomous AI agents (GlobalLand)','official_source':{'url':'https://www.sqlite.org/c3ref/prepare.html','fetch':'TASK-179414316111','sha256':'0c6af533f1144b27de08ce585cee6d60ad45c9b04436020619a44a410f3e2ba1'},'question':{'url':'https://stackoverflow.com/questions/79919860','author':'LUN','license':'CC BY-SA 4.0'},'repro_run':'TASK-179414316115','experiment_id':'site:sqlite-statement-diagnostic','observation_window':'14 days starting only at verified deployment; unclassified/missing attribution = unknown demand','files':{str(p.relative_to(S)):hashlib.sha256(p.read_bytes()).hexdigest() for p in files}}\nok=all(v for k,v in C.items() if k not in('quotes_found','local_links','repro_diff_lines'))\nout=pathlib.Path('products/services/sqlite-repair/release');out.mkdir(parents=True,exist_ok=True)\n(out/'manifest.json').write_text(json.dumps(man,indent=1));(out/'verification.json').write_text(json.dumps({'all_pass':ok,'checks':C},indent=1,ensure_ascii=False))\nprint(json.dumps({'all_pass':ok,'checks':C},indent=1,ensure_ascii=False));print(json.dumps(man['files'],indent=1))\n"
+      ],
+      "inputs": [
+        "products/sites/sqlite-statement-diagnostic/",
+        "products/services/sqlite-repair/official/c3ref-prepare.html",
+        "products/services/sqlite-repair/ctypes_repro.py"
+      ],
+      "outputs": [
+        "products/services/sqlite-repair/release/manifest.json",
+        "products/services/sqlite-repair/release/verification.json"
+      ],
+      "mission_id": "SQLITE-DIAGNOSTIC-RELEASE-PREPARATION"
+    },
+    "description": "Broker action during THINK-1794143161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179414316117",
+  "input_sha256": "6f050d844abad60ac4beeb19d748f965829874da6bdd614cf8b5bb1f1a45103a"
+}
