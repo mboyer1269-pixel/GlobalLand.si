@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "afd0af5622f84ce77e3e66a8651916cf6837a8fdc9ecc3d7a6afc1bf47615590\nstatus \"active\"\ntitle \"Supply and Support of Integrated Workplace Management System\"\nprocurementMethod \"open\"\nprocurementMethodDetails \"Open procedure\"\nsubmissionMethod [\"electronicSubmission\"]\nsubmissionMethodDetails \"https://www.publictendersscotland.publiccontractsscotland.gov.uk\"\nsubmissionTerms {\"languages\": [\"en\"]}\ncontractTerms {\"hasElectronicOrdering\": true, \"electronicInvoicingPolicy\": \"allowed\", \"hasElectronicPayment\": true}\ncoveredBy [\"GPA\"]\nlots [{\"id\": \"1\", \"description\": \"North Ayrshire Council invites tenders for the provision, implementation, hosting, support and maintenance of an Integrated Workplace Management System (IWMS). The solution will provide a single integrated platform for the management of the Council's operational property portfolio, including asset management, maintenance management, statutory compliance, reporting and associated property management functions. The contract includes software licensing, implementation, configuration, data migration, systems integration, training, hosting, support and ongoing maintenance services. The initial contract term will be 3 years with an option to extend for up to an additional 60 months. The contract will be awarded under the Council's Conditions of Contract for ICT Services\", \"awardCriteria\": {\"criteria\": [{\"name\": \"Quality\", \"type\": \"quality\", \"description\": \"40\"}, {\"type\": \"price\", \"description\": \"60\"}]}, \"contractPeriod\": {\"durationInDays\": 1080}, \"hasRenewal\": true, \"renewal\": {\"description\": \"Upto a maximum of 60 months\"}, \"submissionTerms\": {\"variantPolicy\": \"notAllowed\"}, \"hasOptions\": false, \"status\": \"active\"}]\ntenderPeriod {\"endDate\": \"2026-12-07T12:00:00Z\"}\nawardPeriod {\"startDate\": \"2026-12-07T12:00:00Z\"}\nbidOpening {\"date\": \"2026-12-07T12:00:00Z\"}\nlegalBasis {\"id\": \"32014L0024\", \"scheme\": \"CELEX\"}\nhasRecurrence false\ndesc North Ayrshire Council (NAC) is seeking to procure a cloud-hosted Integrated Workplace Management System (IWMS) to replace its existing Computer Aided Facilities Management (CAFM) solution. The new solution will provide a single, integrated platform to support the management of the Council's operational property portfolio, encompassing asset management, maintenance management, statutory compliance, financial monitoring, reporting and governance.\nrelease id 105246-2026 ['tender']\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179411796111.json"
+  ],
+  "request": {
+    "id": "TASK-179411796111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T06:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib\nb=open('products/services/open-software-tender/raw/feed-page1.json','rb').read()\nprint(hashlib.sha256(b).hexdigest())\nd=json.loads(b)\nfor r in d['releases']:\n  if r.get('id','').startswith('105246') or r.get('ocid','').endswith('105246-2026') or '105246' in json.dumps(r.get('tender',{}).get('id','')) or '105246' in r.get('id',''):\n    t=r['tender']\n    for k in ['status','title','procurementMethod','procurementMethodDetails','submissionMethod','submissionMethodDetails','submissionTerms','contractTerms','coveredBy','lots','tenderPeriod','awardPeriod','bidOpening','legalBasis','hasRecurrence']:\n      print(k, json.dumps(t.get(k),ensure_ascii=False)[:1500])\n    print('desc', t.get('description','')[:2500])\n    print('release id', r.get('id'), r.get('tag'))\n"
+      ],
+      "inputs": [
+        "products/services/open-software-tender/raw/feed-page1.json"
+      ],
+      "outputs": [],
+      "mission_id": "IWMS-CHECKLIST-PUBLIC-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794117961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411796111",
+  "input_sha256": "26ddb101ec4fe2bec07d01c4be594ac34154b42b8062d8b9333d405c42b5f364"
+}
