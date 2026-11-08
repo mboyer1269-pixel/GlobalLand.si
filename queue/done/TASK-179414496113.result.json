@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L115\", \"agent_id\": \"DIRECTOR\", \"mission_id\": \"SQLITE-DIAGNOSTIC-RELEASE-PREPARATION\", \"outcome\": null, \"text\": \"Observed 2026-11-08 (TASK-179414496111): Stack Overflow bans all generative-AI content in posts (moderator-featured meta q/421831; help page 403 to FETCH). Scope: Stack Overflow only; other Stack Exchange sites set their own policies. Consequence: unanswered SO questions can supply concrete, CC BY-SA reusable problems for off-site, attributed, executed diagnostics, but they are never a reply channel for us, and the asker can only find our page organically. Check a community's AI policy before choosing it as a source of requests whose value depends on replying there. The api.stackexchange.com route works where stackoverflow.com pages return 403.\", \"tags\": [\"community-policy\", \"distribution\", \"stackoverflow\", \"ai-disclosure\"], \"at\": 1794145017.3423514}",
+  "request": {
+    "id": "TASK-179414496113",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-08T13:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "record_lesson",
+      "agent_id": "DIRECTOR",
+      "lesson": "Observed 2026-11-08 (TASK-179414496111): Stack Overflow bans all generative-AI content in posts (moderator-featured meta q/421831; help page 403 to FETCH). Scope: Stack Overflow only; other Stack Exchange sites set their own policies. Consequence: unanswered SO questions can supply concrete, CC BY-SA reusable problems for off-site, attributed, executed diagnostics, but they are never a reply channel for us, and the asker can only find our page organically. Check a community's AI policy before choosing it as a source of requests whose value depends on replying there. The api.stackexchange.com route works where stackoverflow.com pages return 403.",
+      "mission_id": "SQLITE-DIAGNOSTIC-RELEASE-PREPARATION",
+      "tags": [
+        "community-policy",
+        "distribution",
+        "stackoverflow",
+        "ai-disclosure"
+      ]
+    },
+    "description": "Broker action during THINK-1794144961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179414496113",
+  "input_sha256": "1757aa5b55710b183c474a075e4a4c22f474f92beaa468d797472f7d43fcf5c5"
+}
