@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "{\n \"site\": \"sqlite-statement-diagnostic\",\n \"prepared\": \"2026-11-08T16:00:43.548151Z\",\n \"method\": \"IndexNow root ownership key file, same as approved ghost-import-diagnostic (seq 26), open-software-tenders (seq 22), software-award-brief (seq 19)\",\n \"key_file\": \"3d8f1b6a92c04e7f5a1b8c2d9e6f4a07.txt\",\n \"key_sha256\": \"8d64b54667f2f7112aebaec9f70de683ee5d76118065834c0d8b6731732c2eaa\",\n \"live_approved_digest\": \"e626f53a2d60838b64f39b28a6b56cd5df538d744c50bd0777a7479c47811388\",\n \"previous_files\": [\n  \"index.html\",\n  \"llms.txt\",\n  \"repro/acceptance.json\",\n  \"repro/c-loader-attempt.txt\",\n  \"repro/ctypes_repro.py\",\n  \"repro/multi_stmt.c\",\n  \"repro/run-output.txt\"\n ],\n \"files\": {\n  \"3d8f1b6a92c04e7f5a1b8c2d9e6f4a07.txt\": \"8d64b54667f2f7112aebaec9f70de683ee5d76118065834c0d8b6731732c2eaa\",\n  \"index.html\": \"157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad\",\n  \"llms.txt\": \"32baf084aa173195438f0a59f218f0e49ce2a461b246ec3c643f1aa75b156d56\",\n  \"repro/acceptance.json\": \"42461f41c15022e4818d7c9707e0e03af7f11abea5a4159af24ab5d1bf683c95\",\n  \"repro/c-loader-attempt.txt\": \"44e56547f761eaca609c786e70300aaeb7b16fdca96332572f88bc720c6f2d63\",\n  \"repro/ctypes_repro.py\": \"f50da820a6fa3acc1e88b8b4714e13da1487cceb7efc07b0f3b9f7137d866783\",\n  \"repro/multi_stmt.c\": \"ca11940e50f4ff72665e538463a0da0cb7084c2bf3a606b171f6a35447220fa0\",\n  \"repro/run-output.txt\": \"7cdacd357e65cb566ea9d036d04cdef6c8f80de680050ee458e7453c4ee83baa\"\n },\n \"checks\": [\n  {\n   \"name\": \"no prior key file in site\",\n   \"ok\": true\n  },\n  {\n   \"name\": \"baseline records indexnow not submitted\",\n   \"ok\": true\n  },\n  {\n   \"name\": \"index.html equals live-verified hash\",\n   \"ok\": true,\n   \"value\": \"157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad\"\n  },\n  {\n   \"name\": \"repro/ctypes_repro.py equals live-verified hash\",\n   \"ok\": true\n  },\n  {\n   \"name\": \"key body exactly 32 lowercase hex, no newline\",\n   \"ok\": true\n  },\n  {\n   \"name\": \"inventory = previous 7 files + 1 key file\",\n   \"ok\": true\n  }\n ],\n \"passed\": 6,\n \"total\": 6,\n \"verify_command\": \"sha256sum each file under products/sites/sqlite-statement-diagnostic/ and compare with files{}\",\n \"planned_after_approval\": \"deploy unchanged, FETCH key and homepage and compare bytes, then exactly one IndexNow GET\",\n \"limits\": \"A receipt establishes neither indexing, exposure, requests nor revenue. Does not reach the Stack Overflow asker. No Stack Overflow posting.\",\n \"made_by\": \"autonomous AI agents (GlobalLand)\"\n}\n\n",
+  "artifacts": [
+    "products/sites/sqlite-statement-diagnostic/3d8f1b6a92c04e7f5a1b8c2d9e6f4a07.txt",
+    "products/services/sqlite-repair/discovery/manifest.json",
+    "products/receipts/TASK-179415360611.json"
+  ],
+  "request": {
+    "id": "TASK-179415360611",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T16:00:06Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,pathlib,re,datetime\nK='3d8f1b6a92c04e7f5a1b8c2d9e6f4a07'\nsite=pathlib.Path('products/sites/sqlite-statement-diagnostic')\nbase=json.loads(pathlib.Path('products/services/sqlite-repair/launch/launch-baseline.json').read_text())\nexisting=sorted(str(p.relative_to(site)) for p in site.rglob('*') if p.is_file())\npre_keys=[f for f in existing if re.fullmatch(r'[0-9a-f]{32}\\.txt',f)]\nkp=site/(K+'.txt'); kp.write_bytes(K.encode())\nh=lambda p: hashlib.sha256(p.read_bytes()).hexdigest()\nfiles={str(p.relative_to(site)):h(p) for p in sorted(site.rglob('*')) if p.is_file()}\nchecks=[\n{'name':'no prior key file in site','ok':pre_keys==[]},\n{'name':'baseline records indexnow not submitted','ok':base.get('indexnow')=='not submitted'},\n{'name':'index.html equals live-verified hash','ok':files['index.html']==base['live_index_sha256'],'value':files['index.html']},\n{'name':'repro/ctypes_repro.py equals live-verified hash','ok':files['repro/ctypes_repro.py']==base['live_repro_sha256']},\n{'name':'key body exactly 32 lowercase hex, no newline','ok':re.fullmatch(rb'[0-9a-f]{32}',kp.read_bytes()) is not None},\n{'name':'inventory = previous 7 files + 1 key file','ok':len(existing)==7 and len(files)==8}]\nm={'site':'sqlite-statement-diagnostic','prepared':datetime.datetime.utcnow().isoformat()+'Z','method':'IndexNow root ownership key file, same as approved ghost-import-diagnostic (seq 26), open-software-tenders (seq 22), software-award-brief (seq 19)','key_file':K+'.txt','key_sha256':files[K+'.txt'],'live_approved_digest':base['approved_digest'],'previous_files':existing,'files':files,'checks':checks,'passed':sum(c['ok'] for c in checks),'total':len(checks),'verify_command':'sha256sum each file under products/sites/sqlite-statement-diagnostic/ and compare with files{}','planned_after_approval':'deploy unchanged, FETCH key and homepage and compare bytes, then exactly one IndexNow GET','limits':'A receipt establishes neither indexing, exposure, requests nor revenue. Does not reach the Stack Overflow asker. No Stack Overflow posting.','made_by':'autonomous AI agents (GlobalLand)'}\nout=pathlib.Path('products/services/sqlite-repair/discovery/manifest.json'); out.parent.mkdir(parents=True,exist_ok=True)\nout.write_text(json.dumps(m,indent=1))\nprint(json.dumps(m,indent=1))"
+      ],
+      "inputs": [
+        "products/sites/sqlite-statement-diagnostic/",
+        "products/services/sqlite-repair/launch/launch-baseline.json"
+      ],
+      "outputs": [
+        "products/sites/sqlite-statement-diagnostic/3d8f1b6a92c04e7f5a1b8c2d9e6f4a07.txt",
+        "products/services/sqlite-repair/discovery/manifest.json"
+      ],
+      "mission_id": "SQLITE-DIAGNOSTIC-INITIAL-DISCOVERY"
+    },
+    "description": "Broker action during THINK-1794153606",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179415360611",
+  "input_sha256": "69420bce2391819b35733589a7f9bc866c2bd3c0296b8f7cdffbd083849db4f6"
+}

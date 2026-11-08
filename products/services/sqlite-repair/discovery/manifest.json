@@ -1,0 +1,60 @@
+{
+ "site": "sqlite-statement-diagnostic",
+ "prepared": "2026-11-08T16:00:43.548151Z",
+ "method": "IndexNow root ownership key file, same as approved ghost-import-diagnostic (seq 26), open-software-tenders (seq 22), software-award-brief (seq 19)",
+ "key_file": "3d8f1b6a92c04e7f5a1b8c2d9e6f4a07.txt",
+ "key_sha256": "8d64b54667f2f7112aebaec9f70de683ee5d76118065834c0d8b6731732c2eaa",
+ "live_approved_digest": "e626f53a2d60838b64f39b28a6b56cd5df538d744c50bd0777a7479c47811388",
+ "previous_files": [
+  "index.html",
+  "llms.txt",
+  "repro/acceptance.json",
+  "repro/c-loader-attempt.txt",
+  "repro/ctypes_repro.py",
+  "repro/multi_stmt.c",
+  "repro/run-output.txt"
+ ],
+ "files": {
+  "3d8f1b6a92c04e7f5a1b8c2d9e6f4a07.txt": "8d64b54667f2f7112aebaec9f70de683ee5d76118065834c0d8b6731732c2eaa",
+  "index.html": "157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad",
+  "llms.txt": "32baf084aa173195438f0a59f218f0e49ce2a461b246ec3c643f1aa75b156d56",
+  "repro/acceptance.json": "42461f41c15022e4818d7c9707e0e03af7f11abea5a4159af24ab5d1bf683c95",
+  "repro/c-loader-attempt.txt": "44e56547f761eaca609c786e70300aaeb7b16fdca96332572f88bc720c6f2d63",
+  "repro/ctypes_repro.py": "f50da820a6fa3acc1e88b8b4714e13da1487cceb7efc07b0f3b9f7137d866783",
+  "repro/multi_stmt.c": "ca11940e50f4ff72665e538463a0da0cb7084c2bf3a606b171f6a35447220fa0",
+  "repro/run-output.txt": "7cdacd357e65cb566ea9d036d04cdef6c8f80de680050ee458e7453c4ee83baa"
+ },
+ "checks": [
+  {
+   "name": "no prior key file in site",
+   "ok": true
+  },
+  {
+   "name": "baseline records indexnow not submitted",
+   "ok": true
+  },
+  {
+   "name": "index.html equals live-verified hash",
+   "ok": true,
+   "value": "157a027a567fc3fefe5639f346bb64647724b2ef0c589539587bca63b240ffad"
+  },
+  {
+   "name": "repro/ctypes_repro.py equals live-verified hash",
+   "ok": true
+  },
+  {
+   "name": "key body exactly 32 lowercase hex, no newline",
+   "ok": true
+  },
+  {
+   "name": "inventory = previous 7 files + 1 key file",
+   "ok": true
+  }
+ ],
+ "passed": 6,
+ "total": 6,
+ "verify_command": "sha256sum each file under products/sites/sqlite-statement-diagnostic/ and compare with files{}",
+ "planned_after_approval": "deploy unchanged, FETCH key and homepage and compare bytes, then exactly one IndexNow GET",
+ "limits": "A receipt establishes neither indexing, exposure, requests nor revenue. Does not reach the Stack Overflow asker. No Stack Overflow posting.",
+ "made_by": "autonomous AI agents (GlobalLand)"
+}
