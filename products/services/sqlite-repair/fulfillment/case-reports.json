@@ -1,0 +1,1365 @@
+{
+ "public": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": "public-so-79919860",
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "as_written_first_statement_only": {
+    "statements": [
+     {
+      "index": 1,
+      "start_byte": 0,
+      "end_byte": 51,
+      "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+      "executed": true,
+      "columns": 0,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 101,
+      "finalize_rc": 0
+     }
+    ],
+    "error": null,
+    "unexecuted_tail": "SELECT * FROM T1",
+    "input_bytes": 68,
+    "final_byte": 51,
+    "denied": [],
+    "elapsed_s": 0.001,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   },
+   "all_statements": {
+    "statements": [
+     {
+      "index": 1,
+      "start_byte": 0,
+      "end_byte": 51,
+      "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+      "executed": true,
+      "columns": 0,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 2,
+      "start_byte": 51,
+      "end_byte": 68,
+      "sql": "SELECT * FROM T1",
+      "executed": true,
+      "columns": 2,
+      "row_count": 3,
+      "rows": [
+       [
+        "1",
+        "a"
+       ],
+       [
+        "2",
+        "b"
+       ],
+       [
+        "3",
+        "c"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     }
+    ],
+    "error": null,
+    "unexecuted_tail": null,
+    "input_bytes": 68,
+    "final_byte": 68,
+    "denied": [],
+    "elapsed_s": 0.0,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "expected_match": true,
+  "status": "OK"
+ },
+ "prepare_error": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [
+     {
+      "index": 1,
+      "start_byte": 0,
+      "end_byte": 18,
+      "sql": "CREATE TABLE t(x);",
+      "executed": true,
+      "columns": 0,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 2,
+      "start_byte": 18,
+      "end_byte": 43,
+      "sql": "INSERT INTO t VALUES(1);",
+      "executed": true,
+      "columns": 0,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 101,
+      "finalize_rc": 0
+     }
+    ],
+    "error": {
+     "phase": "prepare",
+     "kind": "PREPARE_ERROR",
+     "statement_index": 3,
+     "start_byte": 43,
+     "rc": 1,
+     "message": "near \"SELEC\": syntax error",
+     "error_offset": 1
+    },
+    "unexecuted_tail": "SELEC x FROM t; INSERT INTO t VALUES(2)",
+    "input_bytes": 83,
+    "final_byte": 43,
+    "denied": [],
+    "elapsed_s": 0.0,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "status": "OK"
+ },
+ "step_error_constraint": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [
+     {
+      "index": 1,
+      "start_byte": 0,
+      "end_byte": 29,
+      "sql": "INSERT INTO u(v) VALUES('y');",
+      "executed": true,
+      "columns": 0,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 2,
+      "start_byte": 29,
+      "end_byte": 59,
+      "sql": "INSERT INTO u(v) VALUES('x');",
+      "executed": true,
+      "columns": 0,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 19,
+      "finalize_rc": 19
+     }
+    ],
+    "error": {
+     "phase": "step",
+     "kind": "STEP_ERROR",
+     "statement_index": 2,
+     "rc": 19,
+     "message": "UNIQUE constraint failed: u.v",
+     "rows_before_error": 0
+    },
+    "unexecuted_tail": "SELECT count(*) FROM u",
+    "input_bytes": 82,
+    "final_byte": 59,
+    "denied": [],
+    "elapsed_s": 0.0,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "status": "OK"
+ },
+ "step_error_after_rows": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [
+     {
+      "index": 1,
+      "start_byte": 0,
+      "end_byte": 76,
+      "sql": "SELECT x, abs(x) FROM (SELECT 1 AS x UNION ALL SELECT -9223372036854775808);",
+      "executed": true,
+      "columns": 2,
+      "row_count": 1,
+      "rows": [
+       [
+        "1",
+        "1"
+       ]
+      ],
+      "step_rc": 1,
+      "finalize_rc": 1
+     }
+    ],
+    "error": {
+     "phase": "step",
+     "kind": "STEP_ERROR",
+     "statement_index": 1,
+     "rc": 1,
+     "message": "integer overflow",
+     "rows_before_error": 1
+    },
+    "unexecuted_tail": "SELECT 2",
+    "input_bytes": 85,
+    "final_byte": 76,
+    "denied": [],
+    "elapsed_s": 0.0,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "status": "OK"
+ },
+ "multi_statement_edges": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [
+     {
+      "index": 1,
+      "start_byte": 0,
+      "end_byte": 29,
+      "sql": "-- lead\n CREATE TABLE m(a);",
+      "executed": true,
+      "columns": 0,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 2,
+      "start_byte": 29,
+      "end_byte": 61,
+      "sql": ";; INSERT INTO m VALUES(2),(1);",
+      "executed": true,
+      "columns": 0,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 3,
+      "start_byte": 61,
+      "end_byte": 99,
+      "sql": "/* mid */ SELECT a FROM m ORDER BY a;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 2,
+      "rows": [
+       [
+        "1"
+       ],
+       [
+        "2"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     }
+    ],
+    "error": null,
+    "unexecuted_tail": null,
+    "input_bytes": 113,
+    "final_byte": 113,
+    "denied": [],
+    "elapsed_s": 0.0,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "expected_match": true,
+  "status": "OK"
+ },
+ "policy_attach": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [],
+    "error": {
+     "phase": "prepare",
+     "kind": "PREPARE_ERROR",
+     "statement_index": 1,
+     "start_byte": 0,
+     "rc": 23,
+     "message": "not authorized",
+     "error_offset": -1
+    },
+    "unexecuted_tail": "ATTACH DATABASE '/tmp/gl_attach_probe.db' AS x; SELECT 1",
+    "input_bytes": 56,
+    "final_byte": 0,
+    "denied": [
+     "ATTACH/DETACH"
+    ],
+    "elapsed_s": 0.0,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "status": "OK"
+ },
+ "policy_load_extension": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [],
+    "error": {
+     "phase": "prepare",
+     "kind": "PREPARE_ERROR",
+     "statement_index": 1,
+     "start_byte": 0,
+     "rc": 1,
+     "message": "not authorized to use function: load_extension",
+     "error_offset": 7
+    },
+    "unexecuted_tail": "SELECT load_extension('/tmp/x')",
+    "input_bytes": 31,
+    "final_byte": 0,
+    "denied": [
+     "load_extension"
+    ],
+    "elapsed_s": 0.0,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "status": "OK"
+ },
+ "policy_vacuum": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [
+     {
+      "index": 1,
+      "start_byte": 0,
+      "end_byte": 18,
+      "sql": "CREATE TABLE v(a);",
+      "executed": true,
+      "columns": 0,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 2,
+      "start_byte": 18,
+      "end_byte": 59,
+      "sql": "/*c*/ VACUUM INTO '/tmp/gl_vac_probe.db'",
+      "finalize_rc": 0,
+      "executed": false
+     }
+    ],
+    "error": {
+     "phase": "policy",
+     "kind": "VACUUM_DENIED",
+     "statement_index": 2
+    },
+    "unexecuted_tail": "VACUUM INTO '/tmp/gl_vac_probe.db'",
+    "input_bytes": 59,
+    "final_byte": 18,
+    "denied": [],
+    "elapsed_s": 0.0,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "status": "OK"
+ },
+ "policy_pragma": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [],
+    "error": {
+     "phase": "prepare",
+     "kind": "PREPARE_ERROR",
+     "statement_index": 1,
+     "start_byte": 0,
+     "rc": 23,
+     "message": "not authorized",
+     "error_offset": -1
+    },
+    "unexecuted_tail": "PRAGMA writable_schema=ON; SELECT 1",
+    "input_bytes": 35,
+    "final_byte": 0,
+    "denied": [
+     "PRAGMA writable_schema"
+    ],
+    "elapsed_s": 0.0,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "status": "OK"
+ },
+ "runtime_bound": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [
+     {
+      "index": 1,
+      "start_byte": 0,
+      "end_byte": 84,
+      "sql": "WITH RECURSIVE c(i) AS (SELECT 1 UNION ALL SELECT i+1 FROM c) SELECT count(*) FROM c",
+      "executed": true,
+      "columns": 1,
+      "row_count": 0,
+      "rows": [],
+      "step_rc": 9,
+      "finalize_rc": 9
+     }
+    ],
+    "error": {
+     "phase": "step",
+     "kind": "INTERRUPTED_BY_LIMIT",
+     "statement_index": 1,
+     "rc": 9,
+     "message": "interrupted",
+     "rows_before_error": 0
+    },
+    "unexecuted_tail": null,
+    "input_bytes": 84,
+    "final_byte": 84,
+    "denied": [],
+    "elapsed_s": 0.077,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "status": "OK"
+ },
+ "statement_limit": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": null,
+  "limits": {
+   "sql_bytes": 65536,
+   "statements": 50,
+   "rows_kept": 50,
+   "vm_steps": 2000000,
+   "seconds": 2.0
+  },
+  "runs": {
+   "all_statements": {
+    "statements": [
+     {
+      "index": 1,
+      "start_byte": 0,
+      "end_byte": 9,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 2,
+      "start_byte": 9,
+      "end_byte": 18,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 3,
+      "start_byte": 18,
+      "end_byte": 27,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 4,
+      "start_byte": 27,
+      "end_byte": 36,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 5,
+      "start_byte": 36,
+      "end_byte": 45,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 6,
+      "start_byte": 45,
+      "end_byte": 54,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 7,
+      "start_byte": 54,
+      "end_byte": 63,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 8,
+      "start_byte": 63,
+      "end_byte": 72,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 9,
+      "start_byte": 72,
+      "end_byte": 81,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 10,
+      "start_byte": 81,
+      "end_byte": 90,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 11,
+      "start_byte": 90,
+      "end_byte": 99,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 12,
+      "start_byte": 99,
+      "end_byte": 108,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 13,
+      "start_byte": 108,
+      "end_byte": 117,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 14,
+      "start_byte": 117,
+      "end_byte": 126,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 15,
+      "start_byte": 126,
+      "end_byte": 135,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 16,
+      "start_byte": 135,
+      "end_byte": 144,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 17,
+      "start_byte": 144,
+      "end_byte": 153,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 18,
+      "start_byte": 153,
+      "end_byte": 162,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 19,
+      "start_byte": 162,
+      "end_byte": 171,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 20,
+      "start_byte": 171,
+      "end_byte": 180,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 21,
+      "start_byte": 180,
+      "end_byte": 189,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 22,
+      "start_byte": 189,
+      "end_byte": 198,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 23,
+      "start_byte": 198,
+      "end_byte": 207,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 24,
+      "start_byte": 207,
+      "end_byte": 216,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 25,
+      "start_byte": 216,
+      "end_byte": 225,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 26,
+      "start_byte": 225,
+      "end_byte": 234,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 27,
+      "start_byte": 234,
+      "end_byte": 243,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 28,
+      "start_byte": 243,
+      "end_byte": 252,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 29,
+      "start_byte": 252,
+      "end_byte": 261,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 30,
+      "start_byte": 261,
+      "end_byte": 270,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 31,
+      "start_byte": 270,
+      "end_byte": 279,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 32,
+      "start_byte": 279,
+      "end_byte": 288,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 33,
+      "start_byte": 288,
+      "end_byte": 297,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 34,
+      "start_byte": 297,
+      "end_byte": 306,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 35,
+      "start_byte": 306,
+      "end_byte": 315,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 36,
+      "start_byte": 315,
+      "end_byte": 324,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 37,
+      "start_byte": 324,
+      "end_byte": 333,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 38,
+      "start_byte": 333,
+      "end_byte": 342,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 39,
+      "start_byte": 342,
+      "end_byte": 351,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 40,
+      "start_byte": 351,
+      "end_byte": 360,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 41,
+      "start_byte": 360,
+      "end_byte": 369,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 42,
+      "start_byte": 369,
+      "end_byte": 378,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 43,
+      "start_byte": 378,
+      "end_byte": 387,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 44,
+      "start_byte": 387,
+      "end_byte": 396,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 45,
+      "start_byte": 396,
+      "end_byte": 405,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 46,
+      "start_byte": 405,
+      "end_byte": 414,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 47,
+      "start_byte": 414,
+      "end_byte": 423,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 48,
+      "start_byte": 423,
+      "end_byte": 432,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 49,
+      "start_byte": 432,
+      "end_byte": 441,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     },
+     {
+      "index": 50,
+      "start_byte": 441,
+      "end_byte": 450,
+      "sql": "SELECT 1;",
+      "executed": true,
+      "columns": 1,
+      "row_count": 1,
+      "rows": [
+       [
+        "1"
+       ]
+      ],
+      "step_rc": 101,
+      "finalize_rc": 0
+     }
+    ],
+    "error": {
+     "phase": "limit",
+     "kind": "STATEMENT_LIMIT"
+    },
+    "unexecuted_tail": "SELECT 1;SELECT 1;SELECT 1;SELECT 1;SELECT 1;SELECT 1;SELECT 1;SELECT 1;SELECT 1;SELECT 1;",
+    "input_bytes": 540,
+    "final_byte": 450,
+    "denied": [],
+    "elapsed_s": 0.001,
+    "open_statements_after_run": false,
+    "close_rc": 0
+   }
+  },
+  "status": "OK"
+ }
+}

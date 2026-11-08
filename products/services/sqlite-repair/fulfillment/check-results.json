@@ -1,0 +1,25 @@
+{
+ "sqlite_version": "3.40.1",
+ "python": "3.11.2",
+ "checks": {
+  "public_as_written_runs_only_first_and_reports_tail": true,
+  "public_fixed_loop_two_statements_expected_rows": true,
+  "public_tail_contiguous_and_reaches_end": true,
+  "public_all_finalized_close_ok_both_runs": true,
+  "prepare_error_stops_at_stmt3_with_message_and_offset": true,
+  "prepare_error_tail_unexecuted_and_finalized": true,
+  "step_error_constraint_rc19_finalize_rc19_third_not_run": true,
+  "step_error_after_one_row_reported_and_finalized": true,
+  "multi_statement_skips_empty_and_comments_three_executed": true,
+  "attach_refused_no_file_created": true,
+  "load_extension_refused": true,
+  "vacuum_into_refused_not_executed": true,
+  "unlisted_pragma_refused": true,
+  "infinite_cte_interrupted_within_5s": true,
+  "statement_limit_50": true,
+  "invalid_case_rejected": true
+ },
+ "passed": 16,
+ "total": 16,
+ "note": "Executed locally in the public offline EXEC sandbox on synthetic cases. Not the private mail cycle; no customer request, no recipient delivery."
+}
