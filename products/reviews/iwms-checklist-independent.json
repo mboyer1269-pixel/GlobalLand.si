@@ -1,0 +1,161 @@
+{
+  "checks": {
+    "quote_0": true,
+    "quote_1": true,
+    "quote_2": true,
+    "quote_3": true,
+    "quote_4": true,
+    "feed_hash": true,
+    "deadline": true,
+    "open": true,
+    "language": true,
+    "gpa": true,
+    "one_lot": true,
+    "variants": true,
+    "weights": true,
+    "no_enquiry": true,
+    "portal_quote": true,
+    "reverse_baseline": true,
+    "llms_unchanged": true,
+    "key_unchanged": true,
+    "two_links": true,
+    "disclosure": true
+  },
+  "passed": 20,
+  "total": 20,
+  "source_tender": {
+    "id": "NAC/5245",
+    "legalBasis": {
+      "id": "32014L0024",
+      "scheme": "CELEX"
+    },
+    "title": "Supply and Support of Integrated Workplace Management System",
+    "status": "active",
+    "classification": {
+      "scheme": "CPV",
+      "id": "72267100",
+      "description": "Maintenance of information technology software"
+    },
+    "mainProcurementCategory": "services",
+    "description": "North Ayrshire Council (NAC) is seeking to procure a cloud-hosted Integrated Workplace Management System (IWMS) to replace its existing Computer Aided Facilities Management (CAFM) solution. The new solution will provide a single, integrated platform to support the management of the Council's operational property portfolio, encompassing asset management, maintenance management, statutory compliance, financial monitoring, reporting and governance.",
+    "lots": [
+      {
+        "id": "1",
+        "description": "North Ayrshire Council invites tenders for the provision, implementation, hosting, support and maintenance of an Integrated Workplace Management System (IWMS). The solution will provide a single integrated platform for the management of the Council's operational property portfolio, including asset management, maintenance management, statutory compliance, reporting and associated property management functions. The contract includes software licensing, implementation, configuration, data migration, systems integration, training, hosting, support and ongoing maintenance services. The initial contract term will be 3 years with an option to extend for up to an additional 60 months. The contract will be awarded under the Council's Conditions of Contract for ICT Services",
+        "awardCriteria": {
+          "criteria": [
+            {
+              "name": "Quality",
+              "type": "quality",
+              "description": "40"
+            },
+            {
+              "type": "price",
+              "description": "60"
+            }
+          ]
+        },
+        "contractPeriod": {
+          "durationInDays": 1080
+        },
+        "hasRenewal": true,
+        "renewal": {
+          "description": "Upto a maximum of 60 months"
+        },
+        "submissionTerms": {
+          "variantPolicy": "notAllowed"
+        },
+        "hasOptions": false,
+        "status": "active"
+      }
+    ],
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV",
+            "id": "72268000",
+            "description": "Software supply services"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72250000",
+            "description": "System and support services"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72263000",
+            "description": "Software implementation services"
+          }
+        ],
+        "deliveryAddresses": [
+          {
+            "region": "UKM93"
+          }
+        ],
+        "relatedLot": "1"
+      }
+    ],
+    "submissionMethod": [
+      "electronicSubmission"
+    ],
+    "submissionMethodDetails": "https://www.publictendersscotland.publiccontractsscotland.gov.uk",
+    "selectionCriteria": {
+      "criteria": [
+        {
+          "type": "suitability",
+          "description": "Where it is required, within a bidder’s country of establishment they must confirm which authorisation or memberships of the relevant organisation(s) are required in order to perform this service.\nBidders must confirm if they hold the particular authorisation or memberships",
+          "appliesTo": [
+            "supplier"
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "documentType": "economicSelectionCriteria",
+        "id": "economic"
+      },
+      {
+        "documentType": "technicalSelectionCriteria",
+        "id": "technical"
+      }
+    ],
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
+    "coveredBy": [
+      "GPA"
+    ],
+    "tenderPeriod": {
+      "endDate": "2026-12-07T12:00:00Z"
+    },
+    "submissionTerms": {
+      "languages": [
+        "en"
+      ]
+    },
+    "awardPeriod": {
+      "startDate": "2026-12-07T12:00:00Z"
+    },
+    "bidOpening": {
+      "date": "2026-12-07T12:00:00Z"
+    },
+    "hasRecurrence": false,
+    "contractTerms": {
+      "hasElectronicOrdering": true,
+      "electronicInvoicingPolicy": "allowed",
+      "hasElectronicPayment": true
+    }
+  },
+  "limitations": [
+    "Saved-source review only; tender pack unread",
+    "No exposure, demand or revenue established"
+  ],
+  "site_sha256": {
+    "iwms-checklist.html": "56c79b638aa377222e34aae5b2da58c94fd0520fd1b0015adaf73c2ea137508b",
+    "5e2c8a91f4b7036d9a1e7c4b28f0d653.txt": "de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f",
+    "index.html": "3ff1a14f4c8f3f1abd8cb34097a1611b2e39bd8bb6ead9d091f49cb76b046937",
+    "llms.txt": "c0e33d7dcae807945d7319c848eb210c13a312d4bade806f0de4126c1cdb253a"
+  }
+}
