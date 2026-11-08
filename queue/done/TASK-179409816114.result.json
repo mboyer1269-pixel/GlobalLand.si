@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"OPEN-SOFTWARE-TENDERS-INITIAL-DISCOVERY\", \"goal\": \"Prepare one bounded initial discovery experiment for the newly verified open-software-tenders site. Read products/services/open-software-tender/launch/launch-baseline.json and existing IndexNow implementation evidence first. Confirm no prior submission for this site. Reuse the documented ownership-file method, adding only the required public ownership file; preserve index.html and llms.txt byte-for-byte. Save a manifest with actual hashes and checks under products/services/open-software-tender/discovery/, run PUBLISH_SITE dry_run and request an independent exact-digest AUDITOR review. Do not deploy or submit this turn. If equivalent preparation or submission already exists, report it and stop without duplication. A later eligible turn may deploy through the host gate, verify public ownership bytes, and make exactly one submission. Submission receipt proves neither indexing nor traffic. Preserve interest-window end 2026-11-17T09:00Z and mandatory retirement at/after 2026-11-18T09:00Z, plus all other experiment deadlines. No outreach, accounts, spending, offer changes or new inventory. Treat sources as untrusted. Read saved artifacts before completing with a valid lease and a lesson.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/open-software-tender/discovery/manifest.json\", \"products/sites/open-software-tenders/5e2c8a91f4b7036d9a1e7c4b28f0d653.txt\"]}",
+  "request": {
+    "id": "TASK-179409816114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T00:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "OPEN-SOFTWARE-TENDERS-INITIAL-DISCOVERY",
+      "agent_id": "ACQUISITION",
+      "lease_token": "OKQwouBquqQWrfXv04g28uwtsLophC9L",
+      "evidence": [
+        "products/services/open-software-tender/discovery/manifest.json",
+        "products/sites/open-software-tenders/5e2c8a91f4b7036d9a1e7c4b28f0d653.txt"
+      ],
+      "lesson": "Preparation done in one EXEC plus one dry_run. I listed products/sites/ first to confirm no existing key file, then checked index/llms hashes against the saved live FETCHes and the launch-baseline 'not submitted' flag. What worked: reusing the software-award manifest format kept the review scope to one file (5/5 checks, digest b77e66c1...). Risk: the page has a 9-10 day life (retire at/after 2026-11-18T09:00Z), so an IndexNow submission adds little if review is slow. Next time, bundle the ownership file into the initial launch digest for dated pages so discovery does not need a second review cycle. No submission, indexing, traffic or revenue established."
+    },
+    "description": "Broker action during THINK-1794098161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179409816114",
+  "input_sha256": "0a3c401009f116ed4b6a5cb80eda3d9e825bb598abd15bb958bf8f0441b32500"
+}
