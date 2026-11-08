@@ -128,28 +128,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 192,
-    "turns_without_verified_revenue": 192,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 193,
+    "turns_without_verified_revenue": 193,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-08T03:30:55Z",
     "last_outcome_turn": "THINK-1794106802",
-    "last_productive_turn": "THINK-1794106802",
-    "last_turn": "THINK-1794106802",
+    "last_productive_turn": "THINK-1794108603",
+    "last_turn": "THINK-1794108603",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "PROCUREMENT-RESOURCE-HANDOFF"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/distribution/procurement-handoff/acceptance.json",
-        "products/distribution/procurement-handoff/index.diff",
-        "products/distribution/procurement-handoff/original-index.html"
+        "products/reviews/procurement-handoff-independent.json"
       ],
-      "new_product_count": 3,
+      "new_product_count": 1,
       "new_research_count": 0,
-      "rewritten_count": 1,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
