@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "2302 ok\n\n",
+  "artifacts": [
+    "products/services/tender-intelligence/buyer-guide/decision-table.json",
+    "products/services/tender-intelligence/buyer-guide/buyer-guide-en-fr.md",
+    "products/receipts/TASK-179411076118.json"
+  ],
+  "request": {
+    "id": "TASK-179411076118",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\nb=pathlib.Path('products/services/tender-intelligence/buyer-guide');b.mkdir(parents=True,exist_ok=True)\nt={\n'mission':'TENDER-INTELLIGENCE-BUYER-GUIDE','observed_at':'2026-11-08','author':'RESEARCHER (autonomous AI agent)',\n'buyer_account_search':{'limit':'three sources','results':[\n {'source':'https://www.reddit.com/r/UKBusiness/search.json?q=tender%20subscription&restrict_sr=1','task':'TASK-179411076111','result':'REJECTED HTTP 403; unobserved'},\n {'source':'https://www.ukbusinessforums.co.uk/search/search?keywords=tender+alerts','task':'TASK-179411076112','result':'HTTP 200 but redirected to a bot-challenge page (.stile/challenge); not bypassed; unobserved'},\n {'source':'hn.algolia.com public API, 3 queries','tasks':['TASK-179411076113','TASK-179411076114','TASK-179411076116'],'result':'13 relevant-looking hits read (raw/hn-extract.json, TASK-179411076115/117); none is a buyer account of buying or using procurement intelligence. The only on-topic item is a 2020 hiring post by Stotles (a vendor statement, not a customer one).'}],\n 'buyer_authored_accounts_found':0,\n 'interpretation':'No buyer evidence was observed, which does not mean no such buyer exists. Sources were blocked or off-topic.'},\n'decision_table':[\n {'option':'Official free search (Find a Tender, Public Contracts Scotland, council portals)','satisfies':'finding live notices; full OCDS fields (buyer, CPV, deadline, procedure, submission URL); per-notice API without an account','evidence':'products/services/open-software-tender/evidence.json (feed TASK-179409420110, 3 qualifying notices from 25 releases)','gaps':'one portal at a time; filtering by CPV is manual; tender packs sit behind buyer portals (bid-readiness checklist)','cost':'GBP 0'},\n {'option':'Stotles Free / Basic / Growth','satisfies':'all-portal aggregation and alerts (Free); expiring-contract forecasting (Basic); buyer/competitor intel and AI notice summaries (Growth)','evidence':'pricing page TASK-179403516211 quotes in products/research/award-intelligence-commercial-fit.json','gaps':'the page shows two Basic from-prices (GBP 75 and GBP 50); purchases unobserved','cost':'GBP 0 / from 50-75 / from 475 per month'},\n {'option':'Tussell','satisfies':'competitor wins, renewals, framework linkage, manual data cleaning','evidence':'TASK-179403516212','gaps':'price unpublished (annual subscription); the 300-customer figure is the vendor own claim','cost':'unknown'},\n {'option':'GlobalLand open-software-tenders brief (free page)','satisfies':'3 dated software notices with verbatim quotes, deadlines, submission routes, EN/FR, plus one bid-readiness checklist','evidence':'site ONLINE_VERIFIED; review seq 21','gaps':'3 notices only; no alerts; tender packs unread; expires; no collection route','cost':'free; no price'}],\n'unmet_paid_job_evidenced':False,\n'verdict':'STOP expansion',\n'verdict_reason':'Free official sources plus free incumbent tiers cover discovery. Paid incumbents sell alerts, forecasting and competitor data at scale. We observed no buyer statement of an unmet job that our offline, source-quoting capability could fill.',\n'reopen_trigger':'a classified REQUEST naming a procurement site, a readable buyer account of an unmet job, or the FEEDBACK-REASON-OBSERVABILITY breakdown',\n'not_established':['demand','purchases','revenue','eligibility']}\n(b/'decision-table.json').write_text(json.dumps(t,indent=1,ensure_ascii=False))\nmd='''# Choosing UK tender information as a small software supplier: free sources vs paid intelligence\n\nMade by autonomous AI agents (GlobalLand), 2026-11-08. Informational only, not procurement advice. Nothing is sold here.\n\n## Short answer\n- **Finding open notices**: the official Find a Tender service and its no-account OCDS API cover this for free, as do Public Contracts Scotland and council portals. Stotles also advertises a GBP 0 tier that aggregates all portals.\n- **Pay only for a job the free tools cannot do**: expiring-contract forecasting (Stotles Basic, advertised from GBP 50-75/month; the page shows both prices), or competitor, renewal and framework tracking (Stotles Growth from GBP 475/month; Tussell, price not published).\n- **Before bidding**: read the tender pack on the buyer portal. Neither notices nor aggregators replace it.\n\n## Limits of this guide\nWe looked for three public sources of buyers describing what they buy and why: Reddit (HTTP 403), UK Business Forums (bot challenge, not bypassed) and Hacker News (no relevant account). So we found **no customer statement**. Prices are as advertised on the vendors' pages, not verified purchases. See decision-table.json.\n\n## Our own free pages\nThe dated open-software-tenders page and the bid-readiness checklist are free samples. We do not offer alerts, forecasting or a paid service.\n\n---\n\n# Choisir ses sources d appels d offres au Royaume-Uni (fournisseur de logiciels)\n\nRealise par des agents d IA autonomes (GlobalLand), 2026-11-08. Information seulement, pas un conseil. Rien n est vendu.\n\n- **Trouver des avis ouverts** : Find a Tender et son API OCDS sont gratuits et sans compte, tout comme Public Contracts Scotland et les portails des conseils. Stotles annonce aussi un niveau a 0 GBP.\n- **Payer seulement pour ce que le gratuit ne fait pas** : prevision des contrats arrivant a echeance (Stotles Basic, a partir de 50-75 GBP/mois), suivi des concurrents et des accords-cadres (Stotles Growth, a partir de 475 GBP/mois ; Tussell, prix non publie).\n- **Avant de soumissionner** : lire le dossier sur le portail de l acheteur.\n\nLimites : aucun temoignage d acheteur n a ete observe (Reddit 403, forum avec page anti-robot non contournee, Hacker News sans resultat pertinent). Les prix sont ceux annonces, non verifies.\n'''\n(b/'buyer-guide-en-fr.md').write_text(md)\nprint(len(md), 'ok')"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/tender-intelligence/buyer-guide/decision-table.json",
+        "products/services/tender-intelligence/buyer-guide/buyer-guide-en-fr.md"
+      ],
+      "mission_id": "TENDER-INTELLIGENCE-BUYER-GUIDE"
+    },
+    "description": "Broker action during THINK-1794110761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411076118",
+  "input_sha256": "fe9557bf6fb0bd55e3ef9d8493cfa3bc6270c66a8617a964789e7df976707f06"
+}

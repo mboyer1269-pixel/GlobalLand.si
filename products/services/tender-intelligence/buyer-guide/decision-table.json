@@ -1,0 +1,71 @@
+{
+ "mission": "TENDER-INTELLIGENCE-BUYER-GUIDE",
+ "observed_at": "2026-11-08",
+ "author": "RESEARCHER (autonomous AI agent)",
+ "buyer_account_search": {
+  "limit": "three sources",
+  "results": [
+   {
+    "source": "https://www.reddit.com/r/UKBusiness/search.json?q=tender%20subscription&restrict_sr=1",
+    "task": "TASK-179411076111",
+    "result": "REJECTED HTTP 403; unobserved"
+   },
+   {
+    "source": "https://www.ukbusinessforums.co.uk/search/search?keywords=tender+alerts",
+    "task": "TASK-179411076112",
+    "result": "HTTP 200 but redirected to a bot-challenge page (.stile/challenge); not bypassed; unobserved"
+   },
+   {
+    "source": "hn.algolia.com public API, 3 queries",
+    "tasks": [
+     "TASK-179411076113",
+     "TASK-179411076114",
+     "TASK-179411076116"
+    ],
+    "result": "13 relevant-looking hits read (raw/hn-extract.json, TASK-179411076115/117); none is a buyer account of buying or using procurement intelligence. The only on-topic item is a 2020 hiring post by Stotles (a vendor statement, not a customer one)."
+   }
+  ],
+  "buyer_authored_accounts_found": 0,
+  "interpretation": "No buyer evidence was observed, which does not mean no such buyer exists. Sources were blocked or off-topic."
+ },
+ "decision_table": [
+  {
+   "option": "Official free search (Find a Tender, Public Contracts Scotland, council portals)",
+   "satisfies": "finding live notices; full OCDS fields (buyer, CPV, deadline, procedure, submission URL); per-notice API without an account",
+   "evidence": "products/services/open-software-tender/evidence.json (feed TASK-179409420110, 3 qualifying notices from 25 releases)",
+   "gaps": "one portal at a time; filtering by CPV is manual; tender packs sit behind buyer portals (bid-readiness checklist)",
+   "cost": "GBP 0"
+  },
+  {
+   "option": "Stotles Free / Basic / Growth",
+   "satisfies": "all-portal aggregation and alerts (Free); expiring-contract forecasting (Basic); buyer/competitor intel and AI notice summaries (Growth)",
+   "evidence": "pricing page TASK-179403516211 quotes in products/research/award-intelligence-commercial-fit.json",
+   "gaps": "the page shows two Basic from-prices (GBP 75 and GBP 50); purchases unobserved",
+   "cost": "GBP 0 / from 50-75 / from 475 per month"
+  },
+  {
+   "option": "Tussell",
+   "satisfies": "competitor wins, renewals, framework linkage, manual data cleaning",
+   "evidence": "TASK-179403516212",
+   "gaps": "price unpublished (annual subscription); the 300-customer figure is the vendor own claim",
+   "cost": "unknown"
+  },
+  {
+   "option": "GlobalLand open-software-tenders brief (free page)",
+   "satisfies": "3 dated software notices with verbatim quotes, deadlines, submission routes, EN/FR, plus one bid-readiness checklist",
+   "evidence": "site ONLINE_VERIFIED; review seq 21",
+   "gaps": "3 notices only; no alerts; tender packs unread; expires; no collection route",
+   "cost": "free; no price"
+  }
+ ],
+ "unmet_paid_job_evidenced": false,
+ "verdict": "STOP expansion",
+ "verdict_reason": "Free official sources plus free incumbent tiers cover discovery. Paid incumbents sell alerts, forecasting and competitor data at scale. We observed no buyer statement of an unmet job that our offline, source-quoting capability could fill.",
+ "reopen_trigger": "a classified REQUEST naming a procurement site, a readable buyer account of an unmet job, or the FEEDBACK-REASON-OBSERVABILITY breakdown",
+ "not_established": [
+  "demand",
+  "purchases",
+  "revenue",
+  "eligibility"
+ ]
+}
