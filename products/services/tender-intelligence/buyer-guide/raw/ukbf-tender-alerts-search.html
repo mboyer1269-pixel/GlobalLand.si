@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="refresh" content="0; url=/.stile/challenge/verify?nojs=1&amp;nonce=1dc476d428b5f09b5163cd934b57c5a7.p.1794110973.33632db8a1ed29482115ce11a8f98a1c8d01d2a8ae3aa1956900875346d10489&amp;return=v2.L3NlYXJjaC9zZWFyY2g_a2V5d29yZHM9dGVuZGVyK2FsZXJ0cyZvPXJlbGV2YW5jZQ.d3d3LnVrYnVzaW5lc3Nmb3J1bXMuY28udWs.4020af19fc8013a832f09b9520fd5bc66372b93ee751fb5a54fd094b9a53ae0d">
+<title>Checking your browser</title>
+<style>:root {
+  --bg: #f6f7f9;
+  --fg: #1b1f24;
+  --muted: #5b6470;
+  --card: #ffffff;
+  --border: #e1e4e8;
+  --accent: #3b6ef5;
+  --radius: 12px;
+  --font: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1116;
+    --fg: #e6e8eb;
+    --muted: #9aa4b2;
+    --card: #161b22;
+    --border: #2b313a;
+  }
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 32rem;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+}
+h1 { font-size: 1.25rem; margin: 0 0 0.75rem; }
+p { margin: 0 0 1rem; color: var(--fg); }
+a { color: var(--accent); font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
+a:hover { text-decoration: none; }
+.muted { color: var(--muted); font-size: 0.9rem; }
+.spinner {
+  width: 1.25rem; height: 1.25rem;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: -0.2rem;
+  margin-right: 0.5rem;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+.ref {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+}
+.logo { max-height: 2.5rem; margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+<main class="card" role="status" aria-live="polite">
+
+<h1><span class="spinner" aria-hidden="true"></span>Checking your browser</h1>
+<p>Verifying your connection. This should only take a moment.</p>
+<p><a href="/.stile/challenge/verify?nojs=1&amp;nonce=1dc476d428b5f09b5163cd934b57c5a7.p.1794110973.33632db8a1ed29482115ce11a8f98a1c8d01d2a8ae3aa1956900875346d10489&amp;return=v2.L3NlYXJjaC9zZWFyY2g_a2V5d29yZHM9dGVuZGVyK2FsZXJ0cyZvPXJlbGV2YW5jZQ.d3d3LnVrYnVzaW5lc3Nmb3J1bXMuY28udWs.4020af19fc8013a832f09b9520fd5bc66372b93ee751fb5a54fd094b9a53ae0d">Continue</a></p>
+</main>
+</body>
+</html>
