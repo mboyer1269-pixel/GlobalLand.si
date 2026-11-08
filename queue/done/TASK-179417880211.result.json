@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"NEEDS_WORK\",\n  \"observations\": {\n    \"advertised_statement_cap\": 50,\n    \"actual_seed_statements\": 50,\n    \"actual_query_statements\": 50,\n    \"query_error\": null,\n    \"aggregate_sql_bytes\": 80026,\n    \"large_seed_and_query_accepted\": true\n  },\n  \"reason\": \"The advertised at-most 50 statements and 64 KiB of SQL limits are per seed/query phase, not aggregate. Each phase also resets the two-second cooperative deadline. Clarify per-phase limits in EN/FR or enforce aggregate budgets; do not promise a hard two-second wall-clock cap from a progress handler.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/sqlite-intake-independent/findings.json",
+    "products/receipts/TASK-179417880211.json"
+  ],
+  "request": {
+    "id": "TASK-179417880211",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-08T23:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import importlib.util,json,pathlib\np=pathlib.Path('products/services/sqlite-repair/fulfillment/diagnose.py');s=importlib.util.spec_from_file_location('d',p);d=importlib.util.module_from_spec(s);s.loader.exec_module(d)\na=d.diagnose({'seed_sql':'CREATE TABLE t(x);'+'INSERT INTO t VALUES(1);'*49,'query_sql':'SELECT count(*) FROM t;'*50})\nb=d.diagnose({'seed_sql':'CREATE TABLE t(x);'+' '*40000,'query_sql':'SELECT 1;'+' '*40000})\nr={'verdict':'NEEDS_WORK','observations':{'advertised_statement_cap':50,'actual_seed_statements':50,'actual_query_statements':len(a['runs']['all_statements']['statements']),'query_error':a['runs']['all_statements']['error'],'aggregate_sql_bytes':80026,'large_seed_and_query_accepted':b['status']=='OK' and b['runs']['all_statements']['error'] is None},'reason':'The advertised at-most 50 statements and 64 KiB of SQL limits are per seed/query phase, not aggregate. Each phase also resets the two-second cooperative deadline. Clarify per-phase limits in EN/FR or enforce aggregate budgets; do not promise a hard two-second wall-clock cap from a progress handler.','reports':{'statements':a,'bytes':b}}\no=pathlib.Path('products/reviews/sqlite-intake-independent/findings.json');o.parent.mkdir(parents=True,exist_ok=True);o.write_text(json.dumps(r,indent=2));print(json.dumps({k:v for k,v in r.items() if k!='reports'},indent=2))"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/fulfillment/diagnose.py"
+      ],
+      "outputs": [
+        "products/reviews/sqlite-intake-independent/findings.json"
+      ],
+      "mission_id": "SQLITE-INTAKE-INDEPENDENT-REVIEW"
+    },
+    "description": "Broker action during THINK-1794178802",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179417880211",
+  "input_sha256": "71f32b39cb1d1e30dd2dfad13feec0d2e2ed1d4fab49a41afab41795f003b1d4"
+}

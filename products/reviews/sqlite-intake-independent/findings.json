@@ -1,0 +1,884 @@
+{
+  "verdict": "NEEDS_WORK",
+  "observations": {
+    "advertised_statement_cap": 50,
+    "actual_seed_statements": 50,
+    "actual_query_statements": 50,
+    "query_error": null,
+    "aggregate_sql_bytes": 80026,
+    "large_seed_and_query_accepted": true
+  },
+  "reason": "The advertised at-most 50 statements and 64 KiB of SQL limits are per seed/query phase, not aggregate. Each phase also resets the two-second cooperative deadline. Clarify per-phase limits in EN/FR or enforce aggregate budgets; do not promise a hard two-second wall-clock cap from a progress handler.",
+  "reports": {
+    "statements": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": null,
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [
+            {
+              "index": 1,
+              "start_byte": 0,
+              "end_byte": 23,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 2,
+              "start_byte": 23,
+              "end_byte": 46,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 3,
+              "start_byte": 46,
+              "end_byte": 69,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 4,
+              "start_byte": 69,
+              "end_byte": 92,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 5,
+              "start_byte": 92,
+              "end_byte": 115,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 6,
+              "start_byte": 115,
+              "end_byte": 138,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 7,
+              "start_byte": 138,
+              "end_byte": 161,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 8,
+              "start_byte": 161,
+              "end_byte": 184,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 9,
+              "start_byte": 184,
+              "end_byte": 207,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 10,
+              "start_byte": 207,
+              "end_byte": 230,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 11,
+              "start_byte": 230,
+              "end_byte": 253,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 12,
+              "start_byte": 253,
+              "end_byte": 276,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 13,
+              "start_byte": 276,
+              "end_byte": 299,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 14,
+              "start_byte": 299,
+              "end_byte": 322,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 15,
+              "start_byte": 322,
+              "end_byte": 345,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 16,
+              "start_byte": 345,
+              "end_byte": 368,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 17,
+              "start_byte": 368,
+              "end_byte": 391,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 18,
+              "start_byte": 391,
+              "end_byte": 414,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 19,
+              "start_byte": 414,
+              "end_byte": 437,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 20,
+              "start_byte": 437,
+              "end_byte": 460,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 21,
+              "start_byte": 460,
+              "end_byte": 483,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 22,
+              "start_byte": 483,
+              "end_byte": 506,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 23,
+              "start_byte": 506,
+              "end_byte": 529,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 24,
+              "start_byte": 529,
+              "end_byte": 552,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 25,
+              "start_byte": 552,
+              "end_byte": 575,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 26,
+              "start_byte": 575,
+              "end_byte": 598,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 27,
+              "start_byte": 598,
+              "end_byte": 621,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 28,
+              "start_byte": 621,
+              "end_byte": 644,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 29,
+              "start_byte": 644,
+              "end_byte": 667,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 30,
+              "start_byte": 667,
+              "end_byte": 690,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 31,
+              "start_byte": 690,
+              "end_byte": 713,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 32,
+              "start_byte": 713,
+              "end_byte": 736,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 33,
+              "start_byte": 736,
+              "end_byte": 759,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 34,
+              "start_byte": 759,
+              "end_byte": 782,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 35,
+              "start_byte": 782,
+              "end_byte": 805,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 36,
+              "start_byte": 805,
+              "end_byte": 828,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 37,
+              "start_byte": 828,
+              "end_byte": 851,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 38,
+              "start_byte": 851,
+              "end_byte": 874,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 39,
+              "start_byte": 874,
+              "end_byte": 897,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 40,
+              "start_byte": 897,
+              "end_byte": 920,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 41,
+              "start_byte": 920,
+              "end_byte": 943,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 42,
+              "start_byte": 943,
+              "end_byte": 966,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 43,
+              "start_byte": 966,
+              "end_byte": 989,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 44,
+              "start_byte": 989,
+              "end_byte": 1012,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 45,
+              "start_byte": 1012,
+              "end_byte": 1035,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 46,
+              "start_byte": 1035,
+              "end_byte": 1058,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 47,
+              "start_byte": 1058,
+              "end_byte": 1081,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 48,
+              "start_byte": 1081,
+              "end_byte": 1104,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 49,
+              "start_byte": 1104,
+              "end_byte": 1127,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 50,
+              "start_byte": 1127,
+              "end_byte": 1150,
+              "sql": "SELECT count(*) FROM t;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "49"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            }
+          ],
+          "error": null,
+          "unexecuted_tail": null,
+          "input_bytes": 1150,
+          "final_byte": 1150,
+          "denied": [],
+          "elapsed_s": 0.051,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "status": "OK"
+    },
+    "bytes": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": null,
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [
+            {
+              "index": 1,
+              "start_byte": 0,
+              "end_byte": 9,
+              "sql": "SELECT 1;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "1"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            }
+          ],
+          "error": null,
+          "unexecuted_tail": null,
+          "input_bytes": 40009,
+          "final_byte": 40009,
+          "denied": [],
+          "elapsed_s": 0.0,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "status": "OK"
+    }
+  }
+}
