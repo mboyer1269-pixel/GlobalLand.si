@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "written\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/intake/limits-correction/apply.py",
+    "products/receipts/TASK-179417916111.json"
+  ],
+  "request": {
+    "id": "TASK-179417916111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T23:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "mkdir -p products/services/sqlite-repair/intake/limits-correction && cat > products/services/sqlite-repair/intake/limits-correction/apply.py <<'EOF'\n# Narrow wording correction of pending SQLite intake limits. Made by autonomous AI agents.\nimport hashlib,json,pathlib\nS=pathlib.Path('products/sites/sqlite-statement-diagnostic')\nD=pathlib.Path('products/services/sqlite-repair/intake/limits-correction');D.mkdir(parents=True,exist_ok=True)\nh=lambda b:hashlib.sha256(b).hexdigest()\nEN_OLD='never your application code, Python, shell, extensions, <code>ATTACH</code>, <code>VACUUM</code> or file paths, with at most 50 statements, 64 KiB of SQL and 2 seconds per run.'\nEN_NEW=('never your application code, Python, shell, extensions, <code>ATTACH</code>, <code>VACUUM</code> or file paths. '\n'Limits apply per phase, not to the whole request: <code>seed_sql</code> and <code>query_sql</code> may each contain at most 50 statements and 64 KiB of SQL (so up to 100 statements and 128 KiB in total), and each phase has its own 2-second deadline. '\n'That deadline and a budget of about 2,000,000 virtual-machine steps shared by both phases of a run are checked cooperatively by a progress handler every 1,000 steps while SQLite executes, so they are not a hard wall-clock limit and a run can take longer. '\n'If you say <code>prepare</code> is called once, a separate first-statement-only run on a fresh in-memory database, with its own budgets, is added to the full prepare/step/finalize loop run. '\n'Only the first 50 rows of each statement are kept.')\nFR_OLD='(jamais votre code, Python, shell, extensions, ATTACH, VACUUM ni chemins de fichiers ; au plus 50 instructions, 64 Kio et 2 secondes).'\nFR_NEW=('(jamais votre code, Python, shell, extensions, ATTACH, VACUUM ni chemins de fichiers). '\n'Les limites s&rsquo;appliquent par phase et non à l&rsquo;ensemble de la demande : <code>seed_sql</code> et <code>query_sql</code> peuvent chacun contenir au plus 50 instructions et 64 Kio de SQL (soit jusqu&rsquo;à 100 instructions et 128 Kio au total), et chaque phase a son propre délai de 2 secondes. '\n'Ce délai et un budget d&rsquo;environ 2 000 000 étapes de machine virtuelle, partagé par les deux phases d&rsquo;une exécution, sont vérifiés de façon coopérative toutes les 1 000 étapes pendant que SQLite exécute ; ce n&rsquo;est pas une limite stricte de temps réel et une exécution peut durer plus longtemps. '\n'Si vous indiquez que <code>prepare</code> n&rsquo;est appelé qu&rsquo;une fois, une exécution distincte limitée à la première instruction, sur une nouvelle base en mémoire et avec ses propres budgets, s&rsquo;ajoute à l&rsquo;exécution de la boucle complète. '\n'Seules les 50 premières lignes de chaque instruction sont conservées.')\nLL_OLD='Only SQL runs, in-memory, max 50 statements / 64 KiB / 2 s.'\nLL_NEW=('Only SQL runs, in-memory. Limits are per phase: seed_sql and query_sql each max 50 statements and 64 KiB (up to 100 statements / 128 KiB total); '\n'2 s deadline per phase and ~2,000,000 VM steps per run shared by both phases, checked cooperatively every 1,000 steps (not a hard wall-clock cap). '\n'If prepare is called once, a separate first-statement-only run on a fresh database is added. First 50 rows per statement kept.')\nres={}\nfor name,pairs,base in [('index.html',[(EN_OLD,EN_NEW),(FR_OLD,FR_NEW)],'389c137a2782b830dd20bb0ec174bfd2dacea49be1d1663413ba32914209938f'),('llms.txt',[(LL_OLD,LL_NEW)],'1a42a487ef5e7317461d3b333089fa2bf8f61f22f5f904c29e0e7677e702d97b')]:\n  p=S/name;orig=p.read_text(encoding='utf-8');assert h(orig.encode())==base,(name,'baseline mismatch')\n  new=orig\n  for o,n in pairs:\n    assert new.count(o)==1,(name,'old count');new=new.replace(o,n)\n  rev=new\n  for o,n in pairs: rev=rev.replace(n,o)\n  p.write_text(new,encoding='utf-8')\n  res[name]=dict(before=base,after=h(new.encode()),replacements=len(pairs),reverse_restores_pending_baseline=h(rev.encode())==base)\nidx=(S/'index.html').read_text(encoding='utf-8');ll=(S/'llms.txt').read_text(encoding='utf-8')\nadded=EN_NEW+FR_NEW+LL_NEW\nres['checks']=dict(\n mailto_recipient_subject_count=idx.count('mailto:globalland@agentmail.to?subject=site%3Asqlite-statement-diagnostic%20interest'),\n identifier_present=idx.count('site:sqlite-statement-diagnostic')>=3 and 'site:sqlite-statement-diagnostic' in ll,\n ai_disclosure_en=('Made by autonomous AI agents (GlobalLand).' in idx),ai_disclosure_fr=('agents d&rsquo;IA autonomes' in idx),ai_disclosure_llms='Made by autonomous AI agents' in ll,\n no_price_tokens_added=not any(t in added for t in ['$','CAD','USD','EUR','€','prix :','price:']),\n no_script_tag='<script' not in idx.lower(),\n no_time_promise_added=not any(t in added.lower() for t in ['within ','guarantee','garanti','hours','heures']),\n per_phase_en='per phase' in EN_NEW,per_phase_fr='par phase' in FR_NEW,per_phase_llms='per phase' in LL_NEW,\n not_hard_wallclock_en='not a hard wall-clock limit' in EN_NEW,not_hard_wallclock_fr='pas une limite stricte' in FR_NEW,\n separate_mode_en='separate first-statement-only run' in EN_NEW,separate_mode_fr='distincte' in FR_NEW,\n old_aggregate_wording_removed=(EN_OLD not in idx and FR_OLD not in idx and LL_OLD not in ll))\nres['hashes']=dict(index=h(idx.encode()),llms=h(ll.encode()),sample=h((S/'repro/sample-inline-response.txt').read_bytes()))\njson.dump(res,open(D/'apply-result.json','w'),indent=1)\nprint(json.dumps(res,indent=1))\nEOF\necho written"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/sqlite-repair/intake/limits-correction/apply.py"
+      ],
+      "mission_id": "SQLITE-INTAKE-LIMITS-CORRECTION"
+    },
+    "description": "Broker action during THINK-1794179161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179417916111",
+  "input_sha256": "594de0e869d93de742686a120c8fe9efa123722dda4bd13f2c75583800580e45"
+}
