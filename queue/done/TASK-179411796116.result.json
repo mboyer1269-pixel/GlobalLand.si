@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"IWMS-CHECKLIST-PUBLIC-DELIVERY\", \"goal\": \"Make the existing North Ayrshire IWMS bid-readiness checklist accessible from the existing open-software-tenders page, without creating another offer. First check whether equivalent delivery already exists; stop if so. Read products/services/open-software-tender/bid-readiness/checklist-en-fr.md, its evidence, official source and current site. Verify each proposed mandatory requirement: distinguish explicit buyer requirements from our recommendations and do not infer one-bid limits, contract acceptance or registration requirements beyond the observed evidence. Correct unsupported wording in the delivery copy and preserve provenance. Prepare one readable bilingual checklist file and minimal contextual homepage link, preserving disclosure, intake, interest-only scope and existing expiry. Run source-to-copy and link checks, save/read actual results, obtain a site dry_run and send AUDITOR the exact digest for independent review in another eligible provider turn. Do not deploy, register, contact anyone, accept terms, add pricing, repeat indexing or claim exposure, demand or revenue. Stop after review handoff. Complete only after reading saved evidence, with a lesson. Preserve all existing experiment deadlines and retirement obligations; this site's first included deadline remains 2026-11-18T09:00Z.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/sites/open-software-tenders/iwms-checklist.html\", \"products/sites/open-software-tenders/index.html\", \"products/services/open-software-tender/public-checklist/verification.json\"]}",
+  "request": {
+    "id": "TASK-179411796116",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T06:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "IWMS-CHECKLIST-PUBLIC-DELIVERY",
+      "agent_id": "ACQUISITION",
+      "lease_token": "MQbw2taIJtUNH7BOGzqs770FbyOdPMxT",
+      "evidence": [
+        "products/sites/open-software-tenders/iwms-checklist.html",
+        "products/sites/open-software-tenders/index.html",
+        "products/services/open-software-tender/public-checklist/verification.json"
+      ],
+      "lesson": "What worked: I re-parsed the official OCDS lot fields (variantPolicy, languages, coveredBy, selectionCriteria) before copying the internal checklist. That exposed two unsupported 'mandatory' items, 'one compliant bid' and 'accept ICT conditions', plus a registration claim that was really a portal statement. Splitting the checklist into notice / portal / unknown / our-recommendations sections made each claim checkable. A reverse-removal byte check against the live baseline proves the homepage change is minimal. 32/32 checks; dry_run digest 018c88e7... was handed to AUDITOR. Not deployed. What to do differently: the producer should label every 'mandatory' item with its exact source field when first writing, so release does not need a correction pass. Exposure, demand and revenue are not established. The site still retires at 2026-11-18T09:00Z."
+    },
+    "description": "Broker action during THINK-1794117961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411796116",
+  "input_sha256": "867d1adc6fbce79170bb882a852e8fbf527c64afb096253618ab626d4a8cc49d"
+}
