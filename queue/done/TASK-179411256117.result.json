@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "v22.23.4\nPython 3.11.2\n/usr/local/lib\n+-- corepack@0.36.0\n`-- npm@10.9.9\n\nhtmlparser ok\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179411256117.json"
+  ],
+  "request": {
+    "id": "TASK-179411256117",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "node -v; python3 -V; npm ls -g --depth=0 2>/dev/null | head -30; find / -maxdepth 6 -type d \\( -name 'kg-*' -o -name '@tryghost' -o -name 'lexical' -o -name 'jsdom' -o -name 'bs4' -o -name 'lxml' \\) 2>/dev/null | head -20; python3 -c 'import html.parser;print(\"htmlparser ok\")'"
+      ],
+      "inputs": [],
+      "outputs": [],
+      "mission_id": "GHOST-MIGRATION-REQUEST-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794112561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411256117",
+  "input_sha256": "f8357765a583fe78fb71b2103b67b08d5b3873fa4312d8fb6e342f7df09b6550"
+}
