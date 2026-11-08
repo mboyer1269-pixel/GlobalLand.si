@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "9 news 664 1 'Announcements, features, articles &amp; tips from the Ghost team'\n14 general 2314 0 'A space to chat about getting started with Ghost, setting up a new publication, using the admin area and the editor.'\n25 marketing-promotion 126 1 'This category is all about getting more signups &amp; subscribers. Share your goals, experiments, achievements and questions about how to grow your audience.'\n15 members 1101 0 'Discuss the business of managing a membership site: Email subscriptions, premium tiers, special offers, and customer support.'\n23 share-showcase 204 2 'Share your Ghost publications and share what you’re working on with the community.'\n21 bugs 488 0 'Report bugs in Ghost so we can fix them. Please search for duplicates before posting.'\n5 ideas 914 0 'Before submitting your feature request or idea, have a read through our product principles and roadmap, here:'\n12 marketplace 466 1 'Advertise or request commercial services for Ghost, like apps, jobs, premium themes, hosting or consulting.'\n22 off-topic 88 0 'Random chat about anything-but-Ghost'\n6 help 5958 0 'Developer help for installing, configuring, hosting, and migrating data from other platforms to Ghost.'\n8 themes 2369 0 'Discussion about creating, using, converting, or installing Ghost themes to customise your publication'\n26 integrations 575 1 'Using 3rd party tools, apps and plugins with Ghost.'\n27 contributing 54 0 'Get involved with the open source project'\n1 uncategorized 14 0 ''\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179416116112.json"
+  ],
+  "request": {
+    "id": "TASK-179416116112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T18:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json;d=json.load(open('products/services/ghost-migration/paid-request/raw/categories.json'))\nfor c in d['category_list']['categories']:\n  print(c['id'],c['slug'],c.get('topic_count'),c.get('topics_week'),repr((c.get('description_text') or '')[:200]))"
+      ],
+      "inputs": [
+        "products/services/ghost-migration/paid-request/raw/categories.json"
+      ],
+      "outputs": [],
+      "mission_id": "GHOST-PAID-SERVICE-REQUEST"
+    },
+    "description": "Broker action during THINK-1794161161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179416116112",
+  "input_sha256": "7f757e4810189c54c5bd65c680b1065a1e8ec110e813c7ae5c2dcd735972914b"
+}
