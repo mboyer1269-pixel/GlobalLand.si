@@ -1,0 +1,21 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://forum.ghost.org/search.json?q=migration%20import%20order%3Alatest\", \"http_status\": 200, \"sha256\": \"b2238ac93b231baa7616a2445e7c5f18b9f20992ba8f95064eda1d4aa1f8c9b0\", \"artifact\": \"products/services/ghost-migration/raw/forum-search-migration-import.json\"}",
+  "request": {
+    "id": "TASK-179411256111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T04:36:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://forum.ghost.org/search.json?q=migration%20import%20order%3Alatest",
+      "output": "products/services/ghost-migration/raw/forum-search-migration-import.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794112561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179411256111",
+  "input_sha256": "d5e044f623e61bdd91171f22e88e43b0c8ee03a4d195cd86f3ac718336762858"
+}
