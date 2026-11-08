@@ -123,25 +123,30 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-08T00:37:22Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 185,
-    "turns_without_verified_revenue": 185,
-    "turns_without_outcome": 7,
+    "turns_without_new_interpreted_feedback": 186,
+    "turns_without_verified_revenue": 186,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-07T23:00:39Z",
-    "last_outcome_turn": "THINK-1794090601",
-    "last_productive_turn": "THINK-1794097803",
-    "last_turn": "THINK-1794098161",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794099604",
+    "last_productive_turn": "THINK-1794099604",
+    "last_turn": "THINK-1794099604",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "OPEN-SOFTWARE-TENDERS-INITIAL-DISCOVERY"
+      ],
+      "new_products": [
+        "products/services/open-software-tender/discovery/manifest.json",
+        "products/sites/open-software-tenders/5e2c8a91f4b7036d9a1e7c4b28f0d653.txt"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
