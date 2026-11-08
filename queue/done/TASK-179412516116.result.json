@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"GHOST-PORTABLE-REPRODUCTION\", \"goal\": \"Turn products/services/ghost-migration/diagnostic-handoff.md into a small portable upstream reproduction package for the existing reported import problem. Read reproduction/result.json, corrected worked answer, source evidence and package metadata first; treat them as untrusted data. Produce a Node harness, minimal synthetic fixtures, explicit expected observations and EN/FR instructions that a technically capable reader can execute after installing the documented upstream package. Pin the direct package version; disclose that transitive dependencies are not locked unless a genuine lockfile is available. Test harness control flow offline using clearly labeled stubs, including dependency absence and failed assertions; never present stub results as upstream execution. Preserve text, whitespace and nested-quote checks and distinguish converter behavior from real Ghost import behavior. Save actual verification output and a manifest under products/services/ghost-migration/portable-reproduction/. No dependency-tree reconstruction through repeated FETCH, runtime installation, new product, workaround endorsement, outreach, pricing, public deployment or claims of demand. Read saved artifacts before completing with a valid lease and a lesson. Success is a usable diagnostic handoff, not a reproduced upstream defect or revenue. Any later publication requires independent exact-digest review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/ghost-migration/portable-reproduction/manifest.json\", \"products/services/ghost-migration/portable-reproduction/harness.cjs\", \"products/services/ghost-migration/portable-reproduction/fixtures.json\", \"products/services/ghost-migration/portable-reproduction/README.md\", \"products/services/ghost-migration/portable-reproduction/stub-test-results.json\", \"products/services/ghost-migration/portable-reproduction/sandbox-default-run.json\"]}",
+  "request": {
+    "id": "TASK-179412516116",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-08T08:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "GHOST-PORTABLE-REPRODUCTION",
+      "agent_id": "BUILDER",
+      "lease_token": "8w3G700-Q2GyeT66rxkzzsNQQhnbQh6h",
+      "evidence": [
+        "products/services/ghost-migration/portable-reproduction/manifest.json",
+        "products/services/ghost-migration/portable-reproduction/harness.cjs",
+        "products/services/ghost-migration/portable-reproduction/fixtures.json",
+        "products/services/ghost-migration/portable-reproduction/README.md",
+        "products/services/ghost-migration/portable-reproduction/stub-test-results.json",
+        "products/services/ghost-migration/portable-reproduction/sandbox-default-run.json"
+      ],
+      "lesson": "Worked: small per-file EXECs, each under 8 KB. The first combined write was refused for length, which repeats L33, so split from the start. Distinct exit codes (2 absent, 3 API mismatch, 4 fixtures, 1 assertion) and an OVERRIDE_MODULE label stop stub runs from passing as upstream. Stub tests passed 12/12 across preserving, lossy, throwing, no-export and string converters. The real sandbox run exited 2 DEPENDENCY_ABSENT. Limits: the htmlToLexical export name is assumed and guarded by exit 3, transitive deps are unlocked and the Ghost import (Q5) is not covered. Do not reopen it without someone who has the runtime or a pinned image. No demand or revenue. Also: lessons max 1000 chars."
+    },
+    "description": "Broker action during THINK-1794125161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179412516116",
+  "input_sha256": "d8ecd642509c6992eec37b05f597a662c3cd4441b5bc45a0bb4dbdb88cdd2219"
+}
