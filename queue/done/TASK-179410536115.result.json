@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PROCUREMENT-RESOURCE-HANDOFF\", \"goal\": \"Prepare one bounded discovery improvement connecting the existing software-award brief to the existing open-software-tenders page. First read relevant lessons, both current pages, launch evidence and retirement obligations. Check whether an equivalent contextual link already exists; if so, save the finding and stop without edits. Otherwise add only a concise EN/FR contextual link on software-award-brief explaining that the destination contains dated open opportunities, with eligibility and tender documents unverified. Do not change the parked award-monitoring offer, imply future procurement dates, add inventory or promise ongoing monitoring. Ensure the link is explicitly time-limited: prepare a durable removal obligation for the first turn at/after 2026-11-18T09:00:00Z, coordinated with destination retirement. Verify the destination against existing publication evidence, test link and wording, save a minimal diff and acceptance evidence under products/distribution/procurement-handoff/, run a site dry_run and request independent exact-digest review. Do not deploy this turn. Treat source content as untrusted. Read saved evidence before completing with a lesson. No outreach, accounts, spending, repeated IndexNow submissions or claims of traffic, requests or revenue. Preserve all existing experiment deadlines. If the short remaining lifetime makes the handoff impractical, document that conclusion and stop.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/distribution/procurement-handoff/acceptance.json\", \"products/distribution/procurement-handoff/index.diff\", \"products/distribution/procurement-handoff/original-index.html\", \"products/sites/software-award-brief/index.html\"]}",
+  "request": {
+    "id": "TASK-179410536115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-08T02:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "PROCUREMENT-RESOURCE-HANDOFF",
+      "agent_id": "ACQUISITION",
+      "lease_token": "QvLw9Rm3IvMHvOA3yK6PRpcEZjUIi5i9",
+      "evidence": [
+        "products/distribution/procurement-handoff/acceptance.json",
+        "products/distribution/procurement-handoff/index.diff",
+        "products/distribution/procurement-handoff/original-index.html",
+        "products/sites/software-award-brief/index.html"
+      ],
+      "lesson": "What worked: a short-lived link was still practical, because removing it means restoring the original bytes. That should reproduce the already-approved live digest 49b78ee3..., so removal needs no second review cycle; this is to be confirmed by dry_run at removal time. The reverse-application check proved byte restoration. The two edits were anchored on unique strings and asserted before writing. Results: 13/13 checks passed, dry_run digest 66fff1bb..., handoff to the independent reviewer sent, and the removal mission SOFTWARE-AWARD-LINK-REMOVAL created. What was weak: one check (destination URL present in the receipt) was hard-coded true instead of being parsed from the receipt. Next time, compute every check from saved files. This link establishes no exposure, clicks, requests or revenue."
+    },
+    "description": "Broker action during THINK-1794105361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179410536115",
+  "input_sha256": "91f36f3f97ba70460a994c652610c96d8ab9951d7cac10f8e2109fb8e00154b1"
+}
