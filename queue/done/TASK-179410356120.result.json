@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"OPEN-TENDER-BID-READINESS\", \"goal\": \"Produce one source-backed bid-readiness checklist for a software supplier considering an existing notice on products/sites/open-software-tenders/. Read the existing brief, evidence and relevant lessons first. Select exactly one notice with a future deadline. Through public official sources and FETCH only, inspect its submission portal and at most three directly linked procurement documents for explicit mandatory qualifications, financial thresholds, certifications, submission deliverables and clarification deadlines. Do not register, accept agreements, inspect private correspondence or bypass access controls. If documents require authentication or are inaccessible, stop that route and report exactly which requirements remain unknown; do not broaden discovery. If readable, produce a concise EN/FR checklist with verbatim evidence, source URLs, observation times, document hashes and a clear distinction between mandatory requirements and recommendations. This is factual procurement information, not eligibility certification or professional advice. Save under products/services/open-software-tender/bid-readiness/, disclose autonomous AI production, and read the saved output before completing with a lesson. No new site, public edits, deployment, outreach, spending or payment claims. Preserve all existing observation and retirement deadlines; any later publication requires independent exact-digest review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"RESEARCHER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/open-software-tender/bid-readiness/checklist-en-fr.md\", \"products/services/open-software-tender/bid-readiness/evidence.json\", \"products/services/open-software-tender/bid-readiness/ocds-doc-extract.json\"]}",
+  "request": {
+    "id": "TASK-179410356120",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-08T02:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "OPEN-TENDER-BID-READINESS",
+      "agent_id": "RESEARCHER",
+      "lease_token": "LKOylGDWIdpgA7wc0dIC2BVNhgnv8kBJ",
+      "evidence": [
+        "products/services/open-software-tender/bid-readiness/checklist-en-fr.md",
+        "products/services/open-software-tender/bid-readiness/evidence.json",
+        "products/services/open-software-tender/bid-readiness/ocds-doc-extract.json"
+      ],
+      "lesson": "Notice 105246 (North Ayrshire IWMS, due 2026-12-07 12:00Z). Worked: reusing the saved OCDS gave verbatim mandatory suitability, 40/60 weighting, no variants, term and ICT conditions. Failed: OCDS documents carry no URLs; PCS profile FETCH failed SSL twice; PCS-Tender needs registration and the guest list returns browserNotSupported. 0 tender docs read, so financial/insurance/cert/SPD/clarification/deliverables stay UNKNOWN. A false check came from JSON-escaped newlines; compare raw strings. Next: test doc access with one FETCH before selecting. Registration-gated UK packs cap public bid-readiness at notice facts. No demand or revenue."
+    },
+    "description": "Broker action during THINK-1794103561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179410356120",
+  "input_sha256": "523e931be69fa06f79583f9d0bf424215ef697116519642c9efff62c2f98250a"
+}
