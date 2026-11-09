@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "2026-11-08T06:45:52+00:00 /u/Superb-Recognition75https://www.reddit.com/user/Superb-Recognition75 https://www.reddit.com/r/forhire/comments/1xqs1mu/hiring_content_management_assistant/ \n  I’m currently looking for a small number of dependable and detail-oriented individuals to join an ongoing online content management project. This is a flexible, remote freelance opportunity suitable for individuals looking for additional income. No prior professional experience is required, as instructions and initial guidance will be provided. Position: Content Management Assistant Compensation: $70–$100 per week, depending on workload and completed assignments Work Arrangement: Remote / Freelance Time Commitment: Approximately 1–2 hours per day Key Responsibilities: Organize and manage content provided for the project. Publish and upload materials following specific instructions. Monitor  \n---\n2026-11-08T04:13:55+00:00 /u/kyibuuhttps://www.reddit.com/user/kyibuu https://www.reddit.com/r/forhire/comments/1xqphzt/hiring_one_time_maybe_in_future_again/ \n  I’m looking to hire someone based in Montreal, Canada for a small, one time freelance task. The job would involve making phone calls to local comic book stores on my behalf. I’m located outside of Canada and don’t speak French, so I’m looking for someone who can communicate with local businesses in either English or French. The goal is to find a comic book store willing to accept money I send them on a monthly basis, which my friend can use to purchase comics in person. This is a short assignment, ideally around one hour of calling! I’m looking for someone who is comfortable speaking with businesses, explaining the arrangement, and finding a store willing to accommodate it. Payment: $30 USD \n---\n2026-11-06T10:38:30+00:00 /u/Fatsquirrel666https://www.reddit.com/user/Fatsquirrel666 https://www.reddit.com/r/forhire/comments/1xp9pdj/hiring_i_vibecoded_a_website_on_chatgpt_now_i/ \n  Hello, don’t judge I just needed to understand the looks of it. now that I like more or less the final result, I would like someone making it smoother in transiction, and just generallg less laggy and clean. I am not sure how much to pay for something like this, so name your price. I am not looking to invest hundreds into it. 15$/h. submitted by /u/Fatsquirrel666 [link] [comments]  \n---\n2026-11-05T13:16:30+00:00 /u/geode_echoichttps://www.reddit.com/user/geode_echoic https://www.reddit.com/r/forhire/comments/1xoidq5/hiring_ai_software_engineer_3060hr/ \n  We're looking for a skilled AI Software Engineer with a strong background in software development and a deep understanding of AI technologies. The ideal candidate is passionate about building innovative AI-powered solutions and has solid engineering skills. Requirements: - Fluent in English, with strong verbal and written communication skills. - 3+ years of professional experience in software development. - Deep knowledge of AI, machine learning, and LLMs. - Strong problem-solving skills and the ability to work independently. - Experience developing, deploying, and maintaining production-ready software. - Blockchain experience is a strong plus. - Passion for emerging technologies and innova \n---\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179424786113.json"
+  ],
+  "request": {
+    "id": "TASK-179424786113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T18:11:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nd=json.load(open('products/services/diversified-offers/forhire-hiring-extract.json'))\nfor o in d:\n  if any(k in o['link'] for k in ['1xqphzt','1xp9pdj','1xoidq5','1xqs1mu']): print(o['updated'],o['author'],o['link'],'\\n',o['text'],'\\n---')\n"
+      ],
+      "inputs": [
+        "products/services/diversified-offers/forhire-hiring-extract.json"
+      ],
+      "outputs": [],
+      "mission_id": "DIVERSIFIED-SMALL-REVENUES-20261109"
+    },
+    "description": "Broker action during THINK-1794247861",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424786113",
+  "input_sha256": "000788fb06f9622e370c538062642ec55f412640822778f737dcb24ec733a4e4"
+}
