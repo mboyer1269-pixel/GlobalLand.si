@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"NEW-ACTIONABLE-BUYERS-20261109\",\n \"observed\": \"2026-11-09\",\n \"verdict\": \"NO_NEW_QUALIFIED_LEAD; one conditional adjacent lead retained (RSL, see qualification.json + rsl-unsent-message.txt)\",\n \"retained\": [\n  {\n   \"name\": \"RSL (WordPress Jobs, posted 2026-11-05)\",\n   \"status\": \"CONDITIONAL_ADJACENT\",\n   \"source\": \"https://jobs.wordpress.net/job/wordpress-website-developer-18/\",\n   \"proposal\": \"CAD79 text-only content/internal-link QA checklist, labelled proposal; buyer did not request it\",\n   \"effort_hours_total\": 2.75,\n   \"message\": \"products/services/new-actionable-buyers/rsl-\n\n",
+  "artifacts": [
+    "products/services/new-actionable-buyers/bounded-result.json",
+    "products/receipts/TASK-179425260415.json"
+  ],
+  "request": {
+    "id": "TASK-179425260415",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T19:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib;p=pathlib.Path('products/services/new-actionable-buyers/bounded-result.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps({'mission':'NEW-ACTIONABLE-BUYERS-20261109','observed':'2026-11-09','verdict':'NO_NEW_QUALIFIED_LEAD; one conditional adjacent lead retained (RSL, see qualification.json + rsl-unsent-message.txt)','retained':[{'name':'RSL (WordPress Jobs, posted 2026-11-05)','status':'CONDITIONAL_ADJACENT','source':'https://jobs.wordpress.net/job/wordpress-website-developer-18/','proposal':'CAD79 text-only content/internal-link QA checklist, labelled proposal; buyer did not request it','effort_hours_total':2.75,'message':'products/services/new-actionable-buyers/rsl-unsent-message.txt (UNSENT; needs explicit operator approval of exact message)'}],'rejected':[{'source':'https://toronto.craigslist.org/search/cpg (served from craigslist.org/search/area/toronto?cat=cpg)','task':'TASK-179425260411/412','result':'13 listings, all survey/panel/testing/referral gigs for human residents or low-value link sharing; none requests data, SQLite, documentation or transformation work. Rejected.'},{'source':'https://www.iapm.net/transfer/projects/iapm-ausschreibung.pdf (linked from WordPress Jobs 2026-10-31)','task':'TASK-179425260413/414','sha256':'2a149e4df6548e27577243ef0bd27d2d202cb9e49e816f9d094db66c2bb341de','quotes':['Wir suchen einen erfahrenen WordPress-Entwickler (m/w/d) mit sehr guten PHP-Kenntnissen, der uns bei diesem Projekt unterstuetzt.','Wir suchen keinen klassischen Webdesigner, sondern einen technischen Partner mit Erfahrung in der Migration komplexer WordPress-Projekte.','Aktuell basiert das Weblearning auf Markdown-Inhalten.'],'result':'Single multi-phase partner sought (analysis, WordPress/WooCommerce rebuild, MySQL migration, LMS, AI chatbot). Markdown-import feasibility is only a sub-part, not a separately purchasable task; no verified WordPress/LMS runtime. Rejected; no sample prepared.'}],'uncertainties':['Visibility of a listing does not establish it is still open.','Craigslist page is one city/category snapshot.','PDF text extracted via pdftotext; parts of the remaining pages not read beyond 12000 chars.'],'not_done':['No contact, application, account, agreement, purchase, sample or Treasury update.'],'learning':'Public job/gig feeds mostly surface whole-project or human-identity roles; small bounded paid tasks matching offline data/doc work were not found in 3 feeds today.'},indent=1,ensure_ascii=False));print(p.read_text()[:600])"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/new-actionable-buyers/bounded-result.json"
+      ],
+      "mission_id": "NEW-ACTIONABLE-BUYERS-20261109"
+    },
+    "description": "Broker action during THINK-1794252604",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425260415",
+  "input_sha256": "0f899d7f8ec5d1dde2e74c36faa6b946b531c8bcb8fad27f88f03a17afa67462"
+}
