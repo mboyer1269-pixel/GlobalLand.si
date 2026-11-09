@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "15210\n13\n{\"u\": \"https://www.craigslist.org/view/d/west-toronto-toronto-gamers-wanted-to/tBWmEDmRpW6c612ZsXxe6e\", \"t\": \"\\ud83c\\udfae Toronto Gamers Wanted to Test Mobile and PC Titles $0 city of toronto\"}\n{\"u\": \"https://www.craigslist.org/view/d/downtown-toronto-get-paid-to-test-new/iEbu3uX2xdbgxQpL1un9ai\", \"t\": \"Get Paid $5 to Test a New Startup Platform! (Remote) $0 Toronto\"}\n{\"u\": \"https://www.craigslist.org/view/d/toronto-ebay-seller-needed/jwZYg8XTEY5t6GojuZYgGv\", \"t\": \"eBay seller needed $0 city of toronto\"}\n{\"u\": \"https://www.craigslist.org/view/d/pickering-southwest-remote-market/asxWfjnnNYdTK8cSXXSixW\", \"t\": \"Remote Market Research Assistant \\u2013 Earn Up to $50/Task $0 Pickering , ON\"}\n{\"u\": \"https://www.craigslist.org/view/d/north-york-toronto-residents-wanted-for/8RqEspRBTZucSte7L6s7kX\", \"t\": \"Toronto residents wanted for a short paid survey $0 toronto\"}\n{\"u\": \"https://www.craigslist.org/view/d/downtown-toronto-do-you-hire-engineers/xuq9xUTCKDZFhPyTh4518q\", \"t\": \"Do you hire engineers at a small company? Online paid interview $0 city of toronto\"}\n{\"u\": \"https://www.craigslist.org/view/d/downtown-toronto-earn-crypto-by-solving/dropjRw2dQ3hMvy4x4fGk5\", \"t\": \"Earn crypto by solving puzzles - trade for real cash! $0 Toronto\"}\n{\"u\": \"https://www.craigslist.org/view/d/ajax-northwest-share-link-get-paid-250/aLCWgCBFfp8W8Ed5X6wv8i\", \"t\": \"Share a Link, Get Paid $2.50 Each \\u2013 Daily e-Transfer (Durham) $0 Durham\"}\n{\"u\": \"https://www.craigslist.org/view/d/north-york-easy-remote-cash-250-every/ux6rT4bSDxBSMskfz7EuER\", \"t\": \"Easy Remote Cash \\u2013 $2.50 Every Survey You Share, Paid Daily $0 York\"}\n{\"u\": \"https://www.craigslist.org/view/d/brampton-southwest-earn-250-per-survey/924TyATPb8dcrugS5DYCPz\", \"t\": \"Earn $2.50 Per Survey From Your Phone \\u2013 Paid Daily (Brampton) $0 Brampton\"}\n{\"u\": \"https://www.craigslist.org/view/d/york-text-link-get-paid-250-per-survey/bDbQgTPVhLJ6bZF5x89g6G\", \"t\": \"Text a Link, Get Paid: $2.50 Per Survey, e-Transfer Daily $0 Toronto\"}\n{\"u\": \"https://www.craigslist.org/view/d/mississauga-survey-response-getter-250/mAxwoTpSopQdtS6GUeZ7Dm\", \"t\": \"Survey Response Getter \\u2013 $2.50 Per Response, Paid Daily (Mississauga) $0 Mississauga\"}\n{\"u\": \"https://www.craigslist.org/view/d/east-york-looking-for-focus-group/qRvUHF7ZpoVL9e7CnFUhgA\", \"t\": \"Looking For Focus Group Panelists - Part Time Remote Work From Home $0 Toronto , ON\"}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179425260412.json"
+  ],
+  "request": {
+    "id": "TASK-179425260412",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T19:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json;t=open('products/services/new-actionable-buyers/raw/cl-toronto-cpg.html',encoding='utf-8',errors='replace').read();print(len(t));items=re.findall(r'<li[^>]*class=\"cl-static-search-result\"[^>]*>(.*?)</li>',t,re.S);print(len(items));\nfor i in items[:60]:\n  h=re.search(r'href=\"([^\"]+)\"',i);x=re.sub(r'<[^>]+>',' ',i);print(json.dumps({'u':h.group(1) if h else None,'t':' '.join(html.unescape(x).split())[:200]}))\nif not items: print(re.sub(r'\\s+',' ',re.sub(r'<[^>]+>',' ',t))[:3000])"
+      ],
+      "inputs": [
+        "products/services/new-actionable-buyers/raw/cl-toronto-cpg.html"
+      ],
+      "outputs": [],
+      "mission_id": "NEW-ACTIONABLE-BUYERS-20261109"
+    },
+    "description": "Broker action during THINK-1794252604",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425260412",
+  "input_sha256": "a7837837c30c5a3a484dee074c521c2b1f474a06ad90900934e937e1295fefdf"
+}
