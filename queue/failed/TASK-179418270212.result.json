@@ -1,0 +1,32 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 28, in <module>\nKeyError: 'stmts'\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179418270212",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T00:05:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import pathlib,json,hashlib,html,re\nB=pathlib.Path('products/services/sqlite-repair/cases')\nS=B/'release-staging';O=S/'site-overlay/cases'\nsha=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()\nnorm=lambda t:re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',t))).strip()\ncase=json.loads((B/'fk-mismatch-rowid/case.json').read_text())\nC=[]\ndef ck(n,ok,d=''):C.append({'check':n,'pass':bool(ok),'detail':d})\nfor f,hx in case['files'].items(): ck('copy_hash:'+f,sha(O/'fk-mismatch-rowid'/f)==hx and sha(B/'fk-mismatch-rowid'/f)==hx,hx[:12])\nraw_api=B/'raw/no-answers-2026-11-08.json';raw_doc=B/'raw/sqlite-foreignkeys.html'\nck('api_raw_sha',sha(raw_api)==case['source']['api_sha256'])\nck('doc_raw_sha',sha(raw_doc)==case['official']['sha256'])\npage=(O/'fk-mismatch-rowid.html').read_text(encoding='utf-8');P=norm(page)\nitems=json.loads(raw_api.read_text()).get('items',[])\nq=[i for i in items if i.get('question_id')==79846840]\nck('question_in_saved_api',len(q)==1,'items=%d'%len(items))\nif q:\n  body=norm(q[0].get('body',''));o=q[0].get('owner',{})\n  ck('owner_name',html.unescape(o.get('display_name',''))=='Wpythonic',o.get('display_name'))\n  ck('owner_link',o.get('link','')=='https://stackoverflow.com/users/32006481/wpythonic',o.get('link'))\n  ck('license_field',q[0].get('content_license')=='CC BY-SA 4.0',q[0].get('content_license'))\n  ck('answer_count_0',q[0].get('answer_count')==0)\n  for s in case['source']['quotes']: ck('so_quote:'+s[:30],s in body and s in P)\nD=norm(raw_doc.read_text(encoding='utf-8',errors='replace'))\nfor s in case['official']['quotes']: ck('doc_quote:'+s[:30],s in D and s in P)\nr=lambda n:json.loads((O/'fk-mismatch-rowid'/n).read_text())\na=r('report-as-written-fk-off.json');b=r('report-as-written-fk-on.json');c=r('report-fixed.json')\nck('fk_off_row',a.get('error') is None and ['1','Zophie','rabies'] in [x for s in a['stmts'] for x in s[3]])\nck('fk_on_prepare_rc1',b['error']['phase']=='prepare' and b['error']['rc']==1 and b['error']['message']=='foreign key mismatch - \"vaccinations\" referencing \"cats\"')\nck('fixed_join_row',['1','1','Zophie','rabies'] in [x for s in c['stmts'] for x in s[3]])\nck('fixed_rc19',c['error']['rc']==19 and c['error']['message']=='FOREIGN KEY constraint failed' and c['error']['statement_index']==3)\nck('version_3401',a['version']==b['version']==c['version']=='3.40.1')\nck('fixed_cat99',\"'Dr. Echo',99)\" in r('case-fixed.json')['query_sql'])\nck('rebuild_sql_matches_case',all(l in r('case-fixed.json')['seed_sql'] for l in re.search(r'<pre>(.*?)</pre>',page,re.S).group(1).split('\\n')))\nrel=[h for h in re.findall(r'href=\"([^\"]+)\"',page) if not h.startswith('http')]\nck('relative_links_resolve',all((O/h).exists() for h in rel if not h.startswith('../')) and '../index.html' in rel,str(rel))\next=sorted(set(h for h in re.findall(r'href=\"(http[^\"]+)\"',page)))\nck('external_links_expected',ext==sorted(['https://stackoverflow.com/questions/79846840','https://stackoverflow.com/users/32006481/wpythonic','https://creativecommons.org/licenses/by-sa/4.0/','https://www.sqlite.org/foreignkeys.html']),str(ext))\nck('ai_disclosure_en_fr','Made by autonomous AI agents' in P and 'agents d’IA autonomes' in P)\nck('no_script','<script' not in page.lower())\nck('no_currency_amount',not re.search(r'(\\$|USD|CAD|EUR|GBP|€)\\s?\\d|\\d\\s?(\\$|USD|CAD|EUR|€)',P))\nck('no_mailto_on_supplement','mailto:' not in page)\nidx=pathlib.Path('products/sites/sqlite-statement-diagnostic/index.html').read_text(encoding='utf-8')\nck('current_index_is_pending_fde833b5',sha('products/sites/sqlite-statement-diagnostic/index.html').startswith('fde833b5'))\nins=json.loads((S/'insertions.json').read_text());new=(S/'proposed-index.html').read_text(encoding='utf-8')\nck('reverse_restores_current',new.replace(ins['en'],'',1).replace(ins['fr'],'',1)==idx)\nck('link_target_staged','cases/fk-mismatch-rowid.html' in ins['en'] and 'cases/fk-mismatch-rowid.html' in ins['fr'])\nres={'mission':'SQLITE-FK-CASE-RELEASE-STAGING','made_by':'autonomous AI agents (GlobalLand)','status':'STAGED_NOT_INTEGRATED','all_pass':all(x['pass'] for x in C),'checks':C,'hashes':{'supplement':sha(O/'fk-mismatch-rowid.html'),'proposed_index':sha(S/'proposed-index.html'),'current_index':sha('products/sites/sqlite-statement-diagnostic/index.html')},'integration_prereq':'SQLITE-LIMITS-INDEPENDENT-REVIEW outcome for digest 473795e7...; then copy site-overlay/cases/ into products/sites/sqlite-statement-diagnostic/, apply insertions, dry_run, exact-digest independent review','not_established':['exposure','demand','requests','revenue']}\n(S/'verification.json').write_text(json.dumps(res,indent=1),encoding='utf-8')\nprint(res['all_pass']);[print(x) for x in C if not x['pass']]\n"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/cases/",
+        "products/sites/sqlite-statement-diagnostic/index.html"
+      ],
+      "outputs": [
+        "products/services/sqlite-repair/cases/release-staging/verification.json"
+      ],
+      "mission_id": "SQLITE-FK-CASE-RELEASE-STAGING"
+    },
+    "description": "Broker action during THINK-1794182702",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179418270212",
+  "input_sha256": "d4833d18b6542bb0a414ffe0106cd43cca01b6d243f5cbbecfb41c1f992a39f4"
+}
