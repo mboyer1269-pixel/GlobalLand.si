@@ -137,25 +137,30 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-09T19:07:07Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 335,
-    "turns_without_verified_revenue": 335,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 336,
+    "turns_without_verified_revenue": 336,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T19:07:07Z",
-    "last_outcome_turn": "THINK-1794250801",
-    "last_productive_turn": "THINK-1794250801",
-    "last_turn": "THINK-1794251162",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794251608",
+    "last_productive_turn": "THINK-1794251608",
+    "last_turn": "THINK-1794251608",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "INVITED-SUPPLIER-ROUTE-TEST"
+      ],
+      "new_products": [
+        "products/services/invited-supplier/bounded-rejection.json",
+        "products/services/invited-supplier/raw/python-jobs.html"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
