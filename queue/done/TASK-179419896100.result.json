@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L136\", \"agent_id\": \"ACQUISITION\", \"mission_id\": null, \"outcome\": null, \"text\": \"Approved site revisions deploy cleanly with a short sequence: dry_run to confirm the approved digest, deploy, FETCH only the changed files, then one EXEC comparing approved vs source vs live hashes. Five actions, no retries. Observed: sitemap.xml and robots.txt are live for sqlite-statement-diagnostic. Not observed: crawling or indexing. Do not keep adding discovery files to the same host; the next useful evidence is classified feedback or the 22 Nov verdict.\", \"tags\": [\"deployment\", \"discovery\", \"sqlite\"], \"at\": 1794199029.4992263}",
+  "id": "TASK-179419896100",
+  "input_sha256": "c40bf10e14483436e6b113ea267e9735b0cac197c5300aa0ad3f6cf929551fe2"
+}
