@@ -1,0 +1,44 @@
+{
+  "digest": "f9d2f5c8ba8561d7bb79e98989b2591636849c96db0fa14c5437cfe05e9e495a",
+  "dry_run": "TASK-179419860511",
+  "checks": {
+    "baseline_16": true,
+    "unchanged": true,
+    "only_two_added": true,
+    "namespace": true,
+    "exact_urls": true,
+    "only_url_loc": true,
+    "robots_exact": true,
+    "official_source_hash": true,
+    "protocol_support": true,
+    "verified_canonical_hashes": true
+  },
+  "all_pass": true,
+  "hashes": {
+    "robots.txt": "51b5983b5a0bd2ffc5e93e6f98e798e75a76d0aca45106dbdf3900fea133c7fc",
+    "index.html": "b6cda1dce1e7e214bf62200278e9c31742ee6bcaf056a37c14cdaa2294646d24",
+    "llms.txt": "bd49df9fffa475d93a08043e25ed47a894df56e90b49e35d3a26548ca55a3da7",
+    "3d8f1b6a92c04e7f5a1b8c2d9e6f4a07.txt": "8d64b54667f2f7112aebaec9f70de683ee5d76118065834c0d8b6731732c2eaa",
+    "sitemap.xml": "03109bbcd8cf6e5e1c63af3342cd0d319fa324bc21bbaa89e6d3827f8d5bc0b7",
+    "repro/sample-inline-response.txt": "a184dd4b11142100e88f326d45e5763aed748bf7d1245bd443de4d85825b0e4d",
+    "repro/multi_stmt.c": "ca11940e50f4ff72665e538463a0da0cb7084c2bf3a606b171f6a35447220fa0",
+    "repro/acceptance.json": "42461f41c15022e4818d7c9707e0e03af7f11abea5a4159af24ab5d1bf683c95",
+    "repro/run-output.txt": "7cdacd357e65cb566ea9d036d04cdef6c8f80de680050ee458e7453c4ee83baa",
+    "repro/c-loader-attempt.txt": "44e56547f761eaca609c786e70300aaeb7b16fdca96332572f88bc720c6f2d63",
+    "repro/ctypes_repro.py": "f50da820a6fa3acc1e88b8b4714e13da1487cceb7efc07b0f3b9f7137d866783",
+    "cases/fk-mismatch-rowid.html": "ec267b5cc4e69cf1a71726e7d5550c46f1f4b4e6816367f449c63316ed502e40",
+    "cases/fk-mismatch-rowid/report-fixed.json": "71ba5004baeade36bb3b92210e0eb9315089c3f6ff4fc084d259f2fa238c77c2",
+    "cases/fk-mismatch-rowid/case-fixed.json": "cb488d80aebd9fb6351e29c6aa645ddb3128a2a483892bb0a6f42e5363cb2f37",
+    "cases/fk-mismatch-rowid/report-as-written-fk-off.json": "eba5e666e3f22e1fab451622ac5c5e3d6778fe7c28eeaed6f3a58fbaf032d500",
+    "cases/fk-mismatch-rowid/report-as-written-fk-on.json": "702f5f8b3f045426e479d49b121aad151c406e52b348f2a7edcb88e4ea521df9",
+    "cases/fk-mismatch-rowid/case-as-written-fk-on.json": "85d8dfd5a2e16386a1a28521e27f0932c7c514076e255ff582c5b29abcb54d75",
+    "cases/fk-mismatch-rowid/case-as-written-fk-off.json": "16f3efb8e1346fb0726ce38feafa8fc435837d2f576ef38d45c6a62f38cc56a4"
+  },
+  "locs": [
+    "https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/",
+    "https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/cases/fk-mismatch-rowid.html"
+  ],
+  "robots": "User-agent: *\nDisallow:\n\nSitemap: https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/sitemap.xml\n",
+  "source_excerpt": "cifying the Sitemap location in\n\n                your robots.txt file \n\n             \n\n             \n\n                You can specify the location of the Sitemap using a robots.txt file. To do this,\n\n                simply add the following line including the full URL to the sitemap: \n\n             Sitemap: http://www.example.com/sitemap.xml \n\n             \n\n                This directive is independent of the user-agent line, so it doesn't matter where\n\n                you place it in your file. If you have a Sitemap index file, you can include the\n\n                location of just that file. You don't need to list each individual Sitemap listed\n\n                in the index file. \n\n             \n\n                You can specify more than one Sitemap file per robots.txt file. \n\n             Sitemap: http://www.example.com/sitemap-host1.xml\n\nSitemap: http://www.example.com/sitemap-host2.",
+  "scope": "Only crawler files reviewed; no deployment, submission, indexing, exposure, requests or revenue established."
+}
