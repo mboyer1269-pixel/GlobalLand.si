@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "[Hiring] Rate $40 | Configuring AT&T BGW320 IP Passthrough + Netgear Nighthawk router + Port Forwarding For Plex Remote Access https://www.reddit.com/r/forhire/comments/1xr1h6c/hiring_rate_40_configuring_att_bgw320_ip/ /u/the-gaynerd\n This task should take an hour I imagine. I’m looking to hire someone remotely to help me properly configure my home network to fix a Plex issue that has occurred with ATT's recent firmware update with their BGW320 router. Would love today if possible. Details here from another person who had the same issue: https://www.reddit.com/r/PleX/comments/1xm4979/comment/19sa85hxdlnuo/?context=1&screen_view_count=2 Current Setup: ISP / Modem: AT&T Fiber with the BGW320-500 Gateway Router: Netgear Nighthawk (R7000 / RAX series) Server: Unraid NAS hosting Plex Media Server The Problem: Right now, with ATT's firmware update, if I have Port Forwarding on to allow my remote users access to my Plex server, I cannot access it locally because of a DNS binding bug which prevents local access. What I Need Done: AT&T BGW320 Configuration: Enable IP Passthrough (DHCPS-fixed) pointing to the Netgear Nighthawk's MAC address, and disable the built-in AT&T Wi-Fi radios (2.4GHz & 5GHz) to prevent interference/device leakage. Netgear Nighthawk Setup: Ensure the router properly acquires the public WAN IP, handles local DHCP for the 192.168.1.x subnet, and set up a static port forward rule for port 32400 (TCP) pointing directly to my Unraid server so that my scripts stay the same I have running and everything else. Verification: Confirm Plex Remote Access reports \"Fully Accessible Outside Your Network\" and test playback on client devices (Roku/Apple TV) to ensure direct play at original quality, and that I can access my Plex locally at home. Please comment or send a DM with your experience and availability. submitted by /u/the-gaynerd [link] [comments] \n----\n[Hiring] Arabic–English Trivia Writer & Content Organizer for Trivia Game — Strong GCC Cultural Knowledge https://www.reddit.com/r/forhire/comments/1xqzs02/hiring_arabicenglish_trivia_writer_content/ /u/CodingKiller\n Hi everyone! I’m developing a bilingual Arabic–English party trivia game, and I’m looking for someone to help write, research, edit, and organize its questions. The game is aimed at a Gulf audience, so strong familiarity with GCC culture, entertainment, and everyday references is especially valuable. What the work involves: Writing engaging, original trivia questions in Arabic and English, with clear and natural wording in each language. Reviewing and improving existing questions, removing duplicates, and fixing unclear wording or ambiguous answers. Researching and verifying answers, including a reliable source link for each question. Organizing questions by category and difficulty in Google Sheets/Excel, following a provided template. Suggesting suitable image, audio, or video references for media-based questions where relevant. Who I’m looking for: Someone with excellent written Arabic and English, strong research skills, and good attention to detail. You should be comfortable working with spreadsheets and have a good understanding of Gulf culture, TV, music, history, geography, and popular references. Knowledge of international topics such as movies, gaming, anime, and sports is also welcome. Previous trivia-writing experience is a plus, but I’m also interested in people with relevant writing, editing, research, or content-organization experience. Work arrangement: Remote freelance work. I’d like to start with a small paid batch, with potential for ongoing work if we’re a good fit. Budget: US$50–75 per batch of 100 completed questions, depending on category complexity. We’ll agree on the ongoing batch rate after a small paid trial. To apply, please send me a DM with: A brief introduction and your relevant experience. Existing writing samples in both Arabic and English. The topics and Gulf cultures you’re most familiar with. Your availability and preferred pricing. Please mention whether you’re interested in writing new questions, editing and organizing existing content, or handling both. submitted by /u/CodingKiller [link] [comments] \n----\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179424244314.json"
+  ],
+  "request": {
+    "id": "TASK-179424244314",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T16:40:43Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,pathlib\nimport xml.etree.ElementTree as ET\nns={'a':'http://www.w3.org/2005/Atom'}\nr=ET.fromstring(pathlib.Path('products/services/first-receipt/raw/forhire-new.rss').read_text())\nfor e in r.findall('a:entry',ns):\n  ti=e.findtext('a:title','',ns)\n  if 'Trivia' in ti or 'Plex' in ti:\n    c=re.sub(r'\\s+',' ',html.unescape(re.sub('<[^>]+>',' ',html.unescape(e.findtext('a:content','',ns)))))\n    print(ti, e.find('a:link',ns).get('href'), e.findtext('a:author/a:name','',ns)); print(c[:3500]); print('----')\n"
+      ],
+      "inputs": [
+        "products/services/first-receipt/raw/forhire-new.rss"
+      ],
+      "outputs": [],
+      "mission_id": "FOUNDER-FIRST-RECEIPT-20261110"
+    },
+    "description": "Broker action during THINK-1794242443",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424244314",
+  "input_sha256": "6f4d0137aa9c5c760bdec81583e6bf75f71238b8837d6c5b34f2f848e211c610"
+}
