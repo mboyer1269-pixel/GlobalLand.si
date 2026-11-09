@@ -90,7 +90,9 @@ class StrategyContextTests(unittest.TestCase):
                 self.assertEqual(initial['treasury']['state'],'UNFUNDED')
                 self.assertEqual(initial['capabilities']['FETCH']['state'],'BUILT_IN')
                 self.assertEqual(initial['capabilities']['EXEC']['state'],'NOT_CONFIGURED')
-                self.assertEqual(initial['commercial_paths']['paths']['collection']['state'],'NOT_IMPLEMENTED')
+                # This fixture has no private payment route; agent conclusions
+                # cannot turn the implemented administrative path into a ready one.
+                self.assertEqual(initial['commercial_paths']['paths']['collection']['state'],'UNAVAILABLE')
                 self.assertEqual(initial['source_products'], ['products/CHANNEL-DELTA.md','products/SURVEY-OMEGA.md'])
                 with patch.object(self.world,'lessons',return_value=[]):clean=c.prepare_context()['context']
                 self.assertEqual(initial['capabilities'],clean['capabilities'])
