@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/receipts/TASK-179425160814.json"
+  ],
+  "request": {
+    "id": "TASK-179425160814",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-09T19:13:28Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nclass P(HTMLParser):\n def __init__(self): super().__init__();self.skip=0;self.a=False\n def handle_starttag(self,t,a):\n  if t in ['script','style']:self.skip+=1\n  if t=='article':self.a=True\n  if self.a and t=='a':print('LINK',dict(a).get('href'))\n def handle_endtag(self,t):\n  if t in ['script','style']:self.skip-=1\n  if t=='article':self.a=False\n def handle_data(self,d):\n  if self.a and not self.skip and d.strip():print(d.strip())\np=P();p.feed(open('products/services/new-actionable-buyers/canadian-project.html').read())"
+      ],
+      "inputs": [
+        "products/services/new-actionable-buyers/canadian-project.html"
+      ],
+      "outputs": [],
+      "mission_id": "NEW-ACTIONABLE-BUYERS-20261109"
+    },
+    "description": "Broker action during THINK-1794251608",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425160814",
+  "input_sha256": "30ef0f27ff35fd09db94dfb8c08076c46fca92ca26c73cd893304e7065731c93"
+}
