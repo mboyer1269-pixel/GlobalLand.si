@@ -98,20 +98,6 @@
       "reports": 1,
       "opened_at": "2026-11-07T19:37:09Z",
       "last_reported_at": "2026-11-07T19:37:09Z"
-    },
-    {
-      "id": "SYSTEM-NO-OUTCOME",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "15 tours consécutifs sans mission conclue ni revenu vérifié",
-      "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 15,
-      "opened_at": "2026-11-09T11:30:48Z",
-      "last_reported_at": "2026-11-09T16:54:19Z"
     }
   ],
   "resolved_recent": [
@@ -156,23 +142,34 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 321,
-    "turns_without_verified_revenue": 321,
-    "turns_without_outcome": 15,
+    "turns_without_new_interpreted_feedback": 322,
+    "turns_without_verified_revenue": 322,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T11:30:48Z",
-    "last_outcome_turn": "THINK-1794222002",
-    "last_productive_turn": "THINK-1794243071",
-    "last_turn": "THINK-1794243071",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794243555",
+    "last_productive_turn": "THINK-1794243555",
+    "last_turn": "THINK-1794243555",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/first-receipt/email-route/current-topics.json",
-        "products/services/first-receipt/email-route/raw/n8n-jobs-current.json"
+      "outcome": true,
+      "mission_outcomes": [
+        "FIRST-RECEIPT-PERMITTED-EMAIL-PROPOSAL",
+        "HN-SEEKING-FREELANCER-EMAIL-PROPOSAL"
       ],
-      "new_product_count": 2,
+      "new_products": [
+        "products/services/first-receipt/email-route/bounded-rejection.json",
+        "products/services/first-receipt/email-route/raw/t325902.json",
+        "products/services/first-receipt/email-route/raw/t326558.json",
+        "products/services/first-receipt/email-route/raw/t327583.json",
+        "products/services/first-receipt/email-route/topic-extract.json",
+        "products/services/first-receipt/hn-route/bounded-rejection.json",
+        "products/services/first-receipt/hn-route/raw/freelancer-thread-search.json",
+        "products/services/first-receipt/hn-route/raw/nov2026-thread.json",
+        "products/services/first-receipt/hn-route/raw/thread-search.json",
+        "products/services/first-receipt/hn-route/thread-extract.json"
+      ],
+      "new_product_count": 10,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
