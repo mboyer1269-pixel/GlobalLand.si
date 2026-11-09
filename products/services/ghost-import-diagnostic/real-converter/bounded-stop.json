@@ -1,0 +1,59 @@
+{
+ "mission": "GHOST-REAL-CONVERTER-VERIFICATION",
+ "verdict": "BOUNDED_STOP_INFEASIBLE",
+ "observed_at": "2026-11-09",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "sources": {
+  "registry_metadata": {
+   "url": "https://registry.npmjs.org/@tryghost/kg-html-to-lexical/1.4.4",
+   "fetch_task": "TASK-179422056111",
+   "sha256": "f0e56a33778459bb84d31abc2c869471977a4eae7d568651d6b571acca34b583",
+   "license": "MIT",
+   "engines": {
+    "node": "^22.22.2 || ^24.15.0"
+   },
+   "tarball": "https://registry.npmjs.org/@tryghost/kg-html-to-lexical/-/kg-html-to-lexical-1.4.4.tgz",
+   "integrity": "sha512-XC7Ci4LmTxxzE+lLaIlC/ywH/FuM+ozsMSi+DTPW/+aEbuoNOFnDkaRbvJZYqs8VsApvJZj4WdR0LkgGBt6i0w=="
+  },
+  "capability_check": {
+   "task": "TASK-179422056112",
+   "artifact": "products/services/ghost-import-diagnostic/real-converter/capability-check.txt"
+  }
+ },
+ "observed_facts": {
+  "direct_dependencies": {
+   "jsdom": "30.0.1",
+   "lexical": "0.13.1",
+   "@lexical/html": "0.13.1",
+   "@lexical/link": "0.13.1",
+   "@lexical/list": "0.13.1",
+   "@lexical/headless": "0.13.1",
+   "@lexical/clipboard": "0.13.1",
+   "@lexical/rich-text": "0.13.1",
+   "@tryghost/kg-default-nodes": "~2.3.0",
+   "@tryghost/kg-default-transforms": "~1.3.9"
+  },
+  "direct_dependency_count": 10,
+  "node": "v22.23.4 (satisfies engines ^22.22.2)",
+  "global_modules": [
+   "corepack",
+   "npm"
+  ],
+  "jsdom_lexical_tryghost_resolvable": false,
+  "npm_cache_entries": 0,
+  "exec_network": "none (FETCH only)"
+ },
+ "reasoning": [
+  "Minimum tarballs = 1 converter + 10 direct dependencies = 11 FETCHes, exceeding the mission bound of 8 (2 already used: metadata + this mission budget leaves 6).",
+  "jsdom 30.0.1 has a large transitive tree (not enumerated here; enumerating it would itself consume further FETCHes) and @tryghost/kg-default-nodes/kg-default-transforms carry their own dependencies.",
+  "Tarballs are gzip binaries; FETCH base64 per package within 1 MiB is possible individually, but the count bound fails before size matters."
+ ],
+ "not_done": [
+  "No upstream converter execution",
+  "No change to public site files",
+  "No real Ghost import, posting, contact or delivery"
+ ],
+ "dependent_operation": "Replacing STUB_ONLY with real-converter results on the live diagnostic",
+ "still_independent": "Live diagnostic remains usable as a STUB_ONLY harness that a user runs after npm install on their own machine (documented in package README).",
+ "reconsideration_trigger": "An image with jsdom/lexical/@tryghost packages preinstalled, an npm cache or offline bundle provided by the operator, or a mission bound large enough for the full lockfile tree (would first require one FETCH of a lockfile listing all transitive versions)."
+}
