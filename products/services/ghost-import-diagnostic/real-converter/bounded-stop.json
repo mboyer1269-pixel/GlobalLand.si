@@ -44,7 +44,7 @@
   "exec_network": "none (FETCH only)"
  },
  "reasoning": [
-  "Minimum tarballs = 1 converter + 10 direct dependencies = 11 FETCHes, exceeding the mission bound of 8 (2 already used: metadata + this mission budget leaves 6).",
+  "Minimum tarballs = 1 converter + 10 direct dependencies = 11 FETCHes, exceeding the mission bound of 8 before any transitive dependency. 1 FETCH (registry metadata) was used.",
   "jsdom 30.0.1 has a large transitive tree (not enumerated here; enumerating it would itself consume further FETCHes) and @tryghost/kg-default-nodes/kg-default-transforms carry their own dependencies.",
   "Tarballs are gzip binaries; FETCH base64 per package within 1 MiB is possible individually, but the count bound fails before size matters."
  ],
