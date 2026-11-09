@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\"file\": \"products/services/sqlite-repair/fulfillment/RUNBOOK.md\", \"before_sha256\": \"825454127be3403d93ba39accdc5e834bc8a4c625601eca0246534b24a720fe1\", \"after_sha256\": \"ef09a7ad29bc28a177766bd96378bd2a5d3b44b37c9bdb7ce0ef6144922a53e7\", \"reverse_restores_original\": true, \"changed_sentences\": 1, \"basis\": \"AUDITOR seq 30 nit; products/reviews/sqlite-limits-independent/review.json; SQLITE-LIMITS-INDEPENDENT-REVIEW goal wording\", \"public_site_bytes_changed\": false, \"functionality_changed\": false}\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/fulfillment/RUNBOOK.md",
+    "products/services/sqlite-repair/fulfillment/runbook-sync-result.json",
+    "products/receipts/TASK-179418990110.json"
+  ],
+  "request": {
+    "id": "TASK-179418990110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-09T02:05:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,pathlib\np=pathlib.Path('products/services/sqlite-repair/fulfillment/RUNBOOK.md')\nb=p.read_bytes();s=b.decode()\nold='64 KiB per SQL text, 50 statements, 50 kept rows per statement, 2,000,000 VM steps and 2 s per run (progress handler -> SQLITE_INTERRUPT).'\nnew='per phase (seed, first-statement-only and all-statements runs are separate phases): 64 KiB per SQL text, 50 statements and 50 kept rows per statement; one 2,000,000 VM-step budget shared across phases; a 2 s deadline reset at the start of each phase. Timing is cooperative (progress handler -> SQLITE_INTERRUPT), not a hard wall-clock kill.'\nassert s.count(old)==1\nt=s.replace(old,new)\nrev=t.replace(new,old)\np.write_text(t)\nr={'file':str(p),'before_sha256':hashlib.sha256(b).hexdigest(),'after_sha256':hashlib.sha256(t.encode()).hexdigest(),'reverse_restores_original':rev.encode()==b,'changed_sentences':1,'basis':'AUDITOR seq 30 nit; products/reviews/sqlite-limits-independent/review.json; SQLITE-LIMITS-INDEPENDENT-REVIEW goal wording','public_site_bytes_changed':False,'functionality_changed':False}\npathlib.Path('products/services/sqlite-repair/fulfillment/runbook-sync-result.json').write_text(json.dumps(r,indent=1))\nprint(json.dumps(r))"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/fulfillment/RUNBOOK.md"
+      ],
+      "outputs": [
+        "products/services/sqlite-repair/fulfillment/RUNBOOK.md",
+        "products/services/sqlite-repair/fulfillment/runbook-sync-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794189901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179418990110",
+  "input_sha256": "baf9cc167b9fd81a2e65f56af74d21fc897735edc3250feac51bf504987c65ce"
+}

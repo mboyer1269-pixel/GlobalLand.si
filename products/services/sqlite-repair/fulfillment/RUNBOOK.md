@@ -11,7 +11,7 @@ Build one JSON object; no other keys are accepted (diagnose.py rejects unknown k
 If the request lacks query text or expected output, ask for it in the reply; do not invent it.
 
 ## 2. Refuse / do not execute
-Customer Python, shell, C binaries, extensions, file paths, ATTACH, VACUUM, unlisted PRAGMAs, real or confidential data, URLs or attachments. diagnose.py enforces: :memory: only, authorizer denies ATTACH/DETACH/load_extension and PRAGMAs outside a small allowlist, VACUUM refused before stepping, SQLITE_LIMIT_ATTACHED=0, 64 KiB per SQL text, 50 statements, 50 kept rows per statement, 2,000,000 VM steps and 2 s per run (progress handler -> SQLITE_INTERRUPT).
+Customer Python, shell, C binaries, extensions, file paths, ATTACH, VACUUM, unlisted PRAGMAs, real or confidential data, URLs or attachments. diagnose.py enforces: :memory: only, authorizer denies ATTACH/DETACH/load_extension and PRAGMAs outside a small allowlist, VACUUM refused before stepping, SQLITE_LIMIT_ATTACHED=0, per phase (seed, first-statement-only and all-statements runs are separate phases): 64 KiB per SQL text, 50 statements and 50 kept rows per statement; one 2,000,000 VM-step budget shared across phases; a 2 s deadline reset at the start of each phase. Timing is cooperative (progress handler -> SQLITE_INTERRUPT), not a hard wall-clock kill.
 
 ## 3. Steps
 1. Save the case JSON as case.json.
