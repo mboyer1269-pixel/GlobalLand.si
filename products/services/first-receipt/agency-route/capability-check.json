@@ -1,0 +1,7 @@
+{
+  "observed_at": "2026-11-09T17:00:59.019929+00:00",
+  "exit_code": 0,
+  "stdout": "{\n \"rows\": 12,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": []\n}\n",
+  "stderr": "",
+  "scope": "Existing synthetic fixture verification only; no customer data or Shopify import."
+}
