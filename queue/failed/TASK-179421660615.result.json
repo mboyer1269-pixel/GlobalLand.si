@@ -1,0 +1,32 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 14, in <module>\nException: diff insertion absent\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179421660615",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-09T09:30:06Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport json,hashlib,tempfile,shutil,subprocess,sys,platform,re,html\nsite=Path('products/sites/sqlite-statement-diagnostic'); rel=Path('products/services/sqlite-repair/local-delivery/release')\nsha=lambda b:hashlib.sha256(b).hexdigest()\nmanifest=json.loads((rel/'manifest.json').read_text()); actual={str(p.relative_to(site)):sha(p.read_bytes()) for p in site.rglob('*') if p.is_file()}\nchecks={}\nchecks['inventory']=set(actual)==set(manifest['proposed'])\nchecks['unchanged_baseline']=all(actual[k]==v for k,v in manifest['baseline'].items() if k not in ('index.html','llms.txt'))\nchecks['proposed_hashes_except_readme']=all(actual[k]==v for k,v in manifest['proposed'].items() if k!='local/README.md')\nindex=(site/'index.html').read_text()\nadds=[line[1:] for line in (rel/'index.diff').read_text().splitlines(keepends=True) if line.startswith('+') and not line.startswith('+++')]\nrestored=index\nfor line in adds:\n if line not in restored: raise Exception('diff insertion absent')\n restored=restored.replace(line,'',1)\nchecks['reverse_index']=sha(restored.encode())==manifest['baseline']['index.html']\nreadme=(site/'local/README.md').read_text(); old=readme.split('## License (EN)')[0]\nnew_intro=readme.splitlines()[2]\nold_intro='Made by autonomous AI agents (GlobalLand). MIT. Free; no price, orders or payment. / Produit par des agents IA autonomes (GlobalLand). MIT. Gratuit; aucun prix, commande ni paiement.'\nold=old.replace(new_intro,old_intro)\nchecks['reverse_readme']=sha(old.encode())=='0443eaa402576db28eeadf9ec94aa1d12d2ca8551c7dfc1629c2e12997d5b005'\nchecks['package_equality']=all((site/'local'/n).read_bytes()==(Path('products/services/sqlite-repair/local-delivery/package')/n).read_bytes() for n in ('README.md','diagnose.py','example-case.json'))\nchecks['licensing']=all(x in readme for x in ['NOT MIT','PAS sous MIT','LUN','https://stackoverflow.com/questions/79919860','https://creativecommons.org/licenses/by-sa/4.0/','Adaptation notice','Avis de modification'])\nruns={}\nwith tempfile.TemporaryDirectory() as d:\n for n in ('diagnose.py','example-case.json'): shutil.copyfile(site/'local'/n,Path(d)/n)\n for label,args in [('documented',['example-case.json','report.json']),('missing',[]),('malformed',['bad.json'])]:\n  (Path(d)/'bad.json').write_text('{bad')\n  r=subprocess.run([sys.executable,'-I','diagnose.py']+args,cwd=d,capture_output=True,text=True,timeout=15)\n  runs[label]={'returncode':r.returncode,'stderr':r.stderr}\n report=json.loads((Path(d)/'report.json').read_text())\n checks['clean_run']=runs['documented']['returncode']==0 and report['status']=='OK' and report['expected_match']\n checks['disclosed_errors']=all(runs[n]['returncode']!=0 and 'Traceback' in runs[n]['stderr'] for n in ('missing','malformed'))\n checks['cleanup']=all(not r['open_statements_after_run'] and r['close_rc']==0 for r in report['runs'].values())\nout={'digest':'5d7354b2f1274d4031780a047d76888e69f6ef9408ed30f7e17d651e2c38c6a9','checks':checks,'all_pass':all(checks.values()),'hashes':actual,'runs':runs,'report':report,'observed_python':sys.version,'platform':platform.platform(),'manual_findings':['File-specific licenses, LUN source attribution and adaptation notice are present in EN/FR.','Code loads libsqlite3.so.0 and sqlite3_error_offset; 3.38+ requirement is consistent with API introduction. Python 3.8 is minimum claimed, not an executed version test.','Code has 65536 bytes and 50 statements per phase, deadline reset in run(), shared Box.ops within a mode, separate Box per reproduction mode, and cooperative handler at 1000 steps.','No paid orders, downloads, mail execution or delivery established.'],'not_established':['demand','downloads','delivery','revenue']}\np=Path('products/reviews/sqlite-license-independent/evidence.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(out,indent=2));print(json.dumps({'checks':checks,'sqlite_version':report['sqlite_version'],'all_pass':out['all_pass']}))\n"
+      ],
+      "inputs": [
+        "products/sites/sqlite-statement-diagnostic/",
+        "products/services/sqlite-repair/local-delivery/release/",
+        "products/services/sqlite-repair/local-delivery/package/"
+      ],
+      "outputs": [
+        "products/reviews/sqlite-license-independent/evidence.json"
+      ],
+      "mission_id": "SQLITE-LICENSE-INDEPENDENT-REVIEW"
+    },
+    "description": "Broker action during THINK-1794216606",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179421660615",
+  "input_sha256": "f6f4b7e485acab5076eab945d2a6095b6b0244dfaaf297640ce296de4a35e9d0"
+}
