@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": " Skip to content Australia 2026 tickets are on sale! Get your ticket . Conferences Write the Docs Australia 2026 Write the Docs Portland 2027 Talk videos Learn Documentation guide Hiring guide Content by topic Salary survey Community Slack Meetups Newsletter Blog Code of Conduct About Team Sponsor us Contribute Contact Join Slack Job posting sponsorship Conferences Write the Docs Australia 2026 Write the Docs Portland 2027 Talk videos Learn Documentation guide Hiring guide Content by topic Salary survey Community Slack Meetups Newsletter Blog Code of Conduct About Team Sponsor us Contribute Contact Join Slack Home / About Write the Docs / Community sponsorship On this page Job posting sponsorship Sponsored entry format Schedule Pricing Examples Ordering Job posting sponsorship ¶ We offer a sponsorship for companies looking to hire documentarians. It’s a great way to promote your job to our community, which is full of folks that are passionate about software documentation, in particular around Docs as Code, API documentation, and developer experience. This sponsorship includes: A job posting in our monthly newsletter jobs section (Over 12,000 subscribers) A highlighted job posting in our #job-posts-only Slack channel (27,000 members) Post your job — $250 Sponsored entry format ¶ This entry format is about putting your information front and centre, and putting the link to your job posting in front of our community. The format is: Company name Job title Job Location / Remote Salary (optional) Link to job posting This information will be used to create a newsletter entry and a Slack post. Schedule ¶ We publish the newsletter once a month, typically in the first week of the month. The Slack post will be made within 1 week of the sponsorship being purchased. Pricing ¶ The price for our hiring sponsorship is $250 per job posting. You can pay via our online payment form , or we can issue you an invoice. Examples ¶ Ordering ¶ Email us at sponsorship @ writethedocs . org to purchase your sponsorship, or if you have any questions. Post your job — $250 On this page Job posting sponsorship Sponsored entry format Schedule Pricing Examples Ordering Join our mailing list Get a monthly roundup of what the community is talking about, with over 12,000 other readers. Email address Subscribe Want conference news too? Choose your lists . Supported by Website Hosting Docs as Code Become a sponsor A global community of people who care about documentation. Stay in touch Talk shop with over 27,000 documentarians in Slack, and read our monthly newsletter. Join Slack Get the newsletter About us Conferences Sponsor us Code of Conduct Contact © Write the Docs · CC BY-NC-SA 4.0 · Spotted a mistake? Edit this page on GitHub \n['#job-posting-sponsorship', '../../_images/job-example.png', 'mailto:sponsorship&#37;&#52;&#48;writethedocs&#46;org?subject=Job%20posting%20sponsorship', 'https://github.com/writethedocs/www/edit/main/docs/sponsorship/jobs.md']\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179425656112.json"
+  ],
+  "request": {
+    "id": "TASK-179425656112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-09T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html;t=open('products/services/docs-paid-task-fit/raw/wtd-jobs.html',encoding='utf-8').read();m=re.search(r'<main.*?</main>|<body.*</body>',t,re.S);s=m.group(0) if m else t;s=re.sub(r'<(script|style).*?</\\1>','',s,flags=re.S);links=re.findall(r'href=\"([^\"]+)\"',s);s=html.unescape(re.sub(r'<[^>]+>',' ',s));s=re.sub(r'\\s+',' ',s);print(s[:3500]);print([l for l in links if 'job' in l.lower()][:30])"
+      ],
+      "inputs": [
+        "products/services/docs-paid-task-fit/raw/wtd-jobs.html"
+      ],
+      "outputs": [],
+      "mission_id": "DOCS-PAID-TASK-FIT-20261109"
+    },
+    "description": "Broker action during THINK-1794256561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425656112",
+  "input_sha256": "6d9bfd3f846a6eb72d048014284f8a33200f188dbcb383c82d39c6c1742bdd0f"
+}
