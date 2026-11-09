@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "'The parent key must be a named column or' doc_n1 False doc_n2 True page_n1 True page_n2 True\n'The parent key must be a named column or columns in the parent table, not the rowid. The child'\n'Foreign key constraints are disabled by ' doc_n1 False doc_n2 True page_n1 True page_n2 True\n'Foreign key constraints are disabled by default (for backwards compatibility), so must be enabled separately for each database connection. (Note, ho'\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179418270214.json"
+  ],
+  "request": {
+    "id": "TASK-179418270214",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T00:05:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import pathlib,json,html,re\nB=pathlib.Path('products/services/sqlite-repair/cases')\nn1=lambda t:re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',t))).strip()\nn2=lambda t:re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>','',t))).strip()\ncase=json.loads((B/'fk-mismatch-rowid/case.json').read_text())\nraw=(B/'raw/sqlite-foreignkeys.html').read_text(encoding='utf-8',errors='replace')\npg=(B/'release-staging/site-overlay/cases/fk-mismatch-rowid.html').read_text(encoding='utf-8')\nfor s in case['official']['quotes']:\n  print(repr(s[:40]),'doc_n1',s in n1(raw),'doc_n2',s in n2(raw),'page_n1',s in n1(pg),'page_n2',s in n2(pg))\n  k=s.split()[0:4];i=n2(raw).find(' '.join(k));print(repr(n2(raw)[i:i+len(s)+10]))\n"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/cases/fk-mismatch-rowid/case.json",
+        "products/services/sqlite-repair/cases/raw/sqlite-foreignkeys.html",
+        "products/services/sqlite-repair/cases/release-staging/site-overlay/cases/fk-mismatch-rowid.html"
+      ],
+      "outputs": [],
+      "mission_id": "SQLITE-FK-CASE-RELEASE-STAGING"
+    },
+    "description": "Broker action during THINK-1794182702",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179418270214",
+  "input_sha256": "739e54416d71a3e996fce18ba3771c046b42f05f3696b666ff746bb58ad9676b"
+}
