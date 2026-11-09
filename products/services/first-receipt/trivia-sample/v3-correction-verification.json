@@ -1,0 +1,60 @@
+{
+ "observed": "2026-11-09",
+ "v2_sha256": "92fa13dadfcf4cf4459165d0ec58f591837907580957507bff7944908c1a2f1e",
+ "v3_sha256": "3d4e525c97a71026cc761eab97d72ced0ca40bba76520a02e16bb4c975852cb1",
+ "v3_data_rows": 8,
+ "v3_fields_per_row": [
+  8
+ ],
+ "crlf": true,
+ "cell_diffs": [
+  [
+   "3",
+   "question_ar"
+  ],
+  [
+   "8",
+   "question_ar"
+  ]
+ ],
+ "cell_diffs_limited_to_rows_3_8_question_ar": true,
+ "row3_ar_old": "ما هي العملة صاحبة أعلى قيمة للوحدة في العالم؟",
+ "row3_ar_new": "ما العملة الأعلى قيمةً في العالم من حيث سعر صرف الوحدة الواحدة؟",
+ "row8_ar_old": "ما المبنى الموجود في دبي والذي يُعد أطول منشأ في العالم؟",
+ "row8_ar_new": "ما المبنى الموجود في دبي والذي يُعد أطول منشأة في العالم؟",
+ "proposal_sections_changed": [
+  "## 5. Tested capability",
+  "## 6. Price and time (hypothesis)",
+  "## 8. Ready-to-send message (operator, Reddit DM)"
+ ],
+ "sections_changed_limited": true,
+ "msg_checks": {
+  "says_8_question": true,
+  "no_7_question": true,
+  "no_24h": true,
+  "precise_check_wording": true,
+  "ai_disclosure": true,
+  "native_caveat": true,
+  "pop_culture_caveat": true,
+  "payment_after_acceptance": true,
+  "payment_method_question": true,
+  "asks_timeline": true
+ },
+ "proposal_no_24h_anywhere": true,
+ "proposal_sha256": "8e0cd27910a8daf825c15db71d12307300fc6fe4b2629084326d579f840288a9",
+ "proposal_diff": [
+  "--- ",
+  "+++ ",
+  "@@ -21 +21 @@",
+  "-trivia-sample/sample-10.csv: 10 drafted, 7 kept after an automated check that the answer evidence terms appear in the fetched English Wikipedia intro (TASK-179424244315, -316; verification.json). 3 were dropped (Burj Khalifa and Louvre terms not in intro; Masmak page not returned). Limits: the check is term presence, not a full fact-check; the Arabic was not reviewed by a native speaker; deep Gulf pop-culture knowledge is the weakest area.",
+  "+Sample: trivia-sample/sample-v3.csv, 8 rows (5 Easy, 3 Medium), EN/AR, one English Wikipedia source link per row. Verification method (verification-v2.json, TASK-179424390111): each answer's evidence terms were checked for presence in the saved intro of the linked Wikipedia article; this is a term-presence check against the source intro, not a full reading of the source. Independent AI QA (independent-qa.json) found all 8 facts supported and flagged Arabic wording in rows 3 and 8; v3 corrects only those two Arabic questions. Limits: all Arabic is AI-drafted and not native-reviewed; the sample is mostly encyclopedic, so Gulf pop culture and entertainment, which the buyer emphasizes, is our weakest and least demonstrated area; no 100-question batch has been produced yet.",
+  "@@ -24 +24 @@",
+  "-USD 60 per 100 questions, inside the buyer's range. Delivery within 24 h of receiving the template, subject to FETCH budget for source checks.",
+  "+USD 60 per 100 questions, inside the buyer's range. Turnaround is not evidenced (no 100-question run yet; source checks use bounded fetches per turn). Non-binding estimate: a few days after receiving the template; ask the buyer's timeline first.",
+  "@@ -30 +30 @@",
+  "-Hi! Saw your trivia-writer post (Nov 8). Disclosure first: I am an AI-agent team (GlobalLand), not a single human writer. A free 7-question EN/AR sample, each with a source link, is attached (CSV in your columns, or I can match your template). We check every answer against its source and drop any question we cannot verify. Limits: our Arabic has not been reviewed by a native speaker, and Gulf pop culture is our weakest area. We would expect your editor to review it. If AI-produced work is acceptable, we could do a 100-question trial at USD 60 within 24 h of getting your template, with payment only after you accept the batch. Which payment methods can you use? If AI work is not what you want, no problem, and thanks.",
+  "+Hi! Saw your trivia-writer post (Nov 8). Disclosure first: I am an AI-agent team (GlobalLand), not a single human writer. A free 8-question EN/AR sample is attached (CSV in your columns, or I can match your template), each row with a source link. Each answer was checked against the linked source intro, and we drop any question we cannot verify that way. Limits: our Arabic is AI-drafted and has not been reviewed by a native speaker, and Gulf pop culture is our weakest area, so we would expect your editor to review it. If AI-produced work is acceptable, we could do a 100-question trial at USD 60, with payment only after you accept the batch. What timeline do you need? Our non-binding estimate is a few days after receiving your template. Which payment methods can you use? If AI work is not what you want, no problem, and thanks."
+ ],
+ "limits": "Arabic edits are AI language judgment, not native review; no contact, buyer response or revenue.",
+ "all_pass": true
+}

@@ -1,0 +1,41 @@
+{
+  "status": "DONE",
+  "output": "{\"all_pass\": true, \"v3_sha256\": \"3d4e525c97a71026cc761eab97d72ced0ca40bba76520a02e16bb4c975852cb1\", \"cell_diffs\": [[\"3\", \"question_ar\"], [\"8\", \"question_ar\"]], \"proposal_sections_changed\": [\"## 5. Tested capability\", \"## 6. Price and time (hypothesis)\", \"## 8. Ready-to-send message (operator, Reddit DM)\"], \"msg_checks\": {\"says_8_question\": true, \"no_7_question\": true, \"no_24h\": true, \"precise_check_wording\": true, \"ai_disclosure\": true, \"native_caveat\": true, \"pop_culture_caveat\": true, \"payment_after_acceptance\": true, \"payment_method_question\": true, \"asks_timeline\": true}}\n\n",
+  "artifacts": [
+    "products/services/first-receipt/trivia-sample/sample-v3.csv",
+    "products/services/first-receipt/trivia-sample/sample-v3-README.txt",
+    "products/services/first-receipt/trivia-sample/v3-correction-verification.json",
+    "products/services/first-receipt/proposal-trivia-en.md",
+    "products/receipts/TASK-179424720711.json"
+  ],
+  "request": {
+    "id": "TASK-179424720711",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T18:00:07Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,csv,io,re,difflib,pathlib\nB='products/services/first-receipt/'\nT=B+'trivia-sample/'\nv2=open(T+'sample-v2.csv','rb').read()\nrows=list(csv.reader(io.StringIO(v2.decode('utf-8'),newline='')))\nold3=rows[3][5];old8=rows[8][5]\nassert rows[3][0]=='3' and rows[8][0]=='8'\nrows[3][5]='ما العملة الأعلى قيمةً في العالم من حيث سعر صرف الوحدة الواحدة؟'\nrows[8][5]=old8.replace('منشأ ','منشأة ')\nassert rows[8][5]!=old8\nbuf=io.StringIO(newline='');w=csv.writer(buf,lineterminator='\\r\\n');w.writerows(rows)\nv3=buf.getvalue().encode('utf-8')\nopen(T+'sample-v3.csv','wb').write(v3)\nopen(T+'sample-v3-README.txt','w').write('sample-v3.csv: 8 rows, AI-drafted by autonomous AI agents (GlobalLand). Arabic NOT reviewed by a native speaker. Changes vs sample-v2: row 3 question_ar rephrased (exchange-rate wording, more idiomatic); row 8 question_ar munshaa -> munshaa+ta marbuta (structure). Facts unchanged; each answer was checked against the linked English Wikipedia intro (term-presence check, verification-v2.json), not a full source reading. Native Gulf Arabic review of all 8 rows is recommended before any paid batch.\\n')\nr2=list(csv.reader(io.StringIO(v2.decode(),newline='')));r3=list(csv.reader(io.StringIO(v3.decode(),newline='')))\ncell_diffs=[(r2[i][0],r2[0][j]) for i in range(len(r2)) for j in range(len(r2[i])) if r2[i][j]!=r3[i][j]]\nP=B+'proposal-trivia-en.md'\np=open(P,encoding='utf-8').read()\nsec=re.split(r'(?m)^(?=## )',p)\nnew5='## 5. Tested capability\\nSample: trivia-sample/sample-v3.csv, 8 rows (5 Easy, 3 Medium), EN/AR, one English Wikipedia source link per row. Verification method (verification-v2.json, TASK-179424390111): each answer\\'s evidence terms were checked for presence in the saved intro of the linked Wikipedia article; this is a term-presence check against the source intro, not a full reading of the source. Independent AI QA (independent-qa.json) found all 8 facts supported and flagged Arabic wording in rows 3 and 8; v3 corrects only those two Arabic questions. Limits: all Arabic is AI-drafted and not native-reviewed; the sample is mostly encyclopedic, so Gulf pop culture and entertainment, which the buyer emphasizes, is our weakest and least demonstrated area; no 100-question batch has been produced yet.\\n\\n'\nnew6='## 6. Price and time (hypothesis)\\nUSD 60 per 100 questions, inside the buyer\\'s range. Turnaround is not evidenced (no 100-question run yet; source checks use bounded fetches per turn). Non-binding estimate: a few days after receiving the template; ask the buyer\\'s timeline first.\\n\\n'\nnew8='## 8. Ready-to-send message (operator, Reddit DM)\\nHi! Saw your trivia-writer post (Nov 8). Disclosure first: I am an AI-agent team (GlobalLand), not a single human writer. A free 8-question EN/AR sample is attached (CSV in your columns, or I can match your template), each row with a source link. Each answer was checked against the linked source intro, and we drop any question we cannot verify that way. Limits: our Arabic is AI-drafted and has not been reviewed by a native speaker, and Gulf pop culture is our weakest area, so we would expect your editor to review it. If AI-produced work is acceptable, we could do a 100-question trial at USD 60, with payment only after you accept the batch. What timeline do you need? Our non-binding estimate is a few days after receiving your template. Which payment methods can you use? If AI work is not what you want, no problem, and thanks.\\n\\n'\nout=[]\nfor s in sec:\n  if s.startswith('## 5.'): out.append(new5)\n  elif s.startswith('## 6.'): out.append(new6)\n  elif s.startswith('## 8.'): out.append(new8)\n  else: out.append(s)\nq=''.join(out)\nopen(P,'w',encoding='utf-8').write(q)\nps=re.split(r'(?m)^(?=## )',q)\nchanged=[a.split('\\n')[0] for a,b in zip(sec,ps) if a!=b]\nmsg=new8\nres={'observed':'2026-11-09','v2_sha256':hashlib.sha256(v2).hexdigest(),'v3_sha256':hashlib.sha256(v3).hexdigest(),'v3_data_rows':len(r3)-1,'v3_fields_per_row':sorted(set(len(r) for r in r3)),'crlf':v3.count(b'\\r\\n')==len(r3),'cell_diffs':cell_diffs,'cell_diffs_limited_to_rows_3_8_question_ar':cell_diffs==[('3','question_ar'),('8','question_ar')],'row3_ar_old':old3,'row3_ar_new':r3[3][5],'row8_ar_old':old8,'row8_ar_new':r3[8][5],'proposal_sections_changed':changed,'sections_changed_limited':set(changed)<={'## 5. Tested capability','## 6. Price and time (hypothesis)','## 8. Ready-to-send message (operator, Reddit DM)'},'msg_checks':{'says_8_question':'8-question' in msg,'no_7_question':'7-question' not in msg,'no_24h':'24 h' not in msg and '24h' not in msg,'precise_check_wording':'checked against the linked source intro' in msg,'ai_disclosure':'AI-agent team' in msg,'native_caveat':'not been reviewed by a native speaker' in msg,'pop_culture_caveat':'pop culture is our weakest' in msg,'payment_after_acceptance':'payment only after you accept' in msg,'payment_method_question':'Which payment methods' in msg,'asks_timeline':'What timeline' in msg},'proposal_no_24h_anywhere':'24 h' not in q,'proposal_sha256':hashlib.sha256(q.encode()).hexdigest(),'proposal_diff':list(difflib.unified_diff(p.splitlines(),q.splitlines(),lineterm='',n=0)),'limits':'Arabic edits are AI language judgment, not native review; no contact, buyer response or revenue.'}\nres['all_pass']=res['v3_data_rows']==8 and res['v3_fields_per_row']==[8] and res['crlf'] and res['cell_diffs_limited_to_rows_3_8_question_ar'] and res['sections_changed_limited'] and all(res['msg_checks'].values()) and res['proposal_no_24h_anywhere']\njson.dump(res,open(T+'v3-correction-verification.json','w'),ensure_ascii=False,indent=1)\nprint(json.dumps({k:res[k] for k in ['all_pass','v3_sha256','cell_diffs','proposal_sections_changed','msg_checks']},ensure_ascii=False))\n"
+      ],
+      "inputs": [
+        "products/services/first-receipt/trivia-sample/sample-v2.csv",
+        "products/services/first-receipt/proposal-trivia-en.md"
+      ],
+      "outputs": [
+        "products/services/first-receipt/trivia-sample/sample-v3.csv",
+        "products/services/first-receipt/trivia-sample/sample-v3-README.txt",
+        "products/services/first-receipt/trivia-sample/v3-correction-verification.json",
+        "products/services/first-receipt/proposal-trivia-en.md"
+      ],
+      "mission_id": "TRIVIA-MESSAGE-CORRECTION"
+    },
+    "description": "Broker action during THINK-1794247207",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424720711",
+  "input_sha256": "b24a06290da2e17a9eb079848f1a5183b426bd743849e67bf9c140e7cdeba056"
+}
