@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "Contact Us | POINTER, an eHouse Company\nAN EHOUSE COMPANY\nOur Work\nCapabilities\nShopify POS\nAbout Us\nContact Us\nAN EHOUSE COMPANY\nHome\nOur Work\nCapabilities\nShopify POS\nAbout Us\nContact Us\nCareers\nWe’re an Exclusive Oddit Partner\nGet some fresh perspective — we’ve partnered with industry leading CRO experts Oddit! Get a free single page report, providing conversion-focused design recommendations, and the rationale behind it.\nRequest a Pointer Oddit\nLet’s\nchat\nabout\nhow\nwe\ncan\nhelp\nWe’re eager to discover more about your business and explore how we can assist you. Share details about your project in our contact form, and we’ll connect you with our solutions team.\nEnabling countless merchants & partners with top notch Shopify resources.\nFor the beauty shots\nInstagram\nFor recent news\nX/Twitter\nIndustry & company info\nLinkedin\n© 2025\n/\nPRIVACY\nOTTAWA, CANADA\nEmpowering Brands with Custom Shopify App Development\nEffortless Migration From Wordpress to Shopify\nEffortless Migration From Bigcommerce to Shopify\nEffortless Migration From Squarespace to Shopify\nEffortless Migration From Woocommerce to Shopify\nEffortless Magento to Shopify Migration Services\nSimplifying the Process of Migrating to Shopify\nExpert Shopify Store Setup Services for a Successful Online Presence\nEmpowering Ecommerce with Custom Shopify Theme Development\nEmpowering Brands with Expert Shopify Agency Services in New York\nEmpowering Brands with Our Expert Los Angeles Shopify Agency\nYour #1 Shopify Plus eCommerce Agency\nEmpowering Brands with Shopify Plus Design Agency Expertise\nShopify Plus Agency: Elevating Ecommerce with our Experts\nEnabling countless merchants & partners with top notch Shopify resources.\nFor the beauty shots\nInstagram\nFor recent news\nX/Twitter\nIndustry & company info\nLinkedin\n© 2025\n/\nPRIVACY\nOTTAWA, CANADA\nEmpowering Brands with Custom Shopify App Development\nEffortless Migration From Wordpress to Shopify\nEffortless Migration From Bigcommerce to Shopify\nEffortless Migration From Squarespace to Shopify\nEffortless Migration From Woocommerce to Shopify\nEffortless Magento to Shopify Migration Services\nSimplifying the Process of Migrating to Shopify\nExpert Shopify Store Setup Services for a Successful Online Presence\nEmpowering Ecommerce with Custom Shopify Theme Development\nEmpowering Brands with Expert Shopify Agency Services in New York\nEmpowering Brands with Our Expert Los Angeles Shopify Agency\nYour #1 Shopify Plus eCommerce Agency\nEmpowering Brands with Shopify Plus Design Agency Expertise\nShopify Plus Agency: Elevating Ecommerce with our Experts\nEnabling countless merchants & partners with top notch Shopify resources.\nFor the beauty shots\nInstagram\nFor recent news\nX/Twitter\nIndustry & company info\nLinkedin\n© 2025\n/\nPRIVACY\nOTTAWA, CANADA\nEmpowering Brands with Custom Shopify App Development\nEffortless Migration From Wordpress to Shopify\nEffortless Migration From Bigcommerce to Shopify\nEffortless Migration From Squarespace to Shopify\nEffortless Migration From Woocommerce to Shopify\nEffortless Magento to Shopify Migration Services\nSimplifying the Process of Migrating to Shopify\nExpert Shopify Store Setup Services for a Successful Online Presence\nEmpowering Ecommerce with Custom Shopify Theme Development\nEmpowering Brands with Expert Shopify Agency Services in New York\nEmpowering Brands with Our Expert Los Angeles Shopify Agency\nYour #1 Shopify Plus eCommerce Agency\nEmpowering Brands with Shopify Plus Design Agency Expertise\nShopify Plus Agency: Elevating Ecommerce with our Experts\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179424355514.json"
+  ],
+  "request": {
+    "id": "TASK-179424355514",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-09T16:59:15Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfrom html.parser import HTMLParser\nclass P(HTMLParser):\n def __init__(self):super().__init__();self.skip=0\n def handle_starttag(self,t,a):\n  if t in ('script','style'):self.skip+=1\n  if t in ('input','textarea','select','form'):print(t,dict(a))\n  if t=='a':\n   for k,v in a:\n    if k=='href' and v.startswith('mailto:'):print('MAIL',v)\n def handle_endtag(self,t):\n  if t in ('script','style'):self.skip=max(0,self.skip-1)\n def handle_data(self,d):\n  if not self.skip and d.strip():print(d.strip())\np=P();p.feed(Path('products/services/first-receipt/agency-route/pointer-contact.html').read_text())"
+      ],
+      "inputs": [
+        "products/services/first-receipt/agency-route/pointer-contact.html"
+      ],
+      "outputs": [],
+      "mission_id": "FOUNDER-FIRST-RECEIPT-20261110"
+    },
+    "description": "Broker action during THINK-1794243555",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424355514",
+  "input_sha256": "da26934d38d2501c7a4867707fd626b4dcdecccafb4cf129b49b0ce4b1883a20"
+}
