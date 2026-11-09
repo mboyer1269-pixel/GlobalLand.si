@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"DOCS-PAID-TASK-FIT-20261109\",\n \"observed\": \"2026-11-09\",\n \"verdict\": \"BOUNDED_REJECTION_CHANNEL_STOPPED\",\n \"buyer_requests_inspected\": 0,\n \"sources\": [\n  {\n   \"requested_url\": \"https://jobs.writethedocs.org/\",\n   \"resolved_url\": \"https://www.writethedocs.org/sponsorship/jobs/\",\n   \"task\": \"TASK-179425656111\",\n   \"sha256\": \"b19c2b0b18acf7a638267e57eb65bc07b4c02e2bfadcd78d56070505f0c5fc93\",\n   \"quotes\": [\n    \"A job posting in our monthly newsletter jobs section (Over 12,000 subscribers)\",\n    \"A highlighted job posting in our #job-posts-only Slack channel (27,000 members)\",\n    \"We offer a sponsorship for companies looking to hire documentarians.\"\n   ],\n   \"present\": {\n    \"monthly newsletter jobs section\": true,\n    \"#job-posts-only Slack channel\": true,\n    \"hire documentarians\": true\n   }\n  },\n  {\n   \"url\": \"https://www.writethedocs.org/blog/newsletter-november-2026/\",\n   \"task\": \"TASK-179425656115\",\n   \"sha256\": \"106dd0fb003a307e92a808e61e08a21a39ee6e586f89b0770ffe050c82e565bc\",\n   \"job_keyword_contexts\": [\n    \"stralia 2026 Write the Docs Portland 2027 Talk videos Learn Documentation guide Hiring guide Content by topic Salary survey Community Slack Meetups Newsletter Blog Co\",\n    \"stralia 2026 Write the Docs Portland 2027 Talk videos Learn Documentation guide Hiring guide Content by topic Salary survey Community Slack Meetups Newsletter Blog Co\",\n    \"es (took me much less) and is amazingly helpful when negotiating your salary or contracting rate. Our articles this month cover how technical you need to get to write d\"\n   ],\n   \"note\": \"Public web copy of the November 2026 newsletter shows sections resources, SDK docs, screenshots, writing skills, events; no job listings observed in the public page.\"\n  }\n ],\n \"findings\": [\n  \"The former public job board now redirects to an employer sponsorship page; listings are distributed via the emailed newsletter and the Slack #job-posts-only channel.\",\n  \"The channel is framed as hiring documentarians (employment), which the mission rejects; no bounded paid task was observed.\",\n  \"Reading Slack requires an account (unavailable, not created); the public newsletter page contained no job entries, so zero concrete buyer requests could be inspected.\"\n ],\n \"not_established\": [\n  \"That no paid docs tasks exist in Slack or the emailed newsletter\",\n  \"Any buyer, request, compensation or AI policy\"\n ],\n \"dependent_operation\": \"Inspection of Write the Docs job posts requires a founder-approved Slack or newsletter subscription identity; not requested now (low expected fit: employment roles).\",\n \"reconsideration_trigger\": \"A public web archive of WTD job posts appears, or an existing approved identity can read #job-posts-only.\",\n \"no_contact_sent\": true,\n \"no_proposal_prepared\": true\n}\n\n",
+  "artifacts": [
+    "products/services/docs-paid-task-fit/bounded-rejection.json",
+    "products/receipts/TASK-179425656117.json"
+  ],
+  "request": {
+    "id": "TASK-179425656117",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-09T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json,hashlib,pathlib\nd='products/services/docs-paid-task-fit/'\ndef txt(p):\n t=open(d+'raw/'+p,encoding='utf-8').read();s=re.sub(r'<(script|style).*?</\\1>','',t,flags=re.S);return t,re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',s)))\nn_raw,n=txt('wtd-newsletter-nov-2026.html');j_raw,j=txt('wtd-jobs.html')\nhits=[n[max(0,m.start()-80):m.end()+80] for m in re.finditer(r'(?i)\\bjobs?\\b|hiring|contract|freelanc',n)]\nr={'mission':'DOCS-PAID-TASK-FIT-20261109','observed':'2026-11-09','verdict':'BOUNDED_REJECTION_CHANNEL_STOPPED','buyer_requests_inspected':0,\n'sources':[{'requested_url':'https://jobs.writethedocs.org/','resolved_url':'https://www.writethedocs.org/sponsorship/jobs/','task':'TASK-179425656111','sha256':hashlib.sha256(j_raw.encode()).hexdigest(),'quotes':['A job posting in our monthly newsletter jobs section (Over 12,000 subscribers)','A highlighted job posting in our #job-posts-only Slack channel (27,000 members)','We offer a sponsorship for companies looking to hire documentarians.'],'present':{q:(q in j) for q in ['monthly newsletter jobs section','#job-posts-only Slack channel','hire documentarians']}},\n{'url':'https://www.writethedocs.org/blog/newsletter-november-2026/','task':'TASK-179425656115','sha256':hashlib.sha256(n_raw.encode()).hexdigest(),'job_keyword_contexts':hits[:10],'note':'Public web copy of the November 2026 newsletter shows sections resources, SDK docs, screenshots, writing skills, events; no job listings observed in the public page.'}],\n'findings':['The former public job board now redirects to an employer sponsorship page; listings are distributed via the emailed newsletter and the Slack #job-posts-only channel.','The channel is framed as hiring documentarians (employment), which the mission rejects; no bounded paid task was observed.','Reading Slack requires an account (unavailable, not created); the public newsletter page contained no job entries, so zero concrete buyer requests could be inspected.'],\n'not_established':['That no paid docs tasks exist in Slack or the emailed newsletter','Any buyer, request, compensation or AI policy'],\n'dependent_operation':'Inspection of Write the Docs job posts requires a founder-approved Slack or newsletter subscription identity; not requested now (low expected fit: employment roles).',\n'reconsideration_trigger':'A public web archive of WTD job posts appears, or an existing approved identity can read #job-posts-only.',\n'no_contact_sent':True,'no_proposal_prepared':True}\np=pathlib.Path(d+'bounded-rejection.json');p.write_text(json.dumps(r,indent=1,ensure_ascii=False));print(p.read_text())"
+      ],
+      "inputs": [
+        "products/services/docs-paid-task-fit/raw/"
+      ],
+      "outputs": [
+        "products/services/docs-paid-task-fit/bounded-rejection.json"
+      ],
+      "mission_id": "DOCS-PAID-TASK-FIT-20261109"
+    },
+    "description": "Broker action during THINK-1794256561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425656117",
+  "input_sha256": "d7264e7eb4c068ab10f9024df538369ed7244b548ff2bdf239bd865bcb56763b"
+}

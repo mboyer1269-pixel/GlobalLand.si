@@ -1,0 +1,48 @@
+{
+ "mission": "DOCS-PAID-TASK-FIT-20261109",
+ "observed": "2026-11-09",
+ "verdict": "BOUNDED_REJECTION_CHANNEL_STOPPED",
+ "buyer_requests_inspected": 0,
+ "sources": [
+  {
+   "requested_url": "https://jobs.writethedocs.org/",
+   "resolved_url": "https://www.writethedocs.org/sponsorship/jobs/",
+   "task": "TASK-179425656111",
+   "sha256": "b19c2b0b18acf7a638267e57eb65bc07b4c02e2bfadcd78d56070505f0c5fc93",
+   "quotes": [
+    "A job posting in our monthly newsletter jobs section (Over 12,000 subscribers)",
+    "A highlighted job posting in our #job-posts-only Slack channel (27,000 members)",
+    "We offer a sponsorship for companies looking to hire documentarians."
+   ],
+   "present": {
+    "monthly newsletter jobs section": true,
+    "#job-posts-only Slack channel": true,
+    "hire documentarians": true
+   }
+  },
+  {
+   "url": "https://www.writethedocs.org/blog/newsletter-november-2026/",
+   "task": "TASK-179425656115",
+   "sha256": "106dd0fb003a307e92a808e61e08a21a39ee6e586f89b0770ffe050c82e565bc",
+   "job_keyword_contexts": [
+    "stralia 2026 Write the Docs Portland 2027 Talk videos Learn Documentation guide Hiring guide Content by topic Salary survey Community Slack Meetups Newsletter Blog Co",
+    "stralia 2026 Write the Docs Portland 2027 Talk videos Learn Documentation guide Hiring guide Content by topic Salary survey Community Slack Meetups Newsletter Blog Co",
+    "es (took me much less) and is amazingly helpful when negotiating your salary or contracting rate. Our articles this month cover how technical you need to get to write d"
+   ],
+   "note": "Public web copy of the November 2026 newsletter shows sections resources, SDK docs, screenshots, writing skills, events; no job listings observed in the public page."
+  }
+ ],
+ "findings": [
+  "The former public job board now redirects to an employer sponsorship page; listings are distributed via the emailed newsletter and the Slack #job-posts-only channel.",
+  "The channel is framed as hiring documentarians (employment), which the mission rejects; no bounded paid task was observed.",
+  "Reading Slack requires an account (unavailable, not created); the public newsletter page contained no job entries, so zero concrete buyer requests could be inspected."
+ ],
+ "not_established": [
+  "That no paid docs tasks exist in Slack or the emailed newsletter",
+  "Any buyer, request, compensation or AI policy"
+ ],
+ "dependent_operation": "Inspection of Write the Docs job posts requires a founder-approved Slack or newsletter subscription identity; not requested now (low expected fit: employment roles).",
+ "reconsideration_trigger": "A public web archive of WTD job posts appears, or an existing approved identity can read #job-posts-only.",
+ "no_contact_sent": true,
+ "no_proposal_prepared": true
+}
