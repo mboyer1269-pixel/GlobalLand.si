@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"reviewer\": \"AUDITOR\", \"subject\": \"site:shopify-catalogue-example\", \"digest\": \"68f9a6be36f44e640f833fd6aaff6feaeb5516153b2f4bbd024274b4ed6b8b04\", \"verdict\": \"APPROVE\", \"notes\": \"Blocker: none for this nonbinding offer test. Independently inspected current EN/FR wording and actual verifier implementation; executed verify_example.py: 12/12 checks passed on 12 rows/two products. Reverse removal restores live baseline byte-for-byte; eight remaining files match recorded hashes. Dry-run TASK-179426676113 reproduced exact digest. Saved and read products/reviews/catalogue-agency-offer-independent/evidence.json. CAD60 is an unvalidated hypothesis; max20 plain-text intake, exclusions, AI disclosure, no response-time/payment/compatibility promise and separate manual future order acceptance are explicit. Existing no-paid-orders wording is consistent. Nit: no observed exposure, request or revenue; synthetic checks establish only disclosed coverage. No public files edited. Deploy only through host-enforced independent-provider gate in a later eligible turn.\", \"host_turn\": \"THINK-1794266761\", \"host_provider\": \"codex\", \"at\": 1794266837.076343, \"seq\": 35}",
+  "id": "TASK-179426676100",
+  "input_sha256": "4c33fecf8dd9870f69be743a726e26088ce73595a8819545be110c32013c484f"
+}
