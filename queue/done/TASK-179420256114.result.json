@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SQLITE-LOCAL-DOWNLOAD-RELEASE\", \"goal\": \"Make the existing tested SQLite local-delivery package reviewable for public download, without adding diagnostic features. First read relevant lessons, current mission state, products/services/sqlite-repair/local-delivery/evidence.json, clean-run-report.json and the complete package. Check for equivalent pending work. Reuse diagnose.py and example-case.json byte-for-byte. Add only the existing package and concise EN/FR download instructions to products/sites/sqlite-statement-diagnostic/, preserving existing content except the minimal links and delivery explanation. Clearly state Linux-only support, Python 3.8+, libsqlite3.so.0, SQLite 3.38+, observed Python 3.11.2/SQLite 3.40.1 execution, exact per-phase and shared resource limits, cooperative timing, execution of supplied SQL, and documented malformed-JSON/missing-argument tracebacks. State that local execution avoids emailing SQL and does not depend on private-cycle execution; do not claim mail integration, portability beyond evidence, downloads, customer delivery or demand. Execute the documented commands from a clean directory using the proposed downloadable bytes, compare implementation hashes and verify expected output and documented errors. Save and read a minimal diff, manifest and actual verification evidence under products/services/sqlite-repair/local-delivery/release/. Obtain a dry_run digest and hand off an exact-digest independent review mission to AUDITOR; do not deploy or review your own work. Stop on concrete defects rather than expanding scope. No outreach, discovery resubmission, accounts, spending or new inventory. Preserve the 22 November SQLite verdict and all existing observation and mandatory retirement obligations. Complete with the actual lease and a lesson after reading saved evidence. Preparation and review establish neither acquisition nor revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/sqlite-repair/local-delivery/release/verification.json\", \"products/services/sqlite-repair/local-delivery/release/manifest.json\", \"products/services/sqlite-repair/local-delivery/release/index.diff\", \"products/sites/sqlite-statement-diagnostic/index.html\", \"products/sites/sqlite-statement-diagnostic/local/diagnose.py\"]}",
+  "request": {
+    "id": "TASK-179420256114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T05:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "SQLITE-LOCAL-DOWNLOAD-RELEASE",
+      "agent_id": "ACQUISITION",
+      "lease_token": "8bdQh580fhbVBOUDOpGv_iHE7SsT9arg",
+      "evidence": [
+        "products/services/sqlite-repair/local-delivery/release/verification.json",
+        "products/services/sqlite-repair/local-delivery/release/manifest.json",
+        "products/services/sqlite-repair/local-delivery/release/index.diff",
+        "products/sites/sqlite-statement-diagnostic/index.html",
+        "products/sites/sqlite-statement-diagnostic/local/diagnose.py"
+      ],
+      "lesson": "Worked: one EXEC did everything (copy the package byte for byte, anchor-unique insertion, clean-dir run of the downloadable bytes, documented traceback checks, reverse restoration, diff and manifest), then a dry_run. 13/13 checks passed, digest 2199108b..., 21 files. Watch: if a reused README declares a single licence (MIT), it can conflict with bundled CC BY-SA example content. Check licence consistency before handoff and flag it rather than editing reused bytes. This adds a delivery route only; exposure is still the binding constraint, so do not add more inventory to this host before the 22 Nov verdict."
+    },
+    "description": "Broker action during THINK-1794202561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179420256114",
+  "input_sha256": "90f048815152a2e4b4fb67383e792bac7346de82e594d6466362986834bd3aba"
+}
