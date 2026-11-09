@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\"from\": \"Livrable testé :\", \"to\": \"Livrable mis à l'essai :\", \"reason\": \"EN says deliverable we are testing; testé wrongly implied a tested offer\", \"index_sha256_before\": \"8fbd3fa65aec4baf7b43ea93e08d88edbb6ee53da6b39b78a558b3c730f1f271\", \"index_sha256_after\": \"ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28\", \"reverse_restores_previous\": true}\n\n",
+  "artifacts": [
+    "products/sites/shopify-catalogue-example/index.html",
+    "products/services/catalogue-transformation/agency-offer/checks.json",
+    "products/receipts/TASK-179426016113.json"
+  ],
+  "request": {
+    "id": "TASK-179426016113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T21:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,pathlib\nS=pathlib.Path('products/sites/shopify-catalogue-example/index.html')\nO=pathlib.Path('products/services/catalogue-transformation/agency-offer');O.mkdir(parents=True,exist_ok=True)\nt=S.read_text('utf-8');a='Livrable testé :';b=\"Livrable mis à l'essai :\"\nassert t.count(a)==1\nn=t.replace(a,b);S.write_text(n,'utf-8')\nr=json.loads((O/'checks.json').read_text('utf-8'))\nr['fr_wording_fix']={'from':a,'to':b,'reason':'EN says deliverable we are testing; testé wrongly implied a tested offer','index_sha256_before':hashlib.sha256(t.encode()).hexdigest(),'index_sha256_after':hashlib.sha256(n.encode()).hexdigest(),'reverse_restores_previous':n.replace(b,a)==t}\nr['new_index_sha256']=r['fr_wording_fix']['index_sha256_after']\n(O/'checks.json').write_text(json.dumps(r,indent=1,ensure_ascii=False),'utf-8')\nprint(json.dumps(r['fr_wording_fix'],ensure_ascii=False))"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/services/catalogue-transformation/agency-offer/checks.json"
+      ],
+      "outputs": [
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/services/catalogue-transformation/agency-offer/checks.json"
+      ],
+      "mission_id": "CATALOGUE-AGENCY-OFFER-TEST"
+    },
+    "description": "Broker action during THINK-1794260161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179426016113",
+  "input_sha256": "60c5e292e2c9fa6b6fe5382d9b2325ccacd5a617ba36dcdc05855b07eda0faf1"
+}
