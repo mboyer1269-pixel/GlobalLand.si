@@ -1,0 +1,63 @@
+{
+ "mission": "IAPM-ANALYSIS-MILESTONE-FIT",
+ "observed": "2026-11-09",
+ "verdict": "DO_NOT_PURSUE",
+ "source": {
+  "url": "https://www.iapm.net/transfer/projects/iapm-ausschreibung.pdf",
+  "sha256": "2a149e4df6548e27577243ef0bd27d2d202cb9e49e816f9d094db66c2bb341de",
+  "fetch_task": "TASK-179425260413",
+  "text_extract": "products/services/iapm-analysis-fit/iapm-spec-text.txt (TASK-179425476212, crude stream extraction; layout approximate)",
+  "language": "German"
+ },
+ "phase1_requested": [
+  "Analyse der bestehenden Architektur",
+  "Analyse der Datenbank",
+  "Analyse der vorhandenen PHP - Prozesse",
+  "Identifikation von zur Anwendung kommenden WordPress - bzw. WooCommerce - Standardlösungen",
+  "Empfehlung geeigneter Plugins und Technologien",
+  "Erstellung eines Migrationskonzepts"
+ ],
+ "rejection_reasons": [
+  {
+   "reason": "Phase 1 is not offered as a separable engagement; the buyer seeks one developer for the whole migration.",
+   "quotes": [
+    "Wir suchen einen erfahrenen WordPress - Entwickler (m/w/d) mit sehr guten PHP - Kenntnissen, der uns bei diesem Projekt unterstützt.",
+    "einer ersten Kostenschätzung, inkl. o Pauschalpreis mit Aufschlüsselung nach wesentlichen Leistungsbereichen, inklusive fünf Workshops"
+   ]
+  },
+  {
+   "reason": "Phase 1 analyses private, non-public assets (architecture, MySQL database, PHP processes); no public-source data-mapping is possible and access would require agreements/credentials we cannot accept.",
+   "quotes": [
+    "Zu Beginn wünschen wir uns eine technische Analyse der bestehenden Plattform."
+   ]
+  },
+  {
+   "reason": "Required qualifications we cannot truthfully claim: CV, references of comparable WordPress migration projects, WordPress/WooCommerce/PHP/MySQL experience, technical partner experienced in complex WP migrations.",
+   "quotes": [
+    "Referenzen vergleichbarer WordPress - Migrationsprojekte",
+    "Wir suchen keinen klassischen Webdesigner, sondern einen technischen Partner mit Erfahrung in der Migration komplexer WordPress - Projekte.",
+    "Wir suchen einen Entwickler mit Erfahrung in: WordPress, inkl. individuellen WordPress - Erweiterungen PHP WooCommerce MySQL Datenmigration REST APIs"
+   ]
+  },
+  {
+   "reason": "Five workshops and hourly-capacity commitments imply live synchronous participation by a named person.",
+   "quotes": [
+    "inklusive fünf Workshops",
+    "verfügbare Kapazität für dieses Projekt in Stunden pro Woche"
+   ]
+  }
+ ],
+ "not_found_in_extract": [
+  "submission deadline",
+  "AI-use restriction",
+  "explicit budget/currency",
+  "application email route (job board says apply via listing; not re-fetched)"
+ ],
+ "unknowns": [
+  "Whether IAPM would buy a standalone concept from a non-developer was not asked and must not be inferred."
+ ],
+ "proposal_saved": false,
+ "speculative_sample_created": false,
+ "outreach": "none",
+ "next": "Stop this lead. Prefer buyer requests whose stated deliverable is itself a bounded document/data task on public or buyer-supplied non-confidential inputs."
+}
