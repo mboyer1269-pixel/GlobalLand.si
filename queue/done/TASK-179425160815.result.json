@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "WordPress website developer | WordPress Jobs\nLINK https://jobs.wordpress.net/\nWordPress.org\nWordPress Jobs\nLINK https://jobs.wordpress.net/\nJobs\nLINK https://jobs.wordpress.net/#candidates\nCandidates\nLINK https://jobs.wordpress.net/faq/\nFAQ\nLINK https://jobs.wordpress.net/feedback/\nFeedback\nLINK https://jobs.wordpress.net/post-a-job/\nPost a Job\nLINK https://jobs.wordpress.net/\nJobs\n/\nWordPress website developer\nWordPress website developer\nPosted\nLINK https://jobs.wordpress.net/job/wordpress-website-developer-18/\nNovember 5, 2026\nDevelopment\nWe are seeking a capable WordPress developer for a short-term, paid website development project.\nThe client is a privately held Canadian management consulting startup.\nThe project involves developing approximately six pages from completed design storyboards, supplied branding and approved website content.\nThe mandatory platform is WordPress using the Gutenberg block editor, Kadence Theme and Kadence Blocks.\nWe are particularly interested in a student, recent graduate or junior freelancer who has already completed professional-quality WordPress websites.\nOur anticipated budget is C$2,000–$2,500 on a fixed-price basis, with an immediate start preferred.\nThe work can be performed remotely.\nWe would appreciate receiving examples of relevant completed websites, confirmation of experience with Kadence, and an indication of availability.\nThe client’s identity and detailed project materials will be provided to shortlisted candidates under appropriate confidentiality arrangements.\nIf you are interested, or can recommend a suitable developer, we would welcome hearing from you.\nThank you.\nLINK mailto:timpson@rogers.com\nApply via Email\nJob Details\nCompany\nRSL\nJob Type\nProject\nLocation\nRemote\nBudget\n$2,000-$2,500\nWordPress Professionals Open to Work\nLINK https://profiles.wordpress.org/stackcroft/\nstackcroft\n→\nLINK https://profiles.wordpress.org/intertechnumberlogythailand/\nintertechnumberlogythailand\nเจ้าของกิจการส่วนตัวบุคคล\nintertechnumberlogythailand\n→\nLINK https://profiles.wordpress.org/milascript/\nLiudmila Skriptunova\nWordPress, WooCommerce & Shopify Developer\nDevScripty\n→\nLINK https://profiles.wordpress.org/jasmeetsaini/\njasmeetsaini\n→\nLINK https://jobs.wordpress.net/#candidates\nView all candidates →\nAbout\nLINK https://wordpress.org/about/\nAbout WordPress\nLINK https://wordpress.org/news/\nNews\nLINK https://wordpress.org/hosting/\nHosting\nLINK https://wordpress.org/donate/\nDonate\nLearn\nLINK https://learn.wordpress.org/\nLearn WordPress\nLINK https://developer.wordpress.org/\nDeveloper Resources\nLINK https://wordpress.org/documentation/\nDocumentation\nLINK https://wordpress.org/support/\nSupport Forums\nCommunity\nLINK https://make.wordpress.org/\nGet Involved\nLINK https://central.wordcamp.org/\nWordCamp\nLINK https://wordpress.tv/\nWordPress.TV\nLINK https://wordpress.org/showcase/\nShowcase\nWordPress Jobs\nLINK https://jobs.wordpress.net/\nCurrent Openings\nLINK https://jobs.wordpress.net/#candidates\nBrowse Candidates\nLINK https://jobs.wordpress.net/post-a-job/\nPost a Job\nLINK https://jobs.wordpress.net/faq/\nFAQ\nLINK https://jobs.wordpress.net/remove-a-job/\nRemove a Job\nLINK https://jobs.wordpress.net/feedback/\nFeedback\nLINK https://wordpress.org/\nWordPress.org\nLINK https://twitter.com/WordPress\nX / Twitter\nLINK https://www.facebook.com/WordPress/\nFacebook\nLINK https://www.youtube.com/wordpress\nYouTube\nCode is Poetry.\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179425160815.json"
+  ],
+  "request": {
+    "id": "TASK-179425160815",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-09T19:13:28Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nclass P(HTMLParser):\n def __init__(self):super().__init__();self.skip=0;self.lines=[]\n def handle_starttag(self,t,a):\n  if t in ['script','style']:self.skip+=1\n  if t=='a' and not self.skip:self.lines.append('LINK '+str(dict(a).get('href')))\n def handle_endtag(self,t):\n  if t in ['script','style']:self.skip-=1\n def handle_data(self,d):\n  if not self.skip and d.strip():self.lines.append(d.strip())\np=P();p.feed(open('products/services/new-actionable-buyers/canadian-project.html').read());print('\\n'.join(p.lines)[-16000:])"
+      ],
+      "inputs": [
+        "products/services/new-actionable-buyers/canadian-project.html"
+      ],
+      "outputs": [],
+      "mission_id": "NEW-ACTIONABLE-BUYERS-20261109"
+    },
+    "description": "Broker action during THINK-1794251608",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425160815",
+  "input_sha256": "2ef0d876470a8ec1d46fa68491e64e12ce9ea48eca12943a7d1160677cc25bcf"
+}
