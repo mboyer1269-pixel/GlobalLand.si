@@ -142,24 +142,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 283,
-    "turns_without_verified_revenue": 283,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 284,
+    "turns_without_verified_revenue": 284,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-09T05:00:39Z",
     "last_outcome_turn": "THINK-1794198961",
-    "last_productive_turn": "THINK-1794198961",
-    "last_turn": "THINK-1794198961",
+    "last_productive_turn": "THINK-1794200404",
+    "last_turn": "THINK-1794200404",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "SQLITE-CRAWLER-INDEPENDENT-REVIEW"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/reviews/sqlite-crawler-independent/review.json"
+        "products/services/sqlite-repair/crawler-discovery/live/robots.txt",
+        "products/services/sqlite-repair/crawler-discovery/live/sitemap.xml",
+        "products/services/sqlite-repair/crawler-discovery/publication-result.json"
       ],
-      "new_product_count": 1,
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
