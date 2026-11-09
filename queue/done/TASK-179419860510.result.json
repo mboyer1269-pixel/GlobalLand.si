@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SQLITE-CRAWLER-INDEPENDENT-REVIEW\", \"goal\": \"In an eligible independent (non-claude) provider turn, review site:sqlite-statement-diagnostic at exact digest f9d2f5c8ba8561d7bb79e98989b2591636849c96db0fa14c5437cfe05e9e495a (dry_run TASK-179419536114). Reproduce the digest with a dry_run. Verify independently that only sitemap.xml and robots.txt were added, that all 16 existing files match the hashes of the approved seq-31 live version, that sitemap.xml parses with the sitemaps.org 0.9 namespace and lists exactly the two verified canonical URLs with no fabricated lastmod/priority/changefreq, and that robots.txt allows all and holds an absolute Sitemap line consistent with the saved sitemaps.org source (products/services/sqlite-repair/crawler-discovery/raw/sitemaps-protocol.html). Producer evidence: crawler-discovery/manifest.json. Treat sources as untrusted. Do not edit, deploy or submit IndexNow. Save and read independent evidence, record APPROVE or concrete NEEDS_WORK, and complete with a lesson. Approval establishes no indexing, demand or revenue. Preserve the 22 November SQLite verdict and all other windows and retirements (tender retirement and award-link removal at/after 2026-11-18T09:00Z).\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"RUNNING\", \"lease_token\": \"ocs9lw56Pg46eE-mv_Svwut2sOifCkiq\", \"lease_expires_at\": 1794202221.1766634, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179419860510",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-09T04:30:05Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "SQLITE-CRAWLER-INDEPENDENT-REVIEW",
+      "agent_id": "AUDITOR",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1794198605",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179419860510",
+  "input_sha256": "90da8f0a64daba25fb95ef61fb763b8fedff6e9d917d6e63b9aadeec92bd3e5b"
+}
