@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "11\n2026-11-09T15:05:50+00:00 [Hiring] Talent Acquisition Partner (Remote) - US |  Above and Beyond Talent is seeking a Talent Acquisition Partner to develop and execute strategic sourcing and recruitment strategies aligned with business needs. This role will manage the full recruitment lifecycle, build and maintain talent pipelines, conduct market research, and partner with hiri \n\n2026-11-09T03:40:04+00:00 [Hiring] Short-Form Video Editor (YouTube Shorts) |  We're looking for a highly skilled, fast, and reliable short-form video editor to join Bullet & Honor, a growing YouTube channel focused on Red Dead Redemption 2. Our content revolves around storytelling, hidden details, character analysis, and interesting questions about the Red Dead Redemption un \n\n2026-11-09T02:04:07+00:00 [HIRING] Gameplay Footage Producer (GTA VI) |  About the role We need a reliable GTA VI player to record clean gameplay footage. You play and capture, and our team handles editing, graphics and voiceover (opportunities for other roles) What you’ll do Record gameplay sessions based on specific needs (tests, mechanics, location runs, challenges,  \n\n2026-11-08T20:11:51+00:00 [Hiring] Remote GameMaker Programmer (and a Sound Designer) for indie RTS roguelite |  Hey everyone, iCon Studio TX is hiring a remote programmer to work on our upcoming game, They're Gonna Get In. You can check out the page here: They're Gonna Get In Right now, our art is running ahead of our programming. We have a lot of finished assets ready to go and need a second programmer to j \n\n2026-11-08T15:49:41+00:00 [Hiring] Rate $40 | Configuring AT&T BGW320 IP Passthrough + Netgear Nighthawk router + Port Forwarding For Plex Remote Access |  This task should take an hour I imagine. I’m looking to hire someone remotely to help me properly configure my home network to fix a Plex issue that has occurred with ATT's recent firmware update with their BGW320 router. Would love today if possible. Details here from another person who had the sa \n\n2026-11-08T15:03:55+00:00 [Hiring] Senior Developer & Pentester for White-Box Security Assessment & Code Review (TypeScript, Next.js, React Native) |  Hi everyone, I am looking for an experienced freelancer to conduct a technical code review and a white-box security assessment for a classifieds marketplace for pet supplies. The Tech Stack: TypeScript Monorepo (pnpm and Turborepo). 4 Apps: Website, Admin panel, API with worker, and an Android/iOS  \n\n2026-11-08T14:33:16+00:00 [Hiring] Arabic–English Trivia Writer & Content Organizer for Trivia Game — Strong GCC Cultural Knowledge |  Hi everyone! I’m developing a bilingual Arabic–English party trivia game, and I’m looking for someone to help write, research, edit, and organize its questions. The game is aimed at a Gulf audience, so strong familiarity with GCC culture, entertainment, and everyday references is especially valuabl \n\n2026-11-08T06:45:52+00:00 [Hiring] Content Management Assistant |  I’m currently looking for a small number of dependable and detail-oriented individuals to join an ongoing online content management project. This is a flexible, remote freelance opportunity suitable for individuals looking for additional income. No prior professional experience is required, as inst \n\n2026-11-08T04:13:55+00:00 [Hiring] One time (Maybe in future again) |  I’m looking to hire someone based in Montreal, Canada for a small, one time freelance task. The job would involve making phone calls to local comic book stores on my behalf. I’m located outside of Canada and don’t speak French, so I’m looking for someone who can communicate with local businesses in \n\n2026-11-08T03:10:54+00:00 [HIRING] Cybersecurity Devs |  Wayne Citadel is searching for 2 (two) experienced, dedicated Security devs. what is all about: heres the story: Problem: Infrastructure changes submitted through GitHub pull requests can silently introduce security risks — widened IAM permissions, public exposure, destructive replacements — and re \n\n2026-11-08T02:13:59+00:00 [HIRING] ₱14k/month, remote Content Board Designer for health + biology YT Channel |  ₱14k/month, remote) Content Board Designer for health + biology YT Channel (Only message if wanting role long term, and want to begin fast) (Canva skills, creativity and science knowledge needed) Hi! We make educational content about the human body, health and the biology behind both, and I am hiri \n\n\n",
+  "artifacts": [
+    "products/services/first-receipt/forhire-hiring-extract.json",
+    "products/receipts/TASK-179424244313.json"
+  ],
+  "request": {
+    "id": "TASK-179424244313",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T16:40:43Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json,pathlib\nimport xml.etree.ElementTree as ET\nt=pathlib.Path('products/services/first-receipt/raw/forhire-new.rss').read_text()\nns={'a':'http://www.w3.org/2005/Atom'}\nr=ET.fromstring(t)\nout=[]\nfor e in r.findall('a:entry',ns):\n  ti=e.findtext('a:title','',ns); \n  if 'hiring' not in ti.lower(): continue\n  c=html.unescape(re.sub('<[^>]+>',' ',html.unescape(e.findtext('a:content','',ns))))\n  c=re.sub(r'\\s+',' ',c)\n  out.append({'title':ti,'updated':e.findtext('a:updated','',ns),'link':e.find('a:link',ns).get('href'),'text':c[:700]})\np=pathlib.Path('products/services/first-receipt/forhire-hiring-extract.json');p.write_text(json.dumps(out,indent=1))\nprint(len(out))\nfor o in out: print(o['updated'],o['title'],'|',o['text'][:300],'\\n')\n"
+      ],
+      "inputs": [
+        "products/services/first-receipt/raw/forhire-new.rss"
+      ],
+      "outputs": [
+        "products/services/first-receipt/forhire-hiring-extract.json"
+      ],
+      "mission_id": "FOUNDER-FIRST-RECEIPT-20261110"
+    },
+    "description": "Broker action during THINK-1794242443",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424244313",
+  "input_sha256": "1251ae8b3c198a470da27adb52e64f0d2bae576c18f0876995d18edbb95403a8"
+}
