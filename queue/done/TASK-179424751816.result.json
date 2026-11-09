@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "digitalpress-home  DigitalPress - Ghost Blog Hosting Features Pricing Themes Support Blog Log in Sign up Log in Sign up Managed Ghost blog hosting Create and publish blog posts with your own Ghost&nbsp;6&nbsp;blog. Launch a blog on your domain and publish content easily within seconds. NEW &ndash; now with Social&nbsp;Web and Native&nbsp;Analytics Learn more Start your blog Why choose DigitalPress for Ghost&nbsp;hosting? Choose a hosting platform built specifically for Ghost blogs &ndash; focus on writing while we handle everything&nbsp;else Hassle-free setup Launch your Ghost blog in seconds. No servers to configure, no software to install &ndash; just sign&nbsp;up, pick a theme and start publishing right&nbsp;away. Automatic updates We handle every upgrade behind the scenes so you never worry about compatibility or&nbsp;downtime. Your blog stays up to date with zero effort. Automatic backups Your content is backed up automatically in real-time. We keep copies in multiple locations for maximum&nbsp;reliability. Free SSL &amp; security Every DigitalPress blog is protected by a free SSL certificate, firewall and spam protection. Your readers browse securely and your data stays&nbsp;safe. Custom domain Use your own domain name with just a few clicks. We automatically provision an SSL certificate for it &ndash; no manual SSL setup&nbsp;required. Uptime &amp; reliability Our infrastructure is monitored around the clock to keep your blog online and fast. Enjoy peace of mind with dependable, highly availabile&nbsp;hosting. Affordable pricing Full-featured Ghost hosting starting at just &euro;1&nbsp;per&nbsp;month. Premium features without the premium price&nbsp;tag. Expert Ghost support Get help from a team that knows Ghost inside and out. Whether it is a theme question or a domain issue, we are here to&nbsp;help. Optimized performance Our servers are tuned specifically for Ghost, delivering fast page loads and a smooth editing experience for you and your&nbsp;readers. No vendor lock-in DigitalPress runs a standard Ghost installation. Export your content anytime and move freely &ndash; your blog is always&nbsp;yours. Free themes included Every blog comes with a curated set of beautiful themes out of the box. Switch designs in a click and find the look that fits your&nbsp;style. Built-in integrations Enable Disqus comments, analytics, Unsplash images and more without writing a single line of code &ndash; all from your&nbsp;dashboard. SEO-optimized platform Ghost produces clean, semantic markup and fast load times. Combined with our optimized hosting, your content is primed to rank&nbsp;well. Team collaboration Invite authors, editors and administrators to your blog. Manage roles and permissions so your whole team can create and publish&nbsp;content. Ghost blog for &euro;1&nbsp;/&nbsp;mo Our goal is to enable everyone to tell their story without having to think about price. Create and edit content with just a few clicks. Our subscriptions include variety of themes and design layouts to show your style. Customize blog with your own cover pictures, embed videos, tweets, music clips and share joy with your readers. We take care of the boring stuff - automatic backups, ssl certificates, upgrades and making sure your blog stays up and running. Tell your story with a&nbsp;blog Make your blog personal. Express yourself and entertain your readers by sharing thoughts, tips, reviews, jokes or wedding announcements. Share blog posts with family, friends, colleagues or your boss. Tell your story. Business or freelancer? Share product announcements, company news, pictures from retreats, conferences or just the office. Build a fan base, create portfolio or share your resume. You can do it all on DigitalPress. Integrations No coding required. Enable integrations right from our web dashboard. Disqus Let readers post comments in your Ghost Blog posts and pages Crisp Engage with your readers through a live chat right on your Ghost blog Analytics Get a deeper understanding of how readers interact with your blog Unsplash Share beautiful pictures with your readers directly from Unsplash without using any storage YouTube Embed YouTube videos directly into your blog by simply pasting a link to the video Many more More integrations can be found directly in your Ghost blog or using custom scripts Discover DigitalPress Learn more about features and tell your story with your Ghost&nbsp;blog Learn more Sign up for a blog Terms of Service Privacy policy Status DigitalPress vs Ghost (Pro) Blog About us \nroutes []\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179424751816.json"
+  ],
+  "request": {
+    "id": "TASK-179424751816",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-09T18:05:18Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs=require('fs');for(const n of ['aeolidia-contact','aeolidia-home','digitalpress-home']){let p='products/services/diversified-offers/raw/'+n+'.html';if(fs.existsSync(p)){let s=fs.readFileSync(p,'utf8');console.log(n, s.replace(/<script[\\s\\S]*?<\\/script>/gi,'').replace(/<style[\\s\\S]*?<\\/style>/gi,'').replace(/<[^>]*>/g,' ').replace(/\\s+/g,' ').slice(0,26000)); console.log('routes', [...s.matchAll(/href=[\"']([^\"']*(?:contact|mailto:|migrat)[^\"']*)/gi)].map(x=>x[1]));}}"
+      ],
+      "inputs": [
+        "products/services/diversified-offers/raw/"
+      ],
+      "outputs": [],
+      "mission_id": "DIVERSIFIED-SMALL-REVENUES-20261109"
+    },
+    "description": "Broker action during THINK-1794247518",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424751816",
+  "input_sha256": "cbcd753ed06431e47ec84b0181d0fcf74bd8826f372a70d9c4395900c73889c8"
+}
