@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\"len\": 401467, \"partner_links\": [\"/partners/directory/partner/absolute-web-services\", \"/partners/directory/partner/barrel\", \"/partners/directory/partner/dpt\", \"/partners/directory/partner/ehousestudio\", \"/partners/directory/partner/maze-design\", \"/partners/directory/partner/orienteed\", \"/partners/directory/partner/peak-activity4\"], \"n_partner\": 7, \"service_links\": [\"/partners/directory/services/channel_expansion\", \"/partners/directory/services/custom_app_development\", \"/partners/directory/services/integrations\", \"/partners/directory/services/marketing\", \"/partners/directory/services/migrations\", \"/partners/directory/services/store_building\"], \"title\": [\"Hire Shopify Experts, Developers, Designers &amp; Freelancers\"]}\n\n",
+  "artifacts": [
+    "products/services/catalogue-agency-prospects/directory-extract.json",
+    "products/receipts/TASK-179426196111.json"
+  ],
+  "request": {
+    "id": "TASK-179426196111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T22:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,json,pathlib\np='products/services/catalogue-agency-prospects/raw/shopify-directory-migration-ca.html'\nt=open(p,encoding='utf-8',errors='replace').read()\nlinks=sorted(set(re.findall(r'href=\"(/partners/directory/partner/[^\"?#]+)',t)))\nsvc=sorted(set(re.findall(r'href=\"(/partners/directory/services/[^\"?#]+)',t)))\nout={'len':len(t),'partner_links':links[:60],'n_partner':len(links),'service_links':svc[:80],'title':re.findall(r'<title>(.*?)</title>',t,re.S)[:1]}\npathlib.Path('products/services/catalogue-agency-prospects').mkdir(parents=True,exist_ok=True)\nopen('products/services/catalogue-agency-prospects/directory-extract.json','w').write(json.dumps(out,indent=1))\nprint(json.dumps(out)[:3500])"
+      ],
+      "inputs": [
+        "products/services/catalogue-agency-prospects/raw/shopify-directory-migration-ca.html"
+      ],
+      "outputs": [
+        "products/services/catalogue-agency-prospects/directory-extract.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794261961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179426196111",
+  "input_sha256": "5c396b1588e0a5f39269b73ccb21fa0602718d4e0eb0fa543017d36dd434d2b0"
+}
