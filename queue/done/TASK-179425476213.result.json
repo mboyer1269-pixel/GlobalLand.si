@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "Bitte bewerben Sie sich mit einem kurzen Anschreiben, Vorstellung und Lebenslauf,  Referenzen vergleichbarer WordPress - Migrationsprojekte  einer ersten Einschätzung zur technischen Umsetzung inkl. Terminplan (ca. eine halbe  Seite),  Ihrer Verfügbarkeit, inkl. o frühestmöglicher Projektstart  o verfügbare Kapazität für dieses Projekt in Stunden pro Woche  einer ersten Kostenschätzung, inkl.  o Pauschalpreis mit  Aufschlüsselung nach wesentlichen Leistungsbereichen,  inklusive fünf Workshops; o enthaltene Leistungen, Annahmen und Ausschlüsse  o zusätzliche und laufende Kosten o Stundensatz für zusätzlich beauftragte Leistungen  IAPM  - International Association of Project Managers Zum St. Johanner 22  - 9490 Vaduz  - Principality of Liechtenstein Entered in the Liechtenstein Register of Associations: no.  FL - 0002.353.470 - 6 Use Cases: gewünschter Zertifizierungsprozess Use Case 1  Registrierung und Buchung einer Zertifizierung Ziel Ein Interessent soll sich online für eine  Zertifizierung registrieren, bezahlen und anschließend  automatisch Zugang zur gebuchten Prüfung erhalten. Prozess 1. Der Besucher wählt eine Zertifizierung aus.  2. Er füllt das Registrierungsformular mit seinen persönlichen Daten aus (z.B. Name,  Anschrift, E - Mail - Adresse, Sprache und Land).  3. Basierend auf seinem Standort wird der Preis für den Test festgelegt. 4. Anschließend erfolgt die Bezahlung über die angebotenen Zahlungsarten:  o PayPal  o Banküberweisung  o Gutscheincode  o ggf. weitere Zahlungsarten über WooCommerce  5. Nach erfolgreicher Zahlung werden automatisch:  o eine IAPMIC erstellt o die Rechnung erstellt,  o eine Bestätigungs - E - Mail versendet,  o der Teilnehmer für die gebuchte Zertifizierung freigeschaltet.  6. Der Teilnehmer erhält per E - Mail einen persönlichen Link bzw. Zugang zur gebuchten  Prüfung.  7. Ein klassisches Benutzerkonto oder Kundenportal ist ausdrücklich nicht gewünscht. Der  Zugang dient ausschließlich der Durchführung der jeweiligen Prüfung.  Use Case 2  Prüfung und Auswertung Ziel Nach  erfolgreicher Bezahlung soll der Teilnehmer die Online - Prüfung absolvieren. Die Ergebnisse  werden automatisch verarbeitet. IAPM  - International Association of Project Managers Zum St. Johanner 22  - 9490 Vaduz  - Principality of Liechtenstein Entered in the Liechtenstein Register of Associations: no.  FL - 0002.353.470 - 6 Prozess 1. Der Teilnehmer öffnet den persönlichen Prüfungszugang.  2. Die Prüfung wird über ClassMarker durchgeführt.  3. Nach Abschluss werden die Ergebnisse automatisch übernommen.  4. Bei bestandener Prüfung werden automatisch:  o das Ergebnis gespeichert,  o das Zertifikat erstellt,  o das Zertifikat per E - Mail versendet.  5. Bei nicht bestandener Prüfung werden:  o das Ergebnis gespeichert,  o eine Benachrichtigung per E - Mail versendet,  o ggf. Informationen zur erneuten Prüfungsbuchung bereitgestellt.\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179425476213.json"
+  ],
+  "request": {
+    "id": "TASK-179425476213",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-09T20:06:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "t=open('products/services/iapm-analysis-fit/iapm-spec-text.txt',encoding='utf-8').read();i=t.find('Bitte bewerben');print(t[i:])"
+      ],
+      "inputs": [
+        "products/services/iapm-analysis-fit/iapm-spec-text.txt"
+      ],
+      "outputs": [],
+      "mission_id": "IAPM-ANALYSIS-MILESTONE-FIT"
+    },
+    "description": "Broker action during THINK-1794254762",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425476213",
+  "input_sha256": "41151b656e8da1a360b852c22fc748e6e1b62f111502bac8b467002ad62dd959"
+}
