@@ -1,24 +1,25 @@
-# Founder unlock plan (updated 2026-11-07, written by autonomous AI agents)
+# Founder unlock plan (updated 2026-11-09, written by autonomous AI agents)
 
-Treasury UNFUNDED, verified revenue 0. Commercial feedback: 0 classified events, 3 unclassified sources (unknown, not zero demand).
-Binding constraint: no authorized route can collect money (commercial_paths.collection NOT_IMPLEMENTED, PUBLISH_ACTOR NOT_CONFIGURED). More inventory or page work cannot produce verified revenue until one founder step below is taken.
+Treasury UNFUNDED, verified revenue 0. Commercial feedback: 0 classified events, 3 unclassified sources (unknown, not zero demand). Last private mail cycle (2026-11-09T13:00Z): processed 0, skipped 6.
 
-## Ranked single steps (do #1 OR #2; either is enough to start)
-1. Option A, Apify credential (blocker NO-APIFY-ACCESS): valid enabled Apify config + private credential file mode 0600. Unlocks private builds of three tested Actors: products/actors/rss-reader (22/22 offline tests), link-checker (21/21), domain-availability (22/22, RDAP-only, no contact data). Store copy ready (products/distribution/*-store-copy.json). Platform-managed pay-per-event billing; no separate checkout. Incumbents showed 29-53 users_30d; our demand is unverified. Kill: fewer than 3 external users within 14 days of listing.
-2. Option B, Gumroad seller account (blocker SERVICE-PAYMENT-COLLECTION; products/research/platform-managed-settlement-fit.json, observed 2026-11-05): founder creates/designates a GlobalLand seller account in the founder's name, adds a CAD bank account (Stripe KYC on founder), and shares only the public profile URL. Fees documented as 10% + USD 0.50 per direct sale; USD 100 payout minimum, 7-day hold; Gumroad acts as merchant of record for sales tax. Gumroad Discover is NOT usable for a first buyer (requires prior genuine sales and USD 100 balance: products/research/gumroad-first-buyer-access.json), so buyers must arrive via direct links from our own pages. Agents then prepare one product package for independent review; the founder uploads it.
-   Either option still needs a payout attestation or reconciliation path before Treasury can verify revenue.
-3. Bounty/challenge eligibility (BOUNTY-SUBMISSION-ELIGIBILITY): parked; needs a designated participant identity and acceptance of specific rules. Lowest priority.
+## What changed since 2026-11-07
+- A CAD payment route now exists: Interac, operator-only (blocker SERVICE-PAYMENT-COLLECTION). Order creation/acceptance is administrative; deposits need founder attestation. Handoff: products/services/payment-handoff/operator-instructions.md. So collection is no longer the first constraint for email services; exposure is.
+- SQLite statement diagnostic is live with a tested local download and intake (https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/, independent APPROVEs seq 27-34). One Bing check (2026-11-09) did not list it; one IndexNow receipt (HTTP 202) proves no indexing.
+- Ghost import diagnostic live; running the real upstream converter needs >=11 package fetches (bounded stop), so it stays explicitly STUB_ONLY.
+- Job boards and help forums tested (WordPress, Berlin OSM, Posit, n8n, Ghost): no bounded offline paid request reachable without an account and outreach.
 
-## Done (no founder action needed)
-- Cloudflare hosting works. Live, free, no checkout:
-  - https://globalland-invoice-preflight.global-land.workers.dev/ (CSV diagnostic; observation ends 2026-11-19T01:30:37Z)
-  - https://globalland-shopify-catalogue-example.global-land.workers.dev/ (Shopify variant/image CSV worked example, downloadable transform + verifier; observation ends 2026-11-19T21:30:49Z)
-  - https://globalland-welfare-tender-brief.global-land.workers.dev/ (UK welfare-advice tender brief; observation ends 2026-11-20; must be retired after 2026-12-04T17:00Z, mission WELFARE-SITE-RETIRE; official notice re-checked unchanged 2026-11-06)
-  - https://globalland-software-award-brief.global-land.workers.dev/ (UK software award buyer brief, 3 notices; observation ends 2026-11-21T05:00:35Z; commercial-fit verdict STOP: free official data and free incumbent tiers exist)
-- 2026-11-07: bounded Shopify Community check found no qualifying current request (products/services/shopify-large-catalogue/current-request/result.json); observed price anchors USD 19-25 are seller proposals, not sales.
-- Feedback observability gap (FEEDBACK-REASON-OBSERVABILITY, host-operator, not founder): experiment verdicts will report requests as UNKNOWN unless skip/unclassified reasons become visible.
-- Plain-text email intake with case-local offline fulfillment (configured; no external customer delivery observed yet).
-- Unpublished: products/services/shopify-browser-delivery/ (browser port, 20/20 parity vs Python under Node; real-browser check still needed before any review).
+## Binding constraint
+People who need these diagnostics cannot find them; agents have no permitted posting channel. Agents will not build more pages or polish existing ones without observed visitors (lesson L144).
 
-## What agents will do meanwhile
-No new inventory, no credential probes, no further search/metadata work on live pages. Judge each experiment at its deadline from aggregate feedback only; retire the welfare page after its deadline. Resume building only after a collection route or a classified request exists.
+## Ranked single founder steps (any one is enough to start; all optional)
+1. Apify credential (NO-APIFY-ACCESS): valid enabled config + private credential file mode 0600. Unlocks three tested Actors (rss-reader 22/22, link-checker 21/21, domain-availability 22/22) with platform-managed pay-per-event billing and Store discovery, i.e. both exposure and collection. Kill: <3 external users within 14 days of listing.
+2. One dedicated, AI-disclosed community account on forum.ghost.org (NO-COMMUNITY-ANSWER-ACCOUNT) for a single reply to t/60053 linking the free diagnostic with its limits stated. Do NOT approve Stack Overflow (bans generative-AI content).
+3. Host operator (not founder authority): expose count-only skip/unclassified reason fields (FEEDBACK-REASON-OBSERVABILITY) so experiment verdicts can tell no requests from unobserved requests.
+4. When a real eligible request arrives: create/accept the Interac order and attest the deposit (operator-instructions.md).
+5. Bounty/challenge participant identity (BOUNTY-SUBMISSION-ELIGIBILITY): parked, lowest priority.
+Gumroad (former option B) is superseded by the Interac route for now; Gumroad Discover needs prior sales anyway.
+
+## Fixed obligations agents will keep
+- Open-software-tenders retirement and software-award link removal at/after 2026-11-18T09:00Z.
+- Verdicts: CSV 2026-11-19T01:30:37Z, Shopify 2026-11-19T21:30:49Z, welfare 2026-11-20, software-award 2026-11-21T05:00:35Z, SQLite 2026-11-22.
+- Welfare tender site offline after 2026-12-04T17:00Z (mission WELFARE-SITE-RETIRE).
