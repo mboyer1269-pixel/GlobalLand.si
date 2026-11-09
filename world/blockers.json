@@ -48,14 +48,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "ACCOUNT",
-      "title": "Operator step for first-receipt lead #1: one AI-disclosed Reddit DM to a paid trivia-batch request (use sample-v3 + revised message), plus a USD payment route",
-      "detail": "Updated 2026-11-09 (TRIVIA-MESSAGE-CORRECTION, TASK-179424720711). #1 (explicit paid buyer request): r/forhire /u/CodingKiller, posted 2026-11-08T14:33Z, https://www.reddit.com/r/forhire/comments/1xqzs02/ , paid trial US$50-75 per 100 bilingual Arabic-English trivia questions with source links; apply only by DM. Message: products/services/first-receipt/proposal-trivia-en.md section 8 (revised after independent QA REVISE: says 8-question sample, 'checked against the linked source intro', no 24 h promise, asks buyer timeline with non-binding estimate, keeps AI disclosure, native-review and pop-culture caveats, payment after acceptance, payment-method question). Attach products/services/first-receipt/trivia-sample/sample-v3.csv (sha256 3d4e525c..., 8 rows), NOT v2 or sample-10: v3 corrects only row 3 and row 8 Arabic questions (v3-correction-verification.json all_pass). Arabic is AI-drafted, not native-reviewed. Post status unverified (Reddit FETCH 403). #2 (weak, cold): Pointer/eHouse contact form, products/services/first-receipt/agency-route/proposal.md, only if operator judges permitted. Operator steps, only if wanted: send #1 once from a founder-approved AI-disclosed account; if accepted, provide a USD-capable payment route, then create/accept the order under SERVICE-PAYMENT-COLLECTION. Agents will not post or DM. Reconsider if buyer replies, post closes, or operator declines.",
-      "mission_id": "FOUNDER-FIRST-RECEIPT-20261110",
-      "expected_gain": "One real paid-trial opportunity (US$50-75 stated by the buyer). Reply, acceptance, order and receipt are all unobserved.",
+      "title": "Operator batch ready: 3 AI-disclosed messages (2 Reddit paid requests + 1 cold email) await per-item approval; see operator-batch.md",
+      "detail": "Updated 2026-11-09 (DIVERSIFIED-SMALL-REVENUES-20261109). One batch: products/services/diversified-offers/operator-batch.md (dossiers: prospect-offers-v2.json). #1 trivia paid trial, r/forhire 1xqzs02, buyer-stated USD50-75/100 questions; message proposal-trivia-en.md s8 + sample-v3.csv (Arabic AI-drafted, not native-reviewed). #2 NEW: r/forhire 1xp9pdj (2026-11-06) asks to make a ChatGPT-built website smoother/less laggy, 'name your price', USD15/h; proposed USD30 fixed, pay-on-acceptance, buyer tests in own browser (we have no browser). #3 DigitalPress cold inquiry via general support route (not a supplier invitation), CAD40 pilot hypothesis. WITHDRAWN: content-management assistant post (scam signals; do not send). Operator steps, only if wanted: approve each exact message; send Reddit items from a founder-approved AI-disclosed account; name a USD-capable payment route for non-Canadian buyers or decline at quote; on real acceptance create/accept the order under SERVICE-PAYMENT-COLLECTION. Agents will not post, DM or email. Reconsider if a buyer replies, a post closes, or operator declines.",
+      "mission_id": "DIVERSIFIED-SMALL-REVENUES-20261109",
+      "expected_gain": "Two explicit paid requests (USD50-75 trial; ~USD30 small fix) plus one cold pilot. Reply, acceptance, order and receipt are all unobserved.",
       "raised_by": "ACQUISITION",
-      "reports": 6,
+      "reports": 7,
       "opened_at": "2026-11-08T10:36:45Z",
-      "last_reported_at": "2026-11-09T18:01:10Z"
+      "last_reported_at": "2026-11-09T18:12:28Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -142,28 +142,26 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 328,
-    "turns_without_verified_revenue": 328,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 329,
+    "turns_without_verified_revenue": 329,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-09T18:12:51Z",
     "last_outcome_turn": "THINK-1794247518",
-    "last_productive_turn": "THINK-1794247518",
-    "last_turn": "THINK-1794247518",
+    "last_productive_turn": "THINK-1794247861",
+    "last_turn": "THINK-1794247861",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "TRIVIA-MESSAGE-CORRECTION"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/services/first-receipt/trivia-sample/sample-v3-README.txt",
-        "products/services/first-receipt/trivia-sample/sample-v3.csv",
-        "products/services/first-receipt/trivia-sample/v3-correction-verification.json"
+        "products/services/diversified-offers/prospect-offers.json",
+        "products/services/diversified-offers/raw/digitalpress-home.html",
+        "products/services/diversified-offers/raw/digitalpress-support.html"
       ],
       "new_product_count": 3,
       "new_research_count": 0,
-      "rewritten_count": 1,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
