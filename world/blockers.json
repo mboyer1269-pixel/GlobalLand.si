@@ -137,25 +137,31 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-09T10:07:12Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 303,
-    "turns_without_verified_revenue": 303,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 304,
+    "turns_without_verified_revenue": 304,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T10:00:44Z",
-    "last_outcome_turn": "THINK-1794216961",
-    "last_productive_turn": "THINK-1794218402",
-    "last_turn": "THINK-1794218761",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794220202",
+    "last_productive_turn": "THINK-1794220202",
+    "last_turn": "THINK-1794220202",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "SQLITE-SEARCH-EXPOSURE-TEST"
+      ],
+      "new_products": [
+        "products/services/sqlite-repair/search-exposure/raw/q1-hostname-bing.html",
+        "products/services/sqlite-repair/search-exposure/raw/q3-fk-rowid-bing.html",
+        "products/services/sqlite-repair/search-exposure/result.json"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
