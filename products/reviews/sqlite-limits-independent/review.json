@@ -1,0 +1,507 @@
+{
+  "digest": "473795e78181a94b3b5fc3c58c8fb77db451631eef41311dc0484a54ef7e3d98",
+  "checks": {
+    "independent_boundary_run": true,
+    "EN_one_new_paragraph": true,
+    "FR_one_new_paragraph": true,
+    "reverse_index_baseline": true,
+    "reverse_llms_baseline": true,
+    "sample_unchanged": true,
+    "two_identifier_mailtos": true,
+    "all_local_links_exist": true,
+    "bilingual_AI": true,
+    "no_paid_acceptance": true,
+    "private_use_qualified": true,
+    "page_example_expected_rows": true,
+    "first_mode_one_full_two": true,
+    "sample_cleanup": true,
+    "seed_65537_rejected": true,
+    "prepare_error_cleanup": true,
+    "step_error_cleanup": true,
+    "attach_cleanup": true,
+    "vacuum_cleanup": true,
+    "rows_cleanup": true,
+    "prepare_error_reported": true,
+    "step_error_reported": true,
+    "attach_denied": true,
+    "vacuum_denied": true,
+    "50_rows_kept_60_counted": true,
+    "cooperative_deadline_inspected": true
+  },
+  "all_pass": true,
+  "sqlite_version": "3.40.1",
+  "sample_report": {
+    "tool": "globalland-sqlite-diagnose/1",
+    "sqlite_version": "3.40.1",
+    "case_id": "page-example",
+    "limits": {
+      "sql_bytes": 65536,
+      "statements": 50,
+      "rows_kept": 50,
+      "vm_steps": 2000000,
+      "seconds": 2.0
+    },
+    "runs": {
+      "as_written_first_statement_only": {
+        "statements": [
+          {
+            "index": 1,
+            "start_byte": 0,
+            "end_byte": 51,
+            "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+            "executed": true,
+            "columns": 0,
+            "row_count": 0,
+            "rows": [],
+            "step_rc": 101,
+            "finalize_rc": 0
+          }
+        ],
+        "error": null,
+        "unexecuted_tail": "SELECT * FROM T1",
+        "input_bytes": 68,
+        "final_byte": 51,
+        "denied": [],
+        "elapsed_s": 0.0,
+        "open_statements_after_run": false,
+        "close_rc": 0
+      },
+      "all_statements": {
+        "statements": [
+          {
+            "index": 1,
+            "start_byte": 0,
+            "end_byte": 51,
+            "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+            "executed": true,
+            "columns": 0,
+            "row_count": 0,
+            "rows": [],
+            "step_rc": 101,
+            "finalize_rc": 0
+          },
+          {
+            "index": 2,
+            "start_byte": 51,
+            "end_byte": 68,
+            "sql": "SELECT * FROM T1",
+            "executed": true,
+            "columns": 2,
+            "row_count": 3,
+            "rows": [
+              [
+                "1",
+                "a"
+              ],
+              [
+                "2",
+                "b"
+              ],
+              [
+                "3",
+                "c"
+              ]
+            ],
+            "step_rc": 101,
+            "finalize_rc": 0
+          }
+        ],
+        "error": null,
+        "unexecuted_tail": null,
+        "input_bytes": 68,
+        "final_byte": 68,
+        "denied": [],
+        "elapsed_s": 0.0,
+        "open_statements_after_run": false,
+        "close_rc": 0
+      }
+    },
+    "expected_match": true,
+    "status": "OK"
+  },
+  "extra_reports": {
+    "prepare_error": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": null,
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [
+            {
+              "index": 1,
+              "start_byte": 0,
+              "end_byte": 9,
+              "sql": "SELECT 1;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 1,
+              "rows": [
+                [
+                  "1"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            }
+          ],
+          "error": {
+            "phase": "prepare",
+            "kind": "PREPARE_ERROR",
+            "statement_index": 2,
+            "start_byte": 9,
+            "rc": 1,
+            "message": "near \"SELEC\": syntax error",
+            "error_offset": 1
+          },
+          "unexecuted_tail": "SELEC 2;",
+          "input_bytes": 18,
+          "final_byte": 9,
+          "denied": [],
+          "elapsed_s": 0.0,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "status": "OK"
+    },
+    "step_error": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": null,
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [
+            {
+              "index": 1,
+              "start_byte": 0,
+              "end_byte": 25,
+              "sql": "CREATE TABLE u(x UNIQUE);",
+              "executed": true,
+              "columns": 0,
+              "row_count": 0,
+              "rows": [],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 2,
+              "start_byte": 25,
+              "end_byte": 54,
+              "sql": "INSERT INTO u VALUES(1),(1);",
+              "executed": true,
+              "columns": 0,
+              "row_count": 0,
+              "rows": [],
+              "step_rc": 19,
+              "finalize_rc": 19
+            }
+          ],
+          "error": {
+            "phase": "step",
+            "kind": "STEP_ERROR",
+            "statement_index": 2,
+            "rc": 19,
+            "message": "UNIQUE constraint failed: u.x",
+            "rows_before_error": 0
+          },
+          "unexecuted_tail": null,
+          "input_bytes": 54,
+          "final_byte": 54,
+          "denied": [],
+          "elapsed_s": 0.0,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "status": "OK"
+    },
+    "attach": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": null,
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [],
+          "error": {
+            "phase": "prepare",
+            "kind": "PREPARE_ERROR",
+            "statement_index": 1,
+            "start_byte": 0,
+            "rc": 23,
+            "message": "not authorized",
+            "error_offset": -1
+          },
+          "unexecuted_tail": "ATTACH 'x.db' AS x;",
+          "input_bytes": 19,
+          "final_byte": 0,
+          "denied": [
+            "ATTACH/DETACH"
+          ],
+          "elapsed_s": 0.0,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "status": "OK"
+    },
+    "vacuum": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": null,
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [
+            {
+              "index": 1,
+              "start_byte": 0,
+              "end_byte": 7,
+              "sql": "VACUUM;",
+              "finalize_rc": 0,
+              "executed": false
+            }
+          ],
+          "error": {
+            "phase": "policy",
+            "kind": "VACUUM_DENIED",
+            "statement_index": 1
+          },
+          "unexecuted_tail": "VACUUM;",
+          "input_bytes": 7,
+          "final_byte": 0,
+          "denied": [],
+          "elapsed_s": 0.0,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "status": "OK"
+    },
+    "rows": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": null,
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [
+            {
+              "index": 1,
+              "start_byte": 0,
+              "end_byte": 89,
+              "sql": "WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c WHERE x<60) SELECT x FROM c;",
+              "executed": true,
+              "columns": 1,
+              "row_count": 60,
+              "rows": [
+                [
+                  "1"
+                ],
+                [
+                  "2"
+                ],
+                [
+                  "3"
+                ],
+                [
+                  "4"
+                ],
+                [
+                  "5"
+                ],
+                [
+                  "6"
+                ],
+                [
+                  "7"
+                ],
+                [
+                  "8"
+                ],
+                [
+                  "9"
+                ],
+                [
+                  "10"
+                ],
+                [
+                  "11"
+                ],
+                [
+                  "12"
+                ],
+                [
+                  "13"
+                ],
+                [
+                  "14"
+                ],
+                [
+                  "15"
+                ],
+                [
+                  "16"
+                ],
+                [
+                  "17"
+                ],
+                [
+                  "18"
+                ],
+                [
+                  "19"
+                ],
+                [
+                  "20"
+                ],
+                [
+                  "21"
+                ],
+                [
+                  "22"
+                ],
+                [
+                  "23"
+                ],
+                [
+                  "24"
+                ],
+                [
+                  "25"
+                ],
+                [
+                  "26"
+                ],
+                [
+                  "27"
+                ],
+                [
+                  "28"
+                ],
+                [
+                  "29"
+                ],
+                [
+                  "30"
+                ],
+                [
+                  "31"
+                ],
+                [
+                  "32"
+                ],
+                [
+                  "33"
+                ],
+                [
+                  "34"
+                ],
+                [
+                  "35"
+                ],
+                [
+                  "36"
+                ],
+                [
+                  "37"
+                ],
+                [
+                  "38"
+                ],
+                [
+                  "39"
+                ],
+                [
+                  "40"
+                ],
+                [
+                  "41"
+                ],
+                [
+                  "42"
+                ],
+                [
+                  "43"
+                ],
+                [
+                  "44"
+                ],
+                [
+                  "45"
+                ],
+                [
+                  "46"
+                ],
+                [
+                  "47"
+                ],
+                [
+                  "48"
+                ],
+                [
+                  "49"
+                ],
+                [
+                  "50"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            }
+          ],
+          "error": null,
+          "unexecuted_tail": null,
+          "input_bytes": 89,
+          "final_byte": 89,
+          "denied": [],
+          "elapsed_s": 0.0,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "status": "OK"
+    }
+  },
+  "limitations": [
+    "No private-cycle execution or recipient delivery observed",
+    "No browser or compiled C/C++ execution",
+    "Timing is cooperative; no hard wall-clock cap tested"
+  ],
+  "contract": "docs/AGENTMAIL.md read TASK-179418600615: eligible Python snapshots do not prove selection or execution",
+  "notes": [
+    "RUNBOOK retains old aggregate-limit shorthand; public corrected wording accurately describes actual implementation. Private agent should use source and corrected limits."
+  ]
+}

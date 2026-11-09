@@ -1,0 +1,105 @@
+{
+ "T1_seed50_plus_query50": {
+  "result": {
+   "seed_error": null,
+   "error": null,
+   "n": 50,
+   "elapsed_s": 0.003,
+   "close_rc": 0
+  },
+  "accepted": true
+ },
+ "T2_query51": {
+  "result": {
+   "seed_error": null,
+   "error": {
+    "phase": "limit",
+    "kind": "STATEMENT_LIMIT"
+   },
+   "n": 50,
+   "elapsed_s": 0.001,
+   "close_rc": 0
+  },
+  "statement_limit": true
+ },
+ "T2b_seed51": {
+  "result": {
+   "seed_error": {
+    "phase": "limit",
+    "kind": "STATEMENT_LIMIT"
+   },
+   "error": null,
+   "n": 0,
+   "elapsed_s": 0.0,
+   "close_rc": 0
+  },
+  "seed_statement_limit": true
+ },
+ "T3_seed64KiB_plus_query64KiB": {
+  "status": "OK",
+  "result": {
+   "seed_error": null,
+   "error": null,
+   "n": 1,
+   "elapsed_s": 0.001,
+   "close_rc": 0
+  },
+  "accepted": true,
+  "total_bytes": 131072
+ },
+ "T4_query_65537": {
+  "status": "INVALID_CASE",
+  "detail": "query_sql must be text <= 65536 bytes",
+  "rejected": true
+ },
+ "T5_vm_budget_shared_across_phases": {
+  "N": 70588,
+  "ops_counted_one_phase": 1200000,
+  "alone_error": null,
+  "combined": {
+   "seed_error": null,
+   "error": {
+    "phase": "step",
+    "kind": "INTERRUPTED_BY_LIMIT",
+    "statement_index": 1,
+    "rc": 9,
+    "message": "interrupted",
+    "rows_before_error": 0
+   },
+   "n": 1,
+   "elapsed_s": 0.081,
+   "close_rc": 0
+  },
+  "shared": true
+ },
+ "T6_deadline_reset_per_phase": {
+  "second_deadline_later_s": 0.05,
+  "reset": true
+ },
+ "T7_separate_modes": {
+  "modes": [
+   "all_statements",
+   "as_written_first_statement_only"
+  ],
+  "first_only_n": 1,
+  "full_n": 2,
+  "close_rcs": [
+   0,
+   0
+  ],
+  "separate": true
+ },
+ "T8_cooperative_timing": {
+  "basis": "code inspection of diagnose.py: progress handler registered with N=1000 VM ops; deadline compared only inside that callback; deadline reset at the start of each run() call. No wall-clock overrun was induced in this test.",
+  "progress_interval_ops": 1000
+ },
+ "all_pass": true,
+ "sqlite_version": "3.40.1",
+ "limits": {
+  "sql_bytes": 65536,
+  "statements": 50,
+  "rows_kept": 50,
+  "vm_steps": 2000000,
+  "seconds": 2.0
+ }
+}
