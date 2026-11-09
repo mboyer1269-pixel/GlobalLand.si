@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"checks\": {\n    \"reverse_to_live_bytes\": true,\n    \"eight_other_files_unchanged\": true,\n    \"fixture_exit_zero\": true,\n    \"current_index_hash\": true\n  },\n  \"fixture_execution\": {\n    \"rows\": 12,\n    \"products\": 2,\n    \"checks\": {\n      \"utf8_no_bom_lf_only\": true,\n      \"header_matches_documented_names\": true,\n      \"no_product_split_across_files\": true,\n      \"handle_rows_contiguous\": true,\n      \"title_only_on_first_row\": true,\n      \"sku_unique\": true,\n      \"identifiers_preserved_sku_barcode_color_size_price\": true,\n      \"color_size_combo_unique_per_product\": true,\n      \"image_positions_1_to_n\": true,\n      \"all_input_images_present_once_per_product\": true,\n      \"variant_image_is_first_image_of_its_color\": true,\n      \"image_only_rows_have_no_variant_fields\": true\n    },\n    \"failed\": []\n  },\n  \"hashes\": {\n    \"verify_example.py\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\",\n    \"index.html\": \"ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28\",\n    \"llms.txt\": \"a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9\",\n    \"transform.py\": \"ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e\",\n    \"7c2e9a41d86b35f0e1a4c97d2b58e360.txt\": \"4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba\",\n    \"verify.py\": \"54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39\",\n    \"fixtures/after-shopify.csv\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\",\n    \"fixtures/before-variants.csv\": \"5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac\",\n    \"fixtures/before-images.csv\": \"894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d\"\n  },\n  \"manual_findings\": \"Actual verifier code checks all listed QA categories on synthetic inputs. EN/FR preserve hypothetical CAD60, nonbinding max20 plain-text scope, exclusions, manually accepted future order distinction and AI disclosure. Nothing sold/no paid orders accepted is consistent with nonbinding scoping requests. No automated delivery, payment route, real compatibility or response-time claim. No public files edited. No demand, exposure or revenue established.\",\n  \"verdict\": \"APPROVE\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/catalogue-agency-offer-independent/evidence.json",
+    "products/receipts/TASK-179426676112.json"
+  ],
+  "request": {
+    "id": "TASK-179426676112",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-09T23:26:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport re,json,hashlib,subprocess\np=Path('products/sites/shopify-catalogue-example'); s=(p/'index.html').read_text(); baseline=Path('products/distribution/related-resources/published-shopify-index.html').read_text()\nen=re.search(r'<h2>For migration agencies:.*?</p>\\n',s).group(); fr=next(x for x in re.findall(r'<p>.*?</p>',s) if 'Livrable mis' in x)\nr=s.replace(en,'',1).replace(fr,'',1)\nold=json.loads(Path('products/services/catalogue-transformation/agency-offer/checks.json').read_text())['site_file_hashes']\nhashes={str(f.relative_to(p)):hashlib.sha256(f.read_bytes()).hexdigest() for f in p.rglob('*') if f.is_file()}\nrun=subprocess.run(['python3',str(p/'verify_example.py'),str(p/'fixtures/before-variants.csv'),str(p/'fixtures/before-images.csv'),str(p/'fixtures/after-shopify.csv')],capture_output=True,text=True)\nchecks={'reverse_to_live_bytes':r.encode()==baseline.encode(),'eight_other_files_unchanged':len(hashes)==9 and all(v==old[k] for k,v in hashes.items() if k!='index.html'),'fixture_exit_zero':run.returncode==0,'current_index_hash':hashes['index.html']=='ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28'}\nresult={'checks':checks,'fixture_execution':json.loads(run.stdout),'hashes':hashes,'manual_findings':'Actual verifier code checks all listed QA categories on synthetic inputs. EN/FR preserve hypothetical CAD60, nonbinding max20 plain-text scope, exclusions, manually accepted future order distinction and AI disclosure. Nothing sold/no paid orders accepted is consistent with nonbinding scoping requests. No automated delivery, payment route, real compatibility or response-time claim. No public files edited. No demand, exposure or revenue established.','verdict':'APPROVE' if all(checks.values()) else 'NEEDS_WORK'}\nout=Path('products/reviews/catalogue-agency-offer-independent/evidence.json');out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2));print(out.read_text())"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/",
+        "products/services/catalogue-transformation/agency-offer/checks.json",
+        "products/distribution/related-resources/published-shopify-index.html"
+      ],
+      "outputs": [
+        "products/reviews/catalogue-agency-offer-independent/evidence.json"
+      ],
+      "mission_id": "CATALOGUE-AGENCY-OFFER-REVIEW"
+    },
+    "description": "Broker action during THINK-1794266761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179426676112",
+  "input_sha256": "d40006020144402e063b1eb8969c82cb90b4b686e81b23e44f2cb53d0911c4bf"
+}
