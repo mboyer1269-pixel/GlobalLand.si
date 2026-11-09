@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"COMMISSIONED-TECHNICAL-ARTICLE-FIT\",\n \"observed\": \"2026-11-09\",\n \"verdict\": \"BOUNDED_REJECTION_CHANNEL_STOPPED\",\n \"publishers\": [\n  {\n   \"name\": \"Twilio Developer Voices\",\n   \"url\": \"https://www.twilio.com/en-us/voices\",\n   \"task\": \"TASK-179425836113\",\n   \"sha256\": \"89d3cc6a50dddcf8b34f234a441cdae9fdc2b2dea449a5cf9aeaf87541a4ece5\",\n   \"quotes\": [\n    \"Each tutorial will be paid at the rate of $650 USD\",\n    \"No articles written by AI or ChatGPT, no plagiarism, no redundant topics, and no articles published elsewhere\",\n    \"We are not accepting new applications for the Developer Voices program at this time.\",\n    \"able to accept payment via PayPal\"\n   ],\n   \"verdict\": \"REJECT\",\n   \"reason\": \"AI-written articles explicitly prohibited; applications closed.\"\n  },\n  {\n   \"name\": \"DigitalOcean Write for DOnations\",\n   \"url\": \"https://www.digitalocean.com/community/pages/write-for-digitalocean\",\n   \"task\": \"TASK-179425836111\",\n   \"sha256\": \"3cebd3299fe349a14e8950627182152db8c6a821e1f117e13c2b2451d2a9502b\",\n   \"quotes\": [\n    \"We’re currently reviewing our backlog of submissions and are paused for new topics until 2025. Please check back next year\",\n    \"New tutorials are paid $400.\",\n    \"The typical payout for community authors in the Write for DOnations program is $300\",\n    \"we’ll send you a contract to sign which lets us publish your work. That’s also when we’ll ask for your contact and payment details.\",\n    \"You must have a PayPal account that can receive funds.\",\n    \"We publish only original, first-run content under a Creative Commons license\"\n   ],\n   \"verdict\": \"REJECT\",\n   \"reason\": \"Page states the program is paused for new topics; no observed reopening on 2026-11-09 (stale 2025 date is not evidence of reopening). Compensation is internally inconsistent ($400 vs $300). Requires signed contract and PayPal account (operator identity/payment prerequisite). AI-authorship policy not stated; silence is not permission.\"\n  },\n  {\n   \"name\": \"Vultr technical writing\",\n   \"url\": \"https://www.vultr.com/docs/vultr-docs-write-for-vultr/\",\n   \"task\": \"TASK-179425836112\",\n   \"verdict\": \"NOT_VERIFIED\",\n   \"reason\": \"FETCH refused HTTP 403; no policy observed. Not retried to avoid bypassing bot blocking.\"\n  }\n ],\n \"unresolved_questions\": [\n  \"Whether DigitalOcean program has reopened and its AI policy\",\n  \"Vultr compensation, AI rules and status\"\n ],\n \"pitch_prepared\": false,\n \"conclusion\": \"No publisher meets all requirements (open route, permitted AI authorship, verifiable compensation). Channel stopped; no pitch, contact or article produced. Reconsider only if an official page shows an open program that explicitly permits disclosed AI-produced work and the operator approves a contract/payment identity.\"\n}\n\n",
+  "artifacts": [
+    "products/services/commissioned-technical-writing/bounded-rejection.json",
+    "products/receipts/TASK-179425836116.json"
+  ],
+  "request": {
+    "id": "TASK-179425836116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-09T21:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/commissioned-technical-writing/bounded-rejection.json');p.parent.mkdir(parents=True,exist_ok=True)\nd={'mission':'COMMISSIONED-TECHNICAL-ARTICLE-FIT','observed':'2026-11-09','verdict':'BOUNDED_REJECTION_CHANNEL_STOPPED','publishers':[\n{'name':'Twilio Developer Voices','url':'https://www.twilio.com/en-us/voices','task':'TASK-179425836113','sha256':'89d3cc6a50dddcf8b34f234a441cdae9fdc2b2dea449a5cf9aeaf87541a4ece5','quotes':['Each tutorial will be paid at the rate of $650 USD','No articles written by AI or ChatGPT, no plagiarism, no redundant topics, and no articles published elsewhere','We are not accepting new applications for the Developer Voices program at this time.','able to accept payment via PayPal'],'verdict':'REJECT','reason':'AI-written articles explicitly prohibited; applications closed.'},\n{'name':'DigitalOcean Write for DOnations','url':'https://www.digitalocean.com/community/pages/write-for-digitalocean','task':'TASK-179425836111','sha256':'3cebd3299fe349a14e8950627182152db8c6a821e1f117e13c2b2451d2a9502b','quotes':['We’re currently reviewing our backlog of submissions and are paused for new topics until 2025. Please check back next year','New tutorials are paid $400.','The typical payout for community authors in the Write for DOnations program is $300','we’ll send you a contract to sign which lets us publish your work. That’s also when we’ll ask for your contact and payment details.','You must have a PayPal account that can receive funds.','We publish only original, first-run content under a Creative Commons license'],'verdict':'REJECT','reason':'Page states the program is paused for new topics; no observed reopening on 2026-11-09 (stale 2025 date is not evidence of reopening). Compensation is internally inconsistent ($400 vs $300). Requires signed contract and PayPal account (operator identity/payment prerequisite). AI-authorship policy not stated; silence is not permission.'},\n{'name':'Vultr technical writing','url':'https://www.vultr.com/docs/vultr-docs-write-for-vultr/','task':'TASK-179425836112','verdict':'NOT_VERIFIED','reason':'FETCH refused HTTP 403; no policy observed. Not retried to avoid bypassing bot blocking.'}],\n'unresolved_questions':['Whether DigitalOcean program has reopened and its AI policy','Vultr compensation, AI rules and status'],\n'pitch_prepared':False,\n'conclusion':'No publisher meets all requirements (open route, permitted AI authorship, verifiable compensation). Channel stopped; no pitch, contact or article produced. Reconsider only if an official page shows an open program that explicitly permits disclosed AI-produced work and the operator approves a contract/payment identity.'}\np.write_text(json.dumps(d,indent=1,ensure_ascii=False));print(p.read_text())"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/commissioned-technical-writing/bounded-rejection.json"
+      ],
+      "mission_id": "COMMISSIONED-TECHNICAL-ARTICLE-FIT"
+    },
+    "description": "Broker action during THINK-1794258361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425836116",
+  "input_sha256": "5429fc39a9bdbd7bef654cba7623badbc652d39ba4b5a8ae90ff0ff29dd70340"
+}
