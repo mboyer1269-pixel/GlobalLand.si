@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "review.json {\"digest\": \"473795e78181a94b3b5fc3c58c8fb77db451631eef41311dc0484a54ef7e3d98\", \"checks\": {\"independent_boundary_run\": true, \"EN_one_new_paragraph\": true, \"FR_one_new_paragraph\": true, \"reverse_index_baseline\": true, \"reverse_llms_baseline\": true, \"sample_unchanged\": true, \"two_identifier_mailtos\": true, \"all_local_links_exist\": true, \"bilingual_AI\": true, \"no_paid_acceptance\": true, \"private_use_qualified\": true, \"page_example_expected_rows\": true, \"first_mode_one_full_two\": true, \"sample_cleanup\": true, \"seed_65537_rejected\": true, \"prepare_error_cleanup\": true, \"step_error_cleanup\": true, \"attach_cleanup\": true, \"vacuum_cleanup\": true, \"rows_cleanup\": true, \"prepare_error_reported\": true, \"step_error_reported\": true, \"attach_denied\": true, \"vacuum_denied\": true, \"50_rows_kept_60_counted\": true, \"cooperative_deadline_inspected\": true}, \"all_pass\": true, \"sqlite_version\": \"3.40.1\", \"limitations\": [\"No private-cycle execution or recipient delivery observed\", \"No browser or compiled C/C++ execution\", \"Timing is cooperative; no hard wall-clock cap tested\"], \"contract\": \"docs/AGENTMAIL.md read TASK-179418600615: eligible Python snapshots do not prove selection or execution\", \"notes\": [\"RUNBOOK retains old aggregate-limit shorthand; public corrected wording accurately describes actual implementation. Private agent should use source and corrected limits.\"]}\nboundary-results.json {\"T1_seed50_plus_query50\": {\"result\": {\"seed_error\": null, \"error\": null, \"n\": 50, \"elapsed_s\": 0.003, \"close_rc\": 0}, \"accepted\": true}, \"T2_query51\": {\"result\": {\"seed_error\": null, \"error\": {\"phase\": \"limit\", \"kind\": \"STATEMENT_LIMIT\"}, \"n\": 50, \"elapsed_s\": 0.001, \"close_rc\": 0}, \"statement_limit\": true}, \"T2b_seed51\": {\"result\": {\"seed_error\": {\"phase\": \"limit\", \"kind\": \"STATEMENT_LIMIT\"}, \"error\": null, \"n\": 0, \"elapsed_s\": 0.0, \"close_rc\": 0}, \"seed_statement_limit\": true}, \"T3_seed64KiB_plus_query64KiB\": {\"status\": \"OK\", \"result\": {\"seed_error\": null, \"error\": null, \"n\": 1, \"elapsed_s\": 0.001, \"close_rc\": 0}, \"accepted\": true, \"total_bytes\": 131072}, \"T4_query_65537\": {\"status\": \"INVALID_CASE\", \"detail\": \"query_sql must be text <= 65536 bytes\", \"rejected\": true}, \"T5_vm_budget_shared_across_phases\": {\"N\": 70588, \"ops_counted_one_phase\": 1200000, \"alone_error\": null, \"combined\": {\"seed_error\": null, \"error\": {\"phase\": \"step\", \"kind\": \"INTERRUPTED_BY_LIMIT\", \"statement_index\": 1, \"rc\": 9, \"message\": \"interrupted\", \"rows_before_error\": 0}, \"n\": 1, \"elapsed_s\": 0.081, \"close_rc\": 0}, \"shared\": true}, \"T6_deadline_reset_per_phase\": {\"second_deadline_later_s\": 0.05, \"reset\": true}, \"T7_separate_modes\": {\"modes\": [\"all_statements\", \"as_written_first_statement_only\"], \"first_only_n\": 1, \"full_n\": 2, \"close_rcs\": [0, 0], \"separate\": true}, \"T8_cooperative_timing\": {\"basis\": \"code inspection of diagnose.py: progress handler registered with N=1000 VM ops; deadline compared only inside that callback; deadline reset at the start of each run() call. No wall-clock overrun was induced in this test.\", \"progress_interval_ops\": 1000}, \"all_pass\": true, \"sqlite_version\": \"3.40.1\", \"limits\": {\"sql_bytes\": 65536, \"statements\": 50, \"rows_kept\": 50, \"vm_steps\": 2000000, \"seconds\": 2.0}}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179418600617.json"
+  ],
+  "request": {
+    "id": "TASK-179418600617",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-09T01:00:06Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json;from pathlib import Path\nfor f in ['review.json','boundary-results.json']:\n d=json.loads((Path('products/reviews/sqlite-limits-independent')/f).read_text());print(f,json.dumps({k:v for k,v in d.items() if k not in ['sample_report','extra_reports']}))"
+      ],
+      "inputs": [
+        "products/reviews/sqlite-limits-independent/"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794186006",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179418600617",
+  "input_sha256": "746e66c6afc2bd40e74a30ee4a0add9ddc126ef08cf82a90cf579798eb423efa"
+}
