@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\"site\": \"sqlite-statement-diagnostic\", \"url\": \"https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/\", \"approved_digest\": \"473795e78181a94b3b5fc3c58c8fb77db451631eef41311dc0484a54ef7e3d98\", \"approval\": \"AUDITOR codex seq 30\", \"dry_run_task\": \"TASK-179418636110\", \"deploy_task\": \"TASK-179418636111\", \"deploy_status\": \"ONLINE_VERIFIED\", \"fetch_index_task\": \"TASK-179418636112\", \"fetch_sample_task\": \"TASK-179418636113\", \"index\": {\"source_sha256\": \"fde833b52380366f0e2559a18cc5e48a544ae9bda97dd7053627266af97fb91d\", \"live_sha256\": \"fde833b52380366f0e2559a18cc5e48a544ae9bda97dd7053627266af97fb91d\", \"match\": true}, \"sample\": {\"source_sha256\": \"a184dd4b11142100e88f326d45e5763aed748bf7d1245bd443de4d85825b0e4d\", \"live_sha256\": \"a184dd4b11142100e88f326d45e5763aed748bf7d1245bd443de4d85825b0e4d\", \"match\": true}, \"indexnow\": \"not resubmitted\", \"observed_at\": \"2026-11-09\", \"not_established\": [\"traffic\", \"requests\", \"private-cycle execution\", \"delivery\", \"revenue\"], \"feedback\": \"0 classified / 3 unclassified = unknown\", \"all_match\": true}\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/intake/release/publication-result.json",
+    "products/receipts/TASK-179418636114.json"
+  ],
+  "request": {
+    "id": "TASK-179418636114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T01:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,pathlib\nh=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()\nS='products/sites/sqlite-statement-diagnostic/'\nR='products/services/sqlite-repair/intake/release/'\nsrc_i=h(S+'index.html');src_s=h(S+'repro/sample-inline-response.txt')\nli=h(R+'live-index.html');ls=h(R+'live-sample.txt')\nr={'site':'sqlite-statement-diagnostic','url':'https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/','approved_digest':'473795e78181a94b3b5fc3c58c8fb77db451631eef41311dc0484a54ef7e3d98','approval':'AUDITOR codex seq 30','dry_run_task':'TASK-179418636110','deploy_task':'TASK-179418636111','deploy_status':'ONLINE_VERIFIED','fetch_index_task':'TASK-179418636112','fetch_sample_task':'TASK-179418636113','index':{'source_sha256':src_i,'live_sha256':li,'match':src_i==li},'sample':{'source_sha256':src_s,'live_sha256':ls,'match':src_s==ls},'indexnow':'not resubmitted','observed_at':'2026-11-09','not_established':['traffic','requests','private-cycle execution','delivery','revenue'],'feedback':'0 classified / 3 unclassified = unknown'}\nr['all_match']=r['index']['match'] and r['sample']['match']\npathlib.Path(R+'publication-result.json').write_text(json.dumps(r,indent=1))\nprint(json.dumps(r))"
+      ],
+      "inputs": [
+        "products/sites/sqlite-statement-diagnostic/",
+        "products/services/sqlite-repair/intake/release/live-index.html",
+        "products/services/sqlite-repair/intake/release/live-sample.txt"
+      ],
+      "outputs": [
+        "products/services/sqlite-repair/intake/release/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794186361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179418636114",
+  "input_sha256": "dad109b2e5b16c2b37d06c8543461c975c3474f04aeb8ead87a4b3873f715bb8"
+}
