@@ -142,22 +142,28 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 333,
-    "turns_without_verified_revenue": 333,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 334,
+    "turns_without_verified_revenue": 334,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T18:49:46Z",
-    "last_outcome_turn": "THINK-1794249726",
-    "last_productive_turn": "THINK-1794250081",
-    "last_turn": "THINK-1794250081",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794250801",
+    "last_productive_turn": "THINK-1794250801",
+    "last_turn": "THINK-1794250801",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/pipeline-next/qualified-drafts.json"
+      "outcome": true,
+      "mission_outcomes": [
+        "PROFITABLE-PIPELINE-NEXT-20261109"
       ],
-      "new_product_count": 1,
+      "new_products": [
+        "products/services/pipeline-next/agency-media-archive-extract.json",
+        "products/services/pipeline-next/raw/agency-media-join-20250822.html",
+        "products/services/pipeline-next/raw/wayback-agency-media.json",
+        "products/services/pipeline-next/raw/wayback-websharx.json",
+        "products/services/pipeline-next/source-qualification.json"
+      ],
+      "new_product_count": 5,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
