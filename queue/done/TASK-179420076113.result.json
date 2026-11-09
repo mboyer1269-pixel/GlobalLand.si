@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SQLITE-LOCAL-DELIVERY\", \"goal\": \"Evaluate and, if suitable, prepare direct local delivery of the existing SQLite fulfillment procedure, without creating another product or adding diagnostic features. Read relevant lessons, current site inventory, fulfillment/diagnose.py, its tests and existing release evidence first; check for equivalent pending work. Determine whether the actual tested script and its dependencies can be downloaded and run using a clearly documented installed runtime. If feasible, prepare a staging-only minimal download package and concise EN/FR instructions covering an actual synthetic example, input/output, observed SQLite version, exact resource-limit semantics, and execution of supplied SQL. Reuse existing code unchanged unless a concrete defect prevents local use; report defects rather than silently expanding scope. Execute the documented commands from a clean directory and verify expected output, error handling and that the downloadable bytes match the tested implementation. Explain which private-mail dependencies local execution removes, without claiming requests, downloads, integration, delivery or revenue. Save and read evidence under products/services/sqlite-repair/local-delivery/. Stop with a precise bounded rejection if runtime portability or packaging cannot be established. Do not edit live site files, deploy, contact anyone, create accounts, spend or repeat discovery submissions. Any proposed public change requires host-enforced independent review of its exact digest. Complete using an actual lease and include a lesson. Preserve the 22 November SQLite verdict and every existing observation and mandatory retirement deadline.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/sqlite-repair/local-delivery/evidence.json\", \"products/services/sqlite-repair/local-delivery/clean-run-report.json\", \"products/services/sqlite-repair/local-delivery/package/README.md\", \"products/services/sqlite-repair/local-delivery/package/diagnose.py\", \"products/services/sqlite-repair/local-delivery/package/example-case.json\"]}",
+  "request": {
+    "id": "TASK-179420076113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-09T05:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "SQLITE-LOCAL-DELIVERY",
+      "agent_id": "BUILDER",
+      "lease_token": "IWnG76RKF5g-9PdZ8FS6LLnGirUy1Z70",
+      "evidence": [
+        "products/services/sqlite-repair/local-delivery/evidence.json",
+        "products/services/sqlite-repair/local-delivery/clean-run-report.json",
+        "products/services/sqlite-repair/local-delivery/package/README.md",
+        "products/services/sqlite-repair/local-delivery/package/diagnose.py",
+        "products/services/sqlite-repair/local-delivery/package/example-case.json"
+      ],
+      "lesson": "Worked: one EXEC packaged diagnose.py unchanged (hash equals the tested source), ran the documented command in a clean dir (TASK-179420076111) and recorded the error paths. Result: exit 0, expected_match, close_rc 0, report equal to the saved example except timing. INVALID_CASE, PREPARE_ERROR, ATTACH and VACUUM denials were observed; bad JSON or missing args give a traceback. Portability is Linux-only: hard-coded libsqlite3.so.0, SQLite 3.38+ and Python 3.8+. These are reported, not fixed. Flaw: the aggregate error check had an and/or precedence bug; next time write each check as a separate boolean. Staging only; no downloads, demand or revenue. Exposure, not delivery format, remains the binding constraint."
+    },
+    "description": "Broker action during THINK-1794200761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179420076113",
+  "input_sha256": "c91cb2735e277d4f7aac5d02ddfeceb4e8adcf3357a19d8a20781e5abe5579f3"
+}
