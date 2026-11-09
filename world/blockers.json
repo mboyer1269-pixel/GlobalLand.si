@@ -142,24 +142,27 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 329,
-    "turns_without_verified_revenue": 329,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 330,
+    "turns_without_verified_revenue": 330,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T18:12:51Z",
-    "last_outcome_turn": "THINK-1794247518",
-    "last_productive_turn": "THINK-1794247861",
-    "last_turn": "THINK-1794247861",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794249006",
+    "last_productive_turn": "THINK-1794249006",
+    "last_turn": "THINK-1794249006",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/diversified-offers/prospect-offers.json",
-        "products/services/diversified-offers/raw/digitalpress-home.html",
-        "products/services/diversified-offers/raw/digitalpress-support.html"
+      "outcome": true,
+      "mission_outcomes": [
+        "DIVERSIFIED-SMALL-REVENUES-20261109"
       ],
-      "new_product_count": 3,
+      "new_products": [
+        "products/services/diversified-offers/forhire-hiring-extract.json",
+        "products/services/diversified-offers/operator-batch.md",
+        "products/services/diversified-offers/prospect-offers-v2.json",
+        "products/services/diversified-offers/raw/forhire-hiring.rss"
+      ],
+      "new_product_count": 4,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
