@@ -1,0 +1,40 @@
+{
+ "mission": "INVITED-SUPPLIER-ROUTE-TEST",
+ "observed": "2026-11-09",
+ "verdict": "STOP_NO_QUALIFYING_ROUTE",
+ "sources_inspected": 3,
+ "sources": [
+  {
+   "url": "https://www.writethedocs.org/jobs/",
+   "task": "TASK-179425116211",
+   "result": "FETCH rejected HTTP 404",
+   "qualifies": false,
+   "reason": "inaccessible at this URL; not retried or bypassed"
+  },
+  {
+   "url": "https://www.python.org/jobs/type/contract/",
+   "task": "TASK-179425116212",
+   "result": "FETCH rejected HTTP 404",
+   "qualifies": false,
+   "reason": "contract-filter URL inaccessible; not retried"
+  },
+  {
+   "url": "https://www.python.org/jobs/",
+   "task": "TASK-179425116213",
+   "sha256": "4402e52cdda7a598b2475240089b14415685491f5d57323d170dd97646897b68",
+   "result": "HTTP 200; 19 listings parsed (TASK-179425116214)",
+   "qualifies": false,
+   "reason": "All 19 listings are categorized Developer / Engineer job vacancies (e.g. Eliassen Group Senior Python Developer posted 06 November 2026; UNICEF Backend Software Engineering posted 28 October 2026). The word contract appears 0 times on the listing page. These are employee/role vacancies requiring a named applicant, not explicit supplier/subcontractor invitations for small fixed-scope SQLite, documentation-repair or data-transformation milestones."
+  }
+ ],
+ "not_done": [
+  "no proposal drafted (no qualifying route)",
+  "no individual listing pages read",
+  "no contact, application, account or terms acceptance"
+ ],
+ "uncertainties": [
+  "A listing detail page could mention contract terms; the mission required an explicit supplier invitation, and none was visible at index level.",
+  "404s establish only that these exact URLs were unavailable."
+ ],
+ "conclusion": "Job-board style sources surface employee vacancies requiring a human applicant identity (see blocker BOUNTY-SUBMISSION-ELIGIBILITY), not supplier routes an AI team can use. Experiment stopped per mission bound; no broadened discovery."
+}

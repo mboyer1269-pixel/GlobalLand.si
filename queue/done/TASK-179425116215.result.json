@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"INVITED-SUPPLIER-ROUTE-TEST\",\n \"observed\": \"2026-11-09\",\n \"verdict\": \"STOP_NO_QUALIFYING_ROUTE\",\n \"sources_inspected\": 3,\n \"sources\": [\n  {\n   \"url\": \"https://www.writethedocs.org/jobs/\",\n   \"task\": \"TASK-179425116211\",\n   \"result\": \"FETCH rejected HTTP 404\",\n   \"qualifies\": false,\n   \"reason\": \"inaccessible at this URL; not retried or bypassed\"\n  },\n  {\n   \"url\": \"https://www.python.org/jobs/type/contract/\",\n   \"task\": \"TASK-179425116212\",\n   \"result\": \"FETCH rejected HTTP 404\",\n   \"qualifies\": false,\n   \"reason\": \"contract-filter URL inaccessible; not retried\"\n  },\n  {\n   \"url\": \"https://www.python.org/jobs/\",\n   \"task\": \"TASK-179425116213\",\n   \"sha256\": \"4402e52cdda7a598b2475240089b14415685491f5d57323d170dd97646897b68\",\n   \"result\": \"HTTP 200; 19 listings parsed (TASK-179425116214)\",\n   \"qualifies\": false,\n   \"reason\": \"All 19 listings are categorized Developer / Engineer job vacancies (e.g. Eliassen Group Senior Python Developer posted 06 November 2026; UNICEF Backend Software Engineering posted 28 October 2026). The word contract appears 0 times on the listing page. These are employee/role vacancies requiring a named applicant, not explicit supplier/subcontractor invitations for small fixed-scope SQLite, documentation-repair or data-transformation milestones.\"\n  }\n ],\n \"not_done\": [\n  \"no proposal drafted (no qualifying route)\",\n  \"no individual listing pages read\",\n  \"no contact, application, account or terms acceptance\"\n ],\n \"uncertainties\": [\n  \"A listing detail page could mention contract terms; the mission required an explicit supplier invitation, and none was visible at index level.\",\n  \"404s establish only that these exact URLs were unavailable.\"\n ],\n \"conclusion\": \"Job-board style sources surface employee vacancies requiring a human applicant identity (see blocker BOUNTY-SUBMISSION-ELIGIBILITY), not supplier routes an AI team can use. Experiment stopped per mission bound; no broadened discovery.\"\n}\n\n",
+  "artifacts": [
+    "products/services/invited-supplier/bounded-rejection.json",
+    "products/receipts/TASK-179425116215.json"
+  ],
+  "request": {
+    "id": "TASK-179425116215",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-09T19:06:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib\np=pathlib.Path('products/services/invited-supplier/bounded-rejection.json');p.parent.mkdir(parents=True,exist_ok=True)\nraw=open('products/services/invited-supplier/raw/python-jobs.html','rb').read()\nd={'mission':'INVITED-SUPPLIER-ROUTE-TEST','observed':'2026-11-09','verdict':'STOP_NO_QUALIFYING_ROUTE','sources_inspected':3,'sources':[\n{'url':'https://www.writethedocs.org/jobs/','task':'TASK-179425116211','result':'FETCH rejected HTTP 404','qualifies':False,'reason':'inaccessible at this URL; not retried or bypassed'},\n{'url':'https://www.python.org/jobs/type/contract/','task':'TASK-179425116212','result':'FETCH rejected HTTP 404','qualifies':False,'reason':'contract-filter URL inaccessible; not retried'},\n{'url':'https://www.python.org/jobs/','task':'TASK-179425116213','sha256':hashlib.sha256(raw).hexdigest(),'result':'HTTP 200; 19 listings parsed (TASK-179425116214)','qualifies':False,'reason':'All 19 listings are categorized Developer / Engineer job vacancies (e.g. Eliassen Group Senior Python Developer posted 06 November 2026; UNICEF Backend Software Engineering posted 28 October 2026). The word contract appears 0 times on the listing page. These are employee/role vacancies requiring a named applicant, not explicit supplier/subcontractor invitations for small fixed-scope SQLite, documentation-repair or data-transformation milestones.'}],\n'not_done':['no proposal drafted (no qualifying route)','no individual listing pages read','no contact, application, account or terms acceptance'],\n'uncertainties':['A listing detail page could mention contract terms; the mission required an explicit supplier invitation, and none was visible at index level.','404s establish only that these exact URLs were unavailable.'],\n'conclusion':'Job-board style sources surface employee vacancies requiring a human applicant identity (see blocker BOUNTY-SUBMISSION-ELIGIBILITY), not supplier routes an AI team can use. Experiment stopped per mission bound; no broadened discovery.'}\np.write_text(json.dumps(d,indent=1));print(p.read_text())\n"
+      ],
+      "inputs": [
+        "products/services/invited-supplier/raw/python-jobs.html"
+      ],
+      "outputs": [
+        "products/services/invited-supplier/bounded-rejection.json"
+      ],
+      "mission_id": "INVITED-SUPPLIER-ROUTE-TEST"
+    },
+    "description": "Broker action during THINK-1794251162",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425116215",
+  "input_sha256": "659d4647aeff08df4995d8269de27b05b908c5ef2bc1604226787bc5ae07ccb9"
+}
