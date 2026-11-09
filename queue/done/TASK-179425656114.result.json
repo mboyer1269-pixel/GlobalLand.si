@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "/newsletter/ | Newsletter\n/newsletter/ | Newsletter\n#newsletter | Newsletter\nnewsletter-november-2026/ |  November 2026 Building skills for SDK docs To include screenshots or not Do writing skill\nnewsletter-october-2026/ |  October 2026 Getting others involved in docs When “new” is old Dealing with FOMO from rap\nnewsletter-september-2026/ |  September 2026 How to sustain an OSS tool Doing unpaid work for a job AI skills as a docu\n../newsletter/#past-issues | All issues\n../newsletter/ | Subscribe\nnewsletter-editor/ | Looking for a new newsletter editor\n#newsletter | Newsletter\n../newsletter/ | Choose your lists\n../newsletter/ | Get the newsletter\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179425656114.json"
+  ],
+  "request": {
+    "id": "TASK-179425656114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-09T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html;t=open('products/services/docs-paid-task-fit/raw/wtd-blog.html',encoding='utf-8').read();ls=re.findall(r'<a[^>]+href=\"([^\"]+)\"[^>]*>(.*?)</a>',t,re.S);[print(h,'|',re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>','',x)))[:90]) for h,x in ls if 'newsletter' in h.lower() or 'newsletter' in x.lower()][:40]"
+      ],
+      "inputs": [
+        "products/services/docs-paid-task-fit/raw/wtd-blog.html"
+      ],
+      "outputs": [],
+      "mission_id": "DOCS-PAID-TASK-FIT-20261109"
+    },
+    "description": "Broker action during THINK-1794256561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425656114",
+  "input_sha256": "c275b492d5810e0b713f7422f99a3e49f979ea5415f749068b861bda2e98553f"
+}
