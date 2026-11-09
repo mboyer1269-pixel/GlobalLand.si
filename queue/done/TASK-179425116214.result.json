@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\n\"n\": 19,\n\"items\": [\n{\n\"text\": \"New Senior Python Developer Eliassen Group Denver, US Cloud , Database , AI AWS Lambda Cloud EC2 ElasticSearch Support Linux Machine Learning NoSQL PostgreSQL Posted: 06 November 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8206/\"\n]\n},\n{\n\"text\": \"New Data/ML Engineer (Python) Odette Technologies Remote / Hybrid, North Carolina, USA Back end , Big Data , Machine Learning , Text Processing Posted: 05 November 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8205/\"\n]\n},\n{\n\"text\": \"New Backend Software Engineering UNICEF Remote, Remote Back end Posted: 28 October 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8195/\"\n]\n},\n{\n\"text\": \"New Founding Principal Engineer Ferto Health GmbH Berlin, Berlin, Germany Back end , Cloud , Database , Lead , Systems Posted: 27 October 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8189/\"\n]\n},\n{\n\"text\": \"New Senior Python Engineer (Barcelona-based / Relocation support to Barcelona) Manychat Barcelona, Spain Back end Posted: 20 October 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8180/\"\n]\n},\n{\n\"text\": \"New Junior Machine Learning Engineer HFT Architecture Remote, Worldwide Finance , Machine Learning Posted: 14 October 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8176/\"\n]\n},\n{\n\"text\": \"New Machine Learning Engineer HFT Architecture Remote, Worldwide Finance , Machine Learning Posted: 14 October 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8175/\"\n]\n},\n{\n\"text\": \"New Python Backend Engineer Uvik Software Tallinn, Harju County, Estonia Back end Posted: 12 October 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8174/\"\n]\n},\n{\n\"text\": \"Senior Staff Engineer - Origination & New Products tem Remote (UK / EU), Remote (UK / EU), Remote (UK / EU) Back end , Cloud , Lead Posted: 18 September 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8139/\"\n]\n},\n{\n\"text\": \"ML Engineer Micro1 Remote, Worlwide, Worldwide Back end , Machine Learning Posted: 15 September 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8136/\"\n]\n},\n{\n\"text\": \"Software Engineer, Full Stack (Python, Java, Rust, C#, C++) Gridnaut Recruiting Remote, Remote, Worldwide Back end , Big Data , Cloud , Database , Front end , Machine Learning , Systems , Web , Python, Full Stack Posted: 11 September 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8135/\"\n]\n},\n{\n\"text\": \"SENIOR Back-End Python Engineer - FULLY REMOTE-WORLDWIDE ActivePrime, Inc. REMOTE, REMOTE Back end , Cloud , Text Processing Posted: 09 September 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8134/\"\n]\n},\n{\n\"text\": \"Agentic Python Engineer Evaboot Remote, Remote/Worldwide, Remote/Worldwide, Remote Back end , Integration , Machine Learning Posted: 08 September 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8133/\"\n]\n},\n{\n\"text\": \"Senior Python Developer Adzuna Remote (within 2 hours of London timezone), Remote Back end , Database , Front end , Integration , Management , Systems , Testing Posted: 03 September 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8131/\"\n]\n},\n{\n\"text\": \"Agentic Python Engineer Evaboot Remote, Remote, Worldwide Back end , Front end Posted: 31 August 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8130/\"\n]\n},\n{\n\"text\": \"Python developer Eleks Poland, Lviv, Ivano-Frankivsk, Ternopil, Uzhhorod, Chernivtsi or Kyiv, Ukraine/Poland Back end , Cloud , Machine Learning , Devops Posted: 28 August 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8129/\"\n]\n},\n{\n\"text\": \"Python/DevOps Engineer NordVpn/NordSecurity Vilnius / Kaunas / Warsaw, Lithuania/Poland Back end , Cloud , Machine Learning Posted: 28 August 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8128/\"\n]\n},\n{\n\"text\": \"Software Engineer (Remote) Softech Associate Panama City Beach, Florida, United States Back end , Cloud , Database , Front end , Integration , Machine Learning , Numeric processing , Testing , Text Processing , Web Posted: 16 August 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8126/\"\n]\n},\n{\n\"text\": \"Agentic Python Engineer Evaboot Remote, Remote/Worldwide, Remote/Worldwide Back end , Integration , Machine Learning , Agentic AI / LLM Agents Posted: 16 August 2026 Developer / Engineer\",\n\"links\": [\n\"/jobs/8125/\"\n]\n}\n]\n}\nFalse 0\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179425116214.json"
+  ],
+  "request": {
+    "id": "TASK-179425116214",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-09T19:06:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json\nt=open('products/services/invited-supplier/raw/python-jobs.html',encoding='utf-8',errors='replace').read()\nitems=re.findall(r'<li>\\s*<h2 class=\"listing-company\">(.*?)</li>',t,re.S)\nout=[]\nfor it in items:\n  txt=re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',it))).strip()\n  links=re.findall(r'href=\"(/jobs/\\d+/)\"',it)\n  out.append({'text':txt[:400],'links':links})\nprint(json.dumps({'n':len(out),'items':out},indent=0)[:6000])\nprint('contract' in t.lower(), t.lower().count('contract'))\n"
+      ],
+      "inputs": [
+        "products/services/invited-supplier/raw/python-jobs.html"
+      ],
+      "outputs": [],
+      "mission_id": "INVITED-SUPPLIER-ROUTE-TEST"
+    },
+    "description": "Broker action during THINK-1794251162",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425116214",
+  "input_sha256": "a73647c03f3966ef5a97411f7d6e93113bf14ab54f8e18ea51bb31ed78bb8a7d"
+}
