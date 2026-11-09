@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\"emails\": [\"hello@agency.media\"], \"len\": 1411}\n\n",
+  "artifacts": [
+    "products/services/pipeline-next/agency-media-archive-extract.json",
+    "products/receipts/TASK-179425008114.json"
+  ],
+  "request": {
+    "id": "TASK-179425008114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T18:48:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json,pathlib\np='products/services/pipeline-next/raw/agency-media-join-20250822.html'\nt=open(p,encoding='utf-8',errors='replace').read()\nt=re.sub(r'(?is)<(script|style|noscript)[^>]*>.*?</\\1>',' ',t)\nmails=sorted(set(re.findall(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[a-z]{2,}',t)))\nx=html.unescape(re.sub(r'<[^>]+>',' ',t))\nx=re.sub(r'\\s+',' ',x).strip()\nkw=['freelanc','SEO','copywrit','developer','email','apply','contact','AI','agency','remote','hello@']\nhits={k:[x[max(0,m.start()-160):m.start()+200] for m in re.finditer(re.escape(k),x)][:3] for k in kw}\nout={'source':'https://web.archive.org/web/20250822005739id_/https://agency.media/join-the-team/','capture_utc':'2025-08-22T00:57:39Z','note':'Archived capture, 15 months old; not evidence of current hiring. Direct live FETCH returned 403 (TASK-179424972611).','emails_in_html':mails,'text_chars':len(x),'text_head':x[:3000],'keyword_context':hits}\npathlib.Path('products/services/pipeline-next/agency-media-archive-extract.json').write_text(json.dumps(out,indent=1,ensure_ascii=False))\nprint(json.dumps({'emails':mails,'len':len(x)}))"
+      ],
+      "inputs": [
+        "products/services/pipeline-next/raw/agency-media-join-20250822.html"
+      ],
+      "outputs": [
+        "products/services/pipeline-next/agency-media-archive-extract.json"
+      ],
+      "mission_id": "PROFITABLE-PIPELINE-NEXT-20261109"
+    },
+    "description": "Broker action during THINK-1794250081",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425008114",
+  "input_sha256": "77c2a9193bca6f03dfa31bdf640fea16f7ff0832d58c94581ff574ad224e1f9a"
+}
