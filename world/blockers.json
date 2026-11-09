@@ -137,25 +137,30 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-09T20:07:12Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 339,
-    "turns_without_verified_revenue": 339,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 340,
+    "turns_without_verified_revenue": 340,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T20:07:12Z",
-    "last_outcome_turn": "THINK-1794254404",
-    "last_productive_turn": "THINK-1794254404",
-    "last_turn": "THINK-1794254762",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794256204",
+    "last_productive_turn": "THINK-1794256204",
+    "last_turn": "THINK-1794256204",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "IAPM-ANALYSIS-MILESTONE-FIT"
+      ],
+      "new_products": [
+        "products/services/iapm-analysis-fit/iapm-spec-text.txt",
+        "products/services/iapm-analysis-fit/rejection.json"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
