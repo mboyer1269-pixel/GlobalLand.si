@@ -1,0 +1,195 @@
+{
+ "mission": "SQLITE-FK-CASE-RELEASE-STAGING",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "status": "STAGED_NOT_INTEGRATED",
+ "all_pass": false,
+ "checks": [
+  {
+   "check": "copy_hash:case-as-written-fk-off.json",
+   "pass": true,
+   "detail": "16f3efb8e134"
+  },
+  {
+   "check": "copy_hash:case-as-written-fk-on.json",
+   "pass": true,
+   "detail": "85d8dfd5a2e1"
+  },
+  {
+   "check": "copy_hash:case-fixed.json",
+   "pass": true,
+   "detail": "cb488d80aebd"
+  },
+  {
+   "check": "copy_hash:report-as-written-fk-off.json",
+   "pass": true,
+   "detail": "eba5e666e3f2"
+  },
+  {
+   "check": "copy_hash:report-as-written-fk-on.json",
+   "pass": true,
+   "detail": "702f5f8b3f04"
+  },
+  {
+   "check": "copy_hash:report-fixed.json",
+   "pass": true,
+   "detail": "71ba5004baea"
+  },
+  {
+   "check": "api_raw_sha",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "doc_raw_sha",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "question_in_saved_api",
+   "pass": true,
+   "detail": "items=20"
+  },
+  {
+   "check": "owner_name",
+   "pass": true,
+   "detail": "Wpythonic"
+  },
+  {
+   "check": "owner_link",
+   "pass": true,
+   "detail": "https://stackoverflow.com/users/32006481/wpythonic"
+  },
+  {
+   "check": "license_field",
+   "pass": true,
+   "detail": "CC BY-SA 4.0"
+  },
+  {
+   "check": "answer_count_0",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "so_quote:sqlite3.OperationalError: fore",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "so_quote:FOREIGN KEY(cat_id) REFERENCES",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "so_quote:Earlier today for whatever rea",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "doc_quote:The parent key must be a named",
+   "pass": false,
+   "detail": ""
+  },
+  {
+   "check": "doc_quote:Foreign key constraints are di",
+   "pass": false,
+   "detail": ""
+  },
+  {
+   "check": "fk_off_row",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fk_on_prepare_rc1",
+   "pass": true,
+   "detail": "{\"phase\": \"prepare\", \"kind\": \"PREPARE_ERROR\", \"statement_index\": 1, \"start_byte\": 0, \"rc\": 1, \"message\": \"foreign key mismatch - \\\"vaccinations\\\" referencing \\\"cats\\\"\", \"error_offset\": -1}"
+  },
+  {
+   "check": "fixed_join_row",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fixed_rc19",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "version_3401",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "closed_clean",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fixed_cat99",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "rebuild_sql_matches_case",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "relative_links_resolve",
+   "pass": true,
+   "detail": "['fk-mismatch-rowid/case-as-written-fk-off.json', 'fk-mismatch-rowid/report-as-written-fk-off.json', 'fk-mismatch-rowid/case-as-written-fk-on.json', 'fk-mismatch-rowid/report-as-written-fk-on.json', 'fk-mismatch-rowid/case-fixed.json', 'fk-mismatch-rowid/report-fixed.json', '../index.html']"
+  },
+  {
+   "check": "external_links_expected",
+   "pass": true,
+   "detail": "['https://creativecommons.org/licenses/by-sa/4.0/', 'https://stackoverflow.com/questions/79846840', 'https://stackoverflow.com/users/32006481/wpythonic', 'https://www.sqlite.org/foreignkeys.html']"
+  },
+  {
+   "check": "ai_disclosure_en_fr",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_script",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_currency_amount",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_mailto_on_supplement",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "current_index_is_pending_fde833b5",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "reverse_restores_current",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "link_target_staged",
+   "pass": true,
+   "detail": ""
+  }
+ ],
+ "hashes": {
+  "supplement": "ec267b5cc4e69cf1a71726e7d5550c46f1f4b4e6816367f449c63316ed502e40",
+  "proposed_index": "b6cda1dce1e7e214bf62200278e9c31742ee6bcaf056a37c14cdaa2294646d24",
+  "current_index": "fde833b52380366f0e2559a18cc5e48a544ae9bda97dd7053627266af97fb91d"
+ },
+ "integration_prereq": "SQLITE-LIMITS-INDEPENDENT-REVIEW outcome for digest 473795e7...; then copy site-overlay/cases/ into products/sites/sqlite-statement-diagnostic/, apply insertions, dry_run, exact-digest independent review",
+ "not_established": [
+  "exposure",
+  "demand",
+  "requests",
+  "revenue"
+ ]
+}
