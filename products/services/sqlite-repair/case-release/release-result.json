@@ -1,0 +1,39 @@
+{
+ "site": "sqlite-statement-diagnostic",
+ "approved_digest": "ffe2d1202fca8c37d303f71b7761f625f5527c41e35b08e3650667a5d09552d7",
+ "approval": "AUDITOR codex seq 31",
+ "dry_run": "TASK-179419320110",
+ "deploy": "TASK-179419320111 ONLINE_VERIFIED",
+ "fetches": [
+  "TASK-179419320112",
+  "TASK-179419320113",
+  "TASK-179419320114"
+ ],
+ "files": {
+  "index.html": {
+   "source": "b6cda1dce1e7e214bf62200278e9c31742ee6bcaf056a37c14cdaa2294646d24",
+   "live": "b6cda1dce1e7e214bf62200278e9c31742ee6bcaf056a37c14cdaa2294646d24",
+   "match": true
+  },
+  "cases/fk-mismatch-rowid.html": {
+   "source": "ec267b5cc4e69cf1a71726e7d5550c46f1f4b4e6816367f449c63316ed502e40",
+   "live": "ec267b5cc4e69cf1a71726e7d5550c46f1f4b4e6816367f449c63316ed502e40",
+   "match": true
+  },
+  "cases/fk-mismatch-rowid/report-fixed.json": {
+   "source": "71ba5004baeade36bb3b92210e0eb9315089c3f6ff4fc084d259f2fa238c77c2",
+   "live": "71ba5004baeade36bb3b92210e0eb9315089c3f6ff4fc084d259f2fa238c77c2",
+   "match": true
+  }
+ },
+ "all_match": true,
+ "indexnow": "not submitted (one prior submission for this host already made)",
+ "not_observed": [
+  "traffic",
+  "requests",
+  "orders",
+  "revenue",
+  "MIME types"
+ ],
+ "feedback": "0 classified / 3 unclassified = unknown"
+}
