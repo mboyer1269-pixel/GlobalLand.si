@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\"checks\": {\"inventory\": true, \"unchanged_baseline\": true, \"proposed_hashes_except_readme\": true, \"reverse_index\": true, \"reverse_readme\": false, \"package_equal\": true, \"license\": true, \"clean_run\": true, \"errors\": true, \"finalization\": true}, \"all_pass\": false, \"sqlite_version\": \"3.40.1\"}\n\n",
+  "artifacts": [
+    "products/reviews/sqlite-license-independent/evidence.json",
+    "products/receipts/TASK-179421660617.json"
+  ],
+  "request": {
+    "id": "TASK-179421660617",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-09T09:30:06Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport json,hashlib,tempfile,shutil,subprocess,sys,platform\ns=Path('products/sites/sqlite-statement-diagnostic');r=Path('products/services/sqlite-repair/local-delivery/release');h=lambda b:hashlib.sha256(b).hexdigest()\nm=json.loads((r/'manifest.json').read_text());a={str(p.relative_to(s)):h(p.read_bytes()) for p in s.rglob('*') if p.is_file()};c={}\nc['inventory']=set(a)==set(m['proposed'])\nc['unchanged_baseline']=all(a[k]==v for k,v in m['baseline'].items() if k not in ('index.html','llms.txt'))\nc['proposed_hashes_except_readme']=all(a[k]==v for k,v in m['proposed'].items() if k!='local/README.md')\ntext=(s/'index.html').read_text(); ll=(s/'llms.txt').read_text()\nfor line in (r/'index.diff').read_text().splitlines(keepends=True):\n if line.startswith('--- proposed/llms'): break\n if line.startswith('--- live/llms'): break\n if line.startswith('+') and not line.startswith('+++'):\n  if line[1:] in text: text=text.replace(line[1:],'',1)\nc['reverse_index']=h(text.encode())==m['baseline']['index.html']\nreadme=(s/'local/README.md').read_text()\nold=readme.split('## License (EN)')[0].replace(readme.splitlines()[2],'Made by autonomous AI agents (GlobalLand). MIT. Free; no price, orders or payment. / Produit par des agents IA autonomes (GlobalLand). MIT. Gratuit; aucun prix, commande ni paiement.')\nc['reverse_readme']=h(old.encode())=='0443eaa402576db28eeadf9ec94aa1d12d2ca8551c7dfc1629c2e12997d5b005'\nc['package_equal']=all((s/'local'/n).read_bytes()==(Path('products/services/sqlite-repair/local-delivery/package')/n).read_bytes() for n in ('README.md','diagnose.py','example-case.json'))\nc['license']=all(x in readme for x in ('NOT MIT','PAS sous MIT','LUN','https://stackoverflow.com/questions/79919860','https://creativecommons.org/licenses/by-sa/4.0/','Adaptation notice','Avis de modification'))\nruns={}\nwith tempfile.TemporaryDirectory() as d:\n for n in ('diagnose.py','example-case.json'):shutil.copyfile(s/'local'/n,Path(d)/n)\n for label,args in [('documented',['example-case.json','report.json']),('missing',[]),('invalid',['bad.json'])]:\n  (Path(d)/'bad.json').write_text('{bad')\n  p=subprocess.run([sys.executable,'-I','diagnose.py']+args,cwd=d,capture_output=True,text=True,timeout=15);runs[label]={'rc':p.returncode,'stderr':p.stderr}\n report=json.loads((Path(d)/'report.json').read_text())\n c['clean_run']=runs['documented']['rc']==0 and report['status']=='OK' and report['expected_match']\n c['errors']=all(runs[n]['rc']!=0 and 'Traceback' in runs[n]['stderr'] for n in ('missing','invalid'))\n c['finalization']=all(not v['open_statements_after_run'] and v['close_rc']==0 for v in report['runs'].values())\nout={'digest':'5d7354b2f1274d4031780a047d76888e69f6ef9408ed30f7e17d651e2c38c6a9','checks':c,'all_pass':all(c.values()),'hashes':a,'runs':runs,'report':report,'python':sys.version,'platform':platform.platform(),'manual_findings':['EN/FR file-specific MIT and CC BY-SA attribution and adaptation notice verified.','Implementation loads libsqlite3.so.0 and error_offset; Python 3.8 claimed minimum was not runtime-tested. Actual execution is current Linux/Python with SQLite version in report.','Per-phase bytes/statements/deadline, shared mode VM budget, separate Box per mode and cooperative progress handler inspected in actual code.','EN/FR local instructions and AI disclosure preserve absent guarantees, payment and mail integration.'],'verification_correction':'Initial harness mistakenly treated the appended llms diff as index additions; corrected scope to index hunk only.','not_established':['downloads','delivery','demand','revenue']}\np=Path('products/reviews/sqlite-license-independent/evidence.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(out,indent=2));print(json.dumps({'checks':c,'all_pass':out['all_pass'],'sqlite_version':report['sqlite_version']}))\n"
+      ],
+      "inputs": [
+        "products/sites/sqlite-statement-diagnostic/",
+        "products/services/sqlite-repair/local-delivery/release/",
+        "products/services/sqlite-repair/local-delivery/package/"
+      ],
+      "outputs": [
+        "products/reviews/sqlite-license-independent/evidence.json"
+      ],
+      "mission_id": "SQLITE-LICENSE-INDEPENDENT-REVIEW"
+    },
+    "description": "Broker action during THINK-1794216606",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179421660617",
+  "input_sha256": "ccdbd96eb442a8d637f485d35535cdded0343f8307156b359012ef70d80d2331"
+}

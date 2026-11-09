@@ -1,0 +1,157 @@
+{
+  "digest": "5d7354b2f1274d4031780a047d76888e69f6ef9408ed30f7e17d651e2c38c6a9",
+  "checks": {
+    "inventory": true,
+    "unchanged_baseline": true,
+    "proposed_hashes_except_readme": true,
+    "reverse_index": true,
+    "reverse_readme": false,
+    "package_equal": true,
+    "license": true,
+    "clean_run": true,
+    "errors": true,
+    "finalization": true
+  },
+  "all_pass": false,
+  "hashes": {
+    "robots.txt": "51b5983b5a0bd2ffc5e93e6f98e798e75a76d0aca45106dbdf3900fea133c7fc",
+    "index.html": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+    "llms.txt": "cf8c567433f0eb7dcac46a2150a78075288dca25824c51300cc45572a75ff948",
+    "3d8f1b6a92c04e7f5a1b8c2d9e6f4a07.txt": "8d64b54667f2f7112aebaec9f70de683ee5d76118065834c0d8b6731732c2eaa",
+    "sitemap.xml": "03109bbcd8cf6e5e1c63af3342cd0d319fa324bc21bbaa89e6d3827f8d5bc0b7",
+    "repro/sample-inline-response.txt": "a184dd4b11142100e88f326d45e5763aed748bf7d1245bd443de4d85825b0e4d",
+    "repro/multi_stmt.c": "ca11940e50f4ff72665e538463a0da0cb7084c2bf3a606b171f6a35447220fa0",
+    "repro/acceptance.json": "42461f41c15022e4818d7c9707e0e03af7f11abea5a4159af24ab5d1bf683c95",
+    "repro/run-output.txt": "7cdacd357e65cb566ea9d036d04cdef6c8f80de680050ee458e7453c4ee83baa",
+    "repro/c-loader-attempt.txt": "44e56547f761eaca609c786e70300aaeb7b16fdca96332572f88bc720c6f2d63",
+    "repro/ctypes_repro.py": "f50da820a6fa3acc1e88b8b4714e13da1487cceb7efc07b0f3b9f7137d866783",
+    "cases/fk-mismatch-rowid.html": "ec267b5cc4e69cf1a71726e7d5550c46f1f4b4e6816367f449c63316ed502e40",
+    "cases/fk-mismatch-rowid/report-fixed.json": "71ba5004baeade36bb3b92210e0eb9315089c3f6ff4fc084d259f2fa238c77c2",
+    "cases/fk-mismatch-rowid/case-fixed.json": "cb488d80aebd9fb6351e29c6aa645ddb3128a2a483892bb0a6f42e5363cb2f37",
+    "cases/fk-mismatch-rowid/report-as-written-fk-off.json": "eba5e666e3f22e1fab451622ac5c5e3d6778fe7c28eeaed6f3a58fbaf032d500",
+    "cases/fk-mismatch-rowid/report-as-written-fk-on.json": "702f5f8b3f045426e479d49b121aad151c406e52b348f2a7edcb88e4ea521df9",
+    "cases/fk-mismatch-rowid/case-as-written-fk-on.json": "85d8dfd5a2e16386a1a28521e27f0932c7c514076e255ff582c5b29abcb54d75",
+    "cases/fk-mismatch-rowid/case-as-written-fk-off.json": "16f3efb8e1346fb0726ce38feafa8fc435837d2f576ef38d45c6a62f38cc56a4",
+    "local/example-case.json": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f",
+    "local/README.md": "53a82b11a58ddbe6b022817d82e28458f2f4fbcb1f0bc1ac72922be1fc14183c",
+    "local/diagnose.py": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7"
+  },
+  "runs": {
+    "documented": {
+      "rc": 0,
+      "stderr": ""
+    },
+    "missing": {
+      "rc": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmppaxotg8m/diagnose.py\", line 102, in <module>\n    case=json.load(open(sys.argv[1],encoding='utf-8'))\n                        ~~~~~~~~^^^\nIndexError: list index out of range\n"
+    },
+    "invalid": {
+      "rc": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmppaxotg8m/diagnose.py\", line 102, in <module>\n    case=json.load(open(sys.argv[1],encoding='utf-8'))\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/__init__.py\", line 293, in load\n    return loads(fp.read(),\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/decoder.py\", line 353, in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\njson.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)\n"
+    }
+  },
+  "report": {
+    "tool": "globalland-sqlite-diagnose/1",
+    "sqlite_version": "3.40.1",
+    "case_id": "page-example",
+    "limits": {
+      "sql_bytes": 65536,
+      "statements": 50,
+      "rows_kept": 50,
+      "vm_steps": 2000000,
+      "seconds": 2.0
+    },
+    "runs": {
+      "as_written_first_statement_only": {
+        "statements": [
+          {
+            "index": 1,
+            "start_byte": 0,
+            "end_byte": 51,
+            "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+            "executed": true,
+            "columns": 0,
+            "row_count": 0,
+            "rows": [],
+            "step_rc": 101,
+            "finalize_rc": 0
+          }
+        ],
+        "error": null,
+        "unexecuted_tail": "SELECT * FROM T1",
+        "input_bytes": 68,
+        "final_byte": 51,
+        "denied": [],
+        "elapsed_s": 0.001,
+        "open_statements_after_run": false,
+        "close_rc": 0
+      },
+      "all_statements": {
+        "statements": [
+          {
+            "index": 1,
+            "start_byte": 0,
+            "end_byte": 51,
+            "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+            "executed": true,
+            "columns": 0,
+            "row_count": 0,
+            "rows": [],
+            "step_rc": 101,
+            "finalize_rc": 0
+          },
+          {
+            "index": 2,
+            "start_byte": 51,
+            "end_byte": 68,
+            "sql": "SELECT * FROM T1",
+            "executed": true,
+            "columns": 2,
+            "row_count": 3,
+            "rows": [
+              [
+                "1",
+                "a"
+              ],
+              [
+                "2",
+                "b"
+              ],
+              [
+                "3",
+                "c"
+              ]
+            ],
+            "step_rc": 101,
+            "finalize_rc": 0
+          }
+        ],
+        "error": null,
+        "unexecuted_tail": null,
+        "input_bytes": 68,
+        "final_byte": 68,
+        "denied": [],
+        "elapsed_s": 0.0,
+        "open_statements_after_run": false,
+        "close_rc": 0
+      }
+    },
+    "expected_match": true,
+    "status": "OK"
+  },
+  "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+  "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.36",
+  "manual_findings": [
+    "EN/FR file-specific MIT and CC BY-SA attribution and adaptation notice verified.",
+    "Implementation loads libsqlite3.so.0 and error_offset; Python 3.8 claimed minimum was not runtime-tested. Actual execution is current Linux/Python with SQLite version in report.",
+    "Per-phase bytes/statements/deadline, shared mode VM budget, separate Box per mode and cooperative progress handler inspected in actual code.",
+    "EN/FR local instructions and AI disclosure preserve absent guarantees, payment and mail integration."
+  ],
+  "verification_correction": "Initial harness mistakenly treated the appended llms diff as index additions; corrected scope to index hunk only.",
+  "not_established": [
+    "downloads",
+    "delivery",
+    "demand",
+    "revenue"
+  ]
+}
