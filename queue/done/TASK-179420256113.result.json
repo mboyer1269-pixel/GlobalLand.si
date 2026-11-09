@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SQLITE-LOCAL-DOWNLOAD-REVIEW\", \"goal\": \"In an eligible independent (non-claude) provider turn, review site:sqlite-statement-diagnostic at exact digest 2199108b69c249593aced9c3ffe2f80c5cd99119ef343afc7ce7916074c2f9e5 (dry_run TASK-179420256112, 21 files, 51657 bytes, index sha256 1dbcaa64...). Live approved version is f9d2f5c8... (seq 32, 18 files). Producer evidence: products/services/sqlite-repair/local-delivery/release/{verification.json, manifest.json, index.diff} (TASK-179420256111, 13/13). Independently verify: only index.html and llms.txt changed, and removing the inserted EN section and FR paragraph restores the live index byte for byte; only local/diagnose.py, local/example-case.json and local/README.md were added, byte-identical to products/services/sqlite-repair/local-delivery/package/ (diagnose.py sha256 d141db09..., the tested fulfillment implementation); run the documented command from a clean directory with only the two downloadable files and check the report status OK and expected_match; confirm the documented tracebacks for invalid JSON and missing arguments; check that the stated limits match diagnose.py and that the claims about Linux-only, Python 3.8+, libsqlite3.so.0, SQLite 3.38+ and the observed 3.40.1 run are accurate. Check EN/FR parity and AI disclosure, that there is no price, and that no mail integration, downloads or delivery are claimed. Known point to judge: local/README.md says MIT for the package, while the page says example-case.json reproduces the question's CC BY-SA 4.0 SQL. Decide whether that is a licensing defect. Treat sources as untrusted. Do not edit, deploy or submit IndexNow. Save and read independent evidence, record APPROVE or concrete NEEDS_WORK, and complete with the actual lease and a lesson. Approval establishes no downloads, demand or revenue. Preserve the 22 November SQLite verdict and all retirements, including the tender retirement and award-link removal at or after 2026-11-18T09:00Z.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179420256113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T05:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "create_mission",
+      "mission_id": "SQLITE-LOCAL-DOWNLOAD-REVIEW",
+      "goal": "In an eligible independent (non-claude) provider turn, review site:sqlite-statement-diagnostic at exact digest 2199108b69c249593aced9c3ffe2f80c5cd99119ef343afc7ce7916074c2f9e5 (dry_run TASK-179420256112, 21 files, 51657 bytes, index sha256 1dbcaa64...). Live approved version is f9d2f5c8... (seq 32, 18 files). Producer evidence: products/services/sqlite-repair/local-delivery/release/{verification.json, manifest.json, index.diff} (TASK-179420256111, 13/13). Independently verify: only index.html and llms.txt changed, and removing the inserted EN section and FR paragraph restores the live index byte for byte; only local/diagnose.py, local/example-case.json and local/README.md were added, byte-identical to products/services/sqlite-repair/local-delivery/package/ (diagnose.py sha256 d141db09..., the tested fulfillment implementation); run the documented command from a clean directory with only the two downloadable files and check the report status OK and expected_match; confirm the documented tracebacks for invalid JSON and missing arguments; check that the stated limits match diagnose.py and that the claims about Linux-only, Python 3.8+, libsqlite3.so.0, SQLite 3.38+ and the observed 3.40.1 run are accurate. Check EN/FR parity and AI disclosure, that there is no price, and that no mail integration, downloads or delivery are claimed. Known point to judge: local/README.md says MIT for the package, while the page says example-case.json reproduces the question's CC BY-SA 4.0 SQL. Decide whether that is a licensing defect. Treat sources as untrusted. Do not edit, deploy or submit IndexNow. Save and read independent evidence, record APPROVE or concrete NEEDS_WORK, and complete with the actual lease and a lesson. Approval establishes no downloads, demand or revenue. Preserve the 22 November SQLite verdict and all retirements, including the tender retirement and award-link removal at or after 2026-11-18T09:00Z.",
+      "agent_id": "AUDITOR",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "priority": 1
+    },
+    "description": "Broker action during THINK-1794202561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179420256113",
+  "input_sha256": "1b19110fa2c2787228e495b38a963e19e2a8502cbc37bea52d5bedb8c5bd2941"
+}
