@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "13658\nasy to understand. Historically, the first programmers were writers and mathematicians, which showcases the common roots these professions share. See more Write the Docs resources about [/topics/#related-roles] related roles . Events coming up [#events-coming-up] ¶ 10 Nov, 19:00 CST (Calgary, Canada): [https://www.meetup.com/wtd-calgary/events/312192372/] The EU Cyber Resilience Act (CRA) and what it means for technical writers 12 Nov, 17:30 PST (Portland, USA): [https://www.meetup.com/write-the-docs-pdx/events/317006948/] Write the Docs PDX + PSU Tech Comms Supermeetup 13 Nov, 08:30 EST (US East Coast Virtual): [https://www.meetup.com/write-the-docs-east-coast/events/311760899/] Write the Docs East Coast Virtual Meetup 19 Nov, 18:00 GMT (London, United Kingdom): [https://www.meetup.com/write-the-docs-london/events/316310087/] Docs in Practice: Behind the State of Docs 19 Nov, 18:30 PST (San Francisco, USA): [https://www.meetup.com/write-the-docs-bay-area/events/317137483/] Rethinking Documentation in the AI Era 23 Nov, 17:30 IST (Tel Aviv+, Israel): [https://www.meetup.com/write-the-docs-taplus/events/317172118/] Measure What Matters. Show What Works. 10 Dec, 18:00 GMT (London, United Kingdom): [https://www.meetup.com/write-the-docs-london/events/313761624/] Write the Docs London Winter Social 11 Dec, 08:30 EST (US East Coast Virtual): [https://www.meetup.com/write-the-docs-east-coast/events/3117609] Write the Docs East Coast Virtual Meetup [../../conf/portland/2027/news/announcing-cfp/] Announcing the Call for Proposals On this page [#] Write the Docs Newsletter – November 2026 [#write-the-docs-resources] Write the Docs resources [#building-skills-for-sdk-docs] Building skills for SDK docs [#to-include-screenshots-or-not] To include screenshots or not [#do-writing-skills-help-you-code-better] Do writing skills help you code better? [#events-coming-up] Events coming up Join our mailing list Get a monthly roundup of what the community is talking about, with over 12,000 other readers. Email address Subscribe Want conference news too? [../../newsletter/] Choose your lists . Supported by [https://about.readthedocs.com] Website Hosting [https://www.nytril.com?utm_source=wtd] Docs as Code [../../sponsorship/] Become a sponsor [/] A global community of people who care about documentation. Stay in touch Talk shop with over 27,000 documentarians in Slack, and read our monthly newsletter. [../../slack/] Join Slack [../../newsletter/] Get the newsletter [../../about/about-the-org/] About us [../../conf/] Conferences [../../sponsorship/] Sponsor us [../../code-of-conduct/] Code of Conduct [../../contact/] Contact © Write the Docs · [https://creativecommons.org/licenses/by-nc-sa/4.0/] CC BY-NC-SA 4.0 · Spotted a mistake? [https://github.com/writethedocs/www/edit/main/docs/blog/newsletter-november-2026.md] Edit this page on GitHub [https://github.com/writethedocs] [https://www.linkedin.com/company/write-the-docs] [https://www.flickr.com/photos/writethedocs/] \n\n",
+  "artifacts": [
+    "products/receipts/TASK-179425656116.json"
+  ],
+  "request": {
+    "id": "TASK-179425656116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-09T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html;t=open('products/services/docs-paid-task-fit/raw/wtd-newsletter-nov-2026.html',encoding='utf-8').read();i=t.lower().find('job');s=t[t.find('<main') if '<main' in t else 0:];s=re.sub(r'<(script|style).*?</\\1>','',s,flags=re.S);s=re.sub(r'<a[^>]+href=\"([^\"]+)\"[^>]*>',r' [\\1] ',s);s=html.unescape(re.sub(r'<[^>]+>',' ',s));s=re.sub(r'\\s+',' ',s);j=s.lower().find('job posting');print(len(s));print(s[max(0,j-300):j+2500] if j>=0 else s[-3000:])"
+      ],
+      "inputs": [
+        "products/services/docs-paid-task-fit/raw/wtd-newsletter-nov-2026.html"
+      ],
+      "outputs": [],
+      "mission_id": "DOCS-PAID-TASK-FIT-20261109"
+    },
+    "description": "Broker action during THINK-1794256561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425656116",
+  "input_sha256": "5863509cbbcc3343dc836411af7eeb861570ae9a2487a957b8d3249d26d766e0"
+}
