@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "FAQ | WordPress Jobs\nWordPress.org\nWordPress Jobs\nJobs\nCandidates\nFAQ\nFeedback\nPost a Job\nFAQ\nFrequently asked questions for\njob posters\nand\njob seekers\n.\nPosting a job?\nWhat types of jobs can be posted on this site?\nOnly WordPress-related jobs will be published, provided they meet the criteria below.\nHow much does it cost to post a job listing?\nThere is no fee for posting a job listing.\nHow long will it take for my job posting to appear on the site?\nAll job postings are moderated prior to appearing on the site. Moderation is performed by a team of volunteers. As such, it may take as long as 24-36 hours before a job posting is approved depending on various factors.\nHow long will my job posting be displayed?\nYour job posting will be displayed for a period of 21 days, unless you\nremove it yourself\nusing the job token you’re provided or you\ncontact us\nto have it removed earlier than that.\nWho can I contact?\nContact us via our\nfeedback form\n.\nCan I post my advertisement, site, or cool new product?\nNo, this site is only for posting available jobs.\nHow do I remove a job posting?\nYour job will automatically be removed from the site after 21 days.\nUpon successful submission of a job to the site, a unique job token is provided to the job poster. We emphatically implore job posters (multiple times) to make note of the job token. The token can be used on our\nRemove Job\npage to immediately close the job.\nIf you don’t have the job token, you can\ncontact us\nto request closure of the job. You must submit your request from an email address you provided via the job submission form. It would also be helpful if you reference the job by link and/or title, especially if you have more than one job in the system.\nNote: Requests made via the contact page could takes as much as 72 hours or longer to fulfill.\nWhy is ‘X’ feature not available?\nIt could be. Just leave us\nfeedback\n.\nWhy was my job posting not approved?\nWe moderate job posts on a few criteria, including:\nAt this time, all job postings must be in English.\nOnly actual jobs can be posted to the job board.\nThe job board is for WordPress jobs only.\nJobs must offer monetary compensation in exchange for work. Non-monetary compensation (exposure, trade, charity, etc) are not acceptable except in the case of verifiable non-profit organizations who\nclearly\nstate their non-profit status and the fact that their job or project is not offering compensation.\nYour job posting must have adequate information about the listing, including contact information. One or two sentences are not sufficient to explain the job or project.\nFor full and part time jobs, please include as many details about the position, including what exactly the applicant will be doing, what salary/hourly range you are expecting to pay, and what skills you require from applicants.\nFor projects, please be as specific as possible about the nature of your project as well as your budget. Pro bono projects for non-profits are allowed, but be up front about this in your job posting.\nProducts and businesses listed on this job board must not infringe on the WordPress trademark. (See the\nWordPress trademark policy\n.)\nJob posting will not be published for sites which:\nPromote discrimination of any kind or hate speech\nPromote illegal activity – as defined by the laws of the United States\nPrimarily host adult content or merchandise (e.g. pornography)\nIf your job posting involves a project that will be released publicly, it must embrace\nthe same license as WordPress\n. If distributing WordPress-derivative works (themes, plugins, WP distros), any person or business should give their users the same freedoms that WordPress itself provides. Projects must be 100% GPL or compatibly licensed.\nSeeking a job?\nHow can I get noticed by employers and share that I’m open to work?\nThe best way to get noticed by employers in the WordPress space is through your\nWordPress.org profile\n, which includes a dedicated jobs section where you can mark yourself as open to work, list your job history, and highlight your key WordPress accomplishments. Direct contributions to\nMake WordPress teams\nand taking courses on\nLearn.WordPress.org\nare also a great way to show your expertise and growth in the WordPress space. Don’t have a profile yet?\nCreate one here\n.\nHow do I contact an employer?\nEmployers are expected to leave their contact information on each post.\nWhy does an employer not respond?\nIt is completely up to the employer to choose to respond or ignore a request for communication.\nAbout\nAbout WordPress\nNews\nHosting\nDonate\nLearn\nLearn WordPress\nDeveloper Resources\nDocumentation\nSupport Forums\nCommunity\nGet Involved\nWordCamp\nWordPress.TV\nShowcase\nWordPress Jobs\nCurrent Openings\nBrowse Candidates\nPost a Job\nFAQ\nRemove a Job\nFeedback\nWordPress.org\nX / Twitter\nFacebook\nYouTube\nCode is Poetry.\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179425160817.json"
+  ],
+  "request": {
+    "id": "TASK-179425160817",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-09T19:13:28Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nclass P(HTMLParser):\n def __init__(self):super().__init__();self.skip=0;self.s=[]\n def handle_starttag(self,t,a):\n  if t in ['script','style']:self.skip+=1\n def handle_endtag(self,t):\n  if t in ['script','style']:self.skip-=1\n def handle_data(self,d):\n  if not self.skip and d.strip():self.s.append(d.strip())\np=P();p.feed(open('products/services/new-actionable-buyers/wordpress-faq.html').read());print('\\n'.join(p.s)[:14000])"
+      ],
+      "inputs": [
+        "products/services/new-actionable-buyers/wordpress-faq.html"
+      ],
+      "outputs": [],
+      "mission_id": "NEW-ACTIONABLE-BUYERS-20261109"
+    },
+    "description": "Broker action during THINK-1794251608",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179425160817",
+  "input_sha256": "8b28f4a96b2eb8e167ff83b718c2d4f4d53b0cde19c64bb3d0da5e38b8456ea2"
+}
