@@ -1,0 +1,17 @@
+{
+  "digest": "2199108b69c249593aced9c3ffe2f80c5cd99119ef343afc7ce7916074c2f9e5",
+  "verdict": "NEEDS_WORK",
+  "blocker": "Standalone local README labels the package MIT without separating the example SQL attributed on the homepage to LUN / Stack Overflow under CC BY-SA 4.0. The downloadable example has no attribution or license metadata. Clarify file-specific licensing and carry attribution, source link, license link and adaptation notice with the standalone package. Do not silently relicense the example.",
+  "readme_sha256": "0443eaa402576db28eeadf9ec94aa1d12d2ca8551c7dfc1629c2e12997d5b005",
+  "readme_blanket_mit_observed": true,
+  "execution_evidence": "products/reviews/sqlite-local-independent/execution-and-license-evidence.json",
+  "executed_result": "OK",
+  "expected_match": true,
+  "review_scope": "Stop on concrete licensing defect; no full approval or claim that all remaining checks passed. Prior dry_run TASK-179420580202 reproduced exact digest.",
+  "not_established": [
+    "downloads",
+    "demand",
+    "delivery",
+    "revenue"
+  ]
+}
