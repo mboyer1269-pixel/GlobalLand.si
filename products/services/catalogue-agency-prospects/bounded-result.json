@@ -1,0 +1,29 @@
+{
+ "observed": "2026-11-09",
+ "purpose": "Find migration agencies for the existing CAD60 catalogue-QA offer (hypothesis price) via Shopify Partner Directory",
+ "fetches": [
+  {
+   "task": "TASK-179426196110",
+   "url": "https://www.shopify.com/partners/directory/services/store-setup/store-migration?locations=CA",
+   "result": "HTTP 200 but redirected to directory root; 7 featured partner slugs only (directory-extract.json)"
+  },
+  {
+   "task": "TASK-179426196112",
+   "url": "https://www.shopify.com/partners/directory/services/migrations?locations=ca",
+   "result": "REJECTED fetch size limit (>1 MiB)"
+  }
+ ],
+ "featured_partners": [
+  "absolute-web-services",
+  "barrel",
+  "dpt",
+  "ehousestudio (already contacted once as Pointer/eHouse; do not recontact)",
+  "maze-design",
+  "orienteed",
+  "peak-activity4"
+ ],
+ "verdict": "BOUNDED_STOP",
+ "reason": "Filtered migration listing is not retrievable within the FETCH 1 MiB limit; featured partners are large agencies with no observed supplier invitation; a directory listing is not a buying request.",
+ "not_done": "No contact, account, sample or message drafted.",
+ "reconsider_if": "A smaller official endpoint for filtered directory results is identified, or the CATALOGUE-AGENCY-OFFER-REVIEW approval and release give a public offer URL to cite in an operator-approved message."
+}

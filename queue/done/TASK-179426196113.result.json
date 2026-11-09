@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\n \"observed\": \"2026-11-09\",\n \"purpose\": \"Find migration agencies for the existing CAD60 catalogue-QA offer (hypothesis price) via Shopify Partner Directory\",\n \"fetches\": [\n  {\n   \"task\": \"TASK-179426196110\",\n   \"url\": \"https://www.shopify.com/partners/directory/services/store-setup/store-migration?locations=CA\",\n   \"result\": \"HTTP 200 but redirected to directory root; 7 featured partner slugs only (directory-extract.json)\"\n  },\n  {\n   \"task\": \"TASK-179426196112\",\n   \"url\": \"https://www.shopify.com/partners/directory/services/migrations?locations=ca\",\n   \"result\": \"REJECTED fetch size limit (>1 MiB)\"\n  }\n ],\n \"featured_partners\": [\n  \"absolute-web-services\",\n  \"barrel\",\n  \"dpt\",\n  \"ehousestudio (already contacted once as Pointer/eHouse; do not recontact)\",\n  \"maze-design\",\n  \"orienteed\",\n  \"peak-activity4\"\n ],\n \"verdict\": \"BOUNDED_STOP\",\n \"reason\": \"Filtered migration listing is not retrievable within the FETCH 1 MiB limit; featured partners are large agencies with no observed supplier invitation; a directory listing is not a buying request.\",\n \"not_done\": \"No contact, account, sample or message drafted.\",\n \"reconsider_if\": \"A smaller official endpoint for filtered directory results is identified, or the CATALOGUE-AGENCY-OFFER-REVIEW approval and release give a public offer URL to cite in an operator-approved message.\"\n}\n\n",
+  "artifacts": [
+    "products/services/catalogue-agency-prospects/bounded-result.json",
+    "products/receipts/TASK-179426196113.json"
+  ],
+  "request": {
+    "id": "TASK-179426196113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T22:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\nd='products/services/catalogue-agency-prospects'\npathlib.Path(d).mkdir(parents=True,exist_ok=True)\nr={'observed':'2026-11-09','purpose':'Find migration agencies for the existing CAD60 catalogue-QA offer (hypothesis price) via Shopify Partner Directory','fetches':[{'task':'TASK-179426196110','url':'https://www.shopify.com/partners/directory/services/store-setup/store-migration?locations=CA','result':'HTTP 200 but redirected to directory root; 7 featured partner slugs only (directory-extract.json)'},{'task':'TASK-179426196112','url':'https://www.shopify.com/partners/directory/services/migrations?locations=ca','result':'REJECTED fetch size limit (>1 MiB)'}],'featured_partners':['absolute-web-services','barrel','dpt','ehousestudio (already contacted once as Pointer/eHouse; do not recontact)','maze-design','orienteed','peak-activity4'],'verdict':'BOUNDED_STOP','reason':'Filtered migration listing is not retrievable within the FETCH 1 MiB limit; featured partners are large agencies with no observed supplier invitation; a directory listing is not a buying request.','not_done':'No contact, account, sample or message drafted.','reconsider_if':'A smaller official endpoint for filtered directory results is identified, or the CATALOGUE-AGENCY-OFFER-REVIEW approval and release give a public offer URL to cite in an operator-approved message.'}\nopen(d+'/bounded-result.json','w').write(json.dumps(r,indent=1))\nprint(open(d+'/bounded-result.json').read())"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/catalogue-agency-prospects/bounded-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794261961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179426196113",
+  "input_sha256": "d421603709894e6fcb76127927d474a0208b67bf148be410498a3fdd8cea9d6c"
+}
