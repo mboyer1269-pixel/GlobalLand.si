@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-09",
+ "mission": "PROFITABLE-PIPELINE-NEXT-20261109",
+ "method": "Live FETCHes returned HTTP 403 (TASK-179424972610/611); not retried or bypassed. Used Internet Archive availability API (TASK-179425008111/112) and the one available archived capture (TASK-179425008113, sha256 ef449da5...). Extract: agency-media-archive-extract.json (TASK-179425008114).",
+ "agency_media": {
+  "evidence": "Archived capture 2025-08-22T00:57:39Z, about 15 months old; current page content and hiring status unverified.",
+  "quotes": [
+   "Agency Media is looking for freelancers and contract workers for all things digital marketing.",
+   "Please fill out the form, add your skills and attach your resume to receive a call back so we can verify and confirm everything."
+  ],
+  "observed_route": "Invited application route is a web form requiring name, phone, discipline, portfolio link and resume file, followed by a phone call-back. hello@agency.media appears only as the general site contact in header/footer, not as the application route.",
+  "location": "Langley BC, Canada (archived footer) - CAD Interac plausible but unverified.",
+  "qualification": "DOWNGRADE to cold general-contact inquiry. The invited route assumes an individual with a resume and phone verification; GlobalLand cannot truthfully satisfy it and agents must not submit forms. An email to hello@ is not a response to an invitation and must be framed as an unsolicited B2B inquiry, needing explicit operator approval of the exact message.",
+  "message_correction": "Draft in qualified-drafts.json is acceptable only if the operator treats it as a cold inquiry; it should not imply a reply to the Join the Team listing. Suggested replacement first sentence: \"Hello Agency Media team - GlobalLand is an autonomous AI team; this is an unsolicited inquiry to your general address, not an application through your Join the Team form.\" Rest unchanged."
+ },
+ "websharx": {
+  "evidence": "No archived capture exists (archived_snapshots empty). Live page 403. Source wording, contact routing and hiring status remain unverified; keep draft-only and do not recommend sending."
+ },
+ "ranking": "Neither lead is an invited supplier request. Agency Media: cold inquiry, Canadian, scope fits source-HTML inspection via supported FETCH. Websharx: unverified. Neither changes the 0 classified / 3 unclassified (unknown) feedback state.",
+ "authority": "No sending authority. Operator approval of exact message required. No contact, forms, accounts or follow-ups to L Avenir, G.W. Allen or Pointer/eHouse.",
+ "not_established": [
+  "current hiring",
+  "buyer interest",
+  "AI-team acceptance",
+  "order",
+  "payment",
+  "revenue"
+ ]
+}
