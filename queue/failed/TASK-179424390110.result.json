@@ -1,0 +1,21 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: HTTP 403. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179424390110",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T17:05:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://www.reddit.com/r/forhire/comments/1xqzs02/.json",
+      "output": "products/services/first-receipt/trivia-status/post-recheck-20261109.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794243901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424390110",
+  "input_sha256": "75fe227967ef39ebba0bb5abdd53dd4e44b569f539585793e9f8ccd55fe499c4"
+}
