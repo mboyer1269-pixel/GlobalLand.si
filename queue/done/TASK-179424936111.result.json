@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"rss_sha256\": \"2c61181177f16671f873337c5d1977b1764eef70b0c1e87a69c8be1a4930af95\",\n \"entries\": 25,\n \"post_text\": \"Hello, don’t judge I just needed to understand the looks of it. now that I like more or less the final result, I would like someone making it smoother in transiction, and just generallg less laggy and clean. I am not sure how much to pay for something like this, so name your price. I am not looking to invest hundreds into it. 15$/h. submitted by /u/Fatsquirrel666 [link] [comments]\",\n \"updated\": \"2026-11-06T10:38:30+00:00\",\n \"published\": \"2026-11-06T10:38:30+00:00\",\n \"title\": \"[HIRING] i vibecoded a website on chatgpt, now I need someone to fixup the code for me\",\n \"author\": [\n  \"/u/Fatsquirrel666\"\n ],\n \"tools\": {\n  \"node\": \"/usr/local/bin/node\",\n  \"tidy\": null,\n  \"xmllint\": null,\n  \"chromium\": null,\n  \"chromium-browser\": null,\n  \"google-chrome\": null,\n  \"firefox\": null,\n  \"lighthouse\": null,\n  \"npx\": \"/usr/local/bin/npx\",\n  \"html5validator\": null,\n  \"java\": null,\n  \"vnu\": null,\n  \"stylelint\": null,\n  \"csslint\": null,\n  \"eslint\": null,\n  \"prettier\": null\n },\n \"python_modules\": {\n  \"html5lib\": false,\n  \"bs4\": false,\n  \"lxml\": false,\n  \"tinycss2\": false,\n  \"cssutils\": false,\n  \"playwright\": false,\n  \"selenium\": false,\n  \"html.parser\": true\n },\n \"node_version\": \"v22.23.4\",\n \"node_modules\": \"jsdom:no,parse5:no,acorn:no,csstree:no,css-tree:no,puppeteer:no,playwright:no,htmlhint:no\",\n \"node_check_flag\": 0\n}\n\n",
+  "artifacts": [
+    "products/services/diversified-offers/website-verification/capability-and-source-check.json",
+    "products/receipts/TASK-179424936111.json"
+  ],
+  "request": {
+    "id": "TASK-179424936111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-09T18:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json,hashlib,shutil,subprocess,pathlib,importlib.util\np='products/services/diversified-offers/raw/forhire-hiring.rss'\nb=open(p,'rb').read()\nt=b.decode('utf-8')\nentries=re.findall(r'<entry>(.*?)</entry>',t,re.S)\npost=None\nfor e in entries:\n  if '1xp9pdj' in e: post=e\nout={'rss_sha256':hashlib.sha256(b).hexdigest(),'entries':len(entries)}\nif post:\n  c=re.search(r'<content[^>]*>(.*?)</content>',post,re.S)\n  body=html.unescape(c.group(1)) if c else ''\n  body=html.unescape(re.sub(r'<[^>]+>',' ',body))\n  out['post_text']=re.sub(r'\\s+',' ',body).strip()\n  for tag in ['updated','published','title']:\n    m=re.search(r'<%s[^>]*>(.*?)</%s>'%(tag,tag),post,re.S); out[tag]=html.unescape(m.group(1)) if m else None\n  out['author']=re.findall(r'<name>(.*?)</name>',post)\ntools={}\nfor x in ['node','tidy','xmllint','chromium','chromium-browser','google-chrome','firefox','lighthouse','npx','html5validator','java','vnu','stylelint','csslint','eslint','prettier']:\n  tools[x]=shutil.which(x)\nmods={m:bool(importlib.util.find_spec(m)) for m in ['html5lib','bs4','lxml','tinycss2','cssutils','playwright','selenium','html.parser']}\nout['tools']=tools; out['python_modules']=mods\ntry: out['node_version']=subprocess.run(['node','--version'],capture_output=True,text=True).stdout.strip()\nexcept Exception as ex: out['node_version']=repr(ex)\nnm=subprocess.run(['node','-e','const r=[];for(const m of [\"jsdom\",\"parse5\",\"acorn\",\"csstree\",\"css-tree\",\"puppeteer\",\"playwright\",\"htmlhint\"]){try{require.resolve(m);r.push(m+\":yes\")}catch(e){r.push(m+\":no\")}};console.log(r.join(\",\"))'],capture_output=True,text=True)\nout['node_modules']=nm.stdout.strip()\nout['node_check_flag']=subprocess.run(['node','--check','/dev/null'],capture_output=True,text=True).returncode\nd=pathlib.Path('products/services/diversified-offers/website-verification');d.mkdir(parents=True,exist_ok=True)\n(d/'capability-and-source-check.json').write_text(json.dumps(out,indent=1,ensure_ascii=False))\nprint(json.dumps(out,indent=1,ensure_ascii=False)[:6000])\n"
+      ],
+      "inputs": [
+        "products/services/diversified-offers/raw/forhire-hiring.rss"
+      ],
+      "outputs": [
+        "products/services/diversified-offers/website-verification/capability-and-source-check.json"
+      ],
+      "mission_id": "WEBSITE-CLEANUP-OFFER-VERIFICATION"
+    },
+    "description": "Broker action during THINK-1794249361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424936111",
+  "input_sha256": "5028ecf4db3363c88176bb0284fe6e742aa82235eb69c2a5e819d240b983c646"
+}
