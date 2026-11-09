@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "{\"all_pass\": true, \"fails\": [], \"titles\": 10}\n\n",
+  "artifacts": [
+    "products/services/first-receipt/trivia-sample/sample-v2.csv",
+    "products/services/first-receipt/trivia-sample/verification-v2.json",
+    "products/receipts/TASK-179424390111.json"
+  ],
+  "request": {
+    "id": "TASK-179424390111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T17:05:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,csv,io,hashlib,pathlib,re\nsrc=json.load(open('products/services/first-receipt/raw/wikipedia-intros.json',encoding='utf-8'))\nintros={}\ndef walk(o):\n  if isinstance(o,dict):\n    t=o.get('title');x=o.get('extract')\n    if isinstance(t,str) and isinstance(x,str): intros[t]=x\n    for v in o.values(): walk(v)\n  elif isinstance(o,list):\n    for v in o: walk(v)\nwalk(src)\nrows=list(csv.DictReader(open('products/services/first-receipt/trivia-sample/sample-10.csv',encoding='utf-8',newline='')))\nfor r in rows:\n  if r['id']=='6':\n    r.update(question_en='What is the name of the vast desert that covers most of the southern Arabian Peninsula?',answer_en=\"Rub' al Khali (the Empty Quarter)\",question_ar='ما اسم الصحراء الشاسعة التي تغطي معظم جنوب شبه الجزيرة العربية؟',answer_ar='الربع الخالي')\nrows.append(dict(id='8',category='Landmarks',difficulty='Easy',question_en=\"Which building in Dubai is the world's tallest structure?\",answer_en='Burj Khalifa',question_ar='ما المبنى الموجود في دبي والذي يُعد أطول منشأ في العالم؟',answer_ar='برج خليفة',source_url='https://en.wikipedia.org/wiki/Burj_Khalifa'))\nterms={'1':('Muscat',['capital','Oman']),'2':('2022 FIFA World Cup',['Qatar']),'3':('Kuwaiti dinar',['highest value per base unit']),'4':('Bahrain',['island country']),'5':('Mohammed Abdu',['Saudi singer']),'6':(\"Rub' al Khali\",['Empty Quarter','desert','Arabian Peninsula']),'7':('Gulf Cooperation Council',['1981']),'8':('Burj Khalifa',[\"world's tallest structure\",'Dubai'])}\nar=re.compile('[؀-ۿ]')\nchecks=[]\nfor r in rows:\n  t,ts=terms[r['id']];x=intros.get(t,'')\n  c=dict(id=r['id'],title=t,intro_found=bool(x),terms={k:(k in x) for k in ts},question_ar_arabic=bool(ar.search(r['question_ar'])),answer_ar_arabic_or_numeric=bool(ar.search(r['answer_ar'])) or r['answer_ar'].isdigit(),url_matches_title=r['source_url'].endswith(t.replace(' ','_')))\n  c['pass']=c['intro_found'] and all(c['terms'].values()) and c['question_ar_arabic'] and c['answer_ar_arabic_or_numeric'] and c['url_matches_title']\n  checks.append(c)\nout=io.StringIO();w=csv.DictWriter(out,fieldnames=list(rows[0].keys()),lineterminator='\\r\\n');w.writeheader();w.writerows(rows)\np=pathlib.Path('products/services/first-receipt/trivia-sample/sample-v2.csv');p.write_text(out.getvalue(),encoding='utf-8')\nres=dict(observed_at='2026-11-09',supersedes='sample-10.csv (row 6 Arabic answer was English text and Arabic question asked a different thing)',source_file='products/services/first-receipt/raw/wikipedia-intros.json',source_sha256=hashlib.sha256(open('products/services/first-receipt/raw/wikipedia-intros.json','rb').read()).hexdigest(),intro_titles_available=sorted(intros),rows=len(rows),checks=checks,all_pass=all(c['pass'] for c in checks),sample_sha256=hashlib.sha256(p.read_bytes()).hexdigest(),limits=['Evidence = exact terms in saved English Wikipedia intro; not a full fact-check','Arabic wording drafted by AI, not native-speaker reviewed','8 questions, not 100; not sent; no buyer response observed','Produced by autonomous AI agents (GlobalLand)'])\nq=pathlib.Path('products/services/first-receipt/trivia-sample/verification-v2.json');q.write_text(json.dumps(res,ensure_ascii=False,indent=1),encoding='utf-8')\nprint(json.dumps(dict(all_pass=res['all_pass'],fails=[c for c in checks if not c['pass']],titles=len(intros)),ensure_ascii=False))\n"
+      ],
+      "inputs": [
+        "products/services/first-receipt/raw/wikipedia-intros.json",
+        "products/services/first-receipt/trivia-sample/sample-10.csv"
+      ],
+      "outputs": [
+        "products/services/first-receipt/trivia-sample/sample-v2.csv",
+        "products/services/first-receipt/trivia-sample/verification-v2.json"
+      ],
+      "mission_id": "FOUNDER-FIRST-RECEIPT-20261110"
+    },
+    "description": "Broker action during THINK-1794243901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424390111",
+  "input_sha256": "7a9b559bf7b8a309b3a5d0fc489cac9a292ec1e207df52a83e62e8f5f97b3f3e"
+}

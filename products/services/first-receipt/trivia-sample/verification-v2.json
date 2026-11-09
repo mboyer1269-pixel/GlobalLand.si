@@ -1,0 +1,129 @@
+{
+ "observed_at": "2026-11-09",
+ "supersedes": "sample-10.csv (row 6 Arabic answer was English text and Arabic question asked a different thing)",
+ "source_file": "products/services/first-receipt/raw/wikipedia-intros.json",
+ "source_sha256": "a70f8b16cc0a8ece7c459723fafeb39e152e9069c13e75c01048ca715ce2f3e1",
+ "intro_titles_available": [
+  "2022 FIFA World Cup",
+  "Al Masmak Palace",
+  "Bahrain",
+  "Burj Khalifa",
+  "Gulf Cooperation Council",
+  "Kuwaiti dinar",
+  "Louvre Abu Dhabi",
+  "Mohammed Abdu",
+  "Muscat",
+  "Rub' al Khali"
+ ],
+ "rows": 8,
+ "checks": [
+  {
+   "id": "1",
+   "title": "Muscat",
+   "intro_found": true,
+   "terms": {
+    "capital": true,
+    "Oman": true
+   },
+   "question_ar_arabic": true,
+   "answer_ar_arabic_or_numeric": true,
+   "url_matches_title": true,
+   "pass": true
+  },
+  {
+   "id": "2",
+   "title": "2022 FIFA World Cup",
+   "intro_found": true,
+   "terms": {
+    "Qatar": true
+   },
+   "question_ar_arabic": true,
+   "answer_ar_arabic_or_numeric": true,
+   "url_matches_title": true,
+   "pass": true
+  },
+  {
+   "id": "3",
+   "title": "Kuwaiti dinar",
+   "intro_found": true,
+   "terms": {
+    "highest value per base unit": true
+   },
+   "question_ar_arabic": true,
+   "answer_ar_arabic_or_numeric": true,
+   "url_matches_title": true,
+   "pass": true
+  },
+  {
+   "id": "4",
+   "title": "Bahrain",
+   "intro_found": true,
+   "terms": {
+    "island country": true
+   },
+   "question_ar_arabic": true,
+   "answer_ar_arabic_or_numeric": true,
+   "url_matches_title": true,
+   "pass": true
+  },
+  {
+   "id": "5",
+   "title": "Mohammed Abdu",
+   "intro_found": true,
+   "terms": {
+    "Saudi singer": true
+   },
+   "question_ar_arabic": true,
+   "answer_ar_arabic_or_numeric": true,
+   "url_matches_title": true,
+   "pass": true
+  },
+  {
+   "id": "6",
+   "title": "Rub' al Khali",
+   "intro_found": true,
+   "terms": {
+    "Empty Quarter": true,
+    "desert": true,
+    "Arabian Peninsula": true
+   },
+   "question_ar_arabic": true,
+   "answer_ar_arabic_or_numeric": true,
+   "url_matches_title": true,
+   "pass": true
+  },
+  {
+   "id": "7",
+   "title": "Gulf Cooperation Council",
+   "intro_found": true,
+   "terms": {
+    "1981": true
+   },
+   "question_ar_arabic": true,
+   "answer_ar_arabic_or_numeric": true,
+   "url_matches_title": true,
+   "pass": true
+  },
+  {
+   "id": "8",
+   "title": "Burj Khalifa",
+   "intro_found": true,
+   "terms": {
+    "world's tallest structure": true,
+    "Dubai": true
+   },
+   "question_ar_arabic": true,
+   "answer_ar_arabic_or_numeric": true,
+   "url_matches_title": true,
+   "pass": true
+  }
+ ],
+ "all_pass": true,
+ "sample_sha256": "92fa13dadfcf4cf4459165d0ec58f591837907580957507bff7944908c1a2f1e",
+ "limits": [
+  "Evidence = exact terms in saved English Wikipedia intro; not a full fact-check",
+  "Arabic wording drafted by AI, not native-speaker reviewed",
+  "8 questions, not 100; not sent; no buyer response observed",
+  "Produced by autonomous AI agents (GlobalLand)"
+ ]
+}
