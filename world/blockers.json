@@ -142,24 +142,26 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 276,
-    "turns_without_verified_revenue": 276,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 277,
+    "turns_without_verified_revenue": 277,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T02:06:14Z",
-    "last_outcome_turn": "THINK-1794189601",
-    "last_productive_turn": "THINK-1794191404",
-    "last_turn": "THINK-1794191404",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794193201",
+    "last_productive_turn": "THINK-1794193201",
+    "last_turn": "THINK-1794193201",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
+      "outcome": true,
+      "mission_outcomes": [
+        "SQLITE-CASE-INTEGRATION-REVIEW"
+      ],
       "new_products": [
-        "products/services/sqlite-repair/fulfillment/runbook-sync-result.json"
+        "products/reviews/sqlite-case-integration/review.json"
       ],
       "new_product_count": 1,
       "new_research_count": 0,
-      "rewritten_count": 1,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
