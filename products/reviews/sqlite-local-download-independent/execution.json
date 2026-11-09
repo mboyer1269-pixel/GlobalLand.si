@@ -1,0 +1,106 @@
+{
+  "example": {
+    "returncode": 0,
+    "stdout": "{\n \"tool\": \"globalland-sqlite-diagnose/1\",\n \"sqlite_version\": \"3.40.1\",\n \"case_id\": \"page-example\",\n \"limits\": {\n  \"sql_bytes\": 65536,\n  \"statements\": 50,\n  \"rows_kept\": 50,\n  \"vm_steps\": 2000000,\n  \"seconds\": 2.0\n },\n \"runs\": {\n  \"as_written_first_statement_only\": {\n   \"statements\": [\n    {\n     \"index\": 1,\n     \"start_byte\": 0,\n     \"end_byte\": 51,\n     \"sql\": \"CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;\",\n     \"executed\": true,\n     \"columns\": 0,\n     \"row_count\": 0,\n     \"rows\": [],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    }\n   ],\n   \"error\": null,\n   \"unexecuted_tail\": \"SELECT * FROM T1\",\n   \"input_bytes\": 68,\n   \"final_byte\": 51,\n   \"denied\": [],\n   \"elapsed_s\": 0.001,\n   \"open_statements_after_run\": false,\n   \"close_rc\": 0\n  },\n  \"all_statements\": {\n   \"statements\": [\n    {\n     \"index\": 1,\n     \"start_byte\": 0,\n     \"end_byte\": 51,\n     \"sql\": \"CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;\",\n     \"executed\": true,\n     \"columns\": 0,\n     \"row_count\": 0,\n     \"rows\": [],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    },\n    {\n     \"index\": 2,\n     \"start_byte\": 51,\n     \"end_byte\": 68,\n     \"sql\": \"SELECT * FROM T1\",\n     \"executed\": true,\n     \"columns\": 2,\n     \"row_count\": 3,\n     \"rows\": [\n      [\n       \"1\",\n       \"a\"\n      ],\n      [\n       \"2\",\n       \"b\"\n      ],\n      [\n       \"3\",\n       \"c\"\n      ]\n     ],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    }\n   ],\n   \"error\": null,\n   \"unexecuted_tail\": null,\n   \"input_bytes\": 68,\n   \"final_byte\": 68,\n   \"denied\": [],\n   \"elapsed_s\": 0.0,\n   \"open_statements_after_run\": false,\n   \"close_rc\": 0\n  }\n },\n \"expected_match\": true,\n \"status\": \"OK\"\n}\n",
+    "stderr": ""
+  },
+  "missing_arguments": {
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmp2rxp6cxs/diagnose.py\", line 102, in <module>\n    case=json.load(open(sys.argv[1],encoding='utf-8'))\n                        ~~~~~~~~^^^\nIndexError: list index out of range\n"
+  },
+  "invalid_json": {
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmp2rxp6cxs/diagnose.py\", line 102, in <module>\n    case=json.load(open(sys.argv[1],encoding='utf-8'))\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/__init__.py\", line 293, in load\n    return loads(fp.read(),\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/decoder.py\", line 353, in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\njson.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)\n"
+  },
+  "report": {
+    "tool": "globalland-sqlite-diagnose/1",
+    "sqlite_version": "3.40.1",
+    "case_id": "page-example",
+    "limits": {
+      "sql_bytes": 65536,
+      "statements": 50,
+      "rows_kept": 50,
+      "vm_steps": 2000000,
+      "seconds": 2.0
+    },
+    "runs": {
+      "as_written_first_statement_only": {
+        "statements": [
+          {
+            "index": 1,
+            "start_byte": 0,
+            "end_byte": 51,
+            "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+            "executed": true,
+            "columns": 0,
+            "row_count": 0,
+            "rows": [],
+            "step_rc": 101,
+            "finalize_rc": 0
+          }
+        ],
+        "error": null,
+        "unexecuted_tail": "SELECT * FROM T1",
+        "input_bytes": 68,
+        "final_byte": 51,
+        "denied": [],
+        "elapsed_s": 0.001,
+        "open_statements_after_run": false,
+        "close_rc": 0
+      },
+      "all_statements": {
+        "statements": [
+          {
+            "index": 1,
+            "start_byte": 0,
+            "end_byte": 51,
+            "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+            "executed": true,
+            "columns": 0,
+            "row_count": 0,
+            "rows": [],
+            "step_rc": 101,
+            "finalize_rc": 0
+          },
+          {
+            "index": 2,
+            "start_byte": 51,
+            "end_byte": 68,
+            "sql": "SELECT * FROM T1",
+            "executed": true,
+            "columns": 2,
+            "row_count": 3,
+            "rows": [
+              [
+                "1",
+                "a"
+              ],
+              [
+                "2",
+                "b"
+              ],
+              [
+                "3",
+                "c"
+              ]
+            ],
+            "step_rc": 101,
+            "finalize_rc": 0
+          }
+        ],
+        "error": null,
+        "unexecuted_tail": null,
+        "input_bytes": 68,
+        "final_byte": 68,
+        "denied": [],
+        "elapsed_s": 0.0,
+        "open_statements_after_run": false,
+        "close_rc": 0
+      }
+    },
+    "expected_match": true,
+    "status": "OK"
+  }
+}
