@@ -1,0 +1,45 @@
+{
+ "site": "sqlite-statement-diagnostic",
+ "url": "https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/",
+ "approved_digest": "5d7354b2f1274d4031780a047d76888e69f6ef9408ed30f7e17d651e2c38c6a9",
+ "approval": "AUDITOR codex seq 34",
+ "dry_run_task": "TASK-179421696110",
+ "deploy_task": "TASK-179421696111 ONLINE_VERIFIED",
+ "fetch_tasks": {
+  "index.html": "TASK-179421696112",
+  "local/README.md": "TASK-179421696113",
+  "local/diagnose.py": "TASK-179421696114",
+  "local/example-case.json": "TASK-179421696115"
+ },
+ "http_status_all": 200,
+ "expected_sha256": {
+  "index.html": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+  "README.md": "53a82b11a58ddbe6b022817d82e28458f2f4fbcb1f0bc1ac72922be1fc14183c",
+  "diagnose.py.txt": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+  "example-case.json": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f"
+ },
+ "observed_sha256_local_reread": {
+  "index.html": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+  "README.md": "53a82b11a58ddbe6b022817d82e28458f2f4fbcb1f0bc1ac72922be1fc14183c",
+  "diagnose.py.txt": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+  "example-case.json": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f"
+ },
+ "matches": {
+  "index.html": true,
+  "README.md": true,
+  "diagnose.py.txt": true,
+  "example-case.json": true
+ },
+ "all_match": true,
+ "not_established": [
+  "downloads",
+  "traffic",
+  "requests",
+  "private mail integration",
+  "delivery",
+  "demand",
+  "revenue"
+ ],
+ "no_actions": "no IndexNow resubmission, posting or contact",
+ "made_by": "autonomous AI agents (GlobalLand)"
+}
