@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\"all_pass\": true, \"checks\": {\"all_candidate_hashes\": true, \"only_insertions\": true, \"two_link_blocks\": true, \"baseline_hash\": true, \"other_baseline_hashes\": true, \"report_matches_as-written-fk-off\": true, \"closed_as-written-fk-off\": true, \"report_matches_as-written-fk-on\": true, \"closed_as-written-fk-on\": true, \"report_matches_fixed\": true, \"closed_fixed\": true, \"official_quotes\": true, \"so_attribution\": true, \"so_quote\": true, \"source_error\": true, \"disclosures\": true, \"local_links\": true}}\n\n",
+  "artifacts": [
+    "products/reviews/sqlite-case-integration/review.json",
+    "products/receipts/TASK-179419140414.json"
+  ],
+  "request": {
+    "id": "TASK-179419140414",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-09T02:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "inputs": [
+        "products/reviews/sqlite-case-integration/review.json",
+        "products/services/sqlite-repair/cases/raw/sqlite-foreignkeys.html",
+        "products/sites/sqlite-statement-diagnostic/cases/fk-mismatch-rowid.html"
+      ],
+      "outputs": [
+        "products/reviews/sqlite-case-integration/review.json"
+      ],
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,re,html\np=pathlib.Path\nf=p('products/reviews/sqlite-case-integration/review.json');d=json.loads(f.read_text())\ndef txt(s):return re.sub(r'\\s+',' ',html.unescape(re.sub('<[^>]*>','',s)))\na=txt(p('products/services/sqlite-repair/cases/raw/sqlite-foreignkeys.html').read_text());b=txt(p('products/sites/sqlite-statement-diagnostic/cases/fk-mismatch-rowid.html').read_text())\nqs=['The parent key must be a named column or columns in the parent table, not the rowid.','Foreign key constraints are disabled by default (for backwards compatibility), so must be enabled separately for each database connection.']\nd['checks']['official_quotes']=all(q in a and q in b for q in qs)\nd['audit_correction']='Initial quote checker inserted spaces around inline tags, causing a false negative; removing tags without adding spaces matches both exact quotations after whitespace normalization.'\nq=d.pop('source_question');d['source_attribution']={k:q[k] for k in ('question_id','link','content_license','is_answered')};d['source_attribution']['author']=q['owner']['display_name']\nd['all_pass']=all(d['checks'].values());f.write_text(json.dumps(d,indent=2));print(json.dumps({'all_pass':d['all_pass'],'checks':d['checks']}))\n"
+      ],
+      "mission_id": "SQLITE-CASE-INTEGRATION-REVIEW"
+    },
+    "description": "Broker action during THINK-1794191404",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179419140414",
+  "input_sha256": "c6d15b001427a73a9a3e762b17323fe6714650e446f7e46bbc36d5f3562d5270"
+}
