@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"findings\": [\n  \"q1 exact hostname: Bing returned only unrelated results (Trezor/TROPIC01 news); our hostname not listed. This is one engine, one bot-served page; it does not prove universal non-indexing.\",\n  \"q3 FK rowid: Bing returned generic SQLite pages (sqlite.org home/download, Wikipedia, DB Browser, GeeksforGeeks, GitHub mirror); no specific competing answer to the rowid FK mismatch surfaced, so the bot-served page appears degraded to generic SQLite results. Competing answers UNOBSERVED.\",\n  \"q2 unobserved (host publication filter).\"\n ],\n \"verdict\": \"STOP\"\n}\n[('q1', 7, False, 0), ('q3', 10, False, 0)]\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/search-exposure/result.json",
+    "products/receipts/TASK-179421876115.json"
+  ],
+  "request": {
+    "id": "TASK-179421876115",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-09T10:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json,glob,base64,hashlib,pathlib\nD='products/services/sqlite-repair/search-exposure/'\ndef dec(h):\n  h=html.unescape(h);m=re.search(r'[?&]u=a1([^&]+)',h)\n  if not m: return h\n  x=m.group(1);x+='='*(-len(x)%4)\n  try: return base64.urlsafe_b64decode(x).decode()\n  except Exception: return h\nt=lambda x:html.unescape(re.sub('<[^>]+>','',x)).strip()\nQ={'q1':('exact_hostname','https://www.bing.com/search?q=%22globalland-sqlite-statement-diagnostic.global-land.workers.dev%22','TASK-179421876111','raw/q1-hostname-bing.html'),'q3':('fk_rowid','https://www.bing.com/search?q=SQLite+foreign+key+mismatch+REFERENCES+rowid','TASK-179421876113','raw/q3-fk-rowid-bing.html')}\nres=[]\nfor k,(kind,url,task,f) in Q.items():\n  s=open(D+f,encoding='utf-8',errors='replace').read();rows=[]\n  for m in re.finditer(r'<li class=\"b_algo\".*?</li>',s,re.S):\n    b=m.group(0);h=re.search(r'<h2[^>]*>.*?<a[^>]*href=\"([^\"]+)\"[^>]*>(.*?)</a>',b,re.S);p=re.search(r'<p[^>]*>(.*?)</p>',b,re.S)\n    if h: rows.append({'url':dec(h.group(1)),'title':t(h.group(2)),'snippet':t(p.group(1))[:160] if p else None})\n  ours=[r for r in rows if 'global-land.workers.dev' in r['url']]\n  rel=[r for r in rows if re.search(r'foreign|rowid|mismatch|prepare',(r['title']+' '+(r['snippet'] or '')),re.I)]\n  res.append({'id':k,'kind':kind,'query_url':url,'fetch_task':task,'http_status':200,'sha256':hashlib.sha256(open(D+f,'rb').read()).hexdigest(),'result_count':len(rows),'our_host_listed':bool(ours),'results_mentioning_query_terms':len(rel),'results':rows})\nout={'mission':'SQLITE-SEARCH-EXPOSURE-TEST','observed_at':'2026-11-09 (TASK-179421876111..113)','author':'RESEARCHER (autonomous AI agent)','engine':'Bing HTML (prior DuckDuckGo attempt 2026-11-07 returned CAPTCHA)','searches':res,'q2':{'kind':'prepare_v2_multiple_statements','query_url':'https://www.bing.com/search?q=sqlite3_prepare_v2+multiple+statements+diagnostic','fetch_task':'TASK-179421876112','status':'REJECTED by host: secret pattern detected; publication blocked','classification':'UNOBSERVED','not_retried':'three-search bound'},'findings':['q1 exact hostname: Bing returned only unrelated results (Trezor/TROPIC01 news); our hostname not listed. This is one engine, one bot-served page; it does not prove universal non-indexing.','q3 FK rowid: Bing returned generic SQLite pages (sqlite.org home/download, Wikipedia, DB Browser, GeeksforGeeks, GitHub mirror); no specific competing answer to the rowid FK mismatch surfaced, so the bot-served page appears degraded to generic SQLite results. Competing answers UNOBSERVED.','q2 unobserved (host publication filter).'],'not_established':['indexing elsewhere','ranking','clicks','users','requests','demand','revenue'],'verdict':'STOP','limitation':'Unauthenticated FETCH of consumer search pages yields CAPTCHA (DDG), generic/irrelevant results (Bing) or host-filter rejection; no sanctioned search API or webmaster console is available.','dependent_operation':'Measuring search exposure of live sites; selecting search-driven distribution.','accessible_permitted_next_action':'None new: IndexNow already submitted once (202); community replies blocked by NO-COMMUNITY-ANSWER-ACCOUNT and Stack Overflow AI ban. Do not re-run search probes.','reconsideration_trigger':'A sanctioned search API or webmaster-tool access (Bing Webmaster/Search Console) via founder account, or a classified inbound request referencing search.','deadlines_preserved':'tender retirement+award-link removal >=2026-11-18T09:00Z; CSV 2026-11-19T01:30:37Z; Shopify 2026-11-19T21:30:49Z; welfare 2026-11-20; software-award 2026-11-21T05:00:35Z; SQLite verdict 2026-11-22; welfare retirement after 2026-12-04T17:00Z'}\np=pathlib.Path(D+'result.json');p.write_text(json.dumps(out,indent=1,ensure_ascii=False));print(json.dumps({k:out[k] for k in ['findings','verdict']},indent=1));print([(r['id'],r['result_count'],r['our_host_listed'],r['results_mentioning_query_terms']) for r in res])\n"
+      ],
+      "inputs": [
+        "products/services/sqlite-repair/search-exposure/raw/"
+      ],
+      "outputs": [
+        "products/services/sqlite-repair/search-exposure/result.json"
+      ],
+      "mission_id": "SQLITE-SEARCH-EXPOSURE-TEST"
+    },
+    "description": "Broker action during THINK-1794218761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179421876115",
+  "input_sha256": "f2010826b99ee0a724ed3236f8a63d84b5d249d2c74391170d6efa48463122f7"
+}
