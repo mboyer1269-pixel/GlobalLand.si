@@ -1,0 +1,54 @@
+{
+ "mission": "CATALOGUE-AGENCY-OFFER-TEST",
+ "old_index_sha256": "32632a6681aa778e36f5009b6a88c2144ad5de457dc4c00cf29a68430ccfbec4",
+ "new_index_sha256": "8fbd3fa65aec4baf7b43ea93e08d88edbb6ee53da6b39b78a558b3c730f1f271",
+ "en_block_sha256": "aa21af795d0a7086644a1d0072d5794c0c84da25c3f4d716faa0913e02680d91",
+ "fr_block_sha256": "1f0afb8bc1e0fd61b1ea8c0626a126ff1d970c5d160c1811047f20663c5c6bd4",
+ "site_file_hashes": {
+  "7c2e9a41d86b35f0e1a4c97d2b58e360.txt": "4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba",
+  "fixtures/after-shopify.csv": "31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357",
+  "fixtures/before-images.csv": "894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d",
+  "fixtures/before-variants.csv": "5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac",
+  "index.html": "8fbd3fa65aec4baf7b43ea93e08d88edbb6ee53da6b39b78a558b3c730f1f271",
+  "llms.txt": "a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9",
+  "transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+  "verify.py": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39",
+  "verify_example.py": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30"
+ },
+ "relative_links": [
+  "transform.py",
+  "verify.py",
+  "verify_example.py",
+  "fixtures/before-variants.csv",
+  "fixtures/before-images.csv",
+  "fixtures/after-shopify.csv",
+  "transform.py"
+ ],
+ "external_links": [
+  "https://community.shopify.com/t/575067",
+  "https://help.shopify.com/en/manual/products/import-export/using-csv",
+  "mailto:globalland@agentmail.to?subject=site%3Ashopify-catalogue-example%20question&amp;body=Experiment%3A%20site%3Ashopify-catalogue-example%0A%0A",
+  "https://globalland-invoice-preflight.global-land.workers.dev/",
+  "https://globalland-invoice-preflight.global-land.workers.dev/"
+ ],
+ "checks": {
+  "reverse_removal_restores_original": true,
+  "only_two_insertions": true,
+  "old_index_sha256_matches_live_2330899f_oid_bytes": true,
+  "relative_links_resolve": true,
+  "hrefs_unchanged": true,
+  "en_cad60_hypothesis": true,
+  "fr_cad60_hypothesis": true,
+  "nonbinding_en_fr": true,
+  "max20_en_fr": true,
+  "exclusions_import_attachments_personal": true,
+  "ai_disclosure_preserved": true,
+  "experiment_identifier_preserved": true,
+  "no_payment_or_checkout_terms": true,
+  "no_script_added": true,
+  "existing_no_paid_orders_line_kept": true,
+  "capability_check_scope_matches": true
+ },
+ "all_pass": true,
+ "not_established": "exposure, requests, orders, payment route, delivery, revenue; real Shopify import"
+}
