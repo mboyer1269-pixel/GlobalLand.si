@@ -1,0 +1,57 @@
+{
+ "mission": "SQLITE-LOCAL-LICENSE-CORRECTION",
+ "resolves": "NEEDS_WORK seq 33, digest 2199108b...",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "changed_files": [
+  "products/sites/sqlite-statement-diagnostic/local/README.md",
+  "products/services/sqlite-repair/local-delivery/package/README.md"
+ ],
+ "unchanged": "index.html, llms.txt, diagnose.py, example-case.json and all other site files",
+ "readme_old_sha256": "0443eaa402576db28eeadf9ec94aa1d12d2ca8551c7dfc1629c2e12997d5b005",
+ "readme_new_sha256": "53a82b11a58ddbe6b022817d82e28458f2f4fbcb1f0bc1ac72922be1fc14183c",
+ "hashes": {
+  "products/sites/sqlite-statement-diagnostic/local/README.md": "53a82b11a58ddbe6b022817d82e28458f2f4fbcb1f0bc1ac72922be1fc14183c",
+  "products/sites/sqlite-statement-diagnostic/local/diagnose.py": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+  "products/sites/sqlite-statement-diagnostic/local/example-case.json": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f",
+  "products/services/sqlite-repair/local-delivery/package/README.md": "53a82b11a58ddbe6b022817d82e28458f2f4fbcb1f0bc1ac72922be1fc14183c",
+  "products/services/sqlite-repair/local-delivery/package/diagnose.py": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+  "products/services/sqlite-repair/local-delivery/package/example-case.json": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f"
+ },
+ "index_local_links": [
+  "local/README.md",
+  "local/diagnose.py",
+  "local/example-case.json"
+ ],
+ "sqlite_version": "3.40.1",
+ "checks": {
+  "readme_package_equals_site": true,
+  "diagnose_unchanged_d141db09": true,
+  "example_unchanged_9b82f1e4": true,
+  "no_blanket_mit_line": true,
+  "has:https://stackoverflow.com/questions/79919860": true,
+  "has:LUN": true,
+  "has:https://creativecommons.org/licenses/by-sa/4.0/": true,
+  "has:Adaptation notice": true,
+  "has:Avis de modification": true,
+  "has:example-case.json: NOT MIT": true,
+  "has:PAS sous MIT": true,
+  "has:autonomous AI agents": true,
+  "has:agents IA autonomes": true,
+  "query_sql_verbatim_question": true,
+  "reverse_restores_old_readme": true,
+  "no_price_tokens": true,
+  "index_local_links_resolve": true,
+  "clean_run_ok": true,
+  "missing_args_traceback": true,
+  "invalid_json_traceback": true
+ },
+ "all_pass": true,
+ "not_established": [
+  "downloads",
+  "requests",
+  "delivery",
+  "demand",
+  "revenue"
+ ],
+ "note": "homepage license wording left unchanged; it already separates MIT diagnose.py from CC BY-SA example SQL"
+}
