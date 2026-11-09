@@ -8,15 +8,17 @@
  "source_check": "capability-and-source-check.json (TASK-179424936111)",
  "checks": {
   "no_gpu_claim": true,
-  "no_validity_claim": false,
+  "no_validity_claim": true,
   "ai_disclosure": true,
   "availability_question": true,
   "currency_question": true,
   "no_speed_promise": true,
   "pay_after_acceptance": true,
   "diagnosis_first": true,
-  "message_words": 197
+  "message_words": 197,
+  "no_gpu_claim_deliverable": true
  },
- "all_pass": false,
- "proposal_sha256": "ddc5f1d7746b8d3773c1fef535ef35f34cdb4ac0f9c057da697d34c37b14b77d"
+ "all_pass": true,
+ "proposal_sha256": "ddc5f1d7746b8d3773c1fef535ef35f34cdb4ac0f9c057da697d34c37b14b77d",
+ "checks_v1_note": "v1 no_validity_claim=false was a check defect: it scanned the whole proposal, whose Corrections section quotes the removed phrase. v2 scans only the outgoing message and the Deliverable/Verification sections."
 }

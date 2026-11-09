@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"WEBSITE-CLEANUP-OFFER-VERIFICATION\",\n \"date\": \"2026-11-09\",\n \"originals_preserved\": {\n  \"prospect-offers-v2.json\": \"c198302cc4f262e60b9522e160a586034116bc182faec738191dcd4f233aeab3\",\n  \"operator-batch.md\": \"5305ea1a2977770619f080e475ccc6cedc22278fdab83ecb78f31bd48210704e\"\n },\n \"source_check\": \"capability-and-source-check.json (TASK-179424936111)\",\n \"checks\": {\n  \"no_gpu_claim\": true,\n  \"no_validity_claim\": true,\n  \"ai_disclosure\": true,\n  \"availability_question\": true,\n  \"currency_question\": true,\n  \"no_speed_promise\": true,\n  \"pay_after_acceptance\": true,\n  \"diagnosis_first\": true,\n  \"message_words\": 197,\n  \"no_gpu_claim_deliverable\": true\n },\n \"all_pass\": true,\n \"proposal_sha256\": \"ddc5f1d7746b8d3773c1fef535ef35f34cdb4ac0f9c057da697d34c37b14b77d\",\n \"checks_v1_note\": \"v1 no_validity_claim=false was a check defect: it scanned the whole proposal, whose Corrections section quotes the removed phrase. v2 scans only the outgoing message and the Deliverable/Verification sections.\"\n}\n\n",
+  "artifacts": [
+    "products/services/diversified-offers/website-verification/correction-evidence.json",
+    "products/receipts/TASK-179424936113.json"
+  ],
+  "request": {
+    "id": "TASK-179424936113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-09T18:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib,re\nd=pathlib.Path('products/services/diversified-offers/website-verification')\np=(d/'proposal-corrected.md').read_text()\nev=json.loads((d/'correction-evidence.json').read_text())\nmsg=re.search(r'```\\n(.*?)\\n```',p,re.S).group(1).lower()\ndeliv=p.split('## Deliverable')[1].split('## Acceptance')[0].lower()\nev['checks_v1_note']='v1 no_validity_claim=false was a check defect: it scanned the whole proposal, whose Corrections section quotes the removed phrase. v2 scans only the outgoing message and the Deliverable/Verification sections.'\nev['checks']['no_validity_claim']= ('valid' not in msg) and ('well-formed' not in msg) and ('well-formed' not in deliv) and ('not verifiable by us: html/css validity' in deliv)\nev['checks']['no_gpu_claim_deliverable']=('gpu' not in msg) and ('gpu use' in deliv)\nev['all_pass']=all(v for k,v in ev['checks'].items() if k!='message_words')\nev['proposal_sha256']=hashlib.sha256(p.encode()).hexdigest()\n(d/'correction-evidence.json').write_text(json.dumps(ev,indent=1))\nprint(json.dumps(ev,indent=1))\n"
+      ],
+      "inputs": [
+        "products/services/diversified-offers/website-verification/"
+      ],
+      "outputs": [
+        "products/services/diversified-offers/website-verification/correction-evidence.json"
+      ],
+      "mission_id": "WEBSITE-CLEANUP-OFFER-VERIFICATION"
+    },
+    "description": "Broker action during THINK-1794249361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424936113",
+  "input_sha256": "b4d8b84fb7bb29117f6dd532660081b04f132a1c8b1372065d742f238f22cb6d"
+}
