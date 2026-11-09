@@ -80,9 +80,9 @@ def case_key(message, config):
     return hashlib.sha256(continuity.canonical(auth['binding'])).hexdigest()
 
 
-def _case_orders(root,key):
+def _case_orders(root,key,order_id=None):
     import orders
-    return orders.case_orders(root,key)
+    return orders.case_orders(root,key) if order_id is None else orders.case_orders(root,key,order_id=order_id)
 
 
 def guard(message, context):
@@ -94,11 +94,11 @@ def current_guard(root,message,config):
     return guard(message,for_message(root,message,config))
 
 
-def for_message(root,message,config):
+def for_message(root,message,config,*,order_id=None):
     key = case_key(message,config)
     if key is None: return {'state':'ISOLATED','orders':[]}
     try:
-        result = _case_orders(root,key)
+        result = _case_orders(root,key) if order_id is None else _case_orders(root,key,order_id)
         if result['state'] != 'AVAILABLE': return {'state':'UNAVAILABLE','orders':[]}
         rows = result['orders']
         if not isinstance(rows,list) or len(rows)>10: raise ValueError('invalid projection')

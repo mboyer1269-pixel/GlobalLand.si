@@ -346,14 +346,18 @@ class OrderRegister:
             return _order_view(db, _require(db, 'orders', 'order_id', order_id))
 
 
-def case_orders(root, case_key, limit=10):
+def case_orders(root, case_key, limit=10, *, order_id=None):
     """Caller must bind case_key to its authenticated conversation, never a model."""
     result = dict(state='UNAVAILABLE', orders=[])
     try:
         _text(case_key)
         if type(limit) is not int or not 1 <= limit <= 50: raise ValueError('invalid case view limit')
+        if order_id is not None: _text(order_id)
         with _connection(root) as db:
-            rows = db.execute('SELECT * FROM orders WHERE case_key=? AND synthetic=0 ORDER BY rowid DESC LIMIT ?', (case_key, limit))
+            if order_id is None:
+                rows = db.execute('SELECT * FROM orders WHERE case_key=? AND synthetic=0 ORDER BY rowid DESC LIMIT ?', (case_key, limit))
+            else:
+                rows = db.execute('SELECT * FROM orders WHERE case_key=? AND synthetic=0 AND order_id=?', (case_key, order_id))
             result = dict(state='AVAILABLE', orders=[_order_view(db, row, private=False) for row in rows])
     except (OSError, sqlite3.Error, ValueError, TypeError, KeyError, IndexError, OverflowError):
         pass

@@ -37,7 +37,8 @@ def _write_route(root,value):
 
 def main(argv=None,root='/opt/globalland',euid=None):
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action',choices=['status','route','create','accept','claim','confirm','allocate','post'])
+    parser.add_argument('action',choices=['status','route','create','accept','claim','confirm','allocate','post',
+                                        'propose','accept-proposal','instructions'])
     parser.add_argument('--request',help='absolute path of administrator-private JSON below state/private')
     args=parser.parse_args(argv)
     euid=euid or getattr(os,'geteuid',lambda:-1)
@@ -56,6 +57,10 @@ def main(argv=None,root='/opt/globalland',euid=None):
         data=order_context.read_private(path)
         if args.action=='route':
             result=_write_route(root,data)
+        elif args.action in ('propose','accept-proposal','instructions'):
+            import order_proposals
+            result={'propose':order_proposals.propose, 'accept-proposal':order_proposals.accept,
+                    'instructions':order_proposals.instructions}[args.action](root,data)
         else:
             signatures={
                 'create':({'case_key','amount_cents','currency','terms_sha256','source_id'}, {'synthetic'}),

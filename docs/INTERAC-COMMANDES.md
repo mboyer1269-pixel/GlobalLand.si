@@ -116,6 +116,11 @@ questions ordinaires des clients concernant leurs paiements restent traitables.
 
 ## Mise en service
 
+Le [pont privé de propositions produit](order-proposals.md) ajoute un import
+administratif depuis une demande authentifiée sauvegardée, une acceptation
+explicitement revue et un export privé des instructions. Il ne donne pas aux
+agents une acceptation contractuelle ni une livraison automatique.
+
 Installer le code relu et testé avant de déclarer cette capacité disponible.
 Conserver la route absente ou `CONFIGURING` tant que l'inscription n'est pas
 confirmée. Tester le parcours avec des données fictives dans un répertoire isolé,

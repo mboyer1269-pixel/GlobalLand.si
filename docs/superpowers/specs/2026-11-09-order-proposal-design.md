@@ -1,0 +1,13 @@
+# Administrative product proposal bridge
+
+Implements the approved demand-to-order path recorded in the local development report `output/globalland-revenu-rapide-recommandation-20261109.md`, the 7 November order design, and the founder's 9 November direction toward repeat-sale products. Local branch only; no deployment or production evidence is implied.
+
+Keep existing order and Treasury authority. A root-only `orders_admin propose` imports versioned product terms from a private request referencing a saved authenticated READY case. It validates an exact demand excerpt, a reusable product identity/version, integer total price/currency, bounded scope/license/support, and a real product artifact under `products/` whose digest matches. Delivery is explicitly `MANUAL_ARTIFACT`; binary files including ZIP are hashed without decoding. The per-file evidence bound is the existing product output limit of 1 MiB. This bridge does not implement a download entitlement, attachment, sending, or automatic delivery.
+
+Store an immutable private proposal snapshot before creating one DRAFT through `OrderRegister.create_order`. Identity derives from the saved incoming identity, product ID and offer version; terms are canonically hashed. Same identity with changed content is refused. Administrative review of exact terms and a separate eligible saved incoming acceptance message in the same conversation is required for `accept-proposal`. Require a source excerpt and explicit `ADMIN_REVIEWED_EXACT_TERMS`; this assertion remains a human interpretation, never a classifier or financial attestation. Acceptance source identity is independent of the proposal so one source cannot accept two orders.
+
+`instructions` reads the proposal, order, current route and artifact evidence, then writes an exclusive private output JSON with the existing `order_context.for_message` instructions. Only accepted/unpaid matching CAD orders qualify. It sends nothing and does not initialize missing storage. Output is a preparation snapshot; after state changes regenerate into a new file, never automatically send it. Default CLI stdout excludes private fields.
+
+All private inputs/outputs must be within `state/private`, bounded regular files, no symlinks/hardlinks/junctions, private permissions on Linux. Separate snapshot/ledger commits are recoverable via immutable source IDs. No changes to responder protocols, ledger schema, bank attestation, posting, strategic choice, or the existing mail send guard.
+
+Tradeoff: an operator prepares the structured request and interprets acceptance. Agents do not yet emit proposal metadata. This makes the assisted path usable without granting autonomous contract authority.
