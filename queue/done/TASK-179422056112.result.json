@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "node=v22.23.4\nnpm=10.9.9\nnpm_root_g=/usr/local/lib/node_modules\ndir /usr/local/lib/node_modules: corepack npm \ndir /usr/local/lib/node_modules: corepack npm \njsdom MODULE_NOT_FOUND\nlexical MODULE_NOT_FOUND\n@lexical/headless MODULE_NOT_FOUND\n@lexical/html MODULE_NOT_FOUND\n@tryghost/kg-html-to-lexical MODULE_NOT_FOUND\n@tryghost/kg-default-nodes MODULE_NOT_FOUND\nnpm_cache_entries=0\n\n",
+  "artifacts": [
+    "products/services/ghost-import-diagnostic/real-converter/capability-check.txt",
+    "products/receipts/TASK-179422056112.json"
+  ],
+  "request": {
+    "id": "TASK-179422056112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-09T10:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "mkdir -p products/services/ghost-import-diagnostic/real-converter; { echo \"node=$(node --version 2>&1)\"; echo \"npm=$(npm --version 2>&1)\"; echo \"npm_root_g=$(npm root -g 2>&1)\"; for d in $(npm root -g 2>/dev/null) /usr/lib/node_modules /usr/local/lib/node_modules /opt/node_modules $HOME/node_modules; do [ -d \"$d\" ] && echo \"dir $d: $(ls $d | tr '\\n' ' ')\"; done; for m in jsdom lexical @lexical/headless @lexical/html @tryghost/kg-html-to-lexical @tryghost/kg-default-nodes; do node -e \"try{require.resolve('$m');console.log('$m RESOLVES')}catch(e){console.log('$m '+e.code)}\"; done; echo \"npm_cache_entries=$(ls ~/.npm/_cacache 2>/dev/null | wc -l)\"; } > products/services/ghost-import-diagnostic/real-converter/capability-check.txt 2>&1; cat products/services/ghost-import-diagnostic/real-converter/capability-check.txt"
+      ],
+      "outputs": [
+        "products/services/ghost-import-diagnostic/real-converter/capability-check.txt"
+      ],
+      "inputs": [],
+      "mission_id": "GHOST-REAL-CONVERTER-VERIFICATION"
+    },
+    "description": "Broker action during THINK-1794220561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179422056112",
+  "input_sha256": "06b4313e581d88ecc496af2a27efb2d74088de09fc166eb28ca1ce8b870bf8b9"
+}
