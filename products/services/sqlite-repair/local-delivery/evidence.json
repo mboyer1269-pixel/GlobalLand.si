@@ -1,0 +1,88 @@
+{
+ "mission": "SQLITE-LOCAL-DELIVERY",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "runtime": {
+  "python": "3.11.2",
+  "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.36",
+  "find_library_sqlite3": "libsqlite3.so.0",
+  "sqlite_version": "3.40.1"
+ },
+ "package": {
+  "diagnose.py": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+  "example-case.json": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f",
+  "README.md": "0443eaa402576db28eeadf9ec94aa1d12d2ca8551c7dfc1629c2e12997d5b005"
+ },
+ "tested_source_sha256": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+ "command": "python3 -I diagnose.py example-case.json report.json (clean temp dir with only the 2 package files)",
+ "checks": {
+  "exit0": true,
+  "status_ok": true,
+  "expected_match": true,
+  "first_only_tail": true,
+  "close_rc0": true,
+  "no_open_stmts": true,
+  "matches_saved_example_report_except_elapsed": true,
+  "pkg_diagnose_equals_tested": true,
+  "clean_copy_equals_pkg": true,
+  "error_paths_as_documented": true
+ },
+ "all_pass": true,
+ "error_paths": {
+  "unknown_key": {
+   "rc": 0,
+   "status": "INVALID_CASE"
+  },
+  "prepare_error": {
+   "rc": 0,
+   "kind": "PREPARE_ERROR",
+   "statement_index": 2,
+   "message": "near \"SELEC\": syntax error",
+   "tail": "SELEC 2; SELECT 3",
+   "close_rc": 0
+  },
+  "attach_denied": {
+   "rc": 0,
+   "kind": "PREPARE_ERROR",
+   "denied": [
+    "ATTACH/DETACH"
+   ]
+  },
+  "vacuum": {
+   "rc": 0,
+   "kind": "VACUUM_DENIED"
+  },
+  "invalid_json": {
+   "rc": 1,
+   "stderr_last": [
+    "json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+   ]
+  },
+  "no_args": {
+   "rc": 1,
+   "stderr_last": [
+    "IndexError: list index out of range"
+   ]
+  }
+ },
+ "portability_defects_reported_not_fixed": [
+  "hard-coded Linux soname libsqlite3.so.0 (macOS/Windows untested, expected to fail at load)",
+  "requires sqlite3_error_offset export (SQLite 3.38+); older libraries raise AttributeError at import",
+  "walrus operator requires Python 3.8+",
+  "no usage message: missing args / invalid JSON produce a traceback"
+ ],
+ "removes_dependencies": [
+  "sending SQL by email",
+  "private-cycle inclusion/execution of diagnose.py (unobserved)",
+  "reply delivery"
+ ],
+ "not_established": [
+  "downloads",
+  "requests",
+  "integration",
+  "delivery",
+  "demand",
+  "revenue"
+ ],
+ "staging_only": true,
+ "site_files_changed": false
+}

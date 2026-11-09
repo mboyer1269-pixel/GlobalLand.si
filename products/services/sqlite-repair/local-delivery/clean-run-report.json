@@ -1,0 +1,89 @@
+{
+ "tool": "globalland-sqlite-diagnose/1",
+ "sqlite_version": "3.40.1",
+ "case_id": "page-example",
+ "limits": {
+  "sql_bytes": 65536,
+  "statements": 50,
+  "rows_kept": 50,
+  "vm_steps": 2000000,
+  "seconds": 2.0
+ },
+ "runs": {
+  "as_written_first_statement_only": {
+   "statements": [
+    {
+     "index": 1,
+     "start_byte": 0,
+     "end_byte": 51,
+     "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+     "executed": true,
+     "columns": 0,
+     "row_count": 0,
+     "rows": [],
+     "step_rc": 101,
+     "finalize_rc": 0
+    }
+   ],
+   "error": null,
+   "unexecuted_tail": "SELECT * FROM T1",
+   "input_bytes": 68,
+   "final_byte": 51,
+   "denied": [],
+   "elapsed_s": 0.001,
+   "open_statements_after_run": false,
+   "close_rc": 0
+  },
+  "all_statements": {
+   "statements": [
+    {
+     "index": 1,
+     "start_byte": 0,
+     "end_byte": 51,
+     "sql": "CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;",
+     "executed": true,
+     "columns": 0,
+     "row_count": 0,
+     "rows": [],
+     "step_rc": 101,
+     "finalize_rc": 0
+    },
+    {
+     "index": 2,
+     "start_byte": 51,
+     "end_byte": 68,
+     "sql": "SELECT * FROM T1",
+     "executed": true,
+     "columns": 2,
+     "row_count": 3,
+     "rows": [
+      [
+       "1",
+       "a"
+      ],
+      [
+       "2",
+       "b"
+      ],
+      [
+       "3",
+       "c"
+      ]
+     ],
+     "step_rc": 101,
+     "finalize_rc": 0
+    }
+   ],
+   "error": null,
+   "unexecuted_tail": null,
+   "input_bytes": 68,
+   "final_byte": 68,
+   "denied": [],
+   "elapsed_s": 0.0,
+   "open_statements_after_run": false,
+   "close_rc": 0
+  }
+ },
+ "expected_match": true,
+ "status": "OK"
+}
