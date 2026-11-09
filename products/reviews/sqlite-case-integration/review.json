@@ -1,0 +1,230 @@
+{
+  "digest": "ffe2d1202fca8c37d303f71b7761f625f5527c41e35b08e3650667a5d09552d7",
+  "checks": {
+    "all_candidate_hashes": true,
+    "only_insertions": true,
+    "two_link_blocks": true,
+    "baseline_hash": true,
+    "other_baseline_hashes": true,
+    "report_matches_as-written-fk-off": true,
+    "closed_as-written-fk-off": true,
+    "report_matches_as-written-fk-on": true,
+    "closed_as-written-fk-on": true,
+    "report_matches_fixed": true,
+    "closed_fixed": true,
+    "official_quotes": false,
+    "so_attribution": true,
+    "so_quote": true,
+    "source_error": true,
+    "disclosures": true,
+    "local_links": true
+  },
+  "all_pass": false,
+  "insertions": [
+    ">\n<h2>Another worked case</h2>\n<p><a href=\"cases/fk-mismatch-rowid.html\">&ldquo;foreign key mismatch&rdquo; when a foreign key references <code>rowid</code></a>: a second free explanation of an unanswered question, reproduced with the same SQLite 3.40.1 ctypes method on synthetic data.</p",
+    "Autre cas trait&eacute; : <a href=\"cases/fk-mismatch-rowid.html\">&laquo; foreign key mismatch &raquo; avec une cl&eacute; &eacute;trang&egrave;re vers <code>rowid</code></a> (r&eacute;sum&eacute; en fran&ccedil;ais en bas de page).</p>\n<p>"
+  ],
+  "runs": {
+    "as-written-fk-off": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": "so79846840-as-written-fk-off",
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [
+            {
+              "index": 1,
+              "start_byte": 0,
+              "end_byte": 69,
+              "sql": "INSERT INTO vaccinations VALUES ('rabies','2023-06-06','Dr. Echo',1);",
+              "executed": true,
+              "columns": 0,
+              "row_count": 0,
+              "rows": [],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 2,
+              "start_byte": 69,
+              "end_byte": 191,
+              "sql": "SELECT cats.rowid, cats.name, vaccinations.vaccine FROM cats INNER JOIN vaccinations ON cats.rowid = vaccinations.cat_id;",
+              "executed": true,
+              "columns": 3,
+              "row_count": 1,
+              "rows": [
+                [
+                  "1",
+                  "Zophie",
+                  "rabies"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            }
+          ],
+          "error": null,
+          "unexecuted_tail": null,
+          "input_bytes": 191,
+          "final_byte": 191,
+          "denied": [],
+          "elapsed_s": 0.001,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "expected_match": true,
+      "status": "OK"
+    },
+    "as-written-fk-on": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": "so79846840-as-written-fk-on",
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [],
+          "error": {
+            "phase": "prepare",
+            "kind": "PREPARE_ERROR",
+            "statement_index": 1,
+            "start_byte": 0,
+            "rc": 1,
+            "message": "foreign key mismatch - \"vaccinations\" referencing \"cats\"",
+            "error_offset": -1
+          },
+          "unexecuted_tail": "INSERT INTO vaccinations VALUES ('rabies','2023-06-06','Dr. Echo',1);\nSELECT cats.rowid, cats.name, vaccinations.vaccine FROM cats INNER JOIN vaccinations ON cats.rowid = vaccinations.cat_id;",
+          "input_bytes": 191,
+          "final_byte": 0,
+          "denied": [],
+          "elapsed_s": 0.001,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "expected_match": false,
+      "status": "OK"
+    },
+    "fixed": {
+      "tool": "globalland-sqlite-diagnose/1",
+      "sqlite_version": "3.40.1",
+      "case_id": "so79846840-fixed-rebuild",
+      "limits": {
+        "sql_bytes": 65536,
+        "statements": 50,
+        "rows_kept": 50,
+        "vm_steps": 2000000,
+        "seconds": 2.0
+      },
+      "runs": {
+        "all_statements": {
+          "statements": [
+            {
+              "index": 1,
+              "start_byte": 0,
+              "end_byte": 69,
+              "sql": "INSERT INTO vaccinations VALUES ('rabies','2023-06-06','Dr. Echo',1);",
+              "executed": true,
+              "columns": 0,
+              "row_count": 0,
+              "rows": [],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 2,
+              "start_byte": 69,
+              "end_byte": 197,
+              "sql": "SELECT cats.id, cats.rowid, cats.name, vaccinations.vaccine FROM cats INNER JOIN vaccinations ON cats.id = vaccinations.cat_id;",
+              "executed": true,
+              "columns": 4,
+              "row_count": 1,
+              "rows": [
+                [
+                  "1",
+                  "1",
+                  "Zophie",
+                  "rabies"
+                ]
+              ],
+              "step_rc": 101,
+              "finalize_rc": 0
+            },
+            {
+              "index": 3,
+              "start_byte": 197,
+              "end_byte": 268,
+              "sql": "INSERT INTO vaccinations VALUES ('rabies','2023-06-06','Dr. Echo',99);",
+              "executed": true,
+              "columns": 0,
+              "row_count": 0,
+              "rows": [],
+              "step_rc": 19,
+              "finalize_rc": 19
+            }
+          ],
+          "error": {
+            "phase": "step",
+            "kind": "STEP_ERROR",
+            "statement_index": 3,
+            "rc": 19,
+            "message": "FOREIGN KEY constraint failed",
+            "rows_before_error": 0
+          },
+          "unexecuted_tail": null,
+          "input_bytes": 268,
+          "final_byte": 268,
+          "denied": [],
+          "elapsed_s": 0.002,
+          "open_statements_after_run": false,
+          "close_rc": 0
+        }
+      },
+      "status": "OK"
+    }
+  },
+  "source_question": {
+    "tags": [
+      "python",
+      "sqlite",
+      "sqlite3-python"
+    ],
+    "owner": {
+      "account_id": 44922630,
+      "reputation": 65,
+      "user_id": 32006481,
+      "user_type": "registered",
+      "profile_image": "https://www.gravatar.com/avatar/04494d2d21894ef35a04aace6ff06750?s=256&d=identicon&r=PG&f=y&so-version=2",
+      "display_name": "Wpythonic",
+      "link": "https://stackoverflow.com/users/32006481/wpythonic"
+    },
+    "is_answered": false,
+    "view_count": 178,
+    "answer_count": 0,
+    "score": 0,
+    "last_activity_date": 1765691342,
+    "creation_date": 1765678403,
+    "question_id": 79846840,
+    "content_license": "CC BY-SA 4.0",
+    "link": "https://stackoverflow.com/questions/79846840/why-am-i-getting-a-foreign-key-mismatch-when-trying-to-join-2-tables-using-forei",
+    "title": "Why am I getting a foreign key mismatch when trying to join 2 tables using foreign keys?",
+    "body": "<p>I am doing <a href=\"https://automatetheboringstuff.com/3e/chapter16.html\" rel=\"nofollow noreferrer\">Chapter 16 - SQLite Databases of Automate the Boring Stuff with Python</a> By Al. Sweigart and I ran into a problem in the &quot;Joining Multiple Tables with Foreign Keys&quot; part, let it be known that I just started to get into python and I am for the first time learning about databases and SQLite.</p>\n<p>I have a file called sweigartcats.db containing a table called &quot;cats&quot;, these are its columns:</p>\n<pre><code>&gt;&gt;&gt; conn.execute('PRAGMA TABLE_INFO(cats)').fetchall()\n[(0, 'name', 'TEXT', 1, None, 0), (1, 'birthdate', 'TEXT', 0, None, 0), (2, 'fur', 'TEXT', 0, None, 0), (3, 'weight_kg', 'REAL', 0, None, 0)]\n</code></pre>\n<p>The tutorial is showing how to create another table called vaccinations (which is successfully created) with the following structure:</p>\n<pre><code>&gt;&gt;&gt; conn.execute('CREATE TABLE IF NOT EXISTS vaccinations (vaccine TEXT,\ndate_administered TEXT, administered_by TEXT, cat_id INTEGER,\nFOREIGN KEY(cat_id) REFERENCES cats(rowid)) STRICT')\n</code></pre>\n<p>The values inserted into the vaccinations table use the rowid of the cats table to connect vaccination data to a selected cat, in this case the cat &quot;Zophie&quot; has the rowid of 1:</p>\n<pre><code>&gt;&gt;&gt; conn.execute('INSERT INTO vaccinations VALUES (&quot;rabies&quot;, &quot;2023-06-06&quot;, &quot;Dr. Echo&quot;, 1)')\n</code></pre>\n<p>However, instead of returning a Cursor object, it gives me an error:</p>\n<pre><code>sqlite3.OperationalError: foreign key mismatch - &quot;vaccinations&quot; referencing &quot;cats&quot;\n</code></pre>\n<p>Earlier today for whatever reason that error didn't happen when I inserted the values (I don't remember doing anything different) and I managed to use the following code to return a tuple that joined the rowid cat and its vaccines data:</p>\n<pre><code>&gt;&gt;&gt; conn.execute('SELECT * FROM cats INNER JOIN vaccinations ON cats.rowid = \nvaccinations.cat_id').fetchall()\n</code></pre>\n<p>But that didn't last as the foreign key mismatch error happened right next to it when i tried to use iterdumps() to copy the database to a .txt file, I tried redoing it using the original file many times but the error always happens and I can no longer insert anything into the vaccinations table (even if i copy the code straight from the website to make sure it's not a typo).</p>\n<p>I'm not sure if it's needed but here are the queries used to create the original file: <a href=\"https://pastebin.com/neG0q4Ai\" rel=\"nofollow noreferrer\">https://pastebin.com/neG0q4Ai</a></p>\n<p>I checked the sqlite3 docs and some questions here and apparently there might be an issue with using rowid as a foreign key, but I'm not very familiar with it so I can't be sure, also the fact that it is in the book with no regards to any errors and I couldn't find anyone else with the same error in this specific lesson could mean I am getting something wrong.</p>\n<p>One of the practice programs at the end of that chapter involves checking the vaccinations of the cats so I can only do it if I can make this work first.</p>\n<p>I apologize if I forgot to add an important piece of information and I'll add it if needed.</p>\n"
+  },
+  "notes": [
+    "Scoped review; prior approved intake untouched except two link insertions.",
+    "No upstream Python driver or real customer database execution; no demand or revenue established."
+  ]
+}
