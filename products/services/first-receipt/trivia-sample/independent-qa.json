@@ -1,0 +1,235 @@
+{
+ "observed_at": "2026-11-09",
+ "reviewer": "AUDITOR",
+ "scope": "sample-v2.csv, verification-v2.json, proposal-trivia-en.md, forhire-hiring-extract.json, raw/wikipedia-intros.json",
+ "sample_sha256": "92fa13dadfcf4cf4459165d0ec58f591837907580957507bff7944908c1a2f1e",
+ "csv": {
+  "rows": 8,
+  "header": [
+   "id",
+   "category",
+   "difficulty",
+   "question_en",
+   "answer_en",
+   "question_ar",
+   "answer_ar",
+   "source_url"
+  ],
+  "crlf": true,
+  "mechanical": [
+   {
+    "id": "1",
+    "fields": 8,
+    "q_ar_arabic": true,
+    "a_ar_arabic_or_digit": true,
+    "url_wikipedia": true
+   },
+   {
+    "id": "2",
+    "fields": 8,
+    "q_ar_arabic": true,
+    "a_ar_arabic_or_digit": true,
+    "url_wikipedia": true
+   },
+   {
+    "id": "3",
+    "fields": 8,
+    "q_ar_arabic": true,
+    "a_ar_arabic_or_digit": true,
+    "url_wikipedia": true
+   },
+   {
+    "id": "4",
+    "fields": 8,
+    "q_ar_arabic": true,
+    "a_ar_arabic_or_digit": true,
+    "url_wikipedia": true
+   },
+   {
+    "id": "5",
+    "fields": 8,
+    "q_ar_arabic": true,
+    "a_ar_arabic_or_digit": true,
+    "url_wikipedia": true
+   },
+   {
+    "id": "6",
+    "fields": 8,
+    "q_ar_arabic": true,
+    "a_ar_arabic_or_digit": true,
+    "url_wikipedia": true
+   },
+   {
+    "id": "7",
+    "fields": 8,
+    "q_ar_arabic": true,
+    "a_ar_arabic_or_digit": true,
+    "url_wikipedia": true
+   },
+   {
+    "id": "8",
+    "fields": 8,
+    "q_ar_arabic": true,
+    "a_ar_arabic_or_digit": true,
+    "url_wikipedia": true
+   }
+  ]
+ },
+ "source_term_hits_independent": {
+  "1": {
+   "capital": true,
+   "Oman": true
+  },
+  "2": {
+   "Qatar": true
+  },
+  "3": {
+   "highest value per base unit": true
+  },
+  "4": {
+   "island country": true
+  },
+  "5": {
+   "Saudi": true
+  },
+  "6": {
+   "Empty Quarter": true,
+   "southern third": true
+  },
+  "7": {
+   "1981": true
+  },
+  "8": {
+   "tallest": true
+  }
+ },
+ "row_findings": [
+  {
+   "id": "1",
+   "fact": "SUPPORTED (Muscat intro: capital of Oman)",
+   "unique": "yes",
+   "equivalence": "EN/AR equivalent (AI language judgment)",
+   "issues": [],
+   "row_verdict": "usable"
+  },
+  {
+   "id": "2",
+   "fact": "SUPPORTED",
+   "unique": "yes",
+   "equivalence": "equivalent (AI judgment)",
+   "issues": [
+    "Very well-known; low challenge for a Gulf party-game audience"
+   ],
+   "row_verdict": "usable"
+  },
+  {
+   "id": "3",
+   "fact": "SUPPORTED as phrased by source (highest value per base unit)",
+   "unique": "conditional: depends on exchange-rate date; source wording is per base unit vs other currencies",
+   "equivalence": "AR أعلى قيمة للوحدة is acceptable but unidiomatic (AI judgment)",
+   "issues": [
+    "Minor: add (by exchange rate) to avoid ambiguity"
+   ],
+   "row_verdict": "usable_with_minor_revision"
+  },
+  {
+   "id": "4",
+   "fact": "SUPPORTED (Bahrain intro: island country)",
+   "unique": "yes: only island GCC member",
+   "equivalence": "equivalent",
+   "issues": [],
+   "row_verdict": "usable"
+  },
+  {
+   "id": "5",
+   "fact": "SUPPORTED (Saudi singer)",
+   "unique": "yes",
+   "equivalence": "AR adds الفنان which correctly disambiguates from the scholar Muhammad Abduh; EN says singer: equivalent",
+   "issues": [],
+   "row_verdict": "usable"
+  },
+  {
+   "id": "6",
+   "fact": "SUPPORTED; source says most of the southern third of the peninsula",
+   "unique": "yes",
+   "equivalence": "equivalent",
+   "issues": [
+    "EN answer includes parenthetical alias; buyer template may need a single canonical answer field"
+   ],
+   "row_verdict": "usable"
+  },
+  {
+   "id": "7",
+   "fact": "SUPPORTED (1981)",
+   "unique": "yes",
+   "equivalence": "equivalent; AR uses the official council name",
+   "issues": [],
+   "row_verdict": "usable"
+  },
+  {
+   "id": "8",
+   "fact": "SUPPORTED (tallest structure, Dubai)",
+   "unique": "yes",
+   "equivalence": "NOT CLEAN: AR منشأ (origin/source) appears to be a mistake for منشأة (structure/facility); AI language judgment, needs native confirmation",
+   "issues": [
+    "Arabic wording defect suspected",
+    "EN question nearly gives the answer category away (building in Dubai + tallest)"
+   ],
+   "row_verdict": "revise"
+  }
+ ],
+ "arabic_review_required": {
+  "rows": [
+   "8",
+   "3"
+  ],
+  "reason": "Row 8 suspected wrong word (منشأ vs منشأة); row 3 phrasing unidiomatic. All Arabic is AI-drafted and AI-judged; no native-speaker review exists. A native Gulf Arabic reviewer should check all 8 rows before any paid batch."
+ },
+ "buyer_requirements_quoted": [
+  "strong familiarity with GCC culture, entertainment, and everyday references",
+  "engaging, original trivia questions",
+  "clear and natural wording in each language",
+  "a reliable source link for each question",
+  "organize by category and difficulty following a provided template",
+  "To apply, please send me a DM"
+ ],
+ "proposal_issues": [
+  {
+   "severity": "Major",
+   "where": "section 8 message",
+   "issue": "Says a free 7-question sample; the blocker instructs sending sample-v2.csv, which has 8 rows. Count must match the attachment."
+  },
+  {
+   "severity": "Major",
+   "where": "section 8 message",
+   "issue": "We check every answer against its source overstates the method: verification is presence of exact English terms in a saved Wikipedia intro, not a reading of the full source. Say: each answer was checked against the linked source intro."
+  },
+  {
+   "severity": "Major",
+   "where": "fit vs buyer request",
+   "issue": "Buyer emphasizes GCC entertainment/everyday references, originality and party-game engagement; sample is 7/8 encyclopedic facts (capitals, founding years), 5 Easy/3 Medium, 0 Hard. It demonstrates sourcing, not the requested cultural depth. The message honestly flags pop culture as weakest; keep that."
+  },
+  {
+   "severity": "Major",
+   "where": "section 6 and message",
+   "issue": "Delivery within 24 h of template for 100 sourced questions is not evidenced: no 100-question run has occurred and sourcing uses bounded FETCHes per turn. Use a non-binding estimate or ask the buyer timeline."
+  },
+  {
+   "severity": "Minor",
+   "where": "section 5",
+   "issue": "Still describes sample-10 (7 kept); not updated for sample-v2 (8 rows, verification-v2)."
+  },
+  {
+   "severity": "Info",
+   "where": "section 7",
+   "issue": "Payment route for a USD buyer is unavailable; proposal states this correctly."
+  }
+ ],
+ "verdict": "REVISE",
+ "verdict_detail": "Facts are supported for all 8 rows (source term check) but row 8 Arabic needs correction and the outreach message has a count mismatch and overstated checking/turnaround claims. Fix the message (8 rows, precise verification wording, no 24 h promise) and row 8 Arabic before any operator send.",
+ "limits": [
+  "Language judgments are by an AI reviewer, not a native speaker",
+  "Same-controller review; provider independence not established for this QA",
+  "Reddit post availability not rechecked (prior 403); no buyer contact, acceptance or revenue established"
+ ]
+}
