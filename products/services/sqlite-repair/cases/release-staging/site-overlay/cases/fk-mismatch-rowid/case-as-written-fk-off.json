@@ -1,0 +1,12 @@
+{
+ "case_id": "so79846840-as-written-fk-off",
+ "seed_sql": "PRAGMA foreign_keys = OFF;\nCREATE TABLE cats (name TEXT NOT NULL, birthdate TEXT, fur TEXT, weight_kg REAL) STRICT;\nINSERT INTO cats VALUES ('Zophie','2021-01-24','gray tabby',5.6),('Miyuki','2016-12-24','siamese',6.2);\nCREATE TABLE IF NOT EXISTS vaccinations (vaccine TEXT, date_administered TEXT, administered_by TEXT, cat_id INTEGER, FOREIGN KEY(cat_id) REFERENCES cats(rowid)) STRICT;\n",
+ "query_sql": "INSERT INTO vaccinations VALUES ('rabies','2023-06-06','Dr. Echo',1);\nSELECT cats.rowid, cats.name, vaccinations.vaccine FROM cats INNER JOIN vaccinations ON cats.rowid = vaccinations.cat_id;",
+ "expected_last_rows": [
+  [
+   "1",
+   "Zophie",
+   "rabies"
+  ]
+ ]
+}

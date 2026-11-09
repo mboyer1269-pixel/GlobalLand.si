@@ -1,0 +1,35 @@
+{
+ "tool": "globalland-sqlite-diagnose/1",
+ "sqlite_version": "3.40.1",
+ "case_id": "so79846840-as-written-fk-on",
+ "limits": {
+  "sql_bytes": 65536,
+  "statements": 50,
+  "rows_kept": 50,
+  "vm_steps": 2000000,
+  "seconds": 2.0
+ },
+ "runs": {
+  "all_statements": {
+   "statements": [],
+   "error": {
+    "phase": "prepare",
+    "kind": "PREPARE_ERROR",
+    "statement_index": 1,
+    "start_byte": 0,
+    "rc": 1,
+    "message": "foreign key mismatch - \"vaccinations\" referencing \"cats\"",
+    "error_offset": -1
+   },
+   "unexecuted_tail": "INSERT INTO vaccinations VALUES ('rabies','2023-06-06','Dr. Echo',1);\nSELECT cats.rowid, cats.name, vaccinations.vaccine FROM cats INNER JOIN vaccinations ON cats.rowid = vaccinations.cat_id;",
+   "input_bytes": 191,
+   "final_byte": 0,
+   "denied": [],
+   "elapsed_s": 0.0,
+   "open_statements_after_run": false,
+   "close_rc": 0
+  }
+ },
+ "expected_match": false,
+ "status": "OK"
+}
