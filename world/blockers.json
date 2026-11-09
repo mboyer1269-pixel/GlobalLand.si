@@ -137,27 +137,32 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-09T21:37:50Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 345,
-    "turns_without_verified_revenue": 345,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 346,
+    "turns_without_verified_revenue": 346,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T21:37:50Z",
-    "last_outcome_turn": "THINK-1794259802",
-    "last_productive_turn": "THINK-1794259802",
-    "last_turn": "THINK-1794260161",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794261606",
+    "last_productive_turn": "THINK-1794261606",
+    "last_turn": "THINK-1794261606",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "CATALOGUE-AGENCY-OFFER-TEST"
+      ],
+      "new_products": [
+        "products/services/catalogue-transformation/agency-offer/checks.json",
+        "products/services/catalogue-transformation/agency-offer/index.diff"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
