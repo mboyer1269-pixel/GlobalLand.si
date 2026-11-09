@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "7 / 10\nBurj Khalifa True False\nMuscat True True\n2022 FIFA World Cup True True\nKuwaiti dinar True True\nBahrain True True\nMohammed Abdu True True\nMasmak fort False False\nLouvre Abu Dhabi True False\nRub' al Khali True True\nGulf Cooperation Council True True\n\n",
+  "artifacts": [
+    "products/services/first-receipt/trivia-sample/sample-10.csv",
+    "products/services/first-receipt/trivia-sample/verification.json",
+    "products/receipts/TASK-179424244316.json"
+  ],
+  "request": {
+    "id": "TASK-179424244316",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-09T16:40:43Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,csv,io,pathlib,hashlib\nraw=pathlib.Path('products/services/first-receipt/raw/wikipedia-intros.json').read_bytes()\nd=json.loads(raw)\npages={p['title']:p.get('extract','') for p in d['query']['pages'].values()}\nQ=[\n('Burj Khalifa','Landmarks','Easy',\"Which skyscraper in Dubai has been the world's tallest building since 2009?\",'Burj Khalifa','ما هي ناطحة السحاب في دبي التي تُعدّ أطول مبنى في العالم منذ عام 2009؟','برج خليفة',['tallest','2009']),\n('Muscat','Geography','Easy','What is the capital city of Oman?','Muscat','ما هي عاصمة سلطنة عُمان؟','مسقط',['capital','Oman']),\n('2022 FIFA World Cup','Sports','Easy','Which country hosted the 2022 FIFA World Cup?','Qatar','أي دولة استضافت كأس العالم لكرة القدم 2022؟','قطر',['Qatar']),\n('Kuwaiti dinar','Economy','Medium','Which currency has the highest value per unit in the world?','Kuwaiti dinar','ما هي العملة صاحبة أعلى قيمة للوحدة في العالم؟','الدينار الكويتي',['highest']),\n('Bahrain','Geography','Easy','Which GCC member state is an island country?','Bahrain','أي دولة من دول مجلس التعاون الخليجي هي دولة جزرية؟','البحرين',['island country']),\n('Mohammed Abdu','Music','Easy','The singer Mohammed Abdu is from which Gulf country?','Saudi Arabia','الفنان محمد عبده من أي دولة خليجية؟','المملكة العربية السعودية',['Saudi','singer']),\n('Masmak fort','History','Medium','In which city is Masmak Fort located?','Riyadh','في أي مدينة يقع قصر المصمك؟','الرياض',['Riyadh']),\n('Louvre Abu Dhabi','Culture','Medium','In which year did the Louvre Abu Dhabi open?','2017','في أي عام افتُتح متحف اللوفر أبوظبي؟','2017',['2017']),\n(\"Rub' al Khali\",'Geography','Medium',\"What is the common English name of the Rub' al Khali desert?\",'The Empty Quarter','ما معنى اسم «الربع الخالي» بالإنجليزية؟','Empty Quarter',['Empty Quarter']),\n('Gulf Cooperation Council','History','Medium','In which year was the Gulf Cooperation Council founded?','1981','في أي عام تأسس مجلس التعاون لدول الخليج العربية؟','1981',['1981'])]\nrows=[];ver=[]\nfor t,cat,dif,qe,ae,qa,aa,ev in Q:\n  ex=pages.get(t,'')\n  ok=bool(ex) and all(e.lower() in ex.lower() for e in ev)\n  snip=[]\n  for e in ev:\n    i=ex.lower().find(e.lower()); snip.append(ex[max(0,i-80):i+80] if i>=0 else None)\n  url='https://en.wikipedia.org/wiki/'+t.replace(' ','_')\n  ver.append({'title':t,'found':bool(ex),'evidence_terms':ev,'all_terms_in_intro':ok,'snippets':snip})\n  if ok: rows.append([len(rows)+1,cat,dif,qe,ae,qa,aa,url])\nb=io.StringIO();w=csv.writer(b);w.writerow(['id','category','difficulty','question_en','answer_en','question_ar','answer_ar','source_url']);w.writerows(rows)\nO=pathlib.Path('products/services/first-receipt/trivia-sample');O.mkdir(parents=True,exist_ok=True)\n(O/'sample-10.csv').write_text(b.getvalue(),encoding='utf-8')\nres={'observed_at':'2026-11-09','source_fetch':'TASK-179424244315','source_sha256':hashlib.sha256(raw).hexdigest(),'pages_returned':sorted(pages),'checks':ver,'verified':sum(v['all_terms_in_intro'] for v in ver),'total':len(ver),'limits':['Answer check = evidence terms present in English Wikipedia intro only; not a full fact-check','Arabic wording drafted by an AI agent, not reviewed by a native speaker','Produced by autonomous AI agents (GlobalLand)']}\n(O/'verification.json').write_text(json.dumps(res,ensure_ascii=False,indent=1),encoding='utf-8')\nprint(res['verified'],'/',res['total'])\nfor v in ver: print(v['title'],v['found'],v['all_terms_in_intro'])\n"
+      ],
+      "inputs": [
+        "products/services/first-receipt/raw/wikipedia-intros.json"
+      ],
+      "outputs": [
+        "products/services/first-receipt/trivia-sample/sample-10.csv",
+        "products/services/first-receipt/trivia-sample/verification.json"
+      ],
+      "mission_id": "FOUNDER-FIRST-RECEIPT-20261110"
+    },
+    "description": "Broker action during THINK-1794242443",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179424244316",
+  "input_sha256": "49a7ac4469bb5658095b668230338c83177e67fb5a78d98db17e46c893e28faf"
+}
