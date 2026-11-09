@@ -142,26 +142,26 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 337,
-    "turns_without_verified_revenue": 337,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 338,
+    "turns_without_verified_revenue": 338,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T19:31:31Z",
-    "last_outcome_turn": "THINK-1794251608",
-    "last_productive_turn": "THINK-1794252604",
-    "last_turn": "THINK-1794252604",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794254404",
+    "last_productive_turn": "THINK-1794254404",
+    "last_turn": "THINK-1794254404",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/new-actionable-buyers/canadian-project.html",
-        "products/services/new-actionable-buyers/qualification.json",
-        "products/services/new-actionable-buyers/rsl-unsent-message.txt",
-        "products/services/new-actionable-buyers/wordpress-faq.html",
-        "products/services/new-actionable-buyers/wordpress-jobs.rss"
+      "outcome": true,
+      "mission_outcomes": [
+        "NEW-ACTIONABLE-BUYERS-20261109"
       ],
-      "new_product_count": 5,
+      "new_products": [
+        "products/services/new-actionable-buyers/bounded-result.json",
+        "products/services/new-actionable-buyers/raw/cl-toronto-cpg.html",
+        "products/services/new-actionable-buyers/raw/iapm-ausschreibung.pdf.b64"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
