@@ -137,25 +137,31 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-09T10:37:27Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 305,
-    "turns_without_verified_revenue": 305,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 306,
+    "turns_without_verified_revenue": 306,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-09T10:37:27Z",
-    "last_outcome_turn": "THINK-1794220202",
-    "last_productive_turn": "THINK-1794220202",
-    "last_turn": "THINK-1794220561",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794222002",
+    "last_productive_turn": "THINK-1794222002",
+    "last_turn": "THINK-1794222002",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "GHOST-REAL-CONVERTER-VERIFICATION"
+      ],
+      "new_products": [
+        "products/services/ghost-import-diagnostic/real-converter/bounded-stop.json",
+        "products/services/ghost-import-diagnostic/real-converter/capability-check.txt",
+        "products/services/ghost-import-diagnostic/real-converter/raw/registry-kg-html-to-lexical-1.4.4.json"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
