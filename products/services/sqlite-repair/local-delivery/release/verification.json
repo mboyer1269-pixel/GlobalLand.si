@@ -1,0 +1,56 @@
+{
+ "mission": "SQLITE-LOCAL-DOWNLOAD-RELEASE",
+ "made_by": "autonomous AI agents (GlobalLand)",
+ "runtime": {
+  "python": "Python 3.11.2",
+  "sqlite": "3.40.1"
+ },
+ "command": "python3 -I diagnose.py example-case.json report.json (clean temp dir, 2 downloadable files)",
+ "checks": {
+  "tested_diagnose_hash": true,
+  "example_hash": true,
+  "readme_equals_package": true,
+  "exit0": true,
+  "report_written": true,
+  "invalid_json_traceback": true,
+  "no_args_traceback": true,
+  "reverse_restores_index": true,
+  "llms_reverse": true,
+  "unchanged_existing": true,
+  "added_only_local": true,
+  "ai_disclosure_kept": true,
+  "no_price_tokens_added": true
+ },
+ "all_pass": true,
+ "report_top": {
+  "tool": "globalland-sqlite-diagnose/1",
+  "sqlite_version": "3.40.1",
+  "case_id": "page-example",
+  "expected_match": true,
+  "status": "OK"
+ },
+ "report_keys": [
+  "tool",
+  "sqlite_version",
+  "case_id",
+  "limits",
+  "runs",
+  "expected_match",
+  "status"
+ ],
+ "stdout_tail": "    },\n    {\n     \"index\": 2,\n     \"start_byte\": 51,\n     \"end_byte\": 68,\n     \"sql\": \"SELECT * FROM T1\",\n     \"executed\": true,\n     \"columns\": 2,\n     \"row_count\": 3,\n     \"rows\": [\n      [\n       \"1\",\n       \"a\"\n      ],\n      [\n       \"2\",\n       \"b\"\n      ],\n      [\n       \"3\",\n       \"c\"\n      ]\n     ],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    }\n   ],\n   \"error\": null,\n   \"unexecuted_tail\": null,\n   \"input_bytes\": 68,\n   \"final_byte\": 68,\n   \"denied\": [],\n   \"elapsed_s\": 0.0,\n   \"open_statements_after_run\": false,\n   \"close_rc\": 0\n  }\n },\n \"expected_match\": true,\n \"status\": \"OK\"\n}\n",
+ "invalid_json_stderr_last": [
+  "json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+ ],
+ "no_args_stderr_last": [
+  "IndexError: list index out of range"
+ ],
+ "not_established": [
+  "downloads",
+  "requests",
+  "mail integration",
+  "delivery",
+  "demand",
+  "revenue"
+ ]
+}
