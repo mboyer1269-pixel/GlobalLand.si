@@ -1,0 +1,403 @@
+{
+ "label": "SYNTHETIC CHECKS ONLY; no buyer data, no customer delivery",
+ "python": "3.11.2",
+ "cases": {
+  "existing_valid": {
+   "exit": 0,
+   "expected_exit": 0,
+   "pass": true,
+   "output": {
+    "records": 8,
+    "errors": [],
+    "duplicate_groups": [],
+    "cross_style_reuse": [],
+    "skipped_blank": []
+   }
+  },
+  "within_style_dup": {
+   "exit": 1,
+   "expected_exit": 1,
+   "pass": true,
+   "output": {
+    "records": 9,
+    "errors": [],
+    "duplicate_groups": [
+     {
+      "style_id": "SYN-A",
+      "url": "https://example.com/img/SYN-A-Black-1.jpg",
+      "count": 2,
+      "occurrences": [
+       {
+        "record": 1,
+        "transform_line": 2,
+        "physical_line_start": 2,
+        "physical_line_end": 2,
+        "fields": {
+         "style_id": "SYN-A",
+         "color": "Black",
+         "position": "1",
+         "url": "https://example.com/img/SYN-A-Black-1.jpg"
+        }
+       },
+       {
+        "record": 9,
+        "transform_line": 10,
+        "physical_line_start": 10,
+        "physical_line_end": 10,
+        "fields": {
+         "style_id": "SYN-A",
+         "color": "Tan",
+         "position": "5",
+         "url": "https://example.com/img/SYN-A-Black-1.jpg"
+        }
+       }
+      ]
+     }
+    ],
+    "cross_style_reuse": [],
+    "skipped_blank": []
+   }
+  },
+  "cross_style_only": {
+   "exit": 0,
+   "expected_exit": 0,
+   "pass": true,
+   "output": {
+    "records": 9,
+    "errors": [],
+    "duplicate_groups": [],
+    "cross_style_reuse": [
+     {
+      "url": "https://example.com/img/SYN-A-Black-1.jpg",
+      "styles": {
+       "SYN-A": [
+        1
+       ],
+       "SYN-B": [
+        9
+       ]
+      }
+     }
+    ],
+    "skipped_blank": []
+   }
+  },
+  "blank_values": {
+   "exit": 1,
+   "expected_exit": 1,
+   "pass": true,
+   "output": {
+    "records": 4,
+    "errors": [],
+    "duplicate_groups": [
+     {
+      "style_id": "S1",
+      "url": "https://example.com/img/a.jpg",
+      "count": 2,
+      "occurrences": [
+       {
+        "record": 1,
+        "transform_line": 2,
+        "physical_line_start": 2,
+        "physical_line_end": 2,
+        "fields": {
+         "style_id": "S1",
+         "color": "Red",
+         "position": "1",
+         "url": "https://example.com/img/a.jpg"
+        }
+       },
+       {
+        "record": 4,
+        "transform_line": 5,
+        "physical_line_start": 5,
+        "physical_line_end": 5,
+        "fields": {
+         "style_id": "S1",
+         "color": "Red",
+         "position": "4",
+         "url": "https://example.com/img/a.jpg"
+        }
+       }
+      ]
+     }
+    ],
+    "cross_style_reuse": [],
+    "skipped_blank": [
+     {
+      "record": 2,
+      "transform_line": 3,
+      "physical_line_start": 3,
+      "physical_line_end": 3,
+      "fields": {
+       "style_id": "S1",
+       "color": "Red",
+       "position": "2",
+       "url": ""
+      },
+      "blank": [
+       "url"
+      ]
+     },
+     {
+      "record": 3,
+      "transform_line": 4,
+      "physical_line_start": 4,
+      "physical_line_end": 4,
+      "fields": {
+       "style_id": "",
+       "color": "Red",
+       "position": "3",
+       "url": "https://example.com/img/a.jpg"
+      },
+      "blank": [
+       "style_id"
+      ]
+     }
+    ]
+   }
+  },
+  "leading_zero": {
+   "exit": 1,
+   "expected_exit": 1,
+   "pass": true,
+   "output": {
+    "records": 3,
+    "errors": [],
+    "duplicate_groups": [
+     {
+      "style_id": "007",
+      "url": "https://example.com/img/z.jpg",
+      "count": 2,
+      "occurrences": [
+       {
+        "record": 1,
+        "transform_line": 2,
+        "physical_line_start": 2,
+        "physical_line_end": 2,
+        "fields": {
+         "style_id": "007",
+         "color": "Red",
+         "position": "1",
+         "url": "https://example.com/img/z.jpg"
+        }
+       },
+       {
+        "record": 3,
+        "transform_line": 4,
+        "physical_line_start": 4,
+        "physical_line_end": 4,
+        "fields": {
+         "style_id": "007",
+         "color": "Red",
+         "position": "2",
+         "url": "https://example.com/img/z.jpg"
+        }
+       }
+      ]
+     }
+    ],
+    "cross_style_reuse": [
+     {
+      "url": "https://example.com/img/z.jpg",
+      "styles": {
+       "007": [
+        1,
+        3
+       ],
+       "7": [
+        2
+       ]
+      }
+     }
+    ],
+    "skipped_blank": []
+   }
+  },
+  "multiline": {
+   "exit": 1,
+   "expected_exit": 1,
+   "pass": true,
+   "output": {
+    "records": 3,
+    "errors": [],
+    "duplicate_groups": [
+     {
+      "style_id": "S1",
+      "url": "https://example.com/img/m.jpg",
+      "count": 2,
+      "occurrences": [
+       {
+        "record": 1,
+        "transform_line": 2,
+        "physical_line_start": 2,
+        "physical_line_end": 3,
+        "fields": {
+         "style_id": "S1",
+         "color": "Red\nDark",
+         "position": "1",
+         "url": "https://example.com/img/m.jpg"
+        }
+       },
+       {
+        "record": 3,
+        "transform_line": 4,
+        "physical_line_start": 5,
+        "physical_line_end": 5,
+        "fields": {
+         "style_id": "S1",
+         "color": "Blue",
+         "position": "3",
+         "url": "https://example.com/img/m.jpg"
+        }
+       }
+      ]
+     }
+    ],
+    "cross_style_reuse": [],
+    "skipped_blank": []
+   }
+  },
+  "whitespace_url": {
+   "exit": 1,
+   "expected_exit": 1,
+   "pass": true,
+   "output": {
+    "records": 2,
+    "errors": [],
+    "duplicate_groups": [
+     {
+      "style_id": "S1",
+      "url": "https://example.com/img/w.jpg",
+      "count": 2,
+      "occurrences": [
+       {
+        "record": 1,
+        "transform_line": 2,
+        "physical_line_start": 2,
+        "physical_line_end": 2,
+        "fields": {
+         "style_id": "S1",
+         "color": "Red",
+         "position": "1",
+         "url": "https://example.com/img/w.jpg"
+        }
+       },
+       {
+        "record": 2,
+        "transform_line": 3,
+        "physical_line_start": 3,
+        "physical_line_end": 3,
+        "fields": {
+         "style_id": "S1",
+         "color": "Red",
+         "position": "2",
+         "url": "  https://example.com/img/w.jpg  "
+        }
+       }
+      ]
+     }
+    ],
+    "cross_style_reuse": [],
+    "skipped_blank": []
+   }
+  },
+  "missing_column": {
+   "exit": 2,
+   "expected_exit": 2,
+   "pass": true,
+   "output": {
+    "records": 0,
+    "errors": [
+     "missing columns ['url']; header is ['style_id', 'color', 'position', 'image']"
+    ],
+    "duplicate_groups": [],
+    "cross_style_reuse": [],
+    "skipped_blank": []
+   }
+  },
+  "malformed_quote": {
+   "exit": 2,
+   "expected_exit": 2,
+   "pass": true,
+   "output": {
+    "records": 0,
+    "errors": [
+     "malformed CSV after physical line 1 (record 1): unexpected end of data"
+    ],
+    "duplicate_groups": [],
+    "cross_style_reuse": [],
+    "skipped_blank": []
+   }
+  },
+  "field_count": {
+   "exit": 2,
+   "expected_exit": 2,
+   "pass": true,
+   "output": {
+    "records": 1,
+    "errors": [
+     "record 1 (physical lines 2-2): 5 fields, header has 4"
+    ],
+    "duplicate_groups": [],
+    "cross_style_reuse": [],
+    "skipped_blank": []
+   }
+  },
+  "bom_crlf": {
+   "exit": 1,
+   "expected_exit": 1,
+   "pass": true,
+   "output": {
+    "records": 2,
+    "errors": [],
+    "duplicate_groups": [
+     {
+      "style_id": "S1",
+      "url": "https://example.com/img/b.jpg",
+      "count": 2,
+      "occurrences": [
+       {
+        "record": 1,
+        "transform_line": 2,
+        "physical_line_start": 2,
+        "physical_line_end": 2,
+        "fields": {
+         "style_id": "S1",
+         "color": "Red",
+         "position": "1",
+         "url": "https://example.com/img/b.jpg"
+        }
+       },
+       {
+        "record": 2,
+        "transform_line": 3,
+        "physical_line_start": 3,
+        "physical_line_end": 3,
+        "fields": {
+         "style_id": "S1",
+         "color": "Red",
+         "position": "1",
+         "url": "https://example.com/img/b.jpg"
+        }
+       }
+      ]
+     }
+    ],
+    "cross_style_reuse": [],
+    "skipped_blank": []
+   }
+  }
+ },
+ "transform_crosscheck": {
+  "exit": 2,
+  "errors": [
+   "style SYN-A: same image URL used twice"
+  ],
+  "pass": true,
+  "note": "transform.py names the style only; helper adds records 1 and 9 (transform_line 2 and 10)"
+ },
+ "passed": 12,
+ "total": 12,
+ "all_pass": true
+}
