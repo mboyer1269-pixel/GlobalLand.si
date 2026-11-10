@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "--- 40810605 photography/Fiji-Photography-Local-Support 25.0 50.0 USD 6 ['Photography', 'Project Management', 'Customer Service', 'Inspections', 'Data Collection', 'Event Photography']\nFiji Photography and Local Support\nProfessional Headline Experienced Fijian Freelancer | Photography, Local Services & Travel-Ready Professional Alternative Reliable and Experienced Freelancer Offering Photography, Local Jobs and Travel Support Profile Summary I am an experienced and dependable professional based in Fiji with a stron\n--- 40810612 revit/Inventor-Skid-Modeling 15.0 25.0 USD 55 ['3D Rendering', 'Mechanical Engineering', 'Electrical Engineering', '3D Modelling', 'Engineering Drawing', 'Autodesk Inventor', 'Visualization', 'Revit']\nInventor RO Skid Modeling\nI need a skilled Inventor user to finish a plumbing-piping-electrical Reverse Osmosis skid assembly so that I can present it to my client in a clear, photo-realistic way. I already have partial Inventor, Revit and 3D Plant files for reference; your job is to turn these into a single, fully detailed \n--- 40810585 desktop-application/Desktop-Program-Development-Help 250.0 750.0 USD 100 ['C Programming', 'Java', 'Python', 'C# Programming', 'C++ Programming', 'Software Development', 'Software Engineering', 'Desktop Application']\nDesktop Program Development Help\nI’m looking for hands-on technical support to build or modify a desktop-level business application. If you’re comfortable architecting or refining standalone software—handling everything from interface logic to data management—let’s talk.  Key objectives • Analyse my current requirements and propose\n--- 40810567 social-media-management/Social-Media-Scheduling-Specialist 8.0 15.0 USD 54 ['Project Management', 'Data Entry', 'Twitter', 'Facebook Marketing', 'Social Media Marketing', 'Time Management', 'Digital Marketing', 'Social Media Management']\nSocial Media Scheduling Specialist Needed\nWe’re looking for a reliable, detail-oriented freelancer to schedule social media posts for multiple Jupiter House client accounts through Later.com.  **What you’ll do**  - Follow our task list and schedule approximately 100-150 posts per month across at least five client accounts. - Schedule each p\n--- 40810566 heating-systems/Low-Mass-Gas-Boiler-Design 250.0 750.0 USD 40 ['Electronics', 'PLC & SCADA', 'Electrical Engineering', 'PCB Layout', 'Heating Systems', 'Mechanical Design', 'HVAC']\nLow-Mass Gas Boiler Design Needed\nMy existing hydronic system needs a fresh, low-mass boiler layout that runs on natural gas and feeds my baseboard radiators for space-heating only—no domestic hot-water integration this time. I’ll provide the current boiler specs, piping photos, and room-by-room heat-loss data as soon as we start.  \n--- 40810557 content-writing/Classified-Ads-Lead-Generation 30.0 250.0 USD 18 ['Internet Marketing', 'Marketing', 'Advertising', 'Market Research', 'Classifieds Posting', 'Creative Writing', 'Content Writing', 'Social Media Marketing', 'Digital Marketing', 'Lead Generation']\nClassified Ads & Lead Generation Specialist – Pakistan -- 2\nFAHAD Tutors Academy is a tutoring services company providing home and online tutoring across Pakistan and internationally.  We are looking for an experienced freelance specialist to build and manage a consistent, low-cost lead generation system through classified advertising platforms and relevant \n--- 40810491 lead-generation/Classified-Ads-Lead-Generation 250.0 750.0 USD 10 ['Internet Marketing', 'Facebook Marketing', 'Marketing', 'Advertising', 'Market Research', 'Google Sheets', 'Lead Generation', 'Canva']\nClassified Ads & Lead Generation Specialist – Pakistan\nAbout Us  FAHAD Tutors Academy is a tutoring services company providing home and online tutoring across Pakistan and internationally.  We are looking for an experienced freelance specialist to build and manage a consistent, low-cost lead generation system through classified advertising platforms and\n--- 40810551 ai-app-development/Build-Accounting-SaaS-Platform 10.0 15.0 EUR 215 ['PHP', 'Website Design', 'Graphic Design', 'Software Architecture', 'Node.js', 'Full Stack Development', 'AI Integration', 'AI App Development']\nBuild AI Accounting SaaS Platform\nProject Title: Full-Stack Developer Needed for AI-Powered Accounting Web Application ​Project Overview We are looking for an experienced full-stack developer or team to build a web application with integrated AI capabilities. The application should be inspired by the core logic, speed, and minimalis\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179427996113.json"
+  ],
+  "request": {
+    "id": "TASK-179427996113",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T03:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nd=json.load(open('products/services/paid-data-request/raw/freelancer-active-csv-cleaning.json'))\nfor p in d['result']['projects'][12:]:\n  b=p.get('budget',{})\n  print('---',p['id'],p.get('seo_url'),b.get('minimum'),b.get('maximum'),p['currency']['code'],(p.get('bid_stats') or {}).get('bid_count'),[j.get('name') for j in (p.get('jobs') or [])])\n  print(p.get('title'));print((p.get('description') or '')[:300].replace('\\n',' '))\n"
+      ],
+      "inputs": [
+        "products/services/paid-data-request/raw/freelancer-active-csv-cleaning.json"
+      ],
+      "outputs": [],
+      "mission_id": "PAID-DATA-CLEANING-REQUEST-TEST"
+    },
+    "description": "Broker action during THINK-1794279961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427996113",
+  "input_sha256": "26ad6bc37f2eb39ac03ed2c907c8a027908b3f841947dad6053a549f956e5b0e"
+}
