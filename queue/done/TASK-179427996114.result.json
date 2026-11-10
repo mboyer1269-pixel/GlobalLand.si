@@ -1,0 +1,21 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://www.freelancer.com/api/projects/0.1/projects/active/?query=csv&project_types%5B%5D=fixed&limit=50&full_description=true&job_details=true\", \"http_status\": 200, \"sha256\": \"2bed5a7eb0ce78bb095293f1e1ea16d5b287ed4c09ba9229521cabd0f4a877ed\", \"artifact\": \"products/services/paid-data-request/raw/freelancer-active-csv-fixed.json\"}",
+  "request": {
+    "id": "TASK-179427996114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T03:06:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=csv&project_types%5B%5D=fixed&limit=50&full_description=true&job_details=true",
+      "output": "products/services/paid-data-request/raw/freelancer-active-csv-fixed.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794279961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427996114",
+  "input_sha256": "847421f48aef4970bcb0ee79e8fb22e016722e852b61b11541a402005df20da3"
+}
