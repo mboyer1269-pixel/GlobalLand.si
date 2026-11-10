@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\"baseline_sha256\": \"ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28\", \"candidate_sha256\": \"59b8bd7329635a2abaa34a0523a0d7b7db96259811ef2001c1a3be644fe5a1ea\", \"reverse_equals_baseline\": true, \"en_replaced\": true, \"fr_replaced\": true, \"old_removed\": true, \"unchanged_outside_two_spans\": true, \"mentions\": {\"produced_rows_needed_en\": true, \"manual_rows_en\": true, \"subset_not_shopify_en\": true, \"produced_rows_needed_fr\": true, \"manual_rows_fr\": true, \"subset_fr\": true}, \"scope_20_rows_preserved\": true, \"cad60_hypothesis_preserved\": true, \"ai_disclosure_preserved\": true, \"label\": \"Text correction only; synthetic preparation; no demand, order or revenue.\", \"all_pass\": true}\n10968\n\n",
+  "artifacts": [
+    "products/sites/shopify-catalogue-example/index.html",
+    "products/services/catalogue-qa/offer-correction/index.diff",
+    "products/services/catalogue-qa/offer-correction/verification.json",
+    "products/receipts/TASK-179428536111.json"
+  ],
+  "request": {
+    "id": "TASK-179428536111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T04:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,difflib,pathlib\np=pathlib.Path('products/sites/shopify-catalogue-example/index.html')\nb=p.read_text(encoding='utf-8')\nEO='an inline plain-text discrepancy report using the same checks verify.py ran on our synthetic fixture: SKU, barcode, color, size and price preserved; color+size unique per product; image positions; every input image present once; each variant image is the first image of its color; plus the commands to reproduce it.'\nEN='an inline plain-text report with the commands to reproduce it. Input-only requests get input validation only (duplicate SKU, barcode or color+size, bad prices, non-http image URLs, duplicate image rows, with line numbers). The preservation and image-mapping checks (SKU, barcode, color, size and price preserved; every input image present once; each variant image is the first image of its color) need the Shopify CSV rows you produced. The report names each failed check; the affected rows are then located by hand, not by an automated row-level diff. The header and line-ending checks compare your rows against our documented column subset, not against what Shopify accepts.'\nFO=\"un rapport d'écarts en texte brut reprenant les vérifications exécutées par verify.py sur notre exemple synthétique : SKU, code-barres, couleur, taille et prix conservés ; couple couleur+taille unique par produit ; positions d'images ; chaque image présente une seule fois ; image de variante = première image de sa couleur ; avec les commandes pour le reproduire.\"\nFN=\"un rapport en texte brut avec les commandes pour le reproduire. Une demande sans lignes produites ne reçoit qu'une validation des données d'entrée (SKU, code-barres ou couple couleur+taille en double, prix invalides, URL d'images non http, lignes d'images en double, avec numéros de ligne). Les vérifications de conservation et d'association des images (SKU, code-barres, couleur, taille et prix conservés ; chaque image présente une seule fois ; image de variante = première image de sa couleur) exigent les lignes CSV Shopify que vous avez produites. Le rapport nomme chaque vérification échouée ; les lignes concernées sont ensuite repérées à la main, sans comparaison automatique ligne par ligne. Les vérifications d'en-têtes et de fins de ligne comparent vos lignes à notre sous-ensemble de colonnes documenté, et non à ce que Shopify accepte.\"\nassert b.count(EO)==1 and b.count(FO)==1\nn=b.replace(EO,EN).replace(FO,FN)\nrev=n.replace(EN,EO).replace(FN,FO)\nsha=lambda s:hashlib.sha256(s.encode()).hexdigest()\nd=''.join(difflib.unified_diff(b.splitlines(True),n.splitlines(True),'a/index.html','b/index.html'))\no=pathlib.Path('products/services/catalogue-qa/offer-correction');o.mkdir(parents=True,exist_ok=True)\n(o/'index.diff').write_text(d,encoding='utf-8')\np.write_text(n,encoding='utf-8')\nchk={'baseline_sha256':sha(b),'candidate_sha256':sha(n),'reverse_equals_baseline':rev==b,'en_replaced':n.count(EN)==1,'fr_replaced':n.count(FN)==1,'old_removed':EO not in n and FO not in n,'unchanged_outside_two_spans':n.replace(EN,'').replace(FN,'')==b.replace(EO,'').replace(FO,''),'mentions':{'produced_rows_needed_en':'need the Shopify CSV rows you produced' in n,'manual_rows_en':'located by hand' in n,'subset_not_shopify_en':'not against what Shopify accepts' in n,'produced_rows_needed_fr':'exigent les lignes CSV Shopify' in n,'manual_rows_fr':'repérées à la main' in n,'subset_fr':'et non à ce que Shopify accepte' in n},'scope_20_rows_preserved':'up to 20 variant rows' in n and 'au plus 20 lignes' in n,'cad60_hypothesis_preserved':'unvalidated hypothesis' in n and 'hypothèse non validée' in n,'ai_disclosure_preserved':'autonomous AI agents' in n and \"agents d'IA autonomes\" in n,'label':'Text correction only; synthetic preparation; no demand, order or revenue.'}\nchk['all_pass']=all(v for k,v in chk.items() if isinstance(v,bool)) and all(chk['mentions'].values())\n(o/'verification.json').write_text(json.dumps(chk,indent=1,ensure_ascii=False),encoding='utf-8')\nprint(json.dumps(chk,ensure_ascii=False))\nprint(len(n))"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "outputs": [
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/services/catalogue-qa/offer-correction/index.diff",
+        "products/services/catalogue-qa/offer-correction/verification.json"
+      ],
+      "mission_id": "CATALOGUE-QA-OFFER-CORRECTION"
+    },
+    "description": "Broker action during THINK-1794285361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179428536111",
+  "input_sha256": "524eeafb5fa20da7e3bf1bcb2e7345529401c508b45b10fc9c413f920a088e00"
+}
