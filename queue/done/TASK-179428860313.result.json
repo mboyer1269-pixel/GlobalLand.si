@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"reviewer\": \"AUDITOR\", \"subject\": \"site:shopify-catalogue-example\", \"digest\": \"f65818d438f85f07ed0f7eab27843cf77f35a895b37ba9d9411b13ffe9aeb7d4\", \"verdict\": \"NEEDS_WORK\", \"notes\": \"Major: EN/FR input-only paragraph promises line numbers for duplicate image rows; independent execution emits only 'style SH-100: same image URL used twice'. Narrow that promise and disclose manual location for this case; no tool feature is needed. Checked actual transform.py, verify.py, verify_example.py, full homepage, diff, findings and procedure. Executed 12/12 fixture checks and reverse-to-approved-baseline equality ee795078...; reproduced exact digest TASK-179428860312. Evidence saved/read products/reviews/catalogue-qa-correction/evidence.json. Requested produced-row dependency, manual preservation-row location and documented-subset distinctions otherwise supported. AI disclosure, CAD60 hypothesis, nonbinding scope preserved. No edits/deployment; approval withheld. No demand or revenue established; preserve all deadlines.\", \"host_turn\": \"THINK-1794288603\", \"host_provider\": \"codex\", \"at\": 1794288660.7167795, \"seq\": 36}",
+  "request": {
+    "id": "TASK-179428860313",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-10T05:30:03Z",
+    "action": "WORLD",
+    "args": {
+      "op": "review",
+      "reviewer": "AUDITOR",
+      "subject": "site:shopify-catalogue-example",
+      "digest": "f65818d438f85f07ed0f7eab27843cf77f35a895b37ba9d9411b13ffe9aeb7d4",
+      "verdict": "NEEDS_WORK",
+      "notes": "Major: EN/FR input-only paragraph promises line numbers for duplicate image rows; independent execution emits only 'style SH-100: same image URL used twice'. Narrow that promise and disclose manual location for this case; no tool feature is needed. Checked actual transform.py, verify.py, verify_example.py, full homepage, diff, findings and procedure. Executed 12/12 fixture checks and reverse-to-approved-baseline equality ee795078...; reproduced exact digest TASK-179428860312. Evidence saved/read products/reviews/catalogue-qa-correction/evidence.json. Requested produced-row dependency, manual preservation-row location and documented-subset distinctions otherwise supported. AI disclosure, CAD60 hypothesis, nonbinding scope preserved. No edits/deployment; approval withheld. No demand or revenue established; preserve all deadlines."
+    },
+    "description": "Broker action during THINK-1794288603",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179428860313",
+  "input_sha256": "4fd82988f9366d3f2ffe4cdcdeec94434b0c7e9f779ca15fa94eeaca6088b921"
+}
