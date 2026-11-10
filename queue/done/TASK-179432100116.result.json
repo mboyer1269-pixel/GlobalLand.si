@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\"metrics\": {\"returned\": 50, \"fresh_lt6h_lt15bids\": 2, \"qualifying_strong_fit\": 0, \"marginal_fit\": 0, \"median_bids_all\": 29, \"inr_budget_share\": 0.58, \"marginal_fit_outside_freshness_window\": {\"id\": 40811231, \"note\": \"business supplier research, INR 600-1500, about 6.2h old, 12 bids; contact-list risk\"}}, \"verdict\": \"DO_NOT_DESIGNATE_NOW\", \"reasoning\": \"In this sample 0 of 50 projects were a strong non-personal file-in/file-out fit. At computation time only 2 were fresh (<6h) with <15 bids, and both were excluded (customer personal data; private human-subject study data needing SPSS). One marginal business-research task just outside the window pays INR 600-1500 (unconverted; roughly USD 7-18). Median bid count is 29 and 58% of budgets are INR. Fees and AI policy are unread (host filter). Expected value does not justify a founder identity commitment on current evidence.\", \"unknowns\": [\"Freelancer fee schedule not read (fetch rejected by host filter)\", \"Freelancer AI-assistance policy not read\", \"Payout route compatibility with founder identity/CAD unverified\", \"Single sample at one time; fit rate may vary by hour and query\", \"Win rate for an AI-disclosed new account with no reviews unknown\"], \"reconsider_when\": \"Fee schedule and AI policy become readable from an accessible source, or repeated samples show >=3 strong fits per day at >=USD 30, or a classified inbound request arrives.\"}\n\n",
+  "artifacts": [
+    "products/services/freelancer-decision/evidence.json",
+    "products/receipts/TASK-179432100116.json"
+  ],
+  "request": {
+    "id": "TASK-179432100116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T14:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/freelancer-decision/evidence.json');o=json.loads(p.read_text())\no['metrics']['marginal_fit']=0\no['metrics']['marginal_fit_outside_freshness_window']={'id':40811231,'note':'business supplier research, INR 600-1500, about 6.2h old, 12 bids; contact-list risk'}\no['reasoning']='In this sample 0 of 50 projects were a strong non-personal file-in/file-out fit. At computation time only 2 were fresh (<6h) with <15 bids, and both were excluded (customer personal data; private human-subject study data needing SPSS). One marginal business-research task just outside the window pays INR 600-1500 (unconverted; roughly USD 7-18). Median bid count is 29 and 58% of budgets are INR. Fees and AI policy are unread (host filter). Expected value does not justify a founder identity commitment on current evidence.'\np.write_text(json.dumps(o,indent=1,ensure_ascii=False))\nprint(json.dumps({k:o[k] for k in ['metrics','verdict','reasoning','unknowns','reconsider_when']},ensure_ascii=False))\n"
+      ],
+      "inputs": [
+        "products/services/freelancer-decision/evidence.json"
+      ],
+      "outputs": [
+        "products/services/freelancer-decision/evidence.json"
+      ],
+      "mission_id": "FREELANCER-DECISION-EVIDENCE"
+    },
+    "description": "Broker action during THINK-1794321001",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179432100116",
+  "input_sha256": "08f0fb328c710d417eeb06f63d02df2a01c51d929c150025d26b1b354f185f2a"
+}

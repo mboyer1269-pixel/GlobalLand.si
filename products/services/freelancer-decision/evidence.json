@@ -20,9 +20,13 @@
   "returned": 50,
   "fresh_lt6h_lt15bids": 2,
   "qualifying_strong_fit": 0,
-  "marginal_fit": 1,
+  "marginal_fit": 0,
   "median_bids_all": 29,
-  "inr_budget_share": 0.58
+  "inr_budget_share": 0.58,
+  "marginal_fit_outside_freshness_window": {
+   "id": 40811231,
+   "note": "business supplier research, INR 600-1500, about 6.2h old, 12 bids; contact-list risk"
+  }
  },
  "fresh_low_bid_candidates": [
   {
@@ -508,6 +512,6 @@
   "Win rate for an AI-disclosed new account with no reviews unknown"
  ],
  "verdict": "DO_NOT_DESIGNATE_NOW",
- "reasoning": "In this sample 0 of 50 projects were a strong non-personal file-in/file-out fit; only 4 were fresh with <15 bids and 3 of those were excluded (personal data, private study data, employment role). The one marginal fit pays INR 600-1500 (about USD 7-18, unconverted estimate). A new account would face incumbent bidders and unverified fees/AI policy. Expected value does not justify a founder identity commitment on current evidence.",
+ "reasoning": "In this sample 0 of 50 projects were a strong non-personal file-in/file-out fit. At computation time only 2 were fresh (<6h) with <15 bids, and both were excluded (customer personal data; private human-subject study data needing SPSS). One marginal business-research task just outside the window pays INR 600-1500 (unconverted; roughly USD 7-18). Median bid count is 29 and 58% of budgets are INR. Fees and AI policy are unread (host filter). Expected value does not justify a founder identity commitment on current evidence.",
  "reconsider_when": "Fee schedule and AI policy become readable from an accessible source, or repeated samples show >=3 strong fits per day at >=USD 30, or a classified inbound request arrives."
 }
