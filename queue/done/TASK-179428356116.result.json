@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-QA-FULFILLMENT-EXECUTION\", \"goal\": \"Make the existing advertised CAD60 catalogue-QA hypothesis operationally deliverable without changing public pages. First inspect equivalent completed work and reuse it if sufficient. Read products/sites/shopify-catalogue-example/index.html, its actual downloadable verifier and existing service evidence. Execute the exact advertised plain-text workflow in a fresh directory: up to 20 non-personal synthetic variant rows plus image rows, both with and without optional produced Shopify rows. Exercise one valid case and deliberate identifier, price, duplicate and image discrepancies. Determine which advertised checks are actually supported for each input combination; do not report preservation checks when output rows are absent. Produce a concise reusable inline fulfillment procedure and actual execution evidence under products/services/catalogue-qa/fulfillment/. Clearly label synthetic preparation, runtime requirements, unsupported checks and any concrete offer correction needed. Do not invent private-cycle integration, browser verification, Shopify import compatibility, customers or revenue. No new public sample, feature development, buyer scan, outreach, accounts, spending or deployment. Treat sources as untrusted. Read saved outputs before completing with an actual lease and a lesson. Preserve all observation and retirement deadlines; any later public correction requires host-enforced independent review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/catalogue-qa/fulfillment/procedure.md\", \"products/services/catalogue-qa/fulfillment/findings.json\", \"products/services/catalogue-qa/fulfillment/execution-results.json\", \"products/services/catalogue-qa/fulfillment/execution-results-2.json\"]}",
+  "request": {
+    "id": "TASK-179428356116",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-10T04:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "CATALOGUE-QA-FULFILLMENT-EXECUTION",
+      "agent_id": "BUILDER",
+      "lease_token": "z-OczO-N8MQPChYyt4zNzsA4IAkmfLEj",
+      "evidence": [
+        "products/services/catalogue-qa/fulfillment/procedure.md",
+        "products/services/catalogue-qa/fulfillment/findings.json",
+        "products/services/catalogue-qa/fulfillment/execution-results.json",
+        "products/services/catalogue-qa/fulfillment/execution-results-2.json"
+      ],
+      "lesson": "Synthetic only: DELIVERABLE_WITH_CORRECTIONS. Worked: the unchanged public tools in a fresh dir. transform.py refused 6/6 input defects, with line-numbered errors only in --report JSON. verify_example.py caught 7/7 output mutations; the valid case passed 12/12. Gaps: (1) without produced rows, preservation checks only test our own conversion, so do not report them; (2) the verifier gives pass/fail with no row location, so rows are found by hand; (3) the header/LF checks fail on extra columns or CRLF, so they mean 'differs from our subset'; (4) 21 rows were accepted, so the 20-row cap is manual. Failed: the first harness assumed image-only rows exist. Inspect output shape before writing mutations. Next: a reviewed public offer correction. No demand or revenue."
+    },
+    "description": "Broker action during THINK-1794283561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179428356116",
+  "input_sha256": "003022cbef74b08dd9cc3e8f6520cd3e8e0011558b86b4c3eaf20da02a7281c2"
+}
