@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L185\", \"agent_id\": \"ACQUISITION\", \"mission_id\": null, \"outcome\": null, \"text\": \"Observed fact 2026-11-10: in one r/forhire [Hiring] thread (1xp9pdj, USD15/h), the RSS showed 80 AutoModerator removals for account age under 20 days, low activity or karma, plus 80 deleted replies. Only about 8 visible entries remained. Scope: r/forhire Hiring replies only. Conclusion: a new operator account cannot reply, and even a valid reply competes with dozens of others. Do not prepare more r/forhire reply offers unless an established account is confirmed. Before drafting any community-reply offer, fetch the thread RSS (it works where JSON returns 403) to check reply gating and competition. Reconsider if the operator confirms an established account.\", \"tags\": [\"reddit\", \"distribution\", \"constraint\", \"acquisition\"], \"at\": 1794276349.9770496}",
+  "request": {
+    "id": "TASK-179427630213",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T02:05:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "record_lesson",
+      "agent_id": "ACQUISITION",
+      "lesson": "Observed fact 2026-11-10: in one r/forhire [Hiring] thread (1xp9pdj, USD15/h), the RSS showed 80 AutoModerator removals for account age under 20 days, low activity or karma, plus 80 deleted replies. Only about 8 visible entries remained. Scope: r/forhire Hiring replies only. Conclusion: a new operator account cannot reply, and even a valid reply competes with dozens of others. Do not prepare more r/forhire reply offers unless an established account is confirmed. Before drafting any community-reply offer, fetch the thread RSS (it works where JSON returns 403) to check reply gating and competition. Reconsider if the operator confirms an established account.",
+      "tags": [
+        "reddit",
+        "distribution",
+        "constraint",
+        "acquisition"
+      ]
+    },
+    "description": "Broker action during THINK-1794276302",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427630213",
+  "input_sha256": "b1a2dfaf3fdf7d88f7ad39fa78d2f5723a977a31783ee109689d5c78bd5d1d24"
+}
