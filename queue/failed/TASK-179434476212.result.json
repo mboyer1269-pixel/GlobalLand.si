@@ -1,0 +1,32 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 16, in <module>\nStopIteration\n\nstdout:\nexisting evidence []\n",
+  "request": {
+    "id": "TASK-179434476212",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-10T21:06:02Z",
+    "action": "EXEC",
+    "args": {
+      "inputs": [
+        "products/services/catalogue-qa/",
+        "products/sites/shopify-catalogue-example/"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/measured-delivery/results.json",
+        "products/services/catalogue-qa/measured-delivery/delivery-report.md"
+      ],
+      "mission_id": "CATALOGUE-QA-MEASURED-DELIVERY",
+      "argv": [
+        "python3",
+        "-c",
+        "import csv,io,json,subprocess,sys,time,tempfile,hashlib\nfrom pathlib import Path\nroot=Path('products/services/catalogue-qa'); out=root/'measured-delivery'; out.mkdir(parents=True,exist_ok=True)\nsite=Path('products/sites/shopify-catalogue-example').resolve(); ful=(root/'fulfillment').resolve()\nprior=list(out.glob('*')); print('existing evidence', [str(p) for p in prior])\nassert not prior, 'Read existing evidence instead of duplicating'\ntmp=Path(tempfile.mkdtemp()); runs={}\ndef run(name,args):\n t=time.monotonic_ns(); p=subprocess.run([sys.executable,*map(str,args)],capture_output=True,text=True); dt=(time.monotonic_ns()-t)/1e9\n runs[name]={'argv':list(map(str,args)),'elapsed_seconds':dt,'exit':p.returncode,'stdout':p.stdout,'stderr':p.stderr}; return p\nv=ful/'synthetic-v.csv'; i=ful/'synthetic-i.csv'; produced=ful/'synthetic-ours.csv'\ncount=len(list(csv.DictReader(io.StringIO(v.read_text()))))\np=run('input_validation',[site/'transform.py','--variants',v,'--images',i,'--out',tmp/'ours.csv','--report',tmp/'rep.json'])\nassert p.returncode==0\np=run('paired_valid',[site/'verify_example.py',v,i,produced]); valid=json.loads(p.stdout); assert p.returncode==0 and not valid['failed']\nrows=list(csv.DictReader(io.StringIO(produced.read_text()))); fields=list(rows[0]); target=next(r for r in rows if r.get('Variant SKU'))\noriginal=target['Variant Barcode']; target['Variant Barcode']='CORRUPTED-SYNTHETIC'\nwith (tmp/'defect.csv').open('w',newline='') as f:\n w=csv.DictWriter(f,fieldnames=fields,lineterminator='\\n'); w.writeheader(); w.writerows(rows)\np=run('paired_known_defect',[site/'verify_example.py',v,i,tmp/'defect.csv']); defect=json.loads(p.stdout); assert p.returncode==1 and 'identifiers_preserved' in defect['failed']\nsource=next(r for r in csv.DictReader(io.StringIO(v.read_text())) if r['sku']==target['Variant SKU'])\nlocation={'sku':target['Variant SKU'],'produced_csv_record':rows.index(target)+1,'field':'Variant Barcode','source_value':source['barcode'],'observed_value':target['Variant Barcode'],'baseline_produced_value':original}\np=run('existing_row_location_suite',[root/'row-location/run_checks.py']); assert p.returncode==0\nsuite=json.loads((root/'row-location/check-results.json').read_text()); assert suite['all_pass']\nres={'label':'SYNTHETIC ONLY; no buyer or customer delivery','variant_rows':count,'within_advertised_scope':count<=20,'runs':runs,'valid_checks':valid,'defect_checks':defect,'located_defect':location,'row_location_suite_passed':suite['passed'],'row_location_suite_total':suite['total'],'timing_scope':'Monotonic subprocess wall duration, including startup; one execution, not total labor. Suite includes multiple synthetic cases.','unknown_effort':['acquisition','interpretation','manual review','revision','order administration'],'scope_rule':'Retain maximum 20 variant rows. This execution does not support 100 rows. Count intake manually.','assumed_remaining_effort':'Prior 2–5.25 total-hour scenarios remain assumptions; runtime does not validate them.','quote_rule':'CAD60 hypothesis only for non-personal pasted text, <=20 variants, source and produced rows for preservation checks, one bounded revision; confirm fit before operator creates and accepts order. Input-only gets validation only. Refuse access/import guarantees or larger scope.','not_established':['demand','orders','profit','revenue']}\n(out/'results.json').write_text(json.dumps(res,indent=2))\nreport=f\"\"\"Catalogue QA delivery rehearsal — SYNTHETIC ONLY\nProduced by autonomous AI agents / Produit par des agents d'IA autonomes.\n\nExisting source: {count} variant rows. Valid produced file: {len(valid['checks'])}/{len(valid['checks'])} checks passed.\nKnown defect: {location['sku']}, produced data record {location['produced_csv_record']}, Variant Barcode: {location['observed_value']}; source value {location['source_value']}. Failed checks: {', '.join(defect['failed'])}.\nExisting duplicate-image locator suite: {suite['passed']}/{suite['total']}. It identifies source image records; it is not an automated output diff.\nReproduction commands, actual stdout, exit codes and monotonic subprocess durations are in results.json.\nNamed checks were followed by a SKU comparison for this single known barcode defect. This does not measure human row-location time or cover arbitrary buyer files.\nHeader and LF checks concern our documented subset, not Shopify acceptance. No Shopify import, image retrieval or store access tested.\n\nInternal acceptance: CAD60 is an unvalidated hypothesis, maximum 20 variant rows, pasted non-personal source and image data. Preservation requires client-produced rows. Count rows at intake; tools do not enforce the cap. One bounded revision. No 100-row expansion. Operator must create/accept any paid order before work is committed.\nAcquisition, interpretation, revision and administration remain unmeasured; prior effort ranges are assumptions. Tool duration is not labor, margin or profit.\nFR : Répétition synthétique seulement. Une erreur de code-barres a été repérée par SKU. Les vérifications de conservation exigent les lignes produites; sans elles, validation des entrées seulement. Maximum 20 lignes de variantes, CAD60 hypothétique, acceptation administrative préalable. Aucun client, paiement ou revenu vérifié.\n\"\"\"\n(out/'delivery-report.md').write_text(report)\nprint(json.dumps(res))\n"
+      ]
+    },
+    "description": "Broker action during THINK-1794344762",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179434476212",
+  "input_sha256": "71e0139113bb0651c2676af6eacb4e54fbc634eb7f8bfb2a8ac9d7562c89017c"
+}
