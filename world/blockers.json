@@ -48,14 +48,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "ACCOUNT",
-      "title": "Operator batch: 3 valid AI-disclosed messages await per-item approval (trivia item 1 WITHDRAWN per L146)",
-      "detail": "Updated 2026-11-10 (OPERATOR-BATCH-WITHDRAWAL-RECONCILIATION). Item 1 (r/forhire trivia) is WITHDRAWN: L146/operator correction forbids contacting that requester by any route; later sample fixes do not restore permission. Do not send it. Currently valid items, each needing separate operator approval of exact text, recipient and identity: item 2 website cleanup (products/services/diversified-offers/operator-batch.md section 2; Reddit reply, needs an approved AI-disclosed Reddit account; operator should first confirm L146 does not cover Reddit replies generally, since agents cannot read its full text); item 3 DigitalPress documentation QA (same file section 3; email, recipient not resolved, general support route, not a supplier invitation); item 4 Maze Studio catalogue-QA email to the published general contact (products/services/catalogue-agency-prospects/distribution-handoff/proposed-message.md, sha256 dca202ac...; cold service fit, no observed buying request). Evidence: products/services/diversified-offers/reconciliation/consistency-result.json (10/10) and operator-batch.diff. Payment is separate: a USD route for non-Canadian buyers; CAD Interac order creation/acceptance under SERVICE-PAYMENT-COLLECTION. Agents will not post, DM or email. Reconsider when a buyer replies, a post closes, or the operator declines or explicitly reverses L146.",
-      "mission_id": "OPERATOR-BATCH-WITHDRAWAL-RECONCILIATION",
-      "expected_gain": "One explicit paid request (~USD30) plus two cold CAD pilots (CAD40, CAD60). Reply, acceptance, order and receipt are all unobserved.",
+      "title": "Operator batch: 3 valid AI-disclosed messages await per-item approval (trivia item 1 WITHDRAWN; item 2 corrected)",
+      "detail": "Updated 2026-11-10 (WEBSITE-OFFER-HANDOFF-SYNC). Item 1 (r/forhire trivia) is WITHDRAWN under L146: do not contact that requester by any route. Valid items, each needing separate operator approval of the exact text, recipient and identity: item 2 website cleanup. Use ONLY the corrected message in products/services/diversified-offers/operator-batch.md section 2 (sha256 8e1f1409...), which is identical to website-verification/proposal-corrected.md (message sha256 5fef54f3...). The earlier GPU, HTML/CSS-validity and preselected-repair text is superseded and must not be sent. Item 2 is a Reddit reply by r/forhire convention; the post names no explicit route. It needs an approved AI-disclosed Reddit account. The operator should confirm L146 does not cover Reddit replies generally. The buyer's availability and the USD currency are unconfirmed. Item 3: DigitalPress documentation QA (same file, section 3; email, recipient not resolved, general support route). Item 4: Maze Studio catalogue-QA email (products/services/catalogue-agency-prospects/distribution-handoff/proposed-message.md, sha256 dca202ac...). Evidence: handoff-sync/consistency-result.json (16/16) and handoff-sync/operator-batch.diff. Payment and acceptance are separate dependencies: a USD route for non-Canadian buyers, and CAD Interac order creation/acceptance under SERVICE-PAYMENT-COLLECTION. Agents will not post, DM or email. Reconsider when a buyer replies, a post closes, or the operator declines or explicitly reverses L146.",
+      "mission_id": "WEBSITE-OFFER-HANDOFF-SYNC",
+      "expected_gain": "One explicit paid request (~USD30, currency unconfirmed) plus two cold CAD pilots (CAD40, CAD60). Reply, acceptance, order and receipt are all unobserved.",
       "raised_by": "ACQUISITION",
-      "reports": 10,
+      "reports": 11,
       "opened_at": "2026-11-08T10:36:45Z",
-      "last_reported_at": "2026-11-10T01:07:21Z"
+      "last_reported_at": "2026-11-10T01:37:17Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -137,35 +137,27 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-10T01:37:39Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 358,
-    "turns_without_verified_revenue": 358,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 359,
+    "turns_without_verified_revenue": 359,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-10T01:37:39Z",
     "last_outcome_turn": "THINK-1794274204",
     "last_productive_turn": "THINK-1794274204",
-    "last_turn": "THINK-1794274204",
+    "last_turn": "THINK-1794274561",
     "last_change": {
-      "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "OPERATOR-BATCH-WITHDRAWAL-RECONCILIATION"
-      ],
-      "new_products": [
-        "products/services/diversified-offers/reconciliation/consistency-result.json",
-        "products/services/diversified-offers/reconciliation/l146-lookup.txt",
-        "products/services/diversified-offers/reconciliation/operator-batch-before.md",
-        "products/services/diversified-offers/reconciliation/operator-batch.diff",
-        "products/services/diversified-offers/reconciliation/withdrawal-source-search.txt"
-      ],
-      "new_product_count": 5,
+      "productive": false,
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
-      "rewritten_count": 1,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
