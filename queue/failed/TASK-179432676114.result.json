@@ -1,0 +1,32 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nWorkspace reminder: Each EXEC starts in a fresh workspace. Programs create required directories before writing; outputs only declares files to publish. For public EXEC, include prior published files in inputs to reuse them. Private EXEC uses its supplied case files.\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"/usr/lib/python3.11/pathlib.py\", line 1079, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/pathlib.py\", line 1045, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'products/services/catalogue-qa/row-location/procedure.diff'\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179432676114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-10T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,sys\np=pathlib.Path('products/services/catalogue-qa/fulfillment/procedure.md');t=p.read_text(encoding='utf-8')\nanchor='   Exit 2 means report every rep.json errors[] line verbatim (they are line-numbered). Exit 0 means the input passed.\\n'\nassert t.count(anchor)==1\nadd=sys.argv[1]\nt2=t.replace(anchor,anchor+add)\np.write_text(t2,encoding='utf-8')\nimport difflib\nd=''.join(difflib.unified_diff(t.splitlines(True),t2.splitlines(True),'procedure.md.orig','procedure.md'))\nq=pathlib.Path('products/services/catalogue-qa/row-location/procedure.diff');q.write_text(d,encoding='utf-8')\nprint(len(t),len(t2));print(d)",
+        "   1b. Duplicate-image row location (internal helper, synthetic-tested 12/12, products/services/catalogue-qa/row-location/check-results.json): if rep.json contains 'style X: same image URL used twice', run python3 -I locate_dup_images.py i.csv (file: products/services/catalogue-qa/row-location/locate_dup_images.py). Exit 1 lists each duplicate per style with record number (1 = first data row), transform_line (record+1, the numbering transform.py uses), physical file lines and all field values; quote them in the reply. Exit 2 = missing column / malformed CSV / wrong field count: report its errors[] verbatim. cross_style_reuse is information only (transform.py does not reject it). Limits: exact URL match after trimming spaces (no case/query normalization, no image fetch); identifiers kept as strings; rows with blank style_id/url are listed under skipped_blank, not compared. transform.py's 'line N' is record+1 and differs from physical lines when a quoted field contains a newline. Human review time is unmeasured.\n"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/fulfillment/procedure.md",
+        "products/services/catalogue-qa/row-location/procedure.diff"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa/fulfillment/procedure.md"
+      ],
+      "mission_id": "CATALOGUE-QA-ROW-LOCATION"
+    },
+    "description": "Broker action during THINK-1794326761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179432676114",
+  "input_sha256": "2b03d26c2d5f5cbac73fe76037f5e8e3ddac0918b090de501a2117b54b4d4498"
+}
