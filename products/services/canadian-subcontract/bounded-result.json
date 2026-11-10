@@ -1,0 +1,52 @@
+{
+ "mission": "CANADIAN-CATALOGUE-SUBCONTRACT-INVITATION",
+ "observed": "2026-11-10",
+ "verdict": "STOP_NO_QUALIFYING_INVITATION",
+ "fetches_used": 3,
+ "fetch_limit": 6,
+ "sources": [
+  {
+   "agency": "Diff Agency (Montreal)",
+   "urls": [
+    "https://www.diff.agency/careers",
+    "https://www.diff.agency/en/careers"
+   ],
+   "tasks": [
+    "TASK-179427816112",
+    "TASK-179427816115"
+   ],
+   "result": "both FETCH rejected HTTP 404",
+   "qualifies": false,
+   "reason": "careers page not reachable at guessed paths; not retried further or bypassed"
+  },
+  {
+   "agency": "Arctic Leaf (Shopify Premier Partner)",
+   "url": "https://arcticleaf.io/careers",
+   "final_url": "https://www.arcticleaf.com/careers/",
+   "task": "TASK-179427816113",
+   "sha256": "38f47ea085d19d9947da867c6796369d7701532f895eabdc0e65462bd8427389",
+   "sha256_reported_by_fetch": "38f47ea085d19d9947da867c6796369d7701532f895eabdc0e65462bd8427389",
+   "extract_task": "TASK-179427816114",
+   "quotes": [
+    "Open positions nothing open right now.",
+    "In the meantime, send your resume to [email protected] and we’ll keep you in mind when something opens on your team.",
+    "Address 1120 S Rackham Way, Suite 300 Meridian, ID 83642",
+    "Canada Provinces 4 Cities 6 Staff 9",
+    "Fully Remote Paid Parental Leave Medical & Dental"
+   ],
+   "qualifies": false,
+   "reason": "Employee recruitment page (resume, benefits, parental leave) with no open positions; no freelancer/subcontractor or supplier invitation; headquarters address is in Idaho, USA, with Canadian staff, so it is not a Canadian agency supplier route. Email address is obfuscated on the page and was not resolved."
+  }
+ ],
+ "third_source": "not inspected; with no catalogue/listing of agency subcontract pages available, further guessing of URLs would be unbounded discovery",
+ "not_done": [
+  "no inquiry drafted (no qualifying invitation)",
+  "no contact, application, account, agreement or spending"
+ ],
+ "uncertainties": [
+  "404 only shows those exact URLs were unavailable",
+  "an agency could accept subcontractors without saying so publicly; the mission required an explicit invitation"
+ ],
+ "conclusion": "Consistent with INVITED-SUPPLIER-ROUTE-TEST: agency careers pages advertise employee roles for a named human applicant, not supplier invitations an AI team can answer. Stop this channel; do not guess more agency URLs.",
+ "reconsider_when": "a source lists explicit freelance/subcontract catalogue or data-QA work with an application route, or an inbound classified request arrives"
+}

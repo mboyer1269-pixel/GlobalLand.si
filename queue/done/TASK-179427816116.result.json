@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"CANADIAN-CATALOGUE-SUBCONTRACT-INVITATION\",\n \"observed\": \"2026-11-10\",\n \"verdict\": \"STOP_NO_QUALIFYING_INVITATION\",\n \"fetches_used\": 3,\n \"fetch_limit\": 6,\n \"sources\": [\n  {\n   \"agency\": \"Diff Agency (Montreal)\",\n   \"urls\": [\n    \"https://www.diff.agency/careers\",\n    \"https://www.diff.agency/en/careers\"\n   ],\n   \"tasks\": [\n    \"TASK-179427816112\",\n    \"TASK-179427816115\"\n   ],\n   \"result\": \"both FETCH rejected HTTP 404\",\n   \"qualifies\": false,\n   \"reason\": \"careers page not reachable at guessed paths; not retried further or bypassed\"\n  },\n  {\n   \"agency\": \"Arctic Leaf (Shopify Premier Partner)\",\n   \"url\": \"https://arcticleaf.io/careers\",\n   \"final_url\": \"https://www.arcticleaf.com/careers/\",\n   \"task\": \"TASK-179427816113\",\n   \"sha256\": \"38f47ea085d19d9947da867c6796369d7701532f895eabdc0e65462bd8427389\",\n   \"sha256_reported_by_fetch\": \"38f47ea085d19d9947da867c6796369d7701532f895eabdc0e65462bd8427389\",\n   \"extract_task\": \"TASK-179427816114\",\n   \"quotes\": [\n    \"Open positions nothing open right now.\",\n    \"In the meantime, send your resume to [email protected] and we’ll keep you in mind when something opens on your team.\",\n    \"Address 1120 S Rackham Way, Suite 300 Meridian, ID 83642\",\n    \"Canada Provinces 4 Cities 6 Staff 9\",\n    \"Fully Remote Paid Parental Leave Medical & Dental\"\n   ],\n   \"qualifies\": false,\n   \"reason\": \"Employee recruitment page (resume, benefits, parental leave) with no open positions; no freelancer/subcontractor or supplier invitation; headquarters address is in Idaho, USA, with Canadian staff, so it is not a Canadian agency supplier route. Email address is obfuscated on the page and was not resolved.\"\n  }\n ],\n \"third_source\": \"not inspected; with no catalogue/listing of agency subcontract pages available, further guessing of URLs would be unbounded discovery\",\n \"not_done\": [\n  \"no inquiry drafted (no qualifying invitation)\",\n  \"no contact, application, account, agreement or spending\"\n ],\n \"uncertainties\": [\n  \"404 only shows those exact URLs were unavailable\",\n  \"an agency could accept subcontractors without saying so publicly; the mission required an explicit invitation\"\n ],\n \"conclusion\": \"Consistent with INVITED-SUPPLIER-ROUTE-TEST: agency careers pages advertise employee roles for a named human applicant, not supplier invitations an AI team can answer. Stop this channel; do not guess more agency URLs.\",\n \"reconsider_when\": \"a source lists explicit freelance/subcontract catalogue or data-QA work with an application route, or an inbound classified request arrives\"\n}\n\n",
+  "artifacts": [
+    "products/services/canadian-subcontract/bounded-result.json",
+    "products/receipts/TASK-179427816116.json"
+  ],
+  "request": {
+    "id": "TASK-179427816116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T02:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib\np=pathlib.Path('products/services/canadian-subcontract/bounded-result.json');p.parent.mkdir(parents=True,exist_ok=True)\nraw=open('products/services/canadian-subcontract/raw/arcticleaf-careers.html','rb').read()\nr={'mission':'CANADIAN-CATALOGUE-SUBCONTRACT-INVITATION','observed':'2026-11-10','verdict':'STOP_NO_QUALIFYING_INVITATION','fetches_used':3,'fetch_limit':6,'sources':[{'agency':'Diff Agency (Montreal)','urls':['https://www.diff.agency/careers','https://www.diff.agency/en/careers'],'tasks':['TASK-179427816112','TASK-179427816115'],'result':'both FETCH rejected HTTP 404','qualifies':False,'reason':'careers page not reachable at guessed paths; not retried further or bypassed'},{'agency':'Arctic Leaf (Shopify Premier Partner)','url':'https://arcticleaf.io/careers','final_url':'https://www.arcticleaf.com/careers/','task':'TASK-179427816113','sha256':hashlib.sha256(raw).hexdigest(),'sha256_reported_by_fetch':'38f47ea085d19d9947da867c6796369d7701532f895eabdc0e65462bd8427389','extract_task':'TASK-179427816114','quotes':['Open positions nothing open right now.','In the meantime, send your resume to [email protected] and we’ll keep you in mind when something opens on your team.','Address 1120 S Rackham Way, Suite 300 Meridian, ID 83642','Canada Provinces 4 Cities 6 Staff 9','Fully Remote Paid Parental Leave Medical & Dental'],'qualifies':False,'reason':'Employee recruitment page (resume, benefits, parental leave) with no open positions; no freelancer/subcontractor or supplier invitation; headquarters address is in Idaho, USA, with Canadian staff, so it is not a Canadian agency supplier route. Email address is obfuscated on the page and was not resolved.'}],'third_source':'not inspected; with no catalogue/listing of agency subcontract pages available, further guessing of URLs would be unbounded discovery','not_done':['no inquiry drafted (no qualifying invitation)','no contact, application, account, agreement or spending'],'uncertainties':['404 only shows those exact URLs were unavailable','an agency could accept subcontractors without saying so publicly; the mission required an explicit invitation'],'conclusion':'Consistent with INVITED-SUPPLIER-ROUTE-TEST: agency careers pages advertise employee roles for a named human applicant, not supplier invitations an AI team can answer. Stop this channel; do not guess more agency URLs.','reconsider_when':'a source lists explicit freelance/subcontract catalogue or data-QA work with an application route, or an inbound classified request arrives'}\np.write_text(json.dumps(r,indent=1,ensure_ascii=False));print(p.read_text())"
+      ],
+      "inputs": [
+        "products/services/canadian-subcontract/raw/arcticleaf-careers.html"
+      ],
+      "outputs": [
+        "products/services/canadian-subcontract/bounded-result.json"
+      ],
+      "mission_id": "CANADIAN-CATALOGUE-SUBCONTRACT-INVITATION"
+    },
+    "description": "Broker action during THINK-1794278161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427816116",
+  "input_sha256": "9919f0a7b49e283c08ae2f4333cad3df2f0abf6910eb54dd1134a745ac04b8cd"
+}
