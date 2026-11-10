@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"APPROVE\",\n  \"duplicate_image_errors\": [\n    \"style SH-100: same image URL used twice\"\n  ],\n  \"reverse_sha256\": \"59b8bd7329635a2abaa34a0523a0d7b7db96259811ef2001c1a3be644fe5a1ea\",\n  \"candidate_sha256\": \"57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61\",\n  \"unchanged_eight_files\": {\n    \"7c2e9a41d86b35f0e1a4c97d2b58e360.txt\": \"4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba\",\n    \"fixtures/after-shopify.csv\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\",\n    \"fixtures/before-images.csv\": \"894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d\",\n    \"fixtures/before-variants.csv\": \"5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac\",\n    \"llms.txt\": \"a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9\",\n    \"transform.py\": \"ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e\",\n    \"verify.py\": \"54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39\",\n    \"verify_example.py\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\"\n  },\n  \"fixture_verification\": {\n    \"rows\": 12,\n    \"products\": 2,\n    \"checks\": {\n      \"utf8_no_bom_lf_only\": true,\n      \"header_matches_documented_names\": true,\n      \"no_product_split_across_files\": true,\n      \"handle_rows_contiguous\": true,\n      \"title_only_on_first_row\": true,\n      \"sku_unique\": true,\n      \"identifiers_preserved_sku_barcode_color_size_price\": true,\n      \"color_size_combo_unique_per_product\": true,\n      \"image_positions_1_to_n\": true,\n      \"all_input_images_present_once_per_product\": true,\n      \"variant_image_is_first_image_of_its_color\": true,\n      \"image_only_rows_have_no_variant_fields\": true\n    },\n    \"failed\": []\n  },\n  \"scope\": \"Two parenthetical text corrections only. Independently read EN/FR: style-level duplicate image reporting without line numbers and manual row location match actual output. Disclosure, nonbinding CAD60 hypothesis, produced-row dependency, documented subset and exclusions preserved. No edits or deployment; no market evidence.\",\n  \"dry_run_task\": \"TASK-179429400611\",\n  \"review_digest\": \"d36fc8375efe9e1b5073093f999d324d0c7717d7a367912aa34b0069637dc3a8\"\n}\n\n\n",
+  "artifacts": [
+    "products/reviews/catalogue-qa-dupimg/evidence.json",
+    "products/receipts/TASK-179429400612.json"
+  ],
+  "request": {
+    "id": "TASK-179429400612",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-10T07:00:06Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,hashlib,sys,subprocess\nbase=pathlib.Path('products/sites/shopify-catalogue-example')\nsys.path.insert(0,str(base))\nimport transform\nv=transform.read(base/'fixtures/before-variants.csv',transform.VREQ)\ni=transform.read(base/'fixtures/before-images.csv',transform.IREQ)\ni.append(dict(i[0]))\n_,errors,_=transform.build(v,i)\nassert errors==['style SH-100: same image URL used twice'],errors\np=base/'index.html'\ns=p.read_text()\ndiff=pathlib.Path('products/services/catalogue-qa/offer-correction-2/index.diff').read_text()\nold=[x[1:] for x in diff.splitlines() if x.startswith('-') and not x.startswith('---')]\nnew=[x[1:] for x in diff.splitlines() if x.startswith('+') and not x.startswith('+++')]\nassert len(old)==len(new)==2\nreverse=s\nfor a,b in zip(old,new):\n assert reverse.count(b)==1\n reverse=reverse.replace(b,a)\nsha=lambda x:hashlib.sha256(x).hexdigest()\nassert sha(reverse.encode())=='59b8bd7329635a2abaa34a0523a0d7b7db96259811ef2001c1a3be644fe5a1ea'\nassert sha(p.read_bytes())=='57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61'\nexpected=json.loads(pathlib.Path('products/services/catalogue-transformation/agency-offer/checks.json').read_text())['site_file_hashes']\nhashes={k:sha((base/k).read_bytes()) for k in expected if k!='index.html'}\nassert all(hashes[k]==expected[k] for k in hashes)\nrun=subprocess.run(['python3',str(base/'verify_example.py'),str(base/'fixtures/before-variants.csv'),str(base/'fixtures/before-images.csv'),str(base/'fixtures/after-shopify.csv')],capture_output=True,text=True)\nassert run.returncode==0,run.stderr\nfixture=json.loads(run.stdout)\nassert len(fixture['checks'])==12 and not fixture['failed']\nresult={'verdict':'APPROVE','duplicate_image_errors':errors,'reverse_sha256':sha(reverse.encode()),'candidate_sha256':sha(p.read_bytes()),'unchanged_eight_files':hashes,'fixture_verification':fixture,'scope':'Two parenthetical text corrections only. Independently read EN/FR: style-level duplicate image reporting without line numbers and manual row location match actual output. Disclosure, nonbinding CAD60 hypothesis, produced-row dependency, documented subset and exclusions preserved. No edits or deployment; no market evidence.','dry_run_task':'TASK-179429400611','review_digest':'d36fc8375efe9e1b5073093f999d324d0c7717d7a367912aa34b0069637dc3a8'}\nout=pathlib.Path('products/reviews/catalogue-qa-dupimg/evidence.json')\nout.parent.mkdir(parents=True,exist_ok=True)\nout.write_text(json.dumps(result,indent=2)+'\\n')\nprint(out.read_text())"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/",
+        "products/services/catalogue-qa/offer-correction-2/",
+        "products/services/catalogue-transformation/agency-offer/checks.json"
+      ],
+      "outputs": [
+        "products/reviews/catalogue-qa-dupimg/evidence.json"
+      ],
+      "mission_id": "CATALOGUE-QA-DUPIMG-REVIEW"
+    },
+    "description": "Broker action during THINK-1794294006",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179429400612",
+  "input_sha256": "89f62a00694fb6f1dc2575888d4f1d60cb6335d41d34eb0678c68fca664f6814"
+}

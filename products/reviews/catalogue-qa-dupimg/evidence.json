@@ -1,0 +1,40 @@
+{
+  "verdict": "APPROVE",
+  "duplicate_image_errors": [
+    "style SH-100: same image URL used twice"
+  ],
+  "reverse_sha256": "59b8bd7329635a2abaa34a0523a0d7b7db96259811ef2001c1a3be644fe5a1ea",
+  "candidate_sha256": "57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61",
+  "unchanged_eight_files": {
+    "7c2e9a41d86b35f0e1a4c97d2b58e360.txt": "4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba",
+    "fixtures/after-shopify.csv": "31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357",
+    "fixtures/before-images.csv": "894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d",
+    "fixtures/before-variants.csv": "5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac",
+    "llms.txt": "a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9",
+    "transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+    "verify.py": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39",
+    "verify_example.py": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30"
+  },
+  "fixture_verification": {
+    "rows": 12,
+    "products": 2,
+    "checks": {
+      "utf8_no_bom_lf_only": true,
+      "header_matches_documented_names": true,
+      "no_product_split_across_files": true,
+      "handle_rows_contiguous": true,
+      "title_only_on_first_row": true,
+      "sku_unique": true,
+      "identifiers_preserved_sku_barcode_color_size_price": true,
+      "color_size_combo_unique_per_product": true,
+      "image_positions_1_to_n": true,
+      "all_input_images_present_once_per_product": true,
+      "variant_image_is_first_image_of_its_color": true,
+      "image_only_rows_have_no_variant_fields": true
+    },
+    "failed": []
+  },
+  "scope": "Two parenthetical text corrections only. Independently read EN/FR: style-level duplicate image reporting without line numbers and manual row location match actual output. Disclosure, nonbinding CAD60 hypothesis, produced-row dependency, documented subset and exclusions preserved. No edits or deployment; no market evidence.",
+  "dry_run_task": "TASK-179429400611",
+  "review_digest": "d36fc8375efe9e1b5073093f999d324d0c7717d7a367912aa34b0069637dc3a8"
+}
