@@ -20,14 +20,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "IDENTITY",
-      "title": "No founder-authorized participant identity for bounties, prize challenges or job boards",
-      "detail": "Updated 2026-11-06. Several bounded tests found the same prerequisite. First, Expensify bounties need an accepted proposal, Upwork hiring and a CLA (products/research/public-bounty-opportunity.json). Second, translation job boards need registered accounts (technical-translation-request-test.json). Third, DrivenData GEMS (DOE, $300,000 advertised) requires a named competitor who registers and certifies eligibility under penalty of perjury (products/services/sponsored-challenge/rejection.json, TASK-179395596113). Agents will not create accounts, accept rules or make certifications. Founder step, only if desired: designate a participant identity and approve one specific challenge's rules. Until then, these channels are parked and no further scans are planned.",
-      "mission_id": "SPONSORED-DATA-CHALLENGE",
-      "expected_gain": "Would allow consideration of sponsor-funded prizes and bounties; no award or payout is guaranteed and advertised prizes are not verified funding.",
+      "title": "No founder-authorized participant identity for bounties, challenges or freelance marketplaces (Freelancer.com paid demand observed)",
+      "detail": "Updated 2026-11-10. New evidence: Freelancer.com public API shows explicitly paid, dated buyer requests (64 active fixed-price CSV projects; data-alignment job GBP 20-250, posted 2026-11-09T20:09Z) in products/services/paid-data-request/bounded-result.json (TASK-179427996114/116). Bidding needs a registered account; agents create no accounts or agreements. Prior evidence unchanged: Expensify (Upwork+CLA), translation boards, DrivenData certification. Founder step only if desired: designate one marketplace identity disclosed as AI-assisted, and confirm platform AI policy and payout route. Then agents can filter low-bid non-personal CSV cleaning tasks and prepare bids for approval. Competition is high (67-121 bids on close fits).",
+      "mission_id": "PAID-DATA-CLEANING-REQUEST-TEST",
+      "expected_gain": "Access to observed paid small data-cleaning jobs (USD/GBP 20-250); win rate unknown; no payout guaranteed.",
       "raised_by": "RESEARCHER",
-      "reports": 2,
+      "reports": 3,
       "opened_at": "2026-11-03T20:01:26Z",
-      "last_reported_at": "2026-11-06T09:08:55Z"
+      "last_reported_at": "2026-11-10T03:07:24Z"
     },
     {
       "id": "SERVICE-PAYMENT-COLLECTION",
@@ -137,30 +137,25 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-10T03:07:42Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 364,
-    "turns_without_verified_revenue": 364,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 365,
+    "turns_without_verified_revenue": 365,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-10T03:07:42Z",
     "last_outcome_turn": "THINK-1794279607",
     "last_productive_turn": "THINK-1794279607",
-    "last_turn": "THINK-1794279607",
+    "last_turn": "THINK-1794279961",
     "last_change": {
-      "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "CANADIAN-CATALOGUE-SUBCONTRACT-INVITATION"
-      ],
-      "new_products": [
-        "products/services/canadian-subcontract/bounded-result.json",
-        "products/services/canadian-subcontract/raw/arcticleaf-careers.html"
-      ],
-      "new_product_count": 2,
+      "productive": false,
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
