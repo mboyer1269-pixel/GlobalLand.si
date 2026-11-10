@@ -1,0 +1,41 @@
+{
+  "status": "DONE",
+  "output": "{\"all_pass\": false, \"passed\": 17, \"total\": 18, \"fails\": [\"no_forbidden_claims\"], \"cand\": \"f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62\", \"dest\": \"a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4\"}\n\n",
+  "artifacts": [
+    "products/sites/invoice-preflight/index.html",
+    "products/distribution/catalogue-referral/index.diff",
+    "products/distribution/catalogue-referral/checks.json",
+    "products/receipts/TASK-179433216211.json"
+  ],
+  "request": {
+    "id": "TASK-179433216211",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T17:36:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,difflib,pathlib,re\nP=pathlib.Path\nsrc=P('products/sites/invoice-preflight/index.html')\nbase=src.read_bytes()\ndest=P('products/sites/shopify-catalogue-example/index.html').read_text('utf-8')\nb=base.decode('utf-8')\nU='https://globalland-shopify-catalogue-example.global-land.workers.dev/'\nEN='<p>The same page also describes an optional, nonbinding <a href=\"'+U+'\">catalogue QA scoping request for migration agencies</a>: up to 20 variant rows pasted as plain text; price idea CAD 60 per check, an unvalidated hypothesis, not a quote. Any paid work would need a separately confirmed scope and a manually accepted order. There is no checkout, and replies are not guaranteed.</p>'\nFR='<p lang=\"fr\">La même page décrit aussi une <a href=\"'+U+'\">demande facultative et sans engagement d’évaluation QA de catalogue pour les agences de migration</a> : au plus 20 lignes de variantes collées en texte brut ; prix envisagé : 60 $ CA par vérification, hypothèse non validée et non une soumission. Tout travail payant exigerait une portée confirmée séparément et une commande acceptée manuellement. Aucun paiement en ligne ; réponses non garanties.</p>'\nanchor_en='a real Shopify import has never been tested.</p>'\nanchor_fr='aucun import Shopify réel n’a été testé.</p>'\nassert b.count(anchor_en)==1 and b.count(anchor_fr)==1\nnew=b.replace(anchor_en,anchor_en+EN).replace(anchor_fr,anchor_fr+FR)\nsrc.write_text(new,'utf-8')\nnb=new.encode('utf-8')\nsh=lambda x:hashlib.sha256(x).hexdigest()\nscript=lambda t:re.findall(r'<script>.*?</script>',t,re.S)\nmailtos=lambda t:re.findall(r'mailto:[^\"]+',t)\nchecks={}\nchecks['baseline_sha256_matches_published_live_copy']=sh(base)==sh(P('products/distribution/related-resources/published-invoice-index.html').read_bytes())\nchecks['reverse_restores_baseline']=new.replace(EN,'',1).replace(FR,'',1).encode('utf-8')==base\nchecks['only_two_insertions']=len(new)-len(b)==len(EN)+len(FR)\nchecks['script_blocks_identical']=script(new)==script(b) and len(script(b))==1\nchecks['mailto_identifiers_identical']=mailtos(new)==mailtos(b) and 'site:invoice-preflight' in new\nchecks['free_script_description_preserved']='a downloadable offline Python script' in new and 'un script Python hors ligne' in new\nfor k,v in {'en_20_rows':('up to 20 variant rows','up to 20 variant rows'),'en_cad60':('CAD 60 per check','CAD 60 per check'),'en_hypothesis':('an unvalidated hypothesis, not a quote','an unvalidated hypothesis, not a quote'),'en_order':('a separately confirmed scope and a manually accepted order','a separately confirmed scope and a manually accepted order'),'en_nonbinding':('nonbinding','nonbinding'),'fr_20':('au plus 20 lignes de variantes','au plus 20 lignes de variantes'),'fr_cad60':('60 $ CA par vérification','60 $ CA par vérification'),'fr_hyp':('hypothèse non validée','hypothèse non validée'),'fr_order':('portée confirmée séparément et une commande acceptée manuellement','portée confirmée séparément et une commande acceptée manuellement'),'fr_noeng':('sans engagement','sans engagement')}.items():\n  ins=EN if k.startswith('en') else FR\n  checks['claim_'+k+'_in_insert_and_destination']=v[0] in ins and v[1] in dest\nlow=(EN+FR).lower()\nchecks['no_forbidden_claims']=not any(w in low for w in ['buy now','order now','guaranteed reply','compatible with shopify','customers','demand','visitors','traffic'])\nchecks['link_target_is_existing_destination']=(EN+FR).count('href=\"'+U+'\"')==2\nout=P('products/distribution/catalogue-referral');out.mkdir(parents=True,exist_ok=True)\ndiff=''.join(difflib.unified_diff(b.replace('</p>','</p>\\n').splitlines(True),new.replace('</p>','</p>\\n').splitlines(True),'index.html.baseline','index.html'))\n(out/'index.diff').write_text(diff,'utf-8')\nother={f:sh(P(f).read_bytes()) for f in ['products/sites/invoice-preflight/llms.txt','products/sites/invoice-preflight/offline-checker.js','products/sites/invoice-preflight/4f1d6a0c9e2b47d8a35c8e1f07b6d29a.txt']}\nres={'mission':'CATALOGUE-OFFER-CONTEXTUAL-REFERRAL','baseline_index_sha256':sh(base),'candidate_index_sha256':sh(nb),'destination_source_sha256':sh(dest.encode('utf-8')),'other_files_sha256_unmodified_inputs':other,'inserted_en':EN,'inserted_fr':FR,'checks':checks,'all_pass':all(checks.values()),'passed':sum(checks.values()),'total':len(checks),'limits':'Destination claims compared against source file of shopify-catalogue-example; live destination equality checked separately by FETCH. No deployment, traffic, demand or revenue established.'}\n(out/'checks.json').write_text(json.dumps(res,ensure_ascii=False,indent=1),'utf-8')\nprint(json.dumps({'all_pass':res['all_pass'],'passed':res['passed'],'total':res['total'],'fails':[k for k,v in checks.items() if not v],'cand':sh(nb),'dest':sh(dest.encode())}))\n"
+      ],
+      "inputs": [
+        "products/sites/invoice-preflight/",
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/distribution/related-resources/published-invoice-index.html"
+      ],
+      "outputs": [
+        "products/sites/invoice-preflight/index.html",
+        "products/distribution/catalogue-referral/index.diff",
+        "products/distribution/catalogue-referral/checks.json"
+      ],
+      "mission_id": "CATALOGUE-OFFER-CONTEXTUAL-REFERRAL"
+    },
+    "description": "Broker action during THINK-1794332162",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179433216211",
+  "input_sha256": "4812082d825499812a43e3365496de22c17a496a35fa1f6231df840576176b34"
+}

@@ -1,0 +1,37 @@
+{
+ "mission": "CATALOGUE-OFFER-CONTEXTUAL-REFERRAL",
+ "baseline_index_sha256": "3e161ef53f6d78e377758c1bbfcd1f7c8e1fdb41dbd8621436383c44e7da1bc6",
+ "candidate_index_sha256": "f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62",
+ "destination_source_sha256": "a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4",
+ "other_files_sha256_unmodified_inputs": {
+  "products/sites/invoice-preflight/llms.txt": "e35800245a4a1ac8ea3ffb9c7202161ca69e2291a8ea21bbb0bc76ba53c65e9e",
+  "products/sites/invoice-preflight/offline-checker.js": "c7199aec0c0a82f62ca5ecd5a69c16a255235bd7353cc8c94869fee19c85d47d",
+  "products/sites/invoice-preflight/4f1d6a0c9e2b47d8a35c8e1f07b6d29a.txt": "d20063fd6ca2a823260fc1a4ce31d700d598403749f76b994661dff21a9e327a"
+ },
+ "inserted_en": "<p>The same page also describes an optional, nonbinding <a href=\"https://globalland-shopify-catalogue-example.global-land.workers.dev/\">catalogue QA scoping request for migration agencies</a>: up to 20 variant rows pasted as plain text; price idea CAD 60 per check, an unvalidated hypothesis, not a quote. Any paid work would need a separately confirmed scope and a manually accepted order. There is no checkout, and replies are not guaranteed.</p>",
+ "inserted_fr": "<p lang=\"fr\">La même page décrit aussi une <a href=\"https://globalland-shopify-catalogue-example.global-land.workers.dev/\">demande facultative et sans engagement d’évaluation QA de catalogue pour les agences de migration</a> : au plus 20 lignes de variantes collées en texte brut ; prix envisagé : 60 $ CA par vérification, hypothèse non validée et non une soumission. Tout travail payant exigerait une portée confirmée séparément et une commande acceptée manuellement. Aucun paiement en ligne ; réponses non garanties.</p>",
+ "checks": {
+  "baseline_sha256_matches_published_live_copy": true,
+  "reverse_restores_baseline": true,
+  "only_two_insertions": true,
+  "script_blocks_identical": true,
+  "mailto_identifiers_identical": true,
+  "free_script_description_preserved": true,
+  "claim_en_20_rows_in_insert_and_destination": true,
+  "claim_en_cad60_in_insert_and_destination": true,
+  "claim_en_hypothesis_in_insert_and_destination": true,
+  "claim_en_order_in_insert_and_destination": true,
+  "claim_en_nonbinding_in_insert_and_destination": true,
+  "claim_fr_20_in_insert_and_destination": true,
+  "claim_fr_cad60_in_insert_and_destination": true,
+  "claim_fr_hyp_in_insert_and_destination": true,
+  "claim_fr_order_in_insert_and_destination": true,
+  "claim_fr_noeng_in_insert_and_destination": true,
+  "no_forbidden_claims": false,
+  "link_target_is_existing_destination": true
+ },
+ "all_pass": false,
+ "passed": 17,
+ "total": 18,
+ "limits": "Destination claims compared against source file of shopify-catalogue-example; live destination equality checked separately by FETCH. No deployment, traffic, demand or revenue established."
+}
