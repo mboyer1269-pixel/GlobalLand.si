@@ -1,0 +1,146 @@
+{
+ "mission": "CATALOGUE-QA-COMPETITIVE-QUOTE",
+ "observed": "2026-11-10",
+ "sources": [
+  {
+   "name": "LitExtension pricing",
+   "url": "https://litextension.com/pricing.html",
+   "fetch": "TASK-179433756112",
+   "http": 200,
+   "sha256": "5d2a72bcbb79e1caa0dac9ca8669cb6b109f482b1a261e6bf3ee7af452720c66",
+   "category": "migration execution (automated tool + done-for-you service)",
+   "quotes": [
+    "starts from $19 ... per project, and the final price is determined by the total number of entities you select to migrate.",
+    "LitExtension All-in-One Migration Service is priced based on your entity count, plus the complexity of your migration, starting from $129 per project.",
+    "each demo transfers only a sample of your data: up to 20 products, 20 customers, and 20 orders, plus their related data",
+    "you can use our Automated Migration Tool for free if your store has fewer than 100 products, 100 customers, and 100 orders",
+    "All of our Migration services are One-Time purchases."
+   ],
+   "billing_unit": "per project, entity-count based; currency shown as $ (USD assumed, not stated in extract)"
+  },
+  {
+   "name": "Matrixify Shopify App Store listing",
+   "url": "https://apps.shopify.com/excel-export-import",
+   "fetch": "TASK-179433756114",
+   "http": 200,
+   "sha256": "8561819dda969e26dc2176fe536187c44c4fcc758d521bb5e6501dd74d977e43",
+   "category": "software subscription (self-serve import/export)",
+   "quotes": [
+    "Demo Free ... Per file: 10 Products, Collections, Customers",
+    "$20 / month ... Per file: 5K Products, 300 Collections",
+    "$50 / month ... Per file: 50K Products, 3K Collections",
+    "$200 / month ... Everything Unlimited",
+    "All charges are billed in USD. Recurring and usage-based charges are billed every 30 days."
+   ],
+   "billing_unit": "USD per 30 days, per-file product limits"
+  },
+  {
+   "name": "Cart2Cart pricing",
+   "url": "https://www.cart2cart.com/pricing.html",
+   "fetch": "TASK-179433756113",
+   "http": 200,
+   "sha256": "6dc9c7fc93bb488bb0520a6c780a8d3c0fb5486a4711aca49b4c53fac7393023",
+   "category": "migration execution",
+   "quotes": [],
+   "note": "No price text in static HTML (likely client-rendered); no prices recorded."
+  },
+  {
+   "name": "Matrixify official pricing page",
+   "url": "https://matrixify.app/pricing/",
+   "fetch": "TASK-179433756111",
+   "status": "REJECTED HTTP 403; not retried or bypassed"
+  }
+ ],
+ "comparability": "No directly comparable paid human catalogue-QA offer was found within bounds. Observed prices are for migration execution (LitExtension) and self-serve import software (Matrixify). Neither is evidence of willingness to pay for our check. Relevant overlap: LitExtension offers a free unlimited 20-product demo migration and a free tool under 100 products; Matrixify does bulk import for USD 20/month. A buyer can preview a 20-product migration for free, so a 20-row input-only validation competes with free previews.",
+ "effort_scenarios": [
+  {
+   "scenario": "low",
+   "hours_ASSUMED": {
+    "acquisition": 0.25,
+    "intake": 0.25,
+    "run_tools": 0.25,
+    "manual_row_location": 0.25,
+    "delivery_note": 0.25,
+    "one_revision": 0.25,
+    "operator_admin": 0.5
+   },
+   "total_hours": 2,
+   "gross_cad_per_total_hour_at_CAD60": 30,
+   "operator_hours_ASSUMED": 0.75,
+   "gross_cad_per_operator_hour_at_CAD60": 80
+  },
+  {
+   "scenario": "mid",
+   "hours_ASSUMED": {
+    "acquisition": 0.5,
+    "intake": 0.25,
+    "run_tools": 0.25,
+    "manual_row_location": 0.5,
+    "delivery_note": 0.5,
+    "one_revision": 0.5,
+    "operator_admin": 0.5
+   },
+   "total_hours": 3,
+   "gross_cad_per_total_hour_at_CAD60": 20,
+   "operator_hours_ASSUMED": 1,
+   "gross_cad_per_operator_hour_at_CAD60": 60
+  },
+  {
+   "scenario": "high",
+   "hours_ASSUMED": {
+    "acquisition": 1,
+    "intake": 0.5,
+    "run_tools": 0.5,
+    "manual_row_location": 1,
+    "delivery_note": 0.5,
+    "one_revision": 1,
+    "operator_admin": 0.75
+   },
+   "total_hours": 5.25,
+   "gross_cad_per_total_hour_at_CAD60": 11.43,
+   "operator_hours_ASSUMED": 1.75,
+   "gross_cad_per_operator_hour_at_CAD60": 34.29
+  }
+ ],
+ "assumption_notes": [
+  "All hours are ASSUMPTIONS, not measurements; no real order has been fulfilled.",
+  "Agent compute cost is unknown and excluded (founder-provided subscriptions are unallocated).",
+  "Operator time is the scarce human input: order creation/acceptance, Interac deposit confirmation and any approved send. The public Interac/admin flow is fixed per order.",
+  "No conversion rate, win rate or profit assumed. CAD60 is gross before any fees, which are unknown."
+ ],
+ "recommendation": {
+  "verdict": "CHANGE (narrow scope; keep price floor)",
+  "detail": [
+   "Keep CAD60 as the per-check floor; do not lower it. The fixed operator admin per order dominates small jobs, and at the high scenario CAD60 is about CAD12 per total hour.",
+   "Lead with the differentiated job: preservation/image-mapping verification of client-produced Shopify rows against the source (input + output pair). Free migration demos and self-serve importers do not independently verify their output against the source.",
+   "Input-only validation of 20 rows overlaps with free LitExtension demos and Matrixify; offer it only bundled with, or as part of, the CAD60 check. Do not sell it separately below CAD60.",
+   "No public page edit now: the live price is already labelled a hypothesis and any edit needs exact-digest review. Revisit only on a classified inbound request."
+  ]
+ },
+ "minimum_quote_rule": {
+  "currency": "CAD",
+  "base": "CAD60 per check, up to 20 variant rows, one source file + optional produced rows, one revision",
+  "over_20_rows": "quote CAD60 per started block of 20 variant rows (hypothesis), max 100 rows per order without a new scoping review",
+  "never_below": "CAD60 per order",
+  "refuse_if": [
+   "personal data present",
+   "authenticated store/admin access required",
+   "needs Shopify import acceptance guarantee",
+   "attachments or URL retrieval required (intake is pasted plain text only)",
+   "payment route other than administrative CAD Interac requested before operator acceptance"
+  ],
+  "prerequisites": "operator creates/accepts the order (SERVICE-PAYMENT-COLLECTION); agents cannot accept orders"
+ },
+ "uncertainties": [
+  "USD currency of LitExtension prices is implied by $ only.",
+  "Cart2Cart and Matrixify official pages unread.",
+  "Effort hours unmeasured; no real buyer files tested.",
+  "Demand unknown: 5 unclassified feedback sources, 0 classified."
+ ],
+ "not_established": [
+  "demand",
+  "orders",
+  "payment",
+  "revenue"
+ ]
+}
