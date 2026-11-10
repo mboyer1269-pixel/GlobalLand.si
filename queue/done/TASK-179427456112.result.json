@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"WEBSITE-OFFER-HANDOFF-SYNC\",\n \"run\": 2,\n \"run1_note\": \"Run 1 (TASK-179427456111) failed 2 naive checks because the superseded-text note names the withdrawn claims; checks now exclude that single labelled note and verify it marks them withdrawn.\",\n \"checks\": {\n  \"outside_item2_byte_identical\": true,\n  \"message_equals_corrected_proposal\": true,\n  \"superseded_line_marks_old_claims_withdrawn\": true,\n  \"no_wellformedness_claim_outside_superseded_note\": true,\n  \"no_gpu_friendly_claim_outside_superseded_note\": true,\n  \"gpu_only_as_nonverifiable\": false,\n  \"no_preselected_repairs\": true,\n  \"no_speedup_promise\": true,\n  \"asks_still_open\": true,\n  \"usd_is_assumption\": true,\n  \"ai_disclosure_in_msg\": true,\n  \"convention_vs_explicit_route\": true,\n  \"trivia_withdrawal_preserved\": true,\n  \"items3_and_maze_preserved\": true,\n  \"payment_and_admin_acceptance_separate\": true,\n  \"not_sent_not_approved\": true\n },\n \"all_pass\": false,\n \"before_sha256\": \"dbb5e048d9f46b6f25381a229d13398de947a003ac7a04874192ac89ff356e53\",\n \"after_sha256\": \"8e1f1409f9aebcca2926e99849dd92fa37e60e7fd9689dacb2c567c42c8ad831\",\n \"message_sha256\": \"5fef54f3654029d531b6ec25f7968ea44463405504ef6f65c6f2056d0deb555e\",\n \"note\": \"Only section 2 replaced. Nothing sent; no operator approval; buyer availability unknown.\"\n}\n\n",
+  "artifacts": [
+    "products/services/diversified-offers/handoff-sync/consistency-result.json",
+    "products/receipts/TASK-179427456112.json"
+  ],
+  "request": {
+    "id": "TASK-179427456112",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T01:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import pathlib,hashlib,json,re\nB='products/services/diversified-offers/'\nold=pathlib.Path(B+'handoff-sync/operator-batch-before.md').read_text();new=pathlib.Path(B+'operator-batch.md').read_text();prop=pathlib.Path(B+'website-verification/proposal-corrected.md').read_text()\nmsg=re.search(r'## Exact message for operator consideration[^\\n]*\\n```\\n(.*?)\\n```',prop,re.S).group(1)\ni=old.index('## 2. ');j=old.index('## 3. ');sec2=new[new.index('## 2. '):new.index('## 3. ')]\nm2=re.search(r'```\\n(.*?)\\n```',sec2,re.S).group(1)\nlines=sec2.splitlines();sup=[l for l in lines if l.startswith('- Superseded text:')]\nclaims='\\n'.join(l for l in lines if not l.startswith('- Superseded text:'))\nlo=claims.lower()\nchk={\n'outside_item2_byte_identical':old[:i]==new[:new.index('## 2. ')] and old[j:]==new[new.index('## 3. '):],\n'message_equals_corrected_proposal':m2==msg,\n'superseded_line_marks_old_claims_withdrawn':len(sup)==1 and 'withdrawn as unsupported' in sup[0],\n'no_wellformedness_claim_outside_superseded_note':'well-formed' not in lo,\n'no_gpu_friendly_claim_outside_superseded_note':'gpu-friendly' not in lo,\n'gpu_only_as_nonverifiable':('gpu' not in lo) or ('gpu use' in lo and lo.count('gpu')==2),\n'no_preselected_repairs':'layout-thrashing' not in sec2 and 'prefers-reduced-motion' not in sec2,\n'no_speedup_promise':'We do not promise a specific speed-up' in m2 and 'No speed-up is promised' in sec2,\n'asks_still_open':'Is this still open?' in m2,\n'usd_is_assumption':'in USD' in m2 and 'USD is an assumption' in sec2,\n'ai_disclosure_in_msg':'autonomous AI agents' in m2,\n'convention_vs_explicit_route':'convention, not an explicit route' in sec2,\n'trivia_withdrawal_preserved':'## 1. WITHDRAWN - Trivia' in new and 'do not contact that requester anywhere' in new,\n'items3_and_maze_preserved':'## 3. DigitalPress' in new and 'item 4 (Maze' in new,\n'payment_and_admin_acceptance_separate':'SERVICE-PAYMENT-COLLECTION' in sec2 and 'Administrative order creation/acceptance' in sec2,\n'not_sent_not_approved':'not approved, not sent' in sec2,\n}\nres={'mission':'WEBSITE-OFFER-HANDOFF-SYNC','run':2,'run1_note':'Run 1 (TASK-179427456111) failed 2 naive checks because the superseded-text note names the withdrawn claims; checks now exclude that single labelled note and verify it marks them withdrawn.','checks':chk,'all_pass':all(chk.values()),'before_sha256':hashlib.sha256(old.encode()).hexdigest(),'after_sha256':hashlib.sha256(new.encode()).hexdigest(),'message_sha256':hashlib.sha256(msg.encode()).hexdigest(),'note':'Only section 2 replaced. Nothing sent; no operator approval; buyer availability unknown.'}\npathlib.Path(B+'handoff-sync/consistency-result.json').write_text(json.dumps(res,indent=1))\nprint(json.dumps(res,indent=1))"
+      ],
+      "inputs": [
+        "products/services/diversified-offers/operator-batch.md",
+        "products/services/diversified-offers/handoff-sync/operator-batch-before.md",
+        "products/services/diversified-offers/website-verification/proposal-corrected.md"
+      ],
+      "outputs": [
+        "products/services/diversified-offers/handoff-sync/consistency-result.json"
+      ],
+      "mission_id": "WEBSITE-OFFER-HANDOFF-SYNC"
+    },
+    "description": "Broker action during THINK-1794274561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427456112",
+  "input_sha256": "f6d959e7b33c9cdf23b8f82f6a2a08cba6a0a6899a217234d697f22c0a022729"
+}
