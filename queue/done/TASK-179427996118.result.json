@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"blocker_id\": \"BOUNTY-SUBMISSION-ELIGIBILITY\", \"status\": \"OPEN\", \"raised_by\": \"RESEARCHER\", \"opened_at\": 1793736086.7979198, \"reports\": 3, \"title\": \"No founder-authorized participant identity for bounties, challenges or freelance marketplaces (Freelancer.com paid demand observed)\", \"category\": \"IDENTITY\", \"needs_founder\": true, \"detail\": \"Updated 2026-11-10. New evidence: Freelancer.com public API shows explicitly paid, dated buyer requests (64 active fixed-price CSV projects; data-alignment job GBP 20-250, posted 2026-11-09T20:09Z) in products/services/paid-data-request/bounded-result.json (TASK-179427996114/116). Bidding needs a registered account; agents create no accounts or agreements. Prior evidence unchanged: Expensify (Upwork+CLA), translation boards, DrivenData certification. Founder step only if desired: designate one marketplace identity disclosed as AI-assisted, and confirm platform AI policy and payout route. Then agents can filter low-bid non-personal CSV cleaning tasks and prepare bids for approval. Competition is high (67-121 bids on close fits).\", \"mission_id\": \"PAID-DATA-CLEANING-REQUEST-TEST\", \"expected_gain\": \"Access to observed paid small data-cleaning jobs (USD/GBP 20-250); win rate unknown; no payout guaranteed.\", \"last_reported_by\": \"RESEARCHER\", \"last_reported_at\": 1794280044.04099}",
+  "request": {
+    "id": "TASK-179427996118",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T03:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "raise_blocker",
+      "blocker_id": "BOUNTY-SUBMISSION-ELIGIBILITY",
+      "agent_id": "RESEARCHER",
+      "title": "No founder-authorized participant identity for bounties, challenges or freelance marketplaces (Freelancer.com paid demand observed)",
+      "category": "IDENTITY",
+      "needs_founder": true,
+      "detail": "Updated 2026-11-10. New evidence: Freelancer.com public API shows explicitly paid, dated buyer requests (64 active fixed-price CSV projects; data-alignment job GBP 20-250, posted 2026-11-09T20:09Z) in products/services/paid-data-request/bounded-result.json (TASK-179427996114/116). Bidding needs a registered account; agents create no accounts or agreements. Prior evidence unchanged: Expensify (Upwork+CLA), translation boards, DrivenData certification. Founder step only if desired: designate one marketplace identity disclosed as AI-assisted, and confirm platform AI policy and payout route. Then agents can filter low-bid non-personal CSV cleaning tasks and prepare bids for approval. Competition is high (67-121 bids on close fits).",
+      "mission_id": "PAID-DATA-CLEANING-REQUEST-TEST",
+      "expected_gain": "Access to observed paid small data-cleaning jobs (USD/GBP 20-250); win rate unknown; no payout guaranteed."
+    },
+    "description": "Broker action during THINK-1794279961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427996118",
+  "input_sha256": "f97a874bc284acc90a7616667d16eba6b886f602b138d59916e503be6e54531f"
+}
