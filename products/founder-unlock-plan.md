@@ -1,23 +1,23 @@
-# Founder unlock plan (updated 2026-11-09, written by autonomous AI agents)
+# Founder unlock plan (updated 2026-11-10, written by autonomous AI agents)
 
-Treasury UNFUNDED, verified revenue 0. Commercial feedback: 0 classified events, 3 unclassified sources (unknown, not zero demand). Last private mail cycle (2026-11-09T13:00Z): processed 0, skipped 6.
+Treasury UNFUNDED, verified revenue 0. Commercial feedback: 0 classified events, 5 unclassified and 5 excluded sources (unknown, not zero demand). Last private mail cycle (2026-11-10T10:50Z): processed 0, skipped 10.
 
-## What changed since 2026-11-07
-- A CAD payment route now exists: Interac, operator-only (blocker SERVICE-PAYMENT-COLLECTION). Order creation/acceptance is administrative; deposits need founder attestation. Handoff: products/services/payment-handoff/operator-instructions.md. So collection is no longer the first constraint for email services; exposure is.
-- SQLite statement diagnostic is live with a tested local download and intake (https://globalland-sqlite-statement-diagnostic.global-land.workers.dev/, independent APPROVEs seq 27-34). One Bing check (2026-11-09) did not list it; one IndexNow receipt (HTTP 202) proves no indexing.
-- Ghost import diagnostic live; running the real upstream converter needs >=11 package fetches (bounded stop), so it stays explicitly STUB_ONLY.
-- Job boards and help forums tested (WordPress, Berlin OSM, Posit, n8n, Ghost): no bounded offline paid request reachable without an account and outreach.
+## What changed since 2026-11-09
+- Paid-work channels without an identity are exhausted under current rules: agency careers pages (2 sources), commissioned technical writing (Twilio bans AI; DigitalOcean paused; Vultr 403), AI-agent task channels (Superteam 404, Algora blocked by host filter, Opire needs GitHub+Opire accounts and pays at creator discretion). Evidence: products/services/canadian-subcontract/bounded-result.json, products/services/commissioned-technical-writing/bounded-rejection.json, products/services/ai-agent-paid-tasks/bounded-rejection.json.
+- Observed paid demand exists only behind accounts: Freelancer.com public API showed 64 active fixed-price CSV projects (e.g. GBP 20-250 data alignment, posted 2026-11-09), 67-121 bids on close fits (products/services/paid-data-request/bounded-result.json).
+- A reviewed, live catalogue-QA offer page exists (https://globalland-shopify-catalogue-example.global-land.workers.dev/, CAD60 labelled unvalidated hypothesis, nonbinding).
+- Two cold email pilots are written, checked and unsent (operator batch items 3 and 4).
 
 ## Binding constraint
-People who need these diagnostics cannot find them; agents have no permitted posting channel. Agents will not build more pages or polish existing ones without observed visitors (lesson L144).
+No agent-usable outgoing channel or participant identity. More pages, samples or channel scans will not change this; agents stop discovery until one step below happens or a classified inbound request appears.
 
-## Ranked single founder steps (any one is enough to start; all optional)
-1. Apify credential (NO-APIFY-ACCESS): valid enabled config + private credential file mode 0600. Unlocks three tested Actors (rss-reader 22/22, link-checker 21/21, domain-availability 22/22) with platform-managed pay-per-event billing and Store discovery, i.e. both exposure and collection. Kill: <3 external users within 14 days of listing.
-2. One dedicated, AI-disclosed community account on forum.ghost.org (NO-COMMUNITY-ANSWER-ACCOUNT) for a single reply to t/60053 linking the free diagnostic with its limits stated. Do NOT approve Stack Overflow (bans generative-AI content).
-3. Host operator (not founder authority): expose count-only skip/unclassified reason fields (FEEDBACK-REASON-OBSERVABILITY) so experiment verdicts can tell no requests from unobserved requests.
-4. When a real eligible request arrives: create/accept the Interac order and attest the deposit (operator-instructions.md).
-5. Bounty/challenge participant identity (BOUNTY-SUBMISSION-ELIGIBILITY): parked, lowest priority.
-Gumroad (former option B) is superseded by the Interac route for now; Gumroad Discover needs prior sales anyway.
+## Ranked single founder/operator steps (any one is enough; all optional)
+1. Apify credential (blocker NO-APIFY-ACCESS): valid enabled config + private credential file mode 0600. Unlocks three tested Actors (rss-reader 22/22, link-checker 21/21, domain-availability 22/22) with platform-managed pay-per-event billing and Store discovery. Kill: <3 external users within 14 days of listing.
+2. Operator decision on the two prepared emails (blocker NO-COMMUNITY-ANSWER-ACCOUNT): item 4 Maze Studio catalogue QA CAD60, use only products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md (sha256 b1fe208d...); item 3 DigitalPress documentation QA CAD40, products/services/diversified-offers/operator-batch.md section 3. Both are unsolicited single inquiries to general contacts, AI-disclosed. Approve, edit or decline. No new account needed beyond an approved sender identity.
+3. One AI-disclosed marketplace or GitHub identity plus payout route (blocker BOUNTY-SUBMISSION-ELIGIBILITY). Freelancer.com: agents would filter non-personal CSV cleaning tasks and draft bids for approval. GitHub: Opire/issue bounties (from USD 20), checked per repository AI policy. Win rate unknown; competition high.
+4. Host operator: count-only skip/unclassified reason fields (FEEDBACK-REASON-OBSERVABILITY).
+5. When a real eligible request arrives: create/accept the Interac CAD order and attest the deposit (products/services/payment-handoff/operator-instructions.md).
+Do NOT approve Stack Overflow (bans generative-AI content). Reddit item 2 needs an established account; low expected value. Trivia item 1 is withdrawn.
 
 ## Fixed obligations agents will keep
 - Open-software-tenders retirement and software-award link removal at/after 2026-11-18T09:00Z.
