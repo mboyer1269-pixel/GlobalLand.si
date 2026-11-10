@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\"cart2cart-pricing.html\":[],\"litextension-pricing.html\":[\"183: Free Demo\",\"197: → Free trial &#038; enjoy 3 months of Shopify for $1\",\"198: Number Of Products\",\"202: Please enter the total of entities you&#8217;d like to migrate.\",\"204: if you do not know how to check the number of entities in your store.\",\"206: FREE DEMO NOW\",\"207: Total Entities:\",\"208: Products;\",\"215: price\",\"216: Free Demo\",\"222: price\",\"229: $0\",\"231: $0\",\"232: FREE Demo Migration\",\"233: Unlimited FREE Demo Migration\",\"234: Unlimited FREE Demo Migration\",\"239: FREE up to 6 Additional Options\",\"240: (Save $50–$150)\",\"241: FREE all\",\"250: Free & Unlimited Recent Migration\",\"251: Free & Unlimited Smart Update\",\"252: Free & Unlimited Re-migration\",\"253: Free & Unlimited Recent Migration\",\"254: Free & Unlimited Smart Update\",\"255: Free 02 Re-migration\",\"270: $0\",\"271: FREE Demo Migration\",\"272: Unlimited FREE Demo Migration\",\"276: FREE all\",\"283: Free & Unlimited Recent Migration\",\"284: Free & Unlimited Smart Update\",\"285: Free 02 Re-migration\",\"297: Join a free demo session to explore every feature in action.\",\"298: Obtain a free demo site to test our migration system.\",\"301: BOOK A FREE CONSULTATION\",\"320: Select data you want to transfer and explore Additional Options to tailor the migration to your needs, then run a FREE Demo Migration to preview the results.\",\"331: starts from $19\",\"332: per project, and the final price is determined by the total number of entities you select to migrate.\",\"333: With this plan, you get up to 6 Additional Options for free, while advanced options such as Customer Password Migration (applicable for selected platforms), SEO URL Migration, or 301 Redirect are paid add-ons.\",\"335: LitExtension All-in-One Migration Service is priced based on your entity count, plus the complexity of your migration, starting from $129 per project.\",\"337: Why does the All-in-One have a h\n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/quote-decision/source-extract.json",
+    "products/receipts/TASK-179433756115.json"
+  ],
+  "request": {
+    "id": "TASK-179433756115",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T19:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs=require('fs');const d='products/services/catalogue-qa/quote-decision/raw/';const out={};for(const f of fs.readdirSync(d)){let t=fs.readFileSync(d+f,'utf8').replace(/<script[\\s\\S]*?<\\/script>/gi,' ').replace(/<style[\\s\\S]*?<\\/style>/gi,' ').replace(/<[^>]+>/g,'\\n').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').split('\\n').map(s=>s.trim()).filter(Boolean);const hits=[];t.forEach((l,i)=>{if(/\\$|USD|price|per |free|product|record|month|entit|demo|limit/i.test(l)&&l.length<220)hits.push(i+': '+l)});out[f]=hits.slice(0,140)}fs.mkdirSync('products/services/catalogue-qa/quote-decision',{recursive:true});fs.writeFileSync('products/services/catalogue-qa/quote-decision/source-extract.json',JSON.stringify(out,null,1));console.log(JSON.stringify(out).slice(0,1900))"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa/quote-decision/raw/"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/quote-decision/source-extract.json"
+      ],
+      "mission_id": "CATALOGUE-QA-COMPETITIVE-QUOTE"
+    },
+    "description": "Broker action during THINK-1794337561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179433756115",
+  "input_sha256": "377e1c42fe271e0eca175b19964b0c09edc66fed667fe8d6a08b442ea397cd48"
+}
