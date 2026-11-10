@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"reverse_bytes\": true,\n  \"two_insertions\": true,\n  \"scripts_unchanged\": true,\n  \"mailto_unchanged\": true,\n  \"candidate_hash\": \"f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62\",\n  \"destination_hash\": \"a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4\",\n  \"other_files\": {\n    \"products/sites/invoice-preflight/llms.txt\": true,\n    \"products/sites/invoice-preflight/offline-checker.js\": true,\n    \"products/sites/invoice-preflight/4f1d6a0c9e2b47d8a35c8e1f07b6d29a.txt\": true\n  },\n  \"all_pass\": true,\n  \"manual_review\": \"EN/FR referral matches destination: optional scoping, 20 variants, hypothetical CAD60, separately confirmed scope and manual order; no checkout or guaranteed reply. No acquisition or revenue established.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/catalogue-referral-independent.json",
+    "products/receipts/TASK-179433540712.json"
+  ],
+  "request": {
+    "id": "TASK-179433540712",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-10T18:30:07Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport re,json,hashlib\np=Path('products/sites/invoice-preflight'); c=(p/'index.html').read_bytes(); b=Path('products/distribution/related-resources/published-invoice-index.html').read_bytes(); d=Path('products/distribution/catalogue-referral/live-destination.html').read_bytes(); diff=Path('products/distribution/catalogue-referral/index.diff').read_text(); added=[x[1:].encode() for x in diff.splitlines() if x.startswith('+<p')]; restored=c\nfor x in added:\n assert restored.count(x)==1\n restored=restored.replace(x,b'',1)\nr={'reverse_bytes':restored==b,'two_insertions':len(added)==2,'scripts_unchanged':re.findall(b'<script.*?</script>',c,re.S)==re.findall(b'<script.*?</script>',b,re.S),'mailto_unchanged':re.findall(b'mailto:[^\\\"]+',c)==re.findall(b'mailto:[^\\\"]+',b),'candidate_hash':hashlib.sha256(c).hexdigest(),'destination_hash':hashlib.sha256(d).hexdigest()}\nchecks=json.loads(Path('products/distribution/catalogue-referral/checks.json').read_text()); r['other_files']={n:hashlib.sha256(Path(n).read_bytes()).hexdigest()==h for n,h in checks['other_files_sha256_unmodified_inputs'].items()};r['all_pass']=all([r['reverse_bytes'],r['two_insertions'],r['scripts_unchanged'],r['mailto_unchanged'],all(r['other_files'].values()),r['candidate_hash']=='f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62',r['destination_hash']=='a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4']);r['manual_review']='EN/FR referral matches destination: optional scoping, 20 variants, hypothetical CAD60, separately confirmed scope and manual order; no checkout or guaranteed reply. No acquisition or revenue established.'\no=Path('products/reviews/catalogue-referral-independent.json');o.parent.mkdir(parents=True,exist_ok=True);o.write_text(json.dumps(r,indent=2));print(o.read_text());assert r['all_pass']"
+      ],
+      "inputs": [
+        "products/sites/invoice-preflight/",
+        "products/distribution/catalogue-referral/",
+        "products/distribution/related-resources/published-invoice-index.html"
+      ],
+      "outputs": [
+        "products/reviews/catalogue-referral-independent.json"
+      ],
+      "mission_id": "CATALOGUE-REFERRAL-REVIEW"
+    },
+    "description": "Broker action during THINK-1794335407",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179433540712",
+  "input_sha256": "306afaf19c49f8b96616b3c6d6a2cc1486b81737972c63d56eb2edb187752684"
+}
