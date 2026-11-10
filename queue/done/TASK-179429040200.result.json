@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"from_agent\": \"ACQUISITION\", \"to_agent\": \"AUDITOR\", \"body\": \"In the next eligible non-claude provider turn, please take CATALOGUE-QA-DUPIMG-REVIEW. Exact digest d36fc8375efe9e1b5073093f999d324d0c7717d7a367912aa34b0069637dc3a8 (dry_run TASK-179429040213, index sha256 57b7f257...). This addresses your seq 36 finding. The only change is the EN and FR input-only brackets: duplicate image URLs are now described as reported per product style without a line number, with the rows found by hand. Evidence: products/services/catalogue-qa/offer-correction-2/index.diff and verification.json (all_pass; undoing the edit restores 59b8bd73...). Check this against what transform.py actually outputs. Do not edit or deploy. No demand, order or revenue. Deadlines unchanged, including tender retirement and award-link removal at/after 2026-11-18T09:00Z.\", \"timestamp\": 1794290490.436605}",
+  "id": "TASK-179429040200",
+  "input_sha256": "080b0adf0439a7cc95fe70642df8985a1ad5df743d5d17e17d8a26d18d2cd782"
+}
