@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\n \"baseline_candidate_sha256\": \"59b8bd7329635a2abaa34a0523a0d7b7db96259811ef2001c1a3be644fe5a1ea\",\n \"en_count\": 1,\n \"fr_count\": 1,\n \"reverse_equals_candidate\": true,\n \"transform_has_style_level_dup_msg\": true,\n \"remaining_line_number_promise_dup_image_en\": false,\n \"remaining_line_number_promise_dup_image_fr\": false,\n \"new_sha256\": \"57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61\",\n \"all_pass\": true,\n \"label\": \"Text narrowing only per AUDITOR seq 36; no demand, order or revenue.\"\n}\n\n",
+  "artifacts": [
+    "products/sites/shopify-catalogue-example/index.html",
+    "products/services/catalogue-qa/offer-correction-2/index.diff",
+    "products/services/catalogue-qa/offer-correction-2/verification.json",
+    "products/receipts/TASK-179429040212.json"
+  ],
+  "request": {
+    "id": "TASK-179429040212",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T06:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,difflib,pathlib\np=pathlib.Path('products/sites/shopify-catalogue-example/index.html')\nb=p.read_text(encoding='utf-8');bh=hashlib.sha256(b.encode()).hexdigest()\nOE='non-http image URLs, duplicate image rows, with line numbers).'\nNE='non-http image URLs, with line numbers; duplicate image URLs are reported per product style without a line number, and the rows are then located by hand).'\nOF='URL d’images non http, lignes d’images en double, avec numéros de ligne).'\nOF2=\"URL d'images non http, lignes d'images en double, avec numéros de ligne).\"\nNF2=\"URL d'images non http, avec numéros de ligne ; les URL d'images en double sont signalées par style de produit, sans numéro de ligne, puis les lignes sont repérées à la main).\"\nr={'baseline_candidate_sha256':bh,'en_count':b.count(OE),'fr_count':b.count(OF2)}\nc=b.replace(OE,NE,1).replace(OF2,NF2,1)\nr['reverse_equals_candidate']=c.replace(NE,OE,1).replace(NF2,OF2,1)==b\nt=pathlib.Path('products/sites/shopify-catalogue-example/transform.py').read_text(encoding='utf-8')\nr['transform_has_style_level_dup_msg']='same image URL used twice' in t\nr['remaining_line_number_promise_dup_image_en']='duplicate image rows, with line numbers' in c\nr['remaining_line_number_promise_dup_image_fr']=\"lignes d'images en double, avec\" in c\np.write_text(c,encoding='utf-8');r['new_sha256']=hashlib.sha256(c.encode()).hexdigest()\nr['all_pass']=r['en_count']==1 and r['fr_count']==1 and r['reverse_equals_candidate'] and r['transform_has_style_level_dup_msg'] and not r['remaining_line_number_promise_dup_image_en'] and not r['remaining_line_number_promise_dup_image_fr'] and bh.startswith('59b8bd73')\nr['label']='Text narrowing only per AUDITOR seq 36; no demand, order or revenue.'\no=pathlib.Path('products/services/catalogue-qa/offer-correction-2');o.mkdir(parents=True,exist_ok=True)\n(o/'index.diff').write_text(''.join(difflib.unified_diff(b.splitlines(True),c.splitlines(True),'a/index.html','b/index.html')),encoding='utf-8')\n(o/'verification.json').write_text(json.dumps(r,indent=1,ensure_ascii=False),encoding='utf-8')\nprint(json.dumps(r,indent=1,ensure_ascii=False))"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/"
+      ],
+      "outputs": [
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/services/catalogue-qa/offer-correction-2/index.diff",
+        "products/services/catalogue-qa/offer-correction-2/verification.json"
+      ],
+      "mission_id": "CATALOGUE-QA-DUPIMG-WORDING-FIX"
+    },
+    "description": "Broker action during THINK-1794290402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179429040212",
+  "input_sha256": "6e63b916b8fa7cc933c0b71ed2cd4adee5f0bfe91adeb7e274d39c36daaa4125"
+}
