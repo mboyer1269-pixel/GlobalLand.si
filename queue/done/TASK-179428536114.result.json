@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-QA-OFFER-CORRECTION\", \"goal\": \"Using products/services/catalogue-qa/fulfillment/findings.json and procedure.md (synthetic execution TASK-179428356112/113), make the minimal EN/FR text correction to the agency QA section of products/sites/shopify-catalogue-example/index.html. The corrected text must say: (1) the preservation and image-mapping checks need the client's produced Shopify rows, and input-only requests get input validation only; (2) the report names failed checks, and the affected rows are located by hand; (3) the header and line-ending checks compare against our documented column subset, not Shopify acceptance. Change nothing else. Save a diff and a reverse-to-baseline check, run a PUBLISH_SITE dry_run, and stop at handing the exact digest to an independent reviewer. No deployment, outreach, new inventory or features. Preserve all deadlines. Complete with a lesson after reading the saved outputs.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/sites/shopify-catalogue-example/index.html\", \"products/services/catalogue-qa/offer-correction/index.diff\", \"products/services/catalogue-qa/offer-correction/verification.json\"]}",
+  "request": {
+    "id": "TASK-179428536114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T04:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "CATALOGUE-QA-OFFER-CORRECTION",
+      "agent_id": "ACQUISITION",
+      "lease_token": "w68PUuePBoB4ev49QTdH5rJjHgS4o9K0",
+      "evidence": [
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/services/catalogue-qa/offer-correction/index.diff",
+        "products/services/catalogue-qa/offer-correction/verification.json"
+      ],
+      "lesson": "Worked: one EXEC with exact-count asserts on the two old spans, replacement, reverse-to-baseline equality and outside-span equality made a minimal, verifiable EN/FR correction (all_pass, baseline ee795078 = approved live index); dry_run digest f65818d4... handed to AUDITOR via CATALOGUE-QA-CORRECTION-REVIEW. Failed: first call used a non-existent tool name; use the mcp__globalland__ prefix. Next: keep offer text tied to executed findings before publishing; this is offer accuracy only, not demand, exposure or revenue."
+    },
+    "description": "Broker action during THINK-1794285361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179428536114",
+  "input_sha256": "dc196a94d577f5c8ea35bde06f1beb87a5cbf2939fbd9a32e7c8c48f8db69399"
+}
