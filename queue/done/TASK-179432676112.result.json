@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/services/catalogue-qa/row-location/run_checks.py",
+    "products/receipts/TASK-179432676112.json"
+  ],
+  "request": {
+    "id": "TASK-179432676112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-10T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,sys;p=pathlib.Path(sys.argv[1]);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(sys.argv[2],encoding='utf-8')",
+        "products/services/catalogue-qa/row-location/run_checks.py",
+        "#!/usr/bin/env python3\n# Synthetic checks for locate_dup_images.py. Autonomous AI agents (GlobalLand). No buyer data.\nimport json, os, subprocess, sys, tempfile, platform\nHERE = os.path.dirname(os.path.abspath(__file__))\nTOOL = os.path.join(HERE, 'locate_dup_images.py')\nROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..', '..'))\nFUL = os.path.join(ROOT, 'products/services/catalogue-qa/fulfillment')\nTR = os.path.join(ROOT, 'products/sites/shopify-catalogue-example/transform.py')\nH = 'style_id,color,position,url\\n'\nU = 'https://example.com/img/'\nbase = open(os.path.join(FUL, 'synthetic-i.csv'), encoding='utf-8').read()\nF = {\n 'existing_valid': base,\n 'within_style_dup': base + 'SYN-A,Tan,5,' + U + 'SYN-A-Black-1.jpg\\n',\n 'cross_style_only': base + 'SYN-B,Blue,5,' + U + 'SYN-A-Black-1.jpg\\n',\n 'blank_values': H + 'S1,Red,1,' + U + 'a.jpg\\nS1,Red,2,\\n,Red,3,' + U + 'a.jpg\\nS1,Red,4,' + U + 'a.jpg\\n',\n 'leading_zero': H + '007,Red,1,' + U + 'z.jpg\\n7,Red,1,' + U + 'z.jpg\\n007,Red,2,' + U + 'z.jpg\\n',\n 'multiline': H + 'S1,\"Red\\nDark\",1,' + U + 'm.jpg\\nS1,Blue,2,' + U + 'n.jpg\\nS1,Blue,3,' + U + 'm.jpg\\n',\n 'whitespace_url': H + 'S1,Red,1,' + U + 'w.jpg\\nS1,Red,2,  ' + U + 'w.jpg  \\n',\n 'missing_column': 'style_id,color,position,image\\nS1,Red,1,' + U + 'a.jpg\\n',\n 'malformed_quote': H + 'S1,Red,1,\"' + U + 'a.jpg\\n',\n 'field_count': H + 'S1,Red,1,' + U + 'a.jpg,extra\\n',\n 'bom_crlf': '﻿' + H.replace('\\n', '\\r\\n') + ('S1,Red,1,' + U + 'b.jpg\\r\\n') * 2,\n}\nEXPECT = {\n 'existing_valid': (0, lambda o: o['records'] == 8 and not o['duplicate_groups'] and not o['cross_style_reuse']),\n 'within_style_dup': (1, lambda o: len(o['duplicate_groups']) == 1 and [x['record'] for x in o['duplicate_groups'][0]['occurrences']] == [1, 9] and o['duplicate_groups'][0]['occurrences'][1]['fields']['color'] == 'Tan' and o['duplicate_groups'][0]['occurrences'][1]['transform_line'] == 10),\n 'cross_style_only': (0, lambda o: not o['duplicate_groups'] and o['cross_style_reuse'] == [{'url': U + 'SYN-A-Black-1.jpg', 'styles': {'SYN-A': [1], 'SYN-B': [9]}}]),\n 'blank_values': (1, lambda o: [x['record'] for x in o['skipped_blank']] == [2, 3] and [x['record'] for x in o['duplicate_groups'][0]['occurrences']] == [1, 4]),\n 'leading_zero': (1, lambda o: len(o['duplicate_groups']) == 1 and o['duplicate_groups'][0]['style_id'] == '007' and [x['record'] for x in o['duplicate_groups'][0]['occurrences']] == [1, 3] and set(o['cross_style_reuse'][0]['styles']) == {'007', '7'}),\n 'multiline': (1, lambda o: [(x['record'], x['physical_line_start'], x['physical_line_end']) for x in o['duplicate_groups'][0]['occurrences']] == [(1, 2, 3), (3, 5, 5)] and o['duplicate_groups'][0]['occurrences'][0]['fields']['color'] == 'Red\\nDark'),\n 'whitespace_url': (1, lambda o: o['duplicate_groups'][0]['count'] == 2),\n 'missing_column': (2, lambda o: 'missing columns' in o['errors'][0]),\n 'malformed_quote': (2, lambda o: 'malformed CSV' in o['errors'][0]),\n 'field_count': (2, lambda o: '5 fields, header has 4' in o['errors'][0]),\n 'bom_crlf': (1, lambda o: [(x['record'], x['physical_line_start']) for x in o['duplicate_groups'][0]['occurrences']] == [(1, 2), (2, 3)]),\n}\nres = {'label': 'SYNTHETIC CHECKS ONLY; no buyer data, no customer delivery', 'python': platform.python_version(), 'cases': {}}\nd = tempfile.mkdtemp()\nfor name, text in F.items():\n    p = os.path.join(d, name + '.csv')\n    open(p, 'w', encoding='utf-8', newline='').write(text)\n    pr = subprocess.run([sys.executable, '-I', TOOL, p], capture_output=True, text=True)\n    try:\n        o = json.loads(pr.stdout)\n        ok = pr.returncode == EXPECT[name][0] and EXPECT[name][1](o)\n    except Exception as e:\n        o, ok = {'parse_error': str(e), 'stdout': pr.stdout, 'stderr': pr.stderr}, False\n    if isinstance(o, dict): o.pop('file', None)\n    res['cases'][name] = {'exit': pr.returncode, 'expected_exit': EXPECT[name][0], 'pass': ok, 'output': o}\nip = os.path.join(d, 'within_style_dup.csv')\npr = subprocess.run([sys.executable, '-I', TR, '--variants', os.path.join(FUL, 'synthetic-v.csv'), '--images', ip, '--out', os.path.join(d, 'o.csv'), '--report', os.path.join(d, 'r.json')], capture_output=True, text=True)\nrep = json.load(open(os.path.join(d, 'r.json')))\nres['transform_crosscheck'] = {'exit': pr.returncode, 'errors': rep['errors'], 'pass': pr.returncode == 2 and 'style SYN-A: same image URL used twice' in rep['errors'], 'note': 'transform.py names the style only; helper adds records 1 and 9 (transform_line 2 and 10)'}\nres['passed'] = sum(c['pass'] for c in res['cases'].values()) + res['transform_crosscheck']['pass']\nres['total'] = len(res['cases']) + 1\nres['all_pass'] = res['passed'] == res['total']\nout = os.path.join(HERE, 'check-results.json')\njson.dump(res, open(out, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)\nprint(json.dumps({'passed': res['passed'], 'total': res['total'], 'fails': [k for k, c in res['cases'].items() if not c['pass']], 'transform': res['transform_crosscheck']}))\n"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/row-location/run_checks.py"
+      ],
+      "inputs": [],
+      "mission_id": "CATALOGUE-QA-ROW-LOCATION"
+    },
+    "description": "Broker action during THINK-1794326761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179432676112",
+  "input_sha256": "a651de2942915f7b578c27ef6a86ad20911f6954b5ed78bc07e6a63d600dfe21"
+}
