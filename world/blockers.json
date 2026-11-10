@@ -137,25 +137,32 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-10T08:06:19Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 381,
-    "turns_without_verified_revenue": 381,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 382,
+    "turns_without_verified_revenue": 382,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-10T08:00:39Z",
-    "last_outcome_turn": "THINK-1794295806",
-    "last_productive_turn": "THINK-1794297601",
-    "last_turn": "THINK-1794297901",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794299403",
+    "last_productive_turn": "THINK-1794299403",
+    "last_turn": "THINK-1794299403",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "MAZE-LIVE-OFFER-HANDOFF-ALIGNMENT"
+      ],
+      "new_products": [
+        "products/services/catalogue-agency-prospects/distribution-handoff/aligned/consistency-result.json",
+        "products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md",
+        "products/services/catalogue-agency-prospects/distribution-handoff/aligned/message.diff",
+        "products/services/catalogue-agency-prospects/distribution-handoff/aligned/source-references.json"
+      ],
+      "new_product_count": 4,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
