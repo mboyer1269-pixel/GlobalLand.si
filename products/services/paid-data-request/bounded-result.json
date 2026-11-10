@@ -1,0 +1,90 @@
+{
+ "mission": "PAID-DATA-CLEANING-REQUEST-TEST",
+ "observed": "2026-11-10",
+ "verdict": "STOP_SUBMISSION_IDENTITY_REQUIRED",
+ "fetches_used": 2,
+ "fetch_limit": 6,
+ "sources": [
+  {
+   "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=csv%20data%20cleaning&limit=20&full_description=true&job_details=true",
+   "task": "TASK-179427996111",
+   "sha256": "536472db9687a9b9420191f09d44d52c27df654494303ba1441d485425f1868f",
+   "finding": "0 of 20 relevant; query is loose (lead-gen, engineering, voice etc.)"
+  },
+  {
+   "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=csv&project_types%5B%5D=fixed&limit=50&full_description=true&job_details=true",
+   "task": "TASK-179427996114",
+   "sha256": "2bed5a7eb0ce78bb095293f1e1ea16d5b287ed4c09ba9229521cabd0f4a877ed",
+   "finding": "64 active fixed-price matches; many CSV mentions are personal-data lead lists or scraping (excluded by legal guardrails)"
+  }
+ ],
+ "candidates_inspected": [
+  {
+   "project_id": 40810456,
+   "url": "https://www.freelancer.com/projects/data-analysis/Data-Alignment-Pantone-Mapping",
+   "title": "Data Alignment and Pantone Mapping",
+   "posted_utc": "2026-11-09T20:09:14Z",
+   "budget": {
+    "min": 20.0,
+    "max": 250.0,
+    "currency": "GBP",
+    "type": "fixed"
+   },
+   "bid_count": 111,
+   "status": "open",
+   "description_excerpt": "I already have the full raw data set for the Hanky Family art project and a live reference feed from the NTA on https://hankyfamily.com/. What still needs doing is the precise record-to-record alignment between my data and the NTA data, using their shared record IDs / reference numbers as the single source of truth.  \n\nOnce every record is correctly paired, each one must carry the accurate Pantone colour that belongs to it. That involves three steps:  \n• assigning the correct Pantone to every matched record,  \n• checking and standardising the Pantone references already in the file so they follow the exact Pantone naming conventions, and  \n• producing a compact colour guide that shows every Pantone used, its code, and the records it appears in.  \n\nDeliverables I’ll accept:  \n• a cleaned, fully aligned master file (CSV or XLSX) ready to slot straight back into the site’s database,  \n• a st",
+   "assessment": "Closest data-alignment fit; needs buyer private dataset plus live third-party reference feed; 111 bids",
+   "qualifies": false
+  },
+  {
+   "project_id": 40810397,
+   "url": "https://www.freelancer.com/projects/ChatGPT-Product-Feed-Campaign-Setup-40810397",
+   "title": "ChatGPT Product Feed Campaign Setup with AI SEO, GEO, AEO and LLM Optimization ",
+   "posted_utc": "2026-11-09T19:08:01Z",
+   "budget": {
+    "min": 10.0,
+    "max": 30.0,
+    "currency": "USD",
+    "type": "fixed"
+   },
+   "bid_count": 121,
+   "status": "open",
+   "description_excerpt": "ChatGPT Product Feed Campaign Setup with AI SEO, GEO, AEO and LLM Optimization \nProduct Feeds Pull from my Ecommerce Store \nChatGPT Product Feed Campaign Setup, I’m ready to launch performance-driven ads that pull directly from well-structured product feeds, and I want ChatGPT at the core of the workflow. The goal is simple: generate clean, up-to-spec XML feeds and connect it to ChatGPT Ads channel and Ads update automatically whenever my catalog changes.\n\nFocus\nUnlike classic search, display, or social campaigns, my priority is the feed itself. I need ChatGPT prompts, scripts, or an API-based process that will:\n• extract my catalog data (CSV or Shopify export),  \n• enrich it with compliant titles, descriptions, and attributes,  \n• output validated XML feeds ready for Google Merchant Center, Amazon Seller Central, and Facebook Commerce Manager.\n\nKey Requirements\n1. A repeatable ChatGPT r",
+   "assessment": "Product-feed/ad campaign setup; requires store and ad-platform access; scope is marketing, not bounded cleaning; 121 bids",
+   "qualifies": false
+  },
+  {
+   "project_id": 40810136,
+   "url": "https://www.freelancer.com/projects/shopify-development/Daily-Shopify-Product-Site-Updates",
+   "title": "Daily Shopify Product & Site Updates -- 2",
+   "posted_utc": "2026-11-09T15:17:38Z",
+   "budget": {
+    "min": 12500.0,
+    "max": 37500.0,
+    "currency": "INR",
+    "type": "fixed"
+   },
+   "bid_count": 67,
+   "status": "open",
+   "description_excerpt": "I need a reliable hand to keep my Shopify store fresh every single day. I’ll send over complete product data—names, prices, stock numbers, full descriptions, photos, and category details—and you’ll jump straight into the Shopify admin to make the changes.\n\nThe routine:\n• Add or edit new products as soon as I provide the details  \n• Adjust prices and stock levels so inventory stays accurate  \n• Swap out homepage banners, promotional graphics, or copy whenever a new campaign goes live  \n\nBecause everything runs on Shopify, familiarity with its bulk editor, CSV import, and image-handling tools will make this job smooth and fast. Accuracy matters more than speed, but I do need same-day turnaround on each batch I send.\n\nEach update is considered done when the products display correctly, variants show the right stock quantities, pricing matches my file, and any promotional assets appear proper",
+   "assessment": "Daily Shopify admin edits; requires authenticated Shopify admin access and ongoing daily availability (excluded: authenticated access)",
+   "qualifies": false
+  }
+ ],
+ "observed_facts": [
+  "Freelancer public API returns dated, budgeted, explicitly paid buyer requests without login (HTTP 200).",
+  "Closest data tasks attract 67-121 bids within hours.",
+  "Many CSV-tagged requests are personal-data lead lists or LinkedIn scraping: excluded."
+ ],
+ "prerequisites_missing": [
+  "Bidding requires a registered Freelancer account under a founder-authorized identity (existing blocker BOUNTY-SUBMISSION-ELIGIBILITY); agents create no accounts.",
+  "Freelancer AI-assistance policy and fee schedule not read in this bounded test.",
+  "Payout route is Freelancer platform withdrawal, not the CAD Interac admin order route; compatibility unverified.",
+  "Candidate 1 requires buyer private data; candidate 3 requires authenticated Shopify admin."
+ ],
+ "not_done": [
+  "no proposal, sample, bid, account, contact or spending"
+ ],
+ "strategic_conclusion": "Paid data-cleaning demand is directly observable on a marketplace with a public API, but every application route needs a platform identity; high bid counts make cold bids low-probability. No candidate qualifies now.",
+ "reconsider_when": "Founder designates a marketplace participant identity (BOUNTY-SUBMISSION-ELIGIBILITY) or a classified inbound request arrives; then filter API results for low-bid (<15), non-personal-data, file-in/file-out cleaning tasks posted <6h ago."
+}
