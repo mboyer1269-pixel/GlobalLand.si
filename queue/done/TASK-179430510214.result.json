@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "6191\n Opire - the bounty platform for software developers WHO IS IT FOR? HOW DOES IT WORK? FAQS OPEN STARTUP BLOG SEE REWARDS WHO IS IT FOR? HOW DOES IT WORK? FAQS OPEN STARTUP BLOG SEE REWARDS Fund Open Source issues Anyone can create bounties in open-source projects and attract contributors, while developers can earn money by solving issues CREATE A BOUNTY EXPLORE REWARDED ISSUES WATCH THE PRODUCT TOUR Stop waiting for an issue to be solved, {reward it} It's easy. Open Source Projects We know that maintaining an open source project is not easy, so you can rely on the community to grow your project and reward their contributions. Developers Helping open source projects by solving issues and also being able to earn money from it! That's the dream of any developer. Teams & supporters Fund a public GitHub issue that matters to you, or join others to increase its reward. You only manage the bounty you create. How Does It Work? Find an issue you want to see solved Browse through the open issues and find the ones you want to see solved. Choose the issues that fit your needs or interests. Create a bounty for that issue Set a bounty to attract developers to tackle the issue. If someone already set a bounty, you can add more funds to increase the reward. Review the proposed solution Developers can submit a pull request and claim the bounty. Review whether it meets the requirements in the issue. Arrange payment after approval When the pull request meets the issue requirements, arrange payment for your own bounty. Each contributor pays their share separately. We are building Opire to solve real-world problems Is there a platform where I can sponsor people to add features to an OSS project? For example, let's say I have to implement a feature on @OramaSearch but I have no capacity right now.Is there a place where I can put a kind of \"bounty\"(I know it's not the right word) on this activity? Michele Riva @MicheleRivaCode Co-founder & CTO of Orama Thank you both! I never thought the day would come when I could earn money from OSS. 🥳 Once this busy weekend is over, I’ll try applying for them. Yuji Sugiura @leaysgur Core member of OXC I encountered this issue on November 5, 2022. This discussion started on December 22, 2021. Now it's August 2024, and still NOTHING has changed - just some workarounds and hacks. It makes me want to cry and laugh at the same time Maciej Sykuła @MHase Software Engineer Is there a way to give bounties for devs that find non-security related bugs, or event issues on your open source project? Ivan Burazin @ivanburazin CEO and Co-Founder at Daytona Frequently Asked Questions General Can Opire be used in private projects? Yes. People who already have access to a private repository can use OpireBot commands there. Bounties created there appear on Opire, but people without repository access cannot solve the issue or claim its bounties. Read the full FAQ for the access implications. Who is Opire for? Opire helps code owners enable contributions, developers solve rewarded issues, and teams or supporters fund work that matters. Developers : It is an opportunity to earn extra income without being tied to schedules or cumbersome procedures. Additionally, you'll enhance your skills by solving real problems in different languages. Teams & supporters : Fund a public GitHub issue, alone or with others. Open-Source Code Owners : You can leverage Opire to grow your community and keep your project alive with contributions from other developers. Open-source supporters : Fund a specific issue and follow its progress. Bounties How do I create a bounty? Use OpireBot commands in repositories where it is installed. Otherwise, create a bounty in the Opire app with the issue URL and amount. Can I create a bounty for any issue? You can create a bounty in any public GitHub repository from the Opire app. In private repositories, commands are available only to people with repository access when OpireBot is installed. How do I claim a bounty? Submit a pull request that solves the associated issue, then claim its bounties. Each bounty creator reviews the pull request. A claim does not create an automatic payment; the creator arranges payment only if the pull request meets the issue requirements. Can multiple developers work on the same bounty? Yes. Each bounty creator reviews the submitted pull requests and decides whether one meets the issue requirements before arranging payment. How are bounties priced? Bounties start at $20 USD. Multiple people can fund the same issue, and each person is responsible only for the bounty they created. Read costs and payments . What happens if my PR is rejected? Improve the pull request and submit it again if the issue requirements allow it. Another developer's solution may be accepted instead. In any case, keep in mind that you will have improved your skills and helped contribute to an open-source project. Tips How can I increase my chances of getting a tip? Help the project and its community. A\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179430510214.json"
+  ],
+  "request": {
+    "id": "TASK-179430510214",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T10:05:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html;t=open('products/services/ai-agent-paid-tasks/raw/opire-home.html',encoding='utf-8',errors='replace').read();t=re.sub(r'(?s)<script.*?</script>|<style.*?</style>','',t);t=html.unescape(re.sub(r'<[^>]+>',' ',t));t=re.sub(r'\\s+',' ',t);print(len(t));print(t[:5000]);[print('AI>>',t[max(0,m.start()-200):m.start()+200]) for m in re.finditer(r'(?i)\\bAI\\b|agent|fee|stripe|crypto|payout',t)][:12]"
+      ],
+      "inputs": [
+        "products/services/ai-agent-paid-tasks/raw/opire-home.html"
+      ],
+      "outputs": [],
+      "mission_id": "AI-AGENT-PAID-TASK-CHANNEL"
+    },
+    "description": "Broker action during THINK-1794305102",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179430510214",
+  "input_sha256": "92147e357f371e2c0e50cb9608164c3742901c3354cf05e648dad764024a5ff3"
+}
