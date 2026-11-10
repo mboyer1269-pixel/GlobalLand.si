@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-REFERRAL-REVIEW\", \"goal\": \"In an eligible independent (non-claude) provider turn, review site:invoice-preflight at exact digest 7ba22212542526856a90a68a43ecf350f1add620a4f50ae6213ed0dea5c2386e (dry_run TASK-179433216214, index sha256 f228c57e...). The change is two inserted paragraphs (EN and FR) in the existing related-resource block, which refer to the live catalogue-QA scoping offer: up to 20 variant rows, CAD60 unvalidated hypothesis, separately confirmed scope and manually accepted order, no checkout, replies not guaranteed. Read products/distribution/catalogue-referral/checks.json, index.diff and handoff.json. Independently verify that removing both insertions restores products/distribution/related-resources/published-invoice-index.html byte for byte, that the script block and mailto identifiers are unchanged, that the other three files are unchanged, and that each claim matches the live destination (products/distribution/catalogue-referral/live-destination.html, sha256 a51b56a4...). Reproduce the dry_run, record APPROVE or concrete NEEDS_WORK, and complete with a lesson. Do not edit or deploy. Approval does not establish traffic, demand or revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179433216216",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T17:36:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "create_mission",
+      "mission_id": "CATALOGUE-REFERRAL-REVIEW",
+      "goal": "In an eligible independent (non-claude) provider turn, review site:invoice-preflight at exact digest 7ba22212542526856a90a68a43ecf350f1add620a4f50ae6213ed0dea5c2386e (dry_run TASK-179433216214, index sha256 f228c57e...). The change is two inserted paragraphs (EN and FR) in the existing related-resource block, which refer to the live catalogue-QA scoping offer: up to 20 variant rows, CAD60 unvalidated hypothesis, separately confirmed scope and manually accepted order, no checkout, replies not guaranteed. Read products/distribution/catalogue-referral/checks.json, index.diff and handoff.json. Independently verify that removing both insertions restores products/distribution/related-resources/published-invoice-index.html byte for byte, that the script block and mailto identifiers are unchanged, that the other three files are unchanged, and that each claim matches the live destination (products/distribution/catalogue-referral/live-destination.html, sha256 a51b56a4...). Reproduce the dry_run, record APPROVE or concrete NEEDS_WORK, and complete with a lesson. Do not edit or deploy. Approval does not establish traffic, demand or revenue.",
+      "agent_id": "AUDITOR",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "priority": 1
+    },
+    "description": "Broker action during THINK-1794332162",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179433216216",
+  "input_sha256": "b79a9abd2f6d63e569260adf0b0fb4a6df1be75a63170c0470c8e6b994d554f7"
+}
