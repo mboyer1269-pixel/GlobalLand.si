@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "decision.json 3909 b10aeb112cf9df16\nminimum-quote-rule.md 1143 152219073ad012dd\nproposal-unsent.md 1157 654e2bfaef932a03\n\n",
+  "artifacts": [
+    "products/services/paid-data-request/economics/decision.json",
+    "products/services/paid-data-request/economics/minimum-quote-rule.md",
+    "products/services/paid-data-request/economics/proposal-unsent.md",
+    "products/receipts/TASK-179428176113.json"
+  ],
+  "request": {
+    "id": "TASK-179428176113",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T03:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib,hashlib\nd=pathlib.Path('products/services/paid-data-request/economics');d.mkdir(parents=True,exist_ok=True)\nsrc=json.load(open('products/services/paid-data-request/bounded-result.json'))\nc=src['candidates_inspected'][0]\nscen=[]\nfor P in (20,50,100):\n  fee=max(0.10*P,5.0); net=P-fee\n  scen.append({'gross_gbp':P,'H1_fee_gbp_unverified':round(fee,2),'H1_effective_fee_rate':round(fee/P,3),'H1_net_before_withdrawal_gbp':round(net,2),'withdrawal_cost':'UNKNOWN','implied_gbp_per_total_hour':{str(h):round(net/h,2) for h in (1,2,4,8)}})\nout={'mission':'CSV-MARKETPLACE-NET-OFFER','observed':'2026-11-10','official_sources_attempted':[{'url':'https://www.freelancer.com/feesandcharges','task':'TASK-179428176111','result':'REJECTED by host: secret pattern detected; publication blocked'},{'url':'https://www.freelancer.com/about/terms','task':'TASK-179428176112','result':'REJECTED by host: secret pattern detected; publication blocked'}],'official_sources_used':0,'not_bypassed':'No proxy, archive or reader service used to strip the flagged content (PUBLIC-DISCOVERY-HOST-REJECTION rule).',\n'facts_established':{'project_fee':'UNKNOWN (no official source read)','fee_minimum':'UNKNOWN','withdrawal_methods_minimums_delays':'UNKNOWN','ai_assisted_or_agency_participation_rules':'UNKNOWN; silence is not permission','buyer_budget':'GBP 20-250 fixed, 111 bids, posted 2026-11-09T20:09:14Z (bounded-result.json, TASK-179427996114)'},\n'H1_fee_hypothesis':'UNVERIFIED prior recollection, not evidence: fixed-price project fee 10% or a 5-unit minimum, whichever is greater. Must be confirmed from an official page read by an operator before any bid.',\n'scenarios_gbp_no_fx':scen,\n'break_even_method':'net_before_withdrawal / total_hours, where total_hours = acquisition (bid drafting + operator approval and submission) + delivery + revision + administration (milestone release, withdrawal, bookkeeping). No reservation rate or subscription cost is known, so the reader compares implied GBP/hour with their own floor. No win rate assumed; with ~111 competing bids expected acquisition hours per win are unknown and likely dominate.',\n'request_fit':{'project_id':c['project_id'],'url':c['url'],'requested':['record-to-record alignment on shared IDs','assign correct Pantone to every record','standardise existing Pantone references to exact Pantone naming','colour guide'],'demonstrated':'Deterministic keyed CSV comparison and transformation with byte-exact tests (supplier-shopify-diff, shopify-catalogue-example, csv-preflight). No Pantone library, licence or colour expertise demonstrated.','honest_deliverable':'ID join + unmatched/duplicate/conflict report + normalisation of existing Pantone strings only against a buyer-supplied canonical list; Pantone assignment explicitly excluded.','fit':'PARTIAL: covers step 1 only; buyer\\'s core value (correct Pantone per record) is out of scope.'},\n'verdict':'REFRAME','decision':'Do not bid on 40810456 as a full-scope job. Keep one UNSENT partial-scope conditional proposal (proposal-unsent.md); low expected value given scope gap and 111 bids. Marketplace route remains identity-gated (BOUNTY-SUBMISSION-ELIGIBILITY) and fee/withdrawal/AI-policy facts must be operator-verified first.',\n'reconsider_when':'Founder designates a marketplace identity and an operator reads the official fee, withdrawal and AI policy pages; or a low-bid (<15) file-in/file-out non-personal CSV job appears.'}\nopen(d/'decision.json','w').write(json.dumps(out,indent=1,ensure_ascii=False))\nrule='''# Minimum-quote rule (reusable, marketplace fixed-price data jobs)\\n\\nStatus: draft, built on UNVERIFIED fee hypothesis H1 (10% or 5-unit minimum). Re-derive once official fees are read.\\n\\n1. Fee floor: below P = m/f (5/0.10 = 50 currency units under H1) the minimum fee dominates (GBP20 -> 25% effective). Do not quote below 50 units unless the official minimum is lower.\\n2. Quote Q only if (Q - fee(Q) - withdrawal_cost) / total_hours >= the founder's reservation rate, where total_hours counts acquisition, operator approval/submission, delivery, revisions (assume at least one) and administration.\\n3. Only file-in/file-out tasks on non-personal data with a deterministic acceptance test we have already demonstrated (keyed join, diff, schema/encoding checks).\\n4. Exclude scope needing domain authority we lack (e.g. Pantone assignment), authenticated admin access, scraping or personal data.\\n5. Prefer <15 existing bids and <6h age; no win rate is assumed.\\n6. Keep currencies separate; convert only with a dated rate source.\\n7. Disclose AI-assisted production; never bid without a founder-authorised identity and verified platform AI policy.\\n'''\nopen(d/'minimum-quote-rule.md','w').write(rule)\nprop='''# UNSENT conditional proposal - Freelancer 40810456 (Data Alignment and Pantone Mapping)\\n\\nStatus: UNSENT. Not a bid. Requires founder-authorised identity, verified platform AI policy and fees (BOUNTY-SUBMISSION-ELIGIBILITY). Price is a hypothesis.\\n\\nHello - this is an AI-assisted, partial-scope offer, prepared by autonomous AI agents and submitted by a human operator.\\n\\nWe can do the deterministic part only:\\n- join your dataset to the NTA reference on the shared record ID / reference number;\\n- deliver the aligned master file (CSV) plus a report of unmatched, duplicate and conflicting IDs;\\n- normalise existing Pantone strings to a canonical list that you supply (spelling, spacing, prefixes), flagging anything not on the list.\\n\\nWe will NOT assign or verify Pantone colours; that needs colour authority we do not have. Every output row is checked by a reproducible script you can rerun.\\n\\nProposed price (hypothesis): GBP 50 fixed for up to 5,000 records, one revision. Payment only after you accept the files.\\nQuestions: Is the NTA feed a downloadable file? Does your data contain personal information? Would a partial-scope delivery be useful to you?\\n'''\nopen(d/'proposal-unsent.md','w').write(prop)\nfor f in ('decision.json','minimum-quote-rule.md','proposal-unsent.md'):\n  b=(d/f).read_bytes();print(f,len(b),hashlib.sha256(b).hexdigest()[:16])\n"
+      ],
+      "inputs": [
+        "products/services/paid-data-request/bounded-result.json"
+      ],
+      "outputs": [
+        "products/services/paid-data-request/economics/decision.json",
+        "products/services/paid-data-request/economics/minimum-quote-rule.md",
+        "products/services/paid-data-request/economics/proposal-unsent.md"
+      ],
+      "mission_id": "CSV-MARKETPLACE-NET-OFFER"
+    },
+    "description": "Broker action during THINK-1794281761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179428176113",
+  "input_sha256": "2da48c7aee00a8853e5b78518461e852b4d544755fe6a70e75ae3cf12678cf94"
+}

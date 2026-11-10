@@ -1,0 +1,84 @@
+{
+ "mission": "CSV-MARKETPLACE-NET-OFFER",
+ "observed": "2026-11-10",
+ "official_sources_attempted": [
+  {
+   "url": "https://www.freelancer.com/feesandcharges",
+   "task": "TASK-179428176111",
+   "result": "REJECTED by host: secret pattern detected; publication blocked"
+  },
+  {
+   "url": "https://www.freelancer.com/about/terms",
+   "task": "TASK-179428176112",
+   "result": "REJECTED by host: secret pattern detected; publication blocked"
+  }
+ ],
+ "official_sources_used": 0,
+ "not_bypassed": "No proxy, archive or reader service used to strip the flagged content (PUBLIC-DISCOVERY-HOST-REJECTION rule).",
+ "facts_established": {
+  "project_fee": "UNKNOWN (no official source read)",
+  "fee_minimum": "UNKNOWN",
+  "withdrawal_methods_minimums_delays": "UNKNOWN",
+  "ai_assisted_or_agency_participation_rules": "UNKNOWN; silence is not permission",
+  "buyer_budget": "GBP 20-250 fixed, 111 bids, posted 2026-11-09T20:09:14Z (bounded-result.json, TASK-179427996114)"
+ },
+ "H1_fee_hypothesis": "UNVERIFIED prior recollection, not evidence: fixed-price project fee 10% or a 5-unit minimum, whichever is greater. Must be confirmed from an official page read by an operator before any bid.",
+ "scenarios_gbp_no_fx": [
+  {
+   "gross_gbp": 20,
+   "H1_fee_gbp_unverified": 5.0,
+   "H1_effective_fee_rate": 0.25,
+   "H1_net_before_withdrawal_gbp": 15.0,
+   "withdrawal_cost": "UNKNOWN",
+   "implied_gbp_per_total_hour": {
+    "1": 15.0,
+    "2": 7.5,
+    "4": 3.75,
+    "8": 1.88
+   }
+  },
+  {
+   "gross_gbp": 50,
+   "H1_fee_gbp_unverified": 5.0,
+   "H1_effective_fee_rate": 0.1,
+   "H1_net_before_withdrawal_gbp": 45.0,
+   "withdrawal_cost": "UNKNOWN",
+   "implied_gbp_per_total_hour": {
+    "1": 45.0,
+    "2": 22.5,
+    "4": 11.25,
+    "8": 5.62
+   }
+  },
+  {
+   "gross_gbp": 100,
+   "H1_fee_gbp_unverified": 10.0,
+   "H1_effective_fee_rate": 0.1,
+   "H1_net_before_withdrawal_gbp": 90.0,
+   "withdrawal_cost": "UNKNOWN",
+   "implied_gbp_per_total_hour": {
+    "1": 90.0,
+    "2": 45.0,
+    "4": 22.5,
+    "8": 11.25
+   }
+  }
+ ],
+ "break_even_method": "net_before_withdrawal / total_hours, where total_hours = acquisition (bid drafting + operator approval and submission) + delivery + revision + administration (milestone release, withdrawal, bookkeeping). No reservation rate or subscription cost is known, so the reader compares implied GBP/hour with their own floor. No win rate assumed; with ~111 competing bids expected acquisition hours per win are unknown and likely dominate.",
+ "request_fit": {
+  "project_id": 40810456,
+  "url": "https://www.freelancer.com/projects/data-analysis/Data-Alignment-Pantone-Mapping",
+  "requested": [
+   "record-to-record alignment on shared IDs",
+   "assign correct Pantone to every record",
+   "standardise existing Pantone references to exact Pantone naming",
+   "colour guide"
+  ],
+  "demonstrated": "Deterministic keyed CSV comparison and transformation with byte-exact tests (supplier-shopify-diff, shopify-catalogue-example, csv-preflight). No Pantone library, licence or colour expertise demonstrated.",
+  "honest_deliverable": "ID join + unmatched/duplicate/conflict report + normalisation of existing Pantone strings only against a buyer-supplied canonical list; Pantone assignment explicitly excluded.",
+  "fit": "PARTIAL: covers step 1 only; buyer's core value (correct Pantone per record) is out of scope."
+ },
+ "verdict": "REFRAME",
+ "decision": "Do not bid on 40810456 as a full-scope job. Keep one UNSENT partial-scope conditional proposal (proposal-unsent.md); low expected value given scope gap and 111 bids. Marketplace route remains identity-gated (BOUNTY-SUBMISSION-ELIGIBILITY) and fee/withdrawal/AI-policy facts must be operator-verified first.",
+ "reconsider_when": "Founder designates a marketplace identity and an operator reads the official fee, withdrawal and AI policy pages; or a low-bid (<15) file-in/file-out non-personal CSV job appears."
+}
