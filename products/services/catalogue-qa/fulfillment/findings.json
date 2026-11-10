@@ -1,0 +1,53 @@
+{
+ "label": "SYNTHETIC PREPARATION ONLY. No customer, request, order, payment or revenue. Not browser-tested, no Shopify import tested, no private-cycle integration observed.",
+ "evidence": [
+  "execution-results.json (TASK-179428356112)",
+  "execution-results-2.json (TASK-179428356113)"
+ ],
+ "runtime": {
+  "python_observed": "3.11.2",
+  "deps": "stdlib only",
+  "tools_sha256": {
+   "transform.py": "ab5a7018...",
+   "verify.py": "54d4d53e...",
+   "verify_example.py": "e7d92cc2..."
+  },
+  "files_from": "products/sites/shopify-catalogue-example/ (unchanged)"
+ },
+ "mode_input_only": {
+  "supported": [
+   "duplicate SKU",
+   "duplicate barcode",
+   "duplicate color+size",
+   "bad price (e.g. 12,50)",
+   "non-http image URL",
+   "duplicate image row"
+  ],
+  "how": "transform.py exits 2 and lists line-numbered errors in --report JSON (stdout only gives error_count); e.g. \"variants line 3: duplicate SKU SYN-A-BL-40 (first line 2)\"",
+  "NOT_supported": "Preservation checks (SKU/barcode/color/size/price preserved, every image once, variant image = first of color). Without client output rows, verify.py can only check OUR own conversion (12/12 passed), which says nothing about the client's file and must not be reported as preservation."
+ },
+ "mode_with_produced_rows": {
+  "detected": {
+   "barcode changed": "identifiers_preserved",
+   "price changed": "identifiers_preserved",
+   "duplicate variant row": "sku_unique+identifiers_preserved+color_size_unique",
+   "image removed": "all_input_images_present_once",
+   "wrong variant image": "variant_image_is_first_image_of_its_color",
+   "unknown SKU": "identifiers_preserved",
+   "variant row dropped": "identifiers_preserved"
+  },
+  "valid_case": "12/12 passed, exit 0",
+  "limits": [
+   "verify.py gives pass/fail per check only, no row or SKU location; the inline report must add a manual row-by-row diff by the agent for each failed check",
+   "header_matches_documented_names fails on any extra/missing column (e.g. Body (HTML)); utf8_no_bom_lf_only fails on CRLF. Real agency files from the full Shopify template will usually fail these two even when data is right: report them as format-difference-from-our-subset, not as defects"
+  ]
+ },
+ "limit_enforcement": "21 variant rows were accepted by transform.py (exit 0); the 20-row cap must be checked manually at intake",
+ "offer_corrections_needed": [
+  "State that preservation/image checks need the produced Shopify rows; input-only requests get input validation only",
+  "Say the report names failed checks and the agent locates rows manually; no automated row-level diff",
+  "Say the two format checks compare against our documented column subset, not Shopify acceptance",
+  "Public page change needs a reviewed dry_run digest; not done here"
+ ],
+ "verdict": "DELIVERABLE_WITH_CORRECTIONS for the two modes above; no demand or revenue evidence"
+}

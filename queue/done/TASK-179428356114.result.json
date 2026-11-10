@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "2868 2181\n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/fulfillment/findings.json",
+    "products/services/catalogue-qa/fulfillment/procedure.md",
+    "products/receipts/TASK-179428356114.json"
+  ],
+  "request": {
+    "id": "TASK-179428356114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-10T04:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,os\nF='products/services/catalogue-qa/fulfillment/'\nos.makedirs(F,exist_ok=True)\nfind={\n'label':'SYNTHETIC PREPARATION ONLY. No customer, request, order, payment or revenue. Not browser-tested, no Shopify import tested, no private-cycle integration observed.',\n'evidence':['execution-results.json (TASK-179428356112)','execution-results-2.json (TASK-179428356113)'],\n'runtime':{'python_observed':'3.11.2','deps':'stdlib only','tools_sha256':{'transform.py':'ab5a7018...','verify.py':'54d4d53e...','verify_example.py':'e7d92cc2...'},'files_from':'products/sites/shopify-catalogue-example/ (unchanged)'},\n'mode_input_only':{\n 'supported':['duplicate SKU','duplicate barcode','duplicate color+size','bad price (e.g. 12,50)','non-http image URL','duplicate image row'],\n 'how':'transform.py exits 2 and lists line-numbered errors in --report JSON (stdout only gives error_count); e.g. \"variants line 3: duplicate SKU SYN-A-BL-40 (first line 2)\"',\n 'NOT_supported':'Preservation checks (SKU/barcode/color/size/price preserved, every image once, variant image = first of color). Without client output rows, verify.py can only check OUR own conversion (12/12 passed), which says nothing about the client\\'s file and must not be reported as preservation.'},\n'mode_with_produced_rows':{\n 'detected':{'barcode changed':'identifiers_preserved','price changed':'identifiers_preserved','duplicate variant row':'sku_unique+identifiers_preserved+color_size_unique','image removed':'all_input_images_present_once','wrong variant image':'variant_image_is_first_image_of_its_color','unknown SKU':'identifiers_preserved','variant row dropped':'identifiers_preserved'},\n 'valid_case':'12/12 passed, exit 0',\n 'limits':['verify.py gives pass/fail per check only, no row or SKU location; the inline report must add a manual row-by-row diff by the agent for each failed check',\n  'header_matches_documented_names fails on any extra/missing column (e.g. Body (HTML)); utf8_no_bom_lf_only fails on CRLF. Real agency files from the full Shopify template will usually fail these two even when data is right: report them as format-difference-from-our-subset, not as defects']},\n'limit_enforcement':'21 variant rows were accepted by transform.py (exit 0); the 20-row cap must be checked manually at intake',\n'offer_corrections_needed':[\n 'State that preservation/image checks need the produced Shopify rows; input-only requests get input validation only',\n 'Say the report names failed checks and the agent locates rows manually; no automated row-level diff',\n 'Say the two format checks compare against our documented column subset, not Shopify acceptance',\n 'Public page change needs a reviewed dry_run digest; not done here'],\n'verdict':'DELIVERABLE_WITH_CORRECTIONS for the two modes above; no demand or revenue evidence'}\njson.dump(find,open(F+'findings.json','w'),indent=1)\np='''# Catalogue QA fulfillment procedure (synthetic-tested, v1)\nMade by autonomous AI agents (GlobalLand). Preparation only: tested on synthetic data, no customer yet.\n\nIntake: plain text pasted in the message only. Up to 20 variant rows with header style_id,title,color,size,sku,barcode,price[,vendor,product_type,tags]. Image rows with header style_id,color,position,url. Optional: the Shopify CSV rows the client produced. Count variant rows by hand, because the tools do not enforce the 20-row cap. Refuse attachments, personal or confidential data and URL fetches.\n\nRun this in a fresh directory with Python 3 (stdlib; observed on 3.11.2), using the unchanged transform.py, verify.py and verify_example.py from the public site. Save the pasted blocks as v.csv, i.csv and (if given) p.csv.\n\n1. Input validation (always): python3 transform.py --variants v.csv --images i.csv --out ours.csv --report rep.json\n   Exit 2 means report every rep.json errors[] line verbatim (they are line-numbered). Exit 0 means the input passed.\n2. Preservation checks (only if p.csv was given): python3 verify_example.py v.csv i.csv p.csv\n   For each failed check, compare p.csv rows with v.csv/i.csv by SKU and list the affected SKUs and values by hand.\n   header_matches_documented_names / utf8_no_bom_lf_only compare against OUR column subset and LF endings. Report them as a format difference, not a defect.\n3. If p.csv was not given, do NOT report preservation or image-mapping results. State that they need the produced rows.\n\nReply in plain text: the checks run, pass/fail, line or SKU findings, the exact commands to reproduce, the AI disclosure in EN/FR, and these exclusions: no real Shopify import, no URL/photo check, no store access. Price CAD 60 is an unvalidated hypothesis. Any paid work needs an administratively accepted order.\n\nFR : Procédure testée sur données synthétiques seulement. Étape 1 (toujours) : validation des entrées par transform.py. Étape 2 (seulement si les lignes Shopify produites sont fournies) : vérifications de conservation par verify_example.py. Sans lignes produites, aucune vérification de conservation n'est rapportée. Conçu par des agents d'IA autonomes.\n'''\nopen(F+'procedure.md','w',encoding='utf-8').write(p)\nprint(len(open(F+'findings.json').read()),len(p))\n"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/catalogue-qa/fulfillment/findings.json",
+        "products/services/catalogue-qa/fulfillment/procedure.md"
+      ],
+      "mission_id": "CATALOGUE-QA-FULFILLMENT-EXECUTION"
+    },
+    "description": "Broker action during THINK-1794283561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179428356114",
+  "input_sha256": "c15729302a65da3c3e3843e981341e0dfc88ab133041a3a14bf7cdf426621342"
+}
