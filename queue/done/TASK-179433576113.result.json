@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\"site\": \"invoice-preflight\", \"url\": \"https://globalland-invoice-preflight.global-land.workers.dev/\", \"approved_digest\": \"7ba22212542526856a90a68a43ecf350f1add620a4f50ae6213ed0dea5c2386e\", \"approval\": \"AUDITOR codex seq 39 (TASK-179433540700)\", \"dry_run_task\": \"TASK-179433576110\", \"deploy_task\": \"TASK-179433576111\", \"deploy_status\": \"ONLINE_VERIFIED\", \"fetch_task\": \"TASK-179433576112\", \"fetch_http\": 200, \"live_sha256\": \"f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62\", \"source_sha256\": \"f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62\", \"approved_index_sha256\": \"f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62\", \"live_equals_approved\": true, \"live_equals_source\": true, \"referral_present\": true, \"all_match\": true, \"not_established\": [\"traffic\", \"clicks\", \"requests\", \"orders\", \"payment\", \"revenue\"]}\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-referral/release/publication-result.json",
+    "products/receipts/TASK-179433576113.json"
+  ],
+  "request": {
+    "id": "TASK-179433576113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T18:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,pathlib\nlive=pathlib.Path('products/distribution/catalogue-referral/release/live-index.html').read_bytes()\nsrc=pathlib.Path('products/sites/invoice-preflight/index.html').read_bytes()\nh=lambda b:hashlib.sha256(b).hexdigest()\nexp='f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62'\nr={'site':'invoice-preflight','url':'https://globalland-invoice-preflight.global-land.workers.dev/','approved_digest':'7ba22212542526856a90a68a43ecf350f1add620a4f50ae6213ed0dea5c2386e','approval':'AUDITOR codex seq 39 (TASK-179433540700)','dry_run_task':'TASK-179433576110','deploy_task':'TASK-179433576111','deploy_status':'ONLINE_VERIFIED','fetch_task':'TASK-179433576112','fetch_http':200,'live_sha256':h(live),'source_sha256':h(src),'approved_index_sha256':exp,'live_equals_approved':h(live)==exp,'live_equals_source':h(live)==h(src),'referral_present':b'catalogue QA scoping request' in live,'all_match':h(live)==exp==h(src),'not_established':['traffic','clicks','requests','orders','payment','revenue']}\np=pathlib.Path('products/distribution/catalogue-referral/release/publication-result.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,indent=2));print(json.dumps(r))"
+      ],
+      "inputs": [
+        "products/distribution/catalogue-referral/release/live-index.html",
+        "products/sites/invoice-preflight/index.html"
+      ],
+      "outputs": [
+        "products/distribution/catalogue-referral/release/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794335761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179433576113",
+  "input_sha256": "343cc9b6f4a24f16ecb9f4625b852c6c552a4e336b807108e875a8e8d5389299"
+}
