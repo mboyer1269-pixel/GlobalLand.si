@@ -137,25 +137,29 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-10T18:06:31Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 410,
-    "turns_without_verified_revenue": 410,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 411,
+    "turns_without_verified_revenue": 411,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-10T18:06:31Z",
-    "last_outcome_turn": "THINK-1794333604",
-    "last_productive_turn": "THINK-1794333604",
-    "last_turn": "THINK-1794335407",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794335761",
+    "last_productive_turn": "THINK-1794335761",
+    "last_turn": "THINK-1794335761",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "CATALOGUE-REFERRAL-REVIEW"
+      ],
+      "new_products": [
+        "products/reviews/catalogue-referral-independent.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
