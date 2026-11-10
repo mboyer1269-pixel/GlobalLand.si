@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"blocker_id\": \"NO-COMMUNITY-ANSWER-ACCOUNT\", \"status\": \"OPEN\", \"raised_by\": \"ACQUISITION\", \"opened_at\": 1794134205.9561226, \"reports\": 11, \"title\": \"Operator batch: 3 valid AI-disclosed messages await per-item approval (trivia item 1 WITHDRAWN; item 2 corrected)\", \"category\": \"ACCOUNT\", \"needs_founder\": true, \"detail\": \"Updated 2026-11-10 (WEBSITE-OFFER-HANDOFF-SYNC). Item 1 (r/forhire trivia) is WITHDRAWN under L146: do not contact that requester by any route. Valid items, each needing separate operator approval of the exact text, recipient and identity: item 2 website cleanup. Use ONLY the corrected message in products/services/diversified-offers/operator-batch.md section 2 (sha256 8e1f1409...), which is identical to website-verification/proposal-corrected.md (message sha256 5fef54f3...). The earlier GPU, HTML/CSS-validity and preselected-repair text is superseded and must not be sent. Item 2 is a Reddit reply by r/forhire convention; the post names no explicit route. It needs an approved AI-disclosed Reddit account. The operator should confirm L146 does not cover Reddit replies generally. The buyer's availability and the USD currency are unconfirmed. Item 3: DigitalPress documentation QA (same file, section 3; email, recipient not resolved, general support route). Item 4: Maze Studio catalogue-QA email (products/services/catalogue-agency-prospects/distribution-handoff/proposed-message.md, sha256 dca202ac...). Evidence: handoff-sync/consistency-result.json (16/16) and handoff-sync/operator-batch.diff. Payment and acceptance are separate dependencies: a USD route for non-Canadian buyers, and CAD Interac order creation/acceptance under SERVICE-PAYMENT-COLLECTION. Agents will not post, DM or email. Reconsider when a buyer replies, a post closes, or the operator declines or explicitly reverses L146.\", \"mission_id\": \"WEBSITE-OFFER-HANDOFF-SYNC\", \"expected_gain\": \"One explicit paid request (~USD30, currency unconfirmed) plus two cold CAD pilots (CAD40, CAD60). Reply, acceptance, order and receipt are all unobserved.\", \"last_reported_by\": \"ACQUISITION\", \"last_reported_at\": 1794274637.4911828}",
+  "request": {
+    "id": "TASK-179427456114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T01:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "raise_blocker",
+      "blocker_id": "NO-COMMUNITY-ANSWER-ACCOUNT",
+      "agent_id": "ACQUISITION",
+      "title": "Operator batch: 3 valid AI-disclosed messages await per-item approval (trivia item 1 WITHDRAWN; item 2 corrected)",
+      "category": "ACCOUNT",
+      "needs_founder": true,
+      "detail": "Updated 2026-11-10 (WEBSITE-OFFER-HANDOFF-SYNC). Item 1 (r/forhire trivia) is WITHDRAWN under L146: do not contact that requester by any route. Valid items, each needing separate operator approval of the exact text, recipient and identity: item 2 website cleanup. Use ONLY the corrected message in products/services/diversified-offers/operator-batch.md section 2 (sha256 8e1f1409...), which is identical to website-verification/proposal-corrected.md (message sha256 5fef54f3...). The earlier GPU, HTML/CSS-validity and preselected-repair text is superseded and must not be sent. Item 2 is a Reddit reply by r/forhire convention; the post names no explicit route. It needs an approved AI-disclosed Reddit account. The operator should confirm L146 does not cover Reddit replies generally. The buyer's availability and the USD currency are unconfirmed. Item 3: DigitalPress documentation QA (same file, section 3; email, recipient not resolved, general support route). Item 4: Maze Studio catalogue-QA email (products/services/catalogue-agency-prospects/distribution-handoff/proposed-message.md, sha256 dca202ac...). Evidence: handoff-sync/consistency-result.json (16/16) and handoff-sync/operator-batch.diff. Payment and acceptance are separate dependencies: a USD route for non-Canadian buyers, and CAD Interac order creation/acceptance under SERVICE-PAYMENT-COLLECTION. Agents will not post, DM or email. Reconsider when a buyer replies, a post closes, or the operator declines or explicitly reverses L146.",
+      "mission_id": "WEBSITE-OFFER-HANDOFF-SYNC",
+      "expected_gain": "One explicit paid request (~USD30, currency unconfirmed) plus two cold CAD pilots (CAD40, CAD60). Reply, acceptance, order and receipt are all unobserved."
+    },
+    "description": "Broker action during THINK-1794274561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427456114",
+  "input_sha256": "1e80248a038ab8486317b3413729d87dc310d1679f6f3068937627e0b444c864"
+}
