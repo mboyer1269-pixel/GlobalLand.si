@@ -1,0 +1,20 @@
+{
+  "status": "DONE",
+  "output": "{\"status\": \"DRY_RUN\", \"site\": \"invoice-preflight\", \"review_digest\": \"7ba22212542526856a90a68a43ecf350f1add620a4f50ae6213ed0dea5c2386e\", \"files\": 4, \"bytes\": 9831, \"index_sha256\": \"f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62\", \"note\": \"A review APPROVE of subject site:invoice-preflight with this review_digest, recorded in another turn by another provider, by Grok or by the founder, is needed to go online.\"}",
+  "request": {
+    "id": "TASK-179433216214",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T17:36:02Z",
+    "action": "PUBLISH_SITE",
+    "args": {
+      "site": "invoice-preflight",
+      "dry_run": true
+    },
+    "description": "Broker action during THINK-1794332162",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179433216214",
+  "input_sha256": "78a1bf62c05afb38c8e39a9e30f59b9cf039ba04b38972030e1f16a87f6dab65"
+}
