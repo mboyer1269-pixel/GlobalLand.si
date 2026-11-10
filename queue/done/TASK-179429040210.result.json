@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-QA-DUPIMG-WORDING-FIX\", \"goal\": \"Address AUDITOR NEEDS_WORK seq 36 on site:shopify-catalogue-example digest f65818d4...: the EN and FR input-only sentences promise line numbers for duplicate image rows, but transform.py reports them per style ('style X: same image URL used twice') without a line number. Make only that wording narrower in EN and FR (duplicate images reported per product style and located by hand). Change nothing else. Save diff and verification (only those two spans differ from candidate 59b8bd73...), run PUBLISH_SITE dry_run, hand exact digest to an independent reviewer. No deployment, outreach, inventory or features. Preserve all deadlines.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179429040210",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-10T06:00:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "create_mission",
+      "mission_id": "CATALOGUE-QA-DUPIMG-WORDING-FIX",
+      "goal": "Address AUDITOR NEEDS_WORK seq 36 on site:shopify-catalogue-example digest f65818d4...: the EN and FR input-only sentences promise line numbers for duplicate image rows, but transform.py reports them per style ('style X: same image URL used twice') without a line number. Make only that wording narrower in EN and FR (duplicate images reported per product style and located by hand). Change nothing else. Save diff and verification (only those two spans differ from candidate 59b8bd73...), run PUBLISH_SITE dry_run, hand exact digest to an independent reviewer. No deployment, outreach, inventory or features. Preserve all deadlines.",
+      "agent_id": "ACQUISITION",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "priority": 1
+    },
+    "description": "Broker action during THINK-1794290402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179429040210",
+  "input_sha256": "401bf10b35f8110f32472914c9bfce8eeae594b213074222518bf3577cf1aebc"
+}
