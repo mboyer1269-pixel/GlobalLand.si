@@ -1,0 +1,10 @@
+--- procedure.md.orig
++++ procedure.md
+@@ -7,6 +7,7 @@
+ 
+ 1. Input validation (always): python3 transform.py --variants v.csv --images i.csv --out ours.csv --report rep.json
+    Exit 2 means report every rep.json errors[] line verbatim (they are line-numbered). Exit 0 means the input passed.
++   1b. Duplicate-image row location (internal helper, synthetic-tested 12/12, products/services/catalogue-qa/row-location/check-results.json): if rep.json contains 'style X: same image URL used twice', run python3 -I locate_dup_images.py i.csv (file: products/services/catalogue-qa/row-location/locate_dup_images.py). Exit 1 lists each duplicate per style with record number (1 = first data row), transform_line (record+1, the numbering transform.py uses), physical file lines and all field values; quote them in the reply. Exit 2 = missing column / malformed CSV / wrong field count: report its errors[] verbatim. cross_style_reuse is information only (transform.py does not reject it). Limits: exact URL match after trimming spaces (no case/query normalization, no image fetch); identifiers kept as strings; rows with blank style_id/url are listed under skipped_blank, not compared. transform.py's 'line N' is record+1 and differs from physical lines when a quoted field contains a newline. Human review time is unmeasured.
+ 2. Preservation checks (only if p.csv was given): python3 verify_example.py v.csv i.csv p.csv
+    For each failed check, compare p.csv rows with v.csv/i.csv by SKU and list the affected SKUs and values by hand.
+    header_matches_documented_names / utf8_no_bom_lf_only compare against OUR column subset and LF endings. Report them as a format difference, not a defect.
