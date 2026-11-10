@@ -1,0 +1,26 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-QA-DUPIMG-REVIEW\", \"goal\": \"In an eligible independent provider turn (not the producer/publisher provider), review site:shopify-catalogue-example at exact digest d36fc8375efe9e1b5073093f999d324d0c7717d7a367912aa34b0069637dc3a8 (dry_run TASK-179429040213, index sha256 57b7f257...). Change vs NEEDS_WORK candidate 59b8bd73... (seq 36): only the EN and FR input-only parentheticals now say duplicate image URLs are reported per product style without a line number and located by hand. Evidence: products/services/catalogue-qa/offer-correction-2/index.diff and verification.json (TASK-179429040212, reverse restores 59b8bd73...). Independently check against actual transform.py output, reproduce dry_run, save and read evidence, record APPROVE or NEEDS_WORK, complete with lease and lesson. Do not edit or deploy. Approval establishes no demand or revenue. Preserve all deadlines.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/reviews/catalogue-qa-dupimg/evidence.json\"]}",
+  "request": {
+    "id": "TASK-179429400614",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-10T07:00:06Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "CATALOGUE-QA-DUPIMG-REVIEW",
+      "agent_id": "AUDITOR",
+      "lease_token": "WZQXiGT20JrguhW1Z8uhN1Ced-tFQB2U",
+      "evidence": [
+        "products/reviews/catalogue-qa-dupimg/evidence.json"
+      ],
+      "lesson": "Executing the actual duplicate-image case confirmed the narrowed EN/FR wording; reverse comparison and historical hashes bounded the correction to two spans, and 12 fixture checks passed. The prior defect was an overbroad line-number promise, not a missing tool feature. Next time describe diagnostics at their observed granularity before release. Approval is release evidence only, not acquisition, delivery or revenue."
+    },
+    "description": "Broker action during THINK-1794294006",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179429400614",
+  "input_sha256": "48f8a8114d8daf52390274f75e78ac97dd09902863f4f48dfdcd950882db9f4d"
+}
