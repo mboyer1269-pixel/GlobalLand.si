@@ -137,27 +137,33 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-10T01:37:39Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 359,
-    "turns_without_verified_revenue": 359,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 360,
+    "turns_without_verified_revenue": 360,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-10T01:37:39Z",
-    "last_outcome_turn": "THINK-1794274204",
-    "last_productive_turn": "THINK-1794274204",
-    "last_turn": "THINK-1794274561",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794276002",
+    "last_productive_turn": "THINK-1794276002",
+    "last_turn": "THINK-1794276002",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "WEBSITE-OFFER-HANDOFF-SYNC"
+      ],
+      "new_products": [
+        "products/services/diversified-offers/handoff-sync/consistency-result.json",
+        "products/services/diversified-offers/handoff-sync/operator-batch-before.md",
+        "products/services/diversified-offers/handoff-sync/operator-batch.diff"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
