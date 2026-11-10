@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"NEEDS_WORK\",\n  \"reverse_baseline_sha256\": \"ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28\",\n  \"fixture_verification\": {\n    \"rows\": 12,\n    \"products\": 2,\n    \"checks\": {\n      \"utf8_no_bom_lf_only\": true,\n      \"header_matches_documented_names\": true,\n      \"no_product_split_across_files\": true,\n      \"handle_rows_contiguous\": true,\n      \"title_only_on_first_row\": true,\n      \"sku_unique\": true,\n      \"identifiers_preserved_sku_barcode_color_size_price\": true,\n      \"color_size_combo_unique_per_product\": true,\n      \"image_positions_1_to_n\": true,\n      \"all_input_images_present_once_per_product\": true,\n      \"variant_image_is_first_image_of_its_color\": true,\n      \"image_only_rows_have_no_variant_fields\": true\n    },\n    \"failed\": []\n  },\n  \"duplicate_image_errors\": [\n    \"style SH-100: same image URL used twice\"\n  ],\n  \"finding\": \"EN and FR promise line numbers for duplicate image rows. Actual transform.build emits style-level same image URL used twice with no line number. Narrow this promise or explicitly say manual row location applies to duplicate images too. Other three requested distinctions are supported by source inspection.\",\n  \"scope\": \"Independent scoped text review; no edits or deployment; no demand or revenue evidence.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/catalogue-qa-correction/evidence.json",
+    "products/receipts/TASK-179428860311.json"
+  ],
+  "request": {
+    "id": "TASK-179428860311",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-10T05:30:03Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,hashlib,subprocess,tempfile\ns=pathlib.Path('products/sites/shopify-catalogue-example'); d=pathlib.Path('products/services/catalogue-qa/offer-correction/index.diff').read_text(); p=s/'index.html'; lines=p.read_text().splitlines(keepends=True); old=[];new=[]\nfor x in d.splitlines(keepends=True):\n if x.startswith('-') and not x.startswith('---'): old.append(x[1:])\n if x.startswith('+') and not x.startswith('+++'): new.append(x[1:])\nr=p.read_text()\nfor a,b in zip(new,old):\n assert r.count(a)==1;r=r.replace(a,b,1)\nh=hashlib.sha256(r.encode()).hexdigest(); assert h=='ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28'\nimport sys;sys.path.insert(0,str(s));import transform\nv=transform.read(s/'fixtures/before-variants.csv',transform.VREQ);i=transform.read(s/'fixtures/before-images.csv',transform.IREQ);i.append(dict(i[0]));_,errors,_=transform.build(v,i);assert any('same image URL used twice' in e for e in errors)\nq=subprocess.run(['python3',str(s/'verify_example.py'),str(s/'fixtures/before-variants.csv'),str(s/'fixtures/before-images.csv'),str(s/'fixtures/after-shopify.csv')],capture_output=True,text=True);assert q.returncode==0\nout={'verdict':'NEEDS_WORK','reverse_baseline_sha256':h,'fixture_verification':json.loads(q.stdout),'duplicate_image_errors':errors,'finding':'EN and FR promise line numbers for duplicate image rows. Actual transform.build emits style-level same image URL used twice with no line number. Narrow this promise or explicitly say manual row location applies to duplicate images too. Other three requested distinctions are supported by source inspection.','scope':'Independent scoped text review; no edits or deployment; no demand or revenue evidence.'}\nf=pathlib.Path('products/reviews/catalogue-qa-correction/evidence.json');f.parent.mkdir(parents=True,exist_ok=True);f.write_text(json.dumps(out,indent=2));print(f.read_text())"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/",
+        "products/services/catalogue-qa/offer-correction/index.diff"
+      ],
+      "outputs": [
+        "products/reviews/catalogue-qa-correction/evidence.json"
+      ],
+      "mission_id": "CATALOGUE-QA-CORRECTION-REVIEW"
+    },
+    "description": "Broker action during THINK-1794288603",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179428860311",
+  "input_sha256": "8ea8c419735eb88907167f8809cd95ff421febc1bfb951fbe52a7a17c019e26a"
+}

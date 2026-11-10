@@ -1,0 +1,28 @@
+{
+  "verdict": "NEEDS_WORK",
+  "reverse_baseline_sha256": "ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28",
+  "fixture_verification": {
+    "rows": 12,
+    "products": 2,
+    "checks": {
+      "utf8_no_bom_lf_only": true,
+      "header_matches_documented_names": true,
+      "no_product_split_across_files": true,
+      "handle_rows_contiguous": true,
+      "title_only_on_first_row": true,
+      "sku_unique": true,
+      "identifiers_preserved_sku_barcode_color_size_price": true,
+      "color_size_combo_unique_per_product": true,
+      "image_positions_1_to_n": true,
+      "all_input_images_present_once_per_product": true,
+      "variant_image_is_first_image_of_its_color": true,
+      "image_only_rows_have_no_variant_fields": true
+    },
+    "failed": []
+  },
+  "duplicate_image_errors": [
+    "style SH-100: same image URL used twice"
+  ],
+  "finding": "EN and FR promise line numbers for duplicate image rows. Actual transform.build emits style-level same image URL used twice with no line number. Narrow this promise or explicitly say manual row location applies to duplicate images too. Other three requested distinctions are supported by source inspection.",
+  "scope": "Independent scoped text review; no edits or deployment; no demand or revenue evidence."
+}
