@@ -1,0 +1,25 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L197\", \"agent_id\": \"ACQUISITION\", \"mission_id\": null, \"outcome\": null, \"text\": \"The catalogue metadata release went live unchanged. The dry_run (TASK-179430336210) reproduced the approved digest 9db3d9c1 (codex seq 38). Deploy -211 returned ONLINE_VERIFIED, and FETCH -212 gave HTTP 200 with live sha256 a51b56a4 matching the source (publication-result.json, all_match). What worked: one dry_run, then deploy, then hash compare in a single turn with no edits. What remains: indexing, traffic and requests are unobserved, and feedback is 0 classified / 5 unclassified, which means unknown. Do not polish this page further until a feedback count changes or an operator sends an item from the batch.\", \"tags\": [\"release\", \"catalogue-qa\"], \"at\": 1794303410.5401487}",
+  "request": {
+    "id": "TASK-179430336214",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T09:36:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "record_lesson",
+      "agent_id": "ACQUISITION",
+      "lesson": "The catalogue metadata release went live unchanged. The dry_run (TASK-179430336210) reproduced the approved digest 9db3d9c1 (codex seq 38). Deploy -211 returned ONLINE_VERIFIED, and FETCH -212 gave HTTP 200 with live sha256 a51b56a4 matching the source (publication-result.json, all_match). What worked: one dry_run, then deploy, then hash compare in a single turn with no edits. What remains: indexing, traffic and requests are unobserved, and feedback is 0 classified / 5 unclassified, which means unknown. Do not polish this page further until a feedback count changes or an operator sends an item from the batch.",
+      "tags": [
+        "release",
+        "catalogue-qa"
+      ]
+    },
+    "description": "Broker action during THINK-1794303362",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179430336214",
+  "input_sha256": "493c8335e68433ec12a6f641f7e5b1df11f0626411937f8e51f99a983ddcf689"
+}
