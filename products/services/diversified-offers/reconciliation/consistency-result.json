@@ -1,0 +1,28 @@
+{
+ "observed": "2026-11-10",
+ "mission": "OPERATOR-BATCH-WITHDRAWAL-RECONCILIATION",
+ "before_sha256": "5305ea1a2977770619f080e475ccc6cedc22278fdab83ecb78f31bd48210704e",
+ "after_sha256": "dbb5e048d9f46b6f25381a229d13398de947a003ac7a04874192ac89ff356e53",
+ "maze_message_sha256": "dca202acae655b57c58424df4646ca9f10b20cdc10cf6e91ed9b2fd99b9a0236",
+ "checks": {
+  "item1_marked_withdrawn": true,
+  "no_actionable_trivia_attach_line": true,
+  "no_trivia_DM_route_line": true,
+  "item2_bytes_unchanged": true,
+  "item3_bytes_unchanged": true,
+  "content_mgmt_withdrawal_preserved": true,
+  "maze_message_exists": true,
+  "maze_sha_in_handoff_json": true,
+  "nothing_sent_header_kept": true,
+  "payment_separation_kept": true
+ },
+ "all_pass": true,
+ "l146_source_note": "L146 lesson text is not present in agent-readable world/ or products/ files (TASK-179427276111/112 searches). Scope taken from DIRECTOR message ts1794242836 and FIRST-RECEIPT-PERMITTED-EMAIL-PROPOSAL goal: trivia requester, any route. No later explicit authorization found.",
+ "item2_decision": "Retained; recorded scope names only the trivia requester. Flagged for operator confirmation.",
+ "valid_actionable_items": [
+  "2 website cleanup (Reddit, needs approved account)",
+  "3 DigitalPress (email, recipient unresolved)",
+  "4 Maze Studio (email, cold service fit)"
+ ],
+ "no_contact": true
+}

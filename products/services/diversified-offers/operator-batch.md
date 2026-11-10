@@ -2,11 +2,11 @@
 
 Prepared by autonomous AI agents (ACQUISITION). Each item needs separate explicit operator approval of the exact text and route. Agents send nothing. No order, payment or reply exists for any item.
 
-## 1. Trivia paid trial (strongest; already prepared)
-- Source: https://www.reddit.com/r/forhire/comments/1xqzs02/ (2026-11-08T14:33Z), buyer-stated USD 50-75 per 100 questions.
-- Route: Reddit DM from a founder-approved AI-disclosed account (NO-COMMUNITY-ANSWER-ACCOUNT).
-- Message: products/services/first-receipt/proposal-trivia-en.md section 8. Attach trivia-sample/sample-v3.csv only (Arabic AI-drafted, not native-reviewed).
-- Payment: USD route needed; Interac CAD likely incompatible.
+## 1. WITHDRAWN - Trivia paid trial (do NOT send by any route)
+- Status 2026-11-10: withdrawn. The DIRECTOR message of 2026-11-10 (ts 1794242836) and mission FIRST-RECEIPT-PERMITTED-EMAIL-PROPOSAL record that L146/operator correction withdrew the prohibited Reddit trivia outreach: "do not contact that requester anywhere" / "No ... Reddit trivia contact by any route".
+- No later explicit authorization supersedes it. Later work (sample-v2/v3, TRIVIA-MESSAGE-CORRECTION, independent QA) corrected sample quality only and itself stated no DM/contact; quality corrections do not restore outreach permission.
+- Files proposal-trivia-en.md and trivia-sample/ are kept as historical artifacts only, not as a send candidate.
+- Reconsider only if the operator/founder explicitly and in writing reverses L146 for this requester.
 
 ## 2. Vibe-coded website cleanup (explicit paid request)
 - Source: https://www.reddit.com/r/forhire/comments/1xp9pdj/hiring_i_vibecoded_a_website_on_chatgpt_now_i/
@@ -43,7 +43,8 @@ Hello DigitalPress team, I am writing on behalf of GlobalLand, where autonomous 
 Do NOT send. Post text matches common recruitment-scam signals: no experience required, fixed weekly pay for vague content work, publish/upload materials following instructions to be revealed only by DM, unsolicited no-fee assurance, details withheld until private message. Legitimacy unverifiable. Also the role is daily staffing, which we cannot supply; the narrowed offer would misfit. Risk to founder identity outweighs CAD25 hypothesis.
 
 ## Operator decisions needed
-1. Approve/decline each message 1-3 individually.
+1. Approve/decline each currently valid message individually: item 2, item 3 (this file) and item 4 (Maze, products/services/catalogue-agency-prospects/distribution-handoff/proposed-message.md). Item 1 is withdrawn and needs no decision.
+   Note on item 2: the recorded L146 scope names only the trivia requester; L146 full text is not readable by agents. Operator should confirm L146 does not also cover Reddit replies generally before any item-2 send.
 2. For Reddit items: an approved AI-disclosed account (blocker NO-COMMUNITY-ANSWER-ACCOUNT).
 3. For non-Canadian buyers: a USD-capable payment route, or decline at quote stage.
 4. On a real acceptance: create/accept the order administratively (SERVICE-PAYMENT-COLLECTION).
