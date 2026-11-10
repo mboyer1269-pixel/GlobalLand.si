@@ -1,0 +1,43 @@
+{
+  "status": "DONE",
+  "output": "{'rows': 20, 'variant_rows': 20, 'image_only_rows': 0}\nA_input_only_valid_transform exit 0 out None | err: \nA_input_only_valid_verify_our_output exit 0 out [] | err: \nB_input_only_duplicate_sku exit 2 out None | err: \nB_input_only_duplicate_barcode exit 2 out None | err: \nB_input_only_duplicate_color_size exit 2 out None | err: \nB_input_only_bad_price exit 2 out None | err: \nB_input_only_non_http_image exit 2 out None | err: \nB_input_only_duplicate_image_row exit 2 out None | err: \nC_produced_valid_unchanged exit 0 out [] | err: \nC_produced_barcode_changed exit 1 out ['identifiers_preserved_sku_barcode_color_size_price'] | err: \nC_produced_price_changed exit 1 out ['identifiers_preserved_sku_barcode_color_size_price'] | err: \nC_produced_duplicate_variant_row exit 1 out ['sku_unique', 'identifiers_preserved_sku_barcode_color_size_price', 'color_size_combo_unique_per_product'] | err: \nC_produced_image_removed exit 1 out ['all_input_images_present_once_per_product'] | err: \nC_produced_wrong_variant_image exit 1 out ['variant_image_is_first_image_of_its_color'] | err: \nC_produced_unknown_sku exit 1 out ['identifiers_preserved_sku_barcode_color_size_price'] | err: \nC_produced_variant_row_dropped exit 1 out ['identifiers_preserved_sku_barcode_color_size_price'] | err: \nD_21_rows_transform exit 0 out None | err: \n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/fulfillment/execution-results.json",
+    "products/services/catalogue-qa/fulfillment/synthetic-v.csv",
+    "products/services/catalogue-qa/fulfillment/synthetic-i.csv",
+    "products/services/catalogue-qa/fulfillment/synthetic-ours.csv",
+    "products/receipts/TASK-179428356112.json"
+  ],
+  "request": {
+    "id": "TASK-179428356112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-10T04:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import csv,io,json,os,shutil,subprocess,sys,tempfile,hashlib,platform\nSRC='products/sites/shopify-catalogue-example/'\nOUT='products/services/catalogue-qa/fulfillment/'\nos.makedirs(OUT,exist_ok=True)\nd=tempfile.mkdtemp()\nfor f in ['transform.py','verify.py','verify_example.py']: shutil.copy(SRC+f,d)\nhashes={f:hashlib.sha256(open(SRC+f,'rb').read()).hexdigest() for f in ['transform.py','verify.py','verify_example.py']}\nVH='style_id,title,color,size,sku,barcode,price,vendor,product_type,tags'\nvar=[]\nn=0\nfor sid,title,colors,sizes in [('SYN-A','Synthetic Boot A',['Black','Tan'],['40','41','42','43','44']),('SYN-B','Synthetic Bag B',['Red','Blue'],['S','M','L','XL','XXL'])]:\n  for c in colors:\n    for s in sizes:\n      n+=1; var.append([sid,title,c,s,'%s-%s-%s'%(sid,c[:2].upper(),s),'0000000%06d'%n,'%d.00'%(50+n),'SynVendor','Shoes' if sid=='SYN-A' else 'Bags','synthetic'])\nimg=[]\nfor sid,colors in [('SYN-A',['Black','Tan']),('SYN-B',['Red','Blue'])]:\n  p=0\n  for c in colors:\n    for k in range(2):\n      p+=1; img.append([sid,c,str(p),'https://example.com/img/%s-%s-%d.jpg'%(sid,c,k+1)])\ndef wcsv(path,hdr,rows):\n  with open(path,'w',newline='',encoding='utf-8') as f:\n    w=csv.writer(f,lineterminator='\\n'); w.writerow(hdr.split(',')); w.writerows(rows)\ndef run(args):\n  r=subprocess.run([sys.executable,'-I']+args,cwd=d,capture_output=True,text=True)\n  return {'argv':args,'exit':r.returncode,'stdout':r.stdout[-1500:],'stderr':r.stderr[-1500:]}\nres={'label':'SYNTHETIC PREPARATION ONLY - no customer data, no customer, no order','runtime':{'python':platform.python_version(),'tool_hashes':hashes},'variant_rows':len(var),'image_rows':len(img),'cases':{}}\nwcsv(d+'/v.csv',VH,var); wcsv(d+'/i.csv','style_id,color,position,url',img)\nres['cases']['A_input_only_valid_transform']=run(['transform.py','--variants','v.csv','--images','i.csv','--out','ours.csv','--report','rep.json'])\nres['cases']['A_input_only_valid_verify_our_output']=run(['verify_example.py','v.csv','i.csv','ours.csv'])\ndef incase(name,vm=None,im=None):\n  v2=[list(r) for r in var]; i2=[list(r) for r in img]\n  if vm: vm(v2)\n  if im: im(i2)\n  wcsv(d+'/v_%s.csv'%name,VH,v2); wcsv(d+'/i_%s.csv'%name,'style_id,color,position,url',i2)\n  res['cases']['B_input_only_'+name]=run(['transform.py','--variants','v_%s.csv'%name,'--images','i_%s.csv'%name,'--out','o_%s.csv'%name,'--report','r_%s.json'%name])\ndef dupsku(v): v[1][4]=v[0][4]\ndef dupbc(v): v[1][5]=v[0][5]\ndef dupcs(v): v[1][3]=v[0][3]\ndef badprice(v): v[2][6]='12,50'\ndef badurl(i): i[0][3]='ftp://example.com/x.jpg'\ndef dupimg(i): i.append(list(i[0]))\nincase('duplicate_sku',dupsku); incase('duplicate_barcode',dupbc); incase('duplicate_color_size',dupcs); incase('bad_price',badprice); incase('non_http_image',None,badurl); incase('duplicate_image_row',None,dupimg)\nwith open(d+'/ours.csv',newline='',encoding='utf-8') as f: rr=list(csv.reader(f))\nhdr,body=rr[0],rr[1:]\nH={h:k for k,h in enumerate(hdr)}\nvrows=[k for k,r in enumerate(body) if r[H['SKU']]]\nres['output_shape']={'rows':len(body),'variant_rows':len(vrows),'image_only_rows':sum(1 for r in body if not r[H['SKU']])}\ndef outcase(name,fn):\n  b=[list(r) for r in body]; fn(b)\n  with open(d+'/p_%s.csv'%name,'w',newline='',encoding='utf-8') as f:\n    w=csv.writer(f,lineterminator='\\n'); w.writerow(hdr); w.writerows(b)\n  res['cases']['C_produced_'+name]=run(['verify_example.py','v.csv','i.csv','p_%s.csv'%name])\noutcase('valid_unchanged',lambda b:None)\ndef m_bc(b): b[vrows[3]][H['Barcodes']]='9999999999999'\ndef m_pr(b): b[vrows[4]][H['Price']]='99.99'\ndef m_dup(b): b.insert(vrows[5]+1,list(b[vrows[5]]))\ndef m_img_missing(b):\n  k=[j for j,r in enumerate(b) if r[H['Product image URL']]][-1]\n  if b[k][H['SKU']]:\n    b[k][H['Product image URL']]=''; b[k][H['Image position']]=''; b[k][H['Image alt text']]=''\n  else: del b[k]\ndef m_varimg(b): b[vrows[6]][H['Variant image URL']]='https://example.com/img/other.jpg'\ndef m_unknown_sku(b): b[vrows[7]][H['SKU']]='NOT-IN-INPUT'\ndef m_drop_variant(b): del b[vrows[-1]]\nfor nm,fn in [('barcode_changed',m_bc),('price_changed',m_pr),('duplicate_variant_row',m_dup),('image_removed',m_img_missing),('wrong_variant_image',m_varimg),('unknown_sku',m_unknown_sku),('variant_row_dropped',m_drop_variant)]: outcase(nm,fn)\nv21=var+[['SYN-B','Synthetic Bag B','Green','S','SYN-B-GR-S','0000000000099','70.00','SynVendor','Bags','synthetic']]\nwcsv(d+'/v21.csv',VH,v21)\nres['cases']['D_21_rows_transform']=run(['transform.py','--variants','v21.csv','--images','i.csv','--out','o21.csv','--report','r21.json'])\nfor f in ['v.csv','i.csv','ours.csv']: shutil.copy(d+'/'+f,OUT+'synthetic-'+f)\njson.dump(res,open(OUT+'execution-results.json','w'),indent=1)\nprint(res['output_shape'])\nfor k,c in res['cases'].items():\n  s=c['stdout']\n  try: fl=json.loads(s).get('failed')\n  except Exception: fl=s.strip()[:200].replace(chr(10),' ')\n  print(k,'exit',c['exit'],'out',fl,'| err:',c['stderr'].strip().splitlines()[-1][:200] if c['stderr'].strip() else '')\n"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/transform.py",
+        "products/sites/shopify-catalogue-example/verify.py",
+        "products/sites/shopify-catalogue-example/verify_example.py"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/fulfillment/execution-results.json",
+        "products/services/catalogue-qa/fulfillment/synthetic-v.csv",
+        "products/services/catalogue-qa/fulfillment/synthetic-i.csv",
+        "products/services/catalogue-qa/fulfillment/synthetic-ours.csv"
+      ],
+      "mission_id": "CATALOGUE-QA-FULFILLMENT-EXECUTION"
+    },
+    "description": "Broker action during THINK-1794283561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179428356112",
+  "input_sha256": "e9a3fedc72634e8fded07b61febf97799691fbe0ffbde5b67f50f2bfd1e03e96"
+}
