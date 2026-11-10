@@ -48,14 +48,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "ACCOUNT",
-      "title": "Operator batch: 3 valid AI-disclosed messages await per-item approval (trivia item 1 WITHDRAWN; item 2 corrected)",
-      "detail": "Updated 2026-11-10 (WEBSITE-OFFER-HANDOFF-SYNC). Item 1 (r/forhire trivia) is WITHDRAWN under L146: do not contact that requester by any route. Valid items, each needing separate operator approval of the exact text, recipient and identity: item 2 website cleanup. Use ONLY the corrected message in products/services/diversified-offers/operator-batch.md section 2 (sha256 8e1f1409...), which is identical to website-verification/proposal-corrected.md (message sha256 5fef54f3...). The earlier GPU, HTML/CSS-validity and preselected-repair text is superseded and must not be sent. Item 2 is a Reddit reply by r/forhire convention; the post names no explicit route. It needs an approved AI-disclosed Reddit account. The operator should confirm L146 does not cover Reddit replies generally. The buyer's availability and the USD currency are unconfirmed. Item 3: DigitalPress documentation QA (same file, section 3; email, recipient not resolved, general support route). Item 4: Maze Studio catalogue-QA email (products/services/catalogue-agency-prospects/distribution-handoff/proposed-message.md, sha256 dca202ac...). Evidence: handoff-sync/consistency-result.json (16/16) and handoff-sync/operator-batch.diff. Payment and acceptance are separate dependencies: a USD route for non-Canadian buyers, and CAD Interac order creation/acceptance under SERVICE-PAYMENT-COLLECTION. Agents will not post, DM or email. Reconsider when a buyer replies, a post closes, or the operator declines or explicitly reverses L146.",
+      "title": "Operator batch: item 2 (r/forhire website) needs an ESTABLISHED Reddit account (>=20 days, active, karma); items 3-4 email await approval",
+      "detail": "Updated 2026-11-10 (TASK-179427630210/211, products/services/diversified-offers/website-verification/post-status-20261110.json). Observed: post 1xp9pdj is still listed. The thread feed contains 80 AutoModerator removal notices quoting 'Your account has to be at least 20 days old and have recent regular activity on reddit ... to comment on [Hiring] ... posts. There is also an undisclosed minimum karma requirement', plus 80 deleted comments. Dependent: item 2 cannot be sent from a new account; it needs an existing established, AI-disclosed operator account, and it competes with many responders. Strategic conclusion: item 2 has low expected value. Prefer items 3 (DigitalPress documentation QA, operator-batch.md section 3) and 4 (Maze Studio catalogue-QA email, distribution-handoff/proposed-message.md sha256 dca202ac...), which need only operator approval of exact text, recipient and identity. Item 1 (trivia) is still WITHDRAWN under L146. Item 2 message unchanged (sha256 5fef54f3...) if an established account exists. Payment and acceptance remain separate (USD route; CAD Interac admin order under SERVICE-PAYMENT-COLLECTION). Nothing sent; no reply, order or revenue. Reconsider when the operator approves or declines an item, a buyer replies, or the post closes.",
       "mission_id": "WEBSITE-OFFER-HANDOFF-SYNC",
-      "expected_gain": "One explicit paid request (~USD30, currency unconfirmed) plus two cold CAD pilots (CAD40, CAD60). Reply, acceptance, order and receipt are all unobserved.",
+      "expected_gain": "Two cold CAD pilots (CAD40, CAD60) via email plus a low-probability ~USD30 Reddit request. Reply, acceptance, order and receipt unobserved.",
       "raised_by": "ACQUISITION",
-      "reports": 11,
+      "reports": 12,
       "opened_at": "2026-11-08T10:36:45Z",
-      "last_reported_at": "2026-11-10T01:37:17Z"
+      "last_reported_at": "2026-11-10T02:05:46Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -137,33 +137,27 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-10T02:06:01Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 360,
-    "turns_without_verified_revenue": 360,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 361,
+    "turns_without_verified_revenue": 361,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-10T02:06:01Z",
     "last_outcome_turn": "THINK-1794276002",
     "last_productive_turn": "THINK-1794276002",
-    "last_turn": "THINK-1794276002",
+    "last_turn": "THINK-1794276302",
     "last_change": {
-      "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "WEBSITE-OFFER-HANDOFF-SYNC"
-      ],
-      "new_products": [
-        "products/services/diversified-offers/handoff-sync/consistency-result.json",
-        "products/services/diversified-offers/handoff-sync/operator-batch-before.md",
-        "products/services/diversified-offers/handoff-sync/operator-batch.diff"
-      ],
-      "new_product_count": 3,
+      "productive": false,
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
-      "rewritten_count": 1,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
