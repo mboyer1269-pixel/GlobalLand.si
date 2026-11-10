@@ -1,0 +1,84 @@
+{
+ "mission": "AI-AGENT-PAID-TASK-CHANNEL",
+ "observed_utc": "2026-11-10",
+ "verdict": "STOP_BOUNDED_REJECTION",
+ "channels_inspected": 3,
+ "sources": [
+  {
+   "channel": "Superteam Earn (agent listings hypothesis)",
+   "urls": [
+    "https://earn.superteam.fun/skill.md",
+    "https://superteam.fun/earn/skill.md",
+    "https://earn.superteam.fun/agents"
+   ],
+   "tasks": [
+    "TASK-179430510211",
+    "TASK-179430510215",
+    "TASK-179430510217"
+   ],
+   "result": "HTTP 404 on all three guessed URLs; no AI-agent eligibility, task or payout evidence observed. Hypothesis from memory only; even if it exists, settlement is understood to be crypto (USDC) which GlobalLand has no wallet for - unverified."
+  },
+  {
+   "channel": "Algora bounties",
+   "urls": [
+    "https://algora.io/bounties",
+    "https://algora.io/"
+   ],
+   "tasks": [
+    "TASK-179430510212",
+    "TASK-179430510218"
+   ],
+   "result": "404 on /bounties; homepage FETCH rejected by host: secret pattern detected; publication blocked (same filter as blocker PUBLIC-DISCOVERY-HOST-REJECTION). Not bypassed. No evidence."
+  },
+  {
+   "channel": "Opire",
+   "urls": [
+    "https://opire.dev/ (served from /home)",
+    "https://opire.dev/faq"
+   ],
+   "tasks": [
+    "TASK-179430510213",
+    "TASK-179430510216"
+   ],
+   "sha256_home": "f195425c4e1d97d8a2267f0937930e3a048c5b462dd713356ee22796f2ecf5bd",
+   "quotations": [
+    {
+     "quote": "Bounties start at $20 USD.",
+     "present_in_saved_page": true
+    },
+    {
+     "quote": "Submit a pull request that solves the associated issue, then claim its bounties.",
+     "present_in_saved_page": true
+    },
+    {
+     "quote": "A claim does not create an automatic payment; the creator arranges payment only if the pull request meets the issue requirements.",
+     "present_in_saved_page": true
+    },
+    {
+     "quote": "Yes. Each bounty creator reviews the submitted pull requests and decides whether one meets the issue requirements before arranging payment.",
+     "present_in_saved_page": true
+    }
+   ],
+   "ai_term_mentions_in_page": 0,
+   "result": "Real paid-bounty channel (USD, min $20), but: no explicit AI-agent eligibility statement observed; claiming requires a GitHub pull request plus an Opire claim (authenticated accounts); payment is arranged by each bounty creator at discretion after review, not escrowed per the quoted text; FAQ page 404 so fees/settlement details unread. No specific current task inspected."
+  }
+ ],
+ "qualifying_opportunity": null,
+ "rejection_reasons": [
+  "No inspected channel shows explicit AI-agent eligibility",
+  "All routes need authenticated GitHub/platform accounts under a founder-authorized identity (blocker BOUNTY-SUBMISSION-ELIGIBILITY)",
+  "Opire payment is creator-discretionary per its own FAQ text"
+ ],
+ "not_done": [
+  "no account creation",
+  "no contact",
+  "no submission",
+  "no sample",
+  "no spending"
+ ],
+ "reconsideration_triggers": [
+  "Founder designates an AI-disclosed GitHub identity and payout route (then Opire/GitHub-issue bounties become eligible to evaluate per issue, checking each repo AI policy)",
+  "A fetchable official page explicitly inviting autonomous AI agents with a fiat payout route",
+  "Host exposes reason for secret-pattern rejections"
+ ]
+}
