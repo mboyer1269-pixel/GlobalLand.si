@@ -1,0 +1,32 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 15, in <module>\nAssertionError\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179434476213",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-10T21:06:02Z",
+    "action": "EXEC",
+    "args": {
+      "inputs": [
+        "products/services/catalogue-qa/",
+        "products/sites/shopify-catalogue-example/"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/measured-delivery/results.json",
+        "products/services/catalogue-qa/measured-delivery/delivery-report.md"
+      ],
+      "mission_id": "CATALOGUE-QA-MEASURED-DELIVERY",
+      "argv": [
+        "python3",
+        "-c",
+        "import csv,io,json,subprocess,sys,time,tempfile\nfrom pathlib import Path\nr=Path('products/services/catalogue-qa'); o=r/'measured-delivery'; o.mkdir(parents=True,exist_ok=True)\ns=Path('products/sites/shopify-catalogue-example').resolve(); f=(r/'fulfillment').resolve(); t=Path(tempfile.mkdtemp()); runs={}\nassert not list(o.glob('*')), 'Equivalent evidence exists: read it first'\ndef run(n,a):\n start=time.monotonic_ns(); p=subprocess.run([sys.executable,*map(str,a)],capture_output=True,text=True)\n runs[n]={'command':[sys.executable,*map(str,a)],'seconds':(time.monotonic_ns()-start)/1e9,'exit':p.returncode,'stdout':p.stdout,'stderr':p.stderr}; return p\nv=f/'synthetic-v.csv'; i=f/'synthetic-i.csv'; prod=f/'synthetic-ours.csv'\nassert run('input_validation',[s/'transform.py','--variants',v,'--images',i,'--out',t/'ours.csv','--report',t/'report.json']).returncode==0\np=run('paired_valid',[s/'verify_example.py',v,i,prod]); good=json.loads(p.stdout); assert p.returncode==0\nrows=list(csv.DictReader(io.StringIO(prod.read_text()))); fields=list(rows[0]); target=next(x for x in rows if x.get('SKU')); baseline=target['Barcodes']; target['Barcodes']='CORRUPTED-SYNTHETIC'\nwith (t/'defect.csv').open('w',newline='') as h:\n w=csv.DictWriter(h,fieldnames=fields,lineterminator='\\n'); w.writeheader(); w.writerows(rows)\np=run('paired_barcode_defect',[s/'verify_example.py',v,i,t/'defect.csv']); bad=json.loads(p.stdout); assert p.returncode==1 and 'identifiers_preserved' in bad['failed']\nsource=next(x for x in csv.DictReader(io.StringIO(v.read_text())) if x['sku']==target['SKU'])\nloc={'SKU':target['SKU'],'produced_data_record':rows.index(target)+1,'field':'Barcodes','source':source['barcode'],'baseline':baseline,'observed':target['Barcodes']}\nassert run('duplicate_image_location_suite',[r/'row-location/run_checks.py']).returncode==0\nsuite=json.loads((r/'row-location/check-results.json').read_text()); assert suite['all_pass']\nn=len(list(csv.DictReader(io.StringIO(v.read_text())))); assert n<=20\nrule='CAD60 is an unvalidated price hypothesis for <=20 variant rows, pasted non-personal text, one bounded revision. Count rows at intake. Preservation/image-mapping checks require source and client-produced rows; input-only receives validation only. Operator creates/accepts paid order. No store access, import guarantee or expansion to 100 rows.'\nres={'label':'SYNTHETIC preparation only','variant_rows':n,'runs':runs,'valid':good,'known_defect':bad,'located_defect':loc,'duplicate_image_suite':{'passed':suite['passed'],'total':suite['total']},'timing_scope':'Single monotonic subprocess wall durations including startup. Suite contains multiple cases. Not total labor or human row-location time.','remaining_effort':'Acquisition, intake interpretation, report review, revision and operator admin remain unmeasured. Prior 2–5.25 hour total scenarios remain assumptions.','acceptance_rule':rule,'unsupported_expansion':'100-row proposal rejected: this test covers only 20 variants.','failed_attempt':'TASK-179434476212 used nonexistent Variant SKU/Variant Barcode headers and stopped. Corrected after reading actual SKU/Barcodes headers.','not_established':['customer delivery','demand','orders','payment','profit','revenue']}\n(o/'results.json').write_text(json.dumps(res,indent=2))\nreport='Catalogue QA — synthetic delivery rehearsal\\nMade by autonomous AI agents / Produit par des agents d’IA autonomes.\\n\\n'+str(n)+' variant rows; valid pair: '+str(len(good['checks']))+' checks passed. Known barcode mutation fails '+', '.join(bad['failed'])+'.\\nLocated by source/produced SKU comparison: '+json.dumps(loc)+'.\\nDuplicate-image locator suite: '+str(suite['passed'])+'/'+str(suite['total'])+'. Actual commands, exits and monotonic durations are in results.json. This single SKU comparison does not validate arbitrary buyer-file row location.\\n\\nHeader/LF checks concern our documented column subset, not Shopify acceptance. No real import or image retrieval tested.\\n'+rule+'\\nNo 100-row scope expansion. Runtime does not establish labor or profit. All remaining effort scenarios are assumptions.\\n\\nFR : Répétition synthétique seulement; erreur de code-barres repérée par SKU. Conservation et correspondance des images exigent les lignes produites; sinon validation des entrées seulement. Maximum 20 variantes, CAD60 hypothétique et une révision limitée; acceptation administrative préalable. Aucun client, paiement ou revenu vérifié.\\n'\n(o/'delivery-report.md').write_text(report)\nprint(json.dumps(res))\n"
+      ]
+    },
+    "description": "Broker action during THINK-1794344762",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179434476213",
+  "input_sha256": "f0383c54a5be2a9cb94e6717eb13356521833e93ad88cd9a6bb4ec8dcae010c5"
+}
