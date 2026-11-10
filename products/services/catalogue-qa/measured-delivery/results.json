@@ -1,0 +1,130 @@
+{
+  "label": "SYNTHETIC ONLY",
+  "runs": {
+    "input_validation": {
+      "command": [
+        "/workspace/products/sites/shopify-catalogue-example/transform.py",
+        "--variants",
+        "/workspace/products/services/catalogue-qa/fulfillment/synthetic-v.csv",
+        "--images",
+        "/workspace/products/services/catalogue-qa/fulfillment/synthetic-i.csv",
+        "--out",
+        "/tmp/tmp7utols61/ours.csv",
+        "--report",
+        "/tmp/tmp7utols61/report.json"
+      ],
+      "seconds": 0.089234285,
+      "exit": 0,
+      "stdout": "{\"ok\": true, \"products\": 2, \"rows\": 20, \"error_count\": 0, \"warning_count\": 0, \"seconds\": 0.001}\n",
+      "stderr": ""
+    },
+    "paired_valid": {
+      "command": [
+        "/workspace/products/sites/shopify-catalogue-example/verify_example.py",
+        "/workspace/products/services/catalogue-qa/fulfillment/synthetic-v.csv",
+        "/workspace/products/services/catalogue-qa/fulfillment/synthetic-i.csv",
+        "/workspace/products/services/catalogue-qa/fulfillment/synthetic-ours.csv"
+      ],
+      "seconds": 0.028735411,
+      "exit": 0,
+      "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": []\n}\n",
+      "stderr": ""
+    },
+    "paired_barcode_defect": {
+      "command": [
+        "/workspace/products/sites/shopify-catalogue-example/verify_example.py",
+        "/workspace/products/services/catalogue-qa/fulfillment/synthetic-v.csv",
+        "/workspace/products/services/catalogue-qa/fulfillment/synthetic-i.csv",
+        "/tmp/tmp7utols61/defect.csv"
+      ],
+      "seconds": 0.076648332,
+      "exit": 1,
+      "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": false,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": [\n  \"identifiers_preserved_sku_barcode_color_size_price\"\n ]\n}\n",
+      "stderr": ""
+    },
+    "existing_duplicate_image_location_suite": {
+      "command": [
+        "products/services/catalogue-qa/row-location/run_checks.py"
+      ],
+      "seconds": 0.990578613,
+      "exit": 0,
+      "stdout": "{\"passed\": 12, \"total\": 12, \"fails\": [], \"transform\": {\"exit\": 2, \"errors\": [\"style SYN-A: same image URL used twice\"], \"pass\": true, \"note\": \"transform.py names the style only; helper adds records 1 and 9 (transform_line 2 and 10)\"}}\n",
+      "stderr": ""
+    }
+  },
+  "variant_rows": 20,
+  "valid": {
+    "rows": 20,
+    "products": 2,
+    "checks": {
+      "utf8_no_bom_lf_only": true,
+      "header_matches_documented_names": true,
+      "no_product_split_across_files": true,
+      "handle_rows_contiguous": true,
+      "title_only_on_first_row": true,
+      "sku_unique": true,
+      "identifiers_preserved_sku_barcode_color_size_price": true,
+      "color_size_combo_unique_per_product": true,
+      "image_positions_1_to_n": true,
+      "all_input_images_present_once_per_product": true,
+      "variant_image_is_first_image_of_its_color": true,
+      "image_only_rows_have_no_variant_fields": true
+    },
+    "failed": []
+  },
+  "known_defect": {
+    "rows": 20,
+    "products": 2,
+    "checks": {
+      "utf8_no_bom_lf_only": true,
+      "header_matches_documented_names": true,
+      "no_product_split_across_files": true,
+      "handle_rows_contiguous": true,
+      "title_only_on_first_row": true,
+      "sku_unique": true,
+      "identifiers_preserved_sku_barcode_color_size_price": false,
+      "color_size_combo_unique_per_product": true,
+      "image_positions_1_to_n": true,
+      "all_input_images_present_once_per_product": true,
+      "variant_image_is_first_image_of_its_color": true,
+      "image_only_rows_have_no_variant_fields": true
+    },
+    "failed": [
+      "identifiers_preserved_sku_barcode_color_size_price"
+    ]
+  },
+  "located_defect": {
+    "SKU": "SYN-A-BL-40",
+    "produced_data_record": 1,
+    "field": "Barcodes",
+    "source": "0000000000001",
+    "baseline": "0000000000001",
+    "observed": "9999999999999"
+  },
+  "row_location_suite": {
+    "passed": 12,
+    "total": 12
+  },
+  "timing_limits": "Single monotonic subprocess durations include startup; suite contains multiple cases. Not human labor or arbitrary buyer-file performance.",
+  "unmeasured": [
+    "acquisition",
+    "intake interpretation",
+    "manual report review",
+    "revision",
+    "operator administration"
+  ],
+  "effort_assumptions": "Prior 2\u20135.25 total hours remain assumptions, not validated by runtime.",
+  "acceptance_rule": "CAD60 unvalidated hypothesis; <=20 variant rows counted at intake, non-personal pasted text, source/images plus produced rows for preservation checks, one bounded revision. Input-only receives validation only. Operator creates and accepts paid order. Refuse store access, import guarantees or larger scope. The proposed 100-row expansion is unsupported.",
+  "failed_attempts": {
+    "TASK-179434476212": "Wrong assumed column names caused StopIteration; read actual headers.",
+    "TASK-179434476213": "Shortened expected check name caused assertion; read actual verifier key."
+  },
+  "not_established": [
+    "customer delivery",
+    "demand",
+    "orders",
+    "payment",
+    "profit",
+    "revenue"
+  ]
+}
