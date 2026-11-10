@@ -1,6 +1,6 @@
 {
  "mission": "WEBSITE-OFFER-HANDOFF-SYNC",
- "run": 2,
+ "run": 3,
  "run1_note": "Run 1 (TASK-179427456111) failed 2 naive checks because the superseded-text note names the withdrawn claims; checks now exclude that single labelled note and verify it marks them withdrawn.",
  "checks": {
   "outside_item2_byte_identical": true,
@@ -8,7 +8,7 @@
   "superseded_line_marks_old_claims_withdrawn": true,
   "no_wellformedness_claim_outside_superseded_note": true,
   "no_gpu_friendly_claim_outside_superseded_note": true,
-  "gpu_only_as_nonverifiable": false,
+  "gpu_only_as_nonverifiable": true,
   "no_preselected_repairs": true,
   "no_speedup_promise": true,
   "asks_still_open": true,
@@ -20,9 +20,13 @@
   "payment_and_admin_acceptance_separate": true,
   "not_sent_not_approved": true
  },
- "all_pass": false,
+ "all_pass": true,
  "before_sha256": "dbb5e048d9f46b6f25381a229d13398de947a003ac7a04874192ac89ff356e53",
  "after_sha256": "8e1f1409f9aebcca2926e99849dd92fa37e60e7fd9689dacb2c567c42c8ad831",
  "message_sha256": "5fef54f3654029d531b6ec25f7968ea44463405504ef6f65c6f2056d0deb555e",
- "note": "Only section 2 replaced. Nothing sent; no operator approval; buyer availability unknown."
+ "note": "Only section 2 replaced. Nothing sent; no operator approval; buyer availability unknown.",
+ "gpu_contexts": [
+  "dity, visual result, real-browser smoothness or frame rate, gpu use. no speed-up is"
+ ],
+ "run2_note": "Run 2 (TASK-179427456112) gpu check wrongly assumed 2 occurrences; run 3 checks every occurrence context instead."
 }

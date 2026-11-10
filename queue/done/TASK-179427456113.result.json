@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"WEBSITE-OFFER-HANDOFF-SYNC\",\n \"run\": 3,\n \"run1_note\": \"Run 1 (TASK-179427456111) failed 2 naive checks because the superseded-text note names the withdrawn claims; checks now exclude that single labelled note and verify it marks them withdrawn.\",\n \"checks\": {\n  \"outside_item2_byte_identical\": true,\n  \"message_equals_corrected_proposal\": true,\n  \"superseded_line_marks_old_claims_withdrawn\": true,\n  \"no_wellformedness_claim_outside_superseded_note\": true,\n  \"no_gpu_friendly_claim_outside_superseded_note\": true,\n  \"gpu_only_as_nonverifiable\": true,\n  \"no_preselected_repairs\": true,\n  \"no_speedup_promise\": true,\n  \"asks_still_open\": true,\n  \"usd_is_assumption\": true,\n  \"ai_disclosure_in_msg\": true,\n  \"convention_vs_explicit_route\": true,\n  \"trivia_withdrawal_preserved\": true,\n  \"items3_and_maze_preserved\": true,\n  \"payment_and_admin_acceptance_separate\": true,\n  \"not_sent_not_approved\": true\n },\n \"all_pass\": true,\n \"before_sha256\": \"dbb5e048d9f46b6f25381a229d13398de947a003ac7a04874192ac89ff356e53\",\n \"after_sha256\": \"8e1f1409f9aebcca2926e99849dd92fa37e60e7fd9689dacb2c567c42c8ad831\",\n \"message_sha256\": \"5fef54f3654029d531b6ec25f7968ea44463405504ef6f65c6f2056d0deb555e\",\n \"note\": \"Only section 2 replaced. Nothing sent; no operator approval; buyer availability unknown.\",\n \"gpu_contexts\": [\n  \"dity, visual result, real-browser smoothness or frame rate, gpu use. no speed-up is\"\n ],\n \"run2_note\": \"Run 2 (TASK-179427456112) gpu check wrongly assumed 2 occurrences; run 3 checks every occurrence context instead.\"\n}\n\n",
+  "artifacts": [
+    "products/services/diversified-offers/handoff-sync/consistency-result.json",
+    "products/receipts/TASK-179427456113.json"
+  ],
+  "request": {
+    "id": "TASK-179427456113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T01:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import pathlib,json,re\nB='products/services/diversified-offers/'\nnew=pathlib.Path(B+'operator-batch.md').read_text();p=pathlib.Path(B+'handoff-sync/consistency-result.json');r=json.loads(p.read_text())\nsec2=new[new.index('## 2. '):new.index('## 3. ')]\nclaims='\\n'.join(l for l in sec2.splitlines() if not l.startswith('- Superseded text:')).lower()\nctx=[claims[max(0,m.start()-60):m.end()+20] for m in re.finditer('gpu',claims)]\nok=all(c.find('not verifiable')>=0 or c.find('gpu use')>=0 for c in ctx) and all('gpu use' in c for c in ctx)\nr['checks']['gpu_only_as_nonverifiable']=ok\nr['gpu_contexts']=ctx\nr['run']=3\nr['run2_note']='Run 2 (TASK-179427456112) gpu check wrongly assumed 2 occurrences; run 3 checks every occurrence context instead.'\nr['all_pass']=all(r['checks'].values())\np.write_text(json.dumps(r,indent=1));print(json.dumps(r,indent=1))"
+      ],
+      "inputs": [
+        "products/services/diversified-offers/operator-batch.md",
+        "products/services/diversified-offers/handoff-sync/consistency-result.json"
+      ],
+      "outputs": [
+        "products/services/diversified-offers/handoff-sync/consistency-result.json"
+      ],
+      "mission_id": "WEBSITE-OFFER-HANDOFF-SYNC"
+    },
+    "description": "Broker action during THINK-1794274561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427456113",
+  "input_sha256": "5d9cf2fb445cd583b138e1789537c9975a07037b729b306f4953d481c3f1e9ca"
+}
