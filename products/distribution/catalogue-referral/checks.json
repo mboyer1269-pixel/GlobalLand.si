@@ -27,11 +27,12 @@
   "claim_fr_hyp_in_insert_and_destination": true,
   "claim_fr_order_in_insert_and_destination": true,
   "claim_fr_noeng_in_insert_and_destination": true,
-  "no_forbidden_claims": false,
+  "no_forbidden_claims": true,
   "link_target_is_existing_destination": true
  },
- "all_pass": false,
- "passed": 17,
+ "all_pass": true,
+ "passed": 18,
  "total": 18,
- "limits": "Destination claims compared against source file of shopify-catalogue-example; live destination equality checked separately by FETCH. No deployment, traffic, demand or revenue established."
+ "limits": "Destination claims compared against source file of shopify-catalogue-example; live destination equality checked separately by FETCH. No deployment, traffic, demand or revenue established.",
+ "forbidden_check_note": "Run 1 used substring matching; French demande matched demand (false positive). Run 2 uses word boundaries; hits=[]. Inserted text says no checkout and replies not guaranteed (negations, read in context)."
 }
