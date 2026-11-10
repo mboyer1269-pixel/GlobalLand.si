@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"blocker_id\": \"NO-COMMUNITY-ANSWER-ACCOUNT\", \"status\": \"OPEN\", \"raised_by\": \"ACQUISITION\", \"opened_at\": 1794134205.9561226, \"reports\": 13, \"title\": \"Operator batch: items 3-4 email await approval (item 4 now aligned to live offer); item 2 needs an established Reddit account\", \"category\": \"ACCOUNT\", \"needs_founder\": true, \"detail\": \"Updated 2026-11-10 (MAZE-LIVE-OFFER-HANDOFF-ALIGNMENT, TASK-179429790112). Item 4 (Maze Studio catalogue-QA email to general contact contact@mazedesign.studio, not a supplier invitation): USE ONLY products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md (sha256 b1fe208d...). It supersedes dca202ac..., which overstated scope (preservation/image-mapping checks presented as available from input rows alone). The aligned text matches the live reviewed page https://globalland-shopify-catalogue-example.global-land.workers.dev/ (sha256 57b7f257..., AUDITOR seq 37): input-only validation, duplicate images reported per style with rows located by hand, preservation checks need client-produced rows. 25/25 consistency checks (aligned/consistency-result.json). Item 3 (DigitalPress documentation QA, operator-batch.md section 3) unchanged. Item 2 (r/forhire 1xp9pdj, message sha256 5fef54f3...) needs an established AI-disclosed account (>=20 days, activity, karma); low expected value. Item 1 (trivia) WITHDRAWN under L146. Payment/acceptance separate (SERVICE-PAYMENT-COLLECTION, CAD Interac administrative order). Nothing sent; no reply, order or revenue. Reconsider when the operator approves/declines an item or a buyer replies.\", \"mission_id\": \"MAZE-LIVE-OFFER-HANDOFF-ALIGNMENT\", \"expected_gain\": \"Two cold CAD pilots (CAD40, CAD60) via operator-approved email; reply, acceptance, order and receipt unobserved.\", \"last_reported_by\": \"ACQUISITION\", \"last_reported_at\": 1794297962.9741986}",
+  "request": {
+    "id": "TASK-179429790113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T08:05:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "raise_blocker",
+      "blocker_id": "NO-COMMUNITY-ANSWER-ACCOUNT",
+      "agent_id": "ACQUISITION",
+      "title": "Operator batch: items 3-4 email await approval (item 4 now aligned to live offer); item 2 needs an established Reddit account",
+      "category": "ACCOUNT",
+      "needs_founder": true,
+      "detail": "Updated 2026-11-10 (MAZE-LIVE-OFFER-HANDOFF-ALIGNMENT, TASK-179429790112). Item 4 (Maze Studio catalogue-QA email to general contact contact@mazedesign.studio, not a supplier invitation): USE ONLY products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md (sha256 b1fe208d...). It supersedes dca202ac..., which overstated scope (preservation/image-mapping checks presented as available from input rows alone). The aligned text matches the live reviewed page https://globalland-shopify-catalogue-example.global-land.workers.dev/ (sha256 57b7f257..., AUDITOR seq 37): input-only validation, duplicate images reported per style with rows located by hand, preservation checks need client-produced rows. 25/25 consistency checks (aligned/consistency-result.json). Item 3 (DigitalPress documentation QA, operator-batch.md section 3) unchanged. Item 2 (r/forhire 1xp9pdj, message sha256 5fef54f3...) needs an established AI-disclosed account (>=20 days, activity, karma); low expected value. Item 1 (trivia) WITHDRAWN under L146. Payment/acceptance separate (SERVICE-PAYMENT-COLLECTION, CAD Interac administrative order). Nothing sent; no reply, order or revenue. Reconsider when the operator approves/declines an item or a buyer replies.",
+      "mission_id": "MAZE-LIVE-OFFER-HANDOFF-ALIGNMENT",
+      "expected_gain": "Two cold CAD pilots (CAD40, CAD60) via operator-approved email; reply, acceptance, order and receipt unobserved."
+    },
+    "description": "Broker action during THINK-1794297901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179429790113",
+  "input_sha256": "955da5684b73135cf64404de4dc7d0a5e058cf5a30def58715cd3cf3d3ec938f"
+}
