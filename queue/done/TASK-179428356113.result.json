@@ -1,0 +1,40 @@
+{
+  "status": "DONE",
+  "output": "input_only_dup_sku_transform exit 2 None | \ninput_only_dup_sku_report_json {\n \"ok\": false,\n \"products\": 2,\n \"rows\": 20,\n \"files\": [],\n \"errors\": [\n  \"variants line 3: duplicate SKU SYN-A-BL-40 (first line 2)\"\n ],\n \"error_count\": 1,\n \"warnings\": [],\n \"warning_count\": 0,\n \"seconds\": 0.001\n}\ninput_only_dup_sku_output_written False\ninput_only_valid_report_json {\n \"ok\": true,\n \"products\": 2,\n \"rows\": 20,\n \"files\": [\n  \"o2.csv\"\n ],\n \"errors\": [],\n \"error_count\": 0,\n \"warnings\": [],\n \"warning_count\": 0,\n \"seconds\": 0.001\n}\nproduced_extra_column exit 1 ['header_matches_documented_names'] | \nproduced_missing_column exit 1 ['header_matches_documented_names'] | \nproduced_crlf exit 1 ['utf8_no_bom_lf_only'] | \n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/fulfillment/execution-results-2.json",
+    "products/receipts/TASK-179428356113.json"
+  ],
+  "request": {
+    "id": "TASK-179428356113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-10T04:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import csv,json,os,shutil,subprocess,sys,tempfile\nSRC='products/sites/shopify-catalogue-example/'\nF='products/services/catalogue-qa/fulfillment/'\nd=tempfile.mkdtemp()\nfor f in ['transform.py','verify.py','verify_example.py']: shutil.copy(SRC+f,d)\nfor f in ['v','i','ours']: shutil.copy(F+'synthetic-%s.csv'%f,d+'/%s.csv'%f)\nres={'label':'SYNTHETIC PREPARATION ONLY','cases':{}}\ndef run(args):\n  r=subprocess.run([sys.executable,'-I']+args,cwd=d,capture_output=True,text=True)\n  return {'argv':args,'exit':r.returncode,'stdout':r.stdout[-1200:],'stderr':r.stderr[-800:]}\nrows=list(csv.reader(open(d+'/v.csv',newline='',encoding='utf-8')))\nrows[2][4]=rows[1][4]\nwith open(d+'/vd.csv','w',newline='',encoding='utf-8') as f: csv.writer(f,lineterminator='\\n').writerows(rows)\nres['cases']['input_only_dup_sku_transform']=run(['transform.py','--variants','vd.csv','--images','i.csv','--out','od.csv','--report','rd.json'])\nres['cases']['input_only_dup_sku_report_json']=open(d+'/rd.json',encoding='utf-8').read()[:1500] if os.path.exists(d+'/rd.json') else 'NO_REPORT'\nres['cases']['input_only_dup_sku_output_written']=os.path.exists(d+'/od.csv')\nres['cases']['input_only_valid_report_json']=(run(['transform.py','--variants','v.csv','--images','i.csv','--out','o2.csv','--report','r2.json']) and open(d+'/r2.json',encoding='utf-8').read()[:800])\nb=list(csv.reader(open(d+'/ours.csv',newline='',encoding='utf-8')))\n# extra Shopify column (realistic agency template)\nx=[r[:1]+['Body (HTML)' if k==0 else '']+r[1:] for k,r in enumerate(b)]\nwith open(d+'/px.csv','w',newline='',encoding='utf-8') as f: csv.writer(f,lineterminator='\\n').writerows(x)\nres['cases']['produced_extra_column']=run(['verify_example.py','v.csv','i.csv','px.csv'])\nk=b[0].index('Image alt text')\ny=[r[:k]+r[k+1:] for r in b]\nwith open(d+'/py.csv','w',newline='',encoding='utf-8') as f: csv.writer(f,lineterminator='\\n').writerows(y)\nres['cases']['produced_missing_column']=run(['verify_example.py','v.csv','i.csv','py.csv'])\nz=[list(r) for r in b]\nwith open(d+'/pz.csv','w',newline='',encoding='utf-8') as f: csv.writer(f,lineterminator='\\r\\n').writerows(z)\nres['cases']['produced_crlf']=run(['verify_example.py','v.csv','i.csv','pz.csv'])\njson.dump(res,open(F+'execution-results-2.json','w'),indent=1)\nfor kk,c in res['cases'].items():\n  if isinstance(c,dict):\n    try: fl=json.loads(c['stdout']).get('failed')\n    except Exception: fl=c['stdout'][:150]\n    print(kk,'exit',c['exit'],fl,'|',(c['stderr'].strip().splitlines() or [''])[-1][:200])\n  else: print(kk,str(c)[:700])\n"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/transform.py",
+        "products/sites/shopify-catalogue-example/verify.py",
+        "products/sites/shopify-catalogue-example/verify_example.py",
+        "products/services/catalogue-qa/fulfillment/synthetic-v.csv",
+        "products/services/catalogue-qa/fulfillment/synthetic-i.csv",
+        "products/services/catalogue-qa/fulfillment/synthetic-ours.csv"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/fulfillment/execution-results-2.json"
+      ],
+      "mission_id": "CATALOGUE-QA-FULFILLMENT-EXECUTION"
+    },
+    "description": "Broker action during THINK-1794283561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179428356113",
+  "input_sha256": "81f40a70749fe50cb9b5cc53cca1627ce3b06cdea8b640e00d4bde757a75dbe7"
+}

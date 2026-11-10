@@ -1,0 +1,57 @@
+{
+ "label": "SYNTHETIC PREPARATION ONLY",
+ "cases": {
+  "input_only_dup_sku_transform": {
+   "argv": [
+    "transform.py",
+    "--variants",
+    "vd.csv",
+    "--images",
+    "i.csv",
+    "--out",
+    "od.csv",
+    "--report",
+    "rd.json"
+   ],
+   "exit": 2,
+   "stdout": "{\"ok\": false, \"products\": 2, \"rows\": 20, \"error_count\": 1, \"warning_count\": 0, \"seconds\": 0.001}\n",
+   "stderr": ""
+  },
+  "input_only_dup_sku_report_json": "{\n \"ok\": false,\n \"products\": 2,\n \"rows\": 20,\n \"files\": [],\n \"errors\": [\n  \"variants line 3: duplicate SKU SYN-A-BL-40 (first line 2)\"\n ],\n \"error_count\": 1,\n \"warnings\": [],\n \"warning_count\": 0,\n \"seconds\": 0.001\n}",
+  "input_only_dup_sku_output_written": false,
+  "input_only_valid_report_json": "{\n \"ok\": true,\n \"products\": 2,\n \"rows\": 20,\n \"files\": [\n  \"o2.csv\"\n ],\n \"errors\": [],\n \"error_count\": 0,\n \"warnings\": [],\n \"warning_count\": 0,\n \"seconds\": 0.001\n}",
+  "produced_extra_column": {
+   "argv": [
+    "verify_example.py",
+    "v.csv",
+    "i.csv",
+    "px.csv"
+   ],
+   "exit": 1,
+   "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": false,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": [\n  \"header_matches_documented_names\"\n ]\n}\n",
+   "stderr": ""
+  },
+  "produced_missing_column": {
+   "argv": [
+    "verify_example.py",
+    "v.csv",
+    "i.csv",
+    "py.csv"
+   ],
+   "exit": 1,
+   "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": false,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": [\n  \"header_matches_documented_names\"\n ]\n}\n",
+   "stderr": ""
+  },
+  "produced_crlf": {
+   "argv": [
+    "verify_example.py",
+    "v.csv",
+    "i.csv",
+    "pz.csv"
+   ],
+   "exit": 1,
+   "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": false,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": [\n  \"utf8_no_bom_lf_only\"\n ]\n}\n",
+   "stderr": ""
+  }
+ }
+}
