@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"candidate_sha256\": \"a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4\",\n  \"reverse_sha256\": \"57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61\",\n  \"reverse_matches_approved_live\": true,\n  \"body_unchanged\": true,\n  \"other_files\": {\n    \"7c2e9a41d86b35f0e1a4c97d2b58e360.txt\": true,\n    \"fixtures/after-shopify.csv\": true,\n    \"fixtures/before-images.csv\": true,\n    \"fixtures/before-variants.csv\": true,\n    \"llms.txt\": true,\n    \"transform.py\": true,\n    \"verify.py\": true,\n    \"verify_example.py\": true\n  },\n  \"inventory_exact\": true,\n  \"title\": \"Color x Size catalogue to Shopify product CSV - free offline script and catalogue QA inquiry for migration agencies\",\n  \"description\": \"Free offline Python script that turns a one-row-per-barcode color/size catalogue plus an image list into a Shopify product CSV with per-color variant images, tested on synthetic data only. Migration agencies may also ask, without commitment, about a small plain-text catalogue QA check; no paid orders on this page.\",\n  \"nonbinding_and_no_orders\": true,\n  \"synthetic_disclosed\": true,\n  \"metadata_no_price\": true,\n  \"limits\": \"Scoped metadata review; other-file hashes compared to saved prior evidence, not independently fetched remote payloads. No indexing, exposure or demand established. Long title/description may be truncated by search engines.\",\n  \"all_pass\": true\n}\n\n",
+  "artifacts": [
+    "products/reviews/catalogue-metadata-independent.json",
+    "products/receipts/TASK-179430300111.json"
+  ],
+  "request": {
+    "id": "TASK-179430300111",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-10T09:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,re,hashlib,json\np=pathlib.Path('products/sites/shopify-catalogue-example'); b=(p/'index.html').read_bytes(); s=b.decode(); h=lambda v:hashlib.sha256(v).hexdigest()\noldtitle='Color x Size catalogue to Shopify product CSV - free offline script'\nolddesc='Free Python script that turns a one-row-per-barcode color/size catalogue plus an image list into a Shopify product CSV with per-color variant images. Offline, tested on synthetic data only.'\ntitle=re.search(r'<title>(.*?)</title>',s).group(1); desc=re.search(r'<meta name=\"description\" content=\"([^\"]*)\">',s).group(1)\nrest=re.sub(r'<title>.*?</title>','<title>'+oldtitle+'</title>',s,count=1);rest=re.sub(r'<meta name=\"description\" content=\"[^\"]*\">','<meta name=\"description\" content=\"'+olddesc+'\">',rest,count=1).encode()\nc=json.loads(pathlib.Path('products/services/catalogue-qa/discovery-metadata/checks.json').read_text());other={k:h((p/k).read_bytes())==v for k,v in c['other_files'].items()}\nr={'candidate_sha256':h(b),'reverse_sha256':h(rest),'reverse_matches_approved_live':h(rest)=='57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61','body_unchanged':b.split(b'<body>',1)[1]==rest.split(b'<body>',1)[1],'other_files':other,'inventory_exact':set(str(x.relative_to(p)) for x in p.rglob('*') if x.is_file())==set(c['other_files'])|{'index.html'},'title':title,'description':desc,'nonbinding_and_no_orders':'without commitment' in desc and 'no paid orders' in desc,'synthetic_disclosed':'synthetic data only' in desc,'metadata_no_price':not any(x in title+desc for x in ['CAD','60','$']),'limits':'Scoped metadata review; other-file hashes compared to saved prior evidence, not independently fetched remote payloads. No indexing, exposure or demand established. Long title/description may be truncated by search engines.'};r['all_pass']=r['reverse_matches_approved_live'] and r['body_unchanged'] and all(other.values()) and r['inventory_exact'] and r['nonbinding_and_no_orders'] and r['synthetic_disclosed'] and r['metadata_no_price'];out=pathlib.Path('products/reviews/catalogue-metadata-independent.json');out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(r,indent=2));print(out.read_text())"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/",
+        "products/services/catalogue-qa/discovery-metadata/checks.json"
+      ],
+      "outputs": [
+        "products/reviews/catalogue-metadata-independent.json"
+      ],
+      "mission_id": "CATALOGUE-METADATA-REVIEW"
+    },
+    "description": "Broker action during THINK-1794303001",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179430300111",
+  "input_sha256": "8465f735392499ddf5e1fe3bd72a9b87eb4a48a7a8bdd9e5b22b2a1f751174be"
+}
