@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "5481\npartner |  Careers | Arctic Leaf Skip to content Arctic Leaf is a Shopify Premier Partner Read the announcement ARCTIC LEAF Work Services your goals. our shared direction. See our approach Need to move fast? Express packages By service Strategy & growth Branding & identity Logo des\nremote |  your resume to [email protected] and we’ll keep you in mind when something opens on your team. Send us your resume benefits & perks. Learn more about us Fully Remote Paid Parental Leave Medical & Dental Wellness Retirement Plans Cellphone Plans Holiday Party company values. Six values, three pairs. They’re how we hire, how we work together, and how we treat\nCanada | me zones, providing flexibility and a strategic advantage for our clients and team. Address 1120 S Rackham Way, Suite 300 Meridian, ID 83642 Phone 949-377-1301 Canada Provinces 4 Cities 6 Staff 9 United States States 6 Cities 7 Staff 10 Brazil Provinces 2 Cities 3 Staff 5 stay cautious. Scammers sometimes use our name and logo to target job seekers. While we\nemail | ity Assurance Open positions nothing open right now. New positions open throughout the year, so it’s worth checking back. In the meantime, send your resume to [email protected] and we’ll keep you in mind when something opens on your team. Send us your resume benefits & perks. Learn more about us Fully Remote Paid Parental Leave Medical & Dental Wellness Reti\nAI  |  Express packages By service Strategy & growth Branding & identity Logo design Design & experience Commerce & platforms Direct sales Engineering & integrations AI & emerging technology Your goals Acquisition Reach the right people. Conversion Turn interest into action. Loyalty Make the relationship last. Integrations Connect the systems behind it. Products A\n---\n Careers | Arctic Leaf Skip to content Arctic Leaf is a Shopify Premier Partner Read the announcement ARCTIC LEAF Work Services your goals. our shared direction. See our approach Need to move fast? Express packages By service Strategy & growth Branding & identity Logo design Design & experience Commerce & platforms Direct sales Engineering & integrations AI & emerging technology Your goals Acquisition Reach the right people. Conversion Turn interest into action. Loyalty Make the relationship last. Integrations Connect the systems behind it. Products About Insights Contact Start a project Explore Arctic Leaf Work Services Strategy & growth Branding & identity Logo design Design & experience Commerce & platforms Direct sales Engineering & integrations AI & emerging technology Your goals Acquisition Reach the right people. Conversion Turn interest into action. Loyalty Make the relationship last. Integrations Connect the systems behind it. Need to move fast? Express packages Products About Insights Start a project LinkedIn Instagram Facebook X YouTube Home / Careers join the team. make an impact. At Arctic Leaf, different perspectives fuel innovation. We move fast, think big, and push boundaries. We want bold ideas, strong voices, and people who challenge the status quo. We hire for skill, mindset, and drive, no matter your background. Our core values—Accountability, Teamwork, Innovation, Diversity, Customer Service, and Integrity—aren’t just words. They shape everything we do. See open positions Explore teams Life at Arctic Leaf teams and roles. An overview of every team and role across the company. Openings vary through the year, so if your role isn’t open today, keep an eye out. Solutions Solutions Consultant Solutions Coordinator Solutions Architect Accounts Client Success Manager Account Manager Technical Program Manager Operations Human Resources Accounting & Finance Advertising/Media Content Creator Growth Marketing Growth Marketing Strategists Implementation Specialists Copywriters Creative UX Designer UI Designer Studio Associate Technical Web Developer Full Stack Developer Quality Assurance Open positions nothing open right now. New positions open throughout the year, so it’s worth checking back. In the meantime, send your resume to [email protected] and we’ll keep you in mind when something opens on your team. Send us your resume benefits & perks. Learn more about us Fully Remote Paid Parental Leave Medical & Dental Wellness Retirement Plans Cellphone Plans Holiday Party company values. Six values, three pairs. They’re how we hire, how we work together, and how we treat clients. Accountability & Teamwork No egos—just results. We take pride in our work and hold ourselves to the highest standards. Every team member understands their role in the big picture, creating a balance of trust, structure, creativity, and respect. Innovation & Diversity We’re built on fresh ideas and diverse strengths. Our team’s mix of backgrounds and perspectives fu\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179427816114.json"
+  ],
+  "request": {
+    "id": "TASK-179427816114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T02:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html\nt=open('products/services/canadian-subcontract/raw/arcticleaf-careers.html',encoding='utf-8',errors='replace').read()\nt=re.sub(r'(?is)<(script|style).*?</\\1>',' ',t)\ns=html.unescape(re.sub(r'<[^>]+>',' ',t))\ns=re.sub(r'\\s+',' ',s)\nprint(len(s))\nfor k in ['freelanc','contract','subcontract','partner','agency','remote','Canada','Toronto','apply','email','@','AI ','catalog','data']:\n  for m in re.finditer(k,s,re.I):\n    print(k,'|',s[max(0,m.start()-160):m.start()+200]);break\nprint('---');print(s[:3000])"
+      ],
+      "inputs": [
+        "products/services/canadian-subcontract/raw/arcticleaf-careers.html"
+      ],
+      "outputs": [],
+      "mission_id": "CANADIAN-CATALOGUE-SUBCONTRACT-INVITATION"
+    },
+    "description": "Broker action during THINK-1794278161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427816114",
+  "input_sha256": "f41d687d3767879f1c4e1b287ba0d986f4cf7580e3d76a414571e765a52b9368"
+}
