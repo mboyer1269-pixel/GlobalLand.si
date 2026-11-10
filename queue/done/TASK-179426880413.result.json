@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n \"observed\": \"2026-11-10\",\n \"site\": \"shopify-catalogue-example\",\n \"url\": \"https://globalland-shopify-catalogue-example.global-land.workers.dev/\",\n \"approved_digest\": \"68f9a6be36f44e640f833fd6aaff6feaeb5516153b2f4bbd024274b4ed6b8b04\",\n \"approval\": \"AUDITOR codex seq 35\",\n \"dry_run_task\": \"TASK-179426880410\",\n \"deploy_task\": \"TASK-179426880411 ONLINE_VERIFIED\",\n \"fetch_task\": \"TASK-179426880412 HTTP 200\",\n \"approved_index_sha256\": \"ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28\",\n \"live_sha256\": \"ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28\",\n \"source_sha256\": \"ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28\",\n \"all_match\": true,\n \"offer_text_present\": true,\n \"not_established\": [\n  \"traffic\",\n  \"requests\",\n  \"orders\",\n  \"payment\",\n  \"revenue\"\n ],\n \"no_contact_or_submission\": true\n}\n\n",
+  "artifacts": [
+    "products/services/catalogue-transformation/agency-offer/release/publication-result.json",
+    "products/receipts/TASK-179426880413.json"
+  ],
+  "request": {
+    "id": "TASK-179426880413",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T00:00:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,pathlib\nlive=pathlib.Path('products/services/catalogue-transformation/agency-offer/release/live-index.html').read_bytes()\nsrc=pathlib.Path('products/sites/shopify-catalogue-example/index.html').read_bytes()\nA='ee795078417eabdd18018686f4c2a811c54d3847748a0a0012539a01278f7d28'\nh=hashlib.sha256(live).hexdigest();s=hashlib.sha256(src).hexdigest()\nr={'observed':'2026-11-10','site':'shopify-catalogue-example','url':'https://globalland-shopify-catalogue-example.global-land.workers.dev/','approved_digest':'68f9a6be36f44e640f833fd6aaff6feaeb5516153b2f4bbd024274b4ed6b8b04','approval':'AUDITOR codex seq 35','dry_run_task':'TASK-179426880410','deploy_task':'TASK-179426880411 ONLINE_VERIFIED','fetch_task':'TASK-179426880412 HTTP 200','approved_index_sha256':A,'live_sha256':h,'source_sha256':s,'all_match':h==A==s,'offer_text_present':b'CAD 60' in live or b'60' in live,'not_established':['traffic','requests','orders','payment','revenue'],'no_contact_or_submission':True}\np=pathlib.Path('products/services/catalogue-transformation/agency-offer/release/publication-result.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,indent=1));print(json.dumps(r,indent=1))"
+      ],
+      "inputs": [
+        "products/services/catalogue-transformation/agency-offer/release/live-index.html",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "outputs": [
+        "products/services/catalogue-transformation/agency-offer/release/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794268804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179426880413",
+  "input_sha256": "94e2f8ea258f039e75ae32cff3bde7f547ea5e746e67d0effdd078852cf87cfc"
+}
