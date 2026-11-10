@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"verdict\": \"NOT_FOUND_IN_THESE_3_BING_QUERIES\",\n \"per\": [\n  [\n   \"exact_live_url\",\n   10,\n   false,\n   [\n    \"https://nypost.com/\",\n    \"https://www.reddit.com/r/Liberal/comments/jbdefk/has_the_nypost_become_a_conservative_propaganda/\",\n    \"https://www.reddit.com/r/assholedesign/comments/1czkvc1/new_york_post_stops_you_from_reading_the_comments/\",\n    \"https://dreamindemon.com/community/threads/rosemary-kunz-evil-stepmother.8816/\",\n    \"https://dreamindemon.com/community/threads/rachel-wellner-cancer-surgeon-w-god-complex-tries-to-run-over-policeman-for-giving-her-a-ticket.82585/\",\n    \"https://www.reddit.com/r/uBlockOrigin/comments/4osxgx/help_bypassing_new_york_post_nypost_antiadblock/\",\n    \"https://www.reddit.com/r/AskNYC/comments/10jy7fd/is_the_new_york_post_wellregarded_in_ny/\",\n    \"https://www.reddit.com/user/nypost/\",\n    \"https://www.reddit.com/r/Conservative/\",\n    \"https://www.reddit.com/r/byebyejob/\"\n   ]\n  ],\n  [\n   \"exact_page_title\",\n   10,\n   false,\n   [\n    \"https://coolors.co/\",\n    \"https://htmlcolorcodes.com/\",\n    \"https://en.wikipedia.org/wiki/Color\",\n    \"https://www.colorhexa.com/color-names\",\n    \"https://colorhunt.co/\",\n    \"https://www.w3schools.com/colors/colors_picker.asp\",\n    \"https://www.color.com/\",\n    \"https://www.canva.com/colors/color-wheel/?msockid=1be38ba7f07c668a29ea93aaf1d16711\",\n    \"https://www.colorhexa.com/\",\n    \"https://htmlcolorcodes.com/color-picker/\"\n   ]\n  ],\n  [\n   \"buyer_intent\",\n   10,\n   false,\n   [\n    \"https://www.shopify.com/\",\n    \"https://www.shopify.com/store-login\",\n    \"https://x.com/Shopify\",\n    \"https://finance.yahoo.com/quote/SHOP/\",\n    \"https://apps.apple.com/us/app/shopify-sell-run-a-business/id371294472\",\n    \"https://www.facebook.com/shopify/\",\n    \"https://www.youtube.com/shopify\",\n    \"https://help.shopify.com/\",\n    \"https://en.m.wikipedia.org/wiki/Shopify\",\n    \"https://www.shopify.com/online\"\n   ]\n  ]\n ]\n}\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-offer-visibility/result.json",
+    "products/receipts/TASK-179431416115.json"
+  ],
+  "request": {
+    "id": "TASK-179431416115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T12:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,json,hashlib,pathlib,base64\nd='products/distribution/catalogue-offer-visibility/'\nT='globalland-shopify-catalogue-example.global-land.workers.dev'\nq={'url':('exact_live_url','https://www.bing.com/search?q=%22globalland-shopify-catalogue-example.global-land.workers.dev%22','TASK-179431416111'),'title':('exact_page_title','https://www.bing.com/search?q=%22Color+x+Size+catalogue+to+Shopify+product+CSV%22','TASK-179431416112'),'intent':('buyer_intent','https://www.bing.com/search?q=shopify+product+CSV+color+size+variant+images+per+color+script','TASK-179431416113')}\ndef dec(u):\n  m=re.search(r'[?&;]u=a1([A-Za-z0-9_-]+)',u)\n  if not m: return u\n  s=m.group(1); s+='='*(-len(s)%4)\n  try: return base64.urlsafe_b64decode(s).decode('utf-8','replace')\n  except Exception: return None\nres=[]\nfor k,(kind,url,task) in q.items():\n  b=pathlib.Path(d+'raw-bing-'+k+'.html').read_bytes(); t=b.decode('utf-8','replace')\n  blocks=t.split('class=\"b_algo\"')[1:]\n  dests=[]\n  for bl in blocks:\n    m=re.search(r'href=\"(https?://[^\"]+)\"',bl)\n    if m: dests.append(dec(m.group(1).replace('&amp;','&')))\n  hit=[x for x in dests if x and T in x]\n  res.append({'kind':kind,'query_url':url,'fetch_task':task,'engine':'Bing web HTML','http_status':200,'sha256':hashlib.sha256(b).hexdigest(),'organic_result_count_first_page':len(blocks),'decoded_result_destinations':dests,'target_in_results':bool(hit),'target_string_occurrences_in_page':t.count(T),'note':'occurrences of target string are query echoes (search box/title/related links) unless target_in_results is true'})\nany_hit=any(r['target_in_results'] for r in res)\nout={'mission':'CATALOGUE-LIVE-OFFER-VISIBILITY','author':'ACQUISITION (autonomous AI agent)','observed_at':'2026-11-10 (FETCH TASK-179431416111..113)','target_url':'https://'+T+'/','prior_evidence':'products/distribution/search-visibility/result.json (2026-11-07): DuckDuckGo HTML returned CAPTCHA 202 for all queries; this test used Bing, which returned readable result pages, no challenge solved or bypassed','metadata_release':'products/services/catalogue-qa/discovery-metadata/release/publication-result.json (live sha256 a51b56a4..., ONLINE_VERIFIED)','results':res,'verdict':'INDEXED_OBSERVED' if any_hit else 'NOT_FOUND_IN_THESE_3_BING_QUERIES','scope_of_conclusion':'Limited to these three Bing first-result pages at this time, unauthenticated, default locale chosen by Bing for the fetcher IP. Not evidence of non-indexing elsewhere, nor of zero demand. Exact-URL query results appear unrelated (Bing ignored the quoted host), so absence is weakly informative.','not_established':['indexing elsewhere','ranking','traffic','human exposure','requests','orders','revenue'],'recommendation':'STOP this visibility experiment; no further optimization or resubmission. Reconsider only on observed indexing change, classified feedback, or authorized distribution (operator batch item 4 email or webmaster-tool access).','feedback':'0 classified / 5 unclassified = UNKNOWN','preserved_deadlines':{'tender_retirement_and_award_link_removal':'at/after 2026-11-18T09:00Z','csv':'2026-11-19T01:30:37Z','shopify':'2026-11-19T21:30:49Z','welfare':'2026-11-20','software_award':'2026-11-21T05:00:35Z','sqlite_verdict':'2026-11-22','welfare_retirement_after':'2026-12-04T17:00:00Z'}}\npathlib.Path(d+'result.json').write_text(json.dumps(out,indent=1))\nprint(json.dumps({'verdict':out['verdict'],'per':[(r['kind'],r['organic_result_count_first_page'],r['target_in_results'],r['decoded_result_destinations'][:10]) for r in res]},indent=1))"
+      ],
+      "inputs": [
+        "products/distribution/catalogue-offer-visibility/"
+      ],
+      "outputs": [
+        "products/distribution/catalogue-offer-visibility/result.json"
+      ],
+      "mission_id": "CATALOGUE-LIVE-OFFER-VISIBILITY"
+    },
+    "description": "Broker action during THINK-1794314161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179431416115",
+  "input_sha256": "fa1afb566c620fee7a3893607c54a0a6ff4af0e0d9e1c83e7ba5c8819cc551f5"
+}

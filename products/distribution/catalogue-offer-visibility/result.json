@@ -1,0 +1,104 @@
+{
+ "mission": "CATALOGUE-LIVE-OFFER-VISIBILITY",
+ "author": "ACQUISITION (autonomous AI agent)",
+ "observed_at": "2026-11-10 (FETCH TASK-179431416111..113)",
+ "target_url": "https://globalland-shopify-catalogue-example.global-land.workers.dev/",
+ "prior_evidence": "products/distribution/search-visibility/result.json (2026-11-07): DuckDuckGo HTML returned CAPTCHA 202 for all queries; this test used Bing, which returned readable result pages, no challenge solved or bypassed",
+ "metadata_release": "products/services/catalogue-qa/discovery-metadata/release/publication-result.json (live sha256 a51b56a4..., ONLINE_VERIFIED)",
+ "results": [
+  {
+   "kind": "exact_live_url",
+   "query_url": "https://www.bing.com/search?q=%22globalland-shopify-catalogue-example.global-land.workers.dev%22",
+   "fetch_task": "TASK-179431416111",
+   "engine": "Bing web HTML",
+   "http_status": 200,
+   "sha256": "df009b80d8420631aea5e9e058f15f1591d0d8971a0662ca2837584cae2037f7",
+   "organic_result_count_first_page": 10,
+   "decoded_result_destinations": [
+    "https://nypost.com/",
+    "https://www.reddit.com/r/Liberal/comments/jbdefk/has_the_nypost_become_a_conservative_propaganda/",
+    "https://www.reddit.com/r/assholedesign/comments/1czkvc1/new_york_post_stops_you_from_reading_the_comments/",
+    "https://dreamindemon.com/community/threads/rosemary-kunz-evil-stepmother.8816/",
+    "https://dreamindemon.com/community/threads/rachel-wellner-cancer-surgeon-w-god-complex-tries-to-run-over-policeman-for-giving-her-a-ticket.82585/",
+    "https://www.reddit.com/r/uBlockOrigin/comments/4osxgx/help_bypassing_new_york_post_nypost_antiadblock/",
+    "https://www.reddit.com/r/AskNYC/comments/10jy7fd/is_the_new_york_post_wellregarded_in_ny/",
+    "https://www.reddit.com/user/nypost/",
+    "https://www.reddit.com/r/Conservative/",
+    "https://www.reddit.com/r/byebyejob/"
+   ],
+   "target_in_results": false,
+   "target_string_occurrences_in_page": 21,
+   "note": "occurrences of target string are query echoes (search box/title/related links) unless target_in_results is true"
+  },
+  {
+   "kind": "exact_page_title",
+   "query_url": "https://www.bing.com/search?q=%22Color+x+Size+catalogue+to+Shopify+product+CSV%22",
+   "fetch_task": "TASK-179431416112",
+   "engine": "Bing web HTML",
+   "http_status": 200,
+   "sha256": "477ea0de52f184129263dbe15cd4854c3c7a5e1c3f9e2bfbfdabe783fbb9a79a",
+   "organic_result_count_first_page": 10,
+   "decoded_result_destinations": [
+    "https://coolors.co/",
+    "https://htmlcolorcodes.com/",
+    "https://en.wikipedia.org/wiki/Color",
+    "https://www.colorhexa.com/color-names",
+    "https://colorhunt.co/",
+    "https://www.w3schools.com/colors/colors_picker.asp",
+    "https://www.color.com/",
+    "https://www.canva.com/colors/color-wheel/?msockid=1be38ba7f07c668a29ea93aaf1d16711",
+    "https://www.colorhexa.com/",
+    "https://htmlcolorcodes.com/color-picker/"
+   ],
+   "target_in_results": false,
+   "target_string_occurrences_in_page": 0,
+   "note": "occurrences of target string are query echoes (search box/title/related links) unless target_in_results is true"
+  },
+  {
+   "kind": "buyer_intent",
+   "query_url": "https://www.bing.com/search?q=shopify+product+CSV+color+size+variant+images+per+color+script",
+   "fetch_task": "TASK-179431416113",
+   "engine": "Bing web HTML",
+   "http_status": 200,
+   "sha256": "e6515e405ed17de37e6db3bb6cbfd877df54b1b1fcde8aa60807ad0309603baa",
+   "organic_result_count_first_page": 10,
+   "decoded_result_destinations": [
+    "https://www.shopify.com/",
+    "https://www.shopify.com/store-login",
+    "https://x.com/Shopify",
+    "https://finance.yahoo.com/quote/SHOP/",
+    "https://apps.apple.com/us/app/shopify-sell-run-a-business/id371294472",
+    "https://www.facebook.com/shopify/",
+    "https://www.youtube.com/shopify",
+    "https://help.shopify.com/",
+    "https://en.m.wikipedia.org/wiki/Shopify",
+    "https://www.shopify.com/online"
+   ],
+   "target_in_results": false,
+   "target_string_occurrences_in_page": 0,
+   "note": "occurrences of target string are query echoes (search box/title/related links) unless target_in_results is true"
+  }
+ ],
+ "verdict": "NOT_FOUND_IN_THESE_3_BING_QUERIES",
+ "scope_of_conclusion": "Limited to these three Bing first-result pages at this time, unauthenticated, default locale chosen by Bing for the fetcher IP. Not evidence of non-indexing elsewhere, nor of zero demand. Exact-URL query results appear unrelated (Bing ignored the quoted host), so absence is weakly informative.",
+ "not_established": [
+  "indexing elsewhere",
+  "ranking",
+  "traffic",
+  "human exposure",
+  "requests",
+  "orders",
+  "revenue"
+ ],
+ "recommendation": "STOP this visibility experiment; no further optimization or resubmission. Reconsider only on observed indexing change, classified feedback, or authorized distribution (operator batch item 4 email or webmaster-tool access).",
+ "feedback": "0 classified / 5 unclassified = UNKNOWN",
+ "preserved_deadlines": {
+  "tender_retirement_and_award_link_removal": "at/after 2026-11-18T09:00Z",
+  "csv": "2026-11-19T01:30:37Z",
+  "shopify": "2026-11-19T21:30:49Z",
+  "welfare": "2026-11-20",
+  "software_award": "2026-11-21T05:00:35Z",
+  "sqlite_verdict": "2026-11-22",
+  "welfare_retirement_after": "2026-12-04T17:00:00Z"
+ }
+}
