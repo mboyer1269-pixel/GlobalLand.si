@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PAID-DATA-CLEANING-REQUEST-TEST\", \"goal\": \"Test one bounded alternative to agency-careers discovery: an explicit paid request for CSV/data cleaning or catalogue normalization. First read relevant existing paid-request, supplier-route and withdrawal lessons and artifacts; check for equivalent completed work. Use available public subscription tools or FETCH, inspecting at most three candidate requests and six source fetches. Exclude Reddit routes withdrawn under L146, employee recruitment, unpaid referrals, personal-data work and tasks requiring unavailable authenticated access. Require a dated primary-source buyer request, stated compensation or explicit paid intent, concrete acceptance criteria, a permitted application route, and no observed prohibition on autonomous-AI assistance. Establish whether the available tools can produce the promised result and identify actual submission, identity and collection prerequisites before any sample. Advertised budgets are not verified funding. If one qualifies, prepare one concise reviewable proposal tied to existing tested capability, with exact source quotations, observation dates, scope, effort economics, AI disclosure, nonbinding price and a measurable acceptance check; do not create another generic sample or website. If none qualifies, save a bounded rejection and stop this experiment. No outreach, submissions, accounts, agreements, spending, credential probes or bypasses. Save and read evidence under products/services/paid-data-request/. Complete with a valid lease and a lesson distinguishing facts, dependent operations, strategic conclusion and reconsideration trigger. Preserve every existing observation deadline and retirement; any later public deployment requires host-enforced independent review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"RESEARCHER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/paid-data-request/bounded-result.json\", \"products/services/paid-data-request/raw/freelancer-active-csv-fixed.json\", \"products/services/paid-data-request/raw/freelancer-active-csv-cleaning.json\"]}",
+  "request": {
+    "id": "TASK-179427996117",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-10T03:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "PAID-DATA-CLEANING-REQUEST-TEST",
+      "agent_id": "RESEARCHER",
+      "lease_token": "ef3dl71FPZe76klc7SuxwNal3V_3m1sV",
+      "evidence": [
+        "products/services/paid-data-request/bounded-result.json",
+        "products/services/paid-data-request/raw/freelancer-active-csv-fixed.json",
+        "products/services/paid-data-request/raw/freelancer-active-csv-cleaning.json"
+      ],
+      "lesson": "Fact (2026-11-10): the Freelancer.com public API (api/projects/0.1/projects/active?query=...&full_description=true) returns dated, budgeted, explicitly paid buyer requests without login, HTTP 200. It is a reproducible primary source of paid demand, unlike seller-dominated HN/n8n threads and agency careers pages. 64 active fixed-price 'csv' projects; the closest data-cleaning fit (GBP 20-250) had 111 bids within hours; many CSV-tagged jobs are personal-data lead lists (excluded). Dependent: every bid needs a founder-authorized marketplace identity (BOUNTY-SUBMISSION-ELIGIBILITY); no qualifying candidate now. Conclusion: demand exists but cold bidding is crowded and identity-gated; do not draft bids without an identity. Reconsider when an identity is designated: then filter API for <15 bids, posted <6h, non-personal file-in/file-out cleaning. Used 2/6 fetches; query must be narrow (loose query 0/20 relevant)."
+    },
+    "description": "Broker action during THINK-1794279961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179427996117",
+  "input_sha256": "0547626c71faa2e13557934b4e18b1754447255bc8f2659f0bb4c0df42ea4db2"
+}
