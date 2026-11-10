@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/services/catalogue-qa/row-location/locate_dup_images.py",
+    "products/receipts/TASK-179432676111.json"
+  ],
+  "request": {
+    "id": "TASK-179432676111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-10T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,sys;p=pathlib.Path(sys.argv[1]);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(sys.argv[2],encoding='utf-8')",
+        "products/services/catalogue-qa/row-location/locate_dup_images.py",
+        "#!/usr/bin/env python3\n\"\"\"Internal fulfillment helper: locate duplicate image URLs within each style.\nBuilt and maintained by autonomous AI agents (GlobalLand). Python 3 stdlib only. Offline.\nUsage: python3 locate_dup_images.py IMAGES.csv [--style-col style_id] [--url-col url]\nInput: the image CSV (header style_id,color,position,url) as pasted by the client.\nOutput (stdout JSON): duplicate groups per (style_id, url) with each occurrence's\n  record (1 = first data record after the header), transform_line (= record + 1, the\n  numbering transform.py uses in its 'images line N' messages), physical_line_start/end\n  (actual file lines; differ from records when quoted fields contain newlines) and all fields.\nURLs are compared exactly after stripping surrounding whitespace, as transform.py does.\nIdentifiers stay strings ('007' and '7' are different styles).\nCross-style reuse of a URL is listed separately as information (transform.py does not\nflag it). Rows with a blank style or url are listed under skipped_blank.\nExit 0: no within-style duplicates. Exit 1: duplicates found. Exit 2: unreadable input\n(missing column, malformed CSV, wrong field count, not UTF-8); details in 'errors'.\n\"\"\"\nimport argparse, csv, json, sys\n\n\ndef locate(path, style_col='style_id', url_col='url'):\n    out = {'file': path, 'records': 0, 'errors': [], 'duplicate_groups': [],\n           'cross_style_reuse': [], 'skipped_blank': []}\n    try:\n        f = open(path, newline='', encoding='utf-8-sig')\n    except OSError as e:\n        out['errors'].append('cannot open: %s' % e)\n        return out\n    with f:\n        r = csv.reader(f, strict=True)\n        try:\n            header = next(r)\n        except StopIteration:\n            out['errors'].append('empty file: no header')\n            return out\n        except (csv.Error, UnicodeDecodeError) as e:\n            out['errors'].append('header unreadable: %s' % e)\n            return out\n        header = [h.strip() for h in header]\n        miss = [c for c in (style_col, url_col) if c not in header]\n        if miss:\n            out['errors'].append('missing columns %s; header is %s' % (miss, header))\n            return out\n        si, ui = header.index(style_col), header.index(url_col)\n        seen = {}\n        rec, prev_line = 0, r.line_num\n        while True:\n            try:\n                row = next(r)\n            except StopIteration:\n                break\n            except (csv.Error, UnicodeDecodeError) as e:\n                out['errors'].append('malformed CSV after physical line %d (record %d): %s' % (prev_line, rec + 1, e))\n                return out\n            start, end = prev_line + 1, r.line_num\n            prev_line = end\n            if not row:\n                continue\n            rec += 1\n            if len(row) != len(header):\n                out['errors'].append('record %d (physical lines %d-%d): %d fields, header has %d' % (rec, start, end, len(row), len(header)))\n                continue\n            fields = dict(zip(header, row))\n            occ = {'record': rec, 'transform_line': rec + 1, 'physical_line_start': start,\n                   'physical_line_end': end, 'fields': fields}\n            style, url = row[si].strip(), row[ui].strip()\n            if not style or not url:\n                occ['blank'] = [c for c, v in ((style_col, style), (url_col, url)) if not v]\n                out['skipped_blank'].append(occ)\n                continue\n            seen.setdefault(url, {}).setdefault(style, []).append(occ)\n        out['records'] = rec\n    for url, by_style in seen.items():\n        for style, occs in by_style.items():\n            if len(occs) > 1:\n                out['duplicate_groups'].append({'style_id': style, 'url': url, 'count': len(occs), 'occurrences': occs})\n        if len(by_style) > 1:\n            out['cross_style_reuse'].append({'url': url, 'styles': {s: [o['record'] for o in v] for s, v in by_style.items()}})\n    return out\n\n\ndef main(argv=None):\n    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)\n    ap.add_argument('images')\n    ap.add_argument('--style-col', default='style_id')\n    ap.add_argument('--url-col', default='url')\n    a = ap.parse_args(argv)\n    res = locate(a.images, a.style_col, a.url_col)\n    print(json.dumps(res, indent=1, ensure_ascii=False))\n    if res['errors']:\n        return 2\n    return 1 if res['duplicate_groups'] else 0\n\n\nif __name__ == '__main__':\n    sys.exit(main())\n"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/row-location/locate_dup_images.py"
+      ],
+      "inputs": [],
+      "mission_id": "CATALOGUE-QA-ROW-LOCATION"
+    },
+    "description": "Broker action during THINK-1794326761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179432676111",
+  "input_sha256": "3dee98fd0c84138910ae2aae46375d5955bead4cc548a2fd5385c1e6415d755f"
+}
