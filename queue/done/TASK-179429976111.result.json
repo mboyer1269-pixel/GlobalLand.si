@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\n \"old_index_sha256\": \"57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61\",\n \"old_matches_live_57b7f257\": true,\n \"new_index_sha256\": \"a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4\",\n \"body_byte_identical\": true,\n \"reverse_restores_old\": true,\n \"other_files_unchanged_count\": 8,\n \"other_files\": {\n  \"7c2e9a41d86b35f0e1a4c97d2b58e360.txt\": \"4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba\",\n  \"fixtures/after-shopify.csv\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\",\n  \"fixtures/before-images.csv\": \"894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d\",\n  \"fixtures/before-variants.csv\": \"5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac\",\n  \"llms.txt\": \"a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9\",\n  \"transform.py\": \"ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e\",\n  \"verify.py\": \"54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39\",\n  \"verify_example.py\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\"\n },\n \"no_price_in_metadata\": true,\n \"no_compatibility_claim\": true,\n \"no_structured_data_added\": true,\n \"no_paid_orders_stated\": true,\n \"synthetic_only_stated\": true,\n \"description_len\": 315,\n \"title_len\": 115,\n \"_recheck\": {\n  \"7c2e9a41d86b35f0e1a4c97d2b58e360.txt\": true,\n  \"fixtures/after-shopify.csv\": true,\n  \"fixtures/before-images.csv\": true,\n  \"fixtures/before-variants.csv\": true,\n  \"llms.txt\": true,\n  \"transform.py\": true,\n  \"verify.py\": true,\n  \"verify_example.py\": true\n },\n \"all_pass\": true\n}\n--- index.html (live 57b7f257)\n+++ index.html (candidate)\n@@ -3,6 +3,6 @@\n <head>\n <meta charset=\"utf-8\">\n <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n-<title>Color x Size catalogue to Shopify product CSV - free offline script</title>\n-<meta name=\"description\" content=\"Free Python script that turns a one-row-per-barcode color/size catalogue plus an image list into a Shopify product CSV with per-color variant images. Offline, tested on synthetic data only.\">\n+<title>Color x Size catalogue to Shopify product CSV - free offline script and catalogue QA inquiry for migration agencies</title>\n+<meta name=\"description\" content=\"Free offline Python script that turns a one-row-per-barcode color/size catalogue plus an image list into a Shopify product CSV with per-color variant images, tested on synthetic data only. Migration agencies may also ask, without commitment, about a small plain-text catalogue QA check; no paid orders on this page.\">\n </head>\n\n\n",
+  "artifacts": [
+    "products/sites/shopify-catalogue-example/index.html",
+    "products/services/catalogue-qa/discovery-metadata/index.diff",
+    "products/services/catalogue-qa/discovery-metadata/checks.json",
+    "products/receipts/TASK-179429976111.json"
+  ],
+  "request": {
+    "id": "TASK-179429976111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T08:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,difflib,pathlib,os\nS=pathlib.Path('products/sites/shopify-catalogue-example')\nO=pathlib.Path('products/services/catalogue-qa/discovery-metadata');O.mkdir(parents=True,exist_ok=True)\np=S/'index.html';old=p.read_bytes();h=lambda b:hashlib.sha256(b).hexdigest()\nothers={str(f.relative_to(S)):h(f.read_bytes()) for f in sorted(S.rglob('*')) if f.is_file() and f.name!='index.html'}\nt0='<title>Color x Size catalogue to Shopify product CSV - free offline script</title>'\nd0='<meta name=\"description\" content=\"Free Python script that turns a one-row-per-barcode color/size catalogue plus an image list into a Shopify product CSV with per-color variant images. Offline, tested on synthetic data only.\">'\nt1='<title>Color x Size catalogue to Shopify product CSV - free offline script and catalogue QA inquiry for migration agencies</title>'\nd1='<meta name=\"description\" content=\"Free offline Python script that turns a one-row-per-barcode color/size catalogue plus an image list into a Shopify product CSV with per-color variant images, tested on synthetic data only. Migration agencies may also ask, without commitment, about a small plain-text catalogue QA check; no paid orders on this page.\">'\ns=old.decode('utf-8');assert s.count(t0)==1 and s.count(d0)==1\nnew=s.replace(t0,t1).replace(d0,d1).encode('utf-8')\nbo=s.split('</head>',1)[1];bn=new.decode().split('</head>',1)[1]\nrev=new.decode().replace(t1,t0).replace(d1,d0).encode()\nlow=d1.lower()\nchecks={'old_index_sha256':h(old),'old_matches_live_57b7f257':h(old)=='57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61','new_index_sha256':h(new),'body_byte_identical':bo==bn,'reverse_restores_old':rev==old,'only_head_changed_lines':None,'other_files_unchanged_count':len(others),'other_files':others,'no_price_in_metadata':('cad' not in low and '$' not in low and '60' not in low),'no_compatibility_claim':('compatible' not in low),'no_structured_data_added':('application/ld+json' not in new.decode() and new.decode().count('<meta')==s.count('<meta')),'no_paid_orders_stated':'no paid orders' in low,'synthetic_only_stated':'synthetic data only' in low,'description_len':len(d1.split('content=\"')[1][:-2]),'title_len':len(t1)-15}\np.write_bytes(new)\nfor f,v in others.items(): checks.setdefault('_recheck',{})[f]=h((S/f).read_bytes())==v\nchecks['all_pass']=all([checks['old_matches_live_57b7f257'],checks['body_byte_identical'],checks['reverse_restores_old'],checks['no_price_in_metadata'],checks['no_compatibility_claim'],checks['no_structured_data_added'],checks['no_paid_orders_stated'],checks['synthetic_only_stated'],all(checks['_recheck'].values())])\ndel checks['only_head_changed_lines']\ndiff=''.join(difflib.unified_diff(s.replace('><','>\\n<').splitlines(True)[:8],new.decode().replace('><','>\\n<').splitlines(True)[:8],'index.html (live 57b7f257)','index.html (candidate)'))\n(O/'index.diff').write_text(diff);(O/'checks.json').write_text(json.dumps(checks,indent=1))\nprint(json.dumps(checks,indent=1));print(diff)"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/"
+      ],
+      "outputs": [
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/services/catalogue-qa/discovery-metadata/index.diff",
+        "products/services/catalogue-qa/discovery-metadata/checks.json"
+      ],
+      "mission_id": "CATALOGUE-OFFER-DISCOVERY-METADATA"
+    },
+    "description": "Broker action during THINK-1794299761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179429976111",
+  "input_sha256": "c9f04e7e679646df9f9da88796605e0bd4d59b1fbaa64db48e64ea2f14745f4e"
+}
