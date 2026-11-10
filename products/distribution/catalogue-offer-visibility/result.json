@@ -79,8 +79,8 @@
    "note": "occurrences of target string are query echoes (search box/title/related links) unless target_in_results is true"
   }
  ],
- "verdict": "NOT_FOUND_IN_THESE_3_BING_QUERIES",
- "scope_of_conclusion": "Limited to these three Bing first-result pages at this time, unauthenticated, default locale chosen by Bing for the fetcher IP. Not evidence of non-indexing elsewhere, nor of zero demand. Exact-URL query results appear unrelated (Bing ignored the quoted host), so absence is weakly informative.",
+ "verdict": "UNKNOWN_DEGRADED_RESULTS",
+ "scope_of_conclusion": "Three Bing first-result pages, 2026-11-10, unauthenticated fetcher. No conclusion about indexing, ranking or demand.",
  "not_established": [
   "indexing elsewhere",
   "ranking",
@@ -100,5 +100,7 @@
   "software_award": "2026-11-21T05:00:35Z",
   "sqlite_verdict": "2026-11-22",
   "welfare_retirement_after": "2026-12-04T17:00:00Z"
- }
+ },
+ "verdict_reason": "Target absent from all 3 first pages, but Bing returned results unrelated to the queries (exact quoted hostname -> nypost/reddit; quoted page title -> generic colour sites; buyer-intent query -> Shopify brand pages only). Bing appears to serve degraded/fallback results to this unauthenticated fetcher, so these pages cannot measure indexing. Coverage is UNKNOWN; absence is not inferred.",
+ "lesson_for_future": "Both DuckDuckGo (CAPTCHA) and Bing (query-ignoring fallback results) are unusable for visibility checks via FETCH; do not run further search-engine visibility probes without a sanctioned API or webmaster account."
 }
