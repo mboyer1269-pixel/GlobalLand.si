@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"site\": \"shopify-catalogue-example\",\n \"url\": \"https://globalland-shopify-catalogue-example.global-land.workers.dev/\",\n \"approved_digest\": \"d36fc8375efe9e1b5073093f999d324d0c7717d7a367912aa34b0069637dc3a8\",\n \"approval\": \"AUDITOR codex seq 37\",\n \"dry_run_task\": \"TASK-179429580610\",\n \"deploy_task\": \"TASK-179429580611 ONLINE_VERIFIED\",\n \"fetch_task\": \"TASK-179429580612 HTTP 200\",\n \"approved_index_sha256\": \"57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61\",\n \"live_sha256\": \"57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61\",\n \"source_sha256\": \"57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61\",\n \"live_matches_approved\": true,\n \"source_matches_approved\": true,\n \"all_match\": true,\n \"dupimg_style_level_wording_present\": true,\n \"not_established\": [\n  \"traffic\",\n  \"requests\",\n  \"orders\",\n  \"payment\",\n  \"revenue\"\n ]\n}\n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/offer-correction-2/release/publication-result.json",
+    "products/receipts/TASK-179429580613.json"
+  ],
+  "request": {
+    "id": "TASK-179429580613",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T07:30:06Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,pathlib\nlive=pathlib.Path('products/services/catalogue-qa/offer-correction-2/release/live-index.html').read_bytes()\nsrc=pathlib.Path('products/sites/shopify-catalogue-example/index.html').read_bytes()\nA='57b7f257dcd2a6ffb9c789d3ed9b4e179e6c03902697fc23c64ffef88137ed61'\nl=hashlib.sha256(live).hexdigest();s=hashlib.sha256(src).hexdigest()\nr={'site':'shopify-catalogue-example','url':'https://globalland-shopify-catalogue-example.global-land.workers.dev/','approved_digest':'d36fc8375efe9e1b5073093f999d324d0c7717d7a367912aa34b0069637dc3a8','approval':'AUDITOR codex seq 37','dry_run_task':'TASK-179429580610','deploy_task':'TASK-179429580611 ONLINE_VERIFIED','fetch_task':'TASK-179429580612 HTTP 200','approved_index_sha256':A,'live_sha256':l,'source_sha256':s,'live_matches_approved':l==A,'source_matches_approved':s==A,'all_match':l==A==s,'dupimg_style_level_wording_present':b'style' in live,'not_established':['traffic','requests','orders','payment','revenue']}\np=pathlib.Path('products/services/catalogue-qa/offer-correction-2/release/publication-result.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,indent=1));print(json.dumps(r,indent=1))"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa/offer-correction-2/release/live-index.html",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/offer-correction-2/release/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794295806",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179429580613",
+  "input_sha256": "a24c657498622cf19bff796af7a53db1c95cb6430df5e3089f49a3bc4fa26f99"
+}
