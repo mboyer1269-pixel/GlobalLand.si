@@ -1,5 +1,5 @@
 {
-  "founder_actions": 4,
+  "founder_actions": 3,
   "open": [
     {
       "id": "NO-APIFY-ACCESS",
@@ -14,20 +14,6 @@
       "reports": 8,
       "opened_at": "2026-11-02T22:32:13Z",
       "last_reported_at": "2026-11-04T19:36:21Z"
-    },
-    {
-      "id": "BOUNTY-SUBMISSION-ELIGIBILITY",
-      "status": "OPEN",
-      "owner": "FOUNDER",
-      "category": "IDENTITY",
-      "title": "No founder-authorized participant identity for bounties, challenges or freelance marketplaces (Freelancer.com paid demand observed)",
-      "detail": "Updated 2026-11-10. New evidence: Freelancer.com public API shows explicitly paid, dated buyer requests (64 active fixed-price CSV projects; data-alignment job GBP 20-250, posted 2026-11-09T20:09Z) in products/services/paid-data-request/bounded-result.json (TASK-179427996114/116). Bidding needs a registered account; agents create no accounts or agreements. Prior evidence unchanged: Expensify (Upwork+CLA), translation boards, DrivenData certification. Founder step only if desired: designate one marketplace identity disclosed as AI-assisted, and confirm platform AI policy and payout route. Then agents can filter low-bid non-personal CSV cleaning tasks and prepare bids for approval. Competition is high (67-121 bids on close fits).",
-      "mission_id": "PAID-DATA-CLEANING-REQUEST-TEST",
-      "expected_gain": "Access to observed paid small data-cleaning jobs (USD/GBP 20-250); win rate unknown; no payout guaranteed.",
-      "raised_by": "RESEARCHER",
-      "reports": 3,
-      "opened_at": "2026-11-03T20:01:26Z",
-      "last_reported_at": "2026-11-10T03:07:24Z"
     },
     {
       "id": "SERVICE-PAYMENT-COLLECTION",
@@ -56,6 +42,20 @@
       "reports": 13,
       "opened_at": "2026-11-08T10:36:45Z",
       "last_reported_at": "2026-11-10T08:06:02Z"
+    },
+    {
+      "id": "BOUNTY-SUBMISSION-ELIGIBILITY",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "IDENTITY",
+      "title": "Marketplace identity: NOT recommended now (Freelancer sample 0/50 strong fits); kept for record",
+      "detail": "Updated 2026-11-10 (FREELANCER-DECISION-EVIDENCE, TASK-179432100112/115/116, products/services/freelancer-decision/evidence.json). A fresh sorted sample of 50 active fixed-price excel/csv projects had 0 strong non-personal file-in/file-out fits. The 2 fresh (<6h, <15 bids) tasks were both excluded (personal data; private study data). Median bids 29; 58% of budgets INR (e.g. INR 600-1500). The fee page FETCH was rejected by the host filter, and the AI policy is unread. Recommendation: do not designate a marketplace identity on current evidence; no founder action requested. Prior evidence (Expensify/Upwork+CLA, translation boards, DrivenData) unchanged. Reconsider if repeated samples show >=3 strong fits per day at >=USD 30, fees/AI policy become readable, or an inbound request arrives.",
+      "mission_id": "FREELANCER-DECISION-EVIDENCE",
+      "expected_gain": "Avoids a low-value founder identity commitment; no revenue implied.",
+      "raised_by": "RESEARCHER",
+      "reports": 4,
+      "opened_at": "2026-11-03T20:01:26Z",
+      "last_reported_at": "2026-11-10T14:31:44Z"
     },
     {
       "id": "PUBLIC-DISCOVERY-HOST-REJECTION",
@@ -98,6 +98,23 @@
       "reports": 1,
       "opened_at": "2026-11-07T19:37:09Z",
       "last_reported_at": "2026-11-07T19:37:09Z"
+    },
+    {
+      "id": "SYSTEM-NO-PROGRESS",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "PROGRESS",
+      "title": "3 tours consécutifs sans résultat vérifiable",
+      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, FOUNDER-FIRST-RECEIPT-20261110, LINK-CHECK-LAUNCH, OPEN-SOFTWARE-TENDER-BRIEF, OPEN-SOFTWARE-TENDERS-RETIRE, RSS-ACTOR-LAUNCH, SOFTWARE-AWARD-LINK-REMOVAL, SQLITE-DIAGNOSTIC-WINDOW-VERDICT, SQLITE-SECOND-CASE-STAGING, TEXT-CSV-INTAKE-EXPERIMENT, WELFARE-LIVE-DEMAND, WELFARE-SITE-RETIRE, WORLD-FIRST-REVENUE.",
+      "open_missions_total": 14,
+      "missions_truncated": false,
+      "missions_collection": "missions",
+      "mission_id": null,
+      "expected_gain": null,
+      "raised_by": "PROGRESS-DETECTOR",
+      "reports": 3,
+      "opened_at": "2026-11-10T13:31:02Z",
+      "last_reported_at": "2026-11-10T14:32:01Z"
     }
   ],
   "resolved_recent": [
@@ -137,19 +154,19 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 3,
     "threshold": 3,
     "stalled_since": "2026-11-10T13:31:02Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 398,
-    "turns_without_verified_revenue": 398,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 399,
+    "turns_without_verified_revenue": 399,
+    "turns_without_outcome": 3,
     "outcome_threshold": 12,
     "dry_since": "2026-11-10T13:31:02Z",
     "last_outcome_turn": "THINK-1794315604",
     "last_productive_turn": "THINK-1794315604",
-    "last_turn": "THINK-1794319206",
+    "last_turn": "THINK-1794321001",
     "last_change": {
       "productive": false,
       "outcome": false,
