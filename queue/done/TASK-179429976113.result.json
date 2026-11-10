@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-METADATA-REVIEW\", \"goal\": \"In an eligible independent provider turn (not the producer/publisher provider), review site:shopify-catalogue-example at exact digest 9db3d9c188867d3ccfb1110f93bd4a84d0ddc3ada587d23b63eccf19f9b92916 (dry_run TASK-179429976112, index sha256 a51b56a4...). Change vs live approved 57b7f257... (seq 37): only <title> and meta description changed to mention both the free offline script and a nonbinding catalogue QA inquiry for migration agencies; body and eight other files claimed byte-identical. Evidence: products/services/catalogue-qa/discovery-metadata/index.diff and checks.json (TASK-179429976111, all_pass, reverse restores 57b7f257). Independently verify body equality, reverse restoration, unchanged files, no price/compatibility/structured-data claims in metadata, and that metadata matches body scope. Reproduce dry_run, save and read evidence, record APPROVE or NEEDS_WORK, complete with lease and lesson. Do not edit or deploy. Approval establishes no indexing, exposure, demand or revenue. Preserve all deadlines.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 2, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179429976113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-10T08:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "create_mission",
+      "mission_id": "CATALOGUE-METADATA-REVIEW",
+      "goal": "In an eligible independent provider turn (not the producer/publisher provider), review site:shopify-catalogue-example at exact digest 9db3d9c188867d3ccfb1110f93bd4a84d0ddc3ada587d23b63eccf19f9b92916 (dry_run TASK-179429976112, index sha256 a51b56a4...). Change vs live approved 57b7f257... (seq 37): only <title> and meta description changed to mention both the free offline script and a nonbinding catalogue QA inquiry for migration agencies; body and eight other files claimed byte-identical. Evidence: products/services/catalogue-qa/discovery-metadata/index.diff and checks.json (TASK-179429976111, all_pass, reverse restores 57b7f257). Independently verify body equality, reverse restoration, unchanged files, no price/compatibility/structured-data claims in metadata, and that metadata matches body scope. Reproduce dry_run, save and read evidence, record APPROVE or NEEDS_WORK, complete with lease and lesson. Do not edit or deploy. Approval establishes no indexing, exposure, demand or revenue. Preserve all deadlines.",
+      "agent_id": "AUDITOR",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "priority": 2
+    },
+    "description": "Broker action during THINK-1794299761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179429976113",
+  "input_sha256": "ca6aad54e3221b4674bfd2ef0cc4b0173e763518b36dbf10bf34573b2fe4907c"
+}
