@@ -1,0 +1,233 @@
+{
+    "uri": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/105246-2026?limit=100&updatedTo=2026-11-11T11:06:34",
+    "version": "1.1",
+    "extensions": [
+        "https://standard.open-contracting.org/profiles/eu/latest/en/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_amendment_rationale_classifications_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_budget_breakdown_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_contract_completion_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_documentation_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_pagination_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_suitability_extension/master/extension.json",
+        "https://raw.githubusercontent.com/portaledcahn/ocds_Links_extension/main/extension.json",
+        "https://raw.githubusercontent.com/cabinetoffice/ocds_uk_extension/main/extension.json"
+    ],
+    "publishedDate": "2026-11-05T14:08:39Z",
+    "publisher": {
+        "name": "Cabinet Office",
+        "scheme": "GB-GOR",
+        "uid": "D2",
+        "uri": "https://www.gov.uk/government/organisations/cabinet-office"
+    },
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "publicationPolicy": "https://www.gov.uk/government/publications/open-contracting",
+    "releases": [
+        {
+            "ocid": "ocds-h6vhtk-07b55c",
+            "id": "105246-2026",
+            "date": "2026-11-05T14:08:39Z",
+            "tag": [
+                "tender"
+            ],
+            "description": "Lots are not being used for this tender for the reason(s) stated below:\nNature of the contract not suitable for lots.\nQuality Management Procedures\n1. The bidder must hold a UKAS (or equivalent) accredited independent third-party certificate of compliance in accordance with BS EN ISO 9001 (or equivalent) or a documented policy regarding quality management, see attachment at SPD question 4D.1.\nHealth and Safety Procedures\n1. The bidder must hold a UKAS (or equivalent) accredited independent third-party certificate of compliance in accordance with ISO 45001 (or equivalent) or have, within the last 12 months, successfully met the assessment requirements of a construction-related scheme in registered membership of the Safety Schemes in Procurement (SSIP) forum or the bidder must have a regularly reviewed and documented policy for Health and Safety management, see attachment at SPD question 4D.1.\nEnvironmental Management Procedures\n1. The bidder must hold a UKAS (or equivalent) accredited independent third-party certificate of compliance in accordance with BS EN ISO 14001 (or equivalent) or a valid EMAS (or equivalent) certificate or the bidder must have a regularly reviewed documented policy regarding environmental management, see attachment at SPD question 4D.2.\nBidders may be excluded from this competition if they are in any of the situations referred to in regulation 58 of the Public Contracts (Scotland) Regulations 2015.\nThe buyer is using PCS-Tender to conduct this ITT exercise. The Project code is 32326. For more information see: http://www.publiccontractsscotland.gov.uk/info/InfoCentre.aspx?ID=2343\nCommunity benefits are included in this requirement. For more information see: https://www.gov.scot/policies/public-sector-procurement/community-benefits-in-procurement/\nA summary of the expected community benefits has been provided as follows:\nCommunity benefits will be required on a voluntary basis for:\n- Employment\n- Employability & Skills\n- SMEs\n- TSOs\n- Education\n- Community Wish List (http://northayrshire.community/community-benefits-wishlist- application-form/)\n(SC Ref:847479)",
+            "initiationType": "tender",
+            "tender": {
+                "id": "NAC/5245",
+                "legalBasis": {
+                    "id": "32014L0024",
+                    "scheme": "CELEX"
+                },
+                "title": "Supply and Support of Integrated Workplace Management System",
+                "status": "active",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "72267100",
+                    "description": "Maintenance of information technology software"
+                },
+                "mainProcurementCategory": "services",
+                "description": "North Ayrshire Council (NAC) is seeking to procure a cloud-hosted Integrated Workplace Management System (IWMS) to replace its existing Computer Aided Facilities Management (CAFM) solution. The new solution will provide a single, integrated platform to support the management of the Council's operational property portfolio, encompassing asset management, maintenance management, statutory compliance, financial monitoring, reporting and governance.",
+                "lots": [
+                    {
+                        "id": "1",
+                        "description": "North Ayrshire Council invites tenders for the provision, implementation, hosting, support and maintenance of an Integrated Workplace Management System (IWMS). The solution will provide a single integrated platform for the management of the Council's operational property portfolio, including asset management, maintenance management, statutory compliance, reporting and associated property management functions. The contract includes software licensing, implementation, configuration, data migration, systems integration, training, hosting, support and ongoing maintenance services. The initial contract term will be 3 years with an option to extend for up to an additional 60 months. The contract will be awarded under the Council's Conditions of Contract for ICT Services",
+                        "awardCriteria": {
+                            "criteria": [
+                                {
+                                    "name": "Quality",
+                                    "type": "quality",
+                                    "description": "40"
+                                },
+                                {
+                                    "type": "price",
+                                    "description": "60"
+                                }
+                            ]
+                        },
+                        "contractPeriod": {
+                            "durationInDays": 1080
+                        },
+                        "hasRenewal": true,
+                        "renewal": {
+                            "description": "Upto a maximum of 60 months"
+                        },
+                        "submissionTerms": {
+                            "variantPolicy": "notAllowed"
+                        },
+                        "hasOptions": false,
+                        "status": "active"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "1",
+                        "additionalClassifications": [
+                            {
+                                "scheme": "CPV",
+                                "id": "72268000",
+                                "description": "Software supply services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "72250000",
+                                "description": "System and support services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "72263000",
+                                "description": "Software implementation services"
+                            }
+                        ],
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKM93"
+                            }
+                        ],
+                        "relatedLot": "1"
+                    }
+                ],
+                "submissionMethod": [
+                    "electronicSubmission"
+                ],
+                "submissionMethodDetails": "https://www.publictendersscotland.publiccontractsscotland.gov.uk",
+                "selectionCriteria": {
+                    "criteria": [
+                        {
+                            "type": "suitability",
+                            "description": "Where it is required, within a bidder’s country of establishment they must confirm which authorisation or memberships of the relevant organisation(s) are required in order to perform this service.\nBidders must confirm if they hold the particular authorisation or memberships",
+                            "appliesTo": [
+                                "supplier"
+                            ]
+                        }
+                    ]
+                },
+                "documents": [
+                    {
+                        "documentType": "economicSelectionCriteria",
+                        "id": "economic"
+                    },
+                    {
+                        "documentType": "technicalSelectionCriteria",
+                        "id": "technical"
+                    }
+                ],
+                "procurementMethod": "open",
+                "procurementMethodDetails": "Open procedure",
+                "coveredBy": [
+                    "GPA"
+                ],
+                "tenderPeriod": {
+                    "endDate": "2026-12-07T12:00:00Z"
+                },
+                "submissionTerms": {
+                    "languages": [
+                        "en"
+                    ]
+                },
+                "awardPeriod": {
+                    "startDate": "2026-12-07T12:00:00Z"
+                },
+                "bidOpening": {
+                    "date": "2026-12-07T12:00:00Z"
+                },
+                "hasRecurrence": false,
+                "contractTerms": {
+                    "hasElectronicOrdering": true,
+                    "electronicInvoicingPolicy": "allowed",
+                    "hasElectronicPayment": true
+                }
+            },
+            "parties": [
+                {
+                    "name": "North Ayrshire Council",
+                    "id": "GB-FTS-1083",
+                    "identifier": {
+                        "legalName": "North Ayrshire Council"
+                    },
+                    "address": {
+                        "streetAddress": "Cunninghame House, Friars Croft",
+                        "locality": "Irvine",
+                        "region": "UKM93",
+                        "postalCode": "KA12 8EE",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "email": "laurakeane@north-ayrshire.gov.uk",
+                        "url": "https://www.publictendersscotland.publiccontractsscotland.gov.uk"
+                    },
+                    "roles": [
+                        "buyer"
+                    ],
+                    "details": {
+                        "url": "http://www.north-ayrshire.gov.uk",
+                        "buyerProfile": "http://www.publiccontractsscotland.gov.uk/search/Search_AuthProfile.aspx?ID=AA00337",
+                        "classifications": [
+                            {
+                                "scheme": "TED_CA_TYPE",
+                                "id": "REGIONAL_AUTHORITY",
+                                "description": "Regional or local authority"
+                            },
+                            {
+                                "scheme": "COFOG",
+                                "id": "01",
+                                "description": "General public services"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Kilmarnock Sheriff Court",
+                    "id": "GB-FTS-4006",
+                    "identifier": {
+                        "legalName": "Kilmarnock Sheriff Court"
+                    },
+                    "address": {
+                        "streetAddress": "Sheriff Court House, St Marnock Street",
+                        "locality": "Kilmarnock",
+                        "postalCode": "KA1 1ED",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "telephone": "+44 1563550024"
+                    },
+                    "roles": [
+                        "reviewBody"
+                    ],
+                    "details": {
+                        "url": "https://www.scotcourts.gov.uk/"
+                    }
+                }
+            ],
+            "buyer": {
+                "id": "GB-FTS-1083",
+                "name": "North Ayrshire Council"
+            },
+            "links": [
+                {
+                    "rel": "canonical",
+                    "href": "https://api.publiccontractsscotland.gov.uk/v1/Notice?id=ocds-r6ebe6-0000847479"
+                }
+            ],
+            "language": "en"
+        }
+    ]
+}
