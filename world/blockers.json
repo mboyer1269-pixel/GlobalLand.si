@@ -137,25 +137,29 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-11T23:06:33Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 506,
-    "turns_without_verified_revenue": 506,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 507,
+    "turns_without_verified_revenue": 507,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-11T23:06:33Z",
-    "last_outcome_turn": "THINK-1794438008",
-    "last_productive_turn": "THINK-1794438008",
-    "last_turn": "THINK-1794439807",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794440161",
+    "last_productive_turn": "THINK-1794440161",
+    "last_turn": "THINK-1794440161",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "TENDER-CALENDAR-REVIEW"
+      ],
+      "new_products": [
+        "products/reviews/tender-calendar-independent.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
