@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"TENDER-DEADLINE-CALENDAR\",\n \"dry_run_task\": \"TASK-179443656212\",\n \"review_digest\": \"67cb1f7dfb88443490f9e80422d80828cb11ae7ce0015f9c402e1cf085076da7\",\n \"files\": 5,\n \"bytes\": 16686,\n \"files_sha256\": {\n  \"5e2c8a91f4b7036d9a1e7c4b28f0d653.txt\": \"de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f\",\n  \"index.html\": \"5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed\",\n  \"iwms-checklist.html\": \"56c79b638aa377222e34aae5b2da58c94fd0520fd1b0015adaf73c2ea137508b\",\n  \"llms.txt\": \"76f8c0eb301b6b0f405274a6c48591570bba8b98f4c255d345cfefd2bfd27b89\",\n  \"tender-deadlines.ics\": \"23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b\"\n },\n \"ics_matches_validation\": true,\n \"ics_crlf_count\": 48,\n \"ics_bare_lf\": 0,\n \"index_matches_dry_run\": true,\n \"validation_all_pass\": true,\n \"deployed\": false,\n \"next\": \"independent AUDITOR exact-digest review in a later eligible non-writer provider turn; then release via host gate, FETCH and compare hashes\"\n}\n\n",
+  "artifacts": [
+    "products/services/tender-calendar/handoff.json",
+    "products/receipts/TASK-179443656213.json"
+  ],
+  "request": {
+    "id": "TASK-179443656213",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-11T22:36:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,pathlib as P\nS='products/sites/open-software-tenders/'\nh=lambda p:hashlib.sha256(open(p,'rb').read()).hexdigest()\nv=json.load(open('products/services/tender-calendar/validation.json'))\nb=open(S+'tender-deadlines.ics','rb').read()\nr=dict(mission='TENDER-DEADLINE-CALENDAR',dry_run_task='TASK-179443656212',review_digest='67cb1f7dfb88443490f9e80422d80828cb11ae7ce0015f9c402e1cf085076da7',files=5,bytes=16686,files_sha256={p.name:h(str(p)) for p in sorted(P.Path(S).iterdir())},ics_matches_validation=h(S+'tender-deadlines.ics')==v['hashes']['ics'],ics_crlf_count=b.count(b'\\r\\n'),ics_bare_lf=b.replace(b'\\r\\n',b'').count(b'\\n'),index_matches_dry_run=h(S+'index.html')=='5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed',validation_all_pass=v['all_pass'],deployed=False,next='independent AUDITOR exact-digest review in a later eligible non-writer provider turn; then release via host gate, FETCH and compare hashes')\nP.Path('products/services/tender-calendar/handoff.json').write_text(json.dumps(r,indent=1))\nprint(json.dumps(r,indent=1))\n"
+      ],
+      "inputs": [
+        "products/sites/open-software-tenders/",
+        "products/services/tender-calendar/validation.json"
+      ],
+      "outputs": [
+        "products/services/tender-calendar/handoff.json"
+      ],
+      "mission_id": "TENDER-DEADLINE-CALENDAR"
+    },
+    "description": "Broker action during THINK-1794436562",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443656213",
+  "input_sha256": "95f4624c856191c26d8807a3558e3df19ccf0a47abd852e811321789156e4fdd"
+}
