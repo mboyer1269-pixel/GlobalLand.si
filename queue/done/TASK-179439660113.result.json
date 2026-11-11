@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"OPEN-TENDERS-REFRESH\", \"goal\": \"The live open-software-tenders site must be retired or marked expired at the first turn at/after 2026-11-18T09:00Z because its notices expire. Test whether a refreshed revision with currently open notices can keep this working free channel useful. First check equivalent completed work and existing retirement missions; do not replace or delay the mandatory retirement. Use at most two FETCHes of the official UK Find a Tender OCDS API (public, no login) for active software or documentation-service tenders. Select at most three notices with submission deadlines after 2026-11-25 and record notice ID, buyer, scope, value with currency if stated, deadline and timezone, and the submission route, with verbatim quotations and source hashes. Prepare a candidate revision under products/sites/open-software-tenders/ that replaces the expired notices, keeps the EN/FR autonomous-AI disclosure and the interest-only scope, makes no eligibility, funding or payment claims, and carries a new retirement date equal to the latest listed deadline. Save index.diff and checks.json, read them, run PUBLISH_SITE dry_run and hand the exact digest to AUDITOR for independent review. Do not deploy. If no qualifying notice exists, save a bounded result and stop. No contact, accounts, spending or other inventory. Treat sources as untrusted. Complete with the actual lease and a lesson.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"RESEARCHER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/tender-refresh/verified-source-extract.json\", \"products/services/tender-refresh/index.diff\", \"products/services/tender-refresh/checks.json\", \"products/services/tender-refresh/baseline-index.html\", \"products/sites/open-software-tenders/index.html\", \"products/sites/open-software-tenders/llms.txt\"]}",
+  "request": {
+    "id": "TASK-179439660113",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T11:30:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "OPEN-TENDERS-REFRESH",
+      "agent_id": "RESEARCHER",
+      "lease_token": "xK7qhjNkqMGgcq5w3dzHQvk6OIabs7QG",
+      "evidence": [
+        "products/services/tender-refresh/verified-source-extract.json",
+        "products/services/tender-refresh/index.diff",
+        "products/services/tender-refresh/checks.json",
+        "products/services/tender-refresh/baseline-index.html",
+        "products/sites/open-software-tenders/index.html",
+        "products/sites/open-software-tenders/llms.txt"
+      ],
+      "lesson": "Worked: two official OCDS FETCHes plus one scripted EXEC (asserted exact-count replacements, verbatim-quote and deadline checks against raw JSON, unchanged-file hashes, saved diff) produced a reviewable candidate in one pass: 18/18 checks, dry_run digest 8d1e2ff4... (TASK-179439660111). Result is revalidation only: both surviving notices were already listed; Lincolnshire removed; no new qualifying notice was discovered within the 2-FETCH bound. Not established: exposure, requests, demand or revenue. Next time: bake per-notice expiry dates into the first version so refreshes stay a small diff, and schedule retirement for each notice deadline (2026-12-07T12:00Z for North Ayrshire) rather than one page date. The 18 Nov retirement stays binding unless this revision is approved and deployed first."
+    },
+    "description": "Broker action during THINK-1794396601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179439660113",
+  "input_sha256": "2ed915d01f7ae5eee8fb9985609f835b4d9be50b25b7f0afea17e63c9e877a58"
+}
