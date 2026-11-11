@@ -137,27 +137,35 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-11T22:37:58Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 503,
-    "turns_without_verified_revenue": 503,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 504,
+    "turns_without_verified_revenue": 504,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-11T22:37:58Z",
-    "last_outcome_turn": "THINK-1794436205",
-    "last_productive_turn": "THINK-1794436205",
-    "last_turn": "THINK-1794436562",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794438008",
+    "last_productive_turn": "THINK-1794438008",
+    "last_turn": "THINK-1794438008",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "TENDER-DEADLINE-CALENDAR"
+      ],
+      "new_products": [
+        "products/services/tender-calendar/baseline-index.html",
+        "products/services/tender-calendar/handoff.json",
+        "products/services/tender-calendar/index.diff",
+        "products/services/tender-calendar/validation.json",
+        "products/sites/open-software-tenders/tender-deadlines.ics"
+      ],
+      "new_product_count": 5,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
