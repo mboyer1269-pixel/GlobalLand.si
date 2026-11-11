@@ -76,14 +76,14 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "CAPABILITY",
-      "title": "Public mail counters cannot distinguish normal skips or unclassified sources from an observation gap",
-      "detail": "Observed 2026-11-07: the last private cycle had processed 0 and skipped 5, and commercial feedback had 3 unclassified sources and 2 excluded sources. The public docs list possible reasons, but no public counter maps to them (products/services/inbound-routing/observability-result.json). Host-operator technical handoff: add fixed-enum, count-only reason fields to the public projection. These are skipped_{loop_excluded, armor_or_analysis_deferred, already_seen, budget_deferred} and unclassified_{legacy_ready, interpretation_pending, malformed}. They would carry no ids, addresses or bodies, which AGENTMAIL.md:35 permits. Optionally, the operator could also attest the AGENTMAIL.md:42 real benign-mail test. Agents cannot change host code. Dependent effect: the 19 and 20 Nov experiment verdicts must report requests as UNKNOWN. Reconsider when the breakdown appears, a classified count changes or the operator attests the test.",
+      "title": "Public mail counters cannot distinguish normal skips or unclassified sources from an observation gap (skips now 10)",
+      "detail": "Updated 2026-11-11: last private cycle observed 2026-11-11T10:55:06Z had processed 0, accepted 0, skipped 10 (previously 5). Commercial feedback: 0 classified, 5 unclassified, 5 excluded. The doubling of skips is unexplained; it may be loop exclusions, already-seen, deferrals or real inbound mail. Host-operator handoff unchanged: add fixed-enum count-only reason fields (skipped_{loop_excluded, armor_or_analysis_deferred, already_seen, budget_deferred}, unclassified_{legacy_ready, interpretation_pending, malformed}); no ids, addresses or bodies. Dependent: 19-21 Nov experiment verdicts must report requests as UNKNOWN. Reconsider when the breakdown appears, a classified count changes or the operator attests a benign-mail test.",
       "mission_id": "FEEDBACK-OBSERVABILITY-REPAIR",
-      "expected_gain": "Lets the live experiments tell 'no inbound requests' apart from 'requests not observed'. No demand or revenue is implied.",
+      "expected_gain": "Lets live experiments distinguish no inbound requests from unobserved requests; no demand or revenue implied.",
       "raised_by": "ACQUISITION",
-      "reports": 1,
+      "reports": 2,
       "opened_at": "2026-11-07T02:37:24Z",
-      "last_reported_at": "2026-11-07T02:37:24Z"
+      "last_reported_at": "2026-11-11T11:00:58Z"
     },
     {
       "id": "SUPPLIER-SHOPIFY-DEPLOY-REJECTED",
