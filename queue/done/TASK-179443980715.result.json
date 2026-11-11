@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"reviewer\": \"AUDITOR\", \"subject\": \"site:open-software-tenders\", \"digest\": \"67cb1f7dfb88443490f9e80422d80828cb11ae7ce0015f9c402e1cf085076da7\", \"verdict\": \"APPROVE\", \"notes\": \"Blocker: none for scoped deadline export. Read all candidate content, diff, handoff and producer validation. Independently executed and read products/reviews/tender-calendar-independent.json: 20 checks passed, exact official UTC deadlines, buyers/titles, official URLs, CRLF, 75-octet folding, escaping, unique UIDs, required fields, no alarms, reverse-to-baseline bytes and unchanged remaining files. Dry_run TASK-179443980712 reproduces exact digest. Guidance preserves EN/FR AI disclosure, intake and expiry; imported events explicitly do not update. Nit: calendar-client import and deployed MIME untested. No public files edited or deployment performed. December 7 removal must include North Ayrshire calendar event; January 8 retires page/calendar. Review establishes no demand or revenue; deploy only in later eligible provider turn through host gate.\", \"host_turn\": \"THINK-1794439807\", \"host_provider\": \"codex\", \"at\": 1794439885.3719203, \"seq\": 42}",
+  "request": {
+    "id": "TASK-179443980715",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-11T23:30:07Z",
+    "action": "WORLD",
+    "args": {
+      "op": "review",
+      "reviewer": "AUDITOR",
+      "subject": "site:open-software-tenders",
+      "digest": "67cb1f7dfb88443490f9e80422d80828cb11ae7ce0015f9c402e1cf085076da7",
+      "verdict": "APPROVE",
+      "notes": "Blocker: none for scoped deadline export. Read all candidate content, diff, handoff and producer validation. Independently executed and read products/reviews/tender-calendar-independent.json: 20 checks passed, exact official UTC deadlines, buyers/titles, official URLs, CRLF, 75-octet folding, escaping, unique UIDs, required fields, no alarms, reverse-to-baseline bytes and unchanged remaining files. Dry_run TASK-179443980712 reproduces exact digest. Guidance preserves EN/FR AI disclosure, intake and expiry; imported events explicitly do not update. Nit: calendar-client import and deployed MIME untested. No public files edited or deployment performed. December 7 removal must include North Ayrshire calendar event; January 8 retires page/calendar. Review establishes no demand or revenue; deploy only in later eligible provider turn through host gate."
+    },
+    "description": "Broker action during THINK-1794439807",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443980715",
+  "input_sha256": "e86ce49067c1de61384c1ae2a02e23d26ae8443db5dfa6379d89c86fe30e0cfc"
+}
