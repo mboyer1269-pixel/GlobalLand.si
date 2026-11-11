@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "/community/tutorials/how-to-write-a-proposal-and-outline-for-a-digitalocean-community-tutorial\n/community/tutorials/digitalocean-s-technical-writing-guidelines\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179436960510.json"
+  ],
+  "request": {
+    "id": "TASK-179436960510",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-11T04:00:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nclass P(HTMLParser):\n def handle_starttag(self,t,a):\n  d=dict(a)\n  if t=='a' and any(w in d.get('href','').lower() for w in ['guideline','apply','proposal','writing']): print(d.get('href'))\np=P();p.feed(Path('products/research/paid-technical-writing/digitalocean-invitation.html').read_text())"
+      ],
+      "inputs": [
+        "products/research/paid-technical-writing/"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794369605",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179436960510",
+  "input_sha256": "b370251f738203680f032fb0ee953c3f1cbedc2cae4ef356d491c3571891a914"
+}
