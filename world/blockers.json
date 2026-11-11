@@ -142,26 +142,28 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 465,
-    "turns_without_verified_revenue": 465,
-    "turns_without_outcome": 6,
+    "turns_without_new_interpreted_feedback": 466,
+    "turns_without_verified_revenue": 466,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-11T09:30:40Z",
-    "last_outcome_turn": "THINK-1794387601",
-    "last_productive_turn": "THINK-1794396601",
-    "last_turn": "THINK-1794396601",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794398401",
+    "last_productive_turn": "THINK-1794398401",
+    "last_turn": "THINK-1794398401",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
+      "outcome": true,
+      "mission_outcomes": [
+        "OPEN-TENDERS-REFRESH"
+      ],
       "new_products": [
-        "products/services/tender-refresh/raw/105246-2026.json",
-        "products/services/tender-refresh/raw/105838-2026.json",
-        "products/services/tender-refresh/verified-source-extract.json"
+        "products/services/tender-refresh/baseline-index.html",
+        "products/services/tender-refresh/checks.json",
+        "products/services/tender-refresh/index.diff"
       ],
       "new_product_count": 3,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 2,
       "revenue_gain_cents": 0
     }
   }
