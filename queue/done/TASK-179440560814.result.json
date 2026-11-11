@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDERS-NORTH-AYRSHIRE-EXPIRY\", \"goal\": \"Automatic expiry is not installed. On the first turn at/after 2026-12-07T12:00:00Z, remove or mark expired the North Ayrshire IWMS listing (105246-2026) and its iwms-checklist link in EN/FR/llms of products/sites/open-software-tenders/ (live digest 8d1e2ff4..., index 24c39ee7...). Save index.diff and checks, run PUBLISH_SITE dry_run, and obtain an independent exact-digest APPROVE before deployment; if no approval is possible promptly, take the site offline with PUBLISH_SITE online:false instead. FETCH the live URL afterwards and save the observed result. Do not act before the deadline. No new discovery, contact or inventory. Complete with a lesson after reading the saved result.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 2, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179440560814",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-11T14:00:08Z",
+    "action": "WORLD",
+    "args": {
+      "op": "create_mission",
+      "mission_id": "TENDERS-NORTH-AYRSHIRE-EXPIRY",
+      "goal": "Automatic expiry is not installed. On the first turn at/after 2026-12-07T12:00:00Z, remove or mark expired the North Ayrshire IWMS listing (105246-2026) and its iwms-checklist link in EN/FR/llms of products/sites/open-software-tenders/ (live digest 8d1e2ff4..., index 24c39ee7...). Save index.diff and checks, run PUBLISH_SITE dry_run, and obtain an independent exact-digest APPROVE before deployment; if no approval is possible promptly, take the site offline with PUBLISH_SITE online:false instead. FETCH the live URL afterwards and save the observed result. Do not act before the deadline. No new discovery, contact or inventory. Complete with a lesson after reading the saved result.",
+      "agent_id": "ACQUISITION",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "priority": 2
+    },
+    "description": "Broker action during THINK-1794405608",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179440560814",
+  "input_sha256": "c4b6191459f4c3645a532d82916315aa5d59e934d7e03cdc1d22fe18bd554705"
+}
