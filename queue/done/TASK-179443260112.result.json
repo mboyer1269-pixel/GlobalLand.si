@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "status_counts {'FINISHED': 10, 'success': 3}\ndates [('1760367600', '2025-10-13T15:00:00+00:00'), ('1722870000', '2024-08-05T15:00:00+00:00'), ('1675695600', '2023-02-06T15:00:00+00:00'), ('1777307400', '2026-04-27T16:30:00+00:00'), ('1712242800', '2024-04-04T15:00:00+00:00'), ('1741100400', '2025-03-04T15:00:00+00:00'), ('1768230000', '2026-01-12T15:00:00+00:00'), ('1763391600', '2025-11-17T15:00:00+00:00'), ('1684162800', '2023-05-15T15:00:00+00:00'), ('1679670000', '2023-03-24T15:00:00+00:00')]\nrecords 10\nactive_contexts ['],\"total\":301,\"hasNext\":true,\"pages\":31}],\"pageParams\":[0]},\"dataUpdateCount\":1,\"dataUpdatedAt\":1794432626341,\"error\":null,\"errorUpdateCount\":0,\"errorUpdatedAt\":0,\"fetchFailureCount\":0,\"fetchFailureReason\":null,\"fetchMeta\":null,\"isInvalidated\":false,\"status\":\"success\",\"fetchStatus\":\"idle\"},\"queryKey\":[\"contests\",\"all\"],\"queryHash\":\"[\\\\\"contests\\\\\",\\\\\"all\\\\\"]\"}]},\"children\":[\"$\",\"$L18\",null,{}]}]]}]\\n19:I[73736,[\"5477\",\"static/chunks/dfddbb69-9b7a83767540bc3e.js\",\"2250\",\"static/chunks/5c3166cd-da755b817df7277f.js\",\"543', 'l,{\"state\":{\"mutations\":[],\"queries\":[{\"state\":{\"data\":null,\"dataUpdateCount\":1,\"dataUpdatedAt\":1794432626360,\"error\":null,\"errorUpdateCount\":0,\"errorUpdatedAt\":0,\"fetchFailureCount\":0,\"fetchFailureReason\":null,\"fetchMeta\":null,\"isInvalidated\":false,\"status\":\"success\",\"fetchStatus\":\"idle\"},\"queryKey\":[\"profile\"],\"queryHash\":\"[\\\\\"profile\\\\\"]\"}]},\"children\":[[\"$\",\"section\",null,{\"className\":\"hidden shrink-0 grow-0 basis-24 bg-dark-200 md:block\",\"children\":[\"$\",\"$L1a\",null,{}]}],[\"$\",\"$L8\",null,{\"parallelRouterKey\":\"p', 'l,{\"state\":{\"mutations\":[],\"queries\":[{\"state\":{\"data\":null,\"dataUpdateCount\":1,\"dataUpdatedAt\":1794432626361,\"error\":null,\"errorUpdateCount\":0,\"errorUpdatedAt\":0,\"fetchFailureCount\":0,\"fetchFailureReason\":null,\"fetchMeta\":null,\"isInvalidated\":false,\"status\":\"success\",\"fetchStatus\":\"idle\"},\"queryKey\":\"$1e\",\"queryHash\":\"[\\\\\"profile\\\\\"]\"}]},\"children\":[\"$\",\"$L1f\",null,{}]}]\\n']\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179443260112.json"
+  ],
+  "request": {
+    "id": "TASK-179443260112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-11T21:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import re,json,collections,datetime\nfrom pathlib import Path\ns=Path('products/research/paid-review-contests/sherlock-directory.html').read_text()\nparts=[]\nfor m in re.finditer(r'self\\.__next_f\\.push\\((\\[.*?\\])\\)</script>',s):\n try:\n  x=json.loads(m.group(1))\n  if len(x)>1 and isinstance(x[1],str): parts.append(x[1])\n except ValueError: pass\ns=''.join(parts)\nprint('status_counts',dict(collections.Counter(re.findall(r'\"status\":\"([^\"]+)\"',s))))\nprint('dates',[(v,datetime.datetime.fromtimestamp(int(v),datetime.timezone.utc).isoformat()) for v in re.findall(r'\"endsAt\":(\\d+)',s)])\nprint('records',len(re.findall(r'\"endsAt\":',s)))\nprint('active_contexts',[s[max(0,m.start()-250):m.end()+250] for m in re.finditer(r'\"status\":\"(?!FINISHED)[^\"]+\"',s)][:10])"
+      ],
+      "inputs": [
+        "products/research/paid-review-contests/sherlock-directory.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794432601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443260112",
+  "input_sha256": "b5b8ac98d7862fffa84830cdb347fe23ecbe237541fc4ddccefc7708597afabb"
+}
