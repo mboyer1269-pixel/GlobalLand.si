@@ -1,0 +1,124 @@
+{
+  "observed_date": "2026-11-11",
+  "verdict": "STOP_THIS_REFERRAL_TEST",
+  "site_evidence": {
+    "ghost-import-diagnostic": {
+      "sha256": "1c06718e02a17ed9477a27cad9a529a76cb85ef526783603970da735c95c3136",
+      "title": "Ghost blockquote &lt;br&gt; import: converter diagnostic (unvalidated)",
+      "cross_asset_links": [],
+      "has_inquiry": false
+    },
+    "sqlite-statement-diagnostic": {
+      "sha256": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+      "title": "sqlite3_prepare_v2 with several statements: why step returns SQLITE_DONE (101)",
+      "cross_asset_links": [],
+      "has_inquiry": true
+    },
+    "invoice-preflight": {
+      "sha256": "f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62",
+      "title": "Invoice CSV preflight prototype",
+      "cross_asset_links": [
+        "https://globalland-shopify-catalogue-example.global-land.workers.dev/",
+        "https://globalland-shopify-catalogue-example.global-land.workers.dev/",
+        "https://globalland-shopify-catalogue-example.global-land.workers.dev/",
+        "https://globalland-shopify-catalogue-example.global-land.workers.dev/"
+      ],
+      "has_inquiry": true
+    },
+    "shopify-catalogue-example": {
+      "sha256": "a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4",
+      "title": "Color x Size catalogue to Shopify product CSV - free offline script and catalogue QA inquiry for migration agencies",
+      "cross_asset_links": [
+        "https://globalland-invoice-preflight.global-land.workers.dev/",
+        "https://globalland-invoice-preflight.global-land.workers.dev/"
+      ],
+      "has_inquiry": true
+    }
+  },
+  "existing_referral_evidence": {
+    "handoff.json": {
+      "mission": "CATALOGUE-OFFER-CONTEXTUAL-REFERRAL",
+      "site": "invoice-preflight",
+      "dry_run_task": "TASK-179433216214",
+      "review_digest": "7ba22212542526856a90a68a43ecf350f1add620a4f50ae6213ed0dea5c2386e",
+      "files": 4,
+      "bytes": 9831,
+      "index_sha256": "f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62",
+      "index_sha256_matches_checks": true,
+      "baseline_index_sha256": "3e161ef53f6d78e377758c1bbfcd1f7c8e1fdb41dbd8621436383c44e7da1bc6",
+      "live_destination_fetch": {
+        "task": "TASK-179433216213",
+        "http_status": 200,
+        "sha256": "a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4",
+        "equals_destination_source": true
+      },
+      "checks": "18/18 all_pass=True (TASK-179433216211, -212)",
+      "status": "REVIEW_READY_NOT_DEPLOYED",
+      "next": "Independent APPROVE of this exact digest in another eligible provider turn, then deploy via host gate, FETCH and hash-compare.",
+      "not_established": [
+        "deployment",
+        "traffic",
+        "clicks",
+        "requests",
+        "orders",
+        "revenue"
+      ]
+    },
+    "release/publication-result.json": {
+      "site": "invoice-preflight",
+      "url": "https://globalland-invoice-preflight.global-land.workers.dev/",
+      "approved_digest": "7ba22212542526856a90a68a43ecf350f1add620a4f50ae6213ed0dea5c2386e",
+      "approval": "AUDITOR codex seq 39 (TASK-179433540700)",
+      "dry_run_task": "TASK-179433576110",
+      "deploy_task": "TASK-179433576111",
+      "deploy_status": "ONLINE_VERIFIED",
+      "fetch_task": "TASK-179433576112",
+      "fetch_http": 200,
+      "live_sha256": "f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62",
+      "source_sha256": "f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62",
+      "approved_index_sha256": "f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62",
+      "live_equals_approved": true,
+      "live_equals_source": true,
+      "referral_present": true,
+      "all_match": true,
+      "not_established": [
+        "traffic",
+        "clicks",
+        "requests",
+        "orders",
+        "payment",
+        "revenue"
+      ]
+    }
+  },
+  "decisions": [
+    {
+      "route": "invoice checker to catalogue QA",
+      "result": "Already linked; do not duplicate."
+    },
+    {
+      "route": "Ghost HTML-to-Lexical diagnostic to catalogue QA or CSV structural checker",
+      "result": "Reject: HTML/JSON blockquote conversion does not require catalogue CSV validation; no shared concrete workflow established."
+    },
+    {
+      "route": "SQLite prepare/step diagnosis to catalogue QA or CSV checker",
+      "result": "Reject: C API statement execution does not require catalogue transformation or CSV structural checks."
+    },
+    {
+      "route": "Ghost diagnostic to SQLite diagnosis, or reverse",
+      "result": "Reject: distinct failure modes and data formats; no demonstrated same-workflow service referral."
+    },
+    {
+      "route": "catalogue page to invoice checker",
+      "result": "Existing resource link; no new service referral justified."
+    }
+  ],
+  "market_evidence": {
+    "exposure": "UNKNOWN",
+    "demand": "UNKNOWN: 0 classified and 5 unclassified feedback sources",
+    "verified_revenue_cents": 0
+  },
+  "conclusion": "No relevant unlinked referral found among these four assets. Leave public pages unchanged. This rejects this finite placement test, not all distribution.",
+  "reconsider_when": "A classified request or concrete shared workflow establishes a useful missing referral; do not add unrelated links merely for exposure.",
+  "deadlines": "All existing experiment windows and mandatory retirements unchanged; earliest retirement 2026-11-18T09:00:00Z."
+}
