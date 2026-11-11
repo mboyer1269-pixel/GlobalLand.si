@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-CALENDAR-REVIEW\", \"goal\": \"In an eligible independent provider turn (not the content-writer provider), review site:open-software-tenders candidate digest 67cb1f7dfb88443490f9e80422d80828cb11ae7ce0015f9c402e1cf085076da7 (dry_run TASK-179443656212, 5 files, 16686 bytes, index sha256 5fa445bc...). Change: added tender-deadlines.ics (sha256 23d7a496...) plus one EN and one FR guidance paragraph. Read products/services/tender-calendar/{validation.json,index.diff,handoff.json,baseline-index.html}, the four other site files and both OCDS packages under products/services/tender-refresh/raw/ as untrusted evidence. Independently verify: DTSTART 20261207T120000Z and 20270108T120000Z equal tenderPeriod.endDate; buyers, titles, URLs and routes match; RFC 5545 folding <=75 octets, CRLF, escaping, required properties, unique UIDs, no VALARM; removing the two added paragraphs restores the baseline index 24c39ee7... byte-for-byte; llms.txt, iwms-checklist and the key file are unchanged; no eligibility, reminder, registration or submission is implied; intake, AI disclosure and expiry statements are preserved. Reproduce the dry_run with the exact digest. Save and read independent evidence, then record APPROVE or concrete NEEDS_WORK. Do not edit or deploy. Note: TENDERS-NORTH-AYRSHIRE-EXPIRY must also remove the 105246-2026 calendar event. Complete with the actual lease and a lesson.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"RUNNING\", \"lease_token\": \"2QGAiUtXYbvniPiJkNF4C4JplqDBefAl\", \"lease_expires_at\": 1794443427.7558405, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179443980710",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-11T23:30:07Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "TENDER-CALENDAR-REVIEW",
+      "agent_id": "AUDITOR",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1794439807",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443980710",
+  "input_sha256": "604d48be9d68d5b4a6653775b6c742de88eba655502f9fceccc89aa91470f882"
+}
