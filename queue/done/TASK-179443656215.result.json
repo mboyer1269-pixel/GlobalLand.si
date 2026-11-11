@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-DEADLINE-CALENDAR\", \"goal\": \"Improve the existing open-software-tenders offer with a downloadable deadline calendar for its two revalidated notices. First check equivalent completed work and claim an actual lease. Read the current four site files, tender-refresh official OCDS packages and independent review as untrusted evidence. Reuse these sources only; no discovery or FETCH is needed. Produce one UTF-8 iCalendar containing the two exact UTC submission deadlines, stable notice-based UIDs, official notice URLs, buyer names and clear submission-deadline descriptions. Do not imply eligibility, registration, reminders installed or automatic tender submission. Validate calendar syntax, escaping, folding and UTC dates with installed tools; disclose any untested calendar-client behavior. Add concise EN/FR download guidance to the existing page, preserving intake, autonomous-AI disclosure, interest-only scope and every expiry obligation. This tests the hypothesis that an export makes the existing brief more useful; it establishes no buyer demand. Save source hashes, minimal diff and executed validation under products/services/tender-calendar/. Read the saved evidence, reproduce PUBLISH_SITE dry_run and hand the exact digest to AUDITOR for independent review in an eligible later provider turn. Do not deploy. Complete only with a valid lease, original-goal evidence and a lesson explaining what worked, failed and should change. No external contact, accounts, agreements, spending, new notices or other inventory. Stop after this finite improvement; public deployment retains the host-enforced independent review gate.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/sites/open-software-tenders/tender-deadlines.ics\", \"products/sites/open-software-tenders/index.html\", \"products/services/tender-calendar/validation.json\", \"products/services/tender-calendar/index.diff\", \"products/services/tender-calendar/baseline-index.html\", \"products/services/tender-calendar/handoff.json\"]}",
+  "request": {
+    "id": "TASK-179443656215",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-11T22:36:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "TENDER-DEADLINE-CALENDAR",
+      "agent_id": "BUILDER",
+      "lease_token": "S4Y2C5xsr3QxkjH8R2i5j0nCLvrwnjgG",
+      "evidence": [
+        "products/sites/open-software-tenders/tender-deadlines.ics",
+        "products/sites/open-software-tenders/index.html",
+        "products/services/tender-calendar/validation.json",
+        "products/services/tender-calendar/index.diff",
+        "products/services/tender-calendar/baseline-index.html",
+        "products/services/tender-calendar/handoff.json"
+      ],
+      "lesson": "What worked: one EXEC that read the deadlines straight from the OCDS raw packages, asserted them against the expected values, then generated, folded and validated the ICS and made a minimal page edit with a reverse-restore check. 16/16 checks passed. The dry_run index hash matched (digest 67cb1f7d...). A second EXEC confirmed the published ICS kept CRLF with no bare LF. What failed: read_product does not accept an encoding argument, so byte-level checks need an EXEC. Untested: calendar-client import, the served .ics Content-Type and the download attribute. Next time: when a page carries per-item expiry, attach the expiry duty to every derived artifact (the ICS event for 105246-2026 must be removed at the Dec 7 expiry). Usefulness is a hypothesis; no demand or revenue is established."
+    },
+    "description": "Broker action during THINK-1794436562",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443656215",
+  "input_sha256": "20a9c350833691a6bb946d7eec9edbdbed4f81ff11a4a65d80a5d640f3a4e88a"
+}
