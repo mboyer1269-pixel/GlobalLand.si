@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "len 47639\nQK \"queryKey\":[\"profile\"]\nQK \"queryKey\":[\"contests\",\"all\"]\nCounter({'FINISHED': 10})\nPAGING ('301', 'true', '31')\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179443290115.json"
+  ],
+  "request": {
+    "id": "TASK-179443290115",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T21:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,collections,datetime\nt=open('products/research/paid-review-contests/sherlock-active-tab.html',encoding='utf-8',errors='replace').read()\nu=t.replace('\\\\\"','\"')\nprint('len',len(t))\nfor m in re.finditer(r'\"queryKey\":\\[[^\\]]*\\]',u): print('QK',m.group(0)[:200])\nprint(collections.Counter(re.findall(r'\"status\":\"([A-Z_]+)\"',u)))\nfor m in re.finditer(r'\"total\":(\\d+),\"hasNext\":(true|false),\"pages\":(\\d+)',u): print('PAGING',m.groups())\nfor m in re.finditer(r'\"status\":\"(RUNNING|CREATED)\"',u):\n  s=u[max(0,m.start()-1500):m.end()+1500]\n  print('CTX',re.findall(r'\"(id|title|starts_at|ends_at|prize_pool|rewards|currency|private|short_description)\":(\"[^\"]{0,120}\"|[0-9.]+|true|false)',s)[:30])\nfor ts in sorted(set(re.findall(r'\"(?:starts_at|ends_at)\":(\\d{10})',u))): print('TS',ts,datetime.datetime.utcfromtimestamp(int(ts)).isoformat())\n"
+      ],
+      "inputs": [
+        "products/research/paid-review-contests/sherlock-active-tab.html"
+      ],
+      "outputs": [],
+      "mission_id": "SHERLOCK-ACTIVE-CONTEST-GATE"
+    },
+    "description": "Broker action during THINK-1794432901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443290115",
+  "input_sha256": "9f3ace8bf67dd74c779e39aebbc8a525d0a49c36336127df51abe70abba166bc"
+}
