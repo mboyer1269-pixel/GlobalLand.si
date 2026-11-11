@@ -1,0 +1,26 @@
+{
+  "observed_date": "2026-11-11",
+  "source": "https://audits.sherlock.xyz/contests",
+  "source_sha256": "43d53de7dd8a31db1672177e399e71ee4b7872a98f6d37c65189799e32ad5946",
+  "fetch_task": "TASK-179443260110",
+  "execution_task": "TASK-179443260112",
+  "observed": {
+    "hydrated_page_items": 10,
+    "item_status": "FINISHED",
+    "directory_total": 301,
+    "hasNext": true,
+    "pages": 31
+  },
+  "conclusion": "INCOMPLETE_DIRECTORY_NOT_NO_OPEN_CONTESTS",
+  "blocked_fetch": {
+    "url": "https://audits.sherlock.xyz/bug-bounties",
+    "task": "TASK-179443260114",
+    "reason": "secret pattern detected; publication blocked",
+    "artifact_available": false,
+    "dependent_operation": "Reading that fetched bounty page",
+    "followup_exec": "TASK-179443260115 refused unavailable selected input"
+  },
+  "scope": "No active contest, reward eligibility, authorization for technical testing, AI terms, funding or revenue established. Do not bypass publication filter.",
+  "next_test": "Use the successful contests page and its explicitly referenced public application chunk to establish the documented active-tab route, then read that route; stop within two further FETCHes if it does not expose an open in-scope contest. No review work until explicit scope/authorization.",
+  "feedback": "0 classified and 5 unclassified sources; demand unknown."
+}

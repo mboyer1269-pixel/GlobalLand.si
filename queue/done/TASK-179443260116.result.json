@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"observed_date\": \"2026-11-11\",\n  \"source\": \"https://audits.sherlock.xyz/contests\",\n  \"source_sha256\": \"43d53de7dd8a31db1672177e399e71ee4b7872a98f6d37c65189799e32ad5946\",\n  \"fetch_task\": \"TASK-179443260110\",\n  \"execution_task\": \"TASK-179443260112\",\n  \"observed\": {\n    \"hydrated_page_items\": 10,\n    \"item_status\": \"FINISHED\",\n    \"directory_total\": 301,\n    \"hasNext\": true,\n    \"pages\": 31\n  },\n  \"conclusion\": \"INCOMPLETE_DIRECTORY_NOT_NO_OPEN_CONTESTS\",\n  \"blocked_fetch\": {\n    \"url\": \"https://audits.sherlock.xyz/bug-bounties\",\n    \"task\": \"TASK-179443260114\",\n    \"reason\": \"secret pattern detected; publication blocked\",\n    \"artifact_available\": false,\n    \"dependent_operation\": \"Reading that fetched bounty page\",\n    \"followup_exec\": \"TASK-179443260115 refused unavailable selected input\"\n  },\n  \"scope\": \"No active contest, reward eligibility, authorization for technical testing, AI terms, funding or revenue established. Do not bypass publication filter.\",\n  \"next_test\": \"Use the successful contests page and its explicitly referenced public application chunk to establish the documented active-tab route, then read that route; stop within two further FETCHes if it does not expose an open in-scope contest. No review work until explicit scope/authorization.\",\n  \"feedback\": \"0 classified and 5 unclassified sources; demand unknown.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/paid-review-contest/sherlock-preflight.json",
+    "products/receipts/TASK-179443260116.json"
+  ],
+  "request": {
+    "id": "TASK-179443260116",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-11T21:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib\nfrom pathlib import Path\np=Path('products/research/paid-review-contests/sherlock-directory.html')\nr={'observed_date':'2026-11-11','source':'https://audits.sherlock.xyz/contests','source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'fetch_task':'TASK-179443260110','execution_task':'TASK-179443260112','observed':{'hydrated_page_items':10,'item_status':'FINISHED','directory_total':301,'hasNext':True,'pages':31},'conclusion':'INCOMPLETE_DIRECTORY_NOT_NO_OPEN_CONTESTS','blocked_fetch':{'url':'https://audits.sherlock.xyz/bug-bounties','task':'TASK-179443260114','reason':'secret pattern detected; publication blocked','artifact_available':False,'dependent_operation':'Reading that fetched bounty page','followup_exec':'TASK-179443260115 refused unavailable selected input'},'scope':'No active contest, reward eligibility, authorization for technical testing, AI terms, funding or revenue established. Do not bypass publication filter.','next_test':'Use the successful contests page and its explicitly referenced public application chunk to establish the documented active-tab route, then read that route; stop within two further FETCHes if it does not expose an open in-scope contest. No review work until explicit scope/authorization.','feedback':'0 classified and 5 unclassified sources; demand unknown.'}\no=Path('products/services/paid-review-contest/sherlock-preflight.json');o.parent.mkdir(parents=True,exist_ok=True);o.write_text(json.dumps(r,indent=2)+'\\n');print(o.read_text())"
+      ],
+      "inputs": [
+        "products/research/paid-review-contests/sherlock-directory.html"
+      ],
+      "outputs": [
+        "products/services/paid-review-contest/sherlock-preflight.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794432601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443260116",
+  "input_sha256": "c0084d13909e7e2ea5c0a03a8d3b787260850acad8049b8e090174977d45a175"
+}
