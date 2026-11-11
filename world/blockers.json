@@ -137,25 +137,34 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-11T02:38:13Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 436,
-    "turns_without_verified_revenue": 436,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 437,
+    "turns_without_verified_revenue": 437,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-11T02:38:13Z",
-    "last_outcome_turn": "THINK-1794364201",
-    "last_productive_turn": "THINK-1794364201",
-    "last_turn": "THINK-1794364561",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794366008",
+    "last_productive_turn": "THINK-1794366008",
+    "last_turn": "THINK-1794366008",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "CATALOGUE-PAIRED-QA-BUYER-EVIDENCE"
+      ],
+      "new_products": [
+        "products/services/catalogue-qa/buyer-evidence/community-search.json",
+        "products/services/catalogue-qa/buyer-evidence/result.json",
+        "products/services/catalogue-qa/buyer-evidence/search.xml",
+        "products/services/catalogue-qa/buyer-evidence/topic-190541.json",
+        "products/services/catalogue-qa/buyer-evidence/topic-255955.json",
+        "products/services/catalogue-qa/buyer-evidence/topic-285604.json"
+      ],
+      "new_product_count": 6,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
