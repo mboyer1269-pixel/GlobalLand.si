@@ -1,0 +1,29 @@
+{
+  "observation_date": "2026-11-11",
+  "source_url": "https://developers.cloudflare.com/workers/configuration/routing/workers-dev/",
+  "source_artifact": "products/distribution/workers-dev-policy/official-routing.html",
+  "source_sha256": "62503bbcdb0248a8467cb5c6b4086bb4375d9ecc3c8057e95ec02969846060c9",
+  "source_excerpts": {
+    "recommended to run production": [
+      "ble in the Cloudflare dashboard. Your workers.dev subdomain allows you getting started quickly by deploying Workers without first onboarding your custom domain to Cloudflare. It's recommended to run production Workers on a Workers route or custom domain , rather than on your workers.dev subdomain. Your workers.dev subdomain is treated as a Free website ↗︎ and is intended for personal or hobby projects that aren't business-critical. Configure workers.dev workers.dev"
+    ],
+    "personal": [
+      ".cloudflare.com/workers/configuration/routing/workers-dev/#page\",\"headline\":\"workers.dev\",\"description\":\"Deploy Cloudflare Workers on a workers.dev subdomain for quick testing and personal projects.\",\"url\":\"https://developers.cloudflare.com/workers/configuration/routing/workers-dev/\",\"inLanguage\":\"en\",\"image\":\"https://developers.cloudflare.com/workers/configuration/routing/workers-dev/og.png?v=61666caf444ad8be\",\"dateModified\":\"2026-11-06\",\"publ",
+      " production Workers on a Workers route or custom domain , rather than on your workers.dev subdomain. Your workers.dev subdomain is treated as a Free website ↗︎ and is intended for personal or hobby projects that aren't business-critical. Configure workers.dev workers.dev subdomains take the format: <YOUR_ACCOUNT_SUBDOMAIN>.workers.dev . To change your workers.dev subdomain: In the Cloudflare dashboard, go to the Workers & Pages page. Go to Work"
+    ],
+    "hobby": [
+      "Workers on a Workers route or custom domain , rather than on your workers.dev subdomain. Your workers.dev subdomain is treated as a Free website ↗︎ and is intended for personal or hobby projects that aren't business-critical. Configure workers.dev workers.dev subdomains take the format: <YOUR_ACCOUNT_SUBDOMAIN>.workers.dev . To change your workers.dev subdomain: In the Cloudflare dashboard, go to the Workers & Pages page. Go to Workers & Pag"
+    ],
+    "search engine": [],
+    "indexing": [],
+    "noindex": [],
+    "robots": []
+  },
+  "verdict": "Do not treat a production-hosting recommendation as an established search-indexing restriction.",
+  "observed_fact": "Official routing source was fetched successfully in TASK-179435376200. Relevant source passages and term matches are reproduced here for inspection.",
+  "dependent_operations": "Changing to a custom domain requires an owned domain and authorized configuration; no purchase or deployment is performed.",
+  "strategic_conclusion": "This source alone does not justify buying a domain or attributing missing buyer responses to workers.dev indexing. Actual indexing and buyer exposure remain unverified.",
+  "reconsideration_trigger": "An explicit applicable official indexing policy, verified response directive, or trustworthy indexing observation establishes a concrete restriction.",
+  "commercial_limits": "No traffic, customer request, order, delivery, payment or revenue is established. Five unclassified feedback sources are unknown demand.",
+  "scope": "Existing saved source only; no new network requests, search probes, public edits, contact or spending."
+}
