@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"observation_date\": \"2026-11-11\",\n  \"source_url\": \"https://developers.cloudflare.com/workers/configuration/routing/workers-dev/\",\n  \"source_artifact\": \"products/distribution/workers-dev-policy/official-routing.html\",\n  \"source_sha256\": \"62503bbcdb0248a8467cb5c6b4086bb4375d9ecc3c8057e95ec02969846060c9\",\n  \"source_excerpts\": {\n    \"recommended to run production\": [\n      \"ble in the Cloudflare dashboard. Your workers.dev subdomain allows you getting started quickly by deploying Workers without first onboarding your custom domain to Cloudflare. It's recommended to run production Workers on a Workers route or custom domain , rather than on your workers.dev subdomain. Your workers.dev subdomain is treated as a Free website ↗︎ and is intended for personal or hobby projects that aren't business-critical. Configure workers.dev workers.dev\"\n    ],\n    \"personal\": [\n      \".cloudflare.com/workers/configuration/routing/workers-dev/#page\\\",\\\"headline\\\":\\\"workers.dev\\\",\\\"description\\\":\\\"Deploy Cloudflare Workers on a workers.dev subdomain for quick testing and personal projects.\\\",\\\"url\\\":\\\"https://developers.cloudflare.com/workers/configuration/routing/workers-dev/\\\",\\\"inLanguage\\\":\\\"en\\\",\\\"image\\\":\\\"https://developers.cloudflare.com/workers/configuration/routing/workers-dev/og.png?v=61666caf444ad8be\\\",\\\"dateModified\\\":\\\"2026-11-06\\\",\\\"publ\",\n      \" production Workers on a Workers route or custom domain , rather than on your workers.dev subdomain. Your workers.dev subdomain is treated as a Free website ↗︎ and is intended for personal or hobby projects that aren't business-critical. Configure workers.dev workers.dev subdomains take the format: <YOUR_ACCOUNT_SUBDOMAIN>.workers.dev . To change your workers.dev subdomain: In the Cloudflare dashboard, go to the Workers & Pages page. Go to Work\"\n    ],\n    \"hobby\": [\n      \"Workers on a Workers route or custom domain , rather than on your workers.dev subdomain. Your workers.dev subdomain is treated as a Free website ↗︎ and is intended for personal or hobby projects that aren't business-critical. Configure workers.dev workers.dev subdomains take the format: <YOUR_ACCOUNT_SUBDOMAIN>.workers.dev . To change your workers.dev subdomain: In the Cloudflare dashboard, go to the Workers & Pages page. Go to Workers & Pag\"\n    ],\n    \"search engine\": [],\n    \"indexing\": [],\n    \"noindex\": [],\n    \"robots\": []\n  },\n  \"verdict\": \"Do not treat a production-hosting recommendation as an established search-indexing restriction.\",\n  \"observed_fact\": \"Official routing source was fetched successfully in TASK-179435376200. Relevant source passages and term matches are reproduced here for inspection.\",\n  \"dependent_operations\": \"Changing to a custom domain requires an owned domain and authorized configuration; no purchase or deployment is performed.\",\n  \"strategic_conclusion\": \"This source alone does not justify buying a domain or attributing missing buyer responses to workers.dev indexing. Actual indexing and buyer exposure remain unverified.\",\n  \"reconsideration_trigger\": \"An explicit applicable official indexing policy, verified response directive, or trustworthy indexing observation establishes a concrete restriction.\",\n  \"commercial_limits\": \"No traffic, customer request, order, delivery, payment or revenue is established. Five unclassified feedback sources are unknown demand.\",\n  \"scope\": \"Existing saved source only; no new network requests, search probes, public edits, contact or spending.\",\n  \"mission_id\": \"WORKERS-DEV-DISCOVERY-CONSTRAINT\",\n  \"completion_scope\": \"Reject the indexing-restriction hypothesis on the inspected official source; absence of a statement is not proof of indexability. No additional discovery is justified by this result.\"\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/workers-dev-discovery/verdict.json",
+    "products/receipts/TASK-179435916112.json"
+  ],
+  "request": {
+    "id": "TASK-179435916112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T01:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json\ns=pathlib.Path('products/distribution/workers-dev-policy/bounded-verdict.json'); d=json.loads(s.read_text()); d['mission_id']='WORKERS-DEV-DISCOVERY-CONSTRAINT'; d['completion_scope']='Reject the indexing-restriction hypothesis on the inspected official source; absence of a statement is not proof of indexability. No additional discovery is justified by this result.'\np=pathlib.Path('products/distribution/workers-dev-discovery/verdict.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\\n');print(p.read_text())"
+      ],
+      "inputs": [
+        "products/distribution/workers-dev-policy/bounded-verdict.json"
+      ],
+      "outputs": [
+        "products/distribution/workers-dev-discovery/verdict.json"
+      ],
+      "mission_id": "WORKERS-DEV-DISCOVERY-CONSTRAINT"
+    },
+    "description": "Broker action during THINK-1794359161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179435916112",
+  "input_sha256": "0b952541305966e6a8ca4212916a45199eb3f8d0bdd89335bb2136004251b2ab"
+}
