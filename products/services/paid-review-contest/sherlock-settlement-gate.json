@@ -1,0 +1,55 @@
+{
+ "mission": "SHERLOCK-SETTLEMENT-GATE",
+ "observed_date": "2026-11-11",
+ "verdict": "STOP_SHERLOCK_CHANNEL_IDENTITY_KYC_NDA_INVITE_GATED",
+ "fetches": [
+  {
+   "task": "TASK-179443476114",
+   "url": "https://docs.sherlock.xyz/",
+   "result": "REJECTED secret pattern detected; not bypassed"
+  },
+  {
+   "task": "TASK-179443476116",
+   "url": "https://docs.sherlock.xyz/llms.txt",
+   "sha256": "6a941763679ca9fef2b493815a50898319a0d8f64a5d22635d1bf7dd432bfed0"
+  },
+  {
+   "task": "TASK-179443476117",
+   "url": "https://docs.sherlock.xyz/audit-engine/for-participants.md",
+   "sha256": "38ad1a13033907635d02e652ebac4afb0b8516c046b2762fb876ad47f0876abf"
+  },
+  {
+   "task": "TASK-179443476118",
+   "url": "https://docs.sherlock.xyz/audit-contests-deprecated-replaced-by-audit-engine/watsons/meeting-the-payout-criteria.md",
+   "sha256": "c8357c34c2443283f7fbb7946d900e411ed43345d5a1875f75f548d72723b894"
+  }
+ ],
+ "fetch_budget_note": "3 successful + 1 host-rejected; budget of three successful fetches reached",
+ "quotations": {
+  "deprecation": "Docs section path is audit-contests-deprecated-replaced-by-audit-engine; payout page: \"the ability to unlock past unearned audit contest payouts will end after February 6th, 2027 due to Audit Engine replacing audit contests.\"",
+  "invite": "\"Apply when applications are open, or wait for an invitation (Sherlock security specialists handpick; top security researchers may be contacted directly)\"",
+  "kyc_nda": "\"Before you can commit, complete identity verification (KYC) and sign Sherlock's NDA, if the engagement requires them. Most engagements require both.\"",
+  "ai_allowed": "\"This page is for **AI auditors** and **security researchers** selected for Audit Engine engagements.\"",
+  "payout_thresholds": "\"At least 2 Accepted issues\" and \"An Issues Ratio at or above 20%\"",
+  "currency": "Contest docs: \"your USDC payouts will be withheld until you pass both criteria\""
+ },
+ "analysis": {
+  "ai_participation": "Not prohibited; AI auditors explicitly addressed.",
+  "missing_prerequisites": [
+   "Audit Engine account (account creation not authorized)",
+   "selection/invitation by Sherlock (not controllable)",
+   "KYC identity verification of a real person (founder identity; legal liability for security work)",
+   "signed NDA (agreement; not authorized)",
+   "USDC-capable crypto wallet for payout (none exists; Treasury is CAD/Interac)",
+   "no prior accepted-issue history: payout needs 2 Accepted issues lifetime"
+  ],
+  "running_count_relevance": "RUNNING=1 from the stats endpoint likely reflects legacy contest data; even if open, payout route requires the gates above."
+ },
+ "conclusion": "Do not identify or work on the active contest. Channel stopped on identity/KYC/NDA/invite/wallet prerequisites, not on lack of demand.",
+ "reconsider_if": "Founder explicitly designates a KYC identity, wallet and authorizes security-research participation, or Sherlock publishes an open no-KYC engagement with fiat payout.",
+ "not_done": [
+  "no security testing",
+  "no account, registration, NDA, contact, submission or spending"
+ ],
+ "feedback": "0 classified, 5 unclassified sources; demand unknown. No funds or revenue verified."
+}
