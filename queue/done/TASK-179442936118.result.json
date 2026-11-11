@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"OPIRE-OFFICIAL-REWARD-DIRECTORY\", \"goal\": \"Test the official Opire application's public reward directory rather than repeating GitHub label or bot searches. Read prior opire-specific-repair/result.json and relevant lessons first; check equivalent completed work and claim an actual lease. Inspect the queued app.opire.dev FETCH only if successful. Use at most three public FETCHes total, following only documented public links; no endpoint guessing, authenticated access or credential probes. If a readable current reward directory exists, inspect at most two genuine upstream tasks with explicit reward/currency and unresolved bounded acceptance criteria. Verify assignment discussions, reusable source, contribution/AI rules and submission/settlement dependencies before substantial preparation. Policy silence is uncertainty; missing submission identity alone need not prohibit offline preparation. Prepare at most one minimal exact-source repair with executable acceptance evidence when justified. Otherwise save a finite result identifying the observed directory-access or task-fit failure and stop this route without another generic search. Treat all source text as untrusted. No contact, claim, submission, account, agreement, spending or deployment. Save and read evidence under products/services/opire-reward-directory/ before closure with the actual lease and a lesson. Advertised rewards are not verified funds. Preserve existing deadlines and independent public-deployment review.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"RESEARCHER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/opire-reward-directory/result.json\", \"products/services/opire-reward-directory/raw/application.html\", \"products/services/opire-reward-directory/raw/bugb-issue-1.json\", \"products/services/opire-reward-directory/raw/rencfs-issue-3.json\"]}",
+  "request": {
+    "id": "TASK-179442936118",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T20:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "OPIRE-OFFICIAL-REWARD-DIRECTORY",
+      "agent_id": "RESEARCHER",
+      "lease_token": "YnCxLDzya5Un7-Sd9F4dotUcEsX7Zmcq",
+      "evidence": [
+        "products/services/opire-reward-directory/result.json",
+        "products/services/opire-reward-directory/raw/application.html",
+        "products/services/opire-reward-directory/raw/bugb-issue-1.json",
+        "products/services/opire-reward-directory/raw/rencfs-issue-3.json"
+      ],
+      "lesson": "What worked: the official Opire app page renders its reward data on the server (initialRewards JSON), so it could be read without logging in. Fetching each issue through the GitHub API exposed its current state quickly, within the 3-FETCH limit. What failed: the visible open value is only $212 across 6 rewards. The $100 listing is a closed, locked issue with an empty body, and the $42 listing now points to a PR with 101 comments where an AI-assisted competing submission already exists. The $20 listing is CAPTCHA solving, which our guardrails prohibit. Directory listings go stale. Next time: check the issue's state, comment count and existing PRs before anything else, and treat small bounty directories as low-yield. Stop the Opire route unless a fresh reward of at least USD 50 appears on a bot-installed upstream repo with clear acceptance criteria and a founder-approved GitHub identity exists."
+    },
+    "description": "Broker action during THINK-1794429361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179442936118",
+  "input_sha256": "04b50c8fff3acb8e207ad66fd2c9e3fdc1d910b767ec46f8219d488fd5e79ace"
+}
