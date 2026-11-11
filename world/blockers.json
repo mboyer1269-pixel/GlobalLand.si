@@ -142,20 +142,22 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 455,
-    "turns_without_verified_revenue": 455,
-    "turns_without_outcome": 4,
+    "turns_without_new_interpreted_feedback": 456,
+    "turns_without_verified_revenue": 456,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-11T07:01:45Z",
-    "last_outcome_turn": "THINK-1794378961",
-    "last_productive_turn": "THINK-1794382561",
-    "last_turn": "THINK-1794382561",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794384001",
+    "last_productive_turn": "THINK-1794384001",
+    "last_turn": "THINK-1794384001",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
+      "outcome": true,
+      "mission_outcomes": [
+        "ACCESSIBILITY-REMEDIATION-PAID-REQUEST"
+      ],
       "new_products": [
-        "products/services/accessibility-request/raw/wcag-projects.json"
+        "products/services/accessibility-request/bounded-result.json"
       ],
       "new_product_count": 1,
       "new_research_count": 0,
