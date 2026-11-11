@@ -1,0 +1,27 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: selected public inputs unavailable; inspect catalog paths and retry with a new task. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179443260115",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-11T21:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import re,json\nfrom html.parser import HTMLParser\nfrom pathlib import Path\nclass P(HTMLParser):\n skip=False\n def handle_starttag(self,t,a):\n  if t=='script': self.skip=True\n  if t=='a': print('LINK',dict(a).get('href'))\n def handle_endtag(self,t):\n  if t=='script': self.skip=False\n def handle_data(self,d):\n  if not self.skip and d.strip(): print(d.strip())\ns=Path('products/research/paid-review-contests/sherlock-bounties.html').read_text();P().feed(s)\nparts=[]\nfor m in re.finditer(r'self\\.__next_f\\.push\\((\\[.*?\\])\\)</script>',s):\n try:\n  x=json.loads(m.group(1))\n  if len(x)>1 and isinstance(x[1],str):parts.append(x[1])\n except ValueError:pass\ns=''.join(parts)\nfor term in ['bounties','ACTIVE','active','prize','reward','USDC']:\n print(term,[s[max(0,m.start()-100):m.start()+500] for m in list(re.finditer(term,s))[:3]])"
+      ],
+      "inputs": [
+        "products/research/paid-review-contests/sherlock-bounties.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794432601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443260115",
+  "input_sha256": "2f56127742c7715c85d16f70adfcf0250014904502955c9f0ed737ef30bcfbf5"
+}
