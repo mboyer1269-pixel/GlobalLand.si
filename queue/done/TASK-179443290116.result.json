@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"SHERLOCK-ACTIVE-CONTEST-GATE\",\n \"observed_date\": \"2026-11-11\",\n \"verdict\": \"STOP_BOUNDED_UNRESOLVED_ACTIVE_LIST_CLIENT_ONLY\",\n \"fetch_budget\": {\n  \"allowed\": 2,\n  \"used\": 2,\n  \"tasks\": [\n   \"TASK-179443290112 chunk https://audits.sherlock.xyz/_next/static/chunks/app/(v2)/contests/page-f102e3467af0595c.js HTTP 200 sha256 b9f0dfed4721e4098410e5b380455236ed32404987a3e839c2bcccce7cfb9564\",\n   \"TASK-179443290114 https://audits.sherlock.xyz/contests?tab=active HTTP 200 sha256 7e50fae8fc0ea1577f48b776d834b3756f5926ee5ebb1648761091ddeeaa79ad\"\n  ]\n },\n \"chunk_observations\": {\n  \"extraction_task\": \"TASK-179443290113\",\n  \"tab_routes\": [\n   \"/contests?tab=active\",\n   \"/contests?tab=upcoming\",\n   \"/contests?tab=all\",\n   \"/contests?tab=finished\",\n   \"/contests?tab=judging-contests\",\n   \"/contests?tab=escalations\",\n   \"/contests?tab=sherlock-judging\"\n  ],\n  \"status_labels\": {\n   \"CREATED\": \"Upcoming\",\n   \"RUNNING\": \"Active\",\n   \"ESCALATING\": \"Escalations Open\",\n   \"JUDGING\": \"Judging Contest\",\n   \"SHERLOCK_JUDGING\": \"Sherlock Judging\",\n   \"FINISHED\": \"Finished\"\n  },\n  \"active_tab_query\": \"client-side query with status RUNNING; upcoming uses status CREATED\",\n  \"counts_endpoint_referenced\": \"/api/contests/stats (returns per-status counts; referenced verbatim in chunk, NOT fetched - budget)\"\n },\n \"active_tab_observations\": {\n  \"extraction_task\": \"TASK-179443290115\",\n  \"hydrated_query_keys\": [\n   [\n    \"profile\"\n   ],\n   [\n    \"contests\",\n    \"all\"\n   ]\n  ],\n  \"status_counts\": {\n   \"FINISHED\": 10\n  },\n  \"paging\": {\n   \"total\": 301,\n   \"hasNext\": true,\n   \"pages\": 31\n  },\n  \"interpretation\": \"Server-rendered ?tab=active HTML hydrates the same all-contests first page as /contests; the RUNNING list is fetched client-side only, so neither fetch exposes active contests.\"\n },\n \"conclusion\": \"Existence of a currently open Sherlock contest is UNKNOWN; not established as absent.\",\n \"open_contest\": null,\n \"builder_handoff\": null,\n \"not_done\": [\n  \"no security testing\",\n  \"no findings\",\n  \"no contact/registration/submission\",\n  \"blocked bug-bounties page not revisited\"\n ],\n \"remaining_checks_if_open_contest_found\": [\n  \"exact contest URL and end time\",\n  \"advertised reward and currency (not verified funds)\",\n  \"in-scope public repository and authorization\",\n  \"AI/tool rules\",\n  \"KYC/eligibility and settlement route\"\n ],\n \"reconsider_if\": \"A future bounded mission allows one FETCH of the referenced /api/contests/stats showing RUNNING or CREATED > 0, or an official Sherlock announcement of an open contest.\",\n \"feedback\": \"0 classified, 5 unclassified sources; demand unknown; no funds or revenue verified.\"\n}\n\n",
+  "artifacts": [
+    "products/services/paid-review-contest/sherlock-active-gate.json",
+    "products/receipts/TASK-179443290116.json"
+  ],
+  "request": {
+    "id": "TASK-179443290116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T21:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/paid-review-contest/sherlock-active-gate.json');p.parent.mkdir(parents=True,exist_ok=True)\nd={'mission':'SHERLOCK-ACTIVE-CONTEST-GATE','observed_date':'2026-11-11','verdict':'STOP_BOUNDED_UNRESOLVED_ACTIVE_LIST_CLIENT_ONLY','fetch_budget':{'allowed':2,'used':2,'tasks':['TASK-179443290112 chunk https://audits.sherlock.xyz/_next/static/chunks/app/(v2)/contests/page-f102e3467af0595c.js HTTP 200 sha256 b9f0dfed4721e4098410e5b380455236ed32404987a3e839c2bcccce7cfb9564','TASK-179443290114 https://audits.sherlock.xyz/contests?tab=active HTTP 200 sha256 7e50fae8fc0ea1577f48b776d834b3756f5926ee5ebb1648761091ddeeaa79ad']},'chunk_observations':{'extraction_task':'TASK-179443290113','tab_routes':['/contests?tab=active','/contests?tab=upcoming','/contests?tab=all','/contests?tab=finished','/contests?tab=judging-contests','/contests?tab=escalations','/contests?tab=sherlock-judging'],'status_labels':{'CREATED':'Upcoming','RUNNING':'Active','ESCALATING':'Escalations Open','JUDGING':'Judging Contest','SHERLOCK_JUDGING':'Sherlock Judging','FINISHED':'Finished'},'active_tab_query':'client-side query with status RUNNING; upcoming uses status CREATED','counts_endpoint_referenced':'/api/contests/stats (returns per-status counts; referenced verbatim in chunk, NOT fetched - budget)'},'active_tab_observations':{'extraction_task':'TASK-179443290115','hydrated_query_keys':[['profile'],['contests','all']],'status_counts':{'FINISHED':10},'paging':{'total':301,'hasNext':True,'pages':31},'interpretation':'Server-rendered ?tab=active HTML hydrates the same all-contests first page as /contests; the RUNNING list is fetched client-side only, so neither fetch exposes active contests.'},'conclusion':'Existence of a currently open Sherlock contest is UNKNOWN; not established as absent.','open_contest':None,'builder_handoff':None,'not_done':['no security testing','no findings','no contact/registration/submission','blocked bug-bounties page not revisited'],'remaining_checks_if_open_contest_found':['exact contest URL and end time','advertised reward and currency (not verified funds)','in-scope public repository and authorization','AI/tool rules','KYC/eligibility and settlement route'],'reconsider_if':'A future bounded mission allows one FETCH of the referenced /api/contests/stats showing RUNNING or CREATED > 0, or an official Sherlock announcement of an open contest.','feedback':'0 classified, 5 unclassified sources; demand unknown; no funds or revenue verified.'}\np.write_text(json.dumps(d,indent=1));print(p.read_text())\n"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/paid-review-contest/sherlock-active-gate.json"
+      ],
+      "mission_id": "SHERLOCK-ACTIVE-CONTEST-GATE"
+    },
+    "description": "Broker action during THINK-1794432901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443290116",
+  "input_sha256": "ad23addef2b10d9c842c2aa00f8b4de8cbc1b8567e6e6f42a3ff2a82837083f0"
+}

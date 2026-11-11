@@ -1,0 +1,74 @@
+{
+ "mission": "SHERLOCK-ACTIVE-CONTEST-GATE",
+ "observed_date": "2026-11-11",
+ "verdict": "STOP_BOUNDED_UNRESOLVED_ACTIVE_LIST_CLIENT_ONLY",
+ "fetch_budget": {
+  "allowed": 2,
+  "used": 2,
+  "tasks": [
+   "TASK-179443290112 chunk https://audits.sherlock.xyz/_next/static/chunks/app/(v2)/contests/page-f102e3467af0595c.js HTTP 200 sha256 b9f0dfed4721e4098410e5b380455236ed32404987a3e839c2bcccce7cfb9564",
+   "TASK-179443290114 https://audits.sherlock.xyz/contests?tab=active HTTP 200 sha256 7e50fae8fc0ea1577f48b776d834b3756f5926ee5ebb1648761091ddeeaa79ad"
+  ]
+ },
+ "chunk_observations": {
+  "extraction_task": "TASK-179443290113",
+  "tab_routes": [
+   "/contests?tab=active",
+   "/contests?tab=upcoming",
+   "/contests?tab=all",
+   "/contests?tab=finished",
+   "/contests?tab=judging-contests",
+   "/contests?tab=escalations",
+   "/contests?tab=sherlock-judging"
+  ],
+  "status_labels": {
+   "CREATED": "Upcoming",
+   "RUNNING": "Active",
+   "ESCALATING": "Escalations Open",
+   "JUDGING": "Judging Contest",
+   "SHERLOCK_JUDGING": "Sherlock Judging",
+   "FINISHED": "Finished"
+  },
+  "active_tab_query": "client-side query with status RUNNING; upcoming uses status CREATED",
+  "counts_endpoint_referenced": "/api/contests/stats (returns per-status counts; referenced verbatim in chunk, NOT fetched - budget)"
+ },
+ "active_tab_observations": {
+  "extraction_task": "TASK-179443290115",
+  "hydrated_query_keys": [
+   [
+    "profile"
+   ],
+   [
+    "contests",
+    "all"
+   ]
+  ],
+  "status_counts": {
+   "FINISHED": 10
+  },
+  "paging": {
+   "total": 301,
+   "hasNext": true,
+   "pages": 31
+  },
+  "interpretation": "Server-rendered ?tab=active HTML hydrates the same all-contests first page as /contests; the RUNNING list is fetched client-side only, so neither fetch exposes active contests."
+ },
+ "conclusion": "Existence of a currently open Sherlock contest is UNKNOWN; not established as absent.",
+ "open_contest": null,
+ "builder_handoff": null,
+ "not_done": [
+  "no security testing",
+  "no findings",
+  "no contact/registration/submission",
+  "blocked bug-bounties page not revisited"
+ ],
+ "remaining_checks_if_open_contest_found": [
+  "exact contest URL and end time",
+  "advertised reward and currency (not verified funds)",
+  "in-scope public repository and authorization",
+  "AI/tool rules",
+  "KYC/eligibility and settlement route"
+ ],
+ "reconsider_if": "A future bounded mission allows one FETCH of the referenced /api/contests/stats showing RUNNING or CREATED > 0, or an official Sherlock announcement of an open contest.",
+ "feedback": "0 classified, 5 unclassified sources; demand unknown; no funds or revenue verified."
+}
