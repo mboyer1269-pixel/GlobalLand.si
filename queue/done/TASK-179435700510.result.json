@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "index '.steps[data-astro-cid-sfejetki] [data-step]:before{content:counter(step);background:var(--nb-accent);width:1.75rem;height:1.75rem;color:var(--nb-foreground);border:1px solid var(--nb-border-strong);z-index:1;border-radius:.5rem;place-items:center;font-size:.6875rem;font-weight:600;display:grid;position:absolute;top:0;left:0}.steps[data-astro-cid-sfejetki] ol>li:not(:last-child):after,.steps[data-astro-cid-sfejetki] [data-step]:not(:last-child):after{content:\"\";background:var(--nb-border);width:1.5px;position:absolute;top:1.75rem;bottom:0;left:calc(.875rem - .75px)}.steps[data-astro-cid-sfejetki] ol>li>p:first-child>strong:only-child{color:var(--nb-foreground)}.steps[data-astro-cid-sfejetki] '\nindex 'ar(--map-gateway);white-space:nowrap;background:0 0;border:0;padding:0;font-family:Paper Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11px} Skip to content Documentation Index Fetch the complete documentation index at: https://developers.cloudflare.com/workers/llms.txt Use this file to discover all available pages before exploring further. Docs Directory API SDKs Changelog try {\\n\\t\\t\\t\\t\\tconst isLoggedIn = document.cookie.split(\";\").some((cookie) => {\\n\\t\\t\\t\\t\\t\\treturn cookie.trim() === \"__cf_logged_in=1\";\\n\\t\\t\\t\\t\\t});\\n\\n\\t\\t\\t\\t\\tif (isLoggedIn) {\\n\\t\\t\\t\\t\\t\\tdocument.currentScript?.parentElement?.classList.add(\"logged-in\");\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t} catch {\\n\\t\\t\\t\\t\\t/* ignore - keeps logged out state '\nindex 'ckground:0 0;border:0;padding:0;font-family:Paper Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11px} Skip to content Documentation Index Fetch the complete documentation index at: https://developers.cloudflare.com/workers/llms.txt Use this file to discover all available pages before exploring further. Docs Directory API SDKs Changelog try {\\n\\t\\t\\t\\t\\tconst isLoggedIn = document.cookie.split(\";\").some((cookie) => {\\n\\t\\t\\t\\t\\t\\treturn cookie.trim() === \"__cf_logged_in=1\";\\n\\t\\t\\t\\t\\t});\\n\\n\\t\\t\\t\\t\\tif (isLoggedIn) {\\n\\t\\t\\t\\t\\t\\tdocument.currentScript?.parentElement?.classList.add(\"logged-in\");\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t} catch {\\n\\t\\t\\t\\t\\t/* ignore - keeps logged out state */\\n\\t\\t\\t\\t} Search Ctrl K Log in Dashboard'\nproduction Workers \"able in the Cloudflare dashboard. Your workers.dev subdomain allows you getting started quickly by deploying Workers without first onboarding your custom domain to Cloudflare. It's recommended to run production Workers on a Workers route or custom domain , rather than on your workers.dev subdomain. Your workers.dev subdomain is treated as a Free website ↗︎ and is intended for personal or hobby projects that aren't business-critical. Configure workers.dev workers.dev subdomains take the format: <YOUR_ACCOUNT_SUBDOMAIN>.workers.dev . To change your workers.dev subdomain: In the Cloudflare dashboard, go to the Workers & Pages page. Go to Workers & Pages ↗ Select Change next to Your subdomain . \"\nproduction Workers \"sion URLs , Preview URLs , and Deployment URLs. You can limit access to yourself, your teammates, your organization, or anyone else you specify in your access policy . Access can protect one Worker's production workers.dev URL, preview URLs, or both. You can also protect all Workers or all Worker previews in an account. To use details about the signed-in user in your Worker, use ctx.access . You can also read the user's identity from the validated JWT or the /cdn-cgi/access/get-identity endpoint. Browser Integrity Check on workers.dev All requests to a workers.dev hostname are evaluated by Browser Integrity Check (BIC) on the Cloudflare-managed workers.dev zone. This includes Preview URLs an\"\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179435700510.json"
+  ],
+  "request": {
+    "id": "TASK-179435700510",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-11T00:30:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nclass P(HTMLParser):\n def handle_data(self,d):\n  if d.strip(): parts.append(d.strip())\nparts=[];p=P();p.feed(Path('products/distribution/workers-dev-policy/official-routing.html').read_text());s=' '.join(parts)\nfor term in ['index','production Workers','search engine']:\n start=0\n for n in range(8):\n  i=s.lower().find(term.lower(),start)\n  if i<0:break\n  print(term,repr(s[max(0,i-200):i+500]));start=i+len(term)"
+      ],
+      "inputs": [
+        "products/distribution/workers-dev-policy/"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794357005",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179435700510",
+  "input_sha256": "ae67535970425a16805658fbbcd4385441c66cbcec0518b8ebda0b2921fc33b6"
+}
