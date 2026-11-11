@@ -1,0 +1,95 @@
+{
+  "mission": "CATALOGUE-PAIRED-QA-BUYER-EVIDENCE",
+  "observed_date": "2026-11-11",
+  "verdict": "STOP_THIS_BUYER_REQUEST_TEST",
+  "prior_evidence_read": [
+    "products/services/catalogue-qa/quote-decision/quote-decision.json",
+    "products/services/catalogue-qa/measured-delivery/results.json"
+  ],
+  "discovery": {
+    "fetch_count": 5,
+    "candidate_count": 3,
+    "community_query": "https://community.shopify.com/search.json?q=CSV%20variant%20images",
+    "selection": "First three first-post results; no claim of representative sampling",
+    "discarded_search": "Bing RSS returned generic results and a personal non-commercial use restriction; not used as commercial lead evidence."
+  },
+  "candidates": [
+    {
+      "url": "https://community.shopify.com/t/285604",
+      "source": "products/services/catalogue-qa/buyer-evidence/topic-285604.json",
+      "sha256": "9c20480b1393246f4a6e41005580cd735cc3cab0e4d16f2cd610812d9ba25120",
+      "title": "Variant image column ignored in CSV import",
+      "request_date": "2024-01-16T02:40:38.000Z",
+      "request_quote": "I work with products that have over 15 variant images each, and with different size options this adds up to almost 100 variants for each product in total. So manually attaching each image to the correct variants would be tediously time-consuming. \n For the past year, I had a routine that worked fine with CSV import. I upload the correct images to each new product, then export the products. Then I use a macro that fills in the “Variant Image” column, by simply copying and pasting the correct url from the “Image Src” column. After re-importing, each product variant would now have the correct image associated with it. \n But recently, this same routine has stopped working entirely. I’ve seen people report some similar-sounding issues with a csv breaking the images, but my images are all still there and still in the same order. After re-exporting the URLs are still the same. All the links are still working too, there are no broken images or 404 errors, so the “/deleted” fix I’ve seen mentioned on here wouldn’t be applicable either. \n I’m not receiving any error messages when I re-import, and the import did successfully save some changes I made in other areas, like the product tags. It’s as if the import just ignored the “Variant Image” column altogether and left it blank instead of saving the changes.",
+      "closed": false,
+      "posts_loaded": 18,
+      "posts_count": 18,
+      "status_limit": "Open thread does not establish an outstanding buyer request. No accepted_answer at top level; resolution not inferred from that field.",
+      "latest_post_date": "2025-09-22T18:09:50.010Z",
+      "latest_post_quote": "Hi all, I have been having a problem with this for about a month and have not been able to find a solution until now. I have chatted with Shopify several times and my imports have been correct per their instruction (don’t delete rows or columns). I recently spoke with someone who told me the following, which is something I have not been told by any other Shopify support member and it is not in any forums.  In addition to not removing any columns or rows, you also CANNOT SORT ROWS . \n Here is a copy of our conversation. I don’t know if it is helpful to anyone, but may shed some light on this problem if you feel like you are going crazy like I did. \n Shopify:  This issue commonly occurs when someone sorts the CSV columns or rows (e.g., sorting variant rows by inventory) before importing . Since additional variants and product images are on separate rows, sorting can break up these rows, causing variants or images to be deleted during import. In this case i would advise avoid sorting the CSV. If you have a backup CSV that hasn’t been sorted, you should import that instead. \n Me: We have hundreds of SKUs and prices to update right now. I have to combine a Shopify product export with our new price list, and sort by SKU to compare and adjust. I highlight the Rows that were not part of the original Shopify product export and remove them. I keep all variants in the file, nothing from the original export is deleted. \n Shopify: I understand, having 100’s of SKUs with frequent price can be challenging. I can suggest you try the follow to help manage your bulk price updates while minimizing risks: \n \n \n Shopify’s bulk editor allows you to edit multiple products and variants directly within the admin without exporting and importing CSVs. This reduces the risk of data loss from CSV imports. \n \n \n There are third-party apps available in the Shopify App Store designed specifically for bulk product and price management. These apps can provide more advanced filtering, sorting, and bulk update capabilities tailored for large inventories. \n \n \n Consider apps or integrations that can automate price adjustments based on cost changes or tariff updates. \n \n \n To handle tariffs effectively, we offers built-in tools like the duties calculator and Managed Markets, which can help calculate and display duties at checkout, ensuring pricing reflects total costs transparently. \n \n \n Me: These suggestions unfortunately aren’t helpful, since I need to compare in the same spreadsheet to make these adjustments. What do others do? \n  Shopify: Directly sorting / rearranging the CSV before importing can cause issues like variants being wiped out. You can look to keep your original export CSV intact in one tab, and perform your sorting, filtering, and price comparison in a separate tab within the same spreadsheet. This way, you preserve the original data structure needed for import. Also in your working tab, use formulas to pull in data from the original tab. This allows you to sort and compare without altering the import-ready data.  \n  Me: Do you have a webpage with instructions to do that and how to create the formulas? I would need something like, if SKU in other tab = XYZ, then replace with this new cell price with the matching SKU in the other tab… if that makes sense.  \n  Shopify: Currently, there isn’t a specific Shopify help page that provides step-by-step instructions on how to keep the original CSV intact in one tab and use formulas in a separate tab for sorting and filtering without breaking the import structure. For learning how to use formulas to pull data between tabs, you can refer to general spreadsheet tutorials such as:  IMPORTRANGE - Google Docs Editors Help   \n  Shopify: To achieve this kind of conditional update where you replace prices based on matching SKUs between two tabs, you can use the VLOOKUP function in your spreadsheet software (Google Sheets or Excel).  \n  Me: Ok, so just to be sure… If I keep the order of rows and columns the same as my export, and change data in the cells only, there shouldn’t be any problems?  \n  Shopify: Yes, that’s correct. If you keep the order of rows and columns exactly the same as your original export CSV and only change the data within the cells (such as prices, descriptions, or inventory quantities), you should not encounter issues like variants being wiped out during import. Maintaining the original structure ensures that Shopify correctly associates each row with the right product and variant. Be sure not to sort, add, or delete rows or columns, as this can break the relationships between products and variants and cause data loss or duplication.",
+      "compensation": "None advertised in observed posts",
+      "requested_deliverable": "Free community assistance with variant-image assignment/import, not commissioned source/output QA",
+      "response_route": "Community thread https://community.shopify.com/t/285604; no external paid-work route requested",
+      "account_prerequisites": "No authorized GlobalLand community account established; login/posting eligibility and current AI/self-promotion rules unverified. No response authorized or sent.",
+      "verdict": "REJECT as paid paired-QA lead"
+    },
+    {
+      "url": "https://community.shopify.com/t/255955",
+      "source": "products/services/catalogue-qa/buyer-evidence/topic-255955.json",
+      "sha256": "afd286883aef648a5abf919d79cba6055f1fa1bbc2c6980776681b270e21d4ca",
+      "title": "Why aren't variant images aligning correctly after CSV import?",
+      "request_date": "2023-10-03T08:23:12.000Z",
+      "request_quote": "Hello All … \n I import products via CSV, and i had uploaded product’s images to Shopify files section beforehand. \n The CSV contains the proper Shopify image links for each variant of the product. The images are included in the product’s media section , and the main image of the product is assigned correctly , though variant images are not assigned to corresponding variants. \n I had made several tries, changing the order of upload (images then product , and product then images) , but always a failure. \n Am i missing something here ? \n Best \nWaw",
+      "closed": false,
+      "posts_loaded": 2,
+      "posts_count": 2,
+      "status_limit": "Open thread does not establish an outstanding buyer request. No accepted_answer at top level; resolution not inferred from that field.",
+      "latest_post_date": "2023-12-17T23:54:23.000Z",
+      "latest_post_quote": "I see that this is an old message, but for anyone that stumbles upon this, to assign images to your product variants you need a column called ‘Variant Image’. You can see more on this in the documentation here:  https://help.shopify.com/en/manual/products/import-export/using-csv#variant-image",
+      "compensation": "None advertised in observed posts",
+      "requested_deliverable": "Free community assistance with variant-image assignment/import, not commissioned source/output QA",
+      "response_route": "Community thread https://community.shopify.com/t/255955; no external paid-work route requested",
+      "account_prerequisites": "No authorized GlobalLand community account established; login/posting eligibility and current AI/self-promotion rules unverified. No response authorized or sent.",
+      "verdict": "REJECT as paid paired-QA lead"
+    },
+    {
+      "url": "https://community.shopify.com/t/190541",
+      "source": "products/services/catalogue-qa/buyer-evidence/topic-190541.json",
+      "sha256": "1ce8db271bd4d89e4a2bdad3bdff27e4f12f1fe1355e646ed36e22ac54c76f90",
+      "title": "Link Image in CSV with the Colour Variant",
+      "request_date": "2023-02-09T12:56:12.000Z",
+      "request_quote": "Hi \n Is there a way to have it so when i upload the CSV which has the image URL and the Option 1 Name &amp; Value (colour variants) that they are linked, so for example when you click on the variant ‘‘blue’’ on the product page the image will change the main product image (which is linked to the image URL) \n My CSV is set like this \n          Screenshot 2023-02-09 at 12.54.24.png  2720×260 207 KB         \n Thanks",
+      "closed": false,
+      "posts_loaded": 1,
+      "posts_count": 1,
+      "status_limit": "Open thread does not establish an outstanding buyer request. No accepted_answer at top level; resolution not inferred from that field.",
+      "latest_post_date": "2023-02-09T12:56:12.000Z",
+      "latest_post_quote": "Hi \n Is there a way to have it so when i upload the CSV which has the image URL and the Option 1 Name &amp; Value (colour variants) that they are linked, so for example when you click on the variant ‘‘blue’’ on the product page the image will change the main product image (which is linked to the image URL) \n My CSV is set like this \n          Screenshot 2023-02-09 at 12.54.24.png  2720×260 207 KB         \n Thanks",
+      "compensation": "None advertised in observed posts",
+      "requested_deliverable": "Free community assistance with variant-image assignment/import, not commissioned source/output QA",
+      "response_route": "Community thread https://community.shopify.com/t/190541; no external paid-work route requested",
+      "account_prerequisites": "No authorized GlobalLand community account established; login/posting eligibility and current AI/self-promotion rules unverified. No response authorized or sent.",
+      "verdict": "REJECT as paid paired-QA lead"
+    }
+  ],
+  "observed_fact": "Three public merchant-authored support questions document variant-image friction. None commissions independent source/output reconciliation or advertises payment. Old dates and replies do not establish current need.",
+  "dependent_operations": "No qualifying paid task selected, so no speculative deliverable or response prepared. Posting would additionally require authorized account and verified rules.",
+  "strategic_conclusion": "These support threads support the existence of the problem, but do not validate willingness to pay CAD60 for paired QA. Stop this bounded search; do not expand support-thread discovery or alter the public offer from it.",
+  "reconsideration_trigger": "A classified eligible inbound request, an explicit current paid paired-QA request, or operator-approved direct buyer conversation.",
+  "feedback": {
+    "availability": "AVAILABLE",
+    "provenance": "Unverified message interpretations; treasury alone verifies revenue",
+    "classified": 0,
+    "unclassified_sources": 5,
+    "conclusion": "Unknown demand, not zero demand"
+  },
+  "not_established": [
+    "buyers",
+    "contact",
+    "orders",
+    "delivery",
+    "funding",
+    "revenue"
+  ],
+  "deadlines": "All existing experiment windows and retirement obligations unchanged, including 2026-11-18T09:00Z tender retirement/award-link removal and 2026-12-04T17:00Z welfare retirement."
+}
