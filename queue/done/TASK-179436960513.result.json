@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "PayPal : you can submit your existing tutorial as your writing sample when you apply to write with us . How do I receive payment for my article? We will send payment for your article when we publish your final draft. You can choose to receive your payout via PayPal or in DigitalOcean credit. You must have a PayPal account that can receive funds. DigitalOcean will make donations using Bright Funds on your behalf, but you’ll tell us which fund or charity that will receive the donation. Which charities and nonprofits will my writing support? In response to the current spread of COVID-19, we have put together the following fund focused on fighting the global pandemic and providing relief to those affected: COVID-19 Relief Fund , which includes Partners in Health , Gates Philanthropy Partners , Direct Relief , the International Medical Corps , the Center For Disaster Philanthropy , the United Nations \n300 : eive, we cannot accept every author who applies and we cannot provide individual feedback on each sample we review. What is the payout structure for Write for DOnations? The typical payout for community authors in the Write for DOnations program is $300 for typical tutorial content. We then make an additional payout in the form of a contribution from DigitalOcean to the author’s choice of tech-focused nonprofits from our list of funds . I cannot receive payments via PayPal. Do you support other payment methods? Unfortunately we can only make payments via PayPal at this time, and only directly to PayPal addresses that can receive money as well as send it. If you cannot receive payment via PayPal, we also offer the same amount in DigitalOcean credits. Can I choose the charity or nonprofit that will receive the charity payout? You can choose to donate to one of the funds we support, which s\ncontract :  with your topic. Once we receive your proposal, we’ll review your proposal as a team. If we’re interested in your proposal, we’ll either accept it as is or work with you to refine it further. Once we agree on the topic and outline, we’ll send you a contract to sign which lets us publish your work. That’s also when we’ll ask for your contact and payment details. Then you’ll begin writing in Markdown, turning your outline into a full article. When your article is done, we ask that you thoroughly test it by reading through it and following it as a reader would. We will provide testing credit for this. You won’t have to incur any cost to test your tutorials. When your draft is complete and tested, you’ll submit it to us, and the draft will be entered into our editorial queue. All submitted drafts enter the queue in the order we receive them. We sometimes have higher than normal volumes of t\n18 years : ties and funds which may be a good match. Will my donation be tax-deductible? Because DigitalOcean will be processing the donation through Bright Funds, it won’t be possible for you to claim it as a charitable deduction on your tax return. I’m under 18 years old. Can I publish a tutorial? Due to legal reasons, we can only work with authors 18 and older. I published a tutorial with DigitalOcean. Can I repost the published tutorial on my own blog? Tutorials on the DigitalOcean Community site are published under a Creative Commons license – specifically, an Attribution-NonCommercial-ShareAlike 4.0 license. This means that you can republish your content as long as you give credit (we prefer a canonical link), share it under the same license, and it is not for commercial purposes. How do you evaluate proposals? Our team reviews each proposal we receive. We look for clear explanations, strong \nartificial : NOT FOUND\nAI-generated : NOT FOUND\napply to write : Ocean Community Tutorial Technical writing guidelines Technical recommendations and best practices Tutorial templates in Markdown Frequently asked questions What does the Write for DOnations process look like? It all starts with a proposal. When you apply to write with us , you’ll submit a a proposal with the following details: The article title An explanation of why this article would be a good fit for the community An outline of your proposed article, including the introduction, prerequisites, and the steps of your proposed article with a paragraph for each section that explains what the section will cover. A writing sample that demonstrates your writing ability, technical expertise, and ability to explain complex topics to readers who are unfamiliar with your topic. Once we receive your proposal, we’ll review your proposal as a team. If we’re interested in your proposal, we’ll either \n\n",
+  "artifacts": [
+    "products/receipts/TASK-179436960513.json"
+  ],
+  "request": {
+    "id": "TASK-179436960513",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-11T04:00:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nclass P(HTMLParser):\n def __init__(self):super().__init__();self.x=[];self.skip=0\n def handle_starttag(self,t,a):\n  if t in ('script','style'):self.skip+=1\n def handle_endtag(self,t):\n  if t in ('script','style'):self.skip=max(0,self.skip-1)\n def handle_data(self,d):\n  if not self.skip:self.x.append(d)\np=P();p.feed(Path('products/research/paid-technical-writing/digitalocean-invitation.html').read_text());s=' '.join(' '.join(p.x).split())\nfor w in ['PayPal','300','contract','18 years','artificial','AI-generated','apply to write']:\n i=s.lower().find(w.lower());print(w,':',s[max(0,i-250):i+650] if i>=0 else 'NOT FOUND')"
+      ],
+      "inputs": [
+        "products/research/paid-technical-writing/digitalocean-invitation.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794369605",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179436960513",
+  "input_sha256": "f5f2c65c91718b8874b19a2407f16094a857f0b505f26adf1de6f32bccf1f3cb"
+}
