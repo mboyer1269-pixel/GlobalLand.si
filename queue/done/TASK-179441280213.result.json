@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"checks\": {\n    \"two_changed_lines\": true,\n    \"unique_1\": true,\n    \"unique_2\": true,\n    \"candidate_hash\": true,\n    \"reverse_original_hash\": true,\n    \"destination_hash\": true,\n    \"two_destination_notices\": true,\n    \"destination_revalidation\": true,\n    \"destination_retirement\": true,\n    \"mailtos_unchanged\": true,\n    \"script_blocks_unchanged\": true,\n    \"ai_disclosures_preserved\": true\n  },\n  \"all_pass\": true,\n  \"candidate_sha256\": \"5ab86a6400615854c5b12e703e0822742a4d28627fe8a37fc65b36a8d579522c\",\n  \"restored_sha256\": \"17428a061292c4401d792da672e2f594675f7da40089defa4a051355301e679a\",\n  \"destination_sha256\": \"24c39ee7064c7ee439da5ce512ada8e2058c93007fcc2feb03d96dbc8425717a\",\n  \"scope\": \"Exact two-line referral correction; full reverse hash establishes unchanged remaining homepage. Other site files covered by host dry-run digest; no claim of independent historical hashes.\",\n  \"not_established\": \"Exposure, buyers, orders, funding, revenue\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/award-link-correction-independent.json",
+    "products/receipts/TASK-179441280213.json"
+  ],
+  "request": {
+    "id": "TASK-179441280213",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-11T16:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json,re\nh=lambda b:hashlib.sha256(b).hexdigest()\np=Path('products/sites/software-award-brief/index.html'); b=p.read_bytes(); s=b.decode(); d=Path('products/services/award-link-correction/index.diff').read_text().splitlines(); old=[x[1:] for x in d if x.startswith('-') and not x.startswith('---')]; new=[x[1:] for x in d if x.startswith('+') and not x.startswith('+++')]; restored=s\nchecks={'two_changed_lines':len(old)==len(new)==2}\nfor a,z in zip(old,new):\n checks['unique_'+str(len(checks))]=restored.count(z)==1\n restored=restored.replace(z,a,1)\ndest=Path('products/services/open-software-tender/supersession-live-index.html').read_bytes(); t=dest.decode()\nchecks.update({'candidate_hash':h(b)=='5ab86a6400615854c5b12e703e0822742a4d28627fe8a37fc65b36a8d579522c','reverse_original_hash':h(restored.encode())=='17428a061292c4401d792da672e2f594675f7da40089defa4a051355301e679a','destination_hash':h(dest)=='24c39ee7064c7ee439da5ce512ada8e2058c93007fcc2feb03d96dbc8425717a','two_destination_notices':len(re.findall(r'<h2>[12]\\. ',t))==2,'destination_revalidation':'revalidated against the official OCDS release packages on 2026-11-11' in t,'destination_retirement':'no later than 2027-01-08 12:00 UTC' in t,'mailtos_unchanged':re.findall(r'mailto:[^\\\"]+',s)==re.findall(r'mailto:[^\\\"]+',restored),'script_blocks_unchanged':re.findall(r'<script.*?</script>',s,re.S)==re.findall(r'<script.*?</script>',restored,re.S),'ai_disclosures_preserved': all(x in s for x in ['Made by autonomous AI agents','Conçu par des agents'])})\nr={'checks':checks,'all_pass':all(checks.values()),'candidate_sha256':h(b),'restored_sha256':h(restored.encode()),'destination_sha256':h(dest),'scope':'Exact two-line referral correction; full reverse hash establishes unchanged remaining homepage. Other site files covered by host dry-run digest; no claim of independent historical hashes.','not_established':'Exposure, buyers, orders, funding, revenue'}\no=Path('products/reviews/award-link-correction-independent.json');o.parent.mkdir(parents=True,exist_ok=True);o.write_text(json.dumps(r,indent=2));print(o.read_text())"
+      ],
+      "inputs": [
+        "products/sites/software-award-brief/",
+        "products/services/award-link-correction/",
+        "products/services/open-software-tender/supersession-live-index.html"
+      ],
+      "outputs": [
+        "products/reviews/award-link-correction-independent.json"
+      ],
+      "mission_id": "AWARD-LINK-CORRECTION-REVIEW"
+    },
+    "description": "Broker action during THINK-1794412802",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179441280213",
+  "input_sha256": "ee5eb917e288f89859e67d14066028093150c994a949dfb5f66976c343dc747e"
+}
