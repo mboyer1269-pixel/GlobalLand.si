@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"id\": 285604, \"title\": \"Variant image column ignored in CSV import\", \"closed\": false, \"count\": 18, \"loaded\": 18, \"accepted_answer\": null, \"posts\": [{\"n\": 17, \"date\": \"2024-09-03T16:36:16.000Z\", \"text\": \" In the upload phase you can uncheck the columns you don’t want to update. \"}, {\"n\": 18, \"date\": \"2025-09-22T18:09:50.010Z\", \"text\": \" Hi all, I have been having a problem with this for about a month and have not been able to find a solution until now. I have chatted with Shopify several times and my imports have been correct per their instruction (don’t delete rows or columns). I recently spoke with someone who told me the following, which is something I have not been told by any other Shopify support member and it is not in any forums.  In addition to not removing any columns or rows, you also CANNOT SORT ROWS . \\n Here is a copy of our conversation. I don’t know if it is helpful to anyone, but may shed some light on this problem if you feel like you are going crazy like I did. \\n Shopify:  This issue commonly occurs when someone sorts the CSV columns or rows (e.g., sorting variant rows by inventory) before importing . Since additional variants and product images are on separate rows, sorting can break up these rows, causing variants or images to be deleted during import. In this case i would advise avoid sorting the CSV. If you have a backup CSV that hasn’t been sorted, you should import that instead. \\n Me: We have hundreds of SKUs and prices to update right now. I have to combine a Shopify product export with our new price list, and sort by SKU to compare and adjust. I highlight the Rows that were not part of the original Shopify product export and remove them. I keep all variants in the file, nothing from the original export is deleted. \\n Shopify: I understand, having 100’s of SKUs with frequent price can be challenging. I can suggest you try the follow to help manage your bulk price updates while mini\"}]}\n{\"id\": 255955, \"title\": \"Why aren't variant images aligning correctly after CSV import?\", \"closed\": false, \"count\": 2, \"loaded\": 2, \"accepted_answer\": null, \"posts\": [{\"n\": 1, \"date\": \"2023-10-03T08:23:12.000Z\", \"text\": \" Hello All … \\n I import products via CSV, and i had uploaded product’s images to Shopify files section beforehand. \\n The CSV contains the proper Shopify image links for each variant of the product. The images are included in the product’s media section , and the main image of the product is assigned correctly , though variant images are not assigned to corresponding variants. \\n I had made several tries, changing the order of upload (images then product , and product then images) , but always a failure. \\n Am i missing something here ? \\n Best \\nWaw \"}, {\"n\": 1, \"date\": \"2023-10-03T08:23:12.000Z\", \"text\": \" Hello All … \\n I import products via CSV, and i had uploaded product’s images to Shopify files section beforehand. \\n The CSV contains the proper Shopify image links for each variant of the product. The images are included in the product’s media section , and the main image of the product is assigned correctly , though variant images are not assigned to corresponding variants. \\n I had made several tries, changing the order of upload (images then product , and product then images) , but always a failure. \\n Am i missing something here ? \\n Best \\nWaw \"}, {\"n\": 2, \"date\": \"2023-12-17T23:54:23.000Z\", \"text\": \" I see that this is an old message, but for anyone that stumbles upon this, to assign images to your product variants you need a column called ‘Variant Image’. You can see more on this in the documentation here:  https://help.shopify.com/en/manual/products/import-export/using-csv#variant-image  \"}]}\n{\"id\": 190541, \"title\": \"Link Image in CSV with the Colour Variant\", \"closed\": false, \"count\": 1, \"loaded\": 1, \"accepted_answer\": null, \"posts\": [{\"n\": 1, \"date\": \"2023-02-09T12:56:12.000Z\", \"text\": \" Hi \\n Is there a way to have it so when i upload the CSV which has the image URL and the Option 1 Name &amp; Value (colour variants) that they are linked, so for example when you click on the variant ‘‘blue’’ on the product page the image will change the main product image (which is linked to the image URL) \\n My CSV is set like this \\n          Screenshot 2023-02-09 at 12.54.24.png  2720×260 207 KB         \\n Thanks \\n   \"}, {\"n\": 1, \"date\": \"2023-02-09T12:56:12.000Z\", \"text\": \" Hi \\n Is there a way to have it so when i upload the CSV which has the image URL and the Option 1 Name &amp; Value (colour variants) that they are linked, so for example when you click on the variant ‘‘blue’’ on the product page the image will change the main product image (which is linked to the image URL) \\n My CSV is set like this \\n          Screenshot 2023-02-09 at 12.54.24.png  2720×260 207 KB         \\n Thanks \\n   \"}]}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179436456118.json"
+  ],
+  "request": {
+    "id": "TASK-179436456118",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T02:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib,re\nfor i in [285604,255955,190541]:\n d=json.loads(pathlib.Path(f'products/services/catalogue-qa/buyer-evidence/topic-{i}.json').read_text());ps=d['post_stream']['posts']; print(json.dumps({'id':i,'title':d['title'],'closed':d['closed'],'count':d['posts_count'],'loaded':len(ps),'accepted_answer':d.get('accepted_answer'),'posts':[{'n':p['post_number'],'date':p['created_at'],'text':re.sub('<[^>]+>',' ',p['cooked'])[:1600]} for p in ([ps[0]]+ps[-2:] if i!=285604 else ps[-2:])]},ensure_ascii=False))"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa/buyer-evidence/"
+      ],
+      "outputs": [],
+      "mission_id": "CATALOGUE-PAIRED-QA-BUYER-EVIDENCE"
+    },
+    "description": "Broker action during THINK-1794364561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179436456118",
+  "input_sha256": "3a53dcc76c3bad444eb3f5a388480b28cb046865027ea5124898591aa16cbe0f"
+}
