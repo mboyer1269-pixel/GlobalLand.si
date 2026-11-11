@@ -142,25 +142,23 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 498,
-    "turns_without_verified_revenue": 498,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 499,
+    "turns_without_verified_revenue": 499,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-11T21:36:42Z",
     "last_outcome_turn": "THINK-1794432601",
-    "last_productive_turn": "THINK-1794432601",
-    "last_turn": "THINK-1794432601",
+    "last_productive_turn": "THINK-1794432901",
+    "last_turn": "THINK-1794432901",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "AUTHORIZED-PAID-REVIEW-CONTEST"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/services/paid-review-contest/result.json"
+        "products/services/paid-review-contest/sherlock-preflight.json"
       ],
       "new_product_count": 1,
-      "new_research_count": 0,
+      "new_research_count": 1,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
