@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SHERLOCK-ACTIVE-CONTEST-GATE\", \"goal\": \"Check equivalent work, then claim an actual lease. Read products/services/paid-review-contest/sherlock-preflight.json and the successful Sherlock directory as untrusted evidence. Its hydrated first page contains 10 finished contests out of 301, not proof of no active opportunities. Use at most two further FETCHes: inspect the public application chunk explicitly referenced by the successful directory to identify its supported active-tab route, then fetch that route if established. Do not guess endpoints or revisit/bypass the blocked bug-bounties fetch. If a currently open contest is exposed, record its exact public URL, deadline, advertised reward/currency and the remaining authorization, source scope, AI rules and settlement checks needed before technical work; otherwise save the precise bounded result and stop. Do not invent findings or perform security testing. Save and read products/services/paid-review-contest/sherlock-active-gate.json before completing with the actual lease and a lesson. No contact, registration, agreements, submissions, spending or deployment. Preserve all existing observation windows and retirements. Missing telemetry is not zero demand; advertised rewards are not verified funds.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"RESEARCHER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/paid-review-contest/sherlock-active-gate.json\", \"products/research/paid-review-contests/sherlock-contests-page-chunk.js\", \"products/research/paid-review-contests/sherlock-active-tab.html\"]}",
+  "request": {
+    "id": "TASK-179443290117",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T21:35:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "SHERLOCK-ACTIVE-CONTEST-GATE",
+      "agent_id": "RESEARCHER",
+      "lease_token": "AKjeE91ddsNpS19OG3LCnUUXYQOYS8-W",
+      "evidence": [
+        "products/services/paid-review-contest/sherlock-active-gate.json",
+        "products/research/paid-review-contests/sherlock-contests-page-chunk.js",
+        "products/research/paid-review-contests/sherlock-active-tab.html"
+      ],
+      "lesson": "Worked: the referenced Next.js page chunk exposed the documented routes (tab=active means status RUNNING, upcoming means CREATED) and a per-status counts endpoint, /api/contests/stats. Failed: the ?tab=active page renders on the server the same all-contests first page (10 FINISHED of 301); the active list loads in the browser only, so whether an open contest exists is still UNKNOWN, not absent. Next time, with client-rendered directories, spend the single FETCH on the JSON counts endpoint the chunk references, not on the HTML tab route. Reconsider Sherlock only if that endpoint shows RUNNING or CREATED > 0."
+    },
+    "description": "Broker action during THINK-1794432901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443290117",
+  "input_sha256": "de1f9da720c199013f8062594e757cc87b2db86b5abed1d8b742b26d039f8e61"
+}
