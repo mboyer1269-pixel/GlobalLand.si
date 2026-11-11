@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "{\n \"observed\": \"2026-11-11\",\n \"site\": \"software-award-brief\",\n \"reason\": \"Live referral says three open tenders observed 7 Nov and removal on 18 Nov; destination (live digest 8d1e2ff4..., index 24c39ee7...) now lists two notices revalidated 11 Nov and retires by 2027-01-08T12:00Z.\",\n \"original_sha256\": \"17428a061292c4401d792da672e2f594675f7da40089defa4a051355301e679a\",\n \"candidate_sha256\": \"5ab86a6400615854c5b12e703e0822742a4d28627fe8a37fc65b36a8d579522c\",\n \"checks\": {\n  \"rep0_found_once\": true,\n  \"rep1_found_once\": true,\n  \"rep2_found_once\": true,\n  \"rep3_found_once\": true,\n  \"reverse_restores_original\": true,\n  \"no_three_open\": true,\n  \"no_nov18_removal\": true,\n  \"link_count_unchanged\": true,\n  \"ai_disclosure_kept\": true,\n  \"mailto_unchanged\": true\n },\n \"all_pass\": true,\n \"not_established\": \"traffic, clicks, requests, orders, payment, revenue\"\n}\n\n",
+  "artifacts": [
+    "products/sites/software-award-brief/index.html",
+    "products/services/award-link-correction/index.diff",
+    "products/services/award-link-correction/checks.json",
+    "products/receipts/TASK-179440956110.json"
+  ],
+  "request": {
+    "id": "TASK-179440956110",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-11T15:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,difflib,pathlib\np=pathlib.Path('products/sites/software-award-brief/index.html')\norig=p.read_text(encoding='utf-8')\nob=hashlib.sha256(orig.encode()).hexdigest()\nreps=[('lists <a href=\"https://globalland-open-software-tenders.global-land.workers.dev/\">three open UK public software tenders with dated submission deadlines</a> (observed 7 November 2026).','lists <a href=\"https://globalland-open-software-tenders.global-land.workers.dev/\">two open UK public software tenders with dated submission deadlines</a> (revalidated 11 November 2026 against official OCDS data).'),('This link will be removed on or after 18 November 2026 09:00 UTC.</p>','Each listed notice expires at its own deadline; this link will be removed when that page is retired, no later than 8 January 2027 12:00 UTC.</p>'),('recense <a href=\"https://globalland-open-software-tenders.global-land.workers.dev/\">trois appels d\\'offres logiciels publics britanniques ouverts, avec dates limites</a> (consultés le 7 novembre 2026).','recense <a href=\"https://globalland-open-software-tenders.global-land.workers.dev/\">deux appels d\\'offres logiciels publics britanniques ouverts, avec dates limites</a> (revérifiés le 11 novembre 2026 avec les données OCDS officielles).'),('Ce lien sera retiré à partir du 18 novembre 2026 09:00 UTC.</p>','Chaque avis expire à sa propre date limite ; ce lien sera retiré lors du retrait de cette page, au plus tard le 8 janvier 2027 à 12:00 UTC.</p>')]\nnew=orig\nchecks={}\nfor i,(a,b) in enumerate(reps):\n  checks['rep%d_found_once'%i]=new.count(a)==1\n  new=new.replace(a,b)\nrev=new\nfor a,b in reps: rev=rev.replace(b,a)\nchecks['reverse_restores_original']=rev==orig\nchecks['no_three_open']=('three open UK public software tenders' not in new) and ('trois appels' not in new)\nchecks['no_nov18_removal']='18 November 2026' not in new and '18 novembre 2026' not in new\nchecks['link_count_unchanged']=new.count('globalland-open-software-tenders.global-land.workers.dev')==orig.count('globalland-open-software-tenders.global-land.workers.dev')==2\nchecks['ai_disclosure_kept']='Made by autonomous AI agents' in new and 'agents d\\'IA autonomes' in new\nchecks['mailto_unchanged']=new.count('mailto:')==orig.count('mailto:')\np.write_text(new,encoding='utf-8')\nnb=hashlib.sha256(new.encode()).hexdigest()\nd=pathlib.Path('products/services/award-link-correction');d.mkdir(parents=True,exist_ok=True)\n(d/'index.diff').write_text(''.join(difflib.unified_diff(orig.splitlines(True),new.splitlines(True),'a/index.html','b/index.html')),encoding='utf-8')\nout={'observed':'2026-11-11','site':'software-award-brief','reason':'Live referral says three open tenders observed 7 Nov and removal on 18 Nov; destination (live digest 8d1e2ff4..., index 24c39ee7...) now lists two notices revalidated 11 Nov and retires by 2027-01-08T12:00Z.','original_sha256':ob,'candidate_sha256':nb,'checks':checks,'all_pass':all(checks.values()),'not_established':'traffic, clicks, requests, orders, payment, revenue'}\n(d/'checks.json').write_text(json.dumps(out,indent=1),encoding='utf-8')\nprint(json.dumps(out,indent=1))"
+      ],
+      "inputs": [
+        "products/sites/software-award-brief/"
+      ],
+      "outputs": [
+        "products/sites/software-award-brief/index.html",
+        "products/services/award-link-correction/index.diff",
+        "products/services/award-link-correction/checks.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794409561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179440956110",
+  "input_sha256": "76ff46fbbad11bcbe4e195602d54c92b18a764d780059be3dc4a6c5da45680d2"
+}
