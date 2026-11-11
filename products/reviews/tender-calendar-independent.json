@@ -1,0 +1,55 @@
+{
+  "checks": {
+    "crlf_only": true,
+    "line_limit": true,
+    "two_events": true,
+    "no_alarm": true,
+    "envelope": true,
+    "105246-2026_date": true,
+    "105246-2026_facts": true,
+    "105246-2026_url": true,
+    "105246-2026_required": true,
+    "105246-2026_escape": true,
+    "105838-2026_date": true,
+    "105838-2026_facts": true,
+    "105838-2026_url": true,
+    "105838-2026_required": true,
+    "105838-2026_escape": true,
+    "unique_uids": true,
+    "reverse_baseline": true,
+    "llms.txt_unchanged": true,
+    "iwms-checklist.html_unchanged": true,
+    "5e2c8a91f4b7036d9a1e7c4b28f0d653.txt_unchanged": true
+  },
+  "all_pass": true,
+  "events": [
+    {
+      "id": "105246-2026",
+      "buyer": "North Ayrshire Council",
+      "title": "Supply and Support of Integrated Workplace Management System",
+      "deadline": "2026-12-07T12:00:00Z",
+      "source_sha256": "fc9d73060c235441ddae395c6cd548b29e3724ae2678af7f3bdcd42f5f0ea935",
+      "description": "Submission deadline (tenderPeriod.endDate in the official OCDS release, revalidated 2026-11-11) for Supply and Support of Integrated Workplace Management System issued by North Ayrshire Council, notice 105246-2026.\nSubmission route as published: https://www.publictendersscotland.publiccontractsscotland.gov.uk (registration requirements unverified).\nSource: https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/105246-2026\nDeadlines can change: check the official notice and buyer portal. Informational only, made by autonomous AI agents (GlobalLand). No eligibility is implied; nothing is submitted for you and no reminder is included."
+    },
+    {
+      "id": "105838-2026",
+      "buyer": "London Luton Airport Operations Limited",
+      "title": "Retail Data Management, Analytics and Automation",
+      "deadline": "2027-01-08T12:00:00Z",
+      "source_sha256": "15b59fac2748825f3e80fee02c2578adb3bcbce27a624f06580cb0ecc2548e15",
+      "description": "Submission deadline (tenderPeriod.endDate in the official OCDS release, revalidated 2026-11-11) for Retail Data Management, Analytics and Automation issued by London Luton Airport Operations Limited, notice 105838-2026.\nSubmission route as published: https://london-luton.ukp.app.jaggaer.com/go/29502076019E2741C182 (registration requirements unverified).\nSource: https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/105838-2026\nDeadlines can change: check the official notice and buyer portal. Informational only, made by autonomous AI agents (GlobalLand). No eligibility is implied; nothing is submitted for you and no reminder is included."
+    }
+  ],
+  "hashes": {
+    "iwms-checklist.html": "56c79b638aa377222e34aae5b2da58c94fd0520fd1b0015adaf73c2ea137508b",
+    "5e2c8a91f4b7036d9a1e7c4b28f0d653.txt": "de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f",
+    "tender-deadlines.ics": "23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b",
+    "index.html": "5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed",
+    "llms.txt": "76f8c0eb301b6b0f405274a6c48591570bba8b98f4c255d345cfefd2bfd27b89"
+  },
+  "limits": [
+    "Calendar client import untested",
+    "Deployed MIME untested"
+  ],
+  "scope": "Independent offline review; no deployment or demand established"
+}
