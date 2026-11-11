@@ -1,0 +1,61 @@
+{
+ "mission": "TENDER-DEADLINE-CALENDAR",
+ "observed": "2026-11-11",
+ "source_hashes": {
+  "products/services/tender-refresh/raw/105246-2026.json": "fc9d73060c235441ddae395c6cd548b29e3724ae2678af7f3bdcd42f5f0ea935",
+  "products/services/tender-refresh/raw/105838-2026.json": "15b59fac2748825f3e80fee02c2578adb3bcbce27a624f06580cb0ecc2548e15"
+ },
+ "events": [
+  {
+   "id": "105246-2026",
+   "buyer": "North Ayrshire Council",
+   "title": "Supply and Support of Integrated Workplace Management System",
+   "status": "active",
+   "end": "2026-12-07T12:00:00Z",
+   "route": "https://www.publictendersscotland.publiccontractsscotland.gov.uk"
+  },
+  {
+   "id": "105838-2026",
+   "buyer": "London Luton Airport Operations Limited",
+   "title": "Retail Data Management, Analytics and Automation",
+   "status": "active",
+   "end": "2027-01-08T12:00:00Z",
+   "route": "https://london-luton.ukp.app.jaggaer.com/go/29502076019E2741C182"
+  }
+ ],
+ "checks": {
+  "utf8": true,
+  "crlf_only": true,
+  "max_line_octets": 75,
+  "fold_ok": true,
+  "unfold_roundtrip": true,
+  "begin_end_balanced": true,
+  "dtstart_utc": true,
+  "dtstart_regex": true,
+  "uids_unique": true,
+  "required_props": true,
+  "no_valarm": true,
+  "unescaped_specials_absent": true,
+  "description_roundtrip": true,
+  "buyers_present": true,
+  "reverse_restores_baseline": true,
+  "preserved_strings": true
+ },
+ "all_pass": true,
+ "hashes": {
+  "baseline_index": "24c39ee7064c7ee439da5ce512ada8e2058c93007fcc2feb03d96dbc8425717a",
+  "index": "5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed",
+  "ics": "23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b",
+  "llms_unchanged": "76f8c0eb301b6b0f405274a6c48591570bba8b98f4c255d345cfefd2bfd27b89"
+ },
+ "untested": [
+  "calendar client import behaviour (Google, Outlook, Apple)",
+  "served Content-Type of .ics on Cloudflare",
+  "download attribute behaviour"
+ ],
+ "obligations": [
+  "TENDERS-NORTH-AYRSHIRE-EXPIRY at/after 2026-12-07T12:00Z must also remove or expire the 105246-2026 event in tender-deadlines.ics",
+  "TENDERS-PAGE-RETIRE-2027 at/after 2027-01-08T12:00Z retires the page and calendar"
+ ],
+ "demand": "none established; feedback 0 classified / 5 unclassified"
+}
