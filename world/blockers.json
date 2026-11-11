@@ -142,23 +142,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 458,
-    "turns_without_verified_revenue": 458,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 459,
+    "turns_without_verified_revenue": 459,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-11T08:06:36Z",
-    "last_outcome_turn": "THINK-1794384001",
-    "last_productive_turn": "THINK-1794385804",
-    "last_turn": "THINK-1794385804",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794387601",
+    "last_productive_turn": "THINK-1794387601",
+    "last_turn": "THINK-1794387601",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/distribution/catalogue-crawl-directives/live-homepage.html",
-        "products/distribution/catalogue-crawl-directives/live-robots.txt"
+      "outcome": true,
+      "mission_outcomes": [
+        "CATALOGUE-CRAWL-DIRECTIVE-TEST"
       ],
-      "new_product_count": 2,
+      "new_products": [
+        "products/distribution/catalogue-crawl-directives/result.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
