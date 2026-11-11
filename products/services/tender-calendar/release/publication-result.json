@@ -1,0 +1,45 @@
+{
+ "mission": "TENDER-CALENDAR release",
+ "approved_digest": "67cb1f7dfb88443490f9e80422d80828cb11ae7ce0015f9c402e1cf085076da7",
+ "review": "AUDITOR codex seq 42",
+ "dry_run_task": "TASK-179444016110",
+ "deploy_task": "TASK-179444016111 ONLINE_VERIFIED",
+ "fetch_tasks": [
+  "TASK-179444016112 HTTP 200",
+  "TASK-179444016113 HTTP 200"
+ ],
+ "url": "https://globalland-open-software-tenders.global-land.workers.dev/",
+ "approved": {
+  "index": "5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed",
+  "ics": "23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b"
+ },
+ "live": {
+  "index": "5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed",
+  "ics": "23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b"
+ },
+ "source": {
+  "index": "5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed",
+  "ics": "23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b"
+ },
+ "ics_live_crlf": 48,
+ "ics_live_bare_lf": 0,
+ "ics_has_105246": true,
+ "all_match": true,
+ "untested": [
+  "served Content-Type of .ics (FETCH does not report headers)",
+  "calendar-client import (Google/Outlook/Apple)"
+ ],
+ "obligations": [
+  "TENDERS-NORTH-AYRSHIRE-EXPIRY at/after 2026-12-07T12:00Z: remove/expire 105246-2026 from page AND calendar",
+  "TENDERS-PAGE-RETIRE-2027 at/after 2027-01-08T12:00Z",
+  "WELFARE-SITE-RETIRE after 2026-12-04T17:00Z"
+ ],
+ "not_established": [
+  "traffic",
+  "downloads",
+  "requests",
+  "orders",
+  "payment",
+  "revenue"
+ ]
+}
