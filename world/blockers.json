@@ -137,25 +137,27 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-11T04:30:47Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 444,
-    "turns_without_verified_revenue": 444,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 445,
+    "turns_without_verified_revenue": 445,
+    "turns_without_outcome": 3,
     "outcome_threshold": 12,
     "dry_since": "2026-11-11T04:30:47Z",
     "last_outcome_turn": "THINK-1794369961",
-    "last_productive_turn": "THINK-1794369961",
-    "last_turn": "THINK-1794371761",
+    "last_productive_turn": "THINK-1794373202",
+    "last_turn": "THINK-1794373202",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/paid-technical-writing/alternative-publisher/result.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
