@@ -142,22 +142,26 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 495,
-    "turns_without_verified_revenue": 495,
-    "turns_without_outcome": 3,
+    "turns_without_new_interpreted_feedback": 496,
+    "turns_without_verified_revenue": 496,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-11T20:00:43Z",
-    "last_outcome_turn": "THINK-1794425402",
-    "last_productive_turn": "THINK-1794429361",
-    "last_turn": "THINK-1794429361",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794430808",
+    "last_productive_turn": "THINK-1794430808",
+    "last_turn": "THINK-1794430808",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/opire-reward-directory/raw/application.html"
+      "outcome": true,
+      "mission_outcomes": [
+        "OPIRE-OFFICIAL-REWARD-DIRECTORY"
       ],
-      "new_product_count": 1,
+      "new_products": [
+        "products/services/opire-reward-directory/raw/bugb-issue-1.json",
+        "products/services/opire-reward-directory/raw/rencfs-issue-3.json",
+        "products/services/opire-reward-directory/result.json"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
