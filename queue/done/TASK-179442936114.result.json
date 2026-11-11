@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "html_url https://github.com/rodrigompy/bugb/issues/1\ntitle c1work\nstate closed\ncreated_at 2026-05-31T02:30:30Z\nupdated_at 2026-05-31T13:52:13Z\ncomments 1\nauthor_association OWNER\nassignee {'login': 'rodrigompy', 'id': 219452619, 'node_id': 'U_kgDODRSUyw', 'avatar_url': 'https://avatars.githubusercontent.com/u/219452619?v=4', 'gravatar_id': '', 'url': 'https://api.github.com/users/rodrigompy', 'html_url': 'https://github.com/rodrigompy', 'followers_url': 'https://api.github.com/users/rodrigompy/followers', 'following_url': 'https://api.github.com/users/rodrigompy/following{/other_user}', 'gists_url': 'https://api.github.com/users/rodrigompy/gists{/gist_id}', 'starred_url': 'https://api.github.com/users/rodrigompy/starred{/owner}{/repo}', 'subscriptions_url': 'https://api.github.com/users/rodrigompy/subscriptions', 'organizations_url': 'https://api.github.com/users/rodrigompy/orgs', 'repos_url': 'https://api.github.com/users/rodrigompy/repos', 'events_url': 'https://api.github.com/users/rodrigompy/events{/privacy}', 'received_events_url': 'https://api.github.com/users/rodrigompy/received_events', 'type': 'User', 'user_view_type': 'public', 'site_admin': False}\nlocked True\nuser rodrigompy User\nlabels []\nBODY \n\n",
+  "artifacts": [
+    "products/receipts/TASK-179442936114.json"
+  ],
+  "request": {
+    "id": "TASK-179442936114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nd=json.load(open('products/services/opire-reward-directory/raw/bugb-issue-1.json'))\nfor k in ['html_url','title','state','created_at','updated_at','comments','author_association','assignee','locked']:\n  print(k,d.get(k))\nprint('user',d['user']['login'],d['user'].get('type'))\nprint('labels',[l['name'] for l in d.get('labels',[])])\nprint('BODY',(d.get('body') or '')[:2500])\n"
+      ],
+      "inputs": [
+        "products/services/opire-reward-directory/raw/bugb-issue-1.json"
+      ],
+      "outputs": [],
+      "mission_id": "OPIRE-OFFICIAL-REWARD-DIRECTORY"
+    },
+    "description": "Broker action during THINK-1794429361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179442936114",
+  "input_sha256": "abfce9b3389c1d1fee4995996b877be18a1fe7ee71616a58bd1f0c2d238fcace"
+}
