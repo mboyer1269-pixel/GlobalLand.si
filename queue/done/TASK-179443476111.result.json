@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"SHERLOCK-STATS-CHECK\",\n \"observed_date\": \"2026-11-11\",\n \"source\": \"https://audits.sherlock.xyz/api/contests/stats\",\n \"fetch_task\": \"TASK-179443290101\",\n \"http_status\": 200,\n \"source_sha256\": \"ec71619a7d90a945e3c243dfc4813d5d65c71d712baafbf74474ae6b95bc3eca\",\n \"raw\": [\n  {\n   \"count\": 301,\n   \"status\": \"FINISHED\"\n  },\n  {\n   \"count\": 1,\n   \"status\": \"RUNNING\"\n  }\n ],\n \"counts\": {\n  \"FINISHED\": 301,\n  \"RUNNING\": 1\n },\n \"RUNNING_active\": 1,\n \"CREATED_upcoming\": \"ABSENT_NOT_EXPLICIT_ZERO\",\n \"verdict\": \"CONTINUE_BOUNDED: RUNNING=1 > 0\",\n \"interpretation\": \"One contest has status RUNNING (UI label Active per chunk TASK-179443290113). Its identity, URL, deadline, reward and scope are not exposed by this endpoint. CREATED key absent from response; treated as unknown/absent, not explicit zero.\",\n \"remaining_checks_for_one_later_mission\": [\n  \"identify the active contest via the application supported public listing query (chunk module 50380 export qa1, status RUNNING; TASK-179443440511) without guessing endpoints or bypassing the rejected bug-bounties fetch\",\n  \"exact public contest URL\",\n  \"future end deadline with timezone\",\n  \"advertised reward pool and currency (advertised, not verified funds)\",\n  \"in-scope public source repository and explicit authorization scope for review\",\n  \"AI-assistance rules for submissions\",\n  \"auditor registration, KYC and eligibility requirements\",\n  \"settlement route and payout prerequisites\"\n ],\n \"not_done\": [\n  \"no security testing\",\n  \"no findings\",\n  \"no contact, registration, agreement, submission or spending\",\n  \"no further FETCH\"\n ],\n \"feedback\": \"0 classified, 5 unclassified sources; demand unknown. No funds or revenue verified.\"\n}\n\n",
+  "artifacts": [
+    "products/services/paid-review-contest/sherlock-stats.json",
+    "products/receipts/TASK-179443476111.json"
+  ],
+  "request": {
+    "id": "TASK-179443476111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T22:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib\nsrc=pathlib.Path('products/research/paid-review-contests/sherlock-stats.json')\nb=src.read_bytes();d=json.loads(b)\nc={x['status']:x['count'] for x in d}\nout={'mission':'SHERLOCK-STATS-CHECK','observed_date':'2026-11-11','source':'https://audits.sherlock.xyz/api/contests/stats','fetch_task':'TASK-179443290101','http_status':200,'source_sha256':hashlib.sha256(b).hexdigest(),'raw':d,'counts':c,'RUNNING_active':c.get('RUNNING'),'CREATED_upcoming':c.get('CREATED','ABSENT_NOT_EXPLICIT_ZERO'),'verdict':'CONTINUE_BOUNDED: RUNNING=1 > 0','interpretation':'One contest has status RUNNING (UI label Active per chunk TASK-179443290113). Its identity, URL, deadline, reward and scope are not exposed by this endpoint. CREATED key absent from response; treated as unknown/absent, not explicit zero.','remaining_checks_for_one_later_mission':['identify the active contest via the application supported public listing query (chunk module 50380 export qa1, status RUNNING; TASK-179443440511) without guessing endpoints or bypassing the rejected bug-bounties fetch','exact public contest URL','future end deadline with timezone','advertised reward pool and currency (advertised, not verified funds)','in-scope public source repository and explicit authorization scope for review','AI-assistance rules for submissions','auditor registration, KYC and eligibility requirements','settlement route and payout prerequisites'],'not_done':['no security testing','no findings','no contact, registration, agreement, submission or spending','no further FETCH'],'feedback':'0 classified, 5 unclassified sources; demand unknown. No funds or revenue verified.'}\np=pathlib.Path('products/services/paid-review-contest/sherlock-stats.json');p.parent.mkdir(parents=True,exist_ok=True)\np.write_text(json.dumps(out,indent=1));print(p.read_text())"
+      ],
+      "inputs": [
+        "products/research/paid-review-contests/sherlock-stats.json"
+      ],
+      "outputs": [
+        "products/services/paid-review-contest/sherlock-stats.json"
+      ],
+      "mission_id": "SHERLOCK-STATS-CHECK"
+    },
+    "description": "Broker action during THINK-1794434761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443476111",
+  "input_sha256": "9cb4a3125faf436357b41eeef494d1bd4d9e04771dbc45f5906e7b22bd7ce054"
+}

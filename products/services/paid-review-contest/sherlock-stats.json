@@ -1,0 +1,43 @@
+{
+ "mission": "SHERLOCK-STATS-CHECK",
+ "observed_date": "2026-11-11",
+ "source": "https://audits.sherlock.xyz/api/contests/stats",
+ "fetch_task": "TASK-179443290101",
+ "http_status": 200,
+ "source_sha256": "ec71619a7d90a945e3c243dfc4813d5d65c71d712baafbf74474ae6b95bc3eca",
+ "raw": [
+  {
+   "count": 301,
+   "status": "FINISHED"
+  },
+  {
+   "count": 1,
+   "status": "RUNNING"
+  }
+ ],
+ "counts": {
+  "FINISHED": 301,
+  "RUNNING": 1
+ },
+ "RUNNING_active": 1,
+ "CREATED_upcoming": "ABSENT_NOT_EXPLICIT_ZERO",
+ "verdict": "CONTINUE_BOUNDED: RUNNING=1 > 0",
+ "interpretation": "One contest has status RUNNING (UI label Active per chunk TASK-179443290113). Its identity, URL, deadline, reward and scope are not exposed by this endpoint. CREATED key absent from response; treated as unknown/absent, not explicit zero.",
+ "remaining_checks_for_one_later_mission": [
+  "identify the active contest via the application supported public listing query (chunk module 50380 export qa1, status RUNNING; TASK-179443440511) without guessing endpoints or bypassing the rejected bug-bounties fetch",
+  "exact public contest URL",
+  "future end deadline with timezone",
+  "advertised reward pool and currency (advertised, not verified funds)",
+  "in-scope public source repository and explicit authorization scope for review",
+  "AI-assistance rules for submissions",
+  "auditor registration, KYC and eligibility requirements",
+  "settlement route and payout prerequisites"
+ ],
+ "not_done": [
+  "no security testing",
+  "no findings",
+  "no contact, registration, agreement, submission or spending",
+  "no further FETCH"
+ ],
+ "feedback": "0 classified, 5 unclassified sources; demand unknown. No funds or revenue verified."
+}
