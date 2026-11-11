@@ -1,0 +1,62 @@
+{
+ "mission": "AUTHORIZED-PAID-REVIEW-CONTEST",
+ "observed_utc": "2026-11-11",
+ "verdict": "STOP_BOUNDED_REJECTION_NO_OPEN_CONTEST",
+ "fetch_budget": {
+  "allowed": 4,
+  "used": 1,
+  "tasks": [
+   "TASK-179443080800 (https://code4rena.com/audits, HTTP 200)"
+  ]
+ },
+ "directory": {
+  "url": "https://code4rena.com/audits",
+  "sha256": "60fa19e66bb8bef4fee4349a2a8d74dbedb8303b086f43d144db62d6e9c9362a",
+  "fetched_sha256_reported": "60fa19e66bb8bef4fee4349a2a8d74dbedb8303b086f43d144db62d6e9c9362a",
+  "extraction_tasks": [
+   "TASK-179443116111",
+   "TASK-179443116112"
+  ],
+  "observed_sections": [
+   "Submissions closed",
+   "Judging",
+   "Report in progress",
+   "Completed audits"
+  ],
+  "section_absent": "No Active or Upcoming audit section rendered in the fetched HTML",
+  "status_counts": {
+   "Completed": 95,
+   "Judging": 2,
+   "Reporting": 2,
+   "Active": 0,
+   "Upcoming": 0
+  },
+  "non_completed": [
+   {
+    "slug": "2026-04-k2",
+    "status": "Judging (Submissions closed)",
+    "window_text": "17 Apr 8:00 PM - 27 May 8:00 PM",
+    "advertised_pool": "$135,000 in USDC"
+   },
+   {
+    "slug": "2025-12-rujira",
+    "status": "Reporting (Report in progress)",
+    "window_text": "16 Dec 2025 8:00 PM - 16 Jan 8:00 PM",
+    "advertised_pool": "$40,000 in USDC"
+   }
+  ]
+ },
+ "criteria_check": {
+  "currently_open_submission_deadline": "NOT_MET (no active contest observed on 2026-11-11)",
+  "scope_rules_ai_policy_settlement": "NOT_INSPECTED - not needed once no open contest exists; contest pages would be historical only"
+ },
+ "contests_inspected": 0,
+ "builder_handoff": null,
+ "uncertainties": [
+  "Server-rendered HTML may omit client-loaded contests; absence of an Active section is observed only in this HTML",
+  "Upcoming contests could appear later; their AI/tool rules, KYC and USDC settlement prerequisites remain unread",
+  "Reward pools are advertised pools, not verified funds or expected earnings"
+ ],
+ "reconsider_if": "An official Code4rena (or equivalent) contest is listed as Active/Upcoming with a future submission deadline, public in-scope source, readable AI/tool and eligibility/settlement terms, and a founder-approved warden identity path",
+ "actions_not_taken": "No registration, contact, submission, testing of deployed targets, spending or deployment. No speculative findings."
+}
