@@ -1,0 +1,21 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://api.github.com/search/issues?q=is%3Aissue+is%3Aopen+no%3Aassignee+commenter%3Aapp%2Fopirebot&sort=updated&order=desc&per_page=15\", \"http_status\": 200, \"sha256\": \"6fe8818a7e7bad3b25fc1cc81e16c10266e469e246e2a04aeabea799535c19bf\", \"artifact\": \"products/services/opire-specific-repair/raw/opirebot-issue-search.json\"}",
+  "request": {
+    "id": "TASK-179442396112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T19:06:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://api.github.com/search/issues?q=is%3Aissue+is%3Aopen+no%3Aassignee+commenter%3Aapp%2Fopirebot&sort=updated&order=desc&per_page=15",
+      "output": "products/services/opire-specific-repair/raw/opirebot-issue-search.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794423961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179442396112",
+  "input_sha256": "c68c64340007928552d3ba2220874a18ac23bab9e5841e45cdd4c9b3f014fbcf"
+}
