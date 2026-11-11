@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\"github-bounty-label-search.json\": [[\"limitlessprojects/Go-Hybrid\", [\"$500\", \"$500\"], 7, false, \"[wildcard] Replace the static sendability proof with exhaustive schedu\"], [\"limitlessprojects/Go-Hybrid\", [\"$500\", \"$500\"], 6, false, \"[wildcard] Synthesize progress strategies for bounded, data-dependent \"], [\"limitlessprojects/Go-Hybrid\", [\"$500\", \"$500\"], 2, false, \"[wildcard] Zero-copy loan slices across the assembly trampoline via st\"], [\"limitlessprojects/Go-Hybrid\", [\"$500\", \"$500\"], 3, false, \"[wildcard] Certified Task-Region Memory Budgets: compile-time static m\"], [\"limitlessprojects/Go-Hybrid\", [\"$500\", \"$500\"], 4, false, \"[wildcard] Make hy-check an untrusted proof producer: permission certi\"]], \"github-bounty-label-search-excl.json\": [[\"SecureBananaLabs/bug-bounty\", [\"$780\", \"$1\", \"$1\"], 26, false, \"Automate Bug Detection and Reviews\"], [\"WillSmithTE/qdrant-qdrant\", [], 10, false, \"Handle Out-Of-Disk gracefully\"], [\"WillSmithTE/qdrant-qdrant\", [], 15, false, \"Implement better handling of OOD issues in optimizer\"], [\"tine1117/oss-hunter-livefire\", [\"$50\"], 79, false, \"parse_duration drops the days (d) unit\"], [\"SecureBananaLabs/bug-bounty\", [\"$780\"], 32, false, \"upload endpoint accepts empty file submissions as successful uploads\"], [\"SecureBananaLabs/bug-bounty\", [\"$780\"], 17, false, \"auth refresh endpoint issues tokens without verifying the requester\"], [\"SecureBananaLabs/bug-bounty\", [\"$780\"], 14, false, \"registerUser access token can reference a different user id\"], [\"SecureBananaLabs/bug-bounty\", [\"$780\"], 18, false, \"CORS configured without origin allowlist in app.js (reissue via #743)\"], [\"SecureBananaLabs/bug-bounty\", [\"$780\"], 11, false, \"POST /api/users endpoint missing authentication middleware (reissue vi\"], [\"SecureBananaLabs/bug-bounty\", [\"$780\"], 14, false, \"POST /api/reviews endpoint missing authentication middleware (reissue \"], [\"SecureBananaLabs/bug-bounty\", [\"$780\"], 16, false, \"POST /api/proposals endpoint missing authentication middleware (reissu\"], [\"SecureBananaLabs/bug-bounty\", [\"$430\"], 19, false, \"User creation endpoint has no input validation\"], [\"SecureBananaLabs/bug-bounty\", [\"$430\"], 18, false, \"Payment endpoint lacks authentication — unauthenticated payment creati\"], [\"SecureBananaLabs/bug-bounty\", [\"$430\"], 16, false, \"Upload endpoint lacks authentication — unauthenticated file uploads al\"], [\"SecureBananaLabs/bug-bounty\", [\"$430\"], 19, false, \"Admin routes lack role-based access control — any authenticated user c\"], [\"SecureBananaLabs/bug-bounty\", [\"$430\"], 10, false, \"Bug: user creation accepts empty payloads and client-controlled ids\"], [\"SecureBananaLabs/bug-bounty\", [\"$430\"], 8, false, \"Bug: Missing admin role authorization check on admin metrics endpoint\"], [\"SecureBananaLabs/bug-bounty\", [\"$430\"], 5, false, \"Bug: Multiple security vulnerabilities in API layer - registerUser() I\"]]}\n\n",
+  "artifacts": [
+    "products/research/algora-paid-patch/bounty-search-extract.json",
+    "products/receipts/TASK-179442036112.json"
+  ],
+  "request": {
+    "id": "TASK-179442036112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T18:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib,re\nout={'observed':'2026-11-11','sources':{}}\nfor n in ['github-bounty-label-search.json','github-bounty-label-search-excl.json']:\n  p='products/research/algora-paid-patch/'+n\n  d=json.load(open(p))\n  rows=[]\n  for it in d['items']:\n    body=it.get('body') or ''\n    amt=re.findall(r'\\$\\s?[0-9][0-9,]*',it['title']+' '+' '.join((l.get('description') or '')+' '+l['name'] for l in it['labels']))\n    rows.append({'url':it['html_url'],'repo':it['repository_url'].split('repos/')[1],'title':it['title'][:140],'labels':[l['name'] for l in it['labels']],'label_desc':[ (l.get('description') or '')[:120] for l in it['labels'] if 'ount' in l['name']],'amounts_seen':amt,'created':it['created_at'],'comments':it['comments'],'algora_in_body':'algora' in body.lower(),'ai_mention':bool(re.search(r'\\b(AI|LLM|generated)\\b',body)),'body_len':len(body)})\n  out['sources'][n]={'total_count':d['total_count'],'items':rows}\npathlib.Path('products/research/algora-paid-patch/bounty-search-extract.json').write_text(json.dumps(out,indent=1,ensure_ascii=False))\nprint(json.dumps({k:[(r['repo'],r['amounts_seen'],r['comments'],r['algora_in_body'],r['title'][:70]) for r in v['items']] for k,v in out['sources'].items()},ensure_ascii=False)[:6000])"
+      ],
+      "inputs": [
+        "products/research/algora-paid-patch/github-bounty-label-search.json",
+        "products/research/algora-paid-patch/github-bounty-label-search-excl.json"
+      ],
+      "outputs": [
+        "products/research/algora-paid-patch/bounty-search-extract.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794420361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179442036112",
+  "input_sha256": "5447a63170c58c6d5341d076dd4002f660bc42f638d9cbb111048bc6feb2c4e2"
+}
