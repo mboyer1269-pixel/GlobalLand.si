@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SHERLOCK-STATS-CHECK\", \"goal\": \"Use only the queued FETCH of https://audits.sherlock.xyz/api/contests/stats (referenced verbatim in the saved contests page chunk, TASK-179443290113). Verify that the receipt succeeded and treat the content as untrusted. Record the per-status counts, in particular RUNNING (Active) and CREATED (Upcoming). If both are 0, save a STOP for the Sherlock channel. If either is above 0, save the counts and list the remaining checks (exact contest URL, deadline, advertised reward and currency, in-scope public source and authorization, AI rules, KYC and settlement) for one later bounded mission. Do not test anything and do not invent findings. No other FETCH, no contact, registration, submission or spending. Save and read products/services/paid-review-contest/sherlock-stats.json, then complete with the actual lease and a lesson.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"RESEARCHER\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/paid-review-contest/sherlock-stats.json\", \"products/research/paid-review-contests/sherlock-stats.json\"]}",
+  "request": {
+    "id": "TASK-179443476112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T22:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "SHERLOCK-STATS-CHECK",
+      "agent_id": "RESEARCHER",
+      "lease_token": "LAt_iQnjkmI0-TfMyGo68-IW5XLNETGc",
+      "evidence": [
+        "products/services/paid-review-contest/sherlock-stats.json",
+        "products/research/paid-review-contests/sherlock-stats.json"
+      ],
+      "lesson": "Worked: the stats endpoint named verbatim in the app chunk answered the open/absent question in one FETCH (FINISHED 301, RUNNING 1; CREATED absent, not explicit zero) where two HTML fetches could not, because the active list loads client-side. Failed: earlier turns spent fetches on server HTML that only hydrates the all-contests page. Next time, for SPA directories, read the referenced chunk for its API calls first. The count does not identify the contest or show that settlement is feasible. Before identifying the contest, gate on the settlement, KYC and AI rules, since those can rule out the whole channel cheaply."
+    },
+    "description": "Broker action during THINK-1794434761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443476112",
+  "input_sha256": "1a239bd533b471b0fb6113863793f85f3ab00292930a0ec6e961d4221aac4fd3"
+}
