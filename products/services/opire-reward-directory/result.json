@@ -1,0 +1,64 @@
+{
+ "mission": "OPIRE-OFFICIAL-REWARD-DIRECTORY",
+ "observed_utc": "2026-11-11",
+ "verdict": "STOP_ROUTE_BOUNDED_REJECTION",
+ "patch_prepared": false,
+ "fetch_budget": {
+  "allowed": 3,
+  "used": 3,
+  "tasks": [
+   "TASK-179442900501 (app.opire.dev/home)",
+   "TASK-179442936113 (bugb#1)",
+   "TASK-179442936115 (rencfs#3)"
+  ]
+ },
+ "directory": {
+  "url": "https://app.opire.dev/home",
+  "sha256": "1edb0e930542af0f083953a89392ca3fba3a2c447dd72a4d44246eca5d53c19d",
+  "access": "readable without login (server-rendered initialRewards)",
+  "observed_counters": "Rewards Paid 44, Available 6, Paid out $4,975.87, Open value $212.00",
+  "initial_rewards_rendered": 3,
+  "unrendered": "3 of 6 available rewards (~$50 combined by subtraction) not in initial HTML; not pursued (no endpoint guessing)"
+ },
+ "candidates": [
+  {
+   "url": "https://github.com/rodrigompy/bugb/issues/1",
+   "listed": "c1work, pendingPrice 10000 USD_CENT, createdAt 2026-05-31, isBotInstalled false",
+   "source_sha256": "4429a0ba736f48199d3adcbb9f24fe03b03e804c996a6f381350c0b453f8671a",
+   "observed": "state closed, locked true, empty body, assigned to owner rodrigompy, 1 comment, updated 2026-05-31",
+   "verdict": "REJECT",
+   "reasons": [
+    "closed and locked",
+    "no acceptance criteria (empty body)",
+    "self-assigned by owner",
+    "directory lists a stale reward"
+   ]
+  },
+  {
+   "url": "https://github.com/radumarias/rencfs/issues/3",
+   "listed": "research implementation for Windows, pendingPrice 4200 USD_CENT, Rust, createdAt 2024-07-30, isBotInstalled false",
+   "source_sha256": "8403f4089c516933369c98c5b37929f1bbd371e1611813f0ced5298551ce6052",
+   "observed": "API resolves number 3 to an open PR (html_url .../pull/3) by a non-member, created 2026-05-12, 101 comments, body states AI-assisted contribution (QuarkAssistant, GPT/Codex) of a Windows research note",
+   "verdict": "REJECT",
+   "reasons": [
+    "an AI-assisted competing submission for the same reward already exists with 101 comments",
+    "listing/issue identity inconsistent (2024 listing vs 2026 PR at same number)",
+    "Windows/WinFsp runtime cannot be verified offline",
+    "bot not installed: claim/settlement route unverified"
+   ]
+  },
+  {
+   "url": "https://github.com/flowese/UdioWrapper/issues/7",
+   "listed": "500 Server Error - Auto Solve hcapcha, $20, 29 claimers",
+   "verdict": "EXCLUDED_WITHOUT_FETCH",
+   "reasons": [
+    "CAPTCHA solving is prohibited by legal-guardrails",
+    "29 claimers"
+   ]
+  }
+ ],
+ "conclusion": "Official Opire directory is publicly readable but its visible open value is small ($212 total) and the three rendered rewards are stale, already contested, or prohibited. No task fits; this Opire route is stopped.",
+ "reconsider_if": "A new Opire reward >= USD 50 appears on an upstream repo with bot installed, open issue with explicit acceptance criteria, <3 trying users, and a founder-approved GitHub identity exists for submission.",
+ "not_established": "No funds, payout eligibility, demand or revenue. Advertised rewards are not verified funds.",
+ "actions_not_taken": "No contact, /try, claim, submission, account, agreement, spending or deployment."
+}
