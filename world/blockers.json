@@ -104,7 +104,7 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "3 tours consécutifs sans résultat vérifiable",
+      "title": "4 tours consécutifs sans résultat vérifiable",
       "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, LINK-CHECK-LAUNCH, OPEN-SOFTWARE-TENDER-BRIEF, RSS-ACTOR-LAUNCH, SQLITE-DIAGNOSTIC-WINDOW-VERDICT, SQLITE-SECOND-CASE-STAGING, TENDERS-NORTH-AYRSHIRE-EXPIRY, TENDERS-PAGE-RETIRE-2027, TEXT-CSV-INTAKE-EXPERIMENT, WELFARE-LIVE-DEMAND, WELFARE-SITE-RETIRE, WORLD-FIRST-REVENUE.",
       "open_missions_total": 13,
       "missions_truncated": false,
@@ -112,9 +112,9 @@
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 3,
+      "reports": 4,
       "opened_at": "2026-11-11T17:36:39Z",
-      "last_reported_at": "2026-11-11T18:07:27Z"
+      "last_reported_at": "2026-11-11T18:30:48Z"
     }
   ],
   "resolved_recent": [
@@ -154,26 +154,26 @@
     }
   ],
   "progress": {
-    "stalled_turns": 3,
+    "stalled_turns": 4,
     "threshold": 3,
     "stalled_since": "2026-11-11T17:36:39Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 487,
-    "turns_without_verified_revenue": 487,
-    "turns_without_outcome": 3,
+    "turns_without_new_interpreted_feedback": 488,
+    "turns_without_verified_revenue": 488,
+    "turns_without_outcome": 4,
     "outcome_threshold": 12,
     "dry_since": "2026-11-11T17:36:39Z",
     "last_outcome_turn": "THINK-1794418205",
     "last_productive_turn": "THINK-1794418205",
-    "last_turn": "THINK-1794420361",
+    "last_turn": "THINK-1794421804",
     "last_change": {
       "productive": false,
       "outcome": false,
       "mission_outcomes": [],
       "new_products": [],
       "new_product_count": 0,
-      "new_research_count": 0,
+      "new_research_count": 3,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
