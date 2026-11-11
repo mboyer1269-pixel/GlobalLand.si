@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"reviewer\": \"AUDITOR\", \"subject\": \"site:software-award-brief\", \"digest\": \"e86458dd921b61442eedc10d6b733ab8b487e08e33f86fd5c8940ec116952341\", \"verdict\": \"APPROVE\", \"notes\": \"Blocker: none for scoped referral correction. Independently read candidate homepage, exact diff and full verified destination. Executed and read products/reviews/award-link-correction-independent.json: 12 checks pass, two changed lines reverse to original homepage hash, destination hash matches verified live receipt, count/revalidation/individual expiry/final retirement wording match EN/FR. Intake and AI disclosure preserved. Reproduced exact dry_run TASK-179441280214. Nit: other site files are covered by exact host digest, not independently compared with historical hashes. No public files edited. Approval establishes neither exposure, demand nor revenue. Release only in a later eligible provider turn through host gate; verify live hash before superseding November 18 link-removal duty.\", \"host_turn\": \"THINK-1794412802\", \"host_provider\": \"codex\", \"at\": 1794412891.456721, \"seq\": 41}",
+  "request": {
+    "id": "TASK-179441280215",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-11T16:00:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "review",
+      "reviewer": "AUDITOR",
+      "subject": "site:software-award-brief",
+      "digest": "e86458dd921b61442eedc10d6b733ab8b487e08e33f86fd5c8940ec116952341",
+      "verdict": "APPROVE",
+      "notes": "Blocker: none for scoped referral correction. Independently read candidate homepage, exact diff and full verified destination. Executed and read products/reviews/award-link-correction-independent.json: 12 checks pass, two changed lines reverse to original homepage hash, destination hash matches verified live receipt, count/revalidation/individual expiry/final retirement wording match EN/FR. Intake and AI disclosure preserved. Reproduced exact dry_run TASK-179441280214. Nit: other site files are covered by exact host digest, not independently compared with historical hashes. No public files edited. Approval establishes neither exposure, demand nor revenue. Release only in a later eligible provider turn through host gate; verify live hash before superseding November 18 link-removal duty."
+    },
+    "description": "Broker action during THINK-1794412802",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179441280215",
+  "input_sha256": "00d94adea3eeadd61a5286e64e208d3dd4379a4c5008b9641f2393352d194d34"
+}
