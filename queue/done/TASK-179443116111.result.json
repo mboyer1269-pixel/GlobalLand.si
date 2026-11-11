@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "31 $135,000 in USDC\n42 $40,000 in USDC\n53 $22,000 in USDC\n64 $4,000 in USDC\n74 $101,000 in USDC\n83 $12,000 in USDC\n92 $12,000 in USDC\n102 $65,000 in USDC\n112 $17,500 in USDC\n122 $105,500 in USDC\n133 $6,000 in USDC (all rounds)\n144 $6,000 in USDC\n154 $107,000 in USDC\n164 $62,000 in USDC\n174 $56,000 in USDC\n184 $23,000 in USDC\n194 $40,000 in USDC\n204 $18,000 in USDC\n216 $37,500 in USDC\n226 $183,500 in USDC\n236 $100,000 in USDC\n246 $18,500 in USDC\n256 $5,000 in USDC (all rounds)\n267 $5,000 in USDC\n271 The Internet's jackpot with $200M+ in drawings.\n277 $30,000 in USDC\n287 $20,000 in USDC\n298 $11,000 in USDC\n308 $100,000 in USDC\n318 $43,000 in USDC\n328 $73,000 in USDC\n339 $33,000 in USDC\n349 $103,000 in USDC\n360 $500,000 in USDC\n370 $112,500 in USDC\n380 $103,250 in USDC\n390 $104,500 in USDC\n401 $203,500 in USDC\n411 $190,000 in USDC\n421 $20,000 in USDC\n431 $63,250 in USDC\n441 $103,500 in USDC\n451 $18,000 in USDC\n462 $4,250 in USDC\n466 A community engagement and rewards program designed to incentivize active participation in the Chainlink Network\n472 $200,000 in USDC\n483 $28,000 in USDC\n493 $13,000 in USDC\n504 $8,000 in USDC\n514 $23,000 in USDC\n524 $60,000 in USDT\n535 $20,000 in USDC\nSLUGS 50 ['2025-04-blend-v2-mitigation-review', '2025-04-cabal-liquid-staking-token', '2025-04-virtuals-protocol', '2025-05-blackhole', '2025-05-silo-finance-mitigation-review', '2025-05-upside', '2025-06-blackhole-mitigation-review', '2025-06-chainlink-rewards', '2025-06-panoptic-hypovault', '2025-07-gte-spot-clob-and-router', '2025-07-lido-finance', '2025-08-flare-fasset', '2025-08-gte-perps-and-launchpad', '2025-08-meteora-dynamic-bonding-curve', '2025-08-morpheus', '2025-08-solana-foundation', '2025-09-layerzero-endpoint-v2-sui', '2025-09-monad', '2025-09-succinct', '2025-10-covenant', '2025-10-flare-fasset-mitigation-review', '2025-10-hybra-finance', '2025-10-layerzero-starknet-endpoint', '2025-10-reflector-v3', '2025-10-sequence', '2025-11-brix-money', '2025-11-ekubo', '2025-11-garden', '2025-11-hybra-finance-mitigation-review', '2025-11-hybra-finance-mitigation-review-round-2', '2025-11-megapot', '2025-11-merkl', '2025-11-sequence-transaction-rails', '2025-11-sukukfi', '2025-11-swafe', '2025-12-panoptic-next-core', '2025-12-rujira', '2026-01-olas', '2026-02-injective-peggy-bridge', '2026-02-jupiter-lend']\n['Judging', 'Reporting', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Judging', 'Reporting', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed']\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179443116111.json"
+  ],
+  "request": {
+    "id": "TASK-179443116111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T21:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,json,pathlib,html\np='products/research/paid-review-contests/official-directory.html'\nt=pathlib.Path(p).read_text()\ntxt=re.sub(r'<script[^>]*>.*?</script>',' ',t,flags=re.S)\ntxt=html.unescape(re.sub(r'<[^>]+>','\\n',txt))\nlines=[l.strip() for l in txt.split('\\n') if l.strip()]\nfor i,l in enumerate(lines):\n  if re.search(r'(?i)active|upcoming|ends in|starts|\\$[0-9]|USDC|ongoing',l): print(i,l[:160])\nslugs=sorted(set(re.findall(r'/audits/([0-9]{4}-[0-9]{2}-[a-z0-9-]+)',t)))\nprint('SLUGS',len(slugs),slugs[:40])\nfor m in re.finditer(r'(?i)(status|startTime|endTime|start_time|end_time|amount)\\\\?\"\\s*:\\s*\\\\?\"?([^,\\\\\"]{1,60})',t):\n  pass\nprint(re.findall(r'(?i)\\\\\"status\\\\\":\\\\\"([^\\\\]+)',t)[:60])\n"
+      ],
+      "inputs": [
+        "products/research/paid-review-contests/official-directory.html"
+      ],
+      "outputs": [],
+      "mission_id": "AUTHORIZED-PAID-REVIEW-CONTEST"
+    },
+    "description": "Broker action during THINK-1794431161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443116111",
+  "input_sha256": "1ae88bcdb4bdbc25fe0d85124e998f48a26ee21faf46d7f0cfd7473a1d933200"
+}
