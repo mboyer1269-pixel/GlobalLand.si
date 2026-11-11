@@ -142,20 +142,22 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 489,
-    "turns_without_verified_revenue": 489,
-    "turns_without_outcome": 5,
+    "turns_without_new_interpreted_feedback": 490,
+    "turns_without_verified_revenue": 490,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-11T17:36:39Z",
-    "last_outcome_turn": "THINK-1794418205",
-    "last_productive_turn": "THINK-1794422161",
-    "last_turn": "THINK-1794422161",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794423605",
+    "last_productive_turn": "THINK-1794423605",
+    "last_turn": "THINK-1794423605",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
+      "outcome": true,
+      "mission_outcomes": [
+        "REPUTABLE-REWARD-ISSUE-TEST"
+      ],
       "new_products": [
-        "products/services/reputable-reward-issue/reward-search.json"
+        "products/services/reputable-reward-issue/result.json"
       ],
       "new_product_count": 1,
       "new_research_count": 0,
