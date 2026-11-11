@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "html_url https://github.com/radumarias/rencfs/pull/3\ntitle docs: add Windows support implementation research\nstate open\ncreated_at 2026-05-12T11:17:02Z\nupdated_at 2026-11-11T18:55:34Z\nclosed_at None\ncomments 101\nauthor_association NONE\nlocked False\nassignee None []\nlabels []\nBODY ## Description\n\nAdds a detailed Windows support research note for the native implementation path.\n\nThis is intentionally framed as research, not a claim that rencfs mounts on Windows today. It documents:\n\n- recommended WinFsp backend and alternatives considered;\n- WinFsp licensing/attribution checkpoint for an `MIT OR Apache-2.0` project;\n- Windows-only dependency and delay-load build shape;\n- proposed `src/mount/windows.rs` architecture around the existing `EncryptedFs` layer;\n- operation mapping from WinFsp callbacks to rencfs methods;\n- Windows metadata decisions and unsupported NTFS features for the first milestone;\n- build/CI plan and a manual smoke test for a Windows host with WinFsp installed;\n- acceptance criteria for a truthful first implementation PR.\n\nRelated to the Windows support bounty/research request (`research implementation for Windows`, Opire listing for #3).\n\n---\n\n## Type of change\n\n- [ ] Bug fix (non-breaking change which fixes an issue)\n- [ ] New feature (non-breaking change which adds functionality)\n- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)\n- [x] Documentation update\n\n---\n\n## Checklist:\n\n- [x] I have performed a self-review of my code\n- [ ] I have tested my code on different platforms (if applicable)\n- [x] I have commented my code, particularly in hard-to-understand areas\n- [x] I have added necessary documentation (if appropriate)\n- [x] My changes generate no new warnings\n- [ ] I have added tests that prove my fix is effective or that my feature works\n- [x] New and existing unit tests pass locally with my changes\n\n---\n\n## Verification\n\n- `cargo check` passes locally on macOS/aarch64.\n- I did not install Windows or claim Windows runtime validation. The PR adds a Windows smoke-test checklist for the next implementation step.\n\n---\n\n## AI disclosure\n\nAI-assisted contribution by QuarkAssistant using GPT/Codex tooling. Human-authored repository context and public documentation were reviewe\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179442936116.json"
+  ],
+  "request": {
+    "id": "TASK-179442936116",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T20:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nd=json.load(open('products/services/opire-reward-directory/raw/rencfs-issue-3.json'))\nfor k in ['html_url','title','state','created_at','updated_at','closed_at','comments','author_association','locked']:\n  print(k,d.get(k))\nprint('assignee',(d.get('assignee') or {}).get('login'), [a['login'] for a in d.get('assignees',[])])\nprint('labels',[l['name'] for l in d.get('labels',[])])\nprint('BODY',(d.get('body') or '')[:2000])\n"
+      ],
+      "inputs": [
+        "products/services/opire-reward-directory/raw/rencfs-issue-3.json"
+      ],
+      "outputs": [],
+      "mission_id": "OPIRE-OFFICIAL-REWARD-DIRECTORY"
+    },
+    "description": "Broker action during THINK-1794429361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179442936116",
+  "input_sha256": "a0c5f4a10f00d14a8592260af88377ac7fb41d555cdbff89cc5b00b222d7f473"
+}
