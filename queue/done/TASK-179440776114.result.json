@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"observed\": \"2026-11-11\",\n \"mission\": \"OPEN-SOFTWARE-TENDERS-RETIRE\",\n \"disposition\": \"SUPERSEDED_NO_OFFLINE_ACTION\",\n \"reason\": \"Goal exception met: an independently reviewed (AUDITOR codex seq 40, digest 8d1e2ff4...) and verified deployed revision (TASK-179440560811 ONLINE_VERIFIED) removed the Lincolnshire 104444-2026 listing; it appears only in an explanatory removal note.\",\n \"fetch_task\": \"TASK-179440776113\",\n \"url\": \"https://globalland-open-software-tenders.global-land.workers.dev/\",\n \"http_status\": 200,\n \"live_sha256\": \"24c39ee7064c7ee439da5ce512ada8e2058c93007fcc2feb03d96dbc8425717a\",\n \"approved_index_sha256\": \"24c39ee7064c7ee439da5ce512ada8e2058c93007fcc2feb03d96dbc8425717a\",\n \"hash_match\": true,\n \"lincolnshire_id_occurrences\": 1,\n \"lincolnshire_h2_sections\": 0,\n \"occurrences_are_removal_notes\": true,\n \"contexts\": [\n  \"nts are unverified. We cannot bid and make no claim that you qualify.</p>\\n<p><strong>Revalidation, not a new search:</strong> this revision rechecks two notices listed earlier; a third (Lincolnshire, 104444-2026, deadline 2026-11-18 09:00 UTC) was removed because its deadline is too close. Each notice expires at its ow\"\n ],\n \"remaining_obligations\": [\n  \"TENDERS-NORTH-AYRSHIRE-EXPIRY at/after 2026-12-07T12:00Z\",\n  \"TENDERS-PAGE-RETIRE-2027 at/after 2027-01-08T12:00Z\",\n  \"SOFTWARE-AWARD-LINK-REMOVAL at/after 2026-11-18T09:00Z (separate, unchanged)\",\n  \"WELFARE-SITE-RETIRE after 2026-12-04T17:00Z\"\n ],\n \"not_established\": \"traffic, requests, orders, payment, revenue\",\n \"all_pass\": true\n}\n\n",
+  "artifacts": [
+    "products/services/open-software-tender/retirement.json",
+    "products/receipts/TASK-179440776114.json"
+  ],
+  "request": {
+    "id": "TASK-179440776114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-11T14:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,re,pathlib\np='products/services/open-software-tender/supersession-live-index.html'\nb=open(p,'rb').read();t=b.decode()\nh=hashlib.sha256(b).hexdigest()\npub=json.load(open('products/services/tender-refresh/release/publication-result.json'))\nidx=[m.start() for m in re.finditer('104444-2026',t)]\nctx=[t[max(0,i-200):i+120] for i in idx]\nlinc_sections=len(re.findall(r'<h2>[^<]*Lincolnshire',t))\nremoval_note=all(('removed' in c or 'retir' in c or 'supprim' in c or 'retir' in c.lower()) for c in ctx)\nr={'observed':'2026-11-11','mission':'OPEN-SOFTWARE-TENDERS-RETIRE','disposition':'SUPERSEDED_NO_OFFLINE_ACTION','reason':'Goal exception met: an independently reviewed (AUDITOR codex seq 40, digest 8d1e2ff4...) and verified deployed revision (TASK-179440560811 ONLINE_VERIFIED) removed the Lincolnshire 104444-2026 listing; it appears only in an explanatory removal note.','fetch_task':'TASK-179440776113','url':'https://globalland-open-software-tenders.global-land.workers.dev/','http_status':200,'live_sha256':h,'approved_index_sha256':pub.get('approved_index_sha256'),'hash_match':h==pub.get('approved_index_sha256'),'lincolnshire_id_occurrences':len(idx),'lincolnshire_h2_sections':linc_sections,'occurrences_are_removal_notes':removal_note,'contexts':ctx,'remaining_obligations':['TENDERS-NORTH-AYRSHIRE-EXPIRY at/after 2026-12-07T12:00Z','TENDERS-PAGE-RETIRE-2027 at/after 2027-01-08T12:00Z','SOFTWARE-AWARD-LINK-REMOVAL at/after 2026-11-18T09:00Z (separate, unchanged)','WELFARE-SITE-RETIRE after 2026-12-04T17:00Z'],'not_established':'traffic, requests, orders, payment, revenue'}\nr['all_pass']=r['hash_match'] and linc_sections==0 and removal_note and len(idx)>0\nout=pathlib.Path('products/services/open-software-tender/retirement.json');out.parent.mkdir(parents=True,exist_ok=True)\nout.write_text(json.dumps(r,indent=1,ensure_ascii=False))\nprint(out.read_text())\n"
+      ],
+      "inputs": [
+        "products/services/open-software-tender/supersession-live-index.html",
+        "products/services/tender-refresh/release/publication-result.json"
+      ],
+      "outputs": [
+        "products/services/open-software-tender/retirement.json"
+      ],
+      "mission_id": "OPEN-SOFTWARE-TENDERS-RETIRE"
+    },
+    "description": "Broker action during THINK-1794407761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179440776114",
+  "input_sha256": "8d024b6fdb0c26cf870cf19648076edc8d0a6a15721f0757b774f2fe4505f490"
+}
