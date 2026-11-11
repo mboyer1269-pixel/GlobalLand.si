@@ -1,0 +1,99 @@
+{
+ "mission": "OPIRE-SPECIFIC-PAID-REPAIR",
+ "observed_utc": "2026-11-11",
+ "verdict": "STOP_BOUNDED_REJECTION",
+ "patch_prepared": false,
+ "fetch_budget": {
+  "allowed": 4,
+  "used": 2,
+  "tasks": [
+   "TASK-179442396112",
+   "TASK-179442396114"
+  ]
+ },
+ "tasks_deep_inspected": 1,
+ "step1_saved_homepage": {
+  "path": "products/services/ai-agent-paid-tasks/raw/opire-home.html",
+  "sha256": "f195425c4e1d97d8a2267f0937930e3a048c5b462dd713356ee22796f2ecf5bd",
+  "extract": "products/services/opire-specific-repair/home-links.json (TASK-179442396111)",
+  "finding": "No live bounty/task listing in saved page; only two testimonial issue-comment links (oxc-project/oxc#611, strapi/strapi#11998), not open reward tasks."
+ },
+ "step2_search": {
+  "url": "https://api.github.com/search/issues?q=is:issue is:open no:assignee commenter:app/opirebot&sort=updated&per_page=15",
+  "sha256": "6fe8818a7e7bad3b25fc1cc81e16c10266e469e246e2a04aeabea799535c19bf",
+  "total_count": 120,
+  "screened": 15,
+  "screen_summary": [
+   {
+    "group": "LiliannaBruflat83/chi#1, Kristywvs22/gin#1, rasoolharlym8/CockroachDB#3, EstefanyLonsway6/traefik#1",
+    "observed": "labels bounty/opire/$10, identical emoji template, owner accounts with name+digits hosting copies of well-known upstream projects (chi, gin, traefik, cockroach), 6-9 comments",
+    "verdict": "REJECT",
+    "reasons": [
+     "forks/copies masquerading as upstream; sponsor not the upstream maintainer",
+     "$10 label is below the $20 minimum stated on Opire homepage (Bounties start at $20 USD.), so the reward amount is unverified",
+     "label-farm pattern consistent with prior L222 observations"
+    ]
+   },
+   {
+    "group": "Ikalus1988/MisakaNet #1753,#4462,#4465,#4571,#4642,#3726,#4487",
+    "observed": "zero-bounty / status:competition / question-answer bounties, 3-39 comments",
+    "verdict": "REJECT",
+    "reasons": [
+     "$0 or unspecified reward",
+     "competition format",
+     "Q&A, not a bounded repair"
+    ]
+   },
+   {
+    "group": "WholeTroutMedia/oss-verification-sandbox#17",
+    "verdict": "REJECT",
+    "reasons": [
+     "release notice, no task"
+    ]
+   },
+   {
+    "group": "odonckers/redline#32",
+    "verdict": "REJECT",
+    "reasons": [
+     "requires owner code-signing certificates and secrets; not doable by a third party"
+    ]
+   },
+   {
+    "group": "probe-rs/probe-rs#4637",
+    "verdict": "REJECT",
+    "reasons": [
+     "STM32G4 hardware reproduction required; no reward observed in search body"
+    ]
+   }
+  ]
+ },
+ "step3_inspected": {
+  "url": "https://github.com/slick/slick/issues/3945",
+  "comments_source": "https://api.github.com/repos/slick/slick/issues/3945/comments",
+  "sha256": "450c1fd4520f18983ad4f47796bda0c71788186736823f01d76bea7e63c5a96e",
+  "quotes": [
+   "opirebot[bot] 2026-11-09: Ups... this issue does not have any reward yet!",
+   "reporter ajozwik 2026-11-09: PR linked /try"
+  ],
+  "verdict": "REJECT",
+  "reasons": [
+   "no reward attached",
+   "reporter has already linked a PR and declared /try"
+  ]
+ },
+ "observed_facts": [
+  "Opire bot is active on genuine upstream repos (slick, probe-rs) but its presence does not imply a funded reward",
+  "All $-labelled Opire issues in this sample were on copy repos with $10 labels"
+ ],
+ "not_established": [
+  "Absence of genuine funded Opire bounties elsewhere (sample of 15 sorted by updated)",
+  "Opire fees/settlement details (docs FAQ unread)",
+  "Any funding, eligibility or revenue"
+ ],
+ "dependent_operations_blocked": [
+  "patch preparation",
+  "any submission (also needs founder-approved GitHub identity: BOUNTY-SUBMISSION-ELIGIBILITY)"
+ ],
+ "reconsideration_trigger": "A specific upstream-maintainer-funded Opire reward >= USD 20 with <5 attempts is observed, AND a founder-approved AI-disclosed GitHub identity exists.",
+ "actions_not_taken": "No contact, /try, claim, submission, account, agreement, spending or deployment."
+}
