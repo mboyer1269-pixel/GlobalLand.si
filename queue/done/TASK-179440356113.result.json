@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"observed_at\": \"2026-11-11T13:27:08.430585+00:00\",\n  \"checks\": {\n    \"105838-2026_hash\": true,\n    \"105838-2026_deadline_active\": true,\n    \"105838-2026_buyer_route\": true,\n    \"105838-2026_value_absent\": true,\n    \"105246-2026_hash\": true,\n    \"105246-2026_deadline_active\": true,\n    \"105246-2026_buyer_route\": true,\n    \"105246-2026_value_absent\": true,\n    \"quote_0\": true,\n    \"quote_1\": true,\n    \"quote_2\": true,\n    \"quote_3\": true,\n    \"unchanged_iwms-checklist.html\": true,\n    \"unchanged_5e2c8a91f4b7036d9a1e7c4b28f0d653.txt\": true,\n    \"intake_unchanged\": true,\n    \"no_third_listing\": true,\n    \"expiry\": true\n  },\n  \"all_pass\": true,\n  \"index_sha256\": \"24c39ee7064c7ee439da5ce512ada8e2058c93007fcc2feb03d96dbc8425717a\",\n  \"manual_review\": \"Read page EN/FR, llms, diff, checklist and extracted source fields. 40/60, CPVs, duration, open procedure, framework and conditional suitability match. Checklist remains accurate and historically dated. Lincolnshire exists only in explanatory removal note. Disclosures and interest-only scope preserved. Expiry is operational, not automated.\",\n  \"limitations\": \"No exposure, demand or revenue established. Private feedback coverage unknown.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/tender-refresh-independent.json",
+    "products/receipts/TASK-179440356113.json"
+  ],
+  "request": {
+    "id": "TASK-179440356113",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-11T13:26:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,re,hashlib,datetime\nb=pathlib.Path('products/services/tender-refresh'); s=pathlib.Path('products/sites/open-software-tenders')\nidx=(s/'index.html').read_text(); old=(b/'baseline-index.html').read_text(); exp=json.loads((b/'checks.json').read_text()); c={}; sources=[]\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nfor id,date in [('105838-2026','2027-01-08T12:00:00Z'),('105246-2026','2026-12-07T12:00:00Z')]:\n p=b/'raw'/(id+'.json'); r=json.loads(p.read_text())['releases'][0]; t=r['tender']; sources.append(json.dumps(r,ensure_ascii=False))\n c[id+'_hash']=sha(p)==exp['raw_sha256'][id]\n c[id+'_deadline_active']=t['status']=='active' and t['tenderPeriod']['endDate']==date\n c[id+'_buyer_route']=r['buyer']['name'] in idx and t['submissionMethodDetails'] in idx\n c[id+'_value_absent']='\"value\"' not in json.dumps(r)\nfor i,q in enumerate(re.findall('\"([^\"]+)\"',re.sub('<[^>]*>','',idx))): c['quote_'+str(i)]=any(q in x for x in sources)\nfor n,h in exp['other_files'].items(): c['unchanged_'+n]=sha(s/n)==h\nc['intake_unchanged']=re.findall('mailto:[^\"]+',idx)==re.findall('mailto:[^\"]+',old)\nc['no_third_listing']='<h2>3.' not in idx and '104444' not in (s/'llms.txt').read_text()\nc['expiry']=all(x in idx for x in ['This listing expires at 2026-12-07 12:00 UTC','This listing expires at 2027-01-08 12:00 UTC','Revalidation, not a new search'])\no={'observed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'checks':c,'all_pass':all(c.values()),'index_sha256':sha(s/'index.html'),'manual_review':'Read page EN/FR, llms, diff, checklist and extracted source fields. 40/60, CPVs, duration, open procedure, framework and conditional suitability match. Checklist remains accurate and historically dated. Lincolnshire exists only in explanatory removal note. Disclosures and interest-only scope preserved. Expiry is operational, not automated.','limitations':'No exposure, demand or revenue established. Private feedback coverage unknown.'}\np=pathlib.Path('products/reviews/tender-refresh-independent.json'); p.parent.mkdir(parents=True,exist_ok=True); p.write_text(json.dumps(o,indent=2)); print(p.read_text())"
+      ],
+      "inputs": [
+        "products/sites/open-software-tenders/",
+        "products/services/tender-refresh/"
+      ],
+      "outputs": [
+        "products/reviews/tender-refresh-independent.json"
+      ],
+      "mission_id": "OPEN-TENDERS-REFRESH-REVIEW"
+    },
+    "description": "Broker action during THINK-1794403561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179440356113",
+  "input_sha256": "7c2afc5004947fb4759949a380b0de956caadf5764613f70aa1d7a7e9ae955e1"
+}
