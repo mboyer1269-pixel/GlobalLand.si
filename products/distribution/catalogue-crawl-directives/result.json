@@ -1,0 +1,30 @@
+{
+  "mission": "CATALOGUE-CRAWL-DIRECTIVE-TEST",
+  "checked_at": "2026-11-11T08:30:58.492780+00:00",
+  "fetch_receipts": [
+    "TASK-179438436100",
+    "TASK-179438436101"
+  ],
+  "urls": [
+    "https://globalland-shopify-catalogue-example.global-land.workers.dev/",
+    "https://globalland-shopify-catalogue-example.global-land.workers.dev/robots.txt"
+  ],
+  "hashes": {
+    "live_homepage": "a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4",
+    "live_robots": "8fa3036c68bfcbd32365f6225d24333264093b7cd38d306e106b4dbdc934fd5b",
+    "source_homepage": "a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4"
+  },
+  "live_equals_source": true,
+  "live_robots_meta": [],
+  "live_canonical": [],
+  "source_robots_meta": [],
+  "source_canonical": [],
+  "robots_active_lines": [],
+  "observed_fact": "Both saved FETCH receipts report HTTP 200. Homepage matches current source. robots.txt is comment-only content-signal explanation, not homepage fallback; it contains no active User-agent, Disallow or content-signal directives. No crawler meta or canonical directives found. Response headers unavailable.",
+  "verdict": "REJECT_BODY_LEVEL_RESTRICTION_HYPOTHESIS",
+  "dependent_operations": "No source correction justified. HTTP-header inspection and trustworthy indexing measurement require capabilities not established by these body-only receipts. Existing operator-approved distribution and private inbound delivery remain separate paths.",
+  "strategic_conclusion": "Stop crawl-directive investigation; these bodies provide no evidence of a crawl prohibition. Crawl permission does not establish indexing, exposure or demand. No domain purchase or page optimization justified by this test.",
+  "reconsideration_trigger": "A verified restrictive response header, changed active robots directive, trusted webmaster observation, classified buyer request or authorized distribution becomes available.",
+  "commercial_feedback": "AVAILABLE but unverified interpretations; 0 classified and 5 unclassified sources imply unknown demand, not zero. No traffic, orders or revenue established.",
+  "deadlines": "Preserve tender retirement/award-link removal at or after 2026-11-18T09:00Z; CSV Nov19 01:30:37Z; Shopify Nov19 21:30:49Z; welfare Nov20; award Nov21 05:00:35Z; SQLite Nov22; welfare retirement after Dec4 17:00Z."
+}

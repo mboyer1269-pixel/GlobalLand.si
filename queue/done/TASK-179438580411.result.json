@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"mission\": \"CATALOGUE-CRAWL-DIRECTIVE-TEST\",\n  \"checked_at\": \"2026-11-11T08:30:58.492780+00:00\",\n  \"fetch_receipts\": [\n    \"TASK-179438436100\",\n    \"TASK-179438436101\"\n  ],\n  \"urls\": [\n    \"https://globalland-shopify-catalogue-example.global-land.workers.dev/\",\n    \"https://globalland-shopify-catalogue-example.global-land.workers.dev/robots.txt\"\n  ],\n  \"hashes\": {\n    \"live_homepage\": \"a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4\",\n    \"live_robots\": \"8fa3036c68bfcbd32365f6225d24333264093b7cd38d306e106b4dbdc934fd5b\",\n    \"source_homepage\": \"a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4\"\n  },\n  \"live_equals_source\": true,\n  \"live_robots_meta\": [],\n  \"live_canonical\": [],\n  \"source_robots_meta\": [],\n  \"source_canonical\": [],\n  \"robots_active_lines\": [],\n  \"observed_fact\": \"Both saved FETCH receipts report HTTP 200. Homepage matches current source. robots.txt is comment-only content-signal explanation, not homepage fallback; it contains no active User-agent, Disallow or content-signal directives. No crawler meta or canonical directives found. Response headers unavailable.\",\n  \"verdict\": \"REJECT_BODY_LEVEL_RESTRICTION_HYPOTHESIS\",\n  \"dependent_operations\": \"No source correction justified. HTTP-header inspection and trustworthy indexing measurement require capabilities not established by these body-only receipts. Existing operator-approved distribution and private inbound delivery remain separate paths.\",\n  \"strategic_conclusion\": \"Stop crawl-directive investigation; these bodies provide no evidence of a crawl prohibition. Crawl permission does not establish indexing, exposure or demand. No domain purchase or page optimization justified by this test.\",\n  \"reconsideration_trigger\": \"A verified restrictive response header, changed active robots directive, trusted webmaster observation, classified buyer request or authorized distribution becomes available.\",\n  \"commercial_feedback\": \"AVAILABLE but unverified interpretations; 0 classified and 5 unclassified sources imply unknown demand, not zero. No traffic, orders or revenue established.\",\n  \"deadlines\": \"Preserve tender retirement/award-link removal at or after 2026-11-18T09:00Z; CSV Nov19 01:30:37Z; Shopify Nov19 21:30:49Z; welfare Nov20; award Nov21 05:00:35Z; SQLite Nov22; welfare retirement after Dec4 17:00Z.\"\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-crawl-directives/result.json",
+    "products/receipts/TASK-179438580411.json"
+  ],
+  "request": {
+    "id": "TASK-179438580411",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-11T08:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,hashlib,datetime\nfrom html.parser import HTMLParser\nbase=pathlib.Path('products/distribution/catalogue-crawl-directives'); live=(base/'live-homepage.html').read_bytes(); robots=(base/'live-robots.txt').read_bytes(); source=pathlib.Path('products/sites/shopify-catalogue-example/index.html').read_bytes()\nclass P(HTMLParser):\n def __init__(self): super().__init__(); self.meta=[]; self.canonical=[]\n def handle_starttag(self,t,a):\n  d=dict(a)\n  if t=='meta' and d.get('name','').lower() in ['robots','googlebot','bingbot']: self.meta.append(d)\n  if t=='link' and 'canonical' in d.get('rel','').lower().split(): self.canonical.append(d)\np=P();p.feed(live.decode());q=P();q.feed(source.decode()); active=[x.strip() for x in robots.decode().splitlines() if x.strip() and not x.lstrip().startswith('#')]\nr={'mission':'CATALOGUE-CRAWL-DIRECTIVE-TEST','checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'fetch_receipts':['TASK-179438436100','TASK-179438436101'],'urls':['https://globalland-shopify-catalogue-example.global-land.workers.dev/','https://globalland-shopify-catalogue-example.global-land.workers.dev/robots.txt'],'hashes':{'live_homepage':hashlib.sha256(live).hexdigest(),'live_robots':hashlib.sha256(robots).hexdigest(),'source_homepage':hashlib.sha256(source).hexdigest()},'live_equals_source':live==source,'live_robots_meta':p.meta,'live_canonical':p.canonical,'source_robots_meta':q.meta,'source_canonical':q.canonical,'robots_active_lines':active,'observed_fact':'Both saved FETCH receipts report HTTP 200. Homepage matches current source. robots.txt is comment-only content-signal explanation, not homepage fallback; it contains no active User-agent, Disallow or content-signal directives. No crawler meta or canonical directives found. Response headers unavailable.','verdict':'REJECT_BODY_LEVEL_RESTRICTION_HYPOTHESIS','dependent_operations':'No source correction justified. HTTP-header inspection and trustworthy indexing measurement require capabilities not established by these body-only receipts. Existing operator-approved distribution and private inbound delivery remain separate paths.','strategic_conclusion':'Stop crawl-directive investigation; these bodies provide no evidence of a crawl prohibition. Crawl permission does not establish indexing, exposure or demand. No domain purchase or page optimization justified by this test.','reconsideration_trigger':'A verified restrictive response header, changed active robots directive, trusted webmaster observation, classified buyer request or authorized distribution becomes available.','commercial_feedback':'AVAILABLE but unverified interpretations; 0 classified and 5 unclassified sources imply unknown demand, not zero. No traffic, orders or revenue established.','deadlines':'Preserve tender retirement/award-link removal at or after 2026-11-18T09:00Z; CSV Nov19 01:30:37Z; Shopify Nov19 21:30:49Z; welfare Nov20; award Nov21 05:00:35Z; SQLite Nov22; welfare retirement after Dec4 17:00Z.'}\nassert live==source and not p.meta and not q.meta and not active\nout=base/'result.json';out.write_text(json.dumps(r,indent=2)+'\\n');print(out.read_text())"
+      ],
+      "inputs": [
+        "products/distribution/catalogue-crawl-directives/",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "outputs": [
+        "products/distribution/catalogue-crawl-directives/result.json"
+      ],
+      "mission_id": "CATALOGUE-CRAWL-DIRECTIVE-TEST"
+    },
+    "description": "Broker action during THINK-1794385804",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179438580411",
+  "input_sha256": "571df1829e4fac0810395329b1e0fd2d25454f939d06b39fa2684d1b1958ad3a"
+}
