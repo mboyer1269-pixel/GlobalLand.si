@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "CHUNK static/chunks/app/(admin)/layout-4a06bab5b356d8d5.js\nCHUNK static/chunks/app/(v2)/contests/loading-2a987df8837bd9cc.js\nCHUNK static/chunks/app/(v2)/contests/page-f102e3467af0595c.js\nCHUNK static/chunks/app/(v2)/layout-411ca8dca2ac18ee.js\nCHUNK static/chunks/app/error-ca8a21737d807b52.js\nCHUNK static/chunks/app/layout-624cafa5ce464443.js\nCHUNK static/chunks/app/not-found-a7dc344b705eca0a.js\nCHUNK static/chunks/main-app-1ac6da1caf92aa7c.js\nnchunks 44\nURL https://docs.sherlock.xyz/\nURL https://sherlock-files.ams3.digitaloceanspaces.com/contests/ethereum-foundation.jpg\nURL https://sherlock-files.ams3.digitaloceanspaces.com/protocols/maker_1766531006.jpg\nURL https://sherlock-files.ams3.digitaloceanspaces.com/contests/optimism.jpg\nURL https://sherlock-files.ams3.digitaloceanspaces.com/protocols/ripple_1775571694.png\nURL https://sherlock-files.ams3.digitaloceanspaces.com/contests/optimism.jpg\nURL https://sherlock-files.ams3.digitaloceanspaces.com/contests/babylon_logo.png\nURL https://sherlock-files.ams3.digitaloceanspaces.com/protocols/aave-dao_1764365658.png\nURL https://sherlock-files.ams3.digitaloceanspaces.com/contests/Centrifuge.jpg\nURL https://sherlock-files.ams3.digitaloceanspaces.com/contests/Notional.jpg\nURL https://sherlock-files.ams3.digitaloceanspaces.com/contests/GMX.jpg\nactive :: col gap-y-1.5\"><a class=\"relative flex w-full rounded-[10px] border p-4 text-sm border-[#7975FF] bg-activePurple/10 text-[#7975FF]\" target=\"_self\" href=\"/contests\"><div class=\"flex flex-row gap-9 w-max item\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179443290111.json"
+  ],
+  "request": {
+    "id": "TASK-179443290111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-11T21:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re\nt=open('products/research/paid-review-contests/sherlock-directory.html',encoding='utf-8',errors='replace').read()\nch=sorted(set(re.findall(r'static/chunks/[A-Za-z0-9_()\\[\\]\\-./%]+?\\.js',t)))\nfor c in ch:\n  if 'contest' in c.lower() or 'app' in c.lower(): print('CHUNK',c)\nprint('nchunks',len(ch))\nfor m in re.finditer(r'(api[A-Za-z0-9_.\\-]*\\.sherlock\\.xyz[^\"\\\\ ]*|https?://[a-z0-9.\\-]*sherlock[a-z0-9.\\-]*/[^\"\\\\ ]*)',t): print('URL',m.group(0)[:150])\nfor k in ['ACTIVE','RUNNING','UPCOMING','status=','?status','active']:\n  for m in list(re.finditer(re.escape(k),t))[:4]: print(k,'::',t[max(0,m.start()-100):m.end()+100].replace('\\n',' '))\n"
+      ],
+      "inputs": [
+        "products/research/paid-review-contests/sherlock-directory.html"
+      ],
+      "outputs": [],
+      "mission_id": "SHERLOCK-ACTIVE-CONTEST-GATE"
+    },
+    "description": "Broker action during THINK-1794432901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179443290111",
+  "input_sha256": "6c2b3fc8a1e207956c7e635cc706a2e1a1dfd87729762dd9d06ff09f5d3d2b54"
+}
