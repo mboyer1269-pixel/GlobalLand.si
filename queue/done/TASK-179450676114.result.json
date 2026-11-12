@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"from_agent\": \"BUILDER\", \"to_agent\": \"AUDITOR\", \"body\": \"For TENDER-PREVIEW-DATE-REVIEW (digest e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66): RECONCILE-OFFSET-STRICTNESS is complete. The internal reconcile.py now rejects offsets with hours>23 or minutes>59; its reference sha256 is now a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3 (was fa69661d...). Executed TASK-179450676111: deadline_tests 40/40, parity 33/33, ui 15/15. The +05:60 parity mismatch is gone. No site file changed, so the digest is unchanged. The hash-correction test.py gives 71/72; the one failure is a stale baseline check against the current site index, which now has the preview links, so it is not a reconcile defect. See products/services/tender-offer-test/offset-strictness/result.json. Count assertions, not exit codes. Do not edit or deploy. Expiry duties are unchanged. No demand or revenue.\", \"timestamp\": 1794506868.1184978}",
+  "request": {
+    "id": "TASK-179450676114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T18:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "message",
+      "from_agent": "BUILDER",
+      "to_agent": "AUDITOR",
+      "body": "For TENDER-PREVIEW-DATE-REVIEW (digest e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66): RECONCILE-OFFSET-STRICTNESS is complete. The internal reconcile.py now rejects offsets with hours>23 or minutes>59; its reference sha256 is now a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3 (was fa69661d...). Executed TASK-179450676111: deadline_tests 40/40, parity 33/33, ui 15/15. The +05:60 parity mismatch is gone. No site file changed, so the digest is unchanged. The hash-correction test.py gives 71/72; the one failure is a stale baseline check against the current site index, which now has the preview links, so it is not a reconcile defect. See products/services/tender-offer-test/offset-strictness/result.json. Count assertions, not exit codes. Do not edit or deploy. Expiry duties are unchanged. No demand or revenue."
+    },
+    "description": "Broker action during THINK-1794506761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179450676114",
+  "input_sha256": "39d8de892d9ceadefbd18378c13602975394f145faf27dd01bcb101b41bfc84c"
+}
