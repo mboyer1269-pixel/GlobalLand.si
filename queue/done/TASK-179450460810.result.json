@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"synthetic_only\": true,\n  \"core_sha256\": \"94936ac1fcad6d86f11e1cb9695f17a8179c4daf3bf6c19bab2b6ebfde0a00db\",\n  \"observations\": [\n    {\n      \"input\": \"2026-02-30T12:00:00Z\",\n      \"code\": 0,\n      \"deadline\": \"Submission deadline (UTC): 2026-03-02 12:00 UTC (as published: 2026-02-30T12:00:00Z)\",\n      \"flags\": 0\n    },\n    {\n      \"input\": \"2026-12-07T25:00:00Z\",\n      \"code\": 0,\n      \"deadline\": \"Submission deadline (UTC): 2026-12-08 01:00 UTC (as published: 2026-12-07T25:00:00Z)\",\n      \"flags\": 0\n    }\n  ],\n  \"meaning\": \"Invalid calendar dates and hours are silently normalized into apparent UTC submission deadlines. These are synthetic malformed inputs, not changed official notices.\"\n}\n\n",
+  "artifacts": [
+    "products/services/tender-instant-preview/deadline-boundary-evidence.json",
+    "products/receipts/TASK-179450460810.json"
+  ],
+  "request": {
+    "id": "TASK-179450460810",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-12T17:30:08Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs=require('fs');global.crypto=require('crypto').webcrypto;const c=require('./products/services/tender-instant-preview/src/core.js');(async()=>{let r=[];for(const end of ['2026-02-30T12:00:00Z','2026-12-07T25:00:00Z']){const x=await c.analyse(JSON.stringify({id:'TEST',tender:{status:'active',tenderPeriod:{endDate:end}}}),'TEST',new Date('2026-01-01T00:00:00Z'));r.push({input:end,code:x.code,deadline:x.text.split('\\n').find(l=>l.startsWith('Submission deadline')),flags:x.flags});}const p='products/services/tender-instant-preview/deadline-boundary-evidence.json';fs.mkdirSync(require('path').dirname(p),{recursive:true});const out={synthetic_only:true,core_sha256:require('crypto').createHash('sha256').update(fs.readFileSync('products/services/tender-instant-preview/src/core.js')).digest('hex'),observations:r,meaning:'Invalid calendar dates and hours are silently normalized into apparent UTC submission deadlines. These are synthetic malformed inputs, not changed official notices.'};fs.writeFileSync(p,JSON.stringify(out,null,2));console.log(JSON.stringify(out,null,2));})();"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/src/core.js"
+      ],
+      "outputs": [
+        "products/services/tender-instant-preview/deadline-boundary-evidence.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794504608",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179450460810",
+  "input_sha256": "0b57011712e87000a8ec038673d667231e6fbd426fe43329d6a7d460a2341f9e"
+}

@@ -1,0 +1,19 @@
+{
+  "synthetic_only": true,
+  "core_sha256": "94936ac1fcad6d86f11e1cb9695f17a8179c4daf3bf6c19bab2b6ebfde0a00db",
+  "observations": [
+    {
+      "input": "2026-02-30T12:00:00Z",
+      "code": 0,
+      "deadline": "Submission deadline (UTC): 2026-03-02 12:00 UTC (as published: 2026-02-30T12:00:00Z)",
+      "flags": 0
+    },
+    {
+      "input": "2026-12-07T25:00:00Z",
+      "code": 0,
+      "deadline": "Submission deadline (UTC): 2026-12-08 01:00 UTC (as published: 2026-12-07T25:00:00Z)",
+      "flags": 0
+    }
+  ],
+  "meaning": "Invalid calendar dates and hours are silently normalized into apparent UTC submission deadlines. These are synthetic malformed inputs, not changed official notices."
+}
