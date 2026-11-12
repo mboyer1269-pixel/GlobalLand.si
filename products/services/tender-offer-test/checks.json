@@ -1,0 +1,277 @@
+{
+ "mission": "TENDER-VERIFIED-BRIEF-OFFER-TEST",
+ "observed_at": "2026-11-12",
+ "baseline_index_sha256": "5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed",
+ "candidate_index_sha256": "7c910186630a64311122ad1529475d97519f78d030ca2fb6556b3cd421b930cd",
+ "candidate_llms_sha256": "da4c55c3b15f24da60365272ea295a9d46d5d8b34f3b23a3f49b94a8bb597bbc",
+ "agentmail_doc_sha256": "02a281f8d2e56027ee9d582cccf543a86b44d51eb0445de1b5fadb2252cf610c",
+ "case_limits_from_doc": [
+  "256 KiB inbound snapshot",
+  "24000 UTF-8 bytes cumulative files per execution",
+  "32000-char final reply",
+  "no new URL retrieval, no incoming attachments",
+  "offline case-local EXEC"
+ ],
+ "feasibility_rehearsal_SYNTHETIC": [
+  {
+   "notice": "105246-2026",
+   "input_bytes": 13430,
+   "reply_chars": 341,
+   "within_256KiB_snapshot": true,
+   "within_24000B_exec_files": true,
+   "within_32000_char_reply": true,
+   "deadline_extracted": "2026-12-07T12:00:00Z",
+   "buyer": "North Ayrshire Council"
+  },
+  {
+   "notice": "105838-2026",
+   "input_bytes": 9748,
+   "reply_chars": 295,
+   "within_256KiB_snapshot": true,
+   "within_24000B_exec_files": true,
+   "within_32000_char_reply": true,
+   "deadline_extracted": "2027-01-08T12:00:00Z",
+   "buyer": "London Luton Airport Operations Limited"
+  }
+ ],
+ "feasibility_limit": "Offline cycle cannot confirm pasted text equals live official record; offer states this. Real private-cycle execution of this specific brief untested; mail path previously needed manual spam reclassification once (doc).",
+ "checks": [
+  {
+   "check": "reverse_restores_baseline_index",
+   "pass": true,
+   "detail": "5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed"
+  },
+  {
+   "check": "reverse_restores_baseline_llms",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:Expression of interest only",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:no checkout",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:no order has been accepted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:delivery is not guaranteed",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:CAD 49",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:unvalidated price hypothesis",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:autonomous AI agents",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:administrative acceptance",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:do not visit links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:cannot confirm",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:No attachments",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "en_contains:site:open-software-tenders",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:Manifestation d’intérêt",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:pas de paiement en ligne",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:aucune commande",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:pas garantie",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:49 CAD",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:hypothèse de prix non validée",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:agents d’IA autonomes",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:acceptation administrative",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:ne consultons ni liens",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:ne pouvons pas confirmer",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:Pas de pièces jointes",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:site:open-software-tenders",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_unsupported:save",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_unsupported:saving",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_unsupported:cheaper",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_unsupported:Stotles",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_unsupported:£",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_unsupported:guaranteed delivery",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_unsupported:buy now",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_unsupported:http://",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_unsupported:https://",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "mailto_recipient_unchanged",
+   "pass": true,
+   "detail": "globalland@agentmail.to"
+  },
+  {
+   "check": "mailto_identifier",
+   "pass": true,
+   "detail": "'Experiment: site:open-software-tenders\\nOffer: reconciliation brief CAD49 interest\\nNotice ID: \\n\\n'"
+  },
+  {
+   "check": "preserved:This listing expires at 2027-01-08 12:00 UTC.",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "preserved:This listing expires at 2026-12-07 12:00 UTC.",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "preserved:no later than 2027-01-08 12:00 UTC",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "preserved:tender-deadlines.ics",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "preserved:iwms-checklist.html",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "preserved:Free interest test: weekly open-tender brief",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no_new_script_or_form",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "top_disclaimer_consistent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "rehearsal_deadlines_match_page",
+   "pass": true,
+   "detail": "['2026-12-07T12:00:00Z', '2027-01-08T12:00:00Z']"
+  },
+  {
+   "check": "rehearsal_within_case_limits",
+   "pass": true,
+   "detail": ""
+  }
+ ],
+ "passed": 47,
+ "total": 47
+}

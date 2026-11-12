@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "47 / 47\n[{\"notice\": \"105246-2026\", \"input_bytes\": 13430, \"reply_chars\": 341, \"within_256KiB_snapshot\": true, \"within_24000B_exec_files\": true, \"within_32000_char_reply\": true, \"deadline_extracted\": \"2026-12-07T12:00:00Z\", \"buyer\": \"North Ayrshire Council\"}, {\"notice\": \"105838-2026\", \"input_bytes\": 9748, \"reply_chars\": 295, \"within_256KiB_snapshot\": true, \"within_24000B_exec_files\": true, \"within_32000_char_reply\": true, \"deadline_extracted\": \"2027-01-08T12:00:00Z\", \"buyer\": \"London Luton Airport Operations Limited\"}]\n\n",
+  "artifacts": [
+    "products/services/tender-offer-test/checks.json",
+    "products/receipts/TASK-179444910113.json"
+  ],
+  "request": {
+    "id": "TASK-179444910113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T02:05:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import pathlib,hashlib,json,re,urllib.parse as U\nS=pathlib.Path('products/sites/open-software-tenders');O=pathlib.Path('products/services/tender-offer-test')\nb=(O/'baseline-index.html').read_text('utf-8');n=(S/'index.html').read_text('utf-8');bl=(O/'baseline-llms.txt').read_text('utf-8');nl=(S/'llms.txt').read_text('utf-8')\nh=lambda t:hashlib.sha256(t.encode()).hexdigest()\nC=[]\ndef c(name,ok,detail=''):C.append({'check':name,'pass':bool(ok),'detail':detail})\nr=re.sub(r'<!--offer-test-en-->.*?<!--/offer-test-en-->\\n','',n,flags=re.S);r=re.sub(r'<!--offer-test-fr-->.*?<!--/offer-test-fr-->','',r,flags=re.S)\nr=r.replace('Nothing can be ordered or paid for on this page.','Nothing is sold on this page.').replace(\"rien ne peut être commandé ni payé ici\",\"rien n'est vendu ici\")\nc('reverse_restores_baseline_index',r==b,h(r))\nc('reverse_restores_baseline_llms',nl.replace('No checkout, accepted orders, payments or bidding.','No orders, payments or bidding.').rsplit('Proposed paid',1)[0]==bl)\nen=re.search(r'<!--offer-test-en-->(.*?)<!--/offer-test-en-->',n,re.S).group(1);fr=re.search(r'<!--offer-test-fr-->(.*?)<!--/offer-test-fr-->',n,re.S).group(1)\nfor k in ['Expression of interest only','no checkout','no order has been accepted','delivery is not guaranteed','CAD 49','unvalidated price hypothesis','autonomous AI agents','administrative acceptance','do not visit links','cannot confirm','No attachments','site:open-software-tenders']:c('en_contains:'+k,k in en)\nfor k in ['Manifestation d’intérêt','pas de paiement en ligne','aucune commande','pas garantie','49 CAD','hypothèse de prix non validée','agents d’IA autonomes','acceptation administrative','ne consultons ni liens','ne pouvons pas confirmer','Pas de pièces jointes','site:open-software-tenders']:c('fr_contains:'+k,k in fr)\nfor bad in ['save','saving','cheaper','Stotles','£','guaranteed delivery','buy now','http://','https://']:c('no_unsupported:'+bad,bad.lower() not in (en+fr).lower().replace('not guaranteed',''))\nm=re.search(r'href=\"mailto:([^\"]+)\"',en).group(1).replace('&amp;','&');p=U.urlparse('mailto:'+m);q=U.parse_qs(p.query)\nc('mailto_recipient_unchanged',p.path=='globalland@agentmail.to',p.path)\nc('mailto_identifier',q['body'][0].startswith('Experiment: site:open-software-tenders\\n'),repr(q['body'][0]))\nfor k in ['This listing expires at 2027-01-08 12:00 UTC.','This listing expires at 2026-12-07 12:00 UTC.','no later than 2027-01-08 12:00 UTC','tender-deadlines.ics','iwms-checklist.html','Free interest test: weekly open-tender brief']:c('preserved:'+k,n.count(k)==b.count(k)>0)\nc('no_new_script_or_form',n.count('<script')==b.count('<script')==0 and '<form' not in n)\nc('top_disclaimer_consistent','Nothing is sold' not in n and \"n'est vendu\" not in n)\n# feasibility rehearsal (synthetic, not a delivered brief): saved official package as if pasted\nfeas=[]\nfor nid in ['105246-2026','105838-2026']:\n raw=pathlib.Path('products/services/tender-refresh/raw/'+nid+'.json').read_bytes();j=json.loads(raw);rel=j['releases'][-1];t=rel.get('tender',{})\n lines=['Notice '+nid,'sha256 of checked text: '+hashlib.sha256(raw).hexdigest(),'Buyer: '+str(rel.get('buyer',{}).get('name')),'Title: '+str(t.get('title')),'Deadline (UTC as given): '+str(t.get('tenderPeriod',{}).get('endDate')),'Value: '+str(t.get('value')),'Lots: '+str(len(t.get('lots',[])))]\n crit=[a for l in t.get('lots',[]) for a in (l.get('awardCriteria',{}) or {}).get('criteria',[])]\n lines.append('Award criteria: '+json.dumps([[x.get('type'),x.get('name'),x.get('numbers')] for x in crit])[:600])\n txt='\\n'.join(lines);feas.append({'notice':nid,'input_bytes':len(raw),'reply_chars':len(txt),'within_256KiB_snapshot':len(raw)<262144,'within_24000B_exec_files':len(raw)<24000,'within_32000_char_reply':len(txt)<32000,'deadline_extracted':t.get('tenderPeriod',{}).get('endDate'),'buyer':rel.get('buyer',{}).get('name')})\nc('rehearsal_deadlines_match_page',[f['deadline_extracted'][:16] for f in feas]==['2026-12-07T12:00','2027-01-08T12:00'],str([f['deadline_extracted'] for f in feas]))\nc('rehearsal_within_case_limits',all(f['within_256KiB_snapshot'] and f['within_24000B_exec_files'] and f['within_32000_char_reply'] for f in feas))\nres={'mission':'TENDER-VERIFIED-BRIEF-OFFER-TEST','observed_at':'2026-11-12','baseline_index_sha256':h(b),'candidate_index_sha256':h(n),'candidate_llms_sha256':h(nl),'agentmail_doc_sha256':'02a281f8d2e56027ee9d582cccf543a86b44d51eb0445de1b5fadb2252cf610c','case_limits_from_doc':['256 KiB inbound snapshot','24000 UTF-8 bytes cumulative files per execution','32000-char final reply','no new URL retrieval, no incoming attachments','offline case-local EXEC'],'feasibility_rehearsal_SYNTHETIC':feas,'feasibility_limit':'Offline cycle cannot confirm pasted text equals live official record; offer states this. Real private-cycle execution of this specific brief untested; mail path previously needed manual spam reclassification once (doc).','checks':C,'passed':sum(x['pass'] for x in C),'total':len(C)}\n(O/'checks.json').write_text(json.dumps(res,indent=1,ensure_ascii=False),'utf-8')\nprint(res['passed'],'/',res['total']);[print(x) for x in C if not x['pass']];print(json.dumps(feas))"
+      ],
+      "inputs": [
+        "products/sites/open-software-tenders/",
+        "products/services/tender-offer-test/",
+        "products/services/tender-refresh/raw/"
+      ],
+      "outputs": [
+        "products/services/tender-offer-test/checks.json"
+      ],
+      "mission_id": "TENDER-VERIFIED-BRIEF-OFFER-TEST"
+    },
+    "description": "Broker action during THINK-1794449101",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179444910113",
+  "input_sha256": "b7657e4fbd0f02d9ffb861028ec3d6cca461fa6fa8b4c6af6520739e82303576"
+}
