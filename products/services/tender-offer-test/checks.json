@@ -2,7 +2,7 @@
  "mission": "TENDER-VERIFIED-BRIEF-OFFER-TEST",
  "observed_at": "2026-11-12",
  "baseline_index_sha256": "5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed",
- "candidate_index_sha256": "7c910186630a64311122ad1529475d97519f78d030ca2fb6556b3cd421b930cd",
+ "candidate_index_sha256": "b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707",
  "candidate_llms_sha256": "da4c55c3b15f24da60365272ea295a9d46d5d8b34f3b23a3f49b94a8bb597bbc",
  "agentmail_doc_sha256": "02a281f8d2e56027ee9d582cccf543a86b44d51eb0445de1b5fadb2252cf610c",
  "case_limits_from_doc": [
@@ -16,7 +16,8 @@
   {
    "notice": "105246-2026",
    "input_bytes": 13430,
-   "reply_chars": 341,
+   "reply_chars": 271,
+   "under_20KB_stated_limit": true,
    "within_256KiB_snapshot": true,
    "within_24000B_exec_files": true,
    "within_32000_char_reply": true,
@@ -26,7 +27,8 @@
   {
    "notice": "105838-2026",
    "input_bytes": 9748,
-   "reply_chars": 295,
+   "reply_chars": 276,
+   "under_20KB_stated_limit": true,
    "within_256KiB_snapshot": true,
    "within_24000B_exec_files": true,
    "within_32000_char_reply": true,
@@ -34,7 +36,7 @@
    "buyer": "London Luton Airport Operations Limited"
   }
  ],
- "feasibility_limit": "Offline cycle cannot confirm pasted text equals live official record; offer states this. Real private-cycle execution of this specific brief untested; mail path previously needed manual spam reclassification once (doc).",
+ "feasibility_limit": "Offline cycle cannot confirm pasted text equals live official record; offer states this. Real private-cycle execution of this brief untested; a prior test inbound needed manual spam reclassification (doc).",
  "checks": [
   {
    "check": "reverse_restores_baseline_index",
@@ -102,6 +104,11 @@
    "detail": ""
   },
   {
+   "check": "en_contains:under 20 KB",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "check": "en_contains:site:open-software-tenders",
    "pass": true,
    "detail": ""
@@ -158,6 +165,11 @@
   },
   {
    "check": "fr_contains:Pas de pièces jointes",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "fr_contains:moins de 20 Ko",
    "pass": true,
    "detail": ""
   },
@@ -272,6 +284,6 @@
    "detail": ""
   }
  ],
- "passed": 47,
- "total": 47
+ "passed": 49,
+ "total": 49
 }
