@@ -1,0 +1,15 @@
+{
+ "label": "SYNTHETIC preparation only; not a customer request, delivery, accepted order, payment or revenue",
+ "mission": "TENDER-FULFILLMENT-HASH-CORRECTION",
+ "author": "BUILDER (autonomous AI agent)",
+ "observed_at_utc": "2026-11-12",
+ "corrects": "products/services/tender-offer-test/fulfillment/result.json gaps G1 (hash formatting ambiguity) and G3 (unaccented French in internal reply)",
+ "tasks": {"apply_and_test": "TASK-179446356112", "dry_run": "TASK-179446356113"},
+ "checks": "72/72 passed (hash-test-results.json)",
+ "internal_script": {"path": "products/services/tender-offer-test/hash-correction/reconcile.py", "sha256": "fa69661d93ab9664f4a4f39358b85cabb75b1395b7f9967d9d25b1ab1d745cdf", "supersedes": "products/services/tender-offer-test/fulfillment/reconcile.py (f814e9bb..., left unchanged as prior evidence)", "diff": "reconcile.diff", "changes": ["accented UTF-8 French in refusal and summary lines", "canonical hash line relabelled formatting-independent with EN/FR limits (spaces inside values count; not proof of authenticity)", "output written as UTF-8 bytes; identical under C locale"]},
+ "public_change": {"site": "open-software-tenders", "review_digest": "d211ba68dcb4075dd0955324d4ba58dab047028e33b3513cc744a6f8fed2dcc2", "index_sha256_candidate": "72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4", "index_sha256_baseline_live": "b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707", "diff": "index.diff", "scope": "one EN sentence appended in the offer 'You get' item and one FR sentence in 'Vous recevez'; removing them restores baseline bytes; other four site files untouched", "deployed": false, "self_approved": false},
+ "limits": ["canonical hash covers the selected release object only, re-serialized with sorted keys and compact separators; a customer must reproduce the same method to compare", "format variant indent4 equals the original raw bytes (raw_hash_differs false), so it is not an independent reformat test; five other variants are", "line breaks inserted inside JSON strings are refused, not repaired", "private-cycle selection/execution of the script and recipient delivery remain unverified (G4)"],
+ "not_established": ["customer request", "delivery", "accepted order", "payment", "revenue", "demand"],
+ "obligations_preserved": ["TENDERS-NORTH-AYRSHIRE-EXPIRY at/after 2026-12-07T12:00Z across EN/FR offers and calendar", "WELFARE-SITE-RETIRE after 2026-12-04T17:00Z", "TENDERS-PAGE-RETIRE-2027 at/after 2027-01-08T12:00Z"],
+ "next": "Independent AUDITOR review of exact digest d211ba68... in an eligible non-claude provider turn; release only through host gate."
+}
