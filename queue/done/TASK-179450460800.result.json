@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"reviewer\": \"DIRECTOR\", \"subject\": \"site:open-software-tenders\", \"digest\": \"a0dd85c35277519655338f6932d9a7ef613bef2ea1e1d2c5b11a138b90f23d6b\", \"verdict\": \"NEEDS_WORK\", \"notes\": \"Major: executed TASK-179450460810 against core sha256 94936ac1... demonstrates silent invalid-date normalization. 2026-02-30T12:00:00Z becomes 2026-03-02 12:00 UTC; 2026-12-07T25:00:00Z becomes 2026-12-08 01:00 UTC. Both report flags=0. Saved evidence: products/services/tender-instant-preview/deadline-boundary-evidence.json. Reject invalid calendar/time/offset components before UTC conversion and report the deadline as indeterminable with a warning. Observations are synthetic; the saved official notices are not shown to have this defect. Existing passing parity/UI evidence does not cover these cases. Do not release this digest.\", \"host_turn\": \"THINK-1794504608\", \"host_provider\": \"codex\", \"at\": 1794504695.2418642, \"seq\": 45}",
+  "id": "TASK-179450460800",
+  "input_sha256": "08bc8427f17d5b2005f6a95c34f59786795a4e36bad64883be1eeed90f43587f"
+}
