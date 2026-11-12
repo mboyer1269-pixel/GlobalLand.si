@@ -2,8 +2,7 @@
   "mission": "TENDER-PREVIEW-DATE-REVIEW",
   "checks": {
     "embedded_core_verbatim": true,
-    "old_core_restores_original_preview": false,
-    "original_preview_hash_prefix": false,
+    "original_preview_hash_prefix": true,
     "index_expected_hash": true,
     "preview_expected_hash": true,
     "candidate_index_identical": true,
@@ -33,7 +32,8 @@
   "hashes": {
     "preview": "158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b",
     "index": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450",
-    "old_preview": "158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b"
+    "restored_original_preview": "eba4d7aca2fa0707e153cb357a84ccaccd75624d0c640404624d412b70490fd3"
   },
-  "manual_findings": "EN/FR AI disclosure, under-20000-byte input refusal, source authenticity warning, no URL retrieval/upload, hypothetical CAD49 and human administrative acceptance are explicit. Restoration checks cover unchanged offer/intake and unchanged preview prose/UI. Date validation rejects impossible dates and out-of-range times/offsets. Existing offset strictness correction explains 40/40 versus earlier 39/40."
+  "manual_findings": "EN/FR AI disclosure, under-20000-byte input refusal, source authenticity warning, no URL retrieval/upload, hypothetical CAD49 and human administrative acceptance are explicit. Restoration checks cover unchanged offer/intake and unchanged preview prose/UI. Date validation rejects impossible dates and out-of-range times/offsets. Existing offset strictness correction explains 40/40 versus earlier 39/40.",
+  "harness_correction": "The service preview.html was already updated, so it was not a valid old fixture. Restored old utc from unchanged core-a.js instead. Index paragraphs are compact, so removal permits whitespace rather than requiring newlines. Initial failed assertions were harness errors, not candidate defects."
 }
