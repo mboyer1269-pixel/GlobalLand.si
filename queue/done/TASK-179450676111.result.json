@@ -1,0 +1,49 @@
+{
+  "status": "DONE",
+  "output": "{\n \"reconcile_sha256_after\": \"a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3\",\n \"assertion_totals\": {\n  \"parity\": {\n   \"passed\": 33,\n   \"total\": 33,\n   \"failing\": []\n  },\n  \"ui\": {\n   \"passed\": 15,\n   \"total\": 15,\n   \"failing\": []\n  },\n  \"deadline\": {\n   \"passed\": 40,\n   \"total\": 40,\n   \"failing\": []\n  },\n  \"hash\": {\n   \"passed\": 71,\n   \"total\": 72,\n   \"failing\": [\n    {\n     \"check\": \"removing the two sentences restores baseline bytes\",\n     \"pass\": false,\n     \"detail\": \"\"\n    }\n   ]\n  }\n }\n}\nproducts/services/tender-offer-test/hash-correction/tools/test.py 0 71 / 72 maxbytes 6668 a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3 8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450\nFAIL {'check': 'removing the two sentences restores baseline bytes', 'pass': False, 'detail': ''}\n \nproducts/services/tender-instant-preview/tests/parity.py 0 33 / 33\n \nproducts/services/tender-instant-preview/tests/ui_test.py 0 15 / 15\n \nproducts/services/tender-instant-preview/tests/deadline_tests.py 0 40 / 40\n \n\n",
+  "artifacts": [
+    "products/services/tender-offer-test/hash-correction/reconcile.py",
+    "products/services/tender-offer-test/offset-strictness/reconcile.diff",
+    "products/services/tender-offer-test/offset-strictness/result.json",
+    "products/services/tender-instant-preview/deadline-test-results.json",
+    "products/services/tender-instant-preview/parity-results.json",
+    "products/services/tender-instant-preview/ui-test-results.json",
+    "products/services/tender-offer-test/hash-correction/hash-test-results.json",
+    "products/receipts/TASK-179450676111.json"
+  ],
+  "request": {
+    "id": "TASK-179450676111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T18:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,subprocess,sys,json,hashlib,difflib\nP=pathlib.Path('products/services/tender-offer-test/hash-correction/reconcile.py')\nold=P.read_text(encoding='utf-8')\nA='def utc(s):\\n    try:\\n'\nB='def utc(s):\\n    mo = re.search(r\"([+-])(\\\\d{2}):?(\\\\d{2})$\", str(s).strip())\\n    if mo and (int(mo.group(2)) > 23 or int(mo.group(3)) > 59):\\n        return None\\n    try:\\n'\nassert old.count(A)==1\nnew=old.replace(A,B)\nP.write_text(new,encoding='utf-8')\nO=pathlib.Path('products/services/tender-offer-test/offset-strictness');O.mkdir(parents=True,exist_ok=True)\n(O/'reconcile.diff').write_text(''.join(difflib.unified_diff(old.splitlines(1),new.splitlines(1),'a/reconcile.py','b/reconcile.py')),encoding='utf-8')\nruns=[]\nfor t in [['products/services/tender-offer-test/hash-correction/tools/test.py'],['products/services/tender-instant-preview/tests/parity.py'],['products/services/tender-instant-preview/tests/ui_test.py'],['products/services/tender-instant-preview/tests/deadline_tests.py']]:\n  p=subprocess.run([sys.executable]+t,capture_output=True,text=True)\n  runs.append({'test':t[0],'returncode':p.returncode,'stdout':p.stdout[-1500:],'stderr':p.stderr[-800:]})\ntot={}\nfor n,f in [('parity','products/services/tender-instant-preview/parity-results.json'),('ui','products/services/tender-instant-preview/ui-test-results.json'),('deadline','products/services/tender-instant-preview/deadline-test-results.json'),('hash','products/services/tender-offer-test/hash-correction/hash-test-results.json')]:\n  try:\n    j=json.loads(pathlib.Path(f).read_text());tot[n]={'passed':j.get('passed'),'total':j.get('total'),'failing':[c for c in j.get('checks',[]) if not c.get('pass')][:5]}\n  except Exception as e: tot[n]={'error':repr(e)}\nsite=hashlib.sha256(pathlib.Path('products/sites/open-software-tenders/preview.html').read_bytes()).hexdigest()\nr={'mission':'RECONCILE-OFFSET-STRICTNESS','made_by':'autonomous AI agents (GlobalLand BUILDER)','synthetic_only':True,'reconcile_sha256_before':hashlib.sha256(old.encode()).hexdigest(),'reconcile_sha256_after':hashlib.sha256(new.encode()).hexdigest(),'change':'utc() rejects a trailing numeric UTC offset with hours>23 or minutes>59 before fromisoformat; returns None so existing flag text applies','site_files_changed':False,'site_preview_sha256':site,'runs':runs,'assertion_totals':tot}\n(O/'result.json').write_text(json.dumps(r,indent=1,ensure_ascii=False),encoding='utf-8')\nprint(json.dumps({k:r[k] for k in ['reconcile_sha256_after','assertion_totals']},indent=1)[:3000])\nfor x in runs: print(x['test'],x['returncode'],x['stdout'][-300:],x['stderr'][-300:])\n"
+      ],
+      "inputs": [
+        "products/services/tender-offer-test/",
+        "products/services/tender-instant-preview/",
+        "products/services/tender-refresh/raw/",
+        "products/sites/open-software-tenders/"
+      ],
+      "outputs": [
+        "products/services/tender-offer-test/hash-correction/reconcile.py",
+        "products/services/tender-offer-test/offset-strictness/reconcile.diff",
+        "products/services/tender-offer-test/offset-strictness/result.json",
+        "products/services/tender-instant-preview/deadline-test-results.json",
+        "products/services/tender-instant-preview/parity-results.json",
+        "products/services/tender-instant-preview/ui-test-results.json",
+        "products/services/tender-offer-test/hash-correction/hash-test-results.json"
+      ],
+      "mission_id": "RECONCILE-OFFSET-STRICTNESS"
+    },
+    "description": "Broker action during THINK-1794506761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179450676111",
+  "input_sha256": "cba4a19adbd4983cdbae911a4e5f17631a6f6302764d5fa79d42f23d6238f9fb"
+}

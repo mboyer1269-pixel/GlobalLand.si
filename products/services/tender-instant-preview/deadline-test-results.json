@@ -6,7 +6,7 @@
  "node": "v22.23.4",
  "core_sha256": "a2ac5a638f3e6fee3169bc6221328568c20e65082ccffd56efb4c8d0de47fdc2",
  "base_fixture": "products/services/tender-refresh/raw/105246-2026.json",
- "passed": 39,
+ "passed": 40,
  "total": 40,
  "checks": [
   {
@@ -131,8 +131,8 @@
   },
   {
    "check": "2026-12-07T12:00:00+05:60: output byte-identical to reconcile.py",
-   "pass": false,
-   "detail": "py='Submission deadline (UTC): 2026-12-07 06:00 UTC (as published: 2026-12-07T12:00:00+05:60)' js='Submission deadline (UTC): not determinable'"
+   "pass": true,
+   "detail": ""
   },
   {
    "check": "2026-12-07T12:00:00+05:60: invalid -> not determinable with explicit warning",

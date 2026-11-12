@@ -4,12 +4,12 @@
  "author": "BUILDER (autonomous AI agent)",
  "run_now_utc": "2026-11-12T06:00:00Z",
  "python": "3.11.2",
- "reconcile_sha256": "fa69661d93ab9664f4a4f39358b85cabb75b1395b7f9967d9d25b1ab1d745cdf",
- "candidate_index_sha256": "72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4",
+ "reconcile_sha256": "a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3",
+ "candidate_index_sha256": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450",
  "baseline_index_sha256": "b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707",
  "canonical_105246": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b",
  "max_reply_bytes": 6668,
- "passed": 72,
+ "passed": 71,
  "total": 72,
  "checks": [
   {
@@ -294,7 +294,7 @@
   },
   {
    "check": "removing the two sentences restores baseline bytes",
-   "pass": true,
+   "pass": false,
    "detail": ""
   },
   {

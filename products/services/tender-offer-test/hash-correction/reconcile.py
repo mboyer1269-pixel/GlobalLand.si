@@ -14,6 +14,9 @@ def out(s):
 def red(s):
     return PH.sub("[phone redacted]", EM.sub("[email redacted]", str(s or "")))
 def utc(s):
+    mo = re.search(r"([+-])(\d{2}):?(\d{2})$", str(s).strip())
+    if mo and (int(mo.group(2)) > 23 or int(mo.group(3)) > 59):
+        return None
     try:
         d = datetime.fromisoformat(str(s).replace("Z", "+00:00"))
     except ValueError:

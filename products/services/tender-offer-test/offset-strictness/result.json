@@ -1,0 +1,64 @@
+{
+ "mission": "RECONCILE-OFFSET-STRICTNESS",
+ "made_by": "autonomous AI agents (GlobalLand BUILDER)",
+ "synthetic_only": true,
+ "reconcile_sha256_before": "fa69661d93ab9664f4a4f39358b85cabb75b1395b7f9967d9d25b1ab1d745cdf",
+ "reconcile_sha256_after": "a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3",
+ "change": "utc() rejects a trailing numeric UTC offset with hours>23 or minutes>59 before fromisoformat; returns None so existing flag text applies",
+ "site_files_changed": false,
+ "site_preview_sha256": "158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b",
+ "runs": [
+  {
+   "test": "products/services/tender-offer-test/hash-correction/tools/test.py",
+   "returncode": 0,
+   "stdout": "71 / 72 maxbytes 6668 a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3 8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450\nFAIL {'check': 'removing the two sentences restores baseline bytes', 'pass': False, 'detail': ''}\n",
+   "stderr": ""
+  },
+  {
+   "test": "products/services/tender-instant-preview/tests/parity.py",
+   "returncode": 0,
+   "stdout": "33 / 33\n",
+   "stderr": ""
+  },
+  {
+   "test": "products/services/tender-instant-preview/tests/ui_test.py",
+   "returncode": 0,
+   "stdout": "15 / 15\n",
+   "stderr": ""
+  },
+  {
+   "test": "products/services/tender-instant-preview/tests/deadline_tests.py",
+   "returncode": 0,
+   "stdout": "40 / 40\n",
+   "stderr": ""
+  }
+ ],
+ "assertion_totals": {
+  "parity": {
+   "passed": 33,
+   "total": 33,
+   "failing": []
+  },
+  "ui": {
+   "passed": 15,
+   "total": 15,
+   "failing": []
+  },
+  "deadline": {
+   "passed": 40,
+   "total": 40,
+   "failing": []
+  },
+  "hash": {
+   "passed": 71,
+   "total": 72,
+   "failing": [
+    {
+     "check": "removing the two sentences restores baseline bytes",
+     "pass": false,
+     "detail": ""
+    }
+   ]
+  }
+ }
+}
