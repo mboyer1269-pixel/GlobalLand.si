@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "\"globalland-open-software-tenders.global-land.workers.dev\" False ['https://hyperallergic.com/hyperallergic-fall-2025-new-york-art-guide/', 'https://hyperallergic.com/tag/opportunities/', 'https://store.hyperallergic.com/', 'https://podcast.hyperallergic.com/episodes', 'https://podcast.hyperallergic.com/', 'https://store.hyperallergic.com/products/hyperallergic-tote']\nNorth Ayrshire IWMS tender bid requirements False ['https://medicine.temple.edu/education/md-program/our-campuses', 'https://medicine.temple.edu/education/md-program', 'https://scrcarchivesspace.temple.edu/repositories/4/archival_objects/6', 'https://scrcarchivesspace.temple.edu/repositories/4/archival_objects/6', 'https://tupress.temple.edu/open-access/north-broad-press/38', 'https://admissions.temple.edu/about/campuses']\nUK software tender bid no bid brief False ['https://en.wikipedia.org/wiki/United_Kingdom', 'https://www.gov.uk/', 'https://www.bbc.com/news/uk', 'https://www.worldatlas.com/maps/united-kingdom', 'https://en.wikipedia.org/wiki/Countries_of_the_United_Kingdom', 'https://www.britannica.com/place/United-Kingdom']\nNo GlobalLand page appeared in the top parsed results of any of the three queries; the exact-hostname query returned unrelated results (Bing ignored the quoted hostname).\n\n",
+  "artifacts": [
+    "products/services/tender-offer-test/search-exposure/result.json",
+    "products/receipts/TASK-179446716115.json"
+  ],
+  "request": {
+    "id": "TASK-179446716115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-12T07:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,base64,urllib.parse,pathlib\nd='products/services/tender-offer-test/search-exposure/'\nx=json.loads(pathlib.Path(d+'extract.json').read_text())\ndef dec(h):\n  q=urllib.parse.parse_qs(urllib.parse.urlparse(h).query).get('u',[''])[0]\n  if q.startswith('a1'):\n    s=q[2:];s+='='*(-len(s)%4)\n    try: return base64.urlsafe_b64decode(s).decode('utf-8','replace')\n    except Exception: return None\n  return h\nqs=[]\nfor q in x['queries']:\n  urls=[{'url':dec(r['href']),'title':r['title']} for r in q['results']]\n  ours=[u for u in urls if u['url'] and 'global-land.workers.dev' in u['url']]\n  qs.append({'query':q['query'],'fetch_task':q['fetch_task'],'sha256':q['sha256'],'result_count_parsed':len(urls),'results':urls,'globalland_result_listed':bool(ours),'note_mentions':'page-level counts of global-land strings include the echoed query text and are not listings','captcha_or_challenge_string_present':q['captcha_or_challenge']})\nlisted=any(q['globalland_result_listed'] for q in qs)\nres={'mission':'TENDER-OFFER-SEARCH-EXPOSURE','observed_at':'2026-11-12 (UTC, FETCH TASK-179446716111..113)','engine':'Bing HTML, unauthenticated FETCH; results may be personalised/region-dependent','queries':qs,'finding':('A GlobalLand page was listed' if listed else 'No GlobalLand page appeared in the top parsed results of any of the three queries; the exact-hostname query returned unrelated results (Bing ignored the quoted hostname).'),'limits':['Three Bing queries only; not evidence about indexing generally, other engines, clicks, buyers or revenue','A challenge/captcha string appears in the HTML; results still parsed but may be degraded'],'exposure_action':('None executable now. Prior IndexNow submission for the refresh/calendar was INTERRUPTED (L234) and must not be blindly resubmitted; the pending hash-correction release (digest d211ba68..., awaiting independent review) is the next legitimate change occasion for one IndexNow notification of the updated URL.' if not listed else 'n/a'),'reconsideration_trigger':'Approved deployment of digest d211ba68... (new notification occasion) or the host journal showing the INTERRUPTED IndexNow request was never sent.','demand':'UNKNOWN (0 classified, 5 unclassified feedback sources); no revenue'}\npathlib.Path(d+'result.json').write_text(json.dumps(res,indent=1,ensure_ascii=False))\nfor q in qs: print(q['query'],q['globalland_result_listed'],[u['url'][:70] for u in q['results'][:6]])\nprint(res['finding'])"
+      ],
+      "inputs": [
+        "products/services/tender-offer-test/search-exposure/extract.json"
+      ],
+      "outputs": [
+        "products/services/tender-offer-test/search-exposure/result.json"
+      ],
+      "mission_id": "TENDER-OFFER-SEARCH-EXPOSURE"
+    },
+    "description": "Broker action during THINK-1794467161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179446716115",
+  "input_sha256": "7cc6e25cc1b1669e8121932e3292ef222c524700ab8597ee385ffd8065f56a9a"
+}
