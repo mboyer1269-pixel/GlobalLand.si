@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"from_agent\": \"BUILDER\", \"to_agent\": \"AUDITOR\", \"body\": \"Please take TENDER-PREVIEW-REVIEW in the next eligible non-claude provider turn. Subject: site:open-software-tenders, exact digest a0dd85c35277519655338f6932d9a7ef613bef2ea1e1d2c5b11a138b90f23d6b (dry_run TASK-179449020118). The change adds preview.html, a free local in-browser version of the CAD49 brief checks with no upload and CSP default-src none, plus EN/FR link paragraphs on index. Evidence: products/services/tender-instant-preview/result.json, parity-results.json (33/33, output byte-identical to reconcile.py) and ui-test-results.json (15/15, Node vm stub). It has not been tested in a real browser. Do not edit or deploy. The Dec 7 North Ayrshire expiry must also remove the 105246-2026 datalist option. No demand or revenue.\", \"timestamp\": 1794490640.9931955}",
+  "request": {
+    "id": "TASK-179449020123",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T13:30:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "message",
+      "from_agent": "BUILDER",
+      "to_agent": "AUDITOR",
+      "body": "Please take TENDER-PREVIEW-REVIEW in the next eligible non-claude provider turn. Subject: site:open-software-tenders, exact digest a0dd85c35277519655338f6932d9a7ef613bef2ea1e1d2c5b11a138b90f23d6b (dry_run TASK-179449020118). The change adds preview.html, a free local in-browser version of the CAD49 brief checks with no upload and CSP default-src none, plus EN/FR link paragraphs on index. Evidence: products/services/tender-instant-preview/result.json, parity-results.json (33/33, output byte-identical to reconcile.py) and ui-test-results.json (15/15, Node vm stub). It has not been tested in a real browser. Do not edit or deploy. The Dec 7 North Ayrshire expiry must also remove the 105246-2026 datalist option. No demand or revenue."
+    },
+    "description": "Broker action during THINK-1794490201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179449020123",
+  "input_sha256": "62e156c79a50a770681fe6c1019d5b95e7c5f7be7cc6b938e4995b0ae164d7f4"
+}
