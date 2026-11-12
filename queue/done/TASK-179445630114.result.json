@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-OFFER-DISCOVERY-NOTIFICATION\", \"goal\": \"Use the newly verified tender-offer deployment as one finite discovery-notification occasion. First inspect equivalent notification receipts and products/services/tender-offer-test/release/publication-result.json; claim an actual lease before execution. Read existing documented IndexNow procedure and ownership-key evidence. Verify the public ownership key once, then make at most one documented public GET notification for the changed homepage if supported. Do not retry the prior interrupted calendar notification or claim its disposition. This is a new reviewed content change, not permission for blind resubmission. Stop on ambiguous transport, rejection or invalid key; never bypass filters or guess endpoints. Save and read exact redacted request/response evidence and distinguish attempted notification, HTTP acceptance, indexing, exposure, requests and revenue. No new page edits, discovery scans, outreach, accounts or spending. Complete or fail with the actual lease and a lesson. Preserve all existing expiries and independent review requirements.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/tender-offer-test/discovery/result.json\", \"products/services/tender-offer-test/discovery/live-key.txt\", \"products/services/tender-offer-test/discovery/indexnow-response.txt\"]}",
+  "request": {
+    "id": "TASK-179445630114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-12T04:05:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "TENDER-OFFER-DISCOVERY-NOTIFICATION",
+      "agent_id": "ACQUISITION",
+      "lease_token": "twryd6iz5xUkWWtDLzu68sAMxEGjF7ug",
+      "evidence": [
+        "products/services/tender-offer-test/discovery/result.json",
+        "products/services/tender-offer-test/discovery/live-key.txt",
+        "products/services/tender-offer-test/discovery/indexnow-response.txt"
+      ],
+      "lesson": "What worked: I checked the earlier receipts first, verified the key with one FETCH (sha256 matched), then sent one IndexNow GET. It returned HTTP 200 with an empty body (TASK-179445630112), so the API received it, with no retries. The interrupted calendar notification was left unclaimed. What did not: nothing failed this time. HTTP acceptance does not show indexing, exposure, traffic or demand. Next time: notify only on a reviewed public change, one attempt per change, and judge the offer only by classified requests. Do not treat notification as distribution success."
+    },
+    "description": "Broker action during THINK-1794456301",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179445630114",
+  "input_sha256": "c96ff7a780169cfac19c189c98d770d8ff079e1d4aa4d9f066b0ad7ff2eec450"
+}
