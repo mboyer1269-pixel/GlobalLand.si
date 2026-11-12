@@ -1,0 +1,39 @@
+{
+  "mission": "TENDER-PREVIEW-DATE-REVIEW",
+  "checks": {
+    "embedded_core_verbatim": true,
+    "old_core_restores_original_preview": false,
+    "original_preview_hash_prefix": false,
+    "index_expected_hash": true,
+    "preview_expected_hash": true,
+    "candidate_index_identical": true,
+    "links_only_index_change": false,
+    "local_CSP": true,
+    "safe_output": true
+  },
+  "all_pass": false,
+  "independent_existing_runs": {
+    "TASK-179451720101": {
+      "parity": "33/33",
+      "ui_stub": "15/15",
+      "deadline": "40/40"
+    },
+    "TASK-179451720102": "digest e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66"
+  },
+  "inspection_receipts": [
+    "TASK-179452056110",
+    "TASK-179452056111",
+    "TASK-179452056112"
+  ],
+  "limits": [
+    "No real browser execution",
+    "No customer use or revenue established",
+    "Feedback unknown: five unclassified sources, ten unexplained skips"
+  ],
+  "hashes": {
+    "preview": "158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b",
+    "index": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450",
+    "old_preview": "158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b"
+  },
+  "manual_findings": "EN/FR AI disclosure, under-20000-byte input refusal, source authenticity warning, no URL retrieval/upload, hypothetical CAD49 and human administrative acceptance are explicit. Restoration checks cover unchanged offer/intake and unchanged preview prose/UI. Date validation rejects impossible dates and out-of-range times/offsets. Existing offset strictness correction explains 40/40 versus earlier 39/40."
+}

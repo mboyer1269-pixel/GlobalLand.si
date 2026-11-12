@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"mission\": \"TENDER-PREVIEW-DATE-REVIEW\",\n  \"checks\": {\n    \"embedded_core_verbatim\": true,\n    \"old_core_restores_original_preview\": false,\n    \"original_preview_hash_prefix\": false,\n    \"index_expected_hash\": true,\n    \"preview_expected_hash\": true,\n    \"candidate_index_identical\": true,\n    \"links_only_index_change\": false,\n    \"local_CSP\": true,\n    \"safe_output\": true\n  },\n  \"all_pass\": false,\n  \"independent_existing_runs\": {\n    \"TASK-179451720101\": {\n      \"parity\": \"33/33\",\n      \"ui_stub\": \"15/15\",\n      \"deadline\": \"40/40\"\n    },\n    \"TASK-179451720102\": \"digest e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66\"\n  },\n  \"inspection_receipts\": [\n    \"TASK-179452056110\",\n    \"TASK-179452056111\",\n    \"TASK-179452056112\"\n  ],\n  \"limits\": [\n    \"No real browser execution\",\n    \"No customer use or revenue established\",\n    \"Feedback unknown: five unclassified sources, ten unexplained skips\"\n  ],\n  \"hashes\": {\n    \"preview\": \"158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b\",\n    \"index\": \"8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450\",\n    \"old_preview\": \"158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b\"\n  },\n  \"manual_findings\": \"EN/FR AI disclosure, under-20000-byte input refusal, source authenticity warning, no URL retrieval/upload, hypothetical CAD49 and human administrative acceptance are explicit. Restoration checks cover unchanged offer/intake and unchanged preview prose/UI. Date validation rejects impossible dates and out-of-range times/offsets. Existing offset strictness correction explains 40/40 versus earlier 39/40.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/tender-preview-date-consolidated.json",
+    "products/receipts/TASK-179452056113.json"
+  ],
+  "request": {
+    "id": "TASK-179452056113",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-12T21:56:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json,re\np=Path('products/services/tender-instant-preview');site=Path('products/sites/open-software-tenders');core=(p/'src/core.js').read_text();v=(site/'preview.html').read_text();old=(p/'preview.html').read_text();h=lambda s:hashlib.sha256(s.encode()).hexdigest();checks={}\nchecks['embedded_core_verbatim']=core in v\nstart=core.index('/* Strict validation:');end=core.index('function p2',start)\nos=old.index('function utc(');oe=old.index('function p2',os)\nrestored=v.replace(core[start:end],old[os:oe])\nchecks['old_core_restores_original_preview']=restored==old\nchecks['original_preview_hash_prefix']=h(old).startswith('eba4d7ac')\nchecks['index_expected_hash']=h((site/'index.html').read_text())=='8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450'\nchecks['preview_expected_hash']=h(v)=='158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b'\nchecks['candidate_index_identical']=(site/'index.html').read_bytes()==(p/'candidate-index.html').read_bytes()\nidx=(site/'index.html').read_text();base=(p/'baseline-index.html').read_text();stripped=re.sub(r'<p>\\n<!--preview-(en|fr)-->.*?<!--/preview-\\1-->\\n</p>\\n','',idx,flags=re.S);checks['links_only_index_change']=stripped==base\nchecks['local_CSP']='default-src \\'none\\'' in v and 'form-action \\'none\\'' in v\nchecks['safe_output']='textContent' in v and 'innerHTML' not in v\nresult={'mission':'TENDER-PREVIEW-DATE-REVIEW','checks':checks,'all_pass':all(checks.values()),'independent_existing_runs':{'TASK-179451720101':{'parity':'33/33','ui_stub':'15/15','deadline':'40/40'},'TASK-179451720102':'digest e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66'},'inspection_receipts':['TASK-179452056110','TASK-179452056111','TASK-179452056112'],'limits':['No real browser execution','No customer use or revenue established','Feedback unknown: five unclassified sources, ten unexplained skips'],'hashes':{'preview':h(v),'index':h(idx),'old_preview':h(old)},'manual_findings':'EN/FR AI disclosure, under-20000-byte input refusal, source authenticity warning, no URL retrieval/upload, hypothetical CAD49 and human administrative acceptance are explicit. Restoration checks cover unchanged offer/intake and unchanged preview prose/UI. Date validation rejects impossible dates and out-of-range times/offsets. Existing offset strictness correction explains 40/40 versus earlier 39/40.'}\nout=Path('products/reviews/tender-preview-date-consolidated.json');out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,ensure_ascii=False,indent=2));print(out.read_text())"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/",
+        "products/sites/open-software-tenders/"
+      ],
+      "outputs": [
+        "products/reviews/tender-preview-date-consolidated.json"
+      ],
+      "mission_id": "TENDER-PREVIEW-DATE-REVIEW"
+    },
+    "description": "Broker action during THINK-1794520561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179452056113",
+  "input_sha256": "8d6c3960caa4b3b81f64d8e780a8f0575ba15efa08a73e127319942f9f850812"
+}
