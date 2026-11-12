@@ -1,0 +1,213 @@
+{
+ "synthetic": true,
+ "made_by": "autonomous AI agents (GlobalLand BUILDER)",
+ "now": "2026-11-12T06:00:00Z",
+ "python": "3.11.2",
+ "node": "v22.23.4",
+ "core_sha256": "a2ac5a638f3e6fee3169bc6221328568c20e65082ccffd56efb4c8d0de47fdc2",
+ "base_fixture": "products/services/tender-refresh/raw/105246-2026.json",
+ "passed": 39,
+ "total": 40,
+ "checks": [
+  {
+   "check": "2026-02-30T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-02-30T12:00:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-12-07T25:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-07T25:00:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-04-31T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-04-31T12:00:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2027-02-29T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2027-02-29T12:00:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2100-02-29T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2100-02-29T12:00:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-13-01T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-13-01T12:00:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-00-10T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-00-10T12:00:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-12-00T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-00T12:00:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-12-07T12:60:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-07T12:60:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-12-07T12:00:60Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-07T12:00:60Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-12-07T24:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-07T24:00:00Z: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-12-07T12:00:00+24:00: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-07T12:00:00+24:00: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2026-12-07T12:00:00+05:60: output byte-identical to reconcile.py",
+   "pass": false,
+   "detail": "py='Submission deadline (UTC): 2026-12-07 06:00 UTC (as published: 2026-12-07T12:00:00+05:60)' js='Submission deadline (UTC): not determinable'"
+  },
+  {
+   "check": "2026-12-07T12:00:00+05:60: invalid -> not determinable with explicit warning",
+   "pass": true,
+   "detail": "Submission deadline (UTC): not determinable"
+  },
+  {
+   "check": "2028-02-29T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2028-02-29T12:00:00Z: valid -> 2028-02-29 12:00 UTC",
+   "pass": true,
+   "detail": "Submission deadline (UTC): 2028-02-29 12:00 UTC (as published: 2028-02-29T12:00:00Z)"
+  },
+  {
+   "check": "2000-02-29T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2000-02-29T12:00:00Z: valid -> 2000-02-29 12:00 UTC",
+   "pass": true,
+   "detail": "Submission deadline (UTC): 2000-02-29 12:00 UTC (as published: 2000-02-29T12:00:00Z)"
+  },
+  {
+   "check": "2026-12-31T23:59:59Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-31T23:59:59Z: valid -> 2026-12-31 23:59 UTC",
+   "pass": true,
+   "detail": "Submission deadline (UTC): 2026-12-31 23:59 UTC (as published: 2026-12-31T23:59:59Z)"
+  },
+  {
+   "check": "2026-12-07T12:00:00-05:00: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-07T12:00:00-05:00: valid -> 2026-12-07 17:00 UTC",
+   "pass": true,
+   "detail": "Submission deadline (UTC): 2026-12-07 17:00 UTC (as published: 2026-12-07T12:00:00-05:00)"
+  },
+  {
+   "check": "2026-12-07T12:00:00+23:59: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-07T12:00:00+23:59: valid -> 2026-12-06 12:01 UTC",
+   "pass": true,
+   "detail": "Submission deadline (UTC): 2026-12-06 12:01 UTC (as published: 2026-12-07T12:00:00+23:59)"
+  },
+  {
+   "check": "2026-12-07T12:00:00Z: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-12-07T12:00:00Z: valid -> 2026-12-07 12:00 UTC",
+   "pass": true,
+   "detail": "Submission deadline (UTC): 2026-12-07 12:00 UTC (as published: 2026-12-07T12:00:00Z)"
+  },
+  {
+   "check": "2026-04-30T00:00:00+00:00: output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "2026-04-30T00:00:00+00:00: valid -> 2026-04-30 00:00 UTC",
+   "pass": true,
+   "detail": "Submission deadline (UTC): 2026-04-30 00:00 UTC (as published: 2026-04-30T00:00:00+00:00)"
+  }
+ ]
+}

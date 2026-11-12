@@ -61,8 +61,9 @@ function ps(v){return typeof v==="string"?v:pr(v);}
 function tru(v){if(v instanceof PF)return v.v!==0;if(Array.isArray(v))return v.length>0;if(isD(v))return Object.keys(v).length>0;return !!v;}
 function or(a,b){return tru(a)?a:b;}
 function red(s){return ps(or(s,"")).replace(EM,"[email redacted]").replace(PH,"[phone redacted]");}
+/* Strict validation: an invalid calendar date, time or offset returns null (deadline not determinable), as Python datetime.fromisoformat raises ValueError in reconcile.py. */
 function utc(s){var m=/^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2})(?::(\d{2})(?::(\d{2})(?:\.(\d{1,6}))?)?)?)?(Z|[+-]\d{2}:?\d{2})?$/.exec(ps(s));
- if(!m||!m[8])return null;var off=0;if(m[8]!=="Z"){var z=m[8].replace(":","");off=(z[0]==="-"?-1:1)*(parseInt(z.substr(1,2),10)*60+parseInt(z.substr(3,2),10));}
+ if(!m||!m[8])return null;var Y=+m[1],Mo=+m[2],Dd=+m[3],H=+(m[4]||0),Mi=+(m[5]||0),Se=+(m[6]||0);var dim=[31,(Y%4===0&&(Y%100!==0||Y%400===0))?29:28,31,30,31,30,31,31,30,31,30,31];if(Y<1||Mo<1||Mo>12||Dd<1||Dd>dim[Mo-1]||H>23||Mi>59||Se>59)return null;var off=0;if(m[8]!=="Z"){var z=m[8].replace(":",""),oh=parseInt(z.substr(1,2),10),om=parseInt(z.substr(3,2),10);if(oh>23||om>59)return null;off=(z[0]==="-"?-1:1)*(oh*60+om);}
  var t=Date.UTC(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0),m[7]?Math.floor(+("0."+m[7])*1000):0)-off*60000;return isNaN(t)?null:new Date(t);}
 function p2(n){return(n<10?"0":"")+n;}
 function fmt(d){return d.getUTCFullYear()+"-"+p2(d.getUTCMonth()+1)+"-"+p2(d.getUTCDate())+" "+p2(d.getUTCHours())+":"+p2(d.getUTCMinutes())+" UTC";}
