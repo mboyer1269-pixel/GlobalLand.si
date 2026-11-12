@@ -1,0 +1,117 @@
+{
+  "scope": "Consolidated existing independent evidence; no new test or deployment claimed",
+  "digest": "d211ba68dcb4075dd0955324d4ba58dab047028e33b3513cc744a6f8fed2dcc2",
+  "partial_review_path": "products/reviews/tender-hash-independent-checks.json",
+  "partial_review": {
+    "scope": "Independent partial review; no approval or deployment",
+    "checks": {
+      "baseline_hash": true,
+      "candidate_hash": true,
+      "only_two_insertions": true,
+      "reverse_restores_baseline": true,
+      "official_releases_present": true,
+      "independent_reindentation": true
+    },
+    "changes": [
+      {
+        "operation": "insert",
+        "before": "",
+        "after": " Because email clients can reformat pasted text, the reply also gives a canonical SHA-256 of the selected release (JSON re-serialized with sorted keys and no spaces between elements): it stays the same if indentation or line breaks between elements change, but changes if any value changes, including spaces inside text values, and neither hash proves that the text is authentic or official."
+      },
+      {
+        "operation": "insert",
+        "before": "",
+        "after": " Comme les logiciels de courriel peuvent reformater le texte collé, la réponse donne aussi une empreinte SHA-256 canonique de la publication choisie (JSON resérialisé avec clés triées et sans espaces entre les éléments) : elle reste identique si l’indentation ou les retours à la ligne entre éléments changent, mais change si une valeur change, y compris les espaces dans un texte, et aucune empreinte ne prouve que le texte est authentique ou officiel."
+      }
+    ],
+    "official_sources": [
+      {
+        "path": "products/services/tender-refresh/raw/105246-2026.json",
+        "raw_sha256": "fc9d73060c235441ddae395c6cd548b29e3724ae2678af7f3bdcd42f5f0ea935",
+        "release_id": "105246-2026",
+        "reindentation_preserves_canonical_bytes": true,
+        "canonical_sha256": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b"
+      },
+      {
+        "path": "products/services/tender-refresh/raw/105838-2026.json",
+        "raw_sha256": "15b59fac2748825f3e80fee02c2578adb3bcbce27a624f06580cb0ecc2548e15",
+        "release_id": "105838-2026",
+        "reindentation_preserves_canonical_bytes": true,
+        "canonical_sha256": "e4218b9b0c3db49c058b5f9daeaf20e3f17657c002305f2b5ae3025e9b6306c9"
+      }
+    ],
+    "candidate_inventory": {
+      "5e2c8a91f4b7036d9a1e7c4b28f0d653.txt": "de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f",
+      "index.html": "72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4",
+      "iwms-checklist.html": "56c79b638aa377222e34aae5b2da58c94fd0520fd1b0015adaf73c2ea137508b",
+      "llms.txt": "da4c55c3b15f24da60365272ea295a9d46d5d8b34f3b23a3f49b94a8bb597bbc",
+      "tender-deadlines.ics": "23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b"
+    },
+    "remaining": "Inspect actual reconcile.py canonicalization and prior manifests before issuing a verdict."
+  },
+  "cli_evidence_path": "products/reviews/tender-hash-cli-independent.json",
+  "cli_evidence": {
+    "scope": "Independent actual CLI execution; synthetic preparation only",
+    "checks": [
+      {
+        "notice": "105246-2026",
+        "variant": "indent",
+        "passed": true,
+        "reply_bytes": 6589,
+        "canonical_sha256": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b"
+      },
+      {
+        "notice": "105246-2026",
+        "variant": "compact",
+        "passed": true,
+        "reply_bytes": 6589,
+        "canonical_sha256": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b"
+      },
+      {
+        "notice": "105246-2026",
+        "variant": "string-space",
+        "passed": true,
+        "reply_bytes": 6590,
+        "canonical_sha256": "4d648845a58f27ba5d93315b6039ca05ceaacb753358f9bf4e3b4e7b15df7092"
+      },
+      {
+        "notice": "105838-2026",
+        "variant": "indent",
+        "passed": true,
+        "reply_bytes": 4312,
+        "canonical_sha256": "e4218b9b0c3db49c058b5f9daeaf20e3f17657c002305f2b5ae3025e9b6306c9"
+      },
+      {
+        "notice": "105838-2026",
+        "variant": "compact",
+        "passed": true,
+        "reply_bytes": 4312,
+        "canonical_sha256": "e4218b9b0c3db49c058b5f9daeaf20e3f17657c002305f2b5ae3025e9b6306c9"
+      },
+      {
+        "notice": "105838-2026",
+        "variant": "string-space",
+        "passed": true,
+        "reply_bytes": 4313,
+        "canonical_sha256": "465b23325a7f9bf6b9ac7096ac43f2ded075a07edbae71819ae29c6f3c82d016"
+      }
+    ],
+    "all_cli_checks_pass": true,
+    "manifest_observation": "No filename containing manifest under selected tender-offer-test directory; previous assertion failed after six CLI checks and published nothing. Prior-manifest inspection remains unresolved, no approval issued.",
+    "available_json_paths": [
+      "products/services/tender-offer-test/checks.json",
+      "products/services/tender-offer-test/search-exposure/result.json",
+      "products/services/tender-offer-test/search-exposure/extract.json",
+      "products/services/tender-offer-test/hash-correction/inserted-sentences.json",
+      "products/services/tender-offer-test/hash-correction/result.json",
+      "products/services/tender-offer-test/hash-correction/hash-test-results.json",
+      "products/services/tender-offer-test/fulfillment/rehearsal-results.json",
+      "products/services/tender-offer-test/fulfillment/result.json",
+      "products/services/tender-offer-test/discovery/result.json",
+      "products/services/tender-offer-test/release/publication-result.json"
+    ],
+    "script_sha256": "fa69661d93ab9664f4a4f39358b85cabb75b1395b7f9967d9d25b1ab1d745cdf"
+  },
+  "manifest_disposition": "Not applicable: no prior manifest exists in the selected tender-offer-test directory. The earlier existence assertion was not a product defect.",
+  "commercial_limits": "Synthetic preparation only; no customer delivery, demand, payment or revenue established."
+}
