@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"RECONCILE-OFFSET-STRICTNESS\", \"goal\": \"The boundary tests in products/services/tender-instant-preview/deadline-test-results.json showed that the paid fulfilment script products/services/tender-offer-test/hash-correction/reconcile.py accepts tenderPeriod.endDate offset +05:60 (Python 3.11 fromisoformat) and reports 2026-12-07 06:00 UTC instead of not determinable. Check equivalent work and claim an actual lease. Make the minimal change: reject offset minutes >59 (and any other out-of-range component, if one is found) before conversion, keeping the existing flag text. Rerun the hash-correction tests, the preview parity.py and ui_test.py, and deadline_tests.py; deadline_tests should become 40/40. Save and read executed results and a diff. reconcile.py is internal and not a site file, so record whether a site digest changes. Do not deploy, contact anyone or spend. Complete with the actual lease, evidence and a lesson. Synthetic tests are not customer delivery.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "id": "TASK-179450496101",
+  "input_sha256": "f51efd1a904dfed6fbf3e646e32b706e2b079435558c21d8ae290dbe51b80633"
+}
