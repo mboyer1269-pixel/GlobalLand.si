@@ -142,22 +142,27 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 511,
-    "turns_without_verified_revenue": 511,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 512,
+    "turns_without_verified_revenue": 512,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-12T00:37:39Z",
-    "last_outcome_turn": "THINK-1794443401",
-    "last_productive_turn": "THINK-1794443761",
-    "last_turn": "THINK-1794443761",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794445205",
+    "last_productive_turn": "THINK-1794445205",
+    "last_turn": "THINK-1794445205",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/topcoder-implementation/raw/official-challenges.html"
+      "outcome": true,
+      "mission_outcomes": [
+        "TOPCODER-BOUNDED-IMPLEMENTATION"
       ],
-      "new_product_count": 1,
+      "new_products": [
+        "products/services/topcoder-implementation/active-extract.json",
+        "products/services/topcoder-implementation/raw/active-challenges-v6.json",
+        "products/services/topcoder-implementation/raw/active-challenges-v6b.json",
+        "products/services/topcoder-implementation/result.json"
+      ],
+      "new_product_count": 4,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
