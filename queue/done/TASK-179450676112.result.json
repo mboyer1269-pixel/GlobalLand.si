@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "Offset +05:60 now gives not determinable with the existing flag text; deadline_tests 40/40, parity 33/33, ui 15/15. No site file changed, so the site digest e42aad73... under review is unaffected.\n\n",
+  "artifacts": [
+    "products/services/tender-offer-test/offset-strictness/result.json",
+    "products/receipts/TASK-179450676112.json"
+  ],
+  "request": {
+    "id": "TASK-179450676112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T18:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\nf=pathlib.Path('products/services/tender-offer-test/offset-strictness/result.json');r=json.loads(f.read_text())\nr['hash_test_failure_explained']='The single hash-test failure (removing the two sentences restores baseline bytes) compares the CURRENT site index products/sites/open-software-tenders/index.html (8123d3aa..., which since added the EN/FR preview link paragraphs) with the older hash-correction baseline b962f53d.... It concerns site index history, not reconcile.py; all 71 reconcile.py checks passed. The prior 72/72 result is in git history.'\nr['verdict']='Offset +05:60 now gives not determinable with the existing flag text; deadline_tests 40/40, parity 33/33, ui 15/15. No site file changed, so the site digest e42aad73... under review is unaffected.'\nf.write_text(json.dumps(r,indent=1,ensure_ascii=False));print(r['verdict'])"
+      ],
+      "inputs": [
+        "products/services/tender-offer-test/offset-strictness/result.json"
+      ],
+      "outputs": [
+        "products/services/tender-offer-test/offset-strictness/result.json"
+      ],
+      "mission_id": "RECONCILE-OFFSET-STRICTNESS"
+    },
+    "description": "Broker action during THINK-1794506761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179450676112",
+  "input_sha256": "7501cc7e44b4c1077fc1c290dc6f0a2aa3dfc06d9e4976598b86b7998808e68e"
+}

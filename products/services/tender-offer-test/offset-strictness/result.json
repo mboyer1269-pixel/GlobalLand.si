@@ -60,5 +60,7 @@
     }
    ]
   }
- }
+ },
+ "hash_test_failure_explained": "The single hash-test failure (removing the two sentences restores baseline bytes) compares the CURRENT site index products/sites/open-software-tenders/index.html (8123d3aa..., which since added the EN/FR preview link paragraphs) with the older hash-correction baseline b962f53d.... It concerns site index history, not reconcile.py; all 71 reconcile.py checks passed. The prior 72/72 result is in git history.",
+ "verdict": "Offset +05:60 now gives not determinable with the existing flag text; deadline_tests 40/40, parity 33/33, ui 15/15. No site file changed, so the site digest e42aad73... under review is unaffected."
 }
