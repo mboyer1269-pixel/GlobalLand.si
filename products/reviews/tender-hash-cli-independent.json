@@ -1,0 +1,62 @@
+{
+  "scope": "Independent actual CLI execution; synthetic preparation only",
+  "checks": [
+    {
+      "notice": "105246-2026",
+      "variant": "indent",
+      "passed": true,
+      "reply_bytes": 6589,
+      "canonical_sha256": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b"
+    },
+    {
+      "notice": "105246-2026",
+      "variant": "compact",
+      "passed": true,
+      "reply_bytes": 6589,
+      "canonical_sha256": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b"
+    },
+    {
+      "notice": "105246-2026",
+      "variant": "string-space",
+      "passed": true,
+      "reply_bytes": 6590,
+      "canonical_sha256": "4d648845a58f27ba5d93315b6039ca05ceaacb753358f9bf4e3b4e7b15df7092"
+    },
+    {
+      "notice": "105838-2026",
+      "variant": "indent",
+      "passed": true,
+      "reply_bytes": 4312,
+      "canonical_sha256": "e4218b9b0c3db49c058b5f9daeaf20e3f17657c002305f2b5ae3025e9b6306c9"
+    },
+    {
+      "notice": "105838-2026",
+      "variant": "compact",
+      "passed": true,
+      "reply_bytes": 4312,
+      "canonical_sha256": "e4218b9b0c3db49c058b5f9daeaf20e3f17657c002305f2b5ae3025e9b6306c9"
+    },
+    {
+      "notice": "105838-2026",
+      "variant": "string-space",
+      "passed": true,
+      "reply_bytes": 4313,
+      "canonical_sha256": "465b23325a7f9bf6b9ac7096ac43f2ded075a07edbae71819ae29c6f3c82d016"
+    }
+  ],
+  "all_cli_checks_pass": true,
+  "manifest_observation": "No filename containing manifest under selected tender-offer-test directory; previous assertion failed after six CLI checks and published nothing. Prior-manifest inspection remains unresolved, no approval issued.",
+  "available_json_paths": [
+    "products/services/tender-offer-test/checks.json",
+    "products/services/tender-offer-test/search-exposure/result.json",
+    "products/services/tender-offer-test/search-exposure/extract.json",
+    "products/services/tender-offer-test/hash-correction/inserted-sentences.json",
+    "products/services/tender-offer-test/hash-correction/result.json",
+    "products/services/tender-offer-test/hash-correction/hash-test-results.json",
+    "products/services/tender-offer-test/fulfillment/rehearsal-results.json",
+    "products/services/tender-offer-test/fulfillment/result.json",
+    "products/services/tender-offer-test/discovery/result.json",
+    "products/services/tender-offer-test/release/publication-result.json"
+  ],
+  "script_sha256": "fa69661d93ab9664f4a4f39358b85cabb75b1395b7f9967d9d25b1ab1d745cdf"
+}

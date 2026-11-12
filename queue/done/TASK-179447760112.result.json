@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Independent actual CLI execution; synthetic preparation only\",\n  \"checks\": [\n    {\n      \"notice\": \"105246-2026\",\n      \"variant\": \"indent\",\n      \"passed\": true,\n      \"reply_bytes\": 6589,\n      \"canonical_sha256\": \"ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b\"\n    },\n    {\n      \"notice\": \"105246-2026\",\n      \"variant\": \"compact\",\n      \"passed\": true,\n      \"reply_bytes\": 6589,\n      \"canonical_sha256\": \"ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b\"\n    },\n    {\n      \"notice\": \"105246-2026\",\n      \"variant\": \"string-space\",\n      \"passed\": true,\n      \"reply_bytes\": 6590,\n      \"canonical_sha256\": \"4d648845a58f27ba5d93315b6039ca05ceaacb753358f9bf4e3b4e7b15df7092\"\n    },\n    {\n      \"notice\": \"105838-2026\",\n      \"variant\": \"indent\",\n      \"passed\": true,\n      \"reply_bytes\": 4312,\n      \"canonical_sha256\": \"e4218b9b0c3db49c058b5f9daeaf20e3f17657c002305f2b5ae3025e9b6306c9\"\n    },\n    {\n      \"notice\": \"105838-2026\",\n      \"variant\": \"compact\",\n      \"passed\": true,\n      \"reply_bytes\": 4312,\n      \"canonical_sha256\": \"e4218b9b0c3db49c058b5f9daeaf20e3f17657c002305f2b5ae3025e9b6306c9\"\n    },\n    {\n      \"notice\": \"105838-2026\",\n      \"variant\": \"string-space\",\n      \"passed\": true,\n      \"reply_bytes\": 4313,\n      \"canonical_sha256\": \"465b23325a7f9bf6b9ac7096ac43f2ded075a07edbae71819ae29c6f3c82d016\"\n    }\n  ],\n  \"all_cli_checks_pass\": true,\n  \"manifest_observation\": \"No filename containing manifest under selected tender-offer-test directory; previous assertion failed after six CLI checks and published nothing. Prior-manifest inspection remains unresolved, no approval issued.\",\n  \"available_json_paths\": [\n    \"products/services/tender-offer-test/checks.json\",\n    \"products/services/tender-offer-test/search-exposure/result.json\",\n    \"products/services/tender-offer-test/search-exposure/extract.json\",\n    \"products/services/tender-offer-test/hash-correction/inserted-sentences.json\",\n    \"products/services/tender-offer-test/hash-correction/result.json\",\n    \"products/services/tender-offer-test/hash-correction/hash-test-results.json\",\n    \"products/services/tender-offer-test/fulfillment/rehearsal-results.json\",\n    \"products/services/tender-offer-test/fulfillment/result.json\",\n    \"products/services/tender-offer-test/discovery/result.json\",\n    \"products/services/tender-offer-test/release/publication-result.json\"\n  ],\n  \"script_sha256\": \"fa69661d93ab9664f4a4f39358b85cabb75b1395b7f9967d9d25b1ab1d745cdf\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/tender-hash-cli-independent.json",
+    "products/receipts/TASK-179447760112.json"
+  ],
+  "request": {
+    "id": "TASK-179447760112",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-12T10:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,subprocess,tempfile,hashlib\nroot=pathlib.Path('products/services/tender-offer-test');script=root/'hash-correction/reconcile.py';results=[]\nfor nid in ['105246-2026','105838-2026']:\n doc=json.loads((pathlib.Path('products/services/tender-refresh/raw')/(nid+'.json')).read_text()); rel=next(r for r in doc['releases'] if r['id']==nid)\n def h(r):return hashlib.sha256(json.dumps(r,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()\n changed=json.loads(json.dumps(doc));r2=next(r for r in changed['releases'] if r['id']==nid);r2['tender']['title']+=' '\n for name,obj,expected in [('indent',doc,h(rel)),('compact',doc,h(rel)),('string-space',changed,h(r2))]:\n  raw=json.dumps(obj,indent=1 if name=='indent' else None,ensure_ascii=False).encode()\n  with tempfile.NamedTemporaryFile() as f:\n   f.write(raw);f.flush();r=subprocess.run(['python3','-I',str(script),f.name,nid,'2026-11-12T12:00:00Z'],capture_output=True)\n  passed=r.returncode==0 and expected in r.stdout.decode() and hashlib.sha256(raw).hexdigest() in r.stdout.decode();assert passed,(nid,name,r.stderr)\n  if name=='string-space':assert expected!=h(rel)\n  results.append({'notice':nid,'variant':name,'passed':passed,'reply_bytes':len(r.stdout),'canonical_sha256':expected})\nreport={'scope':'Independent actual CLI execution; synthetic preparation only','checks':results,'all_cli_checks_pass':True,'manifest_observation':'No filename containing manifest under selected tender-offer-test directory; previous assertion failed after six CLI checks and published nothing. Prior-manifest inspection remains unresolved, no approval issued.','available_json_paths':[str(p) for p in root.rglob('*.json')],'script_sha256':hashlib.sha256(script.read_bytes()).hexdigest()}\np=pathlib.Path('products/reviews/tender-hash-cli-independent.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(report,indent=2));print(p.read_text())"
+      ],
+      "inputs": [
+        "products/services/tender-offer-test/",
+        "products/services/tender-refresh/raw/"
+      ],
+      "outputs": [
+        "products/reviews/tender-hash-cli-independent.json"
+      ],
+      "mission_id": "TENDER-HASH-CORRECTION-REVIEW"
+    },
+    "description": "Broker action during THINK-1794477601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179447760112",
+  "input_sha256": "8ed30ff4b4bce0fb731cb94b5bdc9ad643e6b130c4c8d39972a8487263beeaec"
+}
