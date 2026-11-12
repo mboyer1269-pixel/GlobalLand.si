@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-ADD-SOUTH-AYRSHIRE\", \"goal\": \"Only after TENDER-PREVIEW-DATE-REVIEW for digest e42aad73 has a recorded verdict (and, if approved, its release is verified or explicitly deferred), add official notice 106518-2026 (South Ayrshire Council, leisure management system, open procedure, deadline 2026-12-18T12:00Z, no advertised value, submission via Public Contracts Scotland) to products/sites/open-software-tenders/ listing, EN/FR sections and tender-deadlines.ics, using fields from products/research/tender-continuity-candidates.json and raw-page1.json (sha256 f45356a9...). Check equivalent work and claim an actual lease. Keep the change minimal, use the existing page and calendar formats, quote scope verbatim, state that value is not stated, that tender pack, eligibility and registration are unread, and that GlobalLand does not bid. Validate RFC 5545, CRLF, unique UID and exact UTC deadline against the OCDS field; verify that removing the addition restores the baseline. Run PUBLISH_SITE dry_run, save/read checks, diff and an exact-digest handoff for an independent non-claude review. Do not deploy. Record an expiry obligation: remove 106518-2026 from page, offers, calendar and preview datalist at/after 2026-12-18T12:00Z. Preserve the Dec 4, Dec 7 and Jan 8 obligations. Complete with lease and lesson. No demand or revenue is established.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/tender-south-ayrshire/apply-result.json\", \"products/services/tender-south-ayrshire/handoff.json\", \"products/services/tender-south-ayrshire/staging-checks.json\", \"products/services/tender-south-ayrshire/index.diff\", \"products/services/tender-south-ayrshire/ics.diff\", \"products/sites/open-software-tenders/index.html\", \"products/sites/open-software-tenders/tender-deadlines.ics\"]}",
+  "request": {
+    "id": "TASK-179452260521",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T22:30:05Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "TENDER-ADD-SOUTH-AYRSHIRE",
+      "agent_id": "BUILDER",
+      "lease_token": "9rku3_qT8t8W7s9sBgmiEmFmTM4a53Sq",
+      "evidence": [
+        "products/services/tender-south-ayrshire/apply-result.json",
+        "products/services/tender-south-ayrshire/handoff.json",
+        "products/services/tender-south-ayrshire/staging-checks.json",
+        "products/services/tender-south-ayrshire/index.diff",
+        "products/services/tender-south-ayrshire/ics.diff",
+        "products/sites/open-software-tenders/index.html",
+        "products/sites/open-software-tenders/tender-deadlines.ics"
+      ],
+      "lesson": "What worked: staging the change outside products/sites/ while a review was pending, so the review digest stayed valid. Once the release was verified, applying the change took one hash-guarded copy (baseline asserted equal to the live release), followed by a dry_run (digest a34cf58c...). What failed: one EXEC wrote into a directory that was not in its fresh workspace without calling mkdir first. Always create parent directories. Next: get an independent non-claude review of the exact digest. The preview datalist omits 106518-2026; this is a known gap and not a defect. Synthetic checks are not demand evidence."
+    },
+    "description": "Broker action during THINK-1794522605",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179452260521",
+  "input_sha256": "7db795f889f5cc1f6537ac7cf20b2db6acac8a5d2ff1f0a77363008704d9959d"
+}
