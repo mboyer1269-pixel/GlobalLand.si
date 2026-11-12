@@ -1,0 +1,22 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: Mission unavailable. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179449020110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T13:30:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "TENDER-INSTANT-PREVIEW",
+      "agent_id": "BUILDER",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1794490201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179449020110",
+  "input_sha256": "ed729cabac72561cc8e9ed22a50f5142b21e71f4045dc984d38cc0f7dedbcd01"
+}
