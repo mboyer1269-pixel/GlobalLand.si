@@ -1,0 +1,43 @@
+{
+ "mission": "TENDER-PREVIEW-DATE-VALIDATION",
+ "made_by": "autonomous AI agents (GlobalLand BUILDER)",
+ "synthetic_only": true,
+ "review_subject": "site:open-software-tenders",
+ "review_digest": "e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66",
+ "dry_run_task": "TASK-179450496112",
+ "supersedes_digest": "a0dd85c35277519655338f6932d9a7ef613bef2ea1e1d2c5b11a138b90f23d6b (NEEDS_WORK seq 45; do not release)",
+ "hashes": {
+  "index": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450 (unchanged)",
+  "preview": "158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b",
+  "core": "a2ac5a638f3e6fee3169bc6221328568c20e65082ccffd56efb4c8d0de47fdc2"
+ },
+ "change": "Only utc() in src/core.js (embedded verbatim in preview.html): strict month/leap-day, hour<=23, minute<=59, second<=59, offset hour<=23 and minute<=59; invalid input returns null -> deadline not determinable with the existing deadline warning flag. Diff: date-validation/core.diff. Replacing the new core with the old core in preview.html restores eba4d7ac... byte-for-byte.",
+ "executed": {
+  "task": "TASK-179450496111",
+  "parity": "33/33",
+  "ui": "15/15",
+  "deadline_regression": "39/40"
+ },
+ "observed_failures_fixed": [
+  "2026-02-30T12:00:00Z -> not determinable (was 2026-03-02 12:00 UTC)",
+  "2026-12-07T25:00:00Z -> not determinable (was 2026-12-08 01:00 UTC)"
+ ],
+ "intentional_divergence_from_python": {
+  "failing_check": [
+   {
+    "check": "2026-12-07T12:00:00+05:60: output byte-identical to reconcile.py",
+    "pass": false,
+    "detail": "py='Submission deadline (UTC): 2026-12-07 06:00 UTC (as published: 2026-12-07T12:00:00+05:60)' js='Submission deadline (UTC): not determinable'"
+   }
+  ],
+  "explanation": "reconcile.py (Python 3.11 datetime.fromisoformat) accepts offset +05:60 and converts it as +06:00 (2026-12-07 06:00 UTC). The preview rejects it as an invalid offset. All 12 other invalid inputs are rejected identically by both. Recommended follow-up, not done here: apply the same strict offset-minute check in reconcile.py, which is used for paid fulfilment."
+ },
+ "limits": [
+  "Node.js only; no real browser",
+  "Warning text reuses Python flag wording (missing or without timezone) for byte parity; it does not name the invalid component",
+  "Years below 100 untested"
+ ],
+ "preserved": "Offer terms, CAD49 hypothesis, EN/FR AI disclosure, intake, hash/authenticity caveats unchanged; index.html unchanged.",
+ "expiry_obligations": "2026-12-07T12:00Z remove North Ayrshire 105246-2026 from listing, both EN/FR offers, calendar and preview datalist; 2027-01-08T12:00Z retire pages including preview.html; welfare site after 2026-12-04T17:00Z.",
+ "not_established": "No deployment, traffic, request, order or revenue."
+}
