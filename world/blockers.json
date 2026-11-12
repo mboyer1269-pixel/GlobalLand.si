@@ -142,22 +142,25 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 515,
-    "turns_without_verified_revenue": 515,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 516,
+    "turns_without_verified_revenue": 516,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-12T01:37:39Z",
-    "last_outcome_turn": "THINK-1794447001",
-    "last_productive_turn": "THINK-1794447361",
-    "last_turn": "THINK-1794447361",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794448801",
+    "last_productive_turn": "THINK-1794448801",
+    "last_turn": "THINK-1794448801",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/tender-positioning/raw/stotles-pricing.html"
+      "outcome": true,
+      "mission_outcomes": [
+        "TENDER-SERVICE-COMMERCIAL-POSITIONING"
       ],
-      "new_product_count": 1,
+      "new_products": [
+        "products/services/tender-positioning/decision.json",
+        "products/services/tender-positioning/offer-en-fr.md"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
