@@ -1,0 +1,31 @@
+{
+  "synthetic_only": true,
+  "runs": [
+    {
+      "command": [
+        "python3",
+        "products/services/tender-instant-preview/tests/parity.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/products/services/tender-instant-preview/tests/parity.py\", line 26, in <module>\n    b = (RAW / (nid + '.json')).read_bytes(); P[nid] = json.loads(b)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/pathlib.py\", line 1051, in read_bytes\n    with self.open(mode='rb') as f:\n         ^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/pathlib.py\", line 1045, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'products/services/tender-refresh/raw/105246-2026.json'\n"
+    },
+    {
+      "command": [
+        "python3",
+        "products/services/tender-instant-preview/tests/ui_test.py"
+      ],
+      "returncode": 0,
+      "stdout": "9 / 11\nFAIL {'check': '105246-2026 stub ran', 'pass': False, 'detail': \"odules/cjs/loader:254:19)\\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\\n    at node:internal/main/run_main_module:36:49 {\\n  errno: -2,\\n  code: 'ENOENT',\\n  syscall: 'open',\\n  path: 'products/services/tender-refresh/raw/105246-2026.json'\\n}\\n\\nNode.js v22.23.4\\n\"}\nFAIL {'check': '105838-2026 stub ran', 'pass': False, 'detail': \"odules/cjs/loader:254:19)\\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\\n    at node:internal/main/run_main_module:36:49 {\\n  errno: -2,\\n  code: 'ENOENT',\\n  syscall: 'open',\\n  path: 'products/services/tender-refresh/raw/105838-2026.json'\\n}\\n\\nNode.js v22.23.4\\n\"}\n",
+      "stderr": ""
+    }
+  ],
+  "hashes": {
+    "products/sites/open-software-tenders/5e2c8a91f4b7036d9a1e7c4b28f0d653.txt": "de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f",
+    "products/sites/open-software-tenders/index.html": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450",
+    "products/sites/open-software-tenders/iwms-checklist.html": "56c79b638aa377222e34aae5b2da58c94fd0520fd1b0015adaf73c2ea137508b",
+    "products/sites/open-software-tenders/llms.txt": "da4c55c3b15f24da60365272ea295a9d46d5d8b34f3b23a3f49b94a8bb597bbc",
+    "products/sites/open-software-tenders/preview.html": "eba4d7aca2fa0707e153cb357a84ccaccd75624d0c640404624d412b70490fd3",
+    "products/sites/open-software-tenders/tender-deadlines.ics": "23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b"
+  }
+}
