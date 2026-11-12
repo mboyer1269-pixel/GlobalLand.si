@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "12466 b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707\n\n",
+  "artifacts": [
+    "products/sites/open-software-tenders/index.html",
+    "products/services/tender-offer-test/index.diff",
+    "products/receipts/TASK-179444910114.json"
+  ],
+  "request": {
+    "id": "TASK-179444910114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T02:05:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import pathlib,difflib,hashlib\nS=pathlib.Path('products/sites/open-software-tenders/index.html');O=pathlib.Path('products/services/tender-offer-test')\nt=S.read_text('utf-8');assert t.count('(under 200 KB)')==1 and t.count('(moins de 200 Ko)')==1\nt=t.replace('(under 200 KB)','(under 20 KB, the size of a typical single release package)').replace('(moins de 200 Ko)','(moins de 20 Ko, la taille d’un paquet de publication habituel)')\nS.write_text(t,'utf-8')\nb=(O/'baseline-index.html').read_text('utf-8');bl=(O/'baseline-llms.txt').read_text('utf-8');nl=pathlib.Path('products/sites/open-software-tenders/llms.txt').read_text('utf-8')\nd=''.join(difflib.unified_diff(b.splitlines(True),t.splitlines(True),'a/index.html','b/index.html'))+''.join(difflib.unified_diff(bl.splitlines(True),nl.splitlines(True),'a/llms.txt','b/llms.txt'))\n(O/'index.diff').write_text(d,'utf-8');print(len(t.encode()),hashlib.sha256(t.encode()).hexdigest())"
+      ],
+      "inputs": [
+        "products/sites/open-software-tenders/",
+        "products/services/tender-offer-test/"
+      ],
+      "outputs": [
+        "products/sites/open-software-tenders/index.html",
+        "products/services/tender-offer-test/index.diff"
+      ],
+      "mission_id": "TENDER-VERIFIED-BRIEF-OFFER-TEST"
+    },
+    "description": "Broker action during THINK-1794449101",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179444910114",
+  "input_sha256": "d8d2b8e2b9ff07a5e8752a4197c30c495c6379063967ce021627117eca55fdba"
+}
