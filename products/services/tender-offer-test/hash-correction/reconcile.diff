@@ -1,0 +1,79 @@
+--- fulfillment/reconcile.py
++++ hash-correction/reconcile.py
+@@ -8,6 +8,9 @@
+ LIMIT = 20000
+ EM = re.compile(r"[\w.+-]+@[\w-]+(\.[\w-]+)+")
+ PH = re.compile(r"\+\d[\d ()-]{7,}\d")
++def out(s):
++    sys.stdout.buffer.write((s + "\n").encode("utf-8"))
++    sys.stdout.buffer.flush()
+ def red(s):
+     return PH.sub("[phone redacted]", EM.sub("[email redacted]", str(s or "")))
+ def utc(s):
+@@ -18,26 +21,26 @@
+     return d.astimezone(timezone.utc) if d.tzinfo else None
+ def fmt(d):
+     return d.strftime("%Y-%m-%d %H:%M UTC")
+-DISC = "Produced by autonomous AI agents (GlobalLand). Not legal or procurement advice. / Produit par des agents d'IA autonomes (GlobalLand). Ce n'est pas un avis juridique ni en marches publics."
++DISC = "Produced by autonomous AI agents (GlobalLand). Not legal or procurement advice. / Produit par des agents d'IA autonomes (GlobalLand). Ce n'est pas un avis juridique ni en marchés publics."
+ def refuse(en, fr):
+-    print("REFUSED / REFUSE\nEN: " + en + "\nFR: " + fr + "\n" + DISC)
++    out("REFUSED / REFUSÉ\nEN: " + en + "\nFR: " + fr + "\n" + DISC)
+     sys.exit(2)
+ def main():
+     path, nid = sys.argv[1], sys.argv[2].strip()
+     now = utc(sys.argv[3]) if len(sys.argv) > 3 else datetime.now(timezone.utc)
+     raw = open(path, "rb").read()
+     if len(raw) >= LIMIT:
+-        refuse(f"pasted text is {len(raw)} bytes; this offer accepts under {LIMIT} bytes.", f"le texte colle fait {len(raw)} octets ; l'offre accepte moins de {LIMIT} octets.")
++        refuse(f"pasted text is {len(raw)} bytes; this offer accepts under {LIMIT} bytes.", f"le texte collé fait {len(raw)} octets ; l'offre accepte moins de {LIMIT} octets.")
+     h = hashlib.sha256(raw).hexdigest()
+     try:
+         doc = json.loads(raw.decode("utf-8"))
+     except (UnicodeDecodeError, ValueError) as e:
+-        refuse(f"pasted text is not complete UTF-8 OCDS JSON ({type(e).__name__}); sha256 {h}. Please paste the full release package text.", f"le texte colle n'est pas un JSON OCDS UTF-8 complet ; sha256 {h}. Collez le paquet complet.")
++        refuse(f"pasted text is not complete UTF-8 OCDS JSON ({type(e).__name__}); sha256 {h}. Please paste the full release package text.", f"le texte collé n'est pas un JSON OCDS UTF-8 complet ; sha256 {h}. Collez le paquet complet.")
+     rels = doc.get("releases", [doc]) if isinstance(doc, dict) else []
+     rel = next((r for r in rels if isinstance(r, dict) and r.get("id") == nid), None)
+     if rel is None:
+         ids = [r.get("id") for r in rels if isinstance(r, dict)]
+-        refuse(f"notice {nid} is not in the pasted text (release ids found: {ids}); sha256 {h}.", f"l'avis {nid} n'est pas dans le texte colle (identifiants : {ids}) ; sha256 {h}.")
++        refuse(f"notice {nid} is not in the pasted text (release ids found: {ids}); sha256 {h}.", f"l'avis {nid} n'est pas dans le texte collé (identifiants : {ids}) ; sha256 {h}.")
+     canon = hashlib.sha256(json.dumps(rel, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
+     t = rel.get("tender") or {}
+     lots = t.get("lots") or []
+@@ -93,9 +96,9 @@
+     cpv = [(t.get("classification") or {}).get("id")] + [c.get("id") for i in t.get("items", []) for c in i.get("additionalClassifications", [])]
+     o = ["GlobalLand one-notice source-reconciliation brief / Note de rapprochement des sources (un avis)", DISC,
+          f"Notice / Avis: {nid}   OCID: {rel.get('ocid')}   release date: {rel.get('date')}   tags: {rel.get('tag')}",
+-         f"SHA-256 of the exact pasted text we checked / empreinte du texte verifie: {h} ({len(raw)} bytes)",
+-         f"Whitespace-independent SHA-256 of this release (canonical JSON, sorted keys) / empreinte canonique: {canon}",
+-         "We did not visit any link or portal and cannot confirm this text matches the live official record; compare the hashes and fields yourself. / Nous n'avons consulte aucun lien ni portail ; comparez vous-meme les empreintes et les champs.",
++         f"SHA-256 of the exact pasted text we checked / empreinte du texte vérifié : {h} ({len(raw)} bytes)",
++         f"Formatting-independent SHA-256 of the selected release (canonical JSON: sorted keys, no spaces between elements; spaces inside text values still count; not proof of authenticity) / empreinte canonique (clés triées ; tolère la mise en forme, pas les espaces dans les valeurs ; ne prouve pas l'authenticité): {canon}",
++         "We did not visit any link or portal and cannot confirm this text matches the live official record; compare the hashes and fields yourself. / Nous n'avons consulté aucun lien ni portail ; comparez vous-même les empreintes et les champs.",
+          "", "== 1. Stated facts (quoted from your pasted text) ==",
+          f"Buyer: {red((rel.get('buyer') or {}).get('name'))}", f"Title: {red(t.get('title'))}",
+          f"Scope (tender.description): {red(t.get('description'))}",
+@@ -106,14 +109,14 @@
+     o += ["", "== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) =="] + ([f"  - {m}" for m in must] or ["  - none found in the pasted text"])
+     o += ["", "== 4. Our recommendations (not buyer requirements) ==", "  - Confirm the deadline on the official notice and leave a buffer before it.", "  - Obtain the full tender pack through the submission route above before deciding.", "  - Check each stated requirement in section 3 against your own certificates and policies.", "  - Compare the award weights with your pricing position.", "  - Bid only if every unknown in section 5 is resolved in your favour."]
+     o += ["", "== 5. Unknowns =="] + [f"  - {u}" for u in unk]
+-    o += ["", "== Resume en francais ==", f"Avis : {nid} ; acheteur : {red((rel.get('buyer') or {}).get('name'))}", f"Date limite (UTC) : {dl}",
+-          f"Valeur : {'; '.join(vals) if vals else 'aucune valeur dans la publication collee'}", f"Voie de depot (citee) : {route}",
+-          f"Contradictions signalees : {len(flags)} ; exigences citees (en anglais, section 3) : {len(must)}.",
+-          "Recommandations (les notres) : confirmer la date limite sur l'avis officiel ; obtenir le dossier complet par la voie de depot ; verifier chaque exigence ; comparer les ponderations avec votre prix.",
+-          "Inconnues : documents d'appel d'offres non fournis ni lus ; date limite de clarification ; votre admissibilite et inscription" + (" ; valeur et devise." if not vals else "."),
+-          "Aucune admissibilite n'est affirmee. / No eligibility is asserted."]
++    o += ["", "== Résumé en français ==", f"Avis : {nid} ; acheteur : {red((rel.get('buyer') or {}).get('name'))}", f"Date limite (UTC) : {dl}",
++          f"Valeur : {'; '.join(vals) if vals else 'aucune valeur dans la publication collée'}", f"Voie de dépôt (citée) : {route}",
++          f"Contradictions signalées : {len(flags)} ; exigences citées (en anglais, section 3) : {len(must)}.",
++          "Recommandations (les nôtres) : confirmer la date limite sur l'avis officiel ; obtenir le dossier complet par la voie de dépôt ; vérifier chaque exigence ; comparer les pondérations avec votre prix.",
++          "Inconnues : documents d'appel d'offres non fournis ni lus ; date limite de clarification ; votre admissibilité et inscription" + (" ; valeur et devise." if not vals else "."),
++          "Aucune admissibilité n'est affirmée. / No eligibility is asserted."]
+     txt = "\n".join(o)
+     assert len(txt) < 32000, len(txt)
+-    print(txt)
++    out(txt)
+ if __name__ == "__main__":
+     main()
