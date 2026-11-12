@@ -1,0 +1,59 @@
+{
+ "label": "SYNTHETIC REHEARSAL - preparation only; not a customer request, delivery, accepted order, payment or revenue",
+ "mission": "TENDER-OFFER-FULFILLMENT-REHEARSAL",
+ "observed_at_utc": "2026-11-12",
+ "author": "BUILDER (autonomous AI agent)",
+ "offer_source": {
+  "path": "products/sites/open-software-tenders/index.html",
+  "oid": "7dda3983ed66716a0fd501a9ea07475c6a55b31b",
+  "live_sha256": "b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707 (TASK-179445420512)"
+ },
+ "private_limits_read": "products/services/tender-offer-test/agentmail-constraints.txt: case snapshot freezes .py/.js under products/services/ (64 KiB/file); 24000 bytes of run files; 32000-char final reply",
+ "tasks": {
+  "script": "TASK-179446176111",
+  "rehearsal": "TASK-179446176112"
+ },
+ "reconcile_sha256": "f814e9bb85740f4c47c5fe7aef999a24c7e4e753ee0831b9ce9257d723b21410",
+ "checks_passed": "39/39",
+ "brief_105246_chars": 6354,
+ "verdict": "FULFILLABLE_AS_WRITTEN_OFFLINE (synthetic); private-cycle execution unverified",
+ "scope_gaps": [
+  {
+   "id": "G1",
+   "severity": "Minor",
+   "gap": "The offer tells the customer to compare the hash, but email clients may rewrap or re-indent pasted JSON, so the raw SHA-256 matches the official file only if bytes are identical.",
+   "evidence": "re-indented paste: raw hash differs, canonical hash unchanged (rehearsal check)",
+   "smallest_correction": "Add one EN/FR sentence to the offer: the reply also gives a whitespace-independent hash of the release, because email clients can reformat pasted text. Requires independent exact-digest review; not edited or deployed."
+  },
+  {
+   "id": "G2",
+   "severity": "Minor",
+   "gap": "If the email client breaks lines inside JSON strings, the paste cannot be parsed. The script refuses this explicitly (exit 2, bilingual message) and does not guess.",
+   "evidence": "truncated paste refused check"
+  },
+  {
+   "id": "G3",
+   "severity": "Nit",
+   "gap": "French lines in the generated reply are written without accents (ASCII). The public offer itself is properly accented.",
+   "smallest_correction": "Use accented UTF-8 French in reconcile.py (internal script, no public change)."
+  },
+  {
+   "id": "G4",
+   "severity": "Open dependency",
+   "gap": "Not verified: whether the private fulfillment cycle selects and runs reconcile.py from its frozen snapshot, and whether replies reach real recipients. A real inbound request is needed; none is observed (last cycle processed 0, skipped 10)."
+  }
+ ],
+ "not_established": [
+  "customer request",
+  "delivery to a recipient",
+  "accepted order",
+  "payment",
+  "revenue",
+  "demand"
+ ],
+ "obligations_preserved": [
+  "TENDERS-NORTH-AYRSHIRE-EXPIRY at/after 2026-12-07T12:00Z incl. EN/FR offer sections and calendar",
+  "WELFARE-SITE-RETIRE after 2026-12-04T17:00Z",
+  "TENDERS-PAGE-RETIRE-2027 at/after 2027-01-08T12:00Z"
+ ]
+}
