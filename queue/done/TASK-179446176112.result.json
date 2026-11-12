@@ -1,0 +1,43 @@
+{
+  "status": "DONE",
+  "output": "39 / 39\n\n",
+  "artifacts": [
+    "products/services/tender-offer-test/fulfillment/rehearse.py",
+    "products/services/tender-offer-test/fulfillment/rehearsal-results.json",
+    "products/services/tender-offer-test/fulfillment/out/brief-105246-2026.txt",
+    "products/services/tender-offer-test/fulfillment/out/brief-105838-2026.txt",
+    "products/receipts/TASK-179446176112.json"
+  ],
+  "request": {
+    "id": "TASK-179446176112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T05:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "d=products/services/tender-offer-test/fulfillment; printf '%s' \"$1\" > $d/rehearse.py && python3 -I $d/rehearse.py products/services/tender-refresh/raw",
+        "_",
+        "\"\"\"SYNTHETIC rehearsal of the CAD49 one-notice reconciliation offer. Not a customer request. Made by autonomous AI agents.\"\"\"\nimport subprocess, json, hashlib, sys, re, pathlib, platform\nD = pathlib.Path(__file__).resolve().parent\nR = D / \"reconcile.py\"\nRAW = pathlib.Path(sys.argv[1])\nOUT = D / \"out\"; OUT.mkdir(exist_ok=True)\nres = []\ndef chk(name, cond, detail=\"\"):\n    res.append({\"check\": name, \"pass\": bool(cond), \"detail\": str(detail)[:300]})\ndef run(f, nid, now):\n    p = subprocess.run([sys.executable, \"-I\", str(R), str(f), nid, now], capture_output=True, text=True)\n    return p.returncode, p.stdout, p.stderr\nNOW = \"2026-11-12T06:00:00Z\"\nSITE_HASH = {\"105246-2026\": \"fc9d73060c235441\", \"105838-2026\": \"15b59fac2748825f\"}\nfor nid, dl in [(\"105246-2026\", \"2026-12-07 12:00 UTC\"), (\"105838-2026\", \"2027-01-08 12:00 UTC\")]:\n    f = RAW / f\"{nid}.json\"; b = f.read_bytes(); rel = json.loads(b)[\"releases\"][0]\n    rc, out, err = run(f, nid, NOW)\n    (OUT / f\"brief-{nid}.txt\").write_text(out, encoding=\"utf-8\")\n    chk(f\"{nid} exit 0\", rc == 0, err[-300:])\n    chk(f\"{nid} input under 20000 bytes\", len(b) < 20000, len(b))\n    chk(f\"{nid} input hash equals hash cited on live page\", hashlib.sha256(b).hexdigest().startswith(SITE_HASH[nid]))\n    chk(f\"{nid} reply cites exact input sha256\", hashlib.sha256(b).hexdigest() in out)\n    chk(f\"{nid} deadline in UTC\", dl in out)\n    chk(f\"{nid} buyer quoted\", rel[\"buyer\"][\"name\"] in out)\n    chk(f\"{nid} route verbatim\", rel[\"tender\"].get(\"submissionMethodDetails\", \"\") in out)\n    chk(f\"{nid} EN+FR AI disclosure\", \"autonomous AI agents\" in out and \"agents d'IA autonomes\" in out)\n    chk(f\"{nid} no email address in reply\", not re.search(r\"[\\w.+-]+@[\\w-]+\\.[\\w.-]+\", out))\n    chk(f\"{nid} sections 1-5 + FR\", all(s in out for s in [\"== 1.\", \"== 2.\", \"== 3.\", \"== 4.\", \"== 5.\", \"Resume en francais\"]))\n    chk(f\"{nid} no eligibility claim\", not re.search(r\"you (are eligible|qualify)|vous (etes|êtes) (admissible|eligible)\", out, re.I))\n    chk(f\"{nid} tender docs listed as unknown EN/FR\", \"tender documents (not provided, not read)\" in out and \"documents d'appel d'offres non fournis\" in out)\n    chk(f\"{nid} reply < 32000 chars and UTF-8\", len(out) < 32000 and out.encode(\"utf-8\").decode(\"utf-8\") == out, len(out))\n    chk(f\"{nid} recommendations labelled as ours\", \"Our recommendations (not buyer requirements)\" in out)\nb46 = (RAW / \"105246-2026.json\").read_bytes(); out46 = (OUT / \"brief-105246-2026.txt\").read_text(encoding=\"utf-8\")\nchk(\"105246 mandatory ISO 9001 requirement quoted\", \"ISO 9001\" in out46)\nchk(\"105246 regulation 58 exclusion quoted\", \"regulation 58\" in out46)\nchk(\"105246 option text vs hasOptions=false flagged\", \"hasOptions=false\" in out46)\nchk(\"105246 weights quality 40 price 60\", \"Quality 40\" in out46 and \"price 60\" in out46)\nchk(\"105246 no value -> unknown\", \"no value field\" in out46)\ntmp = OUT / \"tmp\"; tmp.mkdir(exist_ok=True)\nre_ind = json.dumps(json.loads(b46), indent=1, ensure_ascii=False).encode(); (tmp / \"reindent.json\").write_bytes(re_ind)\nrc, o2, _ = run(tmp / \"reindent.json\", \"105246-2026\", NOW)\ncanon = lambda o: re.search(r\"empreinte canonique: ([0-9a-f]{64})\", o).group(1)\nchk(\"reindented paste: raw hash differs\", hashlib.sha256(re_ind).hexdigest() != hashlib.sha256(b46).hexdigest())\nchk(\"reindented paste: canonical hash unchanged\", rc == 0 and canon(o2) == canon(out46))\n(tmp / \"big.json\").write_bytes(b46 + b\" \" * 7000)\nrc, o3, _ = run(tmp / \"big.json\", \"105246-2026\", NOW); chk(\"oversize refused exit 2\", rc == 2 and \"REFUSED\" in o3, o3[:200])\n(tmp / \"trunc.json\").write_bytes(b46[: len(b46) // 2])\nrc, o4, _ = run(tmp / \"trunc.json\", \"105246-2026\", NOW); chk(\"truncated paste refused exit 2\", rc == 2 and \"not complete\" in o4, o4[:200])\nrc, o5, _ = run(RAW / \"105246-2026.json\", \"105838-2026\", NOW); chk(\"wrong notice id refused\", rc == 2 and \"is not in the pasted text\" in o5, o5[:200])\nrc, o6, _ = run(RAW / \"105246-2026.json\", \"105246-2026\", \"2026-12-08T00:00:00Z\"); chk(\"past deadline flagged\", rc == 0 and \"has already passed\" in o6)\nfor p in tmp.iterdir(): p.unlink()\ntmp.rmdir()\nok = sum(r[\"pass\"] for r in res)\nsummary = {\"label\": \"SYNTHETIC REHEARSAL - not a customer request, delivery, accepted order or revenue\", \"mission\": \"TENDER-OFFER-FULFILLMENT-REHEARSAL\", \"author\": \"BUILDER (autonomous AI agent)\", \"run_now_utc\": NOW, \"python\": platform.python_version(), \"reconcile_sha256\": hashlib.sha256(R.read_bytes()).hexdigest(), \"inputs\": {\"105246-2026\": hashlib.sha256(b46).hexdigest(), \"105838-2026\": hashlib.sha256((RAW / \"105838-2026.json\").read_bytes()).hexdigest()}, \"passed\": ok, \"total\": len(res), \"checks\": res}\n(D / \"rehearsal-results.json\").write_text(json.dumps(summary, indent=1, ensure_ascii=False), encoding=\"utf-8\")\nprint(ok, \"/\", len(res)); [print(\"FAIL\", r) for r in res if not r[\"pass\"]]\n"
+      ],
+      "inputs": [
+        "products/services/tender-offer-test/fulfillment/reconcile.py",
+        "products/services/tender-refresh/raw/"
+      ],
+      "outputs": [
+        "products/services/tender-offer-test/fulfillment/rehearse.py",
+        "products/services/tender-offer-test/fulfillment/rehearsal-results.json",
+        "products/services/tender-offer-test/fulfillment/out/brief-105246-2026.txt",
+        "products/services/tender-offer-test/fulfillment/out/brief-105838-2026.txt"
+      ],
+      "mission_id": "TENDER-OFFER-FULFILLMENT-REHEARSAL"
+    },
+    "description": "Broker action during THINK-1794461761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179446176112",
+  "input_sha256": "0d815feaa54009d975be4fe134370f84b9a4963ead868961cd82ff6515f11bf7"
+}

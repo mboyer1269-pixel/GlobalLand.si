@@ -1,0 +1,211 @@
+{
+ "label": "SYNTHETIC REHEARSAL - not a customer request, delivery, accepted order or revenue",
+ "mission": "TENDER-OFFER-FULFILLMENT-REHEARSAL",
+ "author": "BUILDER (autonomous AI agent)",
+ "run_now_utc": "2026-11-12T06:00:00Z",
+ "python": "3.11.2",
+ "reconcile_sha256": "f814e9bb85740f4c47c5fe7aef999a24c7e4e753ee0831b9ce9257d723b21410",
+ "inputs": {
+  "105246-2026": "fc9d73060c235441ddae395c6cd548b29e3724ae2678af7f3bdcd42f5f0ea935",
+  "105838-2026": "15b59fac2748825f3e80fee02c2578adb3bcbce27a624f06580cb0ecc2548e15"
+ },
+ "passed": 39,
+ "total": 39,
+ "checks": [
+  {
+   "check": "105246-2026 exit 0",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 input under 20000 bytes",
+   "pass": true,
+   "detail": "13430"
+  },
+  {
+   "check": "105246-2026 input hash equals hash cited on live page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 reply cites exact input sha256",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 deadline in UTC",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 buyer quoted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 route verbatim",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 EN+FR AI disclosure",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 no email address in reply",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 sections 1-5 + FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 no eligibility claim",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 tender docs listed as unknown EN/FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 reply < 32000 chars and UTF-8",
+   "pass": true,
+   "detail": "6354"
+  },
+  {
+   "check": "105246-2026 recommendations labelled as ours",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 exit 0",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 input under 20000 bytes",
+   "pass": true,
+   "detail": "9748"
+  },
+  {
+   "check": "105838-2026 input hash equals hash cited on live page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 reply cites exact input sha256",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 deadline in UTC",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 buyer quoted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 route verbatim",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 EN+FR AI disclosure",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 no email address in reply",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 sections 1-5 + FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 no eligibility claim",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 tender docs listed as unknown EN/FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 reply < 32000 chars and UTF-8",
+   "pass": true,
+   "detail": "4074"
+  },
+  {
+   "check": "105838-2026 recommendations labelled as ours",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246 mandatory ISO 9001 requirement quoted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246 regulation 58 exclusion quoted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246 option text vs hasOptions=false flagged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246 weights quality 40 price 60",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246 no value -> unknown",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "reindented paste: raw hash differs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "reindented paste: canonical hash unchanged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "oversize refused exit 2",
+   "pass": true,
+   "detail": "REFUSED / REFUSE\nEN: pasted text is 20430 bytes; this offer accepts under 20000 bytes.\nFR: le texte colle fait 20430 octets ; l'offre accepte moins de 20000 octets.\nProduced by autonomous AI agents (G"
+  },
+  {
+   "check": "truncated paste refused exit 2",
+   "pass": true,
+   "detail": "REFUSED / REFUSE\nEN: pasted text is not complete UTF-8 OCDS JSON (JSONDecodeError); sha256 009990c818ee35ec38d02dd3f88f07a97ebd611922e9b391fd108447cd774d9a. Please paste the full release package text."
+  },
+  {
+   "check": "wrong notice id refused",
+   "pass": true,
+   "detail": "REFUSED / REFUSE\nEN: notice 105838-2026 is not in the pasted text (release ids found: ['105246-2026']); sha256 fc9d73060c235441ddae395c6cd548b29e3724ae2678af7f3bdcd42f5f0ea935.\nFR: l'avis 105838-2026 "
+  },
+  {
+   "check": "past deadline flagged",
+   "pass": true,
+   "detail": ""
+  }
+ ]
+}
