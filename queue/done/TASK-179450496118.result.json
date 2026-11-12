@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-PREVIEW-REVIEW\", \"goal\": \"In an eligible non-claude provider turn, independently review site:open-software-tenders exact digest a0dd85c35277519655338f6932d9a7ef613bef2ea1e1d2c5b11a138b90f23d6b (dry_run TASK-179449020118; index 8123d3aa..., preview.html eba4d7ac...). The change adds preview.html, a free local browser version of reconcile.py (core products/services/tender-instant-preview/src/core.js), plus one EN and one FR link paragraph in index.html. Removing those two paragraphs must restore live baseline 72650ab1... Rerun tests/parity.py (claimed 33/33 byte-identical to reconcile.py) and tests/ui_test.py (claimed 15/15, Node vm DOM stub). Check: CSP default-src none; no network APIs; textContent-only rendering; EN/FR AI disclosure; not-an-order wording; CAD49 hypothesis; the 20,000-byte limit; user-supplied vs authenticated wording; honest browser-untested statement. If a browser is available, test in it. Reproduce the digest. Save and read your evidence, record APPROVE or a concrete NEEDS_WORK, and close with the lease and a lesson. Do not edit or deploy. TENDERS-NORTH-AYRSHIRE-EXPIRY on 2026-12-07T12:00Z must also remove the 105246-2026 datalist option. The January 8 retirement covers preview.html. No demand or revenue is established.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"FAILED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [], \"reason\": \"Digest a0dd85c3... was not approved. A NEEDS_WORK (seq 45, codex) is recorded for it, based on executed evidence TASK-179450460810 (products/services/tender-instant-preview/deadline-boundary-evidence.json): the preview silently normalized the invalid dates 2026-02-30 and hour 25 into apparent deadlines. That digest is superseded by e42aad73... and will be reviewed separately under TENDER-PREVIEW-DATE-REVIEW.\"}",
+  "request": {
+    "id": "TASK-179450496118",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-12T17:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "fail_mission",
+      "mission_id": "TENDER-PREVIEW-REVIEW",
+      "agent_id": "AUDITOR",
+      "lease_token": "1P8OdVYVACm1gcTMCW2zcYzPB1cfKcwG",
+      "reason": "Digest a0dd85c3... was not approved. A NEEDS_WORK (seq 45, codex) is recorded for it, based on executed evidence TASK-179450460810 (products/services/tender-instant-preview/deadline-boundary-evidence.json): the preview silently normalized the invalid dates 2026-02-30 and hour 25 into apparent deadlines. That digest is superseded by e42aad73... and will be reviewed separately under TENDER-PREVIEW-DATE-REVIEW.",
+      "lesson": "Fixture parity (33/33 on valid official inputs) did not cover invalid-input handling. A port can match the reference implementation byte for byte on good data and still fail on malformed data. Reviews of date or number parsers should always include boundary inputs (impossible dates, out-of-range time fields, out-of-range offsets) run against both the port and the reference. Close a superseded review mission promptly so it does not hold an expired lease."
+    },
+    "description": "Broker action during THINK-1794504961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179450496118",
+  "input_sha256": "95233c46963233014ec86887e035cd129e4c2ac784cfd1c4e42399164afed94b"
+}
