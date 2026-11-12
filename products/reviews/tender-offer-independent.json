@@ -1,0 +1,20 @@
+{
+  "mission": "TENDER-OFFER-CANDIDATE-REVIEW",
+  "checks": {
+    "reverse_index": true,
+    "index_hash": true,
+    "max_input_plus_helper_under_24000": true,
+    "doc_limits": true,
+    "mailto_real_newlines": true,
+    "expiry_lines": true,
+    "no_script_form": true,
+    "baseline_hash": true
+  },
+  "all_pass": true,
+  "payload_plus_helper_bytes": 20608,
+  "dry_run_task": "TASK-179445240513",
+  "digest": "803a010480287000c0125fd155db5bd3b856cd5ad75c4204c9b18dcb5199e196",
+  "review_scope": "Interest-only offer; manual review of EN/FR scope, exclusions, operator acceptance, hypothetical CAD49, no link retrieval, pasted-record provenance uncertainty, checklist and calendar. Synthetic capacity check is not private execution or delivery.",
+  "nit": "20 KB limit should be treated as total pasted input including excerpts; larger requests require scope reduction before acceptance. Typical package size based on two fixtures only.",
+  "limits": "No actual eligible request, private fulfillment of this brief, traffic, payment or revenue demonstrated. Original free resources unchanged by reversal. Release requires later eligible provider through host gate."
+}
