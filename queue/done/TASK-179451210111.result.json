@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "releases 33 next None\n107764-2026 ['tender'] active 2026-12-14T12:00:00Z | Supply of Replacement Air Circuit Breakers | 31210000,31212000,31220000,31681300,31712110,31712113\n107744-2026 ['tender'] active 2026-12-09T17:00:00Z | Provision - Senior GP Clinical Leadership to support delivery - East Kent Virtual Wards | 85323000\n107686-2026 ['tender'] active 2027-01-04T09:00:00Z | PGCE Provider | 80000000\n107683-2026 ['tender'] active 2026-12-14T12:00:00Z | Year-round Welcome Centre | 85000000,85311000\n107545-2026 ['tender'] active 2026-12-17T12:00:00Z | NHSDG Estates & Property - Term Joinery Contractor | 45420000,45421000,50700000\n107509-2026 ['tender'] active 2026-12-04T12:00:00Z | Provision of an Adult ADHD Neurodevelopmental Practitioner Service | 85100000\n107409-2026 ['tender'] active 2026-12-17T12:00:00Z | NHSDG Estates & Property Grounds Maintenance | 45112700,77310000,77314000\n107400-2026 ['tender'] active 2026-12-17T12:00:00Z | NHSDG Estates & Property Grounds Maintenance | 45112700,77310000,77314000\n107373-2026 ['tender'] active 2026-12-11T17:00:00Z | Provision of Insurance and Risk Rleated Services 2027 to Rural Stirling Housing Associatio | 66000000,66510000,66513000,66513100,66515000,66515100,66515200,66515410,66515411\n107250-2026 ['tender'] active 2026-12-16T10:00:00Z | Children’s Service - Seeking Children’s Views | 85311300\n107240-2026 ['tender'] active 2026-12-08T23:59:00Z | Provision of two Adult Recovery Houses | 85100000\n107223-2026 ['tender'] active 2026-12-04T12:00:00Z | BHCC Adults Community Support and Supported Living Light Touch Dynamic Purchasing System ( | 85000000,85300000\n107056-2026 ['tender'] active 2026-12-15T12:00:00Z | Clinical Diagnosis and Treatment | 85100000,85121240,85121251,85121281,85121282,85121292,85130000\n106971-2026 ['tender'] active 2026-12-11T12:00:00Z | Clyde Valley Group - Contract for Roof Repairs and Minor Works | 44112400,44112500,45260000,45261200,45261210,45261211,45261212,45261410,45261900\n106870-2026 ['tender'] active 2026-12-31 | Outpatient Pharmacy Services | 85149000\n106832-2026 ['tender'] active 2026-12-11T12:00:00Z | EDC/2026/4497 Framework Agreement for Drainage Civil Engineering Works | 45111240,45232411,45232450,45232451,45232452,45232453\n106805-2026 ['tender'] active 2026-12-10T12:00:00Z | CWC26055 - Severe Mental Illness (SMI) Healthy Lifestyle Service | 85100000,85140000,85323000\n106733-2026 ['tender'] active 2026-12-17T12:00:00Z | Mobile Voice and Data Services | 31712112,32250000,32429000,32510000,32520000,64212000,64216110,64227000\n106687-2026 ['tender'] active 2026-12-10T13:00:00Z | NHSGGC Provision of Breastfeeding Support Services | 85000000\n106577-2026 ['tender'] active 2026-12-10T17:00:00Z | Legal Services Framework Agreement - Scottish Futures Trust | 79100000,79110000,79111000,79112000,79140000\n106518-2026 ['tender'] active 2026-12-18T12:00:00Z | CE-215-25 - Supply, Implementation and Ongoing Support of a Leisure Management System | 48000000,72222300\n106517-2026 ['tender'] active 2026-12-11T12:00:00Z | Grounds Maintenance Services: 2027-2031 | 77314000\n106411-2026 ['tender'] active 2026-12-18T12:00:00Z | All Age Community Mild to Moderate Perinatal Mental Health Service | 85100000\n106389-2026 ['tender'] active 2026-12-09T12:00:00Z | Purchase & Installation of Multibeam Echosounder System | 38000000,38110000,38114000\n106307-2026 ['tender'] active 2026-12-09T12:00:00Z | Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management Sys | 48420000,48421000,72000000,72212420,72212421,72514000\n106281-2026 ['tender'] active 2026-12-09T12:00:00Z | Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management Sys | 48420000,48421000,72000000,72212420,72212421,72514000\n106268-2026 ['planning', 'tender'] active 2026-11-23 | CP-401 - Aster Group External Decorations | 45443000\n106256-2026 ['tender'] active 2027-01-08T12:00:00Z | Waste Management Broker Services | 90500000\n106234-2026 ['tender'] active 2026-12-04T14:00:00Z | SWAG Cancer Alliance Lung Cancer Screening Programme | 85100000\n106202-2026 ['tender'] active 2026-12-09T17:00:00Z | Provision of Insurance and Risk Related Services to Pineview Housing Association Limited | 66510000,66512000,66512100,66513000,66513100,66513200,66514110,66515000,66515100\n106031-2026 ['tender'] active 2026-12-09T12:00:00Z | Provision of Grounds Maintenance and Winter Gritting Services | 77314000,90620000\n106021-2026 ['tender'] active 2026-12-04T12:00:00Z | The Provision of a Mental Health Crisis Text Support Service on behalf of NHS Cheshire and | 79430000,85100000,85121270,85323000\n105988-2026 ['tender'] active 2026-12-10T12:00:00Z | Integrated Community Care Service for SCI Patients | 85100000\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179451210111.json"
+  ],
+  "request": {
+    "id": "TASK-179451210111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-12T19:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json\nd=json.load(open('products/research/tender-continuity/raw-page1.json'))\nrs=d.get('releases',[])\nprint('releases',len(rs),'next',d.get('links',{}).get('next'))\nfor r in rs:\n  t=r.get('tender',{});tp=t.get('tenderPeriod',{}) or {}\n  cl=t.get('classification',{}) or {}\n  cpvs=[cl.get('id','')]+[c.get('classification',{}).get('id','') for it in t.get('items',[]) for c in [it] if c.get('classification')]+[a.get('id','') for it in t.get('items',[]) for a in it.get('additionalClassifications',[])]\n  print(r.get('id'),r.get('tag'),t.get('status'),tp.get('endDate'),'|',(t.get('title') or '')[:90],'|',','.join(sorted(set(x for x in cpvs if x)))[:80])\n"
+      ],
+      "inputs": [
+        "products/research/tender-continuity/raw-page1.json"
+      ],
+      "outputs": [],
+      "mission_id": "TENDER-CONTINUITY-CANDIDATES"
+    },
+    "description": "Broker action during THINK-1794512101",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179451210111",
+  "input_sha256": "b5c414316ab1672194a266527d7ee0bcc331b826400aceba56ca388b0759c182"
+}
