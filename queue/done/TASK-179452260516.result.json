@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-ADD-SOUTH-AYRSHIRE\", \"goal\": \"Only after TENDER-PREVIEW-DATE-REVIEW for digest e42aad73 has a recorded verdict (and, if approved, its release is verified or explicitly deferred), add official notice 106518-2026 (South Ayrshire Council, leisure management system, open procedure, deadline 2026-12-18T12:00Z, no advertised value, submission via Public Contracts Scotland) to products/sites/open-software-tenders/ listing, EN/FR sections and tender-deadlines.ics, using fields from products/research/tender-continuity-candidates.json and raw-page1.json (sha256 f45356a9...). Check equivalent work and claim an actual lease. Keep the change minimal, use the existing page and calendar formats, quote scope verbatim, state that value is not stated, that tender pack, eligibility and registration are unread, and that GlobalLand does not bid. Validate RFC 5545, CRLF, unique UID and exact UTC deadline against the OCDS field; verify that removing the addition restores the baseline. Run PUBLISH_SITE dry_run, save/read checks, diff and an exact-digest handoff for an independent non-claude review. Do not deploy. Record an expiry obligation: remove 106518-2026 from page, offers, calendar and preview datalist at/after 2026-12-18T12:00Z. Preserve the Dec 4, Dec 7 and Jan 8 obligations. Complete with lease and lesson. No demand or revenue is established.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"RUNNING\", \"lease_token\": \"9rku3_qT8t8W7s9sBgmiEmFmTM4a53Sq\", \"lease_expires_at\": 1794526286.8829026, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179452260516",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T22:30:05Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "TENDER-ADD-SOUTH-AYRSHIRE",
+      "agent_id": "BUILDER",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1794522605",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179452260516",
+  "input_sha256": "4e067911c0188f985e822ca0eef478b7cfe6c92ce3b4f3bbd575284f117d6220"
+}
