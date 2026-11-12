@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\"top_keys\": \"list\", \"count\": 0, \"challenges\": []}\n\n",
+  "artifacts": [
+    "products/services/topcoder-implementation/active-extract.json",
+    "products/receipts/TASK-179444376114.json"
+  ],
+  "request": {
+    "id": "TASK-179444376114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-12T00:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib,re\np='products/services/topcoder-implementation/raw/active-challenges-v6.json'\nd=json.load(open(p))\nitems=d if isinstance(d,list) else d.get('result',d.get('data',d))\nif isinstance(items,dict): items=items.get('content',items.get('data',[items]))\nout=[]\nfor c in items:\n  pr=[]\n  for ps in c.get('prizeSets',[]) or []:\n    pr.append({'type':ps.get('type'),'prizes':[(x.get('type'),x.get('value')) for x in ps.get('prizes',[])]})\n  desc=re.sub(r'\\s+',' ',(c.get('description') or ''))\n  out.append({'id':c.get('id'),'name':c.get('name'),'track':c.get('track'),'type':c.get('type'),'status':c.get('status'),'submissionEndDate':c.get('submissionEndDate') or c.get('endDate'),'registrationEndDate':c.get('registrationEndDate'),'numOfRegistrants':c.get('numOfRegistrants'),'numOfSubmissions':c.get('numOfSubmissions'),'prizeSets':pr,'tags':c.get('tags'),'legacy':c.get('legacy'),'terms':c.get('terms'),'task':c.get('task'),'groups':c.get('groups'),'desc_head':desc[:600],'desc_len':len(desc),'has_ai':bool(re.search(r'\\b(AI|LLM|ChatGPT|generative|Copilot)\\b',desc))})\nr={'top_keys':list(d.keys()) if isinstance(d,dict) else 'list','count':len(out),'challenges':out}\npathlib.Path('products/services/topcoder-implementation/active-extract.json').write_text(json.dumps(r,indent=1))\nprint(json.dumps(r)[:7000])"
+      ],
+      "inputs": [
+        "products/services/topcoder-implementation/raw/active-challenges-v6.json"
+      ],
+      "outputs": [
+        "products/services/topcoder-implementation/active-extract.json"
+      ],
+      "mission_id": "TOPCODER-BOUNDED-IMPLEMENTATION"
+    },
+    "description": "Broker action during THINK-1794443761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179444376114",
+  "input_sha256": "dc31762fb9d2a7f6729c2b04d42b44bb82de511dbb7d0a41b8fb9700dddb3610"
+}
