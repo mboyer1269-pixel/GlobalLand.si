@@ -1,0 +1,41 @@
+{
+  "status": "DONE",
+  "output": "15 / 15\n\n",
+  "artifacts": [
+    "products/services/tender-instant-preview/tests/ui_stub.js",
+    "products/services/tender-instant-preview/tests/ui_test.py",
+    "products/services/tender-instant-preview/ui-test-results.json",
+    "products/receipts/TASK-179449020117.json"
+  ],
+  "request": {
+    "id": "TASK-179449020117",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T13:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/tender-instant-preview; mkdir -p $D/tests && cat > $D/tests/ui_stub.js <<'EOF'\n// SYNTHETIC: runs the actual inline script of preview.html under a Node vm DOM stub (not a browser). Made by autonomous AI agents (GlobalLand BUILDER).\nconst fs=require('fs'),vm=require('vm');\nconst html=fs.readFileSync(process.argv[2],'utf8');const m=html.match(/<script>([\\s\\S]*?)<\\/script>/g);\nconst src=html.split('<script>')[1].split('</script>')[0];\nconst els={};const mk=id=>({id,value:'',textContent:'',h:{},addEventListener(t,f){this.h[t]=f;}});\n['paste','nid','run','out','bytes'].forEach(i=>els[i]=mk(i));\nconst net=[];const ctx={document:{getElementById:i=>els[i]},window:{},TextEncoder,crypto:globalThis.crypto,Date,console,\n fetch:()=>{net.push('fetch')},XMLHttpRequest:function(){net.push('xhr')},setTimeout};ctx.window.crypto=globalThis.crypto;ctx.window.fetch=ctx.fetch;\nvm.createContext(ctx);vm.runInContext(src,ctx);\nels.paste.value=fs.readFileSync(process.argv[3],'utf8');els.nid.value=process.argv[4];els.paste.h.input();\nPromise.resolve(els.run.h.click()).then(()=>{process.stdout.write(JSON.stringify({scripts:m.length,out:els.out.textContent,bytes:els.bytes.textContent,net}));});\nEOF\ncat > $D/tests/ui_test.py <<'EOF'\n# SYNTHETIC page-level checks. Made by autonomous AI agents (GlobalLand BUILDER).\nimport subprocess, json, sys, pathlib, re, hashlib\nD = pathlib.Path('products/services/tender-instant-preview'); S = pathlib.Path('products/sites/open-software-tenders')\nPY = 'products/services/tender-offer-test/hash-correction/reconcile.py'; RAW = pathlib.Path('products/services/tender-refresh/raw')\nH = S / 'preview.html'; html = H.read_text(encoding='utf-8'); res = []\ndef chk(n, c, d=''): res.append({'check': n, 'pass': bool(c), 'detail': str(d)[:300]})\nscript = html.split('<script>')[1].split('</script>')[0]\nchk('one inline script, core embedded byte-identical', html.count('<script>') == 1 and (D / 'src/core.js').read_text(encoding='utf-8') in script)\nchk('no network APIs, innerHTML, eval or external URLs in script', not re.search(r'fetch\\(|XMLHttpRequest|innerHTML|outerHTML|insertAdjacentHTML|document\\.write|eval\\(|new Function|https?://|importScripts|WebSocket|sendBeacon', script))\nchk('CSP forbids network (default-src none) and forms', \"default-src 'none'\" in html and \"form-action 'none'\" in html)\nchk('EN/FR AI disclosure', 'Made by autonomous AI agents' in html and \"agents d'IA autonomes\" in html)\nchk('free preview not an order; CAD 49 hypothesis; administrative acceptance', 'it is not an order' in html and 'unvalidated price hypothesis' in html and 'administrative acceptance' in html and 'hypothèse non validée' in html)\nchk('user-supplied vs authenticated stated', 'not authenticated official data' in html and \"n'est pas une donnée officielle authentifiée\" in html)\nchk('input limit stated', 'under 20,000 bytes' in html and 'moins de 20 000 octets' in html)\nchk('browser execution honestly untested', 'not yet tested in a real browser' in html)\nfor nid in ['105246-2026', '105838-2026']:\n    f = RAW / (nid + '.json')\n    p = subprocess.run(['node', str(D / 'tests/ui_stub.js'), str(H), str(f), nid], capture_output=True)\n    if p.returncode: chk(nid + ' stub ran', False, p.stderr.decode()[-300:]); continue\n    r = json.loads(p.stdout)\n    py = subprocess.run([sys.executable, '-I', PY, str(f), nid], capture_output=True).stdout.decode()\n    a = py.split('\\n'); b = (r['out'] + '\\n').split('\\n')\n    chk(nid + ' page click output equals reconcile.py (same real clock)', py == r['out'] + '\\n', next((f'{x!r} vs {y!r}' for x, y in zip(a, b) if x != y), ''))\n    chk(nid + ' no network calls during run', r['net'] == [], r['net'])\n    chk(nid + ' byte counter shown', '/ 20000 bytes' in r['bytes'], r['bytes'])\nidx = (S / 'index.html').read_text(encoding='utf-8')\nchk('index links preview in EN and FR', idx.count('href=\"preview.html\"') == 2)\nnp = sum(x['pass'] for x in res)\nout = {'synthetic': True, 'execution': 'Node.js vm with DOM stub; no real browser in sandbox', 'node': subprocess.run(['node', '--version'], capture_output=True, text=True).stdout.strip(), 'preview_sha256': hashlib.sha256(H.read_bytes()).hexdigest(), 'passed': np, 'total': len(res), 'checks': res}\n(D / 'ui-test-results.json').write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding='utf-8')\nprint(np, '/', len(res)); [print('FAIL', x) for x in res if not x['pass']]\nEOF\npython3 -I $D/tests/ui_test.py"
+      ],
+      "outputs": [
+        "products/services/tender-instant-preview/tests/ui_stub.js",
+        "products/services/tender-instant-preview/tests/ui_test.py",
+        "products/services/tender-instant-preview/ui-test-results.json"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/src/core.js",
+        "products/sites/open-software-tenders/",
+        "products/services/tender-offer-test/hash-correction/reconcile.py",
+        "products/services/tender-refresh/raw/"
+      ],
+      "mission_id": "TENDER-INSTANT-PREVIEW"
+    },
+    "description": "Broker action during THINK-1794490201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179449020117",
+  "input_sha256": "547b1b1dafa2e930ca52a70ab9578ac535ef1676e4fa6d873e716e910d622a78"
+}
