@@ -1,0 +1,26 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"IWMS-TENDER-DOCUMENT-VALUE-TEST\", \"goal\": \"Produce one decision-useful evidence supplement for the existing North Ayrshire IWMS opportunity, rather than another market scan or generic sample. First read existing tender-source, checklist, commercial-positioning and portal evidence; check equivalent completed work. Inspect only the already documented official submission route and at most two directly linked official documents, using no more than three FETCHes total. Respect published access restrictions; stop at authentication, registration, agreements or host rejection without bypass. Identify concrete mandatory bid requirements absent from the existing checklist, with exact quotations, document versions, URLs, source hashes and the 2026-12-07T12:00Z deadline. Distinguish mandatory requirements from recommendations and unread material. If useful new facts exist, save a concise EN/FR bid/no-bid supplement and exact proposed checklist diff under products/services/iwms-document-value/; otherwise save the precise bounded result without manufacturing content. Disclose autonomous AI production; no eligibility assurances, legal advice, contact, accounts, submission, spending or deployment. Read executed evidence before completing with an actual lease and a lesson. Any public change requires independent exact-digest review and the host gate. Preserve every existing observation window and retirement obligation, including removal of North Ayrshire from both offer languages and calendar references at expiry. This is preparation, not customer delivery, acquisition or revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"RESEARCHER\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/iwms-document-value/result.json\"]}",
+  "request": {
+    "id": "TASK-179445996113",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-12T05:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "IWMS-TENDER-DOCUMENT-VALUE-TEST",
+      "agent_id": "RESEARCHER",
+      "lease_token": "bXzSE8CPQqxwj6Sy3h9Hv9wSGtIdI8lv",
+      "evidence": [
+        "products/services/iwms-document-value/result.json"
+      ],
+      "lesson": "STOP_BOUNDED, 1 of 3 FETCHes used. What worked: reading the existing bid-readiness evidence first showed that the submission route (PCS-Tender) is behind registration, and that the OCDS document entries are only ids with no URLs, so there was no linked public document to fetch. That kept the test to one FETCH. What failed: the official FTS HTML notice returned HTTP 403 to our fetcher; I did not retry it or try a bypass. Next time: before creating a document-value mission, check whether OCDS documents carry URLs. If they do not and the portal requires registration, buyer-held pack facts cannot be reached without a supplier identity or excerpts that a provider pastes in. Do not open another fetch-based mission for this notice. Reconsider only if a public document URL appears or a real request supplies excerpts."
+    },
+    "description": "Broker action during THINK-1794459961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179445996113",
+  "input_sha256": "41443586c355fe1026e19d103a2c0c79eb080f65d4cdd9e666cf3385c259aea3"
+}
