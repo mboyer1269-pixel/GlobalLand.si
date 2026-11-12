@@ -9,11 +9,18 @@
   "missing": [],
   "account_settings_verified": false,
   "last_turn": {
-    "turn": "THINK-1794486605",
-    "at": "2026-11-12T12:31:02Z",
+    "turn": "THINK-1794486961",
+    "at": "2026-11-12T12:46:40Z",
     "state": "DECISION_READY",
     "provider": "codex",
     "attempts": [
+      {
+        "provider": "claude",
+        "status": "FAILED",
+        "stage": "planning",
+        "exception_type": "TimeoutError",
+        "reason": "provider_timeout"
+      },
       {
         "provider": "codex",
         "status": "SUCCEEDED",
@@ -24,11 +31,18 @@
     ]
   },
   "last_successful_plan": {
-    "turn": "THINK-1794486605",
-    "at": "2026-11-12T12:31:02Z",
+    "turn": "THINK-1794486961",
+    "at": "2026-11-12T12:46:40Z",
     "state": "DECISION_READY",
     "provider": "codex",
     "attempts": [
+      {
+        "provider": "claude",
+        "status": "FAILED",
+        "stage": "planning",
+        "exception_type": "TimeoutError",
+        "reason": "provider_timeout"
+      },
       {
         "provider": "codex",
         "status": "SUCCEEDED",
@@ -38,5 +52,5 @@
       }
     ]
   },
-  "last_turn_age_seconds": 7
+  "last_turn_age_seconds": 0
 }
