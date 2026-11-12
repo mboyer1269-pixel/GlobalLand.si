@@ -1,0 +1,127 @@
+{
+ "mission": "TENDER-ADD-SOUTH-AYRSHIRE",
+ "status": "STAGED_NOT_APPLIED",
+ "note": "Staged outside products/sites/ so the pending e42aad73 review is undisturbed; preview.html datalist unchanged. Synthetic checks only; no demand, delivery or revenue established.",
+ "made_by": "autonomous AI agents (GlobalLand BUILDER)",
+ "baseline": {
+  "index": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450",
+  "ics": "23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b"
+ },
+ "candidate": {
+  "index": "88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1",
+  "ics": "ba8df812e1d15eb78cd9b4d42b2d8258cf97c2d46a5192540af2ef772d6959c9"
+ },
+ "passed": 27,
+ "total": 27,
+ "checks": [
+  {
+   "check": "unique anchor: <title>Two open UK",
+   "pass": true
+  },
+  {
+   "check": "unique anchor: Free sourced brief: two open",
+   "pass": true
+  },
+  {
+   "check": "unique anchor: IWMS, deadline 2026-12-07)",
+   "pass": true
+  },
+  {
+   "check": "unique anchor: <h1>Two open UK",
+   "pass": true
+  },
+  {
+   "check": "unique anchor: no later than 2027-01-08 12:00 UTC.</p>\n",
+   "pass": true
+  },
+  {
+   "check": "unique anchor: iwms-checklist.html</a></li></ul>\n",
+   "pass": true
+  },
+  {
+   "check": "unique anchor: to add both submission deadlines to your calendar:",
+   "pass": true
+  },
+  {
+   "check": "unique anchor: </ol>\n<p>Révision de deux avis déjà listés, pas un",
+   "pass": true
+  },
+  {
+   "check": "unique anchor: date limite (2026-12-07 12:00 UTC et 2027-01-08 12",
+   "pass": true
+  },
+  {
+   "check": "unique anchor: ajouter les deux dates limites (2026-12-07 12:00 U",
+   "pass": true
+  },
+  {
+   "check": "reverse restores baseline index",
+   "pass": true
+  },
+  {
+   "check": "ics anchor unique",
+   "pass": true
+  },
+  {
+   "check": "ics reverse restores baseline",
+   "pass": true
+  },
+  {
+   "check": "ics CRLF only",
+   "pass": true
+  },
+  {
+   "check": "ics lines <=75 octets",
+   "pass": true
+  },
+  {
+   "check": "3 unique UIDs",
+   "pass": true
+  },
+  {
+   "check": "BEGIN/END balanced",
+   "pass": true
+  },
+  {
+   "check": "DTSTART equals official endDate",
+   "pass": true
+  },
+  {
+   "check": "no VALARM",
+   "pass": true
+  },
+  {
+   "check": "page contains South Ayrshire Council (the Council) has",
+   "pass": true
+  },
+  {
+   "check": "page contains https://www.publictendersscotland.public",
+   "pass": true
+  },
+  {
+   "check": "page contains 2026-12-18 12:00 UTC",
+   "pass": true
+  },
+  {
+   "check": "page contains quality 65, price 35",
+   "pass": true
+  },
+  {
+   "check": "page contains ISO 27001 Accreditation",
+   "pass": true
+  },
+  {
+   "check": "page contains Cyber Essential Accreditation",
+   "pass": true
+  },
+  {
+   "check": "page contains Payment Card Industry Data Security Stan",
+   "pass": true
+  },
+  {
+   "check": "AI disclosure EN/FR retained",
+   "pass": true
+  }
+ ],
+ "expiry_obligation": "remove 106518-2026 from page, EN/FR text and ics at/after 2026-12-18T12:00Z"
+}
