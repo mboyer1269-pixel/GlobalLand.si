@@ -137,25 +137,34 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-12T05:41:14Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 529,
-    "turns_without_verified_revenue": 529,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 530,
+    "turns_without_verified_revenue": 530,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-12T05:41:14Z",
-    "last_outcome_turn": "THINK-1794461407",
-    "last_productive_turn": "THINK-1794461407",
-    "last_turn": "THINK-1794461761",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794463201",
+    "last_productive_turn": "THINK-1794463201",
+    "last_turn": "THINK-1794463201",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "TENDER-OFFER-FULFILLMENT-REHEARSAL"
+      ],
+      "new_products": [
+        "products/services/tender-offer-test/fulfillment/out/brief-105246-2026.txt",
+        "products/services/tender-offer-test/fulfillment/out/brief-105838-2026.txt",
+        "products/services/tender-offer-test/fulfillment/reconcile.py",
+        "products/services/tender-offer-test/fulfillment/rehearsal-results.json",
+        "products/services/tender-offer-test/fulfillment/rehearse.py",
+        "products/services/tender-offer-test/fulfillment/result.json"
+      ],
+      "new_product_count": 6,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
