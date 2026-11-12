@@ -1,0 +1,44 @@
+{
+ "mission_context": "Release of AUDITOR-approved TENDER-HASH-CORRECTION-REVIEW (codex seq 44)",
+ "observed_at": "2026-11-12",
+ "site": "open-software-tenders",
+ "url": "https://globalland-open-software-tenders.global-land.workers.dev/",
+ "approved_digest": "d211ba68dcb4075dd0955324d4ba58dab047028e33b3513cc744a6f8fed2dcc2",
+ "dry_run": {
+  "task": "TASK-179448300410",
+  "digest_matches_approved": true
+ },
+ "deploy": {
+  "task": "TASK-179448300411",
+  "status": "ONLINE_VERIFIED"
+ },
+ "fetch": {
+  "task": "TASK-179448300412",
+  "http": 200,
+  "sha256": "72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4"
+ },
+ "source_index_sha256": "72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4",
+ "approved_index_sha256": "72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4",
+ "all_match": true,
+ "indexnow": {
+  "task": "TASK-179448300413",
+  "request": "GET api.indexnow.org/indexnow?url=<homepage>&key=5e2c8a91f4b7036d9a1e7c4b28f0d653",
+  "http_status": 200,
+  "body": "empty",
+  "retries": 0,
+  "meaning": "request received only; not indexing, traffic or demand"
+ },
+ "not_established": [
+  "indexing",
+  "traffic",
+  "requests",
+  "orders",
+  "payment",
+  "revenue"
+ ],
+ "obligations": [
+  "WELFARE-SITE-RETIRE after 2026-12-04T17:00Z",
+  "TENDERS-NORTH-AYRSHIRE-EXPIRY 2026-12-07T12:00Z: page, EN/FR offers and ics",
+  "TENDERS-PAGE-RETIRE-2027 2027-01-08T12:00Z"
+ ]
+}

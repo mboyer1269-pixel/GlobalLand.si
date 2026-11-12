@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission_context\": \"Release of AUDITOR-approved TENDER-HASH-CORRECTION-REVIEW (codex seq 44)\",\n \"observed_at\": \"2026-11-12\",\n \"site\": \"open-software-tenders\",\n \"url\": \"https://globalland-open-software-tenders.global-land.workers.dev/\",\n \"approved_digest\": \"d211ba68dcb4075dd0955324d4ba58dab047028e33b3513cc744a6f8fed2dcc2\",\n \"dry_run\": {\n  \"task\": \"TASK-179448300410\",\n  \"digest_matches_approved\": true\n },\n \"deploy\": {\n  \"task\": \"TASK-179448300411\",\n  \"status\": \"ONLINE_VERIFIED\"\n },\n \"fetch\": {\n  \"task\": \"TASK-179448300412\",\n  \"http\": 200,\n  \"sha256\": \"72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4\"\n },\n \"source_index_sha256\": \"72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4\",\n \"approved_index_sha256\": \"72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4\",\n \"all_match\": true,\n \"indexnow\": {\n  \"task\": \"TASK-179448300413\",\n  \"request\": \"GET api.indexnow.org/indexnow?url=<homepage>&key=5e2c8a91f4b7036d9a1e7c4b28f0d653\",\n  \"http_status\": 200,\n  \"body\": \"empty\",\n  \"retries\": 0,\n  \"meaning\": \"request received only; not indexing, traffic or demand\"\n },\n \"not_established\": [\n  \"indexing\",\n  \"traffic\",\n  \"requests\",\n  \"orders\",\n  \"payment\",\n  \"revenue\"\n ],\n \"obligations\": [\n  \"WELFARE-SITE-RETIRE after 2026-12-04T17:00Z\",\n  \"TENDERS-NORTH-AYRSHIRE-EXPIRY 2026-12-07T12:00Z: page, EN/FR offers and ics\",\n  \"TENDERS-PAGE-RETIRE-2027 2027-01-08T12:00Z\"\n ]\n}\n\n",
+  "artifacts": [
+    "products/services/tender-offer-test/hash-correction/release/publication-result.json",
+    "products/receipts/TASK-179448300414.json"
+  ],
+  "request": {
+    "id": "TASK-179448300414",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-12T11:30:04Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib\nb=pathlib.Path('products/services/tender-offer-test/hash-correction/release/live-index.html').read_bytes()\ns=pathlib.Path('products/sites/open-software-tenders/index.html').read_bytes()\nh=hashlib.sha256(b).hexdigest();hs=hashlib.sha256(s).hexdigest()\nA='72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4'\nr={'mission_context':'Release of AUDITOR-approved TENDER-HASH-CORRECTION-REVIEW (codex seq 44)','observed_at':'2026-11-12','site':'open-software-tenders','url':'https://globalland-open-software-tenders.global-land.workers.dev/','approved_digest':'d211ba68dcb4075dd0955324d4ba58dab047028e33b3513cc744a6f8fed2dcc2','dry_run':{'task':'TASK-179448300410','digest_matches_approved':True},'deploy':{'task':'TASK-179448300411','status':'ONLINE_VERIFIED'},'fetch':{'task':'TASK-179448300412','http':200,'sha256':h},'source_index_sha256':hs,'approved_index_sha256':A,'all_match':h==A==hs,'indexnow':{'task':'TASK-179448300413','request':'GET api.indexnow.org/indexnow?url=<homepage>&key=5e2c8a91f4b7036d9a1e7c4b28f0d653','http_status':200,'body':'empty','retries':0,'meaning':'request received only; not indexing, traffic or demand'},'not_established':['indexing','traffic','requests','orders','payment','revenue'],'obligations':['WELFARE-SITE-RETIRE after 2026-12-04T17:00Z','TENDERS-NORTH-AYRSHIRE-EXPIRY 2026-12-07T12:00Z: page, EN/FR offers and ics','TENDERS-PAGE-RETIRE-2027 2027-01-08T12:00Z']}\np=pathlib.Path('products/services/tender-offer-test/hash-correction/release/publication-result.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,indent=1))\nprint(p.read_text())"
+      ],
+      "inputs": [
+        "products/services/tender-offer-test/hash-correction/release/live-index.html",
+        "products/sites/open-software-tenders/index.html"
+      ],
+      "outputs": [
+        "products/services/tender-offer-test/hash-correction/release/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794483004",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179448300414",
+  "input_sha256": "e4c76db37bdbe7ac027131e36764b63d9b5e736230053ba5ce2e50ae14d21bdf"
+}
