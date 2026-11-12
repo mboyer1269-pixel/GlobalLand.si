@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"TENDER-INSTANT-PREVIEW\",\n \"observed_at\": \"2026-11-12\",\n \"verdict\": \"LOCAL_DELIVERY_DEMONSTRATED_SYNTHETIC_NODE_ONLY\",\n \"deliverable\": \"products/sites/open-software-tenders/preview.html (new) plus one EN and one FR link paragraph in index.html\",\n \"dry_run\": {\n  \"task\": \"TASK-179449020118\",\n  \"review_digest\": \"a0dd85c35277519655338f6932d9a7ef613bef2ea1e1d2c5b11a138b90f23d6b\",\n  \"files\": 6,\n  \"bytes\": 39409\n },\n \"hashes\": {\n  \"index\": \"8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450\",\n  \"baseline_index_live\": \"72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4\",\n  \"preview\": \"eba4d7aca2fa0707e153cb357a84ccaccd75624d0c640404624d412b70490fd3\",\n  \"core\": \"94936ac1fcad6d86f11e1cb9695f17a8179c4daf3bf6c19bab2b6ebfde0a00db\",\n  \"reconcile_py\": \"fa69661d93ab9664f4a4f39358b85cabb75b1395b7f9967d9d25b1ab1d745cdf\"\n },\n \"parity\": {\n  \"task\": \"TASK-179449020114\",\n  \"passed\": 33,\n  \"total\": 33,\n  \"meaning\": \"JS core output byte-identical to reconcile.py stdout on both saved official packages, a re-indented copy, truncated JSON, wrong ID, oversized input, missing fields, HTML-like/contact strings, float values/naive deadline/flags, and a past-deadline clock; canonical hash equals Python and is formatting-independent\"\n },\n \"page\": {\n  \"task\": \"TASK-179449020117\",\n  \"passed\": 15,\n  \"total\": 15,\n  \"meaning\": \"actual inline script run in Node vm DOM stub; output equals reconcile.py; no network calls; textContent only; CSP default-src none\"\n },\n \"value_types\": \"custom JSON parser keeps Python int/float distinction (e.g. 1000.0); canonical hash omitted (stated in output) if an integer exceeds 2^53 or a lone surrogate appears\",\n \"limits\": [\n  \"No real browser available in sandbox; real browser execution, Web Crypto availability and rendering untested\",\n  \"Raw SHA-256 covers text as held by the browser (LF line endings); may differ from a downloaded file hash\",\n  \"JS \\\\b and \\\\d in a few checks are ASCII-only where Python is Unicode-aware; parity shown only on the tested inputs\",\n  \"Synthetic tests are not customer use, demand or revenue\"\n ],\n \"review_handoff\": \"AUDITOR (non-claude provider) to independently verify and APPROVE or NEEDS_WORK exact digest a0dd85c3...; do not deploy before APPROVE\",\n \"expiry_obligations\": [\n  \"2026-12-07T12:00Z TENDERS-NORTH-AYRSHIRE-EXPIRY must also remove the 105246-2026 datalist option in preview.html (page, EN/FR offers, ics, preview)\",\n  \"2027-01-08T12:00Z TENDERS-PAGE-RETIRE-2027 retires preview.html with the site\"\n ],\n \"not_established\": [\n  \"browser execution\",\n  \"traffic\",\n  \"requests\",\n  \"orders\",\n  \"payment\",\n  \"revenue\"\n ]\n}\n\n",
+  "artifacts": [
+    "products/services/tender-instant-preview/result.json",
+    "products/receipts/TASK-179449020119.json"
+  ],
+  "request": {
+    "id": "TASK-179449020119",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T13:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib,hashlib\nD=pathlib.Path('products/services/tender-instant-preview');S=pathlib.Path('products/sites/open-software-tenders')\np=json.loads((D/'parity-results.json').read_text());u=json.loads((D/'ui-test-results.json').read_text())\nh=lambda f:hashlib.sha256(f.read_bytes()).hexdigest()\nr={'mission':'TENDER-INSTANT-PREVIEW','observed_at':'2026-11-12','verdict':'LOCAL_DELIVERY_DEMONSTRATED_SYNTHETIC_NODE_ONLY',\n'deliverable':'products/sites/open-software-tenders/preview.html (new) plus one EN and one FR link paragraph in index.html',\n'dry_run':{'task':'TASK-179449020118','review_digest':'a0dd85c35277519655338f6932d9a7ef613bef2ea1e1d2c5b11a138b90f23d6b','files':6,'bytes':39409},\n'hashes':{'index':h(S/'index.html'),'baseline_index_live':h(D/'baseline-index.html'),'preview':h(S/'preview.html'),'core':h(D/'src/core.js'),'reconcile_py':p['reconcile_sha256']},\n'parity':{'task':'TASK-179449020114','passed':p['passed'],'total':p['total'],'meaning':'JS core output byte-identical to reconcile.py stdout on both saved official packages, a re-indented copy, truncated JSON, wrong ID, oversized input, missing fields, HTML-like/contact strings, float values/naive deadline/flags, and a past-deadline clock; canonical hash equals Python and is formatting-independent'},\n'page':{'task':'TASK-179449020117','passed':u['passed'],'total':u['total'],'meaning':'actual inline script run in Node vm DOM stub; output equals reconcile.py; no network calls; textContent only; CSP default-src none'},\n'value_types':'custom JSON parser keeps Python int/float distinction (e.g. 1000.0); canonical hash omitted (stated in output) if an integer exceeds 2^53 or a lone surrogate appears',\n'limits':['No real browser available in sandbox; real browser execution, Web Crypto availability and rendering untested','Raw SHA-256 covers text as held by the browser (LF line endings); may differ from a downloaded file hash','JS \\\\b and \\\\d in a few checks are ASCII-only where Python is Unicode-aware; parity shown only on the tested inputs','Synthetic tests are not customer use, demand or revenue'],\n'review_handoff':'AUDITOR (non-claude provider) to independently verify and APPROVE or NEEDS_WORK exact digest a0dd85c3...; do not deploy before APPROVE',\n'expiry_obligations':['2026-12-07T12:00Z TENDERS-NORTH-AYRSHIRE-EXPIRY must also remove the 105246-2026 datalist option in preview.html (page, EN/FR offers, ics, preview)','2027-01-08T12:00Z TENDERS-PAGE-RETIRE-2027 retires preview.html with the site'],\n'not_established':['browser execution','traffic','requests','orders','payment','revenue']}\n(D/'result.json').write_text(json.dumps(r,indent=1),encoding='utf-8');print((D/'result.json').read_text())"
+      ],
+      "outputs": [
+        "products/services/tender-instant-preview/result.json"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/",
+        "products/sites/open-software-tenders/"
+      ],
+      "mission_id": "TENDER-INSTANT-PREVIEW"
+    },
+    "description": "Broker action during THINK-1794490201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179449020119",
+  "input_sha256": "4bf13df41484fccfa213db51b8f4982fdcd8ca513c0feda68cead817f1c5d0a9"
+}

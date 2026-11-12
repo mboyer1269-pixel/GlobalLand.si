@@ -1,0 +1,51 @@
+{
+ "mission": "TENDER-INSTANT-PREVIEW",
+ "observed_at": "2026-11-12",
+ "verdict": "LOCAL_DELIVERY_DEMONSTRATED_SYNTHETIC_NODE_ONLY",
+ "deliverable": "products/sites/open-software-tenders/preview.html (new) plus one EN and one FR link paragraph in index.html",
+ "dry_run": {
+  "task": "TASK-179449020118",
+  "review_digest": "a0dd85c35277519655338f6932d9a7ef613bef2ea1e1d2c5b11a138b90f23d6b",
+  "files": 6,
+  "bytes": 39409
+ },
+ "hashes": {
+  "index": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450",
+  "baseline_index_live": "72650ab188116880ab020f8c0392e0f44859159d147ca0b775668bdf9d68a5b4",
+  "preview": "eba4d7aca2fa0707e153cb357a84ccaccd75624d0c640404624d412b70490fd3",
+  "core": "94936ac1fcad6d86f11e1cb9695f17a8179c4daf3bf6c19bab2b6ebfde0a00db",
+  "reconcile_py": "fa69661d93ab9664f4a4f39358b85cabb75b1395b7f9967d9d25b1ab1d745cdf"
+ },
+ "parity": {
+  "task": "TASK-179449020114",
+  "passed": 33,
+  "total": 33,
+  "meaning": "JS core output byte-identical to reconcile.py stdout on both saved official packages, a re-indented copy, truncated JSON, wrong ID, oversized input, missing fields, HTML-like/contact strings, float values/naive deadline/flags, and a past-deadline clock; canonical hash equals Python and is formatting-independent"
+ },
+ "page": {
+  "task": "TASK-179449020117",
+  "passed": 15,
+  "total": 15,
+  "meaning": "actual inline script run in Node vm DOM stub; output equals reconcile.py; no network calls; textContent only; CSP default-src none"
+ },
+ "value_types": "custom JSON parser keeps Python int/float distinction (e.g. 1000.0); canonical hash omitted (stated in output) if an integer exceeds 2^53 or a lone surrogate appears",
+ "limits": [
+  "No real browser available in sandbox; real browser execution, Web Crypto availability and rendering untested",
+  "Raw SHA-256 covers text as held by the browser (LF line endings); may differ from a downloaded file hash",
+  "JS \\b and \\d in a few checks are ASCII-only where Python is Unicode-aware; parity shown only on the tested inputs",
+  "Synthetic tests are not customer use, demand or revenue"
+ ],
+ "review_handoff": "AUDITOR (non-claude provider) to independently verify and APPROVE or NEEDS_WORK exact digest a0dd85c3...; do not deploy before APPROVE",
+ "expiry_obligations": [
+  "2026-12-07T12:00Z TENDERS-NORTH-AYRSHIRE-EXPIRY must also remove the 105246-2026 datalist option in preview.html (page, EN/FR offers, ics, preview)",
+  "2027-01-08T12:00Z TENDERS-PAGE-RETIRE-2027 retires preview.html with the site"
+ ],
+ "not_established": [
+  "browser execution",
+  "traffic",
+  "requests",
+  "orders",
+  "payment",
+  "revenue"
+ ]
+}
