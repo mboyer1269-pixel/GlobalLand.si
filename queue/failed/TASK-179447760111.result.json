@@ -1,0 +1,31 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 17, in <module>\nAssertionError: No prior manifests found\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179447760111",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-12T10:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,subprocess,tempfile,hashlib\nroot=pathlib.Path('products/services/tender-offer-test'); script=root/'hash-correction/reconcile.py'; results=[]\nfor nid in ['105246-2026','105838-2026']:\n p=pathlib.Path('products/services/tender-refresh/raw')/(nid+'.json'); doc=json.loads(p.read_text()); rel=next(r for r in doc['releases'] if r['id']==nid)\n def h(r): return hashlib.sha256(json.dumps(r,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()\n variants=[('original',p.read_bytes(),h(rel)),('compact',json.dumps(doc,separators=(',',':'),ensure_ascii=False).encode(),h(rel))]\n altered=json.loads(json.dumps(doc)); selected=next(r for r in altered['releases'] if r['id']==nid);selected['tender']['title']+=' '\n variants.append(('string-space',json.dumps(altered,ensure_ascii=False).encode(),h(selected)))\n for name,raw,expected in variants:\n  with tempfile.NamedTemporaryFile() as f:\n   f.write(raw);f.flush(); r=subprocess.run(['python3','-I',str(script),f.name,nid,'2026-11-12T12:00:00Z'],capture_output=True)\n  text=r.stdout.decode('utf-8'); ok=r.returncode==0 and expected in text and hashlib.sha256(raw).hexdigest() in text\n  assert ok,(nid,name,r.returncode,r.stderr)\n  if name=='string-space':assert expected!=h(rel)\n  results.append({'notice':nid,'variant':name,'passed':ok,'reply_bytes':len(r.stdout),'canonical_sha256':expected})\nfiles={str(p):p.read_text() for p in root.rglob('*manifest*.json')}\nassert files,'No prior manifests found'\nout={'scope':'Independent actual CLI execution; synthetic only, no delivery or demand','checks':results,'prior_manifests_inspected':files,'script_sha256':hashlib.sha256(script.read_bytes()).hexdigest(),'all_pass':True}\np=pathlib.Path('products/reviews/tender-hash-cli-independent.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(out,ensure_ascii=False,indent=2));print(p.read_text())"
+      ],
+      "inputs": [
+        "products/services/tender-offer-test/",
+        "products/services/tender-refresh/raw/"
+      ],
+      "outputs": [
+        "products/reviews/tender-hash-cli-independent.json"
+      ],
+      "mission_id": "TENDER-HASH-CORRECTION-REVIEW"
+    },
+    "description": "Broker action during THINK-1794477601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179447760111",
+  "input_sha256": "ec2040c0c80102cda17c4a8b18f5c9f563a80501b21f3c598748989c877d96a4"
+}
