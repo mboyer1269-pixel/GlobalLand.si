@@ -1,0 +1,40 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"TENDER-ADD-SOUTH-AYRSHIRE\",\n \"made_by\": \"autonomous AI agents (GlobalLand BUILDER)\",\n \"baseline_matched_live_release\": true,\n \"baseline\": {\n  \"index\": \"8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450\",\n  \"ics\": \"23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b\"\n },\n \"applied\": {\n  \"index\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\",\n  \"ics\": \"ba8df812e1d15eb78cd9b4d42b2d8258cf97c2d46a5192540af2ef772d6959c9\"\n },\n \"expected_staged\": {\n  \"index\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\",\n  \"ics\": \"ba8df812e1d15eb78cd9b4d42b2d8258cf97c2d46a5192540af2ef772d6959c9\"\n },\n \"checks\": {\n  \"ics_crlf_only\": true,\n  \"ics_dtstart_20261218T120000Z\": true,\n  \"ics_uid_count\": 3,\n  \"ics_no_valarm\": true,\n  \"index_has_106518\": true,\n  \"index_ai_disclosure_en\": true,\n  \"preview_unchanged\": true\n },\n \"staged_synthetic_checks\": \"27/27 TASK-179451756111\",\n \"preview_datalist\": \"not changed (106518-2026 not added); expiry still lists it for consistency\",\n \"applied_matches_staged\": true\n}\n\n",
+  "artifacts": [
+    "products/sites/open-software-tenders/index.html",
+    "products/sites/open-software-tenders/tender-deadlines.ics",
+    "products/services/tender-south-ayrshire/apply-result.json",
+    "products/receipts/TASK-179452260517.json"
+  ],
+  "request": {
+    "id": "TASK-179452260517",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T22:30:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,pathlib,shutil\nh=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()\ns='products/sites/open-software-tenders/';st='products/services/tender-south-ayrshire/staging/'\nbase={'index':h(s+'index.html'),'ics':h(s+'tender-deadlines.ics')}\nok=base=={'index':'8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450','ics':'23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b'}\nassert ok,base\nshutil.copyfile(st+'index.html',s+'index.html');shutil.copyfile(st+'tender-deadlines.ics',s+'tender-deadlines.ics')\nics=pathlib.Path(s+'tender-deadlines.ics').read_bytes()\nidx=pathlib.Path(s+'index.html').read_text()\nres={'mission':'TENDER-ADD-SOUTH-AYRSHIRE','made_by':'autonomous AI agents (GlobalLand BUILDER)','baseline_matched_live_release':ok,'baseline':base,'applied':{'index':h(s+'index.html'),'ics':h(s+'tender-deadlines.ics')},'expected_staged':{'index':'88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1','ics':'ba8df812e1d15eb78cd9b4d42b2d8258cf97c2d46a5192540af2ef772d6959c9'},'checks':{'ics_crlf_only':b'\\n' not in ics.replace(b'\\r\\n',b''),'ics_dtstart_20261218T120000Z':b'DTSTART:20261218T120000Z' in ics,'ics_uid_count':ics.count(b'UID:'),'ics_no_valarm':b'VALARM' not in ics,'index_has_106518':'106518-2026' in idx,'index_ai_disclosure_en':'autonomous AI' in idx,'preview_unchanged':h(s+'preview.html')=='158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b'},'staged_synthetic_checks':'27/27 TASK-179451756111','preview_datalist':'not changed (106518-2026 not added); expiry still lists it for consistency'}\nres['applied_matches_staged']=res['applied']==res['expected_staged']\np=pathlib.Path('products/services/tender-south-ayrshire/apply-result.json');p.write_text(json.dumps(res,indent=1));print(p.read_text())"
+      ],
+      "inputs": [
+        "products/sites/open-software-tenders/",
+        "products/services/tender-south-ayrshire/staging/"
+      ],
+      "outputs": [
+        "products/sites/open-software-tenders/index.html",
+        "products/sites/open-software-tenders/tender-deadlines.ics",
+        "products/services/tender-south-ayrshire/apply-result.json"
+      ],
+      "mission_id": "TENDER-ADD-SOUTH-AYRSHIRE"
+    },
+    "description": "Broker action during THINK-1794522605",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179452260517",
+  "input_sha256": "1d47a491b8fc49348ad4c0587e67f9b60d46dcb3b456e6a9d14a49f75e23358a"
+}
