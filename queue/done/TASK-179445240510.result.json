@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-OFFER-CANDIDATE-REVIEW\", \"goal\": \"Independent exact-digest review (eligible non-claude provider turn) of site:open-software-tenders candidate digest 803a010480287000c0125fd155db5bd3b856cd5ad75c4204c9b18dcb5199e196 (dry_run TASK-179444910116, 5 files, 20629 bytes, index sha256 b962f53d...). Change: an EN/FR expression-of-interest section for a proposed one-notice source-reconciliation brief (CAD 49, labelled an unvalidated hypothesis), the top disclaimer 'Nothing is sold' changed to 'Nothing can be ordered or paid for', and one llms.txt line. Read the full candidate files, products/services/tender-offer-test/index.diff, checks.json (49/49), the baselines and the docs/AGENTMAIL.md case limits. Verify these: the offer promises no URL or portal retrieval and no attachments; the pasted-text limit (20 KB) fits the 24000-byte execution and 32000-char reply limits; it states it cannot confirm pasted text matches the live record; no checkout, accepted order, guaranteed delivery or savings claim; administrative human acceptance and Interac-after-acceptance are accurate; AI disclosure in EN/FR; mailto identifier; per-notice expiries, calendar and checklist preserved; reversal restores baseline 5fa445bc.... Reproduce the dry_run, record APPROVE or concrete NEEDS_WORK, save and read evidence, and complete with a lease and a lesson. Do not edit or deploy. If NEEDS_WORK, restore the source from products/services/tender-offer-test/baseline-index.html and baseline-llms.txt through a separate producer mission so that source matches live. Preserve the North Ayrshire expiry on 2026-12-07T12:00Z (the expiry edit must also handle the offer section) and page retirement on 2027-01-08T12:00Z. No demand or revenue is implied.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"RUNNING\", \"lease_token\": \"KFdhd5VKpQz-MB8_KrXBILRWRrVAlxt5\", \"lease_expires_at\": 1794456024.2630188, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179445240510",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-12T03:00:05Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "TENDER-OFFER-CANDIDATE-REVIEW",
+      "agent_id": "AUDITOR",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1794452405",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179445240510",
+  "input_sha256": "e611d77bdb0799d5cb376a5bece072b9f3a8669642141ca1b3b925f78b3e55d3"
+}
