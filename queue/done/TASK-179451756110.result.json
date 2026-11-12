@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"source\": \"products/research/tender-continuity/raw-page1.json\",\n \"sha256\": \"f45356a90671b19f3ff38a711d44349778471324bedd0c48d85bd21fdf784798\",\n \"release_id\": \"106518-2026\",\n \"ocid\": \"ocds-h6vhtk-07b83e\",\n \"date\": \"2026-11-10T10:04:22Z\",\n \"buyer\": {\n  \"id\": \"GB-FTS-4854\",\n  \"name\": \"South Ayrshire Council\"\n },\n \"tender\": {\n  \"id\": \"CE-215-25\",\n  \"legalBasis\": {\n   \"id\": \"32014L0024\",\n   \"scheme\": \"CELEX\"\n  },\n  \"title\": \"CE-215-25 - Supply, Implementation and Ongoing Support of a Leisure Management System\",\n  \"status\": \"active\",\n  \"classification\": {\n   \"scheme\": \"CPV\",\n   \"id\": \"72222300\",\n   \"description\": \"Information technology services\"\n  },\n  \"mainProcurementCategory\": \"services\",\n  \"description\": \"South Ayrshire Council (the Council) has a requirement for the supply, delivery and ongoing support of an integrated leisure management software system.\",\n  \"lots\": [\n   {\n    \"id\": \"1\",\n    \"description\": \"South Ayrshire Council (the Council) has a requirement for the supply, delivery and ongoing support of an integrated leisure management software system.\",\n    \"awardCriteria\": {\n     \"criteria\": [\n      {\n       \"name\": \"Quality\",\n       \"type\": \"quality\",\n       \"description\": \"65\"\n      },\n      {\n       \"type\": \"price\",\n       \"description\": \"35\"\n      }\n     ]\n    },\n    \"contractPeriod\": {\n     \"durationInDays\": 1800\n    },\n    \"hasRenewal\": true,\n    \"renewal\": {\n     \"description\": \"Five (5) years with the option to extend for a further two (2) periods of up to twelve (12) months, at the sole discretion of the Council. 5 years (+1)(+1)\"\n    },\n    \"submissionTerms\": {\n     \"variantPolicy\": \"notAllowed\"\n    },\n    \"hasOptions\": false,\n    \"status\": \"active\"\n   }\n  ],\n  \"items\": [\n   {\n    \"id\": \"1\",\n    \"additionalClassifications\": [\n     {\n      \"scheme\": \"CPV\",\n      \"id\": \"48000000\",\n      \"description\": \"Software package and information systems\"\n     }\n    ],\n    \"deliveryAddresses\": [\n     {\n      \"region\": \"UKM94\"\n     }\n    ],\n    \"relatedLot\": \"1\"\n   }\n  ],\n  \"submissionMethod\": [\n   \"electronicSubmission\"\n  ],\n  \"submissionMethodDetails\": \"https://www.publictendersscotland.publiccontractsscotland.gov.uk/esop/pts-host/public/pts/web/login.html\",\n  \"selectionCriteria\": {\n   \"criteria\": [\n    {\n     \"type\": \"suitability\",\n     \"description\": \"It is a requirement of this procurement that Tenderers hold, or can commit to obtain, prior to the commencement of any subsequently awarded Contract, the accreditations indicated below:\\nISO 27001 Accreditation\\nCyber Essential Accreditation\\nPayment Card Industry Data Security Standard (PCI DSS) Accreditation\\nEvidence for this requirement will be requested at the “Request For Documentation” Stage.\",\n     \"appliesTo\": [\n      \"supplier\"\n     ]\n    }\n   ]\n  },\n  \"documents\": [\n   {\n    \"documentType\": \"economicSelectionCriteria\",\n    \"id\": \"economic\"\n   },\n   {\n    \"documentType\": \"technicalSelectionCriteria\",\n    \"id\": \"technical\"\n   }\n  ],\n  \"contractTerms\": {\n   \"performanceTerms\": \"During the period of the Contract Agreement, the Service Provider shall monitor and measure their performance against the Key Performance Indicators (KPIs). The KPIs shall make up the Balanced Scorecard and will be used to score the Service Provider’s performance.  The Council’s Contract Administrator and other relevant stakeholder shall score the Service Provider’s against the expected results. This shall take place using the Public Contracts Scotland – Tender, Contract and Supplier Management portal yearly, half yearly or monthly depending on the overall risk status of the contract.  The risk status shall be confirmed at Contract Award. Regular meetings will be held between the Service Provider and the Council to deal with issues arising in the routine management of the Contract, to discuss changes in the way that the Contract is executed and/or to discuss performance or any other ad-hoc reasons.\",\n   \"hasElectronicOrdering\": true,\n   \"electronicInvoicingPolicy\": \"allowed\",\n   \"hasElectronicPayment\": true\n  },\n  \"otherRequirements\": {\n   \"requiresStaffNamesAndQualifications\": true\n  },\n  \"procurementMethod\": \"open\",\n  \"procurementMethodDetails\": \"Open procedure\",\n  \"coveredBy\": [\n   \"GPA\"\n  ],\n  \"tenderPeriod\": {\n   \"endDate\": \"2026-12-18T12:00:00Z\"\n  },\n  \"submissionTerms\": {\n   \"languages\": [\n    \"en\"\n   ],\n   \"bidValidityPeriod\": {\n    \"durationInDays\": 120\n   }\n  },\n  \"awardPeriod\": {\n   \"startDate\": \"2026-12-18T12:00:00Z\"\n  },\n  \"bidOpening\": {\n   \"date\": \"2026-12-18T12:00:00Z\"\n  },\n  \"hasRecurrence\": false\n },\n \"parties\": [\n  {\n   \"name\": \"South Ayrshire Council\",\n   \"roles\": [\n    \"buyer\",\n    \"centralPurchasingBody\"\n   ]\n  },\n  {\n   \"name\": \"Ayr Sheriff Court\",\n   \"roles\": [\n    \"reviewBody\"\n   ]\n  }\n ]\n}\n\n",
+  "artifacts": [
+    "products/services/tender-south-ayrshire/release-extract.json",
+    "products/receipts/TASK-179451756110.json"
+  ],
+  "request": {
+    "id": "TASK-179451756110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T21:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,pathlib\np='products/research/tender-continuity/raw-page1.json'\nb=open(p,'rb').read()\nd=json.loads(b)\nout={'source':p,'sha256':hashlib.sha256(b).hexdigest()}\nfor r in d.get('releases',[]):\n  if '07b83e' in r.get('ocid',''):\n    t=r.get('tender',{})\n    out['release_id']=r.get('id');out['ocid']=r.get('ocid');out['date']=r.get('date')\n    out['buyer']=r.get('buyer');out['tender']=t\n    out['parties']=[{'name':x.get('name'),'roles':x.get('roles')} for x in r.get('parties',[])]\nq=pathlib.Path('products/services/tender-south-ayrshire/release-extract.json');q.parent.mkdir(parents=True,exist_ok=True)\nq.write_text(json.dumps(out,indent=1,ensure_ascii=False))\nprint(q.read_text()[:6000])\n"
+      ],
+      "inputs": [
+        "products/research/tender-continuity/raw-page1.json"
+      ],
+      "outputs": [
+        "products/services/tender-south-ayrshire/release-extract.json"
+      ],
+      "mission_id": "TENDER-ADD-SOUTH-AYRSHIRE"
+    },
+    "description": "Broker action during THINK-1794517561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179451756110",
+  "input_sha256": "cbd4ccf2c816713e045a654eb25261b31a16ab2d82646b9b5de2346997e36081"
+}
