@@ -1,0 +1,135 @@
+{
+ "mission": "TENDER-CONTINUITY-CANDIDATES",
+ "made_by": "autonomous AI agents (GlobalLand RESEARCHER)",
+ "observed_at": "2026-11-12T19:36:04.659860+00:00",
+ "sources": [
+  {
+   "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=tender&updatedFrom=2026-11-09T00:00:00&limit=60",
+   "task": "TASK-179451210110"
+  },
+  {
+   "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=tender&updatedFrom=2026-11-03T00:00:00&updatedTo=2026-11-09T00:00:00&limit=50",
+   "task": "TASK-179451210113"
+  }
+ ],
+ "fetch_attempts_note": "3 FETCH attempts: 2 succeeded; 1 (updatedFrom 2026-10-26, limit 100, TASK-179451210112) was refused by host fetch size limit before any data was saved.",
+ "source_files": [
+  {
+   "file": "products/research/tender-continuity/raw-page1.json",
+   "sha256": "f45356a90671b19f3ff38a711d44349778471324bedd0c48d85bd21fdf784798",
+   "releases": 33,
+   "next_link": null
+  },
+  {
+   "file": "products/research/tender-continuity/raw-page2.json",
+   "sha256": "ad2760d2768d9f06e895b6926be9bbc818046d328eb51b42cd3e01a58eb966d9",
+   "releases": 32,
+   "next_link": null
+  }
+ ],
+ "filter": "tender.status active; CPV prefix 48 (software) or 72 (IT services) or 79530000/79821000/79131000 (translation/editing/documentation); tenderPeriod.endDate date after 2026-12-14",
+ "releases_scanned": 65,
+ "software_matches_total": 7,
+ "selected": [
+  {
+   "notice_id": "106518-2026",
+   "ocid": "ocds-h6vhtk-07b83e",
+   "url": "https://www.find-tender.service.gov.uk/Notice/106518-2026",
+   "buyer": "South Ayrshire Council",
+   "title": "CE-215-25 - Supply, Implementation and Ongoing Support of a Leisure Management System",
+   "scope_quote": "South Ayrshire Council (the Council) has a requirement for the supply, delivery and ongoing support of an integrated leisure management software system.",
+   "deadline": "2026-12-18T12:00:00Z",
+   "deadline_timezone": "UTC (Z suffix in official field)",
+   "value": null,
+   "value_currency": null,
+   "value_gross": null,
+   "procurement_method": "open",
+   "procurement_method_details": "Open procedure",
+   "submission_method": [
+    "electronicSubmission"
+   ],
+   "submission_method_details": "https://www.publictendersscotland.publiccontractsscotland.gov.uk/esop/pts-host/public/pts/web/login.html",
+   "cpv": [
+    "48000000",
+    "72222300"
+   ],
+   "contract_period": {},
+   "source_file": "products/research/tender-continuity/raw-page1.json",
+   "tag": [
+    "tender"
+   ],
+   "release_date": "2026-11-10T10:04:22Z"
+  },
+  {
+   "notice_id": "105838-2026",
+   "ocid": "ocds-h6vhtk-07b6cb",
+   "url": "https://www.find-tender.service.gov.uk/Notice/105838-2026",
+   "buyer": "London Luton Airport Operations Limited",
+   "title": "Retail Data Management, Analytics and Automation",
+   "scope_quote": "London Luton Airport Operations Limited (“LLA”) is voluntarily advertising this opportunity through Find a Tender solely to enhance the profile and visibility of the opportunity. LLA does not consider to be subject to the Procurement Act 2023 and publication of this notice does not constitute an acceptance that the Procurement Act 2023 applies to LLA or to this procurement.\nThis tender is for an automated, scalable sales and analytics solution for Duty Free and terminal retail, integrating with multiple POS systems to provide accurate reporting and actionable insights.",
+   "deadline": "2027-01-08T12:00:00Z",
+   "deadline_timezone": "UTC (Z suffix in official field)",
+   "value": null,
+   "value_currency": null,
+   "value_gross": null,
+   "procurement_method": "open",
+   "procurement_method_details": "Open procedure",
+   "submission_method": [
+    "electronicSubmission",
+    "written"
+   ],
+   "submission_method_details": "https://london-luton.ukp.app.jaggaer.com/go/29502076019E2741C182",
+   "cpv": [
+    "48000000",
+    "72000000"
+   ],
+   "contract_period": {},
+   "source_file": "products/research/tender-continuity/raw-page2.json",
+   "tag": [
+    "tender"
+   ],
+   "release_date": "2026-11-06T15:17:51Z"
+  }
+ ],
+ "rejected_software_matches": [
+  {
+   "notice_id": "106307-2026",
+   "deadline": "2026-12-09T12:00:00Z",
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "reason": "deadline on/before 2026-12-14"
+  },
+  {
+   "notice_id": "106281-2026",
+   "deadline": "2026-12-09T12:00:00Z",
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "reason": "deadline on/before 2026-12-14"
+  },
+  {
+   "notice_id": "105246-2026",
+   "deadline": "2026-12-07T12:00:00Z",
+   "title": "Supply and Support of Integrated Workplace Management System",
+   "reason": "deadline on/before 2026-12-14"
+  },
+  {
+   "notice_id": "104619-2026",
+   "deadline": "2026-12-08T12:00:00Z",
+   "title": "Digital Connectivity Programme - 1gb Broadband Install and Service Delivery",
+   "reason": "deadline on/before 2026-12-14"
+  },
+  {
+   "notice_id": "104444-2026",
+   "deadline": "2026-11-18T09:00:00Z",
+   "title": "EMMS Cyber Security SME Support Programme",
+   "reason": "deadline on/before 2026-12-14"
+  }
+ ],
+ "uncertainties": [
+  "Only tender-stage releases updated 2026-11-03..2026-11-12 within page limits were scanned; older notices with later deadlines may exist.",
+  "Pagination: next links recorded in source_files; any truncation not followed within FETCH bound.",
+  "Values, if present, are advertised estimates from the notice, not funding or accessible revenue.",
+  "Tender documents and buyer portals not read; eligibility and registration prerequisites unverified.",
+  "Notice URL constructed from notice ID per Find a Tender pattern; not separately fetched.",
+  "Demand for the alert service remains unknown; GlobalLand does not claim it can bid."
+ ],
+ "verdict": "CANDIDATES_FOUND"
+}
