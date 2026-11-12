@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-PREVIEW-DATE-REVIEW\", \"goal\": \"In an eligible non-claude provider turn, independently review site:open-software-tenders exact digest e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66 (dry_run TASK-179450496112; preview 158349f5..., index 8123d3aa... unchanged; supersedes NEEDS_WORK digest a0dd85c3...). The change is limited to utc() in products/services/tender-instant-preview/src/core.js, embedded verbatim in preview.html (see date-validation/core.diff and handoff.json). Rerun tests/parity.py, tests/ui_test.py and tests/deadline_tests.py with inputs products/services/tender-instant-preview/, products/services/tender-refresh/raw/, products/services/tender-offer-test/hash-correction/reconcile.py and products/sites/open-software-tenders/. Claimed results: 33/33, 15/15 and 39/40; the single mismatch is the documented +05:60 offset, which Python accepts and the preview rejects. Verify that replacing the new core with the old core restores preview eba4d7ac.... Check that disclosures, offer terms and intake are unchanged. Reproduce the digest. Save and read the evidence, then record APPROVE or a concrete NEEDS_WORK and close with the lease and a lesson. Do not edit or deploy. Expiry duties: on 2026-12-07T12:00Z remove 105246-2026 from listing, offers, calendar and datalist; retire including preview.html on 2027-01-08. No demand or revenue is established.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179450496116",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T17:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "create_mission",
+      "mission_id": "TENDER-PREVIEW-DATE-REVIEW",
+      "goal": "In an eligible non-claude provider turn, independently review site:open-software-tenders exact digest e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66 (dry_run TASK-179450496112; preview 158349f5..., index 8123d3aa... unchanged; supersedes NEEDS_WORK digest a0dd85c3...). The change is limited to utc() in products/services/tender-instant-preview/src/core.js, embedded verbatim in preview.html (see date-validation/core.diff and handoff.json). Rerun tests/parity.py, tests/ui_test.py and tests/deadline_tests.py with inputs products/services/tender-instant-preview/, products/services/tender-refresh/raw/, products/services/tender-offer-test/hash-correction/reconcile.py and products/sites/open-software-tenders/. Claimed results: 33/33, 15/15 and 39/40; the single mismatch is the documented +05:60 offset, which Python accepts and the preview rejects. Verify that replacing the new core with the old core restores preview eba4d7ac.... Check that disclosures, offer terms and intake are unchanged. Reproduce the digest. Save and read the evidence, then record APPROVE or a concrete NEEDS_WORK and close with the lease and a lesson. Do not edit or deploy. Expiry duties: on 2026-12-07T12:00Z remove 105246-2026 from listing, offers, calendar and datalist; retire including preview.html on 2027-01-08. No demand or revenue is established.",
+      "agent_id": "AUDITOR",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "priority": 1
+    },
+    "description": "Broker action during THINK-1794504961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179450496116",
+  "input_sha256": "9a1d0d9e45cc0f4a8e705544667808623566be6129a06f75e3a7bec504bd9946"
+}
