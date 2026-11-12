@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "load ok function\n13739 products/services/tender-instant-preview/src/core.js\n94936ac1fcad6d86f11e1cb9695f17a8179c4daf3bf6c19bab2b6ebfde0a00db  products/services/tender-instant-preview/src/core.js\n\n",
+  "artifacts": [
+    "products/services/tender-instant-preview/src/core-c.js",
+    "products/services/tender-instant-preview/src/core.js",
+    "products/receipts/TASK-179449020113.json"
+  ],
+  "request": {
+    "id": "TASK-179449020113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T13:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/tender-instant-preview/src; cat > $D/core-c.js <<'EOF'\n var must=[];var sc=or(g(or(g(t,\"selectionCriteria\"),{}),\"criteria\"),[]);if(!Array.isArray(sc))sc=[];\n var srcs=[ps(or(rel.description,\"\"))].concat(sc.map(function(c){return ps(or(g(c,\"description\"),\"\"));}));\n srcs.forEach(function(s_){s_.split(\"\\n\").forEach(function(line){if(/\\bmust\\b|\\bshall\\b|\\bmay be excluded\\b/i.test(line))must.push(cut(red(line.trim()),500));});});\n var route=red(g(t,\"submissionMethodDetails\"))||\"not stated in pasted text\";\n var cpv=[g(or(g(t,\"classification\"),{}),\"id\")];var its=g(t,\"items\");if(Array.isArray(its))its.forEach(function(it){var ac=g(it,\"additionalClassifications\");if(Array.isArray(ac))ac.forEach(function(c){cpv.push(g(c,\"id\"));});});\n var buyer=red(g(or(rel.buyer,{}),\"name\"));\n var o=[\"GlobalLand one-notice source-reconciliation brief / Note de rapprochement des sources (un avis)\",DISC,\n  \"Notice / Avis: \"+nid+\"   OCID: \"+ps(rel.ocid)+\"   release date: \"+ps(rel.date)+\"   tags: \"+ps(rel.tag),\n  \"SHA-256 of the exact pasted text we checked / empreinte du texte vérifié : \"+h+\" (\"+n+\" bytes)\",\n  \"Formatting-independent SHA-256 of the selected release (canonical JSON: sorted keys, no spaces between elements; spaces inside text values still count; not proof of authenticity) / empreinte canonique (clés triées ; tolère la mise en forme, pas les espaces dans les valeurs ; ne prouve pas l'authenticité): \"+(canon||\"not computed in this browser preview (unsupported number or character) / non calculée\"),\n  \"We did not visit any link or portal and cannot confirm this text matches the live official record; compare the hashes and fields yourself. / Nous n'avons consulté aucun lien ni portail ; comparez vous-même les empreintes et les champs.\",\n  \"\",\"== 1. Stated facts (quoted from your pasted text) ==\",\"Buyer: \"+buyer,\"Title: \"+red(g(t,\"title\")),\"Scope (tender.description): \"+red(g(t,\"description\")),\n  \"Status: \"+ps(st)+\"   Procedure: \"+ps(or(g(t,\"procurementMethodDetails\"),g(t,\"procurementMethod\")))+\"   CPV: \"+cpv.filter(tru).map(ps).join(\", \"),\n  \"Submission deadline (UTC): \"+dl,\"Value / currency: \"+(vals.length?vals.join(\"; \"):\"none stated in pasted release\"),\"Submission route (verbatim): \"+route,\"Lots:\"].concat(L.length?L:[\"  none stated\"]);\n o=o.concat([\"\",\"== 2. Contradictions and checks ==\"],flags.length?flags.map(function(f){return\"  - \"+f;}):[\"  - none detected by our checks\"]);\n o=o.concat([\"\",\"== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) ==\"],must.length?must.map(function(m){return\"  - \"+m;}):[\"  - none found in the pasted text\"]);\n o=o.concat([\"\",\"== 4. Our recommendations (not buyer requirements) ==\",\"  - Confirm the deadline on the official notice and leave a buffer before it.\",\"  - Obtain the full tender pack through the submission route above before deciding.\",\"  - Check each stated requirement in section 3 against your own certificates and policies.\",\"  - Compare the award weights with your pricing position.\",\"  - Bid only if every unknown in section 5 is resolved in your favour.\"]);\n o=o.concat([\"\",\"== 5. Unknowns ==\"],unk.map(function(u){return\"  - \"+u;}));\n o=o.concat([\"\",\"== Résumé en français ==\",\"Avis : \"+nid+\" ; acheteur : \"+buyer,\"Date limite (UTC) : \"+dl,\"Valeur : \"+(vals.length?vals.join(\"; \"):\"aucune valeur dans la publication collée\"),\"Voie de dépôt (citée) : \"+route,\n  \"Contradictions signalées : \"+flags.length+\" ; exigences citées (en anglais, section 3) : \"+must.length+\".\",\n  \"Recommandations (les nôtres) : confirmer la date limite sur l'avis officiel ; obtenir le dossier complet par la voie de dépôt ; vérifier chaque exigence ; comparer les pondérations avec votre prix.\",\n  \"Inconnues : documents d'appel d'offres non fournis ni lus ; date limite de clarification ; votre admissibilité et inscription\"+(vals.length?\".\":\" ; valeur et devise.\"),\"Aucune admissibilité n'est affirmée. / No eligibility is asserted.\"]);\n return{code:0,text:o.join(\"\\n\"),canonical:canon,flags:flags.length,must:must.length};}\nif(typeof module!==\"undefined\")module.exports={analyse:analyse,LIMIT:LIMIT};\nEOF\ncat $D/core-a.js $D/core-b.js $D/core-c.js > $D/core.js && node -e \"var c=require('./'+process.argv[1]);console.log('load ok',typeof c.analyse)\" $D/core.js && wc -c $D/core.js && sha256sum $D/core.js"
+      ],
+      "outputs": [
+        "products/services/tender-instant-preview/src/core-c.js",
+        "products/services/tender-instant-preview/src/core.js"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/src/"
+      ],
+      "mission_id": "TENDER-INSTANT-PREVIEW"
+    },
+    "description": "Broker action during THINK-1794490201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179449020113",
+  "input_sha256": "2def56d100d5d29274b50a5e21d71fbed8228c0f5b3de9737f0e55864de4c15a"
+}
