@@ -1,0 +1,21 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: fetch size limit. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179451210112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-12T19:35:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=tender&updatedFrom=2026-10-26T00:00:00&updatedTo=2026-11-09T00:00:00&limit=100",
+      "output": "products/research/tender-continuity/raw-page2.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794512101",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179451210112",
+  "input_sha256": "5bb792ab0afcc287d95a39fa3e48aa7cee34cc925e4fcaddfb0bc50ffe85b8a8"
+}
