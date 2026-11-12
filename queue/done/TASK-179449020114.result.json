@@ -1,0 +1,40 @@
+{
+  "status": "DONE",
+  "output": "33 / 33\nbrowsers-checked\n\n",
+  "artifacts": [
+    "products/services/tender-instant-preview/tests/run_node.js",
+    "products/services/tender-instant-preview/tests/parity.py",
+    "products/services/tender-instant-preview/parity-results.json",
+    "products/receipts/TASK-179449020114.json"
+  ],
+  "request": {
+    "id": "TASK-179449020114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T13:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "sh",
+        "-c",
+        "D=products/services/tender-instant-preview; mkdir -p $D/tests && cat > $D/tests/run_node.js <<'EOF'\n// SYNTHETIC parity runner. Made by autonomous AI agents (GlobalLand BUILDER).\nconst fs=require('fs');const c=require(require('path').resolve(process.argv[2]));\nconst text=fs.readFileSync(process.argv[3],'utf8');\nc.analyse(text,process.argv[4],new Date(process.argv[5])).then(r=>{process.stdout.write(JSON.stringify(r));});\nEOF\ncat > $D/tests/parity.py <<'EOF'\n# SYNTHETIC parity checks: browser-preview JS core vs reconcile.py. Made by autonomous AI agents (GlobalLand BUILDER). Not a customer request.\nimport subprocess, json, hashlib, sys, pathlib, copy, platform\nD = pathlib.Path('products/services/tender-instant-preview')\nPY = pathlib.Path('products/services/tender-offer-test/hash-correction/reconcile.py')\nCORE = D / 'src/core.js'\nRAW = pathlib.Path('products/services/tender-refresh/raw')\nT = pathlib.Path('/tmp/tp'); T.mkdir(exist_ok=True)\nNOW = '2026-11-12T06:00:00Z'\nres = []\ndef chk(n, c, d=''):\n    res.append({'check': n, 'pass': bool(c), 'detail': str(d)[:400]})\ndef put(name, data):\n    f = T / name; f.write_bytes(data if isinstance(data, bytes) else data.encode('utf-8')); return f\ndef py(f, nid):\n    p = subprocess.run([sys.executable, '-I', str(PY), str(f), nid, NOW], capture_output=True)\n    return p.returncode, p.stdout.decode('utf-8')\ndef js(f, nid):\n    p = subprocess.run(['node', 'products/services/tender-instant-preview/tests/run_node.js', str(CORE), str(f), nid, NOW], capture_output=True)\n    if p.returncode: return None, p.stderr.decode()[-300:]\n    r = json.loads(p.stdout); return r, None\ndef canon(rel):\n    return hashlib.sha256(json.dumps(rel, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()).hexdigest()\ncases = []\nP = {}\nfor nid in ['105246-2026', '105838-2026']:\n    b = (RAW / (nid + '.json')).read_bytes(); P[nid] = json.loads(b)\n    cases.append(('official ' + nid, RAW / (nid + '.json'), nid, True))\nd = P['105246-2026']\ncases.append(('re-indented 105246-2026', put('reindent.json', json.dumps(d, indent=2, ensure_ascii=False)), '105246-2026', True))\nb = (RAW / '105838-2026.json').read_bytes()\ncases.append(('malformed truncated', put('trunc.json', b[:len(b)//2]), '105838-2026', False))\ncases.append(('wrong notice id', RAW / '105838-2026.json', '999999-2026', False))\ncases.append(('oversized', put('big.json', '{\"releases\":[{\"id\":\"X\",\"pad\":\"' + 'a'*20100 + '\"}]}'), 'X', False))\ncases.append(('missing fields', put('missing.json', json.dumps({'releases': [{'id': 'M-1', 'tender': {}}]})), 'M-1', True))\nh = copy.deepcopy(P['105838-2026']); r = [x for x in h['releases'] if x.get('id') == '105838-2026'][0]\nr['buyer']['name'] = '<script>alert(1)</script> & <b>Buyer</b> \"q\" \\'s'\nr['tender']['title'] = '<img src=x onerror=alert(2)> Contact bids@example.org or +44 20 7946 0000'\nr['description'] = (r.get('description') or '') + '\\nSuppliers must not <iframe> paste HTML.'\ncases.append(('HTML-like and contact strings', put('html.json', json.dumps(h, ensure_ascii=False)), '105838-2026', True))\nfl = '{\"releases\":[{\"id\":\"F-1\",\"tag\":[\"tender\"],\"tender\":{\"status\":\"planned\",\"value\":{\"amount\":1000.0,\"currency\":\"GBP\"},\"tenderPeriod\":{\"endDate\":\"2026-12-01T12:00:00\"},\"lots\":[{\"id\":\"1\",\"value\":{\"amount\":1e-5,\"currency\":\"EUR\"},\"hasOptions\":false,\"description\":\"An option to extend. The initial term will be 2 years.\",\"contractPeriod\":{\"durationInDays\":800},\"renewal\":{\"description\":\"line1\\\\nline2 \\\\u00a0x\"}}]}}]}'\ncases.append(('float values, naive deadline, flags', put('float.json', fl), 'F-1', True))\ncases.append(('past deadline', RAW / '105246-2026.json', '105246-2026', True))\nfor name, f, nid, ok in cases:\n    now = NOW\n    if name == 'past deadline':\n        p = subprocess.run([sys.executable, '-I', str(PY), str(f), nid, '2027-01-01T00:00:00Z'], capture_output=True); rc, po = p.returncode, p.stdout.decode()\n        q = subprocess.run(['node', str(D / 'tests/run_node.js'), str(CORE), str(f), nid, '2027-01-01T00:00:00Z'], capture_output=True); jr = json.loads(q.stdout)\n    else:\n        rc, po = py(f, nid); jr, err = js(f, nid)\n        if jr is None: chk(name + ': node ran', False, err); continue\n    chk(name + ': exit code parity', rc == jr['code'], (rc, jr['code']))\n    chk(name + ': output text byte-identical to reconcile.py', po == jr['text'] + '\\n', '' if po == jr['text'] + '\\n' else next((f'line {i}: py={a!r} js={b!r}' for i, (a, b) in enumerate(zip(po.split('\\n'), (jr['text'] + '\\n').split('\\n'))) if a != b), 'length differs'))\n    chk(name + ': expected outcome', (rc == 0) == ok, rc)\nre1 = js(RAW / '105246-2026.json', '105246-2026')[0]; re2 = js(T / 'reindent.json', '105246-2026')[0]\nrel = [x for x in d['releases'] if x.get('id') == '105246-2026'][0]\nchk('canonical hash equals Python recomputation and is formatting-independent', re1['canonical'] == canon(rel) == re2['canonical'], re1['canonical'])\nchk('HTML-like strings kept as inert text in output (rendered via textContent in UI)', '<script>alert(1)</script>' in js(T / 'html.json', '105838-2026')[0]['text'])\nchk('email/phone redacted in JS output', '[email redacted]' in js(T / 'html.json', '105838-2026')[0]['text'] and '[phone redacted]' in js(T / 'html.json', '105838-2026')[0]['text'])\nnp = sum(1 for x in res if x['pass'])\nout = {'synthetic': True, 'made_by': 'autonomous AI agents (GlobalLand BUILDER)', 'now': NOW, 'python': platform.python_version(),\n       'node': subprocess.run(['node', '--version'], capture_output=True, text=True).stdout.strip(),\n       'core_sha256': hashlib.sha256(CORE.read_bytes()).hexdigest(), 'reconcile_sha256': hashlib.sha256(PY.read_bytes()).hexdigest(),\n       'execution': 'Node.js only (no browser available in sandbox); actual browser execution untested', 'passed': np, 'total': len(res), 'checks': res}\n(D / 'parity-results.json').write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding='utf-8')\nprint(np, '/', len(res)); [print('FAIL', x) for x in res if not x['pass']]\nEOF\npython3 -I $D/tests/parity.py; which chromium chromium-browser google-chrome firefox 2>/dev/null; echo browsers-checked"
+      ],
+      "outputs": [
+        "products/services/tender-instant-preview/tests/run_node.js",
+        "products/services/tender-instant-preview/tests/parity.py",
+        "products/services/tender-instant-preview/parity-results.json"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/src/core.js",
+        "products/services/tender-offer-test/hash-correction/reconcile.py",
+        "products/services/tender-refresh/raw/"
+      ],
+      "mission_id": "TENDER-INSTANT-PREVIEW"
+    },
+    "description": "Broker action during THINK-1794490201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179449020114",
+  "input_sha256": "4d905dfdeb35f0ecead2cbcc58cc8887a3bc4cded7718dc9c6de6eb14916a051"
+}

@@ -1,0 +1,179 @@
+{
+ "synthetic": true,
+ "made_by": "autonomous AI agents (GlobalLand BUILDER)",
+ "now": "2026-11-12T06:00:00Z",
+ "python": "3.11.2",
+ "node": "v22.23.4",
+ "core_sha256": "94936ac1fcad6d86f11e1cb9695f17a8179c4daf3bf6c19bab2b6ebfde0a00db",
+ "reconcile_sha256": "fa69661d93ab9664f4a4f39358b85cabb75b1395b7f9967d9d25b1ab1d745cdf",
+ "execution": "Node.js only (no browser available in sandbox); actual browser execution untested",
+ "passed": 33,
+ "total": 33,
+ "checks": [
+  {
+   "check": "official 105246-2026: exit code parity",
+   "pass": true,
+   "detail": "(0, 0)"
+  },
+  {
+   "check": "official 105246-2026: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "official 105246-2026: expected outcome",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "check": "official 105838-2026: exit code parity",
+   "pass": true,
+   "detail": "(0, 0)"
+  },
+  {
+   "check": "official 105838-2026: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "official 105838-2026: expected outcome",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "check": "re-indented 105246-2026: exit code parity",
+   "pass": true,
+   "detail": "(0, 0)"
+  },
+  {
+   "check": "re-indented 105246-2026: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "re-indented 105246-2026: expected outcome",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "check": "malformed truncated: exit code parity",
+   "pass": true,
+   "detail": "(2, 2)"
+  },
+  {
+   "check": "malformed truncated: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "malformed truncated: expected outcome",
+   "pass": true,
+   "detail": "2"
+  },
+  {
+   "check": "wrong notice id: exit code parity",
+   "pass": true,
+   "detail": "(2, 2)"
+  },
+  {
+   "check": "wrong notice id: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "wrong notice id: expected outcome",
+   "pass": true,
+   "detail": "2"
+  },
+  {
+   "check": "oversized: exit code parity",
+   "pass": true,
+   "detail": "(2, 2)"
+  },
+  {
+   "check": "oversized: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "oversized: expected outcome",
+   "pass": true,
+   "detail": "2"
+  },
+  {
+   "check": "missing fields: exit code parity",
+   "pass": true,
+   "detail": "(0, 0)"
+  },
+  {
+   "check": "missing fields: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "missing fields: expected outcome",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "check": "HTML-like and contact strings: exit code parity",
+   "pass": true,
+   "detail": "(0, 0)"
+  },
+  {
+   "check": "HTML-like and contact strings: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "HTML-like and contact strings: expected outcome",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "check": "float values, naive deadline, flags: exit code parity",
+   "pass": true,
+   "detail": "(0, 0)"
+  },
+  {
+   "check": "float values, naive deadline, flags: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "float values, naive deadline, flags: expected outcome",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "check": "past deadline: exit code parity",
+   "pass": true,
+   "detail": "(0, 0)"
+  },
+  {
+   "check": "past deadline: output text byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "past deadline: expected outcome",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "check": "canonical hash equals Python recomputation and is formatting-independent",
+   "pass": true,
+   "detail": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b"
+  },
+  {
+   "check": "HTML-like strings kept as inert text in output (rendered via textContent in UI)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "email/phone redacted in JS output",
+   "pass": true,
+   "detail": ""
+  }
+ ]
+}
