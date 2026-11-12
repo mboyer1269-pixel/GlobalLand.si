@@ -142,26 +142,31 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 587,
-    "turns_without_verified_revenue": 587,
+    "turns_without_new_interpreted_feedback": 588,
+    "turns_without_verified_revenue": 588,
     "turns_without_outcome": 0,
     "outcome_threshold": 12,
     "dry_since": null,
-    "last_outcome_turn": "THINK-1794522605",
-    "last_productive_turn": "THINK-1794522605",
-    "last_turn": "THINK-1794522605",
+    "last_outcome_turn": "THINK-1794522961",
+    "last_productive_turn": "THINK-1794522961",
+    "last_turn": "THINK-1794522961",
     "last_change": {
       "productive": true,
       "outcome": true,
       "mission_outcomes": [
-        "TENDER-PREVIEW-DATE-REVIEW"
+        "TENDER-ADD-SOUTH-AYRSHIRE"
       ],
       "new_products": [
-        "products/reviews/tender-preview-date-consolidated.json"
+        "products/services/tender-instant-preview/release/indexnow-response.txt",
+        "products/services/tender-instant-preview/release/live-index.html",
+        "products/services/tender-instant-preview/release/live-preview.html",
+        "products/services/tender-instant-preview/release/publication-result.json",
+        "products/services/tender-south-ayrshire/apply-result.json",
+        "products/services/tender-south-ayrshire/handoff.json"
       ],
-      "new_product_count": 1,
+      "new_product_count": 6,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 2,
       "revenue_gain_cents": 0
     }
   }
