@@ -142,20 +142,22 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 551,
-    "turns_without_verified_revenue": 551,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 552,
+    "turns_without_verified_revenue": 552,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-12T12:00:49Z",
-    "last_outcome_turn": "THINK-1794483004",
-    "last_productive_turn": "THINK-1794485162",
-    "last_turn": "THINK-1794485162",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794486605",
+    "last_productive_turn": "THINK-1794486605",
+    "last_turn": "THINK-1794486605",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
+      "outcome": true,
+      "mission_outcomes": [
+        "TENDER-CRAWL-ACCESS-CHECK"
+      ],
       "new_products": [
-        "products/services/tender-offer-test/crawl-access/live-robots.txt"
+        "products/services/tender-offer-test/crawl-access/result.json"
       ],
       "new_product_count": 1,
       "new_research_count": 0,
