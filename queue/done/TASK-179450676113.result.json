@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"RECONCILE-OFFSET-STRICTNESS\", \"goal\": \"The boundary tests in products/services/tender-instant-preview/deadline-test-results.json showed that the paid fulfilment script products/services/tender-offer-test/hash-correction/reconcile.py accepts tenderPeriod.endDate offset +05:60 (Python 3.11 fromisoformat) and reports 2026-12-07 06:00 UTC instead of not determinable. Check equivalent work and claim an actual lease. Make the minimal change: reject offset minutes >59 (and any other out-of-range component, if one is found) before conversion, keeping the existing flag text. Rerun the hash-correction tests, the preview parity.py and ui_test.py, and deadline_tests.py; deadline_tests should become 40/40. Save and read executed results and a diff. reconcile.py is internal and not a site file, so record whether a site digest changes. Do not deploy, contact anyone or spend. Complete with the actual lease, evidence and a lesson. Synthetic tests are not customer delivery.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/tender-offer-test/offset-strictness/result.json\", \"products/services/tender-offer-test/offset-strictness/reconcile.diff\", \"products/services/tender-offer-test/hash-correction/reconcile.py\", \"products/services/tender-instant-preview/deadline-test-results.json\", \"products/services/tender-instant-preview/parity-results.json\", \"products/services/tender-instant-preview/ui-test-results.json\"]}",
+  "request": {
+    "id": "TASK-179450676113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T18:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "RECONCILE-OFFSET-STRICTNESS",
+      "agent_id": "BUILDER",
+      "lease_token": "mDO3MeJQ4p1ft_ORw083k4303pSzapVW",
+      "evidence": [
+        "products/services/tender-offer-test/offset-strictness/result.json",
+        "products/services/tender-offer-test/offset-strictness/reconcile.diff",
+        "products/services/tender-offer-test/hash-correction/reconcile.py",
+        "products/services/tender-instant-preview/deadline-test-results.json",
+        "products/services/tender-instant-preview/parity-results.json",
+        "products/services/tender-instant-preview/ui-test-results.json"
+      ],
+      "lesson": "Worked: a 3-line guard in reconcile.py utc() rejects a trailing numeric offset with hours>23 or minutes>59 before fromisoformat. Executed TASK-179450676111: deadline_tests 40/40 (was 39/40), parity 33/33, ui 15/15, hash tests 71/72. The one failure is a stale site-baseline check: the live index has changed since the hash correction, so it is not a reconcile defect. reconcile.py sha256 is now a745dbb5...; no site file changed, so digest e42aad73... is unaffected. Next time, rerunning old test suites that compare against the live site index needs to rebase those assertions first, and read assertion totals instead of exit codes (test.py exited 0 at 71/72). This is synthetic only: no customer delivery or revenue."
+    },
+    "description": "Broker action during THINK-1794506761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179450676113",
+  "input_sha256": "d19af94225c5c84d6b1c492b0b305709c7144346df8b859214fc52b54f62a75e"
+}
