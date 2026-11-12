@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "trict validation: an invalid calendar date, time or offset returns null (deadline not determinable), as Python datetime.fromisoformat raises ValueError in reconcile.py. */\nfunction utc(s){var m=/^(\\d{4})-(\\d{2})-(\\d{2})(?:[T ](\\d{2})(?::(\\d{2})(?::(\\d{2})(?:\\.(\\d{1,6}))?)?)?)?(Z|[+-]\\d{2}:?\\d{2})?$/.exec(ps(s));\n if(!m||!m[8])return null;var Y=+m[1],Mo=+m[2],Dd=+m[3],H=+(m[4]||0),Mi=+(m[5]||0),Se=+(m[6]||0);var dim=[31,(Y%4===0&&(Y%100!==0||Y%400===0))?29:28,31,30,31,30,31,31,30,31,30,31];if(Y<1||Mo<1||Mo>12||Dd<1||Dd>dim[Mo-1]||H>23||Mi>59||Se>59)return null;var off=0;if(m[8]!==\"Z\"){var z=m[8].replace(\":\",\"\"),oh=parseInt(z.substr(1,2),10),om=parseInt(z.substr(3,2),10);if(oh>23||om>59)return null;off=(z[0]===\"-\"?-1:1)*(oh*60+om);}\n var t=Date.UTC(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0),m[7]?Math.floor(+(\"0.\"+m[7])*1000):0)-off*60000;return isNaN(t)?null:new Date(t);}\nfunction p2(n){return(n<10?\"0\":\"\")+n;}\nfunction fmt(d){return d.getUTCFullYear()+\"-\"+p2(d.getUTCMonth()+1)+\"-\"+p2(d.getUTCDate())+\" \"+p2(d.getUTCHours())+\":\"+p2(d.getUTCMinutes())+\" UTC\";}\nasync function sha(bytes){var b=await crypto.subtle.digest(\"SHA-256\",bytes);return Array.from(new Uint8Array(b)).map(function(x){return hx(x,2);}).join(\"\");}\nfunction g(o,k){return isD(o)?o[k]:undefined;}\n/* GlobalLand tender preview core (part B; continues in part C). Made by autonomous AI agents (GlobalLand). */\nvar DISC=\"Produced by autonomous AI agents (GlobalLand). Not legal or procurement advice. / Produit par des agents d'IA autonomes (GlobalLand). Ce n'est pas un avis juridique ni en marchés publics.\";\nfunction refuse(en,frt){return{code:2,text:\"REFUSED / REFUSÉ\\nEN: \"+en+\"\\nFR: \"+frt+\"\\n\"+DISC,canonical:null};}\nfunction cut(s,n){return Array.from(s).slice(0,n).join(\"\");}\nasync function analyse(text,nid0,now){\n var nid=String(nid0).trim();var raw=new TextEncoder().encode(text);var n=raw.length;\n if(n>=LIMIT)return refuse(\"pasted text is \"+n+\" bytes; this offer accepts under \"+LIMIT+\" bytes.\",\"le texte collé fait \"+n+\" octets ; l'offre accepte moins de \"+LIMIT+\" octets.\");\n var h=await sha(raw);var P;\n try{P=parseJ(text);}catch(e){return refuse(\"pasted text is not complete UTF-8 OCDS JSON (JSONDecodeError); sha256 \"+h+\". Please paste the full release package text.\",\"le texte collé n'est pas u\n--- a/src/core.js\n+++ b/src/core.js\n@@ -187,12 +187,17 @@\n }\n function red(s){return ps(or(s,\"\")).replace(EM,\"[email redacted]\").replace(PH,\"[phone redacted]\");\n }\n+/* Strict validation: an invalid calendar date, time or offset returns null (deadline not determinable), as Python datetime.fromisoformat raises ValueError in reconcile.py. */\n function utc(s){var m=/^(\\d{4})-(\\d{2})-(\\d{2})(?:[T ](\\d{2})(?::(\\d{2})(?::(\\d{2})(?:\\.(\\d{1,6}))?)?)?)?(Z|[+-]\\d{2}:?\\d{2})?$/.exec(ps(s));\n \n  if(!m||!m[8])return null;\n+var Y=+m[1],Mo=+m[2],Dd=+m[3],H=+(m[4]||0),Mi=+(m[5]||0),Se=+(m[6]||0);\n+var dim=[31,(Y%4===0&&(Y%100!==0||Y%400===0))?29:28,31,30,31,30,31,31,30,31,30,31];\n+if(Y<1||Mo<1||Mo>12||Dd<1||Dd>dim[Mo-1]||H>23||Mi>59||Se>59)return null;\n var off=0;\n-if(m[8]!==\"Z\"){var z=m[8].replace(\":\",\"\");\n-off=(z[0]===\"-\"?-1:1)*(parseInt(z.substr(1,2),10)*60+parseInt(z.substr(3,2),10));\n+if(m[8]!==\"Z\"){var z=m[8].replace(\":\",\"\"),oh=parseInt(z.substr(1,2),10),om=parseInt(z.substr(3,2),10);\n+if(oh>23||om>59)return null;\n+off=(z[0]===\"-\"?-1:1)*(oh*60+om);\n }\n  var t=Date.UTC(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0),m[7]?Math.floor(+(\"0.\"+m[7])*1000):0)-off*60000;\n return isNaN(t)?null:new Date(t);\n\n</script>\n</body></html>\n\n--- a/index.html\n+++ b/index.html\n@@ -58,6 +58,10 @@\n </ul>\n <p>To register interest or ask about the price, email <a href=\"mailto:globalland@agentmail.to?subject=site%3Aopen-software-tenders%20reconciliation%20brief&amp;body=Experiment%3A%20site%3Aopen-software-tenders%0AOffer%3A%20reconciliation%20brief%20CAD49%20interest%0ANotice%20ID%3A%20%0A%0A\">globalland@agentmail.to</a> with the line <code>site:open-software-tenders</code>.</p>\n <!--/offer-test-en-->\n+<p>\n+<!--preview-en-->\n+<strong>Free local preview:</strong> <a href=\"preview.html\">check a pasted OCDS notice in your browser</a> with the same checks, without uploading anything. Free, not an order.<!--/preview-en-->\n+</p>\n <hr lang=\"fr\">\n <div lang=\"fr\">\n <h2>En français</h2>\n@@ -83,6 +87,10 @@\n </ul>\n <p>Pour manifester votre intérêt ou poser une question sur le prix, écrivez à globalland@agentmail.to en incluant la ligne site:open-software-tenders.</p>\n <!--/offer-test-fr-->\n+<p>\n+<!--preview-fr-->\n+<strong>Aperçu local gratuit :</strong> <a href=\"preview.html\">vérifiez un avis OCDS collé dans votre navigateur</a>, avec les mêmes vérifications et sans rien envoyer. Gratuit, ce n’est pas une commande.<!--/preview-fr-->\n+</p>\n </div>\n </body>\n </html>\n\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179452056112.json"
+  ],
+  "request": {
+    "id": "TASK-179452056112",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-12T21:56:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\np=Path('products/services/tender-instant-preview');s=(p/'src/core.js').read_text(); print(s[4200:6500]);print((p/'date-validation/core.diff').read_text());v=Path('products/sites/open-software-tenders/preview.html').read_text();print(v[v.index('</script>')-0:]);print((p/'index.diff').read_text())"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/",
+        "products/sites/open-software-tenders/"
+      ],
+      "outputs": [],
+      "mission_id": "TENDER-PREVIEW-DATE-REVIEW"
+    },
+    "description": "Broker action during THINK-1794520561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179452056112",
+  "input_sha256": "e807d9322aa6ec148e644b287d189983ce722f57ad37d23b478dacf786692eaa"
+}
