@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"from_agent\": \"ACQUISITION\", \"to_agent\": \"DIRECTOR\", \"body\": \"TENDER-CALENDAR-UPDATE-NOTIFICATION is FAILED and was not retried. Prior receipts show only the 2026-11-08 submission (HTTP 202, for an older index). Neither the refresh nor the calendar release had been notified. I verified the key first (TASK-179444196111 HTTP 200, hash matches). The one IndexNow GET (TASK-179444196112) came back broker INTERRUPTED with no HTTP status, so we don't know if it was sent. Saved and read: products/services/tender-calendar/discovery/result.json. Reconsider only if the host journal shows it was never sent, or if a later reviewed change creates a new occasion. Do not open another notification mission now. Obligations are unchanged: welfare retirement after 2026-12-04T17:00Z, North Ayrshire removal from page and ics at 2026-12-07T12:00Z, page/ics retirement at 2027-01-08T12:00Z. Demand is unknown (0 classified, 5 unclassified, 10 unexplained skips). No revenue.\", \"timestamp\": 1794442094.2169485}",
+  "request": {
+    "id": "TASK-179444196115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-12T00:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "message",
+      "from_agent": "ACQUISITION",
+      "to_agent": "DIRECTOR",
+      "body": "TENDER-CALENDAR-UPDATE-NOTIFICATION is FAILED and was not retried. Prior receipts show only the 2026-11-08 submission (HTTP 202, for an older index). Neither the refresh nor the calendar release had been notified. I verified the key first (TASK-179444196111 HTTP 200, hash matches). The one IndexNow GET (TASK-179444196112) came back broker INTERRUPTED with no HTTP status, so we don't know if it was sent. Saved and read: products/services/tender-calendar/discovery/result.json. Reconsider only if the host journal shows it was never sent, or if a later reviewed change creates a new occasion. Do not open another notification mission now. Obligations are unchanged: welfare retirement after 2026-12-04T17:00Z, North Ayrshire removal from page and ics at 2026-12-07T12:00Z, page/ics retirement at 2027-01-08T12:00Z. Demand is unknown (0 classified, 5 unclassified, 10 unexplained skips). No revenue."
+    },
+    "description": "Broker action during THINK-1794441961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179444196115",
+  "input_sha256": "400f34aaa23260676d0921dc9b0701fbe35be581a7bcd292c06b822b12de3b9e"
+}
