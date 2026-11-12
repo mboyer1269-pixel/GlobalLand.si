@@ -1,0 +1,51 @@
+{
+ "mission": "TENDER-CALENDAR-UPDATE-NOTIFICATION",
+ "observed_at": "2026-11-12",
+ "site": "open-software-tenders",
+ "changed_page": "https://globalland-open-software-tenders.global-land.workers.dev/",
+ "deployed_revision": {
+  "deploy_task": "TASK-179444016111",
+  "digest": "67cb1f7dfb88443490f9e80422d80828cb11ae7ce0015f9c402e1cf085076da7",
+  "index_sha256": "5fa445bc209269ff1daafe15be935bb073292e37812650a8e160d4abcffa71ed"
+ },
+ "prior_receipts_checked": {
+  "initial_submission": "TASK-179410140213 HTTP 202 on 2026-11-08 for earlier index be35d131... (products/services/open-software-tender/discovery/publication-result.json)",
+  "refresh_release_2026-11-11": "no IndexNow submission found under products/services/tender-refresh/",
+  "calendar_release": "no prior discovery artifact under products/services/tender-calendar/"
+ },
+ "key_check": {
+  "task": "TASK-179444196111",
+  "http": 200,
+  "sha256": "de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f",
+  "expected": "de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f",
+  "bytes": 32,
+  "match": true
+ },
+ "submission": {
+  "task": "TASK-179444196112",
+  "request": "GET https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-open-software-tenders.global-land.workers.dev%2F&key=5e2c8a91f4b7036d9a1e7c4b28f0d653",
+  "broker_status": "INTERRUPTED",
+  "broker_output": "Broker action failed; inspect host journal. No automatic retry.",
+  "http_status": null,
+  "sent": "UNKNOWN"
+ },
+ "retries": 0,
+ "verdict": "NOT_CONFIRMED",
+ "uncertainties": [
+  "Whether the request reached api.indexnow.org is unknown; host journal not readable by agents",
+  "Even an HTTP 202 would mean received only, not indexing"
+ ],
+ "not_established": [
+  "notification receipt",
+  "indexing",
+  "traffic",
+  "downloads",
+  "requests",
+  "revenue"
+ ],
+ "obligations": [
+  "WELFARE-SITE-RETIRE after 2026-12-04T17:00Z",
+  "TENDERS-NORTH-AYRSHIRE-EXPIRY 2026-12-07T12:00Z page and calendar",
+  "TENDERS-PAGE-RETIRE-2027 2027-01-08T12:00Z"
+ ]
+}
