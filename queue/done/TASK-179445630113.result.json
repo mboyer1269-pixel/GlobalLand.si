@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"TENDER-OFFER-DISCOVERY-NOTIFICATION\",\n \"observed_at\": \"2026-11-12\",\n \"site\": \"open-software-tenders\",\n \"changed_page\": \"https://globalland-open-software-tenders.global-land.workers.dev/\",\n \"deployed_revision\": {\n  \"deploy_task\": \"TASK-179445420511\",\n  \"digest\": \"803a010480287000c0125fd155db5bd3b856cd5ad75c4204c9b18dcb5199e196\",\n  \"index_sha256\": \"b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707\"\n },\n \"prior_receipts_checked\": {\n  \"initial_submission\": \"TASK-179410140213 HTTP 202 2026-11-08\",\n  \"calendar_notification\": \"TASK-179444196112 INTERRUPTED, sent UNKNOWN; not retried and disposition not claimed\"\n },\n \"key_check\": {\n  \"task\": \"TASK-179445630111\",\n  \"http\": 200,\n  \"sha256\": \"de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f\",\n  \"expected\": \"de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f\",\n  \"bytes\": 32,\n  \"match\": true,\n  \"key_text_is_32_hex\": true\n },\n \"submission\": {\n  \"task\": \"TASK-179445630112\",\n  \"request\": \"GET https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-open-software-tenders.global-land.workers.dev%2F&key=5e2c8a91f4b7036d9a1e7c4b28f0d653\",\n  \"http_status\": 200,\n  \"response_bytes\": 0,\n  \"response_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n },\n \"retries\": 0,\n \"verdict\": \"HTTP_ACCEPTED\",\n \"interpretation\": \"IndexNow documents HTTP 200 as URL submitted successfully; this is receipt by the API only\",\n \"not_established\": [\n  \"indexing\",\n  \"search exposure\",\n  \"traffic\",\n  \"requests\",\n  \"orders\",\n  \"revenue\"\n ],\n \"obligations\": [\n  \"WELFARE-SITE-RETIRE after 2026-12-04T17:00Z\",\n  \"TENDERS-NORTH-AYRSHIRE-EXPIRY 2026-12-07T12:00Z incl. offer section\",\n  \"TENDERS-PAGE-RETIRE-2027 2027-01-08T12:00Z\"\n ]\n}\n\n",
+  "artifacts": [
+    "products/services/tender-offer-test/discovery/result.json",
+    "products/receipts/TASK-179445630113.json"
+  ],
+  "request": {
+    "id": "TASK-179445630113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-12T04:05:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,pathlib\nk=pathlib.Path('products/services/tender-offer-test/discovery/live-key.txt').read_bytes()\nr=pathlib.Path('products/services/tender-offer-test/discovery/indexnow-response.txt').read_bytes()\nkh=hashlib.sha256(k).hexdigest()\nexp='de33843bc30328de6b2cd566b051c570b2d4f8c738856ff9378eda09ab7b9a0f'\nout={'mission':'TENDER-OFFER-DISCOVERY-NOTIFICATION','observed_at':'2026-11-12','site':'open-software-tenders','changed_page':'https://globalland-open-software-tenders.global-land.workers.dev/','deployed_revision':{'deploy_task':'TASK-179445420511','digest':'803a010480287000c0125fd155db5bd3b856cd5ad75c4204c9b18dcb5199e196','index_sha256':'b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707'},'prior_receipts_checked':{'initial_submission':'TASK-179410140213 HTTP 202 2026-11-08','calendar_notification':'TASK-179444196112 INTERRUPTED, sent UNKNOWN; not retried and disposition not claimed'},'key_check':{'task':'TASK-179445630111','http':200,'sha256':kh,'expected':exp,'bytes':len(k),'match':kh==exp,'key_text_is_32_hex':len(k.strip())==32},'submission':{'task':'TASK-179445630112','request':'GET https://api.indexnow.org/indexnow?url=https%3A%2F%2Fgloballand-open-software-tenders.global-land.workers.dev%2F&key=5e2c8a91f4b7036d9a1e7c4b28f0d653','http_status':200,'response_bytes':len(r),'response_sha256':hashlib.sha256(r).hexdigest()},'retries':0,'verdict':'HTTP_ACCEPTED','interpretation':'IndexNow documents HTTP 200 as URL submitted successfully; this is receipt by the API only','not_established':['indexing','search exposure','traffic','requests','orders','revenue'],'obligations':['WELFARE-SITE-RETIRE after 2026-12-04T17:00Z','TENDERS-NORTH-AYRSHIRE-EXPIRY 2026-12-07T12:00Z incl. offer section','TENDERS-PAGE-RETIRE-2027 2027-01-08T12:00Z']}\np=pathlib.Path('products/services/tender-offer-test/discovery/result.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(out,indent=1));print(p.read_text())"
+      ],
+      "inputs": [
+        "products/services/tender-offer-test/discovery/live-key.txt",
+        "products/services/tender-offer-test/discovery/indexnow-response.txt"
+      ],
+      "outputs": [
+        "products/services/tender-offer-test/discovery/result.json"
+      ],
+      "mission_id": "TENDER-OFFER-DISCOVERY-NOTIFICATION"
+    },
+    "description": "Broker action during THINK-1794456301",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179445630113",
+  "input_sha256": "7d2ca3254285d892d9ee61df7ee7c3832fec8f3c447163d7b32eb6ce6232f976"
+}
