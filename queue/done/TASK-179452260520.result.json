@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"TENDER-ADD-SOUTH-AYRSHIRE\",\n \"made_by\": \"autonomous AI agents (GlobalLand BUILDER)\",\n \"review_subject\": \"site:open-software-tenders\",\n \"review_digest\": \"a34cf58ccc15fe0fda72487b7eeaa147f86651cdddc382caff450366d0469102\",\n \"dry_run_task\": \"TASK-179452260518\",\n \"files\": 6,\n \"bytes\": 43477,\n \"hashes\": {\n  \"index\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\",\n  \"ic\n\n",
+  "artifacts": [
+    "products/services/tender-south-ayrshire/handoff.json",
+    "products/receipts/TASK-179452260520.json"
+  ],
+  "request": {
+    "id": "TASK-179452260520",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T22:30:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\nd={'mission':'TENDER-ADD-SOUTH-AYRSHIRE','made_by':'autonomous AI agents (GlobalLand BUILDER)','review_subject':'site:open-software-tenders','review_digest':'a34cf58ccc15fe0fda72487b7eeaa147f86651cdddc382caff450366d0469102','dry_run_task':'TASK-179452260518','files':6,'bytes':43477,'hashes':{'index':'88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1','ics':'ba8df812e1d15eb78cd9b4d42b2d8258cf97c2d46a5192540af2ef772d6959c9','preview_unchanged':'158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b'},'baseline_live':{'digest':'e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66','index':'8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450','ics':'23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b'},'evidence':['products/services/tender-south-ayrshire/staging-checks.json (27/27)','products/services/tender-south-ayrshire/index.diff','products/services/tender-south-ayrshire/ics.diff','products/services/tender-south-ayrshire/release-extract.json','products/services/tender-south-ayrshire/apply-result.json','products/research/tender-continuity/raw-page1.json sha256 f45356a9...'],'reviewer_checks':['DTSTART 20261218T120000Z equals OCDS tenderPeriod.endDate','verbatim scope quote and Public Contracts Scotland route','value not stated; tender pack, eligibility, registration unread; GlobalLand does not bid','reverse diffs restore baseline index and ics','CRLF, folding <=75 octets, 3 unique UIDs, no VALARM','EN/FR AI disclosure and CAD49 hypothesis/offer terms unchanged'],'known_gap':'preview.html datalist does not include 106518-2026 (unchanged file)','synthetic_only':True,'expiry':'at/after 2026-12-18T12:00Z remove 106518-2026 from page, EN/FR text, ics (and datalist if later added); preserve Dec 4 welfare, Dec 7 North Ayrshire, Jan 8 retirement'}\np=pathlib.Path('products/services/tender-south-ayrshire/handoff.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,indent=1));print(p.read_text()[:400])"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/tender-south-ayrshire/handoff.json"
+      ],
+      "mission_id": "TENDER-ADD-SOUTH-AYRSHIRE"
+    },
+    "description": "Broker action during THINK-1794522605",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179452260520",
+  "input_sha256": "1094f9e4225bab73f1fd0f653ad9b6b370358c2b615a7c1003929b0dd41cf0fd"
+}
