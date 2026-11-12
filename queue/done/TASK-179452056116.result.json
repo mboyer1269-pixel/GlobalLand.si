@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "DIFF ''\n{\n  \"mission\": \"TENDER-PREVIEW-DATE-REVIEW\",\n  \"checks\": {\n    \"embedded_core_verbatim\": true,\n    \"original_preview_hash_prefix\": true,\n    \"index_expected_hash\": true,\n    \"preview_expected_hash\": true,\n    \"candidate_index_identical\": true,\n    \"links_only_index_change\": true,\n    \"local_CSP\": true,\n    \"safe_output\": true\n  },\n  \"all_pass\": true,\n  \"independent_existing_runs\": {\n    \"TASK-179451720101\": {\n      \"parity\": \"33/33\",\n      \"ui_stub\": \"15/15\",\n      \"deadline\": \"40/40\"\n    },\n    \"TASK-179451720102\": \"digest e42aad73fc355b8ebb86c8412a15c5bc133a13aa071cbca7b2af7c66f5556c66\"\n  },\n  \"inspection_receipts\": [\n    \"TASK-179452056110\",\n    \"TASK-179452056111\",\n    \"TASK-179452056112\"\n  ],\n  \"limits\": [\n    \"No real browser execution\",\n    \"No customer use or revenue established\",\n    \"Feedback unknown: five unclassified sources, ten unexplained skips\"\n  ],\n  \"hashes\": {\n    \"preview\": \"158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b\",\n    \"index\": \"8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450\",\n    \"restored_original_preview\": \"eba4d7aca2fa0707e153cb357a84ccaccd75624d0c640404624d412b70490fd3\"\n  },\n  \"manual_findings\": \"EN/FR AI disclosure, under-20000-byte input refusal, source authenticity warning, no URL retrieval/upload, hypothetical CAD49 and human administrative acceptance are explicit. Restoration checks cover unchanged offer/intake and unchanged preview prose/UI. Date validation rejects impossible dates and out-of-range times/offsets. Existing offset strictness correction explains 40/40 versus earlier 39/40.\",\n  \"harness_correction\": \"The service preview.html was already updated, so it was not a valid old fixture. Restored old utc from unchanged core-a.js instead. Index paragraphs are compact, so removal permits whitespace rather than requiring newlines. Initial failed assertions were harness errors, not candidate defects.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/tender-preview-date-consolidated.json",
+    "products/receipts/TASK-179452056116.json"
+  ],
+  "request": {
+    "id": "TASK-179452056116",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-12T21:56:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport re,json,difflib\np=Path('products/services/tender-instant-preview');idx=(p/'candidate-index.html').read_text();base=(p/'baseline-index.html').read_text();s=re.sub(r'<p>\\s*<!--preview-(en|fr)-->.*?<!--/preview-\\1-->\\s*</p>','',idx,flags=re.S);print('DIFF',repr(''.join(difflib.unified_diff(base.splitlines(True),s.splitlines(True)))));o=Path('products/reviews/tender-preview-date-consolidated.json');r=json.loads(o.read_text());r['checks']['links_only_index_change']=s==base;r['all_pass']=all(r['checks'].values());o.write_text(json.dumps(r,ensure_ascii=False,indent=2));print(o.read_text())"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/",
+        "products/reviews/tender-preview-date-consolidated.json"
+      ],
+      "outputs": [
+        "products/reviews/tender-preview-date-consolidated.json"
+      ],
+      "mission_id": "TENDER-PREVIEW-DATE-REVIEW"
+    },
+    "description": "Broker action during THINK-1794520561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179452056116",
+  "input_sha256": "b137a1e0179eaf7ed6629cb1d0b78d5515fbe884fc861a1bf7a0b31237b2acae"
+}
