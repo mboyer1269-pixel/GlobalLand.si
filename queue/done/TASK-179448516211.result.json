@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"TENDER-CRAWL-ACCESS-CHECK\",\n \"observed_at\": \"2026-11-12\",\n \"fetch_task\": \"TASK-179448480600\",\n \"http_status\": 200,\n \"sha256\": \"8fa3036c68bfcbd32365f6225d24333264093b7cd38d306e106b4dbdc934fd5b\",\n \"bytes\": 1248,\n \"non_comment_directive_lines\": [],\n \"has_user_agent\": false,\n \"has_disallow\": false,\n \"content_signal_lines\": [],\n \"site_inventory\": [\n  \"5e2c8a91f4b7036d9a1e7c4b28f0d653.txt\",\n  \"index.html\",\n  \"iwms-checklist.html\",\n  \"llms.txt\",\n  \"tender-deadlines.ics\"\n ],\n \"site_has_robots_txt\": false,\n \"identical_to_catalogue_site_robots\": true,\n \"interpretation\": \"Served robots.txt contains only comment lines (Cloudflare managed content-signals preamble); no User-agent, Disallow or Content-Signal directive. Under RFC 9309 no rule restricts crawling of / or /tender-deadlines.ics. File is not among our site files, so it is platform-served, not a controllable defect.\",\n \"verdict\": \"NO_BLOCKING_DIRECTIVE; no correction prepared\",\n \"not_established\": [\n  \"indexing\",\n  \"traffic\",\n  \"requests\",\n  \"revenue\"\n ]\n}\n\n",
+  "artifacts": [
+    "products/services/tender-offer-test/crawl-access/result.json",
+    "products/receipts/TASK-179448516211.json"
+  ],
+  "request": {
+    "id": "TASK-179448516211",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-12T12:06:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,os,pathlib\nr=pathlib.Path('products/services/tender-offer-test/crawl-access/live-robots.txt').read_bytes()\nt=r.decode()\nlines=[l.strip() for l in t.splitlines()]\nd=[l for l in lines if l and not l.startswith('#')]\nsite='products/sites/open-software-tenders'\ninv=sorted(os.listdir(site)) if os.path.isdir(site) else None\ncat=pathlib.Path('products/distribution/catalogue-crawl-directives/live-robots.txt').read_bytes()\nres={'mission':'TENDER-CRAWL-ACCESS-CHECK','observed_at':'2026-11-12','fetch_task':'TASK-179448480600','http_status':200,'sha256':hashlib.sha256(r).hexdigest(),'bytes':len(r),'non_comment_directive_lines':d,'has_user_agent':any(l.lower().startswith('user-agent') for l in d),'has_disallow':any(l.lower().startswith('disallow') for l in d),'content_signal_lines':[l for l in d if l.lower().startswith('content-signal')],'site_inventory':inv,'site_has_robots_txt':(inv is not None and 'robots.txt' in inv),'identical_to_catalogue_site_robots':cat==r,'interpretation':'Served robots.txt contains only comment lines (Cloudflare managed content-signals preamble); no User-agent, Disallow or Content-Signal directive. Under RFC 9309 no rule restricts crawling of / or /tender-deadlines.ics. File is not among our site files, so it is platform-served, not a controllable defect.','verdict':'NO_BLOCKING_DIRECTIVE; no correction prepared','not_established':['indexing','traffic','requests','revenue']}\nout=pathlib.Path('products/services/tender-offer-test/crawl-access/result.json');out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(res,indent=1));print(out.read_text())"
+      ],
+      "inputs": [
+        "products/services/tender-offer-test/crawl-access/live-robots.txt",
+        "products/distribution/catalogue-crawl-directives/live-robots.txt",
+        "products/sites/open-software-tenders/"
+      ],
+      "outputs": [
+        "products/services/tender-offer-test/crawl-access/result.json"
+      ],
+      "mission_id": "TENDER-CRAWL-ACCESS-CHECK"
+    },
+    "description": "Broker action during THINK-1794485162",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179448516211",
+  "input_sha256": "767da58c24815156e655b6407ef4b05c5751366119106b4003d6ccb1e7cbf174"
+}
