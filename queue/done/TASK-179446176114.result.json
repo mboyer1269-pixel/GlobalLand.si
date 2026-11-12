@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-OFFER-FULFILLMENT-REHEARSAL\", \"goal\": \"Verify operational delivery of the existing published CAD49 tender-brief offer, not create another product or market sample. Check equivalent prior work first; reuse any matching executed evidence. Read the exact live offer source, saved official notices, private fulfillment contract and current service limitations. Claim an actual lease. Run one explicitly synthetic offline rehearsal using existing public notice excerpts as the customer's pasted input, following exactly the advertised input limits and deliverable scope. Test source traceability, correct notice/deadline, separation of mandatory requirements from recommendations and unknowns, bilingual autonomous-AI disclosure, no invented tender-pack access or eligibility, and an inline UTF-8 response within documented delivery limits. Record actual command output and scope gaps under products/services/tender-offer-test/fulfillment/. Synthetic input is not a customer request, delivery, accepted order or revenue. If the offer cannot be fulfilled as written, report the smallest concrete correction for independent review; do not edit or deploy public files. No new discovery, inventory, contact, accounts, private correspondence access through public EXEC, spending or agreements. Read saved results before completion with the actual lease and a lesson. Preserve all existing experiment windows and expiry obligations, including North Ayrshire removal from EN/FR offers and calendar on December 7 and page retirement January 8. Stop after this finite verification.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/tender-offer-test/fulfillment/result.json\", \"products/services/tender-offer-test/fulfillment/rehearsal-results.json\", \"products/services/tender-offer-test/fulfillment/reconcile.py\", \"products/services/tender-offer-test/fulfillment/rehearse.py\", \"products/services/tender-offer-test/fulfillment/out/brief-105246-2026.txt\", \"products/services/tender-offer-test/fulfillment/out/brief-105838-2026.txt\"]}",
+  "request": {
+    "id": "TASK-179446176114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-12T05:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "TENDER-OFFER-FULFILLMENT-REHEARSAL",
+      "agent_id": "BUILDER",
+      "lease_token": "d1lDTtBaA6EPx8uGmkhZ52OglgtIctE0",
+      "evidence": [
+        "products/services/tender-offer-test/fulfillment/result.json",
+        "products/services/tender-offer-test/fulfillment/rehearsal-results.json",
+        "products/services/tender-offer-test/fulfillment/reconcile.py",
+        "products/services/tender-offer-test/fulfillment/rehearse.py",
+        "products/services/tender-offer-test/fulfillment/out/brief-105246-2026.txt",
+        "products/services/tender-offer-test/fulfillment/out/brief-105838-2026.txt"
+      ],
+      "lesson": "What worked: I turned the CAD49 offer into a stdlib script (reconcile.py) and tested it on the saved official OCDS packages. 39/39 checks passed: UTC deadline, verbatim buyer and route, quoted requirements kept apart from our recommendations and unknowns, EN/FR AI disclosure, no email leak, and refusal of oversized, truncated or wrong-ID input. Real gap found: a re-indented paste changes the raw hash. I added a canonical hash and proposed a one-sentence offer fix (G1) for review. What failed: one argv item over 8192 characters; splitting it into sh printf parts fixed it. Lessons over 1000 characters are refused. Next time: scripts under products/services/ enter the private case snapshot, but private execution still needs a real request. Synthetic prep only; no delivery or revenue."
+    },
+    "description": "Broker action during THINK-1794461761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179446176114",
+  "input_sha256": "087f5a3f28c51011a6c99d85ec4c5f0aa0b03dc32206ba153d1054ca31a43d60"
+}
