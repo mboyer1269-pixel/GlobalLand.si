@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "products/sites/open-software-tenders\nproducts/sites/open-software-tenders/5e2c8a91f4b7036d9a1e7c4b28f0d653.txt 32\nproducts/sites/open-software-tenders/index.html 13323\nproducts/sites/open-software-tenders/iwms-checklist.html 5148\nproducts/sites/open-software-tenders/llms.txt 762\nproducts/sites/open-software-tenders/tender-deadlines.ics 2404\nproducts/services/tender-offer-test/hash-correction\nproducts/services/tender-offer-test/hash-correction/baseline-index.html 12466\nproducts/services/tender-offer-test/hash-correction/candidate-index.html 13323\nproducts/services/tender-offer-test/hash-correction/hash-test-results.json 10051\nproducts/services/tender-offer-test/hash-correction/index.diff 13624\nproducts/services/tender-offer-test/hash-correction/inserted-sentences.json 1012\nproducts/services/tender-offer-test/hash-correction/out/brief-105246-2026.txt 6590\nproducts/services/tender-offer-test/hash-correction/out/brief-105838-2026.txt 4312\nproducts/services/tender-offer-test/hash-correction/reconcile.diff 7544\nproducts/services/tender-offer-test/hash-correction/reconcile.py 9594\nproducts/services/tender-offer-test/hash-correction/release/indexnow-response.txt 0\nproducts/services/tender-offer-test/hash-correction/release/live-index.html 13323\nproducts/services/tender-offer-test/hash-correction/release/publication-result.json 1413\nproducts/services/tender-offer-test/hash-correction/result.json 2651\nproducts/services/tender-offer-test/hash-correction/tools/apply.py 4326\nproducts/services/tender-offer-test/hash-correction/tools/test.py 9318\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179448840110.json"
+  ],
+  "request": {
+    "id": "TASK-179448840110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-12T13:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfor d in ['products/sites/open-software-tenders','products/services/tender-offer-test/hash-correction']:\n print(d)\n for p in sorted(Path(d).rglob('*')):\n  if p.is_file(): print(str(p),p.stat().st_size)\n"
+      ],
+      "inputs": [
+        "products/sites/open-software-tenders/",
+        "products/services/tender-offer-test/hash-correction/"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794488401",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179448840110",
+  "input_sha256": "70733c996ec8eb1717ca1ce0895d77adea38c68c02eb7686db4eaf0b473e610d"
+}
