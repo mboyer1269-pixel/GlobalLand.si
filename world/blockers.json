@@ -142,24 +142,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 507,
-    "turns_without_verified_revenue": 507,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 508,
+    "turns_without_verified_revenue": 508,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-12T00:00:55Z",
     "last_outcome_turn": "THINK-1794440161",
-    "last_productive_turn": "THINK-1794440161",
-    "last_turn": "THINK-1794440161",
+    "last_productive_turn": "THINK-1794441608",
+    "last_turn": "THINK-1794441608",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "TENDER-CALENDAR-REVIEW"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/reviews/tender-calendar-independent.json"
+        "products/services/tender-calendar/release/live-index.html",
+        "products/services/tender-calendar/release/live-tender-deadlines.ics",
+        "products/services/tender-calendar/release/publication-result.json"
       ],
-      "new_product_count": 1,
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
