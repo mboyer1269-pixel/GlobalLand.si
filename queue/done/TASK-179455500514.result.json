@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n \"site\": \"open-software-tenders\",\n \"approved_digest\": \"9f1a463fa8f980487299b1f015a582ce8806ee0d86ebfd7909702268882c4ab8\",\n \"approval\": \"AUDITOR codex seq 48 (TASK-179455302100)\",\n \"dry_run_task\": \"TASK-179455500510\",\n \"deploy_task\": \"TASK-179455500511\",\n \"deploy_status\": \"ONLINE_VERIFIED\",\n \"preview\": {\n  \"fetch_task\": \"TASK-179455500512\",\n  \"http\": 200,\n  \"sha256\": \"44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681\",\n  \"expected\": \"44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681\",\n  \"match\": true,\n  \"contains_106518\": true,\n  \"contains_lexical_note\": true\n },\n \"index\": {\n  \"fetch_task\": \"TASK-179455500513\",\n  \"http\": 200,\n  \"sha256\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\",\n  \"expected\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\",\n  \"match\": true\n },\n \"notification\": \"none sent; minor preview change, notification judged weak lever (L234)\",\n \"not_established\": [\n  \"traffic\",\n  \"requests\",\n  \"orders\",\n  \"revenue\"\n ],\n \"expiries\": {\n  \"welfare_retire\": \"after 2026-12-04T17:00Z\",\n  \"north_ayrshire_105246_removal_incl_datalist\": \"2026-12-07T12:00Z\",\n  \"south_ayrshire_106518_removal_incl_datalist\": \"2026-12-18T12:00Z\",\n  \"site_retire_incl_preview\": \"2027-01-08T12:00Z\"\n },\n \"all_match\": true\n}\n\n",
+  "artifacts": [
+    "products/services/tender-requirement-wording/release/publication-result.json",
+    "products/receipts/TASK-179455500514.json"
+  ],
+  "request": {
+    "id": "TASK-179455500514",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-13T07:30:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,pathlib\nb='products/services/tender-requirement-wording/release/'\np=pathlib.Path(b+'live-preview.html').read_bytes();i=pathlib.Path(b+'live-index.html').read_bytes()\nhp=hashlib.sha256(p).hexdigest();hi=hashlib.sha256(i).hexdigest()\nr={'site':'open-software-tenders','approved_digest':'9f1a463fa8f980487299b1f015a582ce8806ee0d86ebfd7909702268882c4ab8','approval':'AUDITOR codex seq 48 (TASK-179455302100)','dry_run_task':'TASK-179455500510','deploy_task':'TASK-179455500511','deploy_status':'ONLINE_VERIFIED','preview':{'fetch_task':'TASK-179455500512','http':200,'sha256':hp,'expected':'44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681','match':hp=='44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681','contains_106518':b'106518-2026' in p,'contains_lexical_note':b'lexical' in p},'index':{'fetch_task':'TASK-179455500513','http':200,'sha256':hi,'expected':'88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1','match':hi=='88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1'},'notification':'none sent; minor preview change, notification judged weak lever (L234)','not_established':['traffic','requests','orders','revenue'],'expiries':{'welfare_retire':'after 2026-12-04T17:00Z','north_ayrshire_105246_removal_incl_datalist':'2026-12-07T12:00Z','south_ayrshire_106518_removal_incl_datalist':'2026-12-18T12:00Z','site_retire_incl_preview':'2027-01-08T12:00Z'}}\nr['all_match']=r['preview']['match'] and r['index']['match']\npathlib.Path(b+'publication-result.json').write_text(json.dumps(r,indent=1))\nprint(json.dumps(r,indent=1))"
+      ],
+      "inputs": [
+        "products/services/tender-requirement-wording/release/"
+      ],
+      "outputs": [
+        "products/services/tender-requirement-wording/release/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794555005",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179455500514",
+  "input_sha256": "43bbe043d3b63924d5e8827e641e64211d542a84abd5cf7298a31172b60a6503"
+}

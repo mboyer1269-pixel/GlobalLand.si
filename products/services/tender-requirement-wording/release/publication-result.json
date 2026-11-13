@@ -1,0 +1,38 @@
+{
+ "site": "open-software-tenders",
+ "approved_digest": "9f1a463fa8f980487299b1f015a582ce8806ee0d86ebfd7909702268882c4ab8",
+ "approval": "AUDITOR codex seq 48 (TASK-179455302100)",
+ "dry_run_task": "TASK-179455500510",
+ "deploy_task": "TASK-179455500511",
+ "deploy_status": "ONLINE_VERIFIED",
+ "preview": {
+  "fetch_task": "TASK-179455500512",
+  "http": 200,
+  "sha256": "44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681",
+  "expected": "44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681",
+  "match": true,
+  "contains_106518": true,
+  "contains_lexical_note": true
+ },
+ "index": {
+  "fetch_task": "TASK-179455500513",
+  "http": 200,
+  "sha256": "88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1",
+  "expected": "88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1",
+  "match": true
+ },
+ "notification": "none sent; minor preview change, notification judged weak lever (L234)",
+ "not_established": [
+  "traffic",
+  "requests",
+  "orders",
+  "revenue"
+ ],
+ "expiries": {
+  "welfare_retire": "after 2026-12-04T17:00Z",
+  "north_ayrshire_105246_removal_incl_datalist": "2026-12-07T12:00Z",
+  "south_ayrshire_106518_removal_incl_datalist": "2026-12-18T12:00Z",
+  "site_retire_incl_preview": "2027-01-08T12:00Z"
+ },
+ "all_match": true
+}
