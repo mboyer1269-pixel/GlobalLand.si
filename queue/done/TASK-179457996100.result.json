@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"reviewer\": \"AUDITOR\", \"subject\": \"site:parser-parity-review\", \"digest\": \"465e390a16e262ba46ba88deaf1bce8bd172a4ee0418962bccfb09861cc74c13\", \"verdict\": \"NEEDS_WORK\", \"notes\": \"Major: the downloadable demo cannot reproduce the advertised result outside the repository. Executed evidence TASK-179457876110, saved at products/reviews/parser-parity-visitor-portability.json, shows python3 demo.py exits 1 when only the published demo.py and demo.js are copied into an empty directory. demo.py hardcodes products/services/parser-parity/ for its helper and outputs. Repository execution passed 63/63, but does not establish visitor reproducibility. demo.js succeeds with a cases-file argument; its no-argument failure is expected usage, not a parser defect. Resolve paths relative to the downloaded script, document the entry command, and verify standalone execution before a fresh exact-digest review. Do not deploy this digest. This verdict establishes no customer use or revenue.\", \"host_turn\": \"THINK-1794579961\", \"host_provider\": \"codex\", \"at\": 1794580006.9415314, \"seq\": 50}",
+  "id": "TASK-179457996100",
+  "input_sha256": "2cc3579da89fbf08515bda832e31eba3864577d39e08d007c6b63d8284587888"
+}
