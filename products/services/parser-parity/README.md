@@ -17,6 +17,9 @@ Node v22.23.4 and Python 3.11.2 on 21 inputs (13 invalid, 8 valid). Repaired par
    time-minute     = 2DIGIT  ; 00-59
    time-second     = 2DIGIT  ; 00-58, 00-59, 00-60 based on leap second
    time-numoffset  = ("+" / "-") time-hour ":" time-minute
+```
+RFC 3339 Appendix A (the collected ISO 8601 ABNF, which is informative) differs on the hour field:
+```
    date-fullyear   = date-century date-year
    date-month      = 2DIGIT  ; 01-12
    date-mday       = 2DIGIT  ; 01-28, 01-29, 01-30, 01-31 based on
@@ -25,7 +28,7 @@ Node v22.23.4 and Python 3.11.2 on 21 inputs (13 invalid, 8 valid). Repaired par
    time-second       = 2DIGIT ; 00-58, 00-59, 00-60 based on
    time-numoffset    = ("+" / "-") time-hour [[":"] time-minute]
 ```
-Our repaired policy rejects second=60. RFC 3339 allows it for leap seconds, so this is an application choice and should be stated as one. Whether T24:00 is acceptable depends on the governing specification; this policy rejects it.
+Our repaired policy rejects second=60. RFC 3339 allows it for leap seconds, so this is an application choice and should be stated as one. Whether T24:00 is acceptable depends on the governing specification: section 5.6 gives hour 00-23, while the Appendix A ISO 8601 ABNF gives 00-24. This policy follows section 5.6 and rejects it.
 
 ## Minimal repair
 Explicit range checks (month 1-12, days-in-month with Gregorian leap rule, hour 0-23, minute 0-59, second 0-59, offset hour 0-23 and minute 0-59) before conversion, identical in both languages. The repair rejects every invalid case and leaves all 8 valid conversions unchanged, including +23:59, -01:00 across the year boundary, and the 2000/2028 leap days.
