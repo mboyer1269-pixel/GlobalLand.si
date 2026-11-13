@@ -1,0 +1,32 @@
+== products/services/tender-instant-preview/src/core.js
+a2ac5a638f3e6fee3169bc6221328568c20e65082ccffd56efb4c8d0de47fdc2  products/services/tender-instant-preview/src/core.js
+95: srcs.forEach(function(s_){s_.split("\n").forEach(function(line){if(/\bmust\b|\bshall\b|\bmay be excluded\b/i.test(line))must.push(cut(red(line.trim()),500));});});
+108: o=o.concat(["","== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) =="],must.length?must.map(function(m){return"  - "+m;}):["  - none found in the pasted text"]);
+== products/services/tender-offer-test/hash-correction/reconcile.py
+a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3  products/services/tender-offer-test/hash-correction/reconcile.py
+96:            if re.search(r"\bmust\b|\bshall\b|\bmay be excluded\b", line, re.I):
+112:    o += ["", "== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) =="] + ([f"  - {m}" for m in must] or ["  - none found in the pasted text"])
+== products/sites/open-software-tenders/preview.html
+158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b  products/sites/open-software-tenders/preview.html
+11:<p><label for="nid">Notice ID / Numéro d'avis</label> <input id="nid" list="known" value="" size="16"><datalist id="known"><option value="105246-2026"><option value="105838-2026"></datalist> <span id="bytes"></span></p>
+110: srcs.forEach(function(s_){s_.split("\n").forEach(function(line){if(/\bmust\b|\bshall\b|\bmay be excluded\b/i.test(line))must.push(cut(red(line.trim()),500));});});
+123: o=o.concat(["","== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) =="],must.length?must.map(function(m){return"  - "+m;}):["  - none found in the pasted text"]);
+== core.js in preview?
+True
+products/research/tender-continuity/:
+raw-page1.json
+raw-page2.json
+
+products/services/tender-instant-preview/tests:
+deadline_tests.py
+parity.py
+run_node.js
+ui_stub.js
+ui_test.py
+106518-2026
+B1a, the Procurement Officer may ask for annual accounts from the bidder.\n4B5: It is a requirement of this contract that bidders hold or can commit to obtain prior to the commencement of any subsequently awarded contract, the types of insurance indicated below:\nEmployers (Compulsory) Liability In
+y evidence provided in support of the bidders economic and financial standing.\nIt is a requirement of this contract that bidders hold, or can commit to obtain prior to the commencement of any subsequently awarded\ncontract, the types and levels of insurance indicated below. Such insurance must be 
+ will be required to state the date which they were set up or started trading.\nIt is a requirement of this contract that bidders hold, or can commit to obtain prior to the commencement of any subsequently awarded contract, the types and levels of insurances indicated below:\nEmployer's (Compulsory
+red to have an general yearly turnover of 1,800,000 GBP over the past 3 years.\nIt is a requirement of this contract that bidders hold, or can commit to obtain prior to the commencement of any subsequently awarded contract, the types and levels of insurance indicated below:\nThe Bidder confirms the
+B1a, the Procurement Officer may ask for annual accounts from the bidder.\n4B5: It is a requirement of this contract that bidders hold or can commit to obtain prior to the commencement of any subsequently awarded contract, the types of insurance indicated below:\nEmployers (Compulsory) Liability In
+t of a consortia, then please disregard this question.\nInsurance Requirements\nIt is a requirement that all Tenderers must have or commit to have the required insurance levels at commencement of the Agreement as indicated below and in PCS-T.\nQuestion 4B.5.1b Employers Liability – 5,000,000 GBP\

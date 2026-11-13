@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "== products/services/tender-instant-preview/src/core.js\na2ac5a638f3e6fee3169bc6221328568c20e65082ccffd56efb4c8d0de47fdc2  products/services/tender-instant-preview/src/core.js\n95: srcs.forEach(function(s_){s_.split(\"\\n\").forEach(function(line){if(/\\bmust\\b|\\bshall\\b|\\bmay be excluded\\b/i.test(line))must.push(cut(red(line.trim()),500));});});\n108: o=o.concat([\"\",\"== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) ==\"],must.length?must.map(function(m){return\"  - \"+m;}):[\"  - none found in the pasted text\"]);\n== products/services/tender-offer-test/hash-correction/reconcile.py\na745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3  products/services/tender-offer-test/hash-correction/reconcile.py\n96:            if re.search(r\"\\bmust\\b|\\bshall\\b|\\bmay be excluded\\b\", line, re.I):\n112:    o += [\"\", \"== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) ==\"] + ([f\"  - {m}\" for m in must] or [\"  - none found in the pasted text\"])\n== products/sites/open-software-tenders/preview.html\n158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b  products/sites/open-software-tenders/preview.html\n11:<p><label for=\"nid\">Notice ID / Numéro d'avis</label> <input id=\"nid\" list=\"known\" value=\"\" size=\"16\"><datalist id=\"known\"><option value=\"105246-2026\"><option value=\"105838-2026\"></datalist> <span id=\"bytes\"></span></p>\n110: srcs.forEach(function(s_){s_.split(\"\\n\").forEach(function(line){if(/\\bmust\\b|\\bshall\\b|\\bmay be excluded\\b/i.test(line))must.push(cut(red(line.trim()),500));});});\n123: o=o.concat([\"\",\"== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) ==\"],must.length?must.map(function(m){return\"  - \"+m;}):[\"  - none found in the pasted text\"]);\n== core.js in preview?\nTrue\nproducts/research/tender-continuity/:\nraw-page1.json\nraw-page2.json\n\nproducts/services/tender-instant-preview/tests:\ndeadline_tests.py\nparity.py\nrun_node.js\nui_stub.js\nui_test.py\n106518-2026\nB1a, the Procurement Officer may ask for annual accounts from the bidder.\\n4B5: It is a requirement of this contract that bidders hold or can commit to obtain prior to the commencement of any subsequently awarded contract, the types of insurance indicated below:\\nEmployers (Compulsory) Liability In\ny evidence provided in support of the bidders economic and financial standing.\\nIt is a requirement of this contract that bidders hold, or can commit to obtain prior to the commencement of any subsequently awarded\\ncontract, the types and levels of insurance indicated below. Such insurance must be \n will be required to state the date which they were set up or started trading.\\nIt is a requirement of this contract that bidders hold, or can commit to obtain prior to the commencement of any subsequently awarded contract, the types and levels of insurances indicated below:\\nEmployer's (Compulsory\nred to have an general yearly turnover of 1,800,000 GBP over the past 3 years.\\nIt is a requirement of this contract that bidders hold, or can commit to obtain prior to the commencement of any subsequently awarded contract, the types and levels of insurance indicated below:\\nThe Bidder confirms the\nB1a, the Procurement Officer may ask for annual accounts from the bidder.\\n4B5: It is a requirement of this contract that bidders hold or can commit to obtain prior to the commencement of any subsequently awarded contract, the types of insurance indicated below:\\nEmployers (Compulsory) Liability In\nt of a consortia, then please disregard this question.\\nInsurance Requirements\\nIt is a requirement that all Tenderers must have or commit to have the required insurance levels at commencement of the Agreement as indicated below and in PCS-T.\\nQuestion 4B.5.1b Employers Liability – 5,000,000 GBP\\\n\n",
+  "artifacts": [
+    "products/services/tender-requirement-wording/inspect.txt",
+    "products/receipts/TASK-179454060110.json"
+  ],
+  "request": {
+    "id": "TASK-179454060110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-13T03:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "mkdir -p products/services/tender-requirement-wording; { for f in products/services/tender-instant-preview/src/core.js products/services/tender-offer-test/hash-correction/reconcile.py products/sites/open-software-tenders/preview.html; do echo \"== $f\"; sha256sum $f; grep -n -o '.\\{0,200\\}\\(may be excluded\\|none found\\|wording must\\|datalist\\).\\{0,200\\}' $f; done; echo '== core.js in preview?'; python3 -c \"c=open('products/services/tender-instant-preview/src/core.js').read();p=open('products/sites/open-software-tenders/preview.html').read();print(c in p)\"; ls products/services/tender-instant-preview/tests products/research/tender-continuity/; grep -o '106518-2026[^\\\"]\\{0,40\\}' products/research/tender-continuity/raw-page1.json | head -3; grep -o '.\\{80\\}It is a requirement.\\{200\\}' products/research/tender-continuity/raw-page1.json; } > products/services/tender-requirement-wording/inspect.txt 2>&1; cat products/services/tender-requirement-wording/inspect.txt"
+      ],
+      "outputs": [
+        "products/services/tender-requirement-wording/inspect.txt"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/",
+        "products/services/tender-offer-test/hash-correction/reconcile.py",
+        "products/sites/open-software-tenders/preview.html",
+        "products/research/tender-continuity/"
+      ],
+      "mission_id": "TENDER-PREVIEW-REQUIREMENT-WORDING"
+    },
+    "description": "Broker action during THINK-1794540601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179454060110",
+  "input_sha256": "6bdc018145b4e7b86ff22a29f8109b9f7635fae85c12d20e37bdc9f89d802f46"
+}
