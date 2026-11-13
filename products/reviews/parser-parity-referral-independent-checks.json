@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "baseline_hash": true,
+    "candidate_hash": true,
+    "single_insertion": true,
+    "reverse_restores_baseline": true,
+    "scripts_unchanged": true,
+    "meta_elements_unchanged": true,
+    "datalist_unchanged": true,
+    "index_hash": true
+  },
+  "passed": 8,
+  "total": 8,
+  "added_section": "section id=\"parser-parity-resource\">\n<h2>Timestamp validation example / Exemple de validation des dates</h2>\n<p>For developers comparing JavaScript and Python timestamp validation, our <a href=\"https://globalland-parser-parity-review.global-land.workers.dev/\">reproducible parser comparison</a> shows synthetic boundary cases and a minimal repair. Results cover only the documented runtime versions and inputs; they do not verify this preview in a real browser.</p>\n<p lang=\"fr\">Pour les développeurs comparant la validation des dates en JavaScript et Python, notre <a href=\"https://globalland-parser-parity-review.global-land.workers.dev/\">comparaison reproductible des analyseurs</a> présente des cas limites fictifs et une correction minimale. Les résultats couvrent uniquement les versions et entrées documentées ; ils ne vérifient pas cet aperçu dans un navigateur réel.</p>\n</section>\n<",
+  "candidate_meta_elements": [
+    "<meta charset=\"utf-8\">",
+    "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">",
+    "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'\">"
+  ],
+  "producer_diff": "--- a/preview.html\n+++ b/preview.html\n@@ -140,4 +140,9 @@\n var exb=$('ex');if(exb)exb.addEventListener('click',function(){$('paste').value=EXJ;$('nid').value=EXID;cnt();$('out').textContent='Synthetic example loaded (editable). Press Check locally. / Exemple fictif chargé (modifiable). Cliquez sur Vérifier localement.';});\n cnt();})();\n </script>\n+<section id=\"parser-parity-resource\">\n+<h2>Timestamp validation example / Exemple de validation des dates</h2>\n+<p>For developers comparing JavaScript and Python timestamp validation, our <a href=\"https://globalland-parser-parity-review.global-land.workers.dev/\">reproducible parser comparison</a> shows synthetic boundary cases and a minimal repair. Results cover only the documented runtime versions and inputs; they do not verify this preview in a real browser.</p>\n+<p lang=\"fr\">Pour les développeurs comparant la validation des dates en JavaScript et Python, notre <a href=\"https://globalland-parser-parity-review.global-land.workers.dev/\">comparaison reproductible des analyseurs</a> présente des cas limites fictifs et une correction minimale. Les résultats couvrent uniquement les versions et entrées documentées ; ils ne vérifient pas cet aperçu dans un navigateur réel.</p>\n+</section>\n </body></html>\n",
+  "producer_checks": {
+    "checks": {
+      "reverse_baseline": true,
+      "scripts_unchanged": true,
+      "datalist_unchanged": true,
+      "only_addition": true,
+      "two_contextual_links": true
+    },
+    "passed": 5,
+    "total": 5,
+    "baseline_sha256": "b359b3bffd0a3d36b89adf13b3c9d3f9d2fbaf06e75e6a232f5ff15850709d7b",
+    "candidate_sha256": "36978b9ce93a3f516d2f66b163730fc8c9b7ee55f39d7886c267b660323aea49",
+    "destination": "https://globalland-parser-parity-review.global-land.workers.dev/",
+    "observation_end": "2026-11-27",
+    "measurement": "Deployment, exposure, attributed inquiries, orders and settled receipts are distinct. Missing telemetry remains unknown.",
+    "expiry_duties": "Preserve Dec4 welfare retirement, Dec7 and Dec18 notice removals including datalist, and Jan8 whole-site retirement.",
+    "not_established": [
+      "deployment",
+      "traffic",
+      "clicks",
+      "inquiries",
+      "orders",
+      "revenue"
+    ],
+    "next": "Independent exact-digest review before any deployment"
+  },
+  "remaining_assessment": [
+    "Read destination wording against the complete destination page",
+    "Assess plain navigation against actual CSP",
+    "Record supported verdict only after reading this evidence"
+  ],
+  "limits": "Scoped byte checks only; no browser execution, exposure, buyer or revenue evidence."
+}
