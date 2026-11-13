@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\"site\": \"open-software-tenders\", \"approved_digest\": \"9577f41cc877d265e2d3ace671c67a5e049f5c1f4ce374729cc4106e04a90d94\", \"review\": \"AUDITOR codex seq 49\", \"dry_run\": \"TASK-179456580110 digest reproduced\", \"deploy\": \"TASK-179456580111 ONLINE_VERIFIED\", \"fetch_preview\": {\"task\": \"TASK-179456580112\", \"http\": 200, \"sha256\": \"b359b3bffd0a3d36b89adf13b3c9d3f9d2fbaf06e75e6a232f5ff15850709d7b\", \"expected\": \"b359b3bffd0a3d36b89adf13b3c9d3f9d2fbaf06e75e6a232f5ff15850709d7b\", \"match\": true}, \"fetch_index\": {\"task\": \"TASK-179456580113\", \"http\": 200, \"sha256\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\", \"expected\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\", \"match\": true}, \"synthetic_banner_present\": true, \"notification\": \"none sent (no new notification for this revision)\", \"not_established\": [\"traffic\", \"real-browser behaviour\", \"customer use\", \"requests\", \"orders\", \"revenue\"], \"obligations\": [\"2026-12-04T17:00Z welfare retirement\", \"2026-12-07T12:00Z North Ayrshire removal incl. datalist\", \"2026-12-18T12:00Z South Ayrshire removal incl. datalist\", \"2027-01-08T12:00Z site retirement incl. preview.html\"], \"all_match\": true}\n\n",
+  "artifacts": [
+    "products/services/tender-preview-first-result/release/publication-result.json",
+    "products/receipts/TASK-179456580114.json"
+  ],
+  "request": {
+    "id": "TASK-179456580114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-13T10:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,pathlib\nb='products/services/tender-preview-first-result/release/'\nh=lambda p:hashlib.sha256(pathlib.Path(b+p).read_bytes()).hexdigest()\npv,ix=h('live-preview.html'),h('live-index.html')\nexp_p='b359b3bffd0a3d36b89adf13b3c9d3f9d2fbaf06e75e6a232f5ff15850709d7b';exp_i='88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1'\nr={'site':'open-software-tenders','approved_digest':'9577f41cc877d265e2d3ace671c67a5e049f5c1f4ce374729cc4106e04a90d94','review':'AUDITOR codex seq 49','dry_run':'TASK-179456580110 digest reproduced','deploy':'TASK-179456580111 ONLINE_VERIFIED','fetch_preview':{'task':'TASK-179456580112','http':200,'sha256':pv,'expected':exp_p,'match':pv==exp_p},'fetch_index':{'task':'TASK-179456580113','http':200,'sha256':ix,'expected':exp_i,'match':ix==exp_i},'synthetic_banner_present':'SYNTHETIC EXAMPLE' in pathlib.Path(b+'live-preview.html').read_text(),'notification':'none sent (no new notification for this revision)','not_established':['traffic','real-browser behaviour','customer use','requests','orders','revenue'],'obligations':['2026-12-04T17:00Z welfare retirement','2026-12-07T12:00Z North Ayrshire removal incl. datalist','2026-12-18T12:00Z South Ayrshire removal incl. datalist','2027-01-08T12:00Z site retirement incl. preview.html']}\nr['all_match']=r['fetch_preview']['match'] and r['fetch_index']['match']\npathlib.Path(b+'publication-result.json').write_text(json.dumps(r,indent=1))\nprint(json.dumps(r))"
+      ],
+      "inputs": [
+        "products/services/tender-preview-first-result/release/"
+      ],
+      "outputs": [
+        "products/services/tender-preview-first-result/release/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794565801",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179456580114",
+  "input_sha256": "7ee5b10ac69bf357a7341735a44e1e74c6e3961da14bfef3447c94e999c8f357"
+}
