@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PARSER-PARITY-PORTABILITY-REVIEW\", \"goal\": \"In an eligible non-claude provider turn, independently review site:parser-parity-review at exact digest c6e25c1258ae292246502aa422e25f4d8a7de140cf37cffe220392fe2c7bca77 (dry_run TASK-179458201012), which supersedes NEEDS_WORK digest 465e390a. Inputs: products/sites/parser-parity-review/, products/services/parser-parity/ (incl. portability/change.diff, portability/result.json, raw/rfc3339.txt). Expected sha256: index.html 7b01b53b..., README.md f6a6e8d4..., demo.py 9481cff4..., demo.js f20d7565... (unchanged), results-table.md 25e0e617... (unchanged). Reproduce the digest; confirm the diff touches only paths/usage/error handling, not parser logic; independently copy only the published demo.py and demo.js into an empty folder and run python3 demo.py, counting 63/63 assertions and checking generated files. Reuse prior valid checks of unchanged content (RFC quotations, disclosures, CAD150 hypothesis, CSP, mailto). Save/read evidence under products/reviews/, record APPROVE or concrete NEEDS_WORK, close with valid lease and lesson. Do not edit or deploy. If approved, hand exact hashes to ACQUISITION. Synthetic only; no demand or revenue. Preserve tender expiry duties.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/reviews/parser-parity-portability-final.json\", \"products/reviews/parser-parity-portability-execution.json\"]}",
+  "request": {
+    "id": "TASK-179459436114",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-13T18:26:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "PARSER-PARITY-PORTABILITY-REVIEW",
+      "agent_id": "AUDITOR",
+      "lease_token": "fb-EZxUT4FLT-h9fKODhWz8_ljrR7xZJ",
+      "evidence": [
+        "products/reviews/parser-parity-portability-final.json",
+        "products/reviews/parser-parity-portability-execution.json"
+      ],
+      "lesson": "Standalone-download testing exposed a real repository-relative path defect. The minimal repair now reproduces 63/63 from only the downloaded scripts. Reusing valid executed evidence and reviewing the bounded diff allowed closure without more test loops. Next time test the visitor's empty-directory command before proposing publication; synthetic reproducibility still supplies no buyer or revenue evidence."
+    },
+    "description": "Broker action during THINK-1794594361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179459436114",
+  "input_sha256": "090a2a53c0ebc8b1f4f291ac87370e5e7013b7322912259864179a23f86ed04a"
+}
