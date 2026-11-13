@@ -1,0 +1,41 @@
+{
+  "purpose": "Independent execution and payload comparison; synthetic evidence only",
+  "payloads": {
+    "README.md": {
+      "sha256": "ba41e37f595951c4288b8581704379780c17a2cc66ae872d0eb755968b9739af",
+      "source_equal": true
+    },
+    "results-table.md": {
+      "sha256": "25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1",
+      "source_equal": true
+    },
+    "demo.py": {
+      "sha256": "a59a77e6f1aa90d431a600675153c566cd70045caaabd5e38d32e54a9be5bdd7",
+      "source_equal": true
+    },
+    "demo.js": {
+      "sha256": "f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257",
+      "source_equal": true
+    }
+  },
+  "runs": [
+    {
+      "command": [
+        "python3",
+        "products/sites/parser-parity-review/demo.py"
+      ],
+      "returncode": 0,
+      "stdout": "63 / 63\nnaive_silent ['2026-02-30T12:00:00Z', '2026-04-31T12:00:00Z', '2027-02-29T12:00:00Z', '2100-02-29T12:00:00Z', '2026-13-01T12:00:00Z', '2026-00-10T12:00:00Z', '2026-12-00T12:00:00Z', '2026-12-07T25:00:00Z', '2026-12-07T24:00:00Z', '2026-12-07T12:60:00Z', '2026-12-07T12:00:60Z', '2026-12-07T12:00:00+24:00', '2026-12-07T12:00:00+05:60']\njs_raw ['2026-02-30T12:00:00Z', '2026-04-31T12:00:00Z', '2027-02-29T12:00:00Z', '2100-02-29T12:00:00Z', '2026-12-07T24:00:00Z']\npy_raw ['2026-12-07T12:00:00+05:60']\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "products/sites/parser-parity-review/demo.js"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "node:internal/errors:540\n      throw error;\n      ^\n\nTypeError [ERR_INVALID_ARG_TYPE]: The \"path\" argument must be of type string or an instance of Buffer or URL. Received undefined\n    at Object.readFileSync (node:fs:438:14)\n    at Object.<anonymous> (/workspace/products/sites/parser-parity-review/demo.js:2:38)\n    at Module._compile (node:internal/modules/cjs/loader:1781:14)\n    at Object..js (node:internal/modules/cjs/loader:1913:10)\n    at Module.load (node:internal/modules/cjs/loader:1505:32)\n    at Function._load (node:internal/modules/cjs/loader:1309:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'ERR_INVALID_ARG_TYPE'\n}\n\nNode.js v22.23.4\n"
+    }
+  ]
+}
