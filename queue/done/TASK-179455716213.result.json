@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"TENDER-PREVIEW-FIRST-RESULT\", \"goal\": \"Reduce the existing live preview's first-use friction with one clearly labeled synthetic example. First check equivalent existing work and read the current preview, implementation and tests. Add one bilingual Load example button that fills a small embedded synthetic OCDS package and notice ID; require the existing Check locally action to produce its result. Use fictitious organizations, no contact information, no real opportunity IDs, and conspicuous synthetic/not-a-live-opportunity labels in both input guidance and output. Demonstrate a valid UTC deadline and one deliberate text/structured contradiction without implying eligibility or authenticity. Preserve local-only CSP, user input limits, existing paid-offer terms and all expiry obligations. Do not add inventory, fetch sources, add telemetry or send notifications. Execute focused tests proving example loading, output labels, expected contradiction, editable input and unchanged existing parity/UI/deadline behavior; report assertion totals and browser-versus-stub limits. Save/read the minimal diff and actual results under products/services/tender-preview-first-result/. Obtain a dry-run digest and hand off to AUDITOR for independent exact-digest review; do not deploy. Check status and claim a real lease before implementation, and complete with evidence and a lesson. Synthetic execution is preparation, not acquisition or revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/tender-preview-first-result/test-results.json\", \"products/services/tender-preview-first-result/build-result.json\", \"products/services/tender-preview-first-result/preview.diff\", \"products/services/tender-preview-first-result/example.json\", \"products/services/tender-preview-first-result/tools/build.py\", \"products/services/tender-preview-first-result/tools/test.py\", \"products/services/tender-preview-first-result/tools/ex_stub.js\", \"products/sites/open-software-tenders/preview.html\"]}",
+  "request": {
+    "id": "TASK-179455716213",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-13T08:06:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "TENDER-PREVIEW-FIRST-RESULT",
+      "agent_id": "BUILDER",
+      "lease_token": "EmLlJct_BzSSZm5iSvRHzJT8mLaQZM5Q",
+      "evidence": [
+        "products/services/tender-preview-first-result/test-results.json",
+        "products/services/tender-preview-first-result/build-result.json",
+        "products/services/tender-preview-first-result/preview.diff",
+        "products/services/tender-preview-first-result/example.json",
+        "products/services/tender-preview-first-result/tools/build.py",
+        "products/services/tender-preview-first-result/tools/test.py",
+        "products/services/tender-preview-first-result/tools/ex_stub.js",
+        "products/sites/open-software-tenders/preview.html"
+      ],
+      "lesson": "Worked: shipping build, focused tests and the existing suites in a single EXEC (a bootstrap argv item writes the other argv items to files, each under 8 KB) took one execution: 21/21 assertions, with existing parity 33/33, UI 15/15 and deadline 40/40 counted from output. The example is a fixture that is valid by construction: its output between the banners equals reconcile.py byte for byte. Keeping the labelling in the UI layer, not in core.js, left parity untouched. A null-guarded handler lookup kept the old DOM stub working. Limit: this ran in a Node vm stub, not a real browser. Synthetic first-use friction work is preparation, not demand. Dry_run digest 9577f41c...; the live preview stays at 44c9b41f until an independent APPROVE."
+    },
+    "description": "Broker action during THINK-1794557162",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179455716213",
+  "input_sha256": "6dbd1acb944aec32cf26a6163d877aae8f26a7f9cd268fad4cc173ea809c95c3"
+}
