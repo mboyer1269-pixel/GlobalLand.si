@@ -1,0 +1,20 @@
+--- a/products/services/tender-offer-test/hash-correction/reconcile.py
++++ b/products/services/tender-offer-test/hash-correction/reconcile.py
+@@ -93,7 +93,7 @@
+     srcs = [str(rel.get("description") or "")] + [str(c.get("description") or "") for c in (t.get("selectionCriteria") or {}).get("criteria", [])]
+     for s_ in srcs:
+         for line in re.split(r"\n", s_):
+-            if re.search(r"\bmust\b|\bshall\b|\bmay be excluded\b", line, re.I):
++            if re.search(r"\bmust\b|\bshall\b|\bmay be excluded\b|\bis a requirement\b|\bare required\b|\brequired to\b|\bmandatory\b", line, re.I):
+                 must.append(red(line.strip())[:500])
+     route = red(t.get("submissionMethodDetails")) or "not stated in pasted text"
+     cpv = [(t.get("classification") or {}).get("id")] + [c.get("id") for i in t.get("items", []) for c in i.get("additionalClassifications", [])]
+@@ -109,7 +109,7 @@
+          f"Submission deadline (UTC): {dl}", f"Value / currency: {'; '.join(vals) if vals else 'none stated in pasted release'}",
+          f"Submission route (verbatim): {route}", "Lots:"] + (L or ["  none stated"])
+     o += ["", "== 2. Contradictions and checks =="] + ([f"  - {f}" for f in flags] or ["  - none detected by our checks"])
+-    o += ["", "== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) =="] + ([f"  - {m}" for m in must] or ["  - none found in the pasted text"])
++    o += ["", "== 3. Requirements stated in the pasted text (lexical match only: must, shall, may be excluded, is a requirement, are required, required to, mandatory) =="] + ([f"  - {m}" for m in must] or ["  - no matching wording found (lexical search only; not proof of no requirements) / aucune formulation correspondante trouvée (recherche lexicale seulement ; ce n’est pas la preuve d’une absence d’exigences)"])
+     o += ["", "== 4. Our recommendations (not buyer requirements) ==", "  - Confirm the deadline on the official notice and leave a buffer before it.", "  - Obtain the full tender pack through the submission route above before deciding.", "  - Check each stated requirement in section 3 against your own certificates and policies.", "  - Compare the award weights with your pricing position.", "  - Bid only if every unknown in section 5 is resolved in your favour."]
+     o += ["", "== 5. Unknowns =="] + [f"  - {u}" for u in unk]
+     o += ["", "== Résumé en français ==", f"Avis : {nid} ; acheteur : {red((rel.get('buyer') or {}).get('name'))}", f"Date limite (UTC) : {dl}",

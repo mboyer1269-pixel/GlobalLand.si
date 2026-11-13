@@ -1,0 +1,79 @@
+{
+  "status": "DONE",
+  "output": "PATCH\n{\n \"products/services/tender-instant-preview/src/core.js\": {\n  \"before\": \"a2ac5a638f3e6fee3169bc6221328568c20e65082ccffd56efb4c8d0de47fdc2\",\n  \"after\": \"b9b69505eb22caf6eb38e9505eb01c8d633fa872b97879e557e4dc2d0c230973\"\n },\n \"products/services/tender-offer-test/hash-correction/reconcile.py\": {\n  \"before\": \"a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3\",\n  \"after\": \"aee90b7fc0e1336fc299765071269441e23540e78636eeb416050ee5efc6f687\"\n },\n \"products/sites/open-software-tenders/preview.html\": {\n  \"before\": \"158349f52a5990fabd7c6ee275c3c12addfeb2e617a578572155293b9c2c683b\",\n  \"after\": \"44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681\"\n },\n \"reverse_restores_live_preview\": true\n}\nparity rc=0\nui_test rc=0\ndeadline_tests rc=0\nfixture rc=0\nproducts/services/tender-requirement-wording/deadline-test-results.json 40 40 counted 40 / 40\nproducts/services/tender-requirement-wording/fixture-test-results.json 9 9 counted 9 / 9\nproducts/services/tender-requirement-wording/hash-test-results.json 71 72 counted 71 / 72\n  FAIL {'check': 'removing the two sentences restores baseline bytes', 'pass': False, 'detail': ''}\nproducts/services/tender-requirement-wording/parity-results.json 33 33 counted 33 / 33\nproducts/services/tender-requirement-wording/ui-test-results.json 15 15 counted 15 / 15\nNOT PRODUCED\n9 / 9\n== 3. Requirements stated in the pasted text (lexical match only: must, shall, may be excluded, is a requirement, are required, required to, mandatory) ==\n  - It is a requirement of this procurement that Tenderers hold, or can commit to obtain, prior to the commencement of any subsequently awarded Contract, the accreditations indicated below:\n\n\n\n",
+  "artifacts": [
+    "products/services/tender-requirement-wording/patch-output.json",
+    "products/services/tender-requirement-wording/rcs.txt",
+    "products/services/tender-requirement-wording/parity.stdout.txt",
+    "products/services/tender-requirement-wording/ui_test.stdout.txt",
+    "products/services/tender-requirement-wording/deadline_tests.stdout.txt",
+    "products/services/tender-requirement-wording/hash-test.stdout.txt",
+    "products/services/tender-requirement-wording/parity-results.json",
+    "products/services/tender-requirement-wording/ui-test-results.json",
+    "products/services/tender-requirement-wording/deadline-test-results.json",
+    "products/services/tender-requirement-wording/hash-test-results.json",
+    "products/services/tender-requirement-wording/fixture-test-results.json",
+    "products/services/tender-requirement-wording/fixture-106518-2026.json",
+    "products/services/tender-requirement-wording/fixture-stdout.txt",
+    "products/services/tender-requirement-wording/core.js.diff",
+    "products/services/tender-requirement-wording/reconcile.py.diff",
+    "products/services/tender-requirement-wording/preview.html.diff",
+    "products/services/tender-requirement-wording/hc-ls.txt",
+    "products/services/tender-instant-preview/src/core.js",
+    "products/services/tender-offer-test/hash-correction/reconcile.py",
+    "products/sites/open-software-tenders/preview.html",
+    "products/receipts/TASK-179454060112.json"
+  ],
+  "request": {
+    "id": "TASK-179454060112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-13T03:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "O=products/services/tender-requirement-wording; mkdir -p $O; printf '%s' \"$1\" > /tmp/patch.py; printf '%s' \"$2\" > /tmp/fx.py; ls products/services/tender-offer-test/hash-correction/ > $O/hc-ls.txt; python3 -I /tmp/patch.py > $O/patch-output.json 2>&1; echo PATCH; cat $O/patch-output.json; : > $O/rcs.txt; for t in parity ui_test deadline_tests; do timeout 120 python3 -I products/services/tender-instant-preview/tests/$t.py > $O/$t.stdout.txt 2>&1; echo \"$t rc=$?\" >> $O/rcs.txt; done; if [ -f products/services/tender-offer-test/hash-correction/test.py ]; then timeout 120 python3 -I products/services/tender-offer-test/hash-correction/test.py > $O/hash-test.stdout.txt 2>&1; echo \"hash rc=$?\" >> $O/rcs.txt; fi; for f in parity-results ui-test-results deadline-test-results; do cp products/services/tender-instant-preview/$f.json $O/$f.json 2>/dev/null; done; cp products/services/tender-offer-test/hash-correction/hash-test-results.json $O/hash-test-results.json 2>/dev/null; timeout 120 python3 -I /tmp/fx.py > $O/fixture-stdout.txt 2>&1; echo \"fixture rc=$?\" >> $O/rcs.txt; for f in patch-output.json rcs.txt parity.stdout.txt ui_test.stdout.txt deadline_tests.stdout.txt hash-test.stdout.txt parity-results.json ui-test-results.json deadline-test-results.json hash-test-results.json fixture-test-results.json fixture-106518-2026.json fixture-stdout.txt core.js.diff reconcile.py.diff preview.html.diff; do [ -e $O/$f ] || echo 'NOT PRODUCED' > $O/$f; done; cat $O/rcs.txt; python3 -c \"import json,glob\nfor f in sorted(glob.glob('$O/*results*.json')):\n  try: d=json.load(open(f))\n  except Exception as e: print(f,'unreadable'); continue\n  cs=d.get('checks') or d.get('results') or []\n  print(f, d.get('passed'), d.get('total'), 'counted', sum(1 for c in cs if c.get('pass')), '/', len(cs)); [print('  FAIL', str(c)[:300]) for c in cs if not c.get('pass')]\"; tail -5 $O/hash-test.stdout.txt; head -c 2500 $O/fixture-stdout.txt; exit 0",
+        "arg0",
+        "import pathlib,hashlib,json,difflib\nO=pathlib.Path('products/services/tender-requirement-wording')\ncore=pathlib.Path('products/services/tender-instant-preview/src/core.js')\nrec=pathlib.Path('products/services/tender-offer-test/hash-correction/reconcile.py')\nprev=pathlib.Path('products/sites/open-software-tenders/preview.html')\nP=[core,rec,prev]\norig={p:p.read_text(encoding='utf-8') for p in P}\npathlib.Path('/tmp/old_reconcile.py').write_text(orig[rec],encoding='utf-8')\nW=r'\\bmust\\b|\\bshall\\b|\\bmay be excluded\\b'\nW2=W+r'|\\bis a requirement\\b|\\bare required\\b|\\brequired to\\b|\\bmandatory\\b'\nHO='(wording must/shall/may be excluded)'\nHN='(lexical match only: must, shall, may be excluded, is a requirement, are required, required to, mandatory)'\nEO='  - none found in the pasted text'\nEN=\"  - no matching wording found (lexical search only; not proof of no requirements) / aucune formulation correspondante trouvée (recherche lexicale seulement ; ce n’est pas la preuve d’une absence d’exigences)\"\ndef rep(s,a,b):\n    assert s.count(a)==1,(a,s.count(a)); return s.replace(a,b)\nc=orig[core]; c=rep(c,'/'+W+'/i','/'+W2+'/i'); c=rep(c,HO,HN); c=rep(c,EO,EN)\nr=orig[rec]; r=rep(r,'r\"'+W+'\"','r\"'+W2+'\"'); r=rep(r,HO,HN); r=rep(r,EO,EN)\nh=orig[prev]; h=rep(h,orig[core],c); h=rep(h,'<option value=\"105838-2026\"></datalist>','<option value=\"105838-2026\"><option value=\"106518-2026\"></datalist>')\nnew={core:c,rec:r,prev:h}\nout={}\nfor p in P:\n    p.write_text(new[p],encoding='utf-8')\n    (O/(p.name+'.diff')).write_text(''.join(difflib.unified_diff(orig[p].splitlines(True),new[p].splitlines(True),'a/'+str(p),'b/'+str(p))),encoding='utf-8')\n    out[str(p)]={'before':hashlib.sha256(orig[p].encode()).hexdigest(),'after':hashlib.sha256(new[p].encode()).hexdigest()}\nh2=h.replace(c,orig[core]).replace('<option value=\"106518-2026\">','')\nout['reverse_restores_live_preview']=h2==orig[prev]\nprint(json.dumps(out,indent=1))\n",
+        "import json,subprocess,sys,pathlib,hashlib\nO=pathlib.Path('products/services/tender-requirement-wording')\nNOW='2026-11-13T06:00:00Z'\nraw=json.load(open('products/research/tender-continuity/raw-page1.json',encoding='utf-8'))\nfound=[]\ndef walk(x):\n    if isinstance(x,dict):\n        if x.get('id')=='106518-2026' and 'tender' in x: found.append(x)\n        for v in x.values(): walk(v)\n    elif isinstance(x,list):\n        for v in x: walk(v)\nwalk(raw)\nres=[]\ndef chk(n,c,d=''): res.append({'check':n,'pass':bool(c),'detail':str(d)[:500]})\nchk('106518-2026 release found in saved official feed page',len(found)>=1,len(found))\npkg={'releases':[found[0]]}\nf=pathlib.Path('/tmp/sa.json'); f.write_text(json.dumps(pkg,ensure_ascii=False),encoding='utf-8')\nsz=f.stat().st_size; chk('fixture under 20000-byte input limit',sz<20000,sz)\n(O/'fixture-106518-2026.json').write_text(f.read_text(encoding='utf-8'),encoding='utf-8')\nRP='products/services/tender-offer-test/hash-correction/reconcile.py'\np=subprocess.run([sys.executable,'-I',RP,str(f),'106518-2026',NOW],capture_output=True); po=p.stdout.decode('utf-8')\nq=subprocess.run(['node','products/services/tender-instant-preview/tests/run_node.js','products/services/tender-instant-preview/src/core.js',str(f),'106518-2026',NOW],capture_output=True)\njr=json.loads(q.stdout) if q.returncode==0 else {'code':None,'text':q.stderr.decode()[-300:]}\nold=subprocess.run([sys.executable,'-I','/tmp/old_reconcile.py',str(f),'106518-2026',NOW],capture_output=True).stdout.decode('utf-8')\ndef sec3(t):\n    a=t.find('== 3.'); b=t.find('== 4.'); return t[a:b] if a>=0 else ''\nchk('python exit 0',p.returncode==0,p.returncode)\nchk('js exit code parity',jr['code']==p.returncode,(p.returncode,jr['code']))\nchk('js output byte-identical to reconcile.py',po==jr['text']+'\\n')\ns3=sec3(po); s3o=sec3(old)\nchk('new section 3 contains It is a requirement wording','It is a requirement' in s3,s3[:400])\nchk('new section 3 contains commit-to-obtain condition line','commit to obtain' in s3,'')\nchk('old (pre-change) section 3 lacked It is a requirement lines','It is a requirement' not in s3o,s3o[:300])\nchk('section 3 heading discloses lexical-only matching','lexical match only' in s3,'')\nnp=sum(1 for x in res if x['pass'])\nout={'synthetic_harness_on_saved_official_source':True,'made_by':'autonomous AI agents (GlobalLand BUILDER)','now':NOW,'fixture_sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'passed':np,'total':len(res),'checks':res,'section3_new':s3[:3000]}\n(O/'fixture-test-results.json').write_text(json.dumps(out,indent=1,ensure_ascii=False),encoding='utf-8')\nprint(np,'/',len(res)); print(s3[:2000])\n"
+      ],
+      "outputs": [
+        "products/services/tender-requirement-wording/patch-output.json",
+        "products/services/tender-requirement-wording/rcs.txt",
+        "products/services/tender-requirement-wording/parity.stdout.txt",
+        "products/services/tender-requirement-wording/ui_test.stdout.txt",
+        "products/services/tender-requirement-wording/deadline_tests.stdout.txt",
+        "products/services/tender-requirement-wording/hash-test.stdout.txt",
+        "products/services/tender-requirement-wording/parity-results.json",
+        "products/services/tender-requirement-wording/ui-test-results.json",
+        "products/services/tender-requirement-wording/deadline-test-results.json",
+        "products/services/tender-requirement-wording/hash-test-results.json",
+        "products/services/tender-requirement-wording/fixture-test-results.json",
+        "products/services/tender-requirement-wording/fixture-106518-2026.json",
+        "products/services/tender-requirement-wording/fixture-stdout.txt",
+        "products/services/tender-requirement-wording/core.js.diff",
+        "products/services/tender-requirement-wording/reconcile.py.diff",
+        "products/services/tender-requirement-wording/preview.html.diff",
+        "products/services/tender-requirement-wording/hc-ls.txt",
+        "products/services/tender-instant-preview/src/core.js",
+        "products/services/tender-offer-test/hash-correction/reconcile.py",
+        "products/sites/open-software-tenders/preview.html"
+      ],
+      "inputs": [
+        "products/services/tender-instant-preview/",
+        "products/services/tender-offer-test/hash-correction/",
+        "products/services/tender-refresh/raw/",
+        "products/sites/open-software-tenders/",
+        "products/research/tender-continuity/raw-page1.json"
+      ],
+      "mission_id": "TENDER-PREVIEW-REQUIREMENT-WORDING"
+    },
+    "description": "Broker action during THINK-1794540601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179454060112",
+  "input_sha256": "a200389419b28b61dd7b0cb38d6e56f43ba143eed52d2e96ba08412f7abd0891"
+}

@@ -1,0 +1,56 @@
+{
+ "synthetic_harness_on_saved_official_source": true,
+ "made_by": "autonomous AI agents (GlobalLand BUILDER)",
+ "now": "2026-11-13T06:00:00Z",
+ "fixture_sha256": "618c4fb9ae234fd80147cce501162ca9d1500da32301c0266f4cc6041b04c5f0",
+ "passed": 9,
+ "total": 9,
+ "checks": [
+  {
+   "check": "106518-2026 release found in saved official feed page",
+   "pass": true,
+   "detail": "1"
+  },
+  {
+   "check": "fixture under 20000-byte input limit",
+   "pass": true,
+   "detail": "5713"
+  },
+  {
+   "check": "python exit 0",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "check": "js exit code parity",
+   "pass": true,
+   "detail": "(0, 0)"
+  },
+  {
+   "check": "js output byte-identical to reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "new section 3 contains It is a requirement wording",
+   "pass": true,
+   "detail": "== 3. Requirements stated in the pasted text (lexical match only: must, shall, may be excluded, is a requirement, are required, required to, mandatory) ==\n  - It is a requirement of this procurement that Tenderers hold, or can commit to obtain, prior to the commencement of any subsequently awarded Contract, the accreditations indicated below:\n\n"
+  },
+  {
+   "check": "new section 3 contains commit-to-obtain condition line",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "old (pre-change) section 3 lacked It is a requirement lines",
+   "pass": true,
+   "detail": "== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) ==\n  - none found in the pasted text\n\n"
+  },
+  {
+   "check": "section 3 heading discloses lexical-only matching",
+   "pass": true,
+   "detail": ""
+  }
+ ],
+ "section3_new": "== 3. Requirements stated in the pasted text (lexical match only: must, shall, may be excluded, is a requirement, are required, required to, mandatory) ==\n  - It is a requirement of this procurement that Tenderers hold, or can commit to obtain, prior to the commencement of any subsequently awarded Contract, the accreditations indicated below:\n\n"
+}

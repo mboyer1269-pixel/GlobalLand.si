@@ -1,0 +1,376 @@
+{
+ "label": "SYNTHETIC CHECKS - preparation only; not a customer request, delivery, order, payment or revenue",
+ "mission": "TENDER-FULFILLMENT-HASH-CORRECTION",
+ "author": "BUILDER (autonomous AI agent)",
+ "run_now_utc": "2026-11-12T06:00:00Z",
+ "python": "3.11.2",
+ "reconcile_sha256": "a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3",
+ "candidate_index_sha256": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450",
+ "baseline_index_sha256": "b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707",
+ "canonical_105246": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b",
+ "max_reply_bytes": 6668,
+ "passed": 71,
+ "total": 72,
+ "checks": [
+  {
+   "check": "105246-2026 exit 0",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 raw sha256 of exact input cited",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 canonical hash in reply equals independent recomputation",
+   "pass": true,
+   "detail": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b"
+  },
+  {
+   "check": "105246-2026 canonical line states limits EN/FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 deadline UTC",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 buyer quoted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 route verbatim",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 EN+FR AI disclosure",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 accented French present",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "105246-2026 unaccented legacy French absent",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "105246-2026 sections 1-5",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 tender docs unknown EN/FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 no email address",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 no eligibility claim",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 reply < 32000 chars and < 32000 UTF-8 bytes",
+   "pass": true,
+   "detail": "(6562, 6590)"
+  },
+  {
+   "check": "105838-2026 exit 0",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 raw sha256 of exact input cited",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 canonical hash in reply equals independent recomputation",
+   "pass": true,
+   "detail": "e4218b9b0c3db49c058b5f9daeaf20e3f17657c002305f2b5ae3025e9b6306c9"
+  },
+  {
+   "check": "105838-2026 canonical line states limits EN/FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 deadline UTC",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 buyer quoted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 route verbatim",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 EN+FR AI disclosure",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 accented French present",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "105838-2026 unaccented legacy French absent",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "105838-2026 sections 1-5",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 tender docs unknown EN/FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 no email address",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 no eligibility claim",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 reply < 32000 chars and < 32000 UTF-8 bytes",
+   "pass": true,
+   "detail": "(4282, 4312)"
+  },
+  {
+   "check": "105246 retains ISO 9001",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246 retains regulation 58",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246 retains hasOptions=false",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246 retains Quality 40",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "format indent1: canonical unchanged",
+   "pass": true,
+   "detail": "{'bytes': 9944, 'raw_hash_differs': True}"
+  },
+  {
+   "check": "format indent4: canonical unchanged",
+   "pass": true,
+   "detail": "{'bytes': 13430, 'raw_hash_differs': False}"
+  },
+  {
+   "check": "format compact: canonical unchanged",
+   "pass": true,
+   "detail": "{'bytes': 8411, 'raw_hash_differs': True}"
+  },
+  {
+   "check": "format crlf_indent2: canonical unchanged",
+   "pass": true,
+   "detail": "{'bytes': 11338, 'raw_hash_differs': True}"
+  },
+  {
+   "check": "format ascii_escaped_indent2: canonical unchanged",
+   "pass": true,
+   "detail": "{'bytes': 11109, 'raw_hash_differs': True}"
+  },
+  {
+   "check": "format trailing_blank_lines: canonical unchanged",
+   "pass": true,
+   "detail": "{'bytes': 13433, 'raw_hash_differs': True}"
+  },
+  {
+   "check": "altered content (double space inside buyer name): canonical hash changes",
+   "pass": true,
+   "detail": "0c2c8f7811fb48012a38baff7ca76490d3ce86cd871109f697bb87cee44f1e20"
+  },
+  {
+   "check": "altered content (trailing space in title): canonical hash changes",
+   "pass": true,
+   "detail": "4d648845a58f27ba5d93315b6039ca05ceaacb753358f9bf4e3b4e7b15df7092"
+  },
+  {
+   "check": "altered content (one character changed in description): canonical hash changes",
+   "pass": true,
+   "detail": "66b6ad97fca12a7c229a33ebfe6d08076213d942085bdbdfe7157d518de89ca3"
+  },
+  {
+   "check": "altered content (deadline altered): canonical hash changes",
+   "pass": true,
+   "detail": "615039af99d39056c978748f34be5975da6dfc1e9e3618a247ec3b7a0c14c9ec"
+  },
+  {
+   "check": "altered deadline is reported as pasted (hash comparison is the only detection)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "malformed (truncated half): refused exit 2 with EN/FR message",
+   "pass": true,
+   "detail": "REFUSED / REFUSÉ\nEN: pasted text is not complete UTF-8 OCDS JSON (JSONDecodeError); sha256 009990c818ee35ec38d02dd3f88f07a97ebd611922e9b391fd108447cd774d9a. Please paste the full release package text."
+  },
+  {
+   "check": "malformed (invalid UTF-8 byte): refused exit 2 with EN/FR message",
+   "pass": true,
+   "detail": "REFUSED / REFUSÉ\nEN: pasted text is not complete UTF-8 OCDS JSON (UnicodeDecodeError); sha256 4d26d16aca1f97f819ba33a09163769edbd1acffe4cdfed5c9827654c50ef822. Please paste the full release package te"
+  },
+  {
+   "check": "malformed (line break inserted inside a string (email wrap)): refused exit 2 with EN/FR message",
+   "pass": true,
+   "detail": "REFUSED / REFUSÉ\nEN: pasted text is not complete UTF-8 OCDS JSON (JSONDecodeError); sha256 6e018f2ad1cdde63af5c0159708506000923f1e69f4b8c213acad8dd6654acea. Please paste the full release package text."
+  },
+  {
+   "check": "malformed (empty paste): refused exit 2 with EN/FR message",
+   "pass": true,
+   "detail": "REFUSED / REFUSÉ\nEN: pasted text is not complete UTF-8 OCDS JSON (JSONDecodeError); sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Please paste the full release package text."
+  },
+  {
+   "check": "malformed (JSON array instead of release package): refused exit 2 with EN/FR message",
+   "pass": true,
+   "detail": "REFUSED / REFUSÉ\nEN: notice 105246-2026 is not in the pasted text (release ids found: []); sha256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945.\nFR: l'avis 105246-2026 n'est pas dan"
+  },
+  {
+   "check": "malformed (exactly 20000 bytes): refused exit 2 with EN/FR message",
+   "pass": true,
+   "detail": "REFUSED / REFUSÉ\nEN: pasted text is 20000 bytes; this offer accepts under 20000 bytes.\nFR: le texte collé fait 20000 octets ; l'offre accepte moins de 20000 octets.\nProduced by autonomous AI agents (G"
+  },
+  {
+   "check": "19999 bytes accepted, canonical unchanged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "wrong notice id refused",
+   "pass": true,
+   "detail": "REFUSED / REFUSÉ\nEN: notice 105838-2026 is not in the pasted text (release ids found: ['105246-2026']); sha256 fc9d73060c235441ddae395c6cd548b29e3724ae2678af7f3bdcd42f5f0ea935.\nFR: l'avis 105838-2026 "
+  },
+  {
+   "check": "past deadline flagged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "C locale: identical UTF-8 reply",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "baseline index equals live sha256 recorded in rehearsal",
+   "pass": true,
+   "detail": "b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707"
+  },
+  {
+   "check": "removing the two sentences restores baseline bytes",
+   "pass": false,
+   "detail": ""
+  },
+  {
+   "check": "EN sentence once, inside EN offer, after hash sentence",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "FR sentence once, inside FR offer, after hash sentence",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "sentences state non-authentication EN/FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "preserved: CAD 49",
+   "pass": true,
+   "detail": "(1, 1)"
+  },
+  {
+   "check": "preserved: 49 CAD",
+   "pass": true,
+   "detail": "(1, 1)"
+  },
+  {
+   "check": "preserved: under 20 KB",
+   "pass": true,
+   "detail": "(1, 1)"
+  },
+  {
+   "check": "preserved: moins de 20 Ko",
+   "pass": true,
+   "detail": "(1, 1)"
+  },
+  {
+   "check": "preserved: This listing expires at 2026-12-07 12:00 UTC",
+   "pass": true,
+   "detail": "(1, 1)"
+  },
+  {
+   "check": "preserved: 2027-01-08 12:00 UTC",
+   "pass": true,
+   "detail": "(8, 8)"
+  },
+  {
+   "check": "preserved: tender-deadlines.ics",
+   "pass": true,
+   "detail": "(4, 4)"
+  },
+  {
+   "check": "preserved: Made by autonomous AI agents",
+   "pass": true,
+   "detail": "(1, 1)"
+  },
+  {
+   "check": "preserved: Conçu par des agents d'IA autonomes",
+   "pass": true,
+   "detail": "(1, 1)"
+  },
+  {
+   "check": "preserved: globalland@agentmail.to",
+   "pass": true,
+   "detail": "(6, 6)"
+  },
+  {
+   "check": "preserved: No attachments",
+   "pass": true,
+   "detail": "(1, 1)"
+  },
+  {
+   "check": "preserved: unvalidated price hypothesis",
+   "pass": true,
+   "detail": "(1, 1)"
+  }
+ ]
+}

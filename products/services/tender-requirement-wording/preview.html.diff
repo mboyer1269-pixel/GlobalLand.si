@@ -1,0 +1,29 @@
+--- a/products/sites/open-software-tenders/preview.html
++++ b/products/sites/open-software-tenders/preview.html
+@@ -8,7 +8,7 @@
+ <p>Limits: the raw SHA-256 covers the text as your browser holds it (line endings normalised to LF), so it can differ from a downloaded file's hash; the canonical hash is formatting-independent but proves nothing about authenticity. Tested for byte-identical output with our Python script under Node.js on synthetic and saved official inputs; not yet tested in a real browser. Free preview only: it is not an order. The CAD 49 brief described on the <a href="./">main page</a> is an unvalidated price hypothesis; any paid order would need separate administrative acceptance by a human operator.</p>
+ <h2>Aperçu local gratuit (français)</h2>
+ <p>Collez le texte d'un paquet de publication OCDS officiel Find a Tender (JSON, moins de 20 000 octets) et saisissez le numéro d'avis. Les vérifications s'exécutent entièrement dans votre navigateur : rien n'est envoyé, aucun lien n'est consulté. Le résultat cite votre texte collé, qui n'est pas une donnée officielle authentifiée. Aperçu gratuit, pas une commande ; le prix de 49 CAD reste une hypothèse non validée. Les sections détaillées du résultat sont en anglais, avec un résumé en français.</p>
+-<p><label for="nid">Notice ID / Numéro d'avis</label> <input id="nid" list="known" value="" size="16"><datalist id="known"><option value="105246-2026"><option value="105838-2026"></datalist> <span id="bytes"></span></p>
++<p><label for="nid">Notice ID / Numéro d'avis</label> <input id="nid" list="known" value="" size="16"><datalist id="known"><option value="105246-2026"><option value="105838-2026"><option value="106518-2026"></datalist> <span id="bytes"></span></p>
+ <p><label for="paste">OCDS JSON (pasted text / texte collé)</label><br><textarea id="paste" spellcheck="false"></textarea></p>
+ <p><button id="run" type="button">Check locally / Vérifier localement</button></p>
+ <pre id="out" aria-live="polite"></pre>
+@@ -107,7 +107,7 @@
+   if(s&&x&&mm){var yrs=Math.floor((x-s)/86400000)/365.25;if(Math.abs(yrs-parseInt(mm[1],10))>0.5)flags.push("lot "+ps(lid)+": text states a maximum of "+mm[1]+" years but structured startDate..maxExtentDate spans "+yrs.toFixed(1)+" years.");}});
+  var must=[];var sc=or(g(or(g(t,"selectionCriteria"),{}),"criteria"),[]);if(!Array.isArray(sc))sc=[];
+  var srcs=[ps(or(rel.description,""))].concat(sc.map(function(c){return ps(or(g(c,"description"),""));}));
+- srcs.forEach(function(s_){s_.split("\n").forEach(function(line){if(/\bmust\b|\bshall\b|\bmay be excluded\b/i.test(line))must.push(cut(red(line.trim()),500));});});
++ srcs.forEach(function(s_){s_.split("\n").forEach(function(line){if(/\bmust\b|\bshall\b|\bmay be excluded\b|\bis a requirement\b|\bare required\b|\brequired to\b|\bmandatory\b/i.test(line))must.push(cut(red(line.trim()),500));});});
+  var route=red(g(t,"submissionMethodDetails"))||"not stated in pasted text";
+  var cpv=[g(or(g(t,"classification"),{}),"id")];var its=g(t,"items");if(Array.isArray(its))its.forEach(function(it){var ac=g(it,"additionalClassifications");if(Array.isArray(ac))ac.forEach(function(c){cpv.push(g(c,"id"));});});
+  var buyer=red(g(or(rel.buyer,{}),"name"));
+@@ -120,7 +120,7 @@
+   "Status: "+ps(st)+"   Procedure: "+ps(or(g(t,"procurementMethodDetails"),g(t,"procurementMethod")))+"   CPV: "+cpv.filter(tru).map(ps).join(", "),
+   "Submission deadline (UTC): "+dl,"Value / currency: "+(vals.length?vals.join("; "):"none stated in pasted release"),"Submission route (verbatim): "+route,"Lots:"].concat(L.length?L:["  none stated"]);
+  o=o.concat(["","== 2. Contradictions and checks =="],flags.length?flags.map(function(f){return"  - "+f;}):["  - none detected by our checks"]);
+- o=o.concat(["","== 3. Requirements stated in the pasted text (wording must/shall/may be excluded) =="],must.length?must.map(function(m){return"  - "+m;}):["  - none found in the pasted text"]);
++ o=o.concat(["","== 3. Requirements stated in the pasted text (lexical match only: must, shall, may be excluded, is a requirement, are required, required to, mandatory) =="],must.length?must.map(function(m){return"  - "+m;}):["  - no matching wording found (lexical search only; not proof of no requirements) / aucune formulation correspondante trouvée (recherche lexicale seulement ; ce n’est pas la preuve d’une absence d’exigences)"]);
+  o=o.concat(["","== 4. Our recommendations (not buyer requirements) ==","  - Confirm the deadline on the official notice and leave a buffer before it.","  - Obtain the full tender pack through the submission route above before deciding.","  - Check each stated requirement in section 3 against your own certificates and policies.","  - Compare the award weights with your pricing position.","  - Bid only if every unknown in section 5 is resolved in your favour."]);
+  o=o.concat(["","== 5. Unknowns =="],unk.map(function(u){return"  - "+u;}));
+  o=o.concat(["","== Résumé en français ==","Avis : "+nid+" ; acheteur : "+buyer,"Date limite (UTC) : "+dl,"Valeur : "+(vals.length?vals.join("; "):"aucune valeur dans la publication collée"),"Voie de dépôt (citée) : "+route,

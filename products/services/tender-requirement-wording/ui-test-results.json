@@ -1,0 +1,85 @@
+{
+ "synthetic": true,
+ "execution": "Node.js vm with DOM stub; no real browser in sandbox",
+ "node": "v22.23.4",
+ "preview_sha256": "44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681",
+ "passed": 15,
+ "total": 15,
+ "checks": [
+  {
+   "check": "one inline script, core embedded byte-identical",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no network APIs, innerHTML, eval or external URLs in script",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "CSP forbids network (default-src none) and forms",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "EN/FR AI disclosure",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "free preview not an order; CAD 49 hypothesis; administrative acceptance",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "user-supplied vs authenticated stated",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "input limit stated",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "browser execution honestly untested",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 page click output equals reconcile.py (same real clock)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105246-2026 no network calls during run",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "105246-2026 byte counter shown",
+   "pass": true,
+   "detail": "13430 / 20000 bytes / octets"
+  },
+  {
+   "check": "105838-2026 page click output equals reconcile.py (same real clock)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "105838-2026 no network calls during run",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "105838-2026 byte counter shown",
+   "pass": true,
+   "detail": "9748 / 20000 bytes / octets"
+  },
+  {
+   "check": "index links preview in EN and FR",
+   "pass": true,
+   "detail": ""
+  }
+ ]
+}
