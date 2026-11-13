@@ -18,7 +18,7 @@ Node v22.23.4 and Python 3.11.2 on 21 inputs (13 invalid, 8 valid). Repaired par
    time-second     = 2DIGIT  ; 00-58, 00-59, 00-60 based on leap second
    time-numoffset  = ("+" / "-") time-hour ":" time-minute
 ```
-RFC 3339 Appendix A (the collected ISO 8601 ABNF, which is informative) differs on the hour field:
+RFC 3339 Appendix A (ISO 8601 collected ABNF) differs on the hour field:
 ```
    date-fullyear   = date-century date-year
    date-month      = 2DIGIT  ; 01-12
