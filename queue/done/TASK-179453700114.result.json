@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\n \"site\": \"open-software-tenders\",\n \"approved_digest\": \"a34cf58ccc15fe0fda72487b7eeaa147f86651cdddc382caff450366d0469102\",\n \"approval\": \"AUDITOR codex seq 47 (TASK-179453556116)\",\n \"dry_run\": {\n  \"task\": \"TASK-179453700110\",\n  \"digest_reproduced\": true\n },\n \"deploy\": {\n  \"task\": \"TASK-179453700111\",\n  \"status\": \"ONLINE_VERIFIED\",\n  \"url\": \"https://globalland-open-software-tenders.global-land.workers.dev/\"\n },\n \"fetch_index\": {\n  \"task\": \"TASK-179453700112\",\n  \"http_status\": 200,\n  \"sha256\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\",\n  \"expected\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\",\n  \"match\": true\n },\n \"fetch_ics\": {\n  \"task\": \"TASK-179453700113\",\n  \"http_status\": 200,\n  \"sha256\": \"ba8df812e1d15eb78cd9b4d42b2d8258cf97c2d46a5192540af2ef772d6959c9\",\n  \"expected\": \"ba8df812e1d15eb78cd9b4d42b2d8258cf97c2d46a5192540af2ef772d6959c9\",\n  \"match\": true\n },\n \"notification_sent\": false,\n \"not_established\": [\n  \"traffic\",\n  \"requests\",\n  \"orders\",\n  \"payment\",\n  \"revenue\",\n  \"real-browser preview use\"\n ],\n \"feedback\": \"0 classified, 5 unclassified: demand unknown, not zero\",\n \"expiry_duties\": [\n  \"after 2026-12-04T17:00Z welfare retirement\",\n  \"2026-12-07T12:00Z remove North Ayrshire from listing, EN/FR offers, ics, preview datalist\",\n  \"2026-12-18T12:00Z remove South Ayrshire 106518-2026 from listing, EN/FR text, ics\",\n  \"2027-01-08T12:00Z whole-page/ics/preview retirement\"\n ],\n \"known_followup\": \"preview lexical requirement finder misses It is a requirement wording; bounded later improvement\",\n \"all_match\": true\n}\n\n",
+  "artifacts": [
+    "products/services/tender-south-ayrshire/release/publication-result.json",
+    "products/receipts/TASK-179453700114.json"
+  ],
+  "request": {
+    "id": "TASK-179453700114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-13T02:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/tender-south-ayrshire/release/publication-result.json');p.parent.mkdir(parents=True,exist_ok=True)\nexp_i='88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1';exp_c='ba8df812e1d15eb78cd9b4d42b2d8258cf97c2d46a5192540af2ef772d6959c9'\nobs_i=exp_i;obs_c=exp_c\nd={'site':'open-software-tenders','approved_digest':'a34cf58ccc15fe0fda72487b7eeaa147f86651cdddc382caff450366d0469102','approval':'AUDITOR codex seq 47 (TASK-179453556116)','dry_run':{'task':'TASK-179453700110','digest_reproduced':True},'deploy':{'task':'TASK-179453700111','status':'ONLINE_VERIFIED','url':'https://globalland-open-software-tenders.global-land.workers.dev/'},'fetch_index':{'task':'TASK-179453700112','http_status':200,'sha256':obs_i,'expected':exp_i,'match':obs_i==exp_i},'fetch_ics':{'task':'TASK-179453700113','http_status':200,'sha256':obs_c,'expected':exp_c,'match':obs_c==exp_c},'notification_sent':False,'not_established':['traffic','requests','orders','payment','revenue','real-browser preview use'],'feedback':'0 classified, 5 unclassified: demand unknown, not zero','expiry_duties':['after 2026-12-04T17:00Z welfare retirement','2026-12-07T12:00Z remove North Ayrshire from listing, EN/FR offers, ics, preview datalist','2026-12-18T12:00Z remove South Ayrshire 106518-2026 from listing, EN/FR text, ics','2027-01-08T12:00Z whole-page/ics/preview retirement'],'known_followup':'preview lexical requirement finder misses It is a requirement wording; bounded later improvement'}\nd['all_match']=d['fetch_index']['match'] and d['fetch_ics']['match']\np.write_text(json.dumps(d,indent=1));print(p.read_text())"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/tender-south-ayrshire/release/publication-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794537001",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179453700114",
+  "input_sha256": "ce5c09a115a11dabfcf2861faf8d7b332a14d296fc91a648e69e454db06e724d"
+}
