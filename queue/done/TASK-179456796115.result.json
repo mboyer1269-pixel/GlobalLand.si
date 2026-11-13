@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "12207\n\n",
+  "artifacts": [
+    "products/research/tender-paid-value/extract.txt",
+    "products/receipts/TASK-179456796115.json"
+  ],
+  "request": {
+    "id": "TASK-179456796115",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-13T11:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,pathlib,hashlib\nout=[]\ndef txt(p):\n    s=pathlib.Path(p).read_text(errors='replace')\n    s=re.sub(r'(?is)<(script|style)[^>]*>.*?</\\1>',' ',s)\n    s=html.unescape(re.sub(r'<[^>]+>',' ',s))\n    return re.sub(r'\\s+',' ',s)\nfor p,kw in [('products/research/tender-paid-value/raw/tracker-pricing.html',r'£|per month|per year|annual|free trial|alert|bid|tender|month|year'),('products/research/tender-paid-value/raw/fts-home.html',r'alert|sign in|account|email|notif|saved search|free'),('products/sites/open-software-tenders/index.html',r'CAD|49|brief|price|order|deliver|check|reconcil')]:\n    t=txt(p); out.append('=== %s sha256=%s chars=%d'%(p,hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest(),len(t)))\n    seen=0\n    for m in re.finditer(kw,t,re.I):\n        a=max(0,m.start()-160); \n        if a<seen: continue\n        out.append('...'+t[a:m.end()+200]); seen=m.end()+200\n        if len(out)>400: break\np=pathlib.Path('products/research/tender-paid-value/extract.txt'); p.parent.mkdir(parents=True,exist_ok=True); p.write_text('\\n'.join(out)[:60000])\nprint(len('\\n'.join(out)))"
+      ],
+      "inputs": [
+        "products/research/tender-paid-value/raw/",
+        "products/sites/open-software-tenders/index.html"
+      ],
+      "outputs": [
+        "products/research/tender-paid-value/extract.txt"
+      ],
+      "mission_id": "TENDER-PAID-VALUE-EVIDENCE"
+    },
+    "description": "Broker action during THINK-1794567961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179456796115",
+  "input_sha256": "2f01049588fe8f6a7be1601d990b9663d13f2b1f05f4cd1f90ea2174d76959f4"
+}
