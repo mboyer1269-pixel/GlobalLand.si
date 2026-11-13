@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "products/sites/invoice-preflight/index.html:mailto:globalland@agentmail.to?subject=site%3Ainvoice-preflight%20CSV%20diagnostic&amp;body=Experiment%3A%20site%3Ainvoice-preflight%0A%0A---CSV%20START---%0A%0A---CSV%20END---%0A\nproducts/sites/open-software-tenders/index.html:mailto:globalland@agentmail.to?subject=site%3Aopen-software-tenders%20interest&amp;body=Experiment%3A%20site%3Aopen-software-tenders%0ACPV%20codes%20or%20buyer%20sector%3A%20%0A%0A\nproducts/sites/open-software-tenders/index.html:mailto:globalland@agentmail.to?subject=site%3Aopen-software-tenders%20reconciliation%20brief&amp;body=Experiment%3A%20site%3Aopen-software-tenders%0AOffer%3A%20reconciliation%20brief%20CAD49%20interest%0ANotice%20ID%3A%20%0A%0A\nproducts/sites/shopify-catalogue-example/index.html:mailto:globalland@agentmail.to?subject=site%3Ashopify-catalogue-example%20question&amp;body=Experiment%3A%20site%3Ashopify-catalogue-example%0A%0A\nproducts/sites/software-award-brief/index.html:mailto:globalland@agentmail.to?subject=site%3Asoftware-award-brief%20interest&amp;body=Experiment%3A%20site%3Asoftware-award-brief%0ABuyer%20sector%20of%20interest%3A%20%0A%0A\nproducts/sites/sqlite-statement-diagnostic/index.html:mailto:globalland@agentmail.to?subject=site%3Asqlite-statement-diagnostic%20interest&amp;body=Experiment%3A%20site%3Asqlite-statement-diagnostic%0Aquery_sql%3A%20%0Aseed_sql%3A%20%0Aexpected%20rows%3A%20%0Aprepare%20called%20once%20%28yes%2Fno%29%3A%20%0ASQLite%20version%3A%20%0A\nproducts/sites/sqlite-statement-diagnostic/index.html:mailto:globalland@agentmail.to?subject=site%3Asqlite-statement-diagnostic%20interest&amp;body=Experiment%3A%20site%3Asqlite-statement-diagnostic%0Aquery_sql%3A%20%0Aseed_sql%3A%20%0Aexpected%20rows%3A%20%0Aprepare%20called%20once%20%28yes%2Fno%29%3A%20%0ASQLite%20version%3A%20%0A\nproducts/sites/welfare-tender-brief/index.html:mailto:globalland@agentmail.to?subject=site%3Awelfare-tender-brief%20%E2%80%94%20Bradford%20brief%20%E2%80%94%20expression%20of%20interest&amp;body=Experiment%3A%20site%3Awelfare-tender-brief%0A%0A\nproducts/sites/supplier-shopify-diff/index.html:<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'\">\nghost-import-diagnostic\ninvoice-preflight\nopen-software-tenders\nshopify-catalogue-example\nsoftware-award-brief\nsqlite-statement-diagnostic\nsupplier-shopify-diff\nwelfare-tender-brief\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179457336111.json"
+  ],
+  "request": {
+    "id": "TASK-179457336111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-13T12:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "grep -o 'mailto:[^\"]*' products/sites/*/index.html | head -20; grep -o '<meta http-equiv=\"Content-Security-Policy\"[^>]*>' products/sites/*/index.html | head; ls products/sites/"
+      ],
+      "inputs": [
+        "products/sites/"
+      ],
+      "outputs": [],
+      "mission_id": "PARSER-PARITY-SITE-CANDIDATE"
+    },
+    "description": "Broker action during THINK-1794573361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179457336111",
+  "input_sha256": "dc36501deb4ffd886805882bcc022a68d51725e809583837dac30ebec71020cb"
+}
