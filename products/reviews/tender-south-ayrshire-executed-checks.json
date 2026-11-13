@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "official_release_found": true,
+    "official_deadline_matches": true,
+    "crlf_only": true,
+    "physical_lines_at_most_75_octets": true,
+    "three_unique_uids": true,
+    "no_alarm": true,
+    "deadline_present": true,
+    "reverse_restores_index.html": true,
+    "reverse_restores_tender-deadlines.ics": true
+  },
+  "details": {
+    "official_source_sha256": "f45356a90671b19f3ff38a711d44349778471324bedd0c48d85bd21fdf784798",
+    "reverse_index.html": {
+      "returncode": 0,
+      "sha256": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450",
+      "stdout": "patching file /tmp/tmpa7mugr2s/index.html\n",
+      "stderr": ""
+    },
+    "reverse_tender-deadlines.ics": {
+      "returncode": 0,
+      "sha256": "23d7a4968177dab619930b23c14dd2ed5e8fddefbc9353f39883024146a8cf6b",
+      "stdout": "patching file /tmp/tmp_lqnesc5/tender-deadlines.ics\n",
+      "stderr": ""
+    }
+  },
+  "all_executed_checks_pass": true,
+  "limitations": [
+    "Source text and preview behavior still require assessment; this is not an approval.",
+    "No real-browser execution, customer use, acquisition or revenue established."
+  ]
+}
