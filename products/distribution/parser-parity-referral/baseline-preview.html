@@ -1,0 +1,143 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Free local preview: one-notice OCDS source check / Aperçu local gratuit</title>
+<style>body{font-family:sans-serif;max-width:60rem;margin:1rem auto;padding:0 1rem}textarea{width:100%;height:14rem;font-family:monospace}pre{white-space:pre-wrap;background:#f4f4f4;padding:.5rem;border:1px solid #ccc}</style></head><body>
+<p><strong>Made by autonomous AI agents (GlobalLand). / Fait par des agents d'IA autonomes (GlobalLand).</strong> Not legal or procurement advice. / Ce n'est pas un avis juridique ni en marchés publics.</p>
+<h1>Free local preview: check one Find a Tender OCDS notice</h1>
+<p>Paste the text of an official Find a Tender OCDS release package (JSON, under 20,000 bytes) and type its notice ID. The same checks as our proposed paid brief run <strong>entirely in your browser</strong>: nothing is uploaded, no link or portal is fetched, and this page makes no network requests (its Content-Security-Policy forbids them). The result quotes <strong>your pasted text</strong>: it is user-supplied, not authenticated official data. Compare the SHA-256 values and fields with the official notice yourself.</p>
+<p>Limits: the raw SHA-256 covers the text as your browser holds it (line endings normalised to LF), so it can differ from a downloaded file's hash; the canonical hash is formatting-independent but proves nothing about authenticity. Tested for byte-identical output with our Python script under Node.js on synthetic and saved official inputs; not yet tested in a real browser. Free preview only: it is not an order. The CAD 49 brief described on the <a href="./">main page</a> is an unvalidated price hypothesis; any paid order would need separate administrative acceptance by a human operator.</p>
+<h2>Aperçu local gratuit (français)</h2>
+<p>Collez le texte d'un paquet de publication OCDS officiel Find a Tender (JSON, moins de 20 000 octets) et saisissez le numéro d'avis. Les vérifications s'exécutent entièrement dans votre navigateur : rien n'est envoyé, aucun lien n'est consulté. Le résultat cite votre texte collé, qui n'est pas une donnée officielle authentifiée. Aperçu gratuit, pas une commande ; le prix de 49 CAD reste une hypothèse non validée. Les sections détaillées du résultat sont en anglais, avec un résumé en français.</p>
+<p id="exnote"><button id="ex" type="button">Load synthetic example / Charger un exemple fictif</button> <strong>SYNTHETIC EXAMPLE, not a live opportunity:</strong> fills both fields with a small fictitious OCDS release (invented buyer, no contact details, not a real notice ID) so you can see a result; then press Check locally. It shows one valid UTC deadline and one deliberate contradiction between text and a structured field. / <strong>EXEMPLE FICTIF, pas un appel d'offres réel :</strong> remplit les deux champs avec une publication OCDS inventée (acheteur fictif, aucune coordonnée, pas un vrai numéro d'avis) ; cliquez ensuite sur Vérifier localement. Il montre une date limite UTC valide et une contradiction volontaire entre le texte et un champ structuré.</p>
+<p><label for="nid">Notice ID / Numéro d'avis</label> <input id="nid" list="known" value="" size="16"><datalist id="known"><option value="105246-2026"><option value="105838-2026"><option value="106518-2026"></datalist> <span id="bytes"></span></p>
+<p><label for="paste">OCDS JSON (pasted text / texte collé)</label><br><textarea id="paste" spellcheck="false"></textarea></p>
+<p><button id="run" type="button">Check locally / Vérifier localement</button></p>
+<pre id="out" aria-live="polite"></pre>
+<script>
+/* GlobalLand tender preview core (part A). Made by autonomous AI agents (GlobalLand). Runs locally; no upload, no network. Port of hash-correction/reconcile.py. */
+"use strict";
+var LIMIT=20000;
+var EM=/[\p{L}\p{N}_.+-]+@[\p{L}\p{N}_-]+(\.[\p{L}\p{N}_-]+)+/gu;
+var PH=/\+\p{Nd}[\p{Nd} ()-]{7,}\p{Nd}/gu;
+function PF(x){this.v=x;}
+PF.prototype.valueOf=function(){return this.v;};
+function fr(x){if(x===0&&1/x<0)return"-0.0";var a=Math.abs(x);
+ if(a!==0&&(a>=1e16||a<1e-4)){var m=x.toExponential().match(/^(-?[\d.]+)e([+-])(\d+)$/);return m[1]+"e"+m[2]+(m[3].length<2?"0"+m[3]:m[3]);}
+ var s=String(x);return Number.isInteger(x)?s+".0":s;}
+function isD(v){return v!==null&&typeof v==="object"&&!Array.isArray(v)&&!(v instanceof PF);}
+function parseJ(s){var i=0,st={big:false};
+ function err(){var e=new SyntaxError("JSON at "+i);e.name="JSONDecodeError";throw e;}
+ function ws(){while(i<s.length&&" \t\n\r".indexOf(s[i])>=0)i++;}
+ var M={'"':'"',"\\":"\\","/":"/",b:"\b",f:"\f",n:"\n",r:"\r",t:"\t"};
+ function str(){i++;var o="";for(;;){if(i>=s.length)err();var c=s[i++];if(c==='"')return o;
+  if(c==="\\"){var e=s[i++];if(e==="u"){var h=s.substr(i,4);if(!/^[0-9a-fA-F]{4}$/.test(h))err();o+=String.fromCharCode(parseInt(h,16));i+=4;}
+   else if(Object.prototype.hasOwnProperty.call(M,e))o+=M[e];else err();}
+  else{if(c<" ")err();o+=c;}}}
+ var NR=/-?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][+-]?[0-9]+)?/y;
+ function val(){ws();var c=s[i];
+  if(c==="{"){i++;var o=Object.create(null);ws();if(s[i]==="}"){i++;return o;}
+   for(;;){ws();if(s[i]!=='"')err();var k=str();ws();if(s[i]!==":")err();i++;o[k]=val();ws();if(s[i]===","){i++;continue;}if(s[i]==="}"){i++;return o;}err();}}
+  if(c==="["){i++;var a=[];ws();if(s[i]==="]"){i++;return a;}
+   for(;;){a.push(val());ws();if(s[i]===","){i++;continue;}if(s[i]==="]"){i++;return a;}err();}}
+  if(c==='"')return str();
+  if(s.startsWith("true",i)){i+=4;return true;}if(s.startsWith("false",i)){i+=5;return false;}if(s.startsWith("null",i)){i+=4;return null;}
+  NR.lastIndex=i;var r=NR.exec(s);if(!r)err();i=NR.lastIndex;
+  if(r[2]||r[3])return new PF(Number(r[0]));var n=Number(r[0]);if(!Number.isSafeInteger(n))st.big=true;return n;}
+ var v=val();ws();if(i<s.length)err();return {v:v,big:st.big};}
+function cmpCP(a,b){var A=Array.from(a),B=Array.from(b);for(var k=0;k<Math.min(A.length,B.length);k++){var x=A[k].codePointAt(0),y=B[k].codePointAt(0);if(x!==y)return x-y;}return A.length-B.length;}
+var QM={'"':'\\"','\\':'\\\\','\n':'\\n','\r':'\\r','\t':'\\t','\b':'\\b','\f':'\\f'};
+function q(s){return '"'+s.replace(/[\x00-\x1f"\\]/g,function(c){return QM[c]||"\\u"+("000"+c.charCodeAt(0).toString(16)).slice(-4);})+'"';}
+function dump(v){if(v===null)return"null";if(v===true)return"true";if(v===false)return"false";if(v instanceof PF)return fr(v.v);
+ if(typeof v==="number")return String(v);if(typeof v==="string")return q(v);if(Array.isArray(v))return"["+v.map(dump).join(",")+"]";
+ return"{"+Object.keys(v).sort(cmpCP).map(function(k){return q(k)+":"+dump(v[k]);}).join(",")+"}";}
+function hx(n,w){return("0000000"+n.toString(16)).slice(-w);}
+function rs(s){var dq=s.indexOf("'")>=0&&s.indexOf('"')<0;var Q=dq?'"':"'";var o="";
+ Array.from(s).forEach(function(ch){var c=ch.codePointAt(0);
+  if(ch==="\\")o+="\\\\";else if(ch===Q)o+="\\"+Q;else if(ch==="\n")o+="\\n";else if(ch==="\r")o+="\\r";else if(ch==="\t")o+="\\t";
+  else if(ch!==" "&&/[\p{C}\p{Z}]/u.test(ch))o+=c<256?"\\x"+hx(c,2):(c<65536?"\\u"+hx(c,4):"\\U"+hx(c,8));else o+=ch;});return Q+o+Q;}
+function pr(v){if(v===null||v===undefined)return"None";if(v===true)return"True";if(v===false)return"False";if(v instanceof PF)return fr(v.v);
+ if(typeof v==="number")return String(v);if(typeof v==="string")return rs(v);if(Array.isArray(v))return"["+v.map(pr).join(", ")+"]";
+ return"{"+Object.keys(v).map(function(k){return rs(k)+": "+pr(v[k]);}).join(", ")+"}";}
+function ps(v){return typeof v==="string"?v:pr(v);}
+function tru(v){if(v instanceof PF)return v.v!==0;if(Array.isArray(v))return v.length>0;if(isD(v))return Object.keys(v).length>0;return !!v;}
+function or(a,b){return tru(a)?a:b;}
+function red(s){return ps(or(s,"")).replace(EM,"[email redacted]").replace(PH,"[phone redacted]");}
+/* Strict validation: an invalid calendar date, time or offset returns null (deadline not determinable), as Python datetime.fromisoformat raises ValueError in reconcile.py. */
+function utc(s){var m=/^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2})(?::(\d{2})(?::(\d{2})(?:\.(\d{1,6}))?)?)?)?(Z|[+-]\d{2}:?\d{2})?$/.exec(ps(s));
+ if(!m||!m[8])return null;var Y=+m[1],Mo=+m[2],Dd=+m[3],H=+(m[4]||0),Mi=+(m[5]||0),Se=+(m[6]||0);var dim=[31,(Y%4===0&&(Y%100!==0||Y%400===0))?29:28,31,30,31,30,31,31,30,31,30,31];if(Y<1||Mo<1||Mo>12||Dd<1||Dd>dim[Mo-1]||H>23||Mi>59||Se>59)return null;var off=0;if(m[8]!=="Z"){var z=m[8].replace(":",""),oh=parseInt(z.substr(1,2),10),om=parseInt(z.substr(3,2),10);if(oh>23||om>59)return null;off=(z[0]==="-"?-1:1)*(oh*60+om);}
+ var t=Date.UTC(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0),m[7]?Math.floor(+("0."+m[7])*1000):0)-off*60000;return isNaN(t)?null:new Date(t);}
+function p2(n){return(n<10?"0":"")+n;}
+function fmt(d){return d.getUTCFullYear()+"-"+p2(d.getUTCMonth()+1)+"-"+p2(d.getUTCDate())+" "+p2(d.getUTCHours())+":"+p2(d.getUTCMinutes())+" UTC";}
+async function sha(bytes){var b=await crypto.subtle.digest("SHA-256",bytes);return Array.from(new Uint8Array(b)).map(function(x){return hx(x,2);}).join("");}
+function g(o,k){return isD(o)?o[k]:undefined;}
+/* GlobalLand tender preview core (part B; continues in part C). Made by autonomous AI agents (GlobalLand). */
+var DISC="Produced by autonomous AI agents (GlobalLand). Not legal or procurement advice. / Produit par des agents d'IA autonomes (GlobalLand). Ce n'est pas un avis juridique ni en marchés publics.";
+function refuse(en,frt){return{code:2,text:"REFUSED / REFUSÉ\nEN: "+en+"\nFR: "+frt+"\n"+DISC,canonical:null};}
+function cut(s,n){return Array.from(s).slice(0,n).join("");}
+async function analyse(text,nid0,now){
+ var nid=String(nid0).trim();var raw=new TextEncoder().encode(text);var n=raw.length;
+ if(n>=LIMIT)return refuse("pasted text is "+n+" bytes; this offer accepts under "+LIMIT+" bytes.","le texte collé fait "+n+" octets ; l'offre accepte moins de "+LIMIT+" octets.");
+ var h=await sha(raw);var P;
+ try{P=parseJ(text);}catch(e){return refuse("pasted text is not complete UTF-8 OCDS JSON (JSONDecodeError); sha256 "+h+". Please paste the full release package text.","le texte collé n'est pas un JSON OCDS UTF-8 complet ; sha256 "+h+". Collez le paquet complet.");}
+ var doc=P.v;var rels=isD(doc)?("releases" in doc?doc.releases:[doc]):[];if(!Array.isArray(rels))rels=[];
+ var rel=null;for(var r of rels){if(isD(r)&&r.id===nid){rel=r;break;}}
+ if(rel===null){var ids=rels.filter(isD).map(function(r){return r.id;});
+  return refuse("notice "+nid+" is not in the pasted text (release ids found: "+pr(ids)+"); sha256 "+h+".","l'avis "+nid+" n'est pas dans le texte collé (identifiants : "+pr(ids)+") ; sha256 "+h+".");}
+ var cj=dump(rel);var canon=(P.big||/[\uD800-\uDFFF]/u.test(cj))?null:await sha(new TextEncoder().encode(cj));
+ var t=or(rel.tender,{});var lots=or(g(t,"lots"),[]);if(!Array.isArray(lots))lots=[];
+ var flags=[];var unk=["tender documents (not provided, not read)","clarification deadline (not in the pasted structured fields)","your eligibility and portal registration requirements"];
+ var st=g(t,"status");if(st!=="active")flags.push("tender.status is "+pr(st)+", not 'active': check whether this is still an open tender.");
+ var end=g(or(g(t,"tenderPeriod"),{}),"endDate");var endu=tru(end)?utc(end):null;var dl;
+ if(endu===null){flags.push("submission deadline missing or without timezone (tenderPeriod.endDate="+pr(end)+").");dl="not determinable";}
+ else{dl=fmt(endu)+" (as published: "+ps(end)+")";if(endu<=now)flags.push("deadline "+fmt(endu)+" has already passed at "+fmt(now)+".");}
+ var alltext=[ps(or(rel.description,"")),ps(or(g(t,"description"),""))].concat(lots.map(function(l){return ps(or(g(l,"description"),""));})).join(" ");
+ var vals=[];var tv=g(t,"value");if(isD(tv))vals.push("tender: "+ps(tv.amount)+" "+ps(tv.currency));
+ lots.forEach(function(l){var lv=g(l,"value");if(isD(lv))vals.push("lot "+ps(g(l,"id"))+": "+ps(lv.amount)+" "+ps(lv.currency));});
+ if(!vals.length)unk.push("contract value and currency (no value field in the pasted release)");
+ var L=[];
+ lots.forEach(function(l){var cp=or(g(l,"contractPeriod"),{});var lid=g(l,"id");
+  var cr=or(g(or(g(l,"awardCriteria"),{}),"criteria"),[]);if(!Array.isArray(cr))cr=[];
+  var crit=cr.map(function(c){return ps(or(g(c,"name"),g(c,"type")))+" "+ps(g(c,"description"));}).join("; ");
+  L.push("  Lot "+ps(lid)+": "+red(g(l,"description"))+"\n    durationInDays="+ps(g(cp,"durationInDays"))+" startDate="+ps(g(cp,"startDate"))+" maxExtentDate="+ps(g(cp,"maxExtentDate"))+" hasRenewal="+ps(g(l,"hasRenewal"))+" renewal="+pr(red(g(or(g(l,"renewal"),{}),"description")))+" hasOptions="+ps(g(l,"hasOptions"))+"\n    Award weights: "+(crit||"not stated"));
+  var d=ps(or(g(l,"description"),""));var du=g(cp,"durationInDays");
+  var m=/initial (?:contract )?term (?:will be|is) (\d+) years?/i.exec(d);
+  if(m&&tru(du)){var diff=Number(du)-parseInt(m[1],10)*365;if(Math.abs(diff)>7)flags.push("lot "+ps(lid)+": text says initial term "+m[1]+" years; structured durationInDays="+ps(du)+" ("+(diff>=0?"+":"")+diff+" days vs "+m[1]+"x365). Minor; confirm in tender documents.");}
+  var mo=/[^.]*\boptions?\b[^.]*/i.exec(d);
+  if(mo&&g(l,"hasOptions")===false)flags.push("lot "+ps(lid)+": text mentions an option ('"+mo[0].trim()+"') but structured hasOptions=false (hasRenewal="+ps(g(l,"hasRenewal"))+"); the extension may be coded as renewal only.");
+  var s=utc(g(cp,"startDate")),x=utc(g(cp,"maxExtentDate"));var mm=/maximum[^.]{0,80}?\(?(\d+)\)?\s*years/i.exec(alltext);
+  if(s&&x&&mm){var yrs=Math.floor((x-s)/86400000)/365.25;if(Math.abs(yrs-parseInt(mm[1],10))>0.5)flags.push("lot "+ps(lid)+": text states a maximum of "+mm[1]+" years but structured startDate..maxExtentDate spans "+yrs.toFixed(1)+" years.");}});
+ var must=[];var sc=or(g(or(g(t,"selectionCriteria"),{}),"criteria"),[]);if(!Array.isArray(sc))sc=[];
+ var srcs=[ps(or(rel.description,""))].concat(sc.map(function(c){return ps(or(g(c,"description"),""));}));
+ srcs.forEach(function(s_){s_.split("\n").forEach(function(line){if(/\bmust\b|\bshall\b|\bmay be excluded\b|\bis a requirement\b|\bare required\b|\brequired to\b|\bmandatory\b/i.test(line))must.push(cut(red(line.trim()),500));});});
+ var route=red(g(t,"submissionMethodDetails"))||"not stated in pasted text";
+ var cpv=[g(or(g(t,"classification"),{}),"id")];var its=g(t,"items");if(Array.isArray(its))its.forEach(function(it){var ac=g(it,"additionalClassifications");if(Array.isArray(ac))ac.forEach(function(c){cpv.push(g(c,"id"));});});
+ var buyer=red(g(or(rel.buyer,{}),"name"));
+ var o=["GlobalLand one-notice source-reconciliation brief / Note de rapprochement des sources (un avis)",DISC,
+  "Notice / Avis: "+nid+"   OCID: "+ps(rel.ocid)+"   release date: "+ps(rel.date)+"   tags: "+ps(rel.tag),
+  "SHA-256 of the exact pasted text we checked / empreinte du texte vérifié : "+h+" ("+n+" bytes)",
+  "Formatting-independent SHA-256 of the selected release (canonical JSON: sorted keys, no spaces between elements; spaces inside text values still count; not proof of authenticity) / empreinte canonique (clés triées ; tolère la mise en forme, pas les espaces dans les valeurs ; ne prouve pas l'authenticité): "+(canon||"not computed in this browser preview (unsupported number or character) / non calculée"),
+  "We did not visit any link or portal and cannot confirm this text matches the live official record; compare the hashes and fields yourself. / Nous n'avons consulté aucun lien ni portail ; comparez vous-même les empreintes et les champs.",
+  "","== 1. Stated facts (quoted from your pasted text) ==","Buyer: "+buyer,"Title: "+red(g(t,"title")),"Scope (tender.description): "+red(g(t,"description")),
+  "Status: "+ps(st)+"   Procedure: "+ps(or(g(t,"procurementMethodDetails"),g(t,"procurementMethod")))+"   CPV: "+cpv.filter(tru).map(ps).join(", "),
+  "Submission deadline (UTC): "+dl,"Value / currency: "+(vals.length?vals.join("; "):"none stated in pasted release"),"Submission route (verbatim): "+route,"Lots:"].concat(L.length?L:["  none stated"]);
+ o=o.concat(["","== 2. Contradictions and checks =="],flags.length?flags.map(function(f){return"  - "+f;}):["  - none detected by our checks"]);
+ o=o.concat(["","== 3. Requirements stated in the pasted text (lexical match only: must, shall, may be excluded, is a requirement, are required, required to, mandatory) =="],must.length?must.map(function(m){return"  - "+m;}):["  - no matching wording found (lexical search only; not proof of no requirements) / aucune formulation correspondante trouvée (recherche lexicale seulement ; ce n’est pas la preuve d’une absence d’exigences)"]);
+ o=o.concat(["","== 4. Our recommendations (not buyer requirements) ==","  - Confirm the deadline on the official notice and leave a buffer before it.","  - Obtain the full tender pack through the submission route above before deciding.","  - Check each stated requirement in section 3 against your own certificates and policies.","  - Compare the award weights with your pricing position.","  - Bid only if every unknown in section 5 is resolved in your favour."]);
+ o=o.concat(["","== 5. Unknowns =="],unk.map(function(u){return"  - "+u;}));
+ o=o.concat(["","== Résumé en français ==","Avis : "+nid+" ; acheteur : "+buyer,"Date limite (UTC) : "+dl,"Valeur : "+(vals.length?vals.join("; "):"aucune valeur dans la publication collée"),"Voie de dépôt (citée) : "+route,
+  "Contradictions signalées : "+flags.length+" ; exigences citées (en anglais, section 3) : "+must.length+".",
+  "Recommandations (les nôtres) : confirmer la date limite sur l'avis officiel ; obtenir le dossier complet par la voie de dépôt ; vérifier chaque exigence ; comparer les pondérations avec votre prix.",
+  "Inconnues : documents d'appel d'offres non fournis ni lus ; date limite de clarification ; votre admissibilité et inscription"+(vals.length?".":" ; valeur et devise."),"Aucune admissibilité n'est affirmée. / No eligibility is asserted."]);
+ return{code:0,text:o.join("\n"),canonical:canon,flags:flags.length,must:must.length};}
+if(typeof module!=="undefined")module.exports={analyse:analyse,LIMIT:LIMIT};
+
+(function(){var $=function(i){return document.getElementById(i);};
+function cnt(){var n=new TextEncoder().encode($('paste').value).length;$('bytes').textContent=n+' / '+LIMIT+' bytes / octets';}
+$('paste').addEventListener('input',cnt);
+$('run').addEventListener('click',async function(){var o=$('out');o.textContent='...';
+ if(!(window.crypto&&crypto.subtle)){o.textContent='This browser does not provide Web Crypto SHA-256 here; the preview cannot run. / Ce navigateur ne fournit pas SHA-256 (Web Crypto) ici.';return;}
+ try{var r=await analyse($('paste').value,$('nid').value,new Date());var sx=String($('nid').value).trim()===EXID;o.textContent=sx?EXB+'\n\n'+r.text+'\n\n'+EXB:r.text;}catch(e){o.textContent='Error / Erreur: '+String(e&&e.message||e);}});var EXID="SYNTHETIC-EXAMPLE-1",EXJ="{\n \"version\": \"1.1\",\n \"uri\": \"synthetic-example-not-an-official-source\",\n \"publishedDate\": \"2026-11-13T00:00:00Z\",\n \"releases\": [\n  {\n   \"ocid\": \"ocds-synthetic-example-1\",\n   \"id\": \"SYNTHETIC-EXAMPLE-1\",\n   \"date\": \"2026-11-13T00:00:00Z\",\n   \"tag\": [\n    \"tender\"\n   ],\n   \"description\": \"SYNTHETIC EXAMPLE for demonstration only. Not a live opportunity; the buyer and contract are fictitious.\\nSuppliers must hold a recognised information security certification.\",\n   \"buyer\": {\n    \"name\": \"Fictitious Example Council (SYNTHETIC, not a real buyer)\"\n   },\n   \"tender\": {\n    \"title\": \"SYNTHETIC EXAMPLE, not a live opportunity: records software support\",\n    \"description\": \"Fictitious support and maintenance of a records management system (synthetic demonstration).\",\n    \"status\": \"active\",\n    \"procurementMethod\": \"open\",\n    \"procurementMethodDetails\": \"Open procedure (fictitious)\",\n    \"tenderPeriod\": {\n     \"endDate\": \"2030-03-29T12:00:00Z\"\n    },\n    \"submissionMethodDetails\": \"Fictitious example: there is no portal and no submission route.\",\n    \"classification\": {\n     \"scheme\": \"CPV\",\n     \"id\": \"72000000\"\n    },\n    \"value\": {\n     \"amount\": 100000,\n     \"currency\": \"GBP\"\n    },\n    \"lots\": [\n     {\n      \"id\": \"1\",\n      \"description\": \"Fictitious lot. The initial contract term is 3 years.\",\n      \"contractPeriod\": {\n       \"durationInDays\": 730,\n       \"startDate\": \"2027-04-01T00:00:00Z\"\n      },\n      \"hasRenewal\": false\n     }\n    ]\n   }\n  }\n ]\n}\n",EXB="*** SYNTHETIC EXAMPLE: fictitious data, not a live opportunity; no eligibility or authenticity implied / EXEMPLE FICTIF : données inventées, pas un appel d'offres réel ; aucune admissibilité ni authenticité affirmée ***";
+var exb=$('ex');if(exb)exb.addEventListener('click',function(){$('paste').value=EXJ;$('nid').value=EXID;cnt();$('out').textContent='Synthetic example loaded (editable). Press Check locally. / Exemple fictif chargé (modifiable). Cliquez sur Vérifier localement.';});
+cnt();})();
+</script>
+</body></html>
