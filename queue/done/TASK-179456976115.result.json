@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "ok 4455\n\n",
+  "artifacts": [
+    "products/research/paid-editorial-channel.json",
+    "products/receipts/TASK-179456976115.json"
+  ],
+  "request": {
+    "id": "TASK-179456976115",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-13T11:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,pathlib\nd={\n'mission':'PAID-EDITORIAL-COMMISSION-TEST','observed_utc':'2026-11-13','verdict':'STOP_CHANNEL','summary':'All three bounded candidates fail at least one required condition (open submissions, explicit AI permission, accessible identity/payout). No proposal or demonstration was prepared. No contact, submission, account, agreement or spending occurred.',\n'candidates':[\n {'publisher':'DigitalOcean (Write for DOnations)','url':'https://www.digitalocean.com/community/pages/write-for-digitalocean','fetch_task':'TASK-179456976111','sha256':'599c95ed64af940a8658931464d9f4aaa9d6a7ae3374036ee2356d76abfb0e56',\n  'quotes':['Paused until 2025','New tutorials are paid $400. Updates for existing tutorials, such as distribution changes, are typically paid out at $100. All payouts are at editorial discretion.','The typical payout for community authors in the Write for DOnations program is $300 for typical tutorial content.','Once we agree on the topic and outline, we’ll send you a contract to sign which lets us publish your work. That’s also when we’ll ask for your contact and payment details.','Unfortunately we can only make payments via PayPal at this time','we relicense it under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License'],\n  'advertised_pay':'USD 400 (also stated USD 300 on same page; inconsistent) at editorial discretion; currency assumed USD from $ sign','ai_policy':'No AI-authorship statement found in extracted text: UNKNOWN, not permission','submission_status':'Page banner says Paused until 2025; current open status unverified and inconsistent','prerequisites':['application with writing sample','signed contract in author name','PayPal account able to receive funds (or DO credits)'],\n  'verdict':'DO_NOT_PURSUE','reasons':['AI permission absent','program status ambiguous (paused banner)','requires contract identity and PayPal account not available to agents']},\n {'publisher':'Draft.dev','url':'https://draft.dev/write','fetch_task':'TASK-179456976112','sha256':'93225d09ac7ee115733bfdc560920d0113b6bf2b6af9ff091ba80faf62aeeb76',\n  'quotes':['If you\\'re a software developer and you want to build your personal brand while getting paid to write about interesting technical topics, you\\'ve come to the right place.','Compare vs. Freelancers vs. SEO Agencies vs. AI Generated Content'],\n  'advertised_pay':'Not stated on fetched page (no amount or currency)','ai_policy':'Not stated; publisher markets itself against AI-generated content (hypothesis: AI authorship unwelcome)','submission_status':'Application route not visible in static text','prerequisites':['personal-brand writer identity'],\n  'verdict':'DO_NOT_PURSUE','reasons':['no explicit payment amount/currency','no AI permission; positioned against AI content','personal writer identity required']},\n {'publisher':'LogRocket Blog','url':'https://blog.logrocket.com/become-a-logrocket-guest-author/','fetch_task':'TASK-179456976113','sha256':'5a8f084232f54abfa5cf4ee75af1a78623d1f526e34a83016020ba2231db1140',\n  'quotes':['Depending on the scope and quality of each post, we’ll offer up to $350.','We’re not accepting new applicants for our guest author program at the moment. Check back soon!'],\n  'advertised_pay':'up to USD 350 (currency inferred from $)','ai_policy':'Not stated: UNKNOWN','submission_status':'CLOSED to new applicants (observed)','prerequisites':['guest author application (closed)'],\n  'verdict':'DO_NOT_PURSUE','reasons':['submissions closed','no AI permission']}],\n'uncertainties':['Static HTML extraction; script-rendered terms may be missing','DigitalOcean banner may be stale; current status not verified','Currencies inferred from $ symbol'],\n'acceptance_criterion_for_reopening':'Reconsider only if a publisher page explicitly (a) states payment amount and currency, (b) is open to submissions, (c) permits AI-produced or AI-assisted content with disclosure, and (d) the founder designates an author identity and payout account. Silence about AI is not permission.',\n'pay_vs_revenue':'Advertised remuneration is not eligibility, acceptance or settled revenue. No revenue.'\n}\np=pathlib.Path('products/research/paid-editorial-channel.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,indent=1,ensure_ascii=False))\nprint('ok',len(p.read_text()))"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/research/paid-editorial-channel.json"
+      ],
+      "mission_id": "PAID-EDITORIAL-COMMISSION-TEST"
+    },
+    "description": "Broker action during THINK-1794569761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179456976115",
+  "input_sha256": "73374e3c2396634afae24f4fe5e9f403184a62673347f9949cabb8361a4289a4"
+}
