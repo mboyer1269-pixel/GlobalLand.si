@@ -1,0 +1,53 @@
+{
+  "scope": "Regex-level boundary and negation observations, not full product review or customer evidence",
+  "cases": [
+    {
+      "text": "It is a requirement that bidders hold accreditation",
+      "python_match": true,
+      "javascript_match": true
+    },
+    {
+      "text": "Bidders are required to respond",
+      "python_match": true,
+      "javascript_match": true
+    },
+    {
+      "text": "This is not mandatory",
+      "python_match": true,
+      "javascript_match": true
+    },
+    {
+      "text": "No mandatory insurance is required",
+      "python_match": true,
+      "javascript_match": true
+    },
+    {
+      "text": "émusté",
+      "python_match": false,
+      "javascript_match": true
+    },
+    {
+      "text": "mandatoryé",
+      "python_match": false,
+      "javascript_match": true
+    },
+    {
+      "text": "nonmandatory",
+      "python_match": false,
+      "javascript_match": false
+    },
+    {
+      "text": "Required to provide evidence",
+      "python_match": true,
+      "javascript_match": true
+    },
+    {
+      "text": "mustard",
+      "python_match": false,
+      "javascript_match": false
+    }
+  ],
+  "unicode_divergences": 2,
+  "negation_limit": "Negated mandatory wording is still extracted; verbatim quotation and lexical-only label must not be read as a verified obligation.",
+  "next": "Independent reviewer should judge these observed limitations against the disclosed lexical-only scope; no public files modified."
+}
