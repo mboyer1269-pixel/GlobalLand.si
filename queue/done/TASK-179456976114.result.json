@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\"digitalocean-write\": 19762, \"draftdev-write\": 4658, \"logrocket-guest\": 5605}\n\n",
+  "artifacts": [
+    "products/research/paid-editorial/extract.json",
+    "products/receipts/TASK-179456976114.json"
+  ],
+  "request": {
+    "id": "TASK-179456976114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-13T11:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,json,html,pathlib\nout={}\nfor n in ['digitalocean-write','draftdev-write','logrocket-guest']:\n  t=pathlib.Path('products/research/paid-editorial/raw/'+n+'.html').read_text(errors='replace')\n  t=re.sub(r'(?s)<script.*?</script>|<style.*?</style>',' ',t)\n  t=html.unescape(re.sub(r'<[^>]+>',' ',t)); t=re.sub(r'\\s+',' ',t)\n  hits=[]\n  for k in [r'\\$\\s?\\d[\\d,]*',r'USD',r'\\bpay',r'paid',r'\\bAI\\b',r'artificial',r'ChatGPT',r'generat',r'LLM',r'eligib',r'countr',r'rights',r'licens',r'apply',r'application',r'pause',r'closed',r'not accepting',r'Write for DOnations',r'honorari',r'per article',r'donat']:\n    for m in re.finditer(k,t,re.I):\n      s=t[max(0,m.start()-200):m.end()+200]\n      if s not in hits: hits.append(s)\n      if len(hits)>40: break\n  out[n]={'chars':len(t),'snippets':[k for k in hits][:40]}\npathlib.Path('products/research/paid-editorial/extract.json').write_text(json.dumps(out,indent=1))\nprint(json.dumps({k:v['chars'] for k,v in out.items()}))"
+      ],
+      "inputs": [
+        "products/research/paid-editorial/raw/"
+      ],
+      "outputs": [
+        "products/research/paid-editorial/extract.json"
+      ],
+      "mission_id": "PAID-EDITORIAL-COMMISSION-TEST"
+    },
+    "description": "Broker action during THINK-1794569761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179456976114",
+  "input_sha256": "8c1329ba603ef8c93bf3781e772bfd6fc09f2aa8c191c874cea4f9664d9daa9f"
+}
