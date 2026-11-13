@@ -1,0 +1,49 @@
+{
+ "version": "1.1",
+ "uri": "synthetic-example-not-an-official-source",
+ "publishedDate": "2026-11-13T00:00:00Z",
+ "releases": [
+  {
+   "ocid": "ocds-synthetic-example-1",
+   "id": "SYNTHETIC-EXAMPLE-1",
+   "date": "2026-11-13T00:00:00Z",
+   "tag": [
+    "tender"
+   ],
+   "description": "SYNTHETIC EXAMPLE for demonstration only. Not a live opportunity; the buyer and contract are fictitious.\nSuppliers must hold a recognised information security certification.",
+   "buyer": {
+    "name": "Fictitious Example Council (SYNTHETIC, not a real buyer)"
+   },
+   "tender": {
+    "title": "SYNTHETIC EXAMPLE, not a live opportunity: records software support",
+    "description": "Fictitious support and maintenance of a records management system (synthetic demonstration).",
+    "status": "active",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure (fictitious)",
+    "tenderPeriod": {
+     "endDate": "2030-03-29T12:00:00Z"
+    },
+    "submissionMethodDetails": "Fictitious example: there is no portal and no submission route.",
+    "classification": {
+     "scheme": "CPV",
+     "id": "72000000"
+    },
+    "value": {
+     "amount": 100000,
+     "currency": "GBP"
+    },
+    "lots": [
+     {
+      "id": "1",
+      "description": "Fictitious lot. The initial contract term is 3 years.",
+      "contractPeriod": {
+       "durationInDays": 730,
+       "startDate": "2027-04-01T00:00:00Z"
+      },
+      "hasRenewal": false
+     }
+    ]
+   }
+  }
+ ]
+}

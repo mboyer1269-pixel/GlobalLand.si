@@ -1,0 +1,134 @@
+{
+ "synthetic": true,
+ "made_by": "autonomous AI agents (GlobalLand BUILDER)",
+ "execution": "Node.js vm with DOM stub; no real browser in sandbox",
+ "node": "v22.23.4",
+ "preview_sha256": "b359b3bffd0a3d36b89adf13b3c9d3f9d2fbaf06e75e6a232f5ff15850709d7b",
+ "passed": 21,
+ "total": 21,
+ "checks": [
+  {
+   "check": "one Load example button",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "input guidance labels synthetic EN/FR",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "CSP unchanged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "core.js embedded unchanged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "example under input limit",
+   "pass": true,
+   "detail": "1478"
+  },
+  {
+   "check": "example has no email, phone or URL",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "example id not a Find a Tender notice id",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "datalist unchanged (3 real options, no example)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "load fills editable fields only, no result yet",
+   "pass": true,
+   "detail": "Synthetic example loaded (editable). Press Check locally. / Exemple fictif chargé (modifiable). Cliquez sur Vérifier localement."
+  },
+  {
+   "check": "byte counter updated on load",
+   "pass": true,
+   "detail": "1478 / 20000 bytes / octets"
+  },
+  {
+   "check": "output starts and ends with synthetic banner",
+   "pass": true,
+   "detail": "*** SYNTHETIC EXAMPLE: fictitious data, not a live opportunity; no eligibility or authenticity implied / EXEMPLE FICTIF "
+  },
+  {
+   "check": "valid UTC deadline shown",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "deliberate contradiction flagged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "no eligibility asserted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "example output between banners equals reconcile.py",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "edited input is used",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "other notice id gets no banner",
+   "pass": true,
+   "detail": "REFUSED / REFUSÉ\nEN: notice OTHER-1 is not in the pasted text (release ids found: ['SYNTHETIC-EXAMPL"
+  },
+  {
+   "check": "no network calls",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "existing parity.py all assertions pass",
+   "pass": true,
+   "detail": "33 / 33"
+  },
+  {
+   "check": "existing ui_test.py all assertions pass",
+   "pass": true,
+   "detail": "15 / 15"
+  },
+  {
+   "check": "existing deadline_tests.py all assertions pass",
+   "pass": true,
+   "detail": "40 / 40"
+  }
+ ],
+ "existing_suites": {
+  "parity.py": {
+   "rc": 0,
+   "stdout": "33 / 33\n",
+   "stderr": ""
+  },
+  "ui_test.py": {
+   "rc": 0,
+   "stdout": "15 / 15\n",
+   "stderr": ""
+  },
+  "deadline_tests.py": {
+   "rc": 0,
+   "stdout": "40 / 40\n",
+   "stderr": ""
+  }
+ },
+ "example_output": "*** SYNTHETIC EXAMPLE: fictitious data, not a live opportunity; no eligibility or authenticity implied / EXEMPLE FICTIF : données inventées, pas un appel d'offres réel ; aucune admissibilité ni authenticité affirmée ***\n\nGlobalLand one-notice source-reconciliation brief / Note de rapprochement des sources (un avis)\nProduced by autonomous AI agents (GlobalLand). Not legal or procurement advice. / Produit par des agents d'IA autonomes (GlobalLand). Ce n'est pas un avis juridique ni en marchés publics.\nNotice / Avis: SYNTHETIC-EXAMPLE-1   OCID: ocds-synthetic-example-1   release date: 2026-11-13T00:00:00Z   tags: ['tender']\nSHA-256 of the exact pasted text we checked / empreinte du texte vérifié : 8ab687acbb03b83c002151752c10a7fc13457d249c4bafec69b7cfae51a8d61c (1478 bytes)\nFormatting-independent SHA-256 of the selected release (canonical JSON: sorted keys, no spaces between elements; spaces inside text values still count; not proof of authenticity) / empreinte canonique (clés triées ; tolère la mise en forme, pas les espaces dans les valeurs ; ne prouve pas l'authenticité): 17bb5183e698eaf51a52dfa459259827d0b48a76ffc60198b6b3520a52164ec3\nWe did not visit any link or portal and cannot confirm this text matches the live official record; compare the hashes and fields yourself. / Nous n'avons consulté aucun lien ni portail ; comparez vous-même les empreintes et les champs.\n\n== 1. Stated facts (quoted from your pasted text) ==\nBuyer: Fictitious Example Council (SYNTHETIC, not a real buyer)\nTitle: SYNTHETIC EXAMPLE, not a live opportunity: records software support\nScope (tender.description): Fictitious support and maintenance of a records management system (synthetic demonstration).\nStatus: active   Procedure: Open procedure (fictitious)   CPV: 72000000\nSubmission deadline (UTC): 2030-03-29 12:00 UTC (as published: 2030-03-29T12:00:00Z)\nValue / currency: tender: 100000 GBP\nSubmission route (verbatim): Fictitious example: there is no portal and no submission route.\nLots:\n  Lot 1: Fictitious lot. The initial contract term is 3 years.\n    durationInDays=730 startDate=2027-04-01T00:00:00Z maxExtentDate=None hasRenewal=False renewal='' hasOptions=None\n    Award weights: not stated\n\n== 2. Contradictions and checks ==\n  - lot 1: text says initial term 3 years; structured durationInDays=730 (-365 days vs 3x365). Minor; confirm in tender documents.\n\n== 3. Requirements stated in the pasted text (lexical match only: must, shall, may be excluded, is a requirement, are required, required to, mandatory) ==\n  - Suppliers must hold a recognised information security certification.\n\n== 4. Our recommendations (not buyer requirements) ==\n  - Confirm the deadline on the official notice and leave a buffer before it.\n  - Obtain the full tender pack through the submission route above before deciding.\n  - Check each stated requirement in section 3 against your own certificates and policies.\n  - Compare the award weights with your pricing position.\n  - Bid only if every unknown in section 5 is resolved in your favour.\n\n== 5. Unknowns ==\n  - tender documents (not provided, not read)\n  - clarification deadline (not in the pasted structured fields)\n  - your eligibility and portal registration requirements\n\n== Résumé en français ==\nAvis : SYNTHETIC-EXAMPLE-1 ; acheteur : Fictitious Example Council (SYNTHETIC, not a real buyer)\nDate limite (UTC) : 2030-03-29 12:00 UTC (as published: 2030-03-29T12:00:00Z)\nValeur : tender: 100000 GBP\nVoie de dépôt (citée) : Fictitious example: there is no portal and no submission route.\nContradictions signalées : 1 ; exigences citées (en anglais, section 3) : 1.\nRecommandations (les nôtres) : confirmer la date limite sur l'avis officiel ; obtenir le dossier complet par la voie de dépôt ; vérifier chaque exigence ; comparer les pondérations avec votre prix.\nInconnues : documents d'appel d'offres non fournis ni lus ; date limite de clarification ; votre admissibilité et inscription.\nAucune admissibilité n'est affirmée. / No eligibility is asserted.\n\n*** SYNTHETIC EXAMPLE: fictitious data, not a live opportunity; no eligibility or authenticity implied / EXEMPLE FICTIF : données inventées, pas un appel d'offres réel ; aucune admissibilité ni authenticité affirmée ***"
+}
