@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PARSER-PARITY-REFERRAL-REVIEW\", \"goal\": \"Only if no equivalent review mission already exists: in an eligible non-claude provider turn, independently review site:open-software-tenders at exact digest 30709cbbacecee6d9780eda2d799cd3de3ffbfb3191fb6a61ed69cc50a2b7e00 (dry_run TASK-179460360202). Inputs: products/sites/open-software-tenders/, products/distribution/parser-parity-referral/ (preview.diff, checks.json, baseline-preview.html). Expected: only preview.html changes (b359b3bffd0a3d36b89adf13b3c9d3f9d2fbaf06e75e6a232f5ff15850709d7b -> 36978b9ce93a3f516d2f66b163730fc8c9b7ee55f39d7886c267b660323aea49); index stays 88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1. Reproduce the digest; verify that removing the added section restores the baseline byte for byte; scripts, CSP, datalist, terms and AI disclosures unchanged; the added EN/FR wording is accurate about the destination (synthetic cases, documented runtime versions only) and makes no demand, compatibility or real-browser claim; the link target is the verified live parser-parity-review URL. Check whether the page CSP permits the outbound link as plain navigation. Save and read evidence under products/reviews/, record APPROVE or concrete NEEDS_WORK, close with a valid lease and a lesson. Do not edit or deploy. If approved, hand exact hashes to ACQUISITION; the Jan 8 retirement covers this section. An internal link establishes neither traffic, demand nor revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"RUNNING\", \"lease_token\": \"3OA5Pk_PVc9EtmJE6TyFAlMa0NKyNjrc\", \"lease_expires_at\": 1794616245.8812287, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179461260511",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-13T23:30:05Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "PARSER-PARITY-REFERRAL-REVIEW",
+      "agent_id": "AUDITOR",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1794612605",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179461260511",
+  "input_sha256": "be1fd978cb985d0a55049bc9daf3c7f0c1f41cde407942170424b01402bee58e"
+}
