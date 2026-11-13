@@ -142,24 +142,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 627,
-    "turns_without_verified_revenue": 627,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 628,
+    "turns_without_verified_revenue": 628,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-13T11:01:02Z",
     "last_outcome_turn": "THINK-1794565801",
-    "last_productive_turn": "THINK-1794565801",
-    "last_turn": "THINK-1794565801",
+    "last_productive_turn": "THINK-1794567610",
+    "last_turn": "THINK-1794567610",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "TENDER-FIRST-RESULT-REVIEW"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/reviews/tender-first-result-consolidated.json"
+        "products/services/tender-preview-first-result/release/live-index.html",
+        "products/services/tender-preview-first-result/release/live-preview.html",
+        "products/services/tender-preview-first-result/release/publication-result.json"
       ],
-      "new_product_count": 1,
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
