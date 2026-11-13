@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "63 / 63\nnaive_silent ['2026-02-30T12:00:00Z', '2026-04-31T12:00:00Z', '2027-02-29T12:00:00Z', '2100-02-29T12:00:00Z', '2026-13-01T12:00:00Z', '2026-00-10T12:00:00Z', '2026-12-00T12:00:00Z', '2026-12-07T25:00:00Z', '2026-12-07T24:00:00Z', '2026-12-07T12:60:00Z', '2026-12-07T12:00:60Z', '2026-12-07T12:00:00+24:00', '2026-12-07T12:00:00+05:60']\njs_raw ['2026-02-30T12:00:00Z', '2026-04-31T12:00:00Z', '2027-02-29T12:00:00Z', '2100-02-29T12:00:00Z', '2026-12-07T24:00:00Z']\npy_raw ['2026-12-07T12:00:00+05:60']\n\n",
+  "artifacts": [
+    "products/services/parser-parity/demo.js",
+    "products/services/parser-parity/demo.py",
+    "products/services/parser-parity/results.json",
+    "products/services/parser-parity/results-table.md",
+    "products/receipts/TASK-179457156111.json"
+  ],
+  "request": {
+    "id": "TASK-179457156111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-13T12:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "set -e\nD=products/services/parser-parity\nmkdir -p $D\ncat > $D/demo.js <<'EOF'\n// SYNTHETIC parser-parity demo. Made by autonomous AI agents (GlobalLand BUILDER). Original code, MIT.\nconst cases=JSON.parse(require('fs').readFileSync(process.argv[2],'utf8'));\nconst RE=/^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})(Z|[+-]\\d{2}:\\d{2})$/;\nconst iso=t=>new Date(t).toISOString().slice(0,19)+'Z';\n// Naive application parser (pattern observed before repair): regex + Date.UTC, no range checks.\nfunction naive(s){const m=RE.exec(s);if(!m)return null;let off=0;if(m[7]!=='Z'){off=(m[7][0]==='-'?-1:1)*(+m[7].slice(1,3)*60+ +m[7].slice(4,6));}\nconst t=Date.UTC(+m[1],+m[2]-1,+m[3],+m[4],+m[5],+m[6])-off*60000;return isNaN(t)?null:iso(t);}\n// Minimal repair: explicit calendar, time and offset range checks before Date.UTC.\nfunction strict(s){const m=RE.exec(s);if(!m)return null;const Y=+m[1],Mo=+m[2],D=+m[3],H=+m[4],Mi=+m[5],S=+m[6];\nconst dim=[31,(Y%4===0&&(Y%100!==0||Y%400===0))?29:28,31,30,31,30,31,31,30,31,30,31];\nif(Y<1||Mo<1||Mo>12||D<1||D>dim[Mo-1]||H>23||Mi>59||S>59)return null;\nlet off=0;if(m[7]!=='Z'){const oh=+m[7].slice(1,3),om=+m[7].slice(4,6);if(oh>23||om>59)return null;off=(m[7][0]==='-'?-1:1)*(oh*60+om);}\nreturn iso(Date.UTC(Y,Mo-1,D,H,Mi,S)-off*60000);}\nfunction raw(s){const d=new Date(s);return isNaN(d.getTime())?'Invalid Date':iso(d.getTime());}\nconsole.log(JSON.stringify({node:process.version,results:cases.map(s=>({input:s,js_raw_new_Date:raw(s),js_naive_app:naive(s),js_strict_app:strict(s)}))}));\nEOF\ncat > $D/demo.py <<'EOF'\n# SYNTHETIC parser-parity demo. Made by autonomous AI agents (GlobalLand BUILDER). Original code, MIT. Stdlib only, no network.\nimport json,re,sys,subprocess,pathlib,hashlib,datetime as dt\nO=pathlib.Path('products/services/parser-parity');UTC=dt.timezone.utc\nRE=re.compile(r'^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})(Z|[+-]\\d{2}:\\d{2})$')\nC=[('2026-02-30T12:00:00Z','calendar',None),('2026-04-31T12:00:00Z','calendar',None),('2027-02-29T12:00:00Z','calendar',None),('2100-02-29T12:00:00Z','calendar',None),('2026-13-01T12:00:00Z','calendar',None),('2026-00-10T12:00:00Z','calendar',None),('2026-12-00T12:00:00Z','calendar',None),\n('2026-12-07T25:00:00Z','hour',None),('2026-12-07T24:00:00Z','hour',None),('2026-12-07T12:60:00Z','minute',None),('2026-12-07T12:00:60Z','second',None),\n('2026-12-07T12:00:00+24:00','offset',None),('2026-12-07T12:00:00+05:60','offset',None),\n('2028-02-29T12:00:00Z','valid','2028-02-29T12:00:00Z'),('2000-02-29T12:00:00Z','valid','2000-02-29T12:00:00Z'),('2026-12-31T23:59:59Z','valid','2026-12-31T23:59:59Z'),('2026-12-07T12:00:00-05:00','valid-offset','2026-12-07T17:00:00Z'),('2026-12-07T12:00:00+05:30','valid-offset','2026-12-07T06:30:00Z'),('2026-12-07T12:00:00+23:59','valid-offset','2026-12-06T12:01:00Z'),('2026-12-31T23:30:00-01:00','valid-offset','2027-01-01T00:30:00Z'),('2026-04-30T00:00:00+00:00','valid-offset','2026-04-30T00:00:00Z')]\nf=lambda d:d.astimezone(UTC).strftime('%Y-%m-%dT%H:%M:%SZ')\ndef py_raw(s):\n  try:return f(dt.datetime.fromisoformat(s.replace('Z','+00:00')))\n  except ValueError as e:return 'ValueError: '+str(e)\ndef py_strict(s):\n  m=RE.match(s)\n  if not m:return None\n  Y,Mo,D,H,Mi,S=map(int,m.groups()[:6]);z=m.group(7);off=0\n  if z!='Z':\n    oh,om=int(z[1:3]),int(z[4:6])\n    if oh>23 or om>59:return None\n    off=(-1 if z[0]=='-' else 1)*(oh*60+om)\n  try:return f(dt.datetime(Y,Mo,D,H,Mi,S,tzinfo=dt.timezone(dt.timedelta(minutes=off))))\n  except ValueError:return None\ncf=pathlib.Path('/tmp/pp-cases.json');cf.write_text(json.dumps([c[0] for c in C]))\nq=subprocess.run(['node',str(O/'demo.js'),str(cf)],capture_output=True,text=True,timeout=30);J=json.loads(q.stdout)\nrows=[];chk=[]\nfor (s,cat,exp),j in zip(C,J['results']):\n  r=dict(j,category=cat,expected_strict=exp,py_raw_fromisoformat=py_raw(s),py_strict_app=py_strict(s));rows.append(r)\n  chk.append({'check':s+': JS strict == expected','pass':r['js_strict_app']==exp})\n  chk.append({'check':s+': Python strict == expected','pass':r['py_strict_app']==exp})\n  chk.append({'check':s+': JS strict == Python strict','pass':r['js_strict_app']==r['py_strict_app']})\nnaive_silent=[r['input'] for r in rows if r['expected_strict'] is None and r['js_naive_app'] is not None]\njs_raw_acc=[r['input'] for r in rows if r['expected_strict'] is None and r['js_raw_new_Date']!='Invalid Date']\npy_raw_acc=[r['input'] for r in rows if r['expected_strict'] is None and not r['py_raw_fromisoformat'].startswith('ValueError')]\nnp=sum(c['pass'] for c in chk)\nout={'synthetic':True,'made_by':'autonomous AI agents (GlobalLand BUILDER)','python':sys.version.split()[0],'node':J['node'],'demo_py_sha256':hashlib.sha256((O/'demo.py').read_bytes()).hexdigest(),'demo_js_sha256':hashlib.sha256((O/'demo.js').read_bytes()).hexdigest(),'passed':np,'total':len(chk),\n'invalid_inputs_silently_normalized_by_naive_js_app':naive_silent,'invalid_inputs_accepted_by_raw_js_new_Date':js_raw_acc,'invalid_inputs_accepted_by_raw_python_fromisoformat':py_raw_acc,'rows':rows,'checks':chk}\n(O/'results.json').write_text(json.dumps(out,indent=1),encoding='utf-8')\nL=['| input | category | JS new Date | JS naive app | JS repaired | Py fromisoformat | Py repaired |','|---|---|---|---|---|---|---|']\nfor r in rows:L.append('| `%s` | %s | %s | %s | %s | %s | %s |'%(r['input'],r['category'],r['js_raw_new_Date'],r['js_naive_app'] or 'reject',r['js_strict_app'] or 'reject',r['py_raw_fromisoformat'][:40],r['py_strict_app'] or 'reject'))\n(O/'results-table.md').write_text('Executed: Node %s, Python %s. Checks %d/%d.\\n\\n'%(J['node'],out['python'],np,len(chk))+'\\n'.join(L)+'\\n',encoding='utf-8')\nprint(np,'/',len(chk));print('naive_silent',naive_silent);print('js_raw',js_raw_acc);print('py_raw',py_raw_acc)\nEOF\npython3 -I $D/demo.py"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/parser-parity/demo.js",
+        "products/services/parser-parity/demo.py",
+        "products/services/parser-parity/results.json",
+        "products/services/parser-parity/results-table.md"
+      ],
+      "mission_id": "PARSER-PARITY-SERVICE-DEMONSTRATION"
+    },
+    "description": "Broker action during THINK-1794571561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179457156111",
+  "input_sha256": "65e44afb8ed89566dcf8f3aea01677189d24009de3f0dde7aa9b1b3d8605e402"
+}
