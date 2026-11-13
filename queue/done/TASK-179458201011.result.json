@@ -1,0 +1,53 @@
+{
+  "status": "DONE",
+  "output": "14 / 14\n{\"repo_rc0\": true, \"repo_63\": true, \"repo_results_63\": true, \"repo_results_hash_new\": true, \"visitor_abs_rc0\": true, \"visitor_abs_63\": true, \"visitor_cwd_rc0\": true, \"visitor_results_63\": true, \"visitor_results_hash_new\": true, \"visitor_table_written\": true, \"visitor_rows_equal_repo\": true, \"payloads_equal\": true, \"readme_old_hash_gone\": true, \"no_results_in_site\": true}\n{\"README.md\": \"f6a6e8d4f2da708ffea5ef0286f0f103de06c0848e57306fc56a442d1bcdfdfb\", \"demo.js\": \"f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257\", \"demo.py\": \"9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd\", \"index.html\": \"7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc\", \"results-table.md\": \"25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1\"}\n\n",
+  "artifacts": [
+    "products/services/parser-parity/demo.py",
+    "products/services/parser-parity/README.md",
+    "products/services/parser-parity/results.json",
+    "products/services/parser-parity/results-table.md",
+    "products/services/parser-parity/portability/change.diff",
+    "products/services/parser-parity/portability/result.json",
+    "products/sites/parser-parity-review/demo.py",
+    "products/sites/parser-parity-review/README.md",
+    "products/sites/parser-parity-review/results-table.md",
+    "products/sites/parser-parity-review/index.html",
+    "products/receipts/TASK-179458201011.json"
+  ],
+  "request": {
+    "id": "TASK-179458201011",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-13T15:00:10Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,subprocess,shutil,hashlib,json,difflib,os\nS=pathlib.Path('products/services/parser-parity');W=pathlib.Path('products/sites/parser-parity-review');P=S/'portability';P.mkdir(parents=True,exist_ok=True)\nh=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()\nold={n:(S/n).read_text() for n in ['demo.py','README.md']};old['index.html']=(W/'index.html').read_text()\noldpy=h(S/'demo.py')\nsrc=old['demo.py']\nA=[(\"import json,re,sys,subprocess,pathlib,hashlib,datetime as dt\\n\",\"# Usage: put demo.py and demo.js in one folder, run: python3 demo.py (needs python3 and node on PATH). Writes results.json and results-table.md next to this script.\\nimport json,re,sys,subprocess,pathlib,hashlib,tempfile,datetime as dt\\n\"),(\"O=pathlib.Path('products/services/parser-parity')\",\"O=pathlib.Path(__file__).resolve().parent\"),(\"cf=pathlib.Path('/tmp/pp-cases.json');\",\"cf=pathlib.Path(tempfile.mkdtemp())/'pp-cases.json';\"),(\"timeout=30);J=json.loads(q.stdout)\",\"timeout=30)\\nif q.returncode!=0:sys.exit('demo.js failed (is node on PATH?): '+q.stderr[-500:])\\nJ=json.loads(q.stdout)\")]\nfor a,b in A:\n  assert src.count(a)==1,a\n  src=src.replace(a,b)\n(S/'demo.py').write_text(src);shutil.copyfile(S/'demo.py',W/'demo.py')\nnewpy=h(S/'demo.py')\nrepo=subprocess.run(['python3',str(S/'demo.py')],capture_output=True,text=True)\nV=pathlib.Path('/tmp/visitor');V.mkdir()\nfor n in ['demo.py','demo.js']:shutil.copyfile(W/n,V/n)\nvis=subprocess.run(['python3',str(V/'demo.py')],capture_output=True,text=True,cwd='/')\nvisdir=subprocess.run(['python3','demo.py'],capture_output=True,text=True,cwd=str(V))\nvr=json.loads((V/'results.json').read_text());rr=json.loads((S/'results.json').read_text())\nrd=old['README.md'].replace(oldpy,newpy)\nU=\"## How to run\\nDownload demo.py and demo.js into one folder and run `python3 demo.py` (requires python3 and node on PATH; executed with Python 3.11.2 and Node v22.23.4, other versions may give different raw-runtime results). It writes results.json and results-table.md next to the script and prints the assertion count. demo.js is a helper called by demo.py: `node demo.js cases.json`, where cases.json is a JSON array of timestamp strings.\\n\\nExecution : placer demo.py et demo.js dans un meme dossier puis lancer `python3 demo.py` (python3 et node requis).\\n\\n\"\nk='## Three different layers';assert rd.count(k)==1;rd=rd.replace(k,U+k)\n(S/'README.md').write_text(rd);shutil.copyfile(S/'README.md',W/'README.md');shutil.copyfile(S/'results-table.md',W/'results-table.md')\nix=old['index.html'];k='<h2>Proposed service (hypothesis)</h2>';assert ix.count(k)==1\nix=ix.replace(k,'<p>To reproduce: put <code>demo.py</code> and <code>demo.js</code> in one folder and run <code>python3 demo.py</code> (python3 and node required; results above came from Python 3.11.2 and Node v22.23.4). It writes results.json and results-table.md next to the script. <code>demo.js</code> is a helper: <code>node demo.js cases.json</code> with a JSON array of strings.</p>\\n\\n'+k)\nk2='<p>Service propos&eacute;';assert ix.count(k2)==1\nix=ix.replace(k2,'<p>Reproduire : placer demo.py et demo.js dans un m&ecirc;me dossier puis lancer <code>python3 demo.py</code> (python3 et node requis).</p>\\n'+k2)\n(W/'index.html').write_text(ix)\nD=''\nfor n,p in [('demo.py',S/'demo.py'),('README.md',S/'README.md'),('index.html',W/'index.html')]:D+=''.join(difflib.unified_diff(old[n].splitlines(1),p.read_text().splitlines(1),'a/'+n,'b/'+n))\n(P/'change.diff').write_text(D)\nfiles={n:h(W/n) for n in sorted(os.listdir(W))}\nchecks={'repo_rc0':repo.returncode==0,'repo_63':repo.stdout.startswith('63 / 63'),'repo_results_63':rr['passed']==63 and rr['total']==63,'repo_results_hash_new':rr['demo_py_sha256']==newpy,'visitor_abs_rc0':vis.returncode==0,'visitor_abs_63':vis.stdout.startswith('63 / 63'),'visitor_cwd_rc0':visdir.returncode==0,'visitor_results_63':vr['passed']==63,'visitor_results_hash_new':vr['demo_py_sha256']==newpy,'visitor_table_written':(V/'results-table.md').exists(),'visitor_rows_equal_repo':vr['rows']==rr['rows'],'payloads_equal':all(h(S/n)==h(W/n) for n in ['README.md','results-table.md','demo.py','demo.js']),'readme_old_hash_gone':oldpy not in rd,'no_results_in_site':not (W/'results.json').exists()}\nout={'synthetic':True,'old_demo_py_sha256':oldpy,'new_demo_py_sha256':newpy,'checks':checks,'passed':sum(checks.values()),'total':len(checks),'repo_run':{'rc':repo.returncode,'stdout':repo.stdout,'stderr':repo.stderr[-800:]},'visitor_run_abs_path_cwd_root':{'rc':vis.returncode,'stdout':vis.stdout,'stderr':vis.stderr[-800:]},'visitor_run_cwd_folder':{'rc':visdir.returncode,'stdout':visdir.stdout[:60],'stderr':visdir.stderr[-800:]},'visitor_dir_listing':sorted(os.listdir(V)),'site_files_sha256':files}\n(P/'result.json').write_text(json.dumps(out,indent=1))\nprint(out['passed'],'/',out['total']);print(json.dumps(checks));print(json.dumps(files))"
+      ],
+      "inputs": [
+        "products/services/parser-parity/",
+        "products/sites/parser-parity-review/"
+      ],
+      "outputs": [
+        "products/services/parser-parity/demo.py",
+        "products/services/parser-parity/README.md",
+        "products/services/parser-parity/results.json",
+        "products/services/parser-parity/results-table.md",
+        "products/services/parser-parity/portability/change.diff",
+        "products/services/parser-parity/portability/result.json",
+        "products/sites/parser-parity-review/demo.py",
+        "products/sites/parser-parity-review/README.md",
+        "products/sites/parser-parity-review/results-table.md",
+        "products/sites/parser-parity-review/index.html"
+      ],
+      "mission_id": "PARSER-PARITY-DOWNLOAD-PORTABILITY"
+    },
+    "description": "Broker action during THINK-1794582010",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179458201011",
+  "input_sha256": "9e2390b96406e56c12a7b06bd96c05d97e795af1c0ade66c00c6c9d36c9fde0e"
+}

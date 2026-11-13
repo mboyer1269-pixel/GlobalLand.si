@@ -1,0 +1,51 @@
+{
+ "synthetic": true,
+ "old_demo_py_sha256": "a59a77e6f1aa90d431a600675153c566cd70045caaabd5e38d32e54a9be5bdd7",
+ "new_demo_py_sha256": "9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd",
+ "checks": {
+  "repo_rc0": true,
+  "repo_63": true,
+  "repo_results_63": true,
+  "repo_results_hash_new": true,
+  "visitor_abs_rc0": true,
+  "visitor_abs_63": true,
+  "visitor_cwd_rc0": true,
+  "visitor_results_63": true,
+  "visitor_results_hash_new": true,
+  "visitor_table_written": true,
+  "visitor_rows_equal_repo": true,
+  "payloads_equal": true,
+  "readme_old_hash_gone": true,
+  "no_results_in_site": true
+ },
+ "passed": 14,
+ "total": 14,
+ "repo_run": {
+  "rc": 0,
+  "stdout": "63 / 63\nnaive_silent ['2026-02-30T12:00:00Z', '2026-04-31T12:00:00Z', '2027-02-29T12:00:00Z', '2100-02-29T12:00:00Z', '2026-13-01T12:00:00Z', '2026-00-10T12:00:00Z', '2026-12-00T12:00:00Z', '2026-12-07T25:00:00Z', '2026-12-07T24:00:00Z', '2026-12-07T12:60:00Z', '2026-12-07T12:00:60Z', '2026-12-07T12:00:00+24:00', '2026-12-07T12:00:00+05:60']\njs_raw ['2026-02-30T12:00:00Z', '2026-04-31T12:00:00Z', '2027-02-29T12:00:00Z', '2100-02-29T12:00:00Z', '2026-12-07T24:00:00Z']\npy_raw ['2026-12-07T12:00:00+05:60']\n",
+  "stderr": ""
+ },
+ "visitor_run_abs_path_cwd_root": {
+  "rc": 0,
+  "stdout": "63 / 63\nnaive_silent ['2026-02-30T12:00:00Z', '2026-04-31T12:00:00Z', '2027-02-29T12:00:00Z', '2100-02-29T12:00:00Z', '2026-13-01T12:00:00Z', '2026-00-10T12:00:00Z', '2026-12-00T12:00:00Z', '2026-12-07T25:00:00Z', '2026-12-07T24:00:00Z', '2026-12-07T12:60:00Z', '2026-12-07T12:00:60Z', '2026-12-07T12:00:00+24:00', '2026-12-07T12:00:00+05:60']\njs_raw ['2026-02-30T12:00:00Z', '2026-04-31T12:00:00Z', '2027-02-29T12:00:00Z', '2100-02-29T12:00:00Z', '2026-12-07T24:00:00Z']\npy_raw ['2026-12-07T12:00:00+05:60']\n",
+  "stderr": ""
+ },
+ "visitor_run_cwd_folder": {
+  "rc": 0,
+  "stdout": "63 / 63\nnaive_silent ['2026-02-30T12:00:00Z', '2026-04-31T12",
+  "stderr": ""
+ },
+ "visitor_dir_listing": [
+  "demo.js",
+  "demo.py",
+  "results-table.md",
+  "results.json"
+ ],
+ "site_files_sha256": {
+  "README.md": "f6a6e8d4f2da708ffea5ef0286f0f103de06c0848e57306fc56a442d1bcdfdfb",
+  "demo.js": "f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257",
+  "demo.py": "9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd",
+  "index.html": "7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc",
+  "results-table.md": "25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1"
+ }
+}

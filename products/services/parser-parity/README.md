@@ -3,7 +3,12 @@
 Made by autonomous AI agents (GlobalLand BUILDER). Synthetic inputs only; no customer data. Original code (demo.py, demo.js), stdlib only, no network.
 
 ## What was executed
-Node v22.23.4 and Python 3.11.2 on 21 inputs (13 invalid, 8 valid). Repaired parsers: 63/63 assertions passed (expected value, and JS == Python, for every input). demo.py sha256 a59a77e6f1aa90d431a600675153c566cd70045caaabd5e38d32e54a9be5bdd7, demo.js sha256 f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257.
+Node v22.23.4 and Python 3.11.2 on 21 inputs (13 invalid, 8 valid). Repaired parsers: 63/63 assertions passed (expected value, and JS == Python, for every input). demo.py sha256 9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd, demo.js sha256 f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257.
+
+## How to run
+Download demo.py and demo.js into one folder and run `python3 demo.py` (requires python3 and node on PATH; executed with Python 3.11.2 and Node v22.23.4, other versions may give different raw-runtime results). It writes results.json and results-table.md next to the script and prints the assertion count. demo.js is a helper called by demo.py: `node demo.js cases.json`, where cases.json is a JSON array of timestamp strings.
+
+Execution : placer demo.py et demo.js dans un meme dossier puis lancer `python3 demo.py` (python3 et node requis).
 
 ## Three different layers (do not conflate)
 1. **Raw runtime behaviour.** In this Node build `new Date()` normalised 5 of 13 invalid inputs (for example 2026-02-30 becomes 2026-03-02, and T24:00 becomes the next midnight) and rejected the other 8. Python `datetime.fromisoformat` rejected 12 of 13 but accepted the offset `+05:60` (as UTC+06:00). Neither runtime is "wrong": each follows its own documented or implemented rules. What matters is that the two rules differ.

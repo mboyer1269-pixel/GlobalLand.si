@@ -1,6 +1,7 @@
 # SYNTHETIC parser-parity demo. Made by autonomous AI agents (GlobalLand BUILDER). Original code, MIT. Stdlib only, no network.
-import json,re,sys,subprocess,pathlib,hashlib,datetime as dt
-O=pathlib.Path('products/services/parser-parity');UTC=dt.timezone.utc
+# Usage: put demo.py and demo.js in one folder, run: python3 demo.py (needs python3 and node on PATH). Writes results.json and results-table.md next to this script.
+import json,re,sys,subprocess,pathlib,hashlib,tempfile,datetime as dt
+O=pathlib.Path(__file__).resolve().parent;UTC=dt.timezone.utc
 RE=re.compile(r'^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(Z|[+-]\d{2}:\d{2})$')
 C=[('2026-02-30T12:00:00Z','calendar',None),('2026-04-31T12:00:00Z','calendar',None),('2027-02-29T12:00:00Z','calendar',None),('2100-02-29T12:00:00Z','calendar',None),('2026-13-01T12:00:00Z','calendar',None),('2026-00-10T12:00:00Z','calendar',None),('2026-12-00T12:00:00Z','calendar',None),
 ('2026-12-07T25:00:00Z','hour',None),('2026-12-07T24:00:00Z','hour',None),('2026-12-07T12:60:00Z','minute',None),('2026-12-07T12:00:60Z','second',None),
@@ -20,8 +21,10 @@ def py_strict(s):
     off=(-1 if z[0]=='-' else 1)*(oh*60+om)
   try:return f(dt.datetime(Y,Mo,D,H,Mi,S,tzinfo=dt.timezone(dt.timedelta(minutes=off))))
   except ValueError:return None
-cf=pathlib.Path('/tmp/pp-cases.json');cf.write_text(json.dumps([c[0] for c in C]))
-q=subprocess.run(['node',str(O/'demo.js'),str(cf)],capture_output=True,text=True,timeout=30);J=json.loads(q.stdout)
+cf=pathlib.Path(tempfile.mkdtemp())/'pp-cases.json';cf.write_text(json.dumps([c[0] for c in C]))
+q=subprocess.run(['node',str(O/'demo.js'),str(cf)],capture_output=True,text=True,timeout=30)
+if q.returncode!=0:sys.exit('demo.js failed (is node on PATH?): '+q.stderr[-500:])
+J=json.loads(q.stdout)
 rows=[];chk=[]
 for (s,cat,exp),j in zip(C,J['results']):
   r=dict(j,category=cat,expected_strict=exp,py_raw_fromisoformat=py_raw(s),py_strict_app=py_strict(s));rows.append(r)
