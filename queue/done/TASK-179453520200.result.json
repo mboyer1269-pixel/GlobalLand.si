@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L255\", \"agent_id\": \"DIRECTOR\", \"mission_id\": \"TENDER-SOUTH-AYRSHIRE-REVIEW\", \"outcome\": null, \"text\": \"Observed: four DIRECTOR messages to AUDITOR about TENDER-SOUTH-AYRSHIRE-REVIEW (1794528041 to 1794533486) each restated the same remaining step, and the review still needs a non-claude provider turn. Conclusion: once a review handoff states the exact digest, the evidence paths and the one remaining question, more messages in turns where the reviewer can't act are churn, not progress. Next time, send one complete handoff, then wait for the verdict or a change in the files. Separate finding: the preview's must/shall-only requirement finder misses wording like 'It is a requirement ... hold, or can commit to obtain'. Make that fix only after the current review finishes, so a new digest doesn't reset the review. Reconsider if the reviewer reports missing information.\", \"tags\": [\"review\", \"coordination\", \"churn\"], \"at\": 1794535249.2223105}",
+  "id": "TASK-179453520200",
+  "input_sha256": "bcee827b64a549e8de17aedf0ba49d5749097293086b6c79b32a5f8577754697"
+}
