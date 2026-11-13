@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"digest\": \"9f1a463fa8f980487299b1f015a582ce8806ee0d86ebfd7909702268882c4ab8\",\n  \"digest_receipt\": \"TASK-179454960102\",\n  \"preview_sha256\": \"44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681\",\n  \"core_embedded\": true,\n  \"independent_execution\": {\n    \"parity\": \"33/33\",\n    \"UI_Node_stub\": \"15/15\",\n    \"deadline\": \"40/40\"\n  },\n  \"additional_saved_checks\": {\n    \"fixture-test-results.json\": {\n      \"passed\": 9,\n      \"total\": 9,\n      \"failures\": []\n    },\n    \"hash-test-results.json\": {\n      \"passed\": 71,\n      \"total\": 72,\n      \"failures\": [\n        {\n          \"check\": \"removing the two sentences restores baseline bytes\",\n          \"pass\": false,\n          \"detail\": \"\"\n        }\n      ]\n    }\n  },\n  \"assessment\": \"APPROVE scoped lexical extraction. Negated wording is extracted verbatim; this is not semantic obligation detection. JavaScript ASCII word boundaries match emust accented boundary examples where Python Unicode boundaries do not. Lexical-only heading and no-match disclaimer limit claims; no universal parity claimed. Historical 71/72 failure compares against obsolete homepage baseline, not this minimal preview change. Real browser and customer use untested. No demand or revenue established.\",\n  \"expiry\": \"Preserve Dec4 welfare, Dec7 North Ayrshire including datalist, Dec18 South Ayrshire including datalist, Jan8 whole site.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/tender-wording-final.json",
+    "products/receipts/TASK-179455302112.json"
+  ],
+  "request": {
+    "id": "TASK-179455302112",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-13T06:57:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib,hashlib\nb=pathlib.Path('products/services/tender-requirement-wording'); checks={}\nfor name in ['fixture-test-results.json','hash-test-results.json']:\n d=json.loads((b/name).read_text()); checks[name]={'passed':d.get('passed'),'total':d.get('total'),'failures':[c for c in d.get('checks',[]) if not c.get('pass')]}\np=pathlib.Path('products/sites/open-software-tenders/preview.html'); h=hashlib.sha256(p.read_bytes()).hexdigest(); assert h=='44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681'\ns=p.read_text(); core=pathlib.Path('products/services/tender-instant-preview/src/core.js').read_text(); assert core in s\nout={'digest':'9f1a463fa8f980487299b1f015a582ce8806ee0d86ebfd7909702268882c4ab8','digest_receipt':'TASK-179454960102','preview_sha256':h,'core_embedded':True,'independent_execution':{'parity':'33/33','UI_Node_stub':'15/15','deadline':'40/40'},'additional_saved_checks':checks,'assessment':'APPROVE scoped lexical extraction. Negated wording is extracted verbatim; this is not semantic obligation detection. JavaScript ASCII word boundaries match emust accented boundary examples where Python Unicode boundaries do not. Lexical-only heading and no-match disclaimer limit claims; no universal parity claimed. Historical 71/72 failure compares against obsolete homepage baseline, not this minimal preview change. Real browser and customer use untested. No demand or revenue established.','expiry':'Preserve Dec4 welfare, Dec7 North Ayrshire including datalist, Dec18 South Ayrshire including datalist, Jan8 whole site.'}\nf=pathlib.Path('products/reviews/tender-wording-final.json'); f.parent.mkdir(parents=True,exist_ok=True); f.write_text(json.dumps(out,ensure_ascii=False,indent=2)); print(f.read_text())"
+      ],
+      "inputs": [
+        "products/services/tender-requirement-wording/",
+        "products/sites/open-software-tenders/",
+        "products/services/tender-instant-preview/src/core.js"
+      ],
+      "outputs": [
+        "products/reviews/tender-wording-final.json"
+      ],
+      "mission_id": "TENDER-REQUIREMENT-WORDING-REVIEW"
+    },
+    "description": "Broker action during THINK-1794553021",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179455302112",
+  "input_sha256": "a1e164536369c9290ef49d4dc3abed81d9c315a82fa4ad233b722205f13ed57f"
+}

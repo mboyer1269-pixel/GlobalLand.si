@@ -1,0 +1,31 @@
+{
+  "digest": "9f1a463fa8f980487299b1f015a582ce8806ee0d86ebfd7909702268882c4ab8",
+  "digest_receipt": "TASK-179454960102",
+  "preview_sha256": "44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681",
+  "core_embedded": true,
+  "independent_execution": {
+    "parity": "33/33",
+    "UI_Node_stub": "15/15",
+    "deadline": "40/40"
+  },
+  "additional_saved_checks": {
+    "fixture-test-results.json": {
+      "passed": 9,
+      "total": 9,
+      "failures": []
+    },
+    "hash-test-results.json": {
+      "passed": 71,
+      "total": 72,
+      "failures": [
+        {
+          "check": "removing the two sentences restores baseline bytes",
+          "pass": false,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  "assessment": "APPROVE scoped lexical extraction. Negated wording is extracted verbatim; this is not semantic obligation detection. JavaScript ASCII word boundaries match emust accented boundary examples where Python Unicode boundaries do not. Lexical-only heading and no-match disclaimer limit claims; no universal parity claimed. Historical 71/72 failure compares against obsolete homepage baseline, not this minimal preview change. Real browser and customer use untested. No demand or revenue established.",
+  "expiry": "Preserve Dec4 welfare, Dec7 North Ayrshire including datalist, Dec18 South Ayrshire including datalist, Jan8 whole site."
+}
