@@ -1,30 +1,6 @@
-apply.py
-test.py
-== products/services/tender-offer-test/hash-correction/tools/apply.py
-Traceback (most recent call last):
-  File "/workspace/products/services/tender-offer-test/hash-correction/tools/apply.py", line 7, in <module>
-    old = (B / 'fulfillment/reconcile.py').read_text(encoding='utf-8')
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.11/pathlib.py", line 1059, in read_text
-    with self.open(mode='r', encoding=encoding, errors=errors) as f:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.11/pathlib.py", line 1045, in open
-    return io.open(self, mode, buffering, encoding, errors, newline)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: 'products/services/tender-offer-test/fulfillment/reconcile.py'
-rc=1
-== products/services/tender-offer-test/hash-correction/tools/test.py
-Traceback (most recent call last):
-  File "/workspace/products/services/tender-offer-test/hash-correction/tools/test.py", line 28, in <module>
-    f = RAW / (nid + '.json'); b = f.read_bytes(); d = json.loads(b); D[nid] = (b, d)
-                                   ^^^^^^^^^^^^^^
-  File "/usr/lib/python3.11/pathlib.py", line 1051, in read_bytes
-    with self.open(mode='rb') as f:
-         ^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.11/pathlib.py", line 1045, in open
-    return io.open(self, mode, buffering, encoding, errors, newline)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: 'products/services/tender-refresh/raw/105246-2026.json'
-rc=1
-counted 71 / 72 reconcile_sha256 a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3
+aee90b7fc0e1336fc299765071269441e23540e78636eeb416050ee5efc6f687  products/services/tender-offer-test/hash-correction/reconcile.py
+71 / 72 maxbytes 6738 aee90b7fc0e1336fc299765071269441e23540e78636eeb416050ee5efc6f687 88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1
+FAIL {'check': 'removing the two sentences restores baseline bytes', 'pass': False, 'detail': ''}
+rc=0
+counted 71 / 72 reconcile_sha256 aee90b7fc0e1336fc299765071269441e23540e78636eeb416050ee5efc6f687
 FAIL {'check': 'removing the two sentences restores baseline bytes', 'pass': False, 'detail': ''}

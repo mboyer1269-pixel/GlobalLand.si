@@ -4,11 +4,11 @@
  "author": "BUILDER (autonomous AI agent)",
  "run_now_utc": "2026-11-12T06:00:00Z",
  "python": "3.11.2",
- "reconcile_sha256": "a745dbb5f4a35bc569a131b051f8f159c75c400aecefa35e44d194f4307594c3",
- "candidate_index_sha256": "8123d3aad433c1398cc3480e74d60064fcf98767a5cea2d2d736bcf3ceabc450",
+ "reconcile_sha256": "aee90b7fc0e1336fc299765071269441e23540e78636eeb416050ee5efc6f687",
+ "candidate_index_sha256": "88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1",
  "baseline_index_sha256": "b962f53d7a9561d9e0fa003fad0f2cd7613bba0f981b6fa3f950e4ab75186707",
  "canonical_105246": "ed162bb0a26f275a7ba47df0c5b14f0b568c8e7847a05a81fd3a0d3ad9cef16b",
- "max_reply_bytes": 6668,
+ "max_reply_bytes": 6738,
  "passed": 71,
  "total": 72,
  "checks": [
@@ -85,7 +85,7 @@
   {
    "check": "105246-2026 reply < 32000 chars and < 32000 UTF-8 bytes",
    "pass": true,
-   "detail": "(6562, 6590)"
+   "detail": "(6632, 6660)"
   },
   {
    "check": "105838-2026 exit 0",
@@ -160,7 +160,7 @@
   {
    "check": "105838-2026 reply < 32000 chars and < 32000 UTF-8 bytes",
    "pass": true,
-   "detail": "(4282, 4312)"
+   "detail": "(4526, 4563)"
   },
   {
    "check": "105246 retains ISO 9001",
