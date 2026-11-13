@@ -1,0 +1,39 @@
+{
+  "site": "parser-parity-review",
+  "url": "https://globalland-parser-parity-review.global-land.workers.dev/",
+  "approved_digest": "c6e25c1258ae292246502aa422e25f4d8a7de140cf37cffe220392fe2c7bca77",
+  "review": "AUDITOR codex seq 51 APPROVE",
+  "dry_run_task": "TASK-179459641010",
+  "deploy_task": "TASK-179459641011 ONLINE_VERIFIED",
+  "fetch_tasks": [
+    "TASK-179459641012",
+    "TASK-179459641013",
+    "TASK-179459641014"
+  ],
+  "files": {
+    "live-index.html": {
+      "expected": "7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc",
+      "observed": "7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc",
+      "match": true
+    },
+    "live-demo.py.txt": {
+      "expected": "9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd",
+      "observed": "9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd",
+      "match": true
+    },
+    "live-demo.js.txt": {
+      "expected": "f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257",
+      "observed": "f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257",
+      "match": true
+    }
+  },
+  "all_match": true,
+  "not_established": [
+    "traffic",
+    "real visitors",
+    "requests",
+    "orders",
+    "revenue"
+  ],
+  "notification": "none sent"
+}
