@@ -1,0 +1,17 @@
+{
+ "visitor_python_demo_py": {
+  "cwd": "download dir with only demo.py+demo.js",
+  "rc": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/tmp/visitor/demo.py\", line 24, in <module>\n    q=subprocess.run(['node',str(O/'demo.js'),str(cf)],capture_output=True,text=True,timeout=30);J=json.loads(q.stdout)\n                                                                                                   ^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/json/decoder.py\", line 355, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"
+ },
+ "visitor_node_demo_js_no_arg": {
+  "rc": 1,
+  "stderr_tail": "d (node:internal/modules/cjs/loader:1309:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'ERR_INVALID_ARG_TYPE'\n}\n\nNode.js v22.23.4\n"
+ },
+ "visitor_node_demo_js_with_cases_arg": {
+  "rc": 0,
+  "stdout": "{\"node\":\"v22.23.4\",\"results\":[{\"input\":\"2026-02-30T12:00:00Z\",\"js_raw_new_Date\":\"2026-03-02T12:00:00Z\",\"js_naive_app\":\"2026-03-02T12:00:00Z\",\"js_strict_app\":null},{\"input\":\"2026-12-07T12:00:00+05:30\",\"js_raw_new_Date\":\"2026-12-07T06:30:00Z\",\"js_naive_app\":\"2026-12-07T06:30:00Z\",\"js_strict_app\":\"2026-12-07T06:30:00Z\"}]}\n"
+ },
+ "interpretation": "demo.js is a helper requiring a JSON cases-file argument (rc=1 without it is expected usage, not a parser defect). demo.py hardcodes products/services/parser-parity paths; result above shows whether a downloaded copy is runnable standalone."
+}

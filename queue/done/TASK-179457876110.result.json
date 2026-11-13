@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n \"visitor_python_demo_py\": {\n  \"cwd\": \"download dir with only demo.py+demo.js\",\n  \"rc\": 1,\n  \"stdout\": \"\",\n  \"stderr\": \"Traceback (most recent call last):\\n  File \\\"/tmp/visitor/demo.py\\\", line 24, in <module>\\n    q=subprocess.run(['node',str(O/'demo.js'),str(cf)],capture_output=True,text=True,timeout=30);J=json.loads(q.stdout)\\n                                                                                                   ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/lib/python3.11/json/__init__.py\\\", line 346, in loads\\n    return _default_decoder.decode(s)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/lib/python3.11/json/decoder.py\\\", line 337, in decode\\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/lib/python3.11/json/decoder.py\\\", line 355, in raw_decode\\n    raise JSONDecodeError(\\\"Expecting value\\\", s, err.value) from None\\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\\n\"\n },\n \"visitor_node_demo_js_no_arg\": {\n  \"rc\": 1,\n  \"stderr_tail\": \"d (node:internal/modules/cjs/loader:1309:12)\\n    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)\\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\\n    at node:internal/main/run_main_module:36:49 {\\n  code: 'ERR_INVALID_ARG_TYPE'\\n}\\n\\nNode.js v22.23.4\\n\"\n },\n \"visitor_node_demo_js_with_cases_arg\": {\n  \"rc\": 0,\n  \"stdout\": \"{\\\"node\\\":\\\"v22.23.4\\\",\\\"results\\\":[{\\\"input\\\":\\\"2026-02-30T12:00:00Z\\\",\\\"js_raw_new_Date\\\":\\\"2026-03-02T12:00:00Z\\\",\\\"js_naive_app\\\":\\\"2026-03-02T12:00:00Z\\\",\\\"js_strict_app\\\":null},{\\\"input\\\":\\\"2026-12-07T12:00:00+05:30\\\",\\\"js_raw_new_Date\\\":\\\"2026-12-07T06:30:00Z\\\",\\\"js_naive_app\\\":\\\"2026-12-07T06:30:00Z\\\",\\\"js_strict_app\\\":\\\"2026-12-07T06:30:00Z\\\"}]}\\n\"\n },\n \"interpretation\": \"demo.js is a helper requiring a JSON cases-file argument (rc=1 without it is expected usage, not a parser defect). demo.py hardcodes products/services/parser-parity paths; result above shows whether a downloaded copy is runnable standalone.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/parser-parity-visitor-portability.json",
+    "products/receipts/TASK-179457876110.json"
+  ],
+  "request": {
+    "id": "TASK-179457876110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-13T14:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import subprocess,shutil,pathlib,json,os\nsrc=pathlib.Path('products/sites/parser-parity-review')\nd=pathlib.Path('/tmp/visitor');d.mkdir()\nfor n in ['demo.py','demo.js']: shutil.copy(src/n,d/n)\nres={}\nr=subprocess.run(['python3','demo.py'],cwd=d,capture_output=True,text=True,timeout=60)\nres['visitor_python_demo_py']={'cwd':'download dir with only demo.py+demo.js','rc':r.returncode,'stdout':r.stdout[-600:],'stderr':r.stderr[-900:]}\nr=subprocess.run(['node','demo.js'],cwd=d,capture_output=True,text=True,timeout=60)\nres['visitor_node_demo_js_no_arg']={'rc':r.returncode,'stderr_tail':r.stderr[-300:]}\npathlib.Path('/tmp/c.json').write_text(json.dumps(['2026-02-30T12:00:00Z','2026-12-07T12:00:00+05:30']))\nr=subprocess.run(['node','demo.js','/tmp/c.json'],cwd=d,capture_output=True,text=True,timeout=60)\nres['visitor_node_demo_js_with_cases_arg']={'rc':r.returncode,'stdout':r.stdout[:600]}\nres['interpretation']='demo.js is a helper requiring a JSON cases-file argument (rc=1 without it is expected usage, not a parser defect). demo.py hardcodes products/services/parser-parity paths; result above shows whether a downloaded copy is runnable standalone.'\nout=pathlib.Path('products/reviews/parser-parity-visitor-portability.json');out.parent.mkdir(parents=True,exist_ok=True)\nout.write_text(json.dumps(res,indent=1))\nprint(json.dumps(res,indent=1))"
+      ],
+      "inputs": [
+        "products/sites/parser-parity-review/"
+      ],
+      "outputs": [
+        "products/reviews/parser-parity-visitor-portability.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794578761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179457876110",
+  "input_sha256": "52d920ed9a09680f01b7a9676ddff65a37a768340364d4565b38aa599f63106e"
+}
