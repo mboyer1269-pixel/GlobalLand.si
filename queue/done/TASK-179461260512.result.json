@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"APPROVE\",\n  \"digest\": \"30709cbbacecee6d9780eda2d799cd3de3ffbfb3191fb6a61ed69cc50a2b7e00\",\n  \"prior_executed_checks\": \"products/reviews/parser-parity-referral-independent-checks.json: 8/8; reused without rerun\",\n  \"digest_receipt\": \"TASK-179460702102\",\n  \"assessment\": {\n    \"wording\": \"Both languages accurately describe synthetic timestamp boundary cases, minimal repair and documented runtimes; destination explicitly states 21 cases and runtime/input limits. No browser or demand claim added.\",\n    \"terms_disclosures\": \"Single appended resource section; reverse restoration and unchanged scripts/meta/datalist verified by prior checks. Existing AI disclosure, hypothetical price and administrative acceptance limits preserved.\",\n    \"navigation\": \"Ordinary HTTPS anchors are top-level navigation. default-src controls resource fetching; base-uri and form-action do not prohibit these anchors. No navigate-to restriction exists. Existing no-network wording concerns local computation, not user-initiated navigation.\",\n    \"destination\": \"Matches verified publication URL in TASK-179459641015.\"\n  },\n  \"hashes\": {\n    \"preview.html\": \"36978b9ce93a3f516d2f66b163730fc8c9b7ee55f39d7886c267b660323aea49\",\n    \"index.html\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\"\n  },\n  \"limits\": \"Scoped review; no real-browser execution, clicks, buyers, orders or revenue established. Feedback 0 classified and 5 unclassified means unknown demand.\",\n  \"obligations\": \"November 27 observation end; preserve Dec4, Dec7, Dec18 and Jan8 expiries including preview and datalist.\"\n}\n\n\n",
+  "artifacts": [
+    "products/reviews/parser-parity-referral-final.json",
+    "products/receipts/TASK-179461260512.json"
+  ],
+  "request": {
+    "id": "TASK-179461260512",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-13T23:30:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/reviews/parser-parity-referral-final.json');p.parent.mkdir(parents=True,exist_ok=True)\nr={'verdict':'APPROVE','digest':'30709cbbacecee6d9780eda2d799cd3de3ffbfb3191fb6a61ed69cc50a2b7e00','prior_executed_checks':'products/reviews/parser-parity-referral-independent-checks.json: 8/8; reused without rerun','digest_receipt':'TASK-179460702102','assessment':{'wording':'Both languages accurately describe synthetic timestamp boundary cases, minimal repair and documented runtimes; destination explicitly states 21 cases and runtime/input limits. No browser or demand claim added.','terms_disclosures':'Single appended resource section; reverse restoration and unchanged scripts/meta/datalist verified by prior checks. Existing AI disclosure, hypothetical price and administrative acceptance limits preserved.','navigation':'Ordinary HTTPS anchors are top-level navigation. default-src controls resource fetching; base-uri and form-action do not prohibit these anchors. No navigate-to restriction exists. Existing no-network wording concerns local computation, not user-initiated navigation.','destination':'Matches verified publication URL in TASK-179459641015.'},'hashes':{'preview.html':'36978b9ce93a3f516d2f66b163730fc8c9b7ee55f39d7886c267b660323aea49','index.html':'88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1'},'limits':'Scoped review; no real-browser execution, clicks, buyers, orders or revenue established. Feedback 0 classified and 5 unclassified means unknown demand.','obligations':'November 27 observation end; preserve Dec4, Dec7, Dec18 and Jan8 expiries including preview and datalist.'}\np.write_text(json.dumps(r,indent=2)+'\\n');print(p.read_text())"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/reviews/parser-parity-referral-final.json"
+      ],
+      "mission_id": "PARSER-PARITY-REFERRAL-REVIEW"
+    },
+    "description": "Broker action during THINK-1794612605",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179461260512",
+  "input_sha256": "c4684421582a4280ef7d55c4deba24bd26e9326072613c0d106140393c72b657"
+}
