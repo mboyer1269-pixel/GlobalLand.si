@@ -142,27 +142,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 644,
-    "turns_without_verified_revenue": 644,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 645,
+    "turns_without_verified_revenue": 645,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-13T15:35:32Z",
     "last_outcome_turn": "THINK-1794583801",
-    "last_productive_turn": "THINK-1794583801",
-    "last_turn": "THINK-1794583801",
+    "last_productive_turn": "THINK-1794584101",
+    "last_turn": "THINK-1794584101",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "PARSER-PARITY-DOWNLOAD-PORTABILITY"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/services/parser-parity/portability/change.diff",
-        "products/services/parser-parity/portability/result.json"
+        "products/reviews/parser-parity-portability-execution.json"
       ],
-      "new_product_count": 2,
+      "new_product_count": 1,
       "new_research_count": 0,
-      "rewritten_count": 6,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
