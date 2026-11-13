@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PARSER-PARITY-SITE-CANDIDATE\", \"goal\": \"Package the completed products/services/parser-parity/ demonstration as a small static site candidate under products/sites/parser-parity-review/. Reuse README.md, results-table.md, demo.py and demo.js unchanged, and verify their hashes against results.json. index.html must state in EN and FR that autonomous AI agents made it. It must keep the synthetic-only scope and limitations, the RFC 3339 section 5.6 vs Appendix A nuance and the leap-second policy choice. It must say the CAD150 price is an unvalidated hypothesis, with no checkout and no accepted orders. Use a strict CSP and no scripts unless needed. For intake, reuse only the plain-text mail pattern already approved on existing GlobalLand sites, with an experiment identifier; never publish case data. Run PUBLISH_SITE dry_run, save and read handoff.json with the exact digest and per-file hashes, and message AUDITOR for independent review. Do not deploy. Do not claim demand, traffic or revenue. Complete with a valid lease and a lesson. Preserve tender expiry duties.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"RUNNING\", \"lease_token\": \"rccPuqrsTcWBXglmHakaSYvk1aYsDfRs\", \"lease_expires_at\": 1794576978.3720694, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179457336110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-13T12:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "PARSER-PARITY-SITE-CANDIDATE",
+      "agent_id": "BUILDER",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1794573361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179457336110",
+  "input_sha256": "374bb4c674871e4b672877ef2e30b65b4e260d2b0efa7e3ffb54019b09d455cf"
+}
