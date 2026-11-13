@@ -1,0 +1,130 @@
+{
+ "mission": "PARSER-PARITY-SITE-CANDIDATE",
+ "site": "parser-parity-review",
+ "dry_run_task": "TASK-179457336113",
+ "review_digest": "465e390a16e262ba46ba88deaf1bce8bd172a4ee0418962bccfb09861cc74c13",
+ "host_reported": {
+  "files": 5,
+  "bytes": 22757,
+  "index_sha256": "b5086301fbaa9ff062b1a75d7ae986e23b7b224dae6b8dacb15b2b3c45b2159c"
+ },
+ "files": {
+  "README.md": {
+   "sha256": "ba41e37f595951c4288b8581704379780c17a2cc66ae872d0eb755968b9739af",
+   "bytes": 8387
+  },
+  "demo.js": {
+   "sha256": "f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257",
+   "bytes": 1449
+  },
+  "demo.py": {
+   "sha256": "a59a77e6f1aa90d431a600675153c566cd70045caaabd5e38d32e54a9be5bdd7",
+   "bytes": 4196
+  },
+  "index.html": {
+   "sha256": "b5086301fbaa9ff062b1a75d7ae986e23b7b224dae6b8dacb15b2b3c45b2159c",
+   "bytes": 5525
+  },
+  "results-table.md": {
+   "sha256": "25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1",
+   "bytes": 3201
+  }
+ },
+ "raw_total_bytes": 22758,
+ "checks": [
+  {
+   "check": "payload equals source README.md",
+   "pass": true
+  },
+  {
+   "check": "payload equals source results-table.md",
+   "pass": true
+  },
+  {
+   "check": "payload equals source demo.py",
+   "pass": true
+  },
+  {
+   "check": "payload equals source demo.js",
+   "pass": true
+  },
+  {
+   "check": "demo.py sha256 recorded in results.json",
+   "pass": true
+  },
+  {
+   "check": "demo.js sha256 recorded in results.json",
+   "pass": true
+  },
+  {
+   "check": "all local links resolve",
+   "pass": true,
+   "links": [
+    "README.md",
+    "results-table.md",
+    "demo.py",
+    "demo.js"
+   ]
+  },
+  {
+   "check": "no external http links",
+   "pass": true
+  },
+  {
+   "check": "no script tags",
+   "pass": true
+  },
+  {
+   "check": "strict CSP default-src none",
+   "pass": true
+  },
+  {
+   "check": "single mailto with experiment id",
+   "pass": true
+  },
+  {
+   "check": "index contains: autonomous AI agents",
+   "pass": true
+  },
+  {
+   "check": "index contains: agents IA autonomes",
+   "pass": true
+  },
+  {
+   "check": "index contains: unvalidated price hypothesis",
+   "pass": true
+  },
+  {
+   "check": "index contains: hypoth&egrave;se non valid&eacute;e",
+   "pass": true
+  },
+  {
+   "check": "index contains: no checkout",
+   "pass": true
+  },
+  {
+   "check": "index contains: No demand has been observed",
+   "pass": true
+  },
+  {
+   "check": "index contains: 00-24",
+   "pass": true
+  },
+  {
+   "check": "index contains: section 5.6",
+   "pass": true
+  },
+  {
+   "check": "index contains: leap seconds",
+   "pass": true
+  },
+  {
+   "check": "index contains: Synthetic inputs only",
+   "pass": true
+  }
+ ],
+ "passed": 21,
+ "total": 21,
+ "limitations": "Static page, no browser rendering test. Host byte total differs by 1 from raw sum, as previously seen; semantics unknown. Availability only; no demand, orders or revenue.",
+ "status": "not deployed; awaiting independent review"
+}

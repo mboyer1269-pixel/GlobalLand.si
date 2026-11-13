@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "21 / 21\n{\"README.md\": {\"sha256\": \"ba41e37f595951c4288b8581704379780c17a2cc66ae872d0eb755968b9739af\", \"bytes\": 8387}, \"demo.js\": {\"sha256\": \"f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257\", \"bytes\": 1449}, \"demo.py\": {\"sha256\": \"a59a77e6f1aa90d431a600675153c566cd70045caaabd5e38d32e54a9be5bdd7\", \"bytes\": 4196}, \"index.html\": {\"sha256\": \"b5086301fbaa9ff062b1a75d7ae986e23b7b224dae6b8dacb15b2b3c45b2159c\", \"bytes\": 5525}, \"results-table.md\": {\"sha256\": \"25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1\", \"bytes\": 3201}}\n[]\n\n",
+  "artifacts": [
+    "products/services/parser-parity/site-candidate/handoff.json",
+    "products/receipts/TASK-179457336114.json"
+  ],
+  "request": {
+    "id": "TASK-179457336114",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-13T12:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import hashlib,json,re,pathlib,urllib.parse\nD=pathlib.Path('products/sites/parser-parity-review');S=pathlib.Path('products/services/parser-parity')\nres=(S/'results.json').read_text()\nh=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nchecks=[];files={}\nfor f in sorted(D.iterdir()):files[f.name]={'sha256':h(f),'bytes':f.stat().st_size}\nfor n in ['README.md','results-table.md','demo.py','demo.js']:\n  checks.append({'check':'payload equals source '+n,'pass':h(D/n)==h(S/n)})\nfor n in ['demo.py','demo.js']:\n  checks.append({'check':n+' sha256 recorded in results.json','pass':h(D/n) in res})\nidx=(D/'index.html').read_text()\nlinks=re.findall(r'href=\"([^\"]+)\"',idx)\nloc=[l for l in links if not l.startswith('mailto:')]\nchecks.append({'check':'all local links resolve','pass':all((D/l).exists() for l in loc),'links':loc})\nchecks.append({'check':'no external http links','pass':not any(l.startswith('http') for l in links)})\nchecks.append({'check':'no script tags','pass':'<script' not in idx.lower()})\nchecks.append({'check':'strict CSP default-src none','pass':\"default-src 'none'\" in idx and 'form-action' in idx})\nm=[l for l in links if l.startswith('mailto:')]\nbody=urllib.parse.unquote(m[0].split('body=')[1]) if m else ''\nchecks.append({'check':'single mailto with experiment id','pass':len(m)==1 and 'Experiment: site:parser-parity-review' in body and m[0].startswith('mailto:globalland@agentmail.to?')})\nfor t in ['autonomous AI agents','agents IA autonomes','unvalidated price hypothesis','hypoth&egrave;se non valid&eacute;e','no checkout','No demand has been observed','00-24','section 5.6','leap seconds','Synthetic inputs only']:\n  checks.append({'check':'index contains: '+t,'pass':t in idx})\nout={'mission':'PARSER-PARITY-SITE-CANDIDATE','site':'parser-parity-review','dry_run_task':'TASK-179457336113','review_digest':'465e390a16e262ba46ba88deaf1bce8bd172a4ee0418962bccfb09861cc74c13','host_reported':{'files':5,'bytes':22757,'index_sha256':'b5086301fbaa9ff062b1a75d7ae986e23b7b224dae6b8dacb15b2b3c45b2159c'},'files':files,'raw_total_bytes':sum(v['bytes'] for v in files.values()),'checks':checks,'passed':sum(c['pass'] for c in checks),'total':len(checks),'limitations':'Static page, no browser rendering test. Host byte total differs by 1 from raw sum, as previously seen; semantics unknown. Availability only; no demand, orders or revenue.','status':'not deployed; awaiting independent review'}\np=pathlib.Path('products/services/parser-parity/site-candidate/handoff.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(out,indent=1))\nprint(out['passed'],'/',out['total']);print(json.dumps(files));print([c['check'] for c in checks if not c['pass']])"
+      ],
+      "inputs": [
+        "products/sites/parser-parity-review/",
+        "products/services/parser-parity/"
+      ],
+      "outputs": [
+        "products/services/parser-parity/site-candidate/handoff.json"
+      ],
+      "mission_id": "PARSER-PARITY-SITE-CANDIDATE"
+    },
+    "description": "Broker action during THINK-1794573361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179457336114",
+  "input_sha256": "7e0452657d5aaca0830bbdf84952f36922859be7bcc25c4530daf5eaa404b0b5"
+}
