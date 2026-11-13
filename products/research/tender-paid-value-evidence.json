@@ -20,7 +20,7 @@
    "url": "https://www.find-tender.service.gov.uk/ (redirected to /Search)",
    "fetch": "TASK-179456796114 HTTP 200 sha256 7038010b...",
    "quote_account_section": "When you have an account you can: register a buyer or supplier organisation save search criteria sign up for notifications via email Sign in or register an account 1794568004 Support links Contact us Accessibility statement Terms and conditions Privacy Cookies Data and API Notices are based on TED XML schema. © European Union, https://ted.europa.eu , 1998–2020 All content is available under the Open Government Licence v3.0 , except where otherwise stated © Crown copyright Report concerns about this procurement Contact the service for the location of the procurement: England - Procurement Revie",
-   "observation": "Free official search; account via GOV.UK One Login. Alert/saved-search wording was not found in the fetched homepage text; two GOV.UK guidance URLs returned 404 (TASK-179456796111/113). Free alert feature details UNKNOWN from this observation."
+   "observation": "Free official search. With a GOV.UK One Login account, users can \"save search criteria\" and \"sign up for notifications via email\" (quoted from fetched homepage). So free official email alerts exist; alert filtering detail unobserved. Two GOV.UK guidance URLs returned 404 (TASK-179456796111/113)."
   },
   {
    "name": "Stotles",
@@ -64,6 +64,7 @@
  ],
  "gap_analysis": {
   "observed": [
+   "Find a Tender itself offers free saved searches and email notifications to account holders.",
    "Stotles free tier advertises 3 AI bid/no-bid reports plus tender tracking and alerts at GBP 0; paid tiers advertise AI notice summaries.",
    "Tracker advertises AI contract summaries and smart alerts; Tussell advertises manual enrichment/verification.",
    "Our own free preview.html performs the same reconciliation checks as the CAD 49 brief, locally and free."
@@ -90,7 +91,7 @@
  },
  "bounded_result": "No active acquisition or conversion experiment with accessible prerequisites was found within this comparison; this is a bounded result, not a global blockage.",
  "uncertainties": [
-  "Find a Tender alert features not observed",
+  "Find a Tender alert filtering options not observed (existence of free email notifications is observed)",
   "Tracker prices script-rendered/unknown",
   "Stotles page shows both GBP 75 and GBP 50 for Basic; Stotles/Tussell observed 2026-11-07",
   "marketing pages are untrusted and do not prove features or sales"
