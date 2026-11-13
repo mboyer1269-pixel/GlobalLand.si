@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"reviewer\": \"AUDITOR\",\n  \"checks\": {\n    \"candidate_hash\": true,\n    \"reverse_patch_restores_live_baseline\": true,\n    \"bilingual_synthetic_guidance\": true,\n    \"core_embedded_unchanged\": true,\n    \"safe_output\": true,\n    \"no_automatic_run\": true\n  },\n  \"reverse_baseline_sha256\": \"44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681\",\n  \"executed_focused_tests\": \"TASK-179456040201: 21/21; nested parity 33/33, UI 15/15, deadline 40/40 reported by harness\",\n  \"reproduced_digest\": \"TASK-179456040202: 9577f41cc877d265e2d3ace671c67a5e049f5c1f4ce374729cc4106e04a90d94\",\n  \"source_assessment\": \"Read complete diff, example, builder and focused harness. Fictitious buyer/title/id and absent submission route clearly identify sample; EN/FR banners disclaim eligibility and authenticity. Loader requires Check locally and editable inputs remain. Reverse patch independently restores exact verified live bytes; therefore CSP, datalist and offer terms outside the minimal diff remain unchanged. No source edited.\",\n  \"limits\": \"Node vm stubs only, no real-browser verification; synthetic execution is not customer use, acquisition or revenue.\",\n  \"expiry_obligations\": [\n    \"2026-12-04 welfare retirement\",\n    \"2026-12-07 North Ayrshire removal including datalist\",\n    \"2026-12-18 South Ayrshire removal including datalist\",\n    \"2027-01-08 full site retirement including preview\"\n  ]\n}\n\n",
+  "artifacts": [
+    "products/reviews/tender-first-result-consolidated.json",
+    "products/receipts/TASK-179456376112.json"
+  ],
+  "request": {
+    "id": "TASK-179456376112",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-13T09:56:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,tempfile,subprocess,hashlib,json,re\np=pathlib.Path('products/sites/open-software-tenders/preview.html'); b=p.read_bytes();s=b.decode();o=pathlib.Path('products/services/tender-preview-first-result');d=(o/'preview.diff').read_bytes()\nwith tempfile.TemporaryDirectory() as t:\n q=pathlib.Path(t)/'preview.html';q.write_bytes(b)\n r=subprocess.run(['patch','-R',str(q)],input=d,capture_output=True)\n h=hashlib.sha256(q.read_bytes()).hexdigest()\nchecks={'candidate_hash':hashlib.sha256(b).hexdigest()=='b359b3bffd0a3d36b89adf13b3c9d3f9d2fbaf06e75e6a232f5ff15850709d7b','reverse_patch_restores_live_baseline':r.returncode==0 and h=='44c9b41f37acc9fd6ba73b9834fce01c010a6f114cb06bce7f5473e773a67681','bilingual_synthetic_guidance':all(x in s for x in ['SYNTHETIC EXAMPLE, not a live opportunity','EXEMPLE FICTIF, pas un appel','aucune admissibilité ni authenticité affirmée']),'core_embedded_unchanged':pathlib.Path('products/services/tender-instant-preview/src/core.js').read_text() in s,'safe_output':\"o.textContent=sx?EXB\" in s,'no_automatic_run':\"Press Check locally.\" in s}\nz={'reviewer':'AUDITOR','checks':checks,'reverse_baseline_sha256':h,'executed_focused_tests':'TASK-179456040201: 21/21; nested parity 33/33, UI 15/15, deadline 40/40 reported by harness','reproduced_digest':'TASK-179456040202: 9577f41cc877d265e2d3ace671c67a5e049f5c1f4ce374729cc4106e04a90d94','source_assessment':'Read complete diff, example, builder and focused harness. Fictitious buyer/title/id and absent submission route clearly identify sample; EN/FR banners disclaim eligibility and authenticity. Loader requires Check locally and editable inputs remain. Reverse patch independently restores exact verified live bytes; therefore CSP, datalist and offer terms outside the minimal diff remain unchanged. No source edited.','limits':'Node vm stubs only, no real-browser verification; synthetic execution is not customer use, acquisition or revenue.','expiry_obligations':['2026-12-04 welfare retirement','2026-12-07 North Ayrshire removal including datalist','2026-12-18 South Ayrshire removal including datalist','2027-01-08 full site retirement including preview']}\nassert all(checks.values()),checks\nout=pathlib.Path('products/reviews/tender-first-result-consolidated.json');out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(z,indent=2,ensure_ascii=False));print(out.read_text())"
+      ],
+      "inputs": [
+        "products/sites/open-software-tenders/",
+        "products/services/tender-preview-first-result/",
+        "products/services/tender-instant-preview/src/"
+      ],
+      "outputs": [
+        "products/reviews/tender-first-result-consolidated.json"
+      ],
+      "mission_id": "TENDER-FIRST-RESULT-REVIEW"
+    },
+    "description": "Broker action during THINK-1794563761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179456376112",
+  "input_sha256": "b26126dc795eeb305b618ac3bf186fea4b4a92c7eee71fe70aee97baeb7981d3"
+}
