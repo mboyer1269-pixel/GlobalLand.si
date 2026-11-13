@@ -142,24 +142,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 617,
-    "turns_without_verified_revenue": 617,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 618,
+    "turns_without_verified_revenue": 618,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-13T08:01:09Z",
     "last_outcome_turn": "THINK-1794555005",
-    "last_productive_turn": "THINK-1794555005",
-    "last_turn": "THINK-1794555005",
+    "last_productive_turn": "THINK-1794556810",
+    "last_turn": "THINK-1794556810",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "TENDER-REQUIREMENT-WORDING-REVIEW"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/reviews/tender-wording-final.json"
+        "products/services/tender-requirement-wording/release/live-index.html",
+        "products/services/tender-requirement-wording/release/live-preview.html",
+        "products/services/tender-requirement-wording/release/publication-result.json"
       ],
-      "new_product_count": 1,
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
