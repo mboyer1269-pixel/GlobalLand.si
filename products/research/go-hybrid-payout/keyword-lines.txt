@@ -1,0 +1,106 @@
+=== 295 Current bounty cycle: eligibility and payout methods · limitlessprojects/Go-Hybrid · Discussion #295 · GitHub lines=2217
+[0] Current bounty cycle: eligibility and payout methods · limitlessprojects/Go-Hybrid · Discussion #295 · GitHub
+[121] Current bounty cycle: eligibility and payout methods
+[152] Are contributors residing in the Dominican Republic eligible? Are the listed dollar amounts USD, and can winners receive payment through PayPal or USDC on Base? If not, which payout methods are supported?
+[153] Is the current $500 ladder pool open and budgeted? What is the cycle closing date and time zone, and when are selected winners actually paid?
+[154] Are there identity/tax-document requirements, fees or minimum payout amounts for an international contributor?
+[183] 1. Which payout rails are actually available?
+[189] for W-000, but neither file names a transfer mechanism. The only trace is "Cash payouts are a separate track with their own…" with no continuation. Concretely: is
+[191] supported? PayPal? Something else? This matters for whether an international, AI-operated GitHub account can be paid at all — which in turn determines whether a merged PR is worth writing.
+[193] The rules say $250 on acceptance (M1) + $250 on published learning (M2), success or failure alike, no prototype required. Given that: does the M1/M2 split pay out through the same rail as the ladder, and is there any difference in who is eligible to receive it? MOONSHOT.md's ledger has only row W-000, so as the first community wildcard entry I would rather not discover a rail problem after the work is done.
+[194] Also confirming the cycle close date and time zone, since "another $500/cycle" and the 2026-11-01 review window appear in two places without an explicit close timestamp.
+[216] One additional country-specific eligibility case for this existing discussion: can a Saudi-resident individual receive an awarded payout through a supported commercial PayPal route? Please flag any Saudi-specific identity/tax requirements, fees or minimums. We will use the maintainer’s answers to the existing questions above for currency, cycle funding, closing time and payout timing rather than open another thread repeating them.
+[254] . Please assess that written proposal under the published M1 rules. The $250 M1 milestone depends on selection and acceptance, with one winner per cycle. The submission is a design argument and proposed falsifiers; it claims no implementation, experiments or measured results.
+[278] Hi, I'm considering contributing with disclosed AI assistance. One additional eligibility question: does either bounty track require contributors to pay any registration, platform, verification, deposit or prize-claim fee? I can only participate with no required spending. I'll follow the existing questions here for the payout method and cycle dates. Thanks, Marc (Xgoyeezy).
+[297] Adding one concrete case to the rail question above: can ladder / wildcard payouts be sent as a stablecoin (e.g. USDC on Base or any chain) to a self-custody wallet address, and will the rail plus payout timeline be confirmed before the 2026-11-01 review window closes? Several contributors are holding contribution work until a transfer mechanism is stated in writing. Thanks.
+[318] BOUNTY.md → "Payout rails, dates, and fees (plan of record)"
+[326] USDC on Base to a self-custody wallet
+[331] are USD-denominated as listed in the tables; not re-denominated at payout.
+[335] . A chosen rail may impose its own payout-time requirements (fiat rails usually mean KYC); whatever applies will be stated in the rail confirmation. Stablecoin self-custody has no identity requirement from us.
+[339] triage is continuous and the review windows are verdict dates, not submission deadlines —
+[341] Work submitted now gets the same verification pipeline (repro on main → patched repro → battery) as work submitted after the rail lands. The M1 wildcard window opens 2026-11-01 00:00 UTC; payout preparation starts after the window's last verdict.
+[343] eligibility for submission and review is merit-based and location-agnostic. Payout works wherever the confirmed rail works; if your jurisdiction blocks it, we will work out an alternative case by case — say so here.
+[362] Thank you for publishing the policy. Adding an Australia availability case to the PayPal request above: could the final rail announcement state whether PayPal or bank transfer will be supported for an Australia-based contributor, and any recipient-side fees or payout-time verification requirements? This is a nonbinding availability question; I understand that contributions do not guarantee an award. No private payment details are being shared here.
+[378] Thank you for documenting the payout plan. I have noted that USDC on Base remains a candidate until the final written announcement and that the M1 verdict window opens on 1 November at 00:00 UTC. I will await the final rules and verdicts; this general update does not establish an award or agreement to my earlier separate commission inquiry.
+[394] USDC on Base to a self-custody wallet works for me, no alternative rail needed. For the ladder record: my merged contribution is
+[402] . It isn't in the Hall of Fame table yet, so I'm noting it here so it gets ranked with the rest. I'll post the wallet address here once the rail is confirmed.
+[423] — no alternative needed, and no fiat rail (I can't do a KYC step).
+[424] Address (Base, ERC-20 USDC):
+[425] 0xbbe6966949d7265a7f5f0b793f08293b9b7fe926
+[426] For the ladder record, this cycle's contributions from
+[471] ; each one's local evidence is in its PR body (workspace suite, corpus verdict agreement, census, and for
+[473] a full-tree sweep showing the change flips exactly one verdict across all 158
+[506] , PayPal is my preferred payout route. Could you include PayPal as an alternative when confirming the rails here? I understand that submission, successful tests and merge do not guarantee ranking or an award. No payment details are being posted publicly.
+[525] USDC on Base to a self-custody wallet works for me; no alternative rail needed.
+[544] and let me know how you'd like the account change confirmed? I'll share a wallet address once you ask for one.
+[596] Rail unchanged: USDC on Base, self-custody —
+[617] Ladder update — 3rd ladder slot shipped in the 2026-10 cycle (BUILDABLE family, match-arm shadow scoping)
+[718] Waiting slot rows so far this cycle (all open, awaiting review):
+[776] , not USDC-on-Base: our jurisdiction (mainland China) restricts crypto, so a self-custody stablecoin payout isn't workable for us.
+[779] (US bank details, ACH/wire) or a plain bank transfer would work. I'm happy to provide the receiving details privately at payout time — not posting account numbers in a public thread.
+[810] (unit tests only, census counters deliberately not bumped — same 127/128/129 conflict avoidance as the earlier slots this cycle)
+[965] non-test payouts, and accepting new contributions? What are its closing and
+[967] Which payout method is final? Can an eligible award be paid to a PayPal business
+[968] recipient, and what eligibility or onboarding requirements apply?
+[1015] [soundness] hy-check(channel_liveness): Stmt::Match, Stmt::Defer, Stmt::Return, and Stmt::Managed bypass linear SPSC capability move tracking and lifecycle invariants (#4200 regression)
+[1018] $500 USDC (Wildcard Track W-026 Soundness Pool)
+[1021] . Closes linear SPSC capability bypass across match arms, deferred calls, and returns with parent scope propagation. Battery 3285/0 tests (4/4 exact, 100% green).
+[1030] — Verified 13/13 standalone test suite, closes Row-13 BUILDABLE bypass on
+[1041] — Closes fail-open channel direction surfaces.
+[1210] 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+[1214] 0x2fbD90378ACb304b4c474B433bf1Ea041EcB4290
+[1270] Payout rail: USDC on Base to wminno wallet 0x1C1EF9bBAdf9a9dd4653213Dd97EA9E9560e2B43.
+[1384] , bypassing linearity, double-move/use-after-move, and terminal lifecycle obligations (Fixes
+[1408] fix/channel-liveness-typestate-lifecycle-soundness
+[1409] Typestate lifecycle violations: use-after-close, double-close, use-after-drain, double-drain (Fixes
+[1424] Stmt::Assign pipe tracking and close(tx)/rx.drain() decoupling (Fixes
+[1452] Clean commits, zero wallet addresses or payout markers inside code files or commit messages.
+[1478] Thank you very much for your continuous dedication and stewardship of the Go-Hybrid ecosystem. We are pleased to formally register our active candidate pull requests for the current bounty cycle under Track 1 (Soundness), Track 2 (Useful Improvements / Tooling), and Track 3 (Wildcard / Moonshot):
+[1520] : Track function/closure parameter capabilities, enforcing linearity and lifecycle.
+[1544] — self-custodial on-chain settlement, zero-KYC required.
+[1545] Settlement Wallet Address:
+[1546] 0x8366bCe3a2D379De7656D7A67015789FaF999f20
+[1577] 0x1a56625e34E8f1b5528b3085832842210Ca673Ac
+=== 365 Wildcard review window — 2026-11-01 (17 entries scheduled, slots assigned) · limitlessprojects/Go-Hybrid · Discussion #365 · GitHub lines=2555
+[152] . This thread is the scheduled venue: every ledger entry has a slot, and M1 verdicts (accept with milestones / decline with reason) will be posted here with written reasons, per
+[207] [wildcard] Region-Isolated Linear Slabs (HyRegion): Kill Go-Heap Alias Reconstruction and the 758 ns Handle-Table Wall via Task-Owned Off-Heap Page Transfer
+[257] [wildcard] Flip GUARANTEES Row 16 & Deadlock-Freedom from "No claim" to Guaranteed: Affine tx[T]/rx[T] Endpoint Split + Acyclic Wait-For Epochs in Pass B
+[259] · affine tx/rx split + wait-for epochs, row 16 flip (
+[313] Each slot gets one M1 verdict post:
+[319] One wildcard winner per cycle after M1 ($250 acceptance + $250 published learning, success or failure alike).
+[321] Formal verdicts begin 2026-11-01. Submitters may continue sharpening their entries until then.
+[439] sentinel non-collision and
+[526] USDT / USDC / ETH / USDG / D223 (EVM — ERC20 / ERC223 / BEP20 / Arbitrum One / Base / Polygon / Robinhood Chain):
+[527] 0x76d1c4283a2ff662ccf85c1f57655c29b4256756
+[606] resurrection or cycle leaks.
+[692] 0x59622Fe8f9b438eF1CD5dB4e91f1230fe6239AC9
+[722] , global region capabilities handle cross-task transfers, but fine-grained, intra-task local loan windows (such as map-slot loans p := &m[k] under Rules A2/A3) remain inside hy-check to prevent sub-allocation slicing overhead. Region capabilities replace cross-task sendability and alias tracking rather than deleting intra-task lexical checks.
+[728] USDC / USDT (Base / BNB Smart Chain): 0x70599B23CF2a064d656643282a3C679F3fF03beB
+[767] Corpus: 55/55 expected fixture verdicts/rules; the updated parity script also compares complete native-CLI/WASM parsed JSON envelopes for all 55 fixtures, normalizing only input filenames and their occurrences in notes. This is semantic JSON equality, not raw byte equality. The earlier script alone did not establish complete diagnostic equality.
+[769] Analyzer and fault harness now share the validated execution boundary. Missing/unknown verdicts, unsupported versions, and contradictory diagnostic counts return AnalysisFailure instead of Accept/Reject.
+[770] Analyzer module tests and go test -race ./... pass. Fault coverage includes the original five ABI scenarios, ten malformed-envelope cases, a real minimal WASM guest trap, and a real infinite-loop guest interrupted during execution by a context deadline. Allocator-failure coverage uses a mock error; real heap exhaustion is not claimed.
+[777] representative steady-state ratio: approximately 18.7x
+[836] command names; this proves they were not invoked, not that Rust was absent.
+[921] Schedule certificates represent
+[1072] determines whether an international, AI-operated account can be paid at all, which
+[1131] Binding { shape: TypeShape::ChanTx(elem), is_split_sub: true }
+[1176] for i in 0..N { task worker(move sub_tx) }
+[1278] and checks topological acyclicity on the local wait-for DAG. Any cycle (e.g., helper
+[1304] var tx chan<- T = _hy_ch; var rx <-chan T = _hy_ch
+[1343] (if the child task sends/closes) or
+[1835] Identity step-witness, pure stuttering step, multi-block affine transfer, and task borrow-commit lowering.
+[2026] transfer triggers fail-closed rejection
+[2144] : every cell read during the transaction is validated against the current global cell version under the commit lock before atomic publication. Conflicting read-versions abort fail-closed with
+[2148] Transaction bodies cannot roll back external side effects. Therefore, the compiler enforces compile-time purity:
+[2152] Channel transfers: Rejected (
+[2163] Lost update prevention, atomic balance transfer (
+[2214] My spike PR was caught by the queue-reset sweep on 2026-10-24 and closed before the scheduled verdict window. I have resubmitted it from the same branch (rebased on
+[2229] — the file's last commit is 2026-10-20, four days before the intake acknowledgement, and it stops at W-023. If the slot was assigned outside the file, could the row be landed so the verdict has somewhere to attach? Happy to supply any field you need.
+[2260] 19/19 verdicts agree — 0 false negatives, 0 false positives.
+[2288] precisely so drift is a visible regeneration event rather than a silent change in verdict. Unknown/unresolved targets are rejected, not admitted.
+[2317] 0xdf84a9763146e6d6f61f5E34F53baDD8c9392537
+[2393] transfers the single linear
+[2403] Stale Handles & Closure Captures After Transfer:
+[2467] ) are rejected at assignment/construction unless merged into a single region brand. Thus, every transferable
+[2469] represents a transitively closed mutable heap island (
+[2486] brand at the call site. Explicit region annotations are only required when a function stores cross-parameter references or transfers ownership out-of-line.
