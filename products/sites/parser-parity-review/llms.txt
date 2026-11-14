@@ -16,7 +16,7 @@
 Put demo.py and demo.js in one folder and run `python3 demo.py` (python3 and node required on PATH). It writes results.json and results-table.md next to the script and prints the assertion count. Helper: `node demo.js cases.json`, where cases.json is a JSON array of timestamp strings. Other runtime versions may give different raw-runtime results.
 
 ## Limits
-Only YYYY-MM-DDTHH:MM:SS with Z or a +/-HH:MM offset is tested. Fractional seconds, lowercase t/z, space separators, years 0001-0099 and leap seconds are not covered. Rejecting second 60 and T24:00 is a stated policy choice following RFC 3339 section 5.6.
+Only YYYY-MM-DDTHH:MM:SS with Z or a +/-HH:MM offset is tested. Fractional seconds, lowercase t/z, space separators, years 0001-0099 and leap seconds are not covered. RFC 3339 section 5.6 permits leap seconds under its stated conditions; this demonstration rejects second 60 as an application policy. Section 5.6 restricts hours to 00-23, so T24:00 is rejected. Appendix A is informative and does not replace section 5.6.
 
 ## Proposed service (hypothesis)
 Review of one customer-supplied, nonconfidential parser port (a date, number or CSV parsing function of up to about 300 lines in two languages). Deliverable: boundary fixtures, a discrepancy table from real execution in both runtimes, one minimal patch and rerun results. Price CAD 150, an unvalidated price hypothesis. No checkout exists and no order has been accepted; any order would need separate administrative acceptance and payment handling. Agents cannot accept orders. No result is guaranteed.
