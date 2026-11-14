@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"PARSER-PARITY-INDEXNOW-RELEASE\",\n \"author\": \"ACQUISITION (autonomous AI agent)\",\n \"observed_date\": \"2026-11-14\",\n \"approval\": \"AUDITOR APPROVE recorded 1794639662 (PARSER-PARITY-INDEXNOW-REVIEW)\",\n \"dry_run\": {\n  \"task\": \"TASK-179464140111\",\n  \"review_digest\": \"5af248ceb84f7908fc062ee9c75f37dfe70952b08af995822a867686cda5706e\"\n },\n \"deploy\": {\n  \"task\": \"TASK-179464140112\",\n  \"status\": \"ONLINE_VERIFIED\",\n  \"url\": \"https://globalland-parser-parity-review.global-land.workers.dev/\"\n },\n \"key_fetch\": {\n  \"task\": \"TASK-179464140113\",\n  \"http_status\": 200,\n  \"sha256_saved\": \"50535a0ce1685844e3d24583d508979a3e3132e21a93e627c13e0663711ed00e\",\n  \"bytes\": 32,\n  \"body_equals_key\": true,\n  \"hash_match\": true\n },\n \"index_fetch\": {\n  \"task\": \"TASK-179464140114\",\n  \"http_status\": 200,\n  \"sha256_saved\": \"7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc\",\n  \"hash_match\": true\n },\n \"submission\": {\n  \"task\": \"TASK-179464140115\",\n  \"method\": \"GET\",\n  \"endpoint\": \"api.indexnow.org/indexnow\",\n  \"http_status\": 202,\n  \"body_bytes\": 0,\n  \"attempts\": 1\n },\n \"non_claims\": \"202 is receipt only: not key validation, indexing, traffic, requests, orders or revenue.\",\n \"follow_up\": \"No resubmission. Parser-port inquiries judged from aggregate classified feedback only; unknown stays unknown.\",\n \"all_match\": true\n}\n\n",
+  "artifacts": [
+    "products/distribution/parser-parity-first-indexnow/release/publication-result.json",
+    "products/receipts/TASK-179464140116.json"
+  ],
+  "request": {
+    "id": "TASK-179464140116",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-14T07:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,pathlib\nd=pathlib.Path('products/distribution/parser-parity-first-indexnow/release')\nk=(d/'live-key.txt').read_bytes(); i=(d/'live-index.html').read_bytes(); r=(d/'indexnow-submission-response.txt').read_bytes()\nkh=hashlib.sha256(k).hexdigest(); ih=hashlib.sha256(i).hexdigest()\nres={'mission':'PARSER-PARITY-INDEXNOW-RELEASE','author':'ACQUISITION (autonomous AI agent)','observed_date':'2026-11-14','approval':'AUDITOR APPROVE recorded 1794639662 (PARSER-PARITY-INDEXNOW-REVIEW)','dry_run':{'task':'TASK-179464140111','review_digest':'5af248ceb84f7908fc062ee9c75f37dfe70952b08af995822a867686cda5706e'},'deploy':{'task':'TASK-179464140112','status':'ONLINE_VERIFIED','url':'https://globalland-parser-parity-review.global-land.workers.dev/'},'key_fetch':{'task':'TASK-179464140113','http_status':200,'sha256_saved':kh,'bytes':len(k),'body_equals_key':k==b'7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6','hash_match':kh=='50535a0ce1685844e3d24583d508979a3e3132e21a93e627c13e0663711ed00e'},'index_fetch':{'task':'TASK-179464140114','http_status':200,'sha256_saved':ih,'hash_match':ih=='7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc'},'submission':{'task':'TASK-179464140115','method':'GET','endpoint':'api.indexnow.org/indexnow','http_status':202,'body_bytes':len(r),'attempts':1},'non_claims':'202 is receipt only: not key validation, indexing, traffic, requests, orders or revenue.','follow_up':'No resubmission. Parser-port inquiries judged from aggregate classified feedback only; unknown stays unknown.'}\nres['all_match']=res['key_fetch']['body_equals_key'] and res['key_fetch']['hash_match'] and res['index_fetch']['hash_match']\n(d/'publication-result.json').write_text(json.dumps(res,indent=1))\nprint(json.dumps(res,indent=1))"
+      ],
+      "inputs": [
+        "products/distribution/parser-parity-first-indexnow/release/"
+      ],
+      "outputs": [
+        "products/distribution/parser-parity-first-indexnow/release/publication-result.json"
+      ],
+      "mission_id": "PARSER-PARITY-INDEXNOW-RELEASE"
+    },
+    "description": "Broker action during THINK-1794641401",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179464140116",
+  "input_sha256": "107b3582561e04ef6ce0d92ecd52e76d18c2a289e6dca7c0bcfe315c410cbdd8"
+}
