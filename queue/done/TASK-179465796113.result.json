@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "295 Current bounty cycle: eligibility and payout methods · limitlessprojects/Go-Hybrid · Discussion #295 · GitHub 60000 [] ['0x1C1EF9bBAdf9a9dd4653213Dd97EA9E9560e2B43', '0x1a56625e34E8f1b5528b3085832842210Ca673Ac', '0x2fbD90378ACb304b4c474B433bf1Ea041EcB4290', '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', '0x8366bCe3a2D379De7656D7A67015789FaF999f20', '0xC345C07229307d4f1c7935aD2cAe48e390215808', '0xbbe6966949d7265a7f5f0b793f08293b9b7fe926']\n365 Wildcard review window — 2026-11-01 (17 entries scheduled, slots assigned) · limitlessprojects/Go-Hybrid · Discussion #365 · GitHub 60000 [] ['0x55082a8499f65336222668167c5045561591ed9b', '0x59622Fe8f9b438eF1CD5dB4e91f1230fe6239AC9', '0x5B58b71e14F9856c344f41813fbC9029670A0e26', '0x70599B23CF2a064d656643282a3C679F3fF03beB', '0x76d1c4283a2ff662ccf85c1f57655c29b4256756', '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', '0x920B86D1618db341A2e8141221e4DCFF335D9461', '0x96a2A0578d0903Db541C83794f38A91B7B7e37dd', '0x9a51790aC01c54184bcFa067bC38f7F0E7C6F6B6', '0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c']\n\n",
+  "artifacts": [
+    "products/research/go-hybrid-payout/extract.json",
+    "products/receipts/TASK-179465796113.json"
+  ],
+  "request": {
+    "id": "TASK-179465796113",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-14T12:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json,pathlib,hashlib\nout={}\nfor n in ('295','365'):\n    p=pathlib.Path('products/research/go-hybrid-payout/discussion-%s.html'%n)\n    raw=p.read_text(encoding='utf-8',errors='replace')\n    t=re.search(r'<title>(.*?)</title>',raw,re.S)\n    body=re.sub(r'<script.*?</script>|<style.*?</style>|<svg.*?</svg>',' ',raw,flags=re.S)\n    links=sorted(set(re.findall(r'href=\"(https?://[^\"]*(?:basescan|etherscan|blockscout|tx/)[^\"]*)\"',body)))\n    addrs=sorted(set(re.findall(r'0x[0-9a-fA-F]{40,64}',body)))\n    times=re.findall(r'datetime=\"([^\"]+)\"',body)\n    txt=html.unescape(re.sub(r'<[^>]+>','\\n',body))\n    lines=[re.sub(r'\\s+',' ',l).strip() for l in txt.split('\\n')]\n    lines=[l for l in lines if l]\n    i=0\n    for k,l in enumerate(lines):\n        if t and l[:20]==html.unescape(t.group(1)).strip()[:20]: i=k;break\n    out[n]={'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'title':html.unescape(t.group(1)).strip() if t else None,'tx_links':links,'hex_ids':addrs,'datetimes':times[:60],'text':'\\n'.join(lines)[:60000]}\nd=pathlib.Path('products/research/go-hybrid-payout');d.mkdir(parents=True,exist_ok=True)\n(d/'extract.json').write_text(json.dumps(out,indent=1,ensure_ascii=False))\nfor n in out:\n    o=out[n];print(n,o['title'],len(o['text']),o['tx_links'],o['hex_ids'][:10])\n"
+      ],
+      "inputs": [
+        "products/research/go-hybrid-payout/"
+      ],
+      "outputs": [
+        "products/research/go-hybrid-payout/extract.json"
+      ],
+      "mission_id": "GO-HYBRID-PAYOUT-EVIDENCE"
+    },
+    "description": "Broker action during THINK-1794657961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179465796113",
+  "input_sha256": "0fbacd4f3bffb2000a070f2cfaccc34d98d4a0a99c2ba59f7332b7cb8832d33e"
+}
