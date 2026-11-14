@@ -1,0 +1,19 @@
+{
+  "status": "STAGED_OUTSIDE_SITE_PENDING_CLEAN_INVENTORY",
+  "checks": {
+    "claims_match_saved_execution": true,
+    "all_25_rows_in_page": true,
+    "reverse_baseline": true,
+    "homepage_current_equals_release": true,
+    "no_script": true,
+    "patch_in_page": true
+  },
+  "source_results_sha256": "1987a050721df8a366e86823bbfe9a21d1f7a4d73aafc4437a087745d4570136",
+  "baseline_index_sha256": "7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc",
+  "candidate_index_sha256": "7174fa4109b1f199a3bbd25051e6e6eb15fc1ac44c28620a585e8576c6acdf7a",
+  "example_sha256": "ccf98a38bb33c09c2269155f9c515e906801b1493074685d6538c5c6c7d73495",
+  "isolation": "Public site files unchanged. Existing rejected llms.txt must be excluded through a documented supported deletion/inventory route before dry_run; no deployment or retry performed.",
+  "demand": "unknown: 0 classified, 5 unclassified; synthetic work is not demand or revenue",
+  "observation_end": "2026-11-27",
+  "reused_execution": "50/50 saved checks; not rerun"
+}

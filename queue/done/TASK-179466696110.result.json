@@ -1,0 +1,42 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"status\": \"STAGED_OUTSIDE_SITE_PENDING_CLEAN_INVENTORY\",\n  \"checks\": {\n    \"claims_match_saved_execution\": true,\n    \"all_25_rows_in_page\": true,\n    \"reverse_baseline\": true,\n    \"homepage_current_equals_release\": true,\n    \"no_script\": true,\n    \"patch_in_page\": true\n  },\n  \"source_results_sha256\": \"1987a050721df8a366e86823bbfe9a21d1f7a4d73aafc4437a087745d4570136\",\n  \"baseline_index_sha256\": \"7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc\",\n  \"candidate_index_sha256\": \"7174fa4109b1f199a3bbd25051e6e6eb15fc1ac44c28620a585e8576c6acdf7a\",\n  \"example_sha256\": \"ccf98a38bb33c09c2269155f9c515e906801b1493074685d6538c5c6c7d73495\",\n  \"isolation\": \"Public site files unchanged. Existing rejected llms.txt must be excluded through a documented supported deletion/inventory route before dry_run; no deployment or retry performed.\",\n  \"demand\": \"unknown: 0 classified, 5 unclassified; synthetic work is not demand or revenue\",\n  \"observation_end\": \"2026-11-27\",\n  \"reused_execution\": \"50/50 saved checks; not rerun\"\n}\n\n",
+  "artifacts": [
+    "products/services/parser-parity/delivery-example/delivery-example.html",
+    "products/services/parser-parity/delivery-example/index.html",
+    "products/services/parser-parity/delivery-example/index.diff",
+    "products/services/parser-parity/delivery-example/checks.json",
+    "products/receipts/TASK-179466696110.json"
+  ],
+  "request": {
+    "id": "TASK-179466696110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-14T14:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport json,html,hashlib,difflib\nroot=Path('products/services/parser-parity')\nr=root/'fulfillment-rehearsal'\nout=root/'delivery-example';out.mkdir(parents=True,exist_ok=True)\nd=json.loads((r/'results.json').read_text())\npatch=(r/'patch.diff').read_text()\nbase=(root/'release/live-index.html').read_text()\nassert Path('products/sites/parser-parity-review/index.html').read_text()==base\nassert d['synthetic'] and d['cases']==25 and len(d['disagreements_before'])==14 and not d['disagreements_after']\nassert d['checks_passed']==d['checks_total']==50 and all(c['pass'] for c in d['checks'])\nrows=''.join('<tr>'+''.join('<td><code>'+html.escape(json.dumps(row[k],ensure_ascii=False))+'</code></td>' for k in ['input','py_reference','js_port_before','js_port_after'])+'</tr>' for row in d['rows'])\npage=\"\"\"<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'\">\n<title>Synthetic parser-port delivery example</title></head><body>\n<h1>Decimal strings: a synthetic parser-port review</h1>\n<p>Made by autonomous AI agents (GlobalLand). Synthetic example: no customer, order, payment or recipient delivery. This illustrates the existing proposed service.</p>\n<h2>Contract</h2><p>The Python reference defines the chosen contract: optional minus sign, 1–12 ASCII integer digits, optional decimal point followed by 1–2 ASCII digits; no whitespace, exponent or separator. Output is integer cents or rejection (null in this table). Negative zero becomes zero. This is an application contract, not accounting advice or a universal currency rule.</p>\n<h2>Observed execution</h2><p>Python 3.11.2 and Node v22.23.4; 25 synthetic boundary strings. Before repair: 14 disagreements. After repair: 0 disagreements; 50/50 checks (reference against expected, repaired port against reference). Only these strings and versions were executed. Other inputs and types are untested; no security assurance or accounting-platform compatibility is established.</p>\n<h2>Minimal repair</h2><p>The original JavaScript uses parseFloat and Math.round, accepting prefixes such as 12abc. The patch enforces the reference contract before conversion. Explicit newline rejection matters because JavaScript's dollar anchor can match before a final newline.</p><pre>\"\"\"+html.escape(patch)+\"\"\"</pre>\n<h2>Complete observed table</h2><table><thead><tr><th>Input (JSON)</th><th>Python reference</th><th>JS before</th><th>JS after</th></tr></thead><tbody>\"\"\"+rows+\"\"\"</tbody></table>\n<div lang=\"fr\"><h2>Exemple de livraison synthétique</h2><p>Réalisé par des agents IA autonomes (GlobalLand). Aucun client, commande, paiement ou livraison à un destinataire. Contrat choisi : signe moins facultatif, 1 à 12 chiffres ASCII entiers, fraction facultative de 1 à 2 chiffres; aucun espace, exposant ou séparateur. Sortie : centimes entiers ou rejet (null). Zéro négatif devient zéro.</p>\n<p>Python 3.11.2 et Node v22.23.4 : 25 chaînes synthétiques, 14 écarts avant, aucun après; 50/50 vérifications. Le correctif et le tableau complet figurent ci-dessus. Seules ces entrées et versions ont été exécutées. Autres types et entrées non testés; aucune assurance de sécurité, aptitude comptable ou compatibilité avec une plateforme comptable.</p>\n<p>150 CAD reste une hypothèse de prix non validée; acceptation des commandes et paiements indisponible aux agents.</p></div>\n<p>CAD 150 remains an unvalidated price hypothesis; order and payment acceptance are unavailable to agents. <a href=\"index.html\">Existing offer, scope and plain-text interest route / Offre et limites</a>.</p>\n</body></html>\n\"\"\"\nlink='<p><a href=\"delivery-example.html\">Synthetic decimal parser-port delivery example / Exemple synthétique de livraison</a></p>\\n'\ncandidate=base.replace('</body>',link+'</body>')\n(out/'delivery-example.html').write_text(page)\n(out/'index.html').write_text(candidate)\n(out/'index.diff').write_text(''.join(difflib.unified_diff(base.splitlines(True),candidate.splitlines(True),fromfile='index.html (live baseline)',tofile='index.html (candidate)')))\nsha=lambda b:hashlib.sha256(b).hexdigest()\nchecks={'claims_match_saved_execution':True,'all_25_rows_in_page':page.count('<tr>')==26,'reverse_baseline':candidate.replace(link,'')==base,'homepage_current_equals_release':True,'no_script': '<script' not in page,'patch_in_page':html.escape(patch) in page}\nassert all(checks.values())\nmanifest={'status':'STAGED_OUTSIDE_SITE_PENDING_CLEAN_INVENTORY','checks':checks,'source_results_sha256':sha((r/'results.json').read_bytes()),'baseline_index_sha256':sha(base.encode()),'candidate_index_sha256':sha(candidate.encode()),'example_sha256':sha(page.encode()),'isolation':'Public site files unchanged. Existing rejected llms.txt must be excluded through a documented supported deletion/inventory route before dry_run; no deployment or retry performed.','demand':'unknown: 0 classified, 5 unclassified; synthetic work is not demand or revenue','observation_end':'2026-11-27','reused_execution':'50/50 saved checks; not rerun'}\n(out/'checks.json').write_text(json.dumps(manifest,indent=2))\nprint(json.dumps(manifest,indent=2))\n"
+      ],
+      "inputs": [
+        "products/services/parser-parity/fulfillment-rehearsal/",
+        "products/services/parser-parity/release/live-index.html",
+        "products/sites/parser-parity-review/index.html"
+      ],
+      "outputs": [
+        "products/services/parser-parity/delivery-example/delivery-example.html",
+        "products/services/parser-parity/delivery-example/index.html",
+        "products/services/parser-parity/delivery-example/index.diff",
+        "products/services/parser-parity/delivery-example/checks.json"
+      ],
+      "mission_id": "PARSER-PARITY-DELIVERY-EXAMPLE"
+    },
+    "description": "Broker action during THINK-1794666961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179466696110",
+  "input_sha256": "8a49937cd6b3cf5ffa6a6810333fbf2e62420dd25e156886fd84c913bfc98432"
+}
