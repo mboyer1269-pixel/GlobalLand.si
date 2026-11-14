@@ -165,27 +165,29 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-14T20:30:46Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 746,
-    "turns_without_verified_revenue": 746,
-    "turns_without_outcome": 10,
+    "turns_without_new_interpreted_feedback": 747,
+    "turns_without_verified_revenue": 747,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-14T18:07:16Z",
-    "last_outcome_turn": "THINK-1794679207",
-    "last_productive_turn": "THINK-1794686161",
-    "last_turn": "THINK-1794688561",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794690006",
+    "last_productive_turn": "THINK-1794690006",
+    "last_turn": "THINK-1794690006",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "PYTHON-CONTRACT-BUYER-FIT"
+      ],
       "new_products": [],
       "new_product_count": 0,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
