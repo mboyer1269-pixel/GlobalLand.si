@@ -1,0 +1,21 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://api.github.com/search/issues?q=label%3Abounty+state%3Aopen+is%3Aissue+parser+date+in%3Atitle%2Cbody&sort=created&order=desc&per_page=8\", \"http_status\": 200, \"sha256\": \"e1d61f30e69430a821fd98010ec669f20b653aa7ba73b9d4f6f2b5ba55eb9d8f\", \"artifact\": \"products/research/parser-parity-paid-request/raw/gh-bounty-parser-date.json\"}",
+  "request": {
+    "id": "TASK-179461656111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-14T00:36:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://api.github.com/search/issues?q=label%3Abounty+state%3Aopen+is%3Aissue+parser+date+in%3Atitle%2Cbody&sort=created&order=desc&per_page=8",
+      "output": "products/research/parser-parity-paid-request/raw/gh-bounty-parser-date.json",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1794616561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179461656111",
+  "input_sha256": "5d90b62b26b2dbfd73d64e4cd33033dcb8cfef75b21b61423427dc6c6c4a41ed"
+}
