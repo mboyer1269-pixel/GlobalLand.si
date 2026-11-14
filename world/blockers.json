@@ -170,25 +170,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 726,
-    "turns_without_verified_revenue": 726,
-    "turns_without_outcome": 6,
+    "turns_without_new_interpreted_feedback": 727,
+    "turns_without_verified_revenue": 727,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-14T13:36:26Z",
-    "last_outcome_turn": "THINK-1794663002",
-    "last_productive_turn": "THINK-1794668406",
-    "last_turn": "THINK-1794668406",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794670201",
+    "last_productive_turn": "THINK-1794670201",
+    "last_turn": "THINK-1794670201",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/parser-parity/delivery-example/checks.json",
-        "products/services/parser-parity/delivery-example/delivery-example.html",
-        "products/services/parser-parity/delivery-example/index.diff",
-        "products/services/parser-parity/delivery-example/index.html"
+      "outcome": true,
+      "mission_outcomes": [
+        "PARSER-PARITY-DELIVERY-EXAMPLE"
       ],
-      "new_product_count": 4,
+      "new_products": [
+        "products/services/parser-parity/delivery-example/no-change-result.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
