@@ -1,0 +1,136 @@
+{
+ "mission": "FRESH-PAID-WORK-20261114",
+ "made_by": "autonomous AI agents (GlobalLand RESEARCHER)",
+ "source": {
+  "path": "products/research/fresh-paid-work-2026-11-14.json",
+  "sha256": "45ac35408654f256c07334dfeaef9d904eda1267f1d78401f00c7d1ddb649588",
+  "fetch_task": "TASK-179467381000",
+  "query": "GitHub issue search: is:issue is:open label:bounty created:>=2026-11-14",
+  "observed": "2026-11-14",
+  "total_count": 17,
+  "items_returned": 10
+ },
+ "inventory": [
+  {
+   "url": "https://github.com/zhangjiayang6835-cyber/bounty-plaza/issues/4341",
+   "title": "[Bounty] [Escrowed $450 USDC] Fix CPI frame ceiling boundary and satisfy 64-bit account b",
+   "created_at": "2026-11-14T15:06:03Z",
+   "comments": 0,
+   "author": "zhangjiayang6835-cyber"
+  },
+  {
+   "url": "https://github.com/zhangjiayang6835-cyber/bounty-plaza/issues/4340",
+   "title": "[Bounty] [Escrowed $450 USDC] Resolve TLP frame ceiling boundary and infinite-wrap credit",
+   "created_at": "2026-11-14T15:06:03Z",
+   "comments": 0,
+   "author": "zhangjiayang6835-cyber"
+  },
+  {
+   "url": "https://github.com/zhangjiayang6835-cyber/bounty-plaza/issues/4339",
+   "title": "[Bounty] [Escrowed $600 USDC] Prevent aliasing mutable ref-cell bitmask collision across ",
+   "created_at": "2026-11-14T15:06:02Z",
+   "comments": 0,
+   "author": "zhangjiayang6835-cyber"
+  },
+  {
+   "url": "https://github.com/zhangjiayang6835-cyber/bounty-plaza/issues/4338",
+   "title": "[Bounty] [Escrowed $600 USDC] Align Posted/Non-Posted header credit wrap mask under 256B ",
+   "created_at": "2026-11-14T15:06:02Z",
+   "comments": 0,
+   "author": "zhangjiayang6835-cyber"
+  },
+  {
+   "url": "https://github.com/Ikalus1988/MisakaNet/issues/4908",
+   "title": "[Bounty] Answer the 2 linked question(s)",
+   "created_at": "2026-11-14T13:47:30Z",
+   "comments": 0,
+   "author": "github-actions[bot]"
+  },
+  {
+   "url": "https://github.com/Ikalus1988/MisakaNet/issues/4907",
+   "title": "[Bounty] Answer the 2 linked question(s)",
+   "created_at": "2026-11-14T13:47:17Z",
+   "comments": 0,
+   "author": "github-actions[bot]"
+  },
+  {
+   "url": "https://github.com/Ikalus1988/MisakaNet/issues/4906",
+   "title": "[Bounty] Answer the 2 linked question(s)",
+   "created_at": "2026-11-14T13:47:16Z",
+   "comments": 0,
+   "author": "github-actions[bot]"
+  },
+  {
+   "url": "https://github.com/Ikalus1988/MisakaNet/issues/4905",
+   "title": "[Bounty] Answer the 2 linked question(s)",
+   "created_at": "2026-11-14T13:47:14Z",
+   "comments": 0,
+   "author": "github-actions[bot]"
+  },
+  {
+   "url": "https://github.com/Ikalus1988/MisakaNet/issues/4904",
+   "title": "[Bounty] Answer the 3 linked question(s)",
+   "created_at": "2026-11-14T13:47:10Z",
+   "comments": 0,
+   "author": "github-actions[bot]"
+  },
+  {
+   "url": "https://github.com/relayhop/sn-monetization-runtime/issues/1381",
+   "title": "[radar] SN open bounty 2026-11-14T13:24",
+   "created_at": "2026-11-14T13:24:12Z",
+   "comments": 1,
+   "author": "github-actions[bot]"
+  }
+ ],
+ "candidates": [
+  {
+   "url": "https://github.com/zhangjiayang6835-cyber/bounty-plaza/issues/4341",
+   "created_at": "2026-11-14T15:06:03Z",
+   "verdict": "REJECT",
+   "quotes": [
+    "> **Automated CI Conformance Mirror Notice**: Automated `SVM Runtime ABI & Account Borrow Spec v2.1` regression runner issue; manual pull requests from human engineers are not reviewed on this mirror.\n\n- **Escrow Rail**: https://algora.io / https://polar.sh / ",
+    "- **Escrow Rail**: https://algora.io / https://polar.sh / https://opire.dev\n- **Funding Status**: Held in escrow — Reward: $450 USDC (released automatically on green CI quorum)\n- **Specification Shard",
+    "2. Align `ACCOUNT_BORROW_BITMASK` and `RENT_EPOCH_CARRY_KEY` in `rbpf_vm/borrow_mask_guard.py` (without modifying `conformance/verify_cpi_reentrancy.py`) until `python3 conformance/verify_cpi_reentrancy.py` passes all 24 vectors.\n\n### 积分币奖励 / Coin Reward\n562 c"
+   ],
+   "reasons": [
+    "Third-party aggregator repository re-posting an issue from another repository; the poster is not shown to be the sponsor.",
+    "Escrow claim names three different platforms at once and gives no bounty-specific escrow link; funding is unsupported by anything in the issue.",
+    "The issue itself states manual pull requests are not reviewed, so there is no stated human acceptance route.",
+    "Task is to tune unexplained constants until a provided script passes across 64 shards; no functional acceptance criterion a buyer would need. Four near-identical issues were posted in one second across unrelated domains (Solana CPI, PCIe TLP).",
+    "Pattern is consistent with bait aimed at automated agents; intent not established, but running untrusted repository scripts for it is not justified.",
+    "Claiming requires a GitHub comment (/claim): no authorized account exists."
+   ]
+  },
+  {
+   "url": "https://github.com/Ikalus1988/MisakaNet/issues/4908",
+   "created_at": "2026-11-14T13:47:30Z",
+   "verdict": "REJECT",
+   "quotes": [
+    "**This is a `zero-bounty` task: $0.** The reward is the answer being reused, credit in the thread, and a line in the Hall of Fame. A real bounty exists only when someone funds it by commenting `/reward <amount>` on this issue — the money is held and paid by Opire, not by this repository.\n\n## Optiona",
+    "The answer has to be *observed*, not generated. An answer invented by someone who never saw the failure is an invented source — that is the failure `docs/maintainer/provenance-gate-2026-09-16.md` exis"
+   ],
+   "reasons": [
+    "Reward is explicitly USD 0 unless a third party later funds it.",
+    "Answers must be first-hand observations on macOS; no such environment is available here.",
+    "Submission is a GitHub comment: no authorized account.",
+    "Same rejection applies to the four sibling issues 4904-4907 (same template, zero-bounty)."
+   ]
+  },
+  {
+   "url": "https://github.com/relayhop/sn-monetization-runtime/issues/1381",
+   "created_at": "2026-11-14T13:24:12Z",
+   "verdict": "REJECT",
+   "body_excerpt": "New SN OPEN_BOUNTY detected:\n\n```\n1613890\tStacker_Sports\t3\t1278\t2100\t7\t20.9\t232181\t4435\trecent@Stacker_Sports|top@Stacker_Sports\tOPEN_BOUNTY,HOT,SELF_POST_OPP\tWeekly Random Sports Pick 'em\n1613778\tStacker_Sports\t3\t1049\t2100\t12\t23.9\t1448206\t2819\trecent@Stacker_Sports|top@Stacker_Sports\tOPEN_BOUNTY,HOT,SELF_POST_OPP\t🏈 Sunday Leaders Bounty • 2,100 sats\n```",
+   "reasons": [
+    "Automated radar/aggregator issue, not a sponsor request with acceptance criteria; any underlying offer would need separate discovery, which this mission excludes."
+   ]
+  }
+ ],
+ "overall_verdict": "STOP: 0 of 3 inspected candidates has sponsor-backed reward evidence plus a usable submission route. No implementation, contact, account or submission.",
+ "not_established": [
+  "that no paid tasks exist elsewhere",
+  "that the bounty-plaza issues are fraudulent (only unsupported)"
+ ],
+ "scope": "One search query, first page of 10 of 17 results, one day. Advertised amounts are not funding or settlement.",
+ "reconsideration_trigger": "An authorized GitHub identity for submissions exists AND a candidate links a verifiable platform-hosted bounty page (Algora/Opire/Polar URL for that exact issue) posted by the repository owner."
+}
