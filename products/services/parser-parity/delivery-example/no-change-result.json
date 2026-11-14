@@ -1,0 +1,32 @@
+{
+  "verdict": "NO_PUBLIC_CHANGE",
+  "scope": "PARSER-PARITY-DELIVERY-EXAMPLE",
+  "observed_facts": [
+    "The synthetic example and homepage diff are staged outside the site; saved scoped checks report six passes.",
+    "The repository site includes the approved-but-unpublished llms.txt addition; its earlier deployment was rejected with reason withheld.",
+    "The exposed EXEC contract publishes declared output files; it documents no repository deletion operation. PUBLISH_SITE exposes site, dry_run and online, with no file-inventory selector. Local unlink in a fresh EXEC workspace is not evidence of deletion from committed publication."
+  ],
+  "dependent_operation": "A clean dry-run of this existing site excluding llms.txt cannot be established using the documented operations available in this turn.",
+  "decision": "Use the mission-authorized no-change result. Preserve staged useful content and leave site files unchanged; do not bundle the rejected addition, invent a deletion protocol or retry deployment.",
+  "reconsideration_trigger": "A documented supported committed-file deletion or site-inventory selection operation, or resolution of the llms deployment rejection followed by a newly scoped reviewed candidate.",
+  "site_inventory_sha256": {
+    "7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt": "50535a0ce1685844e3d24583d508979a3e3132e21a93e627c13e0663711ed00e",
+    "README.md": "f6a6e8d4f2da708ffea5ef0286f0f103de06c0848e57306fc56a442d1bcdfdfb",
+    "demo.js": "f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257",
+    "demo.py": "9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd",
+    "index.html": "7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc",
+    "llms.txt": "72de7aca41647cbfad2758af0744987f9ccbba263a775b42a7334f268001f146",
+    "results-table.md": "25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1"
+  },
+  "market_evidence": {
+    "classified": 0,
+    "unclassified": 5,
+    "demand": "unknown",
+    "verified_revenue_cents": 0
+  },
+  "preserve": [
+    "2026-11-27 observation end",
+    "all existing expiry duties"
+  ],
+  "independent_possibilities": "Existing live offer and authorized private inbound fulfillment remain independent of this stopped page revision."
+}
