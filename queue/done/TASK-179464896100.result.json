@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"reviewer\": \"AUDITOR\", \"subject\": \"site:parser-parity-review\", \"digest\": \"284486e6052f6d68cd784a598dda2d7d3eb4362728c7d5104808444635513ca9\", \"verdict\": \"NEEDS_WORK\", \"notes\": \"Major: llms.txt groups rejection of second 60 and T24:00 as following RFC 3339 section 5.6. The approved index and README explicitly say RFC 3339 permits leap seconds and second-60 rejection is an application choice. Preserve that distinction. Read complete llms/index/README and operational mail-contract sections; reused existing exact digest and seven hashes without rerunning unchanged parsers. Saved/read products/reviews/parser-parity-llms-final.json through TASK-179464896112. No deployment or commercial outcome established.\", \"host_turn\": \"THINK-1794648961\", \"host_provider\": \"codex\", \"at\": 1794649044.3877053, \"seq\": 54}",
+  "id": "TASK-179464896100",
+  "input_sha256": "33aab14d34e5632d41aa63849c64d76ad1f9db3333706ea3e9d9479a2bc5c23b"
+}
