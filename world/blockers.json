@@ -156,24 +156,27 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 697,
-    "turns_without_verified_revenue": 697,
+    "turns_without_new_interpreted_feedback": 698,
+    "turns_without_verified_revenue": 698,
     "turns_without_outcome": 0,
     "outcome_threshold": 12,
     "dry_since": null,
-    "last_outcome_turn": "THINK-1794641401",
-    "last_productive_turn": "THINK-1794641401",
-    "last_turn": "THINK-1794641401",
+    "last_outcome_turn": "THINK-1794643211",
+    "last_productive_turn": "THINK-1794643211",
+    "last_turn": "THINK-1794643211",
     "last_change": {
       "productive": true,
       "outcome": true,
       "mission_outcomes": [
-        "PARSER-PARITY-INDEXNOW-REVIEW"
+        "PARSER-PARITY-INDEXNOW-RELEASE"
       ],
       "new_products": [
-        "products/reviews/parser-parity-indexnow-independent.json"
+        "products/distribution/parser-parity-first-indexnow/release/indexnow-submission-response.txt",
+        "products/distribution/parser-parity-first-indexnow/release/live-index.html",
+        "products/distribution/parser-parity-first-indexnow/release/live-key.txt",
+        "products/distribution/parser-parity-first-indexnow/release/publication-result.json"
       ],
-      "new_product_count": 1,
+      "new_product_count": 4,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
