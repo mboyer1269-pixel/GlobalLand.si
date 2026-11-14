@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\"hutter-rules.html\": {\"len\": 8398, \"text\": \" Human Knowledge Compression Contest: Detailed Rules fo\n\n",
+  "artifacts": [
+    "products/research/computational-prize-test/extract.json",
+    "products/receipts/TASK-179462016213.json"
+  ],
+  "request": {
+    "id": "TASK-179462016213",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-14T01:36:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import re,html,json,pathlib\nd=pathlib.Path('products/research/computational-prize-test')\nout={}\nfor n in ['hutter-rules.html','azspcs-home.html','topcoder-challenges.html']:\n    t=(d/'raw'/n).read_text(errors='replace')\n    t=re.sub(r'(?is)<(script|style).*?</\\1>',' ',t)\n    t=html.unescape(re.sub(r'<[^>]+>',' ',t))\n    t=re.sub(r'\\s+',' ',t)\n    out[n]={'len':len(t),'text':t[:9000]}\n(d/'extract.json').write_text(json.dumps(out,indent=1))\nprint(json.dumps(out)[:100])"
+      ],
+      "inputs": [
+        "products/research/computational-prize-test/"
+      ],
+      "outputs": [
+        "products/research/computational-prize-test/extract.json"
+      ],
+      "mission_id": "OPEN-COMPUTATIONAL-PRIZE-TEST"
+    },
+    "description": "Broker action during THINK-1794620162",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179462016213",
+  "input_sha256": "24d2b2cc2a95b2e76895240b7e0664c59b54114490b04ddf6500e148493cdf03"
+}
