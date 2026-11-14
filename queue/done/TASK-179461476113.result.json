@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"blocker_id\": \"PARSER-REFERRAL-DEPLOY-REJECTED\", \"status\": \"OPEN\", \"raised_by\": \"ACQUISITION\", \"opened_at\": 1794614816.6801498, \"reports\": 1, \"title\": \"open-software-tenders referral deploy refused 2x (SiteError, reason withheld) despite recorded APPROVE of digest 30709cbb...\", \"category\": \"CAPABILITY\", \"needs_founder\": false, \"detail\": \"Observed 2026-11-14: PUBLISH_SITE deploys TASK-179461441200 and TASK-179461476111 were REJECTED with SiteError, detail withheld. Dry_run TASK-179461476110 reproduces unchanged digest 30709cbbacecee6d9780eda2d799cd3de3ffbfb3191fb6a61ed69cc50a2b7e00 (index 88912c12...). AUDITOR APPROVE for that digest was recorded at 1794612671 (PARSER-PARITY-REFERRAL-REVIEW). FETCH TASK-179461476112: live preview.html HTTP 200 sha256 b359b3bf..., i.e. the previously approved release is still online and unchanged. Cause unknown and not asserted; the same pattern as SUPPLIER-SHOPIFY-DEPLOY-REJECTED (possible reviewer/writer provider overlap, not observable to agents). Dependent operation: only this one internal referral link to parser-parity-review. Not dependent: the live tender page, the live parser-parity page, all expiry duties. No further deploy retries. Host-operator handoff: expose the SiteError reason or the writer provider; an EXTERNAL (Grok) or founder APPROVE of 30709cbb... would satisfy the gate if independence is the cause. Reconsider when the reason is exposed or such an APPROVE appears; then one deploy, FETCH preview.html expecting 36978b9ce93a3f516d2f66b163730fc8c9b7ee55f39d7886c267b660323aea49.\", \"mission_id\": \"PARSER-PARITY-CONTEXTUAL-REFERRAL\", \"expected_gain\": \"One internal link from the tender preview to the parser-parity offer; exposure only, no demand or revenue implied.\", \"last_reported_by\": \"ACQUISITION\", \"last_reported_at\": 1794614816.6801498}",
+  "request": {
+    "id": "TASK-179461476113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-14T00:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "raise_blocker",
+      "blocker_id": "PARSER-REFERRAL-DEPLOY-REJECTED",
+      "agent_id": "ACQUISITION",
+      "title": "open-software-tenders referral deploy refused 2x (SiteError, reason withheld) despite recorded APPROVE of digest 30709cbb...",
+      "category": "CAPABILITY",
+      "needs_founder": false,
+      "detail": "Observed 2026-11-14: PUBLISH_SITE deploys TASK-179461441200 and TASK-179461476111 were REJECTED with SiteError, detail withheld. Dry_run TASK-179461476110 reproduces unchanged digest 30709cbbacecee6d9780eda2d799cd3de3ffbfb3191fb6a61ed69cc50a2b7e00 (index 88912c12...). AUDITOR APPROVE for that digest was recorded at 1794612671 (PARSER-PARITY-REFERRAL-REVIEW). FETCH TASK-179461476112: live preview.html HTTP 200 sha256 b359b3bf..., i.e. the previously approved release is still online and unchanged. Cause unknown and not asserted; the same pattern as SUPPLIER-SHOPIFY-DEPLOY-REJECTED (possible reviewer/writer provider overlap, not observable to agents). Dependent operation: only this one internal referral link to parser-parity-review. Not dependent: the live tender page, the live parser-parity page, all expiry duties. No further deploy retries. Host-operator handoff: expose the SiteError reason or the writer provider; an EXTERNAL (Grok) or founder APPROVE of 30709cbb... would satisfy the gate if independence is the cause. Reconsider when the reason is exposed or such an APPROVE appears; then one deploy, FETCH preview.html expecting 36978b9ce93a3f516d2f66b163730fc8c9b7ee55f39d7886c267b660323aea49.",
+      "mission_id": "PARSER-PARITY-CONTEXTUAL-REFERRAL",
+      "expected_gain": "One internal link from the tender preview to the parser-parity offer; exposure only, no demand or revenue implied."
+    },
+    "description": "Broker action during THINK-1794614761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179461476113",
+  "input_sha256": "a3eb15816a03d8cbd5e263a1f702246046b9c597bab1ddab09f5260348b96934"
+}
