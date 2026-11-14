@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "sha c29246ab0fa7b68362f42e563f71001c8d4b3bee9e1ea47098e0403e438ffa0e 33324\n\nWordPress website developer | WordPress Jobs\nWordPress.org\n\t\t\tWordPress Jobs\t\t\nJobs\nCandidates\nFAQ\nFeedback\nPost a Job\nJobs\n/\n\tWordPress website developer\nWordPress website developer\nPosted \nNovember 5, 2026\nDevelopment\nWe are seeking a capable WordPress developer for a short-term, paid website development project.\nThe client is a privately held Canadian management consulting startup.\nThe project involves developing approximately six pages from completed design storyboards, supplied branding and approved website content.\nThe mandatory platform is WordPress using the Gutenberg block editor, Kadence Theme and Kadence Blocks.\nWe are particularly interested in a student, recent graduate or junior freelancer who has already completed professional-quality WordPress websites.\nOur anticipated budget is C$2,000–$2,500 on a fixed-price basis, with an immediate start preferred.\nThe work can be performed remotely.\nWe would appreciate receiving examples of relevant completed websites, confirmation of experience with Kadence, and an indication of availability.\nThe client’s identity and detailed project materials will be provided to shortlisted candidates under appropriate confidentiality arrangements.\nIf you are interested, or can recommend a suitable developer, we would welcome hearing from you.\nThank you.\n\t\t\t\t\t\tApply via Email\t\t\t\t\t\nJob Details\nCompany\n\t\t\t\t\t\tRSL\t\t\t\t\t\nJob Type\n\t\t\t\t\t\tProject\t\t\t\t\t\nLocation\n\t\t\t\t\t\tRemote\t\t\t\t\t\nBudget\n\t\t\t\t\t\t$2,000-$2,500\t\t\t\t\t\nWordPress Professionals Open to Work\ndariocositore91\n→\nEileen Zambrana\n\t\t\t\t\t\t\t\tWeb Developer\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n→\nadkhil\n→\nmusomo\n\t\t\t\t\t\t\t\tIndependent Designer & WordPress Developer\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\nSelf-employed\n→\nView all candidates →\nAbout\nAbout WordPress\nNews\nHosting\nDonate\nLearn\nLearn WordPress\nDeveloper Resources\nDocumentation\nSupport Forums\nCommunity\nGet Involved\nWordCamp\nWordPress.TV\nShowcase\nWordPress Jobs\nCurrent Openings\nBrowse Candidates\nPost a Job\nFAQ\nRemove a Job\nFeedback\nWordPress.org\nX / Twitter\nFacebook\nYouTube\nCode is Poetry.\n\nphp None\nwp None\nnode /usr/local/bin/node\nnpm /usr/local/bin/npm\ncomposer None\nmysql None\nmariadb None\nsqlite3 None\ndocker None\nchromium None\ngoogle-chrome None\nfirefox None\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179467956111.json"
+  ],
+  "request": {
+    "id": "TASK-179467956111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-14T18:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,hashlib,shutil,subprocess\nb=open('products/research/canadian-kadence-project-20261114.html','rb').read()\nprint('sha',hashlib.sha256(b).hexdigest(),len(b))\nt=b.decode('utf-8','replace')\nt=re.sub(r'(?is)<(script|style|noscript)[^>]*>.*?</\\1>','',t)\nt=re.sub(r'(?s)<[^>]+>','\\n',t)\nt=html.unescape(t)\nt=re.sub(r'[\\w.+-]+@[\\w-]+\\.[\\w.-]+','[email]',t)\nt=re.sub(r'\\n\\s*\\n+','\\n',t)\ni=t.find('WordPress Website Developer')\nprint(t[:6000] if i<0 else t[max(0,i-200):i+6000])\nfor p in ['php','wp','node','npm','composer','mysql','mariadb','sqlite3','docker','chromium','google-chrome','firefox']:\n    print(p,shutil.which(p))\n"
+      ],
+      "inputs": [
+        "products/research/canadian-kadence-project-20261114.html"
+      ],
+      "outputs": [],
+      "mission_id": "CANADIAN-KADENCE-PROJECT-FIT"
+    },
+    "description": "Broker action during THINK-1794679561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179467956111",
+  "input_sha256": "b39584bbe01ec3bdc50cf80c0b5988dfbe608d5f6572513ee6bd205a083e1562"
+}
