@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"status\": \"BASELINE_COMPARISON_ONLY_LIVE_RELEASE_CHECK_PENDING\",\n  \"comparisons\": [\n    {\n      \"source\": \"products/services/open-software-tenders/refresh-20261114/source-105246-2026.json\",\n      \"sha256\": \"ca6001da1e1495bf1ade3a710f7cafffca04dd2521e395233aff318cc257c0ef\",\n      \"release\": \"105246-2026\",\n      \"baseline_found\": true,\n      \"compared_fields\": [\n        \"buyer\",\n        \"parties\",\n        \"tender\"\n      ],\n      \"changed_fields\": {}\n    },\n    {\n      \"source\": \"products/services/open-software-tenders/refresh-20261114/source-105838-2026.json\",\n      \"sha256\": \"979597e94eb74dbe7bea520f8f9071c16adde2af7fe5ce431ae5cfeac981cbf3\",\n      \"release\": \"105838-2026\",\n      \"baseline_found\": true,\n      \"compared_fields\": [\n        \"buyer\",\n        \"parties\",\n        \"tender\"\n      ],\n      \"changed_fields\": {}\n    },\n    {\n      \"source\": \"products/services/open-software-tenders/refresh-20261114/source-106518-2026.json\",\n      \"sha256\": \"23434b06e6816f8bc49baa963b6fdbf7772775c0dbcece88a02ee9918d3bf4ba\",\n      \"release\": \"106518-2026\",\n      \"baseline_found\": true,\n      \"compared_fields\": [\n        \"buyer\",\n        \"parties\",\n        \"tender\"\n      ],\n      \"changed_fields\": {}\n    }\n  ],\n  \"limitations\": \"Original saved API pages compared; latest live-release consistency and mission closure remain delegated. No public changes, acquisition or revenue.\"\n}\n\n",
+  "artifacts": [
+    "products/services/open-software-tenders/refresh-20261114/baseline-comparison.json",
+    "products/receipts/TASK-179469936112.json"
+  ],
+  "request": {
+    "id": "TASK-179469936112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-14T23:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib\nfrom pathlib import Path\nbase=Path('products/services/open-software-tenders/refresh-20261114'); old=[]\nfor n in ['raw-page1.json','raw-page2.json']: old+=json.loads(Path('products/research/tender-continuity',n).read_text())['releases']\nrows=[]\nfor p in sorted(base.glob('source-*.json')):\n d=json.loads(p.read_text()); releases=d.get('releases',[d])\n for r in releases:\n  candidates=[x for x in old if x.get('id')==r.get('id')]\n  if not candidates: rows.append({'source':str(p),'release':r.get('id'),'baseline_found':False});continue\n  a=candidates[0]; fields=['buyer','parties','tender']; changes={k:{'before':a.get(k),'after':r.get(k)} for k in fields if a.get(k)!=r.get(k)}\n  rows.append({'source':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'release':r.get('id'),'baseline_found':True,'compared_fields':fields,'changed_fields':changes})\nresult={'status':'BASELINE_COMPARISON_ONLY_LIVE_RELEASE_CHECK_PENDING','comparisons':rows,'limitations':'Original saved API pages compared; latest live-release consistency and mission closure remain delegated. No public changes, acquisition or revenue.'}\nout=base/'baseline-comparison.json';out.write_text(json.dumps(result,ensure_ascii=False,indent=2));print(out.read_text())"
+      ],
+      "inputs": [
+        "products/research/tender-continuity/raw-page1.json",
+        "products/research/tender-continuity/raw-page2.json",
+        "products/services/open-software-tenders/refresh-20261114/"
+      ],
+      "outputs": [
+        "products/services/open-software-tenders/refresh-20261114/baseline-comparison.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794699361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179469936112",
+  "input_sha256": "900bad12835171edcc601327e6fa36865f3a31f1996d4aa314f48f5ac225f752"
+}
