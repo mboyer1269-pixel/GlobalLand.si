@@ -1,0 +1,59 @@
+{
+ "mission": "OPEN-COMPUTATIONAL-PRIZE-TEST",
+ "observed_at": "2026-11-14",
+ "candidate_limit": 3,
+ "method": "FETCH of official pages (TASK-179461980101, TASK-179462016210/211/212/214), text extract TASK-179462016213 (extract.json). No registration, contact, terms acceptance or solving.",
+ "candidates": [
+  {
+   "name": "Topcoder challenges",
+   "url": "https://www.topcoder.com/opportunities/challenge",
+   "observed": "HTTP 200 but page is a JavaScript shell (quote: \"You need to enable JavaScript to run this app.\"); guessed public API URL returned HTTP 404 (TASK-179462016210); an earlier FETCH was refused by the host secret filter (TASK-179461980102).",
+   "prize": "UNKNOWN (listing unreadable)",
+   "ai_rules": "UNREAD",
+   "submission": "requires member account (not held)",
+   "verdict": "REJECT - listing not observable with FETCH; account prerequisite",
+   "limit": "Says nothing about whether suitable challenges exist."
+  },
+  {
+   "name": "Al Zimmermann's Programming Contests",
+   "url": "https://azspcs.com/",
+   "observed": "Quotes: \"Yosemite Contest postponed.\" and \"Yellowstone Contest postponed.\"; prizes \"Digital gift cards for Art of Play ... $500, $250, $100, $50 ... $25\"; \"To enter a contest, you must register.\"; \"You send me solutions, not programs.\" Last contest listed ended 21 Feb 2026.",
+   "prize": "gift cards (not cash), USD face value, advertised only",
+   "deadline": "none: no contest currently open",
+   "ai_rules": "not stated on home page",
+   "submission": "website after registration (no account held)",
+   "verdict": "REJECT - no open contest; non-cash prize; registration needed",
+   "reconsider": "when a contest start date is published and its rules are readable"
+  },
+  {
+   "name": "Hutter Prize (enwik9 compression)",
+   "url": "http://prize.hutter1.net/hrules.htm",
+   "observed": "Quotes: \"Compress the 1GB file enwik9 to less than the current record of about 116MB\"; \"There is no deadline.\"; \"Award = Z×( L - S )/ L\" with \"Z = amount in prize fund ( 500'000€ )\"; \"Minimum award is 1% of Z\"; \"Anyone may participate at this contest by emailing\" a list to three named committee members; \"Each program must run in less than 70'000/ T hours ... at most 10GB RAM ... No GPU usage\"; source \"under some OSI license\"; \"Payment of the prize cannot be legally enforced. Marcus Hutter will make the final decision\".",
+   "prize": "advertised minimum EUR 5000 for >=1% (~1 MB) improvement; not verified funding; payment discretionary",
+   "deadline": "none",
+   "scoring": "objective (total bytes), verified on committee machines, >=30 days public comment",
+   "ai_rules": "not stated on rules page (neither permitted nor prohibited) - mission required explicit permission",
+   "submission": "email to three named individuals: GlobalLand has no outgoing contact path (outgoing_acquisition NOT_IMPLEMENTED); would need founder to send and to be the payee",
+   "feasibility": "UNTESTED and judged implausible in this sandbox: beating a record held by specialised compressors needs repeated ~50-100 h single-core runs over a 1 GB corpus with 10 GB RAM; enwik9 exceeds the 1 MiB FETCH limit; no measured attempt was made",
+   "verdict": "REJECT for now - AI permission not explicit, submission route needs founder-sent email and identity, compute/data not accessible",
+   "reconsider": "if founder offers to submit by email and supplies enwik9 plus long-running compute"
+  }
+ ],
+ "verdict": "STOP (bounded)",
+ "selected_experiment": null,
+ "summary": "0 of 3 candidates qualified. No open cash contest with explicit AI permission and an accessible submission route was observed among these three. This is not a claim that none exists elsewhere.",
+ "uncertainties": [
+  "Topcoder inventory unobserved",
+  "AZSPCS detailed rules unread",
+  "Hutter current record and AI stance not confirmed beyond rules page",
+  "Kaggle/AIcrowd/Zindi not inspected (candidate limit); all need accounts and terms acceptance"
+ ],
+ "not_done": [
+  "registration",
+  "terms acceptance",
+  "contact",
+  "submission",
+  "solution work"
+ ],
+ "revenue": "none; advertised prizes are not funding"
+}
