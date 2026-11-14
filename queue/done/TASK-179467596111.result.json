@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "9\n \n <title>M/WBE subcontractors wanted: PDF accessibility remediation, WCAG re-audit</title>\n <link>https://jobs.wordpress.net/job/m-wbe-subcontractors-wanted-pdf-accessibility-remediation-wcag-re-audit/</link>\n \n jobposter \n <pubDate>Thu, 12 Nov 2026 18:25:08 +0000</pubDate>\n https://jobs.wordpress.net/?post_type=job&p=65004 \n\n Marc Gratch Consulting is bidding as prime on a public-agency WordPress project: the Sacramento Housing and Redevelopment Agency’s RFP 2621-KP, “SHRA Website Accessibility, Hosting, and WordPress Support.” Proposals are due November 30, 2026. We’re looking for subcontractors for two pieces of the work, and we especially want to hear from Minority- and Women-Owned Business Enterprises […] \n Marc Gratch Consulting is bidding as prime on a public-agency WordPress project: the Sacramento Housing and Redevelopment Agency’s RFP 2621-KP, “SHRA Website Accessibility, Hosting, and WordPress Support.” Proposals are due November 30, 2026. \n We’re looking for subcontractors for two pieces of the work, and we especially want to hear from Minority- and Women-Owned Business Enterprises (M/WBE). \n 1. Document remediation. Tagging and fixing PDFs and Microsoft Office files to WCAG 2.1 AA and PDF/UA. We estimate 1,000 to 2,000 pages between January and April 2027, mostly short notices, guides and fillable forms linked from a WordPress site. \n 2. Independent accessibility re-audit. A yearly WCAG 2.1 AA review of the WordPress site by someone who isn’t on the team maintaining it. \n All work is remote. You can quote on either piece or both. \n To be considered, email by November 23, 2026 with: \n \n Your pricing: per page for standard documents, and for forms or complex tables; per audit for the re-audit \n Typical turnaround \n The tools and testing methods you use \n One or two examples of similar work \n Your M/WBE certification, if you hold one \n \n Questions are welcome at the same address. \n Marc Gratch \nMarc Gratch Consulting \n \n \n \n 65004 \n\n",
+  "artifacts": [
+    "products/receipts/TASK-179467596111.json"
+  ],
+  "request": {
+    "id": "TASK-179467596111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-14T17:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html\ns=open('products/research/wordpress-paid-work-20261114.xml',encoding='utf-8').read()\nitems=re.findall(r'<item>.*?</item>',s,re.S)\nprint(len(items))\nfor it in items:\n    if 'accessibility' in it.lower():\n        t=html.unescape(re.sub(r'<!\\[CDATA\\[|\\]\\]>','',it))\n        t=re.sub(r'<(?!/?(title|link|pubDate)\\b)[^>]+>',' ',t)\n        print(re.sub(r'[ \\t]+',' ',t)[:9000]);break\n"
+      ],
+      "inputs": [
+        "products/research/wordpress-paid-work-20261114.xml"
+      ],
+      "outputs": [],
+      "mission_id": "ACCESSIBILITY-SUBCONTRACT-FIT"
+    },
+    "description": "Broker action during THINK-1794675961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179467596111",
+  "input_sha256": "f76a107a64203498dc74fbcfb2a9687a89dd1c350c40ac2ea2ddcc6f7ae9b8c9"
+}
