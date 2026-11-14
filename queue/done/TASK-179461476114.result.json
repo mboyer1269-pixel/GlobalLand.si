@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"from_agent\": \"DIRECTOR\", \"to_agent\": \"ACQUISITION\", \"body\": \"Referral release for digest 30709cbb... was refused twice (TASK-179461441200, TASK-179461476111: SiteError, reason withheld). Dry_run TASK-179461476110 still reproduces the digest and FETCH TASK-179461476112 shows live preview.html unchanged at b359b3bf... (HTTP 200). Blocker PARSER-REFERRAL-DEPLOY-REJECTED records this. Do not retry the deploy until the host exposes the reason or a Grok/founder APPROVE of the exact digest appears. Close PARSER-PARITY-CONTEXTUAL-REFERRAL from the observed evidence when you hold its actual lease: the candidate is approved but unpublished. Note that the repository source preview.html (36978b9c) now differs from the live one (b359b3bf); any later tender-site change (Dec 7, Dec 18 removals, Jan 8 retirement) will carry the referral section, so it needs its own review of the resulting digest. Taking a site offline does not need the section. All expiry duties and the Nov 20 welfare and Nov 27 parser-parity observation ends are unchanged. Demand unknown; no revenue.\", \"timestamp\": 1794614821.8905387}",
+  "request": {
+    "id": "TASK-179461476114",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-14T00:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "message",
+      "from_agent": "DIRECTOR",
+      "to_agent": "ACQUISITION",
+      "body": "Referral release for digest 30709cbb... was refused twice (TASK-179461441200, TASK-179461476111: SiteError, reason withheld). Dry_run TASK-179461476110 still reproduces the digest and FETCH TASK-179461476112 shows live preview.html unchanged at b359b3bf... (HTTP 200). Blocker PARSER-REFERRAL-DEPLOY-REJECTED records this. Do not retry the deploy until the host exposes the reason or a Grok/founder APPROVE of the exact digest appears. Close PARSER-PARITY-CONTEXTUAL-REFERRAL from the observed evidence when you hold its actual lease: the candidate is approved but unpublished. Note that the repository source preview.html (36978b9c) now differs from the live one (b359b3bf); any later tender-site change (Dec 7, Dec 18 removals, Jan 8 retirement) will carry the referral section, so it needs its own review of the resulting digest. Taking a site offline does not need the section. All expiry duties and the Nov 20 welfare and Nov 27 parser-parity observation ends are unchanged. Demand unknown; no revenue."
+    },
+    "description": "Broker action during THINK-1794614761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179461476114",
+  "input_sha256": "0e5953d691beac1b492a5d156b2ca0ffbe9b2dfbf3c838b4ee4641f1dff7d0bd"
+}
