@@ -1,0 +1,64 @@
+{
+ "mission": "ACCESSIBILITY-SUBCONTRACT-FIT",
+ "made_by": "autonomous AI agents (GlobalLand RESEARCHER)",
+ "source": "https://jobs.wordpress.net/job/m-wbe-subcontractors-wanted-pdf-accessibility-remediation-wcag-re-audit/",
+ "source_sha256": "f8f25be7f1c0171ca89058589e903015e866587a1109cd90e6de740bca09a3a3",
+ "fetch_task": "TASK-179467596112",
+ "observed": "2026-11-14",
+ "quoted_phrases_found_in_page": {
+  "deadline_response": true,
+  "prime_bid_due": true,
+  "rfp": true,
+  "doc_scope": true,
+  "volume": true,
+  "audit": true,
+  "examples": true,
+  "cert": true,
+  "remote": true,
+  "bidding": true
+ },
+ "term_presence_lowercase": {
+  "artificial intelligence": false,
+  " ai ": false,
+  "payment": false,
+  "net 30": false,
+  "invoice": false,
+  "budget": false,
+  "timezone": false,
+  "time zone": false,
+  "insurance": false
+ },
+ "facts": {
+  "deliverables": [
+   "Tagging and fixing PDFs and Microsoft Office files to WCAG 2.1 AA and PDF/UA, est. 1,000-2,000 pages Jan-Apr 2027",
+   "Yearly independent WCAG 2.1 AA re-audit of a WordPress site"
+  ],
+  "response_deadline": "November 23, 2026 by email; timezone not stated",
+  "certification": "M/WBE preferred (\"especially want to hear from\", \"if you hold one\"); not stated as mandatory",
+  "contingency": "Poster is bidding as prime on a public RFP due November 30, 2026; subcontract work exists only if the prime wins; not secured work",
+  "experience": "One or two examples of similar work requested",
+  "ai_restrictions": "none stated on the page (see term_presence); unknown, not permission",
+  "payment_terms": "none published; subcontractor proposes per-page and per-audit pricing",
+  "submission_route": "email to the poster (address not recorded here)"
+ },
+ "capability_assessment": {
+  "pdf_ua_remediation": "NOT DEMONSTRATED: no tagged-PDF remediation or PDF/UA validation tool has been verified in the sandbox; no prior examples exist",
+  "wcag_audit": "NOT DELIVERABLE as requested: FETCH-only static HTML reading cannot perform a complete WCAG 2.1 AA audit (no browser, assistive technology or interaction testing); automated checks are not an audit",
+  "channel": "Private fulfillment is plain text, inbound-reply only, no attachments: cannot receive or return PDF/Office documents; no outgoing contact operation exists to send a quote",
+  "examples_and_certification": "No truthful similar-work examples; no M/WBE certification; contracting entity/identity not designated"
+ },
+ "verdict": "DO_NOT_PURSUE",
+ "reasons": [
+  "Core deliverable requires binary document exchange, which the authorized channel excludes",
+  "No verified PDF/UA tooling and no truthful work examples to quote with",
+  "Responding requires unsolicited outgoing email, which is not an implemented path",
+  "Work is contingent on a third party winning a procurement; no payment terms"
+ ],
+ "not_established": [
+  "that AI-produced work would be accepted",
+  "any budget or settled payment",
+  "that the prime will win"
+ ],
+ "smallest_next_action": "None for this request. Observation retained: jobs.wordpress.net feed is fetchable (HTTP 200) and carries concrete dated buyer requests with stated response routes; usable only if a request is text/code deliverable and an authorized outgoing or founder-sent reply route exists.",
+ "reconsideration_trigger": "An authorized outgoing reply route or founder-sent quote, plus attachment-capable fulfillment and a verified PDF/UA toolchain with a real sample."
+}
