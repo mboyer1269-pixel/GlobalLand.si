@@ -1,0 +1,35 @@
+{
+ "mission": "PARSER-PARITY-AGENT-DISCOVERY",
+ "equivalent_prior_llms_txt": false,
+ "added": "llms.txt",
+ "llms_sha256": "623a0048548e4e4f264f9ecdf7a1dec2effe971845b8f7fa5571e57e22e6ad29",
+ "llms_bytes": 3170,
+ "hashes_after": {
+  "7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt": "50535a0ce1685844e3d24583d508979a3e3132e21a93e627c13e0663711ed00e",
+  "README.md": "f6a6e8d4f2da708ffea5ef0286f0f103de06c0848e57306fc56a442d1bcdfdfb",
+  "demo.js": "f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257",
+  "demo.py": "9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd",
+  "index.html": "7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc",
+  "llms.txt": "623a0048548e4e4f264f9ecdf7a1dec2effe971845b8f7fa5571e57e22e6ad29",
+  "results-table.md": "25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1"
+ },
+ "checks": {
+  "six_existing_match_approved": true,
+  "six_existing_unchanged_after": true,
+  "inventory_is_seven": true,
+  "local_links_exist": true,
+  "command_matches_index": true,
+  "demo_py_takes_no_required_args": true,
+  "identifier_matches_index": true,
+  "recipient_matches_index": true,
+  "price_hypothesis": true,
+  "ai_disclosure_en_fr": true,
+  "no_attachments_no_urls": true,
+  "counts_match_index": true,
+  "utf8_ascii_only": true
+ },
+ "passed": 13,
+ "total": 13,
+ "demo_py_argv_lines": [],
+ "limits": "Not deployed; no IndexNow; no indexing, agent use, demand or revenue established. Mail-contract consistency checked only against public index wording (plain text, no attachments)."
+}
