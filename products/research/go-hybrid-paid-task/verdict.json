@@ -1,0 +1,104 @@
+{
+ "mission": "GO-HYBRID-PAID-TASK",
+ "observed_at": "2026-11-14",
+ "sources": {
+  "issue": "https://github.com/limitlessprojects/Go-Hybrid/issues/186 (API FETCH TASK-179462160500)",
+  "comments": "TASK-179462196111",
+  "repo": "TASK-179462196112",
+  "BOUNTY.md": "https://raw.githubusercontent.com/limitlessprojects/Go-Hybrid/HEAD/BOUNTY.md (TASK-179462196113)",
+  "MOONSHOT.md": "https://raw.githubusercontent.com/limitlessprojects/Go-Hybrid/HEAD/MOONSHOT.md (TASK-179462196114)"
+ },
+ "sha256": {
+  "issue-186.json": "60ebbaa5a7592c35cdf2983390ac4d937dcff699387281c08eecf76602b9866e",
+  "issue-186-comments.json": "2fa9562b3db5e0dd95eb905f8888793fe00a1fa86e817a892ada39f318a9eaec",
+  "BOUNTY.md": "335010d9467a322a814203999537bc4c822fb5792f106e94fd176569a9ea0c5d",
+  "MOONSHOT.md": "6768dba114374de2fd615ea3abf58bb445acc05e664a489122c913d044259e1d",
+  "repo.json": "99cfa6bdaeb9cf8e6ca8c50256ccf97484e0b1d6c47426fd2703c7fd2d2e2849"
+ },
+ "quotations": {
+  "issue_author_line": "*Proposed by **Rascoff (AI agent), operated by @CarlitoDon**",
+  "wildcard_split": "$250 when the proposal is accepted into the\n  ledger, $250 when its learning is published",
+  "one_winner": "One\n  wildcard winner per cycle",
+  "ai_open": "Open to humans and AI: we judge the\nreport, not the author.",
+  "credit_account": "Credit goes to the **GitHub account** that submits",
+  "rail": "**USDC on Base to a self-custody wallet address you\ncontrol**",
+  "final_say": "The maintainer keeps the final say on whether a report qualifies, its tier,\nand its payout.",
+  "pay_after_repro": "**Pay only after reproduction.**",
+  "ladder_4_10": "| 4th to 10th | **$45 each** |",
+  "ledger_w011": "| W-011 | Erase the `.hy`/`.go` split",
+  "window_pending": "| pending |"
+ },
+ "quotation_found_verbatim": {
+  "issue_author_line": true,
+  "wildcard_split": true,
+  "one_winner": true,
+  "ai_open": true,
+  "credit_account": true,
+  "rail": true,
+  "final_say": true,
+  "pay_after_repro": true,
+  "ladder_4_10": true,
+  "ledger_w011": true,
+  "window_pending": true
+ },
+ "repo": {
+  "full_name": "limitlessprojects/Go-Hybrid",
+  "description": "Hybrid: a Go superset with compiler-enforced ownership & sendability. Add a .hy file, get plain readable Go. If you know Go, you already know Hybrid.",
+  "created_at": "2026-10-11T16:49:28Z",
+  "pushed_at": "2026-11-13T23:59:44Z",
+  "stargazers_count": 29,
+  "forks_count": 310,
+  "open_issues_count": 2070,
+  "archived": false,
+  "has_issues": true
+ },
+ "license_spdx": "NOASSERTION",
+ "owner_type": "User",
+ "comment_authors": [
+  [
+   "limitlessprojects",
+   "OWNER",
+   "2026-10-17T05:05:47Z"
+  ],
+  [
+   "Rohank143",
+   "NONE",
+   "2026-10-21T06:38:48Z"
+  ],
+  [
+   "harmweber787-png",
+   "NONE",
+   "2026-10-27T23:10:50Z"
+  ],
+  [
+   "OGUT1999",
+   "NONE",
+   "2026-10-28T11:07:01Z"
+  ],
+  [
+   "OGUT1999",
+   "NONE",
+   "2026-10-28T11:11:48Z"
+  ]
+ ],
+ "findings": {
+  "nature_of_issue": "Issue #186 is NOT a task offered to contributors. It is a Wildcard-track PROPOSAL written by another party (an AI agent operated by GitHub user CarlitoDon). The $250 figures are the two milestone payments that the track would pay to the winning proposal author. Ledger entry W-011 names CarlitoDon as author.",
+  "sponsor": "repository owner account limitlessprojects (identity beyond the GitHub account not established)",
+  "currency": "USD-denominated; leading payout rail USDC on Base to a self-custody wallet; final rail decision was promised in discussion #295 (not read)",
+  "reward_conditions": "One wildcard winner per cycle among 23 entries in the 2026-11-01 window; verdict pending as observed in MOONSHOT.md; maintainer keeps final say.",
+  "assignment_status": "No GitHub assignee, but the proposal slot belongs to its author; two third parties already posted spike PRs (#1077, #2074) and one posted unrelated PRs. A further spike by us would be at best an auxiliary input with no stated payment entitlement.",
+  "ai_rules": "AI submissions explicitly permitted; credit goes to the submitting GitHub account; flooding disqualifies.",
+  "submission_prerequisites": "A GitHub account to open issues/PRs (GlobalLand holds none; legal-guardrails forbid posting without a founder-approved account). CI must pass on their side for fix PRs.",
+  "payment_prerequisites": "A self-custody wallet on Base (none held; no treasury path from USDC to verified CAD is configured), or a case-by-case alternative. Paid-out history NOT observed: ledger payout column shows only W-000 (the owner's own track-founding entry) as $250 logged; Hall of Fame lists credits, not payment receipts.",
+  "funds": "Advertised only. No evidence of any settled payout to an external contributor was observed.",
+  "competition_signal": "Issue/PR numbers above 4200 within about one month of repo activity and 23+ wildcard entries for one $500 slot indicate heavy agent competition."
+ },
+ "verdict": "STOP for issue #186 (not our task; reward belongs to another author; no account; no wallet).",
+ "adjacent_observation_not_pursued": "The same program has a ladder track ($45-$75 per slot, top 10 per cycle) for reproduced soundness bugs with a minimal .hy repro. It is AI-permitted and offline-testable in principle, but shares the same two missing prerequisites (GitHub account, payout wallet), has unobserved payout history, and heavy competition. Verdict PURSUE_IF: only if the founder independently provides a dedicated GitHub account and an accepted payout rail AND at least one external payout is publicly evidenced. No founder action is requested on this evidence.",
+ "uncertainties": [
+  "Discussions #295 and #365 (rail decision, window verdicts) not read",
+  "cycle close date not found in BOUNTY.md",
+  "whether any contributor has actually been paid"
+ ],
+ "not_done": "No implementation, account, contact, submission, agreement or spending."
+}
