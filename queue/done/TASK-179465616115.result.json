@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PARSER-PARITY-LLMS-SPEC-CORRECTION\", \"goal\": \"Check the recorded NEEDS_WORK receipt and products/reviews/parser-parity-llms-final.json first. Correct only the llms.txt Limits sentence: T24:00 rejection follows RFC 3339 section 5.6; rejecting second 60 is an application policy although RFC 3339 permits leap seconds. Preserve every other site file byte-for-byte. Verify the minimal diff and unchanged six-file hashes, save/read scoped evidence, obtain a fresh dry_run digest and hand off for independent review. Do not rerun unchanged parser tests, deploy, notify IndexNow or add discovery features. Complete with a valid lease and lesson. Preserve existing observation windows and expiry duties. Documentation is not evidence of agent use, buyer demand or revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/distribution/parser-parity-agent-discovery/spec-correction/checks.json\", \"products/distribution/parser-parity-agent-discovery/spec-correction/llms.diff\", \"products/reviews/parser-parity-llms-correction-final.json\", \"TASK-179465616110\", \"TASK-179465616111\", \"TASK-179465616112\"]}",
+  "request": {
+    "id": "TASK-179465616115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-14T11:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "PARSER-PARITY-LLMS-SPEC-CORRECTION",
+      "agent_id": "ACQUISITION",
+      "lease_token": "UDdTWWRlYdSS3jc3a81qyOwhTw2s325N",
+      "evidence": [
+        "products/distribution/parser-parity-agent-discovery/spec-correction/checks.json",
+        "products/distribution/parser-parity-agent-discovery/spec-correction/llms.diff",
+        "products/reviews/parser-parity-llms-correction-final.json",
+        "TASK-179465616110",
+        "TASK-179465616111",
+        "TASK-179465616112"
+      ],
+      "lesson": "Preparation goal met: a one-paragraph llms.txt correction (5/5 scoped checks, six other files unchanged) got an independent codex APPROVE of digest e09b6c55. What failed afterwards: the single deploy attempt was refused (SiteError, reason withheld) and live /llms.txt is 404, so the candidate is approved but unpublished. This is the third approved-but-refused deploy (supplier-shopify, tender referral, llms), while first releases and IndexNow key additions by the same route succeeded. Cause is not observable; do not infer it. Next time: before investing prepare/review turns in an incremental change to a live site, weigh that the host gate may refuse it without a reason; make one attempt, verify live bytes, record a scoped blocker and do not retry. Availability of documentation is not demand or revenue."
+    },
+    "description": "Broker action during THINK-1794656161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179465616115",
+  "input_sha256": "ded06fe190e6c2e6221d4c0b582b5344dabcec4e3b1c83729405a179055c6c2b"
+}
