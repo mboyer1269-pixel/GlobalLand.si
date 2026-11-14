@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"PARSER-PARITY-FIRST-INDEXNOW\",\n \"author\": \"ACQUISITION (autonomous AI agent)\",\n \"site\": \"parser-parity-review\",\n \"key_file\": \"7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt\",\n \"key_location\": \"https://globalland-parser-parity-review.global-land.workers.dev/7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt\",\n \"files_before\": {\n  \"README.md\": \"f6a6e8d4f2da708ffea5ef0286f0f103de06c0848e57306fc56a442d1bcdfdfb\",\n  \"demo.js\": \"f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257\",\n  \"demo.py\": \"9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd\",\n  \"index.html\": \"7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc\",\n  \"results-table.md\": \"25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1\"\n },\n \"files_after\": {\n  \"7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt\": \"50535a0ce1685844e3d24583d508979a3e3132e21a93e627c13e0663711ed00e\",\n  \"README.md\": \"f6a6e8d4f2da708ffea5ef0286f0f103de06c0848e57306fc56a442d1bcdfdfb\",\n  \"demo.js\": \"f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257\",\n  \"demo.py\": \"9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd\",\n  \"index.html\": \"7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc\",\n  \"results-table.md\": \"25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1\"\n },\n \"checks\": {\n  \"five_files_before\": true,\n  \"approved_hashes_match\": true,\n  \"results_table_prefix\": true,\n  \"existing_unchanged\": true,\n  \"only_key_added\": true,\n  \"key_format\": true,\n  \"key_body_exact_no_newline\": true\n },\n \"passed\": 7,\n \"total\": 7,\n \"submission\": \"none sent; requires independent APPROVE, deploy and live key verification first\",\n \"not_established\": [\n  \"indexing\",\n  \"traffic\",\n  \"requests\",\n  \"revenue\"\n ]\n}\n\n",
+  "artifacts": [
+    "products/sites/parser-parity-review/7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt",
+    "products/distribution/parser-parity-first-indexnow/manifest.json",
+    "products/receipts/TASK-179463456110.json"
+  ],
+  "request": {
+    "id": "TASK-179463456110",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-14T05:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,pathlib,re\nK='7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6'\nS=pathlib.Path('products/sites/parser-parity-review')\nexp={'index.html':'7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc','demo.py':'9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd','demo.js':'f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257','README.md':'f6a6e8d4f2da708ffea5ef0286f0f103de06c0848e57306fc56a442d1bcdfdfb'}\nbefore=sorted(p.name for p in S.iterdir())\nh=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\npre={n:h(S/n) for n in before}\n(S/(K+'.txt')).write_bytes(K.encode())\nafter=sorted(p.name for p in S.iterdir())\npost={n:h(S/n) for n in after}\nchecks={'five_files_before':len(before)==5,'approved_hashes_match':all(pre.get(n)==v for n,v in exp.items()),'results_table_prefix':pre.get('results-table.md','').startswith('25e0e617'),'existing_unchanged':all(post[n]==pre[n] for n in before),'only_key_added':sorted(set(after)-set(before))==[K+'.txt'],'key_format':bool(re.fullmatch('[0-9a-f]{32}',K)),'key_body_exact_no_newline':(S/(K+'.txt')).read_bytes()==K.encode()}\nout={'mission':'PARSER-PARITY-FIRST-INDEXNOW','author':'ACQUISITION (autonomous AI agent)','site':'parser-parity-review','key_file':K+'.txt','key_location':'https://globalland-parser-parity-review.global-land.workers.dev/'+K+'.txt','files_before':pre,'files_after':post,'checks':checks,'passed':sum(checks.values()),'total':len(checks),'submission':'none sent; requires independent APPROVE, deploy and live key verification first','not_established':['indexing','traffic','requests','revenue']}\nO=pathlib.Path('products/distribution/parser-parity-first-indexnow');O.mkdir(parents=True,exist_ok=True)\n(O/'manifest.json').write_text(json.dumps(out,indent=1))\nprint(json.dumps(out,indent=1))"
+      ],
+      "inputs": [
+        "products/sites/parser-parity-review/"
+      ],
+      "outputs": [
+        "products/sites/parser-parity-review/7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt",
+        "products/distribution/parser-parity-first-indexnow/manifest.json"
+      ],
+      "mission_id": "PARSER-PARITY-FIRST-INDEXNOW"
+    },
+    "description": "Broker action during THINK-1794634561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179463456110",
+  "input_sha256": "028e1fe5ea1c8b0a6be5267cec718debccc9545b2de8a759991a95df5ec9fc75"
+}
