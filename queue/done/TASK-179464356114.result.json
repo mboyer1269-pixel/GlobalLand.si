@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PARSER-PARITY-LLMS-REVIEW\", \"goal\": \"Independent review, in an eligible non-claude provider turn, of site:parser-parity-review exact digest 284486e6052f6d68cd784a598dda2d7d3eb4362728c7d5104808444635513ca9 (dry_run TASK-179464356112, 7 files, 27293 bytes). Scoped change only: llms.txt (sha256 623a0048548e4e4f264f9ecdf7a1dec2effe971845b8f7fa5571e57e22e6ad29, 3170 bytes) was added; producer evidence products/distribution/parser-parity-agent-discovery/checks.json (TASK-179464356111, 13/13). Reproduce the digest; hash all seven files; confirm the six previously approved files are byte-identical to approved digest 5af248ce hashes; read llms.txt completely and verify every statement against the live index.html and README.md (counts, runtime versions, commands, limits, CAD150 hypothesis, no checkout/order, EN/FR AI disclosure, interest-only plain-text intake identifier) and against docs/AGENTMAIL.md, which the producer did not re-read. Flag any added capability, guarantee or claim. Save and read evidence under products/reviews/, record APPROVE or concrete NEEDS_WORK, close with a valid lease and a lesson, and hand hashes to ACQUISITION. Do not edit, deploy or notify IndexNow. Do not repeat parser tests on unchanged files. Approval establishes neither indexing, agent use, demand nor revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 2, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179464356114",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-14T08:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "create_mission",
+      "mission_id": "PARSER-PARITY-LLMS-REVIEW",
+      "goal": "Independent review, in an eligible non-claude provider turn, of site:parser-parity-review exact digest 284486e6052f6d68cd784a598dda2d7d3eb4362728c7d5104808444635513ca9 (dry_run TASK-179464356112, 7 files, 27293 bytes). Scoped change only: llms.txt (sha256 623a0048548e4e4f264f9ecdf7a1dec2effe971845b8f7fa5571e57e22e6ad29, 3170 bytes) was added; producer evidence products/distribution/parser-parity-agent-discovery/checks.json (TASK-179464356111, 13/13). Reproduce the digest; hash all seven files; confirm the six previously approved files are byte-identical to approved digest 5af248ce hashes; read llms.txt completely and verify every statement against the live index.html and README.md (counts, runtime versions, commands, limits, CAD150 hypothesis, no checkout/order, EN/FR AI disclosure, interest-only plain-text intake identifier) and against docs/AGENTMAIL.md, which the producer did not re-read. Flag any added capability, guarantee or claim. Save and read evidence under products/reviews/, record APPROVE or concrete NEEDS_WORK, close with a valid lease and a lesson, and hand hashes to ACQUISITION. Do not edit, deploy or notify IndexNow. Do not repeat parser tests on unchanged files. Approval establishes neither indexing, agent use, demand nor revenue.",
+      "agent_id": "AUDITOR",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "priority": 2
+    },
+    "description": "Broker action during THINK-1794643561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179464356114",
+  "input_sha256": "54865aca6e7d1526768e59d907ce37f07850c54fbc975bcc8bdbc3f6107a4d6b"
+}
