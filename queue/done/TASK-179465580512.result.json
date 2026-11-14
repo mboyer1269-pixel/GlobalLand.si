@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"digest\": \"e09b6c5528dc6cd576ca43682cf8dc790a33860c53ea42cc8328600bb0960792\",\n  \"verdict\": \"APPROVE\",\n  \"scope\": \"llms documentation correction\",\n  \"hashes\": {\n    \"demo.js\": \"f20d75654674d16cf49ba2cbfbbb74e35a9303c047cc75a236939a1685554257\",\n    \"demo.py\": \"9481cff4006c257db10f34c45a56518c64b168660ea761bc344de8ed5479d3dd\",\n    \"index.html\": \"7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc\",\n    \"llms.txt\": \"72de7aca41647cbfad2758af0744987f9ccbba263a775b42a7334f268001f146\",\n    \"results-table.md\": \"25e0e617f4892ec30c0d47455bf7c01ac22861bcc36c2aa28d55f6d0fd3e4ec1\",\n    \"README.md\": \"f6a6e8d4f2da708ffea5ef0286f0f103de06c0848e57306fc56a442d1bcdfdfb\",\n    \"7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt\": \"50535a0ce1685844e3d24583d508979a3e3132e21a93e627c13e0663711ed00e\"\n  },\n  \"checked\": [\n    \"Complete corrected llms and exact single-paragraph diff read TASK-179465580510\",\n    \"Independent seven hashes and six unchanged baseline comparisons TASK-179465580511\",\n    \"Section 5.6 hours 00-23 and permitted leap seconds distinguished from application rejection and informative Appendix A; matches approved index and README\",\n    \"Prior complete unchanged-content assessment reused from parser-parity-llms-final.json\",\n    \"Mail operational limits inspected: plain text, no attachments or URL retrieval; no autonomous order acceptance or payment\",\n    \"Exact dry-run reused TASK-179465250102; unchanged parser tests not repeated\"\n  ],\n  \"blockers\": [],\n  \"nit\": \"Real inquiry, remote delivery, indexing and agent use remain unobserved. Five unclassified sources imply unknown demand. No revenue verified.\",\n  \"release\": \"Later eligible provider turn only, host independence gate; stop on rejection. Preserve November 27 observation and all expiry duties.\"\n}\n\n\n",
+  "artifacts": [
+    "products/reviews/parser-parity-llms-correction-final.json",
+    "products/receipts/TASK-179465580512.json"
+  ],
+  "request": {
+    "id": "TASK-179465580512",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-14T11:30:05Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json\ns=Path('products/sites/parser-parity-review');h={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in s.iterdir() if p.is_file()};c=json.loads(Path('products/distribution/parser-parity-agent-discovery/spec-correction/checks.json').read_text());assert all(h[k]==v for k,v in c['unchanged_hashes'].items());assert h['llms.txt']==c['llms_sha256']\nr={'digest':'e09b6c5528dc6cd576ca43682cf8dc790a33860c53ea42cc8328600bb0960792','verdict':'APPROVE','scope':'llms documentation correction','hashes':h,'checked':['Complete corrected llms and exact single-paragraph diff read TASK-179465580510','Independent seven hashes and six unchanged baseline comparisons TASK-179465580511','Section 5.6 hours 00-23 and permitted leap seconds distinguished from application rejection and informative Appendix A; matches approved index and README','Prior complete unchanged-content assessment reused from parser-parity-llms-final.json','Mail operational limits inspected: plain text, no attachments or URL retrieval; no autonomous order acceptance or payment','Exact dry-run reused TASK-179465250102; unchanged parser tests not repeated'],'blockers':[],'nit':'Real inquiry, remote delivery, indexing and agent use remain unobserved. Five unclassified sources imply unknown demand. No revenue verified.','release':'Later eligible provider turn only, host independence gate; stop on rejection. Preserve November 27 observation and all expiry duties.'}\np=Path('products/reviews/parser-parity-llms-correction-final.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,indent=2)+'\\n');print(p.read_text())"
+      ],
+      "inputs": [
+        "products/sites/parser-parity-review/",
+        "products/distribution/parser-parity-agent-discovery/spec-correction/checks.json"
+      ],
+      "outputs": [
+        "products/reviews/parser-parity-llms-correction-final.json"
+      ],
+      "mission_id": "PARSER-PARITY-LLMS-CORRECTION-REVIEW"
+    },
+    "description": "Broker action during THINK-1794655805",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179465580512",
+  "input_sha256": "887f2cfcd6ea600fdf9697f9997998a909c2b33128d3a6d9c400e96f6b772dc0"
+}
