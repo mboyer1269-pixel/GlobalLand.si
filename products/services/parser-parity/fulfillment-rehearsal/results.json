@@ -1,0 +1,416 @@
+{
+ "synthetic": true,
+ "customer": null,
+ "order": null,
+ "payment": null,
+ "made_by": "autonomous AI agents (GlobalLand BUILDER)",
+ "python": "3.11.2",
+ "node": "v22.23.4",
+ "cases": 25,
+ "checks_passed": 50,
+ "checks_total": 50,
+ "disagreements_before": [
+  "8.165",
+  "1.005",
+  "12abc",
+  "1e3",
+  " 7",
+  "7 ",
+  "0x1A",
+  ".5",
+  "5.",
+  "+5",
+  "1,234.50",
+  "12.50\n",
+  "Infinity",
+  "1234567890123"
+ ],
+ "disagreements_after": [],
+ "runtime_observation": {
+  "python_re_backslash_d_matches_arabic_indic_digit": true,
+  "js_backslash_d_matches_arabic_indic_digit": false
+ },
+ "delivery_sample_utf8_bytes": 2462,
+ "reference_source": "def to_cents(s):\n    m=re.fullmatch(r'(-?)([0-9]{1,12})(?:\\.([0-9]{1,2}))?',s)\n    if not m:return None\n    c=int(m.group(2))*100+int((m.group(3) or '').ljust(2,'0'))\n    return -c if m.group(1) else c\n",
+ "port_before": "function toCents(s){\n  const v=parseFloat(s);\n  return isNaN(v)?null:Math.round(v*100);\n}\n",
+ "port_after": "function toCents(s){\n  const m=/^(-?)([0-9]{1,12})(?:\\.([0-9]{1,2}))?$/.exec(s);\n  if(!m||/[\\r\\n]/.test(s))return null;\n  const c=Number(m[2])*100+Number((m[3]||'').padEnd(2,'0'));\n  return m[1]&&c!==0?-c:c;\n}\n",
+ "rows": [
+  {
+   "input": "0",
+   "js_port_before": 0,
+   "js_port_after": 0,
+   "expected": 0,
+   "py_reference": 0
+  },
+  {
+   "input": "12",
+   "js_port_before": 1200,
+   "js_port_after": 1200,
+   "expected": 1200,
+   "py_reference": 1200
+  },
+  {
+   "input": "12.5",
+   "js_port_before": 1250,
+   "js_port_after": 1250,
+   "expected": 1250,
+   "py_reference": 1250
+  },
+  {
+   "input": "12.50",
+   "js_port_before": 1250,
+   "js_port_after": 1250,
+   "expected": 1250,
+   "py_reference": 1250
+  },
+  {
+   "input": "-3.07",
+   "js_port_before": -307,
+   "js_port_after": -307,
+   "expected": -307,
+   "py_reference": -307
+  },
+  {
+   "input": "1.15",
+   "js_port_before": 115,
+   "js_port_after": 115,
+   "expected": 115,
+   "py_reference": 115
+  },
+  {
+   "input": "4.35",
+   "js_port_before": 435,
+   "js_port_after": 435,
+   "expected": 435,
+   "py_reference": 435
+  },
+  {
+   "input": "-0",
+   "js_port_before": 0,
+   "js_port_after": 0,
+   "expected": 0,
+   "py_reference": 0
+  },
+  {
+   "input": "999999999999.99",
+   "js_port_before": 99999999999999,
+   "js_port_after": 99999999999999,
+   "expected": 99999999999999,
+   "py_reference": 99999999999999
+  },
+  {
+   "input": "8.165",
+   "js_port_before": 816,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "1.005",
+   "js_port_before": 100,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "12abc",
+   "js_port_before": 1200,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "1e3",
+   "js_port_before": 100000,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": " 7",
+   "js_port_before": 700,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "7 ",
+   "js_port_before": 700,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "",
+   "js_port_before": null,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "abc",
+   "js_port_before": null,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "0x1A",
+   "js_port_before": 0,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": ".5",
+   "js_port_before": 50,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "5.",
+   "js_port_before": 500,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "+5",
+   "js_port_before": 500,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "1,234.50",
+   "js_port_before": 100,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "12.50\n",
+   "js_port_before": 1250,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "Infinity",
+   "js_port_before": "Infinity",
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  },
+  {
+   "input": "1234567890123",
+   "js_port_before": 123456789012300,
+   "js_port_after": null,
+   "expected": null,
+   "py_reference": null
+  }
+ ],
+ "checks": [
+  {
+   "check": "'0': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'0': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'12': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'12': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'12.5': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'12.5': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'12.50': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'12.50': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'-3.07': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'-3.07': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'1.15': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'1.15': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'4.35': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'4.35': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'-0': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'-0': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'999999999999.99': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'999999999999.99': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'8.165': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'8.165': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'1.005': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'1.005': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'12abc': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'12abc': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'1e3': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'1e3': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "' 7': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "' 7': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'7 ': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'7 ': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'abc': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'abc': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'0x1A': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'0x1A': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'.5': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'.5': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'5.': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'5.': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'+5': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'+5': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'1,234.50': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'1,234.50': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'12.50\\n': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'12.50\\n': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'Infinity': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'Infinity': repaired port == reference",
+   "pass": true
+  },
+  {
+   "check": "'1234567890123': reference == expected",
+   "pass": true
+  },
+  {
+   "check": "'1234567890123': repaired port == reference",
+   "pass": true
+  }
+ ]
+}

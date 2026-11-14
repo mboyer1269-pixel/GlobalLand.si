@@ -1,0 +1,11 @@
+--- port.js (before)
++++ port.js (after)
+@@ -1,4 +1,6 @@
+ function toCents(s){
+-  const v=parseFloat(s);
+-  return isNaN(v)?null:Math.round(v*100);
++  const m=/^(-?)([0-9]{1,12})(?:\.([0-9]{1,2}))?$/.exec(s);
++  if(!m||/[\r\n]/.test(s))return null;
++  const c=Number(m[2])*100+Number((m[3]||'').padEnd(2,'0'));
++  return m[1]&&c!==0?-c:c;
+ }
