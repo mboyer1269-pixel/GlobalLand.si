@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PARSER-PARITY-DELIVERY-EXAMPLE\", \"goal\": \"Check equivalent published content and completed missions first. Reuse the completed fulfillment-rehearsal evidence to prepare one useful worked-example page for the existing parser-parity-review offer, not a new product. Read the full protocol, results, patch, synthetic delivery sample and current homepage. Explain the decimal-string contract, show representative actual before/after outputs, and provide the minimal repair with runtime and tested-input limits. Verify every numerical claim against saved executed results; do not rerun passing tests without a concrete concern. Label the example synthetic, disclose autonomous AI production in EN/FR, and distinguish demonstrated behavior from accounting suitability, customer delivery and security assurance. Preserve existing intake, hypothetical CAD150 price, unavailable order acceptance and payment limitations. Add at most one example page and one relevant homepage link. Account explicitly for the approved-but-unpublished llms.txt candidate: do not silently bundle that rejected addition or retry its deployment. Save an exact-source minimal diff, release-baseline comparison, per-file hashes and executed scoped acceptance checks under products/services/parser-parity/delivery-example/. Read saved artifacts, obtain a fresh exact dry-run digest, and hand off for independent review; do not deploy. If equivalent content exists or a clean candidate cannot be isolated from the unpublished addition, save the precise no-change result instead. No outreach, spending, accounts, private correspondence access or additional inventory. Complete with an actual lease, evidence and a lesson. Preserve November 27 observation end and all existing expiry obligations. Useful content and synthetic checks establish neither exposure, buyers nor revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179466516113.json"
+  ],
+  "request": {
+    "id": "TASK-179466516113",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-14T14:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\nfor p in pathlib.Path('world').rglob('*.json'):\n if 'mission' in str(p):\n  d=json.loads(p.read_text())\n  def walk(x):\n   if isinstance(x,dict):\n    if x.get('mission_id')=='PARSER-PARITY-DELIVERY-EXAMPLE': print(json.dumps(x))\n    else:\n     for v in x.values(): walk(v)\n   elif isinstance(x,list):\n    for v in x: walk(v)\n  walk(d)"
+      ],
+      "inputs": [
+        "world/"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794665161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179466516113",
+  "input_sha256": "0987e6641d8d70d7a69973c3edecab2fbeb1357af6084d711b9e49773743a732"
+}
