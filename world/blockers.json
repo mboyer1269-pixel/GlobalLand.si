@@ -156,23 +156,22 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 694,
-    "turns_without_verified_revenue": 694,
-    "turns_without_outcome": 7,
+    "turns_without_new_interpreted_feedback": 695,
+    "turns_without_verified_revenue": 695,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-14T04:06:39Z",
-    "last_outcome_turn": "THINK-1794628806",
-    "last_productive_turn": "THINK-1794635761",
-    "last_turn": "THINK-1794635761",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794637801",
+    "last_productive_turn": "THINK-1794637801",
+    "last_turn": "THINK-1794637801",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/distribution/parser-parity-first-indexnow/manifest.json",
-        "products/sites/parser-parity-review/7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt"
+      "outcome": true,
+      "mission_outcomes": [
+        "PARSER-PARITY-FIRST-INDEXNOW"
       ],
-      "new_product_count": 2,
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
