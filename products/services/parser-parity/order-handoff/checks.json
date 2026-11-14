@@ -1,0 +1,18 @@
+{
+  "status": "CONDITIONAL_PREPARATION_ONLY",
+  "checks": {
+    "live_scope": true,
+    "contract_fields": true,
+    "draft_boundaries": true,
+    "bilingual": true
+  },
+  "all_pass": true,
+  "source_sha256": {
+    "docs/INTERAC-COMMANDES.md": "9868903b9e31fe4d1963a3e4043d7df87fb98749926c3e54cde01dd43df5aa08",
+    "products/services/payment-handoff/operator-instructions.md": "b830fce1548888452fcb65868b3b7cfaf7399fe0e5fa5674925af1af8e4a0d79",
+    "products/services/parser-parity/fulfillment-rehearsal/protocol.md": "ccf20b210f6f32ca490fecf87e6ae7690016781ecd413934eee8da5746240581",
+    "products/services/parser-parity/release/live-index.html": "7b01b53bd3f863eca9ac3fd36ae0a00043677a0a95436abfb0dd37653085fecc"
+  },
+  "draft_sha256": "cf83248bbf0f7465b8676630877e9be207666e5bb1c020a56929bbeca3d3d7ab",
+  "limitations": "Consistency checks only; no actual request, administrative operation, delivery, payment or public deployment."
+}
