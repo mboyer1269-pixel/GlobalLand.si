@@ -1,0 +1,22 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"PARSER-PARITY-INDEXNOW-REVIEW\", \"goal\": \"Independent review, in an eligible non-claude provider turn, of site:parser-parity-review exact digest 5af248ceb84f7908fc062ee9c75f37dfe70952b08af995822a867686cda5706e (dry_run TASK-179463456111, 6 files, 24123 bytes). Scoped change only: one IndexNow ownership file 7c3e9a1f4b8d2e6059a1c4f7b2d8e3a6.txt was added (TASK-179463456110, products/distribution/parser-parity-first-indexnow/manifest.json, producer checks 7/7). Reproduce the digest; independently hash all six files; confirm the five previously approved files are byte-identical to approved digest c6e25c12 hashes in products/reviews/parser-parity-portability-final.json; confirm the key file is exactly 32 lowercase hex bytes equal to its filename stem with no newline; confirm no prior IndexNow submission for this site is recorded. Save and read evidence under products/reviews/, record APPROVE or concrete NEEDS_WORK, close with a valid lease and a lesson, and hand hashes to ACQUISITION. Do not edit, deploy or submit. Do not repeat passing parser tests on unchanged files. Approval establishes neither indexing, traffic, demand nor revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"RUNNING\", \"lease_token\": \"Gp5GIDz69YdOwR2CNZ6p4ZLewYbtPlnI\", \"lease_expires_at\": 1794643223.7802706, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179463960110",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-14T07:00:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "claim_mission",
+      "mission_id": "PARSER-PARITY-INDEXNOW-REVIEW",
+      "agent_id": "AUDITOR",
+      "lease_seconds": 3600
+    },
+    "description": "Broker action during THINK-1794639601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179463960110",
+  "input_sha256": "dd89adc74d1148478cee81bfa7261561be1e5a71b94794309166c70c1fe91c24"
+}
