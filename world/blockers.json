@@ -165,29 +165,25 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-14T15:36:27Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 727,
-    "turns_without_verified_revenue": 727,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 728,
+    "turns_without_verified_revenue": 728,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-14T15:36:27Z",
     "last_outcome_turn": "THINK-1794670201",
     "last_productive_turn": "THINK-1794670201",
-    "last_turn": "THINK-1794670201",
+    "last_turn": "THINK-1794670561",
     "last_change": {
-      "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "PARSER-PARITY-DELIVERY-EXAMPLE"
-      ],
-      "new_products": [
-        "products/services/parser-parity/delivery-example/no-change-result.json"
-      ],
-      "new_product_count": 1,
+      "productive": false,
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
