@@ -1,0 +1,1255 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	
+    Al Zimmermann's Programming Contests
+
+</title><link href="Content/Content.css" rel="stylesheet" type="text/css" /><link href="Content/Master.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #header a:link, #header a:visited {
+            text-decoration: none;
+        }
+
+        #header a:hover, #header a:active {
+            text-decoration: underline;
+        }
+
+        a.country:link, a.country:visited {
+            text-decoration: none;
+        }
+
+        a.country:hover, a.country:active {
+            text-decoration: underline;
+        }
+
+        #footer a:link, #footer a:visited {
+            text-decoration: none;
+        }
+
+        #footer a:hover, #footer a:active {
+            text-decoration: underline;
+        }
+
+        #landmarks {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 110%;
+            padding: 5px 5px 5px 5px;
+            font-weight: bold;
+        }
+
+            #landmarks a:link, #landmarks a:visited {
+                text-decoration: none;
+            }
+
+            #landmarks a:hover, #landmarks a:active {
+                text-decoration: underline;
+            }
+    </style>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">
+        
+    </script>
+
+    <script language="javascript" type="text/javascript">
+        function noSpam(name, domain) {
+            var location = "mailto:" + name + "@" + domain;
+            document.location = location;
+        }
+    </script>
+
+    <script type="text/javascript">
+        function setFocus() {
+            if (document.forms.length == 0) return;
+            for (var i = 0; i < document.forms[0].length; i++) {
+                var element = document.forms[0][i];
+                if (!element.disabled) {
+                    switch (element.type) {
+                        case "text": element.focus(); return;
+                        case "textarea": element.focus(); return;
+                        case "checkbox": element.focus(); return;
+                        case "radio": element.focus(); return;
+                        case "file": element.focus(); return;
+                        case "password": element.focus(); return;
+                        case "select-one": element.focus(); return;
+                        case "select-multiple": element.focus(); return;
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2b06ybnbWO" /><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2b06ybnbWO" /><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png?v=2b06ybnbWO" /><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2b06ybnbWO" /><link rel="manifest" href="/site.webmanifest?v=2b06ybnbWO" /><link rel="mask-icon" href="/safari-pinned-tab.svg?v=2b06ybnbWO" color="#5bbad5" style="color: #5bbad5" /><link rel="shortcut icon" href="/favicon.ico?v=2b06ybnbWO" /><meta name="msapplication-TileColor" content="#603cba" /><meta name="msapplication-TileImage" content="/mstile-144x144.png?v=2b06ybnbWO" /><meta name="theme-color" content="#ffffff" /></head>
+<body onload="setFocus()">
+    <div class="page">
+
+
+        <div id="header"
+            style="height: 106px; margin-bottom: 0; padding: 11px; /* ← makes left/top/bottom margins identical */
+            display: grid; grid-template-columns: auto 1fr auto; align-items: center; column-gap: 11px; box-sizing: border-box;">
+
+            <!-- Left: Logo sized to available height; width auto preserves aspect ratio -->
+            <svg style="background: rgb(52, 52, 108); height: 100%; /* ← fills (106 - 11 - 11) = 84px automatically */
+                width: auto; display: block;"
+                viewbox="0 0 69.282 70">
+        <polygon points="34.641,25  51.962,35  51.962,65  34.641,55  43.301,50  43.301,40  34.641,35" fill="rgb(35,  176, 255)" />
+        <polygon points="17.321,25  17.321,35  25.981,40  34.641,35  43.301,40  25.981,50   0.000,35" fill="rgb(251, 240, 175)" />
+        <polygon points="51.962,5   51.962,25  43.301,20  34.641,25  34.641,35  25.981,40  25.981,20" fill="rgb(108,  15,   8)" />
+        <polygon points="43.301,0   51.962,5   25.981,20  17.321,15" fill="rgb(244, 157, 150)" />
+        <polygon points="17.321,15  25.981,20  25.981,40  17.321,35" fill="rgb(210,  28,  15)" />
+        <polygon points="17.321,5   25.981,10  17.321,15   8.660,10" fill="rgb(175, 224, 255)" />
+        <polygon points=" 8.660,10  17.321,15  17.321,25   8.660,30" fill="rgb(25,  176, 255)" />
+        <polygon points="51.962,15  69.282,25  60.622,30  51.962,25" fill="rgb(251, 240, 175)" />
+        <polygon points="69.282,25  69.282,35  60.622,40  60.622,30" fill="rgb(146, 119,   2)" />
+        <polygon points="43.301,20  60.622,30  51.962,35  34.641,25" fill="rgb(175, 224, 255)" />
+        <polygon points="60.622,30  60.622,60  51.962,65  51.962,35" fill="rgb(2,    91, 141)" />
+        <polygon points="43.301,40  43.301,50  25.981,60  25.981,50" fill="rgb(146, 119,   2)" />
+        <polygon points=" 0.000,35  25.981,50  25.981,60   0.000,45" fill="rgb(225, 221,  30)" />
+        <polygon points="34.641,55  43.301,60  25.981,70  25.981,60" fill="rgb(108,  15,   8)" />
+        <polygon points="17.321,55  25.981,60  25.981,70  17.321,65" fill="rgb(210,  28,  15)" />
+    </svg>
+
+            <!-- Middle: Titles -->
+            <div id="titleBlock"
+                style="justify-self: center; text-align: center; line-height: 1.0;">
+                <div id="titleMain" style="font-size: 200%; font-weight: 600;">
+                    Al Zimmermann&#39;s Programming Contests
+                </div>
+                <div id="titleSub" style="font-size: 110%; margin-top: 10px;">
+                    <span style="font-weight: 600">The Optimization Battleground for Competitive Programmers</span>
+                </div>
+            </div>
+
+            <!-- Right: Welcome -->
+            <div id="welcomeHost"
+                style="justify-self: end; align-self: start; margin-top: -5px; /* reduced */
+            display: inline-block; white-space: nowrap;">
+                <div style="display: inline-block; position: static; float: none;">
+                    
+<div id="welcome">
+    
+    <a href="/Person/Register">Register</a>
+        |
+        <a href="/Person/LogOn?returnUrl=%2F">Log On</a>
+    
+</div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            /* Keep Welcome in-flow even if its internal CSS tries to float/absolute it */
+            #welcomeHost, #welcomeHost * {
+                position: static !important;
+                float: none !important;
+            }
+        </style>
+        <div id="main">
+
+            
+    <div id="landmarks">
+        <a href="/">Home</a>
+    </div>
+
+            <div id="contentContainer">
+                
+    
+    <div style="margin-left:15px; margin-right:15px; ">
+
+
+        <p>
+            <strong>
+                Welcome to <em>Al Zimmermann's Programming Contests</em>.  You've entered 
+                an arena where demented computer programmers compete for glory and for 
+                some cool prizes.
+
+            </strong>
+        </p> 
+        
+        <p>
+            I run one or two contests per year.  Each contest asks that you come up with your
+            best solutions to a set of computationally intensive problems, generally involving
+            sophisticated heuristics.  And, although I speak 
+            of "programming" contests, you don't need to write a computer program to
+            enter.  You can enter whether you use a computer, manual calculations, or tea leaves 
+            to solve the problems.  You send me solutions, not programs.
+        </p>
+        
+        <p>
+            To enter a contest, you must 
+            <a href="/Person/Register">register</a>. 
+            Once registered, you submit your solutions through this website.  You get instant 
+            feedback and your name immediately appears on the contest's standings page where, if 
+            you've done well, you can start to bask in some of that aforementioned glory.
+            <br/>
+        </p>
+
+        <br/>
+
+        <table style="width:100%">
+            <tr>
+                
+                <td style="width:33%; text-align:center">
+                    <img src="/Content/Images/Female - right-facing 270.jpg" style="width:270px;" />
+                </td>
+                <td style="width:34%; text-align:center">
+                    <img src="/Content/Images/Father and son 270.jpg"        style="width:270px;" />
+                </td>
+                <td style="width:33%; text-align:center">
+                    <img src="/Content/Images/Male - left-facing 270.jpg"    style="width:270px;" />
+                </td>
+                
+            </tr>
+        </table>
+
+        <br />
+        
+
+
+        
+
+            <fieldset style="border:1px solid rgb(230,230,230);">
+                <legend>Upcoming Contests</legend>
+                
+<link href="../../Content/Content.css" rel="stylesheet" type="text/css" />
+<td>
+    <table class="withBorder" >
+        <tr>
+            <th>
+                Contest
+            </th>
+            <th>
+                Starts
+            </th>
+            <th>
+                Ends
+            </th>
+            <th>
+                Prizes
+            </th>
+
+        </tr>
+        
+        <tr>
+            <td nowrap="nowrap" style="text-align: left;">
+                Yosemite
+            </td>
+            
+
+
+                
+                <td colspan="2"> Contest postponed.</td>
+
+                <td>
+                    <table style="border:none" class="noborder">
+                        <tr>
+                            <td colspan="2" style="border:none;border-collapse:collapse">
+                                Digital gift cards for <a href="https://www.artofplay.com/collections/" target="_blank" title="Art of Play - opens in new window">Art of Play</a>, as follows:<br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;border-collapse:collapse">1st, 2nd, 3rd, 4th Place:<br/>5th-10th Place:</td>
+                            <td style="border:none;border-collapse:collapse">$500, $250, $100, $50<br/>$25</td>
+                        </tr>
+                    </table>
+                </td>
+            
+        </tr>
+        
+        <tr>
+            <td nowrap="nowrap" style="text-align: left;">
+                Yellowstone
+            </td>
+            
+
+
+                
+                <td colspan="2"> Contest postponed.</td>
+
+                <td>
+                    <table style="border:none" class="noborder">
+                        <tr>
+                            <td colspan="2" style="border:none;border-collapse:collapse">
+                                Digital gift cards for <a href="https://www.artofplay.com/collections/" target="_blank" title="Art of Play - opens in new window">Art of Play</a>, as follows:<br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;border-collapse:collapse">1st, 2nd, 3rd, 4th Place:<br/>5th-10th Place:</td>
+                            <td style="border:none;border-collapse:collapse">$500, $250, $100, $50<br/>$25</td>
+                        </tr>
+                    </table>
+                </td>
+            
+        </tr>
+        
+    </table>
+    <table><tr><td>A contest's description is not available until the contest begins.</td></tr></table>
+    <table><tr><td>
+        All times are in
+        
+            UTC. Please <a href="/Person/LogOn?returnUrl=%2F">log on</a>
+            to see times in your local time zone.
+        
+    </td></tr></table>
+
+            </fieldset>
+            <br/><br/>
+        
+        
+
+
+        <fieldset style="border:1px solid rgb(230,230,230); clear:both;">
+            <legend>Previous Contests</legend>
+            
+<link href="../../Content/Content.css" rel="stylesheet" type="text/css" />
+<div>
+
+    
+
+    <table class="withBorder">
+        <tr>
+            <th>
+            </th>
+            <th>
+                Contest
+            </th>
+            <th>
+                Started
+            </th>
+            <th>
+                Ended
+            </th>
+            <th>
+                First Place
+            </th>
+            <th>
+                Second Place
+            </th>
+        </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/PowerfulSums" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/PowerfulSums/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/PowerfulSums/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Powerful Sums
+                </td>
+                <td>
+                    22&nbsp;Nov&nbsp;2025
+                </td>
+                <td nowrap="nowrap">
+                    21&nbsp;Feb&nbsp;2026
+                </td>
+                <td>
+                    Thomas & David Spencer
+                </td>
+                <td>
+                    Tom Sirgedas
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/NearlyMagicHexagons" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/NearlyMagicHexagons/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/NearlyMagicHexagons/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Nearly Magic Hexagons
+                </td>
+                <td>
+                    15&nbsp;Feb&nbsp;2025
+                </td>
+                <td nowrap="nowrap">
+                    21&nbsp;Jun&nbsp;2025
+                </td>
+                <td>
+                    Hans-Werner & Matthias Paulsen
+                </td>
+                <td>
+                    Roy van Rijn
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/ThoroughlyMagicHexagons" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/ThoroughlyMagicHexagons/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/ThoroughlyMagicHexagons/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Magic Hexagons
+                </td>
+                <td>
+                    23&nbsp;Mar&nbsp;2025
+                </td>
+                <td nowrap="nowrap">
+                    21&nbsp;Jun&nbsp;2025
+                </td>
+                <td>
+                    Ralph Pulletz
+                </td>
+                <td>
+                    Bert Dobbelaere
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/BaltosPuzzle" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/BaltosPuzzle/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/BaltosPuzzle/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Balto's Puzzle
+                </td>
+                <td>
+                    5&nbsp;Oct&nbsp;2024
+                </td>
+                <td nowrap="nowrap">
+                    4&nbsp;Jan&nbsp;2025
+                </td>
+                <td>
+                    Rafaël Bocquet
+                </td>
+                <td>
+                    Jeremy Sawicki
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/SteppingStones" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/SteppingStones/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/SteppingStones/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Stepping Stones
+                </td>
+                <td>
+                    6&nbsp;Aug&nbsp;2022
+                </td>
+                <td nowrap="nowrap">
+                    5&nbsp;Nov&nbsp;2022
+                </td>
+                <td>
+                    Rafaël Bocquet
+                </td>
+                <td>
+                    Spencer / Spencer
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/OddlyTriangular" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/OddlyTriangular/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/OddlyTriangular/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Oddly Triangular
+                </td>
+                <td>
+                    7&nbsp;Sep&nbsp;2022
+                </td>
+                <td nowrap="nowrap">
+                    8&nbsp;Sep&nbsp;2022
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+                <td>
+                    Benjamin Butin
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/APMath" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/APMath/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/APMath/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    AP Math
+                </td>
+                <td>
+                    25&nbsp;Sep&nbsp;2021
+                </td>
+                <td nowrap="nowrap">
+                    27&nbsp;Dec&nbsp;2021
+                </td>
+                <td>
+                    Jarek Wroblewski
+                </td>
+                <td>
+                    Hans-Werner & Matthias Paulsen
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/Cliques" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/Cliques/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/Cliques/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Monochromatic Triangles
+                </td>
+                <td>
+                    19&nbsp;Jun&nbsp;2021
+                </td>
+                <td nowrap="nowrap">
+                    18&nbsp;Sep&nbsp;2021
+                </td>
+                <td>
+                    Hans-Werner & Matthias Paulsen
+                </td>
+                <td>
+                    Rikuya Tomii
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/SumsOfPowers" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/SumsOfPowers/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/SumsOfPowers/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Sums of Powers
+                </td>
+                <td>
+                    28&nbsp;Mar&nbsp;2020
+                </td>
+                <td nowrap="nowrap">
+                    18&nbsp;Jul&nbsp;2020
+                </td>
+                <td>
+                    Martin Piotte
+                </td>
+                <td>
+                    Rafaël Bocquet
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/Nearness" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/Nearness/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/Nearness/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Reversing Nearness
+                </td>
+                <td>
+                    27&nbsp;Jul&nbsp;2019
+                </td>
+                <td nowrap="nowrap">
+                    26&nbsp;Oct&nbsp;2019
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+                <td>
+                    Martin Piotte
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/HexagonalNeighbors" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/HexagonalNeighbors/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/HexagonalNeighbors/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Hexagonal Neighbors
+                </td>
+                <td>
+                    3&nbsp;Nov&nbsp;2018
+                </td>
+                <td nowrap="nowrap">
+                    2&nbsp;Feb&nbsp;2019
+                </td>
+                <td>
+                    Tom Sirgedas
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/PrimorialSoup" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/PrimorialSoup/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/PrimorialSoup/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Primorial Soup
+                </td>
+                <td>
+                    23&nbsp;Sep&nbsp;2017
+                </td>
+                <td nowrap="nowrap">
+                    23&nbsp;Dec&nbsp;2017
+                </td>
+                <td>
+                    Jarek Wroblewski
+                </td>
+                <td>
+                    Jeremy Sawicki
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/PolygonalAreas" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/PolygonalAreas/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/PolygonalAreas/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Polygonal Areas
+                </td>
+                <td>
+                    10&nbsp;Dec&nbsp;2016
+                </td>
+                <td nowrap="nowrap">
+                    11&nbsp;Mar&nbsp;2017
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+                <td>
+                    Tom Sirgedas
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/Tetrahedra" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/Tetrahedra/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/Tetrahedra/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Non-Coplanar Points
+                </td>
+                <td>
+                    5&nbsp;Mar&nbsp;2016
+                </td>
+                <td nowrap="nowrap">
+                    4&nbsp;Jun&nbsp;2016
+                </td>
+                <td>
+                    Tim Foden
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/SumsAndProducts2" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/SumsAndProducts2/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/SumsAndProducts2/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Sums and Products II
+                </td>
+                <td>
+                    28&nbsp;Nov&nbsp;2015
+                </td>
+                <td nowrap="nowrap">
+                    27&nbsp;Feb&nbsp;2016
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+                <td>
+                    Gil Dogon
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/SumsAndProducts1" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/SumsAndProducts1/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/SumsAndProducts1/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Sums and Products I
+                </td>
+                <td>
+                    14&nbsp;Nov&nbsp;2015
+                </td>
+                <td nowrap="nowrap">
+                    13&nbsp;Feb&nbsp;2016
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+                <td>
+                    Oleg Vlasii
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/DelacorteNumbers" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/DelacorteNumbers/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/DelacorteNumbers/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Delacorte Numbers
+                </td>
+                <td>
+                    4&nbsp;Oct&nbsp;2014
+                </td>
+                <td nowrap="nowrap">
+                    3&nbsp;Jan&nbsp;2015
+                </td>
+                <td>
+                    Hermann Jurksch & Hugo Pfoertner
+                </td>
+                <td>
+                    Arch D. Robison
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/AlphabetCity" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/AlphabetCity/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/AlphabetCity/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Alphabet City
+                </td>
+                <td>
+                    18&nbsp;May&nbsp;2014
+                </td>
+                <td nowrap="nowrap">
+                    17&nbsp;Aug&nbsp;2014
+                </td>
+                <td>
+                    Ivan Kazmenko
+                </td>
+                <td>
+                    Igor Dimitrijevic
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/GracefulGraphs" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/GracefulGraphs/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/GracefulGraphs/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Graceful Graphs
+                </td>
+                <td>
+                    21&nbsp;Sep&nbsp;2013
+                </td>
+                <td nowrap="nowrap">
+                    21&nbsp;Dec&nbsp;2013
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+                <td>
+                    Jarek Wroblewski
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/Factorials" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/Factorials/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/Factorials/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Factorials
+                </td>
+                <td>
+                    19&nbsp;Jan&nbsp;2013
+                </td>
+                <td nowrap="nowrap">
+                    20&nbsp;Apr&nbsp;2013
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+                <td>
+                    Hermann Jurksch
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/Cards" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/Cards/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/Cards/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Topswops
+                </td>
+                <td>
+                    13&nbsp;Nov&nbsp;2010
+                </td>
+                <td nowrap="nowrap">
+                    12&nbsp;Feb&nbsp;2011
+                </td>
+                <td>
+                    Jarek Wroblewski
+                </td>
+                <td>
+                    Tomas Rokicki
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/SonOfDarts" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/SonOfDarts/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/SonOfDarts/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Son Of Darts
+                </td>
+                <td>
+                    20&nbsp;Jun&nbsp;2009
+                </td>
+                <td nowrap="nowrap">
+                    20&nbsp;Jun&nbsp;2010
+                </td>
+                <td>
+                    John Morris
+                </td>
+                <td>
+                    Herbert Kociemba
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/MagicWater" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/MagicWater/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/MagicWater/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Retaining Water
+                </td>
+                <td>
+                    13&nbsp;Mar&nbsp;2010
+                </td>
+                <td nowrap="nowrap">
+                    12&nbsp;Jun&nbsp;2010
+                </td>
+                <td>
+                    Walter Trump
+                </td>
+                <td>
+                    Hermann Jurksch
+                </td>
+            </tr>
+        
+            <tr>
+                <td nowrap="nowrap">
+                    
+
+<a href="/Contest/PointPacking" title="View Description">
+    <img border="0" height="25" width="25" src="../../Content/DescriptionIcon.gif" alt="Description" /></a>
+
+
+
+<a href="/Contest/PointPacking/Standings" title="View Standings">
+
+    <img height="25" width="25" border="0" src="../../Content/StandingsIcon.gif" alt="Standings" /></a>
+
+
+    <a href="/Contest/PointPacking/FinalReport" title="View Final Report">
+        <img height="24" width="24" border="0" src="../../Content/FinalReportIcon.gif" alt="Final Report" /></a>
+
+                </td>
+                <td>
+                    Point Packing
+                </td>
+                <td>
+                    11&nbsp;Jul&nbsp;2009
+                </td>
+                <td nowrap="nowrap">
+                    10&nbsp;Oct&nbsp;2009
+                </td>
+                <td>
+                    Hugo Pfoertner
+                </td>
+                <td>
+                    Hermann Jurksch
+                </td>
+            </tr>
+        
+    </table>
+    
+    
+    
+    <table>
+        <tr>
+            <td>
+                Visit our <a href="http://recmath.com/contest/archives.php" target="_blank" title="Opens in new window">
+                    former web site</a> for older contests.
+            </td>
+        </tr>
+    </table>
+</div>
+
+        </fieldset>
+        <br/><br/>
+        
+
+
+
+        <fieldset style="border:1px solid rgb(230,230,230)" >
+            <legend>Unsolicited comments about <i>Al Zimmermann's Programming Contests</i></legend>
+            
+
+<div style="text-align:center">
+
+
+        <p style="text-align: center">
+            <b>&quot;Perhaps the best way to proactively procrastinate I have yet to find!&quot;</b>
+            <br style="line-height: 20px" />
+            <span style="color: #c0c0c0">
+                &ndash; Benjamin Laken, Madrid, Spain
+            </span>
+        </p>
+    
+    <p style="text-align: center">
+        <b>&quot;Here I am, so much actual work to do, but totally entranced by yet another Al Zimmermann programming contest.&quot;</b>
+        <br style="line-height: 20px" />
+        <span style="color: #c0c0c0">
+            &ndash; Tom Rokicki, Palo Alto, California
+        </span>
+    </p>
+    
+    <p style="text-align: center">
+        <b>&quot;Your competitions are, without doubt, the best.  I may have lost months of my free time but, by Jove, it has been worth every second.&quot;</b>
+        <br style="line-height: 20px" />
+        <span style="color: #c0c0c0">
+            &ndash; Mathew Davies, Luton, England
+        </span>
+    </p>
+    
+    <p style="text-align: center">
+        <b>&quot;For this I sent him to college?  Oy.&quot;</b>
+        <br style="line-height: 20px" />
+        <span style="color: #c0c0c0">
+            &ndash; Al Zimmermann's mother
+        </span>
+    </p>
+
+
+
+</div>
+
+        </fieldset>
+        
+    </div>
+
+
+            </div>
+            
+        </div>
+
+        <div id="footer">
+            <a href="/">Home</a>
+            |
+            <a href="/Home/ContactUs">Contact Us</a>
+            | <a href="http://groups.io/g/AZsPCs/"
+                target="_blank" title="Groups.io - opens in new window">Forum</a>
+            |
+            <a href="/Gallery">Gallery</a>
+        </div>
+    </div>
+</body>
+</html>
