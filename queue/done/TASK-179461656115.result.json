@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"PARSER-PARITY-PAID-REQUEST-EVIDENCE\",\n \"observed_at\": \"2026-11-14\",\n \"method\": \"3 public GitHub issue-search API FETCHes (TASK-179461656111/112/113), extract TASK-179461656114; search snippets only, issue comment threads and repository rules NOT read\",\n \"queries\": {\n  \"gh-bounty-parser-date.json\": {\n   \"total_count\": 1\n  },\n  \"gh-algora-parser-compat.json\": {\n   \"total_count\": 8\n  },\n  \"gh-bounty-rfc3339.json\": {\n   \"total_count\": 13\n  }\n },\n \"candidates\": [\n  {\n   \"url\": \"https://github.com/heathivorjocelyn6/jwt/issues/1\",\n   \"created\": \"2026-07-23\",\n   \"title_quote\": \"Reject J\n\n",
+  "artifacts": [
+    "products/research/parser-parity-paid-request/verdict.json",
+    "products/receipts/TASK-179461656115.json"
+  ],
+  "request": {
+    "id": "TASK-179461656115",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-14T00:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,os\nv={'mission':'PARSER-PARITY-PAID-REQUEST-EVIDENCE','observed_at':'2026-11-14','method':'3 public GitHub issue-search API FETCHes (TASK-179461656111/112/113), extract TASK-179461656114; search snippets only, issue comment threads and repository rules NOT read','queries':{'gh-bounty-parser-date.json':{'total_count':1},'gh-algora-parser-compat.json':{'total_count':8},'gh-bounty-rfc3339.json':{'total_count':13}},'candidates':[{'url':'https://github.com/heathivorjocelyn6/jwt/issues/1','created':'2026-07-23','title_quote':'Reject JWTs with Out-of-Bounds Expiration (`exp`) Values to Prevent `time.Time` Overflow','match':'closest: platform-dependent numeric/time parsing inconsistency','advertised_reward':'label \"$10\" with labels bounty, opire (advertised, not verified funds; currency presumed USD, not confirmed)','status':'open, 0 assignees, 7 comments (unread; competing attempts unknown)','prerequisites':'GitHub account for a pull request plus an Opire payout account; neither is an authorized GlobalLand capability','verdict':'REJECT: reward about USD 10, sponsor is a personal-namespace repository of unverified provenance, submission and payout routes inaccessible'},{'url':'https://github.com/limitlessprojects/Go-Hybrid/issues/186','created':'2026-10-15','advertised_reward':'\"$250\" appears in body; label Bounty','match':'none: whole-package type checking design, not parser parity or date validation','verdict':'REJECT: speculative match'},{'url':'https://github.com/Element-Ventures-Canada-Ltd/openchokepoint/issues/19','created':'2026-10-15','advertised_reward':'label bounty; no amount observed in snippet','match':'none: standards crosswalk documentation, not parser parity','verdict':'REJECT: speculative match, reward unobserved'}],'other_results':'Remaining results were unrelated (rewrites, connectors, agent lead-watch threads, GMV competitions).','verdict':'STOP for paid public requests as the acquisition route of the parser-parity offer','reasoning':'No inspected public dated request explicitly sought cross-language parser compatibility or date-validation parity with a meaningful budget and an accessible submission route. This is a bounded negative on three queries, not proof that no buyers exist.','unchanged':'Live parser-parity page stays as is; passive observation window to 2026-11-27 continues; feedback counts remain unknown rather than zero.','reconsider_when':['a classified inbound request names site:parser-parity-review','an authorized GitHub and payout identity exists','a public request with reward >= USD 100 explicitly about cross-runtime parsing parity is observed'],'not_established':['demand','willingness to pay','revenue']}\np='products/research/parser-parity-paid-request/verdict.json'\nos.makedirs(os.path.dirname(p),exist_ok=True)\njson.dump(v,open(p,'w'),indent=1)\nprint(open(p).read()[:600])"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/research/parser-parity-paid-request/verdict.json"
+      ],
+      "mission_id": "PARSER-PARITY-PAID-REQUEST-EVIDENCE"
+    },
+    "description": "Broker action during THINK-1794616561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179461656115",
+  "input_sha256": "ccac39625ea3aa884eaac855e9c3cca10a8dbcc45e2e77d0f09ee15100d5eb36"
+}
