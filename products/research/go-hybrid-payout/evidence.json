@@ -1,0 +1,89 @@
+{
+ "mission": "GO-HYBRID-PAYOUT-EVIDENCE",
+ "observed_at": "2026-11-14",
+ "sources": {
+  "295": "https://github.com/limitlessprojects/Go-Hybrid/discussions/295 (FETCH TASK-179465796111, HTTP 200)",
+  "365": "https://github.com/limitlessprojects/Go-Hybrid/discussions/365 (FETCH TASK-179465796112, HTTP 200)"
+ },
+ "per_discussion": {
+  "295": {
+   "html_sha256": "63dba407b475e1e380637c59c79fbdea6713419bed3d2471d08c6b95d43df7c8",
+   "title": "Current bounty cycle: eligibility and payout methods · limitlessprojects/Go-Hybrid · Discussion #295 · GitHub",
+   "text_chars_analysed": 60000,
+   "text_truncated_at_60000": true,
+   "quotation_found_verbatim": {
+    "USDC on Base to a self-custody wallet": true,
+    "payout preparation starts after the window's last verdict": true,
+    "triage is continuous and the review windows are verdict dates, not submission deadlines": true,
+    "if your jurisdiction blocks it, we will work out an alternative case by case": true,
+    "Rail unchanged: USDC on Base, self-custody": true,
+    "Several contributors are holding contribution work until a transfer mechanism is stated in writing": true
+   },
+   "transaction_explorer_links": [],
+   "distinct_hex_identifiers": 7,
+   "64_hex_tx_like_ids": [],
+   "payment_confirmation_phrase_lines": [
+    "Is the current $500 ladder pool open and budgeted? What is the cycle closing date and time zone, and when are selected winners actually paid?",
+    "supported? PayPal? Something else? This matters for whether an international, AI-operated GitHub account can be paid at all — which in turn determines whether a merged PR is worth writing.",
+    "Which payout method is final? Can an eligible award be paid to a PayPal business"
+   ],
+   "first_datetimes": [
+    "2026-10-16T03:15:55Z",
+    "2026-10-16T03:15:55Z",
+    "2026-10-16T11:52:14Z"
+   ],
+   "last_datetimes": [
+    "2026-11-13T12:53:30Z",
+    "2026-11-13T13:24:20Z",
+    "2026-11-13T14:03:30Z"
+   ]
+  },
+  "365": {
+   "html_sha256": "a13992079851f6d821d8fca40e8c07cde1cd4545bf3af80d668ad2bb9cb4d0c5",
+   "title": "Wildcard review window — 2026-11-01 (17 entries scheduled, slots assigned) · limitlessprojects/Go-Hybrid · Discussion #365 · GitHub",
+   "text_chars_analysed": 60000,
+   "text_truncated_at_60000": true,
+   "quotation_found_verbatim": {
+    "One wildcard winner per cycle after M1 ($250 acceptance + $250 published learning, success or failure alike).": true,
+    "Formal verdicts begin 2026-11-01.": true,
+    "Each slot gets one M1 verdict post:": true
+   },
+   "transaction_explorer_links": [],
+   "distinct_hex_identifiers": 14,
+   "64_hex_tx_like_ids": [],
+   "payment_confirmation_phrase_lines": [
+    "determines whether an international, AI-operated account can be paid at all, which"
+   ],
+   "first_datetimes": [
+    "2026-10-17T05:07:10Z",
+    "2026-10-17T05:07:10Z",
+    "{{datetime}}"
+   ],
+   "last_datetimes": [
+    "2026-11-04T13:43:08Z",
+    "2026-11-05T02:50:56Z",
+    "2026-11-11T19:44:01Z"
+   ]
+  }
+ },
+ "findings": {
+  "payout_rail": "Sponsor-stated plan of record: USDC on Base to a self-custody wallet; alternatives case by case. This is a sponsor claim in the discussion and BOUNTY.md, not a transaction.",
+  "external_payout_substantiated": "NOT OBSERVED in the fetched pages: see transaction_explorer_links, 64_hex_tx_like_ids and payment_confirmation_phrase_lines per discussion. Missing evidence is unknown, not proof of nonpayment.",
+  "wallet_addresses": "40-hex identifiers present are addresses posted by commenters (and the USDC contract), i.e. payment requests, not receipts. Not copied here.",
+  "linked_payout_records_fetched": 0,
+  "m1_verdicts": "Whether any M1 verdict has been posted is not established from the analysed text.",
+  "prerequisites_unchanged": [
+   "dedicated founder-approved GitHub account (none)",
+   "self-custody Base wallet and a route from USDC to verified CAD treasury (none)",
+   "maintainer final say; pay only after reproduction"
+  ],
+  "competition": "Many AI-operated contributors publicly queue for the same pools and post wallets while awaiting a rail."
+ },
+ "verdict": "UNCHANGED: STOP for issue #186; ladder track remains PURSUE_IF (account + rail + publicly evidenced external payout). No founder action requested.",
+ "uncertainties": [
+  "GitHub serves discussion comments partially (hidden/paginated items) and analysis covered only the first 60000 text characters per page",
+  "payouts may have occurred off-thread or after the observation",
+  "wallet balances/on-chain history deliberately not inspected (bounded to two discussions)"
+ ],
+ "not_done": "No account, wallet, contact, submission, agreement, implementation or spending."
+}
