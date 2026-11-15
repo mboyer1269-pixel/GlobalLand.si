@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"SQLITE-NATIVE-DELIVERY\",\n \"source\": \"products/sites/sqlite-statement-diagnostic/repro/multi_stmt.c\",\n \"source_sha256\": \"ca11940e50f4ff72665e538463a0da0cb7084c2bf3a606b171f6a35447220fa0\",\n \"commands\": [\n  {\n   \"cmd\": [\n    \"/usr/bin/gcc\",\n    \"-std=c99\",\n    \"-Wall\",\n    \"-Wextra\",\n    \"-o\",\n    \"ms\",\n    \"multi_stmt.c\",\n    \"-lsqlite3\"\n   ],\n   \"exit\": 0,\n   \"stdout\": \"\",\n   \"stderr\": \"\"\n  },\n  {\n   \"cmd\": [\n    \"./ms\"\n   ],\n   \"exit\": null,\n   \"error\": \"PermissionError(13, 'Permission denied')\"\n  },\n  {\n   \"cmd\": [\n    \"/usr/bin/gcc\",\n    \"-std=c99\",\n    \"-Wall\",\n    \"-Wextra\",\n    \"-o\",\n    \"ms\",\n    \"multi_stmt.c\",\n    \"-lsqlite3\"\n   ],\n   \"exit\": 0,\n   \"stdout\": \"\",\n   \"stderr\": \"\"\n  },\n  {\n   \"cmd\": [\n    \"./ms\"\n   ],\n   \"exit\": null,\n   \"error\": \"PermissionError(13, 'Permission denied')\"\n  }\n ],\n \"tools\": {\n  \"gcc\": \"/usr/bin/gcc\",\n  \"cc\": \"/usr/bin/cc\",\n  \"clang\": null,\n  \"tcc\": null,\n  \"pkg-config\": \"/usr/bin/pkg-config\"\n },\n \"header\": [\n  \"/usr/include/sqlite3.h\"\n ],\n \"libs\": [\n  \"/usr/lib/x86_64-linux-gnu/libsqlite3.so\",\n  \"/usr/lib/x86_64-linux-gnu/libsqlite3.a\",\n  \"/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6\",\n  \"/usr/lib/x86_64-linux-gnu/libsqlite3.so.0\"\n ],\n \"mounts\": [\n  \"shm /dev/shm tmpfs rw,nosuid,nodev,noexec,relatime,size=65536k,inode64 0 0\",\n  \"tmpfs /tmp tmpfs rw,nosuid,nodev,noexec,relatime,size=65536k,inode64 0 0\",\n  \"tmpfs /workspace tmpfs rw,nosuid,nodev,noexec,relatime,size=262144k,mode=755,uid=65534,gid=65534,inode64 0 0\"\n ],\n \"verdict\": \"NOT_EXECUTED_SEE_COMMANDS\"\n}\n\n",
+  "artifacts": [
+    "products/services/sqlite-native-delivery/result.json",
+    "products/receipts/TASK-179476050111.json"
+  ],
+  "request": {
+    "id": "TASK-179476050111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-15T16:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import subprocess,shutil,hashlib,json,os,tempfile,pathlib\nsrc='products/sites/sqlite-statement-diagnostic/repro/multi_stmt.c'\nout='products/services/sqlite-native-delivery'\nos.makedirs(out,exist_ok=True)\nr={'mission':'SQLITE-NATIVE-DELIVERY','source':src,'source_sha256':hashlib.sha256(open(src,'rb').read()).hexdigest(),'commands':[]}\ndef run(cmd,cwd=None):\n    try:\n        p=subprocess.run(cmd,capture_output=True,text=True,timeout=60,cwd=cwd)\n        d={'cmd':cmd,'exit':p.returncode,'stdout':p.stdout[-6000:],'stderr':p.stderr[-2000:]}\n    except Exception as e:\n        d={'cmd':cmd,'exit':None,'error':repr(e)}\n    r['commands'].append(d);return d\nr['tools']={k:shutil.which(k) for k in ['gcc','cc','clang','tcc','pkg-config']}\nr['header']=[p for p in ['/usr/include/sqlite3.h','/usr/local/include/sqlite3.h'] if os.path.exists(p)]\nimport glob\nr['libs']=glob.glob('/usr/lib/*/libsqlite3*')+glob.glob('/usr/lib/libsqlite3*')+glob.glob('/usr/local/lib/libsqlite3*')\ncc=r['tools']['gcc'] or r['tools']['cc'] or r['tools']['clang']\nr['mounts']=[l for l in open('/proc/mounts').read().splitlines() if any(x in l.split()[1] for x in ['/workspace','/tmp','/dev/shm'])][:10]\nif cc:\n    for base in ['/workspace/_native', tempfile.gettempdir()+'/_native']:\n        try:\n            os.makedirs(base,exist_ok=True)\n            shutil.copy(src,base+'/multi_stmt.c')\n        except Exception as e:\n            r['commands'].append({'dir':base,'error':repr(e)});continue\n        c=run([cc,'-std=c99','-Wall','-Wextra','-o','ms','multi_stmt.c','-lsqlite3'],cwd=base)\n        if c.get('exit')==0:\n            e=run(['./ms'],cwd=base)\n            if e.get('exit')==0:\n                r['native_stdout']=e['stdout'];r['executed_in']=base;break\nr['verdict']='NATIVE_EXECUTED' if 'native_stdout' in r else ('COMPILER_ABSENT' if not cc else 'NOT_EXECUTED_SEE_COMMANDS')\nopen(out+'/result.json','w').write(json.dumps(r,indent=1))\nprint(json.dumps(r,indent=1)[:7000])"
+      ],
+      "inputs": [
+        "products/sites/sqlite-statement-diagnostic/repro/"
+      ],
+      "outputs": [
+        "products/services/sqlite-native-delivery/result.json"
+      ],
+      "mission_id": "SQLITE-NATIVE-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794760501",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179476050111",
+  "input_sha256": "1166da6e78f0399d7513d63d68e0d9cf241bbd888bca5d9015341c6575aba182"
+}

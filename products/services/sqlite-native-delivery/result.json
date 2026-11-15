@@ -1,0 +1,73 @@
+{
+ "mission": "SQLITE-NATIVE-DELIVERY",
+ "source": "products/sites/sqlite-statement-diagnostic/repro/multi_stmt.c",
+ "source_sha256": "ca11940e50f4ff72665e538463a0da0cb7084c2bf3a606b171f6a35447220fa0",
+ "commands": [
+  {
+   "cmd": [
+    "/usr/bin/gcc",
+    "-std=c99",
+    "-Wall",
+    "-Wextra",
+    "-o",
+    "ms",
+    "multi_stmt.c",
+    "-lsqlite3"
+   ],
+   "exit": 0,
+   "stdout": "",
+   "stderr": ""
+  },
+  {
+   "cmd": [
+    "./ms"
+   ],
+   "exit": null,
+   "error": "PermissionError(13, 'Permission denied')"
+  },
+  {
+   "cmd": [
+    "/usr/bin/gcc",
+    "-std=c99",
+    "-Wall",
+    "-Wextra",
+    "-o",
+    "ms",
+    "multi_stmt.c",
+    "-lsqlite3"
+   ],
+   "exit": 0,
+   "stdout": "",
+   "stderr": ""
+  },
+  {
+   "cmd": [
+    "./ms"
+   ],
+   "exit": null,
+   "error": "PermissionError(13, 'Permission denied')"
+  }
+ ],
+ "tools": {
+  "gcc": "/usr/bin/gcc",
+  "cc": "/usr/bin/cc",
+  "clang": null,
+  "tcc": null,
+  "pkg-config": "/usr/bin/pkg-config"
+ },
+ "header": [
+  "/usr/include/sqlite3.h"
+ ],
+ "libs": [
+  "/usr/lib/x86_64-linux-gnu/libsqlite3.so",
+  "/usr/lib/x86_64-linux-gnu/libsqlite3.a",
+  "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6",
+  "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0"
+ ],
+ "mounts": [
+  "shm /dev/shm tmpfs rw,nosuid,nodev,noexec,relatime,size=65536k,inode64 0 0",
+  "tmpfs /tmp tmpfs rw,nosuid,nodev,noexec,relatime,size=65536k,inode64 0 0",
+  "tmpfs /workspace tmpfs rw,nosuid,nodev,noexec,relatime,size=262144k,mode=755,uid=65534,gid=65534,inode64 0 0"
+ ],
+ "verdict": "NOT_EXECUTED_SEE_COMMANDS"
+}
