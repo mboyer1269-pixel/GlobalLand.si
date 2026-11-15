@@ -165,30 +165,26 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-15T10:37:39Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 798,
-    "turns_without_verified_revenue": 798,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 799,
+    "turns_without_verified_revenue": 799,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-15T10:37:39Z",
     "last_outcome_turn": "THINK-1794738601",
     "last_productive_turn": "THINK-1794738601",
-    "last_turn": "THINK-1794738601",
+    "last_turn": "THINK-1794738961",
     "last_change": {
-      "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "CSV-REWARDED-REPAIR-20261115"
-      ],
-      "new_products": [
-        "products/services/csv-rewarded-repair/rejection.json"
-      ],
-      "new_product_count": 1,
-      "new_research_count": 0,
+      "productive": false,
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [],
+      "new_product_count": 0,
+      "new_research_count": 1,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
