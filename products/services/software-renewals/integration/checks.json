@@ -1,0 +1,140 @@
+{
+ "all_pass": false,
+ "checks": [
+  {
+   "check": "quote_in_source:9317e486:The Contract includes optional 12 month ",
+   "pass": true
+  },
+  {
+   "check": "quote_in_source:9317e486:£35,500.00 ex VAT",
+   "pass": true
+  },
+  {
+   "check": "quote_in_source:9317e486:The Department of Energy Security and Ne",
+   "pass": true
+  },
+  {
+   "check": "quote_in_source:9317e486:G Cloud 14 Framework (RM1557.14)",
+   "pass": true
+  },
+  {
+   "check": "award_equals_tender_period:9317e486",
+   "pass": true
+  },
+  {
+   "check": "quote_in_source:2b43f425:The supplier was chosen via TePAs2 Lot 3",
+   "pass": true
+  },
+  {
+   "check": "award_equals_tender_period:2b43f425",
+   "pass": true
+  },
+  {
+   "check": "quote_in_source:9536bc1e:ParkMap traffic orders software",
+   "pass": true
+  },
+  {
+   "check": "award_equals_tender_period:9536bc1e",
+   "pass": true
+  },
+  {
+   "check": "baseline_index_equals_live_5ab86a",
+   "pass": true
+  },
+  {
+   "check": "anchors_unique",
+   "pass": true
+  },
+  {
+   "check": "reverse_restores_baseline",
+   "pass": true
+  },
+  {
+   "check": "no_email_in_supplement",
+   "pass": true
+  },
+  {
+   "check": "three_entries_sorted",
+   "pass": true
+  },
+  {
+   "check": "uksbs_values_128000_plus_35500_eq_163500",
+   "pass": true
+  },
+  {
+   "check": "ai_disclosure_en_fr",
+   "pass": true
+  },
+  {
+   "check": "intake_mailto_unchanged",
+   "pass": false
+  }
+ ],
+ "facts_from_source": [
+  {
+   "ocid": "ocds-b5fd17-9317e486-62d1-4813-9eb6-7f764a63ca3b",
+   "buyer": "UK SHARED BUSINESS SERVICES LIMITED",
+   "supplier": "NIXINFINITY - AI LTD",
+   "value": {
+    "amount": 163500,
+    "currency": "GBP"
+   },
+   "tender_value": {
+    "amount": 128000,
+    "currency": "GBP"
+   },
+   "award_date": "2026-03-25",
+   "start": "2026-04-01",
+   "end": "2027-03-31",
+   "route": "Call-off from a framework agreement"
+  },
+  {
+   "ocid": "ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f",
+   "buyer": "Health & Safety Executive",
+   "supplier": "CDW Limited",
+   "value": {
+    "amount": 51624,
+    "currency": "GBP"
+   },
+   "tender_value": {
+    "amount": 51624,
+    "currency": "GBP"
+   },
+   "award_date": "2026-06-15",
+   "start": "2026-06-29",
+   "end": "2027-06-28",
+   "route": "Single tender action (below threshold)"
+  },
+  {
+   "ocid": "ocds-b5fd17-9536bc1e-17ba-4c7d-9c4b-015aa7352e65",
+   "buyer": "London Borough of Barnet",
+   "supplier": "Causeway Technologies Limited",
+   "value": {
+    "amount": 36396,
+    "currency": "GBP"
+   },
+   "tender_value": {
+    "amount": 36396,
+    "currency": "GBP"
+   },
+   "award_date": "2026-10-26",
+   "start": "2026-12-01",
+   "end": "2027-11-30",
+   "route": "Other - "
+  }
+ ],
+ "hashes": {
+  "baseline_index": "5ab86a6400615854c5b12e703e0822742a4d28627fe8a37fc65b36a8d579522c",
+  "candidate_index": "62be2c82e7ddc152b2a172f5dd1eaa1eeeb9a81e92c4dfdbd8ecc6bbb79d0dfb",
+  "renewals_html": "c23b506f4b57d2ae444d69190252f016c6687a3b454048339ffa8e21f6d01c88"
+ },
+ "bytes": {
+  "candidate_index": 10495,
+  "renewals_html": 12275
+ },
+ "added_strings": [
+  "<p><strong>New free sample (15 November 2026):</strong> a separate page lists <a href=\"renewals.html\">three awarded UK software contracts with published end dates in 2027</a>, from official Contracts Finder data. They are different contracts from the three notices above. An end date is not a confirmed renewal or an open tender.</p>\n",
+  "<p><strong>Nouvel échantillon gratuit (15 novembre 2026) :</strong> une page distincte (bilingue) présente <a href=\"renewals.html\">trois contrats logiciels britanniques attribués dont la date de fin publiée tombe en 2027</a>, d'après les données officielles Contracts Finder. Ce ne sont pas les trois avis ci-dessus. Une date de fin n'est ni un renouvellement confirmé ni un appel d'offres ouvert.</p>"
+ ],
+ "limits": "Facts are rendered from integration-source-records.json; interpretive notes are hand-written and only their quoted fragments are machine-checked. Not deployed. No demand or revenue evidence."
+}
