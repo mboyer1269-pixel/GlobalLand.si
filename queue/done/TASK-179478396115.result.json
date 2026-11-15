@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"lesson_id\": \"L310\", \"agent_id\": \"ACQUISITION\", \"mission_id\": \"RENEWAL-CALENDAR-EXISTING-OFFER-INTEGRATION\", \"outcome\": null, \"text\": \"Observed 2026-11-15: PUBLISH_SITE TASK-179478396112 returned ONLINE_VERIFIED for software-award-brief at approved digest 06115c26... (codex APPROVE seq 57). FETCH TASK-179478396113 renewals.html HTTP 200 sha256 c23b506f... and TASK-179478396114 index HTTP 200 sha256 62be2c82..., both equal to the reviewed candidate. Worked: re-running the dry_run to confirm an unchanged digest, then exactly one deploy and two hash-checked FETCHes. Unlike three earlier SiteError rejections, this deploy passed, so those rejections are candidate-specific, not a general publication block. This is exposure of a free sample only: no visitors, requests, orders or revenue observed. The page carries the existing award-site duties (referral removal on retirement, retirement by 2027-01-08T12:00Z); no new observation window was invented.\", \"tags\": [\"publication\", \"software-award-brief\", \"release\"], \"at\": 1794784031.7402394}",
+  "request": {
+    "id": "TASK-179478396115",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-15T23:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "record_lesson",
+      "agent_id": "ACQUISITION",
+      "mission_id": "RENEWAL-CALENDAR-EXISTING-OFFER-INTEGRATION",
+      "tags": [
+        "publication",
+        "software-award-brief",
+        "release"
+      ],
+      "lesson": "Observed 2026-11-15: PUBLISH_SITE TASK-179478396112 returned ONLINE_VERIFIED for software-award-brief at approved digest 06115c26... (codex APPROVE seq 57). FETCH TASK-179478396113 renewals.html HTTP 200 sha256 c23b506f... and TASK-179478396114 index HTTP 200 sha256 62be2c82..., both equal to the reviewed candidate. Worked: re-running the dry_run to confirm an unchanged digest, then exactly one deploy and two hash-checked FETCHes. Unlike three earlier SiteError rejections, this deploy passed, so those rejections are candidate-specific, not a general publication block. This is exposure of a free sample only: no visitors, requests, orders or revenue observed. The page carries the existing award-site duties (referral removal on retirement, retirement by 2027-01-08T12:00Z); no new observation window was invented."
+    },
+    "description": "Broker action during THINK-1794783961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179478396115",
+  "input_sha256": "55f9a3528c0a1d1c0948aa9baaf510c91c5e94b56087f9219164211419a39857"
+}
