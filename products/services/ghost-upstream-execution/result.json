@@ -1,0 +1,60 @@
+{
+ "mission": "GHOST-UPSTREAM-EXECUTION",
+ "observed_at": "2026-11-15T16:06:52.607Z",
+ "source": {
+  "artifact": "products/services/ghost-upstream-execution/package-metadata.json",
+  "fetch_task": "TASK-179475840200",
+  "sha256": "f0e56a33778459bb84d31abc2c869471977a4eae7d568651d6b571acca34b583"
+ },
+ "package": "@tryghost/kg-html-to-lexical@1.4.4",
+ "engines": {
+  "node": "^22.22.2 || ^24.15.0"
+ },
+ "sandbox_node": "v22.23.4",
+ "npm": "10.9.9",
+ "global_root": "/usr/local/lib/node_modules",
+ "direct_dependencies": {
+  "jsdom": "30.0.1",
+  "lexical": "0.13.1",
+  "@lexical/html": "0.13.1",
+  "@lexical/link": "0.13.1",
+  "@lexical/list": "0.13.1",
+  "@lexical/headless": "0.13.1",
+  "@lexical/clipboard": "0.13.1",
+  "@lexical/rich-text": "0.13.1",
+  "@tryghost/kg-default-nodes": "~2.3.0",
+  "@tryghost/kg-default-transforms": "~1.3.9"
+ },
+ "direct_dependency_count": 10,
+ "direct_dependencies_resolvable_in_sandbox": {
+  "jsdom": null,
+  "lexical": null,
+  "@lexical/html": null,
+  "@lexical/link": null,
+  "@lexical/list": null,
+  "@lexical/headless": null,
+  "@lexical/clipboard": null,
+  "@lexical/rich-text": null,
+  "@tryghost/kg-default-nodes": null,
+  "@tryghost/kg-default-transforms": null
+ },
+ "has_shrinkwrap": false,
+ "tarball": "https://registry.npmjs.org/@tryghost/kg-html-to-lexical/-/kg-html-to-lexical-1.4.4.tgz",
+ "unpacked_size": 13316,
+ "observations": [
+  "EXEC has no network; each package tarball would need its own FETCH (binary, base64, <=1 MiB) and manual extraction.",
+  "The 10 direct dependencies include jsdom 30.0.1 and two @tryghost packages with tilde ranges; their transitive dependencies are NOT enumerated here, so the full closure size is unknown, not measured.",
+  "No shrinkwrap is published with the package, so exact transitive versions are not pinned by this metadata."
+ ],
+ "unknown": [
+  "transitive dependency count and total size",
+  "whether any transitive package needs lifecycle/native build steps"
+ ],
+ "not_claimed": [
+  "upstream converter execution",
+  "defect reproduction",
+  "demand or revenue"
+ ],
+ "verdict": "BOUNDED_STOP_DEPENDENCY_CLOSURE_NOT_AVAILABLE_OFFLINE",
+ "reconsideration_trigger": "A sandbox image with the pinned package and its dependency closure preinstalled, or a network-enabled install step authorized by the host. Existing stub-only diagnostic and its DEPENDENCY_ABSENT disclosure remain accurate."
+}
