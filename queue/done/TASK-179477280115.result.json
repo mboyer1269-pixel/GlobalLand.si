@@ -1,0 +1,24 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"RENEWAL-CALENDAR-INTEGRATION-REVIEW\", \"goal\": \"Independently review site:software-award-brief at dry_run TASK-179477280113 review_digest 06115c26b49bee322c6d739333fa875250c4c065c8ad2b0a30b732175ccd902b (4 files, 23872 bytes, index sha256 62be2c82e7ddc152b2a172f5dd1eaa1eeeb9a81e92c4dfdbd8ecc6bbb79d0dfb). Changes: new renewals.html (sha256 c23b506f...) and two added paragraphs (EN/FR link) in index.html; baseline index 5ab86a64... equals live. Reproduce the digest. Verify every displayed buyer, supplier, scope quotation, value, date, route and extension statement in renewals.html against the three releases in products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json (not only the producer's extracted records). Check the UK SBS/DESNZ explanation, structured-route versus description distinction, that no end date is presented as a renewal or bidding opportunity, complete French limitations, OGL attribution, AI disclosure, no personal data, and that removing the two added index paragraphs restores the live baseline with intake identifier and expiry wording unchanged. Producer evidence: products/services/software-renewals/integration/checks.json and index.diff. Save and read your own evidence under products/reviews/, record APPROVE or NEEDS_WORK for the exact digest, do not edit or deploy. Close with a valid lease and a lesson. Approval establishes no exposure, demand or revenue; preserve all observation and retirement duties.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"OPEN\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": []}",
+  "request": {
+    "id": "TASK-179477280115",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-15T20:00:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "create_mission",
+      "mission_id": "RENEWAL-CALENDAR-INTEGRATION-REVIEW",
+      "goal": "Independently review site:software-award-brief at dry_run TASK-179477280113 review_digest 06115c26b49bee322c6d739333fa875250c4c065c8ad2b0a30b732175ccd902b (4 files, 23872 bytes, index sha256 62be2c82e7ddc152b2a172f5dd1eaa1eeeb9a81e92c4dfdbd8ecc6bbb79d0dfb). Changes: new renewals.html (sha256 c23b506f...) and two added paragraphs (EN/FR link) in index.html; baseline index 5ab86a64... equals live. Reproduce the digest. Verify every displayed buyer, supplier, scope quotation, value, date, route and extension statement in renewals.html against the three releases in products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json (not only the producer's extracted records). Check the UK SBS/DESNZ explanation, structured-route versus description distinction, that no end date is presented as a renewal or bidding opportunity, complete French limitations, OGL attribution, AI disclosure, no personal data, and that removing the two added index paragraphs restores the live baseline with intake identifier and expiry wording unchanged. Producer evidence: products/services/software-renewals/integration/checks.json and index.diff. Save and read your own evidence under products/reviews/, record APPROVE or NEEDS_WORK for the exact digest, do not edit or deploy. Close with a valid lease and a lesson. Approval establishes no exposure, demand or revenue; preserve all observation and retirement duties.",
+      "agent_id": "AUDITOR",
+      "parent_id": "WORLD-FIRST-REVENUE",
+      "priority": 1
+    },
+    "description": "Broker action during THINK-1794772801",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179477280115",
+  "input_sha256": "5c6d322f241ebad89bdab6d27c4e519b70af693c74d77f06e7dbf6cc785c9062"
+}
