@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"checks\": {\n    \"two_unique_additions\": true,\n    \"reverse_hash\": true,\n    \"candidate_hash\": true,\n    \"valid_fixture\": true,\n    \"typed_list_one_escaped_cell\": true,\n    \"fixed_options\": true,\n    \"handle_rebuilt\": true,\n    \"sixteen_columns\": true,\n    \"image_prefix_only\": true,\n    \"unchanged_transform.py\": true,\n    \"unchanged_verify.py\": true,\n    \"unchanged_verify_example.py\": true,\n    \"unchanged_before-variants.csv\": true,\n    \"unchanged_before-images.csv\": true,\n    \"unchanged_after-shopify.csv\": true,\n    \"unreachable_prefix_accepted\": true,\n    \"extra_fields_omitted\": true\n  },\n  \"all_pass\": true,\n  \"hashes\": {\n    \"products/sites/shopify-catalogue-example/verify_example.py\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\",\n    \"products/sites/shopify-catalogue-example/index.html\": \"8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc\",\n    \"products/sites/shopify-catalogue-example/llms.txt\": \"a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9\",\n    \"products/sites/shopify-catalogue-example/transform.py\": \"ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e\",\n    \"products/sites/shopify-catalogue-example/7c2e9a41d86b35f0e1a4c97d2b58e360.txt\": \"4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba\",\n    \"products/sites/shopify-catalogue-example/verify.py\": \"54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39\",\n    \"products/sites/shopify-catalogue-example/__pycache__/transform.cpython-311.pyc\": \"953a19387c803fb765ead30a4f79bedcab133e6e95bae5af52ac2e29dd583505\",\n    \"products/sites/shopify-catalogue-example/fixtures/after-shopify.csv\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\",\n    \"products/sites/shopify-catalogue-example/fixtures/before-variants.csv\": \"5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac\",\n    \"products/sites/shopify-catalogue-example/fixtures/before-images.csv\": \"894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d\"\n  },\n  \"scope\": \"Independent scoped review; no import, customer delivery, acquisition or revenue established. Static source inspection confirms URL prefix check has no retrieval; source parser requires every VREQ value including color and size. Public offer terms preserved by reverse hash.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/catalogue-input-suitability/review.json",
+    "products/receipts/TASK-179473500713.json"
+  ],
+  "request": {
+    "id": "TASK-179473500713",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-15T09:30:07Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,importlib.util,csv\nfrom pathlib import Path\ns=Path('products/sites/shopify-catalogue-example')\nb=Path('products/services/shopify-large-catalogue')\nc=json.loads((b/'input-suitability/checks.json').read_text())\nh=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\npage=(s/'index.html').read_text()\nrev=c['site_revision']\nold=page.replace(rev['added_en'],'').replace(' '+rev['added_fr'],'')\nchecks={'two_unique_additions':page.count(rev['added_en'])==1 and page.count(rev['added_fr'])==1,'reverse_hash':hashlib.sha256(old.encode()).hexdigest()==rev['baseline_index_sha256'],'candidate_hash':h(s/'index.html')==rev['candidate_index_sha256']}\nspec=importlib.util.spec_from_file_location('t',s/'transform.py');t=importlib.util.module_from_spec(spec);spec.loader.exec_module(t)\nv=t.read(s/'fixtures/before-variants.csv',t.VREQ);i=t.read(s/'fixtures/before-images.csv',t.IREQ)\nv[0]['barcode']='gtin:111;upc:222'\np,e,w=t.build(v,i);rows=[r for a in p for r in a];r=next(x for x in rows if x['SKU']==v[0]['sku'])\nchecks.update({'valid_fixture':not e,'typed_list_one_escaped_cell':r['Barcodes']==r'gtin\\:111\\;upc\\:222','fixed_options':all(x['Option1 name']=='Color' and x['Option2 name']=='Size' for x in rows if x['SKU']),'handle_rebuilt':r['URL handle']==t.slug(v[0]['title'])+'-'+t.slug(v[0]['style_id']),'sixteen_columns':len(t.COLS)==16 and all(set(x)==set(t.COLS) for x in rows),'image_prefix_only':\"startswith(('http://', 'https://'))\" in (s/'transform.py').read_text()})\nfor n,target in [('transform.py','transform.py.txt'),('verify.py','verify.py.txt'),('verify_example.py','verify_example.py.txt')]:\n checks['unchanged_'+n]=(s/n).read_bytes()==(b/'live-delivery/dl'/target).read_bytes()\nfor n in ['before-variants.csv','before-images.csv','after-shopify.csv']:\n checks['unchanged_'+n]=(s/'fixtures'/n).read_bytes()==(b/'live-delivery/dl'/n).read_bytes()\nv[0]['extra']='omit';v[0]['handle']='keep-me';i[0]['url']='https://'\np,e,w=t.build(v,i)\nchecks['unreachable_prefix_accepted']=not e\nchecks['extra_fields_omitted']=all('extra' not in r and 'handle' not in r for a in p for r in a)\nout={'checks':checks,'all_pass':all(checks.values()),'hashes':{str(p):h(p) for p in s.rglob('*') if p.is_file()},'scope':'Independent scoped review; no import, customer delivery, acquisition or revenue established. Static source inspection confirms URL prefix check has no retrieval; source parser requires every VREQ value including color and size. Public offer terms preserved by reverse hash.'}\ndest=Path('products/reviews/catalogue-input-suitability/review.json');dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(json.dumps(out,indent=2));print(dest.read_text())\n"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/",
+        "products/services/shopify-large-catalogue/input-suitability/",
+        "products/services/shopify-large-catalogue/live-delivery/dl/"
+      ],
+      "outputs": [
+        "products/reviews/catalogue-input-suitability/review.json"
+      ],
+      "mission_id": "CATALOGUE-INPUT-SUITABILITY-REVIEW"
+    },
+    "description": "Broker action during THINK-1794735007",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179473500713",
+  "input_sha256": "ae95b0a2325f0babd85dce5c616863cf96e5e17b1c93a99a32c80cb4fcf8e0a8"
+}

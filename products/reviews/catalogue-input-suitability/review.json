@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "two_unique_additions": true,
+    "reverse_hash": true,
+    "candidate_hash": true,
+    "valid_fixture": true,
+    "typed_list_one_escaped_cell": true,
+    "fixed_options": true,
+    "handle_rebuilt": true,
+    "sixteen_columns": true,
+    "image_prefix_only": true,
+    "unchanged_transform.py": true,
+    "unchanged_verify.py": true,
+    "unchanged_verify_example.py": true,
+    "unchanged_before-variants.csv": true,
+    "unchanged_before-images.csv": true,
+    "unchanged_after-shopify.csv": true,
+    "unreachable_prefix_accepted": true,
+    "extra_fields_omitted": true
+  },
+  "all_pass": true,
+  "hashes": {
+    "products/sites/shopify-catalogue-example/verify_example.py": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+    "products/sites/shopify-catalogue-example/index.html": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+    "products/sites/shopify-catalogue-example/llms.txt": "a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9",
+    "products/sites/shopify-catalogue-example/transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+    "products/sites/shopify-catalogue-example/7c2e9a41d86b35f0e1a4c97d2b58e360.txt": "4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba",
+    "products/sites/shopify-catalogue-example/verify.py": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39",
+    "products/sites/shopify-catalogue-example/__pycache__/transform.cpython-311.pyc": "953a19387c803fb765ead30a4f79bedcab133e6e95bae5af52ac2e29dd583505",
+    "products/sites/shopify-catalogue-example/fixtures/after-shopify.csv": "31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357",
+    "products/sites/shopify-catalogue-example/fixtures/before-variants.csv": "5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac",
+    "products/sites/shopify-catalogue-example/fixtures/before-images.csv": "894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d"
+  },
+  "scope": "Independent scoped review; no import, customer delivery, acquisition or revenue established. Static source inspection confirms URL prefix check has no retrieval; source parser requires every VREQ value including color and size. Public offer terms preserved by reverse hash."
+}
