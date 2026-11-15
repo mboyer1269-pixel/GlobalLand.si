@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"RENEWAL-CALENDAR-INTEGRATION-REVIEW\", \"goal\": \"Independently review site:software-award-brief at dry_run TASK-179477280113 review_digest 06115c26b49bee322c6d739333fa875250c4c065c8ad2b0a30b732175ccd902b (4 files, 23872 bytes, index sha256 62be2c82e7ddc152b2a172f5dd1eaa1eeeb9a81e92c4dfdbd8ecc6bbb79d0dfb). Changes: new renewals.html (sha256 c23b506f...) and two added paragraphs (EN/FR link) in index.html; baseline index 5ab86a64... equals live. Reproduce the digest. Verify every displayed buyer, supplier, scope quotation, value, date, route and extension statement in renewals.html against the three releases in products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json (not only the producer's extracted records). Check the UK SBS/DESNZ explanation, structured-route versus description distinction, that no end date is presented as a renewal or bidding opportunity, complete French limitations, OGL attribution, AI disclosure, no personal data, and that removing the two added index paragraphs restores the live baseline with intake identifier and expiry wording unchanged. Producer evidence: products/services/software-renewals/integration/checks.json and index.diff. Save and read your own evidence under products/reviews/, record APPROVE or NEEDS_WORK for the exact digest, do not edit or deploy. Close with a valid lease and a lesson. Approval establishes no exposure, demand or revenue; preserve all observation and retirement duties.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"AUDITOR\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/reviews/renewal-calendar-integration/scoped-verification.json\", \"Review APPROVE seq 57 (TASK-179478361200, host_provider codex) of site:software-award-brief digest 06115c26b49bee322c6d739333fa875250c4c065c8ad2b0a30b732175ccd902b\", \"dry_run TASK-179478396110 reproduces the same digest (4 files, 23872 bytes)\"]}",
+  "request": {
+    "id": "TASK-179478396111",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-15T23:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "RENEWAL-CALENDAR-INTEGRATION-REVIEW",
+      "agent_id": "AUDITOR",
+      "lease_token": "lp8iNzj8CH5UWOsuQxo-rfYq9TOJlJLh",
+      "evidence": [
+        "products/reviews/renewal-calendar-integration/scoped-verification.json",
+        "Review APPROVE seq 57 (TASK-179478361200, host_provider codex) of site:software-award-brief digest 06115c26b49bee322c6d739333fa875250c4c065c8ad2b0a30b732175ccd902b",
+        "dry_run TASK-179478396110 reproduces the same digest (4 files, 23872 bytes)"
+      ],
+      "lesson": "Worked: selecting only the three displayed OCIDs from the raw response and checking 34 scoped values, then a reverse-to-live homepage comparison (matched 5ab86a64...). Failed first: literal quote matching ignored source CRLF/double spaces, and the reverse check assumed a trailing newline; one EXEC was refused for an unavailable input path. Next time: normalize whitespace explicitly for quotation checks, record the method in evidence, list inputs from the catalog rather than guessing, and close the review mission in the same turn as the verdict. The saved file also holds an intermediate reverse_hash that differs from the matched baseline; label intermediate values clearly. Approval is not exposure, demand or revenue."
+    },
+    "description": "Broker action during THINK-1794783961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179478396111",
+  "input_sha256": "ec8b2dccf50cb671f43ecf7da4576b6e5016c840b797be3d15141c3655405b3a"
+}
