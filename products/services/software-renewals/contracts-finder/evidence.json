@@ -1,0 +1,176 @@
+{
+ "mission": "CONTRACTS-FINDER-RENEWAL-DELIVERY",
+ "observed": "2026-11-15",
+ "verdict": "DELIVERED_3_ENTRIES_FROM_5_INSPECTED",
+ "source": {
+  "url": "https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search?publishedFrom=2026-11-09T00:00:00&publishedTo=2026-11-13T23:59:59&stages=award&limit=100",
+  "fetch_task": "TASK-179476236111",
+  "sha256": "48c34ed08f5f73dbf05328251c53fee6a22da5dab14afdbcff64034b3d9af8ae",
+  "bytes": 569136,
+  "documentation": "https://www.contractsfinder.service.gov.uk/apidocumentation/Notices/1/GET-Published-Notice-OCDS-Search",
+  "licence": "Open Government Licence v3.0 (as stated in the package license field)"
+ },
+ "feed_observations": {
+  "releases": 100,
+  "awards_with_structured_endDate": 100,
+  "software_related_by_cpv_or_keyword": 21,
+  "filter_hits_end_feb_nov_2027": 5,
+  "more_pages_exist": true
+ },
+ "trigger_result": "The reconsideration trigger in ../evidence.json is met: this Contracts Finder award feed exposed awards[].contractPeriod.endDate on every award in the sampled page, unlike the Find a Tender sample (0 of 60).",
+ "entries": [
+  {
+   "ocid": "ocds-b5fd17-9317e486-62d1-4813-9eb6-7f764a63ca3b",
+   "release_id": "221f6262-88d8-4d7f-a5f2-78580494369b-921465",
+   "date": "2026-11-13T09:43:04Z",
+   "buyer": "UK SHARED BUSINESS SERVICES LIMITED",
+   "title": "DDaT25610 - Managed Support",
+   "cpv": "48000000",
+   "cpv_desc": "Software package and information systems",
+   "description": "***PLEASE NOTE THIS IS AN AWARD NOTICE, NOT A CALL FOR COMPETITION***\r\n\r\nThe Department of Energy Security and Net Zero (DESNZ) had a requirement for the provision of Managed Support.  This Call Off contract has been sourced via a longlist shortlist exercise on the G Cloud 14 Framework (RM1557.14).\r\n\r\nThe Contract includes optional 12 month extension.\r\n\r\nContract Variation 002 was implemented to increase the  original contract value for the initial term by £35,500.00 ex VAT.",
+   "suppliers": [
+    "NIXINFINITY - AI LTD"
+   ],
+   "value": {
+    "amount": 163500,
+    "currency": "GBP"
+   },
+   "tender_value": {
+    "amount": 128000,
+    "currency": "GBP"
+   },
+   "award_date": "2026-03-25T00:00:00Z",
+   "start": "2026-04-01T00:00:00+01:00",
+   "end": "2027-03-31T23:59:59+01:00",
+   "award_status": "active",
+   "procurementMethodDetails": "Call-off from a framework agreement",
+   "extension_note": "Release quotes: \"The Contract includes optional 12 month extension.\" Whether it will be exercised is unknown. Award value 163500 GBP differs from tender value 128000 GBP; release quotes a variation increasing initial-term value by GBP 35,500.00 ex VAT",
+   "decision": "INCLUDED"
+  },
+  {
+   "ocid": "ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f",
+   "release_id": "bcca35fe-32ad-4a29-a7e7-63c321af2f88-921564",
+   "date": "2026-11-13T15:34:46Z",
+   "buyer": "Health & Safety Executive",
+   "title": "The Provision of ShareFile Licences (2026)",
+   "cpv": "72000000",
+   "cpv_desc": "IT services: consulting, software development, Internet and support",
+   "description": "HSE were looking for a supplier for Progress ShareFile, a secure file transfer solution for sending large data files to other organisations; which cannot be sent by email. The supplier was chosen via TePAs2 Lot 3 (RM6098).",
+   "suppliers": [
+    "CDW Limited"
+   ],
+   "value": {
+    "amount": 51624,
+    "currency": "GBP"
+   },
+   "tender_value": {
+    "amount": 51624,
+    "currency": "GBP"
+   },
+   "award_date": "2026-06-15T00:00:00+01:00",
+   "start": "2026-06-29T00:00:00+01:00",
+   "end": "2027-06-28T23:59:59+01:00",
+   "award_status": "active",
+   "procurementMethodDetails": "Single tender action (below threshold)",
+   "extension_note": "12-month licence term; no extension option stated in the release",
+   "decision": "INCLUDED"
+  },
+  {
+   "ocid": "ocds-b5fd17-9536bc1e-17ba-4c7d-9c4b-015aa7352e65",
+   "release_id": "23804982-b29c-463a-b661-10ef48847186-921496",
+   "date": "2026-11-13T10:50:32Z",
+   "buyer": "London Borough of Barnet",
+   "title": "Highway Software Licence",
+   "cpv": "72000000",
+   "cpv_desc": "IT services: consulting, software development, Internet and support",
+   "description": "ParkMap traffic orders software",
+   "suppliers": [
+    "Causeway Technologies Limited"
+   ],
+   "value": {
+    "amount": 36396,
+    "currency": "GBP"
+   },
+   "tender_value": {
+    "amount": 36396,
+    "currency": "GBP"
+   },
+   "award_date": "2026-10-26T00:00:00Z",
+   "start": "2026-12-01T00:00:00Z",
+   "end": "2027-11-30T23:59:59Z",
+   "award_status": "active",
+   "procurementMethodDetails": "Other - ",
+   "extension_note": "12-month licence term; no extension option stated in the release; procurement method recorded only as \"Other - \"",
+   "decision": "INCLUDED"
+  }
+ ],
+ "excluded": [
+  {
+   "ocid": "ocds-b5fd17-462f6970-af7d-46dd-b2f0-3bc74282e9ff",
+   "release_id": "9043fa75-5a0a-4c40-ac71-7a65f4ad0a4f-921540",
+   "date": "2026-11-13T13:29:53Z",
+   "buyer": "UK SHARED BUSINESS SERVICES LIMITED",
+   "title": "Hardware and Service Procurement Support",
+   "cpv": "72100000",
+   "cpv_desc": "Hardware consultancy services",
+   "description": "***PLEASE NOTE THIS IS AN AWARD NOTICE, NOT A CALL FOR COMPETITION***\r\n\r\nUK Research and Innovation (UKRI) had a requirement for the provision of Hardware and Service Procurement Support.  This Call Off contract has been sourced via a longlist shortlist exercise on the G Cloud 14 Framework (RM1557.14).",
+   "suppliers": [
+    "Red Oak Consulting LLP"
+   ],
+   "value": {
+    "amount": 150000,
+    "currency": "GBP"
+   },
+   "tender_value": {
+    "amount": 150000,
+    "currency": "GBP"
+   },
+   "award_date": "2026-10-30T00:00:00Z",
+   "start": "2026-11-02T00:00:00Z",
+   "end": "2027-03-31T23:59:59+01:00",
+   "award_status": "active",
+   "procurementMethodDetails": "Call-off from a framework agreement",
+   "decision": "EXCLUDED: hardware consultancy / procurement support, not software support or maintenance"
+  },
+  {
+   "ocid": "ocds-b5fd17-33c75f82-1831-438a-bb15-90536e1759cb",
+   "release_id": "957238ba-2716-42ef-99a4-9aeab5026a42-921453",
+   "date": "2026-11-13T09:26:28Z",
+   "buyer": "Kirklees Council",
+   "title": "Purchase of 5 Servers",
+   "cpv": "48820000",
+   "cpv_desc": "Servers",
+   "description": "For the Purchase and Supply of five (5) Servers.\r\n\r\nDelivery date is expected to be as soon as possible, and no later\r\nthan four months after the order is placed.\r\n\r\nFurther Competition Under Government Commercial Agency framework; Ref: RM6098 - Technology Products and Associated Services 2 (TePAS2) Lot 2 - Hardware.",
+   "suppliers": [
+    "XMA Ltd"
+   ],
+   "value": {
+    "amount": 257768.8,
+    "currency": "GBP"
+   },
+   "tender_value": {
+    "amount": 257768.8,
+    "currency": "GBP"
+   },
+   "award_date": "2026-10-29T00:00:00Z",
+   "start": "2026-11-01T00:00:00Z",
+   "end": "2027-02-28T23:59:59Z",
+   "award_status": "active",
+   "procurementMethodDetails": "Call-off from a framework agreement",
+   "decision": "EXCLUDED: one-off server hardware purchase; end date is a delivery window"
+  }
+ ],
+ "limits": [
+  "One page of 100 releases from 9-13 Nov 2026 only; not a complete market view",
+  "Dates and values are as published by the buyer and were not cross-checked against the human-readable notice page or contract documents",
+  "Notice page URLs are not given because they were not fetched; locate each notice by OCID in the cited API response",
+  "Software filter was CPV 48*/72* or keywords; CPV coding by buyers is imprecise",
+  "An end date does not establish reprocurement, an open bidding window or that the incumbent will not be renewed directly",
+  "No personal contact data recorded"
+ ],
+ "not_claimed": [
+  "buyer interest, customer, price, willingness to pay or revenue",
+  "any open tender"
+ ],
+ "reconsider_if": "An inbound request asks for renewal monitoring, or a reviewed public page for this calendar is wanted; then a filtered multi-page pull via the documented cursor is feasible."
+}
