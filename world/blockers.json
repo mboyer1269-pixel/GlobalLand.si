@@ -170,20 +170,22 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 786,
-    "turns_without_verified_revenue": 786,
-    "turns_without_outcome": 4,
+    "turns_without_new_interpreted_feedback": 787,
+    "turns_without_verified_revenue": 787,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-15T06:06:53Z",
-    "last_outcome_turn": "THINK-1794722402",
-    "last_productive_turn": "THINK-1794726001",
-    "last_turn": "THINK-1794726001",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794727811",
+    "last_productive_turn": "THINK-1794727811",
+    "last_turn": "THINK-1794727811",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
+      "outcome": true,
+      "mission_outcomes": [
+        "SHOPIFY-OFFICIAL-SAMPLE-DELIVERY"
+      ],
       "new_products": [
-        "products/services/shopify-large-catalogue/official-sample-delivery/source-fit-inspection.json"
+        "products/services/shopify-large-catalogue/official-sample-delivery/result.json"
       ],
       "new_product_count": 1,
       "new_research_count": 0,
