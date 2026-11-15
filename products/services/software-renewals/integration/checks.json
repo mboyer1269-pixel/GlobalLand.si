@@ -1,5 +1,5 @@
 {
- "all_pass": false,
+ "all_pass": true,
  "checks": [
   {
    "check": "quote_in_source:9317e486:The Contract includes optional 12 month ",
@@ -67,7 +67,13 @@
   },
   {
    "check": "intake_mailto_unchanged",
-   "pass": false
+   "pass": true,
+   "note": "First run expected count 1 and failed; that expectation was wrong: the single mailto carries the identifier in subject and body (2 occurrences) in both baseline and candidate. Corrected check: counts equal (2) and exactly one mailto in both.",
+   "first_run_pass": false,
+   "counts": {
+    "baseline": 2,
+    "candidate": 2
+   }
   }
  ],
  "facts_from_source": [
@@ -136,5 +142,6 @@
   "<p><strong>New free sample (15 November 2026):</strong> a separate page lists <a href=\"renewals.html\">three awarded UK software contracts with published end dates in 2027</a>, from official Contracts Finder data. They are different contracts from the three notices above. An end date is not a confirmed renewal or an open tender.</p>\n",
   "<p><strong>Nouvel échantillon gratuit (15 novembre 2026) :</strong> une page distincte (bilingue) présente <a href=\"renewals.html\">trois contrats logiciels britanniques attribués dont la date de fin publiée tombe en 2027</a>, d'après les données officielles Contracts Finder. Ce ne sont pas les trois avis ci-dessus. Une date de fin n'est ni un renouvellement confirmé ni un appel d'offres ouvert.</p>"
  ],
- "limits": "Facts are rendered from integration-source-records.json; interpretive notes are hand-written and only their quoted fragments are machine-checked. Not deployed. No demand or revenue evidence."
+ "limits": "Facts are rendered from integration-source-records.json; interpretive notes are hand-written and only their quoted fragments are machine-checked. Not deployed. No demand or revenue evidence.",
+ "candidate_index_sha256_recheck": "62be2c82e7ddc152b2a172f5dd1eaa1eeeb9a81e92c4dfdbd8ecc6bbb79d0dfb"
 }
