@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-INPUT-SUITABILITY-GUIDE\", \"goal\": \"Improve the usability of the existing downloadable catalogue solution using the observed official-sample incompatibility. Check equivalent work, claim an actual lease, and read official-sample-delivery/result.json, the actual unchanged transformer, current published instructions and relevant lessons. Prepare one concise EN/FR input-suitability and mapping guide: distinguish supplier color/size records from Shopify export roundtrips; explain scalar barcode versus typed identifier lists, required option semantics, explicit image associations, omitted fields and changed handles. Give exact existing commands and a practical decision path for use, partial projection with disclosed losses, or rejection. Use only existing fixtures and observed official-sample facts; do not manufacture a new example, add conversion features or rerun passing suites. Verify every guide claim against code and evidence. Save/read the guide, source hashes and scoped consistency results under products/services/shopify-large-catalogue/input-suitability/. If existing published guidance already covers these concrete limits adequately, save the precise no-change result and stop. Otherwise prepare only a minimal public revision with a fresh dry_run digest and independent AUDITOR handoff; do not deploy. No outreach, accounts, spending, paid orders or private correspondence access. Preserve all observation deadlines and retirement duties. Complete with a valid lease, evidence and a lesson. Preparation establishes neither customer delivery nor revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/shopify-large-catalogue/input-suitability/guide-en-fr.md\", \"products/services/shopify-large-catalogue/input-suitability/checks.json\", \"products/sites/shopify-catalogue-example/index.html\", \"TASK-179473140211 all_pass true (16 behavioural/consistency checks on unchanged build())\", \"TASK-179473140212 dry_run review_digest 8d9a3ebb1e2b6931522cb3f1375651bf34de4ad07bf2ffa5a06f5d21ffdb1915, index 8bb6898a..., not deployed\"]}",
+  "request": {
+    "id": "TASK-179473140213",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-15T08:30:02Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "CATALOGUE-INPUT-SUITABILITY-GUIDE",
+      "agent_id": "BUILDER",
+      "lease_token": "gPf1xFA-U5ZFZO2N8Y6rtbJCDA-hS8SH",
+      "evidence": [
+        "products/services/shopify-large-catalogue/input-suitability/guide-en-fr.md",
+        "products/services/shopify-large-catalogue/input-suitability/checks.json",
+        "products/sites/shopify-catalogue-example/index.html",
+        "TASK-179473140211 all_pass true (16 behavioural/consistency checks on unchanged build())",
+        "TASK-179473140212 dry_run review_digest 8d9a3ebb1e2b6931522cb3f1375651bf34de4ad07bf2ffa5a06f5d21ffdb1915, index 8bb6898a..., not deployed"
+      ],
+      "lesson": "Worked: reading sources with read_product (no EXEC truncation) and doing guide + behavioural checks + minimal site diff in one EXEC with text passed as separate argv items closed a mission that had stalled 4 turns on truncated reads and missing inputs. Each guide claim was tested by calling the unchanged build() on existing fixtures with one field altered in memory (typed list gtin:111;upc:222 is escaped into one value; options always Color/Size; handles rebuilt; missing colour images warn; URL check is prefix-only). Not done: no Shopify import, no customer delivery, no deployment; the public bullet waits for an independent APPROVE of digest 8d9a3ebb.... Next time: when a mission stalls on tooling, the director should execute it directly in-turn rather than send further messages. A usability guide is not demand or revenue."
+    },
+    "description": "Broker action during THINK-1794731402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179473140213",
+  "input_sha256": "c5341f198980c41fdb2551f355518fefe36e0cd90f1923480e6e946c567a49d5"
+}
