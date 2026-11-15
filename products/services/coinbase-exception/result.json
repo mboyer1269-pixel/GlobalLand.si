@@ -1,0 +1,65 @@
+{
+ "mission": "COINBASE-EXCEPTION-DELIVERY-GATE",
+ "verdict": "BOUNDED_REJECTION_PREREQUISITES_NOT_USABLE",
+ "observed_at": "2026-11-15",
+ "source": {
+  "url": "https://cantina.xyz/opportunities/bounties",
+  "artifact": "products/research/cantina-bounties-20261115.html",
+  "sha256": "9ce082532b2eb4992fddadd362948e99f110628bd79519fb12f29919da5d4fe7",
+  "coinbase_policy_chunk": "embedded payload chunk 6a (7629 chars), attributed by its own opening sentence naming Coinbase Onchain Bug Bounty Program",
+  "official_program_page_fetched": false
+ },
+ "exact_quotes_present_in_coinbase_chunk": {
+  "Please report vulnerabilities directly through the Spearbit/Cantina platform.": true,
+  "You must also be of legal age in your jurisdiction and not be a resident in a country under sanctions or restrictions, as required by applicable laws.": true,
+  "Do not test vulnerabilities on mainnet or public testnet deployments without prior authorization. Use local test environments or private test setups.": true,
+  "Reward decisions and eligibility are at the sole discretion of Coinbase.": true,
+  "Be the first to report a previously unknown, non-public vulnerability within the defined scope.": true
+ },
+ "terms_absent_from_coinbase_chunk": {
+  "deposit": true,
+  "fee": true,
+  "KYC": true,
+  "\\bAI\\b": true,
+  "agent": true,
+  "automated": true,
+  "LLM": true
+ },
+ "structured_fee_or_deposit_keys_in_payload": [
+  "kycRequired",
+  "submissionFee"
+ ],
+ "structured_key_value_samples": [
+  [
+   "submissionFee",
+   "\"100.00\""
+  ],
+  [
+   "submissionFee",
+   "\"20.00\""
+  ],
+  [
+   "submissionFee",
+   "\"30.00\""
+  ],
+  [
+   "submissionFee",
+   "\"5.00\""
+  ],
+  [
+   "submissionFee",
+   "\"50.00\""
+  ]
+ ],
+ "findings": {
+  "upfront_payment": "UNKNOWN. The Coinbase policy text contains no deposit/fee wording and the listing card lacks the Deposit required label; this is absence of a statement, not proof of free submission. Platform-level terms were not read.",
+  "autonomous_ai_eligibility": "UNKNOWN. The Coinbase text does not mention AI, agents or automated tooling. Pendle AI rules are a different program and are not transferred. Unknown permission is not authorization.",
+  "identity": "FAILS for an agent: eligibility requires a participant of legal age and not resident in a sanctioned country; rewards and eligibility are at Coinbase sole discretion. Only a real person (the founder) could satisfy this; no such designation exists.",
+  "submission": "FAILS currently: reports must go through the Spearbit/Cantina platform, which needs an authenticated account. No founder-approved Cantina account exists and account creation is not authorized.",
+  "settlement": "UNKNOWN: payout in USDC per listing; payout KYC/wallet terms for Coinbase not stated in this chunk.",
+  "testing": "Local-only testing is required; mainnet/testnet testing without authorization is prohibited."
+ },
+ "decision": "Do not start a speculative audit of Coinbase contracts. Two prerequisites (eligible natural-person participant, authenticated Cantina submission account) are not usable now, and AI eligibility and fees are unverified.",
+ "reconsideration_trigger": "Founder records a decision to participate personally with a founder-approved Cantina account, AND Cantina platform terms confirm AI-assisted reports and no upfront fee for this program. Only then define one bounded offline review target.",
+ "limits": "One saved listing page only; no program page, platform terms or login-gated content read. Rewards are advertised maxima, not funding or revenue."
+}
