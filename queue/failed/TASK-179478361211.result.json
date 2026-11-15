@@ -1,0 +1,32 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: selected public inputs unavailable; inspect catalog paths and retry with a new task. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179478361211",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-15T23:00:12Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib,hashlib,re,html\np=pathlib.Path\nraw=p('products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json').read_bytes(); data=json.loads(raw)\npage=p('products/sites/software-award-brief/renewals.html').read_text(); text=html.unescape(re.sub('<[^>]+>',' ',page)); ids=set(re.findall(r'ocds-b5fd17-[a-f0-9-]+',page)); records=[]\ndef walk(x):\n if isinstance(x,dict):\n  if x.get('ocid') in ids and 'tender' in x: records.append(x)\n  else:\n   for v in x.values():walk(v)\n elif isinstance(x,list):\n  for v in x:walk(v)\nwalk(data)\nchecks=[]; summaries=[]\nfor r in records:\n t=r['tender']; a=r['awards'][0]; period=a.get('contractPeriod',t.get('contractPeriod',{})); vals=[r['buyer']['name'],t['title'],t['description'],t.get('procurementMethodDetails',''),str(a['value']['amount']),a['value']['currency'],a['date'][:10],period['startDate'][:10],period['endDate'][:10]]+[s['name'] for s in a['suppliers']]\n checks.extend({'field':v,'pass':v in text} for v in vals)\n summaries.append({'ocid':r['ocid'],'buyer':r['buyer']['name'],'tender':t,'award':a})\nidx=p('products/sites/software-award-brief/index.html').read_bytes(); base=p('products/services/software-awards/expiry-transition/live-award-index.html').read_bytes()\ns=idx.decode(); pars=re.findall(r'<p\\b[^>]*>.*?</p>',s,re.S); added=[v for v in pars if 'renewals.html' in v]; restored=s\nfor v in added:restored=restored.replace(v,'',1)\nchecks += [{'field':'three selected records','pass':len(records)==3},{'field':'two added paragraphs','pass':len(added)==2},{'field':'reverse homepage','pass':restored.encode()==base or restored.replace('\\n\\n','\\n').encode()==base.replace(b'\\n\\n',b'\\n')},{'field':'raw source hash','pass':hashlib.sha256(raw).hexdigest()=='48c34ed08f5f73dbf05328251c53fee6a22da5dab14afdbcff64034b3d9af8ae'}]\nout={'checks':checks,'all_pass':all(c['pass'] for c in checks),'selected':summaries,'added_paragraphs':added,'restored_sha256':hashlib.sha256(restored.encode()).hexdigest(),'baseline_sha256':hashlib.sha256(base).hexdigest()}\nf=p('products/reviews/renewal-calendar-integration/scoped-verification.json');f.parent.mkdir(parents=True,exist_ok=True);f.write_text(json.dumps(out,ensure_ascii=False,indent=2));print(json.dumps({'all_pass':out['all_pass'],'failed':[c for c in checks if not c['pass']],'records':len(records),'restored_sha256':out['restored_sha256'],'baseline_sha256':out['baseline_sha256']}))"
+      ],
+      "inputs": [
+        "products/sites/software-award-brief/",
+        "products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json",
+        "products/services/software-awards/expiry-transition/live-award-index.html"
+      ],
+      "outputs": [
+        "products/reviews/renewal-calendar-integration/scoped-verification.json"
+      ],
+      "mission_id": "RENEWAL-CALENDAR-INTEGRATION-REVIEW"
+    },
+    "description": "Broker action during THINK-1794783612",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179478361211",
+  "input_sha256": "bb4dcb4e0d1983e407be1acf0992c0964f8ecd366d619f8d327703073c2207d0"
+}
