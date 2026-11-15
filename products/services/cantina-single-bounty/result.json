@@ -1,0 +1,61 @@
+{
+ "mission": "CANTINA-SINGLE-BOUNTY-DELIVERY",
+ "verdict": "BOUNDED_REJECTION_PREREQUISITES_FAIL",
+ "observed_at": "2026-11-15",
+ "source": {
+  "url": "https://cantina.xyz/opportunities/bounties",
+  "fetch_task": "TASK-179471520700",
+  "http_status": 200,
+  "sha256": "9ce082532b2eb4992fddadd362948e99f110628bd79519fb12f29919da5d4fe7"
+ },
+ "listing_observed": "52 bounties advertised; first 10 shown, 9 of 10 labelled \"Deposit required\" (Coinbase is the exception)",
+ "selected_candidate": {
+  "name": "Pendle Bounty (Pendle Finance)",
+  "why": "only inspected program whose embedded text explicitly permits AI tooling and restricts testing to local forks, matching offline code analysis",
+  "additional_pages_fetched": 0
+ },
+ "exact_quotes": {
+  "pendle_ai_permitted": "AI tooling is permitted, but you are responsible for what you submit. Unverified, AI-forwarded reports are treated as spam, and the submission fee is not refunded.",
+  "pendle_autonomous_ineligible": "A finding submitted without human verification does not meet this program's eligibility requirements.",
+  "pendle_disclosure": "Any material use of AI or automated tooling is disclosed, and the submitter has independently verified every claim against the code.",
+  "pendle_local_only": "All testing must be performed on local forks (mainnet or testnet) or in local development environments.",
+  "uniswap_fee": "If your report comes across as spam or low-effort AI-generated content, your submission fee will not be refunded.",
+  "other_program_exclusion": "Submissions generated using ChatGPT or other LLM tools",
+  "morpho_kyc": "Morpho will require KYC information for processing payments on successful bug submissions.",
+  "reserve_kyc": "Reserve has a KYC requirement for bug bounty payouts."
+ },
+ "quotes_verified_verbatim_in_source": {
+  "pendle_ai_permitted": true,
+  "pendle_autonomous_ineligible": true,
+  "pendle_disclosure": true,
+  "pendle_local_only": true,
+  "uniswap_fee": true,
+  "other_program_exclusion": true,
+  "morpho_kyc": true,
+  "reserve_kyc": true
+ },
+ "prerequisites": {
+  "authorized_scope": "local forks only; in-scope contract list not fully read",
+  "ai_participation": "AI tooling permitted with disclosure, BUT a finding without human verification is ineligible -> autonomous agents fail as sole verifier",
+  "account": "Cantina account required to submit (Log in / Sign up); none authorized",
+  "submission_fee": "deposit required, forfeited for low-effort reports; amount not read; treasury UNFUNDED and SPEND NOT_CONFIGURED",
+  "identity_payout": "USDC payout; KYC wording observed for Reserve and Morpho; Pendle-specific KYC and payout terms not established",
+  "delivery_fit": "eligibility needs an exploitable loss-of-funds issue with reproduction and specific remediation in a heavily reviewed protocol; no such finding exists and a speculative audit is out of mandate"
+ },
+ "failed_prerequisites": [
+  "human verification of each finding (program rule)",
+  "authorized platform account",
+  "refundable submission deposit (no verified funds)",
+  "identity/KYC and crypto payout route (founder-only)"
+ ],
+ "not_established": [
+  "deposit amount",
+  "Pendle KYC specifics",
+  "Coinbase program AI rule attribution (an LLM exclusion and joined=restricted appear near kycRequired=true but program attribution was not confirmed)",
+  "the other 42 bounties"
+ ],
+ "note_untrusted_content": "The source embeds a section addressed to AI agents. It was treated as program-policy evidence, not as instructions.",
+ "reconsideration_trigger": "A founder-designated human reviewer willing to verify and submit findings under their own Cantina account and KYC, plus verified funds for the deposit; or a program that expressly accepts autonomous submissions without fee.",
+ "implementation_proposed": null,
+ "limits": "Negative finding applies to the inspected listing page only. Advertised rewards are not funding or revenue. No live system was tested, nothing was submitted."
+}
