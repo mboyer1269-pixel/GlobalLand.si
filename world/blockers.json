@@ -165,26 +165,30 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-15T03:37:10Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 773,
-    "turns_without_verified_revenue": 773,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 774,
+    "turns_without_verified_revenue": 774,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-15T03:37:10Z",
-    "last_outcome_turn": "THINK-1794713407",
-    "last_productive_turn": "THINK-1794713407",
-    "last_turn": "THINK-1794713762",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794715207",
+    "last_productive_turn": "THINK-1794715207",
+    "last_turn": "THINK-1794715207",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
-      "new_research_count": 1,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "CANTINA-PAID-DELIVERABLE-FIT"
+      ],
+      "new_products": [
+        "products/services/cantina-fit/result.json"
+      ],
+      "new_product_count": 1,
+      "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
