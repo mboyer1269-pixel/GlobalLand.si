@@ -170,23 +170,27 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 823,
-    "turns_without_verified_revenue": 823,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 824,
+    "turns_without_verified_revenue": 824,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-15T17:08:05Z",
-    "last_outcome_turn": "THINK-1794762008",
-    "last_productive_turn": "THINK-1794762361",
-    "last_turn": "THINK-1794762361",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794763802",
+    "last_productive_turn": "THINK-1794763802",
+    "last_turn": "THINK-1794763802",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/software-renewals/contracts-finder/api-documentation.html",
-        "products/services/software-renewals/contracts-finder/search-documentation.html"
+      "outcome": true,
+      "mission_outcomes": [
+        "CONTRACTS-FINDER-RENEWAL-DELIVERY"
       ],
-      "new_product_count": 2,
+      "new_products": [
+        "products/services/software-renewals/contracts-finder/calendar-en-fr.md",
+        "products/services/software-renewals/contracts-finder/evidence.json",
+        "products/services/software-renewals/contracts-finder/extraction.json",
+        "products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json"
+      ],
+      "new_product_count": 4,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
