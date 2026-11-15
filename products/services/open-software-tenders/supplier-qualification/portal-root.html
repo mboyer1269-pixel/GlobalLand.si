@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no"/>
+<title>PCS - Tender</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<div id="jai-launcher-container" class="container"></div> 
+<script src="/esop/guest/jai/mfe?part=scriptInclude"></script>
+<script type="module" src="/esop/guest/jai/mfe?part=jsModule"></script>
+<!--<script>
+    	document.addEventListener("DOMContentLoaded", function(event) {
+        const script = document.createElement('script');
+        script.setAttribute('src', "https://solve-widget.forethought.ai/embed.js");
+        script.setAttribute('id', "forethought-widget-embed-script");
+        script.setAttribute('data-api-key', "7e860775-2e58-41bf-904f-e1c6459f9bcb");
+        script.setAttribute('data-ft-Embed-Script-Language', navigator.language);
+        script.setAttribute('data-ft-Password-Reset-Link', window.location.href.split('.gov.uk')[0] + '.gov.uk/esop/guest/go/public/lostPwd');
+        script.setAttribute('data-ft-Retrieve-Username-Link', window.location.href.split('.gov.uk')[0] + '.gov.uk/esop/guest/forgot/useralias/view.si');
+        document.head.appendChild(script);
+   		});
+	</script>-->
+</head>
+<body class="body_hp">
+<div class="container"> 
+  <!--<div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item item0 active"></div>
+      <div class="carousel-item item1"></div>
+      <div class="carousel-item item2"></div>
+      <div class="carousel-item item3"></div>
+      <div class="carousel-item item4"></div>
+    </div>
+  </div>-->
+  <div class="header"></div>
+  <div class="main">
+    <div class="left boxes bx-white">
+      <h2>Login</h2>
+      <form style="padding-left:10px;" name="loginForm" autocomplete="off"  method="post" action="/esop/guest/login.do" target="_parent">
+        <input type="hidden" name="loginNotOk" value="/esop/pts-host/public/pts/web/error.html" />
+        <input type="hidden" name="customLoginPage" value="/esop/pts-host/public/pts/web/login.html"/>
+        <fieldset>
+          <legend></legend>
+          <!--div class="red">invalid username / password</div-->
+          <label for="username" accesskey="u">Username</label>
+          <br/>
+          <input name="login" type="text" style="WIDTH: 200px" id="username" tabindex="1" />
+          <br/>
+          <br/>
+          <label for="password" accesskey="p">Password</label>
+          <br/>
+          <input name="password" tabindex="2" id="password" type="password" />
+          <br>
+          <br>
+          <input type="submit" class="button" name="submit" value="Sign in" alt="Sign In" tabindex="3"/>
+          <br>
+          <br>
+        </fieldset>
+      </form>
+      <ul>
+        <li><a title="Click here to load the Supplier registration form! A new browser will be opened" href="/esop/guest/go/public/registration" target="_blank">Register as a Supplier</a></li>
+      </ul>
+      <ul>
+        <li><a title="Click here to receive a new password or recover your username" class="footerText font-large" href="/esop/guest/go/public/lostPwd">Forgot your password or username?</a></li>
+      </ul>
+      <ul>
+        <li class="font-large"><strong>Please contact the Help Desk</strong></li>
+        <li class="font-large"><a href="https://jaggaer.my.site.com/SupplierSupportRequest/s/" target="_blank">Supplier Support Request</a></li>
+        <li class="font-large">0800 069 8630</li>
+        <li><a href="/esop/common-host/public/browserenv/requirements.jsp" onClick="target='_blank'" title="Click to open the System Requirements Applet. A new browser will be opened">System Requirements</a></li>
+        <li><a href="https://www.jaggaer.com/gb/trustcenter/#privacyshield" target="_blank" title="Click to open the System Requirements Applet. A new browser will be opened">Privacy Statement</a></li>
+        <li><a href="https://www.jaggaer.com/accessibility-statement" target="_blank" title="Click to open the Accessibility Statement. A new browser will be opened">Accessibility Statement</a></li>
+      </ul>
+    </div>
+    <!-- left-->
+    
+    <div id="right" class="boxes bx-white">
+      <h1>Welcome to PCS-Tender</h1>
+      <p>PCS-Tender is the national eTendering system, and is centrally funded by the Scottish Government. The system is a secure and efficient means for buyers and suppliers to manage tender exercises online. The standard SPD (Scotland) and ITT templates enable buyers to easily create consistent tender documentation.</p>
+      <br>
+      <br>
+      <h2>Suppliers</h2>
+      Once you have registered as a supplier, you will be sent a password via email which will provide you with secure access to the site. You will then be able to express interest in any advertised tender exercises. Additionally, you will be able to complete your supplier profile, which will pre-populate tender responses providing buyers have used the standard questions. 
+      <!--<div class="pippo">
+        <ul class="pulsanti" style="margin-top: 40px;">
+          <li><a id="showprep" href="/esop/guest/go/public/opportunity/current">Opportunities</a></li>
+        </ul>
+      </div>-->
+      <div class="pippo">
+        <ul class="pulsanti">
+          <li style="width:auto;"><a href="supplier_help_files.html">Further Assistance for Suppliers</a></li>
+          <li style="width:auto;"><a href="../attach/pcs-tender-find_express_interest_in_ITT_PQQ_supplier_guide.pdf" target="_blank">How to Find an ITT or PQQ – Supplier Guide</a></li>
+        </ul>
+      </div>
+      <!-- pippo-->
+      <div style="clear:left;"></div>
+    </div>
+    <!-- right-->
+    <div style="clear:left; margin-bottom:60px;"></div>
+  </div>
+  <!-- main-->
+  
+  <div class="footer">
+    <div align="center"><img src="../images/logos.jpg" alt="" usemap="#Map"/>
+      <map name="Map">
+        <area shape="Scottish_Government" coords="5,14,239,66" href="https://www.publiccontractsscotland.gov.uk" target="_blank">
+        <area shape="Scottish_Government" coords="247,16,472,61" href="https://www.gov.scot/policies/public-sector-procurement" target="_blank">
+        <area shape="Scotland_Excel" coords="482,14,579,67" href="https://home.scotland-excel.org.uk" target="_blank">
+        <area shape="Apuc" coords="596,18,670,71" href="https://apuc-scot.ac.uk" target="_blank">
+        <area shape="NHS_Scotland_National_Procurement" coords="689,16,741,70" href="https://www.nss.nhs.scot" target="_blank">
+        <area shape="Supplier_Development_Programme " coords="759,3,876,79" href="https://www.sdpscotland.co.uk" target="_blank">
+        <area shape="Procurement_Journey" coords="885,14,1098,52" href="https://www.procurementjourney.scot" target="_blank">
+        <area shape="Supplier_Journey" coords="1112,11,1268,46" href="https://www.supplierjourney.scot" target="_blank">
+      </map>
+    </div>
+  </div>
+</div>
+<!-- container--> 
+<script src="../js/jquery-3.2.1.min.js"></script> 
+<script src="../js/bootstrap-4.0.0.js"></script> 
+<!--<script language="JavaScript">	
+if (window.location.href.indexOf('-prep')!=-1) {
+	document.getElementById('showprep').style.display='block';
+}
+</script>-->
+</body>
+</html>
