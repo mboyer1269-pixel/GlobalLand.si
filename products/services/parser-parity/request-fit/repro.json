@@ -1,0 +1,173 @@
+{
+ "python_version": "3.11.2",
+ "node_version": "v22.23.4",
+ "inputs": [
+  "1.365",
+  "1.36500000000001",
+  "1.36500000000005",
+  "1.36500000000009",
+  "1.375",
+  "2.675",
+  "-1.365",
+  "0.125",
+  "1.005"
+ ],
+ "rows": [
+  {
+   "input": "1.365",
+   "python": {
+    "decimal_from_text": "1.36",
+    "decimal_from_str_float": "1.36",
+    "exact_binary_value": "1.3649999999999999911182158029987476766109466552734375",
+    "builtin_round_float": "1.36"
+   },
+   "node": {
+    "x_times_100": "136.5",
+    "question_bankersRound": "1.36",
+    "toFixed2": "1.36",
+    "text_half_even": "1.36"
+   },
+   "question_fn_matches_python_decimal": true,
+   "text_half_even_matches_python_decimal": true
+  },
+  {
+   "input": "1.36500000000001",
+   "python": {
+    "decimal_from_text": "1.37",
+    "decimal_from_str_float": "1.37",
+    "exact_binary_value": "1.36500000000000998312543742940761148929595947265625",
+    "builtin_round_float": "1.37"
+   },
+   "node": {
+    "x_times_100": "136.500000000001",
+    "question_bankersRound": "1.37",
+    "toFixed2": "1.37",
+    "text_half_even": "1.37"
+   },
+   "question_fn_matches_python_decimal": true,
+   "text_half_even_matches_python_decimal": true
+  },
+  {
+   "input": "1.36500000000005",
+   "python": {
+    "decimal_from_text": "1.37",
+    "decimal_from_str_float": "1.37",
+    "exact_binary_value": "1.3650000000000499511543239350430667400360107421875",
+    "builtin_round_float": "1.37"
+   },
+   "node": {
+    "x_times_100": "136.500000000005",
+    "question_bankersRound": "1.37",
+    "toFixed2": "1.37",
+    "text_half_even": "1.37"
+   },
+   "question_fn_matches_python_decimal": true,
+   "text_half_even_matches_python_decimal": true
+  },
+  {
+   "input": "1.36500000000009",
+   "python": {
+    "decimal_from_text": "1.37",
+    "decimal_from_str_float": "1.37",
+    "exact_binary_value": "1.36500000000008991918321044067852199077606201171875",
+    "builtin_round_float": "1.37"
+   },
+   "node": {
+    "x_times_100": "136.50000000000898",
+    "question_bankersRound": "1.37",
+    "toFixed2": "1.37",
+    "text_half_even": "1.37"
+   },
+   "question_fn_matches_python_decimal": true,
+   "text_half_even_matches_python_decimal": true
+  },
+  {
+   "input": "1.375",
+   "python": {
+    "decimal_from_text": "1.38",
+    "decimal_from_str_float": "1.38",
+    "exact_binary_value": "1.375",
+    "builtin_round_float": "1.38"
+   },
+   "node": {
+    "x_times_100": "137.5",
+    "question_bankersRound": "1.38",
+    "toFixed2": "1.38",
+    "text_half_even": "1.38"
+   },
+   "question_fn_matches_python_decimal": true,
+   "text_half_even_matches_python_decimal": true
+  },
+  {
+   "input": "2.675",
+   "python": {
+    "decimal_from_text": "2.68",
+    "decimal_from_str_float": "2.68",
+    "exact_binary_value": "2.67499999999999982236431605997495353221893310546875",
+    "builtin_round_float": "2.67"
+   },
+   "node": {
+    "x_times_100": "267.5",
+    "question_bankersRound": "2.68",
+    "toFixed2": "2.67",
+    "text_half_even": "2.68"
+   },
+   "question_fn_matches_python_decimal": true,
+   "text_half_even_matches_python_decimal": true
+  },
+  {
+   "input": "-1.365",
+   "python": {
+    "decimal_from_text": "-1.36",
+    "decimal_from_str_float": "-1.36",
+    "exact_binary_value": "-1.3649999999999999911182158029987476766109466552734375",
+    "builtin_round_float": "-1.36"
+   },
+   "node": {
+    "x_times_100": "-136.5",
+    "question_bankersRound": "-1.36",
+    "toFixed2": "-1.36",
+    "text_half_even": "-1.36"
+   },
+   "question_fn_matches_python_decimal": true,
+   "text_half_even_matches_python_decimal": true
+  },
+  {
+   "input": "0.125",
+   "python": {
+    "decimal_from_text": "0.12",
+    "decimal_from_str_float": "0.12",
+    "exact_binary_value": "0.125",
+    "builtin_round_float": "0.12"
+   },
+   "node": {
+    "x_times_100": "12.5",
+    "question_bankersRound": "0.12",
+    "toFixed2": "0.13",
+    "text_half_even": "0.12"
+   },
+   "question_fn_matches_python_decimal": true,
+   "text_half_even_matches_python_decimal": true
+  },
+  {
+   "input": "1.005",
+   "python": {
+    "decimal_from_text": "1.00",
+    "decimal_from_str_float": "1.00",
+    "exact_binary_value": "1.00499999999999989341858963598497211933135986328125",
+    "builtin_round_float": "1.0"
+   },
+   "node": {
+    "x_times_100": "100.49999999999999",
+    "question_bankersRound": "1",
+    "toFixed2": "1.00",
+    "text_half_even": "1.00"
+   },
+   "question_fn_matches_python_decimal": true,
+   "text_half_even_matches_python_decimal": true
+  }
+ ],
+ "question_fn_mismatches": 0,
+ "text_half_even_matches": 9,
+ "n": 9
+}
