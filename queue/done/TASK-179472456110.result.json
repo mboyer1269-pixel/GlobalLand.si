@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source_sha256\": \"f41b9562b9d9d951ff8f8184f7fe24e738304339d3e24104fc5c265fa00d28ff\",\n  \"rows\": 16,\n  \"groups\": {\n    \"physical-product-the-band-t-shirt\": {\n      \"rows\": 12,\n      \"option1_values\": [\n        \"Small\",\n        \"Medium\",\n        \"Large\",\n        \"XL\"\n      ],\n      \"option2_values\": [\n        \"green\",\n        \"gray\",\n        \"red\"\n      ],\n      \"product_image_rows\": 1,\n      \"variant_image_rows\": 0,\n      \"empty_barcodes\": 0,\n      \"multi_identifier_barcode_cells\": 1\n    },\n    \"digital-product-the-history-of-rock-music\": {\n      \"rows\": 3,\n      \"option1_values\": [\n        \"PDF\",\n        \"Audio\",\n        \"Kindle\"\n      ],\n      \"option2_values\": [],\n      \"product_image_rows\": 0,\n      \"variant_image_rows\": 0,\n      \"empty_barcodes\": 0,\n      \"multi_identifier_barcode_cells\": 0\n    },\n    \"example-perfume\": {\n      \"rows\": 1,\n      \"option1_values\": [\n        \"Premium\"\n      ],\n      \"option2_values\": [],\n      \"product_image_rows\": 1,\n      \"variant_image_rows\": 0,\n      \"empty_barcodes\": 1,\n      \"multi_identifier_barcode_cells\": 0\n    }\n  },\n  \"assessment\": \"Whole-sample lossless mapping to the existing required color/size/barcode contract is unsupported: digital Format and perfume Title options are not color/size; perfume barcode is empty. T-shirt has actual Size and Color values, but no explicit variant-image assignments and one barcode cell contains two typed identifiers. Do not manufacture image/color relationships or pass a typed identifier list as one opaque barcode while claiming semantic preservation. A supported partial projection requires explicit exclusions; omission of other source columns and changed handles/options must be accounted for. This is source inspection only, not transformation or Shopify import.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/official-sample-delivery/source-fit-inspection.json",
+    "products/receipts/TASK-179472456110.json"
+  ],
+  "request": {
+    "id": "TASK-179472456110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-15T06:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import csv,json,hashlib,pathlib\np=pathlib.Path('products/services/shopify-large-catalogue/official-sample-delivery/official-product-template.csv')\nrows=list(csv.DictReader(p.open(encoding='utf-8',newline='')))\ng={}\nfor r in rows:\n k=r['URL handle']; a=g.setdefault(k,{'rows':0,'option1_values':[],'option2_values':[],'product_image_rows':0,'variant_image_rows':0,'empty_barcodes':0,'multi_identifier_barcode_cells':0})\n a['rows']+=1\n for col,key in [('Option1 value','option1_values'),('Option2 value','option2_values')]:\n  if r[col] and r[col] not in a[key]:a[key].append(r[col])\n a['product_image_rows']+=bool(r['Product image URL']);a['variant_image_rows']+=bool(r['Variant image URL']);a['empty_barcodes']+=not bool(r['Variant Barcodes']);a['multi_identifier_barcode_cells']+=';' in r['Variant Barcodes']\no={'source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'rows':len(rows),'groups':g,'assessment':'Whole-sample lossless mapping to the existing required color/size/barcode contract is unsupported: digital Format and perfume Title options are not color/size; perfume barcode is empty. T-shirt has actual Size and Color values, but no explicit variant-image assignments and one barcode cell contains two typed identifiers. Do not manufacture image/color relationships or pass a typed identifier list as one opaque barcode while claiming semantic preservation. A supported partial projection requires explicit exclusions; omission of other source columns and changed handles/options must be accounted for. This is source inspection only, not transformation or Shopify import.'}\nout=pathlib.Path('products/services/shopify-large-catalogue/official-sample-delivery/source-fit-inspection.json');out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(o,indent=2)+'\\n');print(out.read_text())"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/official-sample-delivery/official-product-template.csv"
+      ],
+      "outputs": [
+        "products/services/shopify-large-catalogue/official-sample-delivery/source-fit-inspection.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794724561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179472456110",
+  "input_sha256": "82eb3b4d673184cd84a2503bf11166fd8fdcd9b1d1d3141314e8531774227f70"
+}

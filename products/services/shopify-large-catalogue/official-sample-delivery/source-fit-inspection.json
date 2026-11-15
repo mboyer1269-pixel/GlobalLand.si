@@ -1,0 +1,49 @@
+{
+  "source_sha256": "f41b9562b9d9d951ff8f8184f7fe24e738304339d3e24104fc5c265fa00d28ff",
+  "rows": 16,
+  "groups": {
+    "physical-product-the-band-t-shirt": {
+      "rows": 12,
+      "option1_values": [
+        "Small",
+        "Medium",
+        "Large",
+        "XL"
+      ],
+      "option2_values": [
+        "green",
+        "gray",
+        "red"
+      ],
+      "product_image_rows": 1,
+      "variant_image_rows": 0,
+      "empty_barcodes": 0,
+      "multi_identifier_barcode_cells": 1
+    },
+    "digital-product-the-history-of-rock-music": {
+      "rows": 3,
+      "option1_values": [
+        "PDF",
+        "Audio",
+        "Kindle"
+      ],
+      "option2_values": [],
+      "product_image_rows": 0,
+      "variant_image_rows": 0,
+      "empty_barcodes": 0,
+      "multi_identifier_barcode_cells": 0
+    },
+    "example-perfume": {
+      "rows": 1,
+      "option1_values": [
+        "Premium"
+      ],
+      "option2_values": [],
+      "product_image_rows": 1,
+      "variant_image_rows": 0,
+      "empty_barcodes": 1,
+      "multi_identifier_barcode_cells": 0
+    }
+  },
+  "assessment": "Whole-sample lossless mapping to the existing required color/size/barcode contract is unsupported: digital Format and perfume Title options are not color/size; perfume barcode is empty. T-shirt has actual Size and Color values, but no explicit variant-image assignments and one barcode cell contains two typed identifiers. Do not manufacture image/color relationships or pass a typed identifier list as one opaque barcode while claiming semantic preservation. A supported partial projection requires explicit exclusions; omission of other source columns and changed handles/options must be accounted for. This is source inspection only, not transformation or Shopify import."
+}
