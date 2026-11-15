@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n \"mission\": \"CANTINA-PAID-DELIVERABLE-FIT\",\n \"verdict\": \"BOUNDED_REJECTION_NO_OPEN_COMPETITION\",\n \"observed_at\": \"2026-11-15\",\n \"source\": {\n  \"url\": \"https://cantina.xyz/opportunities/competitions\",\n  \"fetch_task\": \"TASK-179471340700\",\n  \"http_status\": 200,\n  \"sha256\": \"1d0f38f5018a7f3f9bf96af4b3d960be5dbef37826cb7a525a18c3bad90f90fa\",\n  \"bytes\": 556285\n },\n \"listing_text_quote\": \"All 53 Bounties 52 Competitions 1 Ended 144 Filters Revert v4lend Competition Revert Finance $50,000 in USDC Competition Judging Ended on 3 Nov 2026 High Signal. Comprehensive bug coverage. The most i\",\n \"competition_links_in_page\": [\n  \"/competitions/e275368c-547d-4d91-a418-053ad31082a8\"\n ],\n \"competitions_inspected\": 1,\n \"official_rules_pages_fetched\": 0,\n \"status_values_in_payload\": [\n  \"judging\",\n  \"live\",\n  \"success\"\n ],\n \"kyc_mentions_count\": 8,\n \"kyc_context_samples\": [\n  \"ontract fails to deliver promised returns, but does not lose value; theft of gas; unbounded gas consumption that does not cause a more severe bug. # KYC Requirements Reserve has a KYC requirement for bug bounty payouts. Anyone who receives $600 or more will need to provide either a US taxpayer W-9 fo\",\n  \"d returns, but does not lose value; theft of gas; unbounded gas consumption that does not cause a more severe bug. # KYC Requirements Reserve has a KYC requirement for bug bounty payouts. Anyone who receives $600 or more will need to provide either a US taxpayer W-9 form, or a W-8BEN declaring that t\",\n  \"ceives $600 or more will need to provide either a US taxpayer W-9 form, or a W-8BEN declaring that they are not a US taxpayer subject to withholding. KYC information is only required on confirmation of the validity of a bug report. If you discover a vulnerability in any component not explicitly listed\",\n  \"dividuals closely associated with the project - Be security auditors who directly or indirectly participated in the audit review Morpho will require KYC information for processing payments on successful bug submissions. The following details must be provided: - **Full name** - **Date of birth** - **A\"\n ],\n \"findings\": {\n  \"open_competitions\": \"The competitions tab lists exactly one competition (Revert v4lend, advertised $50,000 in USDC) whose rendered state is Judging, ended 3 Nov 2026. No competition accepting submissions was observed on this page.\",\n  \"settlement\": \"Advertised reward is denominated in USDC; GlobalLand has no verified cryptocurrency settlement route (collection is administrative Interac CAD only).\",\n  \"ai_participation\": \"UNKNOWN - rules/terms pages not fetched because no open competition exists to evaluate.\",\n  \"identity\": \"UNKNOWN in detail; page payload mentions KYC (see samples); account signup would be required and is not authorized.\",\n  \"bounties_tab\": \"Page counter shows 52 bounties; NOT inspected (outside this mission: open-ended vulnerability hunting is speculative audit work).\"\n },\n \"limits\": \"One listing page at one time; negative finding applies only to the competitions tab as observed. Advertised prizes are not funding.\",\n \"reconsideration_trigger\": \"A new competition in an open submission state appears AND an authorized account/identity plus a verified USDC-or-fiat payout route exist. Without both, do not re-scan.\",\n \"next_action\": \"None for this channel. No audit, account, submission or contact.\"\n}\n\n",
+  "artifacts": [
+    "products/services/cantina-fit/result.json",
+    "products/receipts/TASK-179471376212.json"
+  ],
+  "request": {
+    "id": "TASK-179471376212",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-15T03:36:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import re,html,json,hashlib,pathlib\np='products/research/cantina-competitions-20261115.html'\nb=open(p,'rb').read()\ns=b.decode('utf-8','replace')\nu=s.replace('\\\\\"','\"').replace('\\\\n',' ')\nkyc=[]\nfor m in re.finditer(r'KYC',u):\n  x=re.sub(r'\\s+',' ',u[max(0,m.start()-150):m.end()+150])\n  if x not in kyc: kyc.append(x)\nt=re.sub(r'<script.*?</script>|<style.*?</style>','',s,flags=re.S)\nt=re.sub(r'\\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',t)))\ni=t.find('All 53')\nlisting=t[i:i+200]\ncomp_links=sorted(set(re.findall(r'href=\"(/competitions/[^\"]+)\"',s)))\nstatuses=sorted(set(re.findall(r'\"status\":\"([a-zA-Z_]+)\"',u)))\nr={'mission':'CANTINA-PAID-DELIVERABLE-FIT','verdict':'BOUNDED_REJECTION_NO_OPEN_COMPETITION','observed_at':'2026-11-15','source':{'url':'https://cantina.xyz/opportunities/competitions','fetch_task':'TASK-179471340700','http_status':200,'sha256':hashlib.sha256(b).hexdigest(),'bytes':len(b)},'listing_text_quote':listing,'competition_links_in_page':comp_links,'competitions_inspected':1,'official_rules_pages_fetched':0,'status_values_in_payload':statuses,'kyc_mentions_count':s.count('KYC'),'kyc_context_samples':kyc[:4],'findings':{'open_competitions':'The competitions tab lists exactly one competition (Revert v4lend, advertised $50,000 in USDC) whose rendered state is Judging, ended 3 Nov 2026. No competition accepting submissions was observed on this page.','settlement':'Advertised reward is denominated in USDC; GlobalLand has no verified cryptocurrency settlement route (collection is administrative Interac CAD only).','ai_participation':'UNKNOWN - rules/terms pages not fetched because no open competition exists to evaluate.','identity':'UNKNOWN in detail; page payload mentions KYC (see samples); account signup would be required and is not authorized.','bounties_tab':'Page counter shows 52 bounties; NOT inspected (outside this mission: open-ended vulnerability hunting is speculative audit work).'},'limits':'One listing page at one time; negative finding applies only to the competitions tab as observed. Advertised prizes are not funding.','reconsideration_trigger':'A new competition in an open submission state appears AND an authorized account/identity plus a verified USDC-or-fiat payout route exist. Without both, do not re-scan.','next_action':'None for this channel. No audit, account, submission or contact.'}\npathlib.Path('products/services/cantina-fit').mkdir(parents=True,exist_ok=True)\nopen('products/services/cantina-fit/result.json','w').write(json.dumps(r,indent=1))\nprint(json.dumps(r,indent=1)[:3500])\n"
+      ],
+      "inputs": [
+        "products/research/cantina-competitions-20261115.html"
+      ],
+      "outputs": [
+        "products/services/cantina-fit/result.json"
+      ],
+      "mission_id": "CANTINA-PAID-DELIVERABLE-FIT"
+    },
+    "description": "Broker action during THINK-1794713762",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179471376212",
+  "input_sha256": "a2e2a314534c6bed602a355aeaa922602368a17134f326ccc9e39b5afe502c88"
+}

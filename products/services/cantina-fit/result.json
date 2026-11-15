@@ -1,0 +1,40 @@
+{
+ "mission": "CANTINA-PAID-DELIVERABLE-FIT",
+ "verdict": "BOUNDED_REJECTION_NO_OPEN_COMPETITION",
+ "observed_at": "2026-11-15",
+ "source": {
+  "url": "https://cantina.xyz/opportunities/competitions",
+  "fetch_task": "TASK-179471340700",
+  "http_status": 200,
+  "sha256": "1d0f38f5018a7f3f9bf96af4b3d960be5dbef37826cb7a525a18c3bad90f90fa",
+  "bytes": 556285
+ },
+ "listing_text_quote": "All 53 Bounties 52 Competitions 1 Ended 144 Filters Revert v4lend Competition Revert Finance $50,000 in USDC Competition Judging Ended on 3 Nov 2026 High Signal. Comprehensive bug coverage. The most i",
+ "competition_links_in_page": [
+  "/competitions/e275368c-547d-4d91-a418-053ad31082a8"
+ ],
+ "competitions_inspected": 1,
+ "official_rules_pages_fetched": 0,
+ "status_values_in_payload": [
+  "judging",
+  "live",
+  "success"
+ ],
+ "kyc_mentions_count": 8,
+ "kyc_context_samples": [
+  "ontract fails to deliver promised returns, but does not lose value; theft of gas; unbounded gas consumption that does not cause a more severe bug. # KYC Requirements Reserve has a KYC requirement for bug bounty payouts. Anyone who receives $600 or more will need to provide either a US taxpayer W-9 fo",
+  "d returns, but does not lose value; theft of gas; unbounded gas consumption that does not cause a more severe bug. # KYC Requirements Reserve has a KYC requirement for bug bounty payouts. Anyone who receives $600 or more will need to provide either a US taxpayer W-9 form, or a W-8BEN declaring that t",
+  "ceives $600 or more will need to provide either a US taxpayer W-9 form, or a W-8BEN declaring that they are not a US taxpayer subject to withholding. KYC information is only required on confirmation of the validity of a bug report. If you discover a vulnerability in any component not explicitly listed",
+  "dividuals closely associated with the project - Be security auditors who directly or indirectly participated in the audit review Morpho will require KYC information for processing payments on successful bug submissions. The following details must be provided: - **Full name** - **Date of birth** - **A"
+ ],
+ "findings": {
+  "open_competitions": "The competitions tab lists exactly one competition (Revert v4lend, advertised $50,000 in USDC) whose rendered state is Judging, ended 3 Nov 2026. No competition accepting submissions was observed on this page.",
+  "settlement": "Advertised reward is denominated in USDC; GlobalLand has no verified cryptocurrency settlement route (collection is administrative Interac CAD only).",
+  "ai_participation": "UNKNOWN - rules/terms pages not fetched because no open competition exists to evaluate.",
+  "identity": "UNKNOWN in detail; page payload mentions KYC (see samples); account signup would be required and is not authorized.",
+  "bounties_tab": "Page counter shows 52 bounties; NOT inspected (outside this mission: open-ended vulnerability hunting is speculative audit work)."
+ },
+ "limits": "One listing page at one time; negative finding applies only to the competitions tab as observed. Advertised prizes are not funding.",
+ "reconsideration_trigger": "A new competition in an open submission state appears AND an authorized account/identity plus a verified USDC-or-fiat payout route exist. Without both, do not re-scan.",
+ "next_action": "None for this channel. No audit, account, submission or contact."
+}
