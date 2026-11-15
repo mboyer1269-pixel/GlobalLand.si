@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\"source_sha256\": \"48c34ed08f5f73dbf05328251c53fee6a22da5dab14afdbcff64034b3d9af8ae\", \"bytes\": 569136, \"releases\": 100, \"top_keys\": [\"extensions\", \"license\", \"links\", \"publicationPolicy\", \"publishedDate\", \"publisher\", \"releases\", \"uri\", \"version\"], \"has_next\": true, \"awards_with_endDate\": 100, \"software_related_releases\": 21, \"candidate_count\": 5, \"candidates\": [{\"ocid\": \"ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f\", \"release_id\": \"bcca35fe-32ad-4a29-a7e7-63c321af2f88-921564\", \"date\": \"2026-11-13T15:34:46Z\", \"buyer\": \"Health & Safety Executive\", \"title\": \"The Provision of ShareFile Licences (2026)\", \"cpv\": \"72000000\", \"cpv_desc\": \"IT services: consulting, software development, Internet and support\", \"description\": \"HSE were looking for a supplier for Progress ShareFile, a secure file transfer solution for sending large data files to other organisations; which cannot be sent by email. The supplier was chosen via TePAs2 Lot 3 (RM6098).\", \"suppliers\": [\"CDW Limited\"], \"value\": {\"amount\": 51624, \"currency\": \"GBP\"}, \"award_date\": \"2026-06-15T00:00:00+01:00\", \"start\": \"2026-06-29T00:00:00+01:00\", \"end\": \"2027-06-28T23:59:59+01:00\", \"award_status\": \"active\", \"tender_keys\": [\"classification\", \"contractPeriod\", \"description\", \"id\", \"items\", \"mainProcurementCategory\", \"procurementMethod\", \"procurementMethodDetails\", \"status\", \"suitability\", \"tenderPeriod\", \"title\", \"value\"], \"award_keys\": [\"contractPeriod\", \"date\", \"datePublished\", \"documents\", \"id\", \"status\", \"suppliers\", \"value\"], \"docs\": [], \"procurementMethodDetails\": \"Single tender action (below threshold)\", \"tender_value\": {\"amount\": 51624, \"currency\": \"GBP\"}, \"sme\": {\"sme\": true, \"vcse\": false}}, {\"ocid\": \"ocds-b5fd17-462f6970-af7d-46dd-b2f0-3bc74282e9ff\", \"release_id\": \"9043fa75-5a0a-4c40-ac71-7a65f4ad0a4f-921540\", \"date\": \"2026-11-13T13:29:53Z\", \"buyer\": \"UK SHARED BUSINESS SERVICES LIMITED\", \"title\": \"Hardware an\n\n",
+  "artifacts": [
+    "products/services/software-renewals/contracts-finder/extraction.json",
+    "products/receipts/TASK-179476236112.json"
+  ],
+  "request": {
+    "id": "TASK-179476236112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-15T17:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-I",
+        "-c",
+        "import json,hashlib,re,pathlib\np='products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json'\nb=open(p,'rb').read()\nd=json.loads(b)\nrs=d.get('releases',[])\nout={'source_sha256':hashlib.sha256(b).hexdigest(),'bytes':len(b),'releases':len(rs),'top_keys':sorted(d.keys()),'has_next':bool(d.get('links',{}).get('next'))}\nwith_end=0;cands=[];soft=0\nfor r in rs:\n  t=r.get('tender',{})\n  cpv=(t.get('classification') or {}).get('id','')\n  title=t.get('title','');desc=t.get('description','') or ''\n  issoft=cpv.startswith('48') or cpv.startswith('72') or re.search(r'software|licen[cs]e|support and maintenance',title+' '+desc,re.I)\n  if issoft: soft+=1\n  for a in r.get('awards',[]):\n    cp=a.get('contractPeriod') or {}\n    e=cp.get('endDate')\n    if e: with_end+=1\n    if issoft and e and '2027-02-01'<=e[:10]<='2027-11-30':\n      cands.append({'ocid':r.get('ocid'),'release_id':r.get('id'),'date':r.get('date'),'buyer':(r.get('buyer') or {}).get('name'),'title':title,'cpv':cpv,'cpv_desc':(t.get('classification') or {}).get('description'),'description':desc[:700],'suppliers':[s.get('name') for s in a.get('suppliers',[])],'value':a.get('value'),'award_date':a.get('date'),'start':cp.get('startDate'),'end':e,'award_status':a.get('status'),'tender_keys':sorted(t.keys()),'award_keys':sorted(a.keys()),'docs':[x.get('url') for x in t.get('documents',[]) if x.get('url')][:3],'procurementMethodDetails':t.get('procurementMethodDetails'),'tender_value':t.get('value'),'sme':t.get('suitability')})\nout['awards_with_endDate']=with_end;out['software_related_releases']=soft;out['candidate_count']=len(cands);out['candidates']=cands[:12]\no='products/services/software-renewals/contracts-finder/extraction.json'\npathlib.Path(o).parent.mkdir(parents=True,exist_ok=True)\nopen(o,'w').write(json.dumps(out,indent=1,ensure_ascii=False))\nprint(json.dumps(out,ensure_ascii=False)[:1900])"
+      ],
+      "inputs": [
+        "products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json"
+      ],
+      "outputs": [
+        "products/services/software-renewals/contracts-finder/extraction.json"
+      ],
+      "mission_id": "CONTRACTS-FINDER-RENEWAL-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794762361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179476236112",
+  "input_sha256": "50815fd9105fadd92723f528e04d1b3119e151f12b94bacdf369ead5bbf988de"
+}
