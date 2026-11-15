@@ -1,0 +1,51 @@
+{
+ "all_pass": true,
+ "checks": {
+  "baseline_no_errors": true,
+  "options_always_Color_then_Size": true,
+  "handle_is_slug_title_dash_slug_style": true,
+  "cols_16_no_status_inventory_description": true,
+  "typed_list_escaped_to_one_value": true,
+  "typed_list_escaped_observed": [
+   "gtin\\:111\\;upc\\:222"
+  ],
+  "empty_size_is_error": true,
+  "empty_barcode_is_error": true,
+  "missing_color_images_warn_not_error": true,
+  "unknown_color_images_ignored_with_warning": true,
+  "url_prefix_only_no_network_code": true,
+  "image_without_color_is_error": true,
+  "official_sample_facts_match_guide": true,
+  "site_transform_equals_service_transform": true,
+  "guide_contains_one barcode ": true,
+  "guide_contains_gtin\\:111\\;u": true,
+  "guide_contains_verify_examp": true,
+  "guide_contains_USE": true,
+  "guide_contains_PARTIAL": true,
+  "guide_contains_REJECT": true,
+  "guide_contains_En fran": true,
+  "anchors_unique": true,
+  "reverse_restores_baseline": true
+ },
+ "method": "Behavioural checks call the unchanged build() on the existing published fixtures with one field altered in memory per check; no new example file, no suite rerun, no Shopify import.",
+ "sources_sha256": {
+  "site_transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+  "service_transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+  "official_sample_result.json": "2f9cfde3ac003b4b317cf9db1cdb58e60f0e681c6a1298ccd826fa26231dd045",
+  "source_fit_inspection.json": "9e83f13f2ecc84cd9575a73f513e9ea35871db258c10a53138f0e7a711107976",
+  "before-variants.csv": "5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac",
+  "before-images.csv": "894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d",
+  "guide-en-fr.md": "14aecfdd760cd7f378478f467d702f3047da7a65188021decefc61f7d2af271e"
+ },
+ "site_revision": {
+  "baseline_index_sha256": "a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4",
+  "candidate_index_sha256": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+  "added_en": "<li>Made for supplier-style lists (one barcode per row, a color and a size on every row), not for re-importing a Shopify product export. A barcode cell that already holds a typed or multi-value list (for example <code>gtin:111;upc:222</code>) is escaped and written as one single value; option names are always Color then Size; URL handles are rebuilt from title and style_id; columns other than the 16 listed in transform.py are dropped. Image URLs are only checked for an http(s) prefix; nothing is fetched.</li>",
+  "added_fr": "Le script vise des listes de fournisseur (un code-barres par ligne, couleur et taille sur chaque ligne), pas la réimportation d'un export Shopify : une cellule contenant déjà une liste typée d'identifiants est échappée en une seule valeur, les options s'appellent toujours Color puis Size, les handles sont recalculés à partir du titre et du style_id, et les autres colonnes sont omises ; les URL d'images ne sont vérifiées que par leur préfixe http(s).",
+  "deployed": false
+ },
+ "limits": [
+  "No customer delivery, demand or revenue established",
+  "Public change needs independent exact-digest review before deployment"
+ ]
+}
