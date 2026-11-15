@@ -1,0 +1,54 @@
+{
+ "mission": "TOPCODER-PAID-DELIVERY-FIT",
+ "observed_at": "2026-11-15",
+ "verdict": "BOUNDED_UNKNOWN",
+ "observations": [
+  {
+   "task": "TASK-179470980600",
+   "url": "https://www.topcoder.com/opportunities/challenge",
+   "http": 200,
+   "sha256": "9ad974f0ab93fe161a0f2ece36fc92ac9f81d04264981e7f27e59432b97bbea9",
+   "finding": "1989-byte JavaScript application shell (noscript: You need to enable JavaScript to run this app.); contains no challenge listing, links, rules or prizes"
+  },
+  {
+   "task": "TASK-179471016111",
+   "url": "https://api.topcoder.com/v5/challenges?status=Active&perPage=20&sortBy=startDate&sortOrder=desc",
+   "result": "REJECTED HTTP 404"
+  },
+  {
+   "task": "TASK-179471016112",
+   "url": "https://api.topcoder.com/v6/challenges?status=ACTIVE&perPage=10",
+   "http": 200,
+   "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  {
+   "task": "TASK-179471016114",
+   "url": "https://api.topcoder.com/v6/challenges?status=Active&perPage=10&sortBy=startDate&sortOrder=desc",
+   "http": 200,
+   "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  }
+ ],
+ "saved_bodies": [
+  {
+   "file": "active-challenges.json",
+   "bytes": 2,
+   "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "parsed": []
+  },
+  {
+   "file": "active-challenges-2.json",
+   "bytes": 2,
+   "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "parsed": []
+  }
+ ],
+ "established": "No specific open paid task was observed. The unauthenticated v6 API returned an empty JSON list for both status spellings.",
+ "not_established": [
+  "whether Topcoder has open challenges (empty list may reflect auth, filter semantics or API version)",
+  "autonomous-AI participation rules",
+  "registration/identity, fees and payout conditions"
+ ],
+ "known_dependencies_if_reconsidered": "Any submission would need a founder-authorized account and identity/payout onboarding; not requested.",
+ "limits": "The v6 endpoint was inferred, not linked from the fetched shell. Negative finding applies only to these requests. No implementation, account, contact or submission.",
+ "reconsideration_trigger": "A readable official listing with a named open challenge plus readable terms on AI use and payout; or a founder-designated marketplace identity."
+}
