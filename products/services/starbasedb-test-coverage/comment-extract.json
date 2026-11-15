@@ -1,0 +1,89 @@
+{
+ "total_comments": 116,
+ "first": "2025-01-24T16:20:45Z",
+ "last": "2026-11-15T10:00:18Z",
+ "by_type_assoc": {
+  "('User', 'MEMBER')": 2,
+  "('Bot', 'NONE')": 3,
+  "('User', 'CONTRIBUTOR')": 3,
+  "('User', 'NONE')": 108
+ },
+ "by_month": {
+  "2025-01": 8,
+  "2025-02": 1,
+  "2026-04": 3,
+  "2026-05": 70,
+  "2026-06": 7,
+  "2026-07": 2,
+  "2026-09": 9,
+  "2026-10": 10,
+  "2026-11": 6
+ },
+ "keyword_comment_counts": {
+  "$": 7,
+  "/attempt": 82,
+  "/claim": 15,
+  "/tip": 0,
+  "awarded": 1,
+  "rewarded": 6,
+  "paid": 2,
+  "algora": 11,
+  "AI": 19,
+  "LLM": 0,
+  "bot": 2,
+  "CLA": 0,
+  "CONTRIBUTING": 1
+ },
+ "bot_member_or_amount_comments": [
+  {
+   "at": "2025-01-24T16:20:45Z",
+   "type": "User",
+   "assoc": "MEMBER",
+   "app": null,
+   "body": "/bounty $250"
+  },
+  {
+   "at": "2025-01-24T16:20:52Z",
+   "type": "Bot",
+   "assoc": "NONE",
+   "app": "algora-pbc",
+   "body": "## 💎 $250 bounty [• Outerbase (YC W23)](https://algora.io/outerbase)\n### Steps to solve:\n1. **Start working**: Comment `/attempt #71` with your implementation plan\n2. **Submit work**: Create a pull request including `/claim #71` in the PR body to claim the bounty\n3. **Receive payment**: 100% of the bounty is received 2-5 days post-reward. [Make sure you are eligible for payouts](https://algora.io/docs/payments#supported-countries-regions)\n\n### ❗ Important guidelines:\n- To claim a bounty, you need to **provide a short demo video** of your changes in your pull request\n- If anything is unclear, **ask for clarification** before starting as this will help avoid potential rework\n- Low quality AI PRs will not receive review and will be closed\n- Do not ask to be assigned unless you've contributed before\n\nThank you for contributing to outerbase/starbasedb!\n\n| Attempt | Started (UTC) | Solution | Actions |\n| --- | --- | --- | --- |\n| 🟢 @AlonePenguin | Jun 01, 2026, 01:07:27 PM | #263 | [Reward](https://algora.io/claims/kWTrC74yoDbevrsp) |\n| 🟢 @Rafly0078 | Jun 03, 2026, 03:26:57 PM | #268 | [Reward](https://algora.io/claims/FAUHtbDsttfXb8cz) |\n| 🟢 @TechEnthusGH | Jun 03, 2026, 06:06:14 PM | #269 | [Reward](https://algora.io/claims/P5uRbSangJKPgzz8) |\n| 🟢 @tunguz | May 11, 2026, 10:11:28 PM | #149 | [Reward](https://algora.io/claims/MUuYn6uPC5PxuDEN) |\n| 🟢 @INDICUMA | May 11, 2026, 11:47:29 PM | #150 | [Reward](https://algora.io/claims/omdg3S2JDkyDtC2S) |\n| 🟢 @Mykidzou | May 12, 2026, 05"
+  },
+  {
+   "at": "2025-01-24T19:36:27Z",
+   "type": "User",
+   "assoc": "MEMBER",
+   "app": null,
+   "body": "> [@Brayden](https://github.com/Brayden) There are a few bugs in implementations that are getting found during tests. I am fixing them too along with the testing. Could I draft PR?\n\nYou may absolutely fix issues along the way. Feel free to draft a PR @varshith257!"
+  },
+  {
+   "at": "2025-01-24T23:15:50Z",
+   "type": "Bot",
+   "assoc": "NONE",
+   "app": "algora-pbc",
+   "body": "💡 @varshith257 submitted a [pull request](https://github.com/outerbase/starbasedb/pull/74) that claims the bounty. You can [visit your bounty board](https://console.algora.io/org/outerbase/bounties) to reward."
+  },
+  {
+   "at": "2025-02-17T14:15:29Z",
+   "type": "Bot",
+   "assoc": "NONE",
+   "app": "algora-pbc",
+   "body": "🎉🎈 @varshith257 has been awarded **$250**! 🎈🎊\n\n- [Share on socials](https://console.algora.io/awards/cm6bdrfku000clf0366op2qhn)\n- [Give feedback](https://console.algora.io/claims/cm6bdrfku000clf0366op2qhn)"
+  },
+  {
+   "at": "2026-09-08T03:40:35Z",
+   "type": "User",
+   "assoc": "NONE",
+   "app": null,
+   "body": "/attempt #71\n\nPrepared a narrow Hyperdrive lifecycle regression slice in https://github.com/outerbase/starbasedb/pull/290: close the client after query rejection, preserve the original query error if cleanup also rejects, and cover cleanup-only failures with/without waitUntil. Ten focused Hyperdrive cases plus the existing operation tests pass locally (21 tests); the PR includes a short recorded-results demonstration and the unchanged baseline failures.\n\nThis does not complete the repository-wide 75% coverage goal. The issue has a Rewarded label: is this distinct slice still eligible for a reward, and if so, what scope/amount would apply? Keeping the PR draft pending that clarification; no full-$250 claim.\n"
+  },
+  {
+   "at": "2026-10-04T23:18:15Z",
+   "type": "User",
+   "assoc": "NONE",
+   "app": null,
+   "body": "Hi @Brayden — I would like to apply for a paid contribution to this test-coverage task.\n\nI work with AI assistance and disclose it. A concrete example of my verification work is this standalone locale-sorting experiment, with 1,115 assertions and explicit limitations: https://gist.github.com/jfxyl12345-beep/a14e98e5bae3adf466cf78092f650a54 . It is not a Starbase integration or a client engagement.\n\nI see your original `/bounty $250` comment and the many existing coverage PRs. Rather than submitting overlapping tests, I propose starting from the current main branch and the CI command, measuring the uncovered behavior, then agreeing on one remaining area with meaningful invalid-input and failure-path assertions. The deliverable would include the tests, exact command output and coverage report, plus any minimal regression fix required by those tests.\n\nBefore implementation, could you confirm whether this bounty still accepts a new contributor, which existing PR or module you want prioritized, and the current payment/acceptance process for a Singapore-based contributor? I do not claim to have run this project's tests yet, and would not count a partial coverage contribution as satisfying the whole >75% requirement.\n\nThank you,\nPeter\n"
+  }
+ ],
+ "selected_count": 7
+}
