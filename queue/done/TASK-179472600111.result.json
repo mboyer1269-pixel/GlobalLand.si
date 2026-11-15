@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"STOP_OFFICIAL_SAMPLE_ROUNDTRIP_UNSUPPORTED\",\n  \"source_url\": \"https://help.shopify.com/cdn/shopifycloud/product-knowledge/production/csv/product_template.csv\",\n  \"source_sha256\": \"f41b9562b9d9d951ff8f8184f7fe24e738304339d3e24104fc5c265fa00d28ff\",\n  \"checks\": {\n    \"rows_16\": true,\n    \"typed_multiple_identifiers\": true,\n    \"no_variant_image_assignments\": true,\n    \"single_value_escape\": true,\n    \"missing_perfume_barcode\": true\n  },\n  \"en\": \"The unchanged converter cannot preserve the full official sample: digital Format and perfume Title options are not Color/Size, perfume lacks a barcode, and the first T-shirt cell contains two typed identifiers. esc_barcode escapes their separators, changing a typed list into one custom value. No variant-image assignments are supplied. Missing color images alone are allowed warnings, not a universal incompatibility. Eleven T-shirt rows could support a deliberately reduced scalar-only projection, but that would exclude a real variant and the product image, change handles and option order, and omit other source fields; it would not establish the requested preservation of identifiers/options/prices/images. No adapter or transformed example was produced.\",\n  \"fr\": \"Le convertisseur inchangé ne conserve pas intégralement cet exemple officiel : options Format et Title incompatibles avec Couleur/Taille, code-barres du parfum absent et deux identifiants typés dans une cellule du T-shirt. Leur échappement transforme cette liste en une seule valeur personnalisée. Aucune image de variante explicite. Les images de couleur manquantes sont des avertissements permis. Une projection de onze lignes serait partielle : variante et image produit exclues, handles et ordre des options modifiés, autres champs omis. Aucun adaptateur ni exemple transformé produit.\",\n  \"reconsideration_trigger\": \"An authorized input already matching the one-barcode-per-variant color/size contract, with explicit image associations if image preservation is required. This rejects this roundtrip only, not the existing converter or all catalogue work.\",\n  \"limitations\": [\n    \"No Shopify import executed\",\n    \"No customer delivery, demand or revenue established\",\n    \"Source redistribution rights not established; no additional source republication\",\n    \"All live observation windows and retirement duties remain unchanged; any eventual public release requires independent exact-digest review\"\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/services/shopify-large-catalogue/official-sample-delivery/result.json",
+    "products/receipts/TASK-179472600111.json"
+  ],
+  "request": {
+    "id": "TASK-179472600111",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-15T07:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,hashlib,csv\np=pathlib.Path('products/services/shopify-large-catalogue/official-sample-delivery'); src=p/'official-product-template.csv'; rows=list(csv.DictReader(src.open(newline='',encoding='utf-8-sig'))); code=pathlib.Path('products/services/shopify-large-catalogue/transform.py').read_text(); checks={'rows_16':len(rows)==16,'typed_multiple_identifiers':';' in rows[0]['Variant Barcodes'],'no_variant_image_assignments':all(not r['Variant image URL'] for r in rows),'single_value_escape':\"esc_barcode(v['barcode'])\" in code,'missing_perfume_barcode':not rows[-1]['Variant Barcodes']}; assert all(checks.values())\nr={'verdict':'STOP_OFFICIAL_SAMPLE_ROUNDTRIP_UNSUPPORTED','source_url':'https://help.shopify.com/cdn/shopifycloud/product-knowledge/production/csv/product_template.csv','source_sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'checks':checks,'en':'The unchanged converter cannot preserve the full official sample: digital Format and perfume Title options are not Color/Size, perfume lacks a barcode, and the first T-shirt cell contains two typed identifiers. esc_barcode escapes their separators, changing a typed list into one custom value. No variant-image assignments are supplied. Missing color images alone are allowed warnings, not a universal incompatibility. Eleven T-shirt rows could support a deliberately reduced scalar-only projection, but that would exclude a real variant and the product image, change handles and option order, and omit other source fields; it would not establish the requested preservation of identifiers/options/prices/images. No adapter or transformed example was produced.','fr':'Le convertisseur inchangé ne conserve pas intégralement cet exemple officiel : options Format et Title incompatibles avec Couleur/Taille, code-barres du parfum absent et deux identifiants typés dans une cellule du T-shirt. Leur échappement transforme cette liste en une seule valeur personnalisée. Aucune image de variante explicite. Les images de couleur manquantes sont des avertissements permis. Une projection de onze lignes serait partielle : variante et image produit exclues, handles et ordre des options modifiés, autres champs omis. Aucun adaptateur ni exemple transformé produit.','reconsideration_trigger':'An authorized input already matching the one-barcode-per-variant color/size contract, with explicit image associations if image preservation is required. This rejects this roundtrip only, not the existing converter or all catalogue work.','limitations':['No Shopify import executed','No customer delivery, demand or revenue established','Source redistribution rights not established; no additional source republication','All live observation windows and retirement duties remain unchanged; any eventual public release requires independent exact-digest review']}; out=p/'result.json';out.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\\n');print(out.read_text())"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/official-sample-delivery/",
+        "products/services/shopify-large-catalogue/transform.py"
+      ],
+      "outputs": [
+        "products/services/shopify-large-catalogue/official-sample-delivery/result.json"
+      ],
+      "mission_id": "SHOPIFY-OFFICIAL-SAMPLE-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794726001",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179472600111",
+  "input_sha256": "dbc1a54c664b9f3656db7cf07d9e30a471cad8d2f32e2c1e3c51e5ba9d1affae"
+}
