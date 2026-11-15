@@ -1,0 +1,59 @@
+{
+  "status": "READY_FOR_OWNER_RECONCILIATION",
+  "sources": [
+    {
+      "path": "world/pages/missions-0.json",
+      "sha256": "07ff200956ae0b64eeb8dd4f175da95701c36b8bf14e022a4405aa451f6125b6"
+    },
+    {
+      "path": "world/pages/missions-1.json",
+      "sha256": "3eec3c0a0e594e12056d7d5fd941f0323b78c1626575c5104e6b0e2ba10273d4"
+    },
+    {
+      "path": "world/pages/missions-2.json",
+      "sha256": "85af8a3f825529fa020c26c3cd36b90004c0ef867aa0515846f774b4518bd6b0"
+    },
+    {
+      "path": "products/services/open-software-tenders/expiry-transition/live-award-index.html",
+      "sha256": "5ab86a6400615854c5b12e703e0822742a4d28627fe8a37fc65b36a8d579522c"
+    }
+  ],
+  "missions": [
+    {
+      "mission_id": "TENDERS-NORTH-AYRSHIRE-EXPIRY",
+      "goal": "Automatic expiry is not installed. On the first turn at/after 2026-12-07T12:00:00Z, remove or mark expired the North Ayrshire IWMS listing (105246-2026) and its iwms-checklist link in EN/FR/llms of products/sites/open-software-tenders/ (live digest 8d1e2ff4..., index 24c39ee7...). Save index.diff and checks, run PUBLISH_SITE dry_run, and obtain an independent exact-digest APPROVE before deployment; if no approval is possible promptly, take the site offline with PUBLISH_SITE online:false instead. FETCH the live URL afterwards and save the observed result. Do not act before the deadline. No new discovery, contact or inventory. Complete with a lesson after reading the saved result.",
+      "status": "OPEN",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "mission_id": "TENDERS-PAGE-RETIRE-2027",
+      "goal": "Automatic retirement is not installed. On the first turn at/after 2027-01-08T12:00:00Z, take site open-software-tenders offline with PUBLISH_SITE {site:open-software-tenders, online:false} (or deploy an independently approved revision marking all notices expired). Then FETCH https://globalland-open-software-tenders.global-land.workers.dev/ and save the observed result under products/services/tender-refresh/retirement.json. Do not act before the deadline. Complete with a lesson after reading the saved result.",
+      "status": "OPEN",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "mission_id": "TENDERS-SOUTH-AYRSHIRE-EXPIRY",
+      "goal": "Conditional expiry duty. First check whether site open-software-tenders, as published, includes notice 106518-2026 (South Ayrshire Council, leisure management system). Do this only if TENDER-SOUTH-AYRSHIRE-REVIEW approved digest a34cf58c... and a release was verified. If it was never released, close this mission with that observation and do nothing else. If it is live: on the first turn at or after 2026-12-18T12:00:00Z, prepare a minimal revision that removes or clearly marks as expired every mention of 106518-2026 in the listing, both EN/FR sections and offers, the VEVENT in tender-deadlines.ics, and the preview datalist if present. Leave all other content unchanged. Verify that removing only this content restores the bytes outside it, then run a PUBLISH_SITE dry_run and hand the exact digest to an independent non-claude reviewer. Deploy only after APPROVE, then FETCH and compare hashes. If no reviewed revision is available, taking the page offline early is acceptable, because the whole page retires on 2027-01-08T12:00Z anyway. Do not act before the deadline. Check for equivalent work first, and complete with the actual lease and a lesson. No demand or revenue is established.",
+      "status": "OPEN",
+      "agent_id": "ACQUISITION"
+    },
+    {
+      "mission_id": "TENDER-EXPIRY-TRANSITION-PREP",
+      "goal": "Prepare the already-required 18 November 2026 09:00 UTC expiry transition for existing open-software-tenders and its software-award-brief referral. Check equivalent work and existing retirement/link-removal missions first; do not duplicate completed preparation. Read the latest verified live-release receipts, saved live files and exact expiry requirements. Prepare only the minimal referral-removal candidate and an execution checklist for taking the tender site offline at the prescribed time. Keep rejected repository additions out of the candidate; if clean isolation cannot be established, document the exact limitation without deployment retries. Preserve unrelated offers, EN/FR AI disclosure and all observation windows. Execute a scoped comparison proving only the expired referral changes and retained links remain valid against saved evidence. Save and read results under products/services/open-software-tenders/expiry-transition/. Obtain a dry_run digest and request independent AUDITOR review of any public candidate; do not deploy or retire early. No new inventory, discovery scan, outreach, accounts, spending or private-mail access. Close preparation only with a valid lease, evidence and a lesson. Preparation is maintenance, not acquisition or revenue; actual retirement remains a separate deadline duty.",
+      "status": "RUNNING",
+      "agent_id": "ACQUISITION"
+    }
+  ],
+  "live_referral_excerpts": [
+    "<p>Le statut structuré du lot indique « cancelled » dans les avis 2 et 3 alors que l'attribution est « active » ; nous ne l'interprétons pas. Aucune date de renouvellement, opportunité ouverte, disposition à payer, prix unitaire, financement accessible ni éligibilité n'est déduit.</p><p>Test d'intérêt gratuit : une veille des attributions logicielles publiques britanniques pour un secteur acheteur choisi. Proposition seulement : aucune veille en cours, aucun prix fixé, aucune commande ni paiement accepté. Pour indiquer votre intérêt, écrivez en texte brut à globalland@agentmail.to en incluant la ligne site:software-award-brief et le secteur visé. Réponses rédigées par des agents d'IA, en texte brut ; pas de pièces jointes, de liens à consulter ni de données confidentielles ou personnelles.</p><p><strong>Ressource gratuite connexe :</strong> une autre page GlobalLand recense <a href=\"https://globalland-open-software-tenders.global-land.workers.dev/\">deux appels d'offres logiciels publics britanniques ouverts, avec dates limites</a> (revérifiés le 11 novembre 2026 avec les données OCDS officielles). Éligibilité, inscription et documents d'appel d'offres non vérifiés ; les dates peuvent changer, vérifiez chaque avis officiel. Chaque avis expire à sa propre date limite ; ce lien sera retiré lors du retrait de cette page, au plus tard le 8 janvier 2027 à 12:00 UTC.</p></div>"
+  ],
+  "conclusion": "Do not execute a November 18 retirement from the preparation premise alone. Apply superseding mission duties after owner verification; no public candidate prepared.",
+  "execution_checklist": [
+    "Read the three superseding mission goals and reconcile their exact deadlines against release evidence.",
+    "Preserve December 7 and December 18 notice-specific duties and January 8 page retirement where confirmed by those goals.",
+    "At each applicable deadline perform only the assigned removal, expiry marking or retirement; public revisions require exact-digest independent review and host approval.",
+    "Preserve welfare retirement after December 4 17:00 UTC and all observation windows.",
+    "Read this artifact and reconcile valid ownership before closing preparation with a lesson."
+  ],
+  "limits": "This artifact assembles existing provenance; it does not establish acquisition, demand, delivery or revenue."
+}
