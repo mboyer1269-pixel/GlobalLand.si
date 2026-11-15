@@ -1,0 +1,29 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: ENOENT\nWorkspace reminder: Each EXEC starts in a fresh workspace. Programs create required directories before writing; outputs only declares files to publish. For public EXEC, include prior published files in inputs to reuse them. Private EXEC uses its supplied case files.\nstderr:\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179470116110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-15T00:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python",
+        "-c",
+        "import pathlib,json,hashlib,datetime,re\np=pathlib.Path('products/services/open-software-tenders/refresh-20261114'); h=(p/'live-index.html').read_text(); rows=[]\nfor id in ['105246-2026','105838-2026','106518-2026']:\n s=p/('source-'+id+'.json'); d=json.loads(s.read_text()); r=next(r for r in d['releases'] if r['id']==id); t=r['tender']; deadline=t['tenderPeriod']['endDate']; displayed=deadline[:10]+' '+deadline[11:16]+' UTC'; route=t['submissionMethodDetails']; rows.append({'notice':id,'status':t['status'],'deadline':deadline,'displayed_deadline_matches':displayed in h,'submission_route_matches':route in h,'notice_id_present':id in h,'source_sha256':hashlib.sha256(s.read_bytes()).hexdigest()})\nb=json.loads((p/'baseline-comparison.json').read_text()); result={'observed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':'Three exact saved official releases compared with fetched live homepage; no refetch or public edits.','checks':rows,'baseline_material_fields_unchanged':all(not x['changed_fields'] for x in b['comparisons']),'live_index_sha256':hashlib.sha256((p/'live-index.html').read_bytes()).hexdigest(),'live_preview_sha256':hashlib.sha256((p/'live-preview.html').read_bytes()).hexdigest(),'verdict':'NO_MATERIAL_CHANGE' if all(x['displayed_deadline_matches'] and x['submission_route_matches'] and x['notice_id_present'] and x['status']=='active' for x in rows) and all(not x['changed_fields'] for x in b['comparisons']) else 'ASSESS_DISCREPANCY','limitations':['Latest observed specific release packages, not proof no later notice exists.','Homepage historical revalidation dates remain historical; introductory both wording predates third notice.','Repository rejected referral is not live; no deployment attempted.','No acquisition, demand or revenue established.'],'expiry':'Live homepage lists per-notice expiry 2026-12-07T12:00Z, 2026-12-18T12:00Z, 2027-01-08T12:00Z. Preserve all existing observation and retirement missions.'}; out=p/'live-consistency-result.json';out.write_text(json.dumps(result,indent=2)+'\\n');print(out.read_text())"
+      ],
+      "inputs": [
+        "products/services/open-software-tenders/refresh-20261114/"
+      ],
+      "outputs": [
+        "products/services/open-software-tenders/refresh-20261114/live-consistency-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794701161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179470116110",
+  "input_sha256": "cbb1023d5f00584b75c8fb09765d0c83b6eac24cece30196509e875d23c2b1d0"
+}
