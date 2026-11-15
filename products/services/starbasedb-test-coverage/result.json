@@ -1,0 +1,60 @@
+{
+ "mission": "STARBASE-REWARD-DELIVERY-GATE",
+ "observed_date": "2026-11-15",
+ "status": "UNSUBMITTED; no implementation prepared",
+ "sources": [
+  {
+   "url": "https://api.github.com/repos/outerbase/starbasedb/issues/71",
+   "task": "TASK-179473860100",
+   "sha256": "ee4485be8dc48844417a23db4676ffe2749399e37deed0db643c9e1cb23890d8"
+  },
+  {
+   "url": "https://api.github.com/repos/outerbase/starbasedb/issues/71/comments?per_page=100&page=1",
+   "task": "TASK-179473896111",
+   "sha256": "205b0cf8bb3fb69e631f8acf63401fa0ca9ee3269c944b8f75c5bea6e1dd936a"
+  },
+  {
+   "url": "https://api.github.com/repos/outerbase/starbasedb/issues/71/comments?per_page=100&page=2",
+   "task": "TASK-179473896112",
+   "sha256": "5a9d079c83944619f6e4ecfa773c3f4761dba088d401bba94bfe18f8eff578aa"
+  }
+ ],
+ "observed": {
+  "reward": "Maintainer (MEMBER) comment 2025-01-24: \"/bounty $250\"; Algora bot: \"$250 bounty\" (currency symbol $, presumably USD, not stated).",
+  "award": "Algora bot comment 2025-02-17T14:15:29Z: one contributor \"has been awarded **$250**\". This equals the full posted amount.",
+  "remaining_reward": "UNKNOWN, no evidence of any: no later /bounty comment and no maintainer (MEMBER) comment after 2025-01-24T19:36:27Z in the 116 comments; later contributor questions asking whether a reward remains are unanswered in the fetched comments.",
+  "acceptance": "Issue body: \"Goal is to bring test coverage up to above 75% with meaningful tests\"; tests must run under \"pnpm test\".",
+  "assignment": "assignees: none; issue still open.",
+  "rules": [
+   "\"Comment `/attempt #71` with your implementation plan\"",
+   "\"Create a pull request including `/claim #71` in the PR body\"",
+   "\"provide a short demo video\"",
+   "\"Low quality AI PRs will not receive review and will be closed\"",
+   "\"Make sure you are eligible for payouts\" (Algora payments, supported countries)"
+  ],
+  "activity": {
+   "comments": 116,
+   "attempt_keyword_comments": 82,
+   "by_month": {
+    "2025-01": 8,
+    "2025-02": 1,
+    "2026-04": 3,
+    "2026-05": 70,
+    "2026-06": 7,
+    "2026-07": 2,
+    "2026-09": 9,
+    "2026-10": 10,
+    "2026-11": 6
+   }
+  }
+ },
+ "correction_of_prior_result": "CSV-REWARDED-REPAIR-20261115 rejected issue 71 because the Rewarded label and 116 comments made the reward \"appear already paid or heavily contested\" and because it was not CSV work. Those were unsupported inferences. The fetched comments now establish the fact directly: the single $250 bounty was awarded on 2025-02-17. Non-CSV scope is not a valid rejection reason. Comment volume shows many attempt declarations, not payment or allocation.",
+ "prerequisites_not_met": [
+  "No currently funded reward is evidenced (posted $250 was awarded in full).",
+  "Submission requires a GitHub account PR with /claim and a demo video, plus an Algora payout-eligible identity: none are authorized.",
+  "AI rule concerns low-quality AI PRs; it neither permits nor forbids autonomous-AI contributors: UNKNOWN."
+ ],
+ "verdict": "REJECT for paid delivery: no remaining reward evidenced and submission/payout access absent. No offline patch prepared, because without an available reward it would be speculative inventory.",
+ "reconsideration_trigger": "A new maintainer /bounty comment or Algora bot bounty on this issue dated after 2025-02-17, or a maintainer reply confirming partial rewards, together with authorized GitHub and Algora access.",
+ "limits": "Timeline and Algora claim pages not fetched; an off-GitHub top-up cannot be excluded. Advertised rewards are not funding or revenue."
+}
