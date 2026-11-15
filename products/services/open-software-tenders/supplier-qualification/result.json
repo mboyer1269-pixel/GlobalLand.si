@@ -1,0 +1,46 @@
+{
+ "mission": "IWMS-SUPPLIER-QUALIFICATION-DELIVERY",
+ "observed_at": "2026-11-15",
+ "verdict": "BOUNDED_STOP_DOCUMENTS_NOT_PUBLICLY_READABLE",
+ "worksheet_prepared": false,
+ "sources": [
+  {
+   "requested_url": "https://www.publictendersscotland.publiccontractsscotland.gov.uk",
+   "final_url_path": "/esop/pts-host/public/pts/web/login.html",
+   "http_status": 200,
+   "task": "TASK-179475690111",
+   "sha256": "a14ff3c9dd8ff5dd595f6d78f99439151597d4f5a9ecd5125fff4761d18cb0ea",
+   "observation": "Login page. Public links found (TASK-179475690112): Register as a Supplier, lost password, support, system requirements, Opportunities (/esop/guest/go/public/opportunity/current), supplier help files, a generic find-ITT supplier guide PDF. No tender-specific document link."
+  },
+  {
+   "requested_url": "https://www.publictendersscotland.publiccontractsscotland.gov.uk/esop/guest/go/public/opportunity/current",
+   "final_url_path": "/esop/guest/pages/browserNotSupported.jsp",
+   "http_status": 200,
+   "task": "TASK-179475690113",
+   "sha256": "49752606b192ba8fb6274f49ac3c16412b29c23332f2e00950be2531e5a46347",
+   "bytes": 3743,
+   "visible_text_excerpt": "Upgrade Your Browser Contact technicalsupport@jaggaer.com | Phone + 919 659-4200 Upgrade Your Browser JAGGAER solutions are built to take advantage of all the new features and security updates that modern web browsers provide. It appears that your current browser does not support those technologies. Please use one of the following supported browsers: Google Chrome Latest version Microsoft Edge Lat",
+   "observation": "The directly linked public Opportunities listing redirected the non-browser FETCH client to a browser-not-supported page; no opportunity or tender document content was returned."
+  }
+ ],
+ "pages_inspected": 2,
+ "page_limit": 2,
+ "equivalent_existing_work": {
+  "path": "products/sites/open-software-tenders/iwms-checklist.html",
+  "note": "Already separates notice-stated facts, portal statement, unknowns and recommendations in EN/FR from OCDS 105246-2026. The OCDS release was confirmed unchanged on 2026-11-14 (refresh-20261114/baseline-comparison.json)."
+ },
+ "not_established": [
+  "financial thresholds",
+  "insurance levels",
+  "certifications",
+  "SPD/selection questionnaire content",
+  "clarification deadline",
+  "required submission documents",
+  "ICT conditions of contract",
+  "whether registration is the only document route"
+ ],
+ "limits": "An unsupported-client redirect shows only that this FETCH client could not read the listing; it does not show that the listing is login-gated or that documents are restricted for a real browser. Nothing here indicates eligibility or ineligibility of any supplier.",
+ "decision": "No new worksheet: no authoritative requirement beyond the existing checklist was readable. No public change proposed.",
+ "reconsideration_trigger": "An authorized real browser capability, a public direct document URL appearing in a new official notice release, or an inbound supplier request supplying pasted nonconfidential tender excerpts.",
+ "commercial_claims": "None. No demand, acquisition or revenue established."
+}
