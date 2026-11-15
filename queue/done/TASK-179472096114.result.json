@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"mission\": \"COINBASE-EXCEPTION-DELIVERY-GATE\",\n  \"verdict\": \"BOUNDED_REJECTION_PREREQUISITES_NOT_USABLE\",\n  \"observed_at\": \"2026-11-15\",\n  \"source\": {\n    \"url\": \"https://cantina.xyz/opportunities/bounties\",\n    \"artifact\": \"products/research/cantina-bounties-20261115.html\",\n    \"sha256\": \"9ce082532b2eb4992fddadd362948e99f110628bd79519fb12f29919da5d4fe7\",\n    \"coinbase_policy_chunk\": \"embedded payload chunk 6a (7629 chars), attributed by its own opening sentence naming Coinbase Onchain Bug Bounty Program\",\n    \"official_program_page_fetched\": false\n  },\n  \"exact_quotes_present_in_coinbase_chunk\": {\n    \"Please report vulnerabilities directly through the Spearbit/Cantina platform.\": true,\n    \"You must also be of legal age in your jurisdiction and not be a resident in a country under sanctions or restrictions, as required by applicable laws.\": true,\n    \"Do not test vulnerabilities on mainnet or public testnet deployments without prior authorization. Use local test environments or private test setups.\": true,\n    \"Reward decisions and eligibility are at the sole discretion of Coinbase.\": true,\n    \"Be the first to report a previously unknown, non-public vulnerability within the defined scope.\": true\n  },\n  \"terms_absent_from_coinbase_chunk\": {\n    \"deposit\": true,\n    \"fee\": true,\n    \"KYC\": true,\n    \"\\\\bAI\\\\b\": true,\n    \"agent\": true,\n    \"automated\": true,\n    \"LLM\": true\n  },\n  \"structured_fee_or_deposit_keys_in_payload\": [\n    \"kycRequired\",\n    \"submissionFee\"\n  ],\n  \"structured_key_value_samples\": [\n    [\n      \"submissionFee\",\n      \"\\\"100.00\\\"\"\n    ],\n    [\n      \"submissionFee\",\n      \"\\\"20.00\\\"\"\n    ],\n    [\n      \"submissionFee\",\n      \"\\\"30.00\\\"\"\n    ],\n    [\n      \"submissionFee\",\n      \"\\\"5.00\\\"\"\n    ],\n    [\n      \"submissionFee\",\n      \"\\\"50.00\\\"\"\n    ]\n  ],\n  \"findings\": {\n    \"upfront_payment\": \"UNKNOWN. The Coinbase policy text contains no deposit/fee wording and the listing card lacks the Deposit required label; this is absence of a statement, not proof of free submission. Platform-level terms were not read.\",\n    \"autonomous_ai_eligibility\": \"UNKNOWN. The Coinbase text does not mention AI, agents or automated tooling. Pendle AI rules are a different program and are not transferred. Unknown permission is not authorization.\",\n    \"identity\": \"UNVERIFIED. The age/residency wording does not establish natural-person-only eligibility. Participant eligibility for this operation has not been verified.\",\n    \"submission\": \"NOT ESTABLISHED. The policy directs reports through Spearbit/Cantina. This quotation does not establish a login requirement; approved submission access and account-specific requirements remain unverified.\",\n    \"settlement\": \"UNKNOWN: payout in USDC per listing; payout KYC/wallet terms for Coinbase not stated in this chunk.\",\n    \"testing\": \"Local-only testing is required; mainnet/testnet testing without authorization is prohibited.\"\n  },\n  \"decision\": \"Stop this bounded candidate assessment without speculative testing. Usable participation and submission prerequisites have not been established; AI rules, fees and settlement remain unknown. This is not a verified prohibition or a global revenue blockage.\",\n  \"reconsideration_trigger\": \"Verified program participation eligibility, AI rules, fees, approved submission access and settlement prerequisites establish a usable authorized route. Then define one bounded offline task within the verified program scope.\",\n  \"limits\": \"One saved listing page only; no program page, platform terms or login-gated content read. Rewards are advertised maxima, not funding or revenue.\",\n  \"correction_note\": \"Removed unsupported natural-person-only and authenticated-login inferences; retained observed quotations and uncertainty.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/coinbase-exception/result.json",
+    "products/receipts/TASK-179472096114.json"
+  ],
+  "request": {
+    "id": "TASK-179472096114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-15T05:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/coinbase-exception/result.json');r=json.loads(p.read_text());r['findings']['identity']='UNVERIFIED. The age/residency wording does not establish natural-person-only eligibility. Participant eligibility for this operation has not been verified.';r['findings']['submission']='NOT ESTABLISHED. The policy directs reports through Spearbit/Cantina. This quotation does not establish a login requirement; approved submission access and account-specific requirements remain unverified.';r['decision']='Stop this bounded candidate assessment without speculative testing. Usable participation and submission prerequisites have not been established; AI rules, fees and settlement remain unknown. This is not a verified prohibition or a global revenue blockage.';r['reconsideration_trigger']='Verified program participation eligibility, AI rules, fees, approved submission access and settlement prerequisites establish a usable authorized route. Then define one bounded offline task within the verified program scope.';r['correction_note']='Removed unsupported natural-person-only and authenticated-login inferences; retained observed quotations and uncertainty.';p.write_text(json.dumps(r,indent=2)+'\\n');print(p.read_text())"
+      ],
+      "inputs": [
+        "products/services/coinbase-exception/result.json"
+      ],
+      "outputs": [
+        "products/services/coinbase-exception/result.json"
+      ],
+      "mission_id": "COINBASE-EXCEPTION-DELIVERY-GATE"
+    },
+    "description": "Broker action during THINK-1794720961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179472096114",
+  "input_sha256": "20fe545f6d839cd1b718e1b7ee465c4ce722e8528b4474eb8eb690711cffd96e"
+}
