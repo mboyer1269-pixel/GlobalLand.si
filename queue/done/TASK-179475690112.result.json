@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "7342\n/esop/guest/go/public/registration | Register as a Supplier\n/esop/guest/go/public/lostPwd | Forgot your password or username?\nhttps://jaggaer.my.site.com/SupplierSupportRequest/s/ | Supplier Support Request\n/esop/common-host/public/browserenv/requirements.jsp | System Requirements\nhttps://www.jaggaer.com/gb/trustcenter/#privacyshield | Privacy Statement\nhttps://www.jaggaer.com/accessibility-statement | Accessibility Statement\n/esop/guest/go/public/opportunity/current | Opportunities\nsupplier_help_files.html | Further Assistance for Suppliers\n../attach/pcs-tender-find_express_interest_in_ITT_PQQ_supplier_guide.pdf | How to Find an ITT or PQQ – Supplier Guide\nPCS - Tender --> Login invalid username / password Username Password Register as a Supplier Forgot your password or username? Please contact the Help Desk Supplier Support Request 0800 069 8630 System Requirements Privacy Statement Accessibility Statement Welcome to PCS-Tender PCS-Tender is the national eTendering system, and is centrally funded by the Scottish Government. The system is a secure and efficient means for buyers and suppliers to manage tender exercises online. The standard SPD (Scotland) and ITT templates enable buyers to easily create consistent tender documentation. Suppliers Once you have registered as a supplier, you will be sent a password via email which will provide you with secure access to the site. You will then be able to express interest in any advertised tender exercises. Additionally, you will be able to complete your supplier profile, which will pre-populate tender responses providing buyers have used the standard questions. Opportunities --> Further Assistance for Suppliers How to Find an ITT or PQQ – Supplier Guide\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179475690112.json"
+  ],
+  "request": {
+    "id": "TASK-179475690112",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-15T15:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import re,html\ns=open('products/services/open-software-tenders/supplier-qualification/portal-root.html',encoding='utf-8',errors='replace').read()\nprint(len(s))\nfor m in re.finditer(r'<a\\b[^>]*href=\"([^\"]*)\"[^>]*>(.*?)</a>',s,re.S|re.I):\n    t=re.sub(r'<[^>]+>','',m.group(2));t=' '.join(html.unescape(t).split())\n    print(m.group(1)[:200],'|',t[:100])\nt=re.sub(r'<script.*?</script>|<style.*?</style>','',s,flags=re.S|re.I);t=' '.join(html.unescape(re.sub(r'<[^>]+>',' ',t)).split())\nprint(t[:3000])"
+      ],
+      "inputs": [
+        "products/services/open-software-tenders/supplier-qualification/portal-root.html"
+      ],
+      "outputs": [],
+      "mission_id": "IWMS-SUPPLIER-QUALIFICATION-DELIVERY"
+    },
+    "description": "Broker action during THINK-1794756901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179475690112",
+  "input_sha256": "c2675671505d4c4b3bb70d0f3fd2fe583f0b9016d3e02109fe242e8c4e21d47d"
+}
