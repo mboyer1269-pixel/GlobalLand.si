@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\"canonical\": [\"<link rel=\\\"canonical\\\" href=\\\"https://help.shopify.com/en/manual/products/import-export/using-csv\\\"/>\"], \"sample_context\": [\".7497H15.4996V6.74967H14.4996L14.4996 11.7497Z\\\"></path></svg></button></span></div>\\n<p>You can download and view a <a class=\\\"text-inherit hover:text-text hover:no-underline\\\" href=\\\"/cdn/shopifycloud/product-knowledge/production/csv/product_template.csv\\\" target=\\\"_self\\\">sample product CSV file</a> to use as a template. If you use the sample file, then be aware of the following details:</p>\\n<ul>\\n<li>The sample file contains two exa\", \"ew your spreadsheet or text editor program&#x27;s documentation.</p>\\n<p>To view an example CSV file, download this <a class=\\\"text-inherit hover:text-text hover:no-underline\\\" href=\\\"/cdn/shopifycloud/product-knowledge/production/csv/product_template.csv\\\" target=\\\"_self\\\">sample product CSV file</a>, and then open it in <a href=\\\"https://docs.google.com/spreadsheets\\\">Google Sheets</a> or another spreadsheet program.</p>\\n</div><div da\", \"u003e\\\\n\\\\n\\\\u003ch2 id=\\\\\\\"download-a-sample-csv-file\\\\\\\"\\\\u003eDownload a sample CSV file\\\\u003c/h2\\\\u003e\\\\n\\\\u003cp\\\\u003eYou can download and view a \\\\u003ca href=\\\\\\\"https://help.shopify.com/cdn/shopifycloud/product-knowledge/production/csv/product_template.csv\\\\\\\" download=\\\\\\\"\\\\\\\"\\\\u003esample product CSV file\\\\u003c/a\\\\u003e to use as a template. If you use the sample file, then be aware of the following details:\\\\u003c/p\\\\u003e\\\\n\\\\u003cul\\\\u003e\\\\\", \"iew your spreadsheet or text editor program\\\\u0026#39;s documentation.\\\\u003c/p\\\\u003e\\\\n\\\\u003cp\\\\u003eTo view an example CSV file, download this \\\\u003ca href=\\\\\\\"https://help.shopify.com/cdn/shopifycloud/product-knowledge/production/csv/product_template.csv\\\\\\\" download=\\\\\\\"\\\\\\\"\\\\u003esample product CSV file\\\\u003c/a\\\\u003e, and then open it in \\\\u003ca href=\\\\\\\"https://docs.google.com/spreadsheets\\\\\\\"\\\\u003eGoogle Sheets\\\\u003c/a\\\\u003e or another s\"]}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179472420110.json"
+  ],
+  "request": {
+    "id": "TASK-179472420110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-15T06:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport re,json\ns=Path('products/services/shopify-large-catalogue/release/cited-doc-check.html').read_text()\nprint(json.dumps({'canonical':re.findall(r'<link[^>]*rel=\"canonical\"[^>]*>',s),'sample_context':[s[max(0,m.start()-180):m.end()+180] for m in re.finditer(r'/cdn/shopifycloud/product-knowledge/production/csv/product_template.csv',s)]},ensure_ascii=False))"
+      ],
+      "inputs": [
+        "products/services/shopify-large-catalogue/release/cited-doc-check.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794724201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179472420110",
+  "input_sha256": "24697c89b672dbf6b0380a8e2c1492398442b47be83f63d717b79e1c5c46a605"
+}
