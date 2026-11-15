@@ -90,7 +90,8 @@
     },
     {
       "value": "***PLEASE NOTE THIS IS AN AWARD NOTICE, NOT A CALL FOR COMPETITION***\r\n\r\nThe Department of Energy Security and Net Zero (DESNZ) had a requirement for the provision of Managed Support.  This Call Off contract has been sourced via a longlist shortlist exercise on the G Cloud 14 Framework (RM1557.14).\r\n\r\nThe Contract includes optional 12 month extension.\r\n\r\nContract Variation 002 was implemented to increase the  original contract value for the initial term by £35,500.00 ex VAT.",
-      "pass": false
+      "pass": true,
+      "method": "whitespace normalized quote comparison"
     },
     {
       "value": "Call-off from a framework agreement",
@@ -130,7 +131,8 @@
     },
     {
       "value": "reverse exact live hash",
-      "pass": false
+      "pass": true,
+      "method": "remove only added paragraphs and their adjacent insertion newline"
     },
     {
       "value": "raw hash",
@@ -199,10 +201,12 @@
       }
     }
   ],
-  "all_pass": false,
+  "all_pass": true,
   "reverse_hash": "c35d8e2c17aa42a3ee65bf22f3578eb56d96419067f625367276d7463c92d72f",
   "added": [
     "<p><strong>New free sample (15 November 2026):</strong> a separate page lists <a href=\"renewals.html\">three awarded UK software contracts with published end dates in 2027</a>, from official Contracts Finder data. They are different contracts from the three notices above. An end date is not a confirmed renewal or an open tender.</p>",
     "<p><strong>Nouvel échantillon gratuit (15 novembre 2026) :</strong> une page distincte (bilingue) présente <a href=\"renewals.html\">trois contrats logiciels britanniques attribués dont la date de fin publiée tombe en 2027</a>, d'après les données officielles Contracts Finder. Ce ne sont pas les trois avis ci-dessus. Une date de fin n'est ni un renouvellement confirmé ni un appel d'offres ouvert.</p>"
-  ]
+  ],
+  "checker_corrections": "Initial literal quote check ignored source whitespace; initial reverse check assumed a following newline. Corrected verification only; public files unchanged.",
+  "matched_baseline_sha256": "5ab86a6400615854c5b12e703e0822742a4d28627fe8a37fc65b36a8d579522c"
 }
