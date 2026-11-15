@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"NO_MATERIAL_CHANGE\",\n  \"checks\": [\n    {\n      \"id\": \"105246-2026\",\n      \"active\": true,\n      \"deadline_matches\": true,\n      \"route_matches\": true,\n      \"source_sha256\": \"ca6001da1e1495bf1ade3a710f7cafffca04dd2521e395233aff318cc257c0ef\"\n    },\n    {\n      \"id\": \"105838-2026\",\n      \"active\": true,\n      \"deadline_matches\": true,\n      \"route_matches\": true,\n      \"source_sha256\": \"979597e94eb74dbe7bea520f8f9071c16adde2af7fe5ce431ae5cfeac981cbf3\"\n    },\n    {\n      \"id\": \"106518-2026\",\n      \"active\": true,\n      \"deadline_matches\": true,\n      \"route_matches\": true,\n      \"source_sha256\": \"23434b06e6816f8bc49baa963b6fdbf7772775c0dbcece88a02ee9918d3bf4ba\"\n    }\n  ],\n  \"live_hashes\": {\n    \"live-index.html\": \"88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1\",\n    \"live-preview.html\": \"b359b3bffd0a3d36b89adf13b3c9d3f9d2fbaf06e75e6a232f5ff15850709d7b\"\n  },\n  \"limits\": \"Specific saved official releases only; no later-notice completeness established. No site edits, deployment, acquisition or revenue. Rejected repository referral remains isolated from live preview. Historical revalidation dates remain historical.\",\n  \"expiry\": \"Preserve existing observation and expiry duties; live per-notice dates are Dec7 12:00Z, Dec18 12:00Z and Jan8 2027 12:00Z.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/open-software-tenders/refresh-20261114/live-consistency-result.json",
+    "products/receipts/TASK-179470116111.json"
+  ],
+  "request": {
+    "id": "TASK-179470116111",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-15T00:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,hashlib\np=pathlib.Path('products/services/open-software-tenders/refresh-20261114');h=(p/'live-index.html').read_text(); rows=[]\nfor id in ['105246-2026','105838-2026','106518-2026']:\n f=p/('source-'+id+'.json');r=next(x for x in json.loads(f.read_text())['releases'] if x['id']==id);t=r['tender'];d=t['tenderPeriod']['endDate'];rows.append({'id':id,'active':t['status']=='active','deadline_matches':d[:10]+' '+d[11:16]+' UTC' in h,'route_matches':t['submissionMethodDetails'] in h,'source_sha256':hashlib.sha256(f.read_bytes()).hexdigest()})\nb=json.loads((p/'baseline-comparison.json').read_text());ok=all(x['active'] and x['deadline_matches'] and x['route_matches'] for x in rows) and all(not x['changed_fields'] for x in b['comparisons']);out={'verdict':'NO_MATERIAL_CHANGE' if ok else 'ASSESS_DISCREPANCY','checks':rows,'live_hashes':{n:hashlib.sha256((p/n).read_bytes()).hexdigest() for n in ['live-index.html','live-preview.html']},'limits':'Specific saved official releases only; no later-notice completeness established. No site edits, deployment, acquisition or revenue. Rejected repository referral remains isolated from live preview. Historical revalidation dates remain historical.','expiry':'Preserve existing observation and expiry duties; live per-notice dates are Dec7 12:00Z, Dec18 12:00Z and Jan8 2027 12:00Z.'};f=p/'live-consistency-result.json';f.write_text(json.dumps(out,indent=2)+'\\n');print(f.read_text())"
+      ],
+      "inputs": [
+        "products/services/open-software-tenders/refresh-20261114/"
+      ],
+      "outputs": [
+        "products/services/open-software-tenders/refresh-20261114/live-consistency-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794701161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179470116111",
+  "input_sha256": "2ea4097fca49bca5c415d0398a0bff7e7cdf5e5256a58f332dbec2510d0d03e5"
+}
