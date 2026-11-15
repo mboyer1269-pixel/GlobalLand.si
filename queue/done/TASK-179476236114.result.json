@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CONTRACTS-FINDER-RENEWAL-DELIVERY\", \"goal\": \"Test the specific reconsideration trigger in products/services/software-renewals/evidence.json using Contracts Finder rather than repeating Find a Tender discovery. Check equivalent work and claim actual ownership first. Read the prior bounded result and saved Contracts Finder API documentation, including the actual receipt for search-documentation.html. Follow documented public GET routes only; no authentication, guessed endpoints or POST operations. Inspect at most five award notices, selecting software-support or maintenance contracts where possible through documented search. Seek explicit contract end dates between February and November 2027, named buyer and supplier organizations, scope, awarded value/currency and extension options. If supported, deliver a concise sourced EN/FR supplier planning calendar with at most three entries under products/services/software-renewals/contracts-finder/. Distinguish award, base-term expiry, optional extension and actual open bidding; expiry alone does not establish reprocurement. Include exact official URLs, quotations, observation dates and source hashes, excluding personal contact details. If the bounded source cannot produce qualifying entries, save the precise result without broadening or creating speculative inventory. This tests a different official source, not proof of paid demand. No accounts, outreach, agreements, spending, private correspondence or public changes. Read saved outputs before closing with an actual valid lease and a lesson. Any eventual publication requires exact-digest independent review and host-gated deployment. Preserve all existing observation and retirement duties.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"RESEARCHER\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/software-renewals/contracts-finder/evidence.json\", \"products/services/software-renewals/contracts-finder/calendar-en-fr.md\", \"products/services/software-renewals/contracts-finder/extraction.json\"]}",
+  "request": {
+    "id": "TASK-179476236114",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-15T17:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "CONTRACTS-FINDER-RENEWAL-DELIVERY",
+      "agent_id": "RESEARCHER",
+      "lease_token": "gr77N2wavHWjy0A10G2CxfdJ41jAlqHu",
+      "evidence": [
+        "products/services/software-renewals/contracts-finder/evidence.json",
+        "products/services/software-renewals/contracts-finder/calendar-en-fr.md",
+        "products/services/software-renewals/contracts-finder/extraction.json"
+      ],
+      "lesson": "Observed: one documented Contracts Finder OCDS GET (stages=award, 5-day window, limit=100, TASK-179476236111) returned 100 releases, all with a structured contract end date, versus 0 of 60 in the Find a Tender sample. Filtering offline (the API has no keyword parameter) gave 5 software-coded hits ending Feb-Nov 2027; 3 kept, 2 hardware excluded. Worked: reading the API doc first and generating the calendar from the extraction. Limits: one page, buyer-published values not cross-checked, notice pages not fetched. No demand shown. Next time: use Contracts Finder for UK end dates; do not widen or publish without an inbound request or a reviewed-page decision."
+    },
+    "description": "Broker action during THINK-1794762361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179476236114",
+  "input_sha256": "d3ae44ccee4721a841486ad4e82e3ec96f1f9832163f316c22b31fbb39417f62"
+}
