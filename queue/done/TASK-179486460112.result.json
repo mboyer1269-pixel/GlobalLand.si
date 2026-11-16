@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "/withastro/starlight/issues/204\nreward mentions: 0\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179486460112.json"
+  ],
+  "request": {
+    "id": "TASK-179486460112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-16T21:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport re\ns=Path('products/services/accessibility-repair/discovery/starlight-accessibility.html').read_text()\nprint('\\n'.join(sorted(set(re.findall(r'/withastro/starlight/issues/\\d+',s)))))\nprint('reward mentions:',len(re.findall('bounty|reward',s,re.I)))"
+      ],
+      "inputs": [
+        "products/services/accessibility-repair/discovery/starlight-accessibility.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794864601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179486460112",
+  "input_sha256": "956859004a9f6a7c9d95f4c680e0d752b2fe04db9dc3dfadce810022149ae534"
+}
