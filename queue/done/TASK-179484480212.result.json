@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"SUPPORTED_STANDALONE_PLANNING_AID_NOT_SITE_APPROVAL\",\n  \"worksheet_sha256\": \"96e401e350ec26e9da4047b4f9625c5990f8df87723ceb72010732119061f714\",\n  \"review_basis\": [\n    \"Complete worksheet, HTML and delivery/result.json read\",\n    \"Saved independent original-source checks and remaining-original-checks read completely\"\n  ],\n  \"findings\": [\n    {\n      \"severity\": \"Nit\",\n      \"detail\": \"Official URLs are plain text inside pre in HTML; usable by copying, not clickable.\"\n    },\n    {\n      \"severity\": \"Nit\",\n      \"detail\": \"HSE claim lacks a direct award-notice citation in the standalone source list; attach exact OCID provenance before offering this as a fully self-contained sourced brief.\"\n    },\n    {\n      \"severity\": \"Limitation\",\n      \"detail\": \"Not independently reviewed is now historical candidate text; no public deployment is established.\"\n    }\n  ],\n  \"supported_scope\": \"Conditional bid-effort planning: historical call-off survival, reopening versus unverified current admission, shortlisted invitations, approval-dependent key subcontracting and unresolved TePAS2 access. French limitations preserve the English material distinctions. Numeric page dates resolve the failed literal-date search; conflicting guide dates remain disclosed. Suggested fields are recommendations, not official requirements.\",\n  \"publication\": \"No clean site inventory or exact site digest reproduced. No WORLD site APPROVE. TASK-179483941410 documents output publication, not repository deletion. Do not retry rejected CSV deployment.\",\n  \"commercial\": \"Five unclassified sources leave demand UNKNOWN; no acquisition or revenue established.\",\n  \"reconsideration\": \"A clean isolated candidate and reproduced exact digest permit separate independent publication review; new official admission or corrected dates could change supplier recommendations.\"\n}\n\n\n",
+  "artifacts": [
+    "products/reviews/supplier-worksheet/final-verdict.json",
+    "products/receipts/TASK-179484480212.json"
+  ],
+  "request": {
+    "id": "TASK-179484480212",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-16T16:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs=require('fs'),c=require('crypto');const p='products/reviews/supplier-worksheet/final-verdict.json';const w=fs.readFileSync('products/services/software-renewals/supplier-access/delivery/worksheet-en-fr.md');const v={verdict:'SUPPORTED_STANDALONE_PLANNING_AID_NOT_SITE_APPROVAL',worksheet_sha256:c.createHash('sha256').update(w).digest('hex'),review_basis:['Complete worksheet, HTML and delivery/result.json read','Saved independent original-source checks and remaining-original-checks read completely'],findings:[{severity:'Nit',detail:'Official URLs are plain text inside pre in HTML; usable by copying, not clickable.'},{severity:'Nit',detail:'HSE claim lacks a direct award-notice citation in the standalone source list; attach exact OCID provenance before offering this as a fully self-contained sourced brief.'},{severity:'Limitation',detail:'Not independently reviewed is now historical candidate text; no public deployment is established.'}],supported_scope:'Conditional bid-effort planning: historical call-off survival, reopening versus unverified current admission, shortlisted invitations, approval-dependent key subcontracting and unresolved TePAS2 access. French limitations preserve the English material distinctions. Numeric page dates resolve the failed literal-date search; conflicting guide dates remain disclosed. Suggested fields are recommendations, not official requirements.',publication:'No clean site inventory or exact site digest reproduced. No WORLD site APPROVE. TASK-179483941410 documents output publication, not repository deletion. Do not retry rejected CSV deployment.',commercial:'Five unclassified sources leave demand UNKNOWN; no acquisition or revenue established.',reconsideration:'A clean isolated candidate and reproduced exact digest permit separate independent publication review; new official admission or corrected dates could change supplier recommendations.'};fs.mkdirSync(require('path').dirname(p),{recursive:true});fs.writeFileSync(p,JSON.stringify(v,null,2)+'\\n');console.log(fs.readFileSync(p,'utf8'));"
+      ],
+      "inputs": [
+        "products/services/software-renewals/supplier-access/delivery/worksheet-en-fr.md"
+      ],
+      "outputs": [
+        "products/reviews/supplier-worksheet/final-verdict.json"
+      ],
+      "mission_id": "SUPPLIER-WORKSHEET-SOURCE-REVIEW"
+    },
+    "description": "Broker action during THINK-1794844802",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179484480212",
+  "input_sha256": "fca6f8389aa7e41568f491fd3f3d9c431584020bd00b67af1ae11c2c8af66495"
+}
