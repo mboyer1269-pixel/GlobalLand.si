@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"status\": \"ORIGINAL_GUIDE_EXCERPTS_NOT_APPROVAL\",\n  \"source_sha256\": \"377f580e905dbf023e5d5f97f84e06c780c64e569d58773eba05b7e1b008d7ae\",\n  \"excerpts\": [\n    {\n      \"paragraph\": 24,\n      \"text\": \"Agreement duration 4 years (reopens at 18 months and 36 months) Start date\"\n    },\n    {\n      \"paragraph\": 26,\n      \"text\": \"Start date TBC End date\"\n    },\n    {\n      \"paragraph\": 28,\n      \"text\": \"End date 05 August 2030 Maximum contract length\"\n    },\n    {\n      \"paragraph\": 104,\n      \"text\": \" G-Cloud 15 is an online digital platform that helps public sector customers to buy commoditised cloud-based solutions through an open framework that will be reopened at 18 and 36 months allowing Suppliers to provide our customers with up-to-date innovative solutions and allowing new suppliers to join. Please see key changes between G-Cloud 14 to G-Cloud 15. The G-Cloud 15 Supplier guide contains post award information to enable you to constructively engage with Government Commercial Agency and public sector Buyers, as well as how to successfully manage your G-Cloud 15 digital platform items (service offers) through the digital marketplace (applytosupply)on the Digital platform once the agreement is live.\"\n    },\n    {\n      \"paragraph\": 160,\n      \"text\": \"You can find a list of suppliers in theA-Z list. This agreement is an openframework. An open framework allows suppliers to join at multiple points throughout its duration. This framework will re-open after 18 months and again at 36 months. This allows suppliers to submit new bids to refresh existing Digital Platform Items (service offers) and pricing, add new services, and allow new suppliers to bid to join the framework. An existing supplier who submits new bids, or a new supplier bidding to join the framework, will be assessed on the same basis as the first framework within thescheme of open frameworks. Any changes made will be reassessed. Pricing\"\n    }\n  ]\n}\n\n",
+  "artifacts": [
+    "products/services/software-renewals/supplier-access/preparation/original-guide-check.json",
+    "products/receipts/TASK-179483580810.json"
+  ],
+  "request": {
+    "id": "TASK-179483580810",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-16T13:30:08Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,base64,zipfile,io,xml.etree.ElementTree as E,json,re,hashlib\np=pathlib.Path('products/services/software-renewals/gcloud15-access/raw/supplier-guide.odt.base64.txt'); raw=base64.b64decode(p.read_text()); z=zipfile.ZipFile(io.BytesIO(raw)); root=E.fromstring(z.read('content.xml')); ns={'text':'urn:oasis:names:tc:opendocument:xmlns:text:1.0'}; paras=[''.join(e.itertext()) for e in root.findall('.//text:p',ns)]; hits=[]\nfor i,s in enumerate(paras):\n if re.search(r'18 months|36 months|new suppliers|5 August 2030|TBC',s,re.I): hits.append({'paragraph':i,'text':' '.join(paras[max(0,i-1):i+2])})\no={'status':'ORIGINAL_GUIDE_EXCERPTS_NOT_APPROVAL','source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'excerpts':hits}; q=pathlib.Path('products/services/software-renewals/supplier-access/preparation/original-guide-check.json'); q.parent.mkdir(parents=True,exist_ok=True);q.write_text(json.dumps(o,ensure_ascii=False,indent=2)); print(q.read_text())"
+      ],
+      "inputs": [
+        "products/services/software-renewals/gcloud15-access/raw/supplier-guide.odt.base64.txt"
+      ],
+      "outputs": [
+        "products/services/software-renewals/supplier-access/preparation/original-guide-check.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794835808",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179483580810",
+  "input_sha256": "24991dfc38d00429d8cd0d09d7b00c61959286322a211a4708cd0a9095998cfc"
+}
