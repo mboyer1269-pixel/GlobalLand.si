@@ -1,0 +1,494 @@
+{
+  "label": "SYNTHETIC ONLY; no customer delivery or real Shopify import",
+  "passed": 13,
+  "total": 13,
+  "cases": [
+    {
+      "name": "valid",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/valid-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/valid-produced.csv"
+      ],
+      "exit": 0,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "changed-Barcodes",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/changed-Barcodes-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/changed-Barcodes-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "value_difference",
+            "sku": "001",
+            "field": "Barcodes",
+            "source_field": "barcode",
+            "expected": "0001",
+            "observed": "CHANGED",
+            "observed_raw": "CHANGED",
+            "source": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/changed-Barcodes-source.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  3
+                ]
+              }
+            ],
+            "produced": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/changed-Barcodes-produced.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "changed-Option1_value",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/changed-Option1_value-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/changed-Option1_value-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "value_difference",
+            "sku": "001",
+            "field": "Option1 value",
+            "source_field": "color",
+            "expected": "Blue",
+            "observed": "CHANGED",
+            "observed_raw": "CHANGED",
+            "source": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/changed-Option1_value-source.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  3
+                ]
+              }
+            ],
+            "produced": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/changed-Option1_value-produced.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "changed-Option2_value",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/changed-Option2_value-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/changed-Option2_value-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "value_difference",
+            "sku": "001",
+            "field": "Option2 value",
+            "source_field": "size",
+            "expected": "M",
+            "observed": "CHANGED",
+            "observed_raw": "CHANGED",
+            "source": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/changed-Option2_value-source.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  3
+                ]
+              }
+            ],
+            "produced": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/changed-Option2_value-produced.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "changed-Price",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/changed-Price-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/changed-Price-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "value_difference",
+            "sku": "001",
+            "field": "Price",
+            "source_field": "price",
+            "expected": "9.00",
+            "observed": "CHANGED",
+            "observed_raw": "CHANGED",
+            "source": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/changed-Price-source.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  3
+                ]
+              }
+            ],
+            "produced": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/changed-Price-produced.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "missing",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/missing-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/missing-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "missing_sku",
+            "sku": "002",
+            "source": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/missing-source.csv",
+                "record": 2,
+                "physical_lines": [
+                  4,
+                  4
+                ]
+              }
+            ],
+            "produced": []
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "extra",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/extra-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/extra-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "extra_sku",
+            "sku": "002",
+            "source": [],
+            "produced": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/extra-produced.csv",
+                "record": 2,
+                "physical_lines": [
+                  3,
+                  3
+                ]
+              }
+            ]
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "duplicate-source",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-source-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-source-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "ambiguous_duplicate_key",
+            "sku": "001",
+            "source": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-source-source.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  3
+                ]
+              },
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-source-source.csv",
+                "record": 3,
+                "physical_lines": [
+                  5,
+                  6
+                ]
+              }
+            ],
+            "produced": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-source-produced.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "duplicate-produced",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-produced-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-produced-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "ambiguous_duplicate_key",
+            "sku": "001",
+            "source": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-produced-source.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  3
+                ]
+              }
+            ],
+            "produced": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-produced-produced.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/duplicate-produced-produced.csv",
+                "record": 3,
+                "physical_lines": [
+                  4,
+                  4
+                ]
+              }
+            ]
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "blank-source",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/blank-source-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/blank-source-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "ambiguous_blank_key",
+            "side": "source",
+            "file": "/workspace/products/services/catalogue-qa/preservation-findings/blank-source-source.csv",
+            "record": 1,
+            "physical_lines": [
+              2,
+              3
+            ]
+          },
+          {
+            "kind": "extra_sku",
+            "sku": "001",
+            "source": [],
+            "produced": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/blank-source-produced.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "blank-produced",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/blank-produced-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/blank-produced-produced.csv"
+      ],
+      "exit": 1,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [
+          {
+            "kind": "ambiguous_blank_key",
+            "side": "produced",
+            "file": "/workspace/products/services/catalogue-qa/preservation-findings/blank-produced-produced.csv",
+            "record": 1,
+            "physical_lines": [
+              2,
+              2
+            ]
+          },
+          {
+            "kind": "missing_sku",
+            "sku": "001",
+            "source": [
+              {
+                "file": "/workspace/products/services/catalogue-qa/preservation-findings/blank-produced-source.csv",
+                "record": 1,
+                "physical_lines": [
+                  2,
+                  3
+                ]
+              }
+            ],
+            "produced": []
+          }
+        ],
+        "ignored_image_only_rows": []
+      }
+    },
+    {
+      "name": "image-only",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/image-only-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/image-only-produced.csv"
+      ],
+      "exit": 0,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [],
+        "ignored_image_only_rows": [
+          {
+            "file": "/workspace/products/services/catalogue-qa/preservation-findings/image-only-produced.csv",
+            "record": 3,
+            "physical_lines": [
+              4,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "escaped-barcode",
+      "command": [
+        "/usr/bin/python3",
+        "/workspace/products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "/workspace/products/services/catalogue-qa/preservation-findings/escaped-barcode-source.csv",
+        "/workspace/products/services/catalogue-qa/preservation-findings/escaped-barcode-produced.csv"
+      ],
+      "exit": 0,
+      "passed": true,
+      "output": {
+        "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+        "findings": [],
+        "ignored_image_only_rows": []
+      }
+    }
+  ]
+}
