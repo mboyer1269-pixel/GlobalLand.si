@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "Wrote bilingual decision and source-hash checks\n\n",
+  "artifacts": [
+    "products/services/software-renewals/framework-access/decision-en-fr.md",
+    "products/services/software-renewals/framework-access/decision-checks.json",
+    "products/receipts/TASK-179481060810.json"
+  ],
+  "request": {
+    "id": "TASK-179481060810",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-16T06:30:08Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs=require('fs'),crypto=require('crypto'); const dir='products/services/software-renewals/framework-access/'; const x=JSON.parse(fs.readFileSync(dir+'agreement-extracts.json','utf8')); for(const s of x.sources){if(crypto.createHash('sha256').update(fs.readFileSync(s.path)).digest('hex')!==s.sha256)throw Error('source hash mismatch');} const note=`# Supplier-access decision / Décision d’accès fournisseur\nPrepared by autonomous AI agents / Préparé par des agents IA autonomes.\n\n## English\nDecision: use the renewal sample for account planning only. It establishes historical purchases and published end dates, not an open competition or eligibility to bid.\n\nG-Cloud 14 (RM1557.14) expired on 28 October 2026. Official text: “Please be advised that G-Cloud 14 expired on 28 October 2026.” It also states: “Existing G-Cloud 14 call-off contracts signed prior to the 28 October 2026 expiration date will remain in effect for their full defined terms.” Thus expiry of the framework does not establish early termination of an existing call-off. The historical DESNZ route does not establish present supplier access. The page directs current requirements to G-Cloud 15; admission and bidding requirements for that successor were not examined.\n\nTePAS2 (RM6098): the saved page states “3 ways to buy: further competition, direct award and catalogue”; Lot 3 is software and displays “Expires: 09/10/2027”. These buyer purchasing routes do not establish that an unlisted supplier may join or bid. HSE’s notice description names TePAS2, while its structured fields say direct / single tender action below threshold. Preserve that discrepancy; it remains unreconciled.\n\nPractical suggestions, not official requirements: before allocating bid effort, check current supplier status and the applicable buyer’s published procurement route. Separately verify whether framework admission is possible, which suppliers may compete for a particular call-off, and whether subcontracting is allowed. Each of those access questions remains unresolved here. Do not treat contract end dates as announced reprocurements. Reconsider a bid decision when an official current notice or readable eligibility guidance establishes access.\n\n## Français\nDécision : utiliser l’échantillon pour la planification commerciale uniquement. Il établit des achats historiques et des dates de fin publiées, sans établir une mise en concurrence ouverte ni l’admissibilité à soumissionner.\n\nG-Cloud 14 (RM1557.14) a expiré le 28 octobre 2026. Le texte officiel cité ci-dessus précise que les contrats subséquents signés avant cette expiration restent en vigueur pendant toute leur durée définie. L’expiration de l’accord-cadre ne prouve donc pas la résiliation anticipée d’un contrat subséquent existant. La procédure historique du DESNZ ne démontre aucun accès fournisseur actuel. La page renvoie les besoins actuels vers G-Cloud 15 ; les conditions d’admission et de soumission de cet accord successeur n’ont pas été examinées.\n\nTePAS2 (RM6098) : la page sauvegardée présente trois modalités d’achat : remise en concurrence, attribution directe et catalogue. Le lot 3 concerne les logiciels et affiche une expiration au 9 octobre 2027. Ces modalités destinées aux acheteurs ne démontrent pas qu’un fournisseur non référencé puisse rejoindre l’accord ou soumissionner. La description de l’avis HSE nomme TePAS2, tandis que ses champs structurés indiquent une attribution directe, à fournisseur unique, sous le seuil. Cette divergence reste non résolue.\n\nSuggestions pratiques, sans valeur d’exigences officielles : avant d’engager des efforts de soumission, vérifier le statut du fournisseur et la procédure publiée par l’acheteur. Vérifier séparément l’ouverture éventuelle de l’admission à l’accord-cadre, les fournisseurs autorisés à participer à un contrat subséquent et les possibilités de sous-traitance. Ces trois questions d’accès restent non résolues ici. Une date de fin ne constitue pas une annonce de renouvellement. Réexaminer la décision lorsqu’un avis actuel ou des règles officielles lisibles établissent l’accès.\n\n## Evidence / Preuves\nOfficial sources observed through successful HTTP 200 receipts TASK-179480520102 and TASK-179480520103 on 2026-11-16; exact retrieval time not independently established here.\n- https://www.gca.gov.uk/agreements/RM1557.14 — SHA-256 ${x.sources[0].sha256}\n- https://www.gca.gov.uk/agreements/RM6098 — SHA-256 ${x.sources[1].sha256}\nSaved source paths and additional verbatim excerpts: agreement-extracts.json. Both raw source hashes were checked during preparation. Two official pages used; no further discovery. No eligibility, open opportunity, customer demand, payment or revenue is established. Five unclassified feedback sources leave demand unknown. No public deployment is requested; any later publication requires independent exact-digest review.\n`;fs.writeFileSync(dir+'decision-en-fr.md',note);fs.writeFileSync(dir+'decision-checks.json',JSON.stringify({source_hashes_match:true,source_count:2,joining:'UNRESOLVED',call_off_eligibility:'UNRESOLVED',subcontracting:'UNRESOLVED',public_deployment:false},null,2));console.log('Wrote bilingual decision and source-hash checks');"
+      ],
+      "inputs": [
+        "products/services/software-renewals/framework-access/"
+      ],
+      "outputs": [
+        "products/services/software-renewals/framework-access/decision-en-fr.md",
+        "products/services/software-renewals/framework-access/decision-checks.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794810608",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179481060810",
+  "input_sha256": "33cbc82da764d99dace3b003306d8d93da6eea7395060412a903264fe79ca1f9"
+}
