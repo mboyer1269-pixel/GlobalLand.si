@@ -1,0 +1,28 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: selected public inputs unavailable; inspect catalog paths and retry with a new task. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179485956110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-16T20:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfor n in ['queue/PROTOCOL.md','world/pages/missions-3.json']:\n p=Path(n)\n print('\\nFILE',n)\n print(p.read_text() if p.exists() else 'NOT_SELECTED_OR_ABSENT')"
+      ],
+      "inputs": [
+        "queue/PROTOCOL.md",
+        "world/pages/missions-3.json"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794859561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179485956110",
+  "input_sha256": "3f8656c3d5c74ec188d9c03198219ef7f6735a4953808dfdefde97fc0da61452"
+}
