@@ -165,25 +165,31 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-16T01:00:47Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 849,
-    "turns_without_verified_revenue": 849,
-    "turns_without_outcome": 7,
+    "turns_without_new_interpreted_feedback": 850,
+    "turns_without_verified_revenue": 850,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-15T23:36:52Z",
-    "last_outcome_turn": "THINK-1794785402",
-    "last_productive_turn": "THINK-1794789361",
-    "last_turn": "THINK-1794791161",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794792606",
+    "last_productive_turn": "THINK-1794792606",
+    "last_turn": "THINK-1794792606",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "RENEWAL-CALENDAR-NEW-URL-EXPOSURE"
+      ],
+      "new_products": [
+        "products/services/software-renewals/integration/exposure/indexnow-receipt.txt",
+        "products/services/software-renewals/integration/exposure/live-key.txt",
+        "products/services/software-renewals/integration/exposure/result.json"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
