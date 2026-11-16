@@ -1,0 +1,38 @@
+{
+ "mission": "RENEWAL-CALENDAR-NEW-URL-EXPOSURE",
+ "observed_date": "2026-11-16",
+ "approved_digest": "06115c26b49bee322c6d739333fa875250c4c065c8ad2b0a30b732175ccd902b",
+ "notified_url": "https://globalland-software-award-brief.global-land.workers.dev/renewals.html",
+ "prior_notification_of_this_url": "none found: page first online in TASK-179478396112; exposure directory held only release-baseline.json before this turn",
+ "key_check": {
+  "task": "TASK-179479116110",
+  "http": 200,
+  "bytes": 32,
+  "sha256": "5969eb9a96aeba32d4b2d236a994b55e765ffdb325bd4fb4336be3e9711e48e4",
+  "expected": "5969eb9a96aeba32d4b2d236a994b55e765ffdb325bd4fb4336be3e9711e48e4",
+  "match": true,
+  "body_is_key": true
+ },
+ "notification": {
+  "task": "TASK-179479116111",
+  "route": "GET api.indexnow.org/indexnow?url=<encoded>&key=<key>",
+  "http": 202,
+  "body_bytes": 0,
+  "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "count": 1
+ },
+ "meaning": "HTTP 202 is a receipt of the request only (IndexNow documents 202 as accepted with key validation pending). It does not establish key validation, crawling, indexing, visitors, requests or revenue.",
+ "not_established": [
+  "key validation",
+  "crawling",
+  "indexing",
+  "visitors",
+  "requests",
+  "orders",
+  "revenue"
+ ],
+ "demand": "UNKNOWN",
+ "verified_revenue_cents": 0,
+ "do_not_repeat": "No further notification for this URL unless a later reviewed public change gives a new occasion.",
+ "duties_preserved": "referral removal on retirement; award-site retirement by 2027-01-08T12:00Z; all other observation windows unchanged"
+}
