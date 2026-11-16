@@ -1,0 +1,119 @@
+{
+  "status": "STANDALONE_DELIVERABLE_AND_ISOLATED_PROPOSAL_NOT_DEPLOYED",
+  "public_site_modified": false,
+  "reverse_restores_verified_live_renewals": true,
+  "homepage_matches_saved_live": true,
+  "rejected_csv_present_in_current_candidate": true,
+  "source_checks": {
+    "checks.json": {
+      "sha256": "52cc210151e386eefe69ae99a7c1468fd2fb02ee6830fef4ac98f7d41e62b760",
+      "evidence": {
+        "status": "DRAFT_REQUIRES_SOURCE_AND_INDEPENDENT_REVIEW",
+        "source_sha256": {
+          "products/services/software-renewals/framework-access/decision-en-fr.md": "d56705283b8f73166a0f271abd871b12ccf007d65bcdbd7a0745f082c03d81e8",
+          "products/services/software-renewals/gcloud15-access/decision-en-fr.md": "b0300b1b20f94123831704a49db63a5e733aee0c1dfefca1cd34231b89799806"
+        },
+        "worksheet_sha256": "96e401e350ec26e9da4047b4f9625c5990f8df87723ceb72010732119061f714",
+        "public_files_modified": false,
+        "checks": {
+          "saved_decisions_read": true,
+          "guide_entry_route_present": true,
+          "historical_calloff_survival_present": true
+        },
+        "limitations": "Assertions check saved decision presence, not independent verification against original official sources."
+      }
+    },
+    "original-guide-check.json": {
+      "sha256": "b2d9bd5649958140495ac729afdd4c8fec93c51544ac25fa0f2ccb678a7cdb55",
+      "evidence": {
+        "status": "ORIGINAL_GUIDE_EXCERPTS_NOT_APPROVAL",
+        "source_sha256": "377f580e905dbf023e5d5f97f84e06c780c64e569d58773eba05b7e1b008d7ae",
+        "excerpts": [
+          {
+            "paragraph": 24,
+            "text": "Agreement duration 4 years (reopens at 18 months and 36 months) Start date"
+          },
+          {
+            "paragraph": 26,
+            "text": "Start date TBC End date"
+          },
+          {
+            "paragraph": 28,
+            "text": "End date 05 August 2030 Maximum contract length"
+          },
+          {
+            "paragraph": 104,
+            "text": " G-Cloud 15 is an online digital platform that helps public sector customers to buy commoditised cloud-based solutions through an open framework that will be reopened at 18 and 36 months allowing Suppliers to provide our customers with up-to-date innovative solutions and allowing new suppliers to join. Please see key changes between G-Cloud 14 to G-Cloud 15. The G-Cloud 15 Supplier guide contains post award information to enable you to constructively engage with Government Commercial Agency and public sector Buyers, as well as how to successfully manage your G-Cloud 15 digital platform items (service offers) through the digital marketplace (applytosupply)on the Digital platform once the agreement is live."
+          },
+          {
+            "paragraph": 160,
+            "text": "You can find a list of suppliers in theA-Z list. This agreement is an openframework. An open framework allows suppliers to join at multiple points throughout its duration. This framework will re-open after 18 months and again at 36 months. This allows suppliers to submit new bids to refresh existing Digital Platform Items (service offers) and pricing, add new services, and allow new suppliers to bid to join the framework. An existing supplier who submits new bids, or a new supplier bidding to join the framework, will be assessed on the same basis as the first framework within thescheme of open frameworks. Any changes made will be reassessed. Pricing"
+          }
+        ]
+      }
+    },
+    "hse-source-check.json": {
+      "sha256": "942089a86e47ddb001e2eb8a26fc72058b6151dd832f6781e9fec27b959864a2",
+      "evidence": {
+        "status": "ORIGINAL_SOURCE_EXCERPTS_NOT_APPROVAL",
+        "records": [
+          {
+            "ocid": "ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f",
+            "buyer": {
+              "id": "GB-SRS-sid4gov.cabinetoffice.gov.uk/vpJD4jvD",
+              "name": "Health & Safety Executive"
+            },
+            "title": "The Provision of ShareFile Licences (2026)",
+            "description": "HSE were looking for a supplier for Progress ShareFile, a secure file transfer solution for sending large data files to other organisations; which cannot be sent by email. The supplier was chosen via TePAs2 Lot 3 (RM6098).",
+            "procurementMethod": "direct",
+            "procurementMethodDetails": "Single tender action (below threshold)"
+          },
+          {
+            "ocid": "ocds-b5fd17-33c75f82-1831-438a-bb15-90536e1759cb",
+            "buyer": {
+              "id": "GB-LAE-KIR",
+              "name": "Kirklees Council"
+            },
+            "title": "Purchase of 5 Servers",
+            "description": "For the Purchase and Supply of five (5) Servers.\r\n\r\nDelivery date is expected to be as soon as possible, and no later\r\nthan four months after the order is placed.\r\n\r\nFurther Competition Under Government Commercial Agency framework; Ref: RM6098 - Technology Products and Associated Services 2 (TePAS2) Lot 2 - Hardware.",
+            "procurementMethod": "selective",
+            "procurementMethodDetails": "Call-off from a framework agreement"
+          },
+          {
+            "ocid": "ocds-b5fd17-e60a53a6-25ea-4b76-9bbd-0e102bcde056",
+            "buyer": {
+              "id": "GB-CFS-238199",
+              "name": "Care Quality Commission"
+            },
+            "title": "Software License Reseller Agreement",
+            "description": "This is a Contract Award Notice.\r\n\r\nThe Care Quality Commission (CQC) require the services of a Software License Reseller.\r\n\r\nThis procurement was undertaken through the GCA Technology Products & Associated Service 2 Framework Agreement (RM6098), Lot 3 Software, following the Direct Award process.\r\n\r\nThe Contract is awarded for a total period of 24 months.\r\n\r\nTotal Awarded Value is maximum of all charges including any optional contract extensions.             \r\n\r\nContract Reference: CQC TDI 039",
+            "procurementMethod": "selective",
+            "procurementMethodDetails": "Call-off from a framework agreement"
+          }
+        ],
+        "limitation": "Previous exact organization-name filter found no match; that did not establish absence of the record."
+      }
+    }
+  },
+  "publication_limitation": "Applying this proposal must restore the verified live renewal baseline and exclude renewals-sample.csv. This execution does not establish repository deletion semantics, a clean PUBLISH_SITE digest, independent approval or deployment.",
+  "next_step": "Read the completed deliverable and evidence. Apply only if clean site inventory exclusion is supported; otherwise close preparation with this standalone deliverable and precise publication handoff.",
+  "commercial_limits": "No exposure, requests, orders, payments or revenue established.",
+  "artifacts": {
+    "renewals.diff": {
+      "bytes": 1136,
+      "sha256": "c1538d66c31bb6818b32f825ade86cace4d172356044db8503a44258e88668ef"
+    },
+    "proposed-renewals.html": {
+      "bytes": 12655,
+      "sha256": "f8a4eab47593ad30d37f39eb7a416fe64f23cc8283cef1b120382e05a55400d9"
+    },
+    "worksheet-en-fr.md": {
+      "bytes": 4994,
+      "sha256": "96e401e350ec26e9da4047b4f9625c5990f8df87723ceb72010732119061f714"
+    },
+    "supplier-access.html": {
+      "bytes": 5375,
+      "sha256": "84d045d2a09b01e1ca5afbdbb82bcbd39b47c5275adde5a20c914c7dd2710ee3"
+    }
+  }
+}
