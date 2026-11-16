@@ -8,25 +8,25 @@ Source observation: FETCH TASK-179481420101, HTTP 200. Source: https://www.gca.g
 
 Decision: use this as a route-screening aid, not an invitation to bid. The official page identifies an Open Framework under PA2023, with displayed start 6 August 2026 and end 5 February 2028. Separately it describes a four-year programme reopening after 18 and 36 months. These are distinct published statements; the displayed end date must not be presented as the end of the entire programme.
 
-Joining: the reopening statement does not establish an application window open today, admission conditions or our eligibility. Those questions remain unresolved.
+Joining: the supplier guide explicitly permits new suppliers to bid to join at reopenings after 18 and 36 months, assessed on the same basis as the first framework. This establishes a prospective entry route, not an application window open today or verified eligibility. The guide lists start date TBC and end date 05 August 2030; the agreement page displays 6 August 2026 to 5 February 2028. These statements remain unreconciled; do not calculate application dates from them.
 
 Call-offs: the buyer page supports award without competition for suitable existing catalogue services and competitive selection for more complex requirements. Competitive selection uses a filtered shortlist and invitations to eligible shortlisted suppliers. It does not establish that an unlisted supplier may bid, that any buyer is currently procuring, or that a historical renewal will use this framework.
 
 Subcontracting: the page describes an optional key-subcontractor schedule and GCA approval for all key subcontractors. It does not prove an available subcontract, acceptance by a prime supplier or an alternative admission entitlement.
 
-Practical next steps (suggestions, not official requirements): an existing supplier should check its relevant lot/service entry and the buyer-specific invitation before investing in a bid. A prospective entrant should read the linked Supplier guide v1.2 and use the official GCA contact form to clarify reopening dates and admission requirements. A potential subcontractor should first clarify the applicable approval procedure; no outreach is performed here.
+Practical next steps (suggestions, not official requirements): an existing supplier should check its relevant lot/service entry and the buyer-specific invitation before investing in a bid. A prospective entrant can use the documented reopening route for planning and the official GCA contact form to confirm actual application dates and admission requirements before preparing a bid. A potential subcontractor should first clarify the applicable approval procedure; no outreach is performed here.
 
 ## FR
 
 Décision : utiliser cette note pour examiner une voie d’accès, sans la présenter comme une invitation à soumissionner. La page officielle indique un accord-cadre ouvert régi par PA2023, débutant le 6 août 2026 et affichant une échéance au 5 février 2028. Elle décrit séparément un programme de quatre ans avec réouvertures après 18 et 36 mois. Ces énoncés distincts ne permettent pas de présenter l’échéance affichée comme la fin du programme entier.
 
-Admission : les réouvertures annoncées ne prouvent ni une période de candidature ouverte aujourd’hui, ni les conditions d’admission, ni notre admissibilité. Ces questions restent non résolues.
+Admission : le guide permet explicitement aux nouveaux fournisseurs de présenter une candidature aux réouvertures après 18 et 36 mois, selon les mêmes critères que le premier accord du programme. Cette voie future ne prouve ni une admission ouverte aujourd’hui ni notre admissibilité. Le guide indique un début TBC et une fin au 5 août 2030 ; la page de l’accord affiche du 6 août 2026 au 5 février 2028. Ces indications restent non conciliées et ne permettent pas de calculer des dates de candidature.
 
 Marchés subséquents : la page destinée aux acheteurs prévoit une attribution sans mise en concurrence pour certaines prestations existantes du catalogue, ou une sélection concurrentielle pour les besoins plus complexes. Cette sélection repose sur une liste filtrée et une invitation aux fournisseurs admissibles présélectionnés. Cela ne prouve ni l’accès d’un fournisseur non référencé, ni une consultation actuellement ouverte, ni l’utilisation future de cet accord pour un renouvellement historique.
 
 Sous-traitance : la page décrit une annexe facultative concernant les sous-traitants clés et exige leur approbation par GCA. Elle ne prouve ni l’existence d’une sous-traitance disponible, ni l’accord d’un titulaire, ni un droit alternatif d’admission.
 
-Prochaines étapes pratiques (suggestions, pas exigences officielles) : un fournisseur déjà référencé devrait vérifier son lot, sa prestation et l’invitation de l’acheteur avant de préparer une offre. Un nouvel entrant devrait lire le Supplier guide v1.2 lié ci-dessous et utiliser le formulaire officiel GCA pour clarifier les réouvertures et conditions d’admission. Un sous-traitant potentiel devrait clarifier la procédure d’approbation applicable. Aucun contact n’a été effectué.
+Prochaines étapes pratiques (suggestions, pas exigences officielles) : un fournisseur déjà référencé devrait vérifier son lot, sa prestation et l’invitation de l’acheteur avant de préparer une offre. Un nouvel entrant peut préparer son examen de la voie de réouverture documentée et utiliser le formulaire officiel GCA pour confirmer les dates de candidature et les conditions d’admission avant de préparer une offre. Un sous-traitant potentiel devrait clarifier la procédure d’approbation applicable. Aucun contact n’a été effectué.
 
 ## Official quotations / citations officielles
 
@@ -40,8 +40,14 @@ Prochaines étapes pratiques (suggestions, pas exigences officielles) : un fourn
 
 ## Official route / voie officielle
 
-Supplier guide v1.2 (linked by saved agreement page; not read in this bounded note): https://assets.gca.gov.uk/wp-content/uploads/RM1557.15-G-Cloud-15-Framework-supplier-guide-2.odt
+Supplier guide v1.2 (saved official ODT read; FETCH TASK-179482176100, HTTP 200; SHA-256 da109720d9cd359d9dcab97500831660113e5e475ac0b53c1de9c7e3d569f505): https://assets.gca.gov.uk/wp-content/uploads/RM1557.15-G-Cloud-15-Framework-supplier-guide-2.odt
 
 GCA contact form: use the Contact GCA route on the cited agreement page; no guessed form URL.
 
 Limitations / limites : factual source-screening only; no legal advice, verified eligibility, open tender, buyer request, price, order, payment or revenue. Examen factuel uniquement ; aucun conseil juridique, aucune admissibilité vérifiée, consultation ouverte, demande client, commande, paiement ou recette établis. No public deployment / aucune publication publique.
+
+Supplier-guide quotation / citation du guide fournisseur:
+
+> This agreement is an openframework. An open framework allows suppliers to join at multiple points throughout its duration. This framework will re-open after 18 months and again at 36 months. This allows suppliers to submit new bids to refresh existing Digital Platform Items (service offers) and pricing, add new services, and allow new suppliers to bid to join the framework. An existing supplier who submits new bids, or a new supplier bidding to join the framework, will be assessed on the same basis as the first framework within thescheme of open frameworks. Any changes made will be reassessed.
+
+Guide dates / dates du guide: Start date: TBC; End date: 05 August 2030. These do not resolve the agreement-page discrepancy / ces indications ne résolvent pas la divergence avec la page de l’accord.
