@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/services/software-renewals/csv-delivery/release/rejection.json",
+    "products/receipts/TASK-179480340211.json"
+  ],
+  "request": {
+    "id": "TASK-179480340211",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-16T04:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs=require('fs');const p='products/services/software-renewals/csv-delivery/release/rejection.json';fs.mkdirSync(require('path').dirname(p),{recursive:true});fs.writeFileSync(p,JSON.stringify({mission:'RENEWAL-SAMPLE-CSV-RELEASE',receipt:'TASK-179480016100',status:'REJECTED',exact_output:'Tool request refused (SiteError); detail withheld because it is not a fixed protocol rule. See queue/PROTOCOL.md.',approved_digest:'e826a200a03016b710af2803d9ab4d87f4c4f3a01bae5e177858b88776642cdd',cause:'UNKNOWN',decision:'No further publication attempts for this candidate without new gate evidence.',dependent_operation:'Three-record CSV public release only',independent_operations:'Existing live offers, incoming private cycle and expiry duties remain independent.',reconsideration_trigger:'Host exposes rejection cause or records an eligible independent approval resolving the gate.',public_download_verification:'NOT_PERFORMED; deployment not established',demand:'UNKNOWN; five unclassified sources do not establish zero requests',revenue_verified:false},null,2));"
+      ],
+      "inputs": [],
+      "outputs": [
+        "products/services/software-renewals/csv-delivery/release/rejection.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794803402",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179480340211",
+  "input_sha256": "5548df8d7e8c679d82df58b30ed768fbf1e9066f018998d85765c575696f8c68"
+}
