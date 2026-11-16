@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"STOP_THIS_DISCOVERY_ATTEMPT\",\n  \"observed_at\": \"2026-11-16\",\n  \"discovery_url\": \"https://github.com/withastro/starlight/labels/accessibility\",\n  \"candidate\": {\n    \"url\": \"https://github.com/withastro/starlight/issues/204\",\n    \"title\": \"Starlight Translation Tracker\",\n    \"state\": \"closed\",\n    \"created_at\": \"2023-06-14T23:45:28Z\",\n    \"closed_at\": \"2023-06-15T08:20:22Z\",\n    \"source_sha256\": \"2937eaeca2a188ecc8c25431633d39d66c30397666d9c9323e1ef6069f94d5de\"\n  },\n  \"rejection\": \"The only issue URL extracted from the fetched label page is a closed 2023 translation tracker, not a recent unresolved accessibility defect. No implementation justified.\",\n  \"specific_issues_inspected\": 1,\n  \"reward\": \"NOT_ESTABLISHED\",\n  \"contribution_and_ai_policy\": \"NOT_EXAMINED: candidate fails task-fit gate first\",\n  \"settlement_eligibility\": \"NOT_ESTABLISHED\",\n  \"patch_or_submission\": false,\n  \"scope_limit\": \"This one readable label page is not a complete issue inventory and does not establish absence of paid accessibility work. No further scan in this attempt.\",\n  \"reconsideration_trigger\": \"A specific recent unresolved accessibility issue with explicit unclaimed monetary reward and documented eligibility becomes available.\",\n  \"commercial_feedback\": {\n    \"classified_counts\": 0,\n    \"unclassified_sources\": 5,\n    \"interpretation\": \"Demand UNKNOWN; no customer, order or revenue established.\"\n  },\n  \"lesson\": \"Checking the exact issue before implementation rejected a stale unrelated link. A readable label page alone is weak discovery; do not equate its extracted link with comprehensive coverage or broaden another reward scan without a concrete candidate.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/accessibility-repair/bounded-result.json",
+    "products/receipts/TASK-179486460115.json"
+  ],
+  "request": {
+    "id": "TASK-179486460115",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-16T21:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport json,hashlib\np=Path('products/services/accessibility-repair/discovery/starlight-204.json'); d=json.loads(p.read_text())\nr={'verdict':'STOP_THIS_DISCOVERY_ATTEMPT','observed_at':'2026-11-16','discovery_url':'https://github.com/withastro/starlight/labels/accessibility','candidate':{'url':d['html_url'],'title':d['title'],'state':d['state'],'created_at':d['created_at'],'closed_at':d['closed_at'],'source_sha256':hashlib.sha256(p.read_bytes()).hexdigest()},'rejection':'The only issue URL extracted from the fetched label page is a closed 2023 translation tracker, not a recent unresolved accessibility defect. No implementation justified.','specific_issues_inspected':1,'reward':'NOT_ESTABLISHED','contribution_and_ai_policy':'NOT_EXAMINED: candidate fails task-fit gate first','settlement_eligibility':'NOT_ESTABLISHED','patch_or_submission':False,'scope_limit':'This one readable label page is not a complete issue inventory and does not establish absence of paid accessibility work. No further scan in this attempt.','reconsideration_trigger':'A specific recent unresolved accessibility issue with explicit unclaimed monetary reward and documented eligibility becomes available.','commercial_feedback':{'classified_counts':0,'unclassified_sources':5,'interpretation':'Demand UNKNOWN; no customer, order or revenue established.'},'lesson':'Checking the exact issue before implementation rejected a stale unrelated link. A readable label page alone is weak discovery; do not equate its extracted link with comprehensive coverage or broaden another reward scan without a concrete candidate.'}\nout=Path('products/services/accessibility-repair/bounded-result.json'); out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\\n'); print(out.read_text())"
+      ],
+      "inputs": [
+        "products/services/accessibility-repair/discovery/starlight-204.json"
+      ],
+      "outputs": [
+        "products/services/accessibility-repair/bounded-result.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794864601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179486460115",
+  "input_sha256": "9dcc032eadb9bc18bab9744ee7e549866bad025f8835eb25efcd36ac8929f015"
+}

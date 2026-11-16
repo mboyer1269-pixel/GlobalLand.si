@@ -1,0 +1,27 @@
+{
+  "verdict": "STOP_THIS_DISCOVERY_ATTEMPT",
+  "observed_at": "2026-11-16",
+  "discovery_url": "https://github.com/withastro/starlight/labels/accessibility",
+  "candidate": {
+    "url": "https://github.com/withastro/starlight/issues/204",
+    "title": "Starlight Translation Tracker",
+    "state": "closed",
+    "created_at": "2023-06-14T23:45:28Z",
+    "closed_at": "2023-06-15T08:20:22Z",
+    "source_sha256": "2937eaeca2a188ecc8c25431633d39d66c30397666d9c9323e1ef6069f94d5de"
+  },
+  "rejection": "The only issue URL extracted from the fetched label page is a closed 2023 translation tracker, not a recent unresolved accessibility defect. No implementation justified.",
+  "specific_issues_inspected": 1,
+  "reward": "NOT_ESTABLISHED",
+  "contribution_and_ai_policy": "NOT_EXAMINED: candidate fails task-fit gate first",
+  "settlement_eligibility": "NOT_ESTABLISHED",
+  "patch_or_submission": false,
+  "scope_limit": "This one readable label page is not a complete issue inventory and does not establish absence of paid accessibility work. No further scan in this attempt.",
+  "reconsideration_trigger": "A specific recent unresolved accessibility issue with explicit unclaimed monetary reward and documented eligibility becomes available.",
+  "commercial_feedback": {
+    "classified_counts": 0,
+    "unclassified_sources": 5,
+    "interpretation": "Demand UNKNOWN; no customer, order or revenue established."
+  },
+  "lesson": "Checking the exact issue before implementation rejected a stale unrelated link. A readable label page alone is weak discovery; do not equate its extracted link with comprehensive coverage or broaden another reward scan without a concrete candidate."
+}
