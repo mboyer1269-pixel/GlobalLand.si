@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "21:     \"outputs\": [\"products/demo/README.md\"]\n32: | EXEC | argv[], inputs[] optionnel, cwd relatif optionnel, outputs[] | Programme choisi librement dans une boîte temporaire ; publie uniquement les produits indiqués, après contrôle. |\n45: `inputs` sélectionne les fichiers publics nécessaires au programme, par chemin exact ou préfixe de dossier terminé par `/`. Exemple : `{\"argv\":[\"node\",\"products/demo/build.js\"],\"inputs\":[\"products/demo/\",\"products/research/source.json\"],\"outputs\":[\"products/demo/result.json\"]}`. Les chemins relatifs sont conservés sous `/workspace` et la sélection est figée à une révision Git. `inputs: []` donne un espace initial vide. Le champ absent, ou `null` dans la réponse du modèle avant normalisation, demande l'ancienne vue publique complète. L'export sélectionné est limité à **128 Mio par tâche**, pour conserver de la place dans le tmpfs de 256 Mio pour le programme et ses résultats. Un dépassement refuse cette tâche avant exécution et demande une sélection plus petite ou un traitement par morceaux ; aucun fichier n'est omis silencieusement. Cette capacité par opération ne limite pas le corpus conservé dans Git. Les limites des outputs restent celles décrites ci-dessous. Le reçu technique contient `input_source` avec la révision, le total d'octets, le nombre de fichiers et l'empreinte du manifeste.\n47: Chaque EXEC démarre dans un espace neuf. Les dossiers et fichiers d'une invocation précédente ne restent pas automatiquement disponibles. Pour reprendre ou modifier un fichier public déjà publié, le sélectionner à nouveau dans `inputs`. Déclarer `outputs` ne crée ni fichier ni dossier : le programme crée ses parents avant d'écrire, par exemple `pathlib.Path(nom).parent.mkdir(parents=True, exist_ok=True)` ou `fs.mkdirSync(dossier, {recursive: true})`. Une erreur de fichier absent garde son statut d'échec et sa trace, avec un rappel de ce contrat ; aucune relance automatique n'est ajoutée.\n51: Pour le modèle, cwd null ou absent sélectionne la racine /workspace de cette boîte. Les alias exacts chaîne vide, `.`, `./`, `/workspace` et `/workspace/` sont retirés avant la création de la tâche et désignent cette même racine. Un sous-dossier reste relatif, par exemple `products/project`, et doit déjà exister lorsque le programme démarre. Aucun autre chemin absolu n'est converti ; les segments vides, `.`, `..`, `.git` et les antislashs restent refusés. Cette normalisation ne change pas les chemins des outputs et ne crée aucun accès à un dossier de l'hôte.\n53: Les outputs sont des fichiers UTF-8 sous products/, sans liens/chemins traversants, au plus64 fichiers/1Mio chacun/8Mio ensemble. Pour les binaires, utiliser base64 et documenter le décodage. Le wrapper publie une preuve de hash sous products/receipts/. Pas de produits secrets dans GitHub public. Dépendances/outils supplémentaires peuvent être assemblés dans une image dédiée revue, référencée par digest ou ID immuable.\n77: | `submit_action` | Exécute immédiatement EXEC, FETCH, WORLD, STATUS, PUBLISH_ACTOR, ACTOR_STATS ou PUBLISH_SITE et rend le résultat. |\n106: ## Sites publics (PUBLISH_SITE)\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179483941410.json"
+  ],
+  "request": {
+    "id": "TASK-179483941410",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-16T14:30:14Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\np=Path('queue/PROTOCOL.md')\ns=p.read_text()\nfor i,line in enumerate(s.splitlines()):\n if any(w in line.lower() for w in ['delet','remov','outputs','publish_site','inventory']):\n  print(str(i+1)+': '+line)\n"
+      ],
+      "inputs": [
+        "queue/PROTOCOL.md"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794839414",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179483941410",
+  "input_sha256": "e2bf87a9bd5d5d078329db95ec7d68c8c76100995f0dede11a51086122f406dd"
+}
