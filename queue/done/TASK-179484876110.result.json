@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "[\n  {\n    \"ocid\": \"ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f\",\n    \"id\": \"bcca35fe-32ad-4a29-a7e7-63c321af2f88-921564\",\n    \"language\": \"en\",\n    \"date\": \"2026-11-13T15:34:46Z\",\n    \"tag\": [\n      \"award\"\n    ],\n    \"initiationType\": \"tender\",\n    \"tender\": {\n      \"id\": \"1.11.4.4914.\",\n      \"title\": \"The Provision of ShareFile Licences (2026)\",\n      \"description\": \"HSE were looking for a supplier for Progress ShareFile, a secure file transfer solution for sending large data files to other organisations; which cannot be sent by email. The supplier was chosen via TePAs2 Lot 3 (RM6098).\",\n      \"status\": \"complete\",\n      \"classification\": {\n        \"scheme\": \"CPV\",\n        \"id\": \"72000000\",\n        \"description\": \"IT services: consulting, software development, Internet and support\"\n      },\n      \"items\": [\n        {\n          \"id\": \"1\",\n          \"deliveryAddresses\": [\n            {\n              \"region\": \"England\",\n              \"countryName\": \"United Kingdom\"\n            },\n            {\n              \"region\": \"Scotland\",\n              \"countryName\": \"United Kingdom\"\n            },\n            {\n              \"region\": \"Wales\",\n              \"countryName\": \"United Kingdom\"\n            }\n          ]\n        }\n      ],\n      \"value\": {\n        \"amount\": 51624,\n        \"currency\": \"GBP\"\n      },\n      \"procurementMethod\": \"direct\",\n      \"procurementMethodDetails\": \"Single tender action (below threshold)\",\n      \"tenderPeriod\": {\n        \"endDate\": \"2026-05-12T16:00:00+01:00\"\n      },\n      \"contractPeriod\": {\n        \"startDate\": \"2026-06-29T00:00:00+01:00\",\n        \"endDate\": \"2027-06-28T23:59:59+01:00\"\n      },\n      \"suitability\": {\n        \"sme\": true,\n        \"vcse\": false\n      },\n      \"mainProcurementCategory\": \"services\"\n    },\n    \"parties\": [\n      {\n        \"id\": \"GB-SRS-sid4gov.cabinetoffice.gov.uk/vpJD4jvD\",\n        \"name\": \"Health & Safety Executive\",\n        \"identifier\": {\n          \"legalName\": \"Health & Safety Executive\",\n          \"scheme\": \"GB-SRS\",\n          \"id\": \"sid4gov.cabinetoffice.gov.uk/vpJD4jvD\"\n        },\n        \"address\": {\n          \"streetAddress\": \"Redgrave Court\",\n          \"locality\": \"BOOTLE\",\n          \"postalCode\": \"L207HS\",\n          \"countryName\": \"England\"\n        },\n        \"contactPoint\": {\n          \"email\": \"tenders@hse.gov.uk\"\n        },\n        \"roles\": [\n          \"buyer\"\n        ]\n      },\n      {\n        \"id\": \"GB-COH-02465350\",\n        \"name\": \"CDW Limited\",\n        \"identifier\": {\n          \"legalName\": \"CDW Limited\",\n          \"scheme\": \"GB-COH\",\n          \"id\": \"02465350\"\n        },\n        \"address\": {\n          \"streetAddress\": \"3rd Floor One New Change, London, United Kingdom, EC4M 9AF\"\n        },\n        \"details\": {\n          \"scale\": \"large\",\n          \"vcse\": false\n        },\n        \"roles\": [\n          \"supplier\"\n        ]\n      }\n    ],\n    \"buyer\": {\n      \"id\": \"GB-SRS-sid4gov.cabinetoffice.gov.uk/vpJD4jvD\",\n      \"name\": \"Health & Safety Executive\"\n    },\n    \"awards\": [\n      {\n        \"id\": \"ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f-1\",\n        \"status\": \"active\",\n        \"date\": \"2026-06-15T00:00:00+01:00\",\n        \"datePublished\": \"2026-11-13T15:34:46Z\",\n        \"value\": {\n          \"amount\": 51624,\n          \"currency\": \"GBP\"\n        },\n        \"suppliers\": [\n          {\n            \"id\": \"GB-COH-02465350\",\n            \"name\": \"CDW Limited\"\n          }\n        ],\n        \"contractPeriod\": {\n          \"startDate\": \"2026-06-29T00:00:00+01:00\",\n          \"endDate\": \"2027-06-28T23:59:59+01:00\"\n        },\n        \"documents\": [\n          {\n            \"id\": \"1\",\n            \"documentType\": \"awardNotice\",\n            \"description\": \"Awarded contract notice on Contracts Finder\",\n            \"url\": \"https://www.contractsfinder.service.gov.uk/Notice/bcca35fe-32ad-4a29-a7e7-63c321af2f88\",\n            \"datePublished\": \"2026-11-13T15:34:46Z\",\n            \"format\": \"text/html\",\n            \"language\": \"en\"\n          }\n        ]\n      }\n    ]\n  }\n]\n\n",
+  "artifacts": [
+    "products/services/software-renewals/supplier-access/standalone/source-provenance.json",
+    "products/receipts/TASK-179484876110.json"
+  ],
+  "request": {
+    "id": "TASK-179484876110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-16T17:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "inputs": [
+        "products/services/software-renewals/supplier-access/delivery/",
+        "products/reviews/supplier-worksheet/final-verdict.json",
+        "products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json"
+      ],
+      "outputs": [
+        "products/services/software-renewals/supplier-access/standalone/source-provenance.json"
+      ],
+      "argv": [
+        "python3",
+        "-c",
+        "import json,pathlib\np=pathlib.Path('products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json'); d=json.loads(p.read_text()); target='ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f'; found=[]\ndef walk(x):\n if isinstance(x,dict):\n  if x.get('ocid')==target: found.append(x)\n  else:\n   for v in x.values(): walk(v)\n elif isinstance(x,list):\n  for v in x: walk(v)\nwalk(d)\no=pathlib.Path('products/services/software-renewals/supplier-access/standalone/source-provenance.json');o.parent.mkdir(parents=True,exist_ok=True);o.write_text(json.dumps(found,ensure_ascii=False,indent=2));print(o.read_text())"
+      ],
+      "mission_id": "SUPPLIER-WORKSHEET-STANDALONE-EXPOSURE"
+    },
+    "description": "Broker action during THINK-1794848761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179484876110",
+  "input_sha256": "53925baa70e9926c80361b45dc479923d3125efd14762315f343fe49a7690ecb"
+}

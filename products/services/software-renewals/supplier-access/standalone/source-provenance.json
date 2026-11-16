@@ -1,0 +1,139 @@
+[
+  {
+    "ocid": "ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f",
+    "id": "bcca35fe-32ad-4a29-a7e7-63c321af2f88-921564",
+    "language": "en",
+    "date": "2026-11-13T15:34:46Z",
+    "tag": [
+      "award"
+    ],
+    "initiationType": "tender",
+    "tender": {
+      "id": "1.11.4.4914.",
+      "title": "The Provision of ShareFile Licences (2026)",
+      "description": "HSE were looking for a supplier for Progress ShareFile, a secure file transfer solution for sending large data files to other organisations; which cannot be sent by email. The supplier was chosen via TePAs2 Lot 3 (RM6098).",
+      "status": "complete",
+      "classification": {
+        "scheme": "CPV",
+        "id": "72000000",
+        "description": "IT services: consulting, software development, Internet and support"
+      },
+      "items": [
+        {
+          "id": "1",
+          "deliveryAddresses": [
+            {
+              "region": "England",
+              "countryName": "United Kingdom"
+            },
+            {
+              "region": "Scotland",
+              "countryName": "United Kingdom"
+            },
+            {
+              "region": "Wales",
+              "countryName": "United Kingdom"
+            }
+          ]
+        }
+      ],
+      "value": {
+        "amount": 51624,
+        "currency": "GBP"
+      },
+      "procurementMethod": "direct",
+      "procurementMethodDetails": "Single tender action (below threshold)",
+      "tenderPeriod": {
+        "endDate": "2026-05-12T16:00:00+01:00"
+      },
+      "contractPeriod": {
+        "startDate": "2026-06-29T00:00:00+01:00",
+        "endDate": "2027-06-28T23:59:59+01:00"
+      },
+      "suitability": {
+        "sme": true,
+        "vcse": false
+      },
+      "mainProcurementCategory": "services"
+    },
+    "parties": [
+      {
+        "id": "GB-SRS-sid4gov.cabinetoffice.gov.uk/vpJD4jvD",
+        "name": "Health & Safety Executive",
+        "identifier": {
+          "legalName": "Health & Safety Executive",
+          "scheme": "GB-SRS",
+          "id": "sid4gov.cabinetoffice.gov.uk/vpJD4jvD"
+        },
+        "address": {
+          "streetAddress": "Redgrave Court",
+          "locality": "BOOTLE",
+          "postalCode": "L207HS",
+          "countryName": "England"
+        },
+        "contactPoint": {
+          "email": "tenders@hse.gov.uk"
+        },
+        "roles": [
+          "buyer"
+        ]
+      },
+      {
+        "id": "GB-COH-02465350",
+        "name": "CDW Limited",
+        "identifier": {
+          "legalName": "CDW Limited",
+          "scheme": "GB-COH",
+          "id": "02465350"
+        },
+        "address": {
+          "streetAddress": "3rd Floor One New Change, London, United Kingdom, EC4M 9AF"
+        },
+        "details": {
+          "scale": "large",
+          "vcse": false
+        },
+        "roles": [
+          "supplier"
+        ]
+      }
+    ],
+    "buyer": {
+      "id": "GB-SRS-sid4gov.cabinetoffice.gov.uk/vpJD4jvD",
+      "name": "Health & Safety Executive"
+    },
+    "awards": [
+      {
+        "id": "ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f-1",
+        "status": "active",
+        "date": "2026-06-15T00:00:00+01:00",
+        "datePublished": "2026-11-13T15:34:46Z",
+        "value": {
+          "amount": 51624,
+          "currency": "GBP"
+        },
+        "suppliers": [
+          {
+            "id": "GB-COH-02465350",
+            "name": "CDW Limited"
+          }
+        ],
+        "contractPeriod": {
+          "startDate": "2026-06-29T00:00:00+01:00",
+          "endDate": "2027-06-28T23:59:59+01:00"
+        },
+        "documents": [
+          {
+            "id": "1",
+            "documentType": "awardNotice",
+            "description": "Awarded contract notice on Contracts Finder",
+            "url": "https://www.contractsfinder.service.gov.uk/Notice/bcca35fe-32ad-4a29-a7e7-63c321af2f88",
+            "datePublished": "2026-11-13T15:34:46Z",
+            "format": "text/html",
+            "language": "en"
+          }
+        ]
+      }
+    ]
+  }
+]
