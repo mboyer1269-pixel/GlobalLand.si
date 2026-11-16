@@ -1,0 +1,48 @@
+{
+  "status": "SCOPED_CHECKS_NOT_INDEPENDENT_APPROVAL",
+  "checks": [
+    {
+      "check": "draft_contains_actual_line_breaks",
+      "passed": true
+    },
+    {
+      "check": "draft_has_no_literal_backslash_n",
+      "passed": true
+    },
+    {
+      "check": "worksheet_has_bilingual_disclosure",
+      "passed": true
+    },
+    {
+      "check": "official_source: G-Cloud 14 expired on 28 October 2026",
+      "passed": true
+    },
+    {
+      "check": "official_source: will remain in effect for their full defined terms",
+      "passed": true
+    },
+    {
+      "check": "official_source: Issue the invitation to tender (ITT) to all eligible suppliers on your shortlist.",
+      "passed": true
+    },
+    {
+      "check": "official_source: All key subcontractors are subject to GCA approval.",
+      "passed": true
+    }
+  ],
+  "source_hashes": {
+    "gcloud14": {
+      "path": "products/services/software-renewals/framework-access/raw/g-cloud-14.html",
+      "sha256": "8351f1e8998afd737f0f3329d9e22f6a026b555bd5109df27912fe0c0c228f37"
+    },
+    "gcloud15": {
+      "path": "products/services/software-renewals/gcloud15-access/raw/agreement.html",
+      "sha256": "ffe8b96560abc0048185c9cc44887afa03d120aea7fe179bda529a79fbe49ff2"
+    }
+  },
+  "limitations": [
+    "Guide reopening claims and HSE route discrepancy still require their original-source checks.",
+    "No live-baseline isolation, public deployment, customer demand or revenue established."
+  ],
+  "next_step": "Correct any rendering defect, finish source verification and live-baseline isolation, then request exact-digest independent review; otherwise retain worksheet outside public files."
+}
