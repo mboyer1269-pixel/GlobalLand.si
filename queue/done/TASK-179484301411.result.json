@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"status\": \"ORIGINAL_SOURCE_CHECK_HANDOFF_NOT_PUBLICATION_APPROVAL\",\n  \"date_passages\": [\n    {\n      \"term\": \"06/08/2026\",\n      \"passage\": \"t. This includes off-the-shelf and pay as you go solutions. Agreement number: RM1557.15 Start date: 06/08/2026 End date: 05/02/2028 Regulation: PA2023 Agreement type: Open Framework Available for: Central government, charities, education, health, local authori\"\n    },\n    {\n      \"term\": \"05/02/2028\",\n      \"passage\": \"the-shelf and pay as you go solutions. Agreement number: RM1557.15 Start date: 06/08/2026 End date: 05/02/2028 Regulation: PA2023 Agreement type: Open Framework Available for: Central government, charities, education, health, local authority, blue light (polic\"\n    },\n    {\n      \"term\": \"05/02/2028\",\n      \"passage\": \"urces. Access Lot 1a: Infrastructure as a Service (IaaS) and Platform as a Service (PaaS). Expires: 05/02/2028 Lot 1b Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) AO Use this lot to buy infrastructure as a service (IaaS) and platform as \"\n    },\n    {\n      \"term\": \"End date:\",\n      \"passage\": \"ludes off-the-shelf and pay as you go solutions. Agreement number: RM1557.15 Start date: 06/08/2026 End date: 05/02/2028 Regulation: PA2023 Agreement type: Open Framework Available for: Central government, charities, education, health, local authority, blue l\"\n    }\n  ],\n  \"original_guide_quotes\": [\n    \"This agreement is an openframework. An open framework allows suppliers to join at multiple points throughout its duration. This framework will re-open after 18 months and again at 36 months. This allows suppliers to submit new bids to refresh existing Digital Platform Items (service offers) and pricing, add new services, and allow new suppliers to bid to join the framework. An existing supplier who submits new bids, or a new supplier bidding to join the framework, will be assessed on the same basis as the first framework within thescheme of open frameworks. Any changes made will be reassessed.\"\n  ],\n  \"hse_exact_release\": [\n    {\n      \"ocid\": \"ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f\",\n      \"description\": \"HSE were looking for a supplier for Progress ShareFile, a secure file transfer solution for sending large data files to other organisations; which cannot be sent by email. The supplier was chosen via TePAs2 Lot 3 (RM6098).\",\n      \"method\": \"direct\",\n      \"details\": \"Single tender action (below threshold)\"\n    }\n  ],\n  \"hashes\": {\n    \"products/services/software-renewals/gcloud15-access/raw/agreement.html\": \"ffe8b96560abc0048185c9cc44887afa03d120aea7fe179bda529a79fbe49ff2\",\n    \"products/services/software-renewals/gcloud15-access/raw/supplier-guide.odt.base64.txt\": \"377f580e905dbf023e5d5f97f84e06c780c64e569d58773eba05b7e1b008d7ae\",\n    \"products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json\": \"48c34ed08f5f73dbf05328251c53fee6a22da5dab14afdbcff64034b3d9af8ae\"\n  },\n  \"scope\": \"Resolve remaining checks only; no site candidate, deployment, demand or revenue verified.\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/supplier-worksheet/remaining-original-checks.json",
+    "products/receipts/TASK-179484301411.json"
+  ],
+  "request": {
+    "id": "TASK-179484301411",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-16T15:30:14Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,re,json,base64,zipfile,io,xml.etree.ElementTree as E,hashlib\nroot=pathlib.Path('products/services/software-renewals'); page=root/'gcloud15-access/raw/agreement.html'; raw=page.read_text(); text=re.sub('<[^>]+>',' ',raw); text=re.sub(r'\\s+',' ',text)\nterms=['06/08/2026','05/02/2028','2028-02-05','End date:']; dates=[]\nfor term in terms:\n for m in list(re.finditer(re.escape(term),text))[:2]: dates.append({'term':term,'passage':text[max(0,m.start()-100):m.end()+150]})\np=root/'gcloud15-access/raw/supplier-guide.odt.base64.txt'; z=zipfile.ZipFile(io.BytesIO(base64.b64decode(p.read_bytes()))); x=E.fromstring(z.read('content.xml')); paras=[''.join(e.itertext()) for e in x.iter() if e.tag.endswith('}p')]; quotes=[s for s in paras if 'assessed on the same basis' in s or 'End date 05' in s]\np2=root/'contracts-finder/raw/awards-20261109-13.json'; j=json.loads(p2.read_text()); h=[{'ocid':r.get('ocid'),'description':r.get('tender',{}).get('description'),'method':r.get('tender',{}).get('procurementMethod'),'details':r.get('tender',{}).get('procurementMethodDetails')} for r in j['releases'] if r.get('ocid')=='ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f']\nout={'status':'ORIGINAL_SOURCE_CHECK_HANDOFF_NOT_PUBLICATION_APPROVAL','date_passages':dates,'original_guide_quotes':quotes,'hse_exact_release':h,'hashes':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in [page,p,p2]},'scope':'Resolve remaining checks only; no site candidate, deployment, demand or revenue verified.'}; dest=pathlib.Path('products/reviews/supplier-worksheet/remaining-original-checks.json'); dest.parent.mkdir(parents=True,exist_ok=True); dest.write_text(json.dumps(out,ensure_ascii=False,indent=2)); print(dest.read_text())"
+      ],
+      "inputs": [
+        "products/services/software-renewals/gcloud15-access/raw/",
+        "products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json"
+      ],
+      "outputs": [
+        "products/reviews/supplier-worksheet/remaining-original-checks.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794843014",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179484301411",
+  "input_sha256": "f20c1aead812dae2b68144e8a31d96fcdf2a6c5edb4775701a2c30db5d8a4f44"
+}
