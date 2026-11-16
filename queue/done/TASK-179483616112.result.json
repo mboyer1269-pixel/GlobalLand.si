@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"status\": \"ORIGINAL_SOURCE_EXCERPTS_NOT_APPROVAL\",\n  \"records\": [\n    {\n      \"ocid\": \"ocds-b5fd17-2b43f425-69b0-4585-bf3b-deb23d3fe04f\",\n      \"buyer\": {\n        \"id\": \"GB-SRS-sid4gov.cabinetoffice.gov.uk/vpJD4jvD\",\n        \"name\": \"Health & Safety Executive\"\n      },\n      \"title\": \"The Provision of ShareFile Licences (2026)\",\n      \"description\": \"HSE were looking for a supplier for Progress ShareFile, a secure file transfer solution for sending large data files to other organisations; which cannot be sent by email. The supplier was chosen via TePAs2 Lot 3 (RM6098).\",\n      \"procurementMethod\": \"direct\",\n      \"procurementMethodDetails\": \"Single tender action (below threshold)\"\n    },\n    {\n      \"ocid\": \"ocds-b5fd17-33c75f82-1831-438a-bb15-90536e1759cb\",\n      \"buyer\": {\n        \"id\": \"GB-LAE-KIR\",\n        \"name\": \"Kirklees Council\"\n      },\n      \"title\": \"Purchase of 5 Servers\",\n      \"description\": \"For the Purchase and Supply of five (5) Servers.\\r\\n\\r\\nDelivery date is expected to be as soon as possible, and no later\\r\\nthan four months after the order is placed.\\r\\n\\r\\nFurther Competition Under Government Commercial Agency framework; Ref: RM6098 - Technology Products and Associated Services 2 (TePAS2) Lot 2 - Hardware.\",\n      \"procurementMethod\": \"selective\",\n      \"procurementMethodDetails\": \"Call-off from a framework agreement\"\n    },\n    {\n      \"ocid\": \"ocds-b5fd17-e60a53a6-25ea-4b76-9bbd-0e102bcde056\",\n      \"buyer\": {\n        \"id\": \"GB-CFS-238199\",\n        \"name\": \"Care Quality Commission\"\n      },\n      \"title\": \"Software License Reseller Agreement\",\n      \"description\": \"This is a Contract Award Notice.\\r\\n\\r\\nThe Care Quality Commission (CQC) require the services of a Software License Reseller.\\r\\n\\r\\nThis procurement was undertaken through the GCA Technology Products & Associated Service 2 Framework Agreement (RM6098), Lot 3 Software, following the Direct Award process.\\r\\n\\r\\nThe Contract is awarded for a total period of 24 months.\\r\\n\\r\\nTotal Awarded Value is maximum of all charges including any optional contract extensions.             \\r\\n\\r\\nContract Reference: CQC TDI 039\",\n      \"procurementMethod\": \"selective\",\n      \"procurementMethodDetails\": \"Call-off from a framework agreement\"\n    }\n  ],\n  \"limitation\": \"Previous exact organization-name filter found no match; that did not establish absence of the record.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/software-renewals/supplier-access/preparation/hse-source-check.json",
+    "products/receipts/TASK-179483616112.json"
+  ],
+  "request": {
+    "id": "TASK-179483616112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-16T13:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json\np=pathlib.Path('products/services/software-renewals'); raw=json.loads((p/'contracts-finder/raw/awards-20261109-13.json').read_text()); found=[]\nfor r in raw['releases']:\n t=r.get('tender',{}); text=json.dumps(t,ensure_ascii=False)\n if any(x in text.lower() for x in ['tepas','rm6098']):\n  found.append({'ocid':r.get('ocid'),'buyer':r.get('buyer'),'title':t.get('title'),'description':t.get('description'),'procurementMethod':t.get('procurementMethod'),'procurementMethodDetails':t.get('procurementMethodDetails')})\nout=p/'supplier-access/preparation/hse-source-check.json'; out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps({'status':'ORIGINAL_SOURCE_EXCERPTS_NOT_APPROVAL','records':found,'limitation':'Previous exact organization-name filter found no match; that did not establish absence of the record.'},ensure_ascii=False,indent=2)+'\\n'); print(out.read_text())"
+      ],
+      "inputs": [
+        "products/services/software-renewals/contracts-finder/raw/awards-20261109-13.json"
+      ],
+      "outputs": [
+        "products/services/software-renewals/supplier-access/preparation/hse-source-check.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794836161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179483616112",
+  "input_sha256": "5be2db69b94620dedb14234442c22e653c7d0e2cbdddb694852bc42e5a79ada1"
+}
