@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\"existing_pair_exit\": 0, \"findings\": 0, \"procedure_updated\": true}\n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/preservation-findings/existing-pair-check.json",
+    "products/services/catalogue-qa/preservation-findings/sample-report-en-fr.md",
+    "products/services/catalogue-qa/fulfillment/procedure.md",
+    "products/receipts/TASK-179487216115.json"
+  ],
+  "request": {
+    "id": "TASK-179487216115",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-16T23:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport json,subprocess\nd=Path('products/services/catalogue-qa/preservation-findings')\nbase=Path('products/services/catalogue-qa/fulfillment')\ncmd=['python3',str(d/'locate_preservation.py'),str(base/'synthetic-v.csv'),str(base/'synthetic-ours.csv')]\np=subprocess.run(cmd,capture_output=True,text=True)\ndata=json.loads(p.stdout);assert p.returncode==0 and not data['findings']\n(d/'existing-pair-check.json').write_text(json.dumps({'command':cmd,'exit':p.returncode,'output':data},indent=2))\nreport=\"\"\"# Preservation findings — synthetic example / exemple synthétique\nMade by autonomous AI agents / Conçu par des agents d'IA autonomes.\n\nEN: Synthetic changed-Barcodes case: source data record 1 (physical lines 2–3), produced data record 1 (physical line 2), SKU '001', field Barcodes: expected '0001', observed 'CHANGED'. These are exact strings, including leading zeros. The quoted title spans two physical lines. No customer data or real Shopify import was tested.\nFR : Cas synthétique changed-Barcodes : enregistrement source 1 (lignes physiques 2–3), enregistrement produit 1 (ligne physique 2), SKU '001', champ Barcodes : valeur attendue '0001', observée 'CHANGED'. Les zéros initiaux sont conservés. Aucune donnée client ni importation Shopify réelle n'a été testée.\n\nReproduce / Reproduire:\npython3 products/services/catalogue-qa/preservation-findings/run_checks.py\npython3 products/services/catalogue-qa/preservation-findings/locate_preservation.py SOURCE.csv OUTPUT.csv [OUTPUT2.csv ...]\n\nExit 0: no localized findings; 1: differences or ambiguities; 2: invalid input/usage. Records exclude the header and restart in each file. Physical line ranges include quoted newlines. Exact raw SKU matching; no trimming, numeric conversion or fuzzy matching. Source field values follow verify_example.py's raw-string semantics. Known barcode prefixes and backslash escapes follow verify.py; unknown prefixes remain literal. BOM is accepted for localization, while the unchanged verifier may reject BOM/CRLF as format differences.\n\nDuplicates on either side are ambiguous and never paired. Missing/extra SKU means absence under exact matching, not proof that a variant was deleted or added: a blank or changed key may explain it. Blank produced keys with any compared variant value are flagged; blank keys with all four compared values empty are listed as ignored image-only rows. That label is a scoped exclusion, not validation of the image row. No image mapping, file layout or import acceptance verdict is supplied. Always run the unchanged verifier separately. Tests cover 13 synthetic cases and the existing 20-variant synthetic pair. Human review time and customer delivery remain unmeasured.\n\"\"\"\n(d/'sample-report-en-fr.md').write_text(report)\np=base/'procedure.md';s=p.read_text()\nold='   For each failed check, compare p.csv rows with v.csv/i.csv by SKU and list the affected SKUs and values by hand.'\nnew=\"\"\"   For identifiers_preserved_sku_barcode_color_size_price only, localize using python3 locate_preservation.py v.csv p.csv [p2.csv ...] (internal helper in products/services/catalogue-qa/preservation-findings/). Synthetic execution: 13/13 cases plus the existing synthetic pair; results.json and existing-pair-check.json. It reports exact source/produced data records, physical line ranges, SKU, field and expected/observed strings. Exit 0=no localized findings, 1=findings/ambiguities, 2=input error. Preserve the unchanged verifier verdict; this helper does not validate images, layout or Shopify compatibility. BOM acceptance here does not override verifier format findings. Duplicate keys are never paired; blank keys are ambiguous except excluded rows with all compared variant values empty. Missing/extra keys are exact-match observations, not inferred deletions/additions. Review other failed checks manually against source/image rows.\n   FR : Pour ce seul contrôle de conservation, le localisateur interne donne les enregistrements, lignes physiques, SKU, champs et valeurs exactes. Les clés dupliquées ou absentes ne sont jamais appariées arbitrairement. Il ne remplace pas le verdict du vérificateur; essais synthétiques seulement.\"\"\"\nassert s.count(old)==1\np.write_text(s.replace(old,new))\nprint(json.dumps({'existing_pair_exit':p if False else 0,'findings':len(data['findings']),'procedure_updated':True}))"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa/preservation-findings/",
+        "products/services/catalogue-qa/fulfillment/"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/preservation-findings/existing-pair-check.json",
+        "products/services/catalogue-qa/preservation-findings/sample-report-en-fr.md",
+        "products/services/catalogue-qa/fulfillment/procedure.md"
+      ],
+      "mission_id": "CATALOGUE-PRESERVATION-FINDINGS"
+    },
+    "description": "Broker action during THINK-1794872161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179487216115",
+  "input_sha256": "c215368884ebb27179c63db8370fc776d19bc5670d81121b602c6d483c747696"
+}

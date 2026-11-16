@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python3",
+    "products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+    "products/services/catalogue-qa/fulfillment/synthetic-v.csv",
+    "products/services/catalogue-qa/fulfillment/synthetic-ours.csv"
+  ],
+  "exit": 0,
+  "output": {
+    "scope": "Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.",
+    "findings": [],
+    "ignored_image_only_rows": []
+  }
+}
