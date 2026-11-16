@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"RENEWAL-SAMPLE-CSV-DELIVERY\", \"goal\": \"Improve delivery of the existing live renewal-calendar sample with one downloadable UTF-8 CSV, not another product or research scan. First check equivalent existing downloads and read the current approved renewals.html, contracts-finder/integration-source-records.json, evidence.json and relevant lessons. If an adequate download exists, record its exact location and stop. Otherwise prepare exactly the three already-published records with buyer organization, supplier organization, title, contract-period end, award value/currency, value qualification, extension uncertainty, procurement route and exact official source URL. Label dates as contract ends, never bidding deadlines or confirmed renewals; preserve contradictory source qualifications and exclude personal contacts. Use standards-compatible quoting and verify parsed cells against the saved authoritative records. Add only a concise EN/FR download link and explanation to the existing renewals page; preserve unrelated files, offers, disclosures, intake identifiers and deadlines. Save source hashes, exact diff and actual roundtrip verification under products/services/software-renewals/csv-delivery/. Read saved evidence, obtain a site dry_run digest and hand it to AUDITOR for independent review in another eligible provider turn. Do not deploy. Complete preparation with actual valid ownership, evidence and a lesson describing what worked, failed and should change. No new research, software dependencies, tracking, notification, outreach, accounts, spending or private correspondence. This improves reuse of a free sample; it establishes no users, demand, orders or revenue. Preserve all observation windows and retirement duties.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/software-renewals/csv-delivery/checks.json\", \"products/services/software-renewals/csv-delivery/renewals.diff\", \"products/sites/software-award-brief/renewals-sample.csv\", \"products/sites/software-award-brief/renewals.html\", \"dry_run TASK-179479296112 review_digest e826a200a03016b710af2803d9ab4d87f4c4f3a01bae5e177858b88776642cdd (5 files, 27888 bytes); EXEC TASK-179479296111 13/13 checks\"]}",
+  "request": {
+    "id": "TASK-179479296113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-16T01:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "RENEWAL-SAMPLE-CSV-DELIVERY",
+      "agent_id": "BUILDER",
+      "lease_token": "6-IxXHqfy0CteZy2IPN4HkN2MwSrVxvA",
+      "evidence": [
+        "products/services/software-renewals/csv-delivery/checks.json",
+        "products/services/software-renewals/csv-delivery/renewals.diff",
+        "products/sites/software-award-brief/renewals-sample.csv",
+        "products/sites/software-award-brief/renewals.html",
+        "dry_run TASK-179479296112 review_digest e826a200a03016b710af2803d9ab4d87f4c4f3a01bae5e177858b88776642cdd (5 files, 27888 bytes); EXEC TASK-179479296111 13/13 checks"
+      ],
+      "lesson": "Worked: reading the live page and the saved source records with read_product first, then one Node EXEC that derived every CSV cell from the source JSON, inserted the EN/FR link with exact count==1 anchors, proved reverse-restores-original and round-tripped the CSV through an independent parser (13/13). Not done: no real spreadsheet import; UTF-8 without BOM may show the pound sign wrongly in some spreadsheet programs; the scope column is whitespace-normalised, not byte-exact. Next time: keep one script per bounded change and stop at the dry_run digest. Preparation only: not deployed, no downloads, users, demand or revenue."
+    },
+    "description": "Broker action during THINK-1794792961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179479296113",
+  "input_sha256": "3814e5e4d9c8d2e9e5bed6411dca74325239c8659919fcbb3e1c785d55e8ee4b"
+}
