@@ -140,6 +140,20 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
+    },
+    {
+      "id": "SYSTEM-NO-OUTCOME",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "PROGRESS",
+      "title": "12 tours consécutifs sans mission conclue ni revenu vérifié",
+      "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
+      "mission_id": null,
+      "expected_gain": null,
+      "raised_by": "PROGRESS-DETECTOR",
+      "reports": 12,
+      "opened_at": "2026-11-17T11:06:35Z",
+      "last_reported_at": "2026-11-17T14:01:14Z"
     }
   ],
   "resolved_recent": [
@@ -184,20 +198,20 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 979,
-    "turns_without_verified_revenue": 979,
-    "turns_without_outcome": 11,
+    "turns_without_new_interpreted_feedback": 980,
+    "turns_without_verified_revenue": 980,
+    "turns_without_outcome": 12,
     "outcome_threshold": 12,
     "dry_since": "2026-11-17T11:06:35Z",
     "last_outcome_turn": "THINK-1794913201",
-    "last_productive_turn": "THINK-1794922561",
-    "last_turn": "THINK-1794922561",
+    "last_productive_turn": "THINK-1794924019",
+    "last_turn": "THINK-1794924019",
     "last_change": {
       "productive": true,
       "outcome": false,
       "mission_outcomes": [],
       "new_products": [
-        "products/services/godot-paid-debugging/source-inspection.json"
+        "products/services/godot-paid-debugging/bounded-result.json"
       ],
       "new_product_count": 1,
       "new_research_count": 0,
