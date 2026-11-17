@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Guidelines - Godot Forum</title>
+    <meta name="description" content="A place for the Godot community to meet, ask questions, share their work, and provide help to other users.">
+    <meta name="generator" content="Discourse 2026.6.0-latest - https://github.com/discourse/discourse version 8b03a42cd76b7fee2466eb5c825a74b4a2303f2a">
+<link rel="icon" type="image/png" href="https://forum.godotengine.org/uploads/default/optimized/2X/6/6aa102e258d388445ee33e276c62cec922ccb756_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="https://forum.godotengine.org/uploads/default/optimized/2X/4/4b0a7fa8a6334634b94a13d421f0d99e6f04e21f_2_180x180.svg">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ededed">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#333639">
+
+<meta name="color-scheme" content="light dark">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+<link rel="canonical" href="https://forum.godotengine.org/guidelines" />
+
+<meta name="discourse-track-view-session-id" content="j17xyihxujeCEEFtEJAteG2FOpc2BBFp">
+<link rel="search" type="application/opensearchdescription+xml" href="https://forum.godotengine.org/opensearch.xml" title="Godot Forum Search">
+
+    
+    <link href="/stylesheets/color_definitions_godot-light_14_5_9626a07234d54305b6e4623516744f5447e28eff.css?__ws=forum.godotengine.org" media="(prefers-color-scheme: light)" rel="stylesheet" class="light-scheme" data-scheme-id="14"/><link href="/stylesheets/color_definitions_godot-dark_15_5_8cb40494743951b8fd21047d1fd23f7ef290125d.css?__ws=forum.godotengine.org" media="(prefers-color-scheme: dark)" rel="stylesheet" class="dark-scheme" data-scheme-id="15"/>
+
+<link href="/stylesheets/common_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="common"  />
+
+<link href="/stylesheets/mobile_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="(width < 40rem)" rel="stylesheet" data-target="mobile"  />
+<link href="/stylesheets/desktop_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="(width >= 40rem)" rel="stylesheet" data-target="desktop"  />
+
+
+
+  <link href="/stylesheets/checklist_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="checklist"  />
+  <link href="/stylesheets/discourse-details_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="discourse-details"  />
+  <link href="/stylesheets/discourse-lazy-videos_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="discourse-lazy-videos"  />
+  <link href="/stylesheets/discourse-local-dates_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="discourse-local-dates"  />
+  <link href="/stylesheets/discourse-narrative-bot_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="discourse-narrative-bot"  />
+  <link href="/stylesheets/discourse-presence_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="discourse-presence"  />
+  <link href="/stylesheets/discourse-solved_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="discourse-solved"  />
+  <link href="/stylesheets/discourse-templates_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="discourse-templates"  />
+  <link href="/stylesheets/discourse-topic-voting_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="discourse-topic-voting"  />
+  <link href="/stylesheets/docker_manager_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="docker_manager"  />
+  <link href="/stylesheets/footnote_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="footnote"  />
+  <link href="/stylesheets/poll_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="poll"  />
+  <link href="/stylesheets/spoiler-alert_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="spoiler-alert"  />
+  <link href="/stylesheets/poll_desktop_14e3dcbc533c7612849d89a123d3a93d1eb2f350.css?__ws=forum.godotengine.org" media="(width >= 40rem)" rel="stylesheet" data-target="poll_desktop"  />
+
+  <link href="/stylesheets/common_theme_9_6ab9d16611d78fd1dd2f36152b5f45cc418dec7d.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="9" data-theme-name="custom header links"/>
+<link href="/stylesheets/common_theme_3_d6f98cd6db268b8da70f585aac23c40a918c3375.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="3" data-theme-name="godot tweaks"/>
+<link href="/stylesheets/common_theme_12_d572cfb00fd3c9aa0b56e73595f8fe1f16ecdbb3.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="12" data-theme-name="post badges"/>
+<link href="/stylesheets/common_theme_5_1c50a13d0ebcddbe1449c86fd62eef827a435a70.css?__ws=forum.godotengine.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="5" data-theme-name="godot theme"/>
+  
+  
+
+    <script defer="" data-domain="forum.godotengine.org" src="https://plausible.godot.foundation/js/script.file-downloads.outbound-links.js" nonce="A5xJ4ZjnoG7wnMhGNNW4eljlI"></script>
+
+    
+        <meta property="og:site_name" content="Godot Forum" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://forum.godotengine.org/uploads/default/original/2X/c/cbfa764bec13cc2f9506f1b9c9685e40766af7ba.png" />
+<meta property="og:image" content="https://forum.godotengine.org/uploads/default/original/2X/c/cbfa764bec13cc2f9506f1b9c9685e40766af7ba.png" />
+<meta property="og:url" content="https://forum.godotengine.org/guidelines" />
+<meta name="twitter:url" content="https://forum.godotengine.org/guidelines" />
+<meta property="og:title" content="Guidelines - Godot Forum" />
+<meta name="twitter:title" content="Guidelines - Godot Forum" />
+<meta property="og:description" content="A place for the Godot community to meet, ask questions, share their work, and provide help to other users." />
+<meta name="twitter:description" content="A place for the Godot community to meet, ask questions, share their work, and provide help to other users." />
+
+    
+  </head>
+  <body class="crawler ">
+    
+    <header>
+  <a href="/">Godot Forum</a>
+</header>
+
+    <div id="main-outlet" class="wrap" role="main">
+      <div itemscope itemtype='http://schema.org/WebPage'>
+  <meta itemprop='lastReviewed' content='2026-11-09'>
+  <ul class='nav-pills' role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement'>
+      <li class="nav-item-about"><a href="/about">About</a></a></li>
+        <li class='nav-item-guidelines'><a class='active' href='/guidelines'>Guidelines</a></li>
+      <li class='nav-item-tos'><a href='/tos' class=''>Terms of Service</a></li>
+      <li class='nav-item-privacy'><a href='https://godotengine.org/privacy-policy/' class=''>Privacy</a></li>
+  </ul>
+
+
+  <div itemprop='mainContentOfPage'>
+    <h1><a name="p-4-community-rules-1" class="anchor" href="#p-4-community-rules-1" aria-label="Heading link"></a>Community Rules</h1>
+<p>All official community spaces (forum, reddit, discord and youtube) are maintained by the Godot Foundation and follow our <a href="https://godotengine.org/code-of-conduct/">Godot Code of Conduct</a>.</p>
+<p>The rules below are the general baseline, but platform specific rules may vary. For example reddit has rules about flairs, which do not make sense for other platforms. So make sure to check the rules on the other platforms if you plan to use them.</p>
+<p>Breaking rules marked with <img src="https://forum.godotengine.org/images/emoji/twitter/door.png?v=15" title=":door:" class="emoji" alt=":door:" loading="lazy" width="20" height="20"> will get you banned immediately.</p>
+<h2><a name="p-4-about-moderation-2" class="anchor" href="#p-4-about-moderation-2" aria-label="Heading link"></a>About moderation</h2>
+<ul>
+<li>Don’t engage when someone breaks the rules, inform the mod team instead. Even if you are unsure whether the rules apply in a certain situation, do not hesitate to contact us for assistance, we are here to help but cannot do that if we are unaware.</li>
+<li>We may send warnings via the platform tools. We don’t count strikes, and not all warnings are bad! They simply help us inform you of important things privately.</li>
+<li>Do not question moderation decisions (e.g. being told to drop a topic, receiving a warning) publicly to avoid derailing the conversation. We are happy to give you further explanation if you contact the mod team instead.</li>
+<li>Do not message individual persons of the mod team, instead always contact the mod team. This means that more people can answer you.</li>
+</ul>
+<h2><a name="p-4-quickly-reporting-posts-to-the-mod-team-3" class="anchor" href="#p-4-quickly-reporting-posts-to-the-mod-team-3" aria-label="Heading link"></a>Quickly reporting posts to the mod team</h2>
+<p>Posts that violate our community rules or are otherwise inappropriate should be reported. You can do so by clicking the small flag icon below the offending post. Do not engage with these posts, it only brings more attention to them.</p>
+<p>If you have any questions or concerns regarding forum moderation, please reach out to our <a class="mention-group notify" href="/groups/moderators">@moderators</a>. You can find a “Message” button on the <a href="https://forum.godotengine.org/g/moderators">moderators group page</a> in the top right corner.</p>
+<h2><a name="p-4-general-expectations-4" class="anchor" href="#p-4-general-expectations-4" aria-label="Heading link"></a>General Expectations</h2>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/white_check_mark.png?v=15" title=":white_check_mark:" class="emoji" alt=":white_check_mark:" loading="lazy" width="20" height="20"> DO:</strong></p>
+<ul>
+<li>speak English (for moderation purposes);</li>
+<li>act like you would in any professional environment;</li>
+<li>use clear language and avoid confusing slang or humor, as this community is international;</li>
+<li>keep conversations “workplace appropriate”, don’t discuss elections, mention recent news only when gamedev related, keep in mind there may be minors in this space, etc.;</li>
+<li>read category descriptions to be sure you are in the proper place for what you intend to post about;</li>
+<li>assume that people (members and moderators alike) are well-meaning first and foremost, ask for clarification before reacting in an offended manner;</li>
+<li>give feedback only if requested, or ask if it is wanted (some people only want to share progress).</li>
+</ul>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/no_entry.png?v=15" title=":no_entry:" class="emoji" alt=":no_entry:" loading="lazy" width="20" height="20"> DON’T:</strong></p>
+<ul>
+<li>disrespect mod team members or foundation staff <img src="https://forum.godotengine.org/images/emoji/twitter/door.png?v=15" title=":door:" class="emoji" alt=":door:" loading="lazy" width="20" height="20">;</li>
+<li>debate moderators on which conversations are or aren’t appropriate to have;</li>
+<li>troll or purposely incite fights <img src="https://forum.godotengine.org/images/emoji/twitter/door.png?v=15" title=":door:" class="emoji" alt=":door:" loading="lazy" width="20" height="20">;</li>
+<li>be rude, condescending, mocking;</li>
+<li>use discriminatory language or make jokes based on someone’s identity (including, but not limited to: race, age, sexuality or gender, disability, …) <img src="https://forum.godotengine.org/images/emoji/twitter/door.png?v=15" title=":door:" class="emoji" alt=":door:" loading="lazy" width="20" height="20">;</li>
+<li>engage with bad faith actors, contact the mod team to handle the situation instead.</li>
+</ul>
+<h2><a name="p-4-tech-support-5" class="anchor" href="#p-4-tech-support-5" aria-label="Heading link"></a>Tech Support</h2>
+<p>Helping is voluntary, you do not need to answer every question you see. If you do, then do not expect any compensation in return.</p>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/white_check_mark.png?v=15" title=":white_check_mark:" class="emoji" alt=":white_check_mark:" loading="lazy" width="20" height="20"> DO:</strong></p>
+<ul>
+<li>include all relevant details so that other users can help you (see <a href="https://forum.godotengine.org/t/how-to-get-help/147031">“How to get help”</a> for tips);</li>
+<li>avoid immediately answering “how do I do A” with “do B instead”, try letting the asker explain their intentions first.</li>
+</ul>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/no_entry.png?v=15" title=":no_entry:" class="emoji" alt=":no_entry:" loading="lazy" width="20" height="20"> DON’T:</strong></p>
+<ul>
+<li>disregard questions, e.g. by saying “just google it” or “ask ChatGPT”;</li>
+<li>ridicule people for asking questions you deem to be simple or obvious;</li>
+<li>ask for money in return for help;</li>
+<li>belittle a user because of their personal choices or preferences (i.e. using a certain tool over another).</li>
+</ul>
+<h2><a name="p-4-generative-ai-6" class="anchor" href="#p-4-generative-ai-6" aria-label="Heading link"></a>Generative AI</h2>
+<p>This space is for people to discuss with people and help people.</p>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/white_check_mark.png?v=15" title=":white_check_mark:" class="emoji" alt=":white_check_mark:" loading="lazy" width="20" height="20"> DO:</strong></p>
+<ul>
+<li>keep AI discourse in the non-help categories and keep it respectful while not breaking other rules;</li>
+<li>be respectful of users who rely on machine translation tools as not everyone is a proficient English speaker.</li>
+</ul>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/no_entry.png?v=15" title=":no_entry:" class="emoji" alt=":no_entry:" loading="lazy" width="20" height="20"> DON’T:</strong></p>
+<ul>
+<li>post AI-generated content (including code, dialogue, music, etc);</li>
+<li>ask for help or provide help debugging AI-generated code (as it’s a waste of volunteer time and effort);</li>
+<li>advertise AI services;</li>
+<li>be a middleman passing other’s questions and problems into generative or agentic AI, and copy-pasting its output back (a.k.a, “don’t be a meatproxy”);</li>
+<li>be an AI-run account as we will treat you like any other unapproved bot <img src="https://forum.godotengine.org/images/emoji/twitter/door.png?v=15" title=":door:" class="emoji" alt=":door:" loading="lazy" width="20" height="20">.</li>
+</ul>
+<h2><a name="p-4-self-promotion-7" class="anchor" href="#p-4-self-promotion-7" aria-label="Heading link"></a>Self-Promotion</h2>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/white_check_mark.png?v=15" title=":white_check_mark:" class="emoji" alt=":white_check_mark:" loading="lazy" width="20" height="20"> DO:</strong></p>
+<ul>
+<li>show off your Godot projects in the showcase category;</li>
+<li>share resources for Godot Engine learners in the resources category;</li>
+<li>be supportive of each other’s achievements;</li>
+<li>reach out to the mod team before advertising anything else (e.g. events) and wait for permission/denial.</li>
+</ul>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/no_entry.png?v=15" title=":no_entry:" class="emoji" alt=":no_entry:" loading="lazy" width="20" height="20"> DON’T:</strong></p>
+<ul>
+<li>post job offers;</li>
+<li>ask people to do free work for you;</li>
+</ul>
+<h2><a name="p-4-health-safety-8" class="anchor" href="#p-4-health-safety-8" aria-label="Heading link"></a>Health &amp; Safety</h2>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/white_check_mark.png?v=15" title=":white_check_mark:" class="emoji" alt=":white_check_mark:" loading="lazy" width="20" height="20"> DO:</strong></p>
+<ul>
+<li>be mindful sharing personal information (age, location, etc) as this is a public space;</li>
+<li>keep in mind that there might be minors in this space and interact accordingly;</li>
+<li>when in doubt, use content warnings &amp; spoiler tags;</li>
+<li>accept differences in communication needs or styles (e.g. related to neurodiversity);</li>
+<li>prefer positivity and try to raise each other up.</li>
+</ul>
+<p><strong><img src="https://forum.godotengine.org/images/emoji/twitter/no_entry.png?v=15" title=":no_entry:" class="emoji" alt=":no_entry:" loading="lazy" width="20" height="20"> DON’T:</strong></p>
+<ul>
+<li>disregard or ridicule mental or physical health issues;</li>
+<li>give, ask for, or take medical advice;</li>
+<li>post about or encourage illegal behavior;</li>
+<li>disclose being a minor (including in your profile).</li>
+</ul>
+  </div>
+</div>
+
+  
+
+    </div>
+    <footer class="container wrap">
+  <nav class='crawler-nav'>
+    <ul>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/' itemprop="url">Home </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/categories' itemprop="url">Categories </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/guidelines' itemprop="url">Guidelines </a>
+        </span>
+      </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='/tos' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='https://godotengine.org/privacy-policy/' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+    </ul>
+  </nav>
+  <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+</footer>
+
+    
+    
+  </body>
+  
+</html>
