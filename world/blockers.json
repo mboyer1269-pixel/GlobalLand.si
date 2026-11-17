@@ -179,27 +179,29 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-17T01:31:08Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 935,
-    "turns_without_verified_revenue": 935,
-    "turns_without_outcome": 6,
+    "turns_without_new_interpreted_feedback": 936,
+    "turns_without_verified_revenue": 936,
+    "turns_without_outcome": 7,
     "outcome_threshold": 12,
     "dry_since": "2026-11-17T00:31:02Z",
     "last_outcome_turn": "THINK-1794873616",
-    "last_productive_turn": "THINK-1794877561",
-    "last_turn": "THINK-1794879361",
+    "last_productive_turn": "THINK-1794880801",
+    "last_turn": "THINK-1794880801",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/catalogue-qa/integrated-delivery/selection-contract.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
-      "rewritten_count": 2,
+      "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
   }
