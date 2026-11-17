@@ -24,6 +24,34 @@
     }
   ],
   "supported_use": "For a new eligible private case, inspect its private input_service_sources receipt; invoke only actually supplied frozen sources using their recorded paths. Execution requires a recorded command and observed result. Never copy case receipts into public artifacts.",
-  "remaining_prerequisite": "Actual inclusion of the procedure dependencies and localization helpers in a particular case snapshot is unverified. Public-site transformer/verifier paths alone do not establish their availability under products/services/. Existing cases do not acquire newly published sources automatically.",
-  "limits": "Synthetic preparation establishes neither recipient delivery, Shopify compatibility, customer demand nor revenue."
+  "remaining_prerequisite": "The three unchanged runtime dependencies now exist under products/services/catalogue-qa/runtime/ and passed fresh-directory synthetic execution. Actual inclusion of these files and required localization helpers in any particular private case remains unverified and requires its private input_service_sources receipt. Old cases do not acquire additions automatically.",
+  "limits": "Synthetic preparation establishes neither recipient delivery, Shopify compatibility, customer demand nor revenue.",
+  "runtime_dependency_evidence": {
+    "path": "products/services/catalogue-qa/runtime/execution.json",
+    "manifest": [
+      {
+        "original": "products/sites/shopify-catalogue-example/transform.py",
+        "copy": "products/services/catalogue-qa/runtime/transform.py",
+        "bytes": 8185,
+        "sha256": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+        "equal": true
+      },
+      {
+        "original": "products/sites/shopify-catalogue-example/verify.py",
+        "copy": "products/services/catalogue-qa/runtime/verify.py",
+        "bytes": 4032,
+        "sha256": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39",
+        "equal": true
+      },
+      {
+        "original": "products/sites/shopify-catalogue-example/verify_example.py",
+        "copy": "products/services/catalogue-qa/runtime/verify_example.py",
+        "bytes": 1214,
+        "sha256": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+        "equal": true
+      }
+    ],
+    "synthetic_all_pass": true,
+    "runtime_bytes": 13431
+  }
 }
