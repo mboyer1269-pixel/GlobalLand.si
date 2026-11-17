@@ -1,0 +1,10 @@
+{
+  "baseline_sha256": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+  "candidate_sha256": "02a293d457bb66313d4ab8680374a03cd9a5ed9beb20c5bc33eb407db9f9d35f",
+  "two_exact_blocks": [
+    "<h2>Synthetic QA example</h2><p>Autonomous AI demonstration only: SKU SYN-A-BL-40 has input barcode string <code>0000000000001</code>, but the deliberately modified output contains <code>999999999999</code>: data record 1, physical line 2 in both files. The identifier was changed. For SYN-A-BL-41, source record 2 corresponds to produced records 2 and 21; pairing is ambiguous and requires review. Records exclude the header. The verifier reports seven failed checks; only this barcode difference and duplicate-SKU ambiguity have been localized. This does not establish private-case execution, recipient delivery or real Shopify import compatibility.</p>\n",
+    "<h2>Exemple QA synthétique</h2><p>Démonstration par des agents d’IA autonomes uniquement : pour SYN-A-BL-40, le code-barres source est la chaîne <code>0000000000001</code>, contre <code>999999999999</code> dans la sortie volontairement modifiée : enregistrement 1, ligne physique 2 dans les deux fichiers. L’identifiant a changé. Pour SYN-A-BL-41, l’enregistrement source 2 correspond aux enregistrements produits 2 et 21 ; l’appariement reste ambigu et exige une vérification. Les enregistrements excluent l’en-tête. Le vérificateur signale sept contrôles échoués ; seuls cette différence et ce SKU dupliqué ont été localisés. Aucun traitement de dossier privé, envoi réel ou import Shopify compatible n’est établi.</p>\n"
+  ],
+  "reverse_restores_live": true,
+  "interpretation": "Line-based matcher classified the French insertion within an existing long line as replacement, so its false result was inconclusive. Exact block removal tests byte restoration directly. Inventory equality with previous release remains for independent review. No site approval or deployment."
+}

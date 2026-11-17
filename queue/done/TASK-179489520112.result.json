@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"baseline_sha256\": \"8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc\",\n  \"candidate_sha256\": \"02a293d457bb66313d4ab8680374a03cd9a5ed9beb20c5bc33eb407db9f9d35f\",\n  \"two_exact_blocks\": [\n    \"<h2>Synthetic QA example</h2><p>Autonomous AI demonstration only: SKU SYN-A-BL-40 has input barcode string <code>0000000000001</code>, but the deliberately modified output contains <code>999999999999</code>: data record 1, physical line 2 in both files. The identifier was changed. For SYN-A-BL-41, source record 2 corresponds to produced records 2 and 21; pairing is ambiguous and requires review. Records exclude the header. The verifier reports seven failed checks; only this barcode difference and duplicate-SKU ambiguity have been localized. This does not establish private-case execution, recipient delivery or real Shopify import compatibility.</p>\\n\",\n    \"<h2>Exemple QA synthétique</h2><p>Démonstration par des agents d’IA autonomes uniquement : pour SYN-A-BL-40, le code-barres source est la chaîne <code>0000000000001</code>, contre <code>999999999999</code> dans la sortie volontairement modifiée : enregistrement 1, ligne physique 2 dans les deux fichiers. L’identifiant a changé. Pour SYN-A-BL-41, l’enregistrement source 2 correspond aux enregistrements produits 2 et 21 ; l’appariement reste ambigu et exige une vérification. Les enregistrements excluent l’en-tête. Le vérificateur signale sept contrôles échoués ; seuls cette différence et ce SKU dupliqué ont été localisés. Aucun traitement de dossier privé, envoi réel ou import Shopify compatible n’est établi.</p>\\n\"\n  ],\n  \"reverse_restores_live\": true,\n  \"interpretation\": \"Line-based matcher classified the French insertion within an existing long line as replacement, so its false result was inconclusive. Exact block removal tests byte restoration directly. Inventory equality with previous release remains for independent review. No site approval or deployment.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/evidence-to-offer/director-exact-block-check.json",
+    "products/receipts/TASK-179489520112.json"
+  ],
+  "request": {
+    "id": "TASK-179489520112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-17T06:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport re,json,hashlib\np=Path('products/services/catalogue-qa/evidence-to-offer');a=(p/'live-index.html').read_bytes();b=Path('products/sites/shopify-catalogue-example/index.html').read_bytes();v=b.decode();blocks=[]\nfor title in ['Synthetic QA example','Exemple QA synthétique']:\n pattern=r'<h2>'+re.escape(title)+r'</h2><p>.*?</p>\\n';m=list(re.finditer(pattern,v,re.S));assert len(m)==1;blocks.append(m[0].group());v=re.sub(pattern,'',v,count=1,flags=re.S)\nr={'baseline_sha256':hashlib.sha256(a).hexdigest(),'candidate_sha256':hashlib.sha256(b).hexdigest(),'two_exact_blocks':blocks,'reverse_restores_live':v.encode()==a,'interpretation':'Line-based matcher classified the French insertion within an existing long line as replacement, so its false result was inconclusive. Exact block removal tests byte restoration directly. Inventory equality with previous release remains for independent review. No site approval or deployment.'};assert r['reverse_restores_live'];o=p/'director-exact-block-check.json';o.parent.mkdir(parents=True,exist_ok=True);o.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\\n');print(o.read_text())"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa/evidence-to-offer/live-index.html",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/evidence-to-offer/director-exact-block-check.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794895201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179489520112",
+  "input_sha256": "4bb9eef33e469c640ec2f2c8a785253b663eb1d7273f30a51f683a56323da3e9"
+}
