@@ -146,14 +146,14 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "14 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "15 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 14,
+      "reports": 15,
       "opened_at": "2026-11-17T11:06:35Z",
-      "last_reported_at": "2026-11-17T14:30:47Z"
+      "last_reported_at": "2026-11-17T14:36:38Z"
     }
   ],
   "resolved_recent": [
@@ -193,26 +193,30 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-17T14:07:09Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 982,
-    "turns_without_verified_revenue": 982,
-    "turns_without_outcome": 14,
+    "turns_without_new_interpreted_feedback": 983,
+    "turns_without_verified_revenue": 983,
+    "turns_without_outcome": 15,
     "outcome_threshold": 12,
     "dry_since": "2026-11-17T11:06:35Z",
     "last_outcome_turn": "THINK-1794913201",
-    "last_productive_turn": "THINK-1794924019",
-    "last_turn": "THINK-1794925815",
+    "last_productive_turn": "THINK-1794926161",
+    "last_turn": "THINK-1794926161",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
-      "new_research_count": 2,
+      "new_products": [
+        "products/services/wordpress-project-fit/raw/developer-project.html",
+        "products/services/wordpress-project-fit/raw/faq.html",
+        "products/services/wordpress-project-fit/raw/pdf-accessibility.html"
+      ],
+      "new_product_count": 3,
+      "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
