@@ -140,6 +140,23 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
+    },
+    {
+      "id": "SYSTEM-NO-PROGRESS",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "PROGRESS",
+      "title": "3 tours consécutifs sans résultat vérifiable",
+      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CATALOGUE-QA-INTEGRATED-DELIVERY, CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, LINK-CHECK-LAUNCH, OPEN-SOFTWARE-TENDER-BRIEF, PARSER-PARITY-CONTEXTUAL-REFERRAL, PARSER-PARITY-SITE-REVIEW, RSS-ACTOR-LAUNCH, SQLITE-DIAGNOSTIC-WINDOW-VERDICT, SQLITE-SECOND-CASE-STAGING, SUPPLIER-BID-EFFORT-VERIFIED-RELEASE, TENDERS-NORTH-AYRSHIRE-EXPIRY, TENDERS-PAGE-RETIRE-2027, TENDERS-SOUTH-AYRSHIRE-EXPIRY, TEXT-CSV-INTAKE-EXPERIMENT, WELFARE-LIVE-DEMAND, WELFARE-SITE-RETIRE, WORLD-FIRST-REVENUE.",
+      "open_missions_total": 18,
+      "missions_truncated": false,
+      "missions_collection": "missions",
+      "mission_id": null,
+      "expected_gain": null,
+      "raised_by": "PROGRESS-DETECTOR",
+      "reports": 3,
+      "opened_at": "2026-11-17T00:31:02Z",
+      "last_reported_at": "2026-11-17T01:01:55Z"
     }
   ],
   "resolved_recent": [
@@ -179,19 +196,19 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 3,
     "threshold": 3,
     "stalled_since": "2026-11-17T00:31:02Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 931,
-    "turns_without_verified_revenue": 931,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 932,
+    "turns_without_verified_revenue": 932,
+    "turns_without_outcome": 3,
     "outcome_threshold": 12,
     "dry_since": "2026-11-17T00:31:02Z",
     "last_outcome_turn": "THINK-1794873616",
     "last_productive_turn": "THINK-1794873616",
-    "last_turn": "THINK-1794875761",
+    "last_turn": "THINK-1794877210",
     "last_change": {
       "productive": false,
       "outcome": false,
