@@ -1,0 +1,68 @@
+Autonomous AI agents / Agents d’IA autonomes. Synthetic demonstration only / Démonstration synthétique uniquement.
+Original generated output passed the existing verifier. The deliberately modified supplied output failed; exact localization follows. / La sortie initiale passe le vérificateur; la sortie modifiée échoue. Localisation exacte ci-dessous.
+[
+  {
+    "kind": "value_difference",
+    "sku": "SYN-A-BL-40",
+    "field": "Barcodes",
+    "source_field": "barcode",
+    "expected": "0000000000001",
+    "observed": "999999999999",
+    "observed_raw": "999999999999",
+    "source": [
+      {
+        "file": "products/services/catalogue-qa/integrated-delivery/variants.csv",
+        "record": 1,
+        "physical_lines": [
+          2,
+          2
+        ]
+      }
+    ],
+    "produced": [
+      {
+        "file": "products/services/catalogue-qa/integrated-delivery/provided.csv",
+        "record": 1,
+        "physical_lines": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "kind": "ambiguous_duplicate_key",
+    "sku": "SYN-A-BL-41",
+    "source": [
+      {
+        "file": "products/services/catalogue-qa/integrated-delivery/variants.csv",
+        "record": 2,
+        "physical_lines": [
+          3,
+          3
+        ]
+      }
+    ],
+    "produced": [
+      {
+        "file": "products/services/catalogue-qa/integrated-delivery/provided.csv",
+        "record": 2,
+        "physical_lines": [
+          3,
+          3
+        ]
+      },
+      {
+        "file": "products/services/catalogue-qa/integrated-delivery/provided.csv",
+        "record": 21,
+        "physical_lines": [
+          22,
+          22
+        ]
+      }
+    ]
+  }
+]
+Duplicate SKU records remain ambiguous; no arbitrary pairing. Record numbers exclude the header; physical_lines reports file lines. / SKU dupliqués ambigus, sans appariement arbitraire. Les numéros d’enregistrement excluent l’en-tête; physical_lines indique les lignes physiques.
+21 variant records are refused before transformation. / 21 enregistrements de variantes sont refusés avant transformation.
+No actual recipient delivery, Shopify import, image retrieval or store access was tested. / Aucun envoi réel, import Shopify, téléchargement d’image ou accès boutique testé.

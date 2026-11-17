@@ -1,0 +1,65 @@
+{
+  "label": "SYNTHETIC ONLY; no customer or revenue",
+  "eligible_records": 20,
+  "execution": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "products/sites/shopify-catalogue-example/transform.py",
+        "--variants",
+        "products/services/catalogue-qa/integrated-delivery/variants.csv",
+        "--images",
+        "products/services/catalogue-qa/integrated-delivery/images.csv",
+        "--out",
+        "products/services/catalogue-qa/integrated-delivery/ours.csv",
+        "--report",
+        "products/services/catalogue-qa/integrated-delivery/transform-report.json"
+      ],
+      "exit": 0,
+      "stdout": "{\"ok\": true, \"products\": 2, \"rows\": 20, \"error_count\": 0, \"warning_count\": 0, \"seconds\": 0.002}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "products/sites/shopify-catalogue-example/verify_example.py",
+        "products/services/catalogue-qa/integrated-delivery/variants.csv",
+        "products/services/catalogue-qa/integrated-delivery/images.csv",
+        "products/services/catalogue-qa/integrated-delivery/ours.csv"
+      ],
+      "exit": 0,
+      "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "products/sites/shopify-catalogue-example/verify_example.py",
+        "products/services/catalogue-qa/integrated-delivery/variants.csv",
+        "products/services/catalogue-qa/integrated-delivery/images.csv",
+        "products/services/catalogue-qa/integrated-delivery/provided.csv"
+      ],
+      "exit": 1,
+      "stdout": "{\n \"rows\": 21,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": false,\n  \"title_only_on_first_row\": false,\n  \"sku_unique\": false,\n  \"identifiers_preserved_sku_barcode_color_size_price\": false,\n  \"color_size_combo_unique_per_product\": false,\n  \"image_positions_1_to_n\": false,\n  \"all_input_images_present_once_per_product\": false,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": [\n  \"handle_rows_contiguous\",\n  \"title_only_on_first_row\",\n  \"sku_unique\",\n  \"identifiers_preserved_sku_barcode_color_size_price\",\n  \"color_size_combo_unique_per_product\",\n  \"image_positions_1_to_n\",\n  \"all_input_images_present_once_per_product\"\n ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+        "products/services/catalogue-qa/integrated-delivery/variants.csv",
+        "products/services/catalogue-qa/integrated-delivery/provided.csv"
+      ],
+      "exit": 1,
+      "stdout": "{\n  \"scope\": \"Localization only; run unchanged verifier separately. Exact string SKU matching, no trimming; recognized barcode prefixes and escaping follow verify.py. BOM accepted for diagnosis only.\",\n  \"findings\": [\n    {\n      \"kind\": \"value_difference\",\n      \"sku\": \"SYN-A-BL-40\",\n      \"field\": \"Barcodes\",\n      \"source_field\": \"barcode\",\n      \"expected\": \"0000000000001\",\n      \"observed\": \"999999999999\",\n      \"observed_raw\": \"999999999999\",\n      \"source\": [\n        {\n          \"file\": \"products/services/catalogue-qa/integrated-delivery/variants.csv\",\n          \"record\": 1,\n          \"physical_lines\": [\n            2,\n            2\n          ]\n        }\n      ],\n      \"produced\": [\n        {\n          \"file\": \"products/services/catalogue-qa/integrated-delivery/provided.csv\",\n          \"record\": 1,\n          \"physical_lines\": [\n            2,\n            2\n          ]\n        }\n      ]\n    },\n    {\n      \"kind\": \"ambiguous_duplicate_key\",\n      \"sku\": \"SYN-A-BL-41\",\n      \"source\": [\n        {\n          \"file\": \"products/services/catalogue-qa/integrated-delivery/variants.csv\",\n          \"record\": 2,\n          \"physical_lines\": [\n            3,\n            3\n          ]\n        }\n      ],\n      \"produced\": [\n        {\n          \"file\": \"products/services/catalogue-qa/integrated-delivery/provided.csv\",\n          \"record\": 2,\n          \"physical_lines\": [\n            3,\n            3\n          ]\n        },\n        {\n          \"file\": \"products/services/catalogue-qa/integrated-delivery/provided.csv\",\n          \"record\": 21,\n          \"physical_lines\": [\n            22,\n            22\n          ]\n        }\n      ]\n    }\n  ],\n  \"ignored_image_only_rows\": []\n}\n",
+      "stderr": ""
+    }
+  ],
+  "overlimit": {
+    "variant_csv_records": 21,
+    "decision": "REJECT_BEFORE_TRANSFORM",
+    "transform_invoked": false,
+    "method": "csv.DictReader data-record count; header excluded"
+  },
+  "private_selection": "Not established here; builder must verify available frozen service paths against AGENTMAIL before closure."
+}
