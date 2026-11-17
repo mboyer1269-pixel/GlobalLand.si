@@ -1,0 +1,21 @@
+{
+  "scope": "Saved LibreOffice paid-support discovery only",
+  "observed_search_extraction": {
+    "source": "https://ask.libreoffice.org/search?q=paid%20calc%20order%3Alatest",
+    "sha256": "3e1cff91f65bf4d6ccda43120066df4feab4c0f46177352a3cab6a65dc5876db",
+    "bytes": 3945,
+    "page_title": "Search results for 'paid calc order:latest' - Ask LibreOffice",
+    "topic_links": [],
+    "interpretation": "Links are discovery candidates only; payment intent, dates, unresolved status, reuse permission and delivery eligibility remain unverified. No extracted topic links means this saved HTML did not expose candidates, not that no paid demand exists."
+  },
+  "evidence_sha256": "bf475f9bd904796b91737b59a132c2ac375525f279de90b6a499321ae3f3deeb",
+  "decision": "Stop this discovery route without implementation or additional search.",
+  "limits": [
+    "No qualifying buyer request has been established by the observed search extraction.",
+    "This is not evidence that paid spreadsheet demand does not exist.",
+    "No posting, delivery, order or revenue is established."
+  ],
+  "reconsideration_trigger": "A specific accessible recent unresolved paid request with documented delivery permissions and settlement eligibility.",
+  "commercial_feedback": "Five unclassified sources; demand UNKNOWN.",
+  "funding": "UNFUNDED; no spending authorized by available cash."
+}
