@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"PASS_OFFLINE_NOTICE_ONLY\",\n  \"checks\": {\n    \"terms_pinned\": true,\n    \"source_digest_in_brief\": true,\n    \"notice_and_inline_bilingual_format\": true,\n    \"procedure_and_status\": true,\n    \"value\": true,\n    \"tender_deadline\": true,\n    \"clarification_deadline\": true,\n    \"submission_route\": true,\n    \"limitations_and_ai_disclosure\": true\n  },\n  \"sha256\": {\n    \"products/services/payment-handoff/terms-welfare-followon-v1.md\": \"8da570ec00daaead3172576d80a5dfd535b0f6c4496ec6c15d0f154d5ff1f64a\",\n    \"products/services/welfare-tender/followon-rehearsal/official-notice-refresh.json\": \"a4d2af226911f6eb8a9c1c9b618276c5ccd471bbab6ce05b8a0df6165f1c24a2\",\n    \"products/services/welfare-tender/followon-rehearsal/bilingual-inline-rehearsal.txt\": \"4cee3926dc77603d5ccf27a8340efea336067c5b4fa1fee70b00d95f88a66159\"\n  },\n  \"remaining_checks\": [\n    \"Customer excerpt handling was not exercised.\",\n    \"Tender pack and portal content were not checked.\",\n    \"Actual official-source inclusion in a private case, reply execution and recipient delivery are unverified.\",\n    \"Administrative acceptance and founder-confirmed settlement require separate evidence.\"\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/followon-rehearsal/offline-acceptance.json",
+    "products/receipts/TASK-179495076110.json"
+  ],
+  "request": {
+    "id": "TASK-179495076110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-17T21:26:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json\nroot=Path('products/services/welfare-tender/followon-rehearsal/')\nterms=Path('products/services/payment-handoff/terms-welfare-followon-v1.md')\nsource=root/'official-notice-refresh.json'\nbrief=root/'bilingual-inline-rehearsal.txt'\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\ntxt=brief.read_text()\nrecord=json.loads(source.read_text())['releases'][0]['tender']\nchecks={\n 'terms_pinned':sha(terms)=='8da570ec00daaead3172576d80a5dfd535b0f6c4496ec6c15d0f154d5ff1f64a',\n 'source_digest_in_brief':sha(source) in txt,\n 'notice_and_inline_bilingual_format':'104449-2026' in txt and '\\nEN\\n' in txt and '\\nFR\\n' in txt,\n 'procedure_and_status':record['status']=='active' and record['procurementMethodDetails']=='Open procedure' and all(s in txt for s in ('active','actif','open procedure','procédure ouverte')),\n 'value':record['value']['amount']==21102592 and record['value']['currency']=='GBP' and '21,102,592' in txt and '21 102 592' in txt,\n 'tender_deadline':record['tenderPeriod']['endDate'].startswith('2026-12-04T17:00:00') and '4 December 2026 at 17:00 UTC' in txt and '4 décembre 2026 à 17 h UTC' in txt,\n 'clarification_deadline':record['enquiryPeriod']['endDate'].startswith('2026-11-20T17:00:00') and '20 November 2026 at 17:00 UTC' in txt and '20 novembre 2026 à 17 h UTC' in txt,\n 'submission_route':record['submissionMethodDetails'] in txt,\n 'limitations_and_ai_disclosure':all(s in txt for s in ('No provider excerpts','tender pack were not checked','without human professional review','Aucun extrait','sans revue professionnelle humaine'))\n}\nresult={'verdict':'PASS_OFFLINE_NOTICE_ONLY' if all(checks.values()) else 'REVISE','checks':checks,'sha256':{str(p):sha(p) for p in (terms,source,brief)},'remaining_checks':['Customer excerpt handling was not exercised.','Tender pack and portal content were not checked.','Actual official-source inclusion in a private case, reply execution and recipient delivery are unverified.','Administrative acceptance and founder-confirmed settlement require separate evidence.']}\noutput=Path('products/services/welfare-tender/followon-rehearsal/offline-acceptance.json')\noutput.write_text(json.dumps(result,indent=2)+'\\n')\nprint(output.read_text())"
+      ],
+      "inputs": [
+        "products/services/payment-handoff/terms-welfare-followon-v1.md",
+        "products/services/welfare-tender/followon-rehearsal/official-notice-refresh.json",
+        "products/services/welfare-tender/followon-rehearsal/bilingual-inline-rehearsal.txt"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/followon-rehearsal/offline-acceptance.json"
+      ],
+      "mission_id": "WELFARE-FOLLOWON-DELIVERY-REHEARSAL"
+    },
+    "description": "Broker action during THINK-1794950761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179495076110",
+  "input_sha256": "f93ec1b39629f3613778be26f744a9dc1af006a8342badf82485f01bcc74c7ab"
+}
