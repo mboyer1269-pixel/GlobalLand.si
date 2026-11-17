@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\"status\": \"CLEAN_CANDIDATE_REQUIRES_INDEPENDENT_REVIEW\", \"baseline_sha256\": \"8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc\", \"candidate_sha256\": \"02a293d457bb66313d4ab8680374a03cd9a5ed9beb20c5bc33eb407db9f9d35f\", \"only_two_insertions\": true, \"reverse_restores_live\": true, \"runtime_tests_rerun\": false, \"scope\": \"Two bilingual synthetic examples only; existing intake, exclusions and hypothetical price preserved. No deployment, private execution, delivery, demand or revenue established.\"}\n\n",
+  "artifacts": [
+    "products/sites/shopify-catalogue-example/index.html",
+    "products/services/catalogue-qa/evidence-to-offer/applied-checks.json",
+    "products/receipts/TASK-179488830112.json"
+  ],
+  "request": {
+    "id": "TASK-179488830112",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-17T04:05:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json,difflib\np=Path('products/services/catalogue-qa/evidence-to-offer'); site=Path('products/sites/shopify-catalogue-example/index.html')\na=(p/'live-index.html').read_bytes();b=(p/'proposed-index.html').read_bytes()\nassert hashlib.sha256(a).hexdigest()=='8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc'\nassert site.read_bytes()==a\ns=a.decode();t=b.decode();ops=difflib.SequenceMatcher(None,s,t,autojunk=False).get_opcodes(); changes=[(k,i,j,x,y) for k,i,j,x,y in ops if k!='equal'];assert len(changes)==2 and all(k=='insert' for k,*_ in changes)\nrestored=t\nfor k,i,j,x,y in reversed(changes):restored=restored[:x]+restored[y:]\nassert restored==s\nassert all(z in t for z in ['0000000000001','999999999999','seven failed checks','sept contrôles échoués','private-case execution'])\nsite.write_bytes(b)\nr={'status':'CLEAN_CANDIDATE_REQUIRES_INDEPENDENT_REVIEW','baseline_sha256':hashlib.sha256(a).hexdigest(),'candidate_sha256':hashlib.sha256(b).hexdigest(),'only_two_insertions':True,'reverse_restores_live':True,'runtime_tests_rerun':False,'scope':'Two bilingual synthetic examples only; existing intake, exclusions and hypothetical price preserved. No deployment, private execution, delivery, demand or revenue established.'}\n(p/'applied-checks.json').write_text(json.dumps(r,indent=2)+'\\n');print(json.dumps(r))"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa/evidence-to-offer/",
+        "products/sites/shopify-catalogue-example/"
+      ],
+      "outputs": [
+        "products/sites/shopify-catalogue-example/index.html",
+        "products/services/catalogue-qa/evidence-to-offer/applied-checks.json"
+      ],
+      "mission_id": "CATALOGUE-QA-EVIDENCE-TO-OFFER"
+    },
+    "description": "Broker action during THINK-1794888301",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179488830112",
+  "input_sha256": "9e1e93c8f2f6c38da07980abe7ca4cfe8fdcdba99bbc9b063784107859823e1f"
+}
