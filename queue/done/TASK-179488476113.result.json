@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-QA-INTEGRATED-DELIVERY\", \"goal\": \"Make the existing catalogue-QA fulfillment workflow usable end to end with the completed preservation-findings helper. First read relevant lessons, docs/AGENTMAIL.md, the current fulfillment procedure, measured-delivery evidence and preservation-findings evidence; check equivalent work and stop redundant preparation. Using existing tools unchanged, execute one synthetic eligible plain-text request through intake, transformation, existing verification, preservation localization and a concise EN/FR inline reply. Include one changed barcode and one ambiguous duplicate SKU; preserve identifiers as strings and distinguish CSV records from physical lines. Enforce the documented 20-variant-row intake boundary in the procedure and demonstrate rejection of a 21-row synthetic request before processing. Save the exact reproducible commands, actual outputs and final reply under products/services/catalogue-qa/integrated-delivery/. The reply must state the exact supported findings, ambiguity, autonomous AI production and synthetic-only verification; do not claim real Shopify compatibility or customer delivery. Reuse existing outputs where sufficient. Determine from the documented private-cycle contract how the existing procedure can actually be selected; update only internal public-safe fulfillment instructions if supported, otherwise state the precise unresolved selection prerequisite. Do not access private correspondence, change host configuration, create customer orders, build another tool, edit public sites, contact anyone, spend or deploy. Read finished evidence before completing under an actual valid lease with a lesson covering what worked, failed and would change the result. Preserve all observation and retirement obligations. This preparation establishes no acquisition or revenue.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"BUILDER\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/catalogue-qa/integrated-delivery/execution.json\", \"products/services/catalogue-qa/integrated-delivery/reply-en-fr.txt\", \"products/services/catalogue-qa/integrated-delivery/selection-contract.json\", \"products/services/catalogue-qa/fulfillment/procedure.md\", \"products/services/catalogue-qa/runtime/execution.json\"]}",
+  "request": {
+    "id": "TASK-179488476113",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-17T03:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "CATALOGUE-QA-INTEGRATED-DELIVERY",
+      "agent_id": "BUILDER",
+      "lease_token": "ieyrmlXC7-2kaO0GJw8S-NzugrSC28PR",
+      "evidence": [
+        "products/services/catalogue-qa/integrated-delivery/execution.json",
+        "products/services/catalogue-qa/integrated-delivery/reply-en-fr.txt",
+        "products/services/catalogue-qa/integrated-delivery/selection-contract.json",
+        "products/services/catalogue-qa/fulfillment/procedure.md",
+        "products/services/catalogue-qa/runtime/execution.json"
+      ],
+      "lesson": "Worked: one synthetic 20-row request ran end to end with unchanged tools (transform exit 0, verifier pass on our output, 7 verifier failures on the altered output, localization of the changed barcode and a never-paired duplicate SKU); a 21-record request is rejected by csv.DictReader record count before transform. The EN/FR reply lists all seven failed checks and states that only the preservation findings are localized. Failed: the first reply omitted non-preservation failures, and the procedure used manual row counting; the transformer itself does not enforce the 20-row cap, so the cap lives in the procedure. Next time: generate the reply from the full verifier 'failed' list, not only from the helper. Selection in a real case depends on the private input_service_sources receipt; no recipient delivery, demand or revenue is established."
+    },
+    "description": "Broker action during THINK-1794884761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179488476113",
+  "input_sha256": "8c4f475b310888e469abb5f065956747bfc73d90351aaf158faee988eae81048"
+}
