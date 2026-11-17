@@ -1,0 +1,31 @@
+{
+  "digest": "ebb08cc1c20df174b6e2151e218be6de795ba338c14a9e87bf4c22a1f6f955d0",
+  "checks": {
+    "exact_nine_file_inventory": true,
+    "eight_files_match_seq35_evidence": true,
+    "two_example_blocks": true,
+    "reverse_restores_saved_live": true,
+    "baseline_hash": true,
+    "candidate_hash": true,
+    "saved_diff_matches": false
+  },
+  "hashes": {
+    "verify_example.py": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+    "index.html": "02a293d457bb66313d4ab8680374a03cd9a5ed9beb20c5bc33eb407db9f9d35f",
+    "llms.txt": "a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9",
+    "transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+    "7c2e9a41d86b35f0e1a4c97d2b58e360.txt": "4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba",
+    "verify.py": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39",
+    "fixtures/after-shopify.csv": "31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357",
+    "fixtures/before-variants.csv": "5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac",
+    "fixtures/before-images.csv": "894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d"
+  },
+  "diff_header": [
+    "--- verified-live",
+    "+++ proposal"
+  ],
+  "diff_size": 15322,
+  "scope": "Independent scoped review of two bilingual synthetic-example insertions. Exact barcode strings, source record 1 / physical line 2, and duplicate source record 2 versus produced 2 and 21 agree with saved integrated execution and reply. Seven failures are distinguished from two localized findings. Existing exclusions, hypothetical CAD60, autonomous AI disclosure, no paid acceptance and untested real import remain explicit. Historical APPROVE seq35 cites all eight unchanged hashes; seq12 covers scripts/fixtures/key. No runtime suite rerun, no producer edits, no deployment.",
+  "nit": "Real browser, private-case execution, recipient delivery, exposure and demand unverified. Saved diff filename headers are not a publication defect if exact reverse restoration passes.",
+  "verdict": "APPROVE"
+}

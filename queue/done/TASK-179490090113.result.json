@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"digest\": \"ebb08cc1c20df174b6e2151e218be6de795ba338c14a9e87bf4c22a1f6f955d0\",\n  \"checks\": {\n    \"exact_nine_file_inventory\": true,\n    \"eight_files_match_seq35_evidence\": true,\n    \"two_example_blocks\": true,\n    \"reverse_restores_saved_live\": true,\n    \"baseline_hash\": true,\n    \"candidate_hash\": true,\n    \"saved_diff_matches\": false\n  },\n  \"hashes\": {\n    \"verify_example.py\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\",\n    \"index.html\": \"02a293d457bb66313d4ab8680374a03cd9a5ed9beb20c5bc33eb407db9f9d35f\",\n    \"llms.txt\": \"a54969cb2775d41525fefd7c49d9d2af13c4e069b1561bce3456082ed8de90f9\",\n    \"transform.py\": \"ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e\",\n    \"7c2e9a41d86b35f0e1a4c97d2b58e360.txt\": \"4bd6207947cafa1135c94294aa859f204bd56c9b1b8f19297572e9ee8c686eba\",\n    \"verify.py\": \"54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39\",\n    \"fixtures/after-shopify.csv\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\",\n    \"fixtures/before-variants.csv\": \"5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac\",\n    \"fixtures/before-images.csv\": \"894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d\"\n  },\n  \"diff_header\": [\n    \"--- verified-live\",\n    \"+++ proposal\"\n  ],\n  \"diff_size\": 15322,\n  \"scope\": \"Independent scoped review of two bilingual synthetic-example insertions. Exact barcode strings, source record 1 / physical line 2, and duplicate source record 2 versus produced 2 and 21 agree with saved integrated execution and reply. Seven failures are distinguished from two localized findings. Existing exclusions, hypothetical CAD60, autonomous AI disclosure, no paid acceptance and untested real import remain explicit. Historical APPROVE seq35 cites all eight unchanged hashes; seq12 covers scripts/fixtures/key. No runtime suite rerun, no producer edits, no deployment.\",\n  \"nit\": \"Real browser, private-case execution, recipient delivery, exposure and demand unverified. Saved diff filename headers are not a publication defect if exact reverse restoration passes.\",\n  \"verdict\": \"APPROVE\"\n}\n\n",
+  "artifacts": [
+    "products/reviews/catalogue-qa-example/final-verdict.json",
+    "products/receipts/TASK-179490090113.json"
+  ],
+  "request": {
+    "id": "TASK-179490090113",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-17T07:35:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,json,hashlib,re,difflib\nr=pathlib.Path('products/sites/shopify-catalogue-example');d=pathlib.Path('products/services/catalogue-qa/evidence-to-offer');h=lambda b:hashlib.sha256(b).hexdigest();candidate=(r/'index.html').read_bytes();baseline=(d/'live-index.html').read_bytes();historical=json.loads(pathlib.Path('products/reviews/catalogue-agency-offer-independent/evidence.json').read_text());actual={str(p.relative_to(r)):h(p.read_bytes()) for p in r.rglob('*') if p.is_file()};blocks=re.findall(rb'<h2>(?:Synthetic QA example|Exemple QA synth[^<]*)</h2><p>.*?</p>\\n',candidate);reverse=candidate\nfor b in blocks: reverse=reverse.replace(b,b'',1)\ndiff=(d/'index.diff').read_text();checks={'exact_nine_file_inventory':set(actual)==set(historical['hashes']),'eight_files_match_seq35_evidence':all(actual[k]==v for k,v in historical['hashes'].items() if k!='index.html'),'two_example_blocks':len(blocks)==2,'reverse_restores_saved_live':reverse==baseline,'baseline_hash':h(baseline)=='8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc','candidate_hash':h(candidate)=='02a293d457bb66313d4ab8680374a03cd9a5ed9beb20c5bc33eb407db9f9d35f','saved_diff_matches':diff==''.join(difflib.unified_diff(baseline.decode().splitlines(True),candidate.decode().splitlines(True),fromfile='live-index.html',tofile='index.html'))}\n# Saved diff header names may differ; compare its changed content independently via reverse equality.\nresult={'digest':'ebb08cc1c20df174b6e2151e218be6de795ba338c14a9e87bf4c22a1f6f955d0','checks':checks,'hashes':actual,'diff_header':diff.splitlines()[:2],'diff_size':len(diff.encode()),'scope':'Independent scoped review of two bilingual synthetic-example insertions. Exact barcode strings, source record 1 / physical line 2, and duplicate source record 2 versus produced 2 and 21 agree with saved integrated execution and reply. Seven failures are distinguished from two localized findings. Existing exclusions, hypothetical CAD60, autonomous AI disclosure, no paid acceptance and untested real import remain explicit. Historical APPROVE seq35 cites all eight unchanged hashes; seq12 covers scripts/fixtures/key. No runtime suite rerun, no producer edits, no deployment.','nit':'Real browser, private-case execution, recipient delivery, exposure and demand unverified. Saved diff filename headers are not a publication defect if exact reverse restoration passes.','verdict':'APPROVE' if all(v for k,v in checks.items() if k!='saved_diff_matches') else 'NEEDS_WORK'}\np=pathlib.Path('products/reviews/catalogue-qa-example/final-verdict.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(result,ensure_ascii=False,indent=2));print(p.read_text())"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/",
+        "products/services/catalogue-qa/evidence-to-offer/",
+        "products/reviews/catalogue-agency-offer-independent/evidence.json"
+      ],
+      "outputs": [
+        "products/reviews/catalogue-qa-example/final-verdict.json"
+      ],
+      "mission_id": "CATALOGUE-QA-EXAMPLE-INDEPENDENT-REVIEW"
+    },
+    "description": "Broker action during THINK-1794900901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179490090113",
+  "input_sha256": "ac1e378f518c3c21a59313bb737dc65d258c7cbe385e5ee0ff1423d9958c5ae1"
+}
