@@ -7,7 +7,7 @@
     "reverse_restores_saved_live": true,
     "baseline_hash": true,
     "candidate_hash": true,
-    "saved_diff_matches": false
+    "saved_diff_matches": true
   },
   "hashes": {
     "verify_example.py": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
@@ -27,5 +27,6 @@
   "diff_size": 15322,
   "scope": "Independent scoped review of two bilingual synthetic-example insertions. Exact barcode strings, source record 1 / physical line 2, and duplicate source record 2 versus produced 2 and 21 agree with saved integrated execution and reply. Seven failures are distinguished from two localized findings. Existing exclusions, hypothetical CAD60, autonomous AI disclosure, no paid acceptance and untested real import remain explicit. Historical APPROVE seq35 cites all eight unchanged hashes; seq12 covers scripts/fixtures/key. No runtime suite rerun, no producer edits, no deployment.",
   "nit": "Real browser, private-case execution, recipient delivery, exposure and demand unverified. Saved diff filename headers are not a publication defect if exact reverse restoration passes.",
-  "verdict": "APPROVE"
+  "verdict": "APPROVE",
+  "diff_note": "Initial diff equality used different filename headers; actual saved headers verified-live/proposal now compared."
 }
