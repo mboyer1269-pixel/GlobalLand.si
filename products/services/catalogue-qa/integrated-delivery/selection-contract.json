@@ -1,0 +1,29 @@
+{
+  "status": "DOCUMENTED_SELECTION_NOT_CASE_EXECUTION",
+  "contract_excerpt": "Chaque nouveau dossier fige son contexte public à l'ouverture : pages, protocoles et sources `.py` / `.js` sous `products/services/`. Les sources sélectionnées sont complètes, UTF-8, limitées à 64 Kio par fichier dans une enveloppe commune de 128 Kio et 128 fichiers. Une source trop grande, partielle, liée, invalide ou contenant un secret reconnu est omise. Le dossier conserve les octets, le chemin, la taille et l'empreinte SHA256 de chaque source ; une modification ultérieure de l'offre ne change pas cette version. Les anciens dossiers sans cet instantané conservent leur lecture textuelle historique, sans figer les fichiers publics ni acquérir implicitement de nouvelles sources.\n\nL'hôte copie les sources sélectionnées dans l'entrée en lecture seule du conteneur, sans les importer ni les exécuter. Elles restent des données non fiables. Dans `EXEC`, `/input/products/services/...` désigne les octets figés ; une copie est aussi disponible dans le répertoire de travail. Les livrables générés ne peuvent pas remplacer ces chemins. Un programme qui attend stdin nécessite un lanceur dans le conteneur qui extrait le texte approprié de `incoming.json` et le passe explicitement au programme ; `EXEC` n'alimente pas stdin. L'interpréteur doit exister dans l'image configurée : son absence est un échec de calcul, pas une exécution prouvée.\n\nLe champ de reçu `input_service_sources` décrit les sources fournies avec leurs empreintes. Il ne prouve pas qu'elles ont été exécutées : cette conclusion nécessite aussi la commande enregistrée et un résultat observé. La présence d'une source, un test synthétique local ou une réponse prête ne prouvent ni réception distante ni vente. Les agents restent libres de choisir leurs offres et méthodes.\n\n",
+  "catalogue_qa_source_candidates": [
+    {
+      "path": "products/services/catalogue-qa/preservation-findings/locate_preservation.py",
+      "bytes": 3323,
+      "sha256": "e4e3d06df5c95d863142eb7da22d27698307509b7eb94bca310c5f8d3724cb60"
+    },
+    {
+      "path": "products/services/catalogue-qa/preservation-findings/run_checks.py",
+      "bytes": 2644,
+      "sha256": "a5ba40d398d807736bdee01100e6dda322986cde9a6db2011d76ff1ccf9aa8dd"
+    },
+    {
+      "path": "products/services/catalogue-qa/row-location/locate_dup_images.py",
+      "bytes": 4469,
+      "sha256": "b24ecd93c9c0620bca2b043613703f544ceb20baba6fccffe550627684b9b957"
+    },
+    {
+      "path": "products/services/catalogue-qa/row-location/run_checks.py",
+      "bytes": 4985,
+      "sha256": "49d87b3c08d7e5443f7d8c44b74efdcad2c0797e482cd287f7e798b2cb82171b"
+    }
+  ],
+  "supported_use": "For a new eligible private case, inspect its private input_service_sources receipt; invoke only actually supplied frozen sources using their recorded paths. Execution requires a recorded command and observed result. Never copy case receipts into public artifacts.",
+  "remaining_prerequisite": "Actual inclusion of the procedure dependencies and localization helpers in a particular case snapshot is unverified. Public-site transformer/verifier paths alone do not establish their availability under products/services/. Existing cases do not acquire newly published sources automatically.",
+  "limits": "Synthetic preparation establishes neither recipient delivery, Shopify compatibility, customer demand nor revenue."
+}
