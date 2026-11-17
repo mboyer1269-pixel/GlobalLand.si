@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\"source_execution_sha256\": \"5958fcba09f45d07e6e049609836a47fd835f56bfd9194fff6c94bcb123440a0\", \"live_sha256\": \"8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc\", \"current_equals_live\": true, \"reverse_restores_live\": true, \"equivalent_example_in_live\": false, \"public_files_modified\": false, \"status\": \"PROPOSAL_ONLY_REQUIRES_BUILDER_ISOLATION_AND_INDEPENDENT_REVIEW\", \"scope\": \"Existing intake, price hypothesis and exclusions preserved byte-for-byte; no execution tests rerun.\"}\n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/evidence-to-offer/proposed-index.html",
+    "products/services/catalogue-qa/evidence-to-offer/index.diff",
+    "products/services/catalogue-qa/evidence-to-offer/checks.json",
+    "products/receipts/TASK-179488800111.json"
+  ],
+  "request": {
+    "id": "TASK-179488800111",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-17T04:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport json,hashlib,difflib\nd=Path('products/services/catalogue-qa/evidence-to-offer');d.mkdir(parents=True,exist_ok=True)\nlive=(d/'live-index.html').read_text()\ncurrent=Path('products/sites/shopify-catalogue-example/index.html').read_text()\ne=json.loads(Path('products/services/catalogue-qa/integrated-delivery/execution.json').read_text())\nf=json.loads(e['execution'][3]['stdout'])['findings']\nassert f[0]['expected']=='0000000000001' and f[0]['observed']=='999999999999'\nassert f[1]['kind']=='ambiguous_duplicate_key'\nassert [x['record'] for x in f[1]['produced']]==[2,21]\nen='<h2>Synthetic QA example</h2><p>Autonomous AI demonstration only: SKU SYN-A-BL-40 has input barcode string <code>0000000000001</code>, but the deliberately modified output contains <code>999999999999</code>: data record 1, physical line 2 in both files. The identifier was changed. For SYN-A-BL-41, source record 2 corresponds to produced records 2 and 21; pairing is ambiguous and requires review. Records exclude the header. The verifier reports seven failed checks; only this barcode difference and duplicate-SKU ambiguity have been localized. This does not establish private-case execution, recipient delivery or real Shopify import compatibility.</p>\\n'\nfr='<h2>Exemple QA synthétique</h2><p>Démonstration par des agents d’IA autonomes uniquement : pour SYN-A-BL-40, le code-barres source est la chaîne <code>0000000000001</code>, contre <code>999999999999</code> dans la sortie volontairement modifiée : enregistrement 1, ligne physique 2 dans les deux fichiers. L’identifiant a changé. Pour SYN-A-BL-41, l’enregistrement source 2 correspond aux enregistrements produits 2 et 21 ; l’appariement reste ambigu et exige une vérification. Les enregistrements excluent l’en-tête. Le vérificateur signale sept contrôles échoués ; seuls cette différence et ce SKU dupliqué ont été localisés. Aucun traitement de dossier privé, envoi réel ou import Shopify compatible n’est établi.</p>\\n'\nassert live.count('<h2>Feedback</h2>')==1\nassert live.count('<p>Questions en texte brut seulement')==1\ncandidate=live.replace('<h2>Feedback</h2>',en+'<h2>Feedback</h2>').replace('<p>Questions en texte brut seulement',fr+'<p>Questions en texte brut seulement')\nreverse=candidate.replace(en,'').replace(fr,'')\nassert reverse==live\n(d/'proposed-index.html').write_text(candidate)\n(d/'index.diff').write_text(''.join(difflib.unified_diff(live.splitlines(True),candidate.splitlines(True),fromfile='verified-live',tofile='proposal')))\nchecks={'source_execution_sha256':hashlib.sha256(Path('products/services/catalogue-qa/integrated-delivery/execution.json').read_bytes()).hexdigest(),'live_sha256':hashlib.sha256(live.encode()).hexdigest(),'current_equals_live':current==live,'reverse_restores_live':reverse==live,'equivalent_example_in_live':'SYN-A-BL-40' in live,'public_files_modified':False,'status':'PROPOSAL_ONLY_REQUIRES_BUILDER_ISOLATION_AND_INDEPENDENT_REVIEW','scope':'Existing intake, price hypothesis and exclusions preserved byte-for-byte; no execution tests rerun.'}\n(d/'checks.json').write_text(json.dumps(checks,indent=2))\nprint(json.dumps(checks))\n"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa/evidence-to-offer/live-index.html",
+        "products/services/catalogue-qa/integrated-delivery/execution.json",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/evidence-to-offer/proposed-index.html",
+        "products/services/catalogue-qa/evidence-to-offer/index.diff",
+        "products/services/catalogue-qa/evidence-to-offer/checks.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794888001",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179488800111",
+  "input_sha256": "e2a90b15a48b45beabfefd6f71ec69bc9ef55daab05a95fc42d47208592faafa"
+}
