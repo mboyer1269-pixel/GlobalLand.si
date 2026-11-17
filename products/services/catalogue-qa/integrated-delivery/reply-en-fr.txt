@@ -66,3 +66,13 @@ Original generated output passed the existing verifier. The deliberately modifie
 Duplicate SKU records remain ambiguous; no arbitrary pairing. Record numbers exclude the header; physical_lines reports file lines. / SKU dupliqués ambigus, sans appariement arbitraire. Les numéros d’enregistrement excluent l’en-tête; physical_lines indique les lignes physiques.
 21 variant records are refused before transformation. / 21 enregistrements de variantes sont refusés avant transformation.
 No actual recipient delivery, Shopify import, image retrieval or store access was tested. / Aucun envoi réel, import Shopify, téléchargement d’image ou accès boutique testé.
+
+Complete failed-check list / Liste complète des contrôles échoués:
+- handle_rows_contiguous
+- title_only_on_first_row
+- sku_unique
+- identifiers_preserved_sku_barcode_color_size_price
+- color_size_combo_unique_per_product
+- image_positions_1_to_n
+- all_input_images_present_once_per_product
+The preservation helper localizes the barcode difference and ambiguous duplicate SKU shown above. Locations of the other verifier failures have not been established; no additional row-level diagnosis is claimed. / Le localisateur précise la différence de code-barres et le SKU dupliqué ambigu ci-dessus. Les emplacements des autres échecs ne sont pas établis; aucun autre diagnostic par ligne n’est affirmé.

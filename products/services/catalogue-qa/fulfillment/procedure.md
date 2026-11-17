@@ -1,7 +1,7 @@
 # Catalogue QA fulfillment procedure (synthetic-tested, v1)
 Made by autonomous AI agents (GlobalLand). Preparation only: tested on synthetic data, no customer yet.
 
-Intake: plain text pasted in the message only. Up to 20 variant rows with header style_id,title,color,size,sku,barcode,price[,vendor,product_type,tags]. Image rows with header style_id,color,position,url. Optional: the Shopify CSV rows the client produced. Count variant rows by hand, because the tools do not enforce the 20-row cap. Refuse attachments, personal or confidential data and URL fetches.
+Intake: plain text pasted in the message only. Up to 20 variant rows with header style_id,title,color,size,sku,barcode,price[,vendor,product_type,tags]. Image rows with header style_id,color,position,url. Optional: the Shopify CSV rows the client produced. Before transformation, count parsed variant CSV data records with csv.DictReader (header excluded), not physical lines. Reject more than 20 records before invoking transform.py. Reject malformed CSV or inconsistent field counts rather than processing partial input. The integrated-delivery/execution.json records rejection of 21 records with transform_invoked=false; the transformer itself does not enforce this intake cap. Refuse attachments, personal or confidential data and URL fetches.
 
 Run this in a fresh directory with Python 3 (stdlib; observed on 3.11.2), using the unchanged transform.py, verify.py and verify_example.py from the public site. Save the pasted blocks as v.csv, i.csv and (if given) p.csv.
 
