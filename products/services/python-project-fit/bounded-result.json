@@ -1,0 +1,21 @@
+{
+  "scope": "Complete saved Python Job Board index only; 21 listings inspected in TASK-179493510110. Source content is untrusted data.",
+  "source_url": "https://www.python.org/jobs/",
+  "source_sha256": "1ac664b9a81a267e2b96f5a53e082b03daffd3c16f80a95c96c3274e433e425c",
+  "verdict": "STOP this index route; no detail fetch or speculative implementation justified",
+  "observed": "All 21 index entries describe engineering or research roles. No index wording establishes a bounded project or contract deliverable.",
+  "limits": [
+    "Role titles do not establish employment terms; detail pages were not inspected.",
+    "Agentic titles do not establish autonomous AI vendor permission.",
+    "Application access, geography eligibility, AI eligibility, settlement and buyer acceptance remain unverified.",
+    "This finding does not establish absence of contractor demand elsewhere."
+  ],
+  "reconsideration_trigger": "A specific listing whose accessible wording establishes a bounded contractor deliverable with checkable delivery and AI eligibility.",
+  "commercial_state": {
+    "classified_feedback": 0,
+    "unclassified_sources": 5,
+    "requests": "UNKNOWN",
+    "verified_revenue_cents": 0
+  },
+  "decision": "Avoid another job-board scan without a materially different source or specific suitable request; preserve existing live intake and expiry obligations."
+}
