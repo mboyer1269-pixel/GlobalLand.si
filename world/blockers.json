@@ -179,25 +179,27 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-17T12:06:45Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 973,
-    "turns_without_verified_revenue": 973,
-    "turns_without_outcome": 5,
+    "turns_without_new_interpreted_feedback": 974,
+    "turns_without_verified_revenue": 974,
+    "turns_without_outcome": 6,
     "outcome_threshold": 12,
     "dry_since": "2026-11-17T11:06:35Z",
     "last_outcome_turn": "THINK-1794913201",
-    "last_productive_turn": "THINK-1794916816",
-    "last_turn": "THINK-1794917161",
+    "last_productive_turn": "THINK-1794918609",
+    "last_turn": "THINK-1794918609",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/paid-spreadsheet-support/raw/paid-calc-search.html"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
