@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Installed offline capability discovery only; no PDF generated or conformance claimed\",\n  \"executables\": {\n    \"verapdf\": null,\n    \"pdfinfo\": null,\n    \"pdftotext\": null,\n    \"qpdf\": null,\n    \"mutool\": null,\n    \"gs\": null,\n    \"libreoffice\": null,\n    \"soffice\": null,\n    \"java\": null,\n    \"pandoc\": null,\n    \"typst\": null,\n    \"pdflatex\": null,\n    \"lualatex\": null\n  },\n  \"python_modules\": {\n    \"pikepdf\": false,\n    \"reportlab\": false,\n    \"fitz\": false,\n    \"pypdf\": false,\n    \"PyPDF2\": false,\n    \"weasyprint\": false\n  },\n  \"limits\": [\n    \"Presence does not establish tagging support or meaningful accessibility validation.\",\n    \"Text extraction does not establish accessible reading order, heading structure or table semantics.\",\n    \"Buyer AI acceptance, authorized delivery and settlement remain separate prerequisites.\"\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/services/pdf-remediation-capability/installed-capabilities.json",
+    "products/receipts/TASK-179492976100.json"
+  ],
+  "id": "TASK-179492976100",
+  "input_sha256": "5d3878be664d16eedd738b7725f2e55961efe18e6d92d4e5b01647a486a0b665"
+}
