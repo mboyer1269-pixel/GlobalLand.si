@@ -140,23 +140,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-PROGRESS",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "5 tours consécutifs sans résultat vérifiable",
-      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CATALOGUE-QA-EXAMPLE-VERIFIED-RELEASE, CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, EXPLICIT-PAID-SPREADSHEET-SUPPORT-FIT, GODOT-PAID-DEBUGGING-REQUEST-FIT, LINK-CHECK-LAUNCH, OPEN-SOFTWARE-TENDER-BRIEF, PARSER-PARITY-CONTEXTUAL-REFERRAL, PARSER-PARITY-SITE-REVIEW, PDF-REMEDIATION-CAPABILITY-GATE, PYTHON-CONTRACT-DELIVERABLE-FIT, RSS-ACTOR-LAUNCH, SQLITE-DIAGNOSTIC-WINDOW-VERDICT, SQLITE-SECOND-CASE-STAGING, SUPPLIER-BID-EFFORT-VERIFIED-RELEASE, TENDERS-NORTH-AYRSHIRE-EXPIRY, TENDERS-PAGE-RETIRE-2027, TENDERS-SOUTH-AYRSHIRE-EXPIRY, TEXT-CSV-INTAKE-EXPERIMENT, WELFARE-LIVE-DEMAND ; consulter la collection missions paginée pour la suite.",
-      "open_missions_total": 22,
-      "missions_truncated": true,
-      "missions_collection": "missions",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 5,
-      "opened_at": "2026-11-17T16:06:57Z",
-      "last_reported_at": "2026-11-17T17:05:54Z"
     }
   ],
   "resolved_recent": [
@@ -196,25 +179,27 @@
     }
   ],
   "progress": {
-    "stalled_turns": 5,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-17T16:06:57Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 993,
-    "turns_without_verified_revenue": 993,
-    "turns_without_outcome": 6,
+    "turns_without_new_interpreted_feedback": 994,
+    "turns_without_verified_revenue": 994,
+    "turns_without_outcome": 7,
     "outcome_threshold": 12,
     "dry_since": "2026-11-17T16:00:47Z",
     "last_outcome_turn": "THINK-1794929761",
-    "last_productive_turn": "THINK-1794931202",
-    "last_turn": "THINK-1794935101",
+    "last_productive_turn": "THINK-1794936614",
+    "last_turn": "THINK-1794936614",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/python-project-fit/bounded-result.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
