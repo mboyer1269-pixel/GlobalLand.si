@@ -1,0 +1,30 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 7, in <module>\nTypeError: sequence item 0: expected str instance, list found\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179489520110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-17T06:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport difflib,hashlib,json\np=Path('products/services/catalogue-qa/evidence-to-offer'); s=Path('products/sites/shopify-catalogue-example')\na=(p/'live-index.html').read_bytes(); b=(s/'index.html').read_bytes()\nx=a.decode().splitlines(keepends=True); y=b.decode().splitlines(keepends=True)\nops=difflib.SequenceMatcher(None,x,y,autojunk=False).get_opcodes(); changes=[o for o in ops if o[0]!='equal']\nrestored=''.join(y[j:k] for tag,i,h,j,k in ops if tag=='equal').encode()\nr={'baseline_sha256':hashlib.sha256(a).hexdigest(),'candidate_sha256':hashlib.sha256(b).hexdigest(),'changes':[{'operation':tag,'baseline_lines':[i,h],'candidate_lines':[j,k],'inserted_text':''.join(y[j:k])} for tag,i,h,j,k in changes],'only_two_insertions':len(changes)==2 and all(o[0]=='insert' for o in changes),'reverse_restores_live':restored==a,'inventory_sha256':{str(f.relative_to(s)):hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(s.rglob('*')) if f.is_file()},'limitation':'Inventory hashes observed now; equality to prior release inventory requires comparison with original publication manifest. This is director support evidence, not independent approval. No deployment, acquisition or revenue.'}\nr['checks_pass']=r['only_two_insertions'] and r['reverse_restores_live'] and r['baseline_sha256']=='8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc' and r['candidate_sha256']=='02a293d457bb66313d4ab8680374a03cd9a5ed9beb20c5bc33eb407db9f9d35f'\nout=Path('products/services/catalogue-qa/evidence-to-offer/director-reverse-check.json');out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\\n');print(out.read_text())"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa/evidence-to-offer/live-index.html",
+        "products/sites/shopify-catalogue-example/"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa/evidence-to-offer/director-reverse-check.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794895201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179489520110",
+  "input_sha256": "4d2c438662213e7008b0e78e7b6293c463946700c6b12b5187127819a7e8b731"
+}
