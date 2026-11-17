@@ -140,23 +140,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-PROGRESS",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "3 tours consécutifs sans résultat vérifiable",
-      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : CATALOGUE-QA-INTEGRATED-DELIVERY, CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, LINK-CHECK-LAUNCH, OPEN-SOFTWARE-TENDER-BRIEF, PARSER-PARITY-CONTEXTUAL-REFERRAL, PARSER-PARITY-SITE-REVIEW, RSS-ACTOR-LAUNCH, SQLITE-DIAGNOSTIC-WINDOW-VERDICT, SQLITE-SECOND-CASE-STAGING, SUPPLIER-BID-EFFORT-VERIFIED-RELEASE, TENDERS-NORTH-AYRSHIRE-EXPIRY, TENDERS-PAGE-RETIRE-2027, TENDERS-SOUTH-AYRSHIRE-EXPIRY, TEXT-CSV-INTAKE-EXPERIMENT, WELFARE-LIVE-DEMAND, WELFARE-SITE-RETIRE, WORLD-FIRST-REVENUE.",
-      "open_missions_total": 18,
-      "missions_truncated": false,
-      "missions_collection": "missions",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 3,
-      "opened_at": "2026-11-17T00:31:02Z",
-      "last_reported_at": "2026-11-17T01:01:55Z"
     }
   ],
   "resolved_recent": [
@@ -196,25 +179,34 @@
     }
   ],
   "progress": {
-    "stalled_turns": 3,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-17T00:31:02Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 932,
-    "turns_without_verified_revenue": 932,
-    "turns_without_outcome": 3,
+    "turns_without_new_interpreted_feedback": 933,
+    "turns_without_verified_revenue": 933,
+    "turns_without_outcome": 4,
     "outcome_threshold": 12,
     "dry_since": "2026-11-17T00:31:02Z",
     "last_outcome_turn": "THINK-1794873616",
-    "last_productive_turn": "THINK-1794873616",
-    "last_turn": "THINK-1794877210",
+    "last_productive_turn": "THINK-1794877561",
+    "last_turn": "THINK-1794877561",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/catalogue-qa/integrated-delivery/execution.json",
+        "products/services/catalogue-qa/integrated-delivery/images.csv",
+        "products/services/catalogue-qa/integrated-delivery/ours.csv",
+        "products/services/catalogue-qa/integrated-delivery/overlimit.csv",
+        "products/services/catalogue-qa/integrated-delivery/provided.csv",
+        "products/services/catalogue-qa/integrated-delivery/reply-en-fr.txt",
+        "products/services/catalogue-qa/integrated-delivery/transform-report.json",
+        "products/services/catalogue-qa/integrated-delivery/variants.csv"
+      ],
+      "new_product_count": 8,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
