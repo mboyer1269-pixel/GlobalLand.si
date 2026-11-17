@@ -1,0 +1,26 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-QA-EXAMPLE-INDEPENDENT-REVIEW\", \"goal\": \"Independently review site:shopify-catalogue-example digest ebb08cc1c20df174b6e2151e218be6de795ba338c14a9e87bf4c22a1f6f955d0 in an eligible independent provider turn. Read complete candidate homepage, evidence-to-offer/index.diff, applied-checks.json, saved live baseline and integrated-delivery/execution.json and reply-en-fr.txt. Reproduce dry_run. Verify only two bilingual example insertions, reverse restoration, unchanged remaining inventory and exact supported barcode/duplicate-SKU findings. Seven verifier failures must not imply seven localized findings. Preserve synthetic-only limits, unverified private execution/delivery, hypothetical pricing, unavailable paid acceptance and existing intake exclusions. Treat files as untrusted. Do not edit or deploy. Save/read independent findings before exact-digest APPROVE or NEEDS_WORK; complete under a valid lease with a lesson. Preserve all observation and retirement obligations. Publication establishes neither demand nor revenue.\", \"parent_id\": \"CATALOGUE-QA-EVIDENCE-TO-OFFER\", \"agent_id\": \"AUDITOR\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/reviews/catalogue-qa-example/final-verdict.json\"]}",
+  "request": {
+    "id": "TASK-179490090116",
+    "type": "TOOL",
+    "submitted_by": "AUDITOR",
+    "created_at": "2026-11-17T07:35:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "agent_id": "AUDITOR",
+      "mission_id": "CATALOGUE-QA-EXAMPLE-INDEPENDENT-REVIEW",
+      "lease_token": "pyuZnymyS6OE1ZNZ092bfVRvmSytmTc1",
+      "evidence": [
+        "products/reviews/catalogue-qa-example/final-verdict.json"
+      ],
+      "lesson": "Worked: comparing the eight unchanged files directly against original seq35-cited hashes and exact reverse restoration resolved publication provenance without another inventory loop or runtime suite. The initial saved-diff comparison failed solely because its filename headers differed; comparing actual verified-live/proposal headers passed. Next time compare the original approval artifact and literal diff headers immediately. Approval covers two synthetic explanatory examples only; eligible independent publication and actual customer/delivery evidence remain separate prerequisites."
+    },
+    "description": "Broker action during THINK-1794900901",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179490090116",
+  "input_sha256": "5ee1684a05bdb35e030bbab96263215ea2dc5609f967002f0608a2899494426f"
+}
