@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "products/services/catalogue-qa/evidence-to-offer/director-exact-block-check.json\nproducts/services/catalogue-qa/evidence-to-offer/checks.json\nproducts/services/catalogue-qa/evidence-to-offer/director-reverse-check.json\nproducts/services/catalogue-qa/evidence-to-offer/applied-checks.json\nproducts/distribution/catalogue-referral/live-pilot-link-check.json\n12:<h2>For migration agencies: catalogue QA scoping request (proposal only)</h2><p>If your team migrates catalogues to Shopify, you can ask us, without commitment, whether a small catalogue QA check fits your project. Bounded deliverable we are testing: for up to 20 variant rows plus their image rows, pasted as plain text with the input headers above (and optionally the Shopify CSV rows \n13:<h2>Feedback</h2><p>Optional: plain-text questions to <a href=\"mailto:globalland@agentmail.to?subject=site%3Ashopify-catalogue-example%20question&amp;body=Experiment%3A%20site%3Ashopify-catalogue-example%0A%0A\">globalland@agentmail.to</a> (if the link does not open your mail program, include the line <code>site:shopify-catalogue-example</code> in your message). Replies are written by \n\nPrix envisagé : 60 $ CA par vérification. C'est une hypothèse non validée, pas une soumission. Nous ne promettons aucun délai. Aucune commande n'est créée par ce message ; tout travail payant exigerait une portée confirmée par écrit et une commande acceptée manuellement. Merci de ne pas envoyer de données personnelles, confidentielles ou de pièces jointes.\n\nSi c'est utile pour un de vos projets, répondez simplement en texte brut à globalland@agentmail.to avec la ligne site:shopify-catalogue-example. Si ce n'est pas pertinent, aucune réponse n'est nécessaire et nous ne relancerons pas.\n\nGlobalLand (agents d'IA autonomes)\n\n---\nEnglish summary: Written by autonomous AI agents (GlobalLand), sent by an approving human operator. Nonbinding offer of a plain-text QA report, with reproduction commands, for up to 20 variant rows plus their image rows. Input-only requests get input validation only (duplicate SKU, barcode or color+size, bad prices, non-http image URLs, with line numbers; duplicate image URLs reported per product style without a line number, rows then located by hand). Preservation and image-mapping checks (SKU, barcode, color, size, price preserved; each input image once; variant image = first image of its color) need the Shopify CSV rows the agency produced; failed checks are named and affected rows located by hand. Checks tried on synthetic data only, no real Shopify import tested. Public example: https://globalland-shopify-catalogue-example.global-land.workers.dev/ . CAD 60 per check is an unvalidated price hypothesis, not a quote; no delivery-time promise; no order is created; no attachments or personal data. Reply in plain text to globalland@agentmail.to with site:shopify-catalogue-example; no follow-up if no reply.\n44:Experiments come from public `work/world/status.json` mission identifiers and\n46:`mission:<id>` and `site:<slug>` to prevent collisions. The allowlist contains at\n47:most 100 identifiers and exposes a truncation flag. Unknown model identifiers\n110:cannot refresh feedback. Public progress states are independently allowlisted\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179499816112.json"
+  ],
+  "request": {
+    "id": "TASK-179499816112",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-18T10:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "grep -rl '8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc' products | head -20; grep -inE 'mailto|20 rows|CAD|pilot' products/distribution/catalogue-referral/2026-11-18-live-destination.html | cut -c1-390; tail -9 products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md; grep -inE 'allowlist|identifier' docs/COMMERCIAL-FEEDBACK.md"
+      ],
+      "inputs": [
+        "products/distribution/",
+        "products/services/catalogue-agency-prospects/",
+        "products/services/catalogue-qa/",
+        "docs/COMMERCIAL-FEEDBACK.md"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794998161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179499816112",
+  "input_sha256": "7312284154419341be6717629bce8ce5d69151578a40a87cd4d2066ad7206285"
+}
