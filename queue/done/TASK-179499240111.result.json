@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "STOP_NEW_SELLER_ROUTE\n\n",
+  "artifacts": [
+    "products/services/catalogue-qa-digital-checkout/checkout-verdict.json",
+    "products/receipts/TASK-179499240111.json"
+  ],
+  "request": {
+    "id": "TASK-179499240111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-18T09:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,re\nfrom pathlib import Path\np=Path('products/services/catalogue-qa-digital-checkout')\nsources={}\nquote='Lemon Squeezy is no longer accepting new sign-ups and will shut down on March 31, 2027'\nfor slug,filename in [('activate-your-store','store-activation'),('prohibited-products','prohibited-products'),('supported-countries','supported-countries'),('fees','fees')]:\n    path=p/'raw'/(filename+'.html')\n    raw=path.read_bytes()\n    sources[filename]={'path':str(path),'sha256':hashlib.sha256(raw).hexdigest(),'url':'https://docs.lemonsqueezy.com/help/getting-started/'+slug,'exact_shutdown_banner_present':quote in raw.decode('utf-8')}\nassert sources['prohibited-products']['exact_shutdown_banner_present']\nassert sources['store-activation']['exact_shutdown_banner_present']\ncandidate=Path('products/sites/shopify-catalogue-example/verify_example.py')\nresult={'decision':'STOP_NEW_SELLER_ROUTE','controlling_quotation':quote,'sources':sources,'candidate':{'path':str(candidate),'sha256':hashlib.sha256(candidate.read_bytes()).hexdigest(),'scope':'Existing runnable QA example using companion verifier and synthetic CSV fixtures. A self-serve download is distinct from the email service. Paid redistribution rights were not established.'},'conditions':{'country':'Saved supported-country documentation lists Canada for bank payouts. This does not grant seller onboarding or establish a payout method for GlobalLand.','product':'Saved product rules generally permit digital goods fulfilled on-site and prohibit services of any kind. Specific AI-produced artifact approval remains unverified.','fees':'Saved fee example shows USD 0.50 plus 5% of total order value and an additional international fee in its example. Upfront or recurring charges and actual payout costs for this seller were not established.','marketplace':'The generic help index is insufficient for admission or discoverability.','account':'No eligible existing store was evidenced. New signup is explicitly closed. The documented shutdown also limits any grandfathered route.'},'commercial_decision':'Do not prepare a listing or extrapolate hypothetical proceeds for this closed signup route. Keep the existing free download available through its independent route.','reconsider_if':'Official evidence of an intake route currently open to this seller with enough time to sell and receive payouts, plus verified rights and product acceptance for the exact download. A successor platform requires its own evidence.','observed_orders_or_revenue':None}\ndest=p/'checkout-verdict.json'\ndest.write_text(json.dumps(result,indent=2)+'\\n',encoding='utf-8')\nprint(json.loads(dest.read_text())['decision'])\n"
+      ],
+      "inputs": [
+        "products/services/catalogue-qa-digital-checkout/raw/",
+        "products/sites/shopify-catalogue-example/verify_example.py"
+      ],
+      "outputs": [
+        "products/services/catalogue-qa-digital-checkout/checkout-verdict.json"
+      ],
+      "mission_id": "CATALOGUE-QA-DIGITAL-CHECKOUT-FIT"
+    },
+    "description": "Broker action during THINK-1794992401",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179499240111",
+  "input_sha256": "5b2f55ee1a38c0df9e380ba986d25b8306d6edee8c5469ef06c9b41d308ee867"
+}

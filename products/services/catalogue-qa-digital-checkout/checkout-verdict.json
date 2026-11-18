@@ -1,0 +1,45 @@
+{
+  "decision": "STOP_NEW_SELLER_ROUTE",
+  "controlling_quotation": "Lemon Squeezy is no longer accepting new sign-ups and will shut down on March 31, 2027",
+  "sources": {
+    "store-activation": {
+      "path": "products/services/catalogue-qa-digital-checkout/raw/store-activation.html",
+      "sha256": "d102facab7ecb1ca3cc58210b05f84d69618639d8289bab66c08b034873fc7a4",
+      "url": "https://docs.lemonsqueezy.com/help/getting-started/activate-your-store",
+      "exact_shutdown_banner_present": true
+    },
+    "prohibited-products": {
+      "path": "products/services/catalogue-qa-digital-checkout/raw/prohibited-products.html",
+      "sha256": "2f7f43d1c0835a346e78f317fa3c9f378bf14c381658f29404047b6ccc013fe1",
+      "url": "https://docs.lemonsqueezy.com/help/getting-started/prohibited-products",
+      "exact_shutdown_banner_present": true
+    },
+    "supported-countries": {
+      "path": "products/services/catalogue-qa-digital-checkout/raw/supported-countries.html",
+      "sha256": "dc492e4aec24a08097a9906eaf43328f3c1c4aafb80d0db0c24ed47501ed3c0f",
+      "url": "https://docs.lemonsqueezy.com/help/getting-started/supported-countries",
+      "exact_shutdown_banner_present": true
+    },
+    "fees": {
+      "path": "products/services/catalogue-qa-digital-checkout/raw/fees.html",
+      "sha256": "0540d2bcc7b0cf4d9a8d400641bfa80588e58f893e18b9dd803a3d8a5879af60",
+      "url": "https://docs.lemonsqueezy.com/help/getting-started/fees",
+      "exact_shutdown_banner_present": true
+    }
+  },
+  "candidate": {
+    "path": "products/sites/shopify-catalogue-example/verify_example.py",
+    "sha256": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+    "scope": "Existing runnable QA example using companion verifier and synthetic CSV fixtures. A self-serve download is distinct from the email service. Paid redistribution rights were not established."
+  },
+  "conditions": {
+    "country": "Saved supported-country documentation lists Canada for bank payouts. This does not grant seller onboarding or establish a payout method for GlobalLand.",
+    "product": "Saved product rules generally permit digital goods fulfilled on-site and prohibit services of any kind. Specific AI-produced artifact approval remains unverified.",
+    "fees": "Saved fee example shows USD 0.50 plus 5% of total order value and an additional international fee in its example. Upfront or recurring charges and actual payout costs for this seller were not established.",
+    "marketplace": "The generic help index is insufficient for admission or discoverability.",
+    "account": "No eligible existing store was evidenced. New signup is explicitly closed. The documented shutdown also limits any grandfathered route."
+  },
+  "commercial_decision": "Do not prepare a listing or extrapolate hypothetical proceeds for this closed signup route. Keep the existing free download available through its independent route.",
+  "reconsider_if": "Official evidence of an intake route currently open to this seller with enough time to sell and receive payouts, plus verified rights and product acceptance for the exact download. A successor platform requires its own evidence.",
+  "observed_orders_or_revenue": null
+}
