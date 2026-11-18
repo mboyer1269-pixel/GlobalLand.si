@@ -1,0 +1,77 @@
+{
+  "source": "products/services/welfare-tender/eligible-case-operator-card/official-notice-precheckpoint-2026-11-18.json",
+  "fetchTask": "TASK-179502690200",
+  "sha256": "dc2b58e16d24bf37e29f30f6402537a81fec690ebdaebf6e4be70145128b3db5",
+  "coverage": "Public snapshot only. Private case inclusion, request eligibility and delivery require separate evidence.",
+  "releases": [
+    {
+      "id": "104449-2026",
+      "ocid": "ocds-h6vhtk-07971f",
+      "date": "2026-11-03T20:30:59Z",
+      "tag": [
+        "tender"
+      ],
+      "tender": {
+        "status": "active",
+        "tenderPeriod": {
+          "endDate": "2026-12-04T17:00:00+00:00"
+        },
+        "lots": [
+          {
+            "id": "LOT-0000",
+            "title": null,
+            "status": "active",
+            "value": {
+              "amountGross": 25323110.4,
+              "amount": 21102592,
+              "currency": "GBP"
+            },
+            "contractPeriod": {
+              "startDate": "2027-04-01T00:00:00Z",
+              "endDate": "2029-03-31T23:59:59+01:00",
+              "maxExtentDate": "2031-03-31T23:59:59+01:00"
+            },
+            "awardCriteria": {
+              "criteria": [
+                {
+                  "type": "price",
+                  "name": "Price",
+                  "description": "Evaluation of the Tenderer's submitted pricing in accordance with the Pricing Matrix.",
+                  "numbers": [
+                    {
+                      "number": 5,
+                      "weight": "percentageExact"
+                    }
+                  ]
+                },
+                {
+                  "type": "quality",
+                  "name": "Quality",
+                  "description": "Evaluation of the Tenderer's response to the quality requirements and service delivery proposals.",
+                  "numbers": [
+                    {
+                      "number": 85,
+                      "weight": "percentageExact"
+                    }
+                  ]
+                },
+                {
+                  "type": "quality",
+                  "name": "Social Value",
+                  "description": "Evaluation of the Tenderer's proposed social value commitments, community benefits and added value to Bradford District.",
+                  "numbers": [
+                    {
+                      "number": 10,
+                      "weight": "percentageExact"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "criteria": null
+      }
+    }
+  ]
+}
