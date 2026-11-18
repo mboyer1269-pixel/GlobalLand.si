@@ -184,20 +184,22 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1059,
-    "turns_without_verified_revenue": 1059,
-    "turns_without_outcome": 5,
+    "turns_without_new_interpreted_feedback": 1060,
+    "turns_without_verified_revenue": 1060,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-18T09:36:42Z",
-    "last_outcome_turn": "THINK-1794994215",
-    "last_productive_turn": "THINK-1794998161",
-    "last_turn": "THINK-1794998161",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794999611",
+    "last_productive_turn": "THINK-1794999611",
+    "last_turn": "THINK-1794999611",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
+      "outcome": true,
+      "mission_outcomes": [
+        "CATALOGUE-LIVE-PILOT-INQUIRY-ACCEPTANCE"
+      ],
       "new_products": [
-        "products/distribution/catalogue-referral/live-pilot-link-check.json"
+        "products/distribution/catalogue-referral/operator-handoff.md"
       ],
       "new_product_count": 1,
       "new_research_count": 0,
