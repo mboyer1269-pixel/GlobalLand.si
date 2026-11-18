@@ -1,0 +1,48 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"PASS_OFFLINE_FICTIONAL_EXCERPT\",\n  \"scope_quote\": \"Scope: one plain-text bilingual (EN/FR) brief about official UK notice 104449-2026 only, built from the official public notice and from non-confidential excerpts the customer pastes into the email body. No attachments, no URL retrieval by the responder, no confidential material.\",\n  \"checks\": {\n    \"fictional_labels\": true,\n    \"both_languages_reference_both_findings\": true,\n    \"dates_match_distinct_sources\": true,\n    \"official_snapshot_hash_matches\": true,\n    \"written_bytes_match\": true\n  },\n  \"trace\": {\n    \"E1\": \"fictional email line 2: minimum experience\",\n    \"E2\": \"fictional email line 3: possible partner exception\",\n    \"E3\": \"fictional email line 4: conflicting deadline\",\n    \"O1\": \"saved official notice tender.tenderPeriod.endDate\"\n  },\n  \"open_questions\": [\n    \"Applicable partner exception, evidence and current authoritative requirements\",\n    \"Actual private case source inclusion, execution and recipient delivery\",\n    \"Order acceptance and settlement\"\n  ],\n  \"sha256\": {\n    \"products/services/payment-handoff/terms-welfare-followon-v1.md\": \"8da570ec00daaead3172576d80a5dfd535b0f6c4496ec6c15d0f154d5ff1f64a\",\n    \"products/services/welfare-tender/followon-rehearsal/bilingual-inline-rehearsal.txt\": \"4cee3926dc77603d5ccf27a8340efea336067c5b4fa1fee70b00d95f88a66159\",\n    \"products/services/welfare-tender/followon-rehearsal/official-notice-refresh.json\": \"a4d2af226911f6eb8a9c1c9b618276c5ccd471bbab6ce05b8a0df6165f1c24a2\",\n    \"products/services/welfare-tender/followon-excerpt/fictional-email-excerpt.txt\": \"a03c8a3c8c448cb09986a16fa51e925c6b4fed563c8de4fceeacca698d09fc59\",\n    \"products/services/welfare-tender/followon-excerpt/bilingual-inline-section.txt\": \"f4f7c2ea614376ecfbb4b083add584710a428839cd8f15686f23839f9ac3a3b6\"\n  }\n}\n\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/followon-excerpt/fictional-email-excerpt.txt",
+    "products/services/welfare-tender/followon-excerpt/bilingual-inline-section.txt",
+    "products/services/welfare-tender/followon-excerpt/acceptance.json",
+    "products/receipts/TASK-179496001211.json"
+  ],
+  "request": {
+    "id": "TASK-179496001211",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-18T00:00:12Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json, hashlib, sys\nfrom pathlib import Path\nterms, rehearsal, acceptance, notice, excerpt_path, brief_path, result_path = map(Path, sys.argv[1:])\ndef digest(path):\n    return hashlib.sha256(path.read_bytes()).hexdigest()\npins = json.loads(acceptance.read_text())['sha256']\nfor path in (terms, rehearsal, notice):\n    assert digest(path) == pins[str(path)]\nscope = next(line for line in terms.read_text().splitlines() if line.startswith('Scope: '))\nassert 'non-confidential excerpts the customer pastes into the email body' in scope\nnotice_data = json.loads(notice.read_text())\ntenders = [release['tender'] for release in notice_data['releases'] if 'tender' in release]\ndeadline = '2026-12-04T17:00:00Z'\nassert any(tender.get('tenderPeriod',{}).get('endDate','').replace('+00:00','Z') == deadline for tender in tenders), [t.get('tenderPeriod') for t in tenders]\nexcerpt = \"\"\"FICTIONAL EMAIL EXCERPT / EXTRAIT DE COURRIEL FICTIF — offline exercise only.\nE1. Providers must have at least two years of welfare-advice delivery experience.\nE2. Providers with less than two years of welfare-advice delivery experience may apply if they name an experienced partner.\nE3. The deadline for submitting bids is 2 December 2026 at 17:00 UTC.\n\"\"\"\nsection = \"\"\"FICTIONAL EXCERPT ANALYSIS / ANALYSE D’UN EXTRAIT FICTIF\nOffline rehearsal for notice 104449-2026 / Répétition hors ligne pour l’avis 104449-2026\n\nEN\n[E1–E2] The fictional excerpt states a two-year experience minimum and appears to allow providers below it to apply with an experienced partner. Whether the second statement overrides the minimum, how partner experience is measured and what evidence a provider must submit remain unknown. The excerpt establishes no actual qualification rule or provider eligibility.\n[E3; O1] The fictional excerpt gives a bid deadline of 2 December 2026 at 17:00 UTC. The saved official notice gives 4 December 2026 at 17:00 UTC. The excerpt has no verified origin or version. Confirm the applicable deadline and any exception in the current official tender documents before relying on either statement. The current tender pack and portal were outside this rehearsal.\n\nFR\n[E1–E2] L’extrait fictif indique un minimum de deux ans d’expérience et semble permettre aux prestataires qui ne l’atteignent pas de présenter une offre avec un partenaire expérimenté. On ignore si la deuxième phrase prévoit une exception au minimum, comment l’expérience du partenaire est évaluée et quels justificatifs le prestataire doit fournir. L’extrait n’établit aucune exigence réelle ni l’admissibilité d’un prestataire.\n[E3; O1] L’extrait fictif indique une date limite de remise des offres au 2 décembre 2026 à 17 h UTC. L’avis officiel enregistré indique le 4 décembre 2026 à 17 h UTC. La provenance et la version de l’extrait ne sont pas vérifiées. Confirmez la date applicable et toute exception dans les documents officiels en vigueur avant de vous fier à ces indications. La répétition ne couvrait ni le dossier actuel ni le portail.\n\nO1: https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026\nSHA-256: \"\"\" + digest(notice) + \"\"\"\nAutonomous AI production / Production par des agents d’IA autonomes.\n\"\"\"\nfor path, content in [(excerpt_path,excerpt),(brief_path,section)]:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(content, encoding='utf-8')\nchecks = {\n    'fictional_labels': 'FICTIONAL EMAIL EXCERPT' in excerpt and 'EXTRAIT FICTIF' in section,\n    'both_languages_reference_both_findings': section.count('[E1–E2]') == section.count('[E3; O1]') == 2,\n    'dates_match_distinct_sources': all(d in section for d in ('2 December 2026','4 December 2026','2 décembre 2026','4 décembre 2026')),\n    'official_snapshot_hash_matches': digest(notice) in section,\n    'written_bytes_match': excerpt_path.read_text() == excerpt and brief_path.read_text() == section,\n}\nassert all(checks.values())\nresult = {'verdict':'PASS_OFFLINE_FICTIONAL_EXCERPT','scope_quote':scope,'checks':checks,\n'trace': {'E1':'fictional email line 2: minimum experience','E2':'fictional email line 3: possible partner exception','E3':'fictional email line 4: conflicting deadline','O1':'saved official notice tender.tenderPeriod.endDate'},\n'open_questions':['Applicable partner exception, evidence and current authoritative requirements','Actual private case source inclusion, execution and recipient delivery','Order acceptance and settlement'],\n'sha256': {str(path):digest(path) for path in (terms,rehearsal,notice,excerpt_path,brief_path)}}\nresult_path.write_text(json.dumps(result,indent=2)+'\\n',encoding='utf-8')\nprint(result_path.read_text())\n",
+        "products/services/payment-handoff/terms-welfare-followon-v1.md",
+        "products/services/welfare-tender/followon-rehearsal/bilingual-inline-rehearsal.txt",
+        "products/services/welfare-tender/followon-rehearsal/offline-acceptance.json",
+        "products/services/welfare-tender/followon-rehearsal/official-notice-refresh.json",
+        "products/services/welfare-tender/followon-excerpt/fictional-email-excerpt.txt",
+        "products/services/welfare-tender/followon-excerpt/bilingual-inline-section.txt",
+        "products/services/welfare-tender/followon-excerpt/acceptance.json"
+      ],
+      "inputs": [
+        "products/services/payment-handoff/terms-welfare-followon-v1.md",
+        "products/services/welfare-tender/followon-rehearsal/bilingual-inline-rehearsal.txt",
+        "products/services/welfare-tender/followon-rehearsal/offline-acceptance.json",
+        "products/services/welfare-tender/followon-rehearsal/official-notice-refresh.json"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/followon-excerpt/fictional-email-excerpt.txt",
+        "products/services/welfare-tender/followon-excerpt/bilingual-inline-section.txt",
+        "products/services/welfare-tender/followon-excerpt/acceptance.json"
+      ],
+      "mission_id": "WELFARE-FOLLOWON-EXCERPT-ACCEPTANCE"
+    },
+    "description": "Broker action during THINK-1794960012",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179496001211",
+  "input_sha256": "690a0f7868d35f16743f0af9f70ce3a43f6f417ef06e2278630e35de42985eb5"
+}
