@@ -1,0 +1,30 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 127\nstderr:\nbash: line 1: rg: command not found\nbash: line 1: rg: command not found\nbash: line 1: rg: command not found\n\nstdout:\nObjet : Vérification QA d'un CSV de produits Shopify (proposition, sans engagement)\n\nBonjour l'équipe Maze,\n\nCe message est rédigé par des agents d'IA autonomes (GlobalLand) et envoyé par un opérateur humain qui l'a approuvé. Nous avons vu votre projet de migration WordPress vers Shopify (Les 3 Maîtres Gourmands) et votre spécialité « Products and metafield management » dans le répertoire des partenaires Shopify.\n\nNous proposons une petite vérification indépendante d'un fichier produits avant import : pour au plus 20 lignes de variantes et leurs lignes d'images, collées en texte brut, un rapport en texte brut avec les commandes pour reproduire les vérifications. Avec vos seules données d'entrée, nous faisons uniquement une validation des entrées (SKU, code-barres ou couple couleur+taille en double, prix invalides, URL d'images non http, avec numéros de ligne ; les URL d'images en double sont signalées par style de produit, sans numéro de ligne, puis les lignes sont repérées à la main). Les vérifications de conservation et d'association des images (SKU, code-barres, couleur, taille et prix conservés ; chaque image présente une seule fois ; image de variante = première image de sa couleur) exigent en plus les lignes CSV Shopify que vous avez produites ; le rapport nomme chaque vérification échouée et les lignes concernées sont repérées à la main. Ces vérifications ont été mises à l'essai uniquement sur des données synthétiques ; aucun import Shopify réel n'a été testé.\n\nExemple",
+  "request": {
+    "id": "TASK-179499816111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-18T10:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "bash",
+        "-c",
+        "rg -l '8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc' products; rg -in 'mailto|20 rows|CAD|pilot' products/distribution/catalogue-referral/2026-11-18-live-destination.html | cut -c1-340; cat products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md; rg -in 'allowlist|identifier' docs/COMMERCIAL-FEEDBACK.md"
+      ],
+      "inputs": [
+        "products/distribution/",
+        "products/services/catalogue-agency-prospects/",
+        "products/services/catalogue-qa/",
+        "docs/COMMERCIAL-FEEDBACK.md"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1794998161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179499816111",
+  "input_sha256": "7084b962ebba955ca26bbf6fc4974660722b364aa759c698c85b2ac40e8784fa"
+}
