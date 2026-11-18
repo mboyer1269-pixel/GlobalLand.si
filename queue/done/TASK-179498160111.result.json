@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "64518392004630077304329b0c9675685f2c9fb0ae1a9ed9e8b38306279a4d70\n\n",
+  "artifacts": [
+    "products/services/payment-handoff/welfare-source-gate.md",
+    "products/receipts/TASK-179498160111.json"
+  ],
+  "request": {
+    "id": "TASK-179498160111",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-18T06:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib, sys\np = Path(sys.argv[1]); terms = p.with_name('terms-welfare-followon-v1.md')\nassert hashlib.sha256(terms.read_bytes()).hexdigest() == '8da570ec00daaead3172576d80a5dfd535b0f6c4496ec6c15d0f154d5ff1f64a'\np.write_text(sys.argv[2], encoding='utf-8')\nprint(hashlib.sha256(p.read_bytes()).hexdigest())",
+        "products/services/payment-handoff/welfare-source-gate.md",
+        "# Welfare follow-on order check\n\nUse this card with [operator instructions](operator-instructions.md) and [terms v1](terms-welfare-followon-v1.md). The saved rehearsal used fictional inputs. The private case source still needs verification.\n\n1. Open this workflow only for an existing UK welfare-advice provider who requested the follow-on through the public welfare page. Confirm the terms v1 **Customer, Price, Scope and Delivery** clauses in writing in the same thread. The offer is CAD 49 all-inclusive via Interac for one inline EN/FR brief on notice 104449-2026, using the official notice and any non-confidential excerpts pasted in the message. The terms exclude attachments, URL retrieval by the responder, bid writing, eligibility determinations, professional advice, submission and outcome guarantees. Terms SHA-256 is `8da570ec00daaead3172576d80a5dfd535b0f6c4496ec6c15d0f154d5ff1f64a`.\n2. **Before promising the paid scope or accepting an order**, check the [official record](https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/104449-2026) outside the private responder for the operative release, LOT-0000, amendments, status, deadlines and submission route. Record a hash of the verified bytes. The private case needs an `input_service_sources` receipt for that exact source and a matching hash of the frozen case bytes. Selection of the official JSON is unresolved. A redacted operator attestation can identify inclusion, hash match, notice and lot, and the time of the currency check. Hold at this step if currency or inclusion is unverified. The historical snapshot hash `a4d2af226911f6eb8a9c1c9b618276c5ccd471bbab6ce05b8a0df6165f1c24a2` is a comparison reference.\n3. Confirm delivery feasibility under the **Timing** and **Refund** clauses. The terms bar acceptance after 4 December 2026 at 17:00 UTC, give no delivery promise after that time, and specify a full refund if delivery takes longer than five business days after confirmed receipt. The administrator records acceptance and supplies the order reference before payment is due. Founder-confirmed receipt is required before paid delivery.\n4. Use the [independently checked rehearsal](../welfare-tender/followon-acceptance/corrected-bilingual-inline-rehearsal.txt) for format and AI disclosure. Include lot weights only when supported by the current case source. Identify tender-pack gaps and distinguish any pasted excerpt from official facts. Record private execution, same-thread inline EN/FR reply acceptance, and actual recipient delivery separately where observed. Report only permitted redacted outcomes. Deposit confirmation, allocation and Treasury posting follow the separate administrative instructions.\n"
+      ],
+      "inputs": [
+        "products/services/payment-handoff/terms-welfare-followon-v1.md"
+      ],
+      "outputs": [
+        "products/services/payment-handoff/welfare-source-gate.md"
+      ],
+      "mission_id": "WELFARE-ELIGIBLE-CASE-OPERATOR-CARD"
+    },
+    "description": "Broker action during THINK-1794981601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179498160111",
+  "input_sha256": "f777da169b69c46c7c17b36999f12d82ac3367a4f059c63b9ccacb58ac07630a"
+}
