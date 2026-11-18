@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "products/distribution/catalogue-referral/operator-handoff.md 4f51e8eca79025a0274d40f16143b16e5c6a79f1eedab9aa895b1b3a156c8613\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-referral/operator-handoff.md",
+    "products/receipts/TASK-179499816114.json"
+  ],
+  "request": {
+    "id": "TASK-179499816114",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-18T10:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfrom hashlib import sha256\nfrom html.parser import HTMLParser\nfrom urllib.parse import urlsplit,parse_qs\nimport json\nbase=Path('products/distribution/catalogue-referral')\nprior=json.loads((base/'live-pilot-link-check.json').read_text())\nrelease=json.loads(Path('products/services/catalogue-qa/evidence-to-offer/checks.json').read_text())\nlive=Path(prior['snapshot']).read_bytes()\ndraft=Path(prior['draft']).read_bytes()\nassert sha256(live).hexdigest()==prior['snapshot_sha256']==release['live_sha256']\nassert sha256(draft).hexdigest()==prior['draft_sha256']\nclass Links(HTMLParser):\n    def handle_starttag(self,tag,attrs):\n        href=dict(attrs).get('href','')\n        if tag=='a' and href.startswith('mailto:'):\n            self.links.append(urlsplit(href))\nparser=Links()\nparser.links=[]\nparser.feed(live.decode())\ntag='site:shopify-catalogue-example'\ndraft_text=draft.decode()\nassert tag in draft_text\nassert any(link.path in draft_text and all(tag in parse_qs(link.query).get(field,[''])[0] for field in ('subject','body')) for link in parser.links)\ncontract=Path('docs/COMMERCIAL-FEEDBACK.md').read_text()\nassert 'truncation' in contract and 'allowlist' in contract\nout=base/'operator-handoff.md'\nout.write_text(f\"\"\"# Catalogue QA pilot | Operator handoff\n\nDecision **Ready for operator send or decline**. Use the existing item 4 draft at `{prior['draft']}` with SHA-256 `{prior['draft_sha256']}`. The opening describes a human-approved send, so use it only if the operator explicitly approves and sends it through an authorized channel.\n\nVerified destination: {prior['public_destination']} (HTTP 200, {prior['fetch_receipt']}). The saved homepage hash `{prior['snapshot_sha256']}` matches the live baseline recorded in `products/services/catalogue-qa/evidence-to-offer/checks.json`. The decoded feedback link puts `{tag}` in both subject and body; the draft's manual plain-text reply instruction uses the same identifier and recipient. The classifier contract documents a capped allowlist. Live allowlist membership, mail-client handling, and case attribution remain unverified.\n\nThe draft matches the offer's scope: up to 20 variant rows plus image rows as plain text, input-only validation, and preservation and mapping checks only with the Shopify rows produced by the agency. Duplicate image URLs are located by product style and affected rows are identified manually. The live page calls for its documented input headers and excludes personal or confidential data, attachments, store access, live import and compatibility work. The draft makes no conflicting promise. No copy correction or public revision is required for this send-or-decline decision. CAD 60 remains a price hypothesis with no response-time promise.\n\nRecord operator authorization and an actual send separately from any eligible reply. Use the authorized private cycle for any reply and retain only redacted case evidence. Treat delivered QA, administrative order acceptance and Treasury-confirmed settlement as separate outcomes. This check establishes only the public inquiry path and draft fit.\n\"\"\")\nprint(out,sha256(out.read_bytes()).hexdigest())\n"
+      ],
+      "inputs": [
+        "products/distribution/catalogue-referral/live-pilot-link-check.json",
+        "products/distribution/catalogue-referral/2026-11-18-live-destination.html",
+        "products/services/catalogue-qa/evidence-to-offer/checks.json",
+        "products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md",
+        "docs/COMMERCIAL-FEEDBACK.md"
+      ],
+      "outputs": [
+        "products/distribution/catalogue-referral/operator-handoff.md"
+      ],
+      "mission_id": "CATALOGUE-LIVE-PILOT-INQUIRY-ACCEPTANCE"
+    },
+    "description": "Broker action during THINK-1794998161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179499816114",
+  "input_sha256": "e9b230bdabb29f37c9a54ef6e7d7c21472428710e27073c6e95aee607cb06b9c"
+}
