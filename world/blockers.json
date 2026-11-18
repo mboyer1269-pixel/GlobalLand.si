@@ -179,25 +179,29 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-18T08:36:44Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1053,
-    "turns_without_verified_revenue": 1053,
-    "turns_without_outcome": 10,
+    "turns_without_new_interpreted_feedback": 1054,
+    "turns_without_verified_revenue": 1054,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-18T06:36:33Z",
-    "last_outcome_turn": "THINK-1794983409",
-    "last_productive_turn": "THINK-1794990614",
-    "last_turn": "THINK-1794992401",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1794994215",
+    "last_productive_turn": "THINK-1794994215",
+    "last_turn": "THINK-1794994215",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "CATALOGUE-QA-DIGITAL-CHECKOUT-FIT"
+      ],
+      "new_products": [
+        "products/services/catalogue-qa-digital-checkout/checkout-verdict.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
