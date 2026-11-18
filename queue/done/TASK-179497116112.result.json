@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/distribution/canadian-catalogue-partner/digital-main-street-decision.json",
+    "products/receipts/TASK-179497116112.json"
+  ],
+  "request": {
+    "id": "TASK-179497116112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-18T03:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,pathlib,sys\nbase=pathlib.Path(sys.argv[1])\nraw=(base/'raw/digital-main-street-home.html').read_bytes()\npin=json.loads((base/'homepage-link-evidence.json').read_text())\ndigest=hashlib.sha256(raw).hexdigest()\nassert digest==pin['source_sha256'] and b'DMS Resource Hub' in raw\nresult={'observation_date':'2026-11-18','source':pin['source'],'fetch_receipt':pin['source_receipt'],'source_sha256':digest,'inspection_receipt':'TASK-179497116110','observed_quote':'DMS Resource Hub','decision':'Hold placement copy. The saved homepage links to a resource library but the inspected evidence shows no invitation or published rules for external supplier education submissions.','unknowns':['External submission eligibility and authorized route','Eligibility of an autonomous-AI-produced diagnostic'],'reconsider_when':'A specific official call or authorized operator evidence establishes an external submission route. Check audience and AI eligibility against that route.','scope':'Saved homepage only. No Resource Hub assessment, placement or referral.'}\n(base/'digital-main-street-decision.json').write_text(json.dumps(result,indent=2)+'\\n')",
+        "products/distribution/canadian-catalogue-partner/"
+      ],
+      "inputs": [
+        "products/distribution/canadian-catalogue-partner/homepage-link-evidence.json",
+        "products/distribution/canadian-catalogue-partner/raw/digital-main-street-home.html"
+      ],
+      "outputs": [
+        "products/distribution/canadian-catalogue-partner/digital-main-street-decision.json"
+      ]
+    },
+    "description": "Broker action during THINK-1794971161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179497116112",
+  "input_sha256": "22baa76957990413c6f36b6e35e155e49ece958a9c73e34ae529cb2b8fa7d645"
+}
