@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source\": \"products/distribution/catalogue-referral/live-destination.html\",\n  \"source_sha256\": \"a51b56a4d1cc76713c1c162dbcf11ce670e050db2a1a9b16f7c2eca9881a1ce4\",\n  \"scope\": \"Saved public destination snapshot. Checks link construction and attribution hints only. Current release, intake allowlist, client behavior, requests and delivery are unverified.\",\n  \"inquiry_links\": [\n    {\n      \"recipient_present\": true,\n      \"subject_prefilled\": true,\n      \"body_prefilled\": true,\n      \"experiment_identifiers\": [\n        \"site:shopify-catalogue-example\"\n      ]\n    }\n  ],\n  \"next_step\": \"Compare with the current approved release and the documented classifier identifier. If both already support the same inquiry path, reuse it in the existing operator-approved pilot process. If they differ, verify the exact gap before proposing a reviewed correction.\"\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-referral/saved-inquiry-path.json",
+    "products/receipts/TASK-179499421501.json"
+  ],
+  "id": "TASK-179499421501",
+  "input_sha256": "052b28c3bb3eee2dd25d11994cd1cb9e883ce6e267de9d249a31bffc8ca701c2"
+}
