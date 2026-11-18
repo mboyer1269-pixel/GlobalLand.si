@@ -1,0 +1,45 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"release\": \"104449-2026\",\n  \"ocid\": \"ocds-h6vhtk-07971f\",\n  \"lot\": \"LOT-0000\",\n  \"criteria\": [\n    [\n      \"Price\",\n      5,\n      \"percentageExact\"\n    ],\n    [\n      \"Quality\",\n      85,\n      \"percentageExact\"\n    ],\n    [\n      \"Social Value\",\n      10,\n      \"percentageExact\"\n    ]\n  ],\n  \"checks\": {\n    \"source_and_terms_hashes_match\": true,\n    \"two_sentence_replacement_only\": true,\n    \"saved_copy_matches\": true\n  },\n  \"sha256\": {\n    \"products/services/welfare-tender/followon-rehearsal/official-notice-refresh.json\": \"a4d2af226911f6eb8a9c1c9b618276c5ccd471bbab6ce05b8a0df6165f1c24a2\",\n    \"products/services/payment-handoff/terms-welfare-followon-v1.md\": \"8da570ec00daaead3172576d80a5dfd535b0f6c4496ec6c15d0f154d5ff1f64a\",\n    \"products/services/welfare-tender/followon-rehearsal/bilingual-inline-rehearsal.txt\": \"4cee3926dc77603d5ccf27a8340efea336067c5b4fa1fee70b00d95f88a66159\",\n    \"products/services/welfare-tender/followon-acceptance/corrected-bilingual-inline-rehearsal.txt\": \"dfddd1ff667ae159ca50944102a906ea01a7d4e1a4ca9711e745d7c369b01280\"\n  },\n  \"scope\": \"Offline fictional rehearsal. Detailed scoring, eligibility, case-local source inclusion and delivery remain unverified.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/welfare-tender/followon-acceptance/corrected-bilingual-inline-rehearsal.txt",
+    "products/services/welfare-tender/followon-acceptance/lot-criteria-source-check.json",
+    "products/receipts/TASK-179496396110.json"
+  ],
+  "request": {
+    "id": "TASK-179496396110",
+    "type": "TOOL",
+    "submitted_by": "BUILDER",
+    "created_at": "2026-11-18T01:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import sys,json,hashlib\nfrom pathlib import Path\nv,s,b,t,copy,check=map(Path,sys.argv[1:])\ndef sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()\nverdict=json.loads(v.read_text())\nassert sha(s)==verdict['source_check']['sha256']\nassert sha(t)==verdict['terms_sha256']\nassert sha(b)=='4cee3926dc77603d5ccf27a8340efea336067c5b4fa1fee70b00d95f88a66159'\nr,=[r for r in json.loads(s.read_text())['releases'] if r['id']=='104449-2026' and r['ocid']=='ocds-h6vhtk-07971f' and 'tender' in r['tag']]\nlot,=[lot for lot in r['tender']['lots'] if lot['id']=='LOT-0000']\nweights=[(c['name'],n['number'],n['weight']) for c in lot['awardCriteria']['criteria'] for n in c['numbers']]\nassert weights==[('Price',5,'percentageExact'),('Quality',85,'percentageExact'),('Social Value',10,'percentageExact')]\nedits={\n'The saved structured record does not establish eligibility or award criteria.':'The notice publishes these award weights for LOT-0000: Price 5%, Quality 85%, and Social Value 10%. Check the tender pack for detailed scoring and eligibility requirements.',\n'Les données structurées enregistrées ne permettent pas d’établir les conditions d’admissibilité ni les critères d’attribution.':'L’avis publie les pondérations suivantes pour l’attribution du lot LOT-0000 : prix 5 %, qualité 85 % et valeur sociale 10 %. Consultez le dossier de consultation pour connaître les modalités détaillées de notation et les conditions d’admissibilité.'}\noriginal=b.read_text(encoding='utf-8')\nrevised=original\nfor old,new in edits.items():\n    assert revised.count(old)==1\n    revised=revised.replace(old,new)\nrestored=revised\nfor old,new in edits.items():\n    assert restored.count(new)==1\n    restored=restored.replace(new,old)\nassert restored==original\ncopy.write_text(revised,encoding='utf-8')\nassert copy.read_text(encoding='utf-8')==revised\nreport={'release':r['id'],'ocid':r['ocid'],'lot':lot['id'],'criteria':weights,'checks':{'source_and_terms_hashes_match':True,'two_sentence_replacement_only':True,'saved_copy_matches':True},'sha256':{str(p):sha(p) for p in (s,t,b,copy)},'scope':'Offline fictional rehearsal. Detailed scoring, eligibility, case-local source inclusion and delivery remain unverified.'}\ncheck.write_text(json.dumps(report,indent=2)+'\\n',encoding='utf-8')\nassert json.loads(check.read_text())==json.loads(json.dumps(report))\nprint(check.read_text())\n",
+        "products/services/welfare-tender/followon-acceptance/verdict.json",
+        "products/services/welfare-tender/followon-rehearsal/official-notice-refresh.json",
+        "products/services/welfare-tender/followon-rehearsal/bilingual-inline-rehearsal.txt",
+        "products/services/payment-handoff/terms-welfare-followon-v1.md",
+        "products/services/welfare-tender/followon-acceptance/corrected-bilingual-inline-rehearsal.txt",
+        "products/services/welfare-tender/followon-acceptance/lot-criteria-source-check.json"
+      ],
+      "inputs": [
+        "products/services/welfare-tender/followon-acceptance/verdict.json",
+        "products/services/welfare-tender/followon-rehearsal/official-notice-refresh.json",
+        "products/services/welfare-tender/followon-rehearsal/bilingual-inline-rehearsal.txt",
+        "products/services/payment-handoff/terms-welfare-followon-v1.md"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/followon-acceptance/corrected-bilingual-inline-rehearsal.txt",
+        "products/services/welfare-tender/followon-acceptance/lot-criteria-source-check.json"
+      ],
+      "mission_id": "WELFARE-FOLLOWON-LOT-CRITERIA-CORRECTION"
+    },
+    "description": "Broker action during THINK-1794963961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179496396110",
+  "input_sha256": "b7bc1b27f9959a2b4e0c3f735622e8d683b16880f07cba5c8e455bf3f149431d"
+}
