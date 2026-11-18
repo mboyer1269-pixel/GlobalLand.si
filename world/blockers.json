@@ -179,25 +179,28 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-18T01:00:43Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1023,
-    "turns_without_verified_revenue": 1023,
-    "turns_without_outcome": 2,
+    "turns_without_new_interpreted_feedback": 1024,
+    "turns_without_verified_revenue": 1024,
+    "turns_without_outcome": 3,
     "outcome_threshold": 12,
     "dry_since": "2026-11-18T01:00:43Z",
     "last_outcome_turn": "THINK-1794962162",
-    "last_productive_turn": "THINK-1794962162",
-    "last_turn": "THINK-1794963961",
+    "last_productive_turn": "THINK-1794965410",
+    "last_turn": "THINK-1794965410",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/welfare-tender/followon-acceptance/corrected-bilingual-inline-rehearsal.txt",
+        "products/services/welfare-tender/followon-acceptance/lot-criteria-source-check.json"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
