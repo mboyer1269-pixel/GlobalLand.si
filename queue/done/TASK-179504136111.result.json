@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "{\"decision\":\"NO_BID_WITHIN_CAPTURE\",\"sourceReceipt\":\"TASK-179502876101\",\"sha256\":\"33d85ed3b5e0b38258cf283e4a3481dec45102ba444b62c0f83230a8b3e5b6e0\",\"publicationWindowUtc\":[\"2026-11-17T00:00:00Z\",\"2026-11-18T00:00:00Z\"],\"releaseCount\":9,\"reviewBasis\":\"Nine buyer summaries screened; underlying tender packs were outside this readback. Keyword absence was not decisive.\",\"findings\":[\"Thetford seeks an integrated activity and interpretation plan and, separately, an architecture practice. Neither summary offers a standalone file-processing purchase.\",\"The two ALIGN notices point to tender specifications and a Coupa invitation. The captured summaries do not establish a separately purchasable data deliverable, and the Latin America summary gives an earlier September expression-of-interest date despite a November structured deadline.\",\"The dredging notice refers to an attached brief for lot details. The feed cannot establish the contents of those lots. The other summaries concern dementia services, arts and heritage capacity building, AI mentoring delivery or diving equipment.\"],\"reopenOn\":\"A current buyer notice that explicitly permits a standalone data-cleaning, file-conversion or export-validation response and supplies an acceptance criterion, deadline, eligibility and authorized response route.\",\"commercialEvidence\":\"No sample, bid, accepted order or settlement resulted from this screening.\"}\n\n",
+  "artifacts": [
+    "products/services/contracts-finder-small-data-job/bid-decision.json",
+    "products/receipts/TASK-179504136111.json"
+  ],
+  "request": {
+    "id": "TASK-179504136111",
+    "type": "TOOL",
+    "submitted_by": "BUYER_ROUTE",
+    "created_at": "2026-11-18T22:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs=require('node:fs'); const crypto=require('node:crypto'); const assert=require('node:assert/strict'); const [dir,out]=process.argv.slice(1); const triage=JSON.parse(fs.readFileSync(dir+'source-verified-triage.json')); const readback=JSON.parse(fs.readFileSync(dir+'buyer-scope-readback.json')); const bytes=fs.readFileSync(dir+'official-feed.json'); const hash=crypto.createHash('sha256').update(bytes).digest('hex'); assert.equal(hash,triage.sourceSha256); assert.equal(hash,readback.feedSha256); assert.equal(JSON.parse(bytes).releases.length,9); assert.deepEqual(triage.rows.map(r=>r.releaseId),readback.tenders.map(r=>r.id)); const evidence={decision:'NO_BID_WITHIN_CAPTURE',sourceReceipt:triage.sourceReceipt,sha256:hash,publicationWindowUtc:[triage.publishedFromUtc,triage.publishedToUtc],releaseCount:triage.releaseCount,reviewBasis:'Nine buyer summaries screened; underlying tender packs were outside this readback. Keyword absence was not decisive.',findings:['Thetford seeks an integrated activity and interpretation plan and, separately, an architecture practice. Neither summary offers a standalone file-processing purchase.','The two ALIGN notices point to tender specifications and a Coupa invitation. The captured summaries do not establish a separately purchasable data deliverable, and the Latin America summary gives an earlier September expression-of-interest date despite a November structured deadline.','The dredging notice refers to an attached brief for lot details. The feed cannot establish the contents of those lots. The other summaries concern dementia services, arts and heritage capacity building, AI mentoring delivery or diving equipment.'],reopenOn:'A current buyer notice that explicitly permits a standalone data-cleaning, file-conversion or export-validation response and supplies an acceptance criterion, deadline, eligibility and authorized response route.',commercialEvidence:'No sample, bid, accepted order or settlement resulted from this screening.'}; fs.writeFileSync(out,JSON.stringify(evidence,null,2)+'\\n'); console.log(JSON.stringify(evidence));",
+        "products/services/contracts-finder-small-data-job/",
+        "products/services/contracts-finder-small-data-job/bid-decision.json"
+      ],
+      "inputs": [
+        "products/services/contracts-finder-small-data-job/official-feed.json",
+        "products/services/contracts-finder-small-data-job/source-verified-triage.json",
+        "products/services/contracts-finder-small-data-job/buyer-scope-readback.json"
+      ],
+      "outputs": [
+        "products/services/contracts-finder-small-data-job/bid-decision.json"
+      ],
+      "mission_id": "CONTRACTS-FINDER-SMALL-DATA-JOB"
+    },
+    "description": "Broker action during THINK-1795041361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179504136111",
+  "input_sha256": "b04db56db40305d52ae488f581c31276d87abbc427a117e1b4660f0975e3f2aa"
+}
