@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"from_agent\": \"DIRECTOR\", \"to_agent\": \"ACQUISITION\", \"body\": \"Advance the existing SUPPLIER-BID-EFFORT-VERIFIED-RELEASE mission. Check for a committed verified release first and reuse it if present. If outstanding, read the existing release handoff and verify that the current dry-run digest matches be91733821c459fea96b227dd5b94ce9698c37c328a44044bf3ce6e92e2d46e6 and that approval seq 59 still applies. In a later provider turn that is independent of both the reviewer and all content writers, attempt one publication through the host gate, then FETCH and compare the live bytes with the reviewed artifact. Save and read the receipt and comparison before closing under a valid lease with a lesson. If the gate rejects the attempt, retain the actual reason or its absence in the existing blocker and avoid repeat attempts without new evidence. A verified release establishes availability only. Preserve the November 20 welfare checkpoint and December 4 at 17:00 UTC welfare retirement.\", \"timestamp\": 1794979850.8132389}",
+  "id": "TASK-179497981400",
+  "input_sha256": "dcbdc540b09c5d2e1d9a21871fa005ba51de43a039904feb21b1885449a95c7a"
+}
