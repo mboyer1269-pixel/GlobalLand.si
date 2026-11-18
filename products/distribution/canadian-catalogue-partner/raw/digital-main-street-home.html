@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+    <script>
+        var dms_lang = 'en_US';
+    </script>
+            <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NB34DKQ');</script>
+        <!-- End Google Tag Manager -->
+            <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q72T4RSK5Y"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Q72T4RSK5Y');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/logos/user_105.png" />    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+            <link rel="pingback" href="https://digitalmainstreet.ca/xmlrpc.php">
+    <script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script id="dms-topbar-head">
+window.dmsTopbar = {"url":"https:\/\/digitalmainstreet.ca\/wp-json\/dms\/v1\/topbar"};
+(function () {
+    'use strict';
+
+    var config = window.dmsTopbar;
+    if (!config || !config.url || !window.fetch || !window.Promise) {
+        return;
+    }
+
+    var TIMEOUT = 3000;
+
+    var url = config.url;
+    var test = /[?&]dms_topbar_test=([A-Za-z]{2})(?:&|$)/.exec(window.location.search);
+    if (test) {
+        url += (url.indexOf('?') === -1 ? '?' : '&') + 'test=' + test[1];
+    }
+
+    var options = { credentials: 'same-origin', headers: { Accept: 'application/json' } };
+    if (config.nonce) {
+        options.headers['X-WP-Nonce'] = config.nonce;
+    }
+    var controller = window.AbortController ? new window.AbortController() : null;
+    if (controller) {
+        options.signal = controller.signal;
+    }
+
+    var timer;
+    var timeout = new Promise(function (resolve) {
+        timer = window.setTimeout(function () {
+            if (controller) {
+                controller.abort();
+            }
+            resolve(null);
+        }, TIMEOUT);
+    });
+
+    var request = window.fetch(url, options).then(function (response) {
+        return response.ok ? response.json() : null;
+    });
+
+    window.dmsTopbarRequest = Promise.race([request, timeout]).then(function (data) {
+        window.clearTimeout(timer);
+        return data;
+    }, function () {
+        return null;
+    });
+})();
+</script>
+
+	<!-- This site is optimized with the Yoast SEO Premium plugin v28.8 (Yoast SEO v28.8) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
+	<title>Digital Main Street</title>
+	<meta name="description" content="Digital Main Street assists main street businesses with their adoption of technology with easy to use tools and resources." />
+	<link rel="canonical" href="https://digitalmainstreet.ca/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Digital Main Street - Transforming Bricks-and-Mortar" />
+	<meta property="og:description" content="Digital Main Street assists main street businesses with their adoption of technology with easy to use tools and resources." />
+	<meta property="og:url" content="https://digitalmainstreet.ca/" />
+	<meta property="og:site_name" content="Digital Main Street" />
+	<meta property="article:publisher" content="https://www.facebook.com/DigitalMainStreet/" />
+	<meta property="article:modified_time" content="2017-12-30T17:44:26+00:00" />
+	<meta property="og:image" content="https://digitalmainstreet.ca/wp-content/uploads/2018/11/DMS-Banner.jpg" />
+	<meta property="og:image:width" content="800" />
+	<meta property="og:image:height" content="400" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@digital_mainst" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebPage","@id":"https:\/\/digitalmainstreet.ca\/","url":"https:\/\/digitalmainstreet.ca\/","name":"Digital Main Street","isPartOf":{"@id":"https:\/\/digitalmainstreet.ca\/#website"},"about":{"@id":"https:\/\/digitalmainstreet.ca\/#organization"},"datePublished":"2017-02-22T22:00:53+00:00","dateModified":"2017-12-30T17:44:26+00:00","description":"Digital Main Street assists main street businesses with their adoption of technology with easy to use tools and resources.","breadcrumb":{"@id":"https:\/\/digitalmainstreet.ca\/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https:\/\/digitalmainstreet.ca\/"]}]},{"@type":"BreadcrumbList","@id":"https:\/\/digitalmainstreet.ca\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"https:\/\/digitalmainstreet.ca\/#website","url":"https:\/\/digitalmainstreet.ca\/","name":"Digital Main Street","description":"Digital Main Street","publisher":{"@id":"https:\/\/digitalmainstreet.ca\/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/digitalmainstreet.ca\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https:\/\/digitalmainstreet.ca\/#organization","name":"Digital Main Street","url":"https:\/\/digitalmainstreet.ca\/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/digitalmainstreet.ca\/#\/schema\/logo\/image\/","url":"https:\/\/digitalmainstreet.ca\/wp-content\/uploads\/2017\/04\/dms_logo_colour_boxed-e1492625281888.jpg","contentUrl":"https:\/\/digitalmainstreet.ca\/wp-content\/uploads\/2017\/04\/dms_logo_colour_boxed-e1492625281888.jpg","width":533,"height":533,"caption":"Digital Main Street"},"image":{"@id":"https:\/\/digitalmainstreet.ca\/#\/schema\/logo\/image\/"},"sameAs":["https:\/\/www.facebook.com\/DigitalMainStreet\/","https:\/\/x.com\/digital_mainst"]}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//maps.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="Digital Main Street &raquo; Feed" href="https://digitalmainstreet.ca/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Digital Main Street &raquo; Comments Feed" href="https://digitalmainstreet.ca/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Digital Main Street &raquo; Digital Main Street - Transforming Bricks-and-Mortar Comments Feed" href="https://digitalmainstreet.ca/digital-main-street-transforming-bricks-mortar/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://digitalmainstreet.ca/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdigitalmainstreet.ca%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://digitalmainstreet.ca/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdigitalmainstreet.ca%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel='stylesheet' id='wpra-lightbox-css' href='https://digitalmainstreet.ca/wp-content/plugins/wp-rss-aggregator/core/css/jquery-colorbox.css?ver=1.4.33-b-modified-1789740605' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+
+
+<link rel='stylesheet' id='ppress-frontend-css' href='https://digitalmainstreet.ca/wp-content/plugins/wp-user-avatar/assets/css/frontend.min.css?ver=4.17.7-b-modified-1793377237' media='all' />
+<link rel='stylesheet' id='ppress-flatpickr-css' href='https://digitalmainstreet.ca/wp-content/plugins/wp-user-avatar/assets/flatpickr/flatpickr.min.css?ver=4.17.7-b-modified-1793377237' media='all' />
+<link rel='stylesheet' id='ppress-select2-css' href='https://digitalmainstreet.ca/wp-content/plugins/wp-user-avatar/assets/select2/select2.min.css?ver=7.1.4-b-modified-1793377237' media='all' />
+<link rel='stylesheet' id='learndash_quiz_front_css-css' href='//digitalmainstreet.ca/wp-content/plugins/sfwd-lms/themes/legacy/templates/learndash_quiz_front.min.css?ver=4.8.0' media='all' />
+<link rel='stylesheet' id='jquery-dropdown-css-css' href='//digitalmainstreet.ca/wp-content/plugins/sfwd-lms/assets/css/jquery.dropdown.min.css?ver=4.8.0' media='all' />
+<link rel='stylesheet' id='learndash_lesson_video-css' href='//digitalmainstreet.ca/wp-content/plugins/sfwd-lms/themes/legacy/templates/learndash_lesson_video.min.css?ver=4.8.0' media='all' />
+<link rel='stylesheet' id='trp-floater-language-switcher-style-css' href='https://digitalmainstreet.ca/wp-content/plugins/translatepress-multilingual/assets/css/trp-floater-language-switcher.css?ver=3.3.8-b-modified-1793377250' media='all' />
+<link rel='stylesheet' id='trp-language-switcher-style-css' href='https://digitalmainstreet.ca/wp-content/plugins/translatepress-multilingual/assets/css/trp-language-switcher.css?ver=3.3.8-b-modified-1793377250' media='all' />
+<link rel='stylesheet' id='Bebas-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/fonts/Bebas/Bebas.css?ver=3.4.1-b-modified-1495574610' media='all' />
+<link rel='stylesheet' id='BebasNeueRegular-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/fonts/BebasNeueRegular/BebasNeueRegular.css?ver=3.4.1-b-modified-1525128313' media='all' />
+<link rel='stylesheet' id='BebasNeueBold-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/fonts/BebasNeueBold/BebasNeueBold.css?ver=3.4.1-b-modified-1525128312' media='all' />
+<link rel='stylesheet' id='roboto_bold-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/fonts/roboto/stylesheet.css?ver=3.4.1-b-modified-1488382617' media='all' />
+<link rel='stylesheet' id='PTSerif-Caption-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/fonts/PTSerif-Caption/stylesheet.css?ver=3.4.1-b-modified-1619025512' media='all' />
+<link rel='stylesheet' id='bootstrap-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap/css/bootstrap.min.css?ver=7.1.4-b-modified-1491842612' media='all' />
+<link rel='stylesheet' id='rateyo-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/rateyo/jquery.rateyo.min.css?ver=7.1.4-b-modified-1467037829' media='all' />
+<link rel='stylesheet' id='selectize-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/selectize/selectize.css?ver=7.1.4-b-modified-1488908884' media='all' />
+<link rel='stylesheet' id='select-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/select2/select2.min.css?ver=7.1.4-b-modified-1488917245' media='all' />
+<link rel='stylesheet' id='jquery-ui-autocomplete-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/jquery/jquery-ui.min.css?ver=7.1.4-b-modified-1490314606' media='all' />
+<link rel='stylesheet' id='default-calendar-list-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/css/default-calendar-list.min.css?ver=7.1.4-b-modified-1495574607' media='all' />
+<link rel='stylesheet' id='default-calendar-grid-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/css/default-calendar-grid.min.css?ver=7.1.4-b-modified-1495574607' media='all' />
+<link rel='stylesheet' id='multi-select-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap-multiselect/css/bootstrap-multiselect.css?ver=20180924-b-modified-1539579691' media='all' />
+<link rel='stylesheet' id='multi-select2-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/multi-select/css/multi-select.css?ver=20190611-b-modified-1519011951' media='all' />
+<link rel='stylesheet' id='bootstrap-switch-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap-switch/css/bootstrap-switch.css?ver=20170711-b-modified-1519011950' media='all' />
+<link rel='stylesheet' id='bootstrap-datetimepicker-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css?ver=7.1.4-b-modified-1519011949' media='all' />
+<link rel='stylesheet' id='convergine-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/style.css?b-modified=1791567452&#038;ver=20260925' media='all' />
+<link rel='stylesheet' id='media-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/css/media.css?ver=20260925-b-modified-1791575556' media='all' />
+<link rel='stylesheet' id='courses-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/css/courses.css?ver=20220623-b-modified-1701401263' media='all' />
+<link rel='stylesheet' id='brand-guidelines-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/css/brand-guidelines.css?ver=20210819-b-modified-1701128209' media='all' />
+<link rel='stylesheet' id='bootstrap-timepicker-style-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap-timepicker/css/bootstrap-timepicker.min.css?ver=7.1.4-b-modified-1519011950' media='all' />
+<link rel='stylesheet' id='learndash-front-css' href='//digitalmainstreet.ca/wp-content/plugins/sfwd-lms/themes/ld30/assets/css/learndash.min.css?ver=4.8.0' media='all' />
+<style id="learndash-front-inline-css">
+		.learndash-wrapper .ld-item-list .ld-item-list-item.ld-is-next,
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_questionListItem label:focus-within {
+			border-color: #5fd0de;
+		}
+
+		/*
+		.learndash-wrapper a:not(.ld-button):not(#quiz_continue_link):not(.ld-focus-menu-link):not(.btn-blue):not(#quiz_continue_link):not(.ld-js-register-account):not(#ld-focus-mode-course-heading):not(#btn-join):not(.ld-item-name):not(.ld-table-list-item-preview):not(.ld-lesson-item-preview-heading),
+		 */
+
+		.learndash-wrapper .ld-breadcrumbs a,
+		.learndash-wrapper .ld-lesson-item.ld-is-current-lesson .ld-lesson-item-preview-heading,
+		.learndash-wrapper .ld-lesson-item.ld-is-current-lesson .ld-lesson-title,
+		.learndash-wrapper .ld-primary-color-hover:hover,
+		.learndash-wrapper .ld-primary-color,
+		.learndash-wrapper .ld-primary-color-hover:hover,
+		.learndash-wrapper .ld-primary-color,
+		.learndash-wrapper .ld-tabs .ld-tabs-navigation .ld-tab.ld-active,
+		.learndash-wrapper .ld-button.ld-button-transparent,
+		.learndash-wrapper .ld-button.ld-button-reverse,
+		.learndash-wrapper .ld-icon-certificate,
+		.learndash-wrapper .ld-login-modal .ld-login-modal-login .ld-modal-heading,
+		#wpProQuiz_user_content a,
+		.learndash-wrapper .ld-item-list .ld-item-list-item a.ld-item-name:hover,
+		.learndash-wrapper .ld-focus-comments__heading-actions .ld-expand-button,
+		.learndash-wrapper .ld-focus-comments__heading a,
+		.learndash-wrapper .ld-focus-comments .comment-respond a,
+		.learndash-wrapper .ld-focus-comment .ld-comment-reply a.comment-reply-link:hover,
+		.learndash-wrapper .ld-expand-button.ld-button-alternate {
+			color: #5fd0de !important;
+		}
+
+		.learndash-wrapper .ld-focus-comment.bypostauthor>.ld-comment-wrapper,
+		.learndash-wrapper .ld-focus-comment.role-group_leader>.ld-comment-wrapper,
+		.learndash-wrapper .ld-focus-comment.role-administrator>.ld-comment-wrapper {
+			background-color:rgba(95, 208, 222, 0.03) !important;
+		}
+
+
+		.learndash-wrapper .ld-primary-background,
+		.learndash-wrapper .ld-tabs .ld-tabs-navigation .ld-tab.ld-active:after {
+			background: #5fd0de !important;
+		}
+
+
+
+		.learndash-wrapper .ld-course-navigation .ld-lesson-item.ld-is-current-lesson .ld-status-incomplete,
+		.learndash-wrapper .ld-focus-comment.bypostauthor:not(.ptype-sfwd-assignment) >.ld-comment-wrapper>.ld-comment-avatar img,
+		.learndash-wrapper .ld-focus-comment.role-group_leader>.ld-comment-wrapper>.ld-comment-avatar img,
+		.learndash-wrapper .ld-focus-comment.role-administrator>.ld-comment-wrapper>.ld-comment-avatar img {
+			border-color: #5fd0de !important;
+		}
+
+
+
+		.learndash-wrapper .ld-loading::before {
+			border-top:3px solid #5fd0de !important;
+		}
+
+		.learndash-wrapper .ld-button:hover:not(.learndash-link-previous-incomplete):not(.ld-button-transparent),
+		#learndash-tooltips .ld-tooltip:after,
+		#learndash-tooltips .ld-tooltip,
+		.learndash-wrapper .ld-primary-background,
+		.learndash-wrapper .btn-join,
+		.learndash-wrapper #btn-join,
+		.learndash-wrapper .ld-button:not(.ld-button-reverse):not(.learndash-link-previous-incomplete):not(.ld-button-transparent),
+		.learndash-wrapper .ld-expand-button,
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_button:not(.wpProQuiz_button_reShowQuestion):not(.wpProQuiz_button_restartQuiz),
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_button2,
+		.learndash-wrapper .ld-focus .ld-focus-sidebar .ld-course-navigation-heading,
+		.learndash-wrapper .ld-focus .ld-focus-sidebar .ld-focus-sidebar-trigger,
+		.learndash-wrapper .ld-focus-comments .form-submit #submit,
+		.learndash-wrapper .ld-login-modal input[type='submit'],
+		.learndash-wrapper .ld-login-modal .ld-login-modal-register,
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_certificate a.btn-blue,
+		.learndash-wrapper .ld-focus .ld-focus-header .ld-user-menu .ld-user-menu-items a,
+		#wpProQuiz_user_content table.wp-list-table thead th,
+		#wpProQuiz_overlay_close,
+		.learndash-wrapper .ld-expand-button.ld-button-alternate .ld-icon {
+			background-color: #5fd0de !important;
+		}
+
+		.learndash-wrapper .ld-focus .ld-focus-header .ld-user-menu .ld-user-menu-items:before {
+			border-bottom-color: #5fd0de !important;
+		}
+
+		.learndash-wrapper .ld-button.ld-button-transparent:hover {
+			background: transparent !important;
+		}
+
+		.learndash-wrapper .ld-focus .ld-focus-header .sfwd-mark-complete .learndash_mark_complete_button,
+		.learndash-wrapper .ld-focus .ld-focus-header #sfwd-mark-complete #learndash_mark_complete_button,
+		.learndash-wrapper .ld-button.ld-button-transparent,
+		.learndash-wrapper .ld-button.ld-button-alternate,
+		.learndash-wrapper .ld-expand-button.ld-button-alternate {
+			background-color:transparent !important;
+		}
+
+		.learndash-wrapper .ld-focus-header .ld-user-menu .ld-user-menu-items a,
+		.learndash-wrapper .ld-button.ld-button-reverse:hover,
+		.learndash-wrapper .ld-alert-success .ld-alert-icon.ld-icon-certificate,
+		.learndash-wrapper .ld-alert-warning .ld-button:not(.learndash-link-previous-incomplete),
+		.learndash-wrapper .ld-primary-background.ld-status {
+			color:white !important;
+		}
+
+		.learndash-wrapper .ld-status.ld-status-unlocked {
+			background-color: rgba(95,208,222,0.2) !important;
+			color: #5fd0de !important;
+		}
+
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_addToplist {
+			background-color: rgba(95,208,222,0.1) !important;
+			border: 1px solid #5fd0de !important;
+		}
+
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_toplistTable th {
+			background: #5fd0de !important;
+		}
+
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_toplistTrOdd {
+			background-color: rgba(95,208,222,0.1) !important;
+		}
+
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_reviewDiv li.wpProQuiz_reviewQuestionTarget {
+			background-color: #5fd0de !important;
+		}
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_time_limit .wpProQuiz_progress {
+			background-color: #5fd0de !important;
+		}
+		
+		.learndash-wrapper #quiz_continue_link,
+		.learndash-wrapper .ld-secondary-background,
+		.learndash-wrapper .learndash_mark_complete_button,
+		.learndash-wrapper #learndash_mark_complete_button,
+		.learndash-wrapper .ld-status-complete,
+		.learndash-wrapper .ld-alert-success .ld-button,
+		.learndash-wrapper .ld-alert-success .ld-alert-icon {
+			background-color: #81d742 !important;
+		}
+
+		.learndash-wrapper .wpProQuiz_content a#quiz_continue_link {
+			background-color: #81d742 !important;
+		}
+
+		.learndash-wrapper .course_progress .sending_progress_bar {
+			background: #81d742 !important;
+		}
+
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_button_reShowQuestion:hover, .learndash-wrapper .wpProQuiz_content .wpProQuiz_button_restartQuiz:hover {
+			background-color: #81d742 !important;
+			opacity: 0.75;
+		}
+
+		.learndash-wrapper .ld-secondary-color-hover:hover,
+		.learndash-wrapper .ld-secondary-color,
+		.learndash-wrapper .ld-focus .ld-focus-header .sfwd-mark-complete .learndash_mark_complete_button,
+		.learndash-wrapper .ld-focus .ld-focus-header #sfwd-mark-complete #learndash_mark_complete_button,
+		.learndash-wrapper .ld-focus .ld-focus-header .sfwd-mark-complete:after {
+			color: #81d742 !important;
+		}
+
+		.learndash-wrapper .ld-secondary-in-progress-icon {
+			border-left-color: #81d742 !important;
+			border-top-color: #81d742 !important;
+		}
+
+		.learndash-wrapper .ld-alert-success {
+			border-color: #81d742;
+			background-color: transparent !important;
+			color: #81d742;
+		}
+
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_reviewQuestion li.wpProQuiz_reviewQuestionSolved,
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_box li.wpProQuiz_reviewQuestionSolved {
+			background-color: #81d742 !important;
+		}
+
+		.learndash-wrapper .wpProQuiz_content  .wpProQuiz_reviewLegend span.wpProQuiz_reviewColor_Answer {
+			background-color: #81d742 !important;
+		}
+
+		
+		.learndash-wrapper .ld-alert-warning {
+			background-color:transparent;
+		}
+
+		.learndash-wrapper .ld-status-waiting,
+		.learndash-wrapper .ld-alert-warning .ld-alert-icon {
+			background-color: #1e73be !important;
+		}
+
+		.learndash-wrapper .ld-tertiary-color-hover:hover,
+		.learndash-wrapper .ld-tertiary-color,
+		.learndash-wrapper .ld-alert-warning {
+			color: #1e73be !important;
+		}
+
+		.learndash-wrapper .ld-tertiary-background {
+			background-color: #1e73be !important;
+		}
+
+		.learndash-wrapper .ld-alert-warning {
+			border-color: #1e73be !important;
+		}
+
+		.learndash-wrapper .ld-tertiary-background,
+		.learndash-wrapper .ld-alert-warning .ld-alert-icon {
+			color:white !important;
+		}
+
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_reviewQuestion li.wpProQuiz_reviewQuestionReview,
+		.learndash-wrapper .wpProQuiz_content .wpProQuiz_box li.wpProQuiz_reviewQuestionReview {
+			background-color: #1e73be !important;
+		}
+
+		.learndash-wrapper .wpProQuiz_content  .wpProQuiz_reviewLegend span.wpProQuiz_reviewColor_Review {
+			background-color: #1e73be !important;
+		}
+
+		
+/*# sourceURL=learndash-front-inline-css */
+</style>
+<link rel='stylesheet' id='slb_core-css' href='https://digitalmainstreet.ca/wp-content/plugins/simple-lightbox/client/css/app.css?ver=2.9.5' media='all' />
+<link rel='stylesheet' id='forget-about-shortcode-buttons-css' href='https://digitalmainstreet.ca/wp-content/plugins/forget-about-shortcode-buttons/public/css/button-styles.css?ver=2.1.3-b-modified-1674705306' media='all' />
+<link rel='stylesheet' id='dms-topbar-css' href='https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/css/dms-topbar.css?ver=20261028-b-modified-1793200620' media='all' />
+<script id="jquery-core-js" src="https://digitalmainstreet.ca/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://digitalmainstreet.ca/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<script id="ppress-flatpickr-js" src="https://digitalmainstreet.ca/wp-content/plugins/wp-user-avatar/assets/flatpickr/flatpickr.min.js?ver=4.17.7-b-modified-1793377237"></script>
+<script id="ppress-select2-js" src="https://digitalmainstreet.ca/wp-content/plugins/wp-user-avatar/assets/select2/select2.min.js?ver=4.17.7-b-modified-1793377237"></script>
+<script id="jquery-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/jquery/jquery-2.1.3.min.js?ver=7.1.4-b-modified-1488390945"></script>
+<script id="jquery-ui-autocomplete-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/jquery/jquery-ui.min.js?ver=7.1.4-b-modified-1490313622"></script>
+<script id="bootstrap-tether-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap/js/tether.min.js?ver=7.1.4-b-modified-1488208416"></script>
+<script id="bootstrap-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap/js/bootstrap.min.js?ver=7.1.4-b-modified-1488208289"></script>
+<script id="multi-select-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap-multiselect/js/bootstrap-multiselect.js?ver=7.1.4-b-modified-1539579691"></script>
+<script id="multi-select2-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/multi-select/js/jquery.multi-select.js?ver=7.1.4-b-modified-1519011951"></script>
+<script id="quicksearch-master-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/quicksearch-master/jquery.quicksearch.js?ver=7.1.4-b-modified-1519011946"></script>
+<script id="bootstrap-switch-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap-switch/js/bootstrap-switch.js?ver=7.1.4-b-modified-1519011950"></script>
+<script id="moment-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap-datetimepicker/js/moment.js?ver=7.1.4-b-modified-1519011950"></script>
+<script id="bootstrap-datetimepicker-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js?ver=7.1.4-b-modified-1519011950"></script>
+<script id="bootstrap-timepicker-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/bootstrap-timepicker/js/bootstrap-timepicker.min.js?ver=7.1.4-b-modified-1519011950"></script>
+<script id="rateyo-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/rateyo/jquery.rateyo.min.js?ver=7.1.4-b-modified-1488408291"></script>
+<script id="selectize-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/selectize/selectize.js?ver=0.12.61-b-modified-1593723662"></script>
+<script id="validate-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/validate/jquery.validate.min.js?ver=7.1.4-b-modified-1519011946"></script>
+<script id="color-thief-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/color-thief/color-thief.js?ver=7.1.4-b-modified-1495574610"></script>
+<script id="select-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/select2/select2.js?ver=7.1.4-b-modified-1488917334"></script>
+<script id="waitforimages-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/waitforimages/jquery.waitforimages.js?ver=7.1.4-b-modified-1495574610"></script>
+<script id="maskedinput-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/maskedinput/jquery.maskedinput.min.js?ver=7.1.4-b-modified-1488926092"></script>
+<script id="lazyload-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/lazyload/jquery.lazyload.js?ver=7.1.4-b-modified-1495574610"></script>
+<script id="circle-progress-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/circle-progress/circle-progress.min.js?ver=7.1.4-b-modified-1519011945"></script>
+<script id="main-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/js/main.js?ver=20240501-b-modified-1714548751"></script>
+<script id="rsclean-request-script-js-extra">
+var theme_ajax = {"url":"https://digitalmainstreet.ca/wp-admin/admin-ajax.php","site_url":"https://digitalmainstreet.ca","theme_url":"https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet"};
+//# sourceURL=rsclean-request-script-js-extra
+</script>
+<script id="rsclean-request-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/js/theme-ajax.js?ver=20211222-b-modified-1680215490"></script>
+<link rel="https://api.w.org/" href="https://digitalmainstreet.ca/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://digitalmainstreet.ca/wp-json/wp/v2/pages/2" /><link rel='shortlink' href='https://digitalmainstreet.ca/' />
+<link rel="alternate" hreflang="en-US" href="https://digitalmainstreet.ca/"/>
+<link rel="alternate" hreflang="fr-CA" href="https://digitalmainstreet.ca/fr/"/>
+<link rel="alternate" hreflang="en" href="https://digitalmainstreet.ca/"/>
+<link rel="alternate" hreflang="fr" href="https://digitalmainstreet.ca/fr/"/>
+<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>    <script type="text/javascript">
+        function external_links_in_new_windows_loop() {
+            if (!document.links) {
+                document.links = document.getElementsByTagName('a');
+            }
+            var change_link = false;
+            var skip_links = ["https://programs.digitalmainstreet.ca/shophere-signup"];
+            for (var t=0; t<document.links.length; t++) {
+                var all_links = document.links[t];
+                change_link = false;
+                if(document.links[t].hasAttribute('onClick') == false) {
+                    // forced if the address starts with http (or also https), but does not link to the current domain
+                    if(all_links.href.search(/^http/) != -1 && all_links.href.search('digitalmainstreet.ca') == -1) {
+                        if(!skip_links.includes(all_links.href)) {
+                            change_link = true;
+                        }
+                    }
+                    if(change_link == true) {
+                        document.links[t].setAttribute('data-link', all_links.href);
+                        document.links[t].setAttribute('target', '_blank');
+                    }
+                }
+            }
+        }
+        // Load
+        function external_links_in_new_windows_load(func) {
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function'){
+                window.onload = func;
+            } else {
+                window.onload = function(){
+                    oldonload();
+                    func();
+                }
+            }
+        }
+        external_links_in_new_windows_load(external_links_in_new_windows_loop);
+    </script>
+    <!-- Twitter universal website tag code -->
+    <script>
+        !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+        },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+            a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+        // Insert Twitter Pixel ID and Standard Event data below
+        twq('init','nx8at');
+        twq('track','PageView');
+    </script>
+    <!-- End Twitter universal website tag code -->
+            <!-- Google tag (gtag.js) -->
+        <script async src=https://www.googletagmanager.com/gtag/js?id=AW-18579236792></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18579236792');
+        </script>
+        </head>
+<body class="home wp-singular page-template page-template-template-landing-page page-template-template-landing-page-php page page-id-2 wp-theme-digitalmainstreet translatepress-en_US group-blog" data-spy="scroll" data-target="#myScrollspy" data-offset="200">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NB34DKQ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <a onclick="skipToMainContent(this);" class="skip-button" id="skip-button" tabindex="1" href="javascript:void(0)">Skip to main content</a>
+<header class="header header_landing">
+    <nav class="navbarheader">
+        <div class="container">
+            <div class="row">
+                <div class="logo-wrapper col-xl-1 col-lg-1 col-md-3 col-sm-4 col-3">
+                    <a href="/" class="navbar-brand">
+                        <img src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/DMS_Logo_large.svg" alt="Digital Main Street"/>
+                    </a>
+                </div>
+                <div class="menu-wrapper col-xl-9 col-lg-9 col-md-1 col-sm-1 col-2 text-right">
+                    <div class="top-menu">
+                        <div class="menu-btn">
+                            <button class="toggle_mnu">
+                                <span class="sandwich">
+                                    <span class="sw-topper"></span>
+                                    <span class="sw-bottom"></span>
+                                    <span class="sw-footer"></span>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="header-menu">
+                            <div class="navbar-search ui-widget col-md-12 mobile">
+                                <form role="search" action="https://digitalmainstreet.ca/" method="get">
+                                    <input id="mainsearchMobile" type="text" name="s" placeholder="Search"/>
+                                    <input class="icon" type="image" alt="Search" value="Search" name="image" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/icon-search.png" style="padding:0;" />
+                                </form>
+                            </div>
+                            <div class="menu-wrapper">
+                                <div class="menu-header-menu-container"><ul id="menu-header-menu" class="primary-menu"><li id="menu-item-72226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-72226"><a href="https://digitalmainstreet.ca/ontario/">Available Programs</a>
+<ul class="sub-menu">
+	<li id="menu-item-136019" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-136019"><a href="https://digitalmainstreet.ca/alberta/">Alberta</a></li>
+	<li id="menu-item-176943" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-176943"><a href="#">Atlantic Canada</a></li>
+	<li id="menu-item-179334" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-179334"><a href="#">British Columbia</a></li>
+	<li id="menu-item-192105" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-192105"><a href="#">Northwest Territories</a></li>
+	<li id="menu-item-136023" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-136023"><a href="https://digitalmainstreet.ca/ontario/">Ontario</a>
+	<ul class="sub-menu">
+		<li id="menu-item-368967" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-368967"><a href="https://digitalmainstreet.ca/smb-academy/">SMB Academy</a></li>
+	</ul>
+</li>
+	<li id="menu-item-176944" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-176944"><a href="#">Saskatchewan</a></li>
+	<li id="menu-item-199491" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-199491"><a href="#">Yukon</a></li>
+</ul>
+</li>
+<li id="menu-item-13" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13"><a href="https://digitalmainstreet.ca/vendor-directory/">Vendor Directory</a></li>
+<li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11"><a href="https://digitalmainstreet.ca/news/">News</a></li>
+<li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12"><a href="https://digitalmainstreet.ca/events/">Events</a></li>
+<li id="menu-item-72229" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-72229"><a href="#">Resources</a>
+<ul class="sub-menu">
+	<li id="menu-item-303231" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-303231"><a href="https://digitalmainstreet.ca/advocacy/">Small Business Advocacy Toolkit</a></li>
+	<li id="menu-item-226163" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-226163"><a href="#">Careers</a>
+	<ul class="sub-menu">
+		<li id="menu-item-298571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-298571"><a href="https://digitalmainstreet.ca/dms-mastercard-fellowship/">Digital Main Street x Mastercard Small Business Cyber and Intelligence Fellowships</a></li>
+		<li id="menu-item-226161" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-226161"><a href="https://digitalmainstreet.ca/careers/">All Openings</a></li>
+	</ul>
+</li>
+	<li id="menu-item-17864" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17864"><a href="https://digitalmainstreet.ca/case-studies/">Case Studies</a></li>
+	<li id="menu-item-93423" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-93423"><a href="https://digitalmainstreet.ca/dms-courses/">Courses</a></li>
+	<li id="menu-item-287865" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-287865"><a href="https://digitalmainstreet.ca/dms-resource-hub/">DMS Resource Hub</a></li>
+	<li id="menu-item-259755" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-259755"><a href="https://digitalmainstreet.ca/mastercard_trust_centre/">Mastercard Trust Centre</a></li>
+	<li id="menu-item-81442" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-81442"><a href="https://digitalmainstreet.ca/shophere-stories/">ShopHERE Stories</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-34"><a href="https://digitalmainstreet.ca/tools/">Tools</a></li>
+	<li id="menu-item-4378" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4378"><a href="https://digitalmainstreet.ca/faq/">FAQ</a></li>
+</ul>
+</li>
+</ul></div>                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guest-wrapper col-lg-2 col-md-8 col-sm-7 col-7">
+                    <div class="guest">
+                                                    <ul class="guest">
+                                <li id="nav-Sign-up"><a href="#">SIGN UP</a></li>
+                                <li> / </li>
+                                <li id="navLogin"><a href="https://digitalmainstreet.ca/account/login/">LOG IN</a></li>
+                            </ul>
+                                                </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="landing">
+    <section id="hero" class="banner-bg">
+        <div class="container">
+            <div id="heroSign" class="row">
+                <div class="col-md-12">
+                    <h1 id="bricks">Helping Main Street Go Digital</h1>
+                </div>
+                <div class="col-md-12">
+                    <h2 id="coming-soon">A free digital "how to" guide to help you grow your business.</h2>
+                </div>
+                <div class="col-md-12">
+                    <div class="how-it-works">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>here is how it works</h3>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="block one">
+                                    <div class="icon-image"></div>
+                                    <p>Complete the free<br>digital onboarding</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="block two">
+                                    <div class="icon-image"></div>
+                                    <p>Receive a personalized to-do<br>list with recommendations<br>on how to reach your goals</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="block three">
+                                    <div class="icon-image"></div>
+                                    <p>Access a list of digital product<br>and service providers who are<br>offering exclusive discounts</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button id="hero-sign-up" type="button" class="btn btn-yellow">SIGN UP</button>                </div>
+                <div class="col-md-12 hidden">
+                    <a href="#" id="hero-learn-more" class="learn-more">LEARN MORE</a>
+                </div>
+            </div>
+        </div>
+    </section>
+        <section id="support-partnership" class="support-partnership">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Digital Main Street is supported by</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                                        <a href="https://www.google.com/partners/about/index.html" target="_blank" >
+                            <img class="img-fluid" src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/Logo_Google.svg" alt="Google">
+                        </a>
+                                                <a href="http://www.mastercard.ca?cmp=ilc.dms.site.can.egreen.b2b.ec.lpg.mc.gen.linkcopy.101116" target="_blank" >
+                            <img class="img-fluid" src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/Logo_Mastercard.svg" alt="Mastercard">
+                        </a>
+                                                <a href="https://squareup.com/ca/en/l/signup/digital-main-street" target="_blank" >
+                            <img class="img-fluid" src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/Square_LogoLockup_White_nb.png" alt="Squareup">
+                        </a>
+                                                <a href="https://www.canadapost-postescanada.ca/cpc/en/business/small-business.page?ecid=affiliate_se_112" target="_blank" >
+                            <img class="img-fluid" src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/canadapost_logo.png" alt="Canadapost">
+                        </a>
+                                        </div>
+            </div>
+        </div>
+    </section>
+    <section id="happening">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4>What's Happening On Digital Main Street?</h4>
+                </div>
+            </div>
+            <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-12 post-holder news">
+                        <a href="https://digitalmainstreet.ca/news/" class="blueHeader">News</a>
+                                                <div class="content">
+                            <a href="https://digitalmainstreet.ca/watch-the-recording-a-small-business-guide-to-winning-major-events/" class="image block " style="background-image: url('https://digitalmainstreet.ca/wp-content/uploads/2026/04/1640x924-1-1-1024x577.png')" title="Watch the Recording: A Small Business Guide to Winning Major Events"></a>
+                            <p class="date">
+                                May 14, 2026                            </p>
+                            <a href="https://digitalmainstreet.ca/watch-the-recording-a-small-business-guide-to-winning-major-events/" class="title">Watch the Recording: A Small Business Guide to Winning Major Events</a>
+                            <div class="desc">
+                                Watch our session with Google Canada and learn how to optimize your Google Business Profile, share real-time updates to attract new customers, and ensure your business is discoverable when it matters most. 
+                            </div>
+                        </div>
+                        <a href="https://digitalmainstreet.ca/news/" class="more">More news</a>
+                    </div>
+                                        <div class="col-lg-4 col-md-6 col-12 post-holder post">
+                        <a href="https://digitalmainstreet.ca/events/" class="blueHeader">Events</a>
+                                                <div class="content">
+                            <a href="https://digitalmainstreet.ca/event/social-media-101-for-small-businesses-and-entrepreneurs-2/" class="image block " style="background-image: url('https://digitalmainstreet.ca/wp-content/uploads/2026/09/TPL-Ai-Webinar-1024x535.png')" title="Social Media 101 for Small Businesses and Entrepreneurs"></a>
+                            <p class="date">
+                                Thursday, October 15, 2026                            </p>
+                            <a href="https://digitalmainstreet.ca/event/social-media-101-for-small-businesses-and-entrepreneurs-2/" class="title">Social Media 101 for Small Businesses and Entrepreneurs</a>
+                            <div class="head">Date / Time</div>
+                                                            <span>Thursday, October 15th, 2026</span>
+                                <span>1:00 pm - 2:00 pm</span>
+                                                            <div class="head mt-2">Where</div>
+                                                        Toronto, ON, Canada                        </div>
+                        <a href="https://digitalmainstreet.ca/events/" class="more">More events</a>
+                    </div>
+                                        <div class="col-lg-4 col-md-6 col-12 post-holder post">
+                        <a href="https://digitalmainstreet.ca/case-studies/" class="blueHeader">CASE STUDIES</a>
+                                                <div class="content">
+                            <a href="https://digitalmainstreet.ca/case-study/small-business-spotlight-nicole-pena-art-studio/" class="image block " style="background-image: url('https://digitalmainstreet.ca/wp-content/uploads/2026/11/Untitled-design-3.png')" title="Small Business Spotlight: Nicole Pena Art Studio"></a>
+                            <p class="date">
+                                November 16, 2026                            </p>
+                            <a href="https://digitalmainstreet.ca/case-study/small-business-spotlight-nicole-pena-art-studio/" class="title">Small Business Spotlight: Nicole Pena Art Studio</a>
+                            <div class="desc">
+                                Toronto figurative painter Nicole Peña turns Carnival, Spiritual Baptist traditions, and the lasting influence of nine months teaching art in Botswana into vibrant narrative paintings. Working with Digital Main Street’s Digital Service Squad, she found a way to bring the feel of her work and gallery space online and turn website visitors into engaged collectors.                            </div>
+                        </div>
+                        <a href="https://digitalmainstreet.ca/case-studies/" class="more">More case studies</a>
+                    </div>
+                                </div>
+        </div>
+    </section>
+        <section id="moreFeatures">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Features of Digital Main Street</h4>
+                </div>
+                <div class="col-md-12">
+                    <h5><p class="intro">Digital Main Street is supported by key features that assist main street businesses as they adopt digital tools, technologies and services.</p></h5>
+                </div>
+            </div>
+            <div class="row">
+                                        <div class="col-md-4">
+                            <div class="moreFeatures-block">
+                            <a href="/smb-academy/"><img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/logo-DMS-Academy.svg" alt="Learn More" /></a>                            <p>Main Street businesses can put AI and technology to work every day with four practical, workforce-driven training programs, available through self-paced, live online, and in-person learning formats.</p>
+                            <a href="/smb-academy/" class="btn"><span>Learn More</span></a>
+                            </div>
+                        </div>
+                                                <div class="col-md-4">
+                            <div class="moreFeatures-block">
+                            <a href="/digital-main-street-lab/"><img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/logo-DMS-Lab.svg" alt="Visit DMS Lab " /></a>                            <p>A virtual retail tech incubator that helps build partnerships between startups and BIAs to pilot new technologies with main street businesses.</p>
+                            <a href="/digital-main-street-lab/" class="btn"><span>Visit DMS Lab </span></a>
+                            </div>
+                        </div>
+                                                <div class="col-md-4">
+                            <div class="moreFeatures-block">
+                            <a href="/digital-main-street-squad/"><img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/logo-DMS-Squad.svg" alt="Visit DMS Squad" /></a>                            <p>The DMS Squad helps businesses complete their assessments, review recommendations, and activate free and easy to use tools.</p>
+                            <a href="/digital-main-street-squad/" class="btn"><span>Visit DMS Squad</span></a>
+                            </div>
+                        </div>
+                                    </div>
+        </div>
+    </section>
+        <section id="vendors">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Digital Providers</h4>
+                </div>
+                <div class="col-md-12">
+                    <h5><p>Digital Main Street connects main street businesses to a hyper local directory of digital providers.</p></h5>
+                </div>
+            </div>
+            <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-3">
+                            <a href="https://www.cira.ca/en/" target="_blank">
+                                <img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/CIRA_logo.webp" alt="CIRA">
+                            </a>
+                        </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3">
+                            <a href="https://magnetnetwork.ca/" target="_blank">
+                                <img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/magnet-logo-lg.png" alt="Magnet">
+                            </a>
+                        </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3">
+                            <a href="https://www.urbanlogiq.com/?utm_source=website&utm_medium=logo&utm_campaign=DMS" target="_blank">
+                                <img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/thumbnail_image001.png" alt="UrbanLogiq">
+                            </a>
+                        </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3">
+                            <a href="https://www.bizlaunch.com" target="_blank">
+                                <img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/final.jpeg" alt="BizLaunch">
+                            </a>
+                        </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3">
+                            <a href="https://www.humi.ca/?utm_source=website&utm_medium=logo&utm_campaign=DMS" target="_blank">
+                                <img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/humi-logo-white.png" alt="Humi">
+                            </a>
+                        </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3">
+                            <a href="https://www.ownr.co/partners/digitalmainstreet?gspk=digitalmainstreet1136" target="_blank">
+                                <img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/Logo-Primary.png" alt="Ownr">
+                            </a>
+                        </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3">
+                            <a href="https://quickbooks.grsm.io/9lrnk740afds" target="_blank">
+                                <img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/qb-logo.png" alt="Quickbooks">
+                            </a>
+                        </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3">
+                            <a href="https://ecommercecanada.com/?dms" target="_blank">
+                                <img src="https://digitalmainstreet.ca/wp-content/uploads/2017/04/EC_Logo.png" alt="EcommerceCanada">
+                            </a>
+                        </div>
+                                    </div>
+            <div class="row">
+                <div class="col-xs-12 gotoVendorScroll">
+                    <a href="/vendor-directory/" id="vendor-view-more" class="btn btn-green">VIEW VENDORS</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tri-landingVendor" class="container-fluid">
+        <div class="row">
+            <svg class="tri-landingVendor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 240" preserveAspectRatio="none" height="30">
+                <polygon points="250,0 500,500 0,500" style="fill:#ffad00;"></polygon>
+            </svg>
+        </div>
+    </section>
+    <section id="landingVendor">
+        <div class="container">
+            <div class="row">
+                <h4>Are you a digital provider interested in Digital Main Street?</h4>
+                <h5>Complete your free profile and increase your reach to the main street business audience.</h5>
+            </div>
+            <div class="row">
+                <div id="moreInfoBtns">
+                    <button id="sign-up-vendor" type="button" class="btn btn-transparent">SIGN UP</button>
+                    <button id="read-more-vendor" type="button" class="btn btn-transparent" data-toggle="collapse" data-target="#show-more-vendor">READ MORE</button>
+                </div>
+                <div id="show-more-vendor"  class="collapse">
+                    <h4>Who are we looking for?</h4>
+                    <h5>We are looking for digital providers on the forefront of digital innovation and technology who can meet the needs of main street businesses.</h5>
+                    <h4>What's in it for my company?</h4>
+                    <h5>Set-up your profile and promote your products and services directly to main street businesses.</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<div class="container-fluid footer-angle "></div>
+<div id="btmCTA" class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <img id="logo-btm-CTA" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/DMS_Logo_large.svg">
+        </div>
+    </div>
+</div>
+<section id="subscribe">
+    <div class="container">
+        <div class="row">
+                            <div class="col-md-12 text-center cont-ready">
+                    <h4>Ready to get started?</h4>
+                    <button id="btmCTA-sign-up" type="button" class="btn btn-yellow">SIGN UP</button>
+                </div>
+                                    <div class="col-md-12 cont-or">
+                        <p>and</p>
+                    </div>
+                            </div>
+                    <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="https://digitalmainstreet.ca/subscribe-to-our-newsletter/" class="btn-yellow d-inline-block mt-2 p-3">Subscribe to Our Newsletter</a>
+                </div>
+            </div>
+                    <div class="row">
+            <div class="col-md-12">
+                <div class="socialIcons text-center">
+                    <a href="https://www.facebook.com/DigitalMainStreet/" target="_blank">
+                        <img src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/icon-DMS-FB.svg" alt="Facebook">
+                    </a>
+                    <a href="https://twitter.com/digital_mainst" target="_blank">
+                        <img src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/icon-DMS-Twitter.svg" alt="Twitter">
+                    </a>
+                    <a href="http://instagram.com/digitalmainstreet" target="_blank">
+                        <img src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/icon-DMS-Instagram.svg" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="footerMenu">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="footer-menu">
+                <ul>
+                    
+		<li>
+			<a href="/">Home</a></li>
+		<li>
+			<a href="https://digitalmainstreet.ca/vendor-directory/">Vendor Directory</a></li>
+		<li>
+			<a href="https://digitalmainstreet.ca/news/">News</a></li>
+		<li>
+			<a href="https://digitalmainstreet.ca/events/">Events</a></li>
+		<li>
+			<a href="https://digitalmainstreet.ca/tools/">Tools</a></li>
+		<li>
+			<a href="https://digitalmainstreet.ca/about-us/">Brand Guidelines</a></li>
+		<li>
+			<a href="https://digitalmainstreet.ca/careers/">Careers</a></li>
+		<li>
+			<a href="#contact">Contact Us</a></li>
+		<li>
+			<a href="https://digitalmainstreet.ca/account/login/">Account Login</a></li>                </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="privacy col-xs-12 col-lg-4 col-md-4">
+                <a href="https://digitalmainstreet.ca/privacy-policy/">Privacy Policy</a>
+                <a href="https://digitalmainstreet.ca/terms-of-use/">Terms of Use</a>
+            </div>
+            <div class="footerCompanies col-xs-12 col-lg-4 col-md-4">
+                <a href="#" target="_blank">
+                    <img src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/icons/footer-company-icon-01.png" alt="Tabia">
+                </a>
+                <a href="#" target="_blank">
+                    <img src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/icons/footer-company-icon-02.png" alt="Toronto">
+                </a>
+            </div>
+            <div class="copy col-xs-12 col-lg-4 col-md-4">&copy; Digital Main Street 2026</div>
+        </div>
+    </div>
+    <a href="#" class="scrollToTop" >
+        <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </a>
+</footer>
+<!--***************************************myModal**************************************** -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close " data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">Be Part of Digital Main Street</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div id="modal-SignUpB" class="col-xs-12 col-md-6">
+                        <h3>Main Street Businesses</h3>
+                        <p>Complete your free Digital Roadmap to access custom recommendations and connections to trusted digital providers that can help you grow and meet your business goals.</p>
+                        <a href="https://digitalmainstreet.ca/business-account/registration/" id="btn-modal-signup-business" class="btn-yellow col-xs-12">SIGN UP</a>
+                    </div>
+                    <div id="modal-SignUpV" class="col-xs-12 col-md-6">
+                        <h3>Digital Vendors</h3>
+                        <p>We are currently reviewing and updating our vendor directory to better serve our community. As a result, we are not accepting new submissions at this time.</p>
+                        <p>Please check back soon for updates on when applications will reopen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!--***************************************contactModal*********************************** -->
+    <div id="contactModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+            <div class="modal-content-Contact">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title-bePart">Contact Digital Main Street</h4>
+                </div>
+                <div class="modal-body">
+                    <section class="dynamically-form large">
+                                                <script>
+                            var hsFormEmail = "";
+                            var hsFormCompanyName = "";
+                            var hsFormFname = "";
+                            var hsFormLname = "";
+                            var hsFormProvince = "";
+                        </script>
+                        <!--[if lte IE 8]>
+                        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+                        <![endif]-->
+                        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                        <script>
+                            hbspt.forms.create({
+                                portalId: "4108167",
+                                formId: "46334bd4-fdd9-4177-a3fb-a74c7b9ef209",
+                                onFormReady: function ($form) {
+                                    if(hsFormEmail) {
+                                        $form.find('input[name="email"]').val(hsFormEmail).change().prop("readonly", true);
+                                    }
+                                    if(hsFormCompanyName) {
+                                        $form.find('input[name="company"]').val(hsFormCompanyName).change().prop("readonly", true);
+                                    }
+                                    if(hsFormFname) {
+                                        $form.find('input[name="firstname"]').val(hsFormFname).change().prop("readonly", true);
+                                    }
+                                    if(hsFormLname) {
+                                        $form.find('input[name="lastname"]').val(hsFormLname).change().prop("readonly", true);
+                                    }
+                                    if(hsFormProvince) {
+                                        $form.find('select[name="province"] option').each(function(){
+                                            if(this.value == hsFormProvince) {
+                                                $form.find('select[name="province"]').val(hsFormProvince).change().attr("style", "pointer-events: none;");
+                                                return false;
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        </script>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!--***************************************vendorReviewModal****************************** -->
+<div id="vendorReviewModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-Review">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">Congratulations!</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Did you work with a Digital Main Street Vendor for this task? If so, would you like to Write a Review?</h3>
+                <p>Digital Main Street relies on Reviews by its members to rank Vendors. If you worked with a Vendor, please take moment and submit a Review.</p>
+                <div id="encourageReviewBtns" class="row">
+                    <div class="col-sm-6">
+                        <button id="btn-modal-encourage-no" type="button" class="btn-yellow" data-dismiss="modal">No</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button id="btn-modal-encourage-yes" type="button" class="btn-yellow">Yes</button>
+                    </div>
+                </div>
+                <div id="reviewSearchVendor" class="col-xs-12 hidden">
+                    <form id="vendorSearchForm" method="post" action="https://digitalmainstreet.ca/vendor-directory/">
+                        <div id="vendorSearchHolder">Find Vendor:
+                            <div id="vendor-search">
+                                <input class="form-control input-sm ng-pristine ng-untouched ng-valid" name="vendorSearch" type="text" ng-model="model.keywords">
+                                <div id="magnifier" onclick='$("#vendorSearchForm").submit();'>
+                                    <img src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/images/search-magnifier.svg" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** DT Application Completed******************************** -->
+<div id="dtgacModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">Application Form</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">Your application has already been submitted.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** DT Reporting Not Allowed ******************************** -->
+<div id="dtgrcModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">Digital Transformation Reporting</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">Reporting will start one month from the time you receive your grant funding and will continue monthly for six (6) months.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** DTG 2.0 Reporting Not Allowed ******************************** -->
+<div id="dtg2rcModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">Digital Transformation Reporting</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">Reporting will be available at the end of your program. You will receive an email indicating you when you are able to report.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** DTG 2.0 Application Closed ******************************** -->
+<div id="dtg2acModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">Digital Transformation Application</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">Thank you for your interest in Digital Main Street and the Digital Transformation Grant program. The program has been able to provide over 3800 main street small businesses support with their digital expansion. The portal is now closed, however the digital assessment and all online training modules will continue to be an available resource for your business.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+
+<!--***************************** DTG NB PQ Closed ******************************** -->
+<div id="dtgnbpqclosedModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">Digital Transformation Pre-Qualification</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">The pre-qualification form will be available in the coming days</h3>                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** CDAP Eligibility Filled ******************************** -->
+<div id="cdapEligibilityFilledModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">CDAP Eligibility Form</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">Your CDAP eligibility form has already been submitted.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** CDAP Pre-Approval Filled ******************************** -->
+<div id="cdapPreapprovalFilledModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">CDAP Pre-Approval Form</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">Your CDAP pre-approval form has already been submitted.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** CDAP Expenditure Filled ******************************** -->
+<div id="cdapExpenditureModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">CDAP Expenditure Form</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">Your CDAP expenditure form has already been submitted.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** CDAP Receipts Submitted ******************************** -->
+<div id="cdapReceiptsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">CDAP Receipts Submitted</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">You have already submitted receipts for your CDAP Grant. Please reach out to your grant reviewer if you are looking to submit additional receipts or have any questions.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** CDAP Funds Distributed Completed******************************** -->
+<div id="fundsDistributedModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">CDAP Funds Distributed</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">Your CDAP funds have been distributed.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** CDAP Funds Not Yet Distributed ******************************** -->
+<div id="fundsNotDistributedModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title-bePart">Your grant is being processed</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-center">If you have any questions, please reach out to your grant reviewer.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** New Assessment Level Popup ******************************** -->
+<div id="newAssessmentLevelModal" class="modal modal-small fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="text-center m0">We have introduced a new topic into Level 2 of the Digital Assessment focused on Artificial Intelligence (AI). To ensure your account is up to date, and to be the first to get access to our AI resources, tips, and news, please <a href="https://digitalmainstreet.ca/business-account/complete-digital-assessment-form/?step=2">click here</a> to complete this short set of questions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--***************************** New Opt-In Option Popup ******************************** -->
+<div id="optinPopup" class="modal modal-small fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-bePart">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>We're proud to announce our new partnership with Intuit Mailchimp! As a valued member, we want to keep you in the loop and offer exclusive insights and updates directly from Intuit Mailchimp.</p>
+                            <p>Would you like to receive communications from Intuit Mailchimp? Opt-in now to stay informed about the latest features, great events, and offers tailored just for you!</p>
+                            <p class="text-center mt-4 mb-0">
+                                <button id="optin-mailchimp" class="btn btn-sm btn-yellow mr-3">Yes, sign me up!</button>
+                                <button class="btn btn-sm btn-green" data-dismiss="modal">No, thanks.</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#nav-Sign-up, #hero-sign-up, #btmCTA-sign-up, #sign-up-vendor, .sideSignUpBtn').click(function(){
+            $('#myModal').modal('show');
+        });
+
+        $('.dtg-app-filled').click(function(e){
+            e.preventDefault();
+            $('#dtgacModal').modal('show');
+        });
+
+        $('.dtg-reporting-closed').click(function(e){
+            e.preventDefault();
+            $('#dtgrcModal').modal('show');
+        });
+
+        $('.dtg2-reporting-closed').click(function(e){
+            e.preventDefault();
+            $('#dtg2rcModal').modal('show');
+        });
+
+        $('.dtg2-app-closed').click(function(e){
+            e.preventDefault();
+            $('#dtg2acModal').modal('show');
+        });
+
+        $('.dtgnb-pq-closed').click(function(e){
+            e.preventDefault();
+            $('#dtgnbpqclosedModal').modal('show');
+        });
+
+        // CDAP Modals
+
+        $(".cdap-eligibility-filled").click(function(e) {
+            e.preventDefault();
+            $('#cdapEligibilityFilledModal').modal('show');
+        });
+
+        $('.cdap-preapproval-filled').click(function(e) {
+            e.preventDefault();
+            $('#cdapPreapprovalFilledModal').modal('show');
+        });
+
+        $('.cdap-expenditure-filled').click(function(e) {
+            e.preventDefault();
+            $('#cdapExpenditureModal').modal('show');
+        });
+
+        $('.cdap-receipts-submitted').click(function(e) {
+            e.preventDefault();
+            $('#cdapReceiptsModal').modal('show');
+        });
+
+        $('.funds-not-distributed').click(function(e) {
+            e.preventDefault();
+            $('#fundsNotDistributedModal').modal('show');
+        });
+
+        $('.funds-distributed').click(function(e) {
+            e.preventDefault();
+            $('#fundsDistributedModal').modal('show');
+        });
+
+        var themeURL = "/wp-content/themes/digitalmainstreet/";
+
+        // #contactModal
+        $('a[href$="#contact"]').click(function(e){
+            e.preventDefault();
+            $("#contactModalhideThanks").hide();
+            $('#contactModal').modal('show');
+        });
+
+    });
+</script><template id="tp-language" data-tp-language="en_US"></template><script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/digitalmainstreet/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+        <div id="trp-floater-ls" onclick="" data-no-translation class="trp-language-switcher-container trp-floater-ls-names trp-top-right trp-color-dark full-names" >
+            <div id="trp-floater-ls-current-language" class="">
+
+                <a href="#" class="trp-floater-ls-disabled-language trp-ls-disabled-language" onclick="event.preventDefault()">
+					English				</a>
+
+            </div>
+            <div id="trp-floater-ls-language-list" class="" >
+
+                <div class="trp-language-wrap trp-language-wrap-top"><a href="#" class="trp-floater-ls-disabled-language trp-ls-disabled-language" onclick="event.preventDefault()">English</a>                    <a href="https://digitalmainstreet.ca/fr/"
+                         title="Français">
+          						  Français					          </a>
+                </div>            </div>
+        </div>
+
+    <script id="ppress-frontend-script-js-extra">
+var pp_ajax_form = {"ajaxurl":"https://digitalmainstreet.ca/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"8207357a80","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true","is_user_logged_in":"0"};
+//# sourceURL=ppress-frontend-script-js-extra
+</script>
+<script id="ppress-frontend-script-js" src="https://digitalmainstreet.ca/wp-content/plugins/wp-user-avatar/assets/js/frontend.min.js?ver=4.17.7-b-modified-1793377237"></script>
+<script id="modernizr-script-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/libs/modernizr/modernizr.min.js?ver=20160816-b-modified-1447978872"></script>
+<script id="google-maps-api-js" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7xiik1Vkv91I_HTnX7dljgah55_Hk6II&#038;libraries=places&#038;ver=3&#038;callback=google_cb"></script>
+<script id="learndash-front-js-extra">
+var ldVars = {"postID":"2","videoReqMsg":"You must watch the video before accessing this content","ajaxurl":"https://digitalmainstreet.ca/wp-admin/admin-ajax.php"};
+//# sourceURL=learndash-front-js-extra
+</script>
+<script id="learndash-front-js" src="//digitalmainstreet.ca/wp-content/plugins/sfwd-lms/themes/ld30/assets/js/learndash.js?ver=4.8.0"></script>
+<script id="dms-topbar-js" src="https://digitalmainstreet.ca/wp-content/themes/digitalmainstreet/assets/js/dms-topbar.js?ver=20261028-b-modified-1793200645"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://digitalmainstreet.ca/wp-includes/js/wp-emoji-release.min.js?ver=7.1.4"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://digitalmainstreet.ca/wp-includes/js/wp-emoji-loader.min.js
+</script>
+<script type="text/javascript" id="slb_context">/* <![CDATA[ */if ( !!window.jQuery ) {(function($){$(document).ready(function(){if ( !!window.SLB ) { {$.extend(SLB, {"context":["public","user_guest"]});} }})})(jQuery);}/* ]]> */</script>
+    <!-- Default Statcounter code for Digital Main Street  http://www.digitalmainstreet.ca -->
+    <script type="text/javascript">
+        var sc_project=11873670;
+        var sc_invisible=1;
+        var sc_security="97921dd9";
+        var sc_https=1;
+    </script>
+    <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11873670/0/97921dd9/1/" alt="Web Analytics"></a></div></noscript>
+    <!-- End of Statcounter Code -->
+
+    <!-- Default Statcounter code for DMS Monthly http://www.digitalmainstreet.ca -->
+    <script type="text/javascript">
+        var sc_project=11877859;
+        var sc_invisible=1;
+        var sc_security="97dd9804";
+        var sc_https=1;
+    </script>
+    <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11877859/0/97dd9804/1/" alt="Web Analytics"></a></div></noscript>
+    <!-- End of Statcounter Code -->
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4108167.js"></script>
+    <!-- End of HubSpot Embed Code -->
+    </body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/?utm_source=w3tc&utm_medium=footer_comment&utm_campaign=free_plugin
+
+Page Caching using Disk: Enhanced 
+Database Caching 88/277 queries in 2.379 seconds using Memcached (Request-wide modification query)
+
+Served from: digitalmainstreet.ca @ 2026-11-17 20:21:58 by W3 Total Cache
+-->
