@@ -1,0 +1,9 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"state\": \"PROVISIONAL_CHECKPOINT\",\n  \"observed_at_utc\": \"2026-11-19T11:50:16.845944+00:00\",\n  \"readback\": {\n    \"path\": \"products/distribution/invoice-checkpoint/2026-11-19-intake-readback.json\",\n    \"sha256\": \"b645991cca574387d09fc0e0593f5c55d720ffce64abe202e330468f3de0e401\",\n    \"page_sha256\": \"f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62\",\n    \"scope\": \"Public release and buyer intake wording only. Verify the live capture receipt and match the live hash to an authoritative deployment receipt before assigning a cutoff. This check cannot establish requests, replies, orders or settlement.\",\n    \"page_hash_receipt\": \"TASK-179508240201\"\n  },\n  \"historical_cutoff_utc\": \"2026-11-19T01:30:37Z\",\n  \"release_and_cutoff_binding\": \"Confirm against the authoritative deployment receipt and check for a superseding release or committed verdict before closure.\",\n  \"feedback\": {\n    \"classified_requests_reported\": 0,\n    \"unclassified_sources\": 5,\n    \"excluded_sources\": 5,\n    \"attribution_coverage\": \"INCOMPLETE\"\n  },\n  \"eligible_requests\": null,\n  \"completed_replies\": null,\n  \"explicit_paid_interest\": null,\n  \"accepted_orders\": null,\n  \"order_register\": \"UNAVAILABLE\",\n  \"experiment_attributed_verified_settlement_cents\": null,\n  \"treasury_verified_revenue_cents\": 0,\n  \"decision_if_cutoff_confirmed\": \"End the measurement window as inconclusive. Retain the live intake under its existing terms.\",\n  \"reconsider_on\": \"A release-attributed eligible inquiry or evidence resolving feedback coverage.\"\n}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179509170102.json"
+  ],
+  "id": "TASK-179509170102",
+  "input_sha256": "feddf28e8b2ef6a8f79e431b5de037883e7f22028ba52e5735546201e1c00410"
+}
