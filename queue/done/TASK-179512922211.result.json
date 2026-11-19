@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"decision\": \"STOP_BOUNDED_SEARCH\",\n  \"title_screen\": {\n    \"receipt\": \"TASK-179512236111\",\n    \"sha256\": \"1a12538111218e5babe873c947bb49d656c95e0fbdf7ac5f41660f751a4d5911\",\n    \"observed\": 20,\n    \"total\": 34,\n    \"finding\": \"No title clearly advertised a standalone document remediation purchase.\"\n  },\n  \"original_notice\": {\n    \"receipt\": \"TASK-179512236112\",\n    \"sha256\": \"9df314799e4646882e7f5d8acb9874f2db4c8527a31529e8b9d6ce8fb1f477c2\",\n    \"notice\": \"https://www.boamp.fr/pages/avis/?q=idweb:26-109140\",\n    \"buyer\": \"Rennes Métropole\",\n    \"official_deadline_field\": \"2026-12-14T12:00:00+00:00\",\n    \"quotes\": [\n      \"L'accord-cadre sera exécuté par l'émission de bons de commande.\",\n      \"Réalisation de contre-audits\",\n      \"Prestations d'expertise et de conseil en accessibilité numérique.\"\n    ],\n    \"finding\": \"Document audits are included within a broader framework for accessibility audits, counter-audits and advisory. No separate purchase of document remediation was established.\"\n  },\n  \"coverage\": \"The earlier RSS batch had ten generic results and no original solicitation lead. Fourteen BOAMP matching titles were outside the returned page. No market-wide inference follows.\",\n  \"reopen_on\": \"An open buyer-authored notice explicitly allowing a standalone paid document remediation or accessible HTML conversion engagement, with supplier eligibility, an actionable submission route and a testable acceptance criterion.\",\n  \"sample_prepared\": false,\n  \"application_submitted\": false\n}\n\n\n",
+  "artifacts": [
+    "products/services/accessible-document-paid-sample/bounded-verdict.json",
+    "products/receipts/TASK-179512922211.json"
+  ],
+  "request": {
+    "id": "TASK-179512922211",
+    "type": "TOOL",
+    "submitted_by": "BUYER_ROUTE",
+    "created_at": "2026-11-19T23:00:22Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json, hashlib\nfrom pathlib import Path\nroot = Path('products/services/accessible-document-paid-sample/')\ndef load(name, expected):\n    data = (root / name).read_bytes()\n    assert hashlib.sha256(data).hexdigest() == expected\n    return json.loads(data)\nnotice_hash = '9df314799e4646882e7f5d8acb9874f2db4c8527a31529e8b9d6ce8fb1f477c2'\nscreen_hash = '1a12538111218e5babe873c947bb49d656c95e0fbdf7ac5f41660f751a4d5911'\nscreen = load('raw/boamp-title-screen.json', screen_hash)\nnotice = load('raw/boamp-26-109140.json', notice_hash)['results'][0]\ninitial = json.loads(notice['donnees'])['FNSimple']['initial']\ndescription = initial['natureMarche']['description']\nquotes = ['L’accord-cadre sera exécuté par l’émission de bons de commande.'.replace('’', \"'\"), 'Réalisation de contre-audits', 'Prestations d\\'expertise et de conseil en accessibilité numérique.']\nassert all(quote in description for quote in quotes)\nresult = {\n    'decision': 'STOP_BOUNDED_SEARCH',\n    'title_screen': {'receipt': 'TASK-179512236111', 'sha256': screen_hash, 'observed': len(screen['results']), 'total': screen['total_count'], 'finding': 'No title clearly advertised a standalone document remediation purchase.'},\n    'original_notice': {'receipt': 'TASK-179512236112', 'sha256': notice_hash, 'notice': 'https://www.boamp.fr/pages/avis/?q=idweb:26-109140', 'buyer': notice['nomacheteur'], 'official_deadline_field': notice['datelimitereponse'], 'quotes': quotes, 'finding': 'Document audits are included within a broader framework for accessibility audits, counter-audits and advisory. No separate purchase of document remediation was established.'},\n    'coverage': 'The earlier RSS batch had ten generic results and no original solicitation lead. Fourteen BOAMP matching titles were outside the returned page. No market-wide inference follows.',\n    'reopen_on': 'An open buyer-authored notice explicitly allowing a standalone paid document remediation or accessible HTML conversion engagement, with supplier eligibility, an actionable submission route and a testable acceptance criterion.',\n    'sample_prepared': False,\n    'application_submitted': False\n}\noutput = root / 'bounded-verdict.json'\noutput.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\\n', encoding='utf-8')\nprint(output.read_text(encoding='utf-8'))\n"
+      ],
+      "inputs": [
+        "products/services/accessible-document-paid-sample/raw/boamp-title-screen.json",
+        "products/services/accessible-document-paid-sample/raw/boamp-26-109140.json"
+      ],
+      "outputs": [
+        "products/services/accessible-document-paid-sample/bounded-verdict.json"
+      ],
+      "mission_id": "ACCESSIBLE-DOCUMENT-PAID-SAMPLE"
+    },
+    "description": "Broker action during THINK-1795129222",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179512922211",
+  "input_sha256": "edc6a93efef913ebb0b440202c74f0b592e574154869c429f8a35eb07501651b"
+}
