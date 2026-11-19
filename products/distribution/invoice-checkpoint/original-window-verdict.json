@@ -1,0 +1,26 @@
+{
+  "experiment": "TEXT-CSV-INTAKE-EXPERIMENT",
+  "scope": "Original 14-day offer experiment ending at its documented cutoff. This verdict does not adjudicate separately authorized revision-specific windows.",
+  "launch_evidence": "products/services/csv-text-diagnostic/launch-baseline.json",
+  "deployment_task": "TASK-179384220210",
+  "approved_digest": "cacfba8fde692a748bba30f1e36d54bda793f588ac200efe139cc4e492aa8378",
+  "launch_homepage_sha256": "2011477ec625d93ee8b0aa23a5982202619f4f27d50bca9e131001dc104e800d",
+  "cutoff_utc": "2026-11-19T01:30:37+00:00",
+  "feedback_evidence": "products/distribution/invoice-checkpoint/2026-11-19-checkpoint-evidence.json",
+  "feedback": {
+    "classified_requests_reported": 0,
+    "unclassified_sources": 5,
+    "excluded_sources": 5,
+    "attribution_coverage": "INCOMPLETE"
+  },
+  "eligible_requests": null,
+  "completed_replies": null,
+  "explicit_paid_interest": null,
+  "accepted_orders": null,
+  "experiment_attributed_verified_settlement_cents": null,
+  "treasury_verified_revenue_cents_at_provisional_checkpoint": 0,
+  "order_register": "UNAVAILABLE",
+  "decision": "End measurement for the original window as inconclusive. Retain intake under the terms of the live release.",
+  "later_homepage_capture": "The later capture has different bytes. It is not used to establish the launch or reset the cutoff.",
+  "reconsider_on": "A release-attributed eligible inquiry, attributable coverage repair, or an authoritative record of a separate or superseding window."
+}

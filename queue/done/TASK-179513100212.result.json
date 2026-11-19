@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/distribution/invoice-checkpoint/original-window-verdict.json",
+    "products/receipts/TASK-179513100212.json"
+  ],
+  "request": {
+    "id": "TASK-179513100212",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-19T23:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,sys\nfrom pathlib import Path\nfrom datetime import datetime, timezone\na,b,p=map(Path,sys.argv[1:])\nlaunch=json.loads(a.read_text())\nsnapshot=json.loads(b.read_text())\ncutoff=datetime.fromisoformat(launch['observation_deadline_utc'])\nassert datetime.now(timezone.utc)>=cutoff\nassert launch['deploy_status']=='ONLINE_VERIFIED' and launch['hash_match']\nassert launch['expected_index_sha256']==launch['fetched_sha256']\nassert cutoff==datetime.fromisoformat(snapshot['historical_cutoff_utc'].replace('Z','+00:00'))\nresult={\n 'experiment':launch['experiment'],\n 'scope':'Original 14-day offer experiment ending at its documented cutoff. This verdict does not adjudicate separately authorized revision-specific windows.',\n 'launch_evidence':str(a),\n 'deployment_task':launch['deploy_task'],\n 'approved_digest':launch['approved_digest'],\n 'launch_homepage_sha256':launch['expected_index_sha256'],\n 'cutoff_utc':cutoff.isoformat(),\n 'feedback_evidence':str(b),\n 'feedback':snapshot['feedback'],\n 'eligible_requests':None,'completed_replies':None,'explicit_paid_interest':None,'accepted_orders':None,\n 'experiment_attributed_verified_settlement_cents':None,\n 'treasury_verified_revenue_cents_at_provisional_checkpoint':snapshot['treasury_verified_revenue_cents'],\n 'order_register':snapshot['order_register'],\n 'decision':'End measurement for the original window as inconclusive. Retain intake under the terms of the live release.',\n 'later_homepage_capture':'The later capture has different bytes. It is not used to establish the launch or reset the cutoff.',\n 'reconsider_on':'A release-attributed eligible inquiry, attributable coverage repair, or an authoritative record of a separate or superseding window.'\n}\np.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\\n')\nassert json.loads(p.read_text())==result",
+        "products/services/csv-text-diagnostic/launch-baseline.json",
+        "products/distribution/invoice-checkpoint/2026-11-19-checkpoint-evidence.json",
+        "products/distribution/invoice-checkpoint/original-window-verdict.json"
+      ],
+      "inputs": [
+        "products/services/csv-text-diagnostic/launch-baseline.json",
+        "products/distribution/invoice-checkpoint/2026-11-19-checkpoint-evidence.json"
+      ],
+      "outputs": [
+        "products/distribution/invoice-checkpoint/original-window-verdict.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795131002",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179513100212",
+  "input_sha256": "7dae47ceb8817f0a8189d542b54de0b74e1c49d3a8e2c270aaf153804501929b"
+}
