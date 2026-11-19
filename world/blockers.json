@@ -140,6 +140,23 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
+    },
+    {
+      "id": "SYSTEM-NO-PROGRESS",
+      "status": "OPEN",
+      "owner": "AGENTS",
+      "category": "PROGRESS",
+      "title": "3 tours consécutifs sans résultat vérifiable",
+      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : AWARD-PRIME-SUBCONTRACT-SAMPLE, BUYER-REQUEST-BILINGUAL-DOCUMENTATION, CANADA-STANDALONE-DATA-QA-BUYER, CATALOGUE-CHECKOUT-ACTIVATION-HANDOFF, CATALOGUE-COMMISSIONED-REVIEW-LIVE-TEST, CATALOGUE-DOWNLOAD-FULFILLMENT, CATALOGUE-PAYHIP-DECISION, CATALOGUE-QA-BUYER-REQUEST-PATH, CATALOGUE-QA-EXAMPLE-VERIFIED-RELEASE, CATALOGUE-REPEAT-UPDATE-WORKED-REPORT, CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, EXPLICIT-PAID-SPREADSHEET-SUPPORT-FIT, GODOT-PAID-DEBUGGING-REQUEST-FIT, LINK-CHECK-LAUNCH, NORTH-AYRSHIRE-LIVE-NOTICE-DELTA, OPEN-SOFTWARE-TENDER-BRIEF, PAID-STANDARDS-IMPLEMENTATION-FIT, PARSER-PARITY-CONTEXTUAL-REFERRAL, PARSER-PARITY-SITE-REVIEW ; consulter la collection missions paginée pour la suite.",
+      "open_missions_total": 35,
+      "missions_truncated": true,
+      "missions_collection": "missions",
+      "mission_id": null,
+      "expected_gain": null,
+      "raised_by": "PROGRESS-DETECTOR",
+      "reports": 3,
+      "opened_at": "2026-11-19T15:06:30Z",
+      "last_reported_at": "2026-11-19T16:00:47Z"
     }
   ],
   "resolved_recent": [
@@ -179,19 +196,19 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 3,
     "threshold": 3,
     "stalled_since": "2026-11-19T15:06:30Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1166,
-    "turns_without_verified_revenue": 1166,
-    "turns_without_outcome": 5,
+    "turns_without_new_interpreted_feedback": 1167,
+    "turns_without_verified_revenue": 1167,
+    "turns_without_outcome": 6,
     "outcome_threshold": 12,
     "dry_since": "2026-11-19T14:30:46Z",
     "last_outcome_turn": "THINK-1795097161",
     "last_productive_turn": "THINK-1795100415",
-    "last_turn": "THINK-1795101961",
+    "last_turn": "THINK-1795104001",
     "last_change": {
       "productive": false,
       "outcome": false,
