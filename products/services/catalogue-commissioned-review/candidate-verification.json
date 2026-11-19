@@ -1,0 +1,16 @@
+{
+  "candidate_sha256": "518a7843922faae2a1638530e4e59234524e81ab7496c34324e644ab6b4fc5eb",
+  "baseline_sha256": "02a293d457bb66313d4ab8680374a03cd9a5ed9beb20c5bc33eb407db9f9d35f",
+  "reverse_matches_baseline": true,
+  "fictional_request_bytes": 313,
+  "fictional_data_rows": 7,
+  "row_cap_is_offer_scope": 20,
+  "documented_limits": {
+    "incoming_snapshot_kib": 256,
+    "per_execution_artifact_utf8_bytes": 24000,
+    "final_reply_characters": 32000
+  },
+  "contract": "docs/AGENTMAIL.md",
+  "worked_evidence_sha256": "7ae1d88840d872339c3e4d7d005bb929ca6a62a4f682779796b1210b88a18af6",
+  "coverage": "Offline candidate and fixture checks. The fixture body fits the documented snapshot envelope with headroom. Snapshot overhead, live case execution and mail delivery were not tested."
+}
