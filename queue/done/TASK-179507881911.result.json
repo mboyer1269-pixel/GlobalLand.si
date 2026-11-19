@@ -1,0 +1,41 @@
+{
+  "status": "DONE",
+  "output": "{\"scope\": \"Offline verification against committed fictional checker findings and rehearsal\", \"sku\": \"B-02\", \"finding\": {\"type\": \"price_difference\", \"side\": \"supplier\", \"row\": 3, \"other_row\": 3, \"key\": \"B-02\", \"field\": \"price \\u2192 price\", \"value\": \"20.00\", \"other_value\": \"25.00\"}, \"decisions\": {\"explicit_25_approval\": \"KEEP 25.00\", \"no_approval_or_authoritative_target\": \"RESOLVE MANUALLY\", \"explicit_20_target\": \"CORRECT TO 20.00\"}, \"payment_docs_read\": \"TASK-179507881910\", \"source_sha256\": {\"brief-decision-evidence.json\": \"7ae1d88840d872339c3e4d7d005bb929ca6a62a4f682779796b1210b88a18af6\", \"rehearsal-result.json\": \"c81a3378ecc37ebe18db1b747847c1f0123682a92a839ead2f4dc5567732cba0\", \"candidate-verification.json\": \"2635c65a7de585b27636b2f00867eabba2b0e0f539778a4f2d7e4657b44bdda6\", \"offer-copy-draft-en-fr.md\": \"149a4ad0a1fdb4e00cd951ab065870bf7bb2540f14dddcc3e8a08a8d4bdc319d\", \"qualified-inquiry-handoff-en-fr.md\": \"1a97765833a9f0f609dcd47081027837d8641bf54af4bd9b726a1bf1ebbcc044\"}, \"quote\": null, \"buyer_assent\": null, \"order_reference\": null, \"actual_delivery\": null, \"settlement\": null}\n\n",
+  "artifacts": [
+    "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+    "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json",
+    "products/receipts/TASK-179507881911.json"
+  ],
+  "request": {
+    "id": "TASK-179507881911",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-19T09:00:19Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,sys\nfrom pathlib import Path\nroot=Path(sys.argv[1])\nreport=json.loads((root/'brief-decision-evidence.json').read_text())\nrehearsal=json.loads((root/'rehearsal-result.json').read_text())\ncandidate=json.loads((root/'candidate-verification.json').read_text())\nassert report['findings']==rehearsal['original']['findings']\nfinding=next(f for f in report['findings'] if f['key']=='B-02')\nassert (finding['value'],finding['other_value'])==('20.00','25.00')\ndef decision(observed, approved_target):\n    if approved_target is None:\n        return 'RESOLVE MANUALLY'\n    if observed==approved_target:\n        return 'KEEP '+observed\n    return 'CORRECT TO '+approved_target\nassert 'Approve B-02 from 20.00 to 25.00.' in report['counterfactualBrief']\nassert decision(finding['other_value'],'25.00')==rehearsal['counterfactual_decisions']['B-02']\nassert decision(finding['other_value'],None)=='RESOLVE MANUALLY'\nassert decision(finding['other_value'],'20.00')==rehearsal['original']['decisions']['B-02']\nmd=sys.argv[2]\n(root/'qualified-inquiry-handoff-en-fr.md').write_text(md,encoding='utf-8')\nresult={'scope':'Offline verification against committed fictional checker findings and rehearsal','sku':'B-02','finding':finding,'decisions':{'explicit_25_approval':decision('25.00','25.00'),'no_approval_or_authoritative_target':decision('25.00',None),'explicit_20_target':decision('25.00','20.00')},'payment_docs_read':'TASK-179507881910','source_sha256':{n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['brief-decision-evidence.json','rehearsal-result.json','candidate-verification.json','offer-copy-draft-en-fr.md','qualified-inquiry-handoff-en-fr.md']},'quote':None,'buyer_assent':None,'order_reference':None,'actual_delivery':None,'settlement':None}\n(root/'qualified-inquiry-handoff-verification.json').write_text(json.dumps(result,indent=2)+'\\n')\nprint(json.dumps(result))",
+        "products/services/catalogue-commissioned-review/",
+        "# Catalogue price review | Vérification des prix du catalogue\n\n## Copy-ready scope confirmation\n\nEN — Please provide two short fictional or anonymized plain-text CSV excerpts, before and after, with stable SKU and price columns (up to 20 data rows per excerpt), plus a brief identifying approved prices and the authoritative row for any duplicate you can resolve. For each flagged SKU, the report recommends keeping the new value, correcting it to the documented intended value, or resolving it manually with the catalogue owner. It includes the relevant row references where the checker identifies them. Autonomous AI agents prepare the report from your supplied excerpts. It does not modify your catalogue or test a Shopify import. This scope check is nonbinding.\n\nFR — Veuillez fournir deux courts extraits CSV fictifs ou anonymisés en texte brut, avant et après, avec des colonnes SKU et prix stables (jusqu’à 20 lignes de données par extrait), ainsi qu’une note indiquant les prix approuvés et, pour tout doublon que vous pouvez résoudre, la ligne qui fait foi. Pour chaque SKU signalé, le rapport recommande de conserver la nouvelle valeur, de la corriger selon la valeur voulue et documentée, ou de demander au responsable du catalogue de trancher. Il cite les lignes pertinentes lorsque l’outil les identifie. Des agents d’IA autonomes préparent le rapport à partir de vos extraits. Ils ne modifient pas le catalogue et ne testent pas l’importation dans Shopify. Cette confirmation de périmètre est sans engagement.\n\n## Operator checklist\n\n1. Qualify using an actual authorized inbound case and redacted evidence that its two usable excerpts and approval brief fit the documented intake. Keep identifiers and source details in the private case. Use the case-local checker and read its result before composing the report.\n2. Keep the quote, buyer assent and order reference pending. For an actual CAD quote, the operator records immutable catalogue-specific terms, their SHA-256 and actual inbound source. Use the host-derived case key for administrative creation. Record acceptance only with the source message explicitly assenting to those terms and the host acceptance result. The authenticated case may then receive host payment instructions for an accepted unpaid order.\n3. Record delivery separately using the case execution result and authorized reply receipt tied to the report. File preparation alone leaves delivery pending.\n4. Customer payment claims remain unverified. The founder observes and attests the actual deposit, and the operator allocates and posts it. Verify the matching Treasury posting and founder-attested credit before recognizing settlement. Preserve redacted evidence of the stages separately.\n\nWorkflow source: docs/INTERAC-COMMANDES.md, TASK-179507881910. Fictional run and prior rehearsal are documented alongside this handoff.\n"
+      ],
+      "inputs": [
+        "products/services/catalogue-commissioned-review/brief-decision-evidence.json",
+        "products/services/catalogue-commissioned-review/rehearsal-result.json",
+        "products/services/catalogue-commissioned-review/candidate-verification.json",
+        "products/services/catalogue-commissioned-review/offer-copy-draft-en-fr.md"
+      ],
+      "outputs": [
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json"
+      ],
+      "mission_id": "CATALOGUE-QUALIFIED-INQUIRY-ORDER-HANDOFF"
+    },
+    "description": "Broker action during THINK-1795078819",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179507881911",
+  "input_sha256": "396f9fdf3971172e3c9e7e12b45eadd210a72e6e872d5d7dfd25d0765461614d"
+}
