@@ -1,0 +1,35 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 9, in <module>\nAssertionError\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179507881912",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-19T09:00:19Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,sys\nfrom pathlib import Path\ndoc,result=map(Path,sys.argv[1:])\nsite=Path('products/sites/shopify-catalogue-example/index.html').read_text()\nold=['up to 20 data rows per excerpt','jusqu’à 20 lignes de données par extrait']\nnew=['up to 20 data rows across both excerpts, plus their headers','jusqu’à 20 lignes de données au total, en plus des en-têtes']\nbody=doc.read_text()\nfor a,b in zip(old,new):\n    assert b in site and body.count(a)==1\n    body=body.replace(a,b)\ndoc.write_text(body)\ndata=json.loads(result.read_text())\ndata['source_sha256'][doc.name]=hashlib.sha256(doc.read_bytes()).hexdigest()\ndata['offer_cap_verified_against_candidate']='20 data rows total, plus headers'\nresult.write_text(json.dumps(data,indent=2)+'\\n')\nprint(data['offer_cap_verified_against_candidate'])",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json"
+      ],
+      "inputs": [
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "outputs": [
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json"
+      ],
+      "mission_id": "CATALOGUE-QUALIFIED-INQUIRY-ORDER-HANDOFF"
+    },
+    "description": "Broker action during THINK-1795078819",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179507881912",
+  "input_sha256": "7526c9de8332e6505b0891453f300af4b1a546c1bbcf24008cc5c6ee98f2219c"
+}
