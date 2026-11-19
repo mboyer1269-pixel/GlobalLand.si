@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "56: Chaque nouveau dossier fige son contexte public à l'ouverture : pages, protocoles et sources `.py` / `.js` sous `products/services/`. Les sources sélectionnées sont complètes, UTF-8, limitées à 64 Kio par fichier dans une enveloppe commune de 128 Kio et 128 fichiers. Une source trop grande, partielle, liée, invalide ou contenant un secret reconnu est omise. Le dossier conserve les octets, le chemin, la taille et l'empreinte SHA256 de chaque source ; une modification ultérieure de l'offre ne change pas cette version. Les anciens dossiers sans cet instantané conservent leur lecture textuelle historique, sans figer les fichiers publics ni acquérir implicitement de nouvelles sources.\n58: L'hôte copie les sources sélectionnées dans l'entrée en lecture seule du conteneur, sans les importer ni les exécuter. Elles restent des données non fiables. Dans `EXEC`, `/input/products/services/...` désigne les octets figés ; une copie est aussi disponible dans le répertoire de travail. Les livrables générés ne peuvent pas remplacer ces chemins. Un programme qui attend stdin nécessite un lanceur dans le conteneur qui extrait le texte approprié de `incoming.json` et le passe explicitement au programme ; `EXEC` n'alimente pas stdin. L'interpréteur doit exister dans l'image configurée : son absence est un échec de calcul, pas une exécution prouvée.\n66: L'agent sélectionne les fichiers effectivement produits. L'hôte insère leurs octets UTF-8 dans la réponse avec nom et empreinte SHA256. Il s'agit d'un livrable textuel **dans le corps du courriel**, pas d'une pièce jointe ni d'un téléchargement public. Les tailles sont bornées ; un fichier trop volumineux n'est pas livré partiellement en étant présenté comme complet. Les pièces jointes entrantes et les consultations de nouveaux sites ne sont pas disponibles dans cette version.\n68: Limites de cette livraison : 256 Kio pour l'instantané entrant, 24 000 octets UTF-8 cumulés pour les fichiers d'une exécution et 32 000 caractères pour la réponse finale. Les fichiers et reçus vivent sous `state/private/fulfillment/`, séparément du journal d'envoi `state/private/agentmail/`. Le modèle voit les résultats du dossier courant, jamais ceux d'un autre client.\n72: Le parcours n'accepte ni paiement ni contrat et ne convertit pas un test technique en client ou revenu. La vérification complète doit demander un résultat calculable à partir de données fictives, constater l'exécution réelle, vérifier les octets du livrable reçu, puis confirmer l'absence de doublon lors d'un nouveau passage.\n110: distant ni dossiers imbriqués. Limites séparées : 128 Kio UTF-8 de texte, 64 Kio\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179506260911.json"
+  ],
+  "request": {
+    "id": "TASK-179506260911",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-19T04:30:09Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import re; from pathlib import Path; print('\\n'.join(f'{n}: {l}' for n,l in enumerate(Path('docs/AGENTMAIL.md').read_text().splitlines(),1) if re.search(r'caractères|octets|tronc|inline|texte brut|64 Kio',l,re.I)))"
+      ],
+      "inputs": [
+        "docs/AGENTMAIL.md"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795062609",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179506260911",
+  "input_sha256": "31b5e405c9b7ef48b6b17f62d79d9d6b7b486260060ea13f4491bce1ae0fa942"
+}
