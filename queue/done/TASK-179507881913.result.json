@@ -1,0 +1,41 @@
+{
+  "status": "DONE",
+  "output": "20 data rows total, plus headers\n\n",
+  "artifacts": [
+    "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+    "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json",
+    "products/receipts/TASK-179507881913.json"
+  ],
+  "request": {
+    "id": "TASK-179507881913",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-19T09:00:19Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,sys\nfrom pathlib import Path\ndoc,result,site=map(Path,sys.argv[1:])\nbody=doc.read_text()\npage=site.read_text()\npairs=[('up to 20 data rows per excerpt','up to 20 data rows across both excerpts, plus their headers','at most 20 data rows across both excerpts, plus their headers'),('jusqu’à 20 lignes de données par extrait','jusqu’à 20 lignes de données au total, en plus des en-têtes','au plus 20 lignes de données au total, en plus des en-têtes')]\nfor old,new,source in pairs:\n    assert source in page and body.count(old)==1\n    body=body.replace(old,new)\ndoc.write_text(body)\ndata=json.loads(result.read_text())\ndata['source_sha256'][doc.name]=hashlib.sha256(doc.read_bytes()).hexdigest()\ndata['source_sha256'][str(site)]=hashlib.sha256(site.read_bytes()).hexdigest()\ndata['offer_cap_verified_against_candidate']='20 data rows total, plus headers'\nresult.write_text(json.dumps(data,indent=2)+'\\n')\nprint(data['offer_cap_verified_against_candidate'])",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "inputs": [
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "outputs": [
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json"
+      ],
+      "mission_id": "CATALOGUE-QUALIFIED-INQUIRY-ORDER-HANDOFF"
+    },
+    "description": "Broker action during THINK-1795078819",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179507881913",
+  "input_sha256": "40824f9c2b1a77af0ae9de0d78acd4cfea7605ca4f1fb6a821c018eb2d9341ee"
+}
