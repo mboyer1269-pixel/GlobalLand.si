@@ -1,0 +1,25 @@
+{
+  "fixture": "synthetic inline request",
+  "request": "Fictional catalogue review request. Do not send.\n[BEFORE CSV]\nsku,price\nA-01,10.00\nB-02,20.00\nC-03,30.00\n[AFTER CSV]\nsku,price\nA-01,12.00\nB-02,25.00\nC-03,30.00\nC-03,35.00\n[CHANGE BRIEF]\nApprove A-01 from 10.00 to 12.00. Keep B-02 unchanged. Confirm the correct C-03 row with the catalogue owner before importing.\n",
+  "request_sha256": "340c567cff2cf0d3c02d17cacd7cac9c76b2c7ee1b98901094670a1748e4873b",
+  "data_rows": [
+    3,
+    4
+  ],
+  "utf8_bytes": 313,
+  "checks": {
+    "csv_round_trip": true,
+    "approval_brief_round_trip": true,
+    "combined_data_rows_within_20": true,
+    "approved_change_present": true,
+    "unapproved_change_present": true,
+    "duplicate_preserved_for_manual_resolution": true
+  },
+  "all_pass": true,
+  "expected_report": {
+    "A-01": "keep the approved price of 12.00",
+    "B-02": "correct to 20.00 under the change brief",
+    "C-03": "resolve manually with the catalogue owner before importing"
+  },
+  "coverage": "Offline plain-text round trip only. The format and combined row limit are proposed. The current public offer, exact private-cycle limits, checker behavior, actual mail handling and commercial outcomes are outside this check."
+}
