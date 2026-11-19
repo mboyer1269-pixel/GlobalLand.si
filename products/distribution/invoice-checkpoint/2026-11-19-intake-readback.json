@@ -1,0 +1,70 @@
+{
+  "sources": [
+    {
+      "path": "products/distribution/invoice-checkpoint/2026-11-19-live.html",
+      "present": true,
+      "bytes": 7336,
+      "sha256": "f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62",
+      "intake_and_date_excerpts": [
+        "Free structure diagnostic by email",
+        "Optional: email at most 20 data rows of",
+        "synthetic or anonymized",
+        "in your message). An automated AI agent replies in the email body with the same structural result as this page: row and column counts plus quoting, row-width and empty/duplicate-header errors. Not checked: amounts, dates, tax, mappings, semicolon/tab delimiters or platform compatibility. No attachments (not opened), no links (not fetched), no confidential or personal data. More than 20 rows is declined. Reply time is not guaranteed.",
+        "Diagnostic gratuit par courriel.",
+        "Facultatif : envoyez au plus 20 lignes de CSV",
+        "fictif ou anonymisé",
+        "dans le message). Un agent d’IA autonome répond dans le corps du courriel avec le même contrôle de structure que cette page. Aucune pièce jointe, aucun lien, aucune donnée confidentielle ou personnelle. Montants, taxes et compatibilité ne sont pas vérifiés.",
+        "Would a checker tailored to your export and import workflow be useful? Illustrative offer: USD 49 for one mapping and anonymized example fixtures, subject to scope agreement. This price is untested. Ordering and payment are not available; you may mention interest in your email, which is not an order.",
+        "Personnalisation proposée : 49 USD, hypothèse de prix non validée. Aucune commande ni aucun paiement n’est possible.",
+        ", a downloadable offline Python script that converts a one-row-per-barcode color/size catalogue plus an image list into a product CSV. It does a different job from this checker (it transforms rows rather than checking structure), was tested on synthetic data only, and a real Shopify import has never been tested.",
+        ": up to 20 variant rows pasted as plain text; price idea CAD 60 per check, an unvalidated hypothesis, not a quote. Any paid work would need a separately confirmed scope and a manually accepted order. There is no checkout, and replies are not guaranteed.",
+        ": au plus 20 lignes de variantes collées en texte brut ; prix envisagé : 60 $ CA par vérification, hypothèse non validée et non une soumission. Tout travail payant exigerait une portée confirmée séparément et une commande acceptée manuellement. Aucun paiement en ligne ; réponses non garanties."
+      ],
+      "mailto_checks": [
+        {
+          "subject_present": true,
+          "body_present": true,
+          "experiment_identifiers": [
+            "site:invoice-preflight"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "products/distribution/invoice-preflight-live-r2.html",
+      "present": true,
+      "bytes": 4982,
+      "sha256": "2011477ec625d93ee8b0aa23a5982202619f4f27d50bca9e131001dc104e800d",
+      "intake_and_date_excerpts": [
+        "Free structure diagnostic by email",
+        "Optional: email at most 20 data rows of",
+        "synthetic or anonymized",
+        ". An automated AI agent replies in the email body with the same structural result as this page: row and column counts plus quoting, row-width and empty/duplicate-header errors. Not checked: amounts, dates, tax, mappings, semicolon/tab delimiters or platform compatibility. No attachments (not opened), no links (not fetched), no confidential or personal data. More than 20 rows is declined. Reply time is not guaranteed.",
+        "Diagnostic gratuit par courriel.",
+        "Facultatif : envoyez au plus 20 lignes de CSV",
+        "fictif ou anonymisé",
+        ", à globalland@agentmail.to. Un agent d’IA autonome répond dans le corps du courriel avec le même contrôle de structure que cette page. Aucune pièce jointe, aucun lien, aucune donnée confidentielle ou personnelle. Montants, taxes et compatibilité ne sont pas vérifiés.",
+        "Would a checker tailored to your export and import workflow be useful? Illustrative offer: USD 49 for one mapping and anonymized example fixtures, subject to scope agreement. This price is untested. Ordering and payment are not available; you may mention interest in your email, which is not an order.",
+        "Personnalisation proposée : 49 USD, hypothèse de prix non validée. Aucune commande ni aucun paiement n’est possible."
+      ],
+      "mailto_checks": [
+        {
+          "subject_present": false,
+          "body_present": false,
+          "experiment_identifiers": []
+        }
+      ]
+    },
+    {
+      "path": "products/distribution/invoice-preflight-live.html",
+      "present": true,
+      "bytes": 3535,
+      "sha256": "22242ea3b4f4cb89c2b581ec736ae4b14b2239bf158a0e2177218c6a39596948",
+      "intake_and_date_excerpts": [
+        "Would a checker tailored to your export and import workflow be useful? Illustrative offer: USD 49 for one mapping and anonymized example fixtures, subject to scope agreement. This price is untested. Payment and ordering are not available on this page."
+      ],
+      "mailto_checks": []
+    }
+  ],
+  "scope": "Public release and buyer intake wording only. Verify the live capture receipt and match the live hash to an authoritative deployment receipt before assigning a cutoff. This check cannot establish requests, replies, orders or settlement."
+}
