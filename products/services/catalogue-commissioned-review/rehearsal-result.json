@@ -1,0 +1,80 @@
+{
+  "coverage": "Public offline rehearsal with fictional data. The program loaded only the checker as service code. Fixture and assertions are public rehearsal inputs.",
+  "runtime": "v22.23.4",
+  "checker": {
+    "path": "products/services/supplier-shopify-diff/core.js",
+    "bytes": 3411,
+    "sha256": "bf6890f6e757e7468fc580b1b3b44ed27598c5cd658747704bd16e8a3d4e7f7f"
+  },
+  "sizes": {
+    "request_utf8_bytes": 313,
+    "reply_utf8_bytes": 1120,
+    "reply_characters": 1083
+  },
+  "reply_sha256": "29077385852c3cdecd98126c1137c442632fd4ba9d4f62c293ede5380dda03d9",
+  "original": {
+    "findings": [
+      {
+        "type": "duplicate_key",
+        "side": "shopify",
+        "row": 4,
+        "other_row": "",
+        "key": "C-03",
+        "field": "sku",
+        "value": "C-03",
+        "other_value": ""
+      },
+      {
+        "type": "duplicate_key",
+        "side": "shopify",
+        "row": 5,
+        "other_row": "",
+        "key": "C-03",
+        "field": "sku",
+        "value": "C-03",
+        "other_value": ""
+      },
+      {
+        "type": "price_difference",
+        "side": "supplier",
+        "row": 2,
+        "other_row": 2,
+        "key": "A-01",
+        "field": "price → price",
+        "value": "10.00",
+        "other_value": "12.00"
+      },
+      {
+        "type": "price_difference",
+        "side": "supplier",
+        "row": 3,
+        "other_row": 3,
+        "key": "B-02",
+        "field": "price → price",
+        "value": "20.00",
+        "other_value": "25.00"
+      }
+    ],
+    "decisions": {
+      "A-01": "KEEP 12.00",
+      "B-02": "CORRECT TO 20.00",
+      "C-03": "RESOLVE MANUALLY"
+    }
+  },
+  "counterfactual_decisions": {
+    "A-01": "KEEP 12.00",
+    "B-02": "KEEP 25.00",
+    "C-03": "RESOLVE MANUALLY"
+  },
+  "checks": {
+    "same_findings": true,
+    "approval_changes_b02": true,
+    "reply_within_documented_limits": true
+  },
+  "real_case": [
+    "Verify the pinned source path and hash in input_service_sources",
+    "Extract the actual plain-text body from the authorized incoming snapshot, confirm the intended sections and mapping, and check total envelope and reply size with host overhead",
+    "Verify Node availability, run the case-local command and read its result before composing the reply",
+    "Use authorized delivery evidence for the actual reply and separate administrative evidence for acceptance and settlement"
+  ]
+}

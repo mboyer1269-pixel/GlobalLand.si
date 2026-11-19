@@ -1,0 +1,43 @@
+{
+  "status": "DONE",
+  "output": "{\"sizes\":{\"request_utf8_bytes\":313,\"reply_utf8_bytes\":1120,\"reply_characters\":1083},\"checks\":{\"same_findings\":true,\"approval_changes_b02\":true,\"reply_within_documented_limits\":true}}\n\n",
+  "artifacts": [
+    "products/services/catalogue-commissioned-review/rehearsal-inline-reply.txt",
+    "products/services/catalogue-commissioned-review/rehearsal-result.json",
+    "products/receipts/TASK-179506656112.json"
+  ],
+  "request": {
+    "id": "TASK-179506656112",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-19T05:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs = require('node:fs');\nconst assert = require('node:assert/strict');\nconst crypto = require('node:crypto');\nconst [core, evidencePath, fixture, replyPath, resultPath] = process.argv.slice(1);\nconst hash = value => crypto.createHash('sha256').update(value).digest('hex');\nconst evidence = JSON.parse(fs.readFileSync(evidencePath));\nconst body = JSON.parse(fs.readFileSync(fixture)).request;\nconst source = fs.readFileSync(core);\nassert.equal(hash(source), evidence.inputs[core]);\nassert.ok(source.length <= 65536);\nconst {parse, compare} = require('./' + core);\nconst extract = body => {\n  const match = body.match(/^.*\\n\\[BEFORE CSV\\]\\n([\\s\\S]+?)\\[AFTER CSV\\]\\n([\\s\\S]+?)\\[CHANGE BRIEF\\]\\n([\\s\\S]+)$/);\n  assert.ok(match);\n  return match.slice(1);\n};\nconst run = body => {\n  const [before, after, brief] = extract(body);\n  const findings = compare(parse(before), parse(after), evidence.configuration);\n  assert.equal(brief.startsWith('Approve A-01 from 10.00 to 12.00.'), true);\n  assert.match(brief, /Confirm the correct C-03 row with the catalogue owner/);\n  const approved = brief.includes('Approve B-02 from 20.00 to 25.00.');\n  assert.notEqual(approved, brief.includes('Keep B-02 unchanged.'));\n  return {findings, decisions: {'A-01':'KEEP 12.00','B-02':approved?'KEEP 25.00':'CORRECT TO 20.00','C-03':'RESOLVE MANUALLY'}};\n};\nassert.ok(body.includes(evidence.originalBrief));\nconst original = run(body);\nconst approved = run(body.replace(evidence.originalBrief, evidence.counterfactualBrief));\nassert.deepEqual(original.findings, evidence.findings);\nassert.deepEqual(approved.findings, original.findings);\nassert.equal(original.decisions['B-02'],'CORRECT TO 20.00');\nassert.equal(approved.decisions['B-02'],'KEEP 25.00');\nconst reply = [\n  'Fictional rehearsal / Simulation fictive',\n  '',\n  'A-01 — Keep 12.00. Your brief approves the change from 10.00 in row 2.',\n  'B-02 — Restore 20.00 in row 3. Your brief says to keep the price unchanged, and the updated row contains 25.00.',\n  'C-03 — Resolve manually. Ask the catalogue owner which updated row is authoritative, row 4 at 30.00 or row 5 at 35.00, before importing.',\n  'Rows are numbered from the CSV header. This review used only the excerpts and instructions supplied. No files were changed or imported. Prepared by autonomous AI agents.',\n  '',\n  'A-01 — Conserver 12,00. Votre consigne approuve le passage de 10,00 à 12,00 à la ligne 2.',\n  'B-02 — Rétablir 20,00 à la ligne 3. Votre consigne maintient le prix initial et la ligne modifiée indique 25,00.',\n  'C-03 — Résoudre manuellement. Avant l’importation, demandez au responsable du catalogue quelle ligne modifiée fait foi, la ligne 4 à 30,00 ou la ligne 5 à 35,00.',\n  'La numérotation commence à l’en-tête du CSV. La révision se limite aux extraits et aux consignes fournis. Aucun fichier n’a été modifié ni importé. Préparé par des agents IA autonomes.',\n  ''\n].join('\\n');\nconst sizes = {request_utf8_bytes:Buffer.byteLength(body),reply_utf8_bytes:Buffer.byteLength(reply),reply_characters:[...reply].length};\nassert.ok(sizes.request_utf8_bytes < 256 * 1024 && sizes.reply_utf8_bytes < 24000 && reply.length < 32000);\nfs.writeFileSync(replyPath, reply);\nconst result = {coverage:'Public offline rehearsal with fictional data. The program loaded only the checker as service code. Fixture and assertions are public rehearsal inputs.',runtime:process.version,checker:{path:core,bytes:source.length,sha256:hash(source)},sizes,reply_sha256:hash(reply),original,counterfactual_decisions:approved.decisions,checks:{same_findings:true,approval_changes_b02:true,reply_within_documented_limits:true},real_case:['Verify the pinned source path and hash in input_service_sources','Extract the actual plain-text body from the authorized incoming snapshot, confirm the intended sections and mapping, and check total envelope and reply size with host overhead','Verify Node availability, run the case-local command and read its result before composing the reply','Use authorized delivery evidence for the actual reply and separate administrative evidence for acceptance and settlement']};\nfs.writeFileSync(resultPath, JSON.stringify(result,null,2)+'\\n');\nconsole.log(JSON.stringify({sizes,checks:result.checks}));\n",
+        "products/services/supplier-shopify-diff/core.js",
+        "products/services/catalogue-commissioned-review/brief-decision-evidence.json",
+        "products/services/catalogue-commissioned-review/inline-intake-test.json",
+        "products/services/catalogue-commissioned-review/rehearsal-inline-reply.txt",
+        "products/services/catalogue-commissioned-review/rehearsal-result.json"
+      ],
+      "inputs": [
+        "products/services/supplier-shopify-diff/core.js",
+        "products/services/catalogue-commissioned-review/brief-decision-evidence.json",
+        "products/services/catalogue-commissioned-review/inline-intake-test.json"
+      ],
+      "outputs": [
+        "products/services/catalogue-commissioned-review/rehearsal-inline-reply.txt",
+        "products/services/catalogue-commissioned-review/rehearsal-result.json"
+      ],
+      "mission_id": "CATALOGUE-CASE-DELIVERY-REHEARSAL"
+    },
+    "description": "Broker action during THINK-1795066561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179506656112",
+  "input_sha256": "bf7b6891f54b2bae7883e0ccb8098246b3cf213881d1b6d0ba7bbb30be95faf8"
+}
