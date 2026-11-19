@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-QUALIFIED-INQUIRY-ORDER-HANDOFF\", \"goal\": \"Prepare the catalogue-specific operator handoff for converting one verified eligible inquiry into an administratively accepted order. First check for an equivalent committed handoff and reuse it if present. Read docs/INTERAC-COMMANDES.md, the existing welfare payment handoff as a workflow reference, and the committed catalogue draft, brief-decision evidence and rehearsal. Produce one copy-ready EN/FR scope confirmation and one concise operator checklist for a real inquiry. Use exact supported inputs and keep/correct/resolve-manually outputs. Leave any quote, buyer assent and order reference pending actual operator evidence. Carry over no welfare price or terms. Verify the handoff against the fictional B-02 case and a counterexample with missing approval evidence. Record what evidence establishes a qualified inquiry, administrative acceptance, delivery and founder-confirmed Treasury posting. Save and read the artifacts before closing under a valid lease with a lesson. This handoff can proceed while the catalogue candidate awaits independent review. Use no private case data, external send, order creation, payment instructions, spend or deployment.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"FULFILLMENT\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md\", \"products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json\"]}",
+  "request": {
+    "id": "TASK-179507881914",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-19T09:00:19Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "agent_id": "FULFILLMENT",
+      "mission_id": "CATALOGUE-QUALIFIED-INQUIRY-ORDER-HANDOFF",
+      "lease_token": "ntl8XNFcwK9e2V3cb6OeRRUveF3fkuOj",
+      "evidence": [
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-en-fr.md",
+        "products/services/catalogue-commissioned-review/qualified-inquiry-handoff-verification.json"
+      ],
+      "lesson": "Reading payment documentation separately recovered from the unavailable input selection. The fictional checker evidence supports keeping 25.00 when explicitly approved and manual resolution when the intended price is unknown. The first handoff misstated the row cap per excerpt. Comparing both languages to the exact candidate corrected it to 20 data rows total. Check customer-facing limits before drafting and require separate real evidence for qualification, acceptance, delivery and Treasury posting."
+    },
+    "description": "Broker action during THINK-1795078819",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179507881914",
+  "input_sha256": "a5dfc78b93e4461afee8580b84aec279cf86ef49ffb194f7253f31fed55f0c7e"
+}
