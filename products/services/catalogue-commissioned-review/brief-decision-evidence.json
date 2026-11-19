@@ -1,0 +1,84 @@
+{
+  "fixture": "Fictional before/after catalogue update",
+  "runtime": "v22.23.4",
+  "command": [
+    "/usr/local/bin/node",
+    "-e",
+    "const fs = require('node:fs');\nconst assert = require('node:assert/strict');\nconst crypto = require('node:crypto');\nconst [fixturePath, corePath, out] = process.argv.slice(1);\nconst fixture = JSON.parse(fs.readFileSync(fixturePath, 'utf8'));\nconst {parse, compare} = require('./' + corePath);\nconst match = fixture.request.match(/\\[BEFORE CSV\\]\\n([\\s\\S]+?)\\[AFTER CSV\\]\\n([\\s\\S]+?)\\[CHANGE BRIEF\\]\\n([\\s\\S]+)$/);\nassert.ok(match);\nconst [before, after, originalBrief] = match.slice(1);\nassert.match(originalBrief, /Approve A-01 from 10\\.00 to 12\\.00\\. Keep B-02 unchanged\\. Confirm the correct C-03 row/);\nconst configuration = {keyA:'sku',keyB:'sku',fields:[{a:'price',b:'price',kind:'price'}]};\nconst findings = compare(parse(before), parse(after), configuration);\nconst actual = findings.map(({type,key,row,other_row,value,other_value})=>[type,key,row,other_row,value,other_value]);\nassert.deepEqual(actual, [\n ['duplicate_key','C-03',4,'','C-03',''],\n ['duplicate_key','C-03',5,'','C-03',''],\n ['price_difference','A-01',2,2,'10.00','12.00'],\n ['price_difference','B-02',3,3,'20.00','25.00']\n]);\nconst counterfactualBrief = originalBrief.replace('Keep B-02 unchanged.', 'Approve B-02 from 20.00 to 25.00.');\nconst hash = path=>crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex');\nconst report = {\n fixture:'Fictional before/after catalogue update',\n runtime:process.version,\n command:[process.argv[0],'-e',process._eval,...process.argv.slice(1)],\n inputs:{[fixturePath]:hash(fixturePath),[corePath]:hash(corePath)},\n configuration, findings, originalBrief, counterfactualBrief,\n report_en:[\n  'A-01 — Keep 12.00. Both briefs approve the price change flagged in CSV row 2.',\n  'B-02 — Correct to 20.00 under the original brief. Keep 25.00 under the counterfactual, which explicitly approves it. The checker flags the same row 3 price difference in both cases.',\n  'C-03 — Resolve manually. Both briefs require the catalogue owner to confirm which after-file row is authoritative. The checker flags both rows (4 and 5) and does not pair the duplicate.'\n ],\n report_fr:[\n  'A-01 — Conserver 12,00. Les deux consignes approuvent la modification signalée à la ligne 2.',\n  'B-02 — Rétablir 20,00 selon la consigne initiale. Conserver 25,00 selon la seconde consigne, qui approuve explicitement ce prix. Le même écart est signalé à la ligne 3.',\n  'C-03 — Résoudre manuellement. Le responsable du catalogue doit confirmer laquelle des lignes 4 et 5 du fichier après modification fait foi. Le comparateur signale les deux lignes sans les apparier.'\n ],\n scope_en:'Provide two small synthetic or anonymized CSV excerpts with stable SKU and price columns, plus a brief naming approved changes and any authoritative decisions about ambiguous rows. Receive a per-SKU recommendation with supporting row references and questions for the catalogue owner.',\n scope_fr:'Fournir deux courts extraits CSV fictifs ou anonymisés avec des colonnes SKU et prix stables, et préciser les modifications approuvées ainsi que les décisions qui lèvent les ambiguïtés. Recevoir une recommandation par SKU, les références aux lignes et les questions à soumettre au responsable du catalogue.',\n limits:'Offline fictional input. Decisions are an interpretation of the supplied briefs. No import or file modification performed. Private intake and commercial outcomes were outside this run.'\n};\nfs.writeFileSync(out, JSON.stringify(report,null,2)+'\\n');\nconst saved = JSON.parse(fs.readFileSync(out,'utf8'));\nassert.deepEqual(saved.findings,findings);\nconsole.log(JSON.stringify({out,sha256:hash(out),actual,report_en:saved.report_en}));\n",
+    "products/services/catalogue-commissioned-review/inline-intake-test.json",
+    "products/services/supplier-shopify-diff/core.js",
+    "products/services/catalogue-commissioned-review/brief-decision-evidence.json"
+  ],
+  "inputs": {
+    "products/services/catalogue-commissioned-review/inline-intake-test.json": "fd7bc9519a3d79db320e53596466fd3e95e29133243ce398c5861f7a02e2cdd8",
+    "products/services/supplier-shopify-diff/core.js": "bf6890f6e757e7468fc580b1b3b44ed27598c5cd658747704bd16e8a3d4e7f7f"
+  },
+  "configuration": {
+    "keyA": "sku",
+    "keyB": "sku",
+    "fields": [
+      {
+        "a": "price",
+        "b": "price",
+        "kind": "price"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "type": "duplicate_key",
+      "side": "shopify",
+      "row": 4,
+      "other_row": "",
+      "key": "C-03",
+      "field": "sku",
+      "value": "C-03",
+      "other_value": ""
+    },
+    {
+      "type": "duplicate_key",
+      "side": "shopify",
+      "row": 5,
+      "other_row": "",
+      "key": "C-03",
+      "field": "sku",
+      "value": "C-03",
+      "other_value": ""
+    },
+    {
+      "type": "price_difference",
+      "side": "supplier",
+      "row": 2,
+      "other_row": 2,
+      "key": "A-01",
+      "field": "price → price",
+      "value": "10.00",
+      "other_value": "12.00"
+    },
+    {
+      "type": "price_difference",
+      "side": "supplier",
+      "row": 3,
+      "other_row": 3,
+      "key": "B-02",
+      "field": "price → price",
+      "value": "20.00",
+      "other_value": "25.00"
+    }
+  ],
+  "originalBrief": "Approve A-01 from 10.00 to 12.00. Keep B-02 unchanged. Confirm the correct C-03 row with the catalogue owner before importing.\n",
+  "counterfactualBrief": "Approve A-01 from 10.00 to 12.00. Approve B-02 from 20.00 to 25.00. Confirm the correct C-03 row with the catalogue owner before importing.\n",
+  "report_en": [
+    "A-01 — Keep 12.00. Both briefs approve the price change flagged in CSV row 2.",
+    "B-02 — Correct to 20.00 under the original brief. Keep 25.00 under the counterfactual, which explicitly approves it. The checker flags the same row 3 price difference in both cases.",
+    "C-03 — Resolve manually. Both briefs require the catalogue owner to confirm which after-file row is authoritative. The checker flags both rows (4 and 5) and does not pair the duplicate."
+  ],
+  "report_fr": [
+    "A-01 — Conserver 12,00. Les deux consignes approuvent la modification signalée à la ligne 2.",
+    "B-02 — Rétablir 20,00 selon la consigne initiale. Conserver 25,00 selon la seconde consigne, qui approuve explicitement ce prix. Le même écart est signalé à la ligne 3.",
+    "C-03 — Résoudre manuellement. Le responsable du catalogue doit confirmer laquelle des lignes 4 et 5 du fichier après modification fait foi. Le comparateur signale les deux lignes sans les apparier."
+  ],
+  "scope_en": "Provide two small synthetic or anonymized CSV excerpts with stable SKU and price columns, plus a brief naming approved changes and any authoritative decisions about ambiguous rows. Receive a per-SKU recommendation with supporting row references and questions for the catalogue owner.",
+  "scope_fr": "Fournir deux courts extraits CSV fictifs ou anonymisés avec des colonnes SKU et prix stables, et préciser les modifications approuvées ainsi que les décisions qui lèvent les ambiguïtés. Recevoir une recommandation par SKU, les références aux lignes et les questions à soumettre au responsable du catalogue.",
+  "limits": "Offline fictional input. Decisions are an interpretation of the supplied briefs. No import or file modification performed. Private intake and commercial outcomes were outside this run."
+}
