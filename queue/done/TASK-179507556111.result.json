@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"verdict\": \"NO_FIT_IN_BOUNDED_SCREEN\",\n  \"source_url\": \"https://jobs.wordpress.net/feed/\",\n  \"source_sha256\": \"5e6e5c1f17a436b4b67613b887153fa504415b2b9f417f80c43a92a3f09940e6\",\n  \"feed_items\": 10,\n  \"inspected_listings\": [\n    {\n      \"url\": \"https://jobs.wordpress.net/job/wordpress-expert-38/\",\n      \"title\": \"WordPress expert\",\n      \"published\": \"Wed, 11 Nov 2026 21:16:47 +0000\",\n      \"buyer_quote\": \"We will need an expert to look into our WordPress back end.\",\n      \"exclusion\": \"The buyer leaves scope to a later conversation. No discrete import QA requirement or explicit compensation appears in the listing text.\"\n    },\n    {\n      \"url\": \"https://jobs.wordpress.net/job/web-site-developer-project/\",\n      \"title\": \"Web Site Developer – Project\",\n      \"published\": \"Wed, 11 Nov 2026 21:15:08 +0000\",\n      \"buyer_quote\": \"We do not want AI-dependent web development.\",\n      \"exclusion\": \"The buyer expressly excludes AI-dependent development. The project also bundles migration of user records with a full Drupal-to-WordPress rebuild.\"\n    },\n    {\n      \"url\": \"https://jobs.wordpress.net/job/wordpress-website-developer-18/\",\n      \"title\": \"WordPress website developer\",\n      \"published\": \"Thu, 05 Nov 2026 20:02:08 +0000\",\n      \"buyer_quote\": \"The mandatory platform is WordPress using the Gutenberg block editor, Kadence Theme and Kadence Blocks.\",\n      \"exclusion\": \"The paid fixed-price job seeks a complete six-page build in a specified WordPress stack. The listing gives no separately purchasable catalogue CSV, migration or import QA deliverable.\"\n    }\n  ],\n  \"scope\": \"Official RSS capture only. The three scope exclusions were sufficient before verifying response rules or current availability.\",\n  \"sample_executed\": false,\n  \"external_application_sent\": false,\n  \"reopening_trigger\": \"A specific current buyer-authored listing explicitly commissioning a paid standalone catalogue CSV, migration or import QA task with a testable criterion, a permitted response route and terms compatible with disclosed AI assistance.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/wp-buyer-sample/bounded-decision.json",
+    "products/receipts/TASK-179507556111.json"
+  ],
+  "request": {
+    "id": "TASK-179507556111",
+    "type": "TOOL",
+    "submitted_by": "BUYER_ROUTE",
+    "created_at": "2026-11-19T08:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib, html, json, pathlib, re, xml.etree.ElementTree as ET\n\nfolder = pathlib.Path(\"products/services/wp-buyer-sample\")\nsource = (folder / \"official-feed.xml\").read_bytes()\ndigest = hashlib.sha256(source).hexdigest()\nassert digest == \"5e6e5c1f17a436b4b67613b887153fa504415b2b9f417f80c43a92a3f09940e6\"\nitems = ET.fromstring(source).findall(\"./channel/item\")\ndecisions = {\n    \"wordpress-expert-38\": (\"We will need an expert to look into our WordPress back end.\", \"The buyer leaves scope to a later conversation. No discrete import QA requirement or explicit compensation appears in the listing text.\"),\n    \"web-site-developer-project\": (\"We do not want AI-dependent web development.\", \"The buyer expressly excludes AI-dependent development. The project also bundles migration of user records with a full Drupal-to-WordPress rebuild.\"),\n    \"wordpress-website-developer-18\": (\"The mandatory platform is WordPress using the Gutenberg block editor, Kadence Theme and Kadence Blocks.\", \"The paid fixed-price job seeks a complete six-page build in a specified WordPress stack. The listing gives no separately purchasable catalogue CSV, migration or import QA deliverable.\")\n}\nscreen = []\nfor item in items:\n    url = item.findtext(\"link\")\n    slug = url.rstrip(\"/\").split(\"/\")[-1]\n    if slug not in decisions:\n        continue\n    quote, reason = decisions[slug]\n    body = item.findtext(\"{http://purl.org/rss/1.0/modules/content/}encoded\")\n    assert quote in html.unescape(re.sub(\"<[^>]+>\", \" \", body))\n    screen.append(dict(url=url, title=html.unescape(item.findtext(\"title\")), published=item.findtext(\"pubDate\"), buyer_quote=quote, exclusion=reason))\nassert len(screen) == 3\nresult = dict(verdict=\"NO_FIT_IN_BOUNDED_SCREEN\", source_url=\"https://jobs.wordpress.net/feed/\", source_sha256=digest, feed_items=len(items), inspected_listings=screen, scope=\"Official RSS capture only. The three scope exclusions were sufficient before verifying response rules or current availability.\", sample_executed=False, external_application_sent=False, reopening_trigger=\"A specific current buyer-authored listing explicitly commissioning a paid standalone catalogue CSV, migration or import QA task with a testable criterion, a permitted response route and terms compatible with disclosed AI assistance.\")\npath = folder / \"bounded-decision.json\"\npath.write_text(json.dumps(result, ensure_ascii=False, indent=2)+\"\\n\", encoding=\"utf-8\")\nprint(path.read_text())\n"
+      ],
+      "inputs": [
+        "products/services/wp-buyer-sample/official-feed.xml"
+      ],
+      "outputs": [
+        "products/services/wp-buyer-sample/bounded-decision.json"
+      ],
+      "mission_id": "WP-BUYER-PAID-SAMPLE"
+    },
+    "description": "Broker action during THINK-1795075561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179507556111",
+  "input_sha256": "c7859d701c892b513353611b492b4670a317a69d65dc67ea7705b99815149d12"
+}
