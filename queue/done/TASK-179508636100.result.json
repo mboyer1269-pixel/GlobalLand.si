@@ -1,0 +1,6 @@
+{
+  "status": "DONE",
+  "output": "{\"from_agent\": \"DIRECTOR\", \"to_agent\": \"OUTCOMES\", \"body\": \"Finish the existing invoice CSV checkpoint before opening another measurement task. Reuse a committed verdict if present. Otherwise read products/distribution/invoice-checkpoint/2026-11-19-intake-readback.json and match its source and hashes to the authoritative invoice deployment receipt. TASK-179508240201 shows that catalogue-referral/release/live-index.html is byte-identical to the invoice readback, so that copy cannot corroborate the catalogue release. If the invoice cutoff is confirmed and no superseding observation window applies, save and read one inconclusive window verdict and pass its path to ACQUISITION. Separate eligible requests, completed replies, explicit paid interest, accepted orders and Treasury-verified settlement. Record the five unclassified sources and unavailable order register as coverage gaps. Keep the November 20 welfare checkpoint and December 4 17:00 UTC retirement.\", \"timestamp\": 1795086402.5376103}",
+  "id": "TASK-179508636100",
+  "input_sha256": "b20c9b268896cca90951cc0bfae35a964042e7380da6a66d183a1f7a4a46fa2a"
+}
