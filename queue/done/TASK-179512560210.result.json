@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"pilot\": \"existing catalogue item 4\",\n  \"live_fetch_receipt\": \"TASK-179508276100\",\n  \"verified_hashes\": {\n    \"products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html\": \"8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc\",\n    \"products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md\": \"b1fe208d0198d03a55a01641c6d9d8e3fa269296167f53400a35594bd79ba012\"\n  },\n  \"scope_match\": \"The draft and live capture use 20 variant rows plus image rows, plain text, style-level duplicate-image reporting, and require agency-produced Shopify rows for preservation checks. CAD 60 is a nonbinding price hypothesis in both.\",\n  \"decision\": \"Use the existing send-or-decline handoff. The draft scope is supported by the captured live release and does not depend on the commissioned-review candidate.\",\n  \"remaining_condition\": \"Confirm any prior send or decline and the operator authorization for this exact draft and channel before any send.\",\n  \"evidence_limit\": \"This comparison establishes draft fit. Operator decision, actual send, eligible reply, order acceptance and settlement require separate evidence.\"\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-referral/item-4-release-binding.json",
+    "products/receipts/TASK-179512560210.json"
+  ],
+  "request": {
+    "id": "TASK-179512560210",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-19T22:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,sys\nfrom pathlib import Path\nlive,draft,out=map(Path,sys.argv[1:])\nhashes={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (live,draft)}\nexpected=['8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc','b1fe208d0198d03a55a01641c6d9d8e3fa269296167f53400a35594bd79ba012']\nassert list(hashes.values())==expected, 'Evidence hashes differ from handoff'\nresult={'pilot':'existing catalogue item 4','live_fetch_receipt':'TASK-179508276100','verified_hashes':hashes,'scope_match':'The draft and live capture use 20 variant rows plus image rows, plain text, style-level duplicate-image reporting, and require agency-produced Shopify rows for preservation checks. CAD 60 is a nonbinding price hypothesis in both.','decision':'Use the existing send-or-decline handoff. The draft scope is supported by the captured live release and does not depend on the commissioned-review candidate.','remaining_condition':'Confirm any prior send or decline and the operator authorization for this exact draft and channel before any send.','evidence_limit':'This comparison establishes draft fit. Operator decision, actual send, eligible reply, order acceptance and settlement require separate evidence.'}\nout.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\\n')\nprint(out.read_text())\n",
+        "products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html",
+        "products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md",
+        "products/distribution/catalogue-referral/item-4-release-binding.json"
+      ],
+      "inputs": [
+        "products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html",
+        "products/services/catalogue-agency-prospects/distribution-handoff/aligned/final-message.md"
+      ],
+      "outputs": [
+        "products/distribution/catalogue-referral/item-4-release-binding.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795125602",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179512560210",
+  "input_sha256": "fbeb05322e56e2df51883aa1aa49740f2d1a032669e2d7866a3d2e469f8e53b8"
+}
