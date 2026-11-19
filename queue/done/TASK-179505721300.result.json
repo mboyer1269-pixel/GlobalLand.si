@@ -1,0 +1,9 @@
+{
+  "status": "DONE",
+  "output": "{\"path\": \"products/services/catalogue-commissioned-review/inline-intake-test.json\", \"bytes\": 1256, \"sha256\": \"fd7bc9519a3d79db320e53596466fd3e95e29133243ce398c5861f7a02e2cdd8\"}\n{\n  \"fixture\": \"synthetic inline request\",\n  \"request\": \"Fictional catalogue review request. Do not send.\\n[BEFORE CSV]\\nsku,price\\nA-01,10.00\\nB-02,20.00\\nC-03,30.00\\n[AFTER CSV]\\nsku,price\\nA-01,12.00\\nB-02,25.00\\nC-03,30.00\\nC-03,35.00\\n[CHANGE BRIEF]\\nApprove A-01 from 10.00 to 12.00. Keep B-02 unchanged. Confirm the correct C-03 row with the catalogue owner before importing.\\n\",\n  \"request_sha256\": \"340c567cff2cf0d3c02d17cacd7cac9c76b2c7ee1b98901094670a1748e4873b\",\n  \"data_rows\": [\n    3,\n    4\n  ],\n  \"utf8_bytes\": 313,\n  \"checks\": {\n    \"csv_round_trip\": true,\n    \"approval_brief_round_trip\": true,\n    \"combined_data_rows_within_20\": true,\n    \"approved_change_present\": true,\n    \"unapproved_change_present\": true,\n    \"duplicate_preserved_for_manual_resolution\": true\n  },\n  \"all_pass\": true,\n  \"expected_report\": {\n    \"A-01\": \"keep the approved price of 12.00\",\n    \"B-02\": \"correct to 20.00 under the change brief\",\n    \"C-03\": \"resolve manually with the catalogue owner before importing\"\n  },\n  \"coverage\": \"Offline plain-text round trip only. The format and combined row limit are proposed. The current public offer, exact private-cycle limits, checker behavior, actual mail handling and commercial outcomes are outside this check.\"\n}\n\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179505721300.json"
+  ],
+  "id": "TASK-179505721300",
+  "input_sha256": "4fa7669896629f2ad4b34b37ec0ebbcf84b8bbae1ccd6d30edf3a46cb4e48c88"
+}
