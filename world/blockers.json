@@ -140,23 +140,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-PROGRESS",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "3 tours consécutifs sans résultat vérifiable",
-      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : AWARD-PRIME-SUBCONTRACT-SAMPLE, BUYER-REQUEST-BILINGUAL-DOCUMENTATION, CANADA-STANDALONE-DATA-QA-BUYER, CATALOGUE-CHECKOUT-ACTIVATION-HANDOFF, CATALOGUE-COMMISSIONED-REVIEW-LIVE-TEST, CATALOGUE-DOWNLOAD-FULFILLMENT, CATALOGUE-PAYHIP-DECISION, CATALOGUE-QA-BUYER-REQUEST-PATH, CATALOGUE-QA-EXAMPLE-VERIFIED-RELEASE, CATALOGUE-REPEAT-UPDATE-WORKED-REPORT, CSV-ACTOR-LAUNCH, DOMAIN-RDAP-LAUNCH, EXPLICIT-PAID-SPREADSHEET-SUPPORT-FIT, GODOT-PAID-DEBUGGING-REQUEST-FIT, LINK-CHECK-LAUNCH, NORTH-AYRSHIRE-LIVE-NOTICE-DELTA, OPEN-SOFTWARE-TENDER-BRIEF, PAID-STANDARDS-IMPLEMENTATION-FIT, PARSER-PARITY-CONTEXTUAL-REFERRAL, PARSER-PARITY-SITE-REVIEW ; consulter la collection missions paginée pour la suite.",
-      "open_missions_total": 35,
-      "missions_truncated": true,
-      "missions_collection": "missions",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 3,
-      "opened_at": "2026-11-19T11:06:34Z",
-      "last_reported_at": "2026-11-19T11:36:40Z"
     }
   ],
   "resolved_recent": [
@@ -196,26 +179,28 @@
     }
   ],
   "progress": {
-    "stalled_turns": 3,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-19T11:06:34Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1151,
-    "turns_without_verified_revenue": 1151,
-    "turns_without_outcome": 9,
+    "turns_without_new_interpreted_feedback": 1152,
+    "turns_without_verified_revenue": 1152,
+    "turns_without_outcome": 10,
     "outcome_threshold": 12,
     "dry_since": "2026-11-19T09:36:42Z",
     "last_outcome_turn": "THINK-1795080602",
-    "last_productive_turn": "THINK-1795086011",
-    "last_turn": "THINK-1795088162",
+    "last_productive_turn": "THINK-1795089612",
+    "last_turn": "THINK-1795089612",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
-      "new_research_count": 1,
+      "new_products": [
+        "products/services/canadabuys-standalone-data-qa/source-options.json"
+      ],
+      "new_product_count": 1,
+      "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
