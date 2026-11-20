@@ -1,0 +1,482 @@
+
+
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="utf-8"/>
+    <title>Help Center</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="Welcome to the help center. Find out everything about Payhip here."/>
+    <meta name="author" content="Payhip"/>
+    <link rel="canonical" href="https://help.payhip.com"/>
+    
+
+    
+        <link rel="stylesheet" href="//d3eto7onm69fcz.cloudfront.net/assets/stylesheets/launch-1795120006521.css">
+    
+    <style>
+        body { background: #ffffff; }
+        .navbar .navbar-inner { background: #2c323d; }
+        .navbar .nav li a, 
+        .navbar .icon-private-w  { color: #c0c0c0; }
+        .navbar .brand, 
+        .navbar .nav li a:hover, 
+        .navbar .nav li a:focus, 
+        .navbar .nav .active a, 
+        .navbar .nav .active a:hover, 
+        .navbar .nav .active a:focus  { color: #ffffff; }
+        .navbar a:hover .icon-private-w, 
+        .navbar a:focus .icon-private-w, 
+        .navbar .active a .icon-private-w, 
+        .navbar .active a:hover .icon-private-w, 
+        .navbar .active a:focus .icon-private-w { color: #ffffff; }
+        #serp-dd .result a:hover,
+        #serp-dd .result > li.active,
+        #fullArticle strong a,
+        #fullArticle a strong,
+        .collection a,
+        .contentWrapper a,
+        .most-pop-articles .popArticles a,
+        .most-pop-articles .popArticles a:hover span,
+        .category-list .category .article-count,
+        .category-list .category:hover .article-count { color: #4381b5; }
+        #fullArticle, 
+        #fullArticle p, 
+        #fullArticle ul, 
+        #fullArticle ol, 
+        #fullArticle li, 
+        #fullArticle div, 
+        #fullArticle blockquote, 
+        #fullArticle dd, 
+        #fullArticle table { color:#585858; }
+    </style>
+    
+        <link rel="stylesheet" href="//s3.amazonaws.com/helpscout.net/docs/assets/608826bec9133261f23f4c0b/attachments/6a440349d94e5cf21d433abc/helpscout-3.css">
+    
+    <link rel="apple-touch-icon-precomposed" href="//d33v4339jhl8k0.cloudfront.net/docs/assets/608826bec9133261f23f4c0b/images/60cdb51d00fd0d7c253f7c3e/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/png" href="//d33v4339jhl8k0.cloudfront.net/docs/assets/608826bec9133261f23f4c0b/images/60cdb51d8556b07a28847a19/favicon-196x196.png">
+    <!--[if lt IE 9]>
+    
+        <script src="//d3eto7onm69fcz.cloudfront.net/assets/javascripts/html5shiv.min.js"></script>
+    
+    <![endif]-->
+    
+        <script type="application/ld+json">
+        {"@context":"https://schema.org","@type":"WebSite","url":"https://help.payhip.com","potentialAction":{"@type":"SearchAction","target":"https://help.payhip.com/search?query={query}","query-input":"required name=query"}}
+        </script>
+    
+    
+        <script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});
+</script><script type="text/javascript">window.Beacon('init', 'a65a9008-835a-40f9-9c41-b4e120876fc0')</script>
+
+<script type="text/javascript">
+
+	var PayhipHelpCenterPage = (function(){
+
+		// Constructor
+		function PayhipHelpCenterPage() {
+			this.init();
+		}
+
+		PayhipHelpCenterPage.prototype = {
+
+			init: function()
+			{
+				this.opts  = this.setOptions();
+				this.initUI();
+				this.attachEvents();
+			},
+
+			setOptions: function()
+			{
+				var options = {};
+
+				// Selectors
+
+				// Misc
+
+				options.homeIconSvg = '<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" height="140" width="140"><g transform="matrix(5.833333333333333,0,0,5.833333333333333,0,0)"><path d="m23.707 11.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 1 13h1.25a.25.25 0 0 1 .25.25V23a1 1 0 0 0 1 1h5.75a.25.25 0 0 0 .25-.25V19a2.5 2.5 0 0 1 5 0v4.75a.25.25 0 0 0 .25.25h5.75a1 1 0 0 0 1-1v-9.75a.25.25 0 0 1 .25-.25H23a1 1 0 0 0 .707-1.707z" stroke-linecap="round" stroke-linejoin="round" stroke-width="0"></path></g></svg>';
+
+				options.payhipUrl = 'https://payhip.com';
+				options.beaconId = 'a65a9008-835a-40f9-9c41-b4e120876fc0';
+
+				return options;
+			},
+
+			initUI: function()
+			{
+				this.injectGoToPayhipButton();
+
+				this.injectContactUsEmailAddress();
+
+				this.initBeacon();
+			},
+
+			injectGoToPayhipButton: function()
+			{
+				var shopLink = document.createElement('a');
+				shopLink.href = this.opts.payhipUrl;
+				shopLink.innerText = 'Go to payhip.com';
+				shopLink.className = 'main-payhip-link';
+				var shopLinkListItem = document.createElement("li");
+				shopLinkListItem.appendChild(shopLink);
+				var ul = document.querySelector('#mainNav nav ul');
+				ul.insertBefore(shopLinkListItem, ul.firstChild);
+			},
+
+			injectContactUsEmailAddress: function()
+			{
+				var footer = document.querySelector('footer');
+				var firstP = document.querySelector('footer > p');
+
+				var contactUsEmailAddressWrapper = document.createElement('p');
+				contactUsEmailAddressWrapper.className = 'footer-contact-us-email-address-wrapper';
+				contactUsEmailAddressWrapper.innerHTML = 'Can\'t find what you\'re looking for? Shoot us an email at <a href="mailto:contact@payhip.com">contact@payhip.com</a>';
+
+				footer.insertBefore(contactUsEmailAddressWrapper, firstP);
+			},
+
+			initBeacon: function()
+			{
+				window.Beacon('init', this.opts.beaconId);
+			},
+
+			attachEvents: function()
+			{
+				var that = this;
+			}
+
+		};
+
+		return PayhipHelpCenterPage;
+
+	})();
+
+	window.addEventListener("DOMContentLoaded", function() {
+		var payhipHelpCenterPage = new PayhipHelpCenterPage();
+	});
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-34658431-3', 'auto');
+  ga('create', 'UA-34658431-1', 'auto', 'mainPayhip');
+
+  ga('send', 'pageview');
+  ga('mainPayhip.send', 'pageview');  
+
+</script>
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+<script type="text/javascript">
+     var PayhipConfig = {
+        enableCart: true
+    };
+</script>
+    
+</head>
+    <body>
+        <script>
+            window.onload = function() {
+                $("#searchBar input.search-query" ).focus();
+            };
+        </script>
+        
+<header id="mainNav" class="navbar">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="/">
+            
+                <span>Help Center</span>
+            
+            </a>
+            
+            <div class="nav-collapse collapse">
+                <nav role="navigation"><!-- added for accessibility -->
+                <ul class="nav">
+                    
+                    
+                    
+                    
+                </ul>
+                </nav>
+            </div><!--/.nav-collapse -->
+        </div><!--/container-->
+    </div><!--/navbar-inner-->
+</header>
+        <section id="docsSearch">
+            
+                <h1>How can we help?</h1>
+            
+             
+
+<form action="/search" method="GET" id="searchBar" autocomplete="off">
+    
+                <input type="text" name="query" title="search-query" class="search-query" placeholder="Search the knowledge base" aria-label="Search the knowledge base" value="">
+                <button type="submit" aria-label="Search"><i class="icon-search lp"></i><span>Search</span></button>
+                <div id="serp-dd" style="display:none;">
+                    <ul class="result"></ul>
+                </div>
+            
+</form>
+
+        </section><!--/docsSearch-->
+        <section id="contentArea" class="container-fluid">
+            
+
+    <div id="noResults" style="display:none;">No results found</div>
+    
+        <!-- Site has only one collection -->
+        
+            
+                
+                    <section class="category-list">
+                        
+                            
+                                <a class="category" id="category-40" href="/category/40-getting-started">
+                                    <h3>Getting Started</h3>
+                                    <p>Get your Payhip account set up in just a few short steps</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">6</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-350" href="/category/350-payments">
+                                    <h3>Payments</h3>
+                                    <p>Setup and connect the payment gateways that are right for you</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">14</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-41" href="/category/41-products">
+                                    <h3>Products</h3>
+                                    <p>Add your digital, courses, physical, subscription and other types of products</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">26</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-42" href="/category/42-customers">
+                                    <h3>Customers</h3>
+                                    <p>How to assist your customers when you start receiving sales</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">18</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-43" href="/category/43-marketing">
+                                    <h3>Marketing</h3>
+                                    <p>Encourage people to purchase with a suite of powerful marketing tools.</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">17</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-44" href="/category/44-customization">
+                                    <h3>Customization</h3>
+                                    <p>All the options available for you to make your store shine.</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">30</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-45" href="/category/45-popular-questions">
+                                    <h3>Popular Questions</h3>
+                                    <p>The most frequently asked questions about how you can use your store.</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">23</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-47" href="/category/47-account-settings">
+                                    <h3>Account Settings</h3>
+                                    <p>Working with all the settings available on your account</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">10</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-48" href="/category/48-developer">
+                                    <h3>Developer</h3>
+                                    <p>How developers can integrate Payhip into their applications</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">4</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-50" href="/category/50-buyers">
+                                    <h3>Buyers</h3>
+                                    <p>Articles helping buyers with any issues they may face</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">21</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-49" href="/category/49-integrations">
+                                    <h3>Integrations</h3>
+                                    <p></p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">14</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-46" href="/category/46-analytics">
+                                    <h3>Analytics</h3>
+                                    <p>Understanding the analytics data collected from visits and transactions</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">4</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-191" href="/category/191-courses">
+                                    <h3>Courses</h3>
+                                    <p>Creating and managing your online courses</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">14</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-256" href="/category/256-membership">
+                                    <h3>Memberships</h3>
+                                    <p></p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">12</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-391" href="/category/391-sales-tax">
+                                    <h3>Sales Tax</h3>
+                                    <p></p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">3</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                            
+                                <a class="category" id="category-130" href="/category/130-domain-providers">
+                                    <h3>Domain Providers</h3>
+                                    <p>Step-by-step instructions for setting up your store with popular DNS providers.</p>
+                                    <p class="article-count">                                        
+                                        
+                                            <span class="notranslate">9</span> articles
+                                                                                
+                                    </p>
+                                </a><!-- /category -->
+                            
+                        
+                    </section><!-- /category-list -->
+                
+            
+        
+    
+
+            <footer class="center">
+                
+
+<p>&copy;
+    
+        <a href="https://payhip.com">Payhip</a>
+    
+    2026. <span>Powered by <a rel="nofollow noopener noreferrer" href="https://www.helpscout.com/docs-refer/?co=Payhip&utm_source=docs&utm_medium=footerlink&utm_campaign=Docs+Branding" target="_blank">Help Scout</a></span>
+    
+        
+    
+    
+</p>
+
+            </footer>
+        </section><!--/.fluid-container-->
+        
+        
+    <script src="//d3eto7onm69fcz.cloudfront.net/assets/javascripts/app4.min.js"></script>
+
+<script>
+// keep iOS links from opening safari
+if(("standalone" in window.navigator) && window.navigator.standalone){
+// If you want to prevent remote links in standalone web apps opening Mobile Safari, change 'remotes' to true
+var noddy, remotes = false;
+document.addEventListener('click', function(event) {
+noddy = event.target;
+while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+noddy = noddy.parentNode;
+}
+
+if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)){
+event.preventDefault();
+document.location.href = noddy.href;
+}
+
+},false);
+}
+</script>
+    </body>
+</html>
