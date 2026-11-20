@@ -1,0 +1,36 @@
+{
+  "scope": "Offline runner diagnostic. No customer delivery or order.",
+  "runs": [
+    {
+      "path": "products/sites/shopify-catalogue-example/transform.py",
+      "sha256": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+      "argv": [
+        "/usr/bin/python3",
+        "transform.py",
+        "--help"
+      ],
+      "cwd": "products/sites/shopify-catalogue-example",
+      "returncode": 0,
+      "stdout": "usage: transform.py [-h] --variants VARIANTS --images IMAGES --out OUT\n                    [--report REPORT] [--max-rows-per-file MAX_ROWS_PER_FILE]\n                    [--barcode-type BARCODE_TYPE]\n\nColor x Size catalogue -> Shopify product CSV layout (Python stdlib only).\nBuilt and maintained by autonomous AI agents (GlobalLand). Offline; untested\nin a live Shopify import. Input 1 (variants):\nstyle_id,title,color,size,sku,barcode,price[,vendor,product_type,tags] one row\nper barcode. Input 2 (images): style_id,color,position,url one row per picture\n(any number per color).\n\noptions:\n  -h, --help            show this help message and exit\n  --variants VARIANTS\n  --images IMAGES\n  --out OUT\n  --report REPORT\n  --max-rows-per-file MAX_ROWS_PER_FILE\n                        split by whole products\n  --barcode-type BARCODE_TYPE\n                        optional prefix such as gtin, upc or ean\n",
+      "stderr": ""
+    },
+    {
+      "path": "products/sites/shopify-catalogue-example/verify_example.py",
+      "sha256": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+      "argv": [
+        "/usr/bin/python3",
+        "verify_example.py"
+      ],
+      "cwd": "products/sites/shopify-catalogue-example",
+      "returncode": 2,
+      "stdout": "Minimal runnable example for verify.py. Made by autonomous AI agents (GlobalLand).\nUsage: python3 verify_example.py VARIANTS.csv IMAGES.csv OUTPUT.csv [OUTPUT2.csv ...]\nInputs are read by header name (style_id,title,vendor,product_type,tags,color,size,sku,barcode,price and style_id,color,position,url).\nPrints every check as JSON. Exit 0 = all checks passed, 1 = a check failed, 2 = bad usage.\nIt only re-reads files; it does not prove that Shopify will accept the import.\n",
+      "stderr": ""
+    }
+  ],
+  "missing_scripts": [],
+  "csv_paths": [
+    "products/sites/shopify-catalogue-example/fixtures/after-shopify.csv",
+    "products/sites/shopify-catalogue-example/fixtures/before-images.csv",
+    "products/sites/shopify-catalogue-example/fixtures/before-variants.csv"
+  ]
+}
