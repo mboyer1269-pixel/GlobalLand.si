@@ -1,0 +1,72 @@
+{
+  "basis": {
+    "products/distribution/catalogue-referral/item-4-release-binding.json": "cdc5f54122e3c58769762bbf80652ca7f934fd259e8a2bc7c8977e0bb73614e8",
+    "products/services/catalogue-text-fulfillment/inline-reply-verification.json": "904ab92ae21dedbcc7cd3d4344f6cb2a6859c7335e1d8d9e19e6f43902095c5b",
+    "products/services/catalogue-text-fulfillment/inline-reply-en-fr.txt": "07c742ebd710631ce6b1a633675b34b36c903a8d2261d1d7a0ba735cb7d68dec"
+  },
+  "coverage": "Fictional decision table rehearsal. Approval and buyer confirmation are fixture inputs. Order register and settlement were not inspected.",
+  "checks": [
+    {
+      "intent": "diagnostic",
+      "eligible": true,
+      "operator_approved_terms": false,
+      "buyer_confirmed_scope": false,
+      "expected": "FOLLOW_AUTHORIZED_DIAGNOSTIC_WORKFLOW",
+      "actual": "FOLLOW_AUTHORIZED_DIAGNOSTIC_WORKFLOW",
+      "passed": true
+    },
+    {
+      "intent": "commission",
+      "eligible": true,
+      "operator_approved_terms": false,
+      "buyer_confirmed_scope": true,
+      "expected": "NONBINDING_COMMISSION_CLARIFICATION",
+      "actual": "NONBINDING_COMMISSION_CLARIFICATION",
+      "passed": true
+    },
+    {
+      "intent": "commission",
+      "eligible": true,
+      "operator_approved_terms": true,
+      "buyer_confirmed_scope": false,
+      "expected": "NONBINDING_COMMISSION_CLARIFICATION",
+      "actual": "NONBINDING_COMMISSION_CLARIFICATION",
+      "passed": true
+    },
+    {
+      "intent": "commission",
+      "eligible": true,
+      "operator_approved_terms": true,
+      "buyer_confirmed_scope": true,
+      "expected": "HAND_OFF_TO_AUTHORIZED_OPERATOR",
+      "actual": "HAND_OFF_TO_AUTHORIZED_OPERATOR",
+      "passed": true
+    },
+    {
+      "intent": "commission",
+      "eligible": false,
+      "operator_approved_terms": true,
+      "buyer_confirmed_scope": true,
+      "expected": "CLARIFY_SCOPE",
+      "actual": "CLARIFY_SCOPE",
+      "passed": true
+    }
+  ],
+  "operator_reply_drafts": {
+    "diagnostic": {
+      "en": "For the catalogue diagnostic, please paste up to 20 synthetic or anonymized CSV rows, including headers, and describe the discrepancy you want checked. Please omit attachments and confidential information. Autonomous AI agents prepare the diagnostic.",
+      "fr": "Pour le diagnostic du catalogue, veuillez coller au maximum 20 lignes CSV fictives ou anonymisées, avec leurs en-têtes, et décrire l’écart à vérifier. Veuillez omettre les pièces jointes et les renseignements confidentiels. Le diagnostic est préparé par des agents d’IA autonomes."
+    },
+    "commission": {
+      "en": "Please confirm the catalogue issue and the result you want to receive using a short fictional or anonymized example pasted as text. The operator must approve the scope, acceptance checks and price before offering terms for your confirmation. No order has been accepted. Autonomous AI agents prepare this work.",
+      "fr": "Veuillez préciser le problème de catalogue et le résultat attendu à l’aide d’un court exemple fictif ou anonymisé collé en texte. L’opérateur doit approuver le périmètre, les critères d’acceptation et le prix avant de vous soumettre les conditions pour confirmation. Aucune commande n’a été acceptée. Le travail est préparé par des agents d’IA autonomes."
+    }
+  },
+  "separate_evidence": [
+    "request eligibility",
+    "recipient delivery",
+    "administrative order acceptance",
+    "confirmed deposit",
+    "Treasury posting"
+  ]
+}
