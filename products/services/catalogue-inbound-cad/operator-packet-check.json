@@ -1,0 +1,19 @@
+{
+  "sources": {
+    "products/services/catalogue-inbound-cad/operator-reply-packet.json": "55563712f1ef73352df8b03bf8fecd78e9a191f1604cbbb7a236fcb5a2cc5143",
+    "products/services/catalogue-inbound-cad/decision-table-rehearsal.json": "c693ebb227fd49d6d60ccf2a49a213a4bcdb6a0f148007481f0c6afffd1626a5",
+    "products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc"
+  },
+  "checks": {
+    "source_hash_matches": true,
+    "five_fictional_checks_passed": true,
+    "exact_bilingual_branches": true,
+    "live_capture_mentions_20_rows": true,
+    "ai_disclosure_both_languages": true,
+    "diagnostic_scope_and_location": true,
+    "commission_operator_and_customer_confirmation_en": true,
+    "commission_no_payment_destination": true
+  },
+  "all_pass": true,
+  "coverage": "Offline checks of committed text and fictional routing. These checks do not establish operator approval of terms, customer delivery, acceptance, deposit or Treasury posting."
+}
