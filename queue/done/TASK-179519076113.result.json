@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": " For migration agencies: catalogue QA scoping request (proposal only)  If your team migrates catalogues to Shopify, you can ask us, without commitment, whether a small catalogue QA check fits your project. Bounded deliverable we are testing: for up to 20 variant rows plus their image rows, pasted as plain text with the input headers above (and optionally the Shopify CSV rows you produced), an inline plain-text report with the commands to reproduce it. Input-only requests get input validation only (duplicate SKU, barcode or color+size, bad price\n- Registre privé de commandes, déclarations de paiement, dépôts attestés,\n  uniquement pour une commande administrativement acceptée et encore impayée.\nLa création et l'acceptation des commandes restent administratives dans cet\nou d'attester un dépôt. L'acceptation commerciale autonome d'une offre exige un\npython3 /opt/globalland/control/orders_admin.py accept --request /opt/globalland/state/private/accept-request.json\n| `accept` | `order_id`, `acceptance_source_id` documentant l'acceptation de cette version de l'offre |\n| `confirm` | `account_alias`, `reference` bancaire réelle, `amount_cents`, `currency`, `observed_at`, `evidence_sha256`, `attestation: \"FOUNDER_OBSERVED_BANK_DEPOSIT\"`, éventuellement `synthetic` |\n| `post` | `deposit_id`, `attestation: \"FOUNDER_OBSERVED_BANK_DEPOSIT\"` |\nLa recette attestée apparaît séparément dans `founder_attested_revenue_cents`.\nadministratif depuis une demande authentifiée sauvegardée, une acceptation\nagents une acceptation contractuelle ni une livraison automatique.\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179519076113.json"
+  ],
+  "request": {
+    "id": "TASK-179519076113",
+    "type": "TOOL",
+    "submitted_by": "RELEASE_PACKAGE",
+    "created_at": "2026-11-20T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport re\np=Path('products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html').read_text()\nfor line in p.splitlines():\n if re.search(r'commission|CAD|20 variant',line,re.I): print(re.sub(r'<[^>]*>',' ',line)[:550])\nfor line in Path('docs/INTERAC-COMMANDES.md').read_text().splitlines():\n if re.search(r'accept|attest',line,re.I): print(line[:220])"
+      ],
+      "inputs": [
+        "docs/INTERAC-COMMANDES.md",
+        "products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html"
+      ],
+      "outputs": [],
+      "mission_id": "CATALOGUE-COMMISSION-TERMS-PROPOSAL"
+    },
+    "description": "Broker action during THINK-1795190761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179519076113",
+  "input_sha256": "3cb87330b8e8a4b5927f7ca70c44569ddfa4762a440bcd010978e8bdd292e27a"
+}
