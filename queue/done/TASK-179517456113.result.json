@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/distribution/nonprofit-spreadsheet-paid-call/bounded-verdict.json",
+    "products/receipts/TASK-179517456113.json"
+  ],
+  "request": {
+    "id": "TASK-179517456113",
+    "type": "TOOL",
+    "submitted_by": "BUYER_ROUTE",
+    "created_at": "2026-11-20T11:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,sys; p=pathlib.Path(sys.argv[1]); p.parent.mkdir(parents=True,exist_ok=True); p.write_text(sys.argv[2]+'\\n')",
+        "products/distribution/nonprofit-spreadsheet-paid-call/bounded-verdict.json",
+        "{\n  \"verdict\": \"STOP_BOUNDED_TEST\",\n  \"source\": \"https://www.nrc.no/tenders\",\n  \"receipt\": \"TASK-179516556100\",\n  \"sha256\": \"8a77082f1874007d50d0ee2704941a394557bab2e5a3ad674b766be296f33784\",\n  \"observed\": \"The 235-anchor QA screen found no matching URLs. The separate 208-label screen found one generic invitation hit titled IDMC Media relations consultant 27. Feb 2026. Its title did not justify using the second retrieval for spreadsheet QA.\",\n  \"coverage\": \"One saved first-party index and static labels/paths. No individual notice body, external portal, dynamically rendered notice or market-wide demand was verified.\",\n  \"delivery\": \"No buyer-qualified fixture run, submission, acceptance or settlement.\",\n  \"reopen\": \"A specific current original nonprofit notice that explicitly buys standalone spreadsheet or reporting-data QA and states the reply route and a verifiable acceptance criterion. Confirm compatibility with available settlement before sample work.\"\n}"
+      ],
+      "outputs": [
+        "products/distribution/nonprofit-spreadsheet-paid-call/bounded-verdict.json"
+      ],
+      "inputs": [],
+      "mission_id": "NONPROFIT-SPREADSHEET-PAID-CALL"
+    },
+    "description": "Broker action during THINK-1795174561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179517456113",
+  "input_sha256": "5c08c539a83efdc0f06a807ba03f9a1eed743a2ee832aed94ef9496f49d2f46e"
+}
