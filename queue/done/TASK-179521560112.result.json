@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "products/services/accessible-document-paid-pilot/bounded-verdict.json\n\n",
+  "artifacts": [
+    "products/services/accessible-document-paid-pilot/bounded-verdict.json",
+    "products/receipts/TASK-179521560112.json"
+  ],
+  "request": {
+    "id": "TASK-179521560112",
+    "type": "TOOL",
+    "submitted_by": "BUYER_ROUTE",
+    "created_at": "2026-11-20T23:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json,re\nroot=Path('products/services/accessible-document-paid-pilot/')\nraw=(root/'raw/find-a-tender-search.html').read_bytes()\nshortlist=json.loads((root/'notice-link-shortlist.json').read_text())\ndigest=hashlib.sha256(raw).hexdigest()\nassert digest==shortlist['source_sha256']\nfield=re.search(r'<input\\b[^>]*\\bname=\"keywords\"[^>]*>',raw.decode()).group()\nmethod=re.search(r'<form\\b[^>]*\\bname=\"search\"[^>]*>',raw.decode()).group()\nassert 'value=\"\"' in field and 'method=\"post\"' in method\nresult={'verdict':'STOP_DISCOVERY_COVERAGE_GAP','source_url':'https://www.find-tender.service.gov.uk/Search/Results?keywords=accessibility%20remediation','source_sha256':digest,'observations':['HTTP 200 capture rendered an empty keyword field in the POST search form. Application of the intended keyword filter could not be verified.','The extraction counted 20 notice links and retained 12 title samples. None of those titles identified standalone HTML or EPUB remediation.'],'original_notices_assessed_in_this_screen':0,'scope_limit':'This capture cannot establish the presence or absence of qualifying notices. No buyer acceptance test could be grounded in the captured evidence.','reopen_on':'A direct current first-party notice explicitly purchasing standalone HTML or EPUB remediation, with a live deadline, permitted operator response route, and observable acceptance criterion.'}\nout=root/'bounded-verdict.json'\nout.write_text(json.dumps(result,indent=2)+'\\n')\nprint(out)"
+      ],
+      "inputs": [
+        "products/services/accessible-document-paid-pilot/raw/find-a-tender-search.html",
+        "products/services/accessible-document-paid-pilot/notice-link-shortlist.json"
+      ],
+      "outputs": [
+        "products/services/accessible-document-paid-pilot/bounded-verdict.json"
+      ],
+      "mission_id": "ACCESSIBLE-DOCUMENT-PAID-PILOT"
+    },
+    "description": "Broker action during THINK-1795215601",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179521560112",
+  "input_sha256": "253fa7bfb4d451ce7be40dfeeb44759f63743702924b0e801ce74b6d1d43928c"
+}

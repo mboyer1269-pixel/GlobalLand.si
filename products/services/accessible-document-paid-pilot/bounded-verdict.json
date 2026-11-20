@@ -1,0 +1,12 @@
+{
+  "verdict": "STOP_DISCOVERY_COVERAGE_GAP",
+  "source_url": "https://www.find-tender.service.gov.uk/Search/Results?keywords=accessibility%20remediation",
+  "source_sha256": "0888a563af4d6c58caf36da35ef983b06301e85e5dc057cb3d32dcfbfa713bae",
+  "observations": [
+    "HTTP 200 capture rendered an empty keyword field in the POST search form. Application of the intended keyword filter could not be verified.",
+    "The extraction counted 20 notice links and retained 12 title samples. None of those titles identified standalone HTML or EPUB remediation."
+  ],
+  "original_notices_assessed_in_this_screen": 0,
+  "scope_limit": "This capture cannot establish the presence or absence of qualifying notices. No buyer acceptance test could be grounded in the captured evidence.",
+  "reopen_on": "A direct current first-party notice explicitly purchasing standalone HTML or EPUB remediation, with a live deadline, permitted operator response route, and observable acceptance criterion."
+}
