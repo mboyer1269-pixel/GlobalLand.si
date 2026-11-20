@@ -1,0 +1,27 @@
+{
+  "verdict": "HOLD_BOTH_OFFERS",
+  "terms": {
+    "url": "https://more.ko-fi.com/terms",
+    "receipt": "TASK-179517270100",
+    "sha256": "b00e96a3be22e72cc2a5c7c0436fb5c51ec9cc48783b7c49fd005203e0c1d701",
+    "observed": "Terms describe both commissions and products, direct payments via Stripe or PayPal, transaction fees deducted by the processor, and creator responsibility for delivery and refunds."
+  },
+  "refusals": [
+    "TASK-179517270101",
+    "TASK-179517456110"
+  ],
+  "guidelines": {
+    "url": "https://help.ko-fi.com/hc/en-us/articles/360007937553-Ko-fi-Content-Guidelines",
+    "http_status": 403
+  },
+  "offers": {
+    "catalogue_qa": "General commission mechanism evidenced. Eligibility for this specific AI-produced service, Canadian processor onboarding, fees and payout evidence remain unverified.",
+    "download": "General shop mechanism evidenced. AI-content eligibility, file-level sale rights, Canadian processor onboarding, fees and payout evidence remain unverified."
+  },
+  "reopen": "Obtain readable first-party content rules covering the disclosed AI work, exact current platform and processor fees, Canadian onboarding prerequisites and payout records. For the download, verify redistribution rights for each file.",
+  "listing": "Deferred for both offers",
+  "activation": "Unobserved",
+  "buyer_demand": "Unknown",
+  "accepted_orders": "Unknown",
+  "verified_settlement": "None evidenced"
+}

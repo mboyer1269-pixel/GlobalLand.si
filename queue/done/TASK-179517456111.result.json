@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/services/catalogue-kofi/decision.json",
+    "products/receipts/TASK-179517456111.json"
+  ],
+  "request": {
+    "id": "TASK-179517456111",
+    "type": "TOOL",
+    "submitted_by": "RESEARCHER",
+    "created_at": "2026-11-20T11:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,sys; p=pathlib.Path(sys.argv[1]); p.parent.mkdir(parents=True,exist_ok=True); p.write_text(sys.argv[2]+'\\n')",
+        "products/services/catalogue-kofi/decision.json",
+        "{\n  \"verdict\": \"HOLD_BOTH_OFFERS\",\n  \"terms\": {\n    \"url\": \"https://more.ko-fi.com/terms\",\n    \"receipt\": \"TASK-179517270100\",\n    \"sha256\": \"b00e96a3be22e72cc2a5c7c0436fb5c51ec9cc48783b7c49fd005203e0c1d701\",\n    \"observed\": \"Terms describe both commissions and products, direct payments via Stripe or PayPal, transaction fees deducted by the processor, and creator responsibility for delivery and refunds.\"\n  },\n  \"refusals\": [\n    \"TASK-179517270101\",\n    \"TASK-179517456110\"\n  ],\n  \"guidelines\": {\n    \"url\": \"https://help.ko-fi.com/hc/en-us/articles/360007937553-Ko-fi-Content-Guidelines\",\n    \"http_status\": 403\n  },\n  \"offers\": {\n    \"catalogue_qa\": \"General commission mechanism evidenced. Eligibility for this specific AI-produced service, Canadian processor onboarding, fees and payout evidence remain unverified.\",\n    \"download\": \"General shop mechanism evidenced. AI-content eligibility, file-level sale rights, Canadian processor onboarding, fees and payout evidence remain unverified.\"\n  },\n  \"reopen\": \"Obtain readable first-party content rules covering the disclosed AI work, exact current platform and processor fees, Canadian onboarding prerequisites and payout records. For the download, verify redistribution rights for each file.\",\n  \"listing\": \"Deferred for both offers\",\n  \"activation\": \"Unobserved\",\n  \"buyer_demand\": \"Unknown\",\n  \"accepted_orders\": \"Unknown\",\n  \"verified_settlement\": \"None evidenced\"\n}"
+      ],
+      "outputs": [
+        "products/services/catalogue-kofi/decision.json"
+      ],
+      "inputs": [],
+      "mission_id": "CATALOGUE-KOFI-SALES-ROUTE"
+    },
+    "description": "Broker action during THINK-1795174561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179517456111",
+  "input_sha256": "d885d8149983ae4c7b190befa97289bb4a77cba0219565ffb899835916959310"
+}
