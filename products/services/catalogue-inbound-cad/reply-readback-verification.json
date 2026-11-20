@@ -1,0 +1,21 @@
+{
+  "source": "products/services/catalogue-inbound-cad/decision-table-rehearsal.json",
+  "source_sha256": "c693ebb227fd49d6d60ccf2a49a213a4bcdb6a0f148007481f0c6afffd1626a5",
+  "draft_keys": [
+    "commission",
+    "diagnostic"
+  ],
+  "checks": {
+    "five_fictional_routes_passed": true,
+    "diagnostic": {
+      "usable_text": false,
+      "observed_type": "dict"
+    },
+    "commission": {
+      "usable_text": false,
+      "observed_type": "dict"
+    }
+  },
+  "coverage": "Committed fictional routing and draft text only. No delivery, accepted order, deposit attestation or Treasury posting checked.",
+  "all_pass": false
+}
