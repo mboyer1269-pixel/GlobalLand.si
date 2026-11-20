@@ -1,0 +1,14 @@
+{
+  "terms_sha256": "449856ff717c44da65c951b67732f916971c35fee3d4c98642d1cd3b2002ee9e",
+  "artifact_sha256": {
+    "products/services/catalogue-commission-terms/terms-en-fr.md": "449856ff717c44da65c951b67732f916971c35fee3d4c98642d1cd3b2002ee9e",
+    "products/services/catalogue-commission-terms/acceptance-crosswalk.json": "4f4d33000b98b0453ec903b71a100f5a889fd8a1b7e3426b8c2387abc2b1325a",
+    "products/services/catalogue-inbound-cad/operator-reply-packet.json": "55563712f1ef73352df8b03bf8fecd78e9a191f1604cbbb7a236fcb5a2cc5143"
+  },
+  "effect": "Binds the exact proposal, acceptance crosswalk and existing reply packet for operator handoff. No approval or customer event was checked by this execution.",
+  "routing": {
+    "diagnostic": "Use the applicable verified live scope and the diagnostic branch for an eligible inquiry in the authorized private cycle.",
+    "commission": "Use the nonbinding branch until operator approval of these exact terms is evidenced. Buyer confirmation and administrative acceptance are separate.",
+    "settlement": "Record deposit attestation and Treasury posting separately."
+  }
+}
