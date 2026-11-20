@@ -9,11 +9,18 @@
   "missing": [],
   "account_settings_verified": false,
   "last_turn": {
-    "turn": "THINK-1795186802",
-    "at": "2026-11-20T15:00:52Z",
+    "turn": "THINK-1795187161",
+    "at": "2026-11-20T15:06:39Z",
     "state": "DECISION_READY",
     "provider": "codex",
     "attempts": [
+      {
+        "provider": "claude",
+        "status": "FAILED",
+        "stage": "planning",
+        "exception_type": "ValueError",
+        "reason": "provider_or_decision_validation_failed"
+      },
       {
         "provider": "codex",
         "status": "SUCCEEDED",
@@ -24,11 +31,18 @@
     ]
   },
   "last_successful_plan": {
-    "turn": "THINK-1795186802",
-    "at": "2026-11-20T15:00:52Z",
+    "turn": "THINK-1795187161",
+    "at": "2026-11-20T15:06:39Z",
     "state": "DECISION_READY",
     "provider": "codex",
     "attempts": [
+      {
+        "provider": "claude",
+        "status": "FAILED",
+        "stage": "planning",
+        "exception_type": "ValueError",
+        "reason": "provider_or_decision_validation_failed"
+      },
       {
         "provider": "codex",
         "status": "SUCCEEDED",
@@ -38,5 +52,5 @@
       }
     ]
   },
-  "last_turn_age_seconds": 15
+  "last_turn_age_seconds": 0
 }
