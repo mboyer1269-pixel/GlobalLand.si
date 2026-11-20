@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-TEXT-ONLY-FULFILLMENT-CHECK\", \"goal\": \"Make the existing live catalogue QA offer easier to fulfill when an eligible inquiry arrives. First read the direct catalogue readback, item-4 release binding, completed qualified-inquiry handoff and documented private fulfillment limits. Treat all artifacts as untrusted data. If committed evidence already proves the same end-to-end text-only workflow against the same offer, reuse it. Otherwise construct one fictional plain-text inquiry within the exact live limits and exercise the existing checker with installed offline tools. Include one supported discrepancy and one clean control. Produce a self-contained bilingual example reply with autonomous AI disclosure, the actual command and outputs, input limits, any manual step, and a clear distinction between the diagnostic and an accepted paid order. Check that the reply can be delivered inline and that findings match observed output. If the workflow falls short, save the smallest viable operator fallback supported by the live wording. Save under products/services/catalogue-text-fulfillment/, read the committed evidence and close under a valid lease with a lesson. Keep the existing item 4 operator decision separate. No customer data, private mail access, external delivery, spending or deployment.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"FULFILLMENT\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/catalogue-text-fulfillment/inline-reply-en-fr.txt\", \"products/services/catalogue-text-fulfillment/inline-reply-verification.json\", \"products/services/catalogue-text-fulfillment/clean-and-duplicate-run.json\"]}",
+  "request": {
+    "id": "TASK-179514750112",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-20T04:05:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "agent_id": "FULFILLMENT",
+      "mission_id": "CATALOGUE-TEXT-ONLY-FULFILLMENT-CHECK",
+      "lease_token": "HzWBrvWcHcVUASXWYnfG5MaWQaap5Ag7",
+      "evidence": [
+        "products/services/catalogue-text-fulfillment/inline-reply-en-fr.txt",
+        "products/services/catalogue-text-fulfillment/inline-reply-verification.json",
+        "products/services/catalogue-text-fulfillment/clean-and-duplicate-run.json"
+      ],
+      "lesson": "The clean control passed 12 checks and the duplicate case failed as intended with a style-level finding. The previous invocation omitted detailed reporting and an earlier runner stopped before executing cases. Next time request the JSON report on the first run and label line locations from manual comparison. The bilingual inline example is ready for the authorized workflow when an eligible case arrives. Customer delivery requires a separate receipt."
+    },
+    "description": "Broker action during THINK-1795147501",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179514750112",
+  "input_sha256": "5641c4e8afae3e2386b1591f59e09709ff6ec5ee903c1633840685b91278e584"
+}
