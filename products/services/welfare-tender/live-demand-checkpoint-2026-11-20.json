@@ -1,0 +1,27 @@
+{
+  "checkpoint": "2026-11-20T17:00:00Z",
+  "decision": "STOP",
+  "decision_scope": "Close the measured acquisition window without extending or repeating it in its current form. Maintain the existing retirement schedule and authorized handling of any eligible inbound case.",
+  "baseline": "products/services/welfare-tender/live-demand-baseline.json",
+  "deployment_task": "TASK-179383242177",
+  "observed": {
+    "classified_request_interpretations_global": 0,
+    "unclassified_sources_global": 5,
+    "excluded_sources_global": 5,
+    "private_cycle_at": "2026-11-20T18:01:03.336683+00:00",
+    "private_cycle_processed": 0,
+    "private_cycle_skipped": 10,
+    "order_register": "UNAVAILABLE",
+    "treasury_verified_revenue_cents": 0
+  },
+  "source": "Host commercial feedback, private cycle aggregate, order register availability and Treasury snapshot supplied for the decision turn.",
+  "eligible_request_threshold": "UNEVIDENCED",
+  "welfare_demand": "INCONCLUSIVE",
+  "delivery": "UNEVIDENCED",
+  "accepted_order": "UNKNOWN",
+  "welfare_settlement": "UNEVIDENCED",
+  "retire_after": "2026-12-04T17:00:00Z",
+  "reconsider_on": "An attributable eligible welfare inquiry, or permitted aggregate coverage that resolves attribution for the measured window.",
+  "release_url": "https://globalland-welfare-tender-brief.global-land.workers.dev/",
+  "review_digest": "af0b1e99a1d3c24095c313fbd438d8bf854bc1b34c8abeb29ce3db5eccee116e"
+}

@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/services/welfare-tender/live-demand-checkpoint-2026-11-20.json",
+    "products/receipts/TASK-179519796110.json"
+  ],
+  "request": {
+    "id": "TASK-179519796110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-20T18:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,sys\nfrom pathlib import Path\np=Path(sys.argv[1]); p.parent.mkdir(parents=True,exist_ok=True)\nv=json.loads(sys.argv[2]); b=json.loads(Path(v['baseline']).read_text()); assert b['deadlines']['success_window_end']==v['checkpoint'] and b['deployment_task']==v['deployment_task']; v['release_url']=b['url']; v['review_digest']=b['review_digest']; p.write_text(json.dumps(v,indent=2)+'\\n')",
+        "products/services/welfare-tender/live-demand-checkpoint-2026-11-20.json",
+        "{\"checkpoint\":\"2026-11-20T17:00:00Z\",\"decision\":\"STOP\",\"decision_scope\":\"Close the measured acquisition window without extending or repeating it in its current form. Maintain the existing retirement schedule and authorized handling of any eligible inbound case.\",\"baseline\":\"products/services/welfare-tender/live-demand-baseline.json\",\"deployment_task\":\"TASK-179383242177\",\"observed\":{\"classified_request_interpretations_global\":0,\"unclassified_sources_global\":5,\"excluded_sources_global\":5,\"private_cycle_at\":\"2026-11-20T18:01:03.336683+00:00\",\"private_cycle_processed\":0,\"private_cycle_skipped\":10,\"order_register\":\"UNAVAILABLE\",\"treasury_verified_revenue_cents\":0},\"source\":\"Host commercial feedback, private cycle aggregate, order register availability and Treasury snapshot supplied for the decision turn.\",\"eligible_request_threshold\":\"UNEVIDENCED\",\"welfare_demand\":\"INCONCLUSIVE\",\"delivery\":\"UNEVIDENCED\",\"accepted_order\":\"UNKNOWN\",\"welfare_settlement\":\"UNEVIDENCED\",\"retire_after\":\"2026-12-04T17:00:00Z\",\"reconsider_on\":\"An attributable eligible welfare inquiry, or permitted aggregate coverage that resolves attribution for the measured window.\"}"
+      ],
+      "inputs": [
+        "products/services/welfare-tender/live-demand-baseline.json"
+      ],
+      "outputs": [
+        "products/services/welfare-tender/live-demand-checkpoint-2026-11-20.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795197961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179519796110",
+  "input_sha256": "c374fb61bf4b8acdcc8fa599034ac1ac9bf045086af246b4997d674896be5257"
+}
