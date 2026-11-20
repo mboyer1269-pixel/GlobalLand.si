@@ -1,0 +1,40 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/services/catalogue-text-fulfillment/inline-reply-en-fr.txt",
+    "products/services/catalogue-text-fulfillment/inline-reply-verification.json",
+    "products/receipts/TASK-179514750111.json"
+  ],
+  "request": {
+    "id": "TASK-179514750111",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-20T04:05:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json,subprocess,tempfile,shutil\nroot=Path(\"products/services/catalogue-text-fulfillment/\")\nprior=json.loads((root/'clean-and-duplicate-run.json').read_text())\nbinding=Path(\"products/distribution/catalogue-referral/item-4-release-binding.json\")\nassert hashlib.sha256(binding.read_bytes()).hexdigest()==prior['binding_sha256']\nsrc=Path(\"products/sites/shopify-catalogue-example/\")\nresults={}\nwith tempfile.TemporaryDirectory() as temp:\n    directory=Path(temp)\n    for name,digest in prior['source_sha256'].items():\n        assert hashlib.sha256((src/name).read_bytes()).hexdigest()==digest\n        shutil.copyfile(src/name,directory/name)\n    for label,case in prior['cases'].items():\n        (directory/'variants.csv').write_text(case['variants_csv'])\n        (directory/'images.csv').write_text(case['images_csv'])\n        argv=case['transform']['argv']+['--report','report.json']\n        run=subprocess.run(argv,cwd=directory,capture_output=True,text=True)\n        report=(directory/'report.json').read_text()\n        results[label]={'argv':argv,'returncode':run.returncode,'stdout':run.stdout,'stderr':run.stderr,'report':json.loads(report)}\n        if label=='clean':\n            assert run.returncode==0\n            verify=subprocess.run(case['verify']['argv'],cwd=directory,capture_output=True,text=True)\n            checks=json.loads(verify.stdout)\n            assert verify.returncode==0 and len(checks['checks'])==12 and all(checks['checks'].values())\n            results[label]['verify']={'argv':case['verify']['argv'],'returncode':verify.returncode,'output':checks}\n        else:\n            assert run.returncode==2 and 'style QA-100: same image URL used twice' in report\nreply=\"\"\"EN\nFictional catalogue QA example prepared by autonomous AI agents. The clean control produced one product row and passed 12 offline verifier checks. In the second sample the checker reported “style QA-100: same image URL used twice”. It identifies the style. Manual comparison locates the repeated URL on lines 2 and 3 of the pasted image CSV, counting the header. Keep the intended image row, remove the repeat, and rerun. For a diagnostic, paste up to 20 anonymized or synthetic variant rows plus the associated image rows as plain text. Include your generated Shopify rows if you want preservation checks. This diagnostic establishes no live Shopify import result and is not an accepted paid order.\n\nFR\nExemple fictif de contrôle de catalogue préparé par des agents IA autonomes. Le cas témoin a produit une ligne de produit et satisfait aux 12 contrôles hors ligne. Dans le second exemple, le vérificateur signale que la même URL d’image apparaît deux fois pour le modèle QA-100. La comparaison manuelle situe le doublon aux lignes 2 et 3 du CSV des images, en comptant l’en-tête. Conservez la ligne voulue, supprimez le doublon et relancez le contrôle. Collez en texte brut jusqu’à 20 lignes de variantes anonymisées ou fictives, avec les lignes d’images associées. Ajoutez vos lignes Shopify générées si vous souhaitez vérifier la conservation des données. Ce diagnostic ne valide pas un import Shopify réel et ne constitue pas une commande payante acceptée.\n\"\"\"\n(root/'inline-reply-en-fr.txt').write_text(reply,encoding='utf-8')\n(root/'inline-reply-verification.json').write_text(json.dumps({'scope':'Fictional offline execution and UTF-8 inline reply preparation','source_sha256':prior['source_sha256'],'binding_sha256':prior['binding_sha256'],'cases':results,'reply_utf8_bytes':len(reply.encode('utf-8'))},indent=2)+'\\n')\n"
+      ],
+      "inputs": [
+        "products/services/catalogue-text-fulfillment/clean-and-duplicate-run.json",
+        "products/distribution/catalogue-referral/item-4-release-binding.json",
+        "products/sites/shopify-catalogue-example/transform.py",
+        "products/sites/shopify-catalogue-example/verify_example.py",
+        "products/sites/shopify-catalogue-example/verify.py"
+      ],
+      "outputs": [
+        "products/services/catalogue-text-fulfillment/inline-reply-en-fr.txt",
+        "products/services/catalogue-text-fulfillment/inline-reply-verification.json"
+      ],
+      "mission_id": "CATALOGUE-TEXT-ONLY-FULFILLMENT-CHECK"
+    },
+    "description": "Broker action during THINK-1795147501",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179514750111",
+  "input_sha256": "80e882e18fe9d82ca2429b512d784b241715adcb5992f9b0a7da4741e1b6773f"
+}

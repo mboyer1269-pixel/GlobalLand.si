@@ -1,0 +1,101 @@
+{
+  "scope": "Fictional offline execution and UTF-8 inline reply preparation",
+  "source_sha256": {
+    "transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+    "verify_example.py": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+    "verify.py": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39"
+  },
+  "binding_sha256": "cdc5f54122e3c58769762bbf80652ca7f934fd259e8a2bc7c8977e0bb73614e8",
+  "cases": {
+    "clean": {
+      "argv": [
+        "/usr/bin/python3",
+        "transform.py",
+        "--variants",
+        "variants.csv",
+        "--images",
+        "images.csv",
+        "--out",
+        "output.csv",
+        "--report",
+        "report.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\"ok\": true, \"products\": 1, \"rows\": 1, \"error_count\": 0, \"warning_count\": 0, \"seconds\": 0.001}\n",
+      "stderr": "",
+      "report": {
+        "ok": true,
+        "products": 1,
+        "rows": 1,
+        "files": [
+          "output.csv"
+        ],
+        "errors": [],
+        "error_count": 0,
+        "warnings": [],
+        "warning_count": 0,
+        "seconds": 0.001
+      },
+      "verify": {
+        "argv": [
+          "/usr/bin/python3",
+          "verify_example.py",
+          "variants.csv",
+          "images.csv",
+          "output.csv"
+        ],
+        "returncode": 0,
+        "output": {
+          "rows": 1,
+          "products": 1,
+          "checks": {
+            "utf8_no_bom_lf_only": true,
+            "header_matches_documented_names": true,
+            "no_product_split_across_files": true,
+            "handle_rows_contiguous": true,
+            "title_only_on_first_row": true,
+            "sku_unique": true,
+            "identifiers_preserved_sku_barcode_color_size_price": true,
+            "color_size_combo_unique_per_product": true,
+            "image_positions_1_to_n": true,
+            "all_input_images_present_once_per_product": true,
+            "variant_image_is_first_image_of_its_color": true,
+            "image_only_rows_have_no_variant_fields": true
+          },
+          "failed": []
+        }
+      }
+    },
+    "duplicate_image": {
+      "argv": [
+        "/usr/bin/python3",
+        "transform.py",
+        "--variants",
+        "variants.csv",
+        "--images",
+        "images.csv",
+        "--out",
+        "output.csv",
+        "--report",
+        "report.json"
+      ],
+      "returncode": 2,
+      "stdout": "{\"ok\": false, \"products\": 1, \"rows\": 2, \"error_count\": 1, \"warning_count\": 0, \"seconds\": 0.001}\n",
+      "stderr": "",
+      "report": {
+        "ok": false,
+        "products": 1,
+        "rows": 2,
+        "files": [],
+        "errors": [
+          "style QA-100: same image URL used twice"
+        ],
+        "error_count": 1,
+        "warnings": [],
+        "warning_count": 0,
+        "seconds": 0.001
+      }
+    }
+  },
+  "reply_utf8_bytes": 1499
+}
