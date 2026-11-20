@@ -1,0 +1,63 @@
+{
+  "scope": "Fictional offline rehearsal only",
+  "prior_receipt": "TASK-179514396200",
+  "binding_sha256": "cdc5f54122e3c58769762bbf80652ca7f934fd259e8a2bc7c8977e0bb73614e8",
+  "source_sha256": {
+    "transform.py": "ab5a7018ece8b84c442492289fb252cedb2189085042d4d9084afb21947c539e",
+    "verify_example.py": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+    "verify.py": "54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39"
+  },
+  "cases": {
+    "clean": {
+      "variants_csv": "style_id,title,color,size,sku,barcode,price\nQA-100,Example Shirt,Blue,M,QA-100-B-M,4006381333931,19.00\n",
+      "images_csv": "style_id,color,position,url\nQA-100,Blue,1,https://example.com/blue-front.jpg\n",
+      "transform": {
+        "argv": [
+          "/usr/bin/python3",
+          "transform.py",
+          "--variants",
+          "variants.csv",
+          "--images",
+          "images.csv",
+          "--out",
+          "output.csv"
+        ],
+        "returncode": 0,
+        "stdout": "{\"ok\": true, \"products\": 1, \"rows\": 1, \"error_count\": 0, \"warning_count\": 0, \"seconds\": 0.002}\n",
+        "stderr": ""
+      },
+      "output_csv": "Title,URL handle,Vendor,Type,Tags,SKU,Barcodes,Option1 name,Option1 value,Option2 name,Option2 value,Price,Product image URL,Image position,Image alt text,Variant image URL\nExample Shirt,example-shirt-qa-100,,,,QA-100-B-M,4006381333931,Color,Blue,Size,M,19.00,https://example.com/blue-front.jpg,1,Example Shirt - Blue,https://example.com/blue-front.jpg\n",
+      "verify": {
+        "argv": [
+          "/usr/bin/python3",
+          "verify_example.py",
+          "variants.csv",
+          "images.csv",
+          "output.csv"
+        ],
+        "returncode": 0,
+        "stdout": "{\n \"rows\": 1,\n \"products\": 1,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": []\n}\n",
+        "stderr": ""
+      }
+    },
+    "duplicate_image": {
+      "variants_csv": "style_id,title,color,size,sku,barcode,price\nQA-100,Example Shirt,Blue,M,QA-100-B-M,4006381333931,19.00\n",
+      "images_csv": "style_id,color,position,url\nQA-100,Blue,1,https://example.com/blue-front.jpg\nQA-100,Blue,2,https://example.com/blue-front.jpg\n",
+      "transform": {
+        "argv": [
+          "/usr/bin/python3",
+          "transform.py",
+          "--variants",
+          "variants.csv",
+          "--images",
+          "images.csv",
+          "--out",
+          "output.csv"
+        ],
+        "returncode": 2,
+        "stdout": "{\"ok\": false, \"products\": 1, \"rows\": 2, \"error_count\": 1, \"warning_count\": 0, \"seconds\": 0.0}\n",
+        "stderr": ""
+      }
+    }
+  }
+}
