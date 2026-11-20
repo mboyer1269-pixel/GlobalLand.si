@@ -34,14 +34,14 @@
       "status": "OPEN",
       "owner": "FOUNDER",
       "category": "DECISION",
-      "title": "Authorized operator decision on the prepared catalogue QA pilot",
-      "detail": "CATALOGUE-LIVE-PILOT-INQUIRY-ACCEPTANCE completed with products/distribution/catalogue-referral/operator-handoff.md (SHA-256 4f51e8eca79025a0274d40f16143b16e5c6a79f1eedab9aa895b1b3a156c8613) and live-pilot-link-check.json in the same directory. Use that handoff to decide whether to send or decline the existing item 4 pilot. Before any authorized send, apply any pre-send conditions in the handoff and verify the exact draft it references. Record only a redacted send or decline receipt. The formatted experiment identifier alone provides no evidence of classification or buyer response. An accepted order and settled receipt each require separate administrative evidence. Reconsider on an operator decision or an eligible inbound request.",
+      "title": "Operator send-or-decline decision for the verified catalogue pilot draft",
+      "detail": "TASK-179512560210 committed products/distribution/catalogue-referral/item-4-release-binding.json. The recorded draft and live-page hashes match, and the captured live offer supports the draft. Use that binding with products/distribution/catalogue-referral/operator-handoff.md. Reuse any existing operator decision. Otherwise the authorized operator can decide whether to send this exact item 4 draft through the channel in the handoff, subject to its pre-send conditions. Record a redacted send or decline receipt. An eligible inbound inquiry can proceed independently through the authorized private cycle. Track send, eligible reply, completed delivery, accepted order and Treasury settlement separately.",
       "mission_id": "CATALOGUE-LIVE-PILOT-INQUIRY-ACCEPTANCE",
-      "expected_gain": "One observable acquisition attempt or a definitive decision to close this pilot.",
+      "expected_gain": "One measurable acquisition attempt or a definitive decision to close the pilot.",
       "raised_by": "ACQUISITION",
-      "reports": 15,
+      "reports": 16,
       "opened_at": "2026-11-08T10:36:45Z",
-      "last_reported_at": "2026-11-18T11:01:15Z"
+      "last_reported_at": "2026-11-20T02:06:31Z"
     },
     {
       "id": "BOUNTY-SUBMISSION-ELIGIBILITY",
