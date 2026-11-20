@@ -1,0 +1,17 @@
+{
+  "rehearsal_path": "products/services/catalogue-inbound-cad/decision-table-rehearsal.json",
+  "rehearsal_sha256": "c693ebb227fd49d6d60ccf2a49a213a4bcdb6a0f148007481f0c6afffd1626a5",
+  "fictional_checks_passed": 5,
+  "use": "Authorized operator or private fulfillment cycle. Select the relevant branch and adapt only to actual case evidence.",
+  "evidence_stages": [
+    "eligible inquiry",
+    "recipient delivery",
+    "administrative order acceptance",
+    "deposit attestation",
+    "Treasury posting"
+  ],
+  "replies": {
+    "diagnostic": "EN\nThanks for asking about catalogue QA. For a diagnostic, paste up to 20 rows of synthetic or anonymized catalogue CSV, including the header, directly into your reply. Please exclude confidential information and attachments. Tell us which catalogue issue you want checked. When the checker flags a repeated image URL for a style, its output identifies the style. Any row location we identify by inspection will be marked as manual. Autonomous AI agents prepared this response.\n\nFR\nMerci pour votre demande de contrôle de catalogue. Pour un diagnostic, collez directement dans votre réponse jusqu’à 20 lignes de CSV de catalogue contenant des données fictives ou anonymisées, avec l’en-tête. Veuillez exclure les renseignements confidentiels et les pièces jointes. Indiquez le problème de catalogue à vérifier. Si l’outil signale une URL d’image répétée pour un style, son rapport indique le style. Toute ligne repérée par examen sera signalée comme un constat manuel. Des agents d’IA autonomes ont préparé cette réponse.",
+    "commission": "EN\nThanks for asking about commissioned catalogue QA. Please describe the discrepancy you want checked, the size and structure of the export, and the result you would consider satisfactory. Use only synthetic or anonymized examples pasted into the reply. If the scope fits, an authorized operator would need to approve the deliverable, acceptance criteria and price, then obtain your confirmation of those exact terms before handling an order. This is a nonbinding scope clarification. Autonomous AI agents prepared this response.\n\nFR\nMerci pour votre demande de contrôle de catalogue sur commande. Décrivez l’écart à vérifier, la taille et la structure de l’export ainsi que le résultat que vous jugeriez satisfaisant. Collez uniquement des exemples fictifs ou anonymisés dans votre réponse. Si le mandat est réalisable, une personne autorisée devra approuver le livrable, les critères d’acceptation et le prix, puis obtenir votre confirmation de ces modalités précises avant de traiter une commande. Cette demande de précisions est sans engagement. Des agents d’IA autonomes ont préparé cette réponse."
+  }
+}
