@@ -1,0 +1,47 @@
+{
+  "status": "PROPOSED_OPERATOR_APPROVAL_PENDING",
+  "terms_sha256": "449856ff717c44da65c951b67732f916971c35fee3d4c98642d1cd3b2002ee9e",
+  "inputs_sha256": {
+    "products/services/catalogue-text-fulfillment/inline-reply-verification.json": "904ab92ae21dedbcc7cd3d4344f6cb2a6859c7335e1d8d9e19e6f43902095c5b",
+    "products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+    "products/services/catalogue-inbound-cad/operator-reply-packet.json": "55563712f1ef73352df8b03bf8fecd78e9a191f1604cbbb7a236fcb5a2cc5143"
+  },
+  "clean": {
+    "command": [
+      "/usr/bin/python3",
+      "transform.py",
+      "--variants",
+      "variants.csv",
+      "--images",
+      "images.csv",
+      "--out",
+      "output.csv",
+      "--report",
+      "report.json"
+    ],
+    "exit": 0,
+    "errors": []
+  },
+  "duplicate": {
+    "command": [
+      "/usr/bin/python3",
+      "transform.py",
+      "--variants",
+      "variants.csv",
+      "--images",
+      "images.csv",
+      "--out",
+      "output.csv",
+      "--report",
+      "report.json"
+    ],
+    "exit": 2,
+    "finding": "style QA-100: same image URL used twice",
+    "location": "style only; any row location is manual"
+  },
+  "out_of_scope": {
+    "fictional_variant_rows": 21,
+    "decision": "clarify_before_work"
+  },
+  "coverage": "Committed checker executions reused. The out-of-scope check exercises proposal routing only. No buyer, approval, delivery, order or settlement."
+}

@@ -1,0 +1,42 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/services/catalogue-commission-terms/terms-en-fr.md",
+    "products/services/catalogue-commission-terms/acceptance-crosswalk.json",
+    "products/receipts/TASK-179519076114.json"
+  ],
+  "request": {
+    "id": "TASK-179519076114",
+    "type": "TOOL",
+    "submitted_by": "RELEASE_PACKAGE",
+    "created_at": "2026-11-20T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json,sys\ndef sha(p):\n return hashlib.sha256(Path(p).read_bytes()).hexdigest()\nrun,live,packet=sys.argv[2:5]\nassert sha(live)=='8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc'\nassert sha(packet)=='55563712f1ef73352df8b03bf8fecd78e9a191f1604cbbb7a236fcb5a2cc5143'\ncases=json.loads(Path(run).read_text())['cases']\nclean=cases['clean']\ndup=cases['duplicate_image']\nassert clean['returncode']==0 and clean['report']['errors']==[]\nassert dup['returncode']==2 and dup['report']['errors']==['style QA-100: same image URL used twice']\ndef route(variant_rows, headers_valid, synthetic_or_anonymized):\n return 'review' if 1<=variant_rows<=20 and headers_valid and synthetic_or_anonymized else 'clarify_before_work'\nout_of_scope=route(21,True,True)\nassert out_of_scope=='clarify_before_work'\nterms=Path('products/services/catalogue-commission-terms/terms-en-fr.md')\nterms.parent.mkdir(parents=True,exist_ok=True)\nterms.write_text(sys.argv[1],encoding='utf-8')\nresult={'status':'PROPOSED_OPERATOR_APPROVAL_PENDING','terms_sha256':sha(terms),'inputs_sha256':{p:sha(p) for p in (run,live,packet)},'clean':{'command':clean['argv'],'exit':0,'errors':[]},'duplicate':{'command':dup['argv'],'exit':2,'finding':dup['report']['errors'][0],'location':'style only; any row location is manual'},'out_of_scope':{'fictional_variant_rows':21,'decision':out_of_scope},'coverage':'Committed checker executions reused. The out-of-scope check exercises proposal routing only. No buyer, approval, delivery, order or settlement.'}\nPath('products/services/catalogue-commission-terms/acceptance-crosswalk.json').write_text(json.dumps(result,indent=2)+'\\n')\n",
+        "# Catalogue duplicate-image QA / Contrôle des URL d’images répétées\n\nInternal operator proposal for approval or decline. Proposed fixed price CAD 60, an unvalidated hypothesis. No commitment arises from this packet.\n\nEN\nOne inline plain-text report reviewing repeated image URLs within a style. Supply up to 20 synthetic or anonymized variant CSV data rows and the corresponding image rows, pasted with both documented headers. Exclude confidential data and attachments. The report includes the commands to reproduce the check, its outcome and any repeated-URL findings by style. If a row is located by inspection it is labeled manual. A clean outcome means the check found no repeated URL in the supplied styles. No URL retrieval, Shopify access or import, preservation review, file repair, or deployment. If the input exceeds scope or cannot be parsed with the documented headers, pause and request a compliant excerpt before undertaking the work. The buyer compares the result with the disclosed command and supplied rows. In the duplicate case the style and issue must match the checker output. In the clean case the result must state that the check found no repeated URL. Autonomous AI agents prepare the report.\n\nFR\nProposition interne à approuver ou à refuser. Prix fixe proposé de 60 CAD, hypothèse non validée. Ce document ne crée aucun engagement.\n\nUn rapport en texte brut dans la réponse sur les URL d’images répétées au sein d’un même style. Collez jusqu’à 20 lignes de variantes CSV fictives ou anonymisées et les lignes d’images correspondantes, avec les deux en-têtes documentés. Excluez les données confidentielles et les pièces jointes. Le rapport donne les commandes pour reproduire le contrôle, son résultat et les URL répétées signalées par style. Toute ligne repérée par examen est indiquée comme constat manuel. Un résultat sans anomalie signifie que le contrôle n’a repéré aucune URL répétée dans les styles fournis. Aucun accès aux URL ou à Shopify, aucun import, contrôle de préservation, correctif de fichier ou déploiement. Si les données dépassent le périmètre ou si les en-têtes empêchent leur lecture, suspendre le travail et demander un extrait conforme. Le client compare le résultat à la commande communiquée et aux lignes fournies. En présence d’un doublon, le style et l’anomalie doivent correspondre à la sortie de l’outil. Sinon, le rapport doit indiquer que le contrôle n’a repéré aucune URL répétée. Des agents d’IA autonomes préparent le rapport.\n\nOperator workflow / Marche à suivre\nApprove or decline this exact terms hash internally. On a real eligible inquiry, secure the buyer’s confirmation of the exact terms and record administrative acceptance before treating it as an order. Record delivery, deposit attestation and Treasury posting separately.\nApprouver ou refuser en interne la version correspondant à cette empreinte. À réception d’une demande admissible, obtenir la confirmation du client sur ces conditions précises et consigner l’acceptation administrative avant de considérer la commande comme acceptée. Consigner séparément la livraison, l’attestation du dépôt et l’inscription à la trésorerie.\n",
+        "products/services/catalogue-text-fulfillment/inline-reply-verification.json",
+        "products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html",
+        "products/services/catalogue-inbound-cad/operator-reply-packet.json"
+      ],
+      "inputs": [
+        "products/services/catalogue-text-fulfillment/inline-reply-verification.json",
+        "products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html",
+        "products/services/catalogue-inbound-cad/operator-reply-packet.json"
+      ],
+      "outputs": [
+        "products/services/catalogue-commission-terms/terms-en-fr.md",
+        "products/services/catalogue-commission-terms/acceptance-crosswalk.json"
+      ],
+      "mission_id": "CATALOGUE-COMMISSION-TERMS-PROPOSAL"
+    },
+    "description": "Broker action during THINK-1795190761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179519076114",
+  "input_sha256": "3c0fafa7dbc449dae032f62c4e3ed2b5b25c0cb76dc6fba736aa6caaddd309b8"
+}

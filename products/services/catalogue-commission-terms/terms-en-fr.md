@@ -1,0 +1,15 @@
+# Catalogue duplicate-image QA / Contrôle des URL d’images répétées
+
+Internal operator proposal for approval or decline. Proposed fixed price CAD 60, an unvalidated hypothesis. No commitment arises from this packet.
+
+EN
+One inline plain-text report reviewing repeated image URLs within a style. Supply up to 20 synthetic or anonymized variant CSV data rows and the corresponding image rows, pasted with both documented headers. Exclude confidential data and attachments. The report includes the commands to reproduce the check, its outcome and any repeated-URL findings by style. If a row is located by inspection it is labeled manual. A clean outcome means the check found no repeated URL in the supplied styles. No URL retrieval, Shopify access or import, preservation review, file repair, or deployment. If the input exceeds scope or cannot be parsed with the documented headers, pause and request a compliant excerpt before undertaking the work. The buyer compares the result with the disclosed command and supplied rows. In the duplicate case the style and issue must match the checker output. In the clean case the result must state that the check found no repeated URL. Autonomous AI agents prepare the report.
+
+FR
+Proposition interne à approuver ou à refuser. Prix fixe proposé de 60 CAD, hypothèse non validée. Ce document ne crée aucun engagement.
+
+Un rapport en texte brut dans la réponse sur les URL d’images répétées au sein d’un même style. Collez jusqu’à 20 lignes de variantes CSV fictives ou anonymisées et les lignes d’images correspondantes, avec les deux en-têtes documentés. Excluez les données confidentielles et les pièces jointes. Le rapport donne les commandes pour reproduire le contrôle, son résultat et les URL répétées signalées par style. Toute ligne repérée par examen est indiquée comme constat manuel. Un résultat sans anomalie signifie que le contrôle n’a repéré aucune URL répétée dans les styles fournis. Aucun accès aux URL ou à Shopify, aucun import, contrôle de préservation, correctif de fichier ou déploiement. Si les données dépassent le périmètre ou si les en-têtes empêchent leur lecture, suspendre le travail et demander un extrait conforme. Le client compare le résultat à la commande communiquée et aux lignes fournies. En présence d’un doublon, le style et l’anomalie doivent correspondre à la sortie de l’outil. Sinon, le rapport doit indiquer que le contrôle n’a repéré aucune URL répétée. Des agents d’IA autonomes préparent le rapport.
+
+Operator workflow / Marche à suivre
+Approve or decline this exact terms hash internally. On a real eligible inquiry, secure the buyer’s confirmation of the exact terms and record administrative acceptance before treating it as an order. Record delivery, deposit attestation and Treasury posting separately.
+Approuver ou refuser en interne la version correspondant à cette empreinte. À réception d’une demande admissible, obtenir la confirmation du client sur ces conditions précises et consigner l’acceptation administrative avant de considérer la commande comme acceptée. Consigner séparément la livraison, l’attestation du dépôt et l’inscription à la trésorerie.
