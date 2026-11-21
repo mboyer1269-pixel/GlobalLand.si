@@ -1,0 +1,93 @@
+{
+  "source": "products/services/boamp-data-quality-pilot/official-query.json",
+  "sha256": "254425cb6f6d00ee0b86ccc913a839e1c479cdf883da656417249b17e071e8ae",
+  "total_count_reported": 20643,
+  "returned_count": 5,
+  "publication_dates_descending_in_capture": true,
+  "field_names": [
+    "annonce_lie",
+    "annonces_anterieures",
+    "code_departement",
+    "code_departement_prestation",
+    "contractfolderid",
+    "criteres",
+    "datefindiffusion",
+    "datelimitereponse",
+    "dateparution",
+    "dc",
+    "descripteur_code",
+    "descripteur_libelle",
+    "donnees",
+    "etat",
+    "famille",
+    "famille_libelle",
+    "filename",
+    "gestion",
+    "id",
+    "idweb",
+    "marche_public_simplifie",
+    "marche_public_simplifie_label",
+    "nature",
+    "nature_categorise",
+    "nature_categorise_libelle",
+    "nature_libelle",
+    "nomacheteur",
+    "objet",
+    "perimetre",
+    "procedure_categorise",
+    "procedure_libelle",
+    "source_schema",
+    "sousnature",
+    "sousnature_libelle",
+    "soustype_procedure",
+    "titulaire",
+    "type_avis",
+    "type_marche",
+    "type_marche_facette",
+    "type_procedure",
+    "url_avis"
+  ],
+  "records_in_returned_order": [
+    {
+      "idweb": "26-112377",
+      "dateparution": "2026-11-20",
+      "datelimitereponse": "2027-01-04T15:00:00+00:00",
+      "objet": "MAINTENANCE DES INSTALLATIONS  D'ALARME ANTI-INTRUSION MAINTENANCE ET INSTALLATION DES SYSTÈMES  D'ALARME ANTI-INTRUSION, CONTRÔLES D'ACCÈS, BORNES D'APPELS D'URGENCE ET SYSTÈME D'ALERTE D'INFORMAT...",
+      "nature": "APPEL_OFFRE",
+      "url_avis": "https://www.boamp.fr/pages/avis/?q=idweb:26-112377"
+    },
+    {
+      "idweb": "26-111994",
+      "dateparution": "2026-11-20",
+      "datelimitereponse": "2026-11-30T13:00:00+00:00",
+      "objet": "Marché de service relatif aux prestations d'assurance pour les besoins de l'opération de construction d'un groupe scolaire Florian Moulin Pergaud rue Abélard à LILLE",
+      "nature": "APPEL_OFFRE",
+      "url_avis": "https://www.boamp.fr/pages/avis/?q=idweb:26-111994"
+    },
+    {
+      "idweb": "26-112071",
+      "dateparution": "2026-11-20",
+      "datelimitereponse": "2026-12-16T14:00:00+00:00",
+      "objet": "Marché de maitrise d'oeuvre pour la démolition du plot de la pharmacie des Géants, du plot du local Le Repère et des boxes de grande hauteur - Projet de renouvellement urbain villeneuve de Grenoble",
+      "nature": "APPEL_OFFRE",
+      "url_avis": "https://www.boamp.fr/pages/avis/?q=idweb:26-112071"
+    },
+    {
+      "idweb": "26-112268",
+      "dateparution": "2026-11-20",
+      "datelimitereponse": "2027-01-04T17:00:00+00:00",
+      "objet": "Fourniture, mise en œuvre et exploitation d'une solution de gestion des interactions écrites, de gestion de la connaissance, de self-service et de satisfaction client",
+      "nature": "APPEL_OFFRE",
+      "url_avis": "https://www.boamp.fr/pages/avis/?q=idweb:26-112268"
+    },
+    {
+      "idweb": "26-112347",
+      "dateparution": "2026-11-20",
+      "datelimitereponse": "2026-12-22T16:00:00+00:00",
+      "objet": "Prestations d'analyses et de controle réglementaire de l'eau et des boues - Lot n°4-.",
+      "nature": "APPEL_OFFRE",
+      "url_avis": "https://www.boamp.fr/pages/avis/?q=idweb:26-112347"
+    }
+  ],
+  "limits": "Sort check covers only returned publication-date strings. The capture alone does not establish how the search was applied, whether a notice is still open, or whether it has a suitable acceptance criterion and response route."
+}
