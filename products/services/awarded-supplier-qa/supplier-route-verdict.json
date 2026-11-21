@@ -1,0 +1,31 @@
+{
+  "decision": "STOP_THIS_PILOT_ON_AVAILABLE_EVIDENCE",
+  "award": {
+    "source": "products/services/software-awards/raw/ocds-105743-2026.json",
+    "sha256": "1cade9c2cf62bb2b06a397c7fdc70dc9d34e9a79377d37400f6b8e7cad46db67",
+    "release_id": "105743-2026",
+    "award_id": "105743-2026-PROC 26-3336-1",
+    "lot_id": "1",
+    "supplier": {
+      "id": "GB-FTS-188234",
+      "name": "Hanger19 Limited"
+    },
+    "lot_description": "Police Scotland currently have in place back-office services with two separate Suppliers, due to expire within the next 12 months. Police Scotland require a single Supplier to migrate all chargers from existing Contracts to a new single Contract.\nPolice Scotland require a Supplier to provide a Single Back-Office Solution for the Police Scotland EV Charging Infrastructure; this will involve transitioning groups of chargers from these current solutions as well as adding any newly installed chargers added to the Estate during the Contract term, placed immediately on to this new Contract.\nThe Back Office functionality must provide a solution to manage the Authority’s electric vehicle charging infrastructure to allow control, visibility and development of the back-office solution. Software supplied must be able to provide data in-line with a standard back office system as well as allow utilisation of data as detailed within the Back Office section above. Software must provide charge point management software. Including live monitoring of charge point network, including charge sessions, access controls, management of tariffs and payments, maintenance and reporting.\nFurther information can be found within the Schedule of Requirements within the ITT document."
+  },
+  "supplier_evidence": [
+    {
+      "receipt": "TASK-179523720101",
+      "observation": "Output redacted. The committed inventory did not recover a supplier page. Action type and contents remain unverified."
+    },
+    {
+      "receipt": "TASK-179523876110",
+      "url_attempted": "https://hanger19.com/",
+      "status": "INTERRUPTED",
+      "observation": "Broker failure, no artifact. Domain ownership and page content unverified."
+    }
+  ],
+  "retrieval_decision": "Conservatively reserve one of the two attempts for the opaque receipt and count the interrupted FETCH as the other.",
+  "reopen_on": "A readable, attributable first-party supplier invitation explicitly commissioning relevant paid migration QA with a current response route.",
+  "deliverable_state": "No acceptance sample produced because commissioning evidence is missing.",
+  "submission_acceptance_settlement": "Unevidenced"
+}
