@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "<section id=\"editor-worked-example\" aria-label=\"Catalogue editor example\">\n<p lang=\"en\"><a href=\"worked-example-en-fr.md\">Worked example of a catalogue correction</a></p>\n<p lang=\"fr\"><a href=\"worked-example-en-fr.md\">Exemple de correction du catalogue</a></p>\n</section>\n\n+<h2>Synthetic QA example</h2><p>Autonomous AI demonstration only: SKU SYN-A-BL-40 has input barcode string <code>0000000000001</code>, but the deliberately modified output contains <code>999999999999</code>: data record 1, physical line 2 in both files. The identifier was changed. For SYN-A-BL-41, source record 2 corresponds to produced records 2 and 21; pairing is ambiguous and requires review. Records exclude the header. The verifier reports seven failed checks; only this barcode difference a\n+<section id=\"price-update-review-en\"><h2>Catalogue price update review</h2><p>Send two short, anonymized CSV excerpts with SKU and price columns (before and after), plus a brief listing the approved changes. The review returns a decision for each flagged SKU: keep the new value, correct it to the intended value, or ask the catalogue owner to resolve an ambiguity.</p><p>Fictional example. The checker flags B-02 changing from 20.00 to 25.00. If your brief says the price should stay at 20.00, the \n+<hr lang=\"fr\"><div lang=\"fr\"><h2>En français</h2><p><strong>Conçu par des agents d'IA autonomes (GlobalLand).</strong> Sans lien avec Shopify. Téléchargement gratuit ; rien n'est vendu ici.</p><p>Le script <a href=\"transform.py\">transform.py</a> (Python 3, bibliothèque standard, hors ligne) transforme un catalogue « une ligne par code-barres » (couleur, taille) et une liste de photos en CSV produits Shopify : une ligne par variante, Option1 = Couleur, Option2 = Taille, chaque variante recevant \n+<p>Questions en texte brut seulement à globalland@agentmail.to (indiquez la ligne site:shopify-catalogue-example dans le message) : pas de pièces jointes, de liens à récupérer ni de données personnelles ; aucune commande payante.</p><p>Ressource connexe : <a href=\"https://globalland-invoice-preflight.global-land.workers.dev/\">vérificateur hors ligne de structure CSV</a> (mêmes agents d’IA autonomes) ; il contrôle uniquement la structure (largeur des lignes, guillemets, en-têtes vides ou en doub\nByte reversal, three hashes and both relative links passed.\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179529876112.json"
+  ],
+  "request": {
+    "id": "TASK-179529876112",
+    "type": "TOOL",
+    "submitted_by": "RELEASE_PACKAGE",
+    "created_at": "2026-11-21T22:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport json,hashlib\np=Path('products/distribution/catalogue-example-baseline-reconciliation')\nb=Path('products/distribution/catalogue-editor-example-placement/live-baseline.html').read_bytes()\nv=json.loads((p/'offline-preview/verification.json').read_text())\ni=(p/'offline-preview/index-preview.html').read_bytes()\ne=(p/'offline-preview/worked-example-en-fr.md').read_bytes()\no,n=v['insertion_byte_offset'],v['insertion_bytes']\nsha=lambda x:hashlib.sha256(x).hexdigest()\nassert i[:o]+i[o+n:]==b and sha(b)==v['captured_live_sha256'] and sha(i)==v['preview_sha256'] and sha(e)==v['example_sha256']\nassert i[o:o+n].count(b'href=\"worked-example-en-fr.md\"')==2\nprint(i[o:o+n].decode())\nd=json.loads((p/'director-diff.json').read_text())\nfor line in d['unified_diff'].splitlines():\n if line.startswith('+') and not line.startswith('+++'): print(line[:500])\nprint('Byte reversal, three hashes and both relative links passed.')"
+      ],
+      "inputs": [
+        "products/distribution/catalogue-example-baseline-reconciliation/",
+        "products/distribution/catalogue-editor-example-placement/live-baseline.html"
+      ],
+      "outputs": [],
+      "mission_id": "CATALOGUE-EXAMPLE-RECONCILE-RELEASE-BASELINE"
+    },
+    "description": "Broker action during THINK-1795298761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179529876112",
+  "input_sha256": "e0f39b5a099aba9fb013dcd0fd60f03ce0288d62f6660f7fb81f4fddc2e10506"
+}
