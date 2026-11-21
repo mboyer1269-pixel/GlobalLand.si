@@ -1,0 +1,6 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nWorkspace reminder: Each EXEC starts in a fresh workspace. Programs create required directories before writing; outputs only declares files to publish. For public EXEC, include prior published files in inputs to reuse them. Private EXEC uses its supplied case files.\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 35, in <module>\n  File \"/usr/lib/python3.11/shutil.py\", line 256, in copyfile\n    with open(src, 'rb') as fsrc:\n         ^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'products/services/catalogue-one-command-qa/transform.py'\n\nstdout:\n",
+  "id": "TASK-179522136100",
+  "input_sha256": "7f2c807cd051be9501a70881854ca9b6f4c03ef37a0042eecb12e02b0da77240"
+}
