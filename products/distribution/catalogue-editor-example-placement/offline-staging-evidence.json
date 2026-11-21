@@ -1,0 +1,17 @@
+{
+  "status": "STAGED_OFFLINE",
+  "sources_sha256": {
+    "products/services/catalogue-qa-agency-report/editor-report-en-fr.md": "347d53512c5f2bed94d5332ec030ad75f74cf176fd01a7f931a0d1b7ea51b203",
+    "products/reviews/catalogue-editor-handoff/reference-comparison-readback.json": "ad54b68607337963829db71b339c0c425fdf209a78de1f9f5370d3539587ef7b",
+    "products/distribution/catalogue-editor-example-placement/live-baseline.html": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+    "products/sites/shopify-catalogue-example/index.html": "518a7843922faae2a1638530e4e59234524e81ab7496c34324e644ab6b4fc5eb"
+  },
+  "example_sha256": "e1b0198cccb0187c52cff399caa16b03ea9ec499f4bcddbc6460e22b3273c0ac",
+  "proposed_link": {
+    "en": "See how an editor corrected a repeated catalogue image",
+    "fr": "Voir comment corriger une image de catalogue en double",
+    "placement": "Beside the existing explanation of style-level duplicate-image findings, before the intake instructions",
+    "target": "A relative URL to the rendered bilingual example, to verify when integrating"
+  },
+  "integration_reopens_when": "The intended checkout base is reconciled with the verified live homepage and any competing revision is resolved. Verify the minimal diff, link and exact digest through independent review before public deployment."
+}
