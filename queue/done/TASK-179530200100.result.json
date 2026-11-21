@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Structural comparison against saved live bytes. Target presence is checked in selected repository inputs, and does not prove live availability or release eligibility.\",\n  \"pages\": {\n    \"captured_live\": {\n      \"path\": \"products/distribution/catalogue-editor-example-placement/live-baseline.html\",\n      \"sha256\": \"8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc\",\n      \"bytes\": 12409\n    },\n    \"checkout\": {\n      \"path\": \"products/sites/shopify-catalogue-example/index.html\",\n      \"sha256\": \"518a7843922faae2a1638530e4e59234524e81ab7496c34324e644ab6b4fc5eb\",\n      \"bytes\": 16601,\n      \"relative_link_additions\": {},\n      \"relative_link_removals\": {},\n      \"id_additions\": {\n        \"price-update-review-en\": 1,\n        \"price-update-review-fr\": 1\n      },\n      \"id_removals\": {},\n      \"missing_relative_targets_in_checkout_or_preview\": []\n    },\n    \"offline_preview\": {\n      \"path\": \"products/distribution/catalogue-example-baseline-reconciliation/offline-preview/index-preview.html\",\n      \"sha256\": \"c17f5c44e0477f36fda0a1be7d66a39714040630fc4c880a89c3cc90443587d1\",\n      \"bytes\": 12681,\n      \"relative_link_additions\": {\n        \"worked-example-en-fr.md\": 2\n      },\n      \"relative_link_removals\": {},\n      \"id_additions\": {\n        \"editor-worked-example\": 1\n      },\n      \"id_removals\": {},\n      \"missing_relative_targets_in_checkout_or_preview\": []\n    }\n  }\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-example-baseline-reconciliation/consolidation-link-inventory.json",
+    "products/receipts/TASK-179530200100.json"
+  ],
+  "id": "TASK-179530200100",
+  "input_sha256": "f4c23b5d93dae99fa85b6df771c6347a02f9d6da015a781d3e0e0d779dfe1ace"
+}

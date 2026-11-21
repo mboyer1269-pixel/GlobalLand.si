@@ -1,0 +1,37 @@
+{
+  "scope": "Structural comparison against saved live bytes. Target presence is checked in selected repository inputs, and does not prove live availability or release eligibility.",
+  "pages": {
+    "captured_live": {
+      "path": "products/distribution/catalogue-editor-example-placement/live-baseline.html",
+      "sha256": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+      "bytes": 12409
+    },
+    "checkout": {
+      "path": "products/sites/shopify-catalogue-example/index.html",
+      "sha256": "518a7843922faae2a1638530e4e59234524e81ab7496c34324e644ab6b4fc5eb",
+      "bytes": 16601,
+      "relative_link_additions": {},
+      "relative_link_removals": {},
+      "id_additions": {
+        "price-update-review-en": 1,
+        "price-update-review-fr": 1
+      },
+      "id_removals": {},
+      "missing_relative_targets_in_checkout_or_preview": []
+    },
+    "offline_preview": {
+      "path": "products/distribution/catalogue-example-baseline-reconciliation/offline-preview/index-preview.html",
+      "sha256": "c17f5c44e0477f36fda0a1be7d66a39714040630fc4c880a89c3cc90443587d1",
+      "bytes": 12681,
+      "relative_link_additions": {
+        "worked-example-en-fr.md": 2
+      },
+      "relative_link_removals": {},
+      "id_additions": {
+        "editor-worked-example": 1
+      },
+      "id_removals": {},
+      "missing_relative_targets_in_checkout_or_preview": []
+    }
+  }
+}
