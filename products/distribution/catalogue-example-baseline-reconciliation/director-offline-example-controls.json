@@ -1,0 +1,16 @@
+{
+  "scope": "Offline HTML and download checks against the saved live capture. No live deployment, approval or commercial outcome tested.",
+  "checks": {
+    "removing_example_section_restores_live_capture": true,
+    "exactly_two_example_links_added": true,
+    "all_existing_links_and_order_preserved": true,
+    "example_bytes_match_staged_original": true,
+    "price_review_ids_match_captured_live": true
+  },
+  "all_pass": true,
+  "sha256": {
+    "live_capture": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+    "offline_preview": "c17f5c44e0477f36fda0a1be7d66a39714040630fc4c880a89c3cc90443587d1",
+    "worked_example": "e1b0198cccb0187c52cff399caa16b03ea9ec499f4bcddbc6460e22b3273c0ac"
+  }
+}
