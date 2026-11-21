@@ -160,31 +160,14 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "15 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "16 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 15,
+      "reports": 16,
       "opened_at": "2026-11-21T06:06:32Z",
-      "last_reported_at": "2026-11-21T10:06:39Z"
-    },
-    {
-      "id": "SYSTEM-NO-PROGRESS",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "7 tours consécutifs sans résultat vérifiable",
-      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : AWARD-PRIME-SUBCONTRACT-SAMPLE, BUYER-CONTROLLED-EN-FR-LOCALIZATION-SAMPLE, BUYER-REQUEST-BILINGUAL-DOCUMENTATION, CANADA-STANDALONE-DATA-QA-BUYER, CATALOGUE-CHECKOUT-ACTIVATION-HANDOFF, CATALOGUE-COMMISSIONED-REVIEW-LIVE-TEST, CATALOGUE-DOWNLOAD-FULFILLMENT, CATALOGUE-EDITOR-HANDOFF-REVIEW, CATALOGUE-GUMROAD-DELIVERY-TEST, CATALOGUE-PAYHIP-DECISION, CATALOGUE-QA-AGENCY-REPORT-TRIAL, CATALOGUE-QA-BUYER-REQUEST-PATH, CATALOGUE-QA-EXAMPLE-VERIFIED-RELEASE, CATALOGUE-REPEAT-UPDATE-WORKED-REPORT, CSV-ACTOR-LAUNCH, DIRECT-BUYER-DATA-QA-DELIVERY-NOV20, DOMAIN-RDAP-LAUNCH, EXISTING-ASSET-LICENSING-BUYER-TEST, EXPLICIT-PAID-SPREADSHEET-SUPPORT-FIT, FIXED-SCOPE-EXPORT-RECONCILIATION-PILOT ; consulter la collection missions paginée pour la suite.",
-      "open_missions_total": 41,
-      "missions_truncated": true,
-      "missions_collection": "missions",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 7,
-      "opened_at": "2026-11-21T08:30:34Z",
-      "last_reported_at": "2026-11-21T10:06:39Z"
+      "last_reported_at": "2026-11-21T10:30:54Z"
     }
   ],
   "resolved_recent": [
@@ -224,25 +207,27 @@
     }
   ],
   "progress": {
-    "stalled_turns": 7,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-21T08:30:34Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1320,
-    "turns_without_verified_revenue": 1320,
-    "turns_without_outcome": 15,
+    "turns_without_new_interpreted_feedback": 1321,
+    "turns_without_verified_revenue": 1321,
+    "turns_without_outcome": 16,
     "outcome_threshold": 12,
     "dry_since": "2026-11-21T06:06:32Z",
     "last_outcome_turn": "THINK-1795240823",
-    "last_productive_turn": "THINK-1795248361",
-    "last_turn": "THINK-1795255561",
+    "last_productive_turn": "THINK-1795257020",
+    "last_turn": "THINK-1795257020",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/sqlite-repair/launch/cutoff-evidence-inputs-2026-11-21.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
