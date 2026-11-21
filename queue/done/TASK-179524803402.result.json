@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Pre-cutoff artifact inventory. A capture hash must be tied to a successful FETCH and publication receipt before identifying the live release. This is not a demand verdict.\",\n  \"cutoff_utc\": \"2026-11-22T00:00:00Z\",\n  \"artifacts\": [\n    {\n      \"path\": \"products/services/sqlite-repair/launch/launch-baseline.json\",\n      \"present\": true,\n      \"sha256\": \"79ccde33227b79170e93ca1690d514a9e74e2274ac3c01fd338da13f130d4e17\",\n      \"bytes\": 1308,\n      \"baseline_keys\": [\n        \"ai_disclosure_present\",\n        \"all_match\",\n        \"approved_digest\",\n        \"deploy\",\n        \"dry_run\",\n        \"fetch_index\",\n        \"fetch_repro\",\n        \"identifier_present\",\n        \"index_match\",\n        \"indexnow\",\n        \"live_index_sha256\",\n        \"live_repro_file_sha256\",\n        \"live_repro_sha256\",\n        \"not_established\",\n        \"observation_window\",\n        \"repro_match\",\n        \"review\",\n        \"site\",\n        \"source_index_sha256\",\n        \"source_repro_sha256\",\n        \"url\"\n      ]\n    },\n    {\n      \"path\": \"products/services/sqlite-repair/launch/pre-cutoff-live-2026-11-21.html\",\n      \"present\": true,\n      \"sha256\": \"1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db\",\n      \"bytes\": 14905\n    }\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/launch/pre-cutoff-evidence-inventory.json",
+    "products/receipts/TASK-179524803402.json"
+  ],
+  "id": "TASK-179524803402",
+  "input_sha256": "1424a88e3872b9b26aeb7defdda897844efc4f529bbcdb9897a0cab56845c586"
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "Pre-cutoff artifact inventory. A capture hash must be tied to a successful FETCH and publication receipt before identifying the live release. This is not a demand verdict.",
+  "cutoff_utc": "2026-11-22T00:00:00Z",
+  "artifacts": [
+    {
+      "path": "products/services/sqlite-repair/launch/launch-baseline.json",
+      "present": true,
+      "sha256": "79ccde33227b79170e93ca1690d514a9e74e2274ac3c01fd338da13f130d4e17",
+      "bytes": 1308,
+      "baseline_keys": [
+        "ai_disclosure_present",
+        "all_match",
+        "approved_digest",
+        "deploy",
+        "dry_run",
+        "fetch_index",
+        "fetch_repro",
+        "identifier_present",
+        "index_match",
+        "indexnow",
+        "live_index_sha256",
+        "live_repro_file_sha256",
+        "live_repro_sha256",
+        "not_established",
+        "observation_window",
+        "repro_match",
+        "review",
+        "site",
+        "source_index_sha256",
+        "source_repro_sha256",
+        "url"
+      ]
+    },
+    {
+      "path": "products/services/sqlite-repair/launch/pre-cutoff-live-2026-11-21.html",
+      "present": true,
+      "sha256": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+      "bytes": 14905
+    }
+  ]
+}
