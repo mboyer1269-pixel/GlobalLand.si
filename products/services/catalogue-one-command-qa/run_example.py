@@ -21,4 +21,4 @@ with tempfile.TemporaryDirectory() as workspace:
         sys.exit(result.returncode)
     if output.read_bytes() != (base / "fixtures/after-shopify.csv").read_bytes():
         sys.exit("Generated CSV differs from the worked example reference")
-    sys.exit(subprocess.run([sys.executable, "verify_example.py"], cwd=base).returncode)
+    sys.exit(subprocess.run([sys.executable, str(base / "verify_example.py"), str(base / "fixtures/before-variants.csv"), str(images), str(output)], cwd=base).returncode)
