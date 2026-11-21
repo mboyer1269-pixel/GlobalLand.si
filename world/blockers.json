@@ -154,23 +154,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-PROGRESS",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "4 tours consécutifs sans résultat vérifiable",
-      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : AWARD-PRIME-SUBCONTRACT-SAMPLE, BOAMP-DATA-QUALITY-ACCEPTANCE-PILOT, BUYER-CONTROLLED-EN-FR-LOCALIZATION-SAMPLE, BUYER-REQUEST-BILINGUAL-DOCUMENTATION, CANADA-STANDALONE-DATA-QA-BUYER, CATALOGUE-CHECKOUT-ACTIVATION-HANDOFF, CATALOGUE-COMMISSIONED-REVIEW-LIVE-TEST, CATALOGUE-DOWNLOAD-FULFILLMENT, CATALOGUE-EDITOR-HANDOFF-REVIEW, CATALOGUE-GUMROAD-DELIVERY-TEST, CATALOGUE-IMPORT-ACCEPTANCE-PILOT, CATALOGUE-PAYHIP-DECISION, CATALOGUE-QA-BUYER-REQUEST-PATH, CATALOGUE-QA-EXAMPLE-VERIFIED-RELEASE, CATALOGUE-REPEAT-UPDATE-WORKED-REPORT, CSV-ACTOR-LAUNCH, DIRECT-BUYER-DATA-QA-DELIVERY-NOV20, DOMAIN-RDAP-LAUNCH, EXISTING-ASSET-LICENSING-BUYER-TEST, EXPLICIT-PAID-SPREADSHEET-SUPPORT-FIT ; consulter la collection missions paginée pour la suite.",
-      "open_missions_total": 42,
-      "missions_truncated": true,
-      "missions_collection": "missions",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 4,
-      "opened_at": "2026-11-21T12:30:32Z",
-      "last_reported_at": "2026-11-21T13:05:41Z"
     }
   ],
   "resolved_recent": [
@@ -210,25 +193,28 @@
     }
   ],
   "progress": {
-    "stalled_turns": 4,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-21T12:30:32Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1332,
-    "turns_without_verified_revenue": 1332,
-    "turns_without_outcome": 4,
+    "turns_without_new_interpreted_feedback": 1333,
+    "turns_without_verified_revenue": 1333,
+    "turns_without_outcome": 5,
     "outcome_threshold": 12,
     "dry_since": "2026-11-21T12:30:32Z",
     "last_outcome_turn": "THINK-1795262761",
-    "last_productive_turn": "THINK-1795262761",
-    "last_turn": "THINK-1795266301",
+    "last_productive_turn": "THINK-1795267802",
+    "last_turn": "THINK-1795267802",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/reviews/catalogue-editor-handoff/editor-images.csv",
+        "products/reviews/catalogue-editor-handoff/execution.json"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
