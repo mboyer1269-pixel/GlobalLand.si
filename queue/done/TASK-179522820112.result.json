@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"decision\": \"REUSE_EXISTING_ROUTE\",\n  \"source_url\": \"https://globalland-invoice-preflight.global-land.workers.dev/\",\n  \"live_fetch\": \"TASK-179522820111\",\n  \"live_sha256\": \"f228c57ec732ff1c766a0d9df767eca2ba8234fde76b4f3dbe1caa3725448f62\",\n  \"catalogue_links\": [\n    \"https://globalland-shopify-catalogue-example.global-land.workers.dev/\",\n    \"https://globalland-shopify-catalogue-example.global-land.workers.dev/\",\n    \"https://globalland-shopify-catalogue-example.global-land.workers.dev/\",\n    \"https://globalland-shopify-catalogue-example.global-land.workers.dev/\"\n  ],\n  \"destination_capture\": \"products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html\",\n  \"destination_capture_sha256\": \"8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc\",\n  \"destination_capture_receipt\": \"TASK-179508276100\",\n  \"limits\": \"Current referral verified. Destination scope relies on dated capture. Clicks, eligible inquiries, sales and settlement unmeasured.\"\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-relevant-referral/route-verdict.json",
+    "products/receipts/TASK-179522820112.json"
+  ],
+  "request": {
+    "id": "TASK-179522820112",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-21T02:30:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfrom html.parser import HTMLParser\nimport hashlib,json\nbase=Path('products/distribution/catalogue-referral')\nlive=Path('products/distribution/catalogue-relevant-referral/invoice-live.html')\nrelease=json.loads((base/'release/publication-result.json').read_text())\nbinding=json.loads((base/'item-4-release-binding.json').read_text())\nclass Links(HTMLParser):\n def handle_starttag(self, tag, attrs):\n  href=dict(attrs).get('href','')\n  if tag=='a' and href.startswith('https://globalland-shopify-catalogue-example.global-land.workers.dev'):\n   self.matches.append(href)\nparser=Links()\nparser.matches=[]\nparser.feed(live.read_text())\ndigest=hashlib.sha256(live.read_bytes()).hexdigest()\nassert digest==release['approved_index_sha256'] and parser.matches\ndestination=next(p for p in binding['verified_hashes'] if p.endswith('.html'))\ndestination_digest=hashlib.sha256(Path(destination).read_bytes()).hexdigest()\nassert destination_digest==binding['verified_hashes'][destination]\nresult={'decision':'REUSE_EXISTING_ROUTE','source_url':release['url'],'live_fetch':'TASK-179522820111','live_sha256':digest,'catalogue_links':parser.matches,'destination_capture':destination,'destination_capture_sha256':destination_digest,'destination_capture_receipt':binding['live_fetch_receipt'],'limits':'Current referral verified. Destination scope relies on dated capture. Clicks, eligible inquiries, sales and settlement unmeasured.'}\nout=live.with_name('route-verdict.json')\nout.write_text(json.dumps(result,indent=2)+'\\n')\nprint(out.read_text())"
+      ],
+      "inputs": [
+        "products/distribution/catalogue-relevant-referral/invoice-live.html",
+        "products/distribution/catalogue-referral/release/publication-result.json",
+        "products/distribution/catalogue-referral/item-4-release-binding.json",
+        "products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html"
+      ],
+      "outputs": [
+        "products/distribution/catalogue-relevant-referral/route-verdict.json"
+      ],
+      "mission_id": "CATALOGUE-RELEVANT-REFERRAL-TRIAL"
+    },
+    "description": "Broker action during THINK-1795228201",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179522820112",
+  "input_sha256": "17d68dae242fc2f0bcdd6007835b30beb816ca98ad94eb9605b4a9b931cd6d28"
+}
