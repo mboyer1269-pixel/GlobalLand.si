@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"fetch_receipt\": \"TASK-179528221300\",\n  \"expected_sha256\": \"8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc\",\n  \"checks\": {\n    \"live_capture\": {\n      \"path\": \"products/distribution/catalogue-editor-example-placement/live-baseline.html\",\n      \"sha256\": \"8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc\",\n      \"matches_fetch_receipt\": true\n    },\n    \"checkout\": {\n      \"path\": \"products/sites/shopify-catalogue-example/index.html\",\n      \"sha256\": \"518a7843922faae2a1638530e4e59234524e81ab7496c34324e644ab6b4fc5eb\",\n      \"matches_fetch_receipt\": false\n    }\n  },\n  \"baseline_match\": false\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-editor-example-placement/live-checkout-comparison.json",
+    "products/receipts/TASK-179528256201.json"
+  ],
+  "id": "TASK-179528256201",
+  "input_sha256": "3dcd1b47745847e416ef9573c89c4295de4d93df5ca9591728eafc2f85fd9884"
+}

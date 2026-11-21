@@ -1,0 +1,17 @@
+{
+  "fetch_receipt": "TASK-179528221300",
+  "expected_sha256": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+  "checks": {
+    "live_capture": {
+      "path": "products/distribution/catalogue-editor-example-placement/live-baseline.html",
+      "sha256": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+      "matches_fetch_receipt": true
+    },
+    "checkout": {
+      "path": "products/sites/shopify-catalogue-example/index.html",
+      "sha256": "518a7843922faae2a1638530e4e59234524e81ab7496c34324e644ab6b4fc5eb",
+      "matches_fetch_receipt": false
+    }
+  },
+  "baseline_match": false
+}
