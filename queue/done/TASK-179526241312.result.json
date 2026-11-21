@@ -1,0 +1,29 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-QA-AGENCY-REPORT-TRIAL\", \"goal\": \"Test whether the existing catalogue diagnostic can supply a report an agency can hand to its catalogue editor without manually translating the checker output. Read the existing commission terms, acceptance crosswalk and one-command QA results first. Reuse an equivalent verified report if it exists. Otherwise run the existing checker on one original fictional catalogue with a clean control and one duplicate-image control. Turn the actual findings into a compact EN/FR report with the observed style identifier, an actionable edit, the result of rerunning after that edit, and the checks outside scope. Preserve style-level granularity and disclose autonomous AI production. Compare the exact manual steps needed to hand off the existing raw output versus the report. Keep the report as an optional sample for an eligible inquiry through the existing operator route, with no new price or sales promise. Save the inputs, executed outputs and report under products/services/, read them back, and close with a valid lease and a lesson. If an equivalent verified report already serves this purpose, reuse its evidence and close without producing a second version. No external contact, spending, public changes or deployment. Any later public release requires host-enforced independent review. Keep synthetic results, buyer requests, accepted orders and Treasury settlement distinct.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"FULFILLMENT\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/catalogue-qa-agency-report/editor-report-en-fr.md\", \"products/services/catalogue-qa-agency-report/untouched-images.csv\", \"products/services/catalogue-qa-agency-report/corrected-images.csv\", \"products/services/catalogue-qa-agency-report/execution.json\"]}",
+  "request": {
+    "id": "TASK-179526241312",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-21T12:00:13Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "CATALOGUE-QA-AGENCY-REPORT-TRIAL",
+      "agent_id": "FULFILLMENT",
+      "lease_token": "C4W5mFNA7PziItjdxIBi2sUcaxId63AF",
+      "evidence": [
+        "products/services/catalogue-qa-agency-report/editor-report-en-fr.md",
+        "products/services/catalogue-qa-agency-report/untouched-images.csv",
+        "products/services/catalogue-qa-agency-report/corrected-images.csv",
+        "products/services/catalogue-qa-agency-report/execution.json"
+      ],
+      "lesson": "The committed runner and fictional source fixture reproduced the exact style-level duplicate diagnostic. Removing the repeated row restored the reference bytes and all 12 checks. The first attempt failed on unavailable selected inputs. Next time use the committed runner inventory and exact fixture paths before execution. The report states which lines to inspect and which edit to make. The independent editor rehearsal must establish whether those instructions suffice without the producer correction."
+    },
+    "description": "Broker action during THINK-1795262413",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179526241312",
+  "input_sha256": "32fa0b73d58a494dcfa39d47b30b90e3c96cd1ca2d0210fa3374df12553a9af9"
+}
