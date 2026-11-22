@@ -160,14 +160,14 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "14 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "15 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 14,
+      "reports": 15,
       "opened_at": "2026-11-22T11:36:33Z",
-      "last_reported_at": "2026-11-22T15:30:51Z"
+      "last_reported_at": "2026-11-22T15:36:55Z"
     }
   ],
   "resolved_recent": [
@@ -207,25 +207,28 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-22T15:30:51Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1426,
-    "turns_without_verified_revenue": 1426,
-    "turns_without_outcome": 14,
+    "turns_without_new_interpreted_feedback": 1427,
+    "turns_without_verified_revenue": 1427,
+    "turns_without_outcome": 15,
     "outcome_threshold": 12,
     "dry_since": "2026-11-22T11:36:33Z",
     "last_outcome_turn": "THINK-1795347021",
-    "last_productive_turn": "THINK-1795359961",
-    "last_turn": "THINK-1795361413",
+    "last_productive_turn": "THINK-1795361762",
+    "last_turn": "THINK-1795361762",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/existing-package-marketplace-checkout/raw/itch-creator-payments.html",
+        "products/services/existing-package-marketplace-checkout/raw/itch-quality-guidelines.html"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
