@@ -1,0 +1,17 @@
+{
+  "scope": "Offline CSV core baseline using existing fixtures. Grant eligibility, buyer demand and settlement are unverified.",
+  "cwd": "products/actors/csv-preflight",
+  "command": [
+    "/usr/bin/python3",
+    "tests/run_tests.py"
+  ],
+  "python_version": "3.11.2",
+  "input_sha256": {
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/core.py": "39d656fbb6b17506752421825e78b9cd6f3d7390b97df2fbdec155a8cc6e8b0d",
+    "tests/run_tests.py": "b9ec0a2eb1441f61fe34a0f86a33d8e5913af198ccb294751f982f5bfd54f0fb"
+  },
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/workspace/products/actors/csv-preflight/tests/run_tests.py\", line 7, in <module>\n    from src import core\n  File \"/workspace/products/actors/csv-preflight/src/core.py\", line 7, in <module>\n    from .public_http import request, PublicHTTPError\nModuleNotFoundError: No module named 'src.public_http'\n"
+}
