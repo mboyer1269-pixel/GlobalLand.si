@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\"itch-pricing\": [\"eloper Logs Community Log in Register Indie game store Free games Fun games Horror games Game development Assets Comics Sales Bundles Jobs Tags Game Engines General Abou\", \"ch.io any item that can accept money is automatically “pay what you want” or “pay any amount above the minimum”, yet there are many more options to let you set the right pri\", \"cally “pay what you want” or “pay any amount above the minimum”, yet there are many more options to let you set the right pricing for your content. Create an account with i\", \" a new game or read on to learn more Table of contents Pay what you want pricing Pricing options Purchase tiers through Individually priced files Sales & bundles Early acces\", \" Sales & bundles Early access Pre-orders Project goals Pay what you want pricing On itch.io, any price you set is the minimum price . Even if you're giving your content away\", \" you want pricing On itch.io, any price you set is the minimum price . Even if you're giving your content away for free, downloaders will still have the opportunity to send\", \"um price . Even if you're giving your content away for free, downloaders will still have the opportunity to send you money before they download. If you provide a minimum\", \" send you money before they download. If you provide a minimum price on your content then buyers are prompted to pay that amount, or anything above to gain ownership of the\"], \"itch-creator-payments\": [\"ew Process Payment Requirements VAT support Currencies Tax Interview Tax Withholding Account Adjustments How itch.io handles payments itch.io works with third-party payment gatew\", \"ch payment provider No manual connection. Complete one tax interview on itch.io and accept seller terms Payment methods for buyers You have to manually setup each payment provide\", \"te a payout request, you must meet these requirements: Tax Interview Completed : You must complete the tax identity verification form. We validate your information during the pay\", \"r information during the payout review period. See the Tax Interview section for details. Minimum Balance : You must have at least $5.00 USD available to request a payout. Payout\", \"iew period. See the Tax Interview section for details. Minimum Balance : You must have at least $5.00 USD available to request a payout. Payout Method Selected : You must configure\", \" Staff review all payouts before payment. We require a minimum of 7 days after you create a payout and typically complete reviews within 10 to 14 days. This review period lets us ass\", \"ation must reach Validated state. You can complete the tax interview before requesting a payout, but validation occurs during the review period. We cannot process payouts with un\", \"ries and currencies are available: United States — USD Canada — CAD, USD Ireland — EUR, GBP, USD United Kingdom — EUR, GBP, USD If you payment provider account is for a sp\"], \"itch-quality-guidelines\": [\"ted or AI-generated content Accurately tag your use of generative AI Avoid only uploading keys or links to other stores Prefer uploading your files directly to itch.io Avoid obtr\", \"lue to the user experience. Accurately tag your use of generative AI Generative AI refers to artificial intelligence systems that create new content (text, images, music) by lear\", \"r experience. Accurately tag your use of generative AI Generative AI refers to artificial intelligence systems that create new content (text, images, music) by learning from larg\", \" tag your project if it contains materials produced by generative AI by utilizing the AI Disclosure section on your project’s edit page. Projects using self-contained algorithms \", \"lty adjustment, dynamic music, etc. are not considered generative AI and don’t need to be disclosed. Projects that indicate that they use generative AI will appear on the AI Assi\", \" to be disclosed. Projects that indicate that they use generative AI will appear on the AI Assisted browse page. We are strictly enforcing disclosure for all game asset, soundtra\", \"s due to legal ambiguity around rights associated with Generative AI content. Failure to tag these pages may result in delisting. Avoid only uploading keys or links to other stor\", \"cess your project’s files. When publishing your games, software, or other digital content on itch.io, we strongly encourage you to upload your files directly to our platform. Direct f\"]}\n\n",
+  "artifacts": [
+    "products/services/existing-package-marketplace-checkout/itch-checkout-evidence.json",
+    "products/receipts/TASK-179536321513.json"
+  ],
+  "request": {
+    "id": "TASK-179536321513",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-22T16:00:15Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,re,html,hashlib,json,sys\nb=pathlib.Path(sys.argv[1])\nresults={}\nfor name,pattern in [('itch-pricing',r'free|minimum|pay.what|donat'),('itch-creator-payments',r'Canada|Minimum Balance|minimum of 7 days|tax interview'),('itch-quality-guidelines',r'generative AI|software, or other')]:\n p=b/'raw'/(name+'.html')\n raw=p.read_bytes()\n plain=html.unescape(re.sub('<[^>]+>',' ',raw.decode()))\n plain=' '.join(plain.split())\n results[name]={'sha256':hashlib.sha256(raw).hexdigest(),'excerpts':[plain[max(m.start()-55,0):m.end()+110] for m in list(re.finditer(pattern,plain,re.I))[:18]]}\nlive=(b/'raw/sqlite-live-local-readme.md').read_bytes()\nresults['live_readme_sha256']=hashlib.sha256(live).hexdigest()\n(b/'itch-checkout-evidence.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\\n')\nprint(json.dumps({k:v['excerpts'][:8] for k,v in results.items() if isinstance(v,dict)},ensure_ascii=False))",
+        "products/services/existing-package-marketplace-checkout/"
+      ],
+      "inputs": [
+        "products/services/existing-package-marketplace-checkout/raw/itch-pricing.html",
+        "products/services/existing-package-marketplace-checkout/raw/itch-creator-payments.html",
+        "products/services/existing-package-marketplace-checkout/raw/itch-quality-guidelines.html",
+        "products/services/existing-package-marketplace-checkout/raw/sqlite-live-local-readme.md"
+      ],
+      "outputs": [
+        "products/services/existing-package-marketplace-checkout/itch-checkout-evidence.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795363215",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179536321513",
+  "input_sha256": "ea0ed327018f71be4d7d1fd3914ff70b5bdfe53ca6d0e2928340f32435c4f0f1"
+}
