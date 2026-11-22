@@ -1,0 +1,11 @@
+{
+  "command": "python3 diagnose.py example-case.json",
+  "exit_code": 0,
+  "stdout": "{\n \"tool\": \"globalland-sqlite-diagnose/1\",\n \"sqlite_version\": \"3.40.1\",\n \"case_id\": \"page-example\",\n \"limits\": {\n  \"sql_bytes\": 65536,\n  \"statements\": 50,\n  \"rows_kept\": 50,\n  \"vm_steps\": 2000000,\n  \"seconds\": 2.0\n },\n \"runs\": {\n  \"as_written_first_statement_only\": {\n   \"statements\": [\n    {\n     \"index\": 1,\n     \"start_byte\": 0,\n     \"end_byte\": 51,\n     \"sql\": \"CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;\",\n     \"executed\": true,\n     \"columns\": 0,\n     \"row_count\": 0,\n     \"rows\": [],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    }\n   ],\n   \"error\": null,\n   \"unexecuted_tail\": \"SELECT * FROM T1\",\n   \"input_bytes\": 68,\n   \"final_byte\": 51,\n   \"denied\": [],\n   \"elapsed_s\": 0.001,\n   \"open_statements_after_run\": false,\n   \"close_rc\": 0\n  },\n  \"all_statements\": {\n   \"statements\": [\n    {\n     \"index\": 1,\n     \"start_byte\": 0,\n     \"end_byte\": 51,\n     \"sql\": \"CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ;\",\n     \"executed\": true,\n     \"columns\": 0,\n     \"row_count\": 0,\n     \"rows\": [],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    },\n    {\n     \"index\": 2,\n     \"start_byte\": 51,\n     \"end_byte\": 68,\n     \"sql\": \"SELECT * FROM T1\",\n     \"executed\": true,\n     \"columns\": 2,\n     \"row_count\": 3,\n     \"rows\": [\n      [\n       \"1\",\n       \"a\"\n      ],\n      [\n       \"2\",\n       \"b\"\n      ],\n      [\n       \"3\",\n       \"c\"\n      ]\n     ],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    }\n   ],\n   \"error\": null,\n   \"unexecuted_tail\": null,\n   \"input_bytes\": 68,\n   \"final_byte\": 68,\n   \"denied\": [],\n   \"elapsed_s\": 0.0,\n   \"open_statements_after_run\": false,\n   \"close_rc\": 0\n  }\n },\n \"expected_match\": true,\n \"status\": \"OK\"\n}\n",
+  "stderr": "",
+  "sha256": {
+    "README.md": "53a82b11a58ddbe6b022817d82e28458f2f4fbcb1f0bc1ac72922be1fc14183c",
+    "diagnose.py": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+    "example-case.json": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f"
+  }
+}
