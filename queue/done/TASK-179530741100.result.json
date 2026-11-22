@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"site\": \"sqlite-statement-diagnostic\",\n  \"cutoff_utc\": \"2026-11-22T00:00:00Z\",\n  \"launch_evidence\": {\n    \"receipt\": \"TASK-179415180511\",\n    \"baseline_path\": \"products/services/sqlite-repair/launch/launch-baseline.json\",\n    \"baseline_sha256\": \"79ccde33227b79170e93ca1690d514a9e74e2274ac3c01fd338da13f130d4e17\"\n  },\n  \"feedback_source\": \"Host decision context commercial_feedback, available feed with truncated experiment allowlist and no inferred experiment entries\",\n  \"feed_observations\": {\n    \"classified_request_count\": 0,\n    \"unclassified_sources\": 5,\n    \"excluded_sources\": 5\n  },\n  \"private_cycle_observation\": {\n    \"observed_at\": \"2026-11-22T00:25:10.637598+00:00\",\n    \"skipped\": 10,\n    \"processed\": 0,\n    \"accepted\": 0\n  },\n  \"sqlite_request_count\": null,\n  \"coverage\": \"UNKNOWN\",\n  \"verdict\": \"CHANGE\",\n  \"reason\": \"Feed counts and cycle skips have distinct scopes and cannot establish release-specific demand or complete interval coverage.\",\n  \"change\": \"Before another demand verdict, use release-specific aggregate counts with a coverage statement and count-only reasons for unresolved sources, when available. Reopen the inference on attributable feedback or evidence that the interval was fully covered.\",\n  \"verified_revenue_cents\": 0,\n  \"revenue_source\": \"Host Treasury snapshot\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/launch/window-verdict.json",
+    "products/receipts/TASK-179530741100.json"
+  ],
+  "id": "TASK-179530741100",
+  "input_sha256": "ab0aa2a96b3f0787b2a643362fc0b472d6d87c84bcda2f0a2f0900640a693686"
+}

@@ -1,0 +1,28 @@
+{
+  "site": "sqlite-statement-diagnostic",
+  "cutoff_utc": "2026-11-22T00:00:00Z",
+  "launch_evidence": {
+    "receipt": "TASK-179415180511",
+    "baseline_path": "products/services/sqlite-repair/launch/launch-baseline.json",
+    "baseline_sha256": "79ccde33227b79170e93ca1690d514a9e74e2274ac3c01fd338da13f130d4e17"
+  },
+  "feedback_source": "Host decision context commercial_feedback, available feed with truncated experiment allowlist and no inferred experiment entries",
+  "feed_observations": {
+    "classified_request_count": 0,
+    "unclassified_sources": 5,
+    "excluded_sources": 5
+  },
+  "private_cycle_observation": {
+    "observed_at": "2026-11-22T00:25:10.637598+00:00",
+    "skipped": 10,
+    "processed": 0,
+    "accepted": 0
+  },
+  "sqlite_request_count": null,
+  "coverage": "UNKNOWN",
+  "verdict": "CHANGE",
+  "reason": "Feed counts and cycle skips have distinct scopes and cannot establish release-specific demand or complete interval coverage.",
+  "change": "Before another demand verdict, use release-specific aggregate counts with a coverage statement and count-only reasons for unresolved sources, when available. Reopen the inference on attributable feedback or evidence that the interval was fully covered.",
+  "verified_revenue_cents": 0,
+  "revenue_source": "Host Treasury snapshot"
+}
