@@ -1,0 +1,30 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: ENOENT\nWorkspace reminder: Each EXEC starts in a fresh workspace. Programs create required directories before writing; outputs only declares files to publish. For public EXEC, include prior published files in inputs to reuse them. Private EXEC uses its supplied case files.\nstderr:\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179531442112",
+    "type": "TOOL",
+    "submitted_by": "BUYER_ROUTE",
+    "created_at": "2026-11-22T02:27:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python",
+        "-c",
+        "import json, hashlib\nfrom pathlib import Path\nbase = Path(\"products/services/nz-gets-data-acceptance-pilot\")\nsrc = base / \"raw/hcc-35240806.html\"\nraw = src.read_bytes()\ndigest = hashlib.sha256(raw).hexdigest()\nassert digest == \"eb523ec3a90d019bb3b6df6a2a5cd199bd21a2b72912d005bca408274ab24afc\"\nquotes = [\"seeking a strategic data and insights partner\", \"The partner will provide the strategic, business and technical capability\", \"Monday, 23 November 2026 5:00 PM (Pacific/Auckland UTC+13:00)\", \"submission via GETS\"]\nassert all(quote.encode() in raw for quote in quotes)\nresult = dict(source=\"https://www.gets.govt.nz/HamCC/ExternalTenderDetails.htm?id=35240806\", fetch_receipt=\"TASK-179531442111\", sha256=digest, quotes=quotes, verdict=\"NO_QUALIFYING_FIT_IN_CAPTURE\", reason=\"The public notice describes a strategic delivery partner across business domains and a split price/non-price GETS response. It does not establish a separately quotable standalone data-validation task, a measurable acceptance criterion for that task, or authorized access to submit. Tender pack and broader market coverage are unknown.\", reopen=\"An original buyer notice or official clarification identifying separately quotable live validation work, a measurable criterion and a response route the authorized operator can use.\", sample_executed=False, submission_sent=False)\npath = base / \"bounded-verdict.json\"\npath.write_text(json.dumps(result, indent=2) + \"\\n\")\nprint(path.read_text())"
+      ],
+      "inputs": [
+        "products/services/nz-gets-data-acceptance-pilot/raw/hcc-35240806.html"
+      ],
+      "outputs": [
+        "products/services/nz-gets-data-acceptance-pilot/bounded-verdict.json"
+      ],
+      "mission_id": "NZ-GETS-DATA-ACCEPTANCE-PILOT"
+    },
+    "description": "Broker action during THINK-1795314421",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179531442112",
+  "input_sha256": "73c80f7f197afef28774499f49968e2d9f93fd894b3ebf21c97a6faf90b86c5c"
+}
