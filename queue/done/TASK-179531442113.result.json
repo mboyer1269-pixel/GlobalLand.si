@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source\": \"https://www.gets.govt.nz/HamCC/ExternalTenderDetails.htm?id=35240806\",\n  \"fetch_receipt\": \"TASK-179531442111\",\n  \"sha256\": \"eb523ec3a90d019bb3b6df6a2a5cd199bd21a2b72912d005bca408274ab24afc\",\n  \"quotes\": [\n    \"seeking a strategic data and insights partner\",\n    \"The partner will provide the strategic, business and technical capability\",\n    \"Monday, 23 November 2026 5:00 PM (Pacific/Auckland UTC+13:00)\",\n    \"submission via GETS\"\n  ],\n  \"verdict\": \"NO_QUALIFYING_FIT_IN_CAPTURE\",\n  \"reason\": \"The notice seeks a strategic delivery partner across business domains and describes a split price/non-price GETS response. The public capture does not establish separately quotable validation work, a measurable acceptance criterion for it, or authorized submission access.\",\n  \"coverage\": \"One original notice. Tender pack and broader market coverage unknown.\",\n  \"reopen\": \"A live original notice or official clarification with a separately quotable validation task, measurable criterion and response route available to the authorized operator.\",\n  \"sample_executed\": false,\n  \"submission_sent\": false\n}\n\n\n",
+  "artifacts": [
+    "products/services/nz-gets-data-acceptance-pilot/bounded-verdict.json",
+    "products/receipts/TASK-179531442113.json"
+  ],
+  "request": {
+    "id": "TASK-179531442113",
+    "type": "TOOL",
+    "submitted_by": "BUYER_ROUTE",
+    "created_at": "2026-11-22T02:27:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs=require('node:fs'), crypto=require('node:crypto'), assert=require('node:assert/strict');\nconst base=process.argv[1], raw=fs.readFileSync(base+'raw/hcc-35240806.html');\nconst sha256=crypto.createHash('sha256').update(raw).digest('hex');\nassert.equal(sha256,'eb523ec3a90d019bb3b6df6a2a5cd199bd21a2b72912d005bca408274ab24afc');\nconst quotes=['seeking a strategic data and insights partner','The partner will provide the strategic, business and technical capability','Monday, 23 November 2026 5:00 PM (Pacific/Auckland UTC+13:00)','submission via GETS'];\nfor(const quote of quotes) assert.ok(raw.includes(quote));\nconst result={source:'https://www.gets.govt.nz/HamCC/ExternalTenderDetails.htm?id=35240806',fetch_receipt:'TASK-179531442111',sha256,quotes,verdict:'NO_QUALIFYING_FIT_IN_CAPTURE',reason:'The notice seeks a strategic delivery partner across business domains and describes a split price/non-price GETS response. The public capture does not establish separately quotable validation work, a measurable acceptance criterion for it, or authorized submission access.',coverage:'One original notice. Tender pack and broader market coverage unknown.',reopen:'A live original notice or official clarification with a separately quotable validation task, measurable criterion and response route available to the authorized operator.',sample_executed:false,submission_sent:false};\nfs.writeFileSync(base+'bounded-verdict.json',JSON.stringify(result,null,2)+'\\n');\nconsole.log(fs.readFileSync(base+'bounded-verdict.json','utf8'));",
+        "products/services/nz-gets-data-acceptance-pilot/"
+      ],
+      "inputs": [
+        "products/services/nz-gets-data-acceptance-pilot/raw/hcc-35240806.html"
+      ],
+      "outputs": [
+        "products/services/nz-gets-data-acceptance-pilot/bounded-verdict.json"
+      ],
+      "mission_id": "NZ-GETS-DATA-ACCEPTANCE-PILOT"
+    },
+    "description": "Broker action during THINK-1795314421",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179531442113",
+  "input_sha256": "b212a32190b1d10b9df68e6bc6f9eb063c2a6d1e2309e232eb34e59a2660e39c"
+}
