@@ -193,25 +193,27 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-22T09:00:43Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1404,
-    "turns_without_verified_revenue": 1404,
-    "turns_without_outcome": 10,
+    "turns_without_new_interpreted_feedback": 1405,
+    "turns_without_verified_revenue": 1405,
+    "turns_without_outcome": 11,
     "outcome_threshold": 12,
     "dry_since": "2026-11-22T06:36:34Z",
     "last_outcome_turn": "THINK-1795329012",
-    "last_productive_turn": "THINK-1795336561",
-    "last_turn": "THINK-1795338002",
+    "last_productive_turn": "THINK-1795339801",
+    "last_turn": "THINK-1795339801",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/world-bank-buyer-acceptance/feed-structure-readback.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
