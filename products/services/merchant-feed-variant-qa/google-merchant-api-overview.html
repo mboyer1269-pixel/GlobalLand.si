@@ -1,0 +1,2890 @@
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html 
+      lang="en"
+      dir="ltr">
+  <head>
+    <meta name="google-signin-client-id" content="721724668570-nbkv1cfusk7kk4eni4pjvepaus73b13t.apps.googleusercontent.com"><meta name="google-signin-scope"
+          content="profile email https://www.googleapis.com/auth/developerprofiles https://www.googleapis.com/auth/developerprofiles.award https://www.googleapis.com/auth/devprofiles.full_control.firstparty"><meta property="og:site_name" content="Google for Developers">
+    <meta property="og:type" content="website"><meta name="theme-color" content="#fff"><meta charset="utf-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <link rel="manifest" href="/_pwa/developers/manifest.json"
+          crossorigin="use-credentials">
+    <link rel="preconnect" href="//www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="//www.google-analytics.com" crossorigin><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700&display=swap">
+      <link rel="stylesheet"
+            href="//fonts.googleapis.com/css2?family=Material+Icons&family=Material+Symbols+Outlined&display=block"><link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217/developers/css/app.css">
+      <link rel="shortcut icon" href="https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217/developers/images/favicon-new.png">
+    <link rel="apple-touch-icon" href="https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217/developers/images/touchicon-180-new.png"><link rel="canonical" href="https://developers.google.com/merchant/api/guides/products/overview"><link rel="search" type="application/opensearchdescription+xml"
+            title="Google for Developers" href="https://developers.google.com/s/opensearch.xml">
+      <link rel="alternate" hreflang="en"
+          href="https://developers.google.com/merchant/api/guides/products/overview" /><link rel="alternate" hreflang="x-default" href="https://developers.google.com/merchant/api/guides/products/overview" /><link rel="alternate" hreflang="ar"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=ar" /><link rel="alternate" hreflang="bn"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=bn" /><link rel="alternate" hreflang="zh-Hans"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=zh-cn" /><link rel="alternate" hreflang="zh-Hant"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=zh-tw" /><link rel="alternate" hreflang="fa"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=fa" /><link rel="alternate" hreflang="fr"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=fr" /><link rel="alternate" hreflang="de"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=de" /><link rel="alternate" hreflang="he"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=he" /><link rel="alternate" hreflang="hi"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=hi" /><link rel="alternate" hreflang="id"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=id" /><link rel="alternate" hreflang="it"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=it" /><link rel="alternate" hreflang="ja"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=ja" /><link rel="alternate" hreflang="ko"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=ko" /><link rel="alternate" hreflang="pl"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=pl" /><link rel="alternate" hreflang="pt-BR"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=pt-br" /><link rel="alternate" hreflang="ru"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=ru" /><link rel="alternate" hreflang="es-419"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=es-419" /><link rel="alternate" hreflang="th"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=th" /><link rel="alternate" hreflang="tr"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=tr" /><link rel="alternate" hreflang="vi"
+          href="https://developers.google.com/merchant/api/guides/products/overview?hl=vi" /><link rel="alternate" type="text/markdown" href="https://developers.google.com/merchant/api/guides/products/overview.md.txt"><title>Manage your products &nbsp;|&nbsp; Merchant API &nbsp;|&nbsp; Google for Developers</title>
+
+<meta property="og:title" content="Manage your products &nbsp;|&nbsp; Merchant API &nbsp;|&nbsp; Google for Developers"><meta property="og:url" content="https://developers.google.com/merchant/api/guides/products/overview"><meta property="og:image" content="https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217/developers/images/opengraph/white.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675"><meta property="og:locale" content="en"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Merchant API",
+      "item": "https://developers.google.com/merchant/api"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Manage your products",
+      "item": "https://developers.google.com/merchant/api/guides/products/overview"
+    }]
+  }
+  </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+    </head>
+  <body class="color-scheme--light"
+        template="page"
+        theme="white"
+        type="guide"
+        
+        
+        
+        layout="docs"
+        
+        
+        
+        
+        
+          
+            concierge='closed'
+          
+        
+        display-toc
+        pending>
+  
+    <devsite-progress type="indeterminate" id="app-progress"></devsite-progress>
+  
+  
+    <a href="#main-content" class="skip-link button">
+      
+      Skip to main content
+    </a>
+    <section class="devsite-wrapper">
+      <devsite-cookie-notification-bar></devsite-cookie-notification-bar>
+        <devsite-header role="banner">
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-header--inner" data-nosnippet>
+  <div class="devsite-top-logo-row-wrapper-wrapper">
+    <div class="devsite-top-logo-row-wrapper">
+      <div class="devsite-top-logo-row">
+        <button type="button" id="devsite-hamburger-menu"
+          class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+          data-category="Site-Wide Custom Events"
+          data-label="Navigation menu button"
+          visually-hidden
+          aria-label="Open menu">
+        </button>
+        
+<div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="https://developers.google.com/merchant/api">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <picture>
+      
+      <img class="devsite-product-logo"
+           alt="Merchant API"
+           src="https://fonts.gstatic.com/s/i/productlogos/merchant_center/v8/192px.svg"
+           srcset=" https://fonts.gstatic.com/s/i/productlogos/merchant_center/v8/192px.svg"
+           sizes="64px"
+           loading="lazy"
+           >
+    </picture>
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+
+  
+  
+  <span class="devsite-product-name">
+    <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+      
+        
+  <a href="https://developers.google.com/merchant/api"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Merchant API"
+      
+    >
+    
+          Merchant API
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+  </span>
+
+</div>
+        <div class="devsite-top-logo-row-middle">
+          <div class="devsite-header-upper-tabs">
+            
+           </div>
+          
+<devsite-search
+    enable-signin
+    enable-search
+    enable-suggestions
+      enable-query-completion
+    
+    enable-search-summaries
+    project-name="Merchant API"
+    tenant-name="Google for Developers"
+    project-scope="/merchant/api"
+    url-scoped="https://developers.google.com/s/results/merchant/api"
+    
+    
+    
+    >
+  <form class="devsite-search-form" action="https://developers.google.com/s/results" method="GET">
+    <div class="devsite-search-container">
+      <button type="button"
+              search-open
+              class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+              
+              aria-label="Open search"></button>
+      <div class="devsite-searchbox">
+        <input
+          aria-activedescendant=""
+          aria-autocomplete="list"
+          
+          aria-label="Search"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          autocomplete="off"
+          class="devsite-search-field devsite-search-query"
+          name="q"
+          
+          placeholder="Search"
+          role="combobox"
+          type="text"
+          value=""
+          >
+          <div class="devsite-search-image material-icons" aria-hidden="true">
+            
+              <svg class="devsite-search-ai-image" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_6641_386)">
+                    <path d="M19.6 21L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16C7.68333 16 6.14167 15.375 4.875 14.125C3.625 12.8583 3 11.3167 3 9.5C3 7.68333 3.625 6.15 4.875 4.9C6.14167 3.63333 7.68333 3 9.5 3C10.0167 3 10.5167 3.05833 11 3.175C11.4833 3.275 11.9417 3.43333 12.375 3.65L10.825 5.2C10.6083 5.13333 10.3917 5.08333 10.175 5.05C9.95833 5.01667 9.73333 5 9.5 5C8.25 5 7.18333 5.44167 6.3 6.325C5.43333 7.19167 5 8.25 5 9.5C5 10.75 5.43333 11.8167 6.3 12.7C7.18333 13.5667 8.25 14 9.5 14C10.6667 14 11.6667 13.625 12.5 12.875C13.35 12.1083 13.8417 11.15 13.975 10H15.975C15.925 10.6333 15.7833 11.2333 15.55 11.8C15.3333 12.3667 15.05 12.8667 14.7 13.3L21 19.6L19.6 21ZM17.5 12C17.5 10.4667 16.9667 9.16667 15.9 8.1C14.8333 7.03333 13.5333 6.5 12 6.5C13.5333 6.5 14.8333 5.96667 15.9 4.9C16.9667 3.83333 17.5 2.53333 17.5 0.999999C17.5 2.53333 18.0333 3.83333 19.1 4.9C20.1667 5.96667 21.4667 6.5 23 6.5C21.4667 6.5 20.1667 7.03333 19.1 8.1C18.0333 9.16667 17.5 10.4667 17.5 12Z" fill="#5F6368"/>
+                  </g>
+                <defs>
+                <clipPath id="clip0_6641_386">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath>
+                </defs>
+              </svg>
+            
+          </div>
+          <div class="devsite-search-shortcut-icon-container" aria-hidden="true">
+            <kbd class="devsite-search-shortcut-icon">/</kbd>
+          </div>
+      </div>
+    </div>
+  </form>
+  <button type="button"
+          search-close
+          class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+          
+          aria-label="Close search"></button>
+</devsite-search>
+
+        </div>
+
+        
+
+          
+
+          
+
+          
+
+          
+
+          
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es"
+        >Español</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="he"
+        >עברית</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fa"
+        >فارسی</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="bn"
+        >বাংলা</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+
+          
+
+        
+
+        
+          <devsite-user 
+                        
+                        
+                          enable-profiles
+                        
+                        
+                          fp-auth
+                        
+                        id="devsite-user">
+            
+              
+              <span class="button devsite-top-button" aria-hidden="true" visually-hidden>Sign in</span>
+            
+          </devsite-user>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="devsite-collapsible-section
+    ">
+    <div class="devsite-header-background">
+      
+        
+      
+      
+        <div class="devsite-doc-set-nav-row">
+          
+          
+            
+            
+  <devsite-tabs class="lower-tabs">
+
+    <nav class="devsite-tabs-wrapper" aria-label="Lower tabs">
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/merchant/api"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/merchant/api"
+    
+       track-type="nav"
+       track-metadata-position="nav - home"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Home"
+         
+           track-name="home"
+         
+       >
+    Home
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  class="devsite-active">
+            
+    <a href="https://developers.google.com/merchant/api/overview"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/merchant/api/overview"
+    
+       track-type="nav"
+       track-metadata-position="nav - guides"
+       track-metadata-module="primary nav"
+       aria-label="Guides, selected" 
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Guides"
+         
+           track-name="guides"
+         
+       >
+    Guides
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/merchant/api/reference/rest"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/merchant/api/reference/rest"
+    
+       track-type="nav"
+       track-metadata-position="nav - reference"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Reference"
+         
+           track-name="reference"
+         
+       >
+    Reference
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/merchant/api/samples"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/merchant/api/samples"
+    
+       track-type="nav"
+       track-metadata-position="nav - resources"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Resources"
+         
+           track-name="resources"
+         
+       >
+    Resources
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/merchant/api/support/get-help"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/merchant/api/support/get-help"
+    
+       track-type="nav"
+       track-metadata-position="nav - support"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Support"
+         
+           track-name="support"
+         
+       >
+    Support
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+    </nav>
+
+  </devsite-tabs>
+
+          
+          
+        </div>
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+  
+</devsite-header>
+        <devsite-book-nav scrollbars >
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-book-nav-filter"
+     >
+  <span class="filter-list-icon material-icons" aria-hidden="true"></span>
+  <input type="text"
+         placeholder="Filter"
+         
+         aria-label="Type to filter"
+         role="searchbox">
+  
+  <span class="filter-clear-button hidden"
+        data-title="Clear filter"
+        aria-label="Clear filter"
+        role="button"
+        tabindex="0"></span>
+</div>
+
+<nav class="devsite-book-nav devsite-nav nocontent" data-nosnippet
+     aria-label="Side menu">
+  <div class="devsite-mobile-header">
+    <button type="button"
+            id="devsite-close-nav"
+            class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Close navigation"
+            aria-label="Close navigation">
+    </button>
+    <div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="https://developers.google.com/merchant/api">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <picture>
+      
+      <img class="devsite-product-logo"
+           alt="Merchant API"
+           src="https://fonts.gstatic.com/s/i/productlogos/merchant_center/v8/192px.svg"
+           srcset=" https://fonts.gstatic.com/s/i/productlogos/merchant_center/v8/192px.svg"
+           sizes="64px"
+           loading="lazy"
+           >
+    </picture>
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+  
+      <span class="devsite-product-name">
+        
+        
+        <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+      
+        
+  <a href="https://developers.google.com/merchant/api"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Merchant API"
+      
+    >
+    
+          Merchant API
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+      </span>
+    
+
+</div>
+  </div>
+
+  <div class="devsite-book-nav-wrapper">
+    <div class="devsite-mobile-nav-top">
+      
+        <ul class="devsite-nav-list">
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/merchant/api"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Home"
+      
+        track-name="home"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Home"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Home
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/merchant/api/overview"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              devsite-nav-active"
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Guides"
+      
+        track-name="guides"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Guides"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Guides
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/merchant/api/reference/rest"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Reference"
+      
+        track-name="reference"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Reference"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Reference
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/merchant/api/samples"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Resources"
+      
+        track-name="resources"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Resources"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Resources
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+            
+<li class="devsite-nav-item">
+
+  
+  <a href="/merchant/api/support/get-help"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Support"
+      
+        track-name="support"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Support"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Support
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+</li>
+
+          
+          
+          
+        </ul>
+      
+    </div>
+    
+      <div class="devsite-mobile-nav-bottom">
+        
+          
+          <ul class="devsite-nav-list" menu="_book">
+            <li class="devsite-nav-item"><a href="/merchant/api/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Terms and policies</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/terms"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Merchant API terms and conditions</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/policies/youtube-shopping-developer-policies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>YouTube Shopping developer policies</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/latest-updates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Latest updates</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/design"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Design</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/versioning"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Versioning</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/known-issues"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Known issues</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Get started</span>
+      </div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Quickstart</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/quickstart/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/quickstart/create-merchant-account"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Create a Merchant Center account</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/quickstart/create-project"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Create a Google Cloud project</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/quickstart/authentication"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Set up authentication</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/quickstart/registration"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Register as a developer</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/quickstart/insert-first-product"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Insert your first product</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/quickstart/faq"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>FAQ</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Authorization</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/authorization/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/authorization/access-client-accounts"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Access client accounts</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/authorization/access-your-account"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Access your account</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/test-accounts"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Create test accounts</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Agentic tools</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/merchant/api/guides/agentic-tools/merchant-data-mcp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Merchant API MCP Access Service</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="Beta"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/agentic-tools/integration-and-code-assist"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>API Integration and Code Assist Toolkit</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/verify-api-access"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Verify your account&#39;s connection to Merchant API</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Migration</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/manage-transition-gcp-projects"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage and transition Google Cloud projects</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Migrate from Content API</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Quickstart</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/start-migration"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Start your migration</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/configure-api-authentication"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Configure API authentication from Merchant Center</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/refactor-concurrent-requests"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Refactor code for concurrent requests</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Migrate accounts</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/accounts"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate account management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/migrate-view-issues"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate accountstatuses to Account Issues</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/aggregate-product-statuses"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate accountstatuses to Aggregate Product Statuses</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/migrate-control-access"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate user and access management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/homepage"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate homepage management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/migrate-region"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate region management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/shipping-settings"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate shipping settings management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/online-return-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate online return policy management</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/products"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate products management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/reports"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate reporting management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/data-sources"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate data sources management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/inventories"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate inventory management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/merchant-support"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate merchant support</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/order-tracking-signals"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate order tracking signals</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/promotions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate promotions management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/conversion-sources"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate conversion sources management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/local-feeds-partnership"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate local feeds partnership management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/comparison-shopping-services"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate Comparison Shopping Services management</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/compatibility/local-inventory-ads-settings"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Migrate Local Inventory Ads settings</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/data-sources/migrate-from-feeds"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Choose between file feeds and API data sources</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Merchant accounts and settings</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/create-accounts"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Create accounts</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/relationships"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Account relationships</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Access control</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/control-access"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Control access to your account</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/filter"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Filter accounts you can access</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/filter-syntax"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Filter syntax</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Store and fulfillment settings</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/manage-shipping-settings"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage shipping settings</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/online-return-policies/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage online return policies</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/products/checkout-settings"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage checkout settings</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/automatic-improvements/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Enable automatic improvements</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/manage-omnichannel-settings"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage omnichannel settings</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Business info and preferences</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/business-identity"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage business identity</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/link-business-profile"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Link a Google business profile</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/manage-homepage-settings"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage homepage settings</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/manage-tos-agreements"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage Terms of Service</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/email-notifications"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage Merchant Center email preferences</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Programs</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/programs/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/loyalty/loyalty-programs"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage loyalty programs</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/loyalty/customer-match-service"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage customer loyalty data</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Regions</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/regions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Create and update regions</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/manage-region-batching"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage region batching</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Data sources</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/data-sources/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/data-sources/api-sources"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage API data sources</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/data-sources/manage-various-data-sources"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage various data source types</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/data-sources/view-sources"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>View your data sources</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/data-sources/monitor-status"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Monitor and trigger data source processing</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Products</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/products/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/products/add-manage"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Add and manage products</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/products/frequent-updates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Make frequent updates to your products</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/products/list-products-data-issues"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>List your products data and product issues</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>View and troubleshoot issues</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/view-issues"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>View account issues</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/render-issues"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Display issues and solutions to businesses</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/aggregate-product-statuses"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>View aggregate product statistics and issues</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Inventories</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/inventories/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Local inventories</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/inventories/add-local-inventory"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Add local inventory</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/inventories/update-local-inventory"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Update local inventory</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Regional inventories</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/inventories/add-regional-inventory"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Add regional inventory</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/inventories/update-regional-inventory"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Update regional inventory</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Reports</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/reports/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/reports/get-started"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Get started</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/reports/evaluate-products"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Evaluate your products</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/reports/performance-reports"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Performance reports</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/reports/understand-the-market"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Understand the market</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/reports/explore-competitive-landscape"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Explore your competitive landscape</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-beta"><a href="/merchant/api/guides/reports/analyze-youtube-affiliate-performance"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Analyze YouTube Affiliate Performance (Alpha)</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="Beta"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-beta"><a href="/merchant/api/guides/reports/ucp-performance-reports"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Analyze UCP agentic performance (Alpha)</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="Beta"
+        aria-hidden="true"></span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Compose a query</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/merchant/api/guides/reports/query-language"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Use Merchant Center Query Language</span></a></li><li class="devsite-nav-item"><a href="/merchant/api/guides/reports/paging"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Paginate query results</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Notifications</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/notifications/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/notifications/product-status-changes"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Product status changes</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/notifications/account-service-changes"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Account service changes</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Promotions</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/promotions/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/promotions/troubleshooting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Troubleshoot issues</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Reviews</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/reviews/products"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Review products</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/reviews/merchants"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Review merchants</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Local Feeds Partnership</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/local-feeds-partnership/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/accounts/manage-lfp-providers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage Local Feeds Partnership providers</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Quotas and limits</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/quotas-limits/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/quotas-limits/quotas"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Quotas</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/quotas-limits/limits"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Merchant Center limits</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Advanced</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/send-multiple-requests"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Send multiple requests at once</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/latency"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Plan for API latency</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/conversion-sources/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage conversion sources</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/order/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Manage order tracking signals</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/usage-metrics-diagnostics"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Track usage metrics</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/error-handling"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Handle error responses</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/error-messages"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Error messages</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-heading"><div class="devsite-nav-title devsite-nav-title-no-path">
+        <span class="devsite-nav-text" tooltip>Comparison Shopping Services (CSS)</span>
+      </div></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/comparison-shopping-services/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li>
+
+  <li class="devsite-nav-item"><a href="/merchant/api/guides/comparison-shopping-services/get-started"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Get started</span></a></li>
+          </ul>
+        
+        
+        
+          
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+        
+      </div>
+    
+  </div>
+</nav>
+          
+        </devsite-book-nav>
+      
+      <section id="gc-wrapper">
+        <main role="main" id="main-content" class="devsite-main-content"
+            
+              has-book-nav
+              has-sidebar
+            >
+          <div class="devsite-sidebar">
+            <div class="devsite-sidebar-content">
+                
+                <devsite-toc class="devsite-nav"
+                            role="navigation"
+                            aria-label="On this page"
+                            depth="2"
+                            scrollbars
+                            data-nosnippet
+                  ></devsite-toc>
+                <devsite-recommendations-sidebar class="nocontent devsite-nav" data-nosnippet>
+                </devsite-recommendations-sidebar>
+            </div>
+          </div>
+          <devsite-content>
+            
+              
+
+
+
+
+
+
+
+
+
+
+<article class="devsite-article">
+  
+  
+  
+    <div class="devsite-banner devsite-banner-announcement nocontent" data-nosnippet
+      
+        
+    background="google-yellow"
+  
+      >
+      <div class="devsite-banner-message">
+        <div class="devsite-banner-message-text">
+          <div class="announcement-item">
+  <span class="material-icons" aria-hidden="true" translate="no">add_alert</span>
+  <b>Important:</b> Content API for Shopping was sunset on <b>August 18, 2026</b>.
+</div> <div class="announcement-item">
+  <span class="material-icons" aria-hidden="true" translate="no">warning</span>
+  Starting <b>September 1, 2026</b>, Content API for Shopping requests will
+  experience progressive errors. Review the
+  <a href="https://developers.google.com/shopping-content/guides/deprecation-and-sunset">Content
+  API Sunset guide</a>.
+</div> <div class="announcement-item">
+  <span class="material-icons" aria-hidden="true" translate="no">edit_note</span>
+  If you need additional time to migrate to Merchant API,
+  <a href="https://developers.google.com/merchant/api/support/get-help#request-extension">
+  apply for extended access to Content API for Shopping</a>.
+</div>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+
+  <div class="devsite-article-meta nocontent" role="navigation" data-nosnippet>
+    
+    
+    <ul class="devsite-breadcrumb-list"
+  
+    aria-label="Breadcrumb">
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+          Home
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/products"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="2"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="2"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+          Products
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/merchant/api"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="3"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="3"
+      
+        track-metadata-eventdetail="Merchant API"
+      
+    >
+    
+          Merchant API
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/merchant/api/overview"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="4"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="4"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+          Guides
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+    
+      
+    <devsite-thumb-rating position="header">
+    </devsite-thumb-rating>
+  
+    
+  </div>
+  
+    <devsite-feedback
+  position="header"
+  project-name="Merchant API"
+  product-id="5369784"
+  bucket="Customer Issues"
+  context=""
+  version="t-devsite-webserver-20261112-r00-rc00.481796205399988031"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="header"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://fonts.gstatic.com/s/i/productlogos/merchant_center/v8/192px.svg"
+    
+  
+  
+    project-support-url="https://developers.google.com/merchant/api/support/get-help"
+  
+  
+  >
+
+  <button>
+  
+    
+    Send feedback
+  
+  </button>
+</devsite-feedback>
+  
+    <h1 class="devsite-page-title" tabindex="-1">
+      Manage your products<devsite-actions hidden data-nosnippet><devsite-feature-tooltip
+      ack-key="AckCollectionsBookmarkTooltipDismiss"
+      analytics-category="Site-Wide Custom Events"
+      analytics-action-show="Callout Profile displayed"
+      analytics-action-close="Callout Profile dismissed"
+      analytics-label="Create Collection Callout"
+      class="devsite-page-bookmark-tooltip nocontent"
+      data-nosnippet
+      dismiss-button="true"
+      id="devsite-collections-dropdown"
+      
+      dismiss-button-text="Dismiss"
+
+      
+      close-button-text="Got it">
+
+    
+    
+      <devsite-bookmark></devsite-bookmark>
+    
+
+    <span slot="popout-heading">
+      
+      Stay organized with collections
+    </span>
+    <span slot="popout-contents">
+      
+      Save and categorize content based on your preferences.
+    </span>
+  </devsite-feature-tooltip>
+    <devsite-llm-tools></devsite-llm-tools></devsite-actions>
+  
+      
+    </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  
+
+  <devsite-toc class="devsite-nav"
+    depth="2"
+    devsite-toc-embedded
+    >
+  </devsite-toc>
+  <div class="devsite-article-body clearfix
+  ">
+
+  
+    
+      <devsite-key-takeaways-panel role="region" aria-labelledby="key-takeaways-panel-title">
+  <div class="devsite-key-takeaways-panel-header" aria-labelledby="key-takeaways-panel-title" aria-expanded="false" role="button" tabindex="0">
+    
+    <img src="/_static/images/icons/spark.svg" alt="Spark icon" />
+    <div class="devsite-key-takeaways-panel-title">
+      
+      <h2 class="no-link hide-from-toc" id="key-takeaways-panel-title" data-tooltip="Generated with AI">Page Summary</h2>
+    </div>
+    <span
+      class="material-icons devsite-key-takeaways-panel-toggle-button" aria-hidden="true"></span>
+  </div>
+  <div class="devsite-key-takeaways-panel-content">
+    <devsite-feedback
+      product-id="5123748"
+      bucket="8963846920012181156"
+      disable-product-feedback>
+      <button
+        class="button-flat button-primary devsite-key-takeaways-report-button"
+        
+        data-title="Report Key Takeaways!"
+        
+        aria-label="Report Key Takeaways!">
+        <span
+          class="material-icons"
+          
+          aria-label="Report Key Takeaways!"
+          >outlined_flag</span
+        >
+      </button>
+    </devsite-feedback>
+    <ul class="devsite-key-takeaways-panel-list">
+      
+        <li>
+          <p>The Merchant Products API allows you to programmatically manage your product data, including inserting, updating, retrieving, and deleting products.</p>
+
+        </li>
+      
+        <li>
+          <p>Products are managed through two key resources: <code>productInputs</code> (representing input data) and <code>products</code> (representing processed products in the Shopping database).</p>
+
+        </li>
+      
+        <li>
+          <p><code>productInputs</code> can be primary or supplementary and are used to construct the final <code>product</code> that appears in your online or local store catalogs.</p>
+
+        </li>
+      
+        <li>
+          <p>The API offers advantages over file-based uploads, such as faster response times and real-time updates.</p>
+
+        </li>
+      
+        <li>
+          <p>Before using the API, ensure you have a data source set up and are familiar with Shopping Ads and free listings policies.</p>
+
+        </li>
+      
+    </ul>
+  </div>
+</devsite-key-takeaways-panel>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>The Products sub-API lets you programmatically manage your product inventory
+in Google Merchant Center. You can create, retrieve, update, and delete
+products, giving you the flexibility to integrate your systems directly with
+Google.</p>
+
+<p>A key concept in Merchant API is the distinction between the data you submit and
+the final product that Google uses. This separation provides a clearer model of
+the product data lifecycle and gives you more precise control over your product
+information. The API reflects this with two main resources:</p>
+
+<ul>
+<li><p><strong><a href="/merchant/api/reference/rest/products_v1/accounts.productInputs#ProductInput"><code translate="no" dir="ltr">ProductInput</code></a>:</strong>
+This represents the raw product data you submit to a specific data source.
+Think of this as the row you upload in a feed file or the data you submit
+with an API call before any Merchant Center processing happens. You use
+this resource for all <strong>write</strong> operations (<code translate="no" dir="ltr">insert</code>, <code translate="no" dir="ltr">patch</code>, <code translate="no" dir="ltr">delete</code>).</p></li>
+<li><p><strong><a href="/merchant/api/reference/rest/products_v1/accounts.products#Product"><code translate="no" dir="ltr">Product</code></a>:</strong>
+This is a read-only resource that represents the final, processed product as
+it appears in Merchant Center and on Google surfaces. It is built from
+one primary <code translate="no" dir="ltr">ProductInput</code> and zero or more supplemental <code translate="no" dir="ltr">ProductInput</code>
+resources after all feed rules and processing have been applied. This
+resource includes the product&#39;s final status and any data quality issues.
+You use this resource for all <strong>read</strong> operations (<code translate="no" dir="ltr">get</code>, <code translate="no" dir="ltr">list</code>).</p></li>
+</ul>
+
+<p>The format and requirements for all product attributes submitted using the
+<code translate="no" dir="ltr">ProductInput</code> resource are defined in the
+<a href="//support.google.com/merchants/answer/7052112">Product data specification</a>.</p>
+
+<h2 id="what-you-can-do-with-the-products-sub-api" data-text="What you can do with the Products sub-API" tabindex="-1">What you can do with the Products sub-API</h2>
+
+<p>The Products sub-API lets you to perform the following key tasks. Explore
+the guides for detailed instructions and code samples for each use case.</p>
+
+<ul>
+<li><a href="/merchant/api/guides/products/add-manage">Add and manage products</a>: Learn
+how to add new products to your account, provide supplemental data for
+existing ones, and delete products you no longer sell.</li>
+<li><a href="/merchant/api/guides/products/frequent-updates">Make frequent updates to your
+products</a>: Discover how to
+make efficient, partial updates to product attributes that change often,
+such as price and availability.</li>
+<li><a href="/merchant/api/guides/products/list-products-data-issues">List your products data and product
+issues</a>: Find
+out how to retrieve your processed products, check their approval status for
+different destinations, and identify any data quality issues that may be
+affecting their visibility.</li>
+</ul>
+
+<h2 id="before_you_begin" data-text="Before you begin" tabindex="-1">Before you begin</h2>
+
+<p>Before using the Products sub-API, you must create at least one API data
+source in your Merchant Center account. The Products sub-API can only
+insert or update products in data sources of type <code translate="no" dir="ltr">API</code>. For instructions, see
+the <a href="/merchant/api/guides/data-sources/api-sources">Manage API data sources for product uploads</a> guide.</p>
+
+  
+
+  
+</div>
+    <div class="devsite-steps">
+  
+  
+  <div class="steps-next steps-direction">
+    <a href="/merchant/api/guides/products/add-manage"
+       class="steps-link gc-analytics-event"
+       data-category="Site-Wide Custom Events"
+       data-action="Next step"
+       data-label="/merchant/api/guides/products/add-manage">
+      
+      <div class="steps-link-direction">Next</div>
+      <span class="steps-link-title-next steps-link-title">
+        Add and manage products
+      </span>
+      <span class="steps-link-arrow steps-link-arrow-right material-icons" aria-hidden="true">
+        arrow_forward
+      </span>
+    </a>
+  </div>
+  
+</div>
+  
+
+  
+    
+    
+      
+    <devsite-thumb-rating position="footer">
+    </devsite-thumb-rating>
+  
+       
+         <devsite-feedback
+  position="footer"
+  project-name="Merchant API"
+  product-id="5369784"
+  bucket="Customer Issues"
+  context=""
+  version="t-devsite-webserver-20261112-r00-rc00.481796205399988031"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="footer"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://fonts.gstatic.com/s/i/productlogos/merchant_center/v8/192px.svg"
+    
+  
+  
+    project-support-url="https://developers.google.com/merchant/api/support/get-help"
+  
+  
+  >
+
+  <button>
+  
+    
+    Send feedback
+  
+  </button>
+</devsite-feedback>
+       
+    
+    
+  
+
+  <div class="devsite-floating-action-buttons"></div></article>
+
+
+<devsite-content-footer class="nocontent" data-nosnippet>
+  <p>Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 License</a>, and code samples are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see the <a href="https://developers.google.com/site-policies">Google Developers Site Policies</a>. Java is a registered trademark of Oracle and/or its affiliates.</p>
+  <p>Last updated 2026-10-26 UTC.</p>
+</devsite-content-footer>
+
+
+<devsite-notification
+>
+</devsite-notification>
+
+
+  
+<div class="devsite-content-data">
+  
+    
+    
+    <template class="devsite-thumb-rating-feedback">
+      <devsite-feedback
+  position="thumb-rating"
+  project-name="Merchant API"
+  product-id="5369784"
+  bucket="Customer Issues"
+  context=""
+  version="t-devsite-webserver-20261112-r00-rc00.481796205399988031"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="thumb-rating"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://fonts.gstatic.com/s/i/productlogos/merchant_center/v8/192px.svg"
+    
+  
+  
+    project-support-url="https://developers.google.com/merchant/api/support/get-help"
+  
+  
+  >
+
+  <button>
+  
+    Need to tell us more?
+  
+  </button>
+</devsite-feedback>
+    </template>
+  
+  
+    <template class="devsite-content-data-template">
+      [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-26 UTC."],[],["The Merchant Products API allows programmatic product data management via `productInputs` and `products` resources.  Actions include inserting `productInput` data with required fields like `channel`, `offerId`, `contentLanguage`, and `feedLabel` using `accounts.productInputs.insert`. Processed products can be retrieved using `accounts.products.get` and listed with `accounts.products.list`. Product inputs are deleted using `accounts.productInputs.delete`, specifying the data source. Products are built from primary and supplemental data sources, enabling real-time catalog management. You can use Batch mode to manage many products.\n"]]
+    </template>
+  
+</div>
+            
+          </devsite-content>
+        </main>
+        <devsite-footer-promos class="devsite-footer">
+          
+            
+          
+        </devsite-footer-promos>
+        <devsite-footer-linkboxes class="devsite-footer">
+          
+            
+<nav class="devsite-footer-linkboxes nocontent"
+     aria-label="Footer links"
+     data-nosnippet>
+  
+  <ul class="devsite-footer-linkboxes-list">
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Engage</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://discuss.ai.google.dev/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Google AI Forum
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/program"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            Google Developer Program
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/community"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            Google Developer Groups
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/community/experts"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+          
+            Google Developer Experts
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/community/accelerators"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 5)"
+            >
+            
+          
+            Accelerators
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/community/nvidia"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 6)"
+            >
+            
+              
+              
+            
+          
+            Google Cloud & NVIDIA
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Connect</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//googledevelopers.blogspot.com"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Blog
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://bsky.app/profile/developers.google.com"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            Bluesky
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://www.instagram.com/googlefordevs/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            Instagram
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://www.linkedin.com/showcase/googledevelopers/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+          
+            LinkedIn
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//twitter.com/googledevs"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 5)"
+            >
+            
+          
+            X (Twitter)
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//www.youtube.com/user/GoogleDevelopers"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 6)"
+            >
+            
+              
+              
+            
+          
+            YouTube
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Build</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://developer.android.com/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Android
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://developer.chrome.com/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            Chrome
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://firebase.google.com/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            Firebase
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://aistudio.google.com/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+          
+            Google AI Studio
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://antigravity.google/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 5)"
+            >
+            
+          
+            Google Antigravity
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://cloud.google.com/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 6)"
+            >
+            
+          
+            Google Cloud
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://play.google.com/console/about/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 7)"
+            >
+            
+          
+            Google Play
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/products"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 8)"
+            >
+            
+              
+              
+            
+          
+            View all
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+  </ul>
+  
+</nav>
+          
+        </devsite-footer-linkboxes>
+        <devsite-footer-utility class="devsite-footer">
+          
+            
+
+<div class="devsite-footer-utility nocontent" data-nosnippet>
+  
+  
+  <nav class="devsite-footer-sites" aria-label="Other Google Developers websites">
+    <a href="https://developers.google.com/"
+       class="devsite-footer-sites-logo-link gc-analytics-event"
+       data-category="Site-Wide Custom Events"
+       data-label="Footer Google Developers Link">
+      <picture>
+        
+        <img class="devsite-footer-sites-logo"
+             src="https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217/developers/images/lockup-google-for-developers.svg"
+             loading="lazy"
+             alt="Google Developers">
+      </picture>
+    </a>
+    <ul class="devsite-footer-sites-list">
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.android.com"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Android Link"
+         
+         >
+          Android
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.chrome.com/home"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Chrome Link"
+         
+         >
+          Chrome
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//firebase.google.com"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Firebase Link"
+         
+         >
+          Firebase
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//cloud.google.com"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Google Cloud Platform Link"
+         
+         >
+          Google Cloud Platform
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//ai.google.dev/"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Google AI Link"
+         
+         >
+          Google AI
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="/products"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer All products Link"
+         
+         >
+          All products
+        </a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+
+  
+  <nav class="devsite-footer-utility-links" aria-label="Utility links">
+    
+    <ul class="devsite-footer-utility-list">
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="/terms/site-terms"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Terms link"
+         >
+          Terms
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//policies.google.com/privacy"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Privacy link"
+         >
+          Privacy
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 glue-cookie-notification-bar-control">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="#"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Manage cookies link"
+         
+           aria-hidden="true"
+         >
+          Manage cookies
+        </a>
+        
+      </li>
+      
+    </ul>
+    
+    
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es"
+        >Español</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="he"
+        >עברית</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fa"
+        >فارسی</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="bn"
+        >বাংলা</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+  </nav>
+</div>
+          
+        </devsite-footer-utility>
+        <devsite-panel>
+          
+        </devsite-panel>
+        
+          <devsite-concierge
+  
+  
+    data-info-panel
+  
+  
+    data-ai-panel
+  
+  
+  
+  
+    data-api-explorer-panel
+  >
+</devsite-concierge>
+        
+      </section>
+      </section>
+    <devsite-sitemask></devsite-sitemask>
+    <devsite-snackbar></devsite-snackbar>
+    <devsite-tooltip ></devsite-tooltip>
+    <devsite-heading-link></devsite-heading-link>
+    <devsite-analytics>
+      
+        <script type="application/json" analytics>[{&#34;dimensions&#34;: {&#34;dimension11&#34;: false, &#34;dimension6&#34;: &#34;en&#34;, &#34;dimension4&#34;: &#34;Merchant API&#34;, &#34;dimension1&#34;: &#34;Signed out&#34;, &#34;dimension5&#34;: &#34;en&#34;, &#34;dimension3&#34;: false}, &#34;gaid&#34;: &#34;UA-24532603-1&#34;, &#34;metrics&#34;: {&#34;ratings_count&#34;: &#34;metric2&#34;, &#34;ratings_value&#34;: &#34;metric1&#34;}, &#34;purpose&#34;: 1}]</script>
+<script type="application/json" tag-management>{&#34;at&#34;: &#34;True&#34;, &#34;ga4&#34;: [{&#34;id&#34;: &#34;G-272J68FCRF&#34;, &#34;purpose&#34;: 1}, {&#34;id&#34;: &#34;G-SSGNC9N2QN&#34;, &#34;purpose&#34;: 1}], &#34;ga4p&#34;: [{&#34;id&#34;: &#34;G-272J68FCRF&#34;, &#34;purpose&#34;: 1}], &#34;gtm&#34;: [{&#34;id&#34;: &#34;GTM-T98GCPGN&#34;, &#34;purpose&#34;: 1}], &#34;parameters&#34;: {&#34;internalUser&#34;: &#34;False&#34;, &#34;language&#34;: {&#34;machineTranslated&#34;: &#34;False&#34;, &#34;requested&#34;: &#34;en&#34;, &#34;served&#34;: &#34;en&#34;}, &#34;pageType&#34;: &#34;guide&#34;, &#34;projectName&#34;: &#34;Merchant API&#34;, &#34;signedIn&#34;: &#34;False&#34;, &#34;tenant&#34;: &#34;developers&#34;, &#34;recommendations&#34;: {&#34;sourcePage&#34;: &#34;&#34;, &#34;sourceType&#34;: 0, &#34;sourceRank&#34;: 0, &#34;sourceIdenticalDescriptions&#34;: 0, &#34;sourceTitleWords&#34;: 0, &#34;sourceDescriptionWords&#34;: 0, &#34;experiment&#34;: &#34;&#34;}, &#34;experiment&#34;: {&#34;ids&#34;: &#34;&#34;}}}</script>
+      
+    </devsite-analytics>
+    
+      <devsite-badger></devsite-badger>
+    
+    
+    
+    
+    
+<script nonce="VLXQGiuUYW1c7SR42aZH0t/Tcos1eR">
+  
+  (function(d,e,v,s,i,t,E){d['GoogleDevelopersObject']=i;
+    t=e.createElement(v);t.async=1;t.src=s;E=e.getElementsByTagName(v)[0];
+    E.parentNode.insertBefore(t,E);})(window, document, 'script',
+    'https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217/developers/js/app_loader.js', '[1,"en",null,"/js/devsite_app_module.js","https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217","https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217/developers","https://developers-dot-devsite-v2-prod.appspot.com",null,null,["/_pwa/developers/manifest.json","https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217/images/video-placeholder.svg","https://www.gstatic.com/devrel-devsite/prod/vc11e4c9d4c060345ba98585d538d4546e842f4a6ee5c5f9e85be4bd345767217/developers/images/favicon-new.png","https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700&display=swap"],1,null,[1,6,8,12,14,17,21,25,50,52,63,70,75,76,80,87,91,92,93,97,98,100,101,102,103,104,105,107,108,109,110,112,113,116,117,118,120,122,124,125,126,127,129,130,131,132,133,134,135,136,138,140,141,147,148,149,151,152,156,157,158,159,161,163,164,168,169,170,179,180,182,183,186,191,193,196],"AIzaSyAP-jjEJBzmIyKR4F-3XITp8yM9T1gEEI8","AIzaSyB6xiKGDR5O3Ak2okS4rLkauxGUG7XP0hg","developers.google.com","AIzaSyAQk0fBONSGUqCNznf6Krs82Ap1-NV6J4o","AIzaSyCCxcqdrZ_7QMeLCRY20bh_SXdAYqy70KY",null,null,null,["Home__enable_chatbot","Search__enable_suggestions_from_borg","DevPro__enable_google_payments","CloudShell__cloud_shell_button","MiscFeatureFlags__enable_view_transitions","Cloud__enable_cloudx_experiment_ids","TpcFeatures__proxy_prod_host","DevPro__enable_vertex_credit_card","MiscFeatureFlags__developers_footer_image","Search__enable_ai_search_summaries","DevPro__enable_cloud_innovators_plus","AIStudioInteractionsToggle__interactions_are_default","MiscFeatureFlags__enable_markdown_noindex_and_link_tags","Cloud__enable_legacy_calculator_redirect","EngEduTelemetry__enable_engedu_telemetry","DevPro__enable_credits_banner","Analytics__enable_devpro_interaction_logging","Concierge__enable_key_takeaways","Cloud__enable_cloud_shell","DevPro__enable_firebase_workspaces_card","Profiles__enable_public_developer_profiles","Search__enable_ai_search_summaries_restricted","Search__enable_ai_search_summaries_for_all","DevPro__enable_google_one_card","Profiles__enable_release_notes_notifications","Profiles__enable_developer_profile_benefits_ui_redesign","Concierge__enable_pushui","MiscFeatureFlags__enable_firebase_utm","MiscFeatureFlags__gdp_dashboard_reskin_enabled","MiscFeatureFlags__enable_markdown_accept_header","Search__enable_dynamic_content_confidential_banner","Profiles__enable_auto_apply_credits","DevPro__enable_developer_subscriptions","Profiles__enable_complete_playlist_endpoint","Concierge__enable_actions_menu","Profiles__enable_playlist_community_acl","Significatio__enable_by_tenant","Cloud__enable_free_trial_server_call","DevPro__enable_g1_integration","Concierge__enable_remove_info_panel_tags","Profiles__enable_dashboard_curated_recommendations","Profiles__enable_completecodelab_endpoint","Profiles__enable_stripe_subscription_management","Cloud__enable_cloud_dlp_service","DevPro__remove_eu_tax_intake_form","Cloud__cache_serialized_dynamic_content","MiscFeatureFlags__enable_framebox_badge_methods","Profiles__enable_developer_profiles_callout","MiscFeatureFlags__enable_explicit_template_dependencies","BookNav__enable_tenant_cache_key","Cloud__enable_cloud_shell_fte_user_flow","MiscFeatureFlags__enable_project_variables","DevPro__enable_embed_profile_creation","Profiles__enable_developer_profile_pages_as_content","Profiles__require_profile_eligibility_for_signin","DevPro__enable_devpro_offers","DevPro__enable_g1_ineligible_redirect","Concierge__enable_key_takeaways_new_ui","DevPro__enable_free_benefits","MiscFeatureFlags__enable_appearance_cookies","DevPro__enable_code_assist","Concierge__enable_concierge_restricted","Search__enable_page_map","Profiles__enable_recognition_badges","Search__enable_ai_eligibility_checks","MiscFeatureFlags__remove_cross_domain_tracking_params","CloudShell__cloud_code_overflow_menu","MiscFeatureFlags__enable_variable_operator_index_yaml","Profiles__enable_awarding_url","Concierge__enable_concierge","DevPro__enable_nvidia_credits_card","TpcFeatures__enable_unmirrored_page_left_nav","Profiles__enable_join_program_group_endpoint","Concierge__enable_devsite_llm_tools","Profiles__enable_purchase_prompts","Experiments__reqs_query_experiments","Profiles__enable_targeted_hero","MiscFeatureFlags__enable_variable_operator","Analytics__enable_clearcut_logging","MiscFeatureFlags__enable_explain_this_code","Profiles__enable_profile_collections","SignIn__enable_l1_signup_flow","ProgramGroups__enable_auto_enroll","DevPro__enable_enterprise","Cloud__fast_free_trial","Profiles__enable_page_saving","DevPro__enable_google_payments_buyflow","Profiles__enable_completequiz_endpoint","MiscFeatureFlags__developers_footer_dark_image","DevPro__enable_devsite_captcha","MiscFeatureFlags__fix_lower_breadcrumbs","Profiles__enable_callout_notifications","Profiles__enable_user_type"],null,null,"AIzaSyBLEMok-5suZ67qRPzx0qUtbnLmyT_kCVE","https://developerscontentserving-pa.clients6.google.com","AIzaSyCM4QpTRSqP5qI4Dvjt4OAScIN8sOUlO-k","https://developerscontentsearch-pa.clients6.google.com",1,4,null,"https://developerprofiles-pa.clients6.google.com",[1,"developers","Google for Developers","developers.google.com",null,"developers-dot-devsite-v2-prod.appspot.com",null,null,[1,1,[1],null,null,null,null,null,null,null,null,[1],null,null,null,null,null,null,[1],[1,null,null,[1,20],"/recommendations/information"],null,null,null,[1,1,1],[1,1,null,1,1,null,null,["/meridian"]],[1,null,null,null,null,null,null,["/admob","/ad-manager/mobile-ads-sdk","/ml-kit"]],null,[null,["/meridian","/youtube/devices/"]],1,null,[1]],null,[null,null,null,null,null,null,"/images/lockup-new.svg","/images/touchicon-180-new.png",null,null,null,null,1,null,null,null,null,null,null,null,null,1,null,null,null,"/images/lockup-dark-theme-new.svg",[]],[],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[6,1,14,15,20,22,23,29,32,36],null,[[null,null,null,[3,7,10,2,39,17,4,32,24,11,12,13,34,15,25],null,null,[1,[["docType","Choose a content type",[["Tutorial",null,null,null,null,null,null,null,null,"Tutorial"],["Guide",null,null,null,null,null,null,null,null,"Guide"],["Sample",null,null,null,null,null,null,null,null,"Sample"]]],["product","Choose a product",[["Android",null,null,null,null,null,null,null,null,"Android"],["ARCore",null,null,null,null,null,null,null,null,"ARCore"],["ChromeOS",null,null,null,null,null,null,null,null,"ChromeOS"],["Firebase",null,null,null,null,null,null,null,null,"Firebase"],["Flutter",null,null,null,null,null,null,null,null,"Flutter"],["Assistant",null,null,null,null,null,null,null,null,"Google Assistant"],["GoogleCloud",null,null,null,null,null,null,null,null,"Google Cloud"],["GoogleMapsPlatform",null,null,null,null,null,null,null,null,"Google Maps Platform"],["GooglePay",null,null,null,null,null,null,null,null,"Google Pay & Google Wallet"],["GooglePlay",null,null,null,null,null,null,null,null,"Google Play"],["Tensorflow",null,null,null,null,null,null,null,null,"TensorFlow"]]],["category","Choose a topic",[["AiAndMachineLearning",null,null,null,null,null,null,null,null,"AI and Machine Learning"],["Data",null,null,null,null,null,null,null,null,"Data"],["Enterprise",null,null,null,null,null,null,null,null,"Enterprise"],["Gaming",null,null,null,null,null,null,null,null,"Gaming"],["Mobile",null,null,null,null,null,null,null,null,"Mobile"],["Web",null,null,null,null,null,null,null,null,"Web"]]]]]],[1,1],null,1],[[["UA-24532603-1"],["UA-22084204-5"],null,null,["UA-24532603-5"],["GTM-T98GCPGN"],null,[["G-272J68FCRF"],null,null,[["G-272J68FCRF",2]]],[["UA-24532603-1",2]],null,[["UA-24532603-5",2]],[["GTM-T98GCPGN",2]],1],[[15,12],[14,11],[13,10],[6,5],[16,13],[3,2],[4,3],[1,1],[5,4],[11,8],[12,9]],[[1,1],[2,2]]],null,4,null,null,null,null,null,null,null,null,null,null,null,null,null,"developers.devsite.google",null,null,null,null,null,[]],null,"pk_live_5170syrHvgGVmSx9sBrnWtA5luvk9BwnVcvIi7HizpwauFG96WedXsuXh790rtij9AmGllqPtMLfhe2RSwD6Pn38V00uBCydV4m",1,1,"https://developerscontentinsights-pa.clients6.google.com","AIzaSyCg-ZUslalsEbXMfIo9ZP8qufZgo3LSBDU","AIzaSyDxT0vkxnY_KeINtA4LSePJO-4MAZPMRsE","https://developers.clients6.google.com",["https://codeassist.google.com","https://code-assist-free-tier.corp.google.com","https://pay.google.com","https://pay-merchant-console-autopush-qual.corp.google.com","https://pay-merchant-console-dev.corp.google.com","https://pay-merchant-console-preprod-qual.corp.google.com"],null,"AIzaSyBQom12tzI-rybN7Sf-KfeL4nwm-Rf7PmI\n",null,null,"https://developers.googleapis.com"]')
+  
+</script>
+
+    <devsite-a11y-announce></devsite-a11y-announce>
+  </body>
+</html>
