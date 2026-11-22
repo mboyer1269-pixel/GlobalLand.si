@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source_path\": \"products/services/merchant-feed-variant-qa/google-merchant-products-v1-proto.txt\",\n  \"source_receipt\": \"TASK-179532901200\",\n  \"sha256\": \"33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304\",\n  \"expected_sha256\": \"33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304\",\n  \"hash_matches\": true,\n  \"fields\": [\n    {\n      \"line\": 1716,\n      \"declaration\": \"  optional string item_group_id = 27;\",\n      \"preceding_comments\": [\n        \"  // Shared identifier for all variants of the same product.\"\n      ]\n    }\n  ],\n  \"status\": \"FIELD_FOUND\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/merchant-v1-group-id-sample/source-field-evidence.json",
+    "products/receipts/TASK-179533081300.json"
+  ],
+  "id": "TASK-179533081300",
+  "input_sha256": "7921aa96bd4fbe5f17e58b689d8db5725a92a50f61fc1f1f3b81c805ddde6fc6"
+}
