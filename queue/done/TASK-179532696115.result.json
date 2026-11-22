@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"status\": \"REQUIREMENT_UNVERIFIED\",\n  \"earlier_fetch\": {\n    \"task\": \"TASK-179532396101\",\n    \"result\": \"host response-size rejection\"\n  },\n  \"replacement\": {\n    \"task\": \"TASK-179532696112\",\n    \"url\": \"https://developers.google.com/merchant/api/guides/products/overview\",\n    \"http_status\": 200,\n    \"sha256\": \"5517a7b12e1da979fe948c7b5d300f4321850fa047a99a3ab0d537f6e520985f\",\n    \"literal_pattern_counts\": {\n      \"item.group.id\": 0,\n      \"product variants\": 0\n    }\n  },\n  \"sample_executed\": false,\n  \"reopen_on\": \"Readable current first-party field specification stating the applicable variant grouping rule and its exceptions. Check the exact text before creating fixtures.\",\n  \"scope\": \"This finding applies to the retrieved overview and observed fetch refusal. Market demand remains unknown.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/merchant-feed-variant-qa/source-verdict.json",
+    "products/receipts/TASK-179532696115.json"
+  ],
+  "request": {
+    "id": "TASK-179532696115",
+    "type": "TOOL",
+    "submitted_by": "CATALOGUE_BUYER_FIT",
+    "created_at": "2026-11-22T05:56:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib,json,re\npath=Path('products/services/merchant-feed-variant-qa/source-verdict.json')\nsource=path.with_name('google-merchant-api-overview.html')\ndata=source.read_bytes()\nterms=['item.group.id','product variants']\ncounts={term:len(re.findall(term,data.decode('utf-8'),re.I)) for term in terms}\nassert all(value==0 for value in counts.values()), counts\nresult={'status':'REQUIREMENT_UNVERIFIED','earlier_fetch':{'task':'TASK-179532396101','result':'host response-size rejection'},'replacement':{'task':'TASK-179532696112','url':'https://developers.google.com/merchant/api/guides/products/overview','http_status':200,'sha256':hashlib.sha256(data).hexdigest(),'literal_pattern_counts':counts},'sample_executed':False,'reopen_on':'Readable current first-party field specification stating the applicable variant grouping rule and its exceptions. Check the exact text before creating fixtures.','scope':'This finding applies to the retrieved overview and observed fetch refusal. Market demand remains unknown.'}\npath.write_text(json.dumps(result,indent=2)+'\\n')\nprint(path.read_text())"
+      ],
+      "inputs": [
+        "products/services/merchant-feed-variant-qa/google-merchant-api-overview.html"
+      ],
+      "outputs": [
+        "products/services/merchant-feed-variant-qa/source-verdict.json"
+      ],
+      "mission_id": "MERCHANT-FEED-VARIANT-QA-SAMPLE"
+    },
+    "description": "Broker action during THINK-1795326961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179532696115",
+  "input_sha256": "5f67afa03eb8f18b9efda800eea4c6640bbad31223d08830473a391ba81b48b2"
+}

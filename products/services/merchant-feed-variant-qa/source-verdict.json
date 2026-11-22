@@ -1,0 +1,20 @@
+{
+  "status": "REQUIREMENT_UNVERIFIED",
+  "earlier_fetch": {
+    "task": "TASK-179532396101",
+    "result": "host response-size rejection"
+  },
+  "replacement": {
+    "task": "TASK-179532696112",
+    "url": "https://developers.google.com/merchant/api/guides/products/overview",
+    "http_status": 200,
+    "sha256": "5517a7b12e1da979fe948c7b5d300f4321850fa047a99a3ab0d537f6e520985f",
+    "literal_pattern_counts": {
+      "item.group.id": 0,
+      "product variants": 0
+    }
+  },
+  "sample_executed": false,
+  "reopen_on": "Readable current first-party field specification stating the applicable variant grouping rule and its exceptions. Check the exact text before creating fixtures.",
+  "scope": "This finding applies to the retrieved overview and observed fetch refusal. Market demand remains unknown."
+}
