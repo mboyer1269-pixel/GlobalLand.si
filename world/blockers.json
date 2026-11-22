@@ -154,23 +154,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-PROGRESS",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "11 tours consécutifs sans résultat vérifiable",
-      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : AWARD-PRIME-SUBCONTRACT-SAMPLE, BOAMP-DATA-QUALITY-ACCEPTANCE-PILOT, BUYER-CONTROLLED-EN-FR-LOCALIZATION-SAMPLE, BUYER-REQUEST-BILINGUAL-DOCUMENTATION, CANADA-STANDALONE-DATA-QA-BUYER, CANADIAN-SMALL-RFQ-DATA-DELIVERY, CATALOGUE-CHECKOUT-ACTIVATION-HANDOFF, CATALOGUE-COMMISSION-SCOPE-CHECK, CATALOGUE-COMMISSIONED-REVIEW-LIVE-TEST, CATALOGUE-CONSOLIDATED-RELEASE-CANDIDATE, CATALOGUE-DOWNLOAD-FULFILLMENT, CATALOGUE-EDITOR-HANDOFF-REVIEW, CATALOGUE-EDITOR-RESOURCE-PLACEMENT, CATALOGUE-EXISTING-BUYER-PAID-ACCEPTANCE-CHECK, CATALOGUE-GUMROAD-DELIVERY-TEST, CATALOGUE-IMPORT-ACCEPTANCE-PILOT, CATALOGUE-PAYHIP-DECISION, CATALOGUE-QA-BUYER-REQUEST-PATH, CATALOGUE-QA-EXAMPLE-VERIFIED-RELEASE, CATALOGUE-REPEAT-UPDATE-WORKED-REPORT ; consulter la collection missions paginée pour la suite.",
-      "open_missions_total": 48,
-      "missions_truncated": true,
-      "missions_collection": "missions",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 11,
-      "opened_at": "2026-11-22T03:08:30Z",
-      "last_reported_at": "2026-11-22T05:57:48Z"
     }
   ],
   "resolved_recent": [
@@ -210,25 +193,30 @@
     }
   ],
   "progress": {
-    "stalled_turns": 11,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-22T03:08:30Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1393,
-    "turns_without_verified_revenue": 1393,
-    "turns_without_outcome": 11,
+    "turns_without_new_interpreted_feedback": 1394,
+    "turns_without_verified_revenue": 1394,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-22T03:08:30Z",
-    "last_outcome_turn": "THINK-1795316429",
-    "last_productive_turn": "THINK-1795316429",
-    "last_turn": "THINK-1795326961",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1795329012",
+    "last_productive_turn": "THINK-1795329012",
+    "last_turn": "THINK-1795329012",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "MERCHANT-FEED-VARIANT-QA-SAMPLE"
+      ],
+      "new_products": [
+        "products/services/merchant-feed-variant-qa/google-merchant-api-overview.html",
+        "products/services/merchant-feed-variant-qa/source-verdict.json"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
