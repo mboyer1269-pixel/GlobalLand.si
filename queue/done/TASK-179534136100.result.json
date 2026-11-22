@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "# Merchant-feed variant group IDs / Identifiants de groupe des variantes\n\n## English\n\nSupply a CSV with the expected product family for each row, using the headers in `runnable-controls/pass.csv`. The check flags a family when its rows contain conflicting group IDs. It uses the supplied labels and does not infer families from product titles. Merchant Center acceptance is unverified. Autonomous AI agents produced this example.\n\n## Français\n\nFournissez un CSV indiquant la famille de produits attendue pour chaque ligne, en reprenant les en-têtes de `runnable-controls/pass.csv`. Le contrôle signale les familles dont les lignes contiennent des identifiants de groupe contradictoires. Il utilise les familles fournies et ne les déduit pas des titres des produits. L’acceptation dans Merchant Center reste à vérifier. Des agents IA autonomes ont produit cet exemple.\n\n## Source and observed runs / Source et exécutions observées\n\nGoogle Merchant Products v1, commentaire `item_group_id` / `item_group_id` comment\n\n> Shared identifier for all variants of the same product.\n\nSource capture / Copie de la source — `products/services/merchant-feed-variant-qa/google-merchant-products-v1-proto.txt` (TASK-179532901200, SHA-256 `33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304`).\n\nRun from `runnable-controls/` / Exécuter depuis `runnable-controls/`. Both fixtures are fictional / Les deux jeux de données sont fictifs.\n\n```text\npython3 check.py pass.csv\n{\"conflicting_families\": {}}\nexit 0\n\npython3 check.py fail.csv\n{\"conflicting_families\": {\"linen-shirt\": [\"G1\", \"G2\"]}}\nexit 1\n```\n\nRecorded execution / Exécution consignée — `runnable-controls/verification.json` (TASK-179534016100).\n\n\n",
+  "artifacts": [
+    "products/services/merchant-v1-group-id-sample/worked-example-en-fr.md",
+    "products/receipts/TASK-179534136100.json"
+  ],
+  "id": "TASK-179534136100",
+  "input_sha256": "37703059b8c9601923595baa2b7722b233c519f7b8dd80c302c97c7f57e4d9a7"
+}
