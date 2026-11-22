@@ -1,0 +1,13 @@
+{
+  "status": "DONE",
+  "output": "{\"scope\": \"Fictional offline controls with supplied family labels. Platform acceptance and buyer demand are unverified.\", \"files\": {\"check.py\": \"06f1807e2e005a7d84ff1d2ec72f30aee0017faa3ebe8d6e9a12a6eb52fdd45a\", \"pass.csv\": \"cdf514f0cddd81c5959e91f7970cacb1f8f4acc95ba46212f3890cbda9ab2891\", \"fail.csv\": \"5ba82e5a930823336957101b89888b41aa137fb3cad78a98fcd77b038121bdd3\"}, \"runs\": [{\"command\": [\"python3\", \"check.py\", \"pass.csv\"], \"exit_code\": 0, \"expected_exit_code\": 0, \"stdout\": \"{\\\"conflicting_families\\\": {}}\\n\", \"stderr\": \"\"}, {\"command\": [\"python3\", \"check.py\", \"fail.csv\"], \"exit_code\": 1, \"expected_exit_code\": 1, \"stdout\": \"{\\\"conflicting_families\\\": {\\\"linen-shirt\\\": [\\\"G1\\\", \\\"G2\\\"]}}\\n\", \"stderr\": \"\"}], \"expected_exit_codes_observed\": true}\n\n",
+  "artifacts": [
+    "products/services/merchant-v1-group-id-sample/runnable-controls/check.py",
+    "products/services/merchant-v1-group-id-sample/runnable-controls/pass.csv",
+    "products/services/merchant-v1-group-id-sample/runnable-controls/fail.csv",
+    "products/services/merchant-v1-group-id-sample/runnable-controls/verification.json",
+    "products/receipts/TASK-179534016100.json"
+  ],
+  "id": "TASK-179534016100",
+  "input_sha256": "14e168544827fe687b45e530a63e0cde6e9e689923a54efc546453c5ad861c12"
+}
