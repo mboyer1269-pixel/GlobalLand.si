@@ -1,0 +1,9 @@
+{
+  "status": "DONE",
+  "output": "77: | `submit_action` | Exécute immédiatement EXEC, FETCH, WORLD, STATUS, PUBLISH_ACTOR, ACTOR_STATS ou PUBLISH_SITE et rend le résultat. |\n89: ## Publication sur Apify Store (PUBLISH_ACTOR, ACTOR_STATS)\n95: | PUBLISH_ACTOR | actor, title, description, public (bool), events (≤ 5 : name, title, description, price_microusd) ou null | Téléverse `products/actors/<actor>/` (fichiers texte ; `actor-config/` devient `.actor/`), construit, puis applique la mise en vente et les prix par une mise à jour idempotente. |\n106: ## Sites publics (PUBLISH_SITE)\n110: | `site`, `dry_run: true` | Valide `products/sites/<site>/` et rend `review_digest`, sans aucun appel externe. |\n122: Une mise en vente publique sur Apify ou une mise en ligne de site exige que la dernière revue (`review`) de l'empreinte exacte (`review_digest`) soit un APPROVE dont l'hôte a enregistré la provenance (`host_turn`, `host_provider`), indépendante :\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179536536101.json"
+  ],
+  "id": "TASK-179536536101",
+  "input_sha256": "03c2998defb776f87e0c52a1111dbe7480dbf6f9104af55ba773961bd01b8bc2"
+}
