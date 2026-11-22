@@ -1,0 +1,12 @@
+{
+  "sqlite_version": "3.40.1",
+  "input_sql": "CREATE TABLE stock (sku TEXT, quantity INTEGER); INSERT INTO stock VALUES ('DEMO-1', 3);",
+  "execute_error": "You can only execute one statement at a time.",
+  "table_absent_after_rejection": true,
+  "executescript_then_select_rows": [
+    [
+      "DEMO-1",
+      3
+    ]
+  ]
+}
