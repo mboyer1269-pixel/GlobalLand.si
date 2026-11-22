@@ -1,0 +1,111 @@
+{
+  "scope": "Fictional controls only. No private data, host instrumentation, observed demand, delivery, or settlement.",
+  "input_order": [
+    "eligible_release_requests",
+    "pending_classification_that_could_affect_release",
+    "unexplained_skips_that_could_affect_release",
+    "host_verified_complete_release_window"
+  ],
+  "coverage_contract": "Completeness must cover the exact release and cutoff, with attribution and exclusions accounted for. Missing inputs stay unknown.",
+  "results": [
+    {
+      "case": "classified_zero_with_coverage_gaps",
+      "input": [
+        0,
+        5,
+        10,
+        false
+      ],
+      "expected": "UNKNOWN",
+      "actual": "UNKNOWN"
+    },
+    {
+      "case": "empty_counts_without_complete_window",
+      "input": [
+        0,
+        0,
+        0,
+        false
+      ],
+      "expected": "UNKNOWN",
+      "actual": "UNKNOWN"
+    },
+    {
+      "case": "complete_window_with_pending_classification",
+      "input": [
+        0,
+        1,
+        0,
+        true
+      ],
+      "expected": "UNKNOWN",
+      "actual": "UNKNOWN"
+    },
+    {
+      "case": "complete_window_with_unexplained_skip",
+      "input": [
+        0,
+        0,
+        1,
+        true
+      ],
+      "expected": "UNKNOWN",
+      "actual": "UNKNOWN"
+    },
+    {
+      "case": "complete_release_window_with_zero_requests",
+      "input": [
+        0,
+        0,
+        0,
+        true
+      ],
+      "expected": "ZERO_ELIGIBLE_REQUESTS_IN_COVERED_WINDOW",
+      "actual": "ZERO_ELIGIBLE_REQUESTS_IN_COVERED_WINDOW"
+    },
+    {
+      "case": "observed_request_with_incomplete_coverage",
+      "input": [
+        1,
+        2,
+        3,
+        false
+      ],
+      "expected": "ELIGIBLE_REQUEST_OBSERVED",
+      "actual": "ELIGIBLE_REQUEST_OBSERVED"
+    },
+    {
+      "case": "missing_count",
+      "input": [
+        0,
+        null,
+        0,
+        true
+      ],
+      "expected": "UNKNOWN",
+      "actual": "UNKNOWN"
+    },
+    {
+      "case": "invalid_count",
+      "input": [
+        0,
+        -1,
+        0,
+        true
+      ],
+      "expected": "UNKNOWN",
+      "actual": "UNKNOWN"
+    },
+    {
+      "case": "invalid_completeness_flag",
+      "input": [
+        0,
+        0,
+        0,
+        "true"
+      ],
+      "expected": "UNKNOWN",
+      "actual": "UNKNOWN"
+    }
+  ]
+}
