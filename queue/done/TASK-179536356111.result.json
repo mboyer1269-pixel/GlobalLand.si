@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "itch-creator-payments.html\nulated for a transaction. For the sake of simplicity, we'll assume the default rate, 10%, and that we're working in USD. First, itch.io will take the percentage configured on your account’s revenue sharing settings. In this example, \ned on your account’s revenue sharing settings. In this example, the default would be 10% of $10. Next, the payment provider fee is subtracted (Generally $0.30 + 2.9% of the total price). --itch.io-- ----PayPal/Stripe---- $10 - ($10 *\nction the fee represents changes depending on the price of your product. For example 30 cents of a 1 dollar payment is 30%, 30 cents of a 2 dollar payment is 15%, etc. You can avoid high payment processor fees by selling your work for a h\ning on the price of your product. For example 30 cents of a 1 dollar payment is 30%, 30 cents of a 2 dollar payment is 15%, etc. You can avoid high payment processor fees by selling your work for a higher price. For this reason we recomme\nwould be 10% of $10. Next, the payment provider fee is subtracted (Generally $0.30 + 2.9% of the total price). --itch.io-- ----PayPal/Stripe---- $10 - ($10 * 0.1) - $0.30 - ($10 * 0.029) = $8.41 You can choose what percentage of your \ntypically comprised of a fixed amount around 30 cents and a percentage amount around 2.9%. Due to the fixed fee, the total percentage of the entire transaction the fee represents changes depending on the price of your product. For exa\nselected, otherwise your payments may get blocked. When using PayPal , the following currencies are supported: USD — U.S. Dollar CAD — Canadian Dollar GBP — British Pound EUR — Euro JPY — Japanese Yen AUD — Australian Dollar When using Stri\nJapanese Yen AUD — Australian Dollar When using Stripe , the following countries and currencies are available: United States — USD Canada — CAD, USD Ireland — EUR, GBP, USD United Kingdom — EUR, GBP, USD If you payment provider account is f\ng Stripe , the following countries and currencies are available: United States — USD Canada — CAD, USD Ireland — EUR, GBP, USD United Kingdom — EUR, GBP, USD If you payment provider account is for a specific currency, you must set the sam\nuts system. Transaction Waiting Period : Revenue from transactions becomes available 7 days after the purchase date. That waiting period allows us to deal with fraud and various problems that can arise regarding payments. In some cases,\nyout Review Process Staff review all payouts before payment. We require a minimum of 7 days after you create a payout and typically complete reviews within 10 to 14 days. This review period lets us assess risk and fraud issues and allow\ns — When collecting a payout, the processor may charge a fee for the money transfer. PayPal is the most common payout method. Learn more about PayPal payout fees . Generally, requesting payouts more frequently will cause you to lose mor\nee for the money transfer. PayPal is the most common payout method. Learn more about PayPal payout fees . Generally, requesting payouts more frequently will cause you to lose more to fees. We recommend collecting payouts about once a mo\nitch-quality-guidelines.html\nse people will be more likely to pass over it when browsing Most Recent . Note: Feel free to share Draft or Restricted pages, as they aren’t eligible for showing up on our browse & search pages, and will not be placed on top of New Relea\nif it’s worth their time. Just like cover images, screenshots can also be GIFs. Feel free to use them if they better represent your project. Even if your project is an embedded browser game, it’s recommended to provide screenshots. We'll\ntag your project if it contains materials produced by generative AI by utilizing the AI Disclosure section on your project’s edit page. Projects using self-contained algorithms without external large datasets don’t require an AI disclosure. Fo\ncts using self-contained algorithms without external large datasets don’t require an AI disclosure. For example, traditional game AI like NPC pathfinding, enemy behavior patterns, procedural level generation, fuzzy logic systems, and dynamic d\nitch-pricing.html\n the minimum price or above to obtain ownership of the product. As a seller, you are free to change the price at a later time and all buyers will still retain ownership of the product. Note: Individually priced files have different rules\nject, a payment of the suggested donation amount is requested. The viewer can click “No thanks, just take me to the downloads” to skip payment and access the files for free. Note: If someone pays for a project, they are granted ownership t\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179536356111.json"
+  ],
+  "request": {
+    "id": "TASK-179536356111",
+    "type": "TOOL",
+    "submitted_by": "MARKETPLACE_CHECKOUT",
+    "created_at": "2026-11-22T16:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport re,html\nfor f in Path('products/services/existing-package-marketplace-checkout/raw/').glob('itch-*.html'):\n t=' '.join(html.unescape(re.sub(r'<[^>]*>',' ',f.read_text())).split())\n print(f.name)\n for term in ['free to','10%','30¢','30 cents','2.9%','Currencies','Canada —','available for payout','7 days','PayPal','AI Disclosure','No thanks']:\n  m=list(re.finditer(re.escape(term),t,re.I))\n  for x in m[-2:]: print(t[max(0,x.start()-85):x.end()+145])"
+      ],
+      "inputs": [
+        "products/services/existing-package-marketplace-checkout/raw/itch-pricing.html",
+        "products/services/existing-package-marketplace-checkout/raw/itch-creator-payments.html",
+        "products/services/existing-package-marketplace-checkout/raw/itch-quality-guidelines.html"
+      ],
+      "outputs": [],
+      "mission_id": "ITCH-SQLITE-OPTIONAL-SUPPORT"
+    },
+    "description": "Broker action during THINK-1795363561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179536356111",
+  "input_sha256": "b4bc239ffa216615d4db6c5dc497192178ebab34da404a49fa8ec144cad5722b"
+}
