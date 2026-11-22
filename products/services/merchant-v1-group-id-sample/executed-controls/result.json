@@ -1,0 +1,20 @@
+{
+  "source_sha256": "33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304",
+  "synthetic": true,
+  "controls": {
+    "pass": {
+      "exit": 0,
+      "stdout": "{\"conflicting_families\": {}}\n",
+      "stderr": "",
+      "expected_match": true
+    },
+    "fail": {
+      "exit": 1,
+      "stdout": "{\"conflicting_families\": {\"linen-shirt\": [\"G1\", \"G2\"]}}\n",
+      "stderr": "",
+      "expected_match": true
+    }
+  },
+  "field_comment": "// Shared identifier for all variants of the same product.",
+  "status": "CONTROLS_MATCH"
+}

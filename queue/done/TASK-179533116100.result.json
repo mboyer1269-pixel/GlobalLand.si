@@ -1,0 +1,11 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source_sha256\": \"33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304\",\n  \"synthetic\": true,\n  \"controls\": {\n    \"pass\": {\n      \"exit\": 0,\n      \"stdout\": \"{\\\"conflicting_families\\\": {}}\\n\",\n      \"stderr\": \"\",\n      \"expected_match\": true\n    },\n    \"fail\": {\n      \"exit\": 1,\n      \"stdout\": \"{\\\"conflicting_families\\\": {\\\"linen-shirt\\\": [\\\"G1\\\", \\\"G2\\\"]}}\\n\",\n      \"stderr\": \"\",\n      \"expected_match\": true\n    }\n  },\n  \"field_comment\": \"// Shared identifier for all variants of the same product.\",\n  \"status\": \"CONTROLS_MATCH\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/merchant-v1-group-id-sample/executed-controls/result.json",
+    "products/services/merchant-v1-group-id-sample/executed-controls/runner-and-fixtures.json",
+    "products/receipts/TASK-179533116100.json"
+  ],
+  "id": "TASK-179533116100",
+  "input_sha256": "b2a168f34928517a171f8fd1c7fa054aa53bfcf2e684038703b7e3bca8fd919b"
+}

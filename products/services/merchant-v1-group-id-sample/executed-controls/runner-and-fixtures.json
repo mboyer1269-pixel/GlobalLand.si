@@ -1,0 +1,5 @@
+{
+  "check.py": "import csv\nimport json\nimport sys\nfrom collections import defaultdict\n\nwith open(sys.argv[1], encoding=\"utf-8\", newline=\"\") as stream:\n    rows = csv.DictReader(stream)\n    if rows.fieldnames != [\"expected_family\", \"offer_id\", \"item_group_id\"]:\n        sys.exit(2)\n    groups = defaultdict(set)\n    for row in rows:\n        family, offer, group = (row[key] for key in rows.fieldnames)\n        if None in row or not all(value and value.strip() for value in (family, offer, group)):\n            sys.exit(2)\n        groups[family].add(group)\n    if not groups:\n        sys.exit(2)\nconflicts = {family: sorted(ids) for family, ids in groups.items() if len(ids) > 1}\nprint(json.dumps({\"conflicting_families\": conflicts}, sort_keys=True))\nsys.exit(int(bool(conflicts)))\n",
+  "pass.csv": "expected_family,offer_id,item_group_id\nlinen-shirt,shirt-blue,G1\nlinen-shirt,shirt-white,G1\n",
+  "fail.csv": "expected_family,offer_id,item_group_id\nlinen-shirt,shirt-blue,G1\nlinen-shirt,shirt-white,G2\n"
+}
