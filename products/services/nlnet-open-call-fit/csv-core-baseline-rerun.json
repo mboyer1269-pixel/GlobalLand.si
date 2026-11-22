@@ -1,0 +1,18 @@
+{
+  "scope": "Offline CSV core baseline rerun with the imported module included",
+  "cwd": "products/actors/csv-preflight",
+  "command": [
+    "/usr/bin/python3",
+    "tests/run_tests.py"
+  ],
+  "python_version": "3.11.2",
+  "input_sha256": {
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/core.py": "39d656fbb6b17506752421825e78b9cd6f3d7390b97df2fbdec155a8cc6e8b0d",
+    "src/public_http.py": "8a4257f619a500edc73d3475b5ed2f5e6544be3abf35c46763903f1c4458846e",
+    "tests/run_tests.py": "b9ec0a2eb1441f61fe34a0f86a33d8e5913af198ccb294751f982f5bfd54f0fb"
+  },
+  "exit_code": 0,
+  "stdout": "passed 10/10\n",
+  "stderr": ""
+}
