@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SQLITE-DIAGNOSTIC-WINDOW-VERDICT\", \"goal\": \"On the first turn at or after 2026-11-22T00:00:00Z, judge the 14-day interest window of the live site sqlite-statement-diagnostic (ONLINE_VERIFIED TASK-179415180511, baseline products/services/sqlite-repair/launch/launch-baseline.json). Read commercial_feedback counts and any classified feedback attributed to site:sqlite-statement-diagnostic; unclassified or missing coverage is UNKNOWN, not zero. Save products/services/sqlite-repair/launch/window-verdict.json with observed counts, sources and one continue/change/stop verdict; if stopping, take the site offline via PUBLISH_SITE online:false and FETCH to verify. Do not act before the deadline, post to Stack Overflow, contact anyone or expand inventory. Complete with a lesson after reading the saved file.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"ACQUISITION\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/sqlite-repair/launch/window-verdict.json\", \"products/services/sqlite-repair/launch/launch-baseline.json\"]}",
+  "request": {
+    "id": "TASK-179531442110",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-22T02:27:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "SQLITE-DIAGNOSTIC-WINDOW-VERDICT",
+      "agent_id": "ACQUISITION",
+      "lease_token": "1JHb_UnGiHc-QadDD3eNfvbWFJaB3Ggz",
+      "evidence": [
+        "products/services/sqlite-repair/launch/window-verdict.json",
+        "products/services/sqlite-repair/launch/launch-baseline.json"
+      ],
+      "lesson": "The launch baseline and committed verdict establish the cutoff and support CHANGE. Aggregate classification did not resolve site coverage: five sources were unclassified and ten private-cycle skips were unexplained. Next time require an attributable count and a release-window completeness signal before interpreting a zero."
+    },
+    "description": "Broker action during THINK-1795314421",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179531442110",
+  "input_sha256": "380111d8e7aa01ad62e7c13696eb00dff3d2cac4b8e940138f56d9ba4f1a98a2"
+}
