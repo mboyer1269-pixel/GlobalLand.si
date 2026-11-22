@@ -1,0 +1,21 @@
+{
+  "scope": "Fictional operator rehearsal for an explicit incoming inquiry. No reply sent, order accepted or payment observed.",
+  "existing_reply_packet": "products/services/catalogue-inbound-cad/operator-reply-packet.json",
+  "reply_packet_sha256": "55563712f1ef73352df8b03bf8fecd78e9a191f1604cbbb7a236fcb5a2cc5143",
+  "terms_sha256": "449856ff717c44da65c951b67732f916971c35fee3d4c98642d1cd3b2002ee9e",
+  "price_handling": "CAD 60 is provisional pending approval of the exact terms. Reuse the existing nonbinding clarification.",
+  "item_4_handling": "Separate operator send-or-decline decision.",
+  "scenarios": [
+    {
+      "case": "Expected product-family labels supplied",
+      "operator_reply_insert_en": "Using your expected product-family labels, we can report families that contain conflicting item_group_id values and identify the conflicting IDs. In our fictional passing example the checker reported no conflicts and exited 0. In the fictional conflicting example it reported a conflict and exited 1. This check does not establish Merchant Center acceptance.",
+      "operator_reply_insert_fr": "À partir de vos libellés de familles de produits attendus, nous pouvons signaler les familles qui contiennent des valeurs item_group_id contradictoires et indiquer les identifiants en cause. Dans notre exemple fictif conforme, le contrôle n’a signalé aucun conflit et a renvoyé le code 0. Dans l’exemple fictif avec conflit, il a signalé un conflit et renvoyé le code 1. Ce contrôle ne confirme pas l’acceptation par Merchant Center.",
+      "control_receipt": "TASK-179534376100"
+    },
+    {
+      "case": "Expected product-family labels missing",
+      "operator_reply_insert_en": "Please indicate which variants you expect to belong to the same product family. Provide one expected family label for each example row using the existing intake limits. We need those labels before we can check for conflicting group IDs within a family.",
+      "operator_reply_insert_fr": "Veuillez indiquer quelles variantes devraient appartenir à la même famille de produits. Fournissez un libellé de famille attendu pour chaque ligne d’exemple, en respectant les limites de soumission actuelles. Nous avons besoin de ces libellés pour vérifier si des identifiants de groupe se contredisent au sein d’une famille."
+    }
+  ]
+}
