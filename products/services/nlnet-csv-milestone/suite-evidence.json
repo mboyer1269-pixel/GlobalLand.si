@@ -1,0 +1,15 @@
+{
+  "purpose": "Offline baseline for a proposed public-data CSV quality milestone",
+  "command": "PYTHONPATH=. python3 tests/run_tests.py",
+  "cwd": "products/actors/csv-preflight",
+  "python": "3.11.2",
+  "exit_code": 0,
+  "stdout": "passed 10/10\n",
+  "stderr": "",
+  "source_sha256": {
+    "products/actors/csv-preflight/tests/run_tests.py": "b9ec0a2eb1441f61fe34a0f86a33d8e5913af198ccb294751f982f5bfd54f0fb",
+    "products/actors/csv-preflight/src/core.py": "39d656fbb6b17506752421825e78b9cd6f3d7390b97df2fbdec155a8cc6e8b0d",
+    "products/actors/csv-preflight/src/public_http.py": "8a4257f619a500edc73d3475b5ed2f5e6544be3abf35c46763903f1c4458846e"
+  },
+  "limits": "Existing synthetic regression checks. This execution does not establish grant eligibility, adoption, submission or payment."
+}

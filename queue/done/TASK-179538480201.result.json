@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"purpose\": \"Offline baseline for a proposed public-data CSV quality milestone\",\n  \"command\": \"PYTHONPATH=. python3 tests/run_tests.py\",\n  \"cwd\": \"products/actors/csv-preflight\",\n  \"python\": \"3.11.2\",\n  \"exit_code\": 0,\n  \"stdout\": \"passed 10/10\\n\",\n  \"stderr\": \"\",\n  \"source_sha256\": {\n    \"products/actors/csv-preflight/tests/run_tests.py\": \"b9ec0a2eb1441f61fe34a0f86a33d8e5913af198ccb294751f982f5bfd54f0fb\",\n    \"products/actors/csv-preflight/src/core.py\": \"39d656fbb6b17506752421825e78b9cd6f3d7390b97df2fbdec155a8cc6e8b0d\",\n    \"products/actors/csv-preflight/src/public_http.py\": \"8a4257f619a500edc73d3475b5ed2f5e6544be3abf35c46763903f1c4458846e\"\n  },\n  \"limits\": \"Existing synthetic regression checks. This execution does not establish grant eligibility, adoption, submission or payment.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/nlnet-csv-milestone/suite-evidence.json",
+    "products/receipts/TASK-179538480201.json"
+  ],
+  "id": "TASK-179538480201",
+  "input_sha256": "3b4c9405d5b346478904593a9145a536db67693d8f64aa440ccd45e4a563cdd1"
+}
