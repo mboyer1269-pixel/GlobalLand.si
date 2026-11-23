@@ -1,0 +1,78 @@
+{
+  "payout_source": "https://docs.lemonsqueezy.com/help/getting-started/getting-paid",
+  "payout_source_sha256": "15d31e3e82ee28b2fd729df6111f18fe72326ea76a8927b0d0c7959bfaa7cb30",
+  "payout_guide_excerpts": {
+    "(?i)\\bminimum(?:\\s+payout)?\\s+(?:threshold|amount|balance)\\b": [
+      "ey once it’s in your PayPal account. Read more about PayPal fees here . Payout threshold There is a minimum payout threshold of $50 . If your upcoming payout doesn’t meet this threshold it will remain “Pending” and be rolled over to the next payout cycle. This wil"
+    ],
+    "(?i)\\bpayout threshold\\b": [
+      "convert or withdraw your money once it’s in your PayPal account. Read more about PayPal fees here . Payout threshold There is a minimum payout threshold of $50 . If your upcoming payout doesn’t meet this threshold it will remain “Pending” and be rolled ove",
+      "it’s in your PayPal account. Read more about PayPal fees here . Payout threshold There is a minimum payout threshold of $50 . If your upcoming payout doesn’t meet this threshold it will remain “Pending” and be rolled over to the next payout cycle. This wil",
+      "l to top On this page Bank payouts PayPal payouts Supported countries Schedule Payout fees Currency Payout threshold Payout invoices © 2026 Sold through Link, LLC f/k/a Lemon Squeezy LLC • Privacy • Terms • DPA •"
+    ],
+    "(?i)(?:US\\s*\\$|\\$)\\s*50(?:\\.00)?\\b": [
+      "account. Read more about PayPal fees here . Payout threshold There is a minimum payout threshold of $50 . If your upcoming payout doesn’t meet this threshold it will remain “Pending” and be rolled over to the next payout cycle. This will happe"
+    ],
+    "(?i)\\bUSD\\b": [
+      "s PayPal account but it will need to be a verified account. Payouts made using PayPal are always in USD. Supported countries You can sell on Lemon Squeezy if you can get paid into a bank or PayPal account located in one of our hundreds of supp",
+      "region and settlement currency. Read more about payout fees . Currency Bank payouts will be made in USD. For bank payouts to a currency other than USD, the total will be converted to your chosen currency . PayPal payouts will be made in USD. N",
+      " payout fees . Currency Bank payouts will be made in USD. For bank payouts to a currency other than USD, the total will be converted to your chosen currency . PayPal payouts will be made in USD. Note that PayPal may charge you a fee to convert",
+      "ther than USD, the total will be converted to your chosen currency . PayPal payouts will be made in USD. Note that PayPal may charge you a fee to convert or withdraw your money once it’s in your PayPal account. Read more about PayPal fees here"
+    ],
+    "(?i)\\bpayout fees?\\b": [
+      " 4th of the month, it will be included in the payout created on the 15th, and paid out on the 28th. Payout fees Lemon Squeezy will always try to minimize any fees associated with payouts. However, in some cases we will deduct a small fee from your pay",
+      " actual fee varies depending on your payout method, region and settlement currency. Read more about payout fees . Currency Bank payouts will be made in USD. For bank payouts to a currency other than USD, the total will be converted to your chosen curr",
+      "es. Next Fees → Scroll to top On this page Bank payouts PayPal payouts Supported countries Schedule Payout fees Currency Payout threshold Payout invoices © 2026 Sold through Link, LLC f/k/a Lemon Squeezy LLC • Privacy • Terms • DPA •"
+    ]
+  },
+  "fee_source": "https://docs.lemonsqueezy.com/help/getting-started/fees",
+  "fee_source_sha256": "db5842dd40885829ba573a34af6676af15121d0786249ce88592273b69090bc2",
+  "fee_formula_excerpts": [
+    "% VAT) $4.00 Total $24.00 Platform fee ($0.50 + 5% of total + 1.5% int’l payment) $2.06 Net profit (total - tax - platform fee) $17.94 "
+  ],
+  "scenarios": [
+    {
+      "price_usd": "9.00",
+      "assumed_surcharge_rate": "0",
+      "modeled_fee_usd": "0.95",
+      "proceeds_per_sale_before_payout_costs_usd": "8.05",
+      "sales_if_50_usd_threshold_applies": 7
+    },
+    {
+      "price_usd": "9.00",
+      "assumed_surcharge_rate": "0.015",
+      "modeled_fee_usd": "1.09",
+      "proceeds_per_sale_before_payout_costs_usd": "7.91",
+      "sales_if_50_usd_threshold_applies": 7
+    },
+    {
+      "price_usd": "9.00",
+      "assumed_surcharge_rate": "0.03",
+      "modeled_fee_usd": "1.22",
+      "proceeds_per_sale_before_payout_costs_usd": "7.78",
+      "sales_if_50_usd_threshold_applies": 7
+    },
+    {
+      "price_usd": "19.00",
+      "assumed_surcharge_rate": "0",
+      "modeled_fee_usd": "1.45",
+      "proceeds_per_sale_before_payout_costs_usd": "17.55",
+      "sales_if_50_usd_threshold_applies": 3
+    },
+    {
+      "price_usd": "19.00",
+      "assumed_surcharge_rate": "0.015",
+      "modeled_fee_usd": "1.74",
+      "proceeds_per_sale_before_payout_costs_usd": "17.26",
+      "sales_if_50_usd_threshold_applies": 3
+    },
+    {
+      "price_usd": "19.00",
+      "assumed_surcharge_rate": "0.03",
+      "modeled_fee_usd": "2.02",
+      "proceeds_per_sale_before_payout_costs_usd": "16.98",
+      "sales_if_50_usd_threshold_applies": 3
+    }
+  ],
+  "interpretation": "The USD 50 scenario is conditional. Verify amount, currency and applicability against the excerpts before treating it as a published requirement. The 3% surcharge is a sensitivity assumption. Prices are hypothetical. Model assumes one item per transaction and excludes tax in the transaction base, refunds, payout fees, currency conversion and service costs. Proceeds are neither profit nor verified revenue."
+}
