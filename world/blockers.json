@@ -154,20 +154,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-OUTCOME",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "13 tours consécutifs sans mission conclue ni revenu vérifié",
-      "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 13,
-      "opened_at": "2026-11-23T02:30:49Z",
-      "last_reported_at": "2026-11-23T06:02:54Z"
     }
   ],
   "resolved_recent": [
@@ -207,25 +193,32 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-23T06:02:54Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1479,
-    "turns_without_verified_revenue": 1479,
-    "turns_without_outcome": 13,
+    "turns_without_new_interpreted_feedback": 1480,
+    "turns_without_verified_revenue": 1480,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-23T02:30:49Z",
-    "last_outcome_turn": "THINK-1795399561",
-    "last_productive_turn": "THINK-1795411561",
-    "last_turn": "THINK-1795413627",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1795415412",
+    "last_productive_turn": "THINK-1795415412",
+    "last_turn": "THINK-1795415412",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "NLNET-AI-POLICY-MILESTONE-FOLLOWUP",
+        "UK-LOW-VALUE-CSV-BUYER-SAMPLE"
+      ],
+      "new_products": [
+        "products/services/nlnet-ai-policy-followup/policy-decision.json",
+        "products/services/uk-low-value-csv-buyer/bounded-scope-decision.json",
+        "products/services/uk-low-value-csv-buyer/matched-scope-context.json"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
