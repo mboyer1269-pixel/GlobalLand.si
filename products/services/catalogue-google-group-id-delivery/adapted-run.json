@@ -1,0 +1,54 @@
+{
+  "source": {
+    "source_url": "https://raw.githubusercontent.com/googleapis/googleapis/master/google/shopping/merchant/products/v1/products_common.proto",
+    "source_sha256": "33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304",
+    "expected_sha256": "33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304",
+    "field_declarations_with_comments": [
+      {
+        "start_line": 1715,
+        "field_line": 1716,
+        "verbatim": "  // Shared identifier for all variants of the same product.\n  optional string item_group_id = 27;"
+      }
+    ],
+    "scope": "Merchant API schema. Field comments do not demonstrate acceptance of a submitted feed.",
+    "capture_hash_matches": true
+  },
+  "checker_sha256": "06f1807e2e005a7d84ff1d2ec72f30aee0017faa3ebe8d6e9a12a6eb52fdd45a",
+  "mapping": {
+    "expected_family": "supplied_family_label",
+    "offer_id": "id",
+    "item_group_id": "item_group_id"
+  },
+  "runs": [
+    {
+      "name": "consistent",
+      "argv": [
+        "/usr/bin/python3",
+        "products/services/merchant-v1-group-id-sample/runnable-controls/check.py",
+        "/tmp/tmpkszfukqd/consistent.csv"
+      ],
+      "original_sha256": "84f4b77051f8efaadc81e8eb2156a5bedab8de799425303583adc37291c761f1",
+      "mapped_csv": "expected_family,offer_id,item_group_id\nLAMP-FAMILY,LAMP-100-BLUE,LAMP-100\nLAMP-FAMILY,LAMP-100-GREEN,LAMP-100\n",
+      "mapped_sha256": "99fa45ab06d6ad87dc23692e980a1d2b2bfac2fa8a2824be6809cc9d2a02421c",
+      "exit_code": 0,
+      "stdout": "{\"conflicting_families\": {}}\n",
+      "stderr": "",
+      "matches": true
+    },
+    {
+      "name": "conflicting",
+      "argv": [
+        "/usr/bin/python3",
+        "products/services/merchant-v1-group-id-sample/runnable-controls/check.py",
+        "/tmp/tmpkszfukqd/conflicting.csv"
+      ],
+      "original_sha256": "6a962d40b4b08fbb04b0d5a9116cc60a743117b4e487f3768fc9529f798d87bb",
+      "mapped_csv": "expected_family,offer_id,item_group_id\nLAMP-FAMILY,LAMP-100-BLUE,LAMP-100\nLAMP-FAMILY,LAMP-100-GREEN,LAMP-200\n",
+      "mapped_sha256": "b6f0525282f8b9c22bf4892ee06aab6bf22d78367c34d7bbfb94cf65d6d30107",
+      "exit_code": 1,
+      "stdout": "{\"conflicting_families\": {\"LAMP-FAMILY\": [\"LAMP-100\", \"LAMP-200\"]}}\n",
+      "stderr": "",
+      "matches": true
+    }
+  ]
+}
