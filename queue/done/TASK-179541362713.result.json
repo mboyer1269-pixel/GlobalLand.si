@@ -1,0 +1,48 @@
+{
+  "status": "DONE",
+  "output": "{\"products/services/nlnet-open-call-fit/raw/current-call.html\": [\"/foundation/policies/generativeAI/2.0/\"], \"products/services/nlnet-open-call-fit/raw/funding.html\": [], \"products/services/nlnet-open-call-fit/raw/propose.html\": [\"/foundation/policies/generativeAI/\", \"/foundation/policies/generativeAI/2.0/#accessibility\"]}\n\n",
+  "artifacts": [
+    "products/services/nlnet-ai-policy-followup/policy-decision.json",
+    "products/receipts/TASK-179541362713.json"
+  ],
+  "request": {
+    "id": "TASK-179541362713",
+    "type": "TOOL",
+    "submitted_by": "PAID_PILOT",
+    "created_at": "2026-11-23T06:00:27Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib, html, json, re, sys\nfrom pathlib import Path\nsource, extraction, call, funding, form, controls, milestone, output = map(Path, sys.argv[1:])\ndef digest(path):\n    return hashlib.sha256(path.read_bytes()).hexdigest()\ncaptured = json.loads(extraction.read_text())\nassert digest(source) == captured['source_sha256']\ndef normalize(text):\n    return ' '.join(html.unescape(re.sub(r'<[^>]+>', '', text)).split())\npolicy = normalize(source.read_text())\nquotes = {item['line']: item['text'] for item in captured['passages'] if item['line'] in (42,45,48,49,50,52,53,54,55,67)}\nassert all(normalize(quotes[n]) in policy for n in (48,50,52,53))\ndef policy_links(path):\n    return sorted(set(re.findall(r'href=\"([^\"]*generativeAI[^\"]*)\"', path.read_text(), re.I)))\ndecision = {\n    'disposition': 'Do not submit the autonomous AI workflow under policy 2.0. Preserve the executed CSV milestone for other outlets.',\n    'policy_url': captured['source_url'],\n    'source_hashes': {str(path): digest(path) for path in (source,call,funding,form,controls,milestone)},\n    'call_material_policy_links': {str(path): policy_links(path) for path in (call,funding,form)},\n    'policy_quotes': quotes,\n    'applicability': 'The published policy expressly covers proposals submitted to NLnet and funded artifacts. It refers to an NGI Zero transition FAQ. No exception for this proposed workflow was established by this assessment.',\n    'reopen': 'First-party call-specific terms expressly permitting this workflow, or a separately evidenced eligible human-led application and delivery plan complying with the operative policy and disclosing existing AI-generated code as required.',\n    'executed_controls': str(controls),\n    'reusable_milestone': str(milestone),\n    'submission': 'none', 'award': 'unverified', 'settlement': 'unverified'\n}\noutput.write_text(json.dumps(decision,indent=2,ensure_ascii=False)+'\\n')\nprint(json.dumps(decision['call_material_policy_links']))",
+        "products/services/nlnet-ai-policy-followup/raw/policy.html",
+        "products/services/nlnet-ai-policy-followup/director-policy-passages.json",
+        "products/services/nlnet-open-call-fit/raw/current-call.html",
+        "products/services/nlnet-open-call-fit/raw/funding.html",
+        "products/services/nlnet-open-call-fit/raw/propose.html",
+        "products/services/nlnet-csv-milestone/station-csv-acceptance.json",
+        "products/services/nlnet-csv-milestone/director-technical-milestone-handoff.json",
+        "products/services/nlnet-ai-policy-followup/policy-decision.json"
+      ],
+      "inputs": [
+        "products/services/nlnet-ai-policy-followup/raw/policy.html",
+        "products/services/nlnet-ai-policy-followup/director-policy-passages.json",
+        "products/services/nlnet-open-call-fit/raw/current-call.html",
+        "products/services/nlnet-open-call-fit/raw/funding.html",
+        "products/services/nlnet-open-call-fit/raw/propose.html",
+        "products/services/nlnet-csv-milestone/station-csv-acceptance.json",
+        "products/services/nlnet-csv-milestone/director-technical-milestone-handoff.json"
+      ],
+      "outputs": [
+        "products/services/nlnet-ai-policy-followup/policy-decision.json"
+      ],
+      "mission_id": "NLNET-AI-POLICY-MILESTONE-FOLLOWUP"
+    },
+    "description": "Broker action during THINK-1795413627",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179541362713",
+  "input_sha256": "d4f6af0a5a542232c8c885cd04a7489fe665a96e14228581a19badd02aee9cc4"
+}
