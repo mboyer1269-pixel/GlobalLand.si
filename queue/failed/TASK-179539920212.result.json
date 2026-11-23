@@ -1,0 +1,38 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 9, in <module>\nAssertionError\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179539920212",
+    "type": "TOOL",
+    "submitted_by": "PAID_PILOT",
+    "created_at": "2026-11-23T02:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib, json, sys, re\nfrom pathlib import Path\nfrom html import unescape\ncall,funding,proposal,milestone,out=map(Path,sys.argv[1:])\ndef normalized(path):\n    return ' '.join(unescape(re.sub('<[^>]+>',' ',path.read_text())).split())\ndeadline='Deadline for submission: January 3rd 2027, 12.00 (noon) CET.'\neligibility='In principle anyone can apply: individuals, research organisations, non-profits, public institutions, companies of any size and type, etc.'\nassert deadline in normalized(call)\nassert eligibility in normalized(funding)\nassert '/foundation/policies/generativeAI/2.0/' in call.read_text()\nassert all(x['diagnostics_confirmed_in_file'] for x in json.loads(milestone.read_text())['controls'].values())\ndef bind(path,url):\n    return {'path':str(path),'url':url,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}\nresult={'verdict':'Application fit unresolved within the three-page source scope','deadline_quote':deadline,'general_eligibility_quote':eligibility,'policy_link_text':'Generative AI polcy','policy_url':'https://nlnet.nl/foundation/policies/generativeAI/2.0/','sources':[bind(call,'https://nlnet.nl/news/2026/20261103-call.html'),bind(funding,'https://nlnet.nl/funding.html'),bind(proposal,'https://nlnet.nl/propose/'),bind(milestone,None)],'reopen':'Read the official AI policy to establish whether this autonomous workflow may prepare the application and develop the project. If permitted, verify the intended accountable applicant, a specific fund fit for the CSV milestone, and its milestone payment terms before proposing a budget or submitting.','technical_evidence':'Three fictional acceptance controls with saved machine-readable outputs. No application submitted or funding awarded.'}\nout.write_text(json.dumps(result,indent=2)+'\\n')\nprint(result['verdict'])",
+        "products/services/nlnet-open-call-fit/raw/current-call.html",
+        "products/services/nlnet-open-call-fit/raw/funding.html",
+        "products/services/nlnet-open-call-fit/raw/propose.html",
+        "products/services/nlnet-csv-milestone/director-technical-milestone-handoff.json",
+        "products/services/nlnet-open-call-fit/bounded-application-verdict.json"
+      ],
+      "inputs": [
+        "products/services/nlnet-open-call-fit/raw/current-call.html",
+        "products/services/nlnet-open-call-fit/raw/funding.html",
+        "products/services/nlnet-open-call-fit/raw/propose.html",
+        "products/services/nlnet-csv-milestone/director-technical-milestone-handoff.json"
+      ],
+      "outputs": [
+        "products/services/nlnet-open-call-fit/bounded-application-verdict.json"
+      ],
+      "mission_id": "NLNET-OPEN-CALL-DELIVERY-FIT"
+    },
+    "description": "Broker action during THINK-1795399202",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179539920212",
+  "input_sha256": "c2a6cbb342b32f40afcbda7be7f4780d1fba99a00f08da0e03c726b2fc125c4d"
+}
