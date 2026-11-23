@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "[\n  {\n    \"id\": \"110327-2026\",\n    \"ocid\": \"ocds-h6vhtk-07c0c2\",\n    \"tag\": [\n      \"tender\"\n    ],\n    \"title\": \"Contractor Services Framework Agreement\",\n    \"lots\": [\n      \"Port Infrastructure  Works Medium to High Risk - National - Principal North & Principal South\",\n      \"Port Infrastructure Works Low to Medium Risk - National - Principal North & Principal South\",\n      \"Ground Investigation Works - National - Principal Contractor\",\n      \"Port Maintenance: Electrical Low Risk - National - Principal North & Principal South\",\n      \"Port Maintenance: Minor Civilis Low Risk - National - Principal North & Principal South\",\n      \"Port Machinery: Linkspan Supply Installation Upgrade & Commissioning - National - Principal Contractor\",\n      \"Port Machinery: Passenger Access Systems - Supply Installation Maintenance Upgrade & Commissioning - National - Principal Contractor\",\n      \"Port Infrastructure Works High Risk - National - Principal North & Principal South\"\n    ],\n    \"contexts\": [\n      {\n        \"field\": [\n          \"lots\",\n          2,\n          \"awardCriteria\",\n          \"criteria\",\n          1,\n          \"name\"\n        ],\n        \"quote\": \"Data Quality Reporting and Quality Assurance\"\n      }\n    ]\n  },\n  {\n    \"id\": \"110268-2026\",\n    \"ocid\": \"ocds-h6vhtk-07c0a1\",\n    \"tag\": [\n      \"tender\"\n    ],\n    \"title\": \"Contractor Services Framework Agreement\",\n    \"lots\": [\n      \"Port Infrastructure  Works Medium to High Risk - National - Principal North & Principal South\",\n      \"Port Infrastructure Works Low to Medium Risk - National - Principal North & Principal South\",\n      \"Ground Investigation Works - National - Principal Contractor\",\n      \"Port Maintenance: Electrical Low Risk - National - Principal North & Principal South\",\n      \"Port Maintenance: Minor Civilis Low Risk - National - Principal North & Principal South\",\n      \"Port Machinery: Linkspan Supply Installation Upgrade & Commissioning - National - Principal Contractor\",\n      \"Port Machinery: Passenger Access Systems - Supply Installation Maintenance Upgrade & Commissioning - National - Principal Contractor\",\n      \"Port Infrastructure Works High Risk - National - Principal North & Principal South\"\n    ],\n    \"contexts\": [\n      {\n        \"field\": [\n          \"lots\",\n          2,\n          \"awardCriteria\",\n          \"criteria\",\n          1,\n          \"name\"\n        ],\n        \"quote\": \"Data Quality Reporting and Quality Assurance\"\n      }\n    ]\n  },\n  {\n    \"id\": \"110266-2026\",\n    \"ocid\": \"ocds-h6vhtk-07c09f\",\n    \"tag\": [\n      \"tender\"\n    ],\n    \"title\": \"Contractor Services Framework Agreement\",\n    \"lots\": [\n      \"Port Infrastructure  Works Medium to High Risk - National - Principal North & Principal South\",\n      \"Port Infrastructure Works Low to Medium Risk - National - Principal North & Principal South\",\n      \"Ground Investigation Works - National - Principal Contractor\",\n      \"Port Maintenance: Electrical Low Risk - National - Principal North & Principal South\",\n      \"Port Maintenance: Minor Civilis Low Risk - National - Principal North & Principal South\",\n      \"Port Machinery: Linkspan Supply Installation Upgrade & Commissioning - National - Principal Contractor\",\n      \"Port Machinery: Passenger Access Systems - Supply Installation Maintenance Upgrade & Commissioning - National - Principal Contractor\",\n      \"Port Infrastructure Works High Risk - National - Principal North & Principal South\"\n    ],\n    \"contexts\": [\n      {\n        \"field\": [\n          \"lots\",\n          2,\n          \"awardCriteria\",\n          \"criteria\",\n          1,\n          \"name\"\n        ],\n        \"quote\": \"Data Quality Reporting and Quality Assurance\"\n      }\n    ]\n  }\n]\n\n\n",
+  "artifacts": [
+    "products/services/uk-low-value-csv-buyer/matched-scope-context.json",
+    "products/receipts/TASK-179541362715.json"
+  ],
+  "request": {
+    "id": "TASK-179541362715",
+    "type": "TOOL",
+    "submitted_by": "CANADIAN_RFQ_DELIVERY",
+    "created_at": "2026-11-23T06:00:27Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,re,sys\nfrom pathlib import Path\nsource,report,out=map(Path,sys.argv[1:])\nscreen=json.loads(report.read_text())\nids={entry['id'] for entry in screen['candidate_pointers']}\nrows=[]\nfor rel in json.loads(source.read_text())['releases']:\n    if rel['id'] not in ids: continue\n    tender=rel['tender']\n    contexts=[]\n    def visit(value,path):\n        if isinstance(value,dict):\n            for key,child in value.items(): visit(child,path+[key])\n        elif isinstance(value,list):\n            for i,child in enumerate(value): visit(child,path+[i])\n        elif isinstance(value,str) and path[-1] in ('title','description','name'):\n            for m in re.finditer('Data Quality',value,re.I):\n                contexts.append({'field':path,'quote':value[max(0,m.start()-100):m.end()+360]})\n    visit(tender,[])\n    rows.append({'id':rel['id'],'ocid':rel['ocid'],'tag':rel.get('tag'),'title':tender['title'],'lots':[lot.get('title') for lot in tender['lots']],'contexts':contexts})\nout.write_text(json.dumps(rows,indent=2,ensure_ascii=False)+'\\n')\nprint(out.read_text())",
+        "products/services/uk-low-value-csv-buyer/raw/tender-feed.json",
+        "products/services/uk-low-value-csv-buyer/bounded-scope-decision.json",
+        "products/services/uk-low-value-csv-buyer/matched-scope-context.json"
+      ],
+      "inputs": [
+        "products/services/uk-low-value-csv-buyer/raw/tender-feed.json",
+        "products/services/uk-low-value-csv-buyer/bounded-scope-decision.json"
+      ],
+      "outputs": [
+        "products/services/uk-low-value-csv-buyer/matched-scope-context.json"
+      ],
+      "mission_id": "UK-LOW-VALUE-CSV-BUYER-SAMPLE"
+    },
+    "description": "Broker action during THINK-1795413627",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179541362715",
+  "input_sha256": "225682fca5a05e1edfe56dba20a12bd207d107c957656a7ac116e9a1dfd6c22d"
+}
