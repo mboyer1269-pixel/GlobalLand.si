@@ -1,0 +1,57 @@
+{
+  "source_url": "https://docs.lemonsqueezy.com/help/getting-started/fees",
+  "source_sha256": "db5842dd40885829ba573a34af6676af15121d0786249ce88592273b69090bc2",
+  "base_fee_excerpt": "with a card. Description Amount Product price $20.00 Tax (20% VAT) $4.00 Total $24.00 Platform fee ($0.50 + 5% of total + 1.5% int\u2019l payment) $2.06 Net profit (total - tax - platform fee) $17.94 You can see inf",
+  "possible_payout_threshold_excerpt": null,
+  "scenarios": [
+    {
+      "hypothetical_price_usd": "9.00",
+      "hypothetical_additional_rate": "0",
+      "modeled_fee_usd": "0.95",
+      "modeled_proceeds_usd_before_payout_costs": "8.05",
+      "sales_to_modeled_50_usd_balance": null
+    },
+    {
+      "hypothetical_price_usd": "9.00",
+      "hypothetical_additional_rate": "0.015",
+      "modeled_fee_usd": "1.09",
+      "modeled_proceeds_usd_before_payout_costs": "7.91",
+      "sales_to_modeled_50_usd_balance": null
+    },
+    {
+      "hypothetical_price_usd": "9.00",
+      "hypothetical_additional_rate": "0.03",
+      "modeled_fee_usd": "1.22",
+      "modeled_proceeds_usd_before_payout_costs": "7.78",
+      "sales_to_modeled_50_usd_balance": null
+    },
+    {
+      "hypothetical_price_usd": "19.00",
+      "hypothetical_additional_rate": "0",
+      "modeled_fee_usd": "1.45",
+      "modeled_proceeds_usd_before_payout_costs": "17.55",
+      "sales_to_modeled_50_usd_balance": null
+    },
+    {
+      "hypothetical_price_usd": "19.00",
+      "hypothetical_additional_rate": "0.015",
+      "modeled_fee_usd": "1.74",
+      "modeled_proceeds_usd_before_payout_costs": "17.26",
+      "sales_to_modeled_50_usd_balance": null
+    },
+    {
+      "hypothetical_price_usd": "19.00",
+      "hypothetical_additional_rate": "0.03",
+      "modeled_fee_usd": "2.02",
+      "modeled_proceeds_usd_before_payout_costs": "16.98",
+      "sales_to_modeled_50_usd_balance": null
+    }
+  ],
+  "assumptions": [
+    "One item per order, one-time payment, no tax in modeled fee base, no refunds or chargebacks.",
+    "Additional rates are sensitivity inputs only. Applicability to the intended seller or buyer remains unverified.",
+    "Fee rounded up to cents for illustration. Excludes payout and conversion costs. Any threshold calculation is a modeled balance, with exact currency and payout treatment subject to confirmation.",
+    "A missing match means this capture and extraction did not establish the term."
+  ],
+  "decision_limit": "Private pricing evidence only. Seller approval, package eligibility, checkout activation, sales, payouts and Treasury settlement require separate evidence."
+}
