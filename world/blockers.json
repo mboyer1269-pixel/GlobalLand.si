@@ -160,31 +160,31 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "23 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "24 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 23,
+      "reports": 24,
       "opened_at": "2026-11-23T14:30:55Z",
-      "last_reported_at": "2026-11-23T20:30:45Z"
+      "last_reported_at": "2026-11-23T20:37:44Z"
     },
     {
       "id": "SYSTEM-NO-PROGRESS",
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "3 tours consécutifs sans résultat vérifiable",
+      "title": "4 tours consécutifs sans résultat vérifiable",
       "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : AUSTRALIAN-BUYER-DATA-QUALITY-PILOT, AWARD-PRIME-SUBCONTRACT-SAMPLE, BOAMP-DATA-QUALITY-ACCEPTANCE-PILOT, BOAMP-DATE-FIRST-LINK-QA-PILOT, BUYER-CONTROLLED-EN-FR-LOCALIZATION-SAMPLE, BUYER-PAID-FEED-RECONCILIATION, BUYER-REQUEST-BILINGUAL-DOCUMENTATION, CANADA-STANDALONE-DATA-QA-BUYER, CANADIAN-SMALL-RFQ-DATA-DELIVERY, CATALOGUE-CHECKOUT-ACTIVATION-HANDOFF, CATALOGUE-COMMISSION-SCOPE-CHECK, CATALOGUE-COMMISSIONED-REVIEW-LIVE-TEST, CATALOGUE-CONSOLIDATED-RELEASE-CANDIDATE, CATALOGUE-DOWNLOAD-FULFILLMENT, CATALOGUE-EDITOR-HANDOFF-REVIEW, CATALOGUE-EDITOR-RESOURCE-PLACEMENT, CATALOGUE-EXISTING-BUYER-PAID-ACCEPTANCE-CHECK, CATALOGUE-GUMROAD-DELIVERY-TEST, CATALOGUE-IMPORT-ACCEPTANCE-PILOT, CATALOGUE-INQUIRY-COMPLETENESS-CONTROL ; consulter la collection missions paginée pour la suite.",
-      "open_missions_total": 66,
+      "open_missions_total": 65,
       "missions_truncated": true,
       "missions_collection": "missions",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 3,
+      "reports": 4,
       "opened_at": "2026-11-23T19:36:32Z",
-      "last_reported_at": "2026-11-23T20:30:45Z"
+      "last_reported_at": "2026-11-23T20:37:44Z"
     }
   ],
   "resolved_recent": [
@@ -224,19 +224,19 @@
     }
   ],
   "progress": {
-    "stalled_turns": 3,
+    "stalled_turns": 4,
     "threshold": 3,
     "stalled_since": "2026-11-23T19:36:32Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1534,
-    "turns_without_verified_revenue": 1534,
-    "turns_without_outcome": 23,
+    "turns_without_new_interpreted_feedback": 1535,
+    "turns_without_verified_revenue": 1535,
+    "turns_without_outcome": 24,
     "outcome_threshold": 12,
     "dry_since": "2026-11-23T14:30:55Z",
     "last_outcome_turn": "THINK-1795442761",
     "last_productive_turn": "THINK-1795462226",
-    "last_turn": "THINK-1795465801",
+    "last_turn": "THINK-1795466161",
     "last_change": {
       "productive": false,
       "outcome": false,
