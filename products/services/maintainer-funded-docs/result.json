@@ -1,0 +1,53 @@
+{
+  "source": "https://app.opire.dev/home",
+  "capture_receipt": "TASK-179546616111",
+  "sha256": "efa042c52530c016f61ab6fc5abdad7a8182f0f19b1d3981f35cb4df7cadbf5e",
+  "observed_date_utc": "2026-11-23",
+  "rendered_rewards": [
+    {
+      "url": "https://github.com/rodrigompy/bugb/issues/1",
+      "title": "c1work",
+      "advertised": {
+        "value": 10000,
+        "unit": "USD_CENT"
+      },
+      "prior_disposition": [
+        "closed and locked",
+        "no acceptance criteria (empty body)",
+        "self-assigned by owner",
+        "directory lists a stale reward"
+      ]
+    },
+    {
+      "url": "https://github.com/radumarias/rencfs/issues/3",
+      "title": "research implementation for Windows",
+      "advertised": {
+        "value": 4200,
+        "unit": "USD_CENT"
+      },
+      "prior_disposition": [
+        "an AI-assisted competing submission for the same reward already exists with 101 comments",
+        "listing/issue identity inconsistent (2024 listing vs 2026 PR at same number)",
+        "Windows/WinFsp runtime cannot be verified offline",
+        "bot not installed: claim/settlement route unverified"
+      ]
+    },
+    {
+      "url": "https://github.com/flowese/UdioWrapper/issues/7",
+      "title": "500 Server Error - Auto Solve hcapcha",
+      "advertised": {
+        "value": 2000,
+        "unit": "USD_CENT"
+      },
+      "prior_disposition": [
+        "CAPTCHA solving is prohibited by legal-guardrails",
+        "29 claimers"
+      ]
+    }
+  ],
+  "prior_original_checks": "products/services/opire-reward-directory/result.json",
+  "decision": "No new candidate in the three rendered entries. Prior issue findings are historical. No original issue was re-fetched and no patch was attempted.",
+  "coverage_limit": "Only the server-rendered initialRewards array was evaluated. This does not establish coverage of any other entries or boards.",
+  "reopen_if": "A previously unscreened original maintainer notice or updated original issue shows a live funded non-security deliverable with an offline acceptance criterion.",
+  "commercial_evidence": "Directory amounts are advertised. No submission, acceptance or settlement was observed."
+}
