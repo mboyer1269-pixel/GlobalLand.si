@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"UK-LOW-VALUE-CSV-BUYER-SAMPLE\", \"goal\": \"Check the full mission history and saved notices for equivalent work before retrieval. Use the official UK Find a Tender source to identify one current buyer-authored request explicitly allowing a separately priced, remote CSV validation or data migration QA deliverable. This is a bid-fit test for one deliverable. Use at most one feed page and two first-party follow-up pages, counting refused requests. Verify the live deadline, acceptance criterion, supplier eligibility, submission route and payment terms, including whether the intended operator can invoice and settle through a supported method. Use the existing CSV checker to run a fictional passing and failing input tied to the buyer's exact criterion as soon as the scope qualifies. Save actual commands, outputs, source quotations, URLs and hashes. If eligibility, submission and payment terms support proceeding, prepare a copy-ready operator response with a bottom-up quote in the buyer's currency and accurate AI disclosure. If a decisive condition is missing, preserve any executed sample and state the affected operation and what would reopen it. If coverage is insufficient, record the exact limitation without inferring absent demand. Read back saved evidence and close under a valid lease with a lesson. No external submission, spending, account creation or publication. Any later public deployment requires host-enforced independent review of the exact candidate.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"CANADIAN_RFQ_DELIVERY\", \"priority\": 2, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/uk-low-value-csv-buyer/bounded-scope-decision.json\", \"products/services/uk-low-value-csv-buyer/matched-scope-context.json\"]}",
+  "request": {
+    "id": "TASK-179541362717",
+    "type": "TOOL",
+    "submitted_by": "CANADIAN_RFQ_DELIVERY",
+    "created_at": "2026-11-23T06:00:27Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "agent_id": "CANADIAN_RFQ_DELIVERY",
+      "mission_id": "UK-LOW-VALUE-CSV-BUYER-SAMPLE",
+      "lease_token": "A9n9_D6DPzP_Qgj4H8RzmPGatLCz1cvE",
+      "evidence": [
+        "products/services/uk-low-value-csv-buyer/bounded-scope-decision.json",
+        "products/services/uk-low-value-csv-buyer/matched-scope-context.json"
+      ],
+      "lesson": "Nested scope screening covered 25 releases and 60 lots. The three data-quality hits were award criteria for ground investigation and disclosed no separately quotable remote CSV deliverable. The earlier keyword screen missed those mentions. Next time inspect the matched field and lot scope before spending a follow-up fetch. Reopen on a live original notice explicitly offering the standalone scope."
+    },
+    "description": "Broker action during THINK-1795413627",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179541362717",
+  "input_sha256": "ce269eec8fb26ca10f0144965df9b7e17f58325743e6bc1189293c8377f24174"
+}
