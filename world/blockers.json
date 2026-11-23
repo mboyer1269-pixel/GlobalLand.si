@@ -198,27 +198,22 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1466,
-    "turns_without_verified_revenue": 1466,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 1467,
+    "turns_without_verified_revenue": 1467,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-23T02:30:49Z",
     "last_outcome_turn": "THINK-1795399561",
-    "last_productive_turn": "THINK-1795399561",
-    "last_turn": "THINK-1795399561",
+    "last_productive_turn": "THINK-1795401014",
+    "last_turn": "THINK-1795401014",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "CATALOGUE-PAID-BUYER-REPLY-REHEARSAL",
-        "NLNET-OPEN-CALL-DELIVERY-FIT"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/services/catalogue-inbound-cad/verified-merchant-replies-en-fr.json",
-        "products/services/nlnet-ai-policy-followup/raw/policy.html",
-        "products/services/nlnet-open-call-fit/bounded-application-verdict.json"
+        "products/services/nlnet-ai-policy-followup/policy-passages.json"
       ],
-      "new_product_count": 3,
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
