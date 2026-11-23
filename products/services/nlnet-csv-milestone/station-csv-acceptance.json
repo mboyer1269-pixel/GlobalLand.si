@@ -1,0 +1,95 @@
+{
+  "scope": "Fictional station data. Offline structural CSV validation.",
+  "python": "3.11.2",
+  "source_sha256": {
+    "products/actors/csv-preflight/src/core.py": "39d656fbb6b17506752421825e78b9cd6f3d7390b97df2fbdec155a8cc6e8b0d",
+    "products/actors/csv-preflight/src/public_http.py": "8a4257f619a500edc73d3475b5ed2f5e6544be3abf35c46763903f1c4458846e"
+  },
+  "cases": {
+    "clean": {
+      "input": "station_id,reading\nDEMO-1,12\nDEMO-2,17\n",
+      "required_columns": [
+        "station_id",
+        "reading"
+      ],
+      "expected_ok": true,
+      "actual": {
+        "source": "pasted_text",
+        "ok": true,
+        "issues": [],
+        "data_rows": 2,
+        "columns": 2,
+        "headers": [
+          "station_id",
+          "reading"
+        ],
+        "had_bom": false,
+        "error_code": null,
+        "error": null
+      },
+      "repeat_matches": true,
+      "passed": true
+    },
+    "missing_required_column": {
+      "input": "station_id,value\nDEMO-1,12\n",
+      "required_columns": [
+        "station_id",
+        "reading"
+      ],
+      "expected_ok": false,
+      "actual": {
+        "source": "pasted_text",
+        "ok": false,
+        "issues": [
+          {
+            "kind": "missing_required_column",
+            "header": "reading"
+          }
+        ],
+        "data_rows": 1,
+        "columns": 2,
+        "headers": [
+          "station_id",
+          "value"
+        ],
+        "had_bom": false,
+        "error_code": null,
+        "error": null
+      },
+      "repeat_matches": true,
+      "passed": true
+    },
+    "extra_field": {
+      "input": "station_id,reading\nDEMO-1,12,unexpected\n",
+      "required_columns": [
+        "station_id",
+        "reading"
+      ],
+      "expected_ok": false,
+      "actual": {
+        "source": "pasted_text",
+        "ok": false,
+        "issues": [
+          {
+            "kind": "column_count",
+            "record": 2,
+            "expected": 2,
+            "actual": 3
+          }
+        ],
+        "data_rows": 1,
+        "columns": 2,
+        "headers": [
+          "station_id",
+          "reading"
+        ],
+        "had_bom": false,
+        "error_code": null,
+        "error": null
+      },
+      "repeat_matches": true,
+      "passed": true
+    }
+  },
+  "all_pass": true
+}

@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"all_pass\": true,\n  \"cases\": {\n    \"clean\": {\n      \"passed\": true,\n      \"issues\": []\n    },\n    \"missing_required_column\": {\n      \"passed\": true,\n      \"issues\": [\n        {\n          \"kind\": \"missing_required_column\",\n          \"header\": \"reading\"\n        }\n      ]\n    },\n    \"extra_field\": {\n      \"passed\": true,\n      \"issues\": [\n        {\n          \"kind\": \"column_count\",\n          \"record\": 2,\n          \"expected\": 2,\n          \"actual\": 3\n        }\n      ]\n    }\n  },\n  \"artifact\": \"products/services/nlnet-csv-milestone/station-csv-acceptance.json\"\n}\n\n",
+  "artifacts": [
+    "products/services/nlnet-csv-milestone/station-csv-acceptance.json",
+    "products/receipts/TASK-179539236100.json"
+  ],
+  "id": "TASK-179539236100",
+  "input_sha256": "5fbeabca30741c2e836043be89c3ee9d76065f6a33bfd9e4ccbeb92d635ba7dd"
+}
