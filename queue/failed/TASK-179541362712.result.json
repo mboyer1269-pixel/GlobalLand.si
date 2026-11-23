@@ -1,0 +1,46 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 9, in <module>\nAssertionError\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179541362712",
+    "type": "TOOL",
+    "submitted_by": "PAID_PILOT",
+    "created_at": "2026-11-23T06:00:27Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,re,sys\nfrom pathlib import Path\npolicy,extract,call,funding,form,prior,controls,milestone,out=map(Path,sys.argv[1:])\ndef sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()\ndata=json.loads(extract.read_text())\nassert sha(policy)==data['source_sha256']\nlines={x['line']:x['text'] for x in data['passages']}\nfor n in (48,49,50,52,53):\n    assert lines[n].replace('’',\"'\")[:65] in policy.read_text()\ndef links(p):\n    return [x for x in re.findall(r'href=[\"\\']([^\"\\']+)[\"\\']',p.read_text()) if 'generativeai' in x.lower()]\ndoc={'decision':'Do not submit an AI-authored proposal or plan autonomous AI production of funded artifacts under policy 2.0. Preserve the executed CSV milestone for other channels.', 'policy_url':data['source_url'],'source_hashes':{str(p):sha(p) for p in (policy,call,funding,form,prior,controls,milestone)},'call_material_policy_links':{str(p):links(p) for p in (call,funding,form)},'policy_quotes':{n:lines[n] for n in (42,45,48,49,50,52,53,54,55,67)},'scope':'Policy 2.0 describes coverage of applications submitted to NLnet and all work delivered within its grants. The source refers to transitional arrangements for NGI Zero. This decision covers the proposed autonomous workflow.','reopen':'Applicable first-party terms or written confirmation expressly permitting the proposed workflow for this call, or a separately evidenced eligible human-led application and delivery plan complying with the applicable policy, with existing AI-generated code disclosed as required. No exception is assumed.','reusable_milestone':str(milestone),'executed_controls':str(controls),'submission':'none','award':'none verified','settlement':'none verified'}\nout.parent.mkdir(parents=True,exist_ok=True)\nout.write_text(json.dumps(doc,indent=2,ensure_ascii=False)+'\\n')\nprint(json.dumps({k:doc[k] for k in ('decision','call_material_policy_links')}))",
+        "products/services/nlnet-ai-policy-followup/raw/policy.html",
+        "products/services/nlnet-ai-policy-followup/director-policy-passages.json",
+        "products/services/nlnet-open-call-fit/raw/current-call.html",
+        "products/services/nlnet-open-call-fit/raw/funding.html",
+        "products/services/nlnet-open-call-fit/raw/propose.html",
+        "products/services/nlnet-open-call-fit/bounded-application-verdict.json",
+        "products/services/nlnet-csv-milestone/station-csv-acceptance.json",
+        "products/services/nlnet-csv-milestone/director-technical-milestone-handoff.json",
+        "products/services/nlnet-ai-policy-followup/policy-decision.json"
+      ],
+      "inputs": [
+        "products/services/nlnet-ai-policy-followup/raw/policy.html",
+        "products/services/nlnet-ai-policy-followup/director-policy-passages.json",
+        "products/services/nlnet-open-call-fit/raw/current-call.html",
+        "products/services/nlnet-open-call-fit/raw/funding.html",
+        "products/services/nlnet-open-call-fit/raw/propose.html",
+        "products/services/nlnet-open-call-fit/bounded-application-verdict.json",
+        "products/services/nlnet-csv-milestone/station-csv-acceptance.json",
+        "products/services/nlnet-csv-milestone/director-technical-milestone-handoff.json"
+      ],
+      "outputs": [
+        "products/services/nlnet-ai-policy-followup/policy-decision.json"
+      ],
+      "mission_id": "NLNET-AI-POLICY-MILESTONE-FOLLOWUP"
+    },
+    "description": "Broker action during THINK-1795413627",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179541362712",
+  "input_sha256": "c03646a174c6437f16999edf1f20122f66fb2c40130035a0b65e7d30b9dcc5ad"
+}
