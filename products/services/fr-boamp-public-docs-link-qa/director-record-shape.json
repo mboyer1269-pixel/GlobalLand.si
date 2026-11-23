@@ -1,0 +1,1806 @@
+{
+  "source_sha256": "595fca1ee2ff8919fc51aadbec2489cd166e4458a17a6209adcdbf176dc37c9b",
+  "reported_total": 69255,
+  "returned_count": 12,
+  "string_field_inventory": {
+    "$.idweb": {
+      "nonempty_strings": 12,
+      "longest_chars": 9
+    },
+    "$.id": {
+      "nonempty_strings": 12,
+      "longest_chars": 9
+    },
+    "$.objet": {
+      "nonempty_strings": 12,
+      "longest_chars": 171
+    },
+    "$.filename": {
+      "nonempty_strings": 12,
+      "longest_chars": 25
+    },
+    "$.famille": {
+      "nonempty_strings": 12,
+      "longest_chars": 4
+    },
+    "$.code_departement[]": {
+      "nonempty_strings": 20,
+      "longest_chars": 2
+    },
+    "$.famille_libelle": {
+      "nonempty_strings": 12,
+      "longest_chars": 39
+    },
+    "$.dateparution": {
+      "nonempty_strings": 12,
+      "longest_chars": 10
+    },
+    "$.datefindiffusion": {
+      "nonempty_strings": 12,
+      "longest_chars": 10
+    },
+    "$.nomacheteur": {
+      "nonempty_strings": 12,
+      "longest_chars": 37
+    },
+    "$.perimetre": {
+      "nonempty_strings": 12,
+      "longest_chars": 12
+    },
+    "$.type_procedure": {
+      "nonempty_strings": 12,
+      "longest_chars": 16
+    },
+    "$.procedure_libelle": {
+      "nonempty_strings": 12,
+      "longest_chars": 17
+    },
+    "$.procedure_categorise": {
+      "nonempty_strings": 12,
+      "longest_chars": 17
+    },
+    "$.nature": {
+      "nonempty_strings": 12,
+      "longest_chars": 11
+    },
+    "$.sousnature": {
+      "nonempty_strings": 8,
+      "longest_chars": 8
+    },
+    "$.nature_libelle": {
+      "nonempty_strings": 12,
+      "longest_chars": 18
+    },
+    "$.nature_categorise": {
+      "nonempty_strings": 12,
+      "longest_chars": 20
+    },
+    "$.nature_categorise_libelle": {
+      "nonempty_strings": 12,
+      "longest_chars": 19
+    },
+    "$.criteres[]": {
+      "nonempty_strings": 1,
+      "longest_chars": 16
+    },
+    "$.etat": {
+      "nonempty_strings": 12,
+      "longest_chars": 7
+    },
+    "$.descripteur_code[]": {
+      "nonempty_strings": 15,
+      "longest_chars": 3
+    },
+    "$.dc[]": {
+      "nonempty_strings": 15,
+      "longest_chars": 3
+    },
+    "$.descripteur_libelle[]": {
+      "nonempty_strings": 15,
+      "longest_chars": 38
+    },
+    "$.type_marche[]": {
+      "nonempty_strings": 12,
+      "longest_chars": 8
+    },
+    "$.type_marche_facette[]": {
+      "nonempty_strings": 12,
+      "longest_chars": 8
+    },
+    "$.type_avis[]": {
+      "nonempty_strings": 24,
+      "longest_chars": 2
+    },
+    "$.source_schema": {
+      "nonempty_strings": 12,
+      "longest_chars": 14
+    },
+    "$.gestion": {
+      "nonempty_strings": 12,
+      "longest_chars": 950
+    },
+    "$.gestion<json>.REFERENCE.IDWEB": {
+      "nonempty_strings": 12,
+      "longest_chars": 9
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.FAMILLE.JOUE": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.PERIMETRE.DIRECTIVE-24": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.NATURE.APPEL_OFFRE.STANDARD": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.STATUT.INITIAL": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.NOM_HTML": {
+      "nonempty_strings": 11,
+      "longest_chars": 14
+    },
+    "$.gestion<json>.INDEXATION.DATE_PUBLICATION": {
+      "nonempty_strings": 12,
+      "longest_chars": 10
+    },
+    "$.gestion<json>.INDEXATION.DATE_FIN_DIFFUSION": {
+      "nonempty_strings": 12,
+      "longest_chars": 10
+    },
+    "$.gestion<json>.INDEXATION.DESCRIPTEURS.DESCRIPTEUR.CODE": {
+      "nonempty_strings": 9,
+      "longest_chars": 3
+    },
+    "$.gestion<json>.INDEXATION.DESCRIPTEURS.DESCRIPTEUR.LIBELLE": {
+      "nonempty_strings": 9,
+      "longest_chars": 38
+    },
+    "$.gestion<json>.INDEXATION.CRITERES_SOCIAUX_ENV.ENVIRONNEMENTAUX": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.INDEXATION.DEP_PUBLICATION": {
+      "nonempty_strings": 10,
+      "longest_chars": 2
+    },
+    "$.gestion<json>.INDEXATION.RESUME_OBJET": {
+      "nonempty_strings": 12,
+      "longest_chars": 171
+    },
+    "$.donnees": {
+      "nonempty_strings": 12,
+      "longest_chars": 21390
+    },
+    "$.donnees<json>.IDENTITE.DENOMINATION": {
+      "nonempty_strings": 11,
+      "longest_chars": 37
+    },
+    "$.donnees<json>.IDENTITE.ADJUDICATEUR_NUTS": {
+      "nonempty_strings": 6,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.IDENTITE.VILLE": {
+      "nonempty_strings": 11,
+      "longest_chars": 24
+    },
+    "$.donnees<json>.IDENTITE.MEL": {
+      "nonempty_strings": 8,
+      "longest_chars": 34
+    },
+    "$.donnees<json>.IDENTITE.URL": {
+      "nonempty_strings": 8,
+      "longest_chars": 119
+    },
+    "$.donnees<json>.IDENTITE.URL_DOCUMENT": {
+      "nonempty_strings": 5,
+      "longest_chars": 63
+    },
+    "$.donnees<json>.IDENTITE.AGIT_POUR_AUTRE_COMPTE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.IDENTITE.ORGANISME_ACHETEUR_CENTRAL_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.TYPE_POUVOIR_ADJUDICATEUR.AUTRE": {
+      "nonempty_strings": 2,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.ACTIVITE_PRINCIPALE.POUVOIR_ADJUDICATEUR.EDUCATION": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.TITRE_MARCHE": {
+      "nonempty_strings": 7,
+      "longest_chars": 133
+    },
+    "$.donnees<json>.OBJET.REF_MARCHE": {
+      "nonempty_strings": 5,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.OBJET.TYPE_MARCHE.SERVICE": {
+      "nonempty_strings": 1,
+      "longest_chars": 1
+    },
+    "$.donnees<json>.OBJET.OBJET_COMPLET": {
+      "nonempty_strings": 11,
+      "longest_chars": 952
+    },
+    "$.donnees<json>.OBJET.CPV.PRINCIPAL": {
+      "nonempty_strings": 10,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.OBJET.DIV_EN_LOTS.NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.DESCRIPTION": {
+      "nonempty_strings": 4,
+      "longest_chars": 1199
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.CPV.PRINCIPAL": {
+      "nonempty_strings": 3,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.CODE_NUTS": {
+      "nonempty_strings": 3,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.CRITERES_ATTRIBUTION.CRITERES_CCTP": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.DUREE_MOIS": {
+      "nonempty_strings": 2,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.RENOUVELLEMENT_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.VARIANTES_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.OPTIONS_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.CATALOGUE_ELECTRONIQUE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.FONDS_COMMUNAUTAIRES_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.TYPE_PROCEDURE.OUVERT": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.NB_CANDIDATS.REDUCTION_PROGRESSIVE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.AVIS_IMPLIQUE.ACCORD_CADRE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.AVIS_IMPLIQUE.SAD_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.AVIS_IMPLIQUE.SAD_AUTRES_ACHETEURS_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.ATTRIB_POUVOIR_ADJUDICATEUR_SANS_NEGOCIATION_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.ENCHERE_ELECTRONIQUE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.AMP_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.MARCHE_PERIODIQUE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_DELAI.RECEPT_OFFRES": {
+      "nonempty_strings": 9,
+      "longest_chars": 25
+    },
+    "$.donnees<json>.CONDITION_RELATIVE_MARCHE.PARTICIPATION_ELECTRONIQUE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_RELATIVE_MARCHE.LANGUES.LANGUE": {
+      "nonempty_strings": 7,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.CAP_ECO_MARCHE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.CAP_TECH_OFFRE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.MARCHE_RESERVE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.PRESTATION_RESERVEE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.INDICATION_OBLIGATOIRE_NOM_QUALIFICATIONS_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.ELIGIBLE_MPS.non": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_ADMINISTRATIVE.DATE_OUVERTURE_OFFRES": {
+      "nonempty_strings": 5,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.CONDITION_ADMINISTRATIVE.ENVOI_ELECTRONIQUE_AVEC_OUTIL_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.COMMANDE_ELECTRONIQUE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.FACTURATION_ELECTRONIQUE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.PAIEMENT_ELECTRONIQUE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.RENS_COMPLEMENT": {
+      "nonempty_strings": 10,
+      "longest_chars": 807
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE.TYPE.INSTANCE_RECOURS": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE.DENOMINATION": {
+      "nonempty_strings": 4,
+      "longest_chars": 31
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE.VILLE": {
+      "nonempty_strings": 4,
+      "longest_chars": 9
+    },
+    "$.url_avis": {
+      "nonempty_strings": 12,
+      "longest_chars": 50
+    },
+    "$.datelimitereponse": {
+      "nonempty_strings": 4,
+      "longest_chars": 25
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.FAMILLE.FNS": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.PERIMETRE.CMP-2006": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.NATURE.APPEL_OFFRE": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.INDEXATION.DATE_LIMITE_REPONSE": {
+      "nonempty_strings": 4,
+      "longest_chars": 25
+    },
+    "$.gestion<json>.INDEXATION.DESCRIPTEURS.DESCRIPTEUR[].CODE": {
+      "nonempty_strings": 6,
+      "longest_chars": 3
+    },
+    "$.gestion<json>.INDEXATION.DESCRIPTEURS.DESCRIPTEUR[].LIBELLE": {
+      "nonempty_strings": 6,
+      "longest_chars": 38
+    },
+    "$.donnees<json>.IDENTITE.CORRESPONDANT": {
+      "nonempty_strings": 4,
+      "longest_chars": 30
+    },
+    "$.donnees<json>.IDENTITE.ADRESSE": {
+      "nonempty_strings": 9,
+      "longest_chars": 28
+    },
+    "$.donnees<json>.IDENTITE.CP": {
+      "nonempty_strings": 10,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.IDENTITE.TEL": {
+      "nonempty_strings": 5,
+      "longest_chars": 19
+    },
+    "$.donnees<json>.TYPE_ORGANISME.AUTRE": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.ACTIVITE_PRINCIPALE.POUVOIR_ADJUDICATEUR.SANTE": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.TYPE_MARCHE.TRAVAUX.EXECUTION": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LIEU_EXEC_LIVR.ADRESSE": {
+      "nonempty_strings": 4,
+      "longest_chars": 45
+    },
+    "$.donnees<json>.OBJET.LIEU_EXEC_LIVR.CP": {
+      "nonempty_strings": 2,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.OBJET.LIEU_EXEC_LIVR.VILLE": {
+      "nonempty_strings": 2,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.OBJET.AVIS_IMPLIQUE.MARCHE_PUBLIC": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.VARIANTES_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.CARACTERISTIQUES.QUANTITE": {
+      "nonempty_strings": 4,
+      "longest_chars": 171
+    },
+    "$.donnees<json>.PROCEDURE.TYPE_PROCEDURE.PROCEDURE_ADAPTE": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.CRITERES_ATTRIBUTION.CRITERES_CCTP": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_ADMINISTRATIVE.REFERENCE_MARCHE": {
+      "nonempty_strings": 3,
+      "longest_chars": 24
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].TYPE.INSTANCE_RECOURS": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].DENOMINATION": {
+      "nonempty_strings": 13,
+      "longest_chars": 66
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].ADRESSE": {
+      "nonempty_strings": 12,
+      "longest_chars": 39
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].CP": {
+      "nonempty_strings": 12,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].VILLE": {
+      "nonempty_strings": 12,
+      "longest_chars": 14
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].TEL": {
+      "nonempty_strings": 12,
+      "longest_chars": 21
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].FAX": {
+      "nonempty_strings": 8,
+      "longest_chars": 21
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].MEL": {
+      "nonempty_strings": 6,
+      "longest_chars": 26
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].URL": {
+      "nonempty_strings": 5,
+      "longest_chars": 124
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].TYPE.RENS_RECOURS": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].TYPE.DOCUMENTS": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].TYPE.ADMIN": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].CORRESPONDANT": {
+      "nonempty_strings": 2,
+      "longest_chars": 19
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE[].TYPE.TECH": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.contractfolderid": {
+      "nonempty_strings": 1,
+      "longest_chars": 36
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.NATURE.ATTRIBUTION.STANDARD": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.INDEXATION.SCHEMA": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.gestion<json>.INDEXATION.NOMORGANISME": {
+      "nonempty_strings": 1,
+      "longest_chars": 23
+    },
+    "$.gestion<json>.INDEXATION.NATURE_MARCHE.SERVICES": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.INDEXATION.TYPE_PROCEDURE.OUVERT": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.cbc:TotalAmount.@currencyID": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.cbc:TotalAmount.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 6
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:LotResult.cbc:ID.@schemeName": {
+      "nonempty_strings": 1,
+      "longest_chars": 6
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:LotResult.cbc:ID.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:LotResult.cbc:TenderResultCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 23
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:LotResult.cbc:TenderResultCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 7
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:LotResult.efac:SettledContract.cbc:ID": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:LotResult.efac:TenderLot.cbc:ID": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:SettledContract.cbc:ID.@schemeName": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:SettledContract.cbc:ID.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:SettledContract.efbc:ContractFrameworkIndicator": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeResult.efac:SettledContract.efac:ContractReference.cbc:ID": {
+      "nonempty_strings": 1,
+      "longest_chars": 9
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeSubType.cbc:SubTypeCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 14
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:NoticeSubType.cbc:SubTypeCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:PartyIdentification.cbc:ID.@schemeName": {
+      "nonempty_strings": 1,
+      "longest_chars": 12
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:PartyIdentification.cbc:ID.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:PartyName.cbc:Name.@languageID": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:PartyName.cbc:Name.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 23
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:PostalAddress.cbc:CityName": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:PostalAddress.cac:Country.cbc:IdentificationCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 7
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:PostalAddress.cac:Country.cbc:IdentificationCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:PartyLegalEntity.cbc:CompanyID": {
+      "nonempty_strings": 1,
+      "longest_chars": 14
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:Contact.cbc:Telephone": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:Organizations.efac:Organization.efac:Company.cac:Contact.cbc:ElectronicMail": {
+      "nonempty_strings": 1,
+      "longest_chars": 29
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:UBLVersionID": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:CustomizationID": {
+      "nonempty_strings": 1,
+      "longest_chars": 14
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:ID.@schemeName": {
+      "nonempty_strings": 1,
+      "longest_chars": 9
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:ID.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 36
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:ContractFolderID": {
+      "nonempty_strings": 1,
+      "longest_chars": 36
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:IssueDate": {
+      "nonempty_strings": 1,
+      "longest_chars": 16
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:IssueTime": {
+      "nonempty_strings": 1,
+      "longest_chars": 14
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:VersionID": {
+      "nonempty_strings": 1,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:RegulatoryDomain": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:NoticeTypeCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 6
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:NoticeTypeCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 12
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:NoticeLanguageCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cbc:NoticeLanguageCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ContractingParty.cac:ContractingPartyType.cbc:PartyTypeCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 16
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ContractingParty.cac:ContractingPartyType.cbc:PartyTypeCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 7
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ContractingParty.cac:ContractingActivity.cbc:ActivityTypeCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 18
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ContractingParty.cac:ContractingActivity.cbc:ActivityTypeCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 9
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ContractingParty.cac:Party.cac:PartyIdentification.cbc:ID": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:TenderingProcess.cbc:ProcedureCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 26
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:TenderingProcess.cbc:ProcedureCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 4
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cbc:Name.@languageID": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cbc:Name.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 55
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cbc:Description.@languageID": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cbc:Description.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 55
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cbc:ProcurementTypeCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 15
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cbc:ProcurementTypeCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cac:MainCommodityClassification.cbc:ItemClassificationCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cac:MainCommodityClassification.cbc:ItemClassificationCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cac:AdditionalCommodityClassification.cbc:ItemClassificationCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cac:AdditionalCommodityClassification.cbc:ItemClassificationCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cbc:ID.@schemeName": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cbc:ID.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cbc:FundingProgramCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 9
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cbc:FundingProgramCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 11
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cac:AwardingTerms.cac:AwardingCriterion.cac:SubordinateAwardingCriterion.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:AwardCriterionParameter.efbc:ParameterCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 13
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cac:AwardingTerms.cac:AwardingCriterion.cac:SubordinateAwardingCriterion.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:AwardCriterionParameter.efbc:ParameterCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 7
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cac:AwardingTerms.cac:AwardingCriterion.cac:SubordinateAwardingCriterion.ext:UBLExtensions.ext:UBLExtension.ext:ExtensionContent.efext:EformsExtension.efac:AwardCriterionParameter.efbc:ParameterNumeric": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cac:AwardingTerms.cac:AwardingCriterion.cac:SubordinateAwardingCriterion.cbc:AwardingCriterionTypeCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 20
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cac:AwardingTerms.cac:AwardingCriterion.cac:SubordinateAwardingCriterion.cbc:AwardingCriterionTypeCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cac:AwardingTerms.cac:AwardingCriterion.cac:SubordinateAwardingCriterion.cbc:Description.@languageID": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cac:AwardingTerms.cac:AwardingCriterion.cac:SubordinateAwardingCriterion.cbc:Description.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 40
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingTerms.cac:AppealTerms.cac:AppealReceiverParty.cac:PartyIdentification.cbc:ID": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingProcess.cbc:GovernmentAgreementConstraintIndicator": {
+      "nonempty_strings": 1,
+      "longest_chars": 4
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingProcess.cac:AuctionTerms.cbc:AuctionConstraintIndicator": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingProcess.cac:FrameworkAgreement.cac:SubsequentProcessTenderRequirement.cbc:Name": {
+      "nonempty_strings": 1,
+      "longest_chars": 16
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingProcess.cac:ContractingSystem[].cbc:ContractingSystemTypeCode.@listName": {
+      "nonempty_strings": 2,
+      "longest_chars": 19
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:TenderingProcess.cac:ContractingSystem[].cbc:ContractingSystemTypeCode.#text": {
+      "nonempty_strings": 2,
+      "longest_chars": 4
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cbc:ID": {
+      "nonempty_strings": 1,
+      "longest_chars": 9
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cbc:Name.@languageID": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cbc:Name.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 50
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cbc:Description.@languageID": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cbc:Description.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 50
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cbc:ProcurementTypeCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 15
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cbc:ProcurementTypeCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cac:MainCommodityClassification.cbc:ItemClassificationCode.@listName": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cac:MainCommodityClassification.cbc:ItemClassificationCode.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.EFORMS.ContractAwardNotice.cac:TenderResult.cbc:AwardDate": {
+      "nonempty_strings": 1,
+      "longest_chars": 11
+    },
+    "$.donnees<json>.IDENTITE.URL_PROFIL_ACHETEUR": {
+      "nonempty_strings": 7,
+      "longest_chars": 83
+    },
+    "$.donnees<json>.ACTIVITE_PRINCIPALE.ENTITE_ADJUDICATRICE.ACT_PORT": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LIEU_EXEC_LIVR.CODE_NUTS": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.OBJET.AMP_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.CARACTERISTIQUES.PRINCIPALES": {
+      "nonempty_strings": 3,
+      "longest_chars": 1145
+    },
+    "$.donnees<json>.OBJET.DUREE_DELAI.DATE_DEBUT": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.OBJET.DUREE_DELAI.DATE_FIN": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.OBJET.DIV_EN_LOTS.OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.DIV_EN_LOTS.OFFRE_TOUS": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].NUM": {
+      "nonempty_strings": 17,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].DESCRIPTION": {
+      "nonempty_strings": 17,
+      "longest_chars": 691
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].CPV.PRINCIPAL": {
+      "nonempty_strings": 15,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].QUANTITE": {
+      "nonempty_strings": 3,
+      "longest_chars": 14
+    },
+    "$.donnees<json>.CONDITION_DELAI.VALIDITE_OFFRE.DUREE_JOUR": {
+      "nonempty_strings": 2,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.CONDITION_RELATIVE_MARCHE.CAUTIONNEMENT": {
+      "nonempty_strings": 1,
+      "longest_chars": 129
+    },
+    "$.donnees<json>.CONDITION_RELATIVE_MARCHE.FINANCEMENT": {
+      "nonempty_strings": 1,
+      "longest_chars": 219
+    },
+    "$.donnees<json>.CONDITION_RELATIVE_MARCHE.FORME_JURIDIQUE": {
+      "nonempty_strings": 1,
+      "longest_chars": 61
+    },
+    "$.donnees<json>.CONDITION_RELATIVE_MARCHE.AUTRES_CONDITIONS_PART_OUI": {
+      "nonempty_strings": 1,
+      "longest_chars": 193
+    },
+    "$.donnees<json>.CONDITION_RELATIVE_MARCHE.UNITE_MONETAIRE_EUR": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.JUSTIFICATIFS_CANDIDAT.P[]": {
+      "nonempty_strings": 15,
+      "longest_chars": 349
+    },
+    "$.donnees<json>.CONDITION_ADMINISTRATIVE.DATE_LIMITE_OBTENTION_DOCUMENTS": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.CONDITION_ADMINISTRATIVE.DOCUMENT_PAYANT_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.PROCEDURES_RECOURS_PRECISIONS": {
+      "nonempty_strings": 1,
+      "longest_chars": 21
+    },
+    "$.marche_public_simplifie": {
+      "nonempty_strings": 2,
+      "longest_chars": 1
+    },
+    "$.marche_public_simplifie_label": {
+      "nonempty_strings": 2,
+      "longest_chars": 23
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.ELIGIBLE_MPS.oui": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.IDENTITE.URL_PARTICIPATION": {
+      "nonempty_strings": 4,
+      "longest_chars": 124
+    },
+    "$.donnees<json>.TYPE_POUVOIR_ADJUDICATEUR.AGENCE_NATIONAL": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.ACTIVITE_PRINCIPALE.POUVOIR_ADJUDICATEUR.LOIS_CULT_REL": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.LIEU_PRINCIPAL": {
+      "nonempty_strings": 2,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.RENOUVELLEMENT_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.RENOUVELLEMENT_DESCRIPTION": {
+      "nonempty_strings": 1,
+      "longest_chars": 117
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.VARIANTES_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.OPTIONS_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.OPTIONS_DESCRIPTION": {
+      "nonempty_strings": 2,
+      "longest_chars": 337
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.INFO_COMPL": {
+      "nonempty_strings": 1,
+      "longest_chars": 238
+    },
+    "$.donnees<json>.CONDITION_RELATIVE_MARCHE.PARTICIPATION_ELECTRONIQUE_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_RELATIVE_MARCHE.AUTRES_CONDITIONS_PART_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.CAP_ECO_MARCHE_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.CAP_TECH_OFFRE_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.FACTURATION_ELECTRONIQUE_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.IDENTITE.CODE_IDENT_NATIONAL": {
+      "nonempty_strings": 2,
+      "longest_chars": 14
+    },
+    "$.donnees<json>.TYPE_POUVOIR_ADJUDICATEUR.ORG_DROIT_PUBLIC": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.ACTIVITE_PRINCIPALE.POUVOIR_ADJUDICATEUR.AUTRE": {
+      "nonempty_strings": 1,
+      "longest_chars": 22
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].INTITULE": {
+      "nonempty_strings": 14,
+      "longest_chars": 109
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].CPV[].PRINCIPAL": {
+      "nonempty_strings": 4,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].CODE_NUTS": {
+      "nonempty_strings": 14,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].CRITERES_ATTRIBUTION.CRITERES_CCTP": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].DUREE_MOIS": {
+      "nonempty_strings": 14,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].RENOUVELLEMENT_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].VARIANTES_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].OPTIONS_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].CATALOGUE_ELECTRONIQUE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].FONDS_COMMUNAUTAIRES_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE.ADRESSE": {
+      "nonempty_strings": 3,
+      "longest_chars": 19
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE.CP": {
+      "nonempty_strings": 3,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.OBJET.CPV.SUPPLEMENTAIRE": {
+      "nonempty_strings": 1,
+      "longest_chars": 4
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].CPV.SUPPLEMENTAIRE": {
+      "nonempty_strings": 10,
+      "longest_chars": 4
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].LIEU_PRINCIPAL": {
+      "nonempty_strings": 9,
+      "longest_chars": 24
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].CRITERES_ATTRIBUTION.CRITERES_QUALITE.CRITERE.@POIDS": {
+      "nonempty_strings": 10,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].CRITERES_ATTRIBUTION.CRITERES_QUALITE.CRITERE.#text": {
+      "nonempty_strings": 10,
+      "longest_chars": 9
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].CRITERES_ATTRIBUTION.CRITERES_PRIX.POIDS": {
+      "nonempty_strings": 10,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].INFO_COMPL": {
+      "nonempty_strings": 10,
+      "longest_chars": 368
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].RENOUVELLEMENT_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT[].RENOUVELLEMENT_DESCRIPTION": {
+      "nonempty_strings": 9,
+      "longest_chars": 320
+    },
+    "$.donnees<json>.PROCEDURE.AVIS_IMPLIQUE.ACCORD_CADRE_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.ACCORD_CADRE.UN_SEUL_OPERATEUR": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.CRITERES_ATTRIBUTION.CRITERES_PRIX": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.CONDITION_DELAI.VALIDITE_OFFRE.DUREE_MOIS": {
+      "nonempty_strings": 2,
+      "longest_chars": 1
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.SITUATION_JURIDIQUE": {
+      "nonempty_strings": 2,
+      "longest_chars": 3750
+    },
+    "$.titulaire[]": {
+      "nonempty_strings": 1,
+      "longest_chars": 6
+    },
+    "$.annonce_lie[]": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.annonces_anterieures": {
+      "nonempty_strings": 1,
+      "longest_chars": 463
+    },
+    "$.annonces_anterieures<json>.REFERENCE.IDWEB": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.annonces_anterieures<json>.REFERENCE.TYPE_AVIS.FAMILLE.JOUE": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.annonces_anterieures<json>.REFERENCE.TYPE_AVIS.PERIMETRE.DIRECTIVE-24": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.annonces_anterieures<json>.REFERENCE.TYPE_AVIS.NATURE.APPEL_OFFRE.STANDARD": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.annonces_anterieures<json>.REFERENCE.TYPE_AVIS.STATUT.INITIAL": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.annonces_anterieures<json>.REFERENCE.DATE_ENVOI": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.annonces_anterieures<json>.REFERENCE_PUBLICATION[].PUBLICATION_ELECTRONIQUE.DATE_PUBLICATION": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.annonces_anterieures<json>.REFERENCE_PUBLICATION[].PUBLICATION_ELECTRONIQUE.DATE_FIN_DIFFUSION": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.annonces_anterieures<json>.REFERENCE_PUBLICATION[].PUBLICATION_JOUE.ANNEE": {
+      "nonempty_strings": 1,
+      "longest_chars": 4
+    },
+    "$.annonces_anterieures<json>.REFERENCE_PUBLICATION[].PUBLICATION_JOUE.NUM_PARUTION": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.annonces_anterieures<json>.REFERENCE_PUBLICATION[].PUBLICATION_JOUE.NUM_ANNONCE": {
+      "nonempty_strings": 1,
+      "longest_chars": 6
+    },
+    "$.annonces_anterieures<json>.REFERENCE_PUBLICATION[].PUBLICATION_JOUE.DATE_PUBLICATION": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE.IDWEB": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE.TYPE_AVIS.FAMILLE.JOUE": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE.TYPE_AVIS.PERIMETRE.DIRECTIVE-24": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE.TYPE_AVIS.NATURE.APPEL_OFFRE.STANDARD": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE.TYPE_AVIS.STATUT.INITIAL": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE.DATE_ENVOI": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE_PUBLICATION[].PUBLICATION_ELECTRONIQUE.DATE_PUBLICATION": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE_PUBLICATION[].PUBLICATION_ELECTRONIQUE.DATE_FIN_DIFFUSION": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE_PUBLICATION[].PUBLICATION_JOUE.ANNEE": {
+      "nonempty_strings": 1,
+      "longest_chars": 4
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE_PUBLICATION[].PUBLICATION_JOUE.NUM_PARUTION": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE_PUBLICATION[].PUBLICATION_JOUE.NUM_ANNONCE": {
+      "nonempty_strings": 1,
+      "longest_chars": 6
+    },
+    "$.gestion<json>.MARCHE.ANNONCE_ANTERIEUR.REFERENCE_PUBLICATION[].PUBLICATION_JOUE.DATE_PUBLICATION": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.OBJET.CARACTERISTIQUES.VALEUR.@DEVISE": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.OBJET.CARACTERISTIQUES.VALEUR.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 9
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.CRITERES_ATTRIBUTION.CRITERES_QUALITE.CRITERE[].@POIDS": {
+      "nonempty_strings": 2,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.CRITERES_ATTRIBUTION.CRITERES_QUALITE.CRITERE[].#text": {
+      "nonempty_strings": 2,
+      "longest_chars": 84
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.CRITERES_ATTRIBUTION.CRITERES_PRIX.POIDS": {
+      "nonempty_strings": 1,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.PUBLICATION_ANTERIEURE.OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PUBLICATION_ANTERIEURE.REFERENCE_PUBLICATION.PUBLICATION_JOUE.ANNEE": {
+      "nonempty_strings": 1,
+      "longest_chars": 4
+    },
+    "$.donnees<json>.PUBLICATION_ANTERIEURE.REFERENCE_PUBLICATION.PUBLICATION_JOUE.NUM_PARUTION": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.PUBLICATION_ANTERIEURE.REFERENCE_PUBLICATION.PUBLICATION_JOUE.NUM_ANNONCE": {
+      "nonempty_strings": 1,
+      "longest_chars": 6
+    },
+    "$.donnees<json>.ATTRIBUTION.ATTRIBUE_PAR_LOTS_MARCHES": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.ATTRIBUE": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.NUM_MARCHE": {
+      "nonempty_strings": 1,
+      "longest_chars": 8
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.INTITULE": {
+      "nonempty_strings": 1,
+      "longest_chars": 88
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.TITULAIRE.DENOMINATION": {
+      "nonempty_strings": 1,
+      "longest_chars": 6
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.TITULAIRE.ADRESSE": {
+      "nonempty_strings": 1,
+      "longest_chars": 38
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.TITULAIRE.CP": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.TITULAIRE.VILLE": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.TITULAIRE.CODE_NUTS": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.TITULAIRE.URL": {
+      "nonempty_strings": 1,
+      "longest_chars": 17
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.TITULAIRE.PME_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.RENSEIGNEMENT.DATE_ATTRIBUTION": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.RENSEIGNEMENT.NB_OFFRE_RECU": {
+      "nonempty_strings": 1,
+      "longest_chars": 1
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.RENSEIGNEMENT.MONTANT.@DEVISE": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.RENSEIGNEMENT.MONTANT.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 9
+    },
+    "$.donnees<json>.ATTRIBUTION.DECISION.RENSEIGNEMENT.SOUSTRAITANCE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.ANNEXE_D1": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.FAMILLE.MAPA": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.gestion<json>.INDEXATION.DEP_PUBLICATION[]": {
+      "nonempty_strings": 10,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.OBJET.DUREE_DELAI.DATE_EXECUTION": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.OBJET.DIV_EN_LOTS.OFFRE_UN": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.NUM": {
+      "nonempty_strings": 1,
+      "longest_chars": 6
+    },
+    "$.donnees<json>.OBJET.LOTS.LOT.DATE_LIVRAISON": {
+      "nonempty_strings": 1,
+      "longest_chars": 10
+    },
+    "$.donnees<json>.CONDITION_ADMINISTRATIVE.CONDITIONS_REMISE_OFFRES": {
+      "nonempty_strings": 1,
+      "longest_chars": 265
+    },
+    "$.donnees<json>.ACTIVITE_PRINCIPALE.POUVOIR_ADJUDICATEUR.ACT_SERV_ADM_PUB": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.NB_LOT_ATTRIB_MAX": {
+      "nonempty_strings": 1,
+      "longest_chars": 1
+    },
+    "$.donnees<json>.OBJET.LOTS_RESERVE_POUVOIR_ADJUDICATEUR": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.PROCEDURE.AMP_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.ADRESSES_COMPLEMENTAIRES.ADRESSE.URL": {
+      "nonempty_strings": 1,
+      "longest_chars": 38
+    },
+    "$.gestion<json>.REFERENCE.TYPE_AVIS.PERIMETRE.FNSimple": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.IDENTITE.TYPE_IDENT_NATIONAL.SIRET": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.IDENTITE.CONTACT": {
+      "nonempty_strings": 1,
+      "longest_chars": 12
+    },
+    "$.donnees<json>.IDENTITE.INTEGRALITE_DOC_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.CARACTERISTIQUES.VALEUR_TOTALE.@DEVISE": {
+      "nonempty_strings": 1,
+      "longest_chars": 3
+    },
+    "$.donnees<json>.OBJET.CARACTERISTIQUES.VALEUR_TOTALE.#text": {
+      "nonempty_strings": 1,
+      "longest_chars": 5
+    },
+    "$.donnees<json>.OBJET.DUREE_DELAI.DUREE_MOIS": {
+      "nonempty_strings": 1,
+      "longest_chars": 2
+    },
+    "$.donnees<json>.OBJET.TRANCHE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.OBJET.MARCHE_RESERVE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.TECH_ACHAT.ACCORD_CADRE": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.ATTRIB_SANS_NEG_OUI": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.VARIANTES_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    },
+    "$.donnees<json>.PROCEDURE.CATEGORIE_ACHETEUR": {
+      "nonempty_strings": 1,
+      "longest_chars": 400
+    },
+    "$.donnees<json>.PROCEDURE.CRITERES_ATTRIBUTION.CRITERES_LIBRE": {
+      "nonempty_strings": 1,
+      "longest_chars": 79
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.CRITERE_SELECTION": {
+      "nonempty_strings": 1,
+      "longest_chars": 79
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.CAP_ECO": {
+      "nonempty_strings": 1,
+      "longest_chars": 30
+    },
+    "$.donnees<json>.CONDITION_PARTICIPATION.CAP_TECH": {
+      "nonempty_strings": 1,
+      "longest_chars": 30
+    },
+    "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.VISITE_NON": {
+      "nonempty_strings": 0,
+      "longest_chars": 0
+    }
+  },
+  "scope_term_pointers": [
+    {
+      "record_index": 0,
+      "field": "$.objet",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 0,
+      "field": "$.gestion<json>.INDEXATION.RESUME_OBJET",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 0,
+      "field": "$.gestion",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 0,
+      "field": "$.donnees<json>.OBJET.TITRE_MARCHE",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 0,
+      "field": "$.donnees<json>.OBJET.OBJET_COMPLET",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 0,
+      "field": "$.donnees<json>.OBJET.LOTS.LOT.DESCRIPTION",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 0,
+      "field": "$.donnees",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 2,
+      "field": "$.objet",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 2,
+      "field": "$.gestion<json>.INDEXATION.RESUME_OBJET",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 2,
+      "field": "$.gestion",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 2,
+      "field": "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cbc:Name.#text",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 2,
+      "field": "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProject.cbc:Description.#text",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 2,
+      "field": "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cbc:Name.#text",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 2,
+      "field": "$.donnees<json>.EFORMS.ContractAwardNotice.cac:ProcurementProjectLot.cac:ProcurementProject.cbc:Description.#text",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 2,
+      "field": "$.donnees",
+      "matched_phrase": "migration et refonte de certains site"
+    },
+    {
+      "record_index": 4,
+      "field": "$.objet",
+      "matched_phrase": "Migration vers Drupal 8 du site"
+    },
+    {
+      "record_index": 4,
+      "field": "$.gestion<json>.INDEXATION.RESUME_OBJET",
+      "matched_phrase": "Migration vers Drupal 8 du site"
+    },
+    {
+      "record_index": 4,
+      "field": "$.gestion",
+      "matched_phrase": "Migration vers Drupal 8 du site"
+    },
+    {
+      "record_index": 4,
+      "field": "$.donnees<json>.OBJET.OBJET_COMPLET",
+      "matched_phrase": "Migration vers Drupal 8 du site"
+    },
+    {
+      "record_index": 4,
+      "field": "$.donnees<json>.OBJET.CARACTERISTIQUES.PRINCIPALES",
+      "matched_phrase": "Refonte-site"
+    },
+    {
+      "record_index": 4,
+      "field": "$.donnees<json>.OBJET.CARACTERISTIQUES.QUANTITE",
+      "matched_phrase": "Migration vers Drupal 8 du site"
+    },
+    {
+      "record_index": 4,
+      "field": "$.donnees<json>.CONDITION_ADMINISTRATIVE.REFERENCE_MARCHE",
+      "matched_phrase": "Refonte-site"
+    },
+    {
+      "record_index": 4,
+      "field": "$.donnees",
+      "matched_phrase": "Migration vers Drupal 8 du site"
+    },
+    {
+      "record_index": 5,
+      "field": "$.objet",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 5,
+      "field": "$.gestion<json>.INDEXATION.RESUME_OBJET",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 5,
+      "field": "$.gestion",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 5,
+      "field": "$.donnees<json>.OBJET.TITRE_MARCHE",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 5,
+      "field": "$.donnees",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 6,
+      "field": "$.objet",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 6,
+      "field": "$.gestion<json>.INDEXATION.RESUME_OBJET",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 6,
+      "field": "$.gestion",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 6,
+      "field": "$.donnees<json>.OBJET.TITRE_MARCHE",
+      "matched_phrase": "Refonte du site"
+    },
+    {
+      "record_index": 6,
+      "field": "$.donnees<json>.OBJET.OBJET_COMPLET",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 6,
+      "field": "$.donnees<json>.OBJET.LOTS.LOT[].DESCRIPTION",
+      "matched_phrase": "Refonte du site"
+    },
+    {
+      "record_index": 6,
+      "field": "$.donnees",
+      "matched_phrase": "Refonte du site"
+    },
+    {
+      "record_index": 8,
+      "field": "$.objet",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 8,
+      "field": "$.gestion<json>.INDEXATION.RESUME_OBJET",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 8,
+      "field": "$.gestion",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 8,
+      "field": "$.donnees<json>.OBJET.TITRE_MARCHE",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 8,
+      "field": "$.donnees<json>.ATTRIBUTION.DECISION.INTITULE",
+      "matched_phrase": "Migration technique des site"
+    },
+    {
+      "record_index": 8,
+      "field": "$.donnees",
+      "matched_phrase": "Migration site"
+    },
+    {
+      "record_index": 9,
+      "field": "$.objet",
+      "matched_phrase": "Refonte du site"
+    },
+    {
+      "record_index": 9,
+      "field": "$.gestion<json>.INDEXATION.RESUME_OBJET",
+      "matched_phrase": "Refonte du site"
+    },
+    {
+      "record_index": 9,
+      "field": "$.gestion",
+      "matched_phrase": "Refonte du site"
+    },
+    {
+      "record_index": 9,
+      "field": "$.donnees<json>.IDENTITE.URL",
+      "matched_phrase": "refonte-du-site"
+    },
+    {
+      "record_index": 9,
+      "field": "$.donnees<json>.OBJET.OBJET_COMPLET",
+      "matched_phrase": "Refonte du site"
+    },
+    {
+      "record_index": 9,
+      "field": "$.donnees<json>.OBJET.CARACTERISTIQUES.PRINCIPALES",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 9,
+      "field": "$.donnees<json>.OBJET.CARACTERISTIQUES.QUANTITE",
+      "matched_phrase": "Refonte graphique et ergonomique du site"
+    },
+    {
+      "record_index": 9,
+      "field": "$.donnees<json>.RENSEIGNEMENTS_COMPLEMENTAIRES.RENS_COMPLEMENT",
+      "matched_phrase": "refonte-du-site"
+    },
+    {
+      "record_index": 9,
+      "field": "$.donnees",
+      "matched_phrase": "refonte-du-site"
+    },
+    {
+      "record_index": 10,
+      "field": "$.objet",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 10,
+      "field": "$.gestion<json>.INDEXATION.RESUME_OBJET",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 10,
+      "field": "$.gestion",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 10,
+      "field": "$.donnees<json>.OBJET.TITRE_MARCHE",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 10,
+      "field": "$.donnees<json>.OBJET.OBJET_COMPLET",
+      "matched_phrase": "Refonte du site"
+    },
+    {
+      "record_index": 10,
+      "field": "$.donnees<json>.OBJET.LOTS.LOT[].DESCRIPTION",
+      "matched_phrase": "Migration des contenus- Publication du site"
+    },
+    {
+      "record_index": 10,
+      "field": "$.donnees",
+      "matched_phrase": "refonte du site"
+    },
+    {
+      "record_index": 11,
+      "field": "$.objet",
+      "matched_phrase": "Migration du site"
+    },
+    {
+      "record_index": 11,
+      "field": "$.gestion<json>.INDEXATION.RESUME_OBJET",
+      "matched_phrase": "Migration du site"
+    },
+    {
+      "record_index": 11,
+      "field": "$.gestion",
+      "matched_phrase": "Migration du site"
+    }
+  ],
+  "limits": "One saved response. Phrase matches are pointers only. An empty match set does not verify a server-side filter or rule out suitable notices."
+}
