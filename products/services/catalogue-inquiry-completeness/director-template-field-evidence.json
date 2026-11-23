@@ -1,0 +1,23 @@
+{
+  "scope": "Exact field-name check of prefilled mail-link bodies in the saved 19 November public capture. Visible instructions and equivalent French or English wording require separate review. No email client, private correspondence or buyer activity was tested.",
+  "source": "products/distribution/catalogue-referral/2026-11-19-direct-catalogue-readback.html",
+  "source_sha256": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+  "checker_sha256": "06f1807e2e005a7d84ff1d2ec72f30aee0017faa3ebe8d6e9a12a6eb52fdd45a",
+  "required_checker_headers": [
+    "expected_family",
+    "offer_id",
+    "item_group_id"
+  ],
+  "templates": [
+    {
+      "ordinal": 1,
+      "exact_field_names_present": [],
+      "exact_field_names_absent": [
+        "expected_family",
+        "offer_id",
+        "item_group_id"
+      ]
+    }
+  ],
+  "template_count": 1
+}
