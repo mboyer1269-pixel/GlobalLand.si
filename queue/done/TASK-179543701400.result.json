@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source_url\": \"https://raw.githubusercontent.com/googleapis/googleapis/master/google/shopping/merchant/products/v1/products_common.proto\",\n  \"source_sha256\": \"33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304\",\n  \"expected_sha256\": \"33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304\",\n  \"field_declarations_with_comments\": [\n    {\n      \"start_line\": 1715,\n      \"field_line\": 1716,\n      \"verbatim\": \"  // Shared identifier for all variants of the same product.\\n  optional string item_group_id = 27;\"\n    }\n  ],\n  \"scope\": \"Merchant API schema. Field comments do not demonstrate acceptance of a submitted feed.\",\n  \"capture_hash_matches\": true\n}\n\n\n",
+  "artifacts": [
+    "products/services/catalogue-google-group-id-delivery/merchant-api-field-evidence.json",
+    "products/receipts/TASK-179543701400.json"
+  ],
+  "id": "TASK-179543701400",
+  "input_sha256": "2a9db9682a188c89e157229c92f5a64b906a058130c16659d5ef42793e039e51"
+}
