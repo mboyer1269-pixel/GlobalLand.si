@@ -1,0 +1,42 @@
+{
+  "status": "DONE",
+  "output": "{\"verified\": true, \"scenario_count\": 2, \"sha256\": \"a0e38ec9ae3738cf29f1309020d4f96f0586edb297e218aea0c28d29bd0ec32e\"}\n\n",
+  "artifacts": [
+    "products/services/catalogue-inbound-cad/verified-merchant-replies-en-fr.json",
+    "products/receipts/TASK-179539920210.json"
+  ],
+  "request": {
+    "id": "TASK-179539920210",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-23T02:00:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json, hashlib, re\nfrom pathlib import Path\ndef read(p):\n    return json.loads(Path(p).read_text())\ndef sha(p):\n    return hashlib.sha256(Path(p).read_bytes()).hexdigest()\nscenario_path, packet_path, table_path, control_path, output = __import__('sys').argv[1:]\ns, p, t, c = map(read, [scenario_path, packet_path, table_path, control_path])\nassert sha(packet_path) == s['reply_packet_sha256']\nassert sha(table_path) == p['rehearsal_sha256']\nassert len(t['checks']) == 5 and all(x['passed'] for x in t['checks'])\nassert all(set(d) == {'en','fr'} and all(isinstance(v,str) and v.strip() for v in d.values()) for d in t['operator_reply_drafts'].values())\nruns = c['runs']\nassert [r['exit_code'] for r in runs] == [0,1]\nassert [json.loads(r['stdout']) for r in runs] == [{'conflicting_families':{}},{'conflicting_families':{'linen-shirt':['G1','G2']}}]\nassert len(s['scenarios']) == 2\nmatch = re.fullmatch(r'EN\\n(.+)\\n\\nFR\\n(.+)',p['replies']['commission'],re.S)\nassert match and all(x.strip() for x in match.groups())\nintake = {'en':'Paste up to 20 CSV rows including the header as plain text. Use synthetic or anonymized data and exclude attachments and confidential information.', 'fr':'Collez en texte brut jusqu’à 20 lignes de CSV, en-tête compris. Utilisez des données fictives ou anonymisées et excluez les pièces jointes et les renseignements confidentiels.'}\nreplies = []\nfor item in s['scenarios']:\n    replies.append({'case':item['case'], **{lang:base+'\\n\\n'+intake[lang]+'\\n\\n'+item['operator_reply_insert_'+lang] for lang,base in zip(('en','fr'),match.groups())}})\nresult={'all_pass':True,'usage':s['scope'],'price_handling':s['price_handling'],'item_4_handling':s['item_4_handling'],'inputs':{path:sha(path) for path in [scenario_path,packet_path,table_path,control_path]},'observed_controls':[{'exit_code': r['exit_code'], 'output':json.loads(r['stdout'])} for r in runs],'replies':replies}\nPath(output).write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\\n')\nprint(json.dumps({'verified':result['all_pass'],'scenario_count':len(replies),'sha256':sha(output)}))",
+        "products/services/catalogue-inbound-cad/merchant-inquiry-scenarios-en-fr.json",
+        "products/services/catalogue-inbound-cad/operator-reply-packet.json",
+        "products/services/catalogue-inbound-cad/decision-table-rehearsal.json",
+        "products/services/merchant-v1-group-id-sample/runnable-controls/verification.json",
+        "products/services/catalogue-inbound-cad/verified-merchant-replies-en-fr.json"
+      ],
+      "inputs": [
+        "products/services/catalogue-inbound-cad/merchant-inquiry-scenarios-en-fr.json",
+        "products/services/catalogue-inbound-cad/operator-reply-packet.json",
+        "products/services/catalogue-inbound-cad/decision-table-rehearsal.json",
+        "products/services/merchant-v1-group-id-sample/runnable-controls/verification.json"
+      ],
+      "outputs": [
+        "products/services/catalogue-inbound-cad/verified-merchant-replies-en-fr.json"
+      ],
+      "mission_id": "CATALOGUE-PAID-BUYER-REPLY-REHEARSAL"
+    },
+    "description": "Broker action during THINK-1795399202",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179539920210",
+  "input_sha256": "563042b55be013fbdd5f7dc670ed9d7c7c489d718ed5c4e9748a7a583a4b9b34"
+}
