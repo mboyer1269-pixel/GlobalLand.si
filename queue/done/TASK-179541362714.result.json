@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\"releases\": 25, \"lots\": 60, \"text_fields\": 881, \"pointers\": [{\"id\": \"110327-2026\", \"title\": \"Contractor Services Framework Agreement\", \"lots\": 8, \"text_fields_screened\": 168, \"matched_terms\": [\"Data Quality\"]}, {\"id\": \"110268-2026\", \"title\": \"Contractor Services Framework Agreement\", \"lots\": 8, \"text_fields_screened\": 168, \"matched_terms\": [\"Data Quality\"]}, {\"id\": \"110266-2026\", \"title\": \"Contractor Services Framework Agreement\", \"lots\": 8, \"text_fields_screened\": 168, \"matched_terms\": [\"Data Quality\"]}]}\n\n",
+  "artifacts": [
+    "products/services/uk-low-value-csv-buyer/bounded-scope-decision.json",
+    "products/receipts/TASK-179541362714.json"
+  ],
+  "request": {
+    "id": "TASK-179541362714",
+    "type": "TOOL",
+    "submitted_by": "CANADIAN_RFQ_DELIVERY",
+    "created_at": "2026-11-23T06:00:27Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,re,sys\nfrom pathlib import Path\nsource,out=map(Path,sys.argv[1:])\nraw=source.read_bytes()\nsha=hashlib.sha256(raw).hexdigest()\nassert sha=='a6d3f9b0dfbebd1cb1dd5b9bc98df9c666e04a1ca3c6edbf48dc7d3835fd6efa'\ndef scope(obj):\n    if isinstance(obj,dict):\n        for key,value in obj.items():\n            if key in {'title','description','name'} and isinstance(value,str):\n                yield value\n            elif isinstance(value,(dict,list)):\n                yield from scope(value)\n    elif isinstance(obj,list):\n        for value in obj:\n            yield from scope(value)\npattern=re.compile(r'\\bcsv\\b|\\bcomma.separated\\b|\\bdata\\s+(migration|cleansing|cleaning|validation|quality|conversion|import|reconciliation)\\b|\\bspreadsheet\\b|\\bfile\\s+(validation|conversion)\\b',re.I)\nreleases=json.loads(raw)['releases']\nassert len(releases)==25\nrows=[]\nfor release in releases:\n    tender=release.get('tender') or {}\n    fields=list(scope(tender))\n    rows.append({'id':release.get('id'),'title':tender.get('title'),'lots':len(tender.get('lots') or []),'text_fields_screened':len(fields),'matched_terms':sorted(set(match.group(0) for field in fields for match in pattern.finditer(field)))})\nhits=[row for row in rows if row['matched_terms']]\nreport={'source':'https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=tender&limit=25','source_sha256':sha,'fetch_receipt':'TASK-179540820101','scope':'One page of 25 releases. Screened nested tender titles, descriptions and names, including lot fields. A textual match is a pointer. Unpublished tender packs and other pages were outside coverage.','rows':rows,'candidate_pointers':hits,'decision':'No concrete lead for separately priced remote CSV validation or migration QA in this page' if not hits else 'Read matching scope before making a bid decision','reopen':'A live original notice explicitly permitting an independently quotable remote CSV validation or migration QA deliverable. Verify eligibility and settlement before a submission-ready quote.','market_demand':'unknown','buyer_specific_controls':'Not run because no original acceptance requirement was identified in the earlier scope review.','submission':'none'}\nout.write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\\n')\nprint(json.dumps({'releases':len(rows),'lots':sum(r['lots'] for r in rows),'text_fields':sum(r['text_fields_screened'] for r in rows),'pointers':hits},ensure_ascii=False))",
+        "products/services/uk-low-value-csv-buyer/raw/tender-feed.json",
+        "products/services/uk-low-value-csv-buyer/bounded-scope-decision.json"
+      ],
+      "inputs": [
+        "products/services/uk-low-value-csv-buyer/raw/tender-feed.json"
+      ],
+      "outputs": [
+        "products/services/uk-low-value-csv-buyer/bounded-scope-decision.json"
+      ],
+      "mission_id": "UK-LOW-VALUE-CSV-BUYER-SAMPLE"
+    },
+    "description": "Broker action during THINK-1795413627",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179541362714",
+  "input_sha256": "e751eeeab0b5e095883bb3127410275c12cf9c70b7f5af45f55a8fc416c3cff7"
+}
