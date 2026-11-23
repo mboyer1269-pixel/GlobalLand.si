@@ -1,0 +1,9 @@
+{
+  "status": "DONE",
+  "output": "src/core.py:18 check_text(text, delimiter=',', required_columns=None, source='pasted_text')\nsrc/core.py:30 read_csv(url, delimiter=',', required_columns=None, timeout=30)\nsrc/core.py:58 check(text, delimiter=',', required_columns=None)\ntests/run_tests.py:10 main()\n  assert row['ok'] is ok\n  assert [issue['kind'] for issue in row['issues']] == issues\n  assert row['had_bom'] is True and row['headers'] == ['A', 'B']\n  assert row['data_rows'] == 1 and row['columns'] == 2\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179539200102.json"
+  ],
+  "id": "TASK-179539200102",
+  "input_sha256": "d8e4f4ece412d6a1e4ca2d53cb9dd2c8451be437745fe8c00a8ffc14b0454f1f"
+}
