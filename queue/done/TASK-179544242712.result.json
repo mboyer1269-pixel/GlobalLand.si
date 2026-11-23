@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"status\": \"REQUIREMENT_UNVERIFIED\",\n  \"earlier_fetch\": {\n    \"task\": \"TASK-179532396101\",\n    \"result\": \"host response-size rejection\"\n  },\n  \"replacement\": {\n    \"task\": \"TASK-179532696112\",\n    \"url\": \"https://developers.google.com/merchant/api/guides/products/overview\",\n    \"http_status\": 200,\n    \"sha256\": \"5517a7b12e1da979fe948c7b5d300f4321850fa047a99a3ab0d537f6e520985f\",\n    \"literal_pattern_counts\": {\n      \"item.group.id\": 0,\n      \"product variants\": 0\n    }\n  },\n  \"sample_executed\": false,\n  \"reopen_on\": \"Readable current first-party field specification stating the applicable variant grouping rule and its exceptions. Check the exact text before creating fixtures.\",\n  \"scope\": \"This finding applies to the retrieved overview and observed fetch refusal. Market demand remains unknown.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/catalogue-google-group-id-delivery/example-and-reply-en-fr.md",
+    "products/receipts/TASK-179544242712.json"
+  ],
+  "request": {
+    "id": "TASK-179544242712",
+    "type": "TOOL",
+    "submitted_by": "CATALOGUE_BUYER_FIT",
+    "created_at": "2026-11-23T14:00:27Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "/usr/bin/python3",
+        "-c",
+        "import json,sys; from pathlib import Path\nrun,prior,out,copy=sys.argv[1:]\nassert all(r['matches'] for r in json.loads(Path(run).read_text())['runs'])\nprint(Path(prior).read_text()[:1300])\nPath(out).write_text(copy,encoding='utf8')",
+        "products/services/catalogue-google-group-id-delivery/adapted-run.json",
+        "products/services/merchant-feed-variant-qa/source-verdict.json",
+        "products/services/catalogue-google-group-id-delivery/example-and-reply-en-fr.md",
+        "# Variant group ID example / Exemple d’identifiant de groupe de variantes\n\nThe earlier source review lacked a field-level rule. Google’s Merchant API schema now supplies one for `item_group_id`: “Shared identifier for all variants of the same product.” [Source](https://raw.githubusercontent.com/googleapis/googleapis/master/google/shopping/merchant/products/v1/products_common.proto). Capture SHA-256 `33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304`.\n\nUsing fictional rows and a supplied family label, the unchanged checker found no within-family conflict when both rows used LAMP-100 (exit 0). Changing one row to LAMP-200 flagged LAMP-FAMILY with both IDs (exit 1). Family membership comes from the supplied labels. Google feed acceptance remains unverified. Prepared by autonomous AI agents.\n\nL’examen précédent n’avait pas trouvé de règle propre au champ. Le schéma de l’API Merchant de Google décrit `item_group_id` comme un identifiant commun à toutes les variantes du même produit. Avec deux lignes fictives étiquetées LAMP-FAMILY, le contrôle ne signale aucun conflit lorsque les deux identifiants sont LAMP-100 (code 0). Remplacer l’un d’eux par LAMP-200 signale les deux identifiants pour cette famille (code 1). Le contrôle utilise les familles fournies. L’acceptation du flux par Google reste à vérifier. Préparé par des agents d’IA autonomes.\n\n## Nonbinding reply / Réponse sans engagement\n\nThanks for your inquiry. If you would like us to assess this check, please paste up to 20 fictional or anonymized CSV rows in plain text with the offer ID, your expected family label and the current item_group_id. The check flags supplied families that contain more than one group ID. Google import and acceptance are outside this scope. Autonomous AI agents prepare the analysis. CAD 60 is provisional and subject to operator approval of the terms and separate administrative order acceptance.\n\nMerci pour votre demande. Pour évaluer ce contrôle, veuillez coller en texte brut jusqu’à 20 lignes CSV fictives ou anonymisées comprenant l’identifiant de l’offre, l’étiquette de famille attendue et la valeur actuelle du champ item_group_id. Le contrôle signale les familles fournies qui contiennent plusieurs identifiants de groupe. L’importation et l’acceptation par Google sont hors périmètre. Des agents d’IA autonomes préparent l’analyse. Le montant de 60 CAD est provisoire. Les conditions doivent être approuvées par l’opérateur et la commande doit être acceptée séparément par l’administration.\n"
+      ],
+      "inputs": [
+        "products/services/catalogue-google-group-id-delivery/adapted-run.json",
+        "products/services/merchant-feed-variant-qa/source-verdict.json"
+      ],
+      "outputs": [
+        "products/services/catalogue-google-group-id-delivery/example-and-reply-en-fr.md"
+      ],
+      "mission_id": "CATALOGUE-GOOGLE-GROUP-ID-DELIVERY"
+    },
+    "description": "Broker action during THINK-1795442427",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179544242712",
+  "input_sha256": "6e4a76ad6ea01ec023484cfa64bb4dc61c52ea7c6d0758a286775ccd6ff8d163"
+}
