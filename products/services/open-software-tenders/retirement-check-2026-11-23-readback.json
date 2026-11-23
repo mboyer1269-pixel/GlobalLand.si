@@ -1,0 +1,61 @@
+{
+  "fetch_tasks": [
+    "TASK-179541756102",
+    "TASK-179541756103"
+  ],
+  "pages": {
+    "homepage": {
+      "sha256": "88912c1277b5f420586cc02e4a53039704d5bc36c8dd4a6c3178fbd5647aaec1",
+      "tender_link_targets": [
+        "mailto:globalland@agentmail.to?subject=site%3Aopen-software-tenders%20interest&body=Experiment%3A%20site%3Aopen-software-tenders%0ACPV%20codes%20or%20buyer%20sector%3A%20%0A%0A",
+        "mailto:globalland@agentmail.to?subject=site%3Aopen-software-tenders%20reconciliation%20brief&body=Experiment%3A%20site%3Aopen-software-tenders%0AOffer%3A%20reconciliation%20brief%20CAD49%20interest%0ANotice%20ID%3A%20%0A%0A",
+        "preview.html",
+        "preview.html"
+      ],
+      "relevant_text": [
+        "this revision rechecks two notices listed earlier; a third (Lincolnshire, 104444-2026, deadline 2026-11-18 09:00 UTC) was removed because its deadline is too close. Each notice expires at its own deadline and must not be treated as open afterwards. This page will be retired or marked expired no later than 2027-01-08 12:00 UTC.",
+        "This listing expires at 2027-01-08 12:00 UTC.",
+        "This listing expires at 2026-12-07 12:00 UTC.",
+        "This listing expires at 2026-12-18 12:00 UTC.",
+        "Révision de deux avis déjà listés, pas une nouvelle recherche ; avis 106518-2026 ajouté le 2026-11-12 depuis le flux officiel. Chaque avis expire à sa propre date limite (2026-12-07 12:00 UTC, 2026-12-18 12:00 UTC et 2027-01-08 12:00 UTC) ; cette page sera retirée ou marquée expirée au plus tard le 2027-01-08 12:00 UTC.",
+        "Documents d'appel d'offres et portails non consultés ; éligibilité et inscription non vérifiées. Nous ne pouvons pas soumissionner et n'affirmons pas que vous êtes admissible.",
+        "Exclu : nous ne consultons ni liens ni portails et ne pouvons pas confirmer que le texte collé correspond à l’enregistrement officiel en ligne. Comparez vous-même l’empreinte et les champs. Ni documents d’appel d’offres, ni admissibilité, ni avis juridique, ni rédaction d’offre, ni suivi après livraison."
+      ]
+    },
+    "award-referral": {
+      "sha256": "62be2c82e7ddc152b2a172f5dd1eaa1eeeb9a81e92c4dfdbd8ecc6bbb79d0dfb",
+      "tender_link_targets": [
+        "https://globalland-open-software-tenders.global-land.workers.dev/",
+        "https://globalland-open-software-tenders.global-land.workers.dev/"
+      ],
+      "relevant_text": [
+        "These are awarded or proposed purchases, not open tenders.",
+        "Status: an advance transparency notice. The buyer says the 5 November 2026 date in the notice \"does not represent the date of contract conclusion\" and \"The proposed extension has not yet been executed\". \"The current contract expires on 28th December 2026.\"",
+        "(revalidated 11 November 2026 against official OCDS data). Eligibility, registration and tender documents there are unverified, and deadlines can change: check each official notice. Each listed notice expires at its own deadline; this link will be removed when that page is retired, no later than 8 January 2027 12:00 UTC.",
+        ", from official Contracts Finder data. They are different contracts from the three notices above. An end date is not a confirmed renewal or an open tender.",
+        "No renewal dates, open tenders, willingness to pay, unit prices, accessible funding or eligibility (yours or ours) are inferred. No structured contract end date appears in any of the three releases.",
+        "(revérifiés le 11 novembre 2026 avec les données OCDS officielles). Éligibilité, inscription et documents d'appel d'offres non vérifiés ; les dates peuvent changer, vérifiez chaque avis officiel. Chaque avis expire à sa propre date limite ; ce lien sera retiré lors du retrait de cette page, au plus tard le 8 janvier 2027 à 12:00 UTC.",
+        ", d'après les données officielles Contracts Finder. Ce ne sont pas les trois avis ci-dessus. Une date de fin n'est ni un renouvellement confirmé ni un appel d'offres ouvert."
+      ]
+    }
+  },
+  "mission_records": [
+    {
+      "mission_id": "WELFARE-SITE-RETIRE",
+      "status": "OPEN",
+      "goal": "Automatic retirement is not installed. On the first turn after 2026-12-04T17:00:00Z, take site welfare-tender-brief offline using PUBLISH_SITE {site:welfare-tender-brief, online:false}. Another option is a revision that is reviewed and marks it expired. Then FETCH the URL https://globalland-welfare-tender-brief.global-land.workers.dev/ and save the observed result under products/services/welfare-tender/retirement.json. Do not act before the deadline. Complete it with a lesson only after reading the saved result.",
+      "evidence": []
+    },
+    {
+      "mission_id": "TENDERS-PAGE-RETIRE-2027",
+      "status": "OPEN",
+      "goal": "Automatic retirement is not installed. On the first turn at/after 2027-01-08T12:00:00Z, take site open-software-tenders offline with PUBLISH_SITE {site:open-software-tenders, online:false} (or deploy an independently approved revision marking all notices expired). Then FETCH https://globalland-open-software-tenders.global-land.workers.dev/ and save the observed result under products/services/tender-refresh/retirement.json. Do not act before the deadline. Complete with a lesson after reading the saved result.",
+      "evidence": []
+    }
+  ],
+  "mission_pages_read": [
+    "world/pages/missions-0.json",
+    "world/pages/missions-1.json",
+    "world/pages/missions-2.json"
+  ]
+}
