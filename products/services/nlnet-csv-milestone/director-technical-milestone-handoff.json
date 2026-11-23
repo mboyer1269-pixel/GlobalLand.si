@@ -1,0 +1,131 @@
+{
+  "purpose": "Help public-data publishers detect structural regressions before releasing CSV files.",
+  "proposed_deliverable": "A documented, offline acceptance check for station-data CSV, with a reusable fictional fixture set and machine-readable diagnostics.",
+  "acceptance": [
+    "Run the existing 10-case regression suite successfully.",
+    "Run the three named station-data controls and reproduce the diagnostic arrays recorded below."
+  ],
+  "baseline": {
+    "command": "PYTHONPATH=. python3 tests/run_tests.py",
+    "cwd": "products/actors/csv-preflight",
+    "stdout": "passed 10/10\n"
+  },
+  "controls": {
+    "clean": {
+      "receipt_passed": true,
+      "committed_case": {
+        "input": "station_id,reading\nDEMO-1,12\nDEMO-2,17\n",
+        "required_columns": [
+          "station_id",
+          "reading"
+        ],
+        "expected_ok": true,
+        "actual": {
+          "source": "pasted_text",
+          "ok": true,
+          "issues": [],
+          "data_rows": 2,
+          "columns": 2,
+          "headers": [
+            "station_id",
+            "reading"
+          ],
+          "had_bom": false,
+          "error_code": null,
+          "error": null
+        },
+        "repeat_matches": true,
+        "passed": true
+      },
+      "observed_in_task_179539236100": [],
+      "diagnostics_confirmed_in_file": true
+    },
+    "missing_required_column": {
+      "receipt_passed": true,
+      "committed_case": {
+        "input": "station_id,value\nDEMO-1,12\n",
+        "required_columns": [
+          "station_id",
+          "reading"
+        ],
+        "expected_ok": false,
+        "actual": {
+          "source": "pasted_text",
+          "ok": false,
+          "issues": [
+            {
+              "kind": "missing_required_column",
+              "header": "reading"
+            }
+          ],
+          "data_rows": 1,
+          "columns": 2,
+          "headers": [
+            "station_id",
+            "value"
+          ],
+          "had_bom": false,
+          "error_code": null,
+          "error": null
+        },
+        "repeat_matches": true,
+        "passed": true
+      },
+      "observed_in_task_179539236100": [
+        {
+          "kind": "missing_required_column",
+          "header": "reading"
+        }
+      ],
+      "diagnostics_confirmed_in_file": true
+    },
+    "extra_field": {
+      "receipt_passed": true,
+      "committed_case": {
+        "input": "station_id,reading\nDEMO-1,12,unexpected\n",
+        "required_columns": [
+          "station_id",
+          "reading"
+        ],
+        "expected_ok": false,
+        "actual": {
+          "source": "pasted_text",
+          "ok": false,
+          "issues": [
+            {
+              "kind": "column_count",
+              "record": 2,
+              "expected": 2,
+              "actual": 3
+            }
+          ],
+          "data_rows": 1,
+          "columns": 2,
+          "headers": [
+            "station_id",
+            "reading"
+          ],
+          "had_bom": false,
+          "error_code": null,
+          "error": null
+        },
+        "repeat_matches": true,
+        "passed": true
+      },
+      "observed_in_task_179539236100": [
+        {
+          "kind": "column_count",
+          "record": 2,
+          "expected": 2,
+          "actual": 3
+        }
+      ],
+      "diagnostics_confirmed_in_file": true
+    }
+  },
+  "sources": {
+    "products/services/nlnet-csv-milestone/station-csv-acceptance.json": "e32c0ea226d6e96cfc6a82998c36f6ef98b537ba2a658e0a8166e6be0f1ae0e8",
+    "products/services/nlnet-csv-milestone/suite-evidence.json": "1f8649d8b36e50140e125fbe52700a3215226f2e5019a9414cdcbb868fb78706"
+  },
+  "application_status": "Technical handoff only. Verify first-party scope, licensing, applicant responsibility for disclosed autonomous AI work, and milestone payment terms before proposing a budget or submitting."
+}
