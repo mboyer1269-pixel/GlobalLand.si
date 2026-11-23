@@ -160,14 +160,14 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "12 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "13 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 12,
+      "reports": 13,
       "opened_at": "2026-11-23T11:00:46Z",
-      "last_reported_at": "2026-11-23T13:42:36Z"
+      "last_reported_at": "2026-11-23T14:01:56Z"
     }
   ],
   "resolved_recent": [
@@ -207,25 +207,27 @@
     }
   ],
   "progress": {
-    "stalled_turns": 2,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-23T13:31:00Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1509,
-    "turns_without_verified_revenue": 1509,
-    "turns_without_outcome": 12,
+    "turns_without_new_interpreted_feedback": 1510,
+    "turns_without_verified_revenue": 1510,
+    "turns_without_outcome": 13,
     "outcome_threshold": 12,
     "dry_since": "2026-11-23T11:00:46Z",
     "last_outcome_turn": "THINK-1795430102",
-    "last_productive_turn": "THINK-1795439161",
-    "last_turn": "THINK-1795440961",
+    "last_productive_turn": "THINK-1795442427",
+    "last_turn": "THINK-1795442427",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "new_products": [
+        "products/services/catalogue-google-group-id-delivery/director-paired-control-run.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
