@@ -1,0 +1,54 @@
+{
+  "scope": "Fictional offline controls using supplied product-family labels. Google ingestion and buyer activity were not tested.",
+  "source": {
+    "source_url": "https://raw.githubusercontent.com/googleapis/googleapis/master/google/shopping/merchant/products/v1/products_common.proto",
+    "source_sha256": "33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304",
+    "expected_sha256": "33292e48e4e5ebd4a9146b6f3bda2583f8e8cb69341b9ed789ce8273124e5304",
+    "field_declarations_with_comments": [
+      {
+        "start_line": 1715,
+        "field_line": 1716,
+        "verbatim": "  // Shared identifier for all variants of the same product.\n  optional string item_group_id = 27;"
+      }
+    ],
+    "scope": "Merchant API schema. Field comments do not demonstrate acceptance of a submitted feed.",
+    "capture_hash_matches": true
+  },
+  "checker_sha256": "06f1807e2e005a7d84ff1d2ec72f30aee0017faa3ebe8d6e9a12a6eb52fdd45a",
+  "runs": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "products/services/merchant-v1-group-id-sample/runnable-controls/check.py",
+        "products/services/catalogue-google-group-id-delivery/fictional-inputs/consistent.csv"
+      ],
+      "fixture_sha256": "84f4b77051f8efaadc81e8eb2156a5bedab8de799425303583adc37291c761f1",
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "",
+      "expected_exit_code": 0,
+      "expected_group_id_sets": [],
+      "matches_expectation": false
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "products/services/merchant-v1-group-id-sample/runnable-controls/check.py",
+        "products/services/catalogue-google-group-id-delivery/fictional-inputs/conflicting.csv"
+      ],
+      "fixture_sha256": "6a962d40b4b08fbb04b0d5a9116cc60a743117b4e487f3768fc9529f798d87bb",
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "",
+      "expected_exit_code": 1,
+      "expected_group_id_sets": [
+        [
+          "LAMP-100",
+          "LAMP-200"
+        ]
+      ],
+      "matches_expectation": false
+    }
+  ],
+  "all_pass": false
+}
