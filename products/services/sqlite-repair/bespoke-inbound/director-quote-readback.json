@@ -1,0 +1,36 @@
+{
+  "scope": "Committed artifacts and wording checks only. Quote acceptance controls and case reports require substantive readback.",
+  "quote_candidates": [
+    {
+      "path": "products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-en-fr.md",
+      "sha256": "39c73f36b6dedd2c329816d223b0675eb32f593581f12c25f343df133dd9085a",
+      "english_price": true,
+      "french_price": true,
+      "effort_present": true,
+      "expected_rows_present": true,
+      "approval_present": true
+    }
+  ],
+  "control": {
+    "path": "products/services/sqlite-repair/bespoke-inbound/fictional-reply-control.json",
+    "sha256": "a7d0641f0552c9c27a1d824b3c278137aa5a885b45486937167edb21736c558a",
+    "top_level_keys": [
+      "handoff",
+      "intake_controls",
+      "observed",
+      "prior_invalid_case_receipt",
+      "reply_en",
+      "reply_fr",
+      "scope",
+      "source",
+      "source_sha256"
+    ]
+  },
+  "files": [
+    "products/services/sqlite-repair/bespoke-inbound/director-operator-reply-draft.md",
+    "products/services/sqlite-repair/bespoke-inbound/fictional-reply-control.json",
+    "products/services/sqlite-repair/bespoke-inbound/operator-evidence-crosswalk.json",
+    "products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-controls.json",
+    "products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-en-fr.md"
+  ]
+}
