@@ -1,0 +1,74 @@
+{
+  "scope": "Fictional control and private nonbinding templates. No correspondence or customer data.",
+  "source": "products/services/sqlite-repair/original-fixture/director-paired-run.json",
+  "source_sha256": "bd776a5f05b7fc8678694f19fa86ec202bdb1b45b90efd1fbd9bc7af266b15cb",
+  "observed": {
+    "mode": "as_written_first_statement_only",
+    "before_rows": [
+      [
+        "4"
+      ],
+      [
+        "7"
+      ]
+    ],
+    "before_unexecuted_tail": "SELECT SUM(quantity) FROM shelf;",
+    "after_rows": [
+      [
+        "11"
+      ]
+    ],
+    "after_unexecuted_tail": null,
+    "statement_counts": [
+      1,
+      1
+    ],
+    "close_rc": [
+      0,
+      0
+    ],
+    "comparison_basis": "Direct comparison of reported text rows to fictional expected text rows"
+  },
+  "prior_invalid_case_receipt": "TASK-179547876100",
+  "intake_controls": [
+    {
+      "case": {
+        "live_access": false,
+        "fictional": true,
+        "query_sql": "SELECT quantity FROM shelf ORDER BY quantity; SELECT SUM(quantity) FROM shelf;",
+        "expected_rows": [
+          [
+            "11"
+          ]
+        ]
+      },
+      "decision": "eligible_for_private_scoping"
+    },
+    {
+      "case": {
+        "live_access": true,
+        "fictional": false,
+        "query_sql": "",
+        "expected_rows": null
+      },
+      "decision": "decline_out_of_scope"
+    },
+    {
+      "case": {
+        "live_access": false,
+        "fictional": true,
+        "query_sql": "SELECT 1;",
+        "expected_rows": null
+      },
+      "decision": "clarify"
+    }
+  ],
+  "reply_en": "To assess whether we can reproduce your SQLite case offline, please paste a small fictional schema and seed SQL if needed, the query SQL, the rows you expected in order, and whether your application prepares only the first statement. Leave out real records and credentials. If the case reproduces, we can scope a diagnosis, a minimal correction where supported, and before-and-after results checked against your expected rows. Autonomous AI agents assist with this work. This reply is a scoping step. Any order requires separate operator acceptance.",
+  "reply_fr": "Pour évaluer si nous pouvons reproduire votre cas SQLite hors ligne, veuillez coller un petit schéma fictif et, au besoin, les instructions SQL qui créent les données fictives, ainsi que la requête, les lignes attendues dans leur ordre et une indication précisant si votre application prépare uniquement la première instruction. Veuillez omettre les données réelles et les identifiants d’accès. Si le cas se reproduit, nous pouvons définir la portée d’un diagnostic, d’une correction minimale si les résultats le permettent et d’une comparaison des résultats avant et après avec vos lignes attendues. Des agents d’IA autonomes participent à ce travail. Cette réponse sert à définir la portée. Toute commande doit être acceptée séparément par un opérateur.",
+  "handoff": [
+    "Confirm the SQL is fictional and can run offline within existing diagnostic limits.",
+    "Request a missing query or expected output. Decline cases that require a live database.",
+    "Check diagnostic report status and cleanup even when process exit is zero. Verify observed rows against the supplied expectations before offering a supported correction.",
+    "Record operator acceptance, delivery and verified Treasury settlement separately."
+  ]
+}
