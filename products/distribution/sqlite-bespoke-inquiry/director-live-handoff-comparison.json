@@ -1,0 +1,70 @@
+{
+  "live_baseline_sha256": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+  "operator_draft_sha256": "7be71b7c2a2aca12c30bf966e64de904cd8586382dcbeefca1fc6b6478cd17da",
+  "operator_crosswalk_sha256": "8d255579c1261ef9284312e6530e91ecbc533d54b8ee1dddc901ce4ffac953cc",
+  "live_passages": [
+    ". Prepare each statement only after the previous one ran, because",
+    "does not exist before the",
+    "(SQLite 3.40.1) and synthetic data,",
+    "One SQLite version (3.40.1), one platform, synthetic data. No guarantee for other builds or for your program.",
+    ": a second free explanation of an unanswered question, reproduced with the same SQLite 3.40.1 ctypes method on synthetic data.",
+    "Run the diagnosis yourself (local download)",
+    "Instead of emailing SQL, you can run the same diagnostic script on your own machine. Put",
+    "diagnose.py",
+    "python3 -I diagnose.py example-case.json report.json",
+    "(SQLite 3.38+). The script loads that exact Linux name, so macOS and Windows are untested and expected to fail at startup. Observed run: Python 3.11.2 with SQLite 3.40.1 on Linux x86_64. The script really executes the SQL in your case file, on an in-memory database through the SQLite C API (ctypes). Limits:",
+    "diagnose.py",
+    "Free test: diagnosis of your own synthetic example",
+    "We are testing whether developers want this kind of reproduced SQLite diagnosis.",
+    "site:sqlite-statement-diagnostic",
+    ": CREATE/INSERT statements that rebuild a minimal synthetic dataset;",
+    "the rows you expected from the last statement;",
+    "site:sqlite-statement-diagnostic query_sql: CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ; SELECT * FROM T1 seed_sql: CREATE TABLE TABLE1(id INTEGER, name TEXT); INSERT INTO TABLE1 VALUES (1,'a'),(2,'b'),(3,'c'); expected rows: (1,a) (2,b) (3,c) prepare called once: yes SQLite version: 3.40.1",
+    "returns, the error message and statement position if a statement fails, the documented cause and a corrected loop. Format example, generated from the question above:",
+    "Limits: our documented private mail process can give the replying agent our diagnostic script and run it offline on an in-memory database without network access. Whether it is used for a given email, whether a reply is sent or arrives, and when, are not guaranteed. We run only your SQL, never your application code, Python, shell, extensions,",
+    "Test réel : appels à l’API C de SQLite 3.40.1 via ctypes, données synthétiques, 6 vérifications sur 6. Le programme C compilé n’a pas pu être exécuté ; l’extrait C++ n’a pas été compilé. Aucune garantie.",
+    "diagnose.py",
+    "python3 -I diagnose.py example-case.json report.json",
+    "(SQLite 3.38+) ; macOS et Windows non testés, échec attendu au démarrage. Exécution observée : Python 3.11.2, SQLite 3.40.1, Linux x86_64. Votre SQL est réellement exécuté, en mémoire, via l’API C de SQLite. Limites :",
+    "diagnose.py",
+    "Test gratuit : diagnostic de votre exemple synthétique.",
+    "site:sqlite-statement-diagnostic",
+    ", obligatoire), les instructions CREATE/INSERT d’un petit jeu de données synthétique (",
+    "), les lignes attendues de la dernière instruction, si votre code n’appelle",
+    "qu’une fois, et votre version de SQLite (voir l’exemple en anglais ci-dessus). Une réponse peut contenir, en texte dans le même fil et rédigée par des agents d’IA, la comparaison entre l’exécution de la seule première instruction et la boucle corrigée, l’erreur éventuelle, la cause documentée et la correction ("
+  ],
+  "live_templates": [
+    {
+      "subject": [
+        "site:sqlite-statement-diagnostic interest"
+      ],
+      "body": [
+        "Experiment: site:sqlite-statement-diagnostic\nquery_sql: \nseed_sql: \nexpected rows: \nprepare called once (yes/no): \nSQLite version: \n"
+      ]
+    },
+    {
+      "subject": [
+        "site:sqlite-statement-diagnostic interest"
+      ],
+      "body": [
+        "Experiment: site:sqlite-statement-diagnostic\nquery_sql: \nseed_sql: \nexpected rows: \nprepare called once (yes/no): \nSQLite version: \n"
+      ]
+    }
+  ],
+  "operator_draft_passages": [
+    "# SQLite statement-tail diagnosis",
+    "Thanks for describing the SQLite issue. Could you paste a small fictional reproduction as plain text? Please include the SQL that creates and populates the sample tables, the query exactly as your application passes it to SQLite, and the rows you expected, in order if order matters. Include your SQLite version and how the application prepares and executes the SQL, if known. Please omit credentials, customer records, attachments and links.",
+    "This would let us assess whether we can explain which statement ran, suggest a minimal correction where the evidence supports one, and compare a rerun with your expected rows. Autonomous AI agents assist with this work. This message confirms no order, price or delivery date.",
+    "Merci d’avoir décrit le problème SQLite. Pourriez-vous coller en texte brut un petit exemple fictif qui reproduit le problème? Incluez le SQL qui crée et remplit les tables d’exemple, la requête exacte transmise à SQLite par votre application et les lignes attendues, dans l’ordre si celui-ci compte. Si vous les connaissez, précisez votre version de SQLite et la façon dont l’application prépare et exécute le SQL. N’incluez aucun identifiant de connexion, dossier client, lien ni pièce jointe.",
+    "Nous pourrons alors déterminer si nous sommes en mesure d’expliquer quelle instruction a été exécutée, de proposer une correction minimale si les résultats la justifient et de comparer une nouvelle exécution aux lignes attendues. Des agents d’IA autonomes participent à ce travail. Ce message ne confirme ni commande, ni prix, ni date de livraison.",
+    "- Scope only a standalone fictional SQL reproduction with expected rows and no live system access. Ask for missing expectations or reproduction details. Decline requests that require credentials, private data or live database access.",
+    "- In the recorded fictional control, preparing and executing only the first statement returned 4 and 7, with the SUM query reported as the unexecuted tail. Running both statements showed 11 as the second result. The standalone SUM returned 11 with no tail. This establishes behavior for the recorded SQLite 3.40.1 reproduction.",
+    "- For an eligible case, check report status and compare the actual rows with the supplied expectation. Record statement counts, remaining SQL and cleanup. If the correction does not reproduce the expected rows, report the discrepancy before making any claim of resolution."
+  ],
+  "comparison_targets": [
+    "case-specific explanation",
+    "minimal correction where supported",
+    "before-and-after output checked against supplied expected rows"
+  ],
+  "scope": "Private comparison evidence from a saved live capture and a fictional handoff. Matching words require contextual judgment in both languages. No new deployment or customer outcome."
+}
