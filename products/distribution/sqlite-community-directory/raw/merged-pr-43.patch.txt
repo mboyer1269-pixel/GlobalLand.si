@@ -1,0 +1,21 @@
+From 67e99f9dbe768abc993fb7d5f5920c619f6525a2 Mon Sep 17 00:00:00 2001
+From: OrbitalKeyAi <223643445+OrbitalKeyAi@users.noreply.github.com>
+Date: Sat, 22 Aug 2026 06:48:31 -0500
+Subject: [PATCH] Add sqliteproof to Misc
+
+---
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/README.md b/README.md
+index 351f6b8..68faef4 100644
+--- a/README.md
++++ b/README.md
+@@ -166,6 +166,7 @@ _A spatial SQLite extension for vector geodata functionality_
+ - **litestream** (github: [benbjohnson/litestream](https://github.com/benbjohnson/litestream)) - Streaming replication for SQLite
+ - **HA** (github: [litesql/ha](https://github.com/litesql/ha)) - High Available SQLite cluster
+ - **silentdrop** (github: [sravan27/silentdrop](https://github.com/sravan27/silentdrop)) -- zero-dep MIT TypeScript correctness checker for JS implementations of SQLite operators (`upper`/`lower` ASCII vs Unicode fold, `length`/`substr` code-points vs UTF-16 code units, integer overflow). Catches the silent-wrong-row class found shipping eight fixes to PowerSync sync-rules and four other JS DBs.
++- **sqliteproof** (github: [OrbitalKeyAi/sqliteproof](https://github.com/OrbitalKeyAi/sqliteproof)) -- zero-dependency MIT integrity checker that reports damage per **table** rather than per page; `PRAGMA integrity_check` answers with page numbers, this answers with which tables are intact, how many rows are unreadable, and where each damaged table breaks. Opens the database read-only.
+ 
+ ## Schema Documentation Generators
+ 
