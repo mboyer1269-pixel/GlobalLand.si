@@ -1,0 +1,84 @@
+{
+  "draft_and_control_hashes_verified": {
+    "products/services/sqlite-repair/bespoke-inbound/director-operator-reply-draft.md": "7be71b7c2a2aca12c30bf966e64de904cd8586382dcbeefca1fc6b6478cd17da",
+    "products/services/sqlite-repair/bespoke-inbound/fictional-reply-control.json": "a7d0641f0552c9c27a1d824b3c278137aa5a885b45486937167edb21736c558a"
+  },
+  "handoff_files": {
+    "products/services/sqlite-repair/original-fixture/verified-handoff/README.md": "96ed893ec831413258276639f02271e253e3cfc8599dfa8fb402dff7eb51bc7c",
+    "products/services/sqlite-repair/original-fixture/verified-handoff/corrected.case.json": "60ec8fc999e00c20bab6669be9727dae3505de6cf75476d7336ad5ec0806a754",
+    "products/services/sqlite-repair/original-fixture/verified-handoff/corrected.report.json": "d03f0d76fd4fd2959bfa57b790b53f682c03be3bdd59d94765b32aeedcdae0f2",
+    "products/services/sqlite-repair/original-fixture/verified-handoff/first_statement_only.case.json": "10a738a304b944b00d105b9639c3036965321ad83b5f819257449aeb93072c80",
+    "products/services/sqlite-repair/original-fixture/verified-handoff/first_statement_only.report.json": "885d92c8a059d81d245057b752e5ce1ac8721cc37de14a3a3acc2a195006c49a",
+    "products/services/sqlite-repair/original-fixture/verified-handoff/manifest.json": "a9b23032e62c42bf5f94c746ee89732fee0c786fc81b415c31a06f2d3c7b23bf"
+  },
+  "observed_json_fields": {
+    "products/services/sqlite-repair/original-fixture/verified-handoff/corrected.case.json": {},
+    "products/services/sqlite-repair/original-fixture/verified-handoff/corrected.report.json": {
+      "runs.as_written_first_statement_only.statements[0].rows": [
+        [
+          "11"
+        ]
+      ],
+      "runs.as_written_first_statement_only.unexecuted_tail": null,
+      "runs.as_written_first_statement_only.close_rc": 0,
+      "runs.all_statements.statements[0].rows": [
+        [
+          "11"
+        ]
+      ],
+      "runs.all_statements.unexecuted_tail": null,
+      "runs.all_statements.close_rc": 0,
+      "expected_match": true,
+      "status": "OK"
+    },
+    "products/services/sqlite-repair/original-fixture/verified-handoff/first_statement_only.case.json": {},
+    "products/services/sqlite-repair/original-fixture/verified-handoff/first_statement_only.report.json": {
+      "runs.as_written_first_statement_only.statements[0].rows": [
+        [
+          "4"
+        ],
+        [
+          "7"
+        ]
+      ],
+      "runs.as_written_first_statement_only.unexecuted_tail": "SELECT SUM(quantity) FROM shelf;",
+      "runs.as_written_first_statement_only.close_rc": 0,
+      "runs.all_statements.statements[0].rows": [
+        [
+          "4"
+        ],
+        [
+          "7"
+        ]
+      ],
+      "runs.all_statements.statements[1].rows": [
+        [
+          "11"
+        ]
+      ],
+      "runs.all_statements.unexecuted_tail": null,
+      "runs.all_statements.close_rc": 0,
+      "expected_match": true,
+      "status": "OK"
+    },
+    "products/services/sqlite-repair/original-fixture/verified-handoff/manifest.json": {
+      "runs.first_statement_only.checks.as_written_first_statement_only.statement_count": 1,
+      "runs.first_statement_only.checks.as_written_first_statement_only.unexecuted_tail": "SELECT SUM(quantity) FROM shelf;",
+      "runs.first_statement_only.checks.as_written_first_statement_only.open_statements": false,
+      "runs.first_statement_only.checks.as_written_first_statement_only.close_rc": 0,
+      "runs.first_statement_only.checks.all_statements.statement_count": 2,
+      "runs.first_statement_only.checks.all_statements.unexecuted_tail": null,
+      "runs.first_statement_only.checks.all_statements.open_statements": false,
+      "runs.first_statement_only.checks.all_statements.close_rc": 0,
+      "runs.corrected.checks.as_written_first_statement_only.statement_count": 1,
+      "runs.corrected.checks.as_written_first_statement_only.unexecuted_tail": null,
+      "runs.corrected.checks.as_written_first_statement_only.open_statements": false,
+      "runs.corrected.checks.as_written_first_statement_only.close_rc": 0,
+      "runs.corrected.checks.all_statements.statement_count": 1,
+      "runs.corrected.checks.all_statements.unexecuted_tail": null,
+      "runs.corrected.checks.all_statements.open_statements": false,
+      "runs.corrected.checks.all_statements.close_rc": 0
+    }
+  },
+  "scope": "Committed fictional evidence only. Extracted fields require comparison with both reports and the draft before operator handoff."
+}
