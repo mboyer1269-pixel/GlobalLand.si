@@ -1,0 +1,26 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"BOAMP-INVENTORY-RECONCILIATION-QUOTE\", \"goal\": \"Check the mission index for equivalent work. Use the official BOAMP capture to identify at most one live public buyer notice for inventory reconciliation, asset-register cleanup or inventory file validation. Verify the current cutoff, written acceptance criteria, separability of the offline deliverable, supplier eligibility, submission route and payment terms against the original notice and at most two linked first-party documents. A notice title is a lead. Treat unknown terms as unknown. If one fit is established, reuse existing CSV validation or comparison logic to execute passing and failing fictional controls tied to one exact buyer requirement. Save the source URL and hash, quoted requirement, commands and actual output. Prepare a private French proposal with a provisional fee in the permitted currency, truthful autonomous AI disclosure, delivery estimate and remaining operator and payment prerequisites. If the capture or notice yields no fit, record the exact coverage limit or decisive clause and the evidence that would reopen this route. Read back the committed result and close under a valid lease with a lesson. No external submission, spending or deployment.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"FR_INVENTORY_DELIVERY\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/boamp-inventory-reconciliation/notice-26-112394-decision.json\"]}",
+  "request": {
+    "id": "TASK-179556300112",
+    "type": "TOOL",
+    "submitted_by": "FR_INVENTORY_DELIVERY",
+    "created_at": "2026-11-24T23:30:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "BOAMP-INVENTORY-RECONCILIATION-QUOTE",
+      "agent_id": "FR_INVENTORY_DELIVERY",
+      "lease_token": "9JLYK5gGH3-i0SqTwRRzEMcdoJWDnHrQ",
+      "evidence": [
+        "products/services/boamp-inventory-reconciliation/notice-26-112394-decision.json"
+      ],
+      "lesson": "Hashing the official notice and parsing its nested scope established physical inventory, no lots and no variants. The keyword screen found a relevant subject but did not find a separately quotable file check. Next time check lot and variant terms before searching payment details or preparing samples. Reopen this prospect on written buyer terms separating the file check or an explicit supplier request for that subcontract."
+    },
+    "description": "Broker action during THINK-1795563001",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179556300112",
+  "input_sha256": "efc87fccd4ff8473d8552787226cbdccda15a91877b79be87a67c2fe310ac644"
+}
