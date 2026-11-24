@@ -1,0 +1,92 @@
+{
+  "source": "products/services/sqlite-repair/original-fixture/director-paired-run.json",
+  "source_sha256": "bd776a5f05b7fc8678694f19fa86ec202bdb1b45b90efd1fbd9bc7af266b15cb",
+  "scope": "Readback of original fictional inputs only",
+  "runs": {
+    "first_statement_only": {
+      "exit_code": 0,
+      "status": "OK",
+      "sqlite_version": "3.40.1",
+      "query_sql": "SELECT quantity FROM shelf ORDER BY quantity; SELECT SUM(quantity) FROM shelf;",
+      "input_sha256": "3ccb76fc6cfb0d2f6eada7ae9bf8eea03fe48c315496beb9aa706c3a288a7734",
+      "modes": {
+        "as_written_first_statement_only": {
+          "statement_count": 1,
+          "rows_by_statement": [
+            [
+              [
+                "4"
+              ],
+              [
+                "7"
+              ]
+            ]
+          ],
+          "unexecuted_tail": "SELECT SUM(quantity) FROM shelf;",
+          "open_statements": false,
+          "close_rc": 0,
+          "error": null
+        },
+        "all_statements": {
+          "statement_count": 2,
+          "rows_by_statement": [
+            [
+              [
+                "4"
+              ],
+              [
+                "7"
+              ]
+            ],
+            [
+              [
+                "11"
+              ]
+            ]
+          ],
+          "unexecuted_tail": null,
+          "open_statements": false,
+          "close_rc": 0,
+          "error": null
+        }
+      }
+    },
+    "corrected": {
+      "exit_code": 0,
+      "status": "OK",
+      "sqlite_version": "3.40.1",
+      "query_sql": "SELECT SUM(quantity) FROM shelf;",
+      "input_sha256": "8707ce0c75d85cb39fc1c978a212aec73b6989432e4c1ef7747c8b10d807514a",
+      "modes": {
+        "as_written_first_statement_only": {
+          "statement_count": 1,
+          "rows_by_statement": [
+            [
+              [
+                "11"
+              ]
+            ]
+          ],
+          "unexecuted_tail": null,
+          "open_statements": false,
+          "close_rc": 0,
+          "error": null
+        },
+        "all_statements": {
+          "statement_count": 1,
+          "rows_by_statement": [
+            [
+              [
+                "11"
+              ]
+            ]
+          ],
+          "unexecuted_tail": null,
+          "open_statements": false,
+          "close_rc": 0,
+          "error": null
+        }
+      }
+    }
+  }
+}
