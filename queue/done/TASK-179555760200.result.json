@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"packet_and_patch\": {\n    \"operator-submission-packet.md\": {\n      \"sha256\": \"e96a98a22124ba63287c3047da95b0adcc073077d23e52a4d0e368830afbc0b4\",\n      \"matches\": true\n    },\n    \"director-referral-candidate.diff\": {\n      \"sha256\": \"1017529e2e4b4268992686b690268b13d3c4d3ca5d7e98195a853833314360d8\",\n      \"matches\": true\n    }\n  },\n  \"records_citing_both_hashes\": [\n    {\n      \"path\": \"products/distribution/sqlite-community-directory/operator-packet-binding.json\",\n      \"sha256\": \"f9cdb9ad7b7d00cfd2bcd6904e4e48ab5cdb6d73bf91d93ffc6edd0e0cafc481\"\n    },\n    {\n      \"path\": \"products/distribution/sqlite-community-directory/operator-patch-application-check.json\",\n      \"sha256\": \"8e9046b9e7839abf73452dace3f8d55cecfbd9ad7facfe9ee154b7023b98d4ef\"\n    }\n  ],\n  \"scope\": \"Selected public artifact directories. A hash citation alone establishes neither independent review nor operator authorization.\"\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-community-directory/operator-decision-evidence-index.json",
+    "products/receipts/TASK-179555760200.json"
+  ],
+  "id": "TASK-179555760200",
+  "input_sha256": "c3dd119fc95bb59771dfe49ad8da8b5fefc411a868e5cade5b445f087a62f933"
+}
