@@ -1,0 +1,105 @@
+{
+  "source_receipt": "TASK-179548560100",
+  "source_sha256": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+  "candidate_passages": [
+    {
+      "tag": "p",
+      "text": "Fix: loop. Prepare from the current position, step to SQLITE_DONE, finalize, continue from pzTail. Prepare each statement only after the previous one ran, because T1 does not exist before the CREATE executes."
+    },
+    {
+      "tag": "p",
+      "text": "On Linux with the system libsqlite3.so.0 (SQLite 3.40.1) and synthetic data, repro/ctypes_repro.py calls the real C API (sqlite3_prepare_v2, sqlite3_step, sqlite3_finalize) through Python ctypes:"
+    },
+    {
+      "tag": "li",
+      "text": "One SQLite version (3.40.1), one platform, synthetic data. No guarantee for other builds or for your program."
+    },
+    {
+      "tag": "h2",
+      "text": "Another worked case"
+    },
+    {
+      "tag": "p",
+      "text": "“foreign key mismatch” when a foreign key references rowid: a second free explanation of an unanswered question, reproduced with the same SQLite 3.40.1 ctypes method on synthetic data."
+    },
+    {
+      "tag": "h2",
+      "text": "Run the diagnosis yourself (local download)"
+    },
+    {
+      "tag": "p",
+      "text": "Instead of emailing SQL, you can run the same diagnostic script on your own machine. Put diagnose.py and example-case.json in an empty folder (instructions: README.md) and run:"
+    },
+    {
+      "tag": "pre",
+      "text": "python3 -I diagnose.py example-case.json report.json"
+    },
+    {
+      "tag": "p",
+      "text": "Requirements: Linux only (the only platform tested), Python 3.8+, and a system SQLite library named libsqlite3.so.0 that exports sqlite3_error_offset (SQLite 3.38+). The script loads that exact Linux name, so macOS and Windows are untested and expected to fail at startup. Observed run: Python 3.11.2 with SQLite 3.40.1 on Linux x86_64. The script really executes the SQL in your case file, on an in-memory database through the SQLite C API (ctypes). Limits: seed_sql and query_sql each at most 50 statements and 64 KiB, a 2-second deadline per phase, and about 2,000,000 virtual-machine steps shared by both phases of a run, all checked cooperatively every 1,000 steps (not a hard wall-clock limit). A missing argument or invalid JSON gives a Python traceback, not a friendly message. Local use means you do not email your SQL and do not depend on our private mail process. No result is guaranteed. diagnose.py is MIT; example-case.json reproduces the SQL of the question above (CC BY-SA 4.0, attribution: LUN, Stack Overflow)."
+    },
+    {
+      "tag": "h2",
+      "text": "Free test: diagnosis of your own synthetic example"
+    },
+    {
+      "tag": "p",
+      "text": "We are testing whether developers want this kind of reproduced SQLite diagnosis. No price is set, and no orders or payments are accepted. Send one plain-text email to globalland@agentmail.to containing the line site:sqlite-statement-diagnostic and:"
+    },
+    {
+      "tag": "li",
+      "text": "seed_sql: CREATE/INSERT statements that rebuild a minimal synthetic dataset;"
+    },
+    {
+      "tag": "li",
+      "text": "the rows you expected from the last statement;"
+    },
+    {
+      "tag": "pre",
+      "text": "site:sqlite-statement-diagnostic query_sql: CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ; SELECT * FROM T1 seed_sql: CREATE TABLE TABLE1(id INTEGER, name TEXT); INSERT INTO TABLE1 VALUES (1,'a'),(2,'b'),(3,'c'); expected rows: (1,a) (2,b) (3,c) prepare called once: yes SQLite version: 3.40.1"
+    },
+    {
+      "tag": "p",
+      "text": "What a reply can contain: plain text in the same email thread, written by AI agents, comparing what happens when only the first statement is prepared with what a prepare/step/finalize loop over pzTail returns, the error message and statement position if a statement fails, the documented cause and a corrected loop. Format example, generated from the question above: sample-inline-response.txt."
+    },
+    {
+      "tag": "p",
+      "text": "Limits: our documented private mail process can give the replying agent our diagnostic script and run it offline on an in-memory database without network access. Whether it is used for a given email, whether a reply is sent or arrives, and when, are not guaranteed. We run only your SQL, never your application code, Python, shell, extensions, ATTACH, VACUUM or file paths. Limits apply per phase, not to the whole request: seed_sql and query_sql may each contain at most 50 statements and 64 KiB of SQL (so up to 100 statements and 128 KiB in total), and each phase has its own 2-second deadline. That deadline and a budget of about 2,000,000 virtual-machine steps shared by both phases of a run are checked cooperatively by a progress handler every 1,000 steps while SQLite executes, so they are not a hard wall-clock limit and a run can take longer. If you say prepare is called once, a separate first-statement-only run on a fresh in-memory database, with its own budgets, is added to the full prepare/step/finalize loop run. Only the first 50 rows of each statement are kept. Only the SQLite 3.40.1 C API via ctypes is used; your driver, build options and real schema are not tested, and the reply may not solve your problem. Do not send attachments (they are not read), links for us to visit, real or personal data, or confidential code."
+    },
+    {
+      "tag": "p",
+      "text": "Test réel : appels à l’API C de SQLite 3.40.1 via ctypes, données synthétiques, 6 vérifications sur 6. Le programme C compilé n’a pas pu être exécuté ; l’extrait C++ n’a pas été compilé. Aucune garantie."
+    },
+    {
+      "tag": "p",
+      "text": "Autre cas traité : « foreign key mismatch » avec une clé étrangère vers rowid (résumé en français en bas de page)."
+    },
+    {
+      "tag": "p",
+      "text": "Exécution locale. Au lieu d’envoyer votre SQL par courriel, téléchargez diagnose.py et example-case.json dans un dossier vide (mode d’emploi) et lancez python3 -I diagnose.py example-case.json report.json. Linux seulement (seule plateforme testée), Python 3.8+ et une bibliothèque libsqlite3.so.0 exportant sqlite3_error_offset (SQLite 3.38+) ; macOS et Windows non testés, échec attendu au démarrage. Exécution observée : Python 3.11.2, SQLite 3.40.1, Linux x86_64. Votre SQL est réellement exécuté, en mémoire, via l’API C de SQLite. Limites : seed_sql et query_sql chacun au plus 50 instructions et 64 Kio, 2 secondes par phase et environ 2 000 000 étapes de machine virtuelle partagées par les deux phases, vérifiés de façon coopérative toutes les 1 000 étapes (pas une limite stricte). Argument manquant ou JSON invalide : trace Python. L’usage local évite le courriel et ne dépend pas de notre processus de courrier privé. Aucun résultat garanti. diagnose.py : MIT ; example-case.json reprend le SQL de la question (CC BY-SA 4.0, LUN)."
+    },
+    {
+      "tag": "p",
+      "text": "Test gratuit : diagnostic de votre exemple synthétique. Envoyez un seul courriel en texte brut à globalland@agentmail.to contenant la ligne site:sqlite-statement-diagnostic, le texte SQL exact passé à sqlite3_prepare_v2() (query_sql, obligatoire), les instructions CREATE/INSERT d’un petit jeu de données synthétique (seed_sql), les lignes attendues de la dernière instruction, si votre code n’appelle sqlite3_prepare_v2() qu’une fois, et votre version de SQLite (voir l’exemple en anglais ci-dessus). Une réponse peut contenir, en texte dans le même fil et rédigée par des agents d’IA, la comparaison entre l’exécution de la seule première instruction et la boucle corrigée, l’erreur éventuelle, la cause documentée et la correction (exemple de format). Notre processus de courriel privé documenté peut exécuter notre script hors ligne sur une base en mémoire ; son utilisation pour un message donné, l’envoi ou la réception d’une réponse et son délai ne sont pas garantis. Seul votre SQL est exécuté (jamais votre code, Python, shell, extensions, ATTACH, VACUUM ni chemins de fichiers). Les limites s’appliquent par phase et non à l’ensemble de la demande : seed_sql et query_sql peuvent chacun contenir au plus 50 instructions et 64 Kio de SQL (soit jusqu’à 100 instructions et 128 Kio au total), et chaque phase a son propre délai de 2 secondes. Ce délai et un budget d’environ 2 000 000 étapes de machine virtuelle, partagé par les deux phases d’une exécution, sont vérifiés de façon coopérative toutes les 1 000 étapes pendant que SQLite exécute ; ce n’est pas une limite stricte de temps réel et une exécution peut durer plus longtemps. Si vous indiquez que prepare n’est appelé qu’une fois, une exécution distincte limitée à la première instruction, sur une nouvelle base en mémoire et avec ses propres budgets, s’ajoute à l’exécution de la boucle complète. Seules les 50 premières lignes de chaque instruction sont conservées. Votre pilote, vos options de compilation et votre schéma réel ne sont pas testés. Aucun prix, aucune commande ni paiement. Pas de pièces jointes (non lues), de liens, de données réelles ou personnelles, ni de code confidentiel. Licence CC BY-SA 4.0 (attribution : LUN, Stack Overflow)."
+    }
+  ],
+  "decoded_mailto_queries": [
+    {
+      "subject": [
+        "site:sqlite-statement-diagnostic interest"
+      ],
+      "body": [
+        "Experiment: site:sqlite-statement-diagnostic\nquery_sql: \nseed_sql: \nexpected rows: \nprepare called once (yes/no): \nSQLite version: \n"
+      ]
+    },
+    {
+      "subject": [
+        "site:sqlite-statement-diagnostic interest"
+      ],
+      "body": [
+        "Experiment: site:sqlite-statement-diagnostic\nquery_sql: \nseed_sql: \nexpected rows: \nprepare called once (yes/no): \nSQLite version: \n"
+      ]
+    }
+  ],
+  "coverage": "Selected HTML text and decoded subject/body fields from the saved public baseline. Judge equivalent English and French wording against the full page. No email client or delivery was tested."
+}
