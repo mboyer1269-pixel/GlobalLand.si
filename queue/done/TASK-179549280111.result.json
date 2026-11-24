@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/distribution/sqlite-bespoke-inquiry/live-scope-verdict.json",
+    "products/receipts/TASK-179549280111.json"
+  ],
+  "request": {
+    "id": "TASK-179549280111",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-24T04:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,hashlib,pathlib\np=pathlib.Path('products/distribution/sqlite-bespoke-inquiry/')\nb=(p/'live-baseline.html').read_bytes()\nd=json.loads((p/'director-live-handoff-comparison.json').read_text())\nassert hashlib.sha256(b).hexdigest()==d['live_baseline_sha256']\nen,fr=[b.decode().split(s,1)[1].split('</p>',1)[0] for s in ['What a reply can contain:', 'Une réponse peut contenir,']]\nassert 'documented cause and a corrected loop' in en and 'cause documentée et la correction' in fr\nassert 'the rows you expected from the last statement' in b.decode() and 'les lignes attendues de la dernière instruction' in b.decode()\nassert len(d['live_templates'])==2 and all('expected rows:' in t['body'][0] for t in d['live_templates'])\nr=dict(verdict='REUSE_LIVE_FREE_INQUIRY',baseline_sha256=d['live_baseline_sha256'],english_reply_excerpt=en,french_reply_excerpt=fr,scope='Both languages ask for expected rows and invite a case-specific cause, corrected loop and comparison of first-statement and corrected execution. The private checklist explicitly compares the rerun with supplied rows. Existing invitation is adequate for this free inquiry. Paid terms, attribution coverage and buyer demand remain unverified.',new_observation_window_started=False)\n(p/'live-scope-verdict.json').write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\\n')"
+      ],
+      "inputs": [
+        "products/distribution/sqlite-bespoke-inquiry/live-baseline.html",
+        "products/distribution/sqlite-bespoke-inquiry/director-live-handoff-comparison.json"
+      ],
+      "outputs": [
+        "products/distribution/sqlite-bespoke-inquiry/live-scope-verdict.json"
+      ],
+      "mission_id": "SQLITE-BESPOKE-INQUIRY-EXPOSURE"
+    },
+    "description": "Broker action during THINK-1795492801",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179549280111",
+  "input_sha256": "093d20fe31f0519df6bd41c8b06be298354f0394f8d7902509b5cf71f60009ae"
+}
