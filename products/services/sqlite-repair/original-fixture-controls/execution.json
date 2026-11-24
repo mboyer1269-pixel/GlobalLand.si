@@ -1,0 +1,50 @@
+{
+  "scope": "Original synthetic inputs. Tool execution only. Inspect actual reports before asserting result differences, statement counts or cleanup.",
+  "implementation_sha256": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+  "results": {
+    "first_statement_only": {
+      "case": {
+        "case_id": "fictional-inventory-total",
+        "seed_sql": "CREATE TABLE shelf(quantity INTEGER NOT NULL); INSERT INTO shelf VALUES (4),(7);",
+        "expected_rows": [
+          [
+            11
+          ]
+        ],
+        "reproduce": true,
+        "query_sql": "SELECT quantity FROM shelf ORDER BY quantity; SELECT SUM(quantity) FROM shelf;"
+      },
+      "case_sha256": "8ffc7e55c1e63756d68d6d326ecc347481f46a9ade7c58ab3d2ca1e7f4e2d434",
+      "command": [
+        "/usr/bin/python3",
+        "diagnose.py",
+        "case.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\n \"status\": \"INVALID_CASE\",\n \"detail\": \"unknown keys ['expected_rows', 'reproduce'] or missing query_sql\"\n}\n",
+      "stderr": ""
+    },
+    "corrected_single_statement": {
+      "case": {
+        "case_id": "fictional-inventory-total",
+        "seed_sql": "CREATE TABLE shelf(quantity INTEGER NOT NULL); INSERT INTO shelf VALUES (4),(7);",
+        "expected_rows": [
+          [
+            11
+          ]
+        ],
+        "reproduce": true,
+        "query_sql": "SELECT SUM(quantity) FROM shelf;"
+      },
+      "case_sha256": "032ce2c6513452874a6352612f48fe4b6658856f3f2e88ca0e504ba96d005a24",
+      "command": [
+        "/usr/bin/python3",
+        "diagnose.py",
+        "case.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\n \"status\": \"INVALID_CASE\",\n \"detail\": \"unknown keys ['expected_rows', 'reproduce'] or missing query_sql\"\n}\n",
+      "stderr": ""
+    }
+  }
+}
