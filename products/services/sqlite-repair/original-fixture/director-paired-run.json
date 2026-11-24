@@ -1,0 +1,61 @@
+{
+  "scope": "Original fictional inventory data. Offline execution only.",
+  "implementation_sha256": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+  "template_sha256": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f",
+  "prior_invalid_run": "TASK-179547876100",
+  "runs": {
+    "first_statement_only": {
+      "input": {
+        "case_id": "fictional-inventory-first_statement_only",
+        "query_sql": "SELECT quantity FROM shelf ORDER BY quantity; SELECT SUM(quantity) FROM shelf;",
+        "seed_sql": "CREATE TABLE shelf(quantity INTEGER NOT NULL); INSERT INTO shelf VALUES (4),(7);",
+        "reproduce_first_statement_only": true,
+        "expected_last_rows": [
+          [
+            11
+          ]
+        ]
+      },
+      "input_sha256": "3ccb76fc6cfb0d2f6eada7ae9bf8eea03fe48c315496beb9aa706c3a288a7734",
+      "argv": [
+        "/usr/bin/python3",
+        "diagnose.py",
+        "case.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n \"tool\": \"globalland-sqlite-diagnose/1\",\n \"sqlite_version\": \"3.40.1\",\n \"case_id\": \"fictional-inventory-first_statement_only\",\n \"limits\": {\n  \"sql_bytes\": 65536,\n  \"statements\": 50,\n  \"rows_kept\": 50,\n  \"vm_steps\": 2000000,\n  \"seconds\": 2.0\n },\n \"runs\": {\n  \"as_written_first_statement_only\": {\n   \"statements\": [\n    {\n     \"index\": 1,\n     \"start_byte\": 0,\n     \"end_byte\": 45,\n     \"sql\": \"SELECT quantity FROM shelf ORDER BY quantity;\",\n     \"executed\": true,\n     \"columns\": 1,\n     \"row_count\": 2,\n     \"rows\": [\n      [\n       \"4\"\n      ],\n      [\n       \"7\"\n      ]\n     ],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    }\n   ],\n   \"error\": null,\n   \"unexecuted_tail\": \"SELECT SUM(quantity) FROM shelf;\",\n   \"input_bytes\": 78,\n   \"final_byte\": 45,\n   \"denied\": [],\n   \"elapsed_s\": 0.002,\n   \"open_statements_after_run\": false,\n   \"close_rc\": 0\n  },\n  \"all_statements\": {\n   \"statements\": [\n    {\n     \"index\": 1,\n     \"start_byte\": 0,\n     \"end_byte\": 45,\n     \"sql\": \"SELECT quantity FROM shelf ORDER BY quantity;\",\n     \"executed\": true,\n     \"columns\": 1,\n     \"row_count\": 2,\n     \"rows\": [\n      [\n       \"4\"\n      ],\n      [\n       \"7\"\n      ]\n     ],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    },\n    {\n     \"index\": 2,\n     \"start_byte\": 45,\n     \"end_byte\": 78,\n     \"sql\": \"SELECT SUM(quantity) FROM shelf;\",\n     \"executed\": true,\n     \"columns\": 1,\n     \"row_count\": 1,\n     \"rows\": [\n      [\n       \"11\"\n      ]\n     ],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    }\n   ],\n   \"error\": null,\n   \"unexecuted_tail\": null,\n   \"input_bytes\": 78,\n   \"final_byte\": 78,\n   \"denied\": [],\n   \"elapsed_s\": 0.0,\n   \"open_statements_after_run\": false,\n   \"close_rc\": 0\n  }\n },\n \"expected_match\": false,\n \"status\": \"OK\"\n}\n",
+      "stderr": "",
+      "report_status": "OK"
+    },
+    "corrected": {
+      "input": {
+        "case_id": "fictional-inventory-corrected",
+        "query_sql": "SELECT SUM(quantity) FROM shelf;",
+        "seed_sql": "CREATE TABLE shelf(quantity INTEGER NOT NULL); INSERT INTO shelf VALUES (4),(7);",
+        "reproduce_first_statement_only": true,
+        "expected_last_rows": [
+          [
+            11
+          ]
+        ]
+      },
+      "input_sha256": "8707ce0c75d85cb39fc1c978a212aec73b6989432e4c1ef7747c8b10d807514a",
+      "argv": [
+        "/usr/bin/python3",
+        "diagnose.py",
+        "case.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n \"tool\": \"globalland-sqlite-diagnose/1\",\n \"sqlite_version\": \"3.40.1\",\n \"case_id\": \"fictional-inventory-corrected\",\n \"limits\": {\n  \"sql_bytes\": 65536,\n  \"statements\": 50,\n  \"rows_kept\": 50,\n  \"vm_steps\": 2000000,\n  \"seconds\": 2.0\n },\n \"runs\": {\n  \"as_written_first_statement_only\": {\n   \"statements\": [\n    {\n     \"index\": 1,\n     \"start_byte\": 0,\n     \"end_byte\": 32,\n     \"sql\": \"SELECT SUM(quantity) FROM shelf;\",\n     \"executed\": true,\n     \"columns\": 1,\n     \"row_count\": 1,\n     \"rows\": [\n      [\n       \"11\"\n      ]\n     ],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    }\n   ],\n   \"error\": null,\n   \"unexecuted_tail\": null,\n   \"input_bytes\": 32,\n   \"final_byte\": 32,\n   \"denied\": [],\n   \"elapsed_s\": 0.001,\n   \"open_statements_after_run\": false,\n   \"close_rc\": 0\n  },\n  \"all_statements\": {\n   \"statements\": [\n    {\n     \"index\": 1,\n     \"start_byte\": 0,\n     \"end_byte\": 32,\n     \"sql\": \"SELECT SUM(quantity) FROM shelf;\",\n     \"executed\": true,\n     \"columns\": 1,\n     \"row_count\": 1,\n     \"rows\": [\n      [\n       \"11\"\n      ]\n     ],\n     \"step_rc\": 101,\n     \"finalize_rc\": 0\n    }\n   ],\n   \"error\": null,\n   \"unexecuted_tail\": null,\n   \"input_bytes\": 32,\n   \"final_byte\": 32,\n   \"denied\": [],\n   \"elapsed_s\": 0.0,\n   \"open_statements_after_run\": false,\n   \"close_rc\": 0\n  }\n },\n \"expected_match\": false,\n \"status\": \"OK\"\n}\n",
+      "stderr": "",
+      "report_status": "OK"
+    }
+  },
+  "template_field_names": [
+    "case_id",
+    "expected_last_rows",
+    "query_sql",
+    "reproduce_first_statement_only",
+    "seed_sql"
+  ]
+}
