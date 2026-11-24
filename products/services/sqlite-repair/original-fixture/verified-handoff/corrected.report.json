@@ -1,0 +1,72 @@
+{
+ "tool": "globalland-sqlite-diagnose/1",
+ "sqlite_version": "3.40.1",
+ "case_id": "fictional-inventory-corrected",
+ "limits": {
+  "sql_bytes": 65536,
+  "statements": 50,
+  "rows_kept": 50,
+  "vm_steps": 2000000,
+  "seconds": 2.0
+ },
+ "runs": {
+  "as_written_first_statement_only": {
+   "statements": [
+    {
+     "index": 1,
+     "start_byte": 0,
+     "end_byte": 32,
+     "sql": "SELECT SUM(quantity) FROM shelf;",
+     "executed": true,
+     "columns": 1,
+     "row_count": 1,
+     "rows": [
+      [
+       "11"
+      ]
+     ],
+     "step_rc": 101,
+     "finalize_rc": 0
+    }
+   ],
+   "error": null,
+   "unexecuted_tail": null,
+   "input_bytes": 32,
+   "final_byte": 32,
+   "denied": [],
+   "elapsed_s": 0.001,
+   "open_statements_after_run": false,
+   "close_rc": 0
+  },
+  "all_statements": {
+   "statements": [
+    {
+     "index": 1,
+     "start_byte": 0,
+     "end_byte": 32,
+     "sql": "SELECT SUM(quantity) FROM shelf;",
+     "executed": true,
+     "columns": 1,
+     "row_count": 1,
+     "rows": [
+      [
+       "11"
+      ]
+     ],
+     "step_rc": 101,
+     "finalize_rc": 0
+    }
+   ],
+   "error": null,
+   "unexecuted_tail": null,
+   "input_bytes": 32,
+   "final_byte": 32,
+   "denied": [],
+   "elapsed_s": 0.0,
+   "open_statements_after_run": false,
+   "close_rc": 0
+  }
+ },
+ "expected_match": true,
+ "status": "OK"
+}

@@ -1,0 +1,11 @@
+{
+  "case_id": "fictional-inventory-corrected",
+  "query_sql": "SELECT SUM(quantity) FROM shelf;",
+  "seed_sql": "CREATE TABLE shelf(quantity INTEGER NOT NULL); INSERT INTO shelf VALUES (4),(7);",
+  "reproduce_first_statement_only": true,
+  "expected_last_rows": [
+    [
+      "11"
+    ]
+  ]
+}

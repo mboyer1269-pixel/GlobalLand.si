@@ -1,0 +1,104 @@
+{
+  "scope": "Private offline example only",
+  "implementation_sha256": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+  "source_sha256": "bd776a5f05b7fc8678694f19fa86ec202bdb1b45b90efd1fbd9bc7af266b15cb",
+  "prior_invalid_receipt": "TASK-179547876100",
+  "files_sha256": {
+    "README.md": "96ed893ec831413258276639f02271e253e3cfc8599dfa8fb402dff7eb51bc7c",
+    "corrected.case.json": "60ec8fc999e00c20bab6669be9727dae3505de6cf75476d7336ad5ec0806a754",
+    "corrected.report.json": "d03f0d76fd4fd2959bfa57b790b53f682c03be3bdd59d94765b32aeedcdae0f2",
+    "first_statement_only.case.json": "10a738a304b944b00d105b9639c3036965321ad83b5f819257449aeb93072c80",
+    "first_statement_only.report.json": "885d92c8a059d81d245057b752e5ce1ac8721cc37de14a3a3acc2a195006c49a"
+  },
+  "runs": {
+    "first_statement_only": {
+      "command": [
+        "/usr/bin/python3",
+        "diagnose.py",
+        "case.json"
+      ],
+      "exit_code": 0,
+      "sqlite_version": "3.40.1",
+      "application_status": "OK",
+      "tool_expected_match": true,
+      "checks": {
+        "as_written_first_statement_only": {
+          "rows_by_statement": [
+            [
+              [
+                "4"
+              ],
+              [
+                "7"
+              ]
+            ]
+          ],
+          "statement_count": 1,
+          "unexecuted_tail": "SELECT SUM(quantity) FROM shelf;",
+          "open_statements": false,
+          "close_rc": 0
+        },
+        "all_statements": {
+          "rows_by_statement": [
+            [
+              [
+                "4"
+              ],
+              [
+                "7"
+              ]
+            ],
+            [
+              [
+                "11"
+              ]
+            ]
+          ],
+          "statement_count": 2,
+          "unexecuted_tail": null,
+          "open_statements": false,
+          "close_rc": 0
+        }
+      }
+    },
+    "corrected": {
+      "command": [
+        "/usr/bin/python3",
+        "diagnose.py",
+        "case.json"
+      ],
+      "exit_code": 0,
+      "sqlite_version": "3.40.1",
+      "application_status": "OK",
+      "tool_expected_match": true,
+      "checks": {
+        "as_written_first_statement_only": {
+          "rows_by_statement": [
+            [
+              [
+                "11"
+              ]
+            ]
+          ],
+          "statement_count": 1,
+          "unexecuted_tail": null,
+          "open_statements": false,
+          "close_rc": 0
+        },
+        "all_statements": {
+          "rows_by_statement": [
+            [
+              [
+                "11"
+              ]
+            ]
+          ],
+          "statement_count": 1,
+          "unexecuted_tail": null,
+          "open_statements": false,
+          "close_rc": 0
+        }
+      }
+    }
+  }
+}
