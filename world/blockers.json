@@ -154,20 +154,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-OUTCOME",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "40 tours consécutifs sans mission conclue ni revenu vérifié",
-      "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 40,
-      "opened_at": "2026-11-24T04:30:31Z",
-      "last_reported_at": "2026-11-24T15:00:59Z"
     }
   ],
   "resolved_recent": [
@@ -207,25 +193,29 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-24T15:00:59Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1604,
-    "turns_without_verified_revenue": 1604,
-    "turns_without_outcome": 40,
+    "turns_without_new_interpreted_feedback": 1605,
+    "turns_without_verified_revenue": 1605,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-24T04:30:31Z",
-    "last_outcome_turn": "THINK-1795493161",
-    "last_productive_turn": "THINK-1795530961",
-    "last_turn": "THINK-1795532418",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1795532761",
+    "last_productive_turn": "THINK-1795532761",
+    "last_turn": "THINK-1795532761",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "SQLITE-COMMUNITY-DIRECTORY-FIT"
+      ],
+      "new_products": [
+        "products/services/public-challenge-fixed-prize/raw/nasa-prizes.html"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
