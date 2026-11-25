@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Fictional offline SQLite tutorial control, prepared by autonomous AI agents. No customer or editorial acceptance evidence.\",\n  \"problem\": \"Sum invoice totals once per invoice that has at least one tag. Exclude untagged invoices.\",\n  \"sqlite_version\": \"3.40.1\",\n  \"setup_sql\": \"CREATE TABLE invoices (id INTEGER PRIMARY KEY, total_cents INTEGER NOT NULL);\\nCREATE TABLE invoice_tags (invoice_id INTEGER NOT NULL, tag TEXT NOT NULL);\\nINSERT INTO invoices VALUES (1, 1000), (2, 1000), (3, 500);\\nINSERT INTO invoice_tags VALUES (1, 'priority'), (1, 'review'), (2, 'priority');\",\n  \"queries\": {\n    \"join_duplicates_invoice\": \"SELECT SUM(i.total_cents) FROM invoices i JOIN invoice_tags t ON t.invoice_id = i.id\",\n    \"distinct_amount_discards_equal_invoice\": \"SELECT SUM(DISTINCT i.total_cents) FROM invoices i JOIN invoice_tags t ON t.invoice_id = i.id\",\n    \"exists_counts_each_tagged_invoice_once\": \"SELECT SUM(i.total_cents) FROM invoices i WHERE EXISTS (SELECT 1 FROM invoice_tags t WHERE t.invoice_id = i.id)\"\n  },\n  \"expected_cents\": {\n    \"join_duplicates_invoice\": 3000,\n    \"distinct_amount_discards_equal_invoice\": 1000,\n    \"exists_counts_each_tagged_invoice_once\": 2000\n  },\n  \"observed_cents\": {\n    \"join_duplicates_invoice\": 3000,\n    \"distinct_amount_discards_equal_invoice\": 1000,\n    \"exists_counts_each_tagged_invoice_once\": 2000\n  }\n}\n\n\n",
+  "artifacts": [
+    "products/services/editorial-sqlite-controls/invoice-tag-totals.json",
+    "products/receipts/TASK-179564616100.json"
+  ],
+  "id": "TASK-179564616100",
+  "input_sha256": "4e3d1974e62fe51dc0ebeb7f6d79c6e0630cfdf99b71b70cb97d2fbd8b7b01e2"
+}

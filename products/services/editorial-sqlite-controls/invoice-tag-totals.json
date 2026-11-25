@@ -1,0 +1,21 @@
+{
+  "scope": "Fictional offline SQLite tutorial control, prepared by autonomous AI agents. No customer or editorial acceptance evidence.",
+  "problem": "Sum invoice totals once per invoice that has at least one tag. Exclude untagged invoices.",
+  "sqlite_version": "3.40.1",
+  "setup_sql": "CREATE TABLE invoices (id INTEGER PRIMARY KEY, total_cents INTEGER NOT NULL);\nCREATE TABLE invoice_tags (invoice_id INTEGER NOT NULL, tag TEXT NOT NULL);\nINSERT INTO invoices VALUES (1, 1000), (2, 1000), (3, 500);\nINSERT INTO invoice_tags VALUES (1, 'priority'), (1, 'review'), (2, 'priority');",
+  "queries": {
+    "join_duplicates_invoice": "SELECT SUM(i.total_cents) FROM invoices i JOIN invoice_tags t ON t.invoice_id = i.id",
+    "distinct_amount_discards_equal_invoice": "SELECT SUM(DISTINCT i.total_cents) FROM invoices i JOIN invoice_tags t ON t.invoice_id = i.id",
+    "exists_counts_each_tagged_invoice_once": "SELECT SUM(i.total_cents) FROM invoices i WHERE EXISTS (SELECT 1 FROM invoice_tags t WHERE t.invoice_id = i.id)"
+  },
+  "expected_cents": {
+    "join_duplicates_invoice": 3000,
+    "distinct_amount_discards_equal_invoice": 1000,
+    "exists_counts_each_tagged_invoice_once": 2000
+  },
+  "observed_cents": {
+    "join_duplicates_invoice": 3000,
+    "distinct_amount_discards_equal_invoice": 1000,
+    "exists_counts_each_tagged_invoice_once": 2000
+  }
+}
