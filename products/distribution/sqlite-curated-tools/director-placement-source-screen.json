@@ -1,0 +1,137 @@
+{
+  "repository_capture_sha256": "def07f7c7ee4a8b46e5df403b6bf943d55d2ff510de5a6387fee114d1c6f4d6e",
+  "readme_capture_sha256": "7e819abac550662d99b2f46c8a3995dee34f4abe70c1e3358971b92d963beac3",
+  "repository_metadata": {
+    "html_url": "https://github.com/planetopendata/awesome-sqlite",
+    "archived": false,
+    "disabled": false,
+    "pushed_at": "2026-08-22T15:01:30Z",
+    "default_branch": "master"
+  },
+  "readme_url": "https://github.com/planetopendata/awesome-sqlite/blob/master/README.md",
+  "readme_line_count": 204,
+  "excerpts": [
+    {
+      "line": 10,
+      "text": ""
+    },
+    {
+      "line": 11,
+      "text": "**Contributions welcome. Anything missing? Send in a pull request. Thanks.**"
+    },
+    {
+      "line": 12,
+      "text": ""
+    },
+    {
+      "line": 63,
+      "text": "> (A) as a target for cross-compilation from many other languages and"
+    },
+    {
+      "line": 64,
+      "text": "> (B) for running via a virtual machine in a browser."
+    },
+    {
+      "line": 65,
+      "text": "> Designed with scriptability via JavaScript in mind, it provides a way to compile C code (among others) to WASM and script"
+    },
+    {
+      "line": 114,
+      "text": ""
+    },
+    {
+      "line": 115,
+      "text": "- **sqlite-web** ★217 (github: [coleifer/sqlite-web](https://github.com/coleifer/sqlite-web)) by Charles Leifer -- a web-based SQLite database browser written in Python"
+    },
+    {
+      "line": 116,
+      "text": "- **sqliteweb** ★46 (github: [hypebeast/sqliteweb](https://github.com/hypebeast/sqliteweb)) by Sebastian Ruml -- a web-based SQLite database browser written in Go"
+    },
+    {
+      "line": 117,
+      "text": "- **phpliteadmin** ★31 (web: [phpliteadmin.org](https://www.phpliteadmin.org), github: [phpLiteAdmin/pla](https://github.com/phpLiteAdmin/pla)) -- a web-based SQLite database admin tool written in PHP"
+    },
+    {
+      "line": 118,
+      "text": "- **web gui for sqlite** (web: [extendsclass.com](https://extendsclass.com/sqlite-browser.html), github: [hautdefrance/Web-GUI-for-SQLite](https://github.com/hautdefrance/Web-GUI-for-SQLite) by Cyril Bois -- a web-based SQLite database browser written in JavaScript"
+    },
+    {
+      "line": 119,
+      "text": "- **SQLite Hub** ★4 (web: [sqlite-hub](https://oliverjessner.at/sqlite-hub/), github: [oliverjessner/sqlite-hub](https://github.com/oliverjessner/sqlite-hub)) -- a web-based SQLite database browser written in NodeJS"
+    },
+    {
+      "line": 120,
+      "text": "- **LiteAdmin** (github: [martijndeb/liteadmin](https://github.com/martijndeb/liteadmin)) -- a web-based SQLite administration tool written in dependency free PHP"
+    },
+    {
+      "line": 127,
+      "text": "- **SQLiteStudio** (web: [sqlitestudio.pl](http://sqlitestudio.pl)) - Linux, Windows, Mac OS X"
+    },
+    {
+      "line": 128,
+      "text": "- **DB Browser for SQLite** ★3,718 (web: [sqlitebrowser.org](http://sqlitebrowser.org), github: [sqlitebrowser/sqlitebrowser](https://github.com/sqlitebrowser/sqlitebrowser)) -- formerly known as SQLite Database Browser"
+    },
+    {
+      "line": 129,
+      "text": "- [**SQLite Toolbox**](https://visualstudiogallery.msdn.microsoft.com/0e313dfd-be80-4afb-b5e9-6e74d369f7a1) (codeplex: [sqlcetoolbox] (http://sqlcetoolbox.codeplex.com)) -- Visual Studio extension (add-in); coded by Erik Ejlskov Jensen"
+    },
+    {
+      "line": 156,
+      "text": ""
+    },
+    {
+      "line": 157,
+      "text": "- **Corgi VIN Decoder** (github: [cardog-ai/corgi](https://github.com/cardog-ai/corgi)) -- Vehicle identification decoder using heavily optimized SQLite database. Reduced NHTSA's 1.5GB dataset to 21MB with 100x performance improvement."
+    },
+    {
+      "line": 158,
+      "text": "- **R-Mem** (github: [Adaimade/R-Mem](https://github.com/Adaimade/R-Mem)) -- Lightweight Rust AI memory system using SQLite for both vector storage (cosine similarity) and graph storage. Reimplements mem0's architecture in ~1,748 lines."
+    },
+    {
+      "line": 159,
+      "text": "- **BrainDB** (github: [beckfexx/BrainDB](https://github.com/beckfexx/BrainDB)) -- Local-first AI memory and multi-agent orchestrator using SQLite with FTS5 for hybrid search. 110 REST endpoints, 51 MCP tools, knowledge graph, self-learning. TypeScript/Bun."
+    },
+    {
+      "line": 160,
+      "text": "- **KubeStellar Console** (github: [kubestellar/console](https://github.com/kubestellar/console)) -- Multi-cluster Kubernetes dashboard using SQLite WASM in a Web Worker for persistent client-side caching. SWR pattern with IndexedDB fallback, keeping structured query performance off the main thread for real-time observability across edge and cloud clusters. Go/TypeScript."
+    },
+    {
+      "line": 168,
+      "text": "- **silentdrop** (github: [sravan27/silentdrop](https://github.com/sravan27/silentdrop)) -- zero-dep MIT TypeScript correctness checker for JS implementations of SQLite operators (`upper`/`lower` ASCII vs Unicode fold, `length`/`substr` code-points vs UTF-16 code units, integer overflow). Catches the silent-wrong-row class found shipping eight fixes to PowerSync sync-rules and four other JS DBs."
+    },
+    {
+      "line": 169,
+      "text": "- **sqliteproof** (github: [OrbitalKeyAi/sqliteproof](https://github.com/OrbitalKeyAi/sqliteproof)) -- zero-dependency MIT integrity checker that reports damage per **table** rather than per page; `PRAGMA integrity_check` answers with page numbers, this answers with which tables are intact, how many rows are unreadable, and where each damaged table breaks. Opens the database read-only."
+    },
+    {
+      "line": 170,
+      "text": ""
+    },
+    {
+      "line": 185,
+      "text": "- **beer.db** (github: [openbeer/schema.sql](https://github.com/openbeer/schema.sql)) - beer, brand, brewery, etc."
+    },
+    {
+      "line": 186,
+      "text": "- **Chinook Database** (codeplex: [chinookdatabase](http://chinookdatabase.codeplex.com)), [(chinook.sqlite Download)](http://chinookdatabase.codeplex.com/releases/view/55681) - online music store (artists, albums, genres, playlists, media tracks, customers, invoices, employees) with sample data; inspired by the \"classic\" Microsoft Northwind database"
+    },
+    {
+      "line": 187,
+      "text": "- **Northwind.db** (github: [jpwhite3/northwind-SQLite3](https://github.com/jpwhite3/northwind-SQLite3), Swift pkg: [NorthwindSQLite.swift](https://github.com/Lighter-swift/NorthwindSQLite.swift)) - food store (customers, products, orders, employees, suppliers, ...) with sample data; port of the \"classic\" Microsoft Northwind database"
+    },
+    {
+      "line": 190,
+      "text": ""
+    },
+    {
+      "line": 191,
+      "text": "_Turn your Database into Ready-to-Use (Instant) Online Web Services (JSON APIs) w/ Query Language (QL)_"
+    },
+    {
+      "line": 192,
+      "text": ""
+    }
+  ],
+  "excerpt_limit_reached": false,
+  "limit": "Keyword excerpts are pointers. Inspect the complete README and any linked contribution policy before drawing conclusions."
+}
