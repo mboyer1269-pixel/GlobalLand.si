@@ -1,0 +1,1265 @@
+{
+    "uri": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?stages=tender&updatedFrom=2026-11-24T00:00:00Z&limit=20&updatedTo=2026-11-25T13:06:59",
+    "version": "1.1",
+    "extensions": [
+        "https://standard.open-contracting.org/profiles/eu/latest/en/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_amendment_rationale_classifications_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_budget_breakdown_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_contract_completion_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_documentation_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_pagination_extension/master/extension.json",
+        "https://raw.githubusercontent.com/open-contracting-extensions/ocds_suitability_extension/master/extension.json",
+        "https://raw.githubusercontent.com/portaledcahn/ocds_Links_extension/main/extension.json",
+        "https://raw.githubusercontent.com/cabinetoffice/ocds_uk_extension/main/extension.json"
+    ],
+    "publishedDate": "2026-11-25T11:27:31Z",
+    "publisher": {
+        "name": "Cabinet Office",
+        "scheme": "GB-GOR",
+        "uid": "D2",
+        "uri": "https://www.gov.uk/government/organisations/cabinet-office"
+    },
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "publicationPolicy": "https://www.gov.uk/government/publications/open-contracting",
+    "releases": [
+        {
+            "ocid": "ocds-h6vhtk-07c349",
+            "id": "111530-2026",
+            "date": "2026-11-25T11:27:31Z",
+            "tag": [
+                "tender"
+            ],
+            "description": "All tenders for the University of St Andrews are administered through our eTendering System (InTend).To Express an Interest please go to our tender website at https://intendhost.co.uk/universityofstandrews\nPlease note that 'Notes of Interest' placed via PCS (Public Contracts Scotland) are not automatically accepted.\nTenderers are asked to provide names of certain staff that would be involved in contract delivery.  See the Tender documents for further information.\nNOTE: To register your interest in this notice and obtain any additional information please visit the Public Contracts Scotland Web Site at https://www.publiccontractsscotland.gov.uk/Search/Search_Switch.aspx?ID=848745.\n(SC Ref:848745)",
+            "initiationType": "tender",
+            "tender": {
+                "id": "ocds-h6vhtk-07c349",
+                "legalBasis": {
+                    "id": "32014L0024",
+                    "scheme": "CELEX"
+                },
+                "title": "Managed Maintenance Service for Data Centres",
+                "status": "active",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "50312300",
+                    "description": "Maintenance and repair of data network equipment"
+                },
+                "mainProcurementCategory": "services",
+                "description": "The University is seeking to procure an ongoing managed maintenance service for its two Data Centres located at Butts Wynd (St Andrews) and Eden Campus (Guardbridge) that ensures all the individual services (power, cooling, fire, security, BMS) are working together as one holistic system.",
+                "lots": [
+                    {
+                        "id": "1",
+                        "description": "The University is seeking to procure an ongoing managed maintenance service for its two Data Centres located at Butts Wynd (St Andrews) and Eden Campus (Guardbridge) that ensures all the individual services (power, cooling, fire, security, BMS) are working together as one holistic system.\nThe Managed Maintenance Service will commence on 1st April 2027 for the Butts Wynd data Centre. The Eden Campus Data Centre is currently being operated under a Design, Build, Maintain & Operate warranty period during its 1st year in operation and as such this Data Centre’s maintenance service support will start on 1st August 2027.\nThe Butts Wynd Data Centre incorporates 24 server cabinets and is connected to two of the University’s separately routed fibre network installations. The Eden Campus Data Centre incorporates 8 Cabinets. The Data Centres operate based on TIA ‘tier III’ principles and are an essential business critical facility, providing high-quality accommodation for the University’s main servers and storage systems and it is essential that it is kept functional, highly available and secure at all times. Additional information: All tenders for the University of St Andrews are administered through our eTendering System (InTend).To Express an Interest please go to our tender website at https://intendhost.co.uk/universityofstandrews\nPlease note that 'Notes of Interest' placed via PCS (Public Contracts Scotland) are not automatically accepted",
+                        "contractPeriod": {
+                            "durationInDays": 1080
+                        },
+                        "hasRenewal": true,
+                        "renewal": {
+                            "description": "2 x 12 months"
+                        },
+                        "submissionTerms": {
+                            "variantPolicy": "notAllowed"
+                        },
+                        "hasOptions": false,
+                        "status": "active"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "1",
+                        "additionalClassifications": [
+                            {
+                                "scheme": "CPV",
+                                "id": "50312300",
+                                "description": "Maintenance and repair of data network equipment"
+                            }
+                        ],
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKM72"
+                            }
+                        ],
+                        "deliveryLocation": {
+                            "description": "The Butts Wynd Data Centre (BWDC) is located in the centre of St Andrews.  The Eden Campus Data Centre (ECDC) is located in Guardbridge 5 miles from St Andrews was commissioned in 2026."
+                        },
+                        "relatedLot": "1"
+                    }
+                ],
+                "participationFees": [
+                    {
+                        "id": "1",
+                        "type": [
+                            "document"
+                        ]
+                    }
+                ],
+                "submissionMethod": [
+                    "electronicSubmission"
+                ],
+                "submissionMethodDetails": "https://in-tendhost.co.uk/universityofstandrews",
+                "communication": {
+                    "atypicalToolUrl": "https://in-tendhost.co.uk/universityofstandrews"
+                },
+                "selectionCriteria": {
+                    "criteria": [
+                        {
+                            "type": "suitability",
+                            "description": "Please see Tender Documents for full details.",
+                            "appliesTo": [
+                                "supplier"
+                            ]
+                        }
+                    ]
+                },
+                "documents": [
+                    {
+                        "documentType": "economicSelectionCriteria",
+                        "id": "economic"
+                    }
+                ],
+                "procurementMethod": "open",
+                "procurementMethodDetails": "Open procedure",
+                "coveredBy": [
+                    "GPA"
+                ],
+                "tenderPeriod": {
+                    "endDate": "2027-01-11T12:00:00Z"
+                },
+                "submissionTerms": {
+                    "languages": [
+                        "en"
+                    ],
+                    "bidValidityPeriod": {
+                        "durationInDays": 90
+                    }
+                },
+                "awardPeriod": {
+                    "startDate": "2027-01-11T12:00:00Z"
+                },
+                "bidOpening": {
+                    "date": "2027-01-11T12:00:00Z",
+                    "address": {
+                        "streetAddress": "Procurement - University of St Andrews"
+                    },
+                    "description": "Appointed Procurement Staff."
+                },
+                "hasRecurrence": true,
+                "contractTerms": {
+                    "hasElectronicOrdering": true,
+                    "electronicInvoicingPolicy": "allowed",
+                    "hasElectronicPayment": true
+                },
+                "reviewDetails": "The University of St Andrews will incorporate a minimum of 10 calendar day standstill period at the point of information on the award of the contract being communicated to tenderers. This period allows unsuccessful tenderers to seek further debriefing from the contracting authority before the contract is entered into. Applicants have 2 working days from the notification of the award decision to request additional debriefing and that information has to be provided a minimum of 3 working days before the expiry of the standstill period. Such additional information should be requested from The University of St Andrews.\nIf an appeal regarding the award of contract has not been successfully resolved The Public Contracts (Scotland) Regulations 2012 provide for aggrieved parties who have been harmed or are at risk of harm by a breach of the rule to take action in the Sheriff Court or Court of Session.\nThe anticipated review body in such cases would be:\nDundee Sheriff Court\n6 West Bell Street\nDundee\nDD1 9AD\nTelephone: +44 1382 229 961\nAnyone bringing court proceedings against the University of St Andrews must inform the University of St Andrews in advance of the alleged breach and its intention to bring proceedings. Any such action must be brought within 15 days of the date on which a decision is sent to them or published to challenge that decision.\nProceedings seeking an ineffectiveness order must be brought within 30 days of the publication of the contract award notice in the OJEU, or 30 days from the date of a decision letter to all tenderers concerned, and any candidates concerned, containing a summary of the reason for the recipient being unsuccessful, otherwise 6 months from the date of entering into the contract or concluding the framework agreement.\nWhere a contract has not been entered into the Court may, by interim order, suspend the procurement procedure. The court may also set aside a decision or actions taken by the University or order it to amend and document; and/or award damages. However, by express requirement the court may decide not to grant an interim order when the negative consequences of such an order are likely to outweigh the benefits, having regard to a number of considerations.\nIf the contract has been entered into the Court may, depending on the nature of the breach: make an ineffectiveness order; impose a financial penalty; shorten the duration of the contract; make any other order considered appropriate to address the consequences of ineffectiveness or shortening the duration or the contract; award damages.",
+                "recurrence": {
+                    "description": "It is likely the University will continue to have similar requirements.  If so, any relevant procurement will be advertised approx. 6 months prior to any new contract requirement."
+                }
+            },
+            "parties": [
+                {
+                    "name": "University of St Andrews",
+                    "id": "GB-FTS-1904",
+                    "identifier": {
+                        "legalName": "University of St Andrews"
+                    },
+                    "address": {
+                        "streetAddress": "Walter Bower House, Eden Campus",
+                        "locality": "Guardbridge",
+                        "region": "UKM72",
+                        "postalCode": "KY16 0US",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "name": "Adrian Wood",
+                        "telephone": "+44 1334462523",
+                        "email": "procurement@st-andrews.ac.uk",
+                        "url": "https://in-tendhost.co.uk/universityofstandrews"
+                    },
+                    "roles": [
+                        "buyer"
+                    ],
+                    "details": {
+                        "url": "http://www.st-andrews.ac.uk/staf/procurement/",
+                        "buyerProfile": "https://www.publiccontractsscotland.gov.uk/search/Search_AuthProfile.aspx?ID=AA00111",
+                        "classifications": [
+                            {
+                                "scheme": "TED_CA_TYPE",
+                                "id": "BODY_PUBLIC",
+                                "description": "Body governed by public law"
+                            },
+                            {
+                                "scheme": "COFOG",
+                                "id": "09",
+                                "description": "Education"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Dundee Sheriff Court",
+                    "id": "GB-FTS-1026",
+                    "identifier": {
+                        "legalName": "Dundee Sheriff Court"
+                    },
+                    "address": {
+                        "streetAddress": "6 West Bell Street",
+                        "locality": "Dundee",
+                        "postalCode": "DD1 9AD",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "telephone": "+44 1382229961"
+                    },
+                    "roles": [
+                        "reviewBody"
+                    ]
+                }
+            ],
+            "buyer": {
+                "id": "GB-FTS-1904",
+                "name": "University of St Andrews"
+            },
+            "links": [
+                {
+                    "rel": "canonical",
+                    "href": "https://api.publiccontractsscotland.gov.uk/v1/Notice?id=ocds-r6ebe6-0000848745"
+                }
+            ],
+            "language": "en"
+        },
+        {
+            "ocid": "ocds-h6vhtk-07c31a",
+            "id": "111450-2026",
+            "date": "2026-11-25T10:07:48Z",
+            "tag": [
+                "tender"
+            ],
+            "description": "Please note that it is an essential requirement of the procurement process that Tenderers fully complete and submit a satisfactory Single\nProcurement Document (SPD) (Scotland) and satisfy all requirements specified or referred to in the Contract Notice.\nThe Council is not and shall not be under any obligation to award a contract and shall be at liberty to abandon the procurement exercise at\nany time including any time after submission and evaluation of Tenders.\nThe Contract shall be subject to Scots Law and the jurisdiction of the Scottish Courts.\nGBP means Great British Pounds.\nNOTE: To register your interest in this notice and obtain any additional information please visit the Public Contracts Scotland Web Site at https://www.publiccontractsscotland.gov.uk/Search/Search_Switch.aspx?ID=846861.\nThe buyer has indicated that it will accept electronic responses to this notice via the Postbox facility. A user guide is available at https://www.publiccontractsscotland.gov.uk/sitehelp/help_guides.aspx.\nSuppliers are advised to allow adequate time for uploading documents and to dispatch the electronic response well in advance of the closing time to avoid any last minute problems.\nA sub-contract clause has been included in this contract. For more information see: http://www.publiccontractsscotland.gov.uk/info/InfoCentre.aspx?ID=2363\nCommunity benefits are included in this requirement. For more information see: https://www.gov.scot/policies/public-sector-procurement/community-benefits-in-procurement/\nA summary of the expected community benefits has been provided as follows:\nCommunity benefits are not included as a scored award criterion. Tenderers are nevertheless invited to identify any proportionate community benefits they may be able to deliver through Call-off Contracts, including employment, training, skills development and opportunities for underrepresented groups. Any offered commitments accepted by the Council may be incorporated into the relevant Call-off Contract.\n(SC Ref:846861)\nDownload the ESPD document here: https://www.publiccontractsscotland.gov.uk/ESPD/ESPD_Download.aspx?id=846861",
+            "initiationType": "tender",
+            "tender": {
+                "id": "I/26/26",
+                "legalBasis": {
+                    "id": "32014L0024",
+                    "scheme": "CELEX"
+                },
+                "title": "PROVISION OF DRY DOCKING FACILITIES FOR REFIT/MAINTENANCE AND ASSOCIATED SERVICES OF MARINE VESSELS",
+                "status": "active",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "50246100",
+                    "description": "Dry-docking services"
+                },
+                "mainProcurementCategory": "services",
+                "description": "The Council intends to establish a multi-supplier Framework Agreement for the provision of dry-docking facilities, refit, maintenance and associated services for the Council’s fleet of ferries, tugs and any additional vessels added to the fleet during the Framework Agreement.",
+                "value": {
+                    "amount": 6000000,
+                    "currency": "GBP"
+                },
+                "lots": [
+                    {
+                        "id": "1",
+                        "description": "Open Procedure in accordance with Regulation 28 of the Public Contracts (Scotland) Regulations 2015.  The procedure is intended to result in the Council entering into a Multi-Supplier Framework Agreement with the successful Tenderers, from whom subsequent Call-off Contract(s) for Services shall be made.",
+                        "awardCriteria": {
+                            "criteria": [
+                                {
+                                    "name": "Quality Submission",
+                                    "type": "quality",
+                                    "description": "25"
+                                },
+                                {
+                                    "type": "price",
+                                    "description": "75"
+                                }
+                            ]
+                        },
+                        "contractPeriod": {
+                            "durationInDays": 1080
+                        },
+                        "hasRenewal": true,
+                        "renewal": {
+                            "description": "extend the Framework Agreement for one further period of up to 12 months."
+                        },
+                        "submissionTerms": {
+                            "variantPolicy": "notAllowed"
+                        },
+                        "hasOptions": false,
+                        "status": "active"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "1",
+                        "additionalClassifications": [
+                            {
+                                "scheme": "CPV",
+                                "id": "50246100",
+                                "description": "Dry-docking services"
+                            }
+                        ],
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKM66"
+                            }
+                        ],
+                        "relatedLot": "1"
+                    }
+                ],
+                "submissionMethod": [
+                    "electronicSubmission"
+                ],
+                "submissionMethodDetails": "http://www.publiccontractsscotland.gov.uk",
+                "communication": {
+                    "atypicalToolUrl": "http://www.publiccontractsscotland.gov.uk"
+                },
+                "selectionCriteria": {
+                    "criteria": [
+                        {
+                            "type": "suitability",
+                            "description": "Quality Management\nTenderers must demonstrate that they have appropriate documented quality management arrangements relevant to marine dry-docking, repair and refit activities. ISO 9001 certification, or equivalent quality management measures, will be accepted.\nHealth and Safety Management\nTenderers must demonstrate appropriate documented health and safety management arrangements relevant to marine dry-docking and vessel repair activities, including arrangements for risk assessment and control of significant operational hazards.\nEnvironmental Management\nTenderers must demonstrate appropriate environmental management arrangements relevant to marine dry-docking, repair and refit activities, including waste management, pollution prevention and hazardous substance controls. ISO 14001 certification, or equivalent environmental management measures, will be accepted.",
+                            "appliesTo": [
+                                "supplier"
+                            ]
+                        },
+                        {
+                            "type": "economic",
+                            "description": "Full financial statements for the last 3 financial years available.  Where accounts are not in the English, the Tenderer must provide certified extracts in the English language. Evidence of Employers Liability Insurance with a minimum limit of indemnity of 10,000,000 (ten million) GBP, and;\nEvidence of Public Liability Insurance with a minimum limit of indemnity of 5,000,000 (five million) GBP.",
+                            "appliesTo": [
+                                "supplier"
+                            ]
+                        },
+                        {
+                            "type": "technical",
+                            "description": "Provide two relevant examples from the previous three years of experience in the provision of drydocking facilities and/or marine vessel maintenance, repair or refit services of vessels of a comparable nature to vessels mentioned in this Framework Agreement.\nTechnical Facilities and Equipment: The tenderer must have access to suitable docking facilities, equipment and resources to undertake the services offered under this Framework Agreement for at least one of the vessel types included in Appendix 1",
+                            "minimum": "Facilities must be within three (3) days steaming from the port of Lerwick, Shetland.",
+                            "appliesTo": [
+                                "supplier"
+                            ]
+                        }
+                    ]
+                },
+                "procurementMethod": "open",
+                "procurementMethodDetails": "Open procedure",
+                "techniques": {
+                    "hasFrameworkAgreement": true,
+                    "frameworkAgreement": {
+                        "maximumParticipants": 5
+                    }
+                },
+                "coveredBy": [
+                    "GPA"
+                ],
+                "tenderPeriod": {
+                    "endDate": "2027-01-11T12:00:00Z"
+                },
+                "submissionTerms": {
+                    "languages": [
+                        "en"
+                    ]
+                },
+                "awardPeriod": {
+                    "startDate": "2027-01-11T12:00:00Z"
+                },
+                "bidOpening": {
+                    "date": "2027-01-11T12:00:00Z",
+                    "address": {
+                        "streetAddress": "8 North Ness Business Park, Lerwick, Shetland, ZE1 0LZ"
+                    }
+                },
+                "hasRecurrence": false,
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "allowed",
+                    "hasElectronicPayment": true
+                }
+            },
+            "parties": [
+                {
+                    "name": "Shetland Islands Council",
+                    "id": "GB-FTS-71681",
+                    "identifier": {
+                        "legalName": "Shetland Islands Council"
+                    },
+                    "address": {
+                        "streetAddress": "8 North Ness Business Park",
+                        "locality": "Lerwick, Shetland",
+                        "region": "UKM66",
+                        "postalCode": "ZE1 0LZ",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "name": "Mr Graeme MacDonald",
+                        "telephone": "+44 1595744595",
+                        "email": "graeme.macdonald@shetland.gov.uk",
+                        "url": "http://www.publiccontractsscotland.gov.uk"
+                    },
+                    "roles": [
+                        "buyer",
+                        "centralPurchasingBody"
+                    ],
+                    "details": {
+                        "url": "http://www.shetland.gov.uk",
+                        "buyerProfile": "https://www.publiccontractsscotland.gov.uk/search/Search_AuthProfile.aspx?ID=AA00402",
+                        "classifications": [
+                            {
+                                "scheme": "TED_CA_TYPE",
+                                "id": "REGIONAL_AUTHORITY",
+                                "description": "Regional or local authority"
+                            },
+                            {
+                                "scheme": "COFOG",
+                                "id": "01",
+                                "description": "General public services"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Lerwick Sheriff Court",
+                    "id": "GB-FTS-155485",
+                    "identifier": {
+                        "legalName": "Lerwick Sheriff Court"
+                    },
+                    "address": {
+                        "streetAddress": "King Erik Street",
+                        "locality": "Lerwick",
+                        "postalCode": "ZE1 0UD",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "email": "lerwick@scotcourts.gov.uk"
+                    },
+                    "roles": [
+                        "reviewBody"
+                    ]
+                }
+            ],
+            "buyer": {
+                "id": "GB-FTS-71681",
+                "name": "Shetland Islands Council"
+            },
+            "links": [
+                {
+                    "rel": "canonical",
+                    "href": "https://api.publiccontractsscotland.gov.uk/v1/Notice?id=ocds-r6ebe6-0000846861"
+                }
+            ],
+            "language": "en"
+        },
+        {
+            "ocid": "ocds-h6vhtk-07b96f",
+            "id": "111330-2026",
+            "date": "2026-11-24T16:19:57Z",
+            "tag": [
+                "tender"
+            ],
+            "description": "The buyer is using PCS-Tender to conduct this ITT exercise. The Project code is 66518. For more information see: http://www.publiccontractsscotland.gov.uk/info/InfoCentre.aspx?ID=2343\nCommunity benefits are included in this requirement. For more information see: https://www.gov.scot/policies/public-sector-procurement/community-benefits-in-procurement/\nA summary of the expected community benefits has been provided as follows:\nWe have provided an indicative Community Benefit and Partnership Menu which aligns the provision of community benefits across five key areas:\n- Employability & Skills\n- Community Engagement\n- Research & Student Engagement\n- Economic Development\n- Environment\nPlease review and complete the Community Benefit providing realistic and representative benefits. Please note proposed benefits must be new commitments made specifically for this contract. Activity your organisation already delivers will not be accepted.\nThe value of this contract falls within the 750k-3m GBP band shown in Tab 1. Bidders are encouraged to offer benefits that match the points available for this band.\nPlease note that your offer applies to the contract as a whole and is not to be delivered in full each year. For example, a 5,000 GBP donation of equipment to a local school or charity can be spread across the contract term at 1,000 GBP per year. This is not a 5,000 GBP donation in each year of the contract.\nPlease note that community benefits will be actively monitored through contract review meetings, ensuring consistent oversight and accountability throughout the duration of the framework.\nPlease also provide a methodology setting out how your organisation will resource, deliver, evidence and report on the benefits proposed in your completed menu.\nYour score will be based on both the community benefit offer and the methodology.\n(SC Ref:849299)",
+            "initiationType": "tender",
+            "tender": {
+                "id": "EC1102",
+                "legalBasis": {
+                    "id": "32014L0024",
+                    "scheme": "CELEX"
+                },
+                "title": "Tree Planting and Maintenance",
+                "status": "active",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "77200000",
+                    "description": "Forestry services"
+                },
+                "mainProcurementCategory": "services",
+                "description": "The University is looking to contract planting and maintenance for it's 3 woodland creation sites;\nRullion Green – Flotterstone, Pentlands – 30-hectare site\nDrumbrae – Sherrifmuir Road, Bridge of Allan – 430-hectare site\nBarvick Burn Wood – Crieff, Perthshire – 431-hectare site\nThe contract is estimated to begin in February 2027. The University is seeking to contract initial planting, beat-up planting and maintenance for 2 years, with the possibility to extend for 3 years (3 x 12 months).\nPlease note the value stated is indicative only and does not represent a guaranteed level of expenditure.",
+                "value": {
+                    "amount": 2000000,
+                    "currency": "GBP"
+                },
+                "lots": [
+                    {
+                        "id": "1",
+                        "description": "The University is looking to appoint a contractor to carry out planting and maintenance for the 3 woodland creation sites.\nRullion Green – Flotterstone, Pentlands – 30-hectare site\nDrumbrae – Sherrifmuir Road, Bridge of Allan – 430-hectare site\nBarvick Burn Wood – Crieff, Perthshire – 431-hectare site",
+                        "awardCriteria": {
+                            "criteria": [
+                                {
+                                    "name": "Technical",
+                                    "type": "quality",
+                                    "description": "80"
+                                },
+                                {
+                                    "type": "price",
+                                    "description": "20"
+                                }
+                            ]
+                        },
+                        "value": {
+                            "amount": 2000000,
+                            "currency": "GBP"
+                        },
+                        "contractPeriod": {
+                            "durationInDays": 720
+                        },
+                        "hasRenewal": true,
+                        "renewal": {
+                            "description": "Option to extend for a period of up to 3 years (1+1+1)"
+                        },
+                        "submissionTerms": {
+                            "variantPolicy": "allowed"
+                        },
+                        "hasOptions": true,
+                        "options": {
+                            "description": "Future sites - tenderers should note that the Buyer reserves the right to vary this contract to include additional services to any potential additional sites within the life of the contract. This variation will be done by mutual agreement between the Buyer and the successful bidder. There is no guarantee of additional services other than the awarded services in this procurement."
+                        },
+                        "status": "active"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "1",
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKM75"
+                            }
+                        ],
+                        "relatedLot": "1"
+                    }
+                ],
+                "submissionMethod": [
+                    "electronicSubmission"
+                ],
+                "submissionMethodDetails": "https://www.publictendersscotland.publiccontractsscotland.gov.uk",
+                "documents": [
+                    {
+                        "documentType": "economicSelectionCriteria",
+                        "id": "economic"
+                    },
+                    {
+                        "documentType": "technicalSelectionCriteria",
+                        "id": "technical"
+                    }
+                ],
+                "procurementMethod": "open",
+                "procurementMethodDetails": "Open procedure",
+                "coveredBy": [
+                    "GPA"
+                ],
+                "tenderPeriod": {
+                    "endDate": "2027-01-05T12:00:00Z"
+                },
+                "submissionTerms": {
+                    "languages": [
+                        "en"
+                    ],
+                    "bidValidityPeriod": {
+                        "durationInDays": 120
+                    }
+                },
+                "awardPeriod": {
+                    "startDate": "2027-01-05T12:00:00Z"
+                },
+                "bidOpening": {
+                    "date": "2027-01-05T12:00:00Z"
+                },
+                "hasRecurrence": false,
+                "contractTerms": {
+                    "hasElectronicOrdering": true,
+                    "electronicInvoicingPolicy": "allowed",
+                    "hasElectronicPayment": true
+                }
+            },
+            "parties": [
+                {
+                    "name": "University Of Edinburgh",
+                    "id": "GB-FTS-2023",
+                    "identifier": {
+                        "legalName": "University Of Edinburgh"
+                    },
+                    "address": {
+                        "streetAddress": "Charles Stewart House, 9-16 Chambers Street",
+                        "locality": "Edinburgh",
+                        "region": "UKM75",
+                        "postalCode": "EH1 1HT",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "telephone": "+44 1316502508",
+                        "email": "mritchi7@ed.ac.uk",
+                        "url": "https://www.publictendersscotland.publiccontractsscotland.gov.uk"
+                    },
+                    "roles": [
+                        "buyer",
+                        "centralPurchasingBody"
+                    ],
+                    "details": {
+                        "url": "https://www.ed.ac.uk",
+                        "buyerProfile": "https://www.publiccontractsscotland.gov.uk/search/Search_AuthProfile.aspx?ID=AA00107",
+                        "classifications": [
+                            {
+                                "scheme": "TED_CA_TYPE",
+                                "id": "BODY_PUBLIC",
+                                "description": "Body governed by public law"
+                            },
+                            {
+                                "scheme": "COFOG",
+                                "id": "09",
+                                "description": "Education"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Edinburgh Sheriff Court",
+                    "id": "GB-FTS-404",
+                    "identifier": {
+                        "legalName": "Edinburgh Sheriff Court"
+                    },
+                    "address": {
+                        "streetAddress": "27 Chambers Street",
+                        "locality": "Edinburgh",
+                        "postalCode": "EH1 1LB",
+                        "countryName": "United Kingdom"
+                    },
+                    "roles": [
+                        "reviewBody"
+                    ]
+                }
+            ],
+            "buyer": {
+                "id": "GB-FTS-2023",
+                "name": "University Of Edinburgh"
+            },
+            "links": [
+                {
+                    "rel": "canonical",
+                    "href": "https://api.publiccontractsscotland.gov.uk/v1/Notice?id=ocds-r6ebe6-0000848178"
+                }
+            ],
+            "language": "en"
+        },
+        {
+            "ocid": "ocds-h6vhtk-07c2ba",
+            "id": "111282-2026",
+            "date": "2026-11-24T15:28:47Z",
+            "tag": [
+                "tender"
+            ],
+            "description": "To access this opportunity, please register using the following link :<br/>https://atamis-scottishwater.my.salesforce-sites.com/ProSpend__CS_PublicLandingPage?SearchType=Projects",
+            "initiationType": "tender",
+            "tender": {
+                "id": "SW26/W&WTE/1550",
+                "legalBasis": {
+                    "id": "32014L0025",
+                    "scheme": "CELEX"
+                },
+                "title": "Telemetry Engineering Support Services",
+                "status": "active",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "50330000",
+                    "description": "Maintenance services of telecommunications equipment"
+                },
+                "mainProcurementCategory": "services",
+                "description": "Scottish Water is establishing a Framework Agreement for Telemetry Engineering Support Services, covering the survey, supply, installation, commissioning, decommissioning and documentation of Remote Telemetry Units (RTUs) and associated communications equipment across Scottish Water's water and wastewater asset base, together with reactive telemetry support. Services may be required anywhere in Scotland, so Suppliers must be able to service all geographic areas.<br/><br/>The scope includes, but is not limited to:<br/><br/>- Desktop and on-site surveys of existing and future telemetry installations, including communications surveys (e.g. 4G, SOGEA, FTTP).<br/>- Procurement of RTUs and associated equipment through Scottish Water's mandatory RTU framework, and Factory Acceptance Testing (FAT) prior to delivery to site.<br/>- Supply and installation of RTU associated communications equipment in accordance with Scottish Water specifications (antennas, surge and lightning protection, cable containment, marshalling, relays, signal conditioners, Modbus PLC communications, data gatherers and inter-site comms).<br/>- Programming and end to end (source to screen) commissioning and testing of new and existing plant monitored by the telemetry top end, including hot swaps of live RTUs.<br/>- Decommissioning of RTUs and associated equipment, including safe removal, return of spares and WEEE compliant disposal.<br/>- Production of IO tag sheets, mimics, risk assessments and method statements, commissioning and FAT records, Ready to Go Live documentation and Operation and Maintenance manuals, in line with Scottish Water procedures and a Common Data Environment aligned to ISO 19650.<br/>- Training for Scottish Water Electrical and Mechanical (E&M) support staff on installed telemetry.<br/>- Additional on-site support to Scottish Water E&M teams for communications failures, reactive faults and minor enhancements, and to supplement Scottish Water maintenance teams during periods of high breakdown volumes or staff shortages.<br/><br/>Work will be delivered on assets within Scottish Water's Operational Technology environment, which is in scope of the Network and Information Systems (NIS) Regulations, in accordance with Scottish Water's Telemetry Realisation Process, telemetry procedures and Engineering Specification Section 633 - Telemetry. The Supplier will act as Principal Contractor only and must provide its own base facilities, as Scottish Water will not make premises available.<br/><br/>Call-off contracts will be awarded under the Framework by direct allocation or mini-competition. Scottish Water may appoint more than one Supplier. Appointment to the Framework does not guarantee any volume or value of work.<br/><br/>This opportunity is aimed at telemetry, SCADA, instrumentation and controls and electrical engineering contractors with proven capability in delivering telemetry installations on operational water and wastewater assets, a competent and suitably qualified workforce, and the capacity to respond across Scotland.",
+                "value": {
+                    "amount": 13000000.00,
+                    "currency": "GBP"
+                },
+                "lots": [
+                    {
+                        "id": "1",
+                        "description": "Scottish Water is seeking to appoint Suppliers to a Framework Agreement for the provision of Telemetry Engineering Support Services. The Framework will support the survey, supply, installation, commissioning, decommissioning and documentation of Remote Telemetry Units (RTUs) and associated communications equipment on Scottish Water's water and wastewater assets, for both new and existing works, together with reactive telemetry support to Scottish Water's Electrical and Mechanical (E&M) teams.<br/><br/>Services may be required across all of Scotland. Suppliers must therefore be able to service all geographic areas of Scotland.<br/><br/>This notice is intended to help prospective Suppliers understand the nature and breadth of the services so that those with the right capability and capacity can decide whether to participate.<br/><br/>The scope of services includes, but is not limited to, the following.<br/><br/>Surveys<br/><br/>- Desktop and on-site surveys of existing telemetry installations.<br/>- Desktop and on-site surveys for future telemetry installations.<br/>- Communications surveys (desktop and on site) to establish the communications options available for future installations and to document existing communications (e.g. 4G, SOGEA, FTTP).<br/>- Surveys will identify hazards and limitations relevant to the telemetry installation, its function and site access, and will record the location, type and function of the RTU and its associated communications equipment, any integration with control systems (PLC and SCADA), the electrical supply, cable ways and marshalling arrangements.<br/><br/>Remote Telemetry Units and associated equipment<br/><br/>- Procurement of Framework approved RTUs and associated equipment via Scottish Water's approved supply chain. Use of Scottish Water's RTU framework (currently SW20/CI/1285/1 - Supply of Remote Telemetry Units, or any successor or replacement framework) is mandatory.<br/>- Factory Acceptance Testing (FAT) of RTUs before delivery to site.<br/>- Supply and installation of RTU associated communications equipment in accordance with Scottish Water specifications, including antennas, surge protection, lightning protection, cable containment, marshalling junction boxes, knife edge terminations, relays, signal conditioners (24v / 0-20mA), PLC communication via RS485 Modbus protocol, 230v unswitched fused spurs, data gatherers and inter-site communications.<br/>- Where ancillary electrical work is required, design, supply, installation, testing and commissioning in compliance with BS 7671, the Electricity at Work Regulations 1989 and applicable UK water industry standards, including relevant WIMES, Scottish Water specifications and Sewers for Scotland.<br/><br/>Programming, testing and commissioning<br/><br/>- Programming of RTUs and completion of the IO and mimic configuration based on Scottish Water design packages.<br/>- End to end (source to screen) commissioning of all new and existing plant monitored by the telemetry top end, including hot swaps of live RTUs and signal additions or modifications, in collaboration with Scottish Water's Telemetry Engineering Support Team (TeST) and Specialist Service Delivery (SSD) team.<br/>- Close liaison with Scottish Water Operations, principal partners and control centre staff to plan and coordinate testing.<br/><br/>Decommissioning<br/><br/>- Decommissioning of telemetry RTUs and associated equipment. Equipment is to be removed from site unless otherwise instructed, with any equipment left in place made safe and labelled.<br/>- Return of spares to Scottish Water where instructed, and safe disposal of removed equipment in accordance with WEEE and other relevant legislation.<br/>- Removal and making safe of redundant power supplies, RTU cards and cabling, and updating of enclosure labelling where existing enclosures are reused.<br/><br/>Documentation and information management<br/><br/>- Production of IO tag sheets and mimics based on the design package provided by Scottish Water or its partners.<br/>- Risk assessments and method statements in compliance with Scottish Water requirements.<br/>- Testing documentation, including commissioning records and FAT documentation.<br/>- Ready to Go Live (RtGL) documentation in accordance with Scottish Water SSD and TeST procedures and standards.<br/>- Operations and Maintenance (O&M) manuals in accordance with Scottish Water procedures and standards.<br/>- Compliance with Scottish Water's Common Data Environment requirements for the SR27 regulatory period (Autodesk Forma), including alignment to ISO 19650, naming conventions, metadata, folder structures, workflows and product data.<br/><br/>Training<br/><br/>- Training for local Scottish Water E&M support staff on the telemetry RTU installed, including anything non-standard or specific to the site, rather than generic manufacturer information only.<br/><br/>Maintenance and reactive support<br/><br/>- Additional support to Scottish Water's E&M department as required for communications failures, reactive faults and minor enhancements.<br/>- On-site telemetry support to supplement Scottish Water's own maintenance teams during periods of high breakdown volumes or staff shortages.<br/><br/>Project management and reporting<br/><br/>- Monthly financial and programme reporting.<br/>- Applications for payment in line with the Scottish Water payment calendar.<br/>- The Supplier will act as Principal Contractor only and will be assessed as such by Scottish Water.<br/>- Working to Scottish Water processes and procedures, including the Telemetry Realisation Process and telemetry procedures that form part of the scope documents.<br/>- A defect period of 2 years.<br/><br/>DELIVERY ENVIRONMENT AND EXPECTATIONS<br/><br/>Telemetry and operational technology<br/><br/>The services will be delivered on telemetry equipment, RTUs, communications infrastructure and PLC interfaces that form part of Scottish Water's Operational Technology (OT) environment, which is in scope of the Network and Information Systems (NIS) Regulations. Suppliers will be expected to work to secure-by-design principles and Scottish Water's OT security requirements.<br/><br/>Standards and specifications<br/><br/>Work must comply with Scottish Water's Standards and Specifications, including Engineering Specification Section 633 - Telemetry.<br/><br/>Geographic coverage and base operations<br/><br/>Suppliers must be capable of servicing all geographic areas of Scotland. Scottish Water will not make premises available for Suppliers to establish base operations, so Suppliers must have sufficient facilities to service the Framework. Same day attendance at mainland sites within 150 miles of the Supplier's Scottish base (or the Central Belt if there is no Scottish base) is expected as a minimum.<br/><br/>Workforce competence<br/><br/>All personnel must be appropriately trained, qualified and experienced, and able to work to industry-recognised health, safety and quality standards. This includes, but is not limited to, CSCS / Electrical Safety Certification Scheme, DOMS, Water Hygiene, Confined Space and Working at Height training.<br/><br/>Working with Scottish Water teams<br/><br/>Suppliers will work closely with Scottish Water's SSD and TeST teams and other Scottish Water framework partners and will be expected to meet defined service levels and lead times throughout the telemetry delivery process.<br/><br/>Work will be awarded through call-off contracts under the Framework Agreement, by either direct allocation or mini-competition depending on the nature of the individual work package. Scottish Water may appoint more than one Supplier to the Framework.<br/><br/>Where work is directly allocated, Scottish Water may consider factors such as resource capacity and competence, telemetry device and site experience, performance, quotation and specific stakeholder or project requirements. Appointment to the Framework does not guarantee any minimum volume, value or share of work. Scottish Water Horizons Limited may also use the Framework where it is an entitled user.<br/><br/>This opportunity is aimed at organisations with proven experience of delivering telemetry, SCADA, instrumentation and controls and electrical engineering services on operational water, wastewater or other critical infrastructure assets, and which can demonstrate:<br/><br/>- Experience of surveying, installing, programming and commissioning RTU based telemetry systems.<br/>- A competent, suitably qualified workforce and the resource capacity to deliver across Scotland.<br/>- The ability to produce high quality technical documentation and manage information in a Common Data Environment.<br/>- Capability to operate as Principal Contractor.<br/>- A strong commitment to health and safety and to working collaboratively with Scottish Water and its wider supply chain.<br/><br/>Full details of the requirements, including the scope documents, Telemetry Realisation Process and Standards and Specifications, will be available to participating Bidders through the Scottish Water e-Sourcing portal (Atamis). Additional information: To access this opportunity, please register using the following link : <br/>https://atamis-scottishwater.my.salesforce-sites.com/ProSpend__CS_PublicLandingPage?SearchType=Projects",
+                        "value": {
+                            "amount": 13000000.00,
+                            "currency": "GBP"
+                        },
+                        "contractPeriod": {
+                            "durationInDays": 2880
+                        },
+                        "hasRenewal": false,
+                        "secondStage": {
+                            "minimumCandidates": 3
+                        },
+                        "submissionTerms": {
+                            "variantPolicy": "notAllowed"
+                        },
+                        "hasOptions": false,
+                        "status": "active"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "1",
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKM"
+                            }
+                        ],
+                        "relatedLot": "1"
+                    }
+                ],
+                "submissionMethod": [
+                    "electronicSubmission"
+                ],
+                "submissionMethodDetails": "https://atamis-scottishwater.my.salesforce-sites.com/ProSpend__CS_PublicLandingPage?SearchType=Projects",
+                "documents": [
+                    {
+                        "documentType": "economicSelectionCriteria",
+                        "id": "economic"
+                    },
+                    {
+                        "documentType": "technicalSelectionCriteria",
+                        "id": "technical"
+                    }
+                ],
+                "otherRequirements": {
+                    "reductionCriteria": "See Procurement Documents for further information."
+                },
+                "contractTerms": {
+                    "performanceTerms": "See Procurement Documents for further information.",
+                    "hasElectronicOrdering": true,
+                    "electronicInvoicingPolicy": "allowed",
+                    "hasElectronicPayment": true
+                },
+                "procurementMethod": "selective",
+                "procurementMethodDetails": "Negotiated procedure with prior call for competition",
+                "techniques": {
+                    "hasFrameworkAgreement": true,
+                    "frameworkAgreement": {
+                        "maximumParticipants": 1e9999
+                    }
+                },
+                "coveredBy": [
+                    "GPA"
+                ],
+                "tenderPeriod": {
+                    "endDate": "2027-01-20T12:00:00Z"
+                },
+                "submissionTerms": {
+                    "languages": [
+                        "en"
+                    ]
+                },
+                "hasRecurrence": false
+            },
+            "parties": [
+                {
+                    "name": "Scottish Water",
+                    "id": "GB-FTS-130632",
+                    "identifier": {
+                        "legalName": "Scottish Water"
+                    },
+                    "address": {
+                        "streetAddress": "The Bridge, 6 Buchanan Gate, Stepps",
+                        "locality": "Glasgow",
+                        "region": "UKM",
+                        "postalCode": "G33 6FB",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "name": "Paul McDonald",
+                        "telephone": "+44 1414830344",
+                        "email": "paul.mcdonald@scottishwater.co.uk",
+                        "url": "https://atamis-scottishwater.my.salesforce-sites.com/ProSpend__CS_PublicLandingPage?SearchType=Projects"
+                    },
+                    "roles": [
+                        "buyer",
+                        "mediationBody"
+                    ],
+                    "details": {
+                        "url": "https://www.scottishwater.co.uk/",
+                        "buyerProfile": "https://www.scottishwater.co.uk/",
+                        "classifications": [
+                            {
+                                "scheme": "TED_CE_ACTIVITY",
+                                "id": "WATER",
+                                "description": "Water"
+                            }
+                        ]
+                    },
+                    "additionalContactPoints": [
+                        {
+                            "email": "help@scottishwater.co.uk"
+                        }
+                    ]
+                },
+                {
+                    "name": "Glasgow Sheriff Court",
+                    "id": "GB-FTS-2553",
+                    "identifier": {
+                        "legalName": "Glasgow Sheriff Court"
+                    },
+                    "address": {
+                        "streetAddress": "1 Carlton Place",
+                        "locality": "Glasgow",
+                        "postalCode": "G5 9DA",
+                        "countryName": "United Kingdom"
+                    },
+                    "roles": [
+                        "reviewBody"
+                    ]
+                }
+            ],
+            "buyer": {
+                "id": "GB-FTS-130632",
+                "name": "Scottish Water"
+            },
+            "language": "en"
+        },
+        {
+            "ocid": "ocds-h6vhtk-07c2a8",
+            "id": "111244-2026",
+            "date": "2026-11-24T14:41:26Z",
+            "tag": [
+                "tender"
+            ],
+            "description": "Bidders must provide two examples that demonstrates they have the relevant experience to deliver the contract. Examples must be of a similar scope, size, and value and be from within the last three years. Unsatisfactory experience will result in a fail and exclusion from the tender process. If you submit more than two examples, NAC will only evaluate the first two examples provided.\nBidders must also provide two satisfactory references for the same two examples. References must be fully completed and signed by previous customers. If any of the referees score less than two, the bidder will be excluded from the tender process. If you submit more than two references, NAC will only evaluate the first two references provided.\nBidders will be required to confirm whether they intend to subcontract and, if so, for what proportion of the contract.\nBidders who intend to subcontract more than 25% to any individual organisation must ensure the SPD (Scotland) - Subcontractors Supplier Response is completed and uploaded at question 2D.1.2 of the qualification envelope.\nQuality Management Procedures\nThe bidder must hold a UKAS (or equivalent) accredited independent third-party certificate of compliance in accordance with BS EN ISO 9001 (or equivalent)\nOR\nA documented policy regarding quality management.\nHealth and Safety Procedures\nThe bidder must hold a UKAS (or equivalent), accredited independent third-party certificate of compliance in accordance with ISO 45001 (or equivalent) or have, within the last 12 months, successfully met the assessment requirements of a construction-related scheme in registered membership of the Safety Schemes in Procurement (SSIP) forum.\nOR\nA documented policy regarding health and safety.\nEnvironmental Management Procedures\nThe Bidder must hold a UKAS (or equivalent) accredited independent third-party certificate of compliance with BS EN ISO 14001 (or equivalent) or a valid EMAS (or equivalent) certificate.\nOR\nA documented policy regarding environmental management.\nThe buyer is using PCS-Tender to conduct this ITT exercise. The Project code is 33228. For more information see: http://www.publiccontractsscotland.gov.uk/info/InfoCentre.aspx?ID=2343\nCommunity benefits are included in this requirement. For more information see: https://www.gov.scot/policies/public-sector-procurement/community-benefits-in-procurement/\nA summary of the expected community benefits has been provided as follows:\nCommunity benefits will be required on a mandatory basis for:\n- Employment\n- Employability & Skills\n- SMEs\n- TSOs\n- Education\n- Community Wish List (http://northayrshire.community/community-benefits-wishlist- application-form/)\n(SC Ref:849158)",
+            "initiationType": "tender",
+            "tender": {
+                "id": "NAC/5248",
+                "legalBasis": {
+                    "id": "32014L0024",
+                    "scheme": "CELEX"
+                },
+                "title": "Provision of a Mental Health Wellbeing Recovery College and Peer Support Service",
+                "status": "active",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "85323000",
+                    "description": "Community health services"
+                },
+                "mainProcurementCategory": "services",
+                "description": "North Ayrshire Council invites tenders for the provision of a Mental Health Wellbeing Recovery College and Peer Support Service.",
+                "value": {
+                    "amount": 1246475,
+                    "currency": "GBP"
+                },
+                "lots": [
+                    {
+                        "id": "1",
+                        "description": "North Ayrshire Council is seeking to appoint a suitably qualified and experienced Provider to deliver a Mental Health Wellbeing Recovery College and Peer Support Service for individuals aged 16 years and over. The Service will provide a recovery-focused, person-centred approach through the delivery of learning opportunities, peer support, wellbeing activities and community-based interventions.\nThe successful Provider will be responsible for delivering and developing a Recovery College model and Peer Support Service that supports individuals to improve their mental health and wellbeing, build resilience, develop self-management skills, strengthen social connections and increase participation within their communities.\nThe Provider will work collaboratively with North Ayrshire Health and Social Care Partnership, statutory services, third sector organisations, local communities and people with lived experience to achieve positive outcomes for service users.\nThe anticipated contract commencement date is 1st July 2027. The anticipated contract end date is 30th June 2030. The anticipated maximum extension date is 30th June 2032 (this will be at the sole discretion of NAC and subject to satisfactory performance and funding).\nTenderers must agree to accept NAC Conditions of Contract for Health and Social Care Services and NAC Exit Terms and Conditions as the contract will be let on these terms.",
+                        "value": {
+                            "amount": 1246475,
+                            "currency": "GBP"
+                        },
+                        "status": "active"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "1",
+                        "additionalClassifications": [
+                            {
+                                "scheme": "CPV",
+                                "id": "85323000",
+                                "description": "Community health services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85300000",
+                                "description": "Social work and related services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85000000",
+                                "description": "Health and social work services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85310000",
+                                "description": "Social work services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85311000",
+                                "description": "Social work services with accommodation"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85320000",
+                                "description": "Social services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85312300",
+                                "description": "Guidance and counselling services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85312500",
+                                "description": "Rehabilitation services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85121270",
+                                "description": "Psychiatrist or psychologist services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "98133100",
+                                "description": "Civic betterment and community facility support services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "80340000",
+                                "description": "Special education services"
+                            },
+                            {
+                                "scheme": "CPV",
+                                "id": "85100000",
+                                "description": "Health services"
+                            }
+                        ],
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKM93"
+                            }
+                        ],
+                        "relatedLot": "1"
+                    }
+                ],
+                "submissionMethod": [
+                    "electronicSubmission"
+                ],
+                "submissionMethodDetails": "https://www.publictendersscotland.publiccontractsscotland.gov.uk",
+                "otherRequirements": {
+                    "reductionCriteria": "Bidders may be excluded if they are in any of the situations referred to in regulation 58 of the Public Contracts (Scotland) Regulations 2015.\nNAC can review the bidders financial info using company watch at tender stage and throughout the contract. If the bidders financial health score is 25 or less, more info will be requested to ensure the equivalent economic and financial standing is adhered too. If this is not satisfactory, the bidder will be excluded from the process.\nBidders will be required to have a minimum “general” yearly turnover of 498,590 GBP per year for the last 3 years. Where turnover information is not available for the period requested, the bidder will be required to state the date which they were set up/started trading. Compliance with the minimum turnover requirement will be assessed proportionately based on the financial years available since the bidder commenced trading.",
+                    "requiresStaffNamesAndQualifications": true
+                },
+                "selectionCriteria": {
+                    "criteria": [
+                        {
+                            "type": "technical",
+                            "description": "As this contract includes work with vulnerable children and/or adults, bidders must confirm all staff engaged in the contract hold a Protecting Vulnerable Group (\"PVG\") membership.\nIt is a requirement of this contract that bidders hold, or can commit to obtain prior to the commencement of any subsequently awarded contract, the types and levels of insurance indicated below:\n- Employer’s (Compulsory) Liability Insurance = 5 million GBP\n- Public Liability Insurance = 10 million GBP\n- Third-party motor vehicle insurance - A valid motor vehicle certificate must be held in the company name or (where there is no fleet but rather the company permits its employees to use their personal vehicles for business purposes), a letter signed by a person of appropriate authority - confirming that the company has ongoing arrangements in place to ensure their employees' vehicles are appropriately insured and maintained\nhttp://www.hse.gov.uk/pubns/hse40.pdf"
+                        }
+                    ]
+                },
+                "procurementMethod": "open",
+                "procurementMethodDetails": "Open procedure",
+                "procedure": {
+                    "features": "http://www.gov.scot/Topics/Government/Procurement"
+                },
+                "awardCriteriaDetails": "This procurement is based on the most economically advantageous tender (\"MEAT\") on the basis of best price and quality ratio, where price is 20% and quality is 80%. Please see PCS-Tender for further information.",
+                "tenderPeriod": {
+                    "endDate": "2027-01-12T12:00:00Z"
+                },
+                "submissionTerms": {
+                    "languages": [
+                        "en"
+                    ]
+                },
+                "contractTerms": {
+                    "hasElectronicOrdering": true,
+                    "electronicInvoicingPolicy": "allowed",
+                    "hasElectronicPayment": true
+                }
+            },
+            "parties": [
+                {
+                    "name": "North Ayrshire Council",
+                    "id": "GB-FTS-1083",
+                    "identifier": {
+                        "legalName": "North Ayrshire Council"
+                    },
+                    "address": {
+                        "streetAddress": "Cunninghame House, Friars Croft",
+                        "locality": "Irvine",
+                        "region": "UKM93",
+                        "postalCode": "KA12 8EE",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "email": "murraythompson@north-ayrshire.gov.uk",
+                        "url": "https://www.publictendersscotland.publiccontractsscotland.gov.uk"
+                    },
+                    "roles": [
+                        "buyer"
+                    ],
+                    "details": {
+                        "url": "http://www.north-ayrshire.gov.uk",
+                        "buyerProfile": "http://www.publiccontractsscotland.gov.uk/search/Search_AuthProfile.aspx?ID=AA00337",
+                        "classifications": [
+                            {
+                                "scheme": "TED_CA_TYPE",
+                                "id": "REGIONAL_AUTHORITY",
+                                "description": "Regional or local authority"
+                            },
+                            {
+                                "scheme": "COFOG",
+                                "id": "01",
+                                "description": "General public services"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Kilmarnock Sheriff Court",
+                    "id": "GB-FTS-4006",
+                    "identifier": {
+                        "legalName": "Kilmarnock Sheriff Court"
+                    },
+                    "address": {
+                        "streetAddress": "Sheriff Court House, St Marnock Street",
+                        "locality": "Kilmarnock",
+                        "postalCode": "KA1 1ED",
+                        "countryName": "United Kingdom"
+                    },
+                    "roles": [
+                        "reviewBody"
+                    ],
+                    "details": {
+                        "url": "https://www.scotcourts.gov.uk/"
+                    }
+                }
+            ],
+            "buyer": {
+                "id": "GB-FTS-1083",
+                "name": "North Ayrshire Council"
+            },
+            "links": [
+                {
+                    "rel": "canonical",
+                    "href": "https://api.publiccontractsscotland.gov.uk/v1/Notice?id=ocds-r6ebe6-0000849158"
+                }
+            ],
+            "language": "en"
+        },
+        {
+            "ocid": "ocds-h6vhtk-07b2a1",
+            "id": "111243-2026",
+            "date": "2026-11-24T14:40:53Z",
+            "tag": [
+                "tender"
+            ],
+            "description": "The buyer is using PCS-Tender to conduct this ITT exercise. The Project code is 33170. For more information see: http://www.publiccontractsscotland.gov.uk/info/InfoCentre.aspx?ID=2343\nA sub-contract clause has been included in this contract. For more information see: http://www.publiccontractsscotland.gov.uk/info/InfoCentre.aspx?ID=2363\nCommunity benefits are included in this requirement. For more information see: https://www.gov.scot/policies/public-sector-procurement/community-benefits-in-procurement/\nA summary of the expected community benefits has been provided as follows:\nThe Statement of Requirements will detail the Community Benefit background and objectives. The contract will mandate that suppliers\nRespond in its tender outlining current Community Benefits and proposals if successful and mandating that they support the overall\nCommunity Benefit concept and process including a contract and supplier management process post award\n(SC Ref:848232)",
+            "initiationType": "tender",
+            "tender": {
+                "id": "NP74326",
+                "legalBasis": {
+                    "id": "32014L0024",
+                    "scheme": "CELEX"
+                },
+                "title": "Provisions",
+                "status": "active",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "15000000",
+                    "description": "Food, beverages, tobacco and related products"
+                },
+                "mainProcurementCategory": "goods",
+                "description": "Renewal of a National Framework (NP743) to provide a full range of Provision Products (indicative of and not limited to) Canned products, beverages, pulses, pasta and rice, biscuits, bakery, etc.",
+                "value": {
+                    "amount": 39000000,
+                    "currency": "GBP"
+                },
+                "lots": [
+                    {
+                        "id": "1",
+                        "description": "A range of dry, canned and sundries products to be use by health boards across Scotland. This is a Single Supplier Framework for Supply, Storage and Distribution, includes option for manufacturer direct deals.\nThe Framework Agreement may be used by all mainland and Island NHS Scotland Health Boards and Special Boards (including the common services agency) and by all entities constituted pursuant to the National Health Service (Scotland) Act 1978 (i.e. all NHS Scotland\nHealth Boards, Special Boards, and the Authority or other NHS Organisations established pursuant to NHS (Scotland Act 1978) and any Integrated Joint Boards established pursuant to the new Public Bodies (Joint Working) Scotland Act 2014. All Scottish Hospices. Additional information: Total value shown is for the duration of the framework and based on 12 months’ suppliers spend data. The Framework period shall be for 4 years",
+                        "awardCriteria": {
+                            "criteria": [
+                                {
+                                    "name": "Service",
+                                    "type": "quality",
+                                    "description": "20"
+                                },
+                                {
+                                    "name": "Commercial",
+                                    "type": "cost",
+                                    "description": "80"
+                                }
+                            ]
+                        },
+                        "value": {
+                            "amount": 39000000,
+                            "currency": "GBP"
+                        },
+                        "contractPeriod": {
+                            "durationInDays": 1440
+                        },
+                        "hasRenewal": false,
+                        "submissionTerms": {
+                            "variantPolicy": "notAllowed",
+                            "electronicCataloguePolicy": "required"
+                        },
+                        "hasOptions": false,
+                        "status": "active"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "1",
+                        "additionalClassifications": [
+                            {
+                                "scheme": "CPV",
+                                "id": "15000000",
+                                "description": "Food, beverages, tobacco and related products"
+                            }
+                        ],
+                        "deliveryAddresses": [
+                            {
+                                "region": "UKM"
+                            }
+                        ],
+                        "deliveryLocation": {
+                            "description": "Any or all locations of all NHS Scotland Health Boards, All NHS Scotland Special Boards and/or the authority"
+                        },
+                        "relatedLot": "1"
+                    }
+                ],
+                "submissionMethod": [
+                    "electronicSubmission"
+                ],
+                "submissionMethodDetails": "http://www.publictenderscotland.publiccontractsscotland.gov.uk",
+                "communication": {
+                    "atypicalToolUrl": "http://www.publictenderscotland.publiccontractsscotland.gov.uk"
+                },
+                "selectionCriteria": {
+                    "criteria": [
+                        {
+                            "type": "economic",
+                            "description": "See contract/tender documentation which incorporates requirements of the SPD\n(Scotland) and the financial period for reporting is the previous 3 financial years",
+                            "appliesTo": [
+                                "supplier"
+                            ]
+                        },
+                        {
+                            "type": "technical",
+                            "description": "See contract/tender documentation which incorporates requirements of the SPD (Scotland)",
+                            "minimum": "A copy of a valid certificate issued within the last 12 months, certified by a UKAS accredited\nCertification Body confirming that the\neconomic operators holds a relevant certificate to one of the following standards as\napplicable:\nBRC Global Standard for Food Safety (Issue 9 or above);\nBRC Global Standard for Storage and Distribution (Issue 4 or above);\nSTS Code of Practice for Suppliers to the Public Sector (Version 11.1)\nSALSA (Issue 6) with additional bolt on which must include criteria for Listeria\nmonocytogenes; detection of all pathogens\nCertification to any of the above standards must be maintained by suppliers at all times during the Framework agreement.\nOur Supplier Assessment Agents, Micron2, will facilitate the management of certification and audits",
+                            "appliesTo": [
+                                "supplier"
+                            ]
+                        }
+                    ]
+                },
+                "otherRequirements": {
+                    "requiresStaffNamesAndQualifications": true
+                },
+                "procurementMethod": "open",
+                "procurementMethodDetails": "Open procedure",
+                "techniques": {
+                    "hasFrameworkAgreement": true,
+                    "frameworkAgreement": {
+                        "maximumParticipants": 1
+                    },
+                    "hasElectronicAuction": true
+                },
+                "coveredBy": [
+                    "GPA"
+                ],
+                "tenderPeriod": {
+                    "endDate": "2027-01-07T10:30:00Z"
+                },
+                "submissionTerms": {
+                    "languages": [
+                        "en"
+                    ],
+                    "bidValidityPeriod": {
+                        "endDate": "2027-01-07T23:59:59Z"
+                    }
+                },
+                "awardPeriod": {
+                    "startDate": "2027-01-07T10:30:00Z"
+                },
+                "bidOpening": {
+                    "date": "2027-01-07T10:30:00Z",
+                    "address": {
+                        "streetAddress": "Gyle Square, South Gyle Crescent, Edinburgh"
+                    },
+                    "description": "Carried out by PSD Scotland National Procurement"
+                },
+                "hasRecurrence": false,
+                "contractTerms": {
+                    "hasElectronicOrdering": true,
+                    "electronicInvoicingPolicy": "allowed",
+                    "hasElectronicPayment": true
+                },
+                "reviewDetails": "The authority will notify economic operators who submitted a tender or (where no\ndeselection notification has previously been made)applied to be selected to tender, of its\ndecision to award the framework agreement which notification will contain among other\ninformation,\na summary of the reasons why the economic operator was unsuccessful. The notification will\nincorporate a ‘standstill period’ of a minimum of 10 clear calendar days (or a minimum of 15 if\nthe communication method used is not electronic) between the date on which\nthe authority despatches the notice(s) and the date on which the authority proposes to\nconclude the relevant framework agreement.\nThe bringing of court proceedings against the authority during the standstill period will\nautomatically continue the prohibition on entering into the framework agreement until the\ncourt proceedings are determined, discontinued or disposed of, or the court, by interim\norder, brings\nto an end the prohibition. The remedies that may be awarded by the courts before the\nframework agreement has been entered into include the setting aside of the decision to\naward the framework agreement to the winning tenderer(s). The bringing of court\nproceedings against the\nauthority after the framework agreement has been entered into will not affect the framework\nagreement unless grounds for the imposition of special penalties under the Public Contracts\n(Scotland) Regulations 2015 can be established. Otherwise the remedies that may be\nawarded by the courts where the framework agreement has been entered into are limited to\nthe award of damages. Economic operators are\nentitled to write to the authority after receipt of the notification should they require further\nclarification. The authority will respond within 15 days of such a written request, but it should be noted that receipt by the authority of such request during the standstill period may not\nprevent the authority from awarding the framework agreement following the expiry of the\nstandstill period. Economic operators should approach the contracting authority in the first\ninstance. However, the only formal remedy is to apply to the courts:\nAn economic operator that suffers or is at risk of suffering, loss or damage attributable to a\nbreach of duty under the Public Contracts(Scotland) Regulations 2015 or the Procurement\nReform (Scotland) Act 2014, may bring proceedings in the Sheriff Court or the Court of Session"
+            },
+            "parties": [
+                {
+                    "name": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+                    "id": "GB-FTS-179412",
+                    "identifier": {
+                        "legalName": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)"
+                    },
+                    "address": {
+                        "streetAddress": "1 South Gyle Crescent.",
+                        "locality": "Edinburgh",
+                        "region": "UKM",
+                        "postalCode": "EH12 9EB",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "name": "Loraine Hartley",
+                        "telephone": "+44 1312756000",
+                        "email": "loraine.hartley@nhs.scot",
+                        "url": "http://www.publictenderscotland.publiccontractsscotland.gov.uk"
+                    },
+                    "roles": [
+                        "buyer",
+                        "centralPurchasingBody"
+                    ],
+                    "details": {
+                        "url": "http://publicservicesdelivery.scot/about/procurement/",
+                        "buyerProfile": "https://www.publiccontractsscotland.gov.uk/search/Search_AuthProfile.aspx?ID=AA11883",
+                        "classifications": [
+                            {
+                                "scheme": "TED_CA_TYPE",
+                                "id": "BODY_PUBLIC",
+                                "description": "Body governed by public law"
+                            },
+                            {
+                                "scheme": "COFOG",
+                                "id": "07",
+                                "description": "Health"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Edinburgh Sherriff Court",
+                    "id": "GB-FTS-143853",
+                    "identifier": {
+                        "legalName": "Edinburgh Sherriff Court"
+                    },
+                    "address": {
+                        "streetAddress": "Sheriff Court House, 27 Chambers Street",
+                        "locality": "Edinburgh",
+                        "postalCode": "EH1 1LB",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "telephone": "+44 1312252525"
+                    },
+                    "roles": [
+                        "reviewBody"
+                    ]
+                },
+                {
+                    "name": "Court of Session",
+                    "id": "GB-FTS-2541",
+                    "identifier": {
+                        "legalName": "Court of Session"
+                    },
+                    "address": {
+                        "streetAddress": "Parliament House, Parliament Square",
+                        "locality": "Edinburgh",
+                        "postalCode": "EH1 1RQ",
+                        "countryName": "United Kingdom"
+                    },
+                    "roles": [
+                        "reviewContactPoint"
+                    ]
+                }
+            ],
+            "buyer": {
+                "id": "GB-FTS-179412",
+                "name": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)"
+            },
+            "links": [
+                {
+                    "rel": "canonical",
+                    "href": "https://api.publiccontractsscotland.gov.uk/v1/Notice?id=ocds-r6ebe6-0000846863"
+                }
+            ],
+            "language": "en"
+        }
+    ]
+}
