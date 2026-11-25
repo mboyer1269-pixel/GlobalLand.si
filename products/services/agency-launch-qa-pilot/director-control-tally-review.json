@@ -1,0 +1,15 @@
+{
+  "source": "products/services/agency-launch-qa-pilot/buyer-report-control.csv",
+  "sha256": "0d046516016f741118d8fe6c092f6d4fb1976b2200d2dc8303773d13babe8e99",
+  "columns": [
+    "route",
+    "task",
+    "outcome",
+    "evidence"
+  ],
+  "control_rows": 2,
+  "rows_marked_for_refusal_or_uncertainty_review": [
+    3
+  ],
+  "scope": "Synthetic report inspection only. A host refusal must stay outside the confirmed successful and confirmed broken link counts. Text matches indicate rows for review and do not certify the tally."
+}

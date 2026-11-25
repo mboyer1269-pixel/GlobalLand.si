@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source\": \"products/services/agency-launch-qa-pilot/buyer-report-control.csv\",\n  \"sha256\": \"0d046516016f741118d8fe6c092f6d4fb1976b2200d2dc8303773d13babe8e99\",\n  \"columns\": [\n    \"route\",\n    \"task\",\n    \"outcome\",\n    \"evidence\"\n  ],\n  \"control_rows\": 2,\n  \"rows_marked_for_refusal_or_uncertainty_review\": [\n    3\n  ],\n  \"scope\": \"Synthetic report inspection only. A host refusal must stay outside the confirmed successful and confirmed broken link counts. Text matches indicate rows for review and do not certify the tally.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/agency-launch-qa-pilot/director-control-tally-review.json",
+    "products/receipts/TASK-179557776101.json"
+  ],
+  "id": "TASK-179557776101",
+  "input_sha256": "71cf6a280bda76f835fbadac70c26ee3de7d20e3c8e9a46593d23d8afd2f5e81"
+}
