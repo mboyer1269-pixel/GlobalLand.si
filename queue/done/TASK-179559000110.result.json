@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"command\": [\n    \"/usr/bin/python3\",\n    \"verify_example.py\",\n    \"fixtures/before-variants.csv\",\n    \"fixtures/before-images.csv\",\n    \"fixtures/after-shopify.csv\"\n  ],\n  \"exit_code\": 0,\n  \"stdout\": \"{\\n \\\"rows\\\": 12,\\n \\\"products\\\": 2,\\n \\\"checks\\\": {\\n  \\\"utf8_no_bom_lf_only\\\": true,\\n  \\\"header_matches_documented_names\\\": true,\\n  \\\"no_product_split_across_files\\\": true,\\n  \\\"handle_rows_contiguous\\\": true,\\n  \\\"title_only_on_first_row\\\": true,\\n  \\\"sku_unique\\\": true,\\n  \\\"identifiers_preserved_sku_barcode_color_size_price\\\": true,\\n  \\\"color_size_combo_unique_per_product\\\": true,\\n  \\\"image_positions_1_to_n\\\": true,\\n  \\\"all_input_images_present_once_per_product\\\": true,\\n  \\\"variant_image_is_first_image_of_its_color\\\": true,\\n  \\\"image_only_rows_have_no_variant_fields\\\": true\\n },\\n \\\"failed\\\": []\\n}\\n\",\n  \"stderr\": \"\",\n  \"sha256\": {\n    \"verify_example.py\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\",\n    \"verify.py\": \"54d4d53e8656fdb7e7e7416477247039a584469520f2078b095bcdb915ae4d39\",\n    \"fixtures/before-variants.csv\": \"5122a95f5611807b028ea7148a27ffc1f2f5459f89c0c8b071d163f2ef975eac\",\n    \"fixtures/before-images.csv\": \"894a95cd61cc49b7957e3faa260864649c1bdb34b6e28f8acfef9414e88f5f0d\",\n    \"fixtures/after-shopify.csv\": \"31c574420ea3293818aed268f0464209164c9c2c4933051078563c9098483357\"\n  },\n  \"scope\": \"Verifier run on existing synthetic fixtures. No transform regenerated, live import or customer delivery.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/catalogue-training-license/director-verifier-execution.json",
+    "products/receipts/TASK-179559000110.json"
+  ],
+  "request": {
+    "id": "TASK-179559000110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T07:00:01Z",
+    "action": "EXEC",
+    "args": {
+      "cwd": "products/sites/shopify-catalogue-example",
+      "inputs": [
+        "products/sites/shopify-catalogue-example/fixtures/",
+        "products/sites/shopify-catalogue-example/verify.py",
+        "products/sites/shopify-catalogue-example/verify_example.py"
+      ],
+      "outputs": [
+        "products/services/catalogue-training-license/director-verifier-execution.json"
+      ],
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib, json, subprocess, sys\nfrom pathlib import Path\nfiles = ['verify_example.py', 'verify.py', 'fixtures/before-variants.csv', 'fixtures/before-images.csv', 'fixtures/after-shopify.csv']\ncommand = [sys.executable, files[0], *files[2:]]\nrun = subprocess.run(command, capture_output=True, text=True)\nresult = {'command': command, 'exit_code': run.returncode, 'stdout': run.stdout, 'stderr': run.stderr, 'sha256': {name: hashlib.sha256(Path(name).read_bytes()).hexdigest() for name in files}, 'scope': 'Verifier run on existing synthetic fixtures. No transform regenerated, live import or customer delivery.'}\noutput = Path(sys.argv[1])\noutput.parent.mkdir(parents=True, exist_ok=True)\noutput.write_text(json.dumps(result, indent=2) + '\\n')\nprint(output.read_text())",
+        "/workspace/products/services/catalogue-training-license/director-verifier-execution.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795590001",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179559000110",
+  "input_sha256": "b78e3cbd6d789ae6350f7759895b0b0204ee98bccc4739afeca0ff90516afcc1"
+}
