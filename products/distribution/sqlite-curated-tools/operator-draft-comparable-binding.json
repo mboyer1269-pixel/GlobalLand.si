@@ -1,0 +1,24 @@
+{
+  "draft": "products/distribution/sqlite-curated-tools/operator-listing-draft.json",
+  "draft_sha256": "ad5f2d7f0451b2b2f5fb6e3603d093fc96d174d9898b20bd1e115309bc14975b",
+  "comparables": [
+    {
+      "pull_request": 37,
+      "source": "https://api.github.com/repos/planetopendata/awesome-sqlite/pulls/37/files",
+      "sha256": "dffedeed540338ca2477f8393cfbcc76b2db4ef7c49198a833bd01311df88a8a",
+      "added_readme_lines": [
+        "- **SQLite Hub** ★4 (web: [sqlite-hub](https://oliverjessner.at/sqlite-hub/), github: [oliverjessner/sqlite-hub](https://github.com/oliverjessner/sqlite-hub)) -- a web-based SQLite database browser written in NodeJS"
+      ]
+    },
+    {
+      "pull_request": 43,
+      "source": "https://api.github.com/repos/planetopendata/awesome-sqlite/pulls/43/files",
+      "sha256": "79c9299deca621270f6b6a20073b17cde86beeccc06776b60889b4ac94a07a68",
+      "added_readme_lines": [
+        "- **sqliteproof** (github: [OrbitalKeyAi/sqliteproof](https://github.com/OrbitalKeyAi/sqliteproof)) -- zero-dependency MIT integrity checker that reports damage per **table** rather than per page; `PRAGMA integrity_check` answers with page numbers, this answers with which tables are intact, how many rows are unreadable, and where each damaged table breaks. Opens the database read-only."
+      ]
+    }
+  ],
+  "evidence_limit": "README additions establish listing precedents within these PRs. Contributor eligibility, AI participation, and acceptance of the bound draft require separate evidence.",
+  "reconsider_on": "Applicable maintainer guidance or an explicit maintainer decision covering the disclosed submission."
+}
