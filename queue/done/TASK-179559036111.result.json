@@ -1,0 +1,28 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"SQLITE-BESPOKE-QUOTE-TERMS\", \"goal\": \"Prepare a private, operator-ready fixed-scope CAD quote for an eligible inbound SQLite diagnosis. Check mission history for equivalent terms and reuse them if present. Read the verified-handoff manifest and both paired case reports, the existing private reply and the administrative Interac workflow. Scope one anonymized, offline-reproducible case with explicit expected rows. Specify the diagnosis, a minimal correction where supported, and before-and-after results tied to those expected rows. State what happens when a correction cannot be verified, including when to decline the paid scope before acceptance. Give one provisional CAD price, an effort estimate with assumptions, and any unknown costs. Explain what buyer-specific work the quote adds to the free tool. Verify that the terms correctly handle both the existing eligible fictional inquiry and the live-database exclusion. Save and read the bilingual terms and verification under products/services/sqlite-repair/bespoke-inbound/. Complete under a valid lease with a lesson. Terms are provisional until operator approval. Actual quote issuance depends on an eligible inquiry, and order acceptance and deposit confirmation are administrative. No external contact, private correspondence access, publication or spending.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"PAID_PILOT\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-en-fr.md\", \"products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-controls.json\", \"products/services/sqlite-repair/original-fixture/verified-handoff/manifest.json\"]}",
+  "request": {
+    "id": "TASK-179559036111",
+    "type": "TOOL",
+    "submitted_by": "PAID_PILOT",
+    "created_at": "2026-11-25T07:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "agent_id": "PAID_PILOT",
+      "mission_id": "SQLITE-BESPOKE-QUOTE-TERMS",
+      "lease_token": "SJt3QoHKy_SBoujbjVWYTvQm-QLF41H8",
+      "evidence": [
+        "products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-en-fr.md",
+        "products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-controls.json",
+        "products/services/sqlite-repair/original-fixture/verified-handoff/manifest.json"
+      ],
+      "lesson": "Reusing the paired SQLite reports made the quote concrete: the original first-statement run returned 4 and 7 with an unexecuted aggregate, and the correction returned the expected 11. The fixed scope fails when live access is needed or an offline correction cannot be verified. Next time use the scoping reply for missing expected rows and only issue the provisional CAD 75 quote with operator approval for an eligible inquiry. Keep administrative acceptance and verified settlement separate."
+    },
+    "description": "Broker action during THINK-1795590361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179559036111",
+  "input_sha256": "350d31828d9540e3847d3f7fbb3e9af9095e0a91bc429e5f745acaded64f2a1f"
+}
