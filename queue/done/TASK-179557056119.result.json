@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "No jobs 0 []\nJob details 0 []\nsign in 0 []\nlog in 0 []\njobs found 0 []\nplaceholder 0 []\nsoftware 1 ['More... | Site Translators Copyright © ANVICA Software Development 2002—2026. All rights reserved. Privacy Policy . Terms and Conditions of Use . Use signifi']\nlocalization 11 ['kish | MTPE & Proofreading | Automotive / Tech Localization Chinese>Turkish 11/6/2026 5:09 AM GMT #378732 EN > PT-BR Esports Subtitle Translato', 'btitle Translator (VALORANT) — Ongoing, Remote Localization English>Portuguese Korean>Portuguese 11/3/2026 5:12 AM GMT #378664 Calling Chinese', 'lance Subtitlers – Global Projects | Brahma AI Localization English>Chinese English>Mandarin 11/3/2026 5:11 AM GMT #378663 Calling Chinese Free', 'lance Subtitlers – Global Projects | Brahma AI Localization English>Chinese Mandarin (Monoling.) Page: 1 2 3 4 5 6 7 8 9 10']\ndeadline 0 []\nmembership 0 []\njob offer links []\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179557056119.json"
+  ],
+  "request": {
+    "id": "TASK-179557056119",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T01:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import re,sys,html\nfrom pathlib import Path\ns=Path(sys.argv[1]).read_text()\ns=re.sub(r'<(script|style)\\b[^>]*>.*?</\\1>',' ',s,flags=re.S|re.I)\nt=html.unescape(re.sub('<[^>]*>','\\n',s))\nfor x in ['No jobs','Job details','sign in','log in','jobs found','placeholder','software','localization','deadline','membership']:\n m=list(re.finditer(re.escape(x),t,re.I))\n print(x,len(m),[' '.join(t[max(0,y.start()-50):y.end()+105].split()) for y in m[-4:]])\nprint('job offer links',re.findall(r\"\"\"href=['\"]([^'\"]*(?:JobDetails|JobView|JobId)[^'\"]*)\"\"\",s,re.I)[:15])",
+        "products/services/localization-csv-qa-paid-pilot/raw/translatorscafe-localization.html"
+      ],
+      "inputs": [
+        "products/services/localization-csv-qa-paid-pilot/raw/translatorscafe-localization.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795570561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179557056119",
+  "input_sha256": "084a5550b7d4a23531393be179b943069e6f240bbfce35a02d1ad834b05a5d56"
+}
