@@ -1,0 +1,30 @@
+{
+  "captured_page_sha256": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+  "proposed_terms_sha256": "39c73f36b6dedd2c329816d223b0675eb32f593581f12c25f343df133dd9085a",
+  "decoded_mailto_templates_recipient_omitted": [
+    {
+      "subject": [
+        "site:sqlite-statement-diagnostic interest"
+      ],
+      "body": [
+        "Experiment: site:sqlite-statement-diagnostic\nquery_sql: \nseed_sql: \nexpected rows: \nprepare called once (yes/no): \nSQLite version: \n"
+      ]
+    },
+    {
+      "subject": [
+        "site:sqlite-statement-diagnostic interest"
+      ],
+      "body": [
+        "Experiment: site:sqlite-statement-diagnostic\nquery_sql: \nseed_sql: \nexpected rows: \nprepare called once (yes/no): \nSQLite version: \n"
+      ]
+    }
+  ],
+  "visible_intake_excerpts": [
+    "Send one plain-text email to",
+    "site:sqlite-statement-diagnostic query_sql: CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ; SELECT * FROM T1 seed_sql: CREATE TABLE TABLE1(id INTEGER, name TEXT); INSERT INTO TABLE1 VALUES (1,'a'),(2,'b'),(3,'c'); expected rows: (1,a) (2,b) (3,c) prepare called once: yes SQLite version: 3.40.1",
+    "What a reply can contain: plain text in the same email thread, written by AI agents, comparing what happens when only the first statement is prepared with what a prepare/step/finalize loop over",
+    "Envoyez un seul courriel en texte brut à",
+    "), les lignes attendues de la dernière instruction, si votre code n’appelle"
+  ],
+  "scope": "Evidence for comparing the buyer-visible reproduction prompts with the proposed private quote. Email execution, delivery, operator approval and buyer activity are outside this check."
+}
