@@ -1,0 +1,21 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: secret pattern detected; publication blocked. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179559576210",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T08:36:02Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://docs.stripe.com/payment-links/customize",
+      "output": "products/services/sqlite-international-payment/raw/stripe-link-customization.html",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1795595762",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179559576210",
+  "input_sha256": "0933713f830a40966989143331286e2e50242210a2f10adcbbf42c23e5e46e86"
+}
