@@ -1,0 +1,42 @@
+{
+  "sha256": {
+    "products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-en-fr.md": "39c73f36b6dedd2c329816d223b0675eb32f593581f12c25f343df133dd9085a",
+    "products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-controls.json": "ac3de3c1e15f31f31634a01ffdb0241ce8bf9d6ab9a226587cee4efa8e3c6330",
+    "products/services/sqlite-repair/original-fixture/verified-handoff/manifest.json": "a9b23032e62c42bf5f94c746ee89732fee0c786fc81b415c31a06f2d3c7b23bf"
+  },
+  "quote_lines_mentioning_75": [
+    "Private draft for operator approval. Proposed fixed fee CAD 75 for one anonymized SQLite case that can be recreated offline using synthetic or anonymized seed SQL, the failing statement and the buyer’s confirmed expected rows. Estimated analyst effort is 60–90 minutes once the reproduction is usable. Incremental cash costs and taxes are unverified. No turnaround commitment.",
+    "Projet privé soumis à l’approbation de l’opérateur. Prix forfaitaire proposé de 75 CAD pour un cas SQLite anonymisé reproductible hors ligne à partir de données d’initialisation synthétiques ou anonymisées, de la requête défaillante et des lignes attendues confirmées par le client. Effort estimé de 60 à 90 minutes une fois le cas reproductible. Les coûts supplémentaires et les taxes restent à vérifier. Aucun délai garanti."
+  ],
+  "saved_controls": {
+    "scope": "Synthetic quote policy checks. Verification was supplied as an input to the screen. No new SQLite execution, quote issuance or customer activity.",
+    "source_sha256": {
+      "products/services/sqlite-repair/original-fixture/verified-handoff/manifest.json": "a9b23032e62c42bf5f94c746ee89732fee0c786fc81b415c31a06f2d3c7b23bf",
+      "products/services/sqlite-repair/bespoke-inbound/fictional-reply-control.json": "a7d0641f0552c9c27a1d824b3c278137aa5a885b45486937167edb21736c558a",
+      "products/services/sqlite-repair/bespoke-inbound/operator-fixed-scope-quote-en-fr.md": "39c73f36b6dedd2c329816d223b0675eb32f593581f12c25f343df133dd9085a"
+    },
+    "results": [
+      {
+        "fictional_case": "fictional offline with confirmed rows",
+        "expected": "ELIGIBLE_FOR_OPERATOR_QUOTE",
+        "observed": "ELIGIBLE_FOR_OPERATOR_QUOTE"
+      },
+      {
+        "fictional_case": "live database",
+        "expected": "DECLINE",
+        "observed": "DECLINE"
+      },
+      {
+        "fictional_case": "expected rows not supplied",
+        "expected": "CLARIFY",
+        "observed": "CLARIFY"
+      },
+      {
+        "fictional_case": "correction not verified",
+        "expected": "DECLINE_FIXED_SCOPE",
+        "observed": "DECLINE_FIXED_SCOPE"
+      }
+    ]
+  },
+  "scope": "Artifact readback and hash binding. Saved controls describe fictional cases. Operator approval, buyer inquiry, quote issuance, acceptance and settlement require separate evidence."
+}
