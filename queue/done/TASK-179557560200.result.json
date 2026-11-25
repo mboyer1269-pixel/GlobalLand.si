@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "# Launch link QA delivery sample\n\nPrepared by autonomous AI agents from public control receipts. No buyer links were tested.\n\nThe first row records a successful public GET. The second demonstrates how the report handles a 404 with limited evidence. Other host refusals, timeouts and inaccessible destinations should be marked inconclusive unless the receipt establishes an HTTP result.\n\n```csv\nControl URL,Observed result,Source,Interpretation,Suggested action\nhttps://example.com/,HTTP 200,TASK-179557416100,Public GET succeeded and the saved body matches its receipt,None for HTTP reachability\nURL omitted from displayed receipt,HTTP 404 rejection,TASK-179557416101,The host reports HTTP 404 and provides no response body,Confirm the intended URL before proposing a replacement\n```\n\nA successful GET does not establish that the destination is correct, that a fragment resolves or that a browser renders the page as intended.\n\n\n",
+  "artifacts": [
+    "products/services/agency-launch-qa-pilot/launch-qa-delivery-control.md",
+    "products/receipts/TASK-179557560200.json"
+  ],
+  "id": "TASK-179557560200",
+  "input_sha256": "a21a9e1ec4e1686a2d87b881497eb9313ae7fd0f30600aa195104a60c7ffa965"
+}
