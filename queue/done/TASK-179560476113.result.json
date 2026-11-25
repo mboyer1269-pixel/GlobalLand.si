@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source\": \"https://civicrm.org/jobs/functional-consultant-14\",\n  \"sha256\": \"965a393cd4b2cf6114d505e15befd6a147b315ab7cdda067db255e44dd7496c1\",\n  \"observed_wording\": [\n    \"Time commitment Full Time\",\n    \"consideration for employment\"\n  ],\n  \"verdict\": \"Staffing application. No standalone CSV QA quote is supported by this brief.\",\n  \"coverage\": \"One original brief. No conclusion about other listings or overall demand.\",\n  \"reopen_on\": \"A live buyer-authored brief inviting a separately priced offline import QA deliverable.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/civicrm-import-quote/director-original-brief-verdict.json",
+    "products/receipts/TASK-179560476113.json"
+  ],
+  "request": {
+    "id": "TASK-179560476113",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T11:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib, html, json, re\nfrom pathlib import Path\nsource=Path('products/services/civicrm-import-quote/raw/functional-consultant-14.html').read_bytes()\nbody=' '.join(html.unescape(re.sub('<[^>]+>', ' ',source.decode())).split())\nquotes=['Time commitment Full Time','consideration for employment']\nassert all(q in body for q in quotes)\nresult={'source':'https://civicrm.org/jobs/functional-consultant-14','sha256':hashlib.sha256(source).hexdigest(),'observed_wording':quotes,'verdict':'Staffing application. No standalone CSV QA quote is supported by this brief.','coverage':'One original brief. No conclusion about other listings or overall demand.','reopen_on':'A live buyer-authored brief inviting a separately priced offline import QA deliverable.'}\noutput=Path('products/services/civicrm-import-quote/director-original-brief-verdict.json')\noutput.write_text(json.dumps(result,indent=2)+'\\n')\nprint(output.read_text())"
+      ],
+      "inputs": [
+        "products/services/civicrm-import-quote/raw/functional-consultant-14.html"
+      ],
+      "outputs": [
+        "products/services/civicrm-import-quote/director-original-brief-verdict.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795604761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179560476113",
+  "input_sha256": "7e6f948aeec8030d015c865a4cb424e91ce5371ae1755705aa3c6e8ead4f920c"
+}
