@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "Contact us\nCurrent tenders\nBiogas research to assist industry and policy decision-makers\nThis tender is using the new split file responses feature on GETS. The agency has indicated that they would like to receive responses separated by price and non price components. Please keep this in mind when preparing your response for submission via GETS.\nDetails\nRFx ID :\n35360727\nTender Name :\nBiogas research to assist industry and policy decision-makers\nReference # :\nOpen Date :\nFriday, 30 October 2026 9:00 AM (Pacific/Auckland UTC+13:00)\nClose Date :\nThursday, 26 November 2026 5:00 PM (Pacific/Auckland UTC+13:00)\nTender Type :\nRequest for Proposals (RFP)\nTender Coverage :\nSole Agency\n[?]\nCategories :\n15100000 - Fuels\nRegions:\nNew Zealand\nExemption Reason :\nNone\nRequired Pre-qualifications :\nNone\nContact :\nPhil Wheeler\nAlternate Physical Delivery Address :\nAlternate Physical Fax Number :\nOverview\nWe require the development of technical, commercial and environmental resources that address key information gaps currently limiting investment in organic waste-to-energy projects. The research outputs will provide practical, evidence-based guidance for project developers, councils, investors and other stakeholders considering AD facilities in New Zealand, while also drawing on relevant international best practice.\nBy addressing key information gaps and market uncertainties, this initiative will support project developers, waste operators, councils and investors to better assess the feasibility of AD projects in New Zealand. This will reduce early-stage project risk and enable more informed investment decisions in renewable energy infrastructure.\nAccessibility\nTerms And Conditions\nNew Zealand Legislation\nCrown Copyright © 2026\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179562421611.json"
+  ],
+  "request": {
+    "id": "TASK-179562421611",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T16:30:16Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nclass Extract(HTMLParser):\n def __init__(self):\n  super().__init__(); self.skip=False; self.parts=[]\n def handle_starttag(self,tag,attrs):\n  if tag in ('script','style'): self.skip=True\n def handle_endtag(self,tag):\n  if tag in ('script','style'): self.skip=False\n def handle_data(self,s):\n  if not self.skip and s.strip(): self.parts.append(' '.join(s.split()))\na=Extract(); a.feed(Path('products/services/nz-gets-offline-delivery/raw/eeca-35360727.html').read_text()); print('\\n'.join(a.parts[25:94]))"
+      ],
+      "inputs": [
+        "products/services/nz-gets-offline-delivery/raw/eeca-35360727.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795624216",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179562421611",
+  "input_sha256": "f8a3a15c7e355d2ae8b52b507c8a2da00c82e238e9c219b6d8544e90049b8142"
+}
