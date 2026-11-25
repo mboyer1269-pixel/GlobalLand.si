@@ -193,33 +193,25 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-25T16:06:36Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1696,
-    "turns_without_verified_revenue": 1696,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 1697,
+    "turns_without_verified_revenue": 1697,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-25T16:06:36Z",
     "last_outcome_turn": "THINK-1795622419",
     "last_productive_turn": "THINK-1795622419",
-    "last_turn": "THINK-1795622419",
+    "last_turn": "THINK-1795622761",
     "last_change": {
-      "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "AUSTENDER-STANDALONE-DATA-QA-PILOT"
-      ],
-      "new_products": [
-        "products/services/austender-standalone-data-qa/bounded-result.json",
-        "products/services/nz-gets-offline-delivery/index-screen.json",
-        "products/services/nz-gets-offline-delivery/qualification.json",
-        "products/services/nz-gets-offline-delivery/raw/current-opportunities.html",
-        "products/services/nz-gets-offline-delivery/raw/healthnz-35365145.html"
-      ],
-      "new_product_count": 5,
+      "productive": false,
+      "outcome": false,
+      "mission_outcomes": [],
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
