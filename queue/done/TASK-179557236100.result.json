@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Existing offline link-checker test suite for the provisional agency launch QA pilot\",\n  \"command\": [\n    \"/usr/bin/python3\",\n    \"tests/run_tests.py\"\n  ],\n  \"cwd\": \"products/actors/link-checker\",\n  \"test_sha256\": \"25a840eadcae4a2385d1959930a2ddb22f82d0cc0a42d8b7f0d5e0aa8c164982\",\n  \"core_sha256\": \"58dc5cf18463aa5916300192ff214e346804cb8eda9b1eadffed45554cc134f3\",\n  \"exit_code\": 0,\n  \"stdout\": \"passed 21/21\\n\",\n  \"stderr\": \"\",\n  \"live_buyer_links_checked\": 0\n}\n\n\n",
+  "artifacts": [
+    "products/services/agency-launch-qa-pilot/offline-link-check-readback.json",
+    "products/receipts/TASK-179557236100.json"
+  ],
+  "id": "TASK-179557236100",
+  "input_sha256": "edf046ad90a2d9ec5f3838f23417c90b675aefc24e323ce71ebb148010b4966b"
+}
