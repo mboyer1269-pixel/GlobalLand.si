@@ -1,0 +1,15 @@
+{
+  "scope": "Two public control observations from host receipts supplied in the world snapshot",
+  "existing_control_sha256": "fc5afb3f67532f83813c1631f5ed87cf322ca7e08058f70323b8d5ee5e4ca52d",
+  "checks": [
+    "Retrieved body matches the recorded digest",
+    "CSV round-trip preserves both outcomes",
+    "Refusal retains host wording and stays distinct from retrieval"
+  ],
+  "delivery_limits": [
+    "No buyer URLs checked",
+    "Browser rendering and final redirect behavior were not verified",
+    "Report blocked or ambiguous checks separately and count them toward the agreed ten-link scope"
+  ],
+  "commercial_state": "No customer delivery, acceptance or settlement established"
+}
