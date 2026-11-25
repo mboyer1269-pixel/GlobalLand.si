@@ -1,0 +1,21 @@
+{
+  "status": "REJECTED",
+  "output": "Tool request refused: HTTP 403. See queue/PROTOCOL.md.",
+  "request": {
+    "id": "TASK-179562096118",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T15:36:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://www.gets.govt.nz/ExternalRSSFeed.htm",
+      "output": "products/services/nz-gets-offline-delivery/raw/current-feed.xml",
+      "encoding": "utf-8"
+    },
+    "description": "Broker action during THINK-1795620961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179562096118",
+  "input_sha256": "b87614eaced0af783f0e8c4396f468d6fe85092ce5be776d0a203e79d73b2c6a"
+}
