@@ -1,0 +1,44 @@
+{
+  "status": "DONE",
+  "output": "{\"baseline_sha256\": \"1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db\", \"live_sha256\": \"1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db\", \"candidate_sha256\": \"f71bdac2fe5c9623bdbf65626d968008e846414e1cea8912cc42633e3d155fb5\", \"reverse_restores_baseline\": true, \"sqlite_version\": \"3.40.1\", \"links\": [{\"language\": \"en\", \"subject\": \"site:sqlite-statement-diagnostic interest\", \"manual_matches_mail\": true, \"request\": \"I would like to request a nonbinding private quote.\", \"actual_rows\": [[\"A\"], [\"B\"]], \"expected_rows\": [[\"A\"]], \"corrected_rows\": [[\"A\"]]}, {\"language\": \"fr\", \"subject\": \"site:sqlite-statement-diagnostic interest\", \"manual_matches_mail\": true, \"request\": \"Je souhaite demander un devis priv\\u00e9 sans engagement.\", \"actual_rows\": [[\"A\"], [\"B\"]], \"expected_rows\": [[\"A\"]], \"corrected_rows\": [[\"A\"]]}], \"coverage\": \"Static HTML and executed fictional SQL using Python sqlite3. Existing free intake subjects and bodies are byte-preserved. Mail delivery, live attribution, buyer response and payment were not tested.\"}\n\n",
+  "artifacts": [
+    "products/sites/sqlite-statement-diagnostic/index.html",
+    "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/release-candidate.patch",
+    "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/release-verification.json",
+    "products/receipts/TASK-179561916113.json"
+  ],
+  "request": {
+    "id": "TASK-179561916113",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-25T15:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib, difflib, html, json, re, sqlite3, sys\nfrom urllib.parse import parse_qs, quote, urlsplit\np,s=map(Path,sys.argv[1:])\nindex=s/'index.html'\nsha=lambda b:hashlib.sha256(b).hexdigest()\nbaseline=index.read_bytes()\nassert sha(baseline)=='1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db'\nassert baseline==(p/'release-live-baseline.html').read_bytes()\nbase=baseline.decode()\npreview=(p/'index-preview.html').read_bytes()\nproof=json.loads((p/'verification.json').read_text())\nassert sha(preview)==proof['preview_sha256']\npatch=''.join(difflib.unified_diff(base.splitlines(True),preview.decode().splitlines(True),fromfile='a/index.html',tofile='b/index.html'))\nassert [l for l in patch.splitlines() if l.startswith(('+','-'))]==[l for l in (p/'intake.patch').read_text().splitlines() if l.startswith(('+','-'))]\nblocks=re.findall(r'<section>\\n<h3>(?:Request a private quote|Demander un devis privé)</h3>.*?</section>',preview.decode(),re.S)\nassert len(blocks)==2\ndef mail(markup):\n    href,=re.findall(r'href=\"(mailto:[^\"]+)\"',markup)\n    parts=urlsplit(html.unescape(href))\n    return parts.path,parse_qs(parts.query)\noriginal=re.findall(r'href=\"(mailto:[^\"]+)\"',base)\nassert len(original)==2\nupdated=[]\nchecks=[]\nfor n,block in enumerate(blocks):\n    recipient,fields=mail(block)\n    old_recipient,old_fields=mail(f'href=\"{original[n]}\"')\n    assert recipient==old_recipient\n    subject,=old_fields['subject']\n    prior_subject,=fields['subject']\n    prior_body,=fields['body']\n    assert prior_body==proof['links'][n]['decoded_body']\n    request=['I would like to request a nonbinding private quote.','Je souhaite demander un devis privé sans engagement.'][n]\n    body=prior_body.replace('\\n\\n','\\n'+request+'\\n\\n',1)\n    before=f'subject={quote(prior_subject,safe=\"\")}&amp;body={quote(prior_body,safe=\"\")}'\n    after=f'subject={quote(subject,safe=\"\")}&amp;body={quote(body,safe=\"\")}'\n    assert block.count(before)==1\n    manual=prior_subject+'\\n\\n'+prior_body\n    assert block.count(manual)==1\n    staged=block.replace(before,after).replace(manual,subject+'\\n\\n'+body)\n    actual_recipient,actual=mail(staged)\n    assert actual_recipient==recipient and actual=={'subject':[subject],'body':[body]}\n    assert html.unescape(re.search(r'<pre>(.*?)</pre>',staged,re.S)[1])==subject+'\\n\\n'+body\n    sample=proof['links'][n]['filled_fictional_body']\n    filled=sample.replace('\\n\\n','\\n'+request+'\\n\\n',1)\n    lines=filled.splitlines()\n    seed=lines[lines.index('seed_sql:')+1]\n    query=lines[lines.index('query_sql:')+1]\n    expected=json.loads(lines[-1])\n    with sqlite3.connect(':memory:') as db:\n        db.executescript(seed)\n        actual_rows=[list(row) for row in db.execute(query)]\n        corrected_rows=[list(row) for row in db.execute(query.replace('>= 0','> 0'))]\n    assert actual_rows!=expected and corrected_rows==expected\n    checks.append(dict(language=['en','fr'][n],subject=subject,manual_matches_mail=True,request= request,actual_rows=actual_rows,expected_rows=expected,corrected_rows=corrected_rows))\n    updated.append(staged)\nen='<hr lang=\"fr\">'\nfr='</div>\\n</body></html>'\nassert base.count(en)==base.count(fr)==1\ncandidate=base.replace(en,updated[0]+'\\n'+en).replace(fr,'\\n'+updated[1]+fr)\nassert candidate.replace(updated[0]+'\\n','').replace('\\n'+updated[1],'')==base\ninventory={str(f.relative_to(s)):sha(f.read_bytes()) for f in sorted(s.rglob('*')) if f.is_file() and f!=index}\nassert len(inventory)==20\n(p/'release-candidate.patch').write_text(''.join(difflib.unified_diff(base.splitlines(True),candidate.splitlines(True),fromfile='a/index.html',tofile='b/index.html')))\nindex.write_bytes(candidate.encode())\nassert inventory=={str(f.relative_to(s)):sha(f.read_bytes()) for f in sorted(s.rglob('*')) if f.is_file() and f!=index}\ndata=dict(baseline_sha256=sha(baseline),live_sha256=sha((p/'release-live-baseline.html').read_bytes()),candidate_sha256=sha(index.read_bytes()),reverse_restores_baseline=True,sqlite_version=sqlite3.sqlite_version,links=checks,unchanged_site_files=inventory,coverage='Static HTML and executed fictional SQL using Python sqlite3. Existing free intake subjects and bodies are byte-preserved. Mail delivery, live attribution, buyer response and payment were not tested.')\n(p/'release-verification.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\\n')\nprint(json.dumps({k:v for k,v in data.items() if k!='unchanged_site_files'}))",
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/",
+        "products/sites/sqlite-statement-diagnostic/"
+      ],
+      "inputs": [
+        "products/sites/sqlite-statement-diagnostic/",
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/release-live-baseline.html",
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/intake.patch",
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/index-preview.html",
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/verification.json"
+      ],
+      "outputs": [
+        "products/sites/sqlite-statement-diagnostic/index.html",
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/release-candidate.patch",
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/release-verification.json"
+      ],
+      "mission_id": "SQLITE-QUOTE-INTAKE-RELEASE-CANDIDATE"
+    },
+    "description": "Broker action during THINK-1795619161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179561916113",
+  "input_sha256": "2967929b19fffc4664855f0c24c17caac1d3135d2f35f85ee06f7afb6fbb3210"
+}
