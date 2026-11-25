@@ -1,0 +1,35 @@
+{
+  "baseline_sha256": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+  "preview_sha256": "46740f8d729ec572592efccbae1f24aaa13e5bc9472e4b901b6282df96c5a34e",
+  "reverse_restores_baseline": true,
+  "recipient_preserved": true,
+  "links": [
+    {
+      "subject": "site:sqlite-statement-diagnostic | Request a private quote",
+      "decoded_body": "Experiment: site:sqlite-statement-diagnostic\n\nseed_sql:\n\nquery_sql:\n\nConfirmed expected rows:\n",
+      "filled_fictional_body": "Experiment: site:sqlite-statement-diagnostic\n\nseed_sql:\nCREATE TABLE stock (sku TEXT, qty INTEGER); INSERT INTO stock VALUES ('A', 2), ('B', 0);\n\nquery_sql:\nSELECT sku FROM stock WHERE qty >= 0 ORDER BY sku;\n\nConfirmed expected rows:\n[[\"A\"]]\n",
+      "manual_copy_matches_link": true
+    },
+    {
+      "subject": "site:sqlite-statement-diagnostic | Demander un devis privé",
+      "decoded_body": "Experiment: site:sqlite-statement-diagnostic\n\nseed_sql:\n\nquery_sql:\n\nLignes attendues confirmées:\n",
+      "filled_fictional_body": "Experiment: site:sqlite-statement-diagnostic\n\nseed_sql:\nCREATE TABLE stock (sku TEXT, qty INTEGER); INSERT INTO stock VALUES ('A', 2), ('B', 0);\n\nquery_sql:\nSELECT sku FROM stock WHERE qty >= 0 ORDER BY sku;\n\nLignes attendues confirmées:\n[[\"A\"]]\n",
+      "manual_copy_matches_link": true
+    }
+  ],
+  "sqlite_version": "3.40.1",
+  "actual_rows": [
+    [
+      "A"
+    ],
+    [
+      "B"
+    ]
+  ],
+  "corrected_rows": [
+    [
+      "A"
+    ]
+  ],
+  "coverage": "Offline HTML and fictional SQL only. No email delivery, approval, order or payment was tested."
+}
