@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "GETS | Health New Zealand (Te Whatu Ora) - Grow Manukau Health Park - Electronic Wayfinding and Pathfinding Solution\n// The function definitions for errorText and fieldNames // must be in the velocity template so that // the error messages and field names get set to the correct // language specific values. function errorText() { this.cannotBeBlankMsg=\"{0} cannot be blank.\"; this.mustBeAtLeastMsg=\"{0} must be at least {1} characters long.\"; this.mustBeAtMostMsg=\"{0} must be less than or equal to {1} characters long.\"; this.mustBeLessThanMsg=\"{0} must be less than {1}.\"; this.mustBeGreaterThanMsg=\"{0} must be greater than {1}.\"; this.mustBeNumberMsg=\"{0} must be a number.\"; this.mustBeGreaterEqMsg=\"{0} must be greater than or equal to {1}.\"; this.mustBeLessEqMsg=\"{0} must be less than or equal to {1}.\"; this.mustTakeFormMsg=\"{0} must take the form {1}.\"; this.cannotBeNullMsg=\"{0} cannot be null.\"; this.typeMismatchMsg=\"{0} cannot be converted to the required type - {1}.\"; this.allowedValueMsg=\"{0} is not in the allowed set of data types ({1}).\"; this.fileMustExistMsg=\"File must exist\"; }\nSupplier log in\nGrow Manukau Health Park - Electronic Wayfinding a...\nSupplier help\n/* This javascript content is after the menu otherwise it doesnt always execute properly */ function setSelectedItemBackground(strNode) { var selItem = document.getElementById(strNode); selItem.setAttribute(\"class\", \"navItem current\"); var selItemFirstLink = selItem.getElementsByTagName(\"a\")[0]; selItemFirstLink.setAttribute(\"class\", \"current\"); } function setTheMenuBackgrounds() { if (!String.prototype.trim) { String.prototype.trim = function () { return this.replace(/^\\s+|\\s+$/g, ''); }; } var pathArray = window.location.toString().split('/'); var arrSize = pathArray.length; var currPage = pathArray[arrSize - 1].trim(); var strSelectedNode = \"\"; if (currPage.indexOf(\"RegisterUser.htm\") > -1) { setSelectedItemBackground(\"divCreateNewAccount\"); return 0; } if (currPage.indexOf(\"RealMeLogin.htm\") > -1) { setSelectedItemBackground(\"divTendererLogin\"); return 0; } if (currPage.indexOf(\"CreateFreeAccount.htm\") > -1) { return 0; } if (currPage.indexOf(\"ExternalTendererLogout.htm\") > -1) { setSelectedItemBackground(\"divExternalTendererLogout\"); } if (currPage.indexOf(\"SupplierUserUpdateAccount.htm\") > -1) { setSelectedItemBackground(\"divSupplierUserUpdateAccount\"); } if (currPage.indexOf(\"ClientOrganisationTenders.htm?action=restricted\") > -1) { setSelectedItemBackground(\"divClientOrganisationTendersRestricted\"); } if (currPage.indexOf(\"ClientOrganisationTenders.htm\\?action\\=registered\") > -1) { setSelectedItemBackground(\"divClientOrganisationTendersRegistered\"); } if (currPage.indexOf(\"ExternalRestrictedTenderList.htm\") > -1) { setSelectedItemBackground(\"divExternalRestrictedTen\nGrow Manukau Health Park - Electronic Wayfinding and Pathfinding Solution\nGrow Manukau Health Park - Electronic Wayfinding and Pathfinding Solution\nFriday, 30 October 2026 4:30 PM (Pacific/Auckland UTC+13:00)\nFriday, 27 November 2026 12:00 PM (Pacific/Auckland UTC+13:00)\nRequest for Proposals (RFP)\nHealth New Zealand is seeking proposals for a cloud-based electronic wayfinding and pathfinding solution for Manukau Health Park to improve navigation for patients, visitors and staff. The solution will provide accessible, mobile-friendly indoor navigation, helping improve the overall patient and visitor experience.\ndocument.addEventListener(\"DOMContentLoaded\", () => { var tenderFile = document.getElementById( \"tenderFile\" ); if(tenderFile !== null && tenderFile !== 'undefined'){ tenderFile.onclick = function (e) { document.location.href='$HtmlEscapedUrl'; }; tenderFile.onmouseover = function (e) { this.style.cursor='pointer'; }; } var addendaFile = document.getElementById( \"addendaFile\" ); if(addendaFile !== null && addendaFile !== 'undefined'){ addendaFile.onclick = function (e) { document.location.href='$HtmlEscapedUrl'; }; addendaFile.onmouseover = function (e) { this.style.cursor='pointer'; }; } var QAFile = document.getElementById( \"QAFile\" ); if(QAFile !== null && QAFile !== 'undefined'){ QAFile.onclick = function (e) { document.location.href='$HtmlEscapedUrl'; }; QAFile.onmouseover = function (e) { this.style.cursor='pointer'; }; } initTooltip({ id: \"tender-closedate-tooltip\", label: \"The indicative release date that the buying agency expects a realised procurement process to commence, the FPO will close on this date. Please note that the date will be presented to suppliers by calendar quarter\" }); initTooltip({ id: \"tender-project-status-tooltip\", label: \"\" }); initTooltip({ id: \"tender-expected-tooltip\", label: \"The Indicative combined value of any realised tenders that may arise from this FPO, this value is intended to set an expectation of the scope of work that is required\" }); initTooltip({ id: \"tender-coverage-tooltip\", label: \"An individual agency purchasing on its own behalf \" }); });\nCrown Copyright © 2026\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179562096116.json"
+  ],
+  "request": {
+    "id": "TASK-179562096116",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T15:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nimport sys,re\nclass P(HTMLParser):\n def handle_data(self,s):\n  s=' '.join(s.split())\n  if s and re.search(r'202[567]|wayfind|solution|deadline|submit|registr|data |evaluation|supplier|scope|proposal',s,re.I): print(s[:1600])\nP().feed(Path(sys.argv[1]).read_text())",
+        "products/services/nz-gets-offline-delivery/raw/healthnz-35365145.html"
+      ],
+      "outputs": [],
+      "inputs": [
+        "products/services/nz-gets-offline-delivery/raw/healthnz-35365145.html"
+      ]
+    },
+    "description": "Broker action during THINK-1795620961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179562096116",
+  "input_sha256": "7b5cd024a110996ecf48dd07b2460ad4976cede848fdf82aed71b9e350f86071"
+}
