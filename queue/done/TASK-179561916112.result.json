@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "docs/COMMERCIAL-FEEDBACK.md\n{\"category\":\"PRICE_QUESTION\",\"audience\":\"ORDINARY\",\"experiment_id\":\"site:fictional-demo\",\"evidence\":{\"field\":\"text\",\"quote\":\"What is the price?\"}}\nExperiments come from public `work/world/status.json` mission identifiers and\n`mission:<id>` and `site:<slug>` to prevent collisions. The allowlist contains at\nThe normalized private record contains category, audience, experiment_id,\n`allowed_experiments(root)` returns `ids`, `truncated`, and `available`;\n`normalize_observation(raw, message, allowed_experiments, host_origin, provider)`\nstates, category counts, validated public experiment references, exclusion and\ndocs/AGENTMAIL.md\n\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179561916112.json"
+  ],
+  "request": {
+    "id": "TASK-179561916112",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-25T15:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfor n in ['docs/COMMERCIAL-FEEDBACK.md','docs/AGENTMAIL.md']:\n p=Path(n); print(n); print('\\n'.join(l for l in p.read_text().splitlines() if any(w in l.lower() for w in ['subject','site:','experiment','plain-text']))[:6500])"
+      ],
+      "inputs": [
+        "docs/COMMERCIAL-FEEDBACK.md",
+        "docs/AGENTMAIL.md"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795619161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179561916112",
+  "input_sha256": "50e7c8af9e0dbc8131f04925ac0fdbaaff3e4ce398933b4e68a5be7f870a0065"
+}
