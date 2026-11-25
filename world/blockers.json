@@ -160,14 +160,14 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "15 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "16 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 15,
+      "reports": 16,
       "opened_at": "2026-11-25T16:06:36Z",
-      "last_reported_at": "2026-11-25T20:01:41Z"
+      "last_reported_at": "2026-11-25T20:06:38Z"
     }
   ],
   "resolved_recent": [
@@ -212,22 +212,23 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1711,
-    "turns_without_verified_revenue": 1711,
-    "turns_without_outcome": 15,
+    "turns_without_new_interpreted_feedback": 1712,
+    "turns_without_verified_revenue": 1712,
+    "turns_without_outcome": 16,
     "outcome_threshold": 12,
     "dry_since": "2026-11-25T16:06:36Z",
     "last_outcome_turn": "THINK-1795622419",
-    "last_productive_turn": "THINK-1795636831",
-    "last_turn": "THINK-1795636831",
+    "last_productive_turn": "THINK-1795637161",
+    "last_turn": "THINK-1795637161",
     "last_change": {
       "productive": true,
       "outcome": false,
       "mission_outcomes": [],
       "new_products": [
-        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/director-release-comparison.json"
+        "products/distribution/sqlite-curated-tools/raw/director-pr-37-files.json",
+        "products/distribution/sqlite-curated-tools/raw/director-pr-43-files.json"
       ],
-      "new_product_count": 1,
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
