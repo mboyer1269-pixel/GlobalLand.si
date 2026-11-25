@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"receipt\": \"TASK-179560440301\",\n  \"source\": \"https://www.interac.ca/en/payments/business/interac-e-transfer-business-request-money/\",\n  \"capture_sha256\": \"4251ea3c323f733222dec9eb4d966c3507778b0f848c3bb655788ef3cfe91d56\",\n  \"candidate_source_passages\": [\n    \"Consumers can open a Canadian deposit or investment account (RRSP, TFSA) at a participating financial institution or an account with a licensed lottery and gaming operator and fund it instantly by initiating a Business Request Money transaction.\",\n    \"Business Request Money is available through a participating financial institution’s online banking service. Organizations looking to incorporate the feature on their website, mobile app or via a QR code should contact their financial institution.\",\n    \"Business Request Money is currently available through the following participating Canadian financial institutions:\"\n  ],\n  \"operator_scoping_question_en\": \"If you decide to proceed, can you pay in CAD using Interac e-Transfer through a participating financial institution?\",\n  \"operator_scoping_question_fr\": \"Si vous décidez de poursuivre, pouvez-vous payer en dollars canadiens par Virement Interac auprès d’une institution financière participante?\",\n  \"scope\": \"Published source excerpts for manual verification. Buyer compatibility, operator acceptance and Treasury settlement are unverified.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/sqlite-repair/international-cad/director-interac-source-crosswalk.json",
+    "products/receipts/TASK-179560656101.json"
+  ],
+  "id": "TASK-179560656101",
+  "input_sha256": "22b8e9e91513ee69d25ee34de7308498d4ff589948ae376c1c3501592a57e072"
+}
