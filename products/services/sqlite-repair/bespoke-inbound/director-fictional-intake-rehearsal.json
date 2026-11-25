@@ -1,0 +1,41 @@
+{
+  "source": "products/services/sqlite-repair/bespoke-inbound/director-intake-field-readback.json",
+  "source_sha256": "8d989404391762324a77b78775b5c894849ab7fbd364a7643ed68bb4d6204a18",
+  "sqlite_version": "3.40.1",
+  "fictional_plain_text_reply": "Setup SQL\nCREATE TABLE stock (sku TEXT, qty INTEGER); INSERT INTO stock VALUES ('A', 2), ('B', 0);\n\nFailing statement\nSELECT sku FROM stock WHERE qty >= 0 ORDER BY sku;\n\nConfirmed expected rows\n[[\"A\"]]\n\nCould you send the private terms for diagnosing this fictional query?",
+  "actual_rows": [
+    [
+      "A"
+    ],
+    [
+      "B"
+    ]
+  ],
+  "corrected_control_rows": [
+    [
+      "A"
+    ]
+  ],
+  "intake_passages_for_manual_review": {
+    "setup": [
+      "seed_sql:",
+      "site:sqlite-statement-diagnostic query_sql: CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ; SELECT * FROM T1 seed_sql: CREATE TABLE TABLE1(id INTEGER, name TEXT); INSERT INTO TABLE1 VALUES (1,'a'),(2,'b'),(3,'c'); expected rows: (1,a) (2,b) (3,c) prepare called once: yes SQLite version: 3.40.1"
+    ],
+    "failing_statement": [
+      "site:sqlite-statement-diagnostic interest",
+      "Experiment: site:sqlite-statement-diagnostic",
+      "site:sqlite-statement-diagnostic query_sql: CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ; SELECT * FROM T1 seed_sql: CREATE TABLE TABLE1(id INTEGER, name TEXT); INSERT INTO TABLE1 VALUES (1,'a'),(2,'b'),(3,'c'); expected rows: (1,a) (2,b) (3,c) prepare called once: yes SQLite version: 3.40.1",
+      "What a reply can contain: plain text in the same email thread, written by AI agents, comparing what happens when only the first statement is prepared with what a prepare/step/finalize loop over",
+      "), les lignes attendues de la dernière instruction, si votre code n’appelle"
+    ],
+    "expected_rows": [
+      "expected rows:",
+      "site:sqlite-statement-diagnostic query_sql: CREATE TEMPORARY TABLE T1 AS SELECT * FROM TABLE1 ; SELECT * FROM T1 seed_sql: CREATE TABLE TABLE1(id INTEGER, name TEXT); INSERT INTO TABLE1 VALUES (1,'a'),(2,'b'),(3,'c'); expected rows: (1,a) (2,b) (3,c) prepare called once: yes SQLite version: 3.40.1",
+      "), les lignes attendues de la dernière instruction, si votre code n’appelle"
+    ],
+    "private_terms": [
+      "Evidence for comparing the buyer-visible reproduction prompts with the proposed private quote. Email execution, delivery, operator approval and buyer activity are outside this check."
+    ]
+  },
+  "limits": "Keyword matches are pointers. Read both decoded prompts before asserting field coverage. This executes fictional SQL locally and establishes no mail delivery, buyer eligibility, quote approval or payment."
+}
