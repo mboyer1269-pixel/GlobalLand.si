@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "Jobs https://www.translatorscafe.com/cafe/SearchJobs.asp?Mode=Selected\nTranslation Job Board https://www.translatorscafe.com/cafe/SearchJobs.asp\nPost, Edit or Close Job https://www.translatorscafe.com/cafe/JobPost.asp\nWho’s Posting Jobs https://www.translatorscafe.com/cafe/tools.asp?pn=jobposters\nPost a Job https://www.translatorscafe.com/cafe/EN/JobPost.asp\nTranslation Jobs https://www.translatorscafe.com/cafe/EN/SearchJobs.asp\nJobs ?show=jobs\nRecent Professional Translation Jobs / Total: 376,635 /cafe/SearchJobs.asp?Mode=All\nPost a Job /cafe/jobpost.asp\nJobs /cafe/EN/searchJobs.asp\nSoftware Localization versus Translation /cafe/article87.htm\nEnglish /cafe/EN/QuickLook.asp?show=Jobs\nSpanish – Español /cafe/ES/QuickLook.asp?show=Jobs\nFrench – Français /cafe/FR/QuickLook.asp?show=Jobs\nGerman – Deutsch /cafe/DE/QuickLook.asp?show=Jobs\nItalian – Italiano /cafe/IT/QuickLook.asp?show=Jobs\n['RE: New York City 2026, inequality', 'Wordsmith Quality Model WQM 10 – An Attempt to Make a Homebrewed Quality Model', 'Software Localization versus Translation']\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179557056115.json"
+  ],
+  "request": {
+    "id": "TASK-179557056115",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T01:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nimport sys,re\nclass Page(HTMLParser):\n def __init__(self): super().__init__(); self.href=None; self.label=[]; self.body=[]\n def handle_starttag(self,t,a):\n  if t=='a': self.href=dict(a).get('href',''); self.label=[]\n def handle_data(self,s):\n  s=' '.join(s.split())\n  if s and len(s)<300: self.body.append(s)\n  if self.href is not None: self.label.append(s)\n def handle_endtag(self,t):\n  if t=='a' and self.href is not None:\n   s=' '.join(self.label).strip()\n   if s and re.search(r'job|locali[sz]|proof|\\bQA\\b',s+' '+self.href,re.I): print(s[:130],self.href[:170])\n   self.href=None\np=Page(); p.feed(Path(sys.argv[1]).read_text())\nprint([s for s in p.body if re.search(r'no jobs|error|locali[sz]|qualit|sign in|log in',s,re.I)][:25])",
+        "products/services/localization-csv-qa-paid-pilot/raw/translatorscafe-translatorscafe-quicklook.html"
+      ],
+      "inputs": [
+        "products/services/localization-csv-qa-paid-pilot/raw/translatorscafe-translatorscafe-quicklook.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795570561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179557056115",
+  "input_sha256": "cec2ddb998d76d075ba049c86c6227255d38cefae9210ccd3d795b1a47a44b22"
+}
