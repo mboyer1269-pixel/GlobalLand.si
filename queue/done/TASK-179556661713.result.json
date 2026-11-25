@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "SBA’s Directory of Federal Government Prime Contractors with a Subcontracting Plan https://www.sba.gov/document/support--directory-federal-government-prime-contractors-subcontracting-plans\nDOT Subcontracting Directory | US Department of Transportation https://www.transportation.gov/osdbu/procurement-assistance/dot-subcontracting-directory\nSubcontracting Directory | USDA https://www.usda.gov/sites/default/files/documents/subcontracting-directory.pdf\nSUBNet https://www.sba.gov/subnet\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179556661713.json"
+  ],
+  "request": {
+    "id": "TASK-179556661713",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T00:30:17Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import re,sys,html\ns=open(sys.argv[1]).read()\nfor url,content in re.findall(r'<a\\b[^>]*href=\"([^\"]+)\"[^>]*>(.*?)</a>',s,re.S):\n label=html.unescape(re.sub('<[^>]+>','',content)).strip()\n if re.search('subnet|directory|subcontracting opportunit',url+' '+label,re.I):print(label,url)",
+        "products/services/inventory-file-qa-subcontract/raw/sba-prime-subcontracting.html"
+      ],
+      "inputs": [
+        "products/services/inventory-file-qa-subcontract/raw/sba-prime-subcontracting.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795566617",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179556661713",
+  "input_sha256": "6323ded2518165eb60363d213ea422a5018d2fc015f2f03fde7527abfe1735e2"
+}
