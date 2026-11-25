@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"search_receipt\": \"TASK-179556661711\",\n  \"search_observation\": \"Visible result headings concern dating, finance and a dictionary entry. No original inventory request was identified in those headings.\",\n  \"sba_url\": \"https://www.sba.gov/subnet\",\n  \"sba_sha256\": \"e6060f629d04f2d75f4d7e467be5ea45a09e1d066b21eeb71e3180eb29a508be\",\n  \"sba_excerpts\": [\n    \"SUBNet subcontracting opportunities\",\n    \"Notice: To post new subcontracting opportunities in SUBNet, please email subcontracting@sba.gov\",\n    \"Small businesses can browse the listing below to find subcontracting opportunities. You can filter the listing by state or keyword, or sort the listing by clicking a column header. Please direct questions to the posted point of contact for the opportunity, not SBA. Any posts meant only to promote your small business will be removed.\",\n    \"Subcontracting opportunities for the construction of a water tank project located in (City and State) Site Work: NAICS 238910 Tank Paint: NAICS: 238320 Electric: NAICS: 238210\",\n    \"THIS IS A SUBCONTRACTING OPPORTUNITY WITH MANAGEMENT & TRAINING CORPORATION operating the Inland Empire Job Corps for a Fascia Replacement Project\"\n  ],\n  \"matching_links\": [\n    \"https://www.sba.gov/federal-contracting/contracting-guide/prime-subcontracting/subcontracting-opportunities\",\n    \"https://legacy.sba.gov/federal-contracting/contracting-guide/prime-subcontracting/subcontracting-opportunities\",\n    \"mailto:subcontracting@sba.gov\",\n    \"?state=All&keyword=&order=field_subnet_closing_timestamp&sort=asc\",\n    \"?state=All&keyword=&order=field_subnet_start_date&sort=asc\",\n    \"?state=All&keyword=&order=field_subnet_naics&sort=asc\"\n  ],\n  \"scope\": \"Channel evidence only. A directory or listing heading does not establish a current standalone request, eligible supplier, or payment route.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/inventory-file-qa-subcontract/director-channel-evidence.json",
+    "products/receipts/TASK-179556661715.json"
+  ],
+  "request": {
+    "id": "TASK-179556661715",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T00:30:17Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,html,json,pathlib,re,sys\np,out=map(pathlib.Path,sys.argv[1:])\nraw=p.read_bytes()\npage=raw.decode()\nlines=[]\nfor match in re.finditer(r'<(?:p|h[1-4]|a)\\b[^>]*>(.*?)</(?:p|h[1-4]|a)>', page,re.S|re.I):\n label=' '.join(html.unescape(re.sub('<[^>]+>',' ',match[1])).split())\n if re.search(r'SUBNet|subcontracting opportunit|inventory|unable|no results',label,re.I) and 0<len(label)<850:\n  lines.append(label)\nlinks=list(dict.fromkeys(html.unescape(u) for u in re.findall(r'href=\"([^\"]+)\"',page) if re.search('subnet|subcontract',u,re.I)))\nreport={'search_receipt':'TASK-179556661711','search_observation':'Visible result headings concern dating, finance and a dictionary entry. No original inventory request was identified in those headings.','sba_url':'https://www.sba.gov/subnet','sba_sha256':hashlib.sha256(raw).hexdigest(),'sba_excerpts':list(dict.fromkeys(lines))[:15],'matching_links':links[:15],'scope':'Channel evidence only. A directory or listing heading does not establish a current standalone request, eligible supplier, or payment route.'}\nout.write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\\n')\nprint(out.read_text())",
+        "products/services/inventory-file-qa-subcontract/raw/sba-subnet.html",
+        "products/services/inventory-file-qa-subcontract/director-channel-evidence.json"
+      ],
+      "inputs": [
+        "products/services/inventory-file-qa-subcontract/raw/sba-subnet.html"
+      ],
+      "outputs": [
+        "products/services/inventory-file-qa-subcontract/director-channel-evidence.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795566617",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179556661715",
+  "input_sha256": "451158ca0b43deaee2c9a31629f76ebacca5148b5aa8b24cb7620abe4edd50d1"
+}
