@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Demonstration using public example routes. No buyer links were checked.\",\n  \"source_sha256\": \"0d046516016f741118d8fe6c092f6d4fb1976b2200d2dc8303773d13babe8e99\",\n  \"checks\": [\n    {\n      \"route\": \"https://example.com/\",\n      \"receipt\": \"TASK-179557416100\",\n      \"result\": \"successful_retrieval\",\n      \"basis\": \"Host returned an HTTP 200 response and committed the retrieved page.\"\n    },\n    {\n      \"route\": \"404 control\",\n      \"receipt\": \"TASK-179557416101\",\n      \"result\": \"inconclusive\",\n      \"basis\": \"Host refused the request with HTTP 404. This receipt does not independently confirm a broken source link.\"\n    }\n  ],\n  \"totals\": {\n    \"successful_retrieval\": 1,\n    \"confirmed_broken\": 0,\n    \"inconclusive\": 1\n  },\n  \"coverage\": \"Retrieval evidence applies only to the recorded request. Browser behavior, authenticated destinations and remediation are outside this scope.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/agency-launch-qa-pilot/buyer-report-receipt-crosswalk.json",
+    "products/receipts/TASK-179557920200.json"
+  ],
+  "id": "TASK-179557920200",
+  "input_sha256": "64681c2c92b237227c749bc66c834e9c3cd5988b82f6e34a1a2f6edb61f969a5"
+}
