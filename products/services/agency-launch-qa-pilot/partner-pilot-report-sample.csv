@@ -1,0 +1,5 @@
+check,retrieval_outcome,static_fragment_outcome,evidence
+Public example homepage,retrieved,not_applicable,HTTP 200 observed in TASK-179557416100
+Fictional fragment present,not_run,present_in_saved_html,Offline fixture. Exact target ID appears in the supplied HTML.
+Fictional fragment absent,not_run,absent_from_saved_html,Offline fixture. Exact target ID is absent from the supplied HTML.
+Host-refused public request,inconclusive,not_run,Host returned a refusal in TASK-179557776100. Destination behavior remains unknown.
