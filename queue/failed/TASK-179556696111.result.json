@@ -1,0 +1,30 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: ENOENT\nWorkspace reminder: Each EXEC starts in a fresh workspace. Programs create required directories before writing; outputs only declares files to publish. For public EXEC, include prior published files in inputs to reuse them. Private EXEC uses its supplied case files.\nstderr:\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179556696111",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T00:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python",
+        "-c",
+        "import re, html, json, hashlib\nfrom pathlib import Path\nroot = Path('products/services/inventory-file-qa-subcontract/')\nresult = {}\nfor filename in ('sba-subnet.html', 'sba-subnet-inventory.html'):\n    raw = (root / 'raw' / filename).read_bytes()\n    page = raw.decode()\n    clean = lambda value: ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', value)).split())\n    fields = [x for x in re.findall(r'<input\\b[^>]*>', page, re.I) if re.search(r'name=[\"\\']keyword[\"\\']', x, re.I)]\n    bodies = re.findall(r'<tbody\\b[^>]*>(.*?)</tbody>', page, re.I | re.S)\n    rows = [clean(x)[:350] for body in bodies for x in re.findall(r'<tr\\b[^>]*>(.*?)</tr>', body, re.I | re.S)]\n    notices = [clean(x) for x in re.findall(r'<(?:div|p)\\b[^>]*>([^<>]*(?:no results|no opportunities|no records|no matching)[^<>]*)</(?:div|p)>', page, re.I)]\n    result[filename] = dict(sha256=hashlib.sha256(raw).hexdigest(), keyword_fields=fields, row_count=len(rows), row_examples=rows[:5], no_results_text=notices[:5])\nout = root / 'director-subnet-inventory-filter.json'\nout.write_text(json.dumps(result, indent=2) + '\\n')\nprint(out.read_text())"
+      ],
+      "inputs": [
+        "products/services/inventory-file-qa-subcontract/raw/sba-subnet.html",
+        "products/services/inventory-file-qa-subcontract/raw/sba-subnet-inventory.html"
+      ],
+      "outputs": [
+        "products/services/inventory-file-qa-subcontract/director-subnet-inventory-filter.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795566961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179556696111",
+  "input_sha256": "49bf11d45ae806625a2dfcf3be4036332d47fa941b92d4cfa7046de0723851d9"
+}
