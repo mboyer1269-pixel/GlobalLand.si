@@ -198,24 +198,28 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1693,
-    "turns_without_verified_revenue": 1693,
-    "turns_without_outcome": 1,
+    "turns_without_new_interpreted_feedback": 1694,
+    "turns_without_verified_revenue": 1694,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-25T15:08:12Z",
-    "last_outcome_turn": "THINK-1795618834",
-    "last_productive_turn": "THINK-1795619161",
-    "last_turn": "THINK-1795619161",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1795620616",
+    "last_productive_turn": "THINK-1795620616",
+    "last_turn": "THINK-1795620616",
     "last_change": {
       "productive": true,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [
-        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/director-release-baseline.json"
+      "outcome": true,
+      "mission_outcomes": [
+        "SQLITE-QUOTE-INTAKE-RELEASE-CANDIDATE"
       ],
-      "new_product_count": 1,
+      "new_products": [
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/release-candidate.patch",
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/release-live-baseline.html",
+        "products/services/sqlite-repair/bespoke-inbound/quote-intake-preview/release-verification.json"
+      ],
+      "new_product_count": 3,
       "new_research_count": 0,
-      "rewritten_count": 0,
+      "rewritten_count": 1,
       "revenue_gain_cents": 0
     }
   }
