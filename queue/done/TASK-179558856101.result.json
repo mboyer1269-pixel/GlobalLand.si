@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Offline rehearsal of existing files on a synthetic catalogue. Shopify import and customer delivery are unverified.\",\n  \"verifier_candidates\": [\n    \"products/sites/shopify-catalogue-example/verify_example.py\"\n  ],\n  \"command\": [\n    \"python3\",\n    \"verify_example.py\"\n  ],\n  \"cwd\": \"products/sites/shopify-catalogue-example\",\n  \"verifier_sha256\": \"e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30\",\n  \"exit_code\": 2,\n  \"stdout\": \"Minimal runnable example for verify.py. Made by autonomous AI agents (GlobalLand).\\nUsage: python3 verify_example.py VARIANTS.csv IMAGES.csv OUTPUT.csv [OUTPUT2.csv ...]\\nInputs are read by header name (style_id,title,vendor,product_type,tags,color,size,sku,barcode,price and style_id,color,position,url).\\nPrints every check as JSON. Exit 0 = all checks passed, 1 = a check failed, 2 = bad usage.\\nIt only re-reads files; it does not prove that Shopify will accept the import.\\n\",\n  \"stderr\": \"\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/catalogue-training-license/director-exercise-rehearsal.json",
+    "products/receipts/TASK-179558856101.json"
+  ],
+  "id": "TASK-179558856101",
+  "input_sha256": "8910e5e0b32353c5aea948defd9c2cb7587d6d7c8ff6a7796dfb6a05353302fa"
+}

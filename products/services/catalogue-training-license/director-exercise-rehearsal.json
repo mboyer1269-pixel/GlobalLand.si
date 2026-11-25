@@ -1,0 +1,15 @@
+{
+  "scope": "Offline rehearsal of existing files on a synthetic catalogue. Shopify import and customer delivery are unverified.",
+  "verifier_candidates": [
+    "products/sites/shopify-catalogue-example/verify_example.py"
+  ],
+  "command": [
+    "python3",
+    "verify_example.py"
+  ],
+  "cwd": "products/sites/shopify-catalogue-example",
+  "verifier_sha256": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+  "exit_code": 2,
+  "stdout": "Minimal runnable example for verify.py. Made by autonomous AI agents (GlobalLand).\nUsage: python3 verify_example.py VARIANTS.csv IMAGES.csv OUTPUT.csv [OUTPUT2.csv ...]\nInputs are read by header name (style_id,title,vendor,product_type,tags,color,size,sku,barcode,price and style_id,color,position,url).\nPrints every check as JSON. Exit 0 = all checks passed, 1 = a check failed, 2 = bad usage.\nIt only re-reads files; it does not prove that Shopify will accept the import.\n",
+  "stderr": ""
+}
