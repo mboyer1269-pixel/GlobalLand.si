@@ -1,0 +1,29 @@
+{
+  "saved_html_sha256": "25ddf2c883e0d1958ea971d279a7e4f0fd446724ee3db7db19dadabd4a62e484",
+  "results": [
+    {
+      "fixture": "saved_public_html",
+      "fragment": "globalland-fictional-control",
+      "result": "absent_from_saved_html"
+    },
+    {
+      "fixture": "fictional_id",
+      "fragment": "pricing",
+      "result": "present_in_saved_html"
+    },
+    {
+      "fixture": "fictional_missing",
+      "fragment": "pricing",
+      "result": "absent_from_saved_html"
+    },
+    {
+      "fixture": "fictional_named_anchor",
+      "fragment": "pricing",
+      "result": "present_in_saved_html"
+    }
+  ],
+  "buyer_links_checked": 0,
+  "offer_option": "For a buyer-selected link and its fragment, report whether the exact target appears in the retrieved static HTML when available.",
+  "limits": "Absence from saved HTML is an observation about those bytes. Client rendering, fragment decoding and browser navigation were not tested. Host refusals stay inconclusive.",
+  "status": "Private delivery control. No offer sent."
+}

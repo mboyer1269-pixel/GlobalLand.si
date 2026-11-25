@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"saved_html_sha256\": \"25ddf2c883e0d1958ea971d279a7e4f0fd446724ee3db7db19dadabd4a62e484\",\n  \"results\": [\n    {\n      \"fixture\": \"saved_public_html\",\n      \"fragment\": \"globalland-fictional-control\",\n      \"result\": \"absent_from_saved_html\"\n    },\n    {\n      \"fixture\": \"fictional_id\",\n      \"fragment\": \"pricing\",\n      \"result\": \"present_in_saved_html\"\n    },\n    {\n      \"fixture\": \"fictional_missing\",\n      \"fragment\": \"pricing\",\n      \"result\": \"absent_from_saved_html\"\n    },\n    {\n      \"fixture\": \"fictional_named_anchor\",\n      \"fragment\": \"pricing\",\n      \"result\": \"present_in_saved_html\"\n    }\n  ],\n  \"buyer_links_checked\": 0,\n  \"offer_option\": \"For a buyer-selected link and its fragment, report whether the exact target appears in the retrieved static HTML when available.\",\n  \"limits\": \"Absence from saved HTML is an observation about those bytes. Client rendering, fragment decoding and browser navigation were not tested. Host refusals stay inconclusive.\",\n  \"status\": \"Private delivery control. No offer sent.\"\n}\n\n",
+  "artifacts": [
+    "products/services/agency-launch-qa-pilot/fragment-check-control.json",
+    "products/receipts/TASK-179557956110.json"
+  ],
+  "request": {
+    "id": "TASK-179557956110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T04:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nfrom hashlib import sha256\nimport json, sys\nclass Targets(HTMLParser):\n    def __init__(self):\n        super().__init__()\n        self.targets = set()\n    def handle_starttag(self, tag, attrs):\n        for key, value in attrs:\n            if value and (key == 'id' or (tag == 'a' and key == 'name')):\n                self.targets.add(value)\n\ndef check(markup, target):\n    parser = Targets()\n    parser.feed(markup)\n    parser.close()\n    return 'present_in_saved_html' if target in parser.targets else 'absent_from_saved_html'\n\nsaved = Path(sys.argv[1]).read_bytes()\nfixtures = [\n    ('saved_public_html', saved.decode('utf-8'), 'globalland-fictional-control'),\n    ('fictional_id', '<h2 id=\"pricing\">Pricing</h2>', 'pricing'),\n    ('fictional_missing', '<h2 id=\"plans\">Plans</h2>', 'pricing'),\n    ('fictional_named_anchor', '<a name=\"pricing\"></a>', 'pricing'),\n]\nresults = [{'fixture': label, 'fragment': target, 'result': check(html, target)} for label, html, target in fixtures]\nassert [r['result'] for r in results[1:]] == ['present_in_saved_html', 'absent_from_saved_html', 'present_in_saved_html']\ndata = {\n    'saved_html_sha256': sha256(saved).hexdigest(),\n    'results': results,\n    'buyer_links_checked': 0,\n    'offer_option': 'For a buyer-selected link and its fragment, report whether the exact target appears in the retrieved static HTML when available.',\n    'limits': 'Absence from saved HTML is an observation about those bytes. Client rendering, fragment decoding and browser navigation were not tested. Host refusals stay inconclusive.',\n    'status': 'Private delivery control. No offer sent.'\n}\noutput = json.dumps(data, indent=2)\nPath(sys.argv[2]).write_text(output + '\\n')\nprint(output)\n",
+        "products/services/agency-launch-qa-pilot/controls/example-home.html",
+        "products/services/agency-launch-qa-pilot/fragment-check-control.json"
+      ],
+      "inputs": [
+        "products/services/agency-launch-qa-pilot/controls/example-home.html"
+      ],
+      "outputs": [
+        "products/services/agency-launch-qa-pilot/fragment-check-control.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795579561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179557956110",
+  "input_sha256": "f5e46996049e2e798d53f300e37b41efe8381f040ef395bfe6e9ea0325235da9"
+}
