@@ -1,0 +1,62 @@
+{
+  "reports": {
+    "partner-pilot-report-sample.csv": {
+      "sha256": "42f21b5f3bb854c6b4c77e1dc40f3af2b406b5d036f4fcdfe5fbf8baf467c48e",
+      "header": [
+        "check",
+        "retrieval_outcome",
+        "static_fragment_outcome",
+        "evidence"
+      ],
+      "row_count": 4,
+      "row_widths": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "fields_for_review": [
+        {
+          "retrieval_outcome": "retrieved",
+          "static_fragment_outcome": "not_applicable"
+        },
+        {
+          "retrieval_outcome": "not_run",
+          "static_fragment_outcome": "present_in_saved_html"
+        },
+        {
+          "retrieval_outcome": "not_run",
+          "static_fragment_outcome": "absent_from_saved_html"
+        },
+        {
+          "retrieval_outcome": "inconclusive",
+          "static_fragment_outcome": "not_run"
+        }
+      ]
+    },
+    "buyer-report-control.csv": {
+      "sha256": "0d046516016f741118d8fe6c092f6d4fb1976b2200d2dc8303773d13babe8e99",
+      "header": [
+        "route",
+        "task",
+        "outcome",
+        "evidence"
+      ],
+      "row_count": 2,
+      "row_widths": [
+        4,
+        4
+      ],
+      "fields_for_review": [
+        {
+          "outcome": "retrieved"
+        },
+        {
+          "outcome": "fetch refused"
+        }
+      ]
+    }
+  },
+  "partner_sample_matches_prior_receipt": true,
+  "scope": "Offline report readback for the failed shape check. No buyer links checked, no browser execution, and no intake or delivery verified."
+}

@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"reports\": {\n    \"partner-pilot-report-sample.csv\": {\n      \"sha256\": \"42f21b5f3bb854c6b4c77e1dc40f3af2b406b5d036f4fcdfe5fbf8baf467c48e\",\n      \"header\": [\n        \"check\",\n        \"retrieval_outcome\",\n        \"static_fragment_outcome\",\n        \"evidence\"\n      ],\n      \"row_count\": 4,\n      \"row_widths\": [\n        4,\n        4,\n        4,\n        4\n      ],\n      \"fields_for_review\": [\n        {\n          \"retrieval_outcome\": \"retrieved\",\n          \"static_fragment_outcome\": \"not_applicable\"\n        },\n        {\n          \"retrieval_outcome\": \"not_run\",\n          \"static_fragment_outcome\": \"present_in_saved_html\"\n        },\n        {\n          \"retrieval_outcome\": \"not_run\",\n          \"static_fragment_outcome\": \"absent_from_saved_html\"\n        },\n        {\n          \"retrieval_outcome\": \"inconclusive\",\n          \"static_fragment_outcome\": \"not_run\"\n        }\n      ]\n    },\n    \"buyer-report-control.csv\": {\n      \"sha256\": \"0d046516016f741118d8fe6c092f6d4fb1976b2200d2dc8303773d13babe8e99\",\n      \"header\": [\n        \"route\",\n        \"task\",\n        \"outcome\",\n        \"evidence\"\n      ],\n      \"row_count\": 2,\n      \"row_widths\": [\n        4,\n        4\n      ],\n      \"fields_for_review\": [\n        {\n          \"outcome\": \"retrieved\"\n        },\n        {\n          \"outcome\": \"fetch refused\"\n        }\n      ]\n    }\n  },\n  \"partner_sample_matches_prior_receipt\": true,\n  \"scope\": \"Offline report readback for the failed shape check. No buyer links checked, no browser execution, and no intake or delivery verified.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/agency-launch-qa-pilot/partner-report-shape-readback.json",
+    "products/receipts/TASK-179558262100.json"
+  ],
+  "id": "TASK-179558262100",
+  "input_sha256": "db14c1788263887bd08924146cd06bf60e87cd4c1105b13e6dec6a5ce0a8d03a"
+}
