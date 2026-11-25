@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"bindings\": {\n    \"operator-submission-packet.md\": {\n      \"expected\": \"e96a98a22124ba63287c3047da95b0adcc073077d23e52a4d0e368830afbc0b4\",\n      \"actual\": \"e96a98a22124ba63287c3047da95b0adcc073077d23e52a4d0e368830afbc0b4\",\n      \"matches\": true\n    },\n    \"director-referral-candidate.diff\": {\n      \"expected\": \"1017529e2e4b4268992686b690268b13d3c4d3ca5d7e98195a853833314360d8\",\n      \"actual\": \"1017529e2e4b4268992686b690268b13d3c4d3ca5d7e98195a853833314360d8\",\n      \"matches\": true\n    }\n  },\n  \"candidate_records_containing_both_hashes\": [\n    \"products/distribution/sqlite-community-directory/operator-decision-evidence-index.json\",\n    \"products/distribution/sqlite-community-directory/operator-packet-binding.json\",\n    \"products/distribution/sqlite-community-directory/operator-patch-application-check.json\"\n  ],\n  \"coverage\": \"Selected public directory only. Matching text is a pointer. Verify the author, verdict and operator authority in the original record before acting.\"\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-community-directory/director-referral-decision-index.json",
+    "products/receipts/TASK-179556840100.json"
+  ],
+  "id": "TASK-179556840100",
+  "input_sha256": "eea5ff75352390bc870f988f2e9c884c886e5fcd7f6a38ead7f9d0d3be558ac6"
+}

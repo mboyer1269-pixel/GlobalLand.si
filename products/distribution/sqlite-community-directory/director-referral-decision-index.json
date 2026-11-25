@@ -1,0 +1,20 @@
+{
+  "bindings": {
+    "operator-submission-packet.md": {
+      "expected": "e96a98a22124ba63287c3047da95b0adcc073077d23e52a4d0e368830afbc0b4",
+      "actual": "e96a98a22124ba63287c3047da95b0adcc073077d23e52a4d0e368830afbc0b4",
+      "matches": true
+    },
+    "director-referral-candidate.diff": {
+      "expected": "1017529e2e4b4268992686b690268b13d3c4d3ca5d7e98195a853833314360d8",
+      "actual": "1017529e2e4b4268992686b690268b13d3c4d3ca5d7e98195a853833314360d8",
+      "matches": true
+    }
+  },
+  "candidate_records_containing_both_hashes": [
+    "products/distribution/sqlite-community-directory/operator-decision-evidence-index.json",
+    "products/distribution/sqlite-community-directory/operator-packet-binding.json",
+    "products/distribution/sqlite-community-directory/operator-patch-application-check.json"
+  ],
+  "coverage": "Selected public directory only. Matching text is a pointer. Verify the author, verdict and operator authority in the original record before acting."
+}
