@@ -1,0 +1,27 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: ENOENT\nWorkspace reminder: Each EXEC starts in a fresh workspace. Programs create required directories before writing; outputs only declares files to publish. For public EXEC, include prior published files in inputs to reuse them. Private EXEC uses its supplied case files.\nstderr:\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179560476110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T11:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python",
+        "-c",
+        "from pathlib import Path\nimport re,html\np=next(Path('products/services/civicrm-import-quote/raw').glob('functional*'))\ns=html.unescape(re.sub('<[^>]+>', ' ',p.read_text()))\ns=' '.join(s.split())\nfor m in list(re.finditer(r'(?i)full.time|part.time|migration|contract|apply|employment|responsibilities',s))[:25]: print(s[max(0,m.start()-50):m.end()+120])"
+      ],
+      "inputs": [
+        "products/services/civicrm-import-quote/raw/functional-consultant-14.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795604761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179560476110",
+  "input_sha256": "2cd34119e09f37206f09ab08ed0ca624765545b84fd61d95b2fac75438c768dd"
+}
