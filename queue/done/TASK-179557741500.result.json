@@ -1,0 +1,9 @@
+{
+  "status": "DONE",
+  "output": "buyer-report-verification.json\n{\n  \"scope\": \"Two public control observations from host receipts supplied in the world snapshot\",\n  \"existing_control_sha256\": \"fc5afb3f67532f83813c1631f5ed87cf322ca7e08058f70323b8d5ee5e4ca52d\",\n  \"checks\": [\n    \"Retrieved body matches the recorded digest\",\n    \"CSV round-trip preserves both outcomes\",\n    \"Refusal retains host wording and stays distinct from retrieval\"\n  ],\n  \"delivery_limits\": [\n    \"No buyer URLs checked\",\n    \"Browser rendering and final redirect behavior were not verified\",\n    \"Report blocked or ambiguous checks separately and count them toward the agreed ten-link scope\"\n  ],\n  \"commercial_state\": \"No customer delivery, acceptance or settlement established\"\n}\noffline-link-check-readback.json\n{\n  \"scope\": \"Existing offline link-checker test suite for the provisional agency launch QA pilot\",\n  \"command\": [\n    \"/usr/bin/python3\",\n    \"tests/run_tests.py\"\n  ],\n  \"cwd\": \"products/actors/link-checker\",\n  \"test_sha256\": \"25a840eadcae4a2385d1959930a2ddb22f82d0cc0a42d8b7f0d5e0aa8c164982\",\n  \"core_sha256\": \"58dc5cf18463aa5916300192ff214e346804cb8eda9b1eadffed45554cc134f3\",\n  \"exit_code\": 0,\n  \"stdout\": \"passed 21/21\\n\",\n  \"stderr\": \"\",\n  \"live_buyer_links_checked\": 0\n}\nReport rows, including header: 3\nConsistent column counts: True\nroute,task,outcome,evidence\nhttps://example.com/,TASK-179557416100,retrieved,HTTP 200 with committed body and verified SHA-256 25ddf2c883e0d1958ea971d279a7e4f0fd446724ee3db7db19dadabd4a62e484\n404 control,TASK-179557416101,fetch refused,The host reported HTTP 404 and supplied no committed body\n\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179557741500.json"
+  ],
+  "id": "TASK-179557741500",
+  "input_sha256": "9847fe7c5051e86b98bbd45dfdbadf7b4b6db89d920d989925b87f4a0c5a2bbb"
+}
