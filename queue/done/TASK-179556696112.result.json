@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"sba-subnet.html\": {\n    \"sha256\": \"e6060f629d04f2d75f4d7e467be5ea45a09e1d066b21eeb71e3180eb29a508be\",\n    \"keyword_fields\": [\n      \"<input data-drupal-selector=\\\"edit-keyword\\\" type=\\\"text\\\" id=\\\"edit-keyword\\\" name=\\\"keyword\\\" value=\\\"\\\" size=\\\"30\\\" maxlength=\\\"128\\\" class=\\\"form-text usa-input\\\"/>\"\n    ],\n    \"row_count\": 10,\n    \"row_examples\": [\n      \"Well #5A &amp; Well 6 Centralized Treatment and New Storage Tank Construction Specialty Construction, Inc. Rehabilitation of Well No. 6; construction of a raw water interconnection pipeline connecting Well No. 6 to the Well No. 5 site; and constructi\",\n      \"AMC-0172 OSU Public Announcement PTSI Managed Services Inc. (Parsons) Project electrical work consists of making corrections to the LPGBS such as replacement to access wells, grounding rods, SPDs, mechanical connectors, and EES counterpoise system. B\",\n      \"AMC-0166 CRW ASR Public Announcement PTSI Managed Services Inc. (Parsons) Project electrical work consists of making corrections to the LPGBS such as EES counterpoise adjustments, grounding, access wells installation, installing new lightning protect\"\n    ],\n    \"no_results_text\": []\n  },\n  \"sba-subnet-inventory.html\": {\n    \"sha256\": \"5c03b272e4ee7cead145f4c2b647f8d74fbdf557187891b43baf0231e4d82779\",\n    \"keyword_fields\": [\n      \"<input data-drupal-selector=\\\"edit-keyword\\\" type=\\\"text\\\" id=\\\"edit-keyword\\\" name=\\\"keyword\\\" value=\\\"inventory\\\" size=\\\"30\\\" maxlength=\\\"128\\\" class=\\\"form-text usa-input\\\"/>\"\n    ],\n    \"row_count\": 0,\n    \"row_examples\": [],\n    \"no_results_text\": [\n      \"No opportunities found for this search\",\n      \"No opportunities found for this search\"\n    ]\n  }\n}\n\n\n",
+  "artifacts": [
+    "products/services/inventory-file-qa-subcontract/director-subnet-inventory-filter.json",
+    "products/receipts/TASK-179556696112.json"
+  ],
+  "request": {
+    "id": "TASK-179556696112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-25T00:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "node",
+        "-e",
+        "const fs = require('fs'), crypto = require('crypto');\nconst root = 'products/services/inventory-file-qa-subcontract/';\nconst result = {};\nfor (const name of ['sba-subnet.html', 'sba-subnet-inventory.html']) {\n  const raw = fs.readFileSync(root + 'raw/' + name);\n  const page = raw.toString('utf8');\n  const clean = value => value.replace(/<[^>]+>/g, ' ').replace(/\\s+/g, ' ').trim();\n  const fields = (page.match(/<input\\b[^>]*>/gi) || []).filter(tag => /name=[\"']keyword[\"']/i.test(tag));\n  const bodies = Array.from(page.matchAll(/<tbody\\b[^>]*>([\\s\\S]*?)<\\/tbody>/gi), m => m[1]);\n  const rows = bodies.flatMap(body => Array.from(body.matchAll(/<tr\\b[^>]*>([\\s\\S]*?)<\\/tr>/gi), m => clean(m[1])));\n  const notices = (page.match(/>[^<>]*(?:no results|no opportunities|no records|no matching)[^<>]*</gi) || []).map(s => s.slice(1,-1).trim());\n  result[name] = {sha256: crypto.createHash('sha256').update(raw).digest('hex'), keyword_fields: fields, row_count: rows.length, row_examples: rows.slice(0,3).map(x=>x.slice(0,250)), no_results_text: notices.slice(0,5)};\n}\nconst output = JSON.stringify(result,null,2) + '\\n';\nfs.writeFileSync(root+'director-subnet-inventory-filter.json',output);\nconsole.log(output);"
+      ],
+      "inputs": [
+        "products/services/inventory-file-qa-subcontract/raw/sba-subnet.html",
+        "products/services/inventory-file-qa-subcontract/raw/sba-subnet-inventory.html"
+      ],
+      "outputs": [
+        "products/services/inventory-file-qa-subcontract/director-subnet-inventory-filter.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795566961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179556696112",
+  "input_sha256": "b361592d21861c6f0aefdc64a55b57e1faa23851aaf11c2e6b0be449b7500c34"
+}
