@@ -1,0 +1,57 @@
+{
+  "scope": "Fictional offline controls against the CLI. One CAD invoice per invocation.",
+  "results": [
+    {
+      "case": "matching",
+      "exit": 0,
+      "report": {
+        "currency": "CAD",
+        "rows": 3,
+        "declared_subtotal": "49.95",
+        "computed_subtotal": "49.95",
+        "declared_minus_computed": "0.00",
+        "verdict": "MATCH"
+      }
+    },
+    {
+      "case": "subtotal_mismatch",
+      "exit": 1,
+      "report": {
+        "currency": "CAD",
+        "rows": 3,
+        "declared_subtotal": "39.95",
+        "computed_subtotal": "49.95",
+        "declared_minus_computed": "-10.00",
+        "verdict": "MISMATCH"
+      }
+    },
+    {
+      "case": "over_limit",
+      "exit": 2,
+      "report": {
+        "verdict": "INVALID",
+        "reason": "Provide 1\u201320 rows, each containing one line amount."
+      }
+    },
+    {
+      "case": "invalid_precision",
+      "exit": 2,
+      "report": {
+        "verdict": "INVALID",
+        "reason": "Use unsigned CAD amounts with 1\u20139 whole digits and exactly two decimal digits."
+      }
+    },
+    {
+      "case": "exact_cent_control",
+      "exit": 0,
+      "report": {
+        "currency": "CAD",
+        "rows": 2,
+        "declared_subtotal": "0.30",
+        "computed_subtotal": "0.30",
+        "declared_minus_computed": "0.00",
+        "verdict": "MATCH"
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Fictional offline controls against the CLI. One CAD invoice per invocation.\",\n  \"results\": [\n    {\n      \"case\": \"matching\",\n      \"exit\": 0,\n      \"report\": {\n        \"currency\": \"CAD\",\n        \"rows\": 3,\n        \"declared_subtotal\": \"49.95\",\n        \"computed_subtotal\": \"49.95\",\n        \"declared_minus_computed\": \"0.00\",\n        \"verdict\": \"MATCH\"\n      }\n    },\n    {\n      \"case\": \"subtotal_mismatch\",\n      \"exit\": 1,\n      \"report\": {\n        \"currency\": \"CAD\",\n        \"rows\": 3,\n        \"declared_subtotal\": \"39.95\",\n        \"computed_subtotal\": \"49.95\",\n        \"declared_minus_computed\": \"-10.00\",\n        \"verdict\": \"MISMATCH\"\n      }\n    },\n    {\n      \"case\": \"over_limit\",\n      \"exit\": 2,\n      \"report\": {\n        \"verdict\": \"INVALID\",\n        \"reason\": \"Provide 1\\u201320 rows, each containing one line amount.\"\n      }\n    },\n    {\n      \"case\": \"invalid_precision\",\n      \"exit\": 2,\n      \"report\": {\n        \"verdict\": \"INVALID\",\n        \"reason\": \"Use unsigned CAD amounts with 1\\u20139 whole digits and exactly two decimal digits.\"\n      }\n    },\n    {\n      \"case\": \"exact_cent_control\",\n      \"exit\": 0,\n      \"report\": {\n        \"currency\": \"CAD\",\n        \"rows\": 2,\n        \"declared_subtotal\": \"0.30\",\n        \"computed_subtotal\": \"0.30\",\n        \"declared_minus_computed\": \"0.00\",\n        \"verdict\": \"MATCH\"\n      }\n    }\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/services/invoice-line-total-pilot/reconcile_subtotal.py",
+    "products/services/invoice-line-total-pilot/cli-controls.json",
+    "products/receipts/TASK-179572176100.json"
+  ],
+  "id": "TASK-179572176100",
+  "input_sha256": "a3754fe545a119ae493aeea8d17e0bd006d3906ed535b9e5147600180554d348"
+}
