@@ -1,0 +1,30 @@
+{
+  "expected_archive_sha256": "80b451146e7cdf45c3adada847d22dbe1dcaa8c192077cdf08b6d1fe323c6364",
+  "scope": "Fictional fixtures only",
+  "runs": {
+    "join": {
+      "exit": 1,
+      "expected_exit": 1,
+      "expected_failing_case": "multiple_tags",
+      "stdout": "{\n  \"sqlite_version\": \"3.40.1\",\n  \"query\": \"join\",\n  \"results\": [\n    {\n      \"case\": \"single_invoice\",\n      \"expected\": 100,\n      \"actual\": 100,\n      \"passed\": true\n    },\n    {\n      \"case\": \"multiple_tags\",\n      \"expected\": 100,\n      \"actual\": 200,\n      \"passed\": false\n    },\n    {\n      \"case\": \"equal_invoice_amounts\",\n      \"expected\": 200,\n      \"actual\": 200,\n      \"passed\": true\n    },\n    {\n      \"case\": \"untagged_invoice\",\n      \"expected\": 100,\n      \"actual\": 100,\n      \"passed\": true\n    },\n    {\n      \"case\": \"empty_selection\",\n      \"expected\": 0,\n      \"actual\": 0,\n      \"passed\": true\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    "distinct_amount": {
+      "exit": 1,
+      "expected_exit": 1,
+      "expected_failing_case": "equal_invoice_amounts",
+      "stdout": "{\n  \"sqlite_version\": \"3.40.1\",\n  \"query\": \"distinct_amount\",\n  \"results\": [\n    {\n      \"case\": \"single_invoice\",\n      \"expected\": 100,\n      \"actual\": 100,\n      \"passed\": true\n    },\n    {\n      \"case\": \"multiple_tags\",\n      \"expected\": 100,\n      \"actual\": 100,\n      \"passed\": true\n    },\n    {\n      \"case\": \"equal_invoice_amounts\",\n      \"expected\": 200,\n      \"actual\": 100,\n      \"passed\": false\n    },\n    {\n      \"case\": \"untagged_invoice\",\n      \"expected\": 100,\n      \"actual\": 100,\n      \"passed\": true\n    },\n    {\n      \"case\": \"empty_selection\",\n      \"expected\": 0,\n      \"actual\": 0,\n      \"passed\": true\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    "exists": {
+      "exit": 0,
+      "expected_exit": 0,
+      "expected_failing_case": null,
+      "stdout": "{\n  \"sqlite_version\": \"3.40.1\",\n  \"query\": \"exists\",\n  \"results\": [\n    {\n      \"case\": \"single_invoice\",\n      \"expected\": 100,\n      \"actual\": 100,\n      \"passed\": true\n    },\n    {\n      \"case\": \"multiple_tags\",\n      \"expected\": 100,\n      \"actual\": 100,\n      \"passed\": true\n    },\n    {\n      \"case\": \"equal_invoice_amounts\",\n      \"expected\": 200,\n      \"actual\": 200,\n      \"passed\": true\n    },\n    {\n      \"case\": \"untagged_invoice\",\n      \"expected\": 100,\n      \"actual\": 100,\n      \"passed\": true\n    },\n    {\n      \"case\": \"empty_selection\",\n      \"expected\": 0,\n      \"actual\": 0,\n      \"passed\": true\n    }\n  ]\n}\n",
+      "stderr": ""
+    }
+  },
+  "passed": true,
+  "archive_path": "products/distribution/sqlite-gumroad-fit/private-exercise/delivery/invoice-regression.zip.b64",
+  "archive_sha256": "80b451146e7cdf45c3adada847d22dbe1dcaa8c192077cdf08b6d1fe323c6364"
+}
