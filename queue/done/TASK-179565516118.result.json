@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "154227 8c2cc746b6971036ab4e34ab2c839935f7163d2168c96bd483819efead0f0893\nutf-8-sig ['title-titre-eng', 'title-titre-fra', 'referenceNumber-numeroReference', 'amendmentNumber-numeroModification', 'solicitationNumber-numeroSollicitation', 'publicationDate-datePublication', 'tenderClosingDate-appelOffresDateCloture', 'amendmentDate-dateModification', 'expectedContractStartDate-dateDebutContratPrevue', 'expectedContractEndDate-dateFinContratPrevue', 'tenderStatus-appelOffresStatut-eng', 'tenderStatus-appelOffresStatut-fra', 'gsin-nibs', 'gsinDescription-nibsDescription-eng', 'gsinDescription-nibsDescription-fra', 'unspsc', 'unspscDescription-eng', 'unspscDescription-fra', 'procurementCategory-categorieApprovisionnement', 'noticeType-avisType-eng', 'noticeType-avisType-fra', 'procurementMethod-methodeApprovisionnement-eng', 'procurementMethod-methodeApprovisionnement-fra', 'selectionCriteria-criteresSelection-eng', 'selectionCriteria-criteresSelection-fra', 'limitedTenderingReason-raisonAppelOffresLimite-eng', 'limitedTenderingReason-raisonAppelOffresLimite-fra', 'tradeAgreements-accordsCommerciaux-eng', 'tradeAgreements-accordsCommerciaux-fra', 'regionsOfOpportunity-regionAppelOffres-eng', 'regionsOfOpportunity-regionAppelOffres-fra', 'regionsOfDelivery-regionsLivraison-eng', 'regionsOfDelivery-regionsLivraison-fra', 'contractingEntityName-nomEntitContractante-eng', 'contractingEntityAddressLine-ligneAdresseEntiteContractante-eng', 'contractingEntityAddressCity-entiteContractanteAdresseVille-eng', 'contractingEntityAddressProvince-entiteContractanteAdresseProvince-eng', 'contractingEntityAddressPostalCode-entiteContractanteAdresseCodePostal', 'contractingEntityAddressCountry-entiteContractanteAdressePays-eng', 'contractingEntityName-nomEntitContractante-fra', 'contractingEntityAddressLine-ligneAdresseEntiteContractante-fra', 'contractingEntityAddressCity-entiteContractanteAdresseVille-fra', 'contractingEntityAddressProvince-entiteContractanteAdresseProvince-fra', 'contractingEntityAddressCountry-entiteContractanteAdressePays-fra', 'endUserEntitiesName-nomEntitesUtilisateurFinal-eng', 'endUserEntitiesAddress-adresseEntitesUtilisateurFinal-eng', 'endUserEntitiesName-nomEntitesUtilisateurFinal-fra', 'endUserEntitiesAddress-adresseEntitesUtilisateurFinal-fra', 'contactInfoName-informationsContactNom', 'contactInfoEmail-informationsContactCourriel', 'contactInfoPhone-contactInfoTelephone', 'contactInfoFax', 'contactInfoAddressLine-contactInfoAdresseLigne-eng', 'contactInfoCity-contacterInfoVille-eng', 'contactInfoProvince-contacterInfoProvince-eng', 'contactInfoPostalcode', 'contactInfoCountry-contactInfoPays-eng', 'contactInfoAddressLine-contactInfoAdresseLigne-fra', 'contactInfoCity-contacterInfoVille-fra', 'contactInfoProvince-contacterInfoProvince-fra', 'contactInfoCountry-contactInfoPays-fra', 'noticeURL-URLavis-eng', 'noticeURL-URLavis-fra', 'attachment-piecesJointes-eng', 'attachment-piecesJointes-fra', 'tenderDescription-descriptionAppelOffres-eng', 'tenderDescription-descriptionAppelOffres-fra']\nrows 28\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179565516118.json"
+  ],
+  "request": {
+    "id": "TASK-179565516118",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T01:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport base64,csv,io,sys,re,hashlib\nb=base64.b64decode(Path(sys.argv[1]).read_bytes()); print(len(b),hashlib.sha256(b).hexdigest());\nfor enc in ('utf-8-sig','cp1252'):\n try: s=b.decode(enc);break\n except UnicodeDecodeError: pass\nr=csv.DictReader(io.StringIO(s)); print(enc,r.fieldnames); rows=list(r); print('rows',len(rows));\nfor x in rows:\n if any(re.search(r'spreadsheet|data quality|reconcil|migration|validation|cleansing|nettoyage|rapprochement',v or '',re.I) for k,v in x.items() if k and 'title' in k.lower()): print({k:v for k,v in x.items() if k and any(w in k.lower() for w in ('title','url','closing'))})",
+        "products/services/canadabuys-offline-reconciliation/raw/new-tender-notices.csv.b64"
+      ],
+      "inputs": [
+        "products/services/canadabuys-offline-reconciliation/raw/new-tender-notices.csv.b64"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795655161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179565516118",
+  "input_sha256": "99e36f0d0c97eaea3cbf53e7acf02f7a8f22941c65f7060fe507e34781238451"
+}
