@@ -1,0 +1,9 @@
+{
+  "status": "DONE",
+  "output": "{\"path\": \"products/distribution/sqlite-original-regression-exercise/exercise.py\", \"bytes\": 2676, \"sha256\": \"758f4382dc2820826b56558fad4f4f6797cbc156dd9c7698242d8566efbc1b15\"}\n{\"path\": \"products/distribution/sqlite-original-regression-exercise/private-evaluation-verification.json\", \"bytes\": 4455, \"sha256\": \"85bf84ebfd346f9b25d8a19c78f6cd3cdb8e5e4ac9715c4952016aaa19a42b9b\"}\n{\"previous_verification_sha256\": \"60e549f74cd14e8486ba2c16f7f3262c850019f18f9df9b9f458e1e55d11c6e8\", \"exercise_sha256\": \"758f4382dc2820826b56558fad4f4f6797cbc156dd9c7698242d8566efbc1b15\", \"scope\": \"Private synthetic evaluation only\", \"extracted_source_matches\": true, \"passed\": false}\n{\"mode\": \"global-join\", \"expected_exit\": 1, \"actual_exit\": 1, \"failing_cases\": [\"multiple grants\", \"same id across teams\", \"absent grants\"], \"passed\": true}\n{\"mode\": \"distinct-sum\", \"expected_exit\": 1, \"actual_exit\": 1, \"failing_cases\": [\"same-value events\"], \"passed\": true}\n{\"mode\": \"exists\", \"expected_exit\": 0, \"actual_exit\": 2, \"failing_cases\": [], \"passed\": false}\n{\"path\": \"products/distribution/sqlite-original-regression-exercise/private-evaluation.zip.b64\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}\n{\"archive_read_error\": \"File is not a zip file\"}\n{\"path\": \"products/distribution/sqlite-original-regression-exercise/verification.json\", \"bytes\": 5662, \"sha256\": \"60e549f74cd14e8486ba2c16f7f3262c850019f18f9df9b9f458e1e55d11c6e8\"}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179571240200.json"
+  ],
+  "id": "TASK-179571240200",
+  "input_sha256": "778b9b534cab008953af44831704b0fa7f9723277d1827aa3327e8b3a747e5d7"
+}
