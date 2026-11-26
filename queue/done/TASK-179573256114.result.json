@@ -1,0 +1,38 @@
+{
+  "status": "DONE",
+  "output": "[(13377, 2), (11916, 0)]\n\n",
+  "artifacts": [
+    "products/services/invoice-export-qa-alternative/dext-bounded-verdict.json",
+    "products/receipts/TASK-179573256114.json"
+  ],
+  "request": {
+    "id": "TASK-179573256114",
+    "type": "TOOL",
+    "submitted_by": "PAID_PILOT",
+    "created_at": "2026-11-26T22:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nfrom hashlib import sha256\nimport json,re,sys\nclass Visible(HTMLParser):\n def __init__(self):\n  super().__init__(); self.skip=False; self.parts=[]\n def handle_starttag(self,tag,attrs):\n  if tag in ('script','style'): self.skip=True\n def handle_endtag(self,tag):\n  if tag in ('script','style'): self.skip=False\n def handle_data(self,data):\n  if not self.skip and data.strip(): self.parts.append(data)\nsources=[]\nfor filename,url in zip(sys.argv[2:],['https://dext.com/ca','https://dext.com/ca/partner/product/capture-bookkeeping-data']):\n data=Path(filename).read_bytes()\n page=Visible(); page.feed(data.decode('utf-8')); words=' '.join(' '.join(page.parts).split())\n hits=list(re.finditer(r'line[ -]items?|sub[ -]?total|\\bCSV\\b|\\bexports?\\b|net amount|tax amount',words,re.I))\n sources.append({'url':url,'sha256':sha256(data).hexdigest(),'visible_characters':len(words),'visible_excerpt':words[:210],'matches':[words[max(0,m.start()-65):m.end()+85] for m in hits]})\nassert all(s['visible_characters']>500 for s in sources)\nassert any('pulls out' in m for m in sources[0]['matches'])\nreport={'sources':sources,'earlier_attempt':'TASK-179572896101 returned HTTP 404 and supplied no workflow evidence.','control_reference':'TASK-179572176100 is the fictional subtotal check. It requires supplied line amounts and a declared pre-tax CAD subtotal.','decision':'Hold the Dext-specific offer insertion. The homepage documents line-item extraction. The two captures do not establish an export with both required inputs or an existing authorized prospect handoff for that workflow. Dext capabilities outside the captures remain unknown.','reconsider_when':'An official field map or permitted nonconfidential sample shows the required fields, or a buyer confirms separately supplied inputs and a suitable authorized inquiry route.','commercial_effect':'No inquiry, order, settlement or deployment occurred.'}\nout=Path(sys.argv[1]); out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps(report,indent=2)+'\\n')\nprint([(s['visible_characters'],len(s['matches'])) for s in sources])",
+        "products/services/invoice-export-qa-alternative/dext-bounded-verdict.json",
+        "products/services/invoice-export-qa-alternative/raw/dext-canada.html",
+        "products/services/invoice-export-qa-alternative/raw/dext-partner-capture.html"
+      ],
+      "inputs": [
+        "products/services/invoice-export-qa-alternative/raw/dext-canada.html",
+        "products/services/invoice-export-qa-alternative/raw/dext-partner-capture.html"
+      ],
+      "outputs": [
+        "products/services/invoice-export-qa-alternative/dext-bounded-verdict.json"
+      ],
+      "mission_id": "INVOICE-EXPORT-QA-ALTERNATIVE"
+    },
+    "description": "Broker action during THINK-1795732561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179573256114",
+  "input_sha256": "25765cf34249ac5b40c6044eb66e4ddf119b41e6a8ed322b8428107b2dbe3c23"
+}
