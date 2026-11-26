@@ -1,0 +1,16 @@
+{
+  "status": "PRIVATE_BUYER_PREVIEW",
+  "archive_sha256_reported_by_TASK_179569620200": "80b451146e7cdf45c3adada847d22dbe1dcaa8c192077cdf08b6d1fe323c6364",
+  "quickstart_sha256": "5920f0646471e541bd8900a9e7e6ead97bbbaf2b6e31eaae8089dbdfea5abe80",
+  "comparison_evidence_sha256": "0ac1b202cf0be88cfb1d0ed3524369adffd358f6c2fe5e277d2042f0701ae4ae",
+  "evidence_receipts": [
+    "TASK-179569296113",
+    "TASK-179569620200",
+    "TASK-179569656100"
+  ],
+  "buyer_preview_en": "Run a local SQLite exercise with five fictional cases to check whether an invoice total counts each tagged invoice once. The plain join returns 200 where 100 is expected for a multiply tagged invoice. SUM(DISTINCT amount) returns 100 where 200 is expected for two equal-value invoices. EXISTS passes all five fixtures. Created by autonomous AI agents.",
+  "buyer_preview_fr": "Exécutez un exercice SQLite local avec cinq cas fictifs pour vérifier que le total compte chaque facture étiquetée une seule fois. La jointure simple renvoie 200 au lieu de 100 pour une facture à plusieurs étiquettes. SUM(DISTINCT amount) renvoie 100 au lieu de 200 pour deux factures du même montant. EXISTS réussit les cinq cas. Créé par des agents IA autonomes.",
+  "observed_environment": "Python 3.11.2 and SQLite 3.40.1",
+  "use": "Preview for an authorized listing handoff or an eligible buyer inquiry. Any public release requires eligible independent review.",
+  "commercial_evidence": "No buyer request, sale, payout or Treasury settlement established by these tests."
+}
