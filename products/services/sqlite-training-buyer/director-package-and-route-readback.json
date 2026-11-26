@@ -1,0 +1,45 @@
+{
+  "scope": "Archive and source-text readback. Text matches are leads for human-readable provenance review and do not establish licensing authority.",
+  "expected_archive_sha256": "80b451146e7cdf45c3adada847d22dbe1dcaa8c192077cdf08b6d1fe323c6364",
+  "archives": [
+    {
+      "path": "products/distribution/sqlite-gumroad-fit/private-exercise/delivery/invoice-regression.zip.b64",
+      "sha256": "80b451146e7cdf45c3adada847d22dbe1dcaa8c192077cdf08b6d1fe323c6364",
+      "members": {
+        "invoice-regression.py": "c99719e32dc4d2b8b83375771447cff8452d3724720c6497628708b3f5287c13",
+        "invoice-fixtures.json": "e18ab2e03269ddf25ab7a1dcd0d6aece2e91c8afaa6c2c4b8a30d910d39ec24c"
+      },
+      "exact_members": true,
+      "crc_ok": true
+    }
+  ],
+  "text_matches": {
+    "products/distribution/sqlite-gumroad-fit/private-exercise/delivery/buyer-preview.json": [
+      "\"buyer_preview_en\": \"Run a local SQLite exercise with five fictional cases to check whether an invoice total counts each tagged invoice once. The plain join returns 200 where 100 is expected for a multiply tagged invoice. SUM(DISTINCT amount) returns 100 where 200 is expected for two equal-value inv"
+    ],
+    "products/distribution/sqlite-gumroad-fit/private-exercise/delivery/clean-extraction-usage.json": [
+      "\"stdout\": \"usage: invoice-regression.py [-h] {exists,join,distinct_amount}\\n\\nRun fictional invoice-total regression cases locally. Made by GlobalLand\\nautonomous AI agents.\\n\\npositional arguments:\\n  {exists,join,distinct_amount}\\n\\noptions:\\n  -h, --help            show this help message and exit"
+    ],
+    "products/distribution/sqlite-gumroad-fit/private-exercise/delivery/quickstart-en-fr.md": [
+      "Built by autonomous AI agents. The exercise uses five fictional datasets to show how joining invoices to tags can inflate totals and how summing distinct amounts can suppress separate invoices with the same amount. It runs locally and is intended for practice with SQLite queries."
+    ],
+    "products/distribution/sqlite-gumroad-fit/private-exercise/delivery/usage-draft-en-fr.md": [
+      "Extract both files into the same directory. Open a terminal there and run `python3 invoice-regression.py --help` for the available arguments. The exercise uses fictional invoice and tag records to check whether a query returns the expected total across five cases. It was created by autonomous AI age",
+      "autonomous AI agents."
+    ],
+    "products/distribution/sqlite-gumroad-fit/private-exercise/invoice-regression.py": [
+      "\"\"\"Run fictional invoice-total regression cases locally. Made by GlobalLand autonomous AI agents.\"\"\""
+    ]
+  },
+  "draft_sha256": "91dd1ad0ca31d98713545b788acd8618227f54f772794f510e5ea0b6dbc9c329",
+  "draft_matches_receipt": true,
+  "draft_scope_lines": [
+    "Observed 2026-11-26. BrainStation’s [Data Analytics curriculum](https://brainstation.io/course/online/data-analytics) includes “SQL for Data Analysis” and describes breakout sessions “as part of the hands-on projects in our online courses.” It lists MySQL in its toolkit. The SQLite lab is an optional local exercise on query logic, with MySQL compatibility untested. The [Contact Us page](https://brainstation.io/contact) lists the Toronto location and offers a form with a message field and terms a",
+    "Could you route this to the person who evaluates optional practice materials for Data Analytics? Your course includes hands-on SQL work. GlobalLand’s autonomous AI agents built a short offline SQLite lab where learners test three ways of totaling invoices with tags. A plain join doubles one invoice, SUM(DISTINCT amount) drops one of two equal-value invoices, and EXISTS passes all five fictional cases. It runs locally with Python and SQLite. Your curriculum lists MySQL, so this would be supplemen",
+    "If your team evaluates externally produced exercises, would you be open to reviewing a preview for a one-cohort pilot? We would propose CAD 120 for a nonexclusive license for one instructor-led cohort of up to 25 learners, with a bilingual quickstart and one consolidated clarification. No public redistribution or LMS integration is included. The price and scope are provisional.",
+    "Confirm the form’s current terms permit this inquiry, check authorized prior-contact records and use approved sender details. Record one send-or-decline decision for this exact text. Confirm rights for both archive members and the quickstart before offering a license. Use the exact tested archive SHA-256 80b451146e7cdf45c3adada847d22dbe1dcaa8c192077cdf08b6d1fe323c6364 and TASK-179569620200. Estimate 60–90 minutes total operator effort for review, routing, one clarification, delivery and collecti"
+  ],
+  "published_policy_links": [
+    "/terms-of-service"
+  ]
+}
