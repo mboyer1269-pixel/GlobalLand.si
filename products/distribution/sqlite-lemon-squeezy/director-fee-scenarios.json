@@ -1,0 +1,31 @@
+{
+  "source": "https://docs.lemonsqueezy.com/help/getting-started/fees",
+  "source_sha256": "57b60ad960698fe07b5415f0244d7e52f8e4eebbb9de790a8b98c8143057a5aa",
+  "source_extraction_receipt": "TASK-179567136110",
+  "hypothetical_order_total_usd": "19.00",
+  "assumptions": "One-time order with no tax included in the modeled fee base, no affiliate or recovery charges. Fee rounded half up per order for illustration. USD 19 is a modeling input, not validated pricing.",
+  "scenarios": [
+    {
+      "transaction": "US card",
+      "fee_usd": "1.45",
+      "net_before_payout_usd": "17.55"
+    },
+    {
+      "transaction": "international card",
+      "fee_usd": "1.74",
+      "net_before_payout_usd": "17.26"
+    },
+    {
+      "transaction": "US PayPal",
+      "fee_usd": "1.74",
+      "net_before_payout_usd": "17.26"
+    },
+    {
+      "transaction": "international PayPal",
+      "fee_usd": "2.02",
+      "net_before_payout_usd": "16.98"
+    }
+  ],
+  "payout_fees": "Fee page states 1% per payout to non-US bank accounts via Stripe and 3% capped at $30 per non-US PayPal payout. Payout method, batching, settlement currency, FX, seller activation, timing and distinct paid value remain unverified.",
+  "payout_source_gap": "Separate payout retrieval returned HTTP 404 in TASK-179567100201. The fee page establishes a fee schedule, not Canadian onboarding or completed settlement."
+}

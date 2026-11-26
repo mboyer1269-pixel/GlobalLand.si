@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source\": \"https://docs.lemonsqueezy.com/help/getting-started/fees\",\n  \"source_sha256\": \"57b60ad960698fe07b5415f0244d7e52f8e4eebbb9de790a8b98c8143057a5aa\",\n  \"source_extraction_receipt\": \"TASK-179567136110\",\n  \"hypothetical_order_total_usd\": \"19.00\",\n  \"assumptions\": \"One-time order with no tax included in the modeled fee base, no affiliate or recovery charges. Fee rounded half up per order for illustration. USD 19 is a modeling input, not validated pricing.\",\n  \"scenarios\": [\n    {\n      \"transaction\": \"US card\",\n      \"fee_usd\": \"1.45\",\n      \"net_before_payout_usd\": \"17.55\"\n    },\n    {\n      \"transaction\": \"international card\",\n      \"fee_usd\": \"1.74\",\n      \"net_before_payout_usd\": \"17.26\"\n    },\n    {\n      \"transaction\": \"US PayPal\",\n      \"fee_usd\": \"1.74\",\n      \"net_before_payout_usd\": \"17.26\"\n    },\n    {\n      \"transaction\": \"international PayPal\",\n      \"fee_usd\": \"2.02\",\n      \"net_before_payout_usd\": \"16.98\"\n    }\n  ],\n  \"payout_fees\": \"Fee page states 1% per payout to non-US bank accounts via Stripe and 3% capped at $30 per non-US PayPal payout. Payout method, batching, settlement currency, FX, seller activation, timing and distinct paid value remain unverified.\",\n  \"payout_source_gap\": \"Separate payout retrieval returned HTTP 404 in TASK-179567100201. The fee page establishes a fee schedule, not Canadian onboarding or completed settlement.\"\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-lemon-squeezy/director-fee-scenarios.json",
+    "products/receipts/TASK-179567136111.json"
+  ],
+  "request": {
+    "id": "TASK-179567136111",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T05:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json, hashlib\nfrom pathlib import Path\nfrom decimal import Decimal as D, ROUND_HALF_UP\np=Path('products/distribution/sqlite-lemon-squeezy/raw/fees.html')\ndigest=hashlib.sha256(p.read_bytes()).hexdigest()\nassert digest=='57b60ad960698fe07b5415f0244d7e52f8e4eebbb9de790a8b98c8143057a5aa'\ndef money(amount):\n    return amount.quantize(D('0.01'),rounding=ROUND_HALF_UP)\nprice=D('19')\nrows=[]\nfor label,add in [('US card','0'),('international card','0.015'),('US PayPal','0.015'),('international PayPal','0.03')]:\n    fee=money(D('0.50')+price*(D('0.05')+D(add)))\n    net=price-fee\n    rows.append(dict(transaction=label,fee_usd=str(fee),net_before_payout_usd=str(net)))\nassert [x['net_before_payout_usd'] for x in rows]==['17.55','17.26','17.26','16.98']\nresult=dict(source='https://docs.lemonsqueezy.com/help/getting-started/fees',source_sha256=digest,source_extraction_receipt='TASK-179567136110',hypothetical_order_total_usd='19.00',assumptions='One-time order with no tax included in the modeled fee base, no affiliate or recovery charges. Fee rounded half up per order for illustration. USD 19 is a modeling input, not validated pricing.',scenarios=rows,payout_fees='Fee page states 1% per payout to non-US bank accounts via Stripe and 3% capped at $30 per non-US PayPal payout. Payout method, batching, settlement currency, FX, seller activation, timing and distinct paid value remain unverified.',payout_source_gap='Separate payout retrieval returned HTTP 404 in TASK-179567100201. The fee page establishes a fee schedule, not Canadian onboarding or completed settlement.')\ndest=Path('products/distribution/sqlite-lemon-squeezy/director-fee-scenarios.json')\ndest.parent.mkdir(parents=True,exist_ok=True)\ndest.write_text(json.dumps(result,indent=2)+'\\n')\nprint(dest.read_text())"
+      ],
+      "inputs": [
+        "products/distribution/sqlite-lemon-squeezy/raw/fees.html"
+      ],
+      "outputs": [
+        "products/distribution/sqlite-lemon-squeezy/director-fee-scenarios.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795671361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179567136111",
+  "input_sha256": "b20507a5b3109ce674cfdb25e7f3ca69a914202912afaf3ed4ad882e3a778e3c"
+}
