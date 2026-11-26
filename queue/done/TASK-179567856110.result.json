@@ -1,0 +1,40 @@
+{
+  "status": "DONE",
+  "output": "{\"verified\": true, \"baseline_exit\": 0, \"negative_exit\": 1, \"failed\": [\"identifiers_preserved_sku_barcode_color_size_price\"]}\n\n",
+  "artifacts": [
+    "products/services/stream-commerce-catalogue/stream-barcode-evidence.json",
+    "products/receipts/TASK-179567856110.json"
+  ],
+  "request": {
+    "id": "TASK-179567856110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T07:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import csv,hashlib,json,subprocess,sys,tempfile\nfrom pathlib import Path\np,s,o=map(Path,sys.argv[1:])\ndraft=p/'operator-draft.md'\nbinding=json.loads((p/'decision-binding.json').read_text())\nfixtures=s/'fixtures'\nsource=fixtures/'after-shopify.csv'\ninputs=[s/'verify_example.py',s/'verify.py',fixtures/'before-variants.csv',fixtures/'before-images.csv',source,draft]\nhashes={str(x):hashlib.sha256(x.read_bytes()).hexdigest() for x in inputs}\nassert hashes[str(draft)]==binding['file_sha256']['operator-draft.md']\nbefore=b',SH100-BLA-40,2000000000015,'\nafter=b',SH100-BLA-40,2000000000091,'\nraw=source.read_bytes()\nassert raw.count(before)==1\ndef run(output):\n    argv=[sys.executable,str(inputs[0]),str(inputs[2]),str(inputs[3]),str(output)]\n    r=subprocess.run(argv,capture_output=True,text=True)\n    return dict(argv=argv,exit=r.returncode,report=json.loads(r.stdout),stderr=r.stderr)\nbaseline=run(source)\nwith tempfile.TemporaryDirectory() as d:\n    mutant=Path(d)/'barcode.csv'\n    mutant.write_bytes(raw.replace(before,after,1))\n    negative=run(mutant)\n    mutant_hash=hashlib.sha256(mutant.read_bytes()).hexdigest()\ncheck='identifiers_preserved_sku_barcode_color_size_price'\nverified=baseline['exit']==0 and baseline['report']['failed']==[] and negative['exit']==1 and negative['report']['failed']==[check]\nresult=dict(verified=verified,scope='Fictional offline fixtures',input_sha256=hashes,mutation={'SKU':'SH100-BLA-40','column':'Barcodes','before':'2000000000015','after':'2000000000091','sha256':mutant_hash},baseline=baseline,negative=negative,interpretation='The verifier reports a grouped failure. Identifying the affected field and row requires manual comparison.')\no.parent.mkdir(parents=True,exist_ok=True)\no.write_text(json.dumps(result,indent=2)+'\\n')\nprint(json.dumps(dict(verified=verified,baseline_exit=baseline['exit'],negative_exit=negative['exit'],failed=negative['report']['failed'])))",
+        "products/services/stream-commerce-catalogue/",
+        "products/sites/shopify-catalogue-example/",
+        "products/services/stream-commerce-catalogue/stream-barcode-evidence.json"
+      ],
+      "inputs": [
+        "products/services/stream-commerce-catalogue/operator-draft.md",
+        "products/services/stream-commerce-catalogue/decision-binding.json",
+        "products/sites/shopify-catalogue-example/verify_example.py",
+        "products/sites/shopify-catalogue-example/verify.py",
+        "products/sites/shopify-catalogue-example/fixtures/"
+      ],
+      "outputs": [
+        "products/services/stream-commerce-catalogue/stream-barcode-evidence.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795678561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179567856110",
+  "input_sha256": "96f334d0c004778f6061ae92042c7a3e6f2745d85845829abb8500f35df91442"
+}
