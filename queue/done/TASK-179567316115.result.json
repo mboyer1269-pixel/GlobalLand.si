@@ -1,0 +1,41 @@
+{
+  "status": "DONE",
+  "output": "{\n \"rows\": 12,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": []\n}\n \n\n",
+  "artifacts": [
+    "products/services/stream-commerce-catalogue/operator-draft.md",
+    "products/services/stream-commerce-catalogue/verification.json",
+    "products/receipts/TASK-179567316115.json"
+  ],
+  "request": {
+    "id": "TASK-179567316115",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T06:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,json,subprocess,sys\nfrom pathlib import Path\nout,site=map(Path,sys.argv[1:3]); inputs=['fixtures/before-variants.csv','fixtures/before-images.csv','fixtures/after-shopify.csv']; command=[sys.executable,'verify_example.py',*inputs]; run=subprocess.run(command,cwd=site,capture_output=True,text=True); print(run.stdout,run.stderr);run.check_returncode(); draft=out/'operator-draft.md';draft.write_text(sys.argv[3]); paths=[draft,*sorted((out/'raw').glob('*.html')),*(site/p for p in inputs+['verify_example.py','verify.py'])]; evidence={'scope':'Fictional fixture and first-party prospect captures.','source_receipts':['TASK-179567316110','TASK-179567316112','TASK-179567316113'],'command':command,'exit_code':run.returncode,'stdout':run.stdout,'sha256':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}};(out/'verification.json').write_text(json.dumps(evidence,indent=2)+'\\n')",
+        "products/services/stream-commerce-catalogue",
+        "products/sites/shopify-catalogue-example",
+        "# Stream Commerce | Unsent operator draft\n\nOn 2026-11-26 the agency's services page said it can “migrate from your current platform to Shopify Plus” and listed “content creation and migration, order and account migration, ERP integration”. Its homepage lists “Global Team in Toronto, Montreal, London.” The agency publishes hello@streamcommerce.com as a general business contact. An active need for subcontracted catalogue QA and the purchasing entity are unverified. The limited repository scan found no prior prospect mention. Check the authorized operator's prior-contact record before any send.\n\nProposed pilot fee CAD 60. Allow an estimated 75–105 minutes total for scope, comparison, reporting, one clarification and administration. Report discrepancies in identifiers and image-reference counts, with style-level duplicate-reference findings. Exclude attachments, photo inspection, URL checks, live import and production changes. Cash costs and taxes are unverified. Obtain authorization for this exact message and recipient, confirm buyer compatibility with administrative CAD Interac, and record any send, reply, order and settlement separately.\n\nSubject: Shopify Plus migration | CSV QA pilot / contrôle CSV\n\nBonjour équipe Stream Commerce,\n\nVotre page Services présente vos migrations vers Shopify Plus. Pour un projet où votre équipe prépare les lignes Shopify, un contrôle avant importation vous serait-il utile? Prix indicatif de 60 CAD pour comparer un lot anonymisé en texte brut comprenant jusqu’à 20 lignes de variantes, les références d’images et les lignes Shopify produites par votre équipe. Le rapport indique les écarts d’identifiants et de nombre de références d’images ainsi que les doublons de références par style. Des agents IA autonomes réalisent le travail, sans accès à la boutique ni import réel. Quel écart souhaiteriez-vous vérifier en premier?\n\nHello Stream Commerce team,\n\nYour Services page describes your Shopify Plus migrations. When your team prepares the Shopify rows, would a pre-import comparison help? I’m proposing a provisional CAD 60 pilot for an anonymized plain-text batch of up to 20 variant rows, the corresponding image references and the Shopify rows your team produced. The report flags identifier and image-reference count discrepancies and duplicate references by style. Autonomous AI agents produce the work without store access or a live import. Which discrepancy would you want checked first?\n"
+      ],
+      "inputs": [
+        "products/services/stream-commerce-catalogue/raw/",
+        "products/sites/shopify-catalogue-example/fixtures/",
+        "products/sites/shopify-catalogue-example/verify.py",
+        "products/sites/shopify-catalogue-example/verify_example.py"
+      ],
+      "outputs": [
+        "products/services/stream-commerce-catalogue/operator-draft.md",
+        "products/services/stream-commerce-catalogue/verification.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795673161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179567316115",
+  "input_sha256": "90c0c123ca5d58085666d47675c911bd22867e69c6139f40c24f42b8538771ba"
+}
