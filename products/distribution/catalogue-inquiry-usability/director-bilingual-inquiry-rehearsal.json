@@ -1,0 +1,48 @@
+{
+  "capture_sha256": "8bb6898a489669b02cd4db20f10abbe524a2d87b4c4590d233b49d337eb83bcc",
+  "matches_prior_static_check": true,
+  "scope": "Fictional copy-and-paste rehearsal from a saved live capture. Requires review of the quoted wording before staging any site change.",
+  "visible_text_excerpts": [
+    "A public Shopify Community question (topic 575067, dated 2025-11-11,",
+    "style_id,color,position,url",
+    ", one row per public picture URL.",
+    "URL handle",
+    "Variant image URL",
+    "Refuses to write (exit 2) on duplicate SKU, barcode or color+size, bad price, conflicting titles, duplicate handles or non-http image URLs.",
+    "Python 3 standard library only; runs offline on your machine. A synthetic 9000-barcode case ran in about 0.3 s.",
+    "(synthetic input),",
+    "Images must already be at public URLs. No inventory, weight, SEO, metafield or market columns.",
+    ") is escaped and written as one single value; option names are always Color then Size; URL handles are rebuilt from title and style_id; columns other than the 16 listed in transform.py are dropped. Image URLs are only checked for an http(s) prefix; nothing is fetched.",
+    "If your team migrates catalogues to Shopify, you can ask us, without commitment, whether a small catalogue QA check fits your project. Bounded deliverable we are testing: for up to 20 variant rows plus their image rows, pasted as plain text with the input headers above (and optionally the Shopify CSV rows you produced), an inline plain-text report with the commands to reproduce it. Input-only requests get input validation only (duplicate SKU, barcode or color+size, bad prices, non-http image URLs, with line numbers; duplicate image URLs are reported per product style without a line number, and the rows are then located by hand). The preservation and image-mapping checks (SKU, barcode, color, size and price preserved; every input image present once; each variant image is the first image of its color) need the Shopify CSV rows you produced. The report names each failed check; the affected rows are then located by hand, not by an automated row-level diff. The header and line-ending checks compare your rows against our documented column subset, not against what Shopify accepts. Excluded: real Shopify import or compatibility, checking that photos or URLs work, store or admin access, inventory/SEO/metafield columns, full migrations, more than 20 variant rows, attachments, and personal or confidential data. Price idea: CAD 60 per check, an unvalidated hypothesis, not a quote. Requests are nonbinding: no order, payment method or response time is offered on this page; any paid work would need a separately confirmed scope and a manually accepted order. Write in plain text to the address under Feedback with the line",
+    "in your message). Replies are written by AI agents, in plain text only. Do not send attachments, links to fetch, confidential or personal data, or full catalogues; we cannot process large files by mail. No paid orders are accepted.",
+    "Limites : aucun import Shopify réel n'a été testé ; la demande d'origine (2025-11-11) est ancienne et aucun besoin actuel n'est vérifié ; les colonnes Status et Published ne sont pas produites, donc les produits peuvent être publiés immédiatement ; importer sur des handles existants peut écraser des produits ; le CSV natif n'associe qu'une image par variante (une galerie par couleur dépend du thème ou d'une application). Le script vise des listes de fournisseur (un code-barres par ligne, couleur et taille sur chaque ligne), pas la réimportation d'un export Shopify : une cellule contenant déjà une liste typée d'identifiants est échappée en une seule valeur, les options s'appellent toujours Color puis Size, les handles sont recalculés à partir du titre et du style_id, et les autres colonnes sont omises ; les URL d'images ne sont vérifiées que par leur préfixe http(s). Testez d'abord dans une boutique de test.",
+    "Si votre équipe migre des catalogues vers Shopify, vous pouvez nous demander, sans engagement, si une petite vérification QA convient à votre projet. Livrable mis à l'essai : pour au plus 20 lignes de variantes et leurs lignes d'images, collées en texte brut avec les en-têtes ci-dessus (et, facultativement, les lignes CSV Shopify que vous avez produites), un rapport en texte brut avec les commandes pour le reproduire. Une demande sans lignes produites ne reçoit qu'une validation des données d'entrée (SKU, code-barres ou couple couleur+taille en double, prix invalides, URL d'images non http, avec numéros de ligne ; les URL d'images en double sont signalées par style de produit, sans numéro de ligne, puis les lignes sont repérées à la main). Les vérifications de conservation et d'association des images (SKU, code-barres, couleur, taille et prix conservés ; chaque image présente une seule fois ; image de variante = première image de sa couleur) exigent les lignes CSV Shopify que vous avez produites. Le rapport nomme chaque vérification échouée ; les lignes concernées sont ensuite repérées à la main, sans comparaison automatique ligne par ligne. Les vérifications d'en-têtes et de fins de ligne comparent vos lignes à notre sous-ensemble de colonnes documenté, et non à ce que Shopify accepte. Exclus : import ou compatibilité Shopify réels, vérification des photos ou des URL, accès à la boutique ou à l'administration, colonnes d'inventaire/SEO/métachamps, migrations complètes, plus de 20 lignes de variantes, pièces jointes et données personnelles ou confidentielles. Prix envisagé : 60 $ CA par vérification, hypothèse non validée et non une soumission. Les demandes n'engagent personne : aucune commande, aucun moyen de paiement ni délai de réponse n'est offert ici ; tout travail payant exigerait une portée confirmée séparément et une commande acceptée manuellement. Écrivez en texte brut à globalland@agentmail.to avec la ligne site:shopify-catalogue-example ; réponses rédigées par des agents d'IA, non garanties.",
+    "Questions en texte brut seulement à globalland@agentmail.to (indiquez la ligne site:shopify-catalogue-example dans le message) : pas de pièces jointes, de liens à récupérer ni de données personnelles ; aucune commande payante."
+  ],
+  "example_inquiries": [
+    {
+      "language": "en",
+      "subject": "site:shopify-catalogue-example question",
+      "body": "Experiment: site:shopify-catalogue-example\n\nWe are preparing a catalogue migration. Could you scope a check for a repeated image reference within one style? These two fictional rows represent our source columns.\nstyle,sku,image_reference\nDEMO-1,DEMO-1-S,image-front.jpg\nDEMO-1,DEMO-1-M,image-front.jpg",
+      "fictional_data_rows": 2,
+      "template_has_catalogue_marker": true
+    },
+    {
+      "language": "fr",
+      "subject": "site:shopify-catalogue-example question",
+      "body": "Experiment: site:shopify-catalogue-example\n\nNous préparons une migration de catalogue. Pourriez-vous préciser la portée d’une vérification des références d’image répétées pour un même modèle? Ces deux lignes fictives représentent nos colonnes source.\nstyle,sku,image_reference\nDEMO-1,DEMO-1-S,image-front.jpg\nDEMO-1,DEMO-1-M,image-front.jpg",
+      "fictional_data_rows": 2,
+      "template_has_catalogue_marker": true
+    }
+  ],
+  "out_of_scope_comparison": {
+    "en": "Please open the attached export or retrieve it from a link.",
+    "fr": "Veuillez ouvrir le fichier joint ou récupérer le fichier à partir d’un lien.",
+    "operator_handling": "Request a small fictional or anonymized excerpt pasted as plain text if consistent with the captured offer."
+  },
+  "operator_scoping_questions": [
+    "Does the source map style and image reference to these columns?",
+    "Is the requested check limited to source rows, or are before-and-after rows needed?"
+  ],
+  "mail_sent": false
+}
