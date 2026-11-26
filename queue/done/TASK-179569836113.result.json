@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "Contact Us | BrainStation®\n{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"item\":{\"@type\":\"Thing\",\"@id\":\"https://brainstation.io\",\"name\":\"BrainStation Home\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"https://brainstation.io/contact\",\"name\":\"Contact Us\"}}]}\na {'href': '/contact'}\na {'href': '/contact'}\na {'href': '/contact'}\na {'href': '/contact'}\nContact Us\nform {}\nselect {'name': 'phoneCountry'}\ntextarea {'id': 'hero-message', 'name': 'message'}\nBy clicking “Submit”, you confirm that you accept our\nSubmit\nOur spaces in New York, London and Toronto host client training, AI strategy sessions and our industry events. Visit us or book a session for your team.\na {'href': '/contact'}\nContact Us\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179569836113.json"
+  ],
+  "request": {
+    "id": "TASK-179569836113",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T13:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nclass Page(HTMLParser):\n def handle_starttag(self,t,a):\n  d=dict(a)\n  if t in ('form','select','textarea') or t=='a' and any(k in d.get('href','').lower() for k in ('contact','enterprise','team','partner','mailto','tel:')): print(t, {k:v for k,v in a if k in ('href','action','name','id')})\n def handle_data(self,d):\n  if any(k in d.lower() for k in ('get in touch','book a','how can','submit','inquir','contact us')) and len(d)<500: print(d.strip())\nPage().feed(Path('products/services/sqlite-training-buyer/raw/contact.html').read_text())"
+      ],
+      "inputs": [
+        "products/services/sqlite-training-buyer/raw/contact.html"
+      ],
+      "outputs": [],
+      "mission_id": "SQLITE-REGRESSION-TRAINING-BUYER-20261126"
+    },
+    "description": "Broker action during THINK-1795698361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179569836113",
+  "input_sha256": "15a1e78d368d08f610ae98b102a9867cd55713dfb7ef18b1b32b86c3a886e59c"
+}
