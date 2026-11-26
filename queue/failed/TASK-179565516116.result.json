@@ -1,0 +1,27 @@
+{
+  "status": "FAILED",
+  "output": "Process failed: 1\nstderr:\nTraceback (most recent call last):\n  File \"<string>\", line 2, in <module>\nModuleNotFoundError: No module named 'bs4'\n\nstdout:\n",
+  "request": {
+    "id": "TASK-179565516116",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T01:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfrom bs4 import BeautifulSoup\nimport re\np=Path('products/services/honeybadger-paid-writing/raw/official-blog-write-for-us.html'); s=BeautifulSoup(p.read_bytes(),'html.parser'); n=s.find('article') or s.find('main') or s\nfor e in n.find_all(['h1','h2','h3','p','li']):\n t=' '.join(e.stripped_strings)\n if t and len(t)<1200 and re.search(r'pay|writ|pitch|author|\\bAI\\b|generat|guideline|submit|accept|closed',t,re.I): print(t)"
+      ],
+      "inputs": [
+        "products/services/honeybadger-paid-writing/raw/official-blog-write-for-us.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795655161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179565516116",
+  "input_sha256": "782a1c0f805e9527e167ba73f9c3ee43ce9f98b4961f1939d9dfbe490dce61dd"
+}
