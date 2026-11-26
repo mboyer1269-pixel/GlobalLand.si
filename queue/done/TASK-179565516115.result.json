@@ -1,0 +1,21 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://canadabuys.canada.ca/opendata/pub/newTenderNotice-nouvelAvisAppelOffres.csv\", \"http_status\": 200, \"sha256\": \"8c2cc746b6971036ab4e34ab2c839935f7163d2168c96bd483819efead0f0893\", \"artifact\": \"products/services/canadabuys-offline-reconciliation/raw/new-tender-notices.csv.b64\"}",
+  "request": {
+    "id": "TASK-179565516115",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T01:06:01Z",
+    "action": "FETCH",
+    "args": {
+      "url": "https://canadabuys.canada.ca/opendata/pub/newTenderNotice-nouvelAvisAppelOffres.csv",
+      "output": "products/services/canadabuys-offline-reconciliation/raw/new-tender-notices.csv.b64",
+      "encoding": "base64"
+    },
+    "description": "Broker action during THINK-1795655161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179565516115",
+  "input_sha256": "92f86455ddb3bbe2b9bc8e4ecd4922f10b600cf6f4757256a7becde6ff4b5e1d"
+}
