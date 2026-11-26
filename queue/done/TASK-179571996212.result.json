@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\"source\": \"https://www.zoho.com/affiliate/\", \"source_sha256\": \"060113c16960955f5d235f4b2b145b702f9b407f4348afdbeb67155031472885\", \"quoted_public_faq\": [\"For each qualified sale that you generate, you can earn 15% of the revenue Zoho receives from the sale in the subsequent 12 months, provided the referral stays with Zoho for at least 60 days. You will not be eligible to receive a commission for any subsequent purchases of other Zoho services the customer makes.\", \"If the unpaid commissions reflected in your account equals or exceeds $100 you can request a payout. Once you initiate the payment, it takes 15 days to reflect in your bank account.\", \"What happens when my referral signs up from a different data center?\", \"Affiliate payouts are decided by the customer's mode of payment. For example, if an affiliate is from Europe and their referred customer makes a purchase using US dollars, then the affiliate will automatically receive their incentive in US dollars.\"], \"illustration\": {\"basis\": \"Single currency bucket, before any rounding per sale, fees or FX. Hypothetical qualified settled product spend, assuming terms apply.\", \"minimum_aggregate_qualified_spend_rounded_up_to_cent\": \"666.67\", \"sales_at_100_each\": 7, \"gross_commission_from_seven_at_100\": \"105.00\"}, \"unverified\": [\"Zoho Books eligibility\", \"Canadian payee onboarding and payout\", \"Currency denomination and whether balances are combined across currencies\", \"Commission rounding, fees and FX\", \"Publisher and disclosure eligibility\", \"Traffic and conversion\"]}\n\n",
+  "artifacts": [
+    "products/distribution/invoice-referral-fit/director-payout-threshold.json",
+    "products/receipts/TASK-179571996212.json"
+  ],
+  "request": {
+    "id": "TASK-179571996212",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T19:06:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfrom html.parser import HTMLParser\nfrom hashlib import sha256\nfrom decimal import Decimal, ROUND_UP\nimport json\nclass Visible(HTMLParser):\n hidden=0\n items=[]\n def handle_starttag(self,tag,attrs):\n  if tag in ('script','style'): self.hidden+=1\n def handle_endtag(self,tag):\n  if tag in ('script','style'): self.hidden=max(0,self.hidden-1)\n def handle_data(self,s):\n  if not self.hidden: self.items.append(' '.join(s.split()))\nroot=Path('products/distribution/invoice-referral-fit')\nraw=(root/'raw/zoho.html').read_bytes()\ndigest=sha256(raw).hexdigest()\nassert digest=='060113c16960955f5d235f4b2b145b702f9b407f4348afdbeb67155031472885'\np=Visible()\np.feed(raw.decode())\nterms=[next(s for s in p.items if q in s) for q in ('earn 15% of the revenue','equals or exceeds $100','different data center','Affiliate payouts are decided')]\nrate=Decimal('0.15')\nthreshold=Decimal('100')\nresult={'source':'https://www.zoho.com/affiliate/','source_sha256':digest,'quoted_public_faq':terms,'illustration':{'basis':'Single currency bucket, before any rounding per sale, fees or FX. Hypothetical qualified settled product spend, assuming terms apply.','minimum_aggregate_qualified_spend_rounded_up_to_cent':str((threshold/rate).quantize(Decimal('0.01'),rounding=ROUND_UP)),'sales_at_100_each':7,'gross_commission_from_seven_at_100':str(7*100*rate)},'unverified':['Zoho Books eligibility','Canadian payee onboarding and payout','Currency denomination and whether balances are combined across currencies','Commission rounding, fees and FX','Publisher and disclosure eligibility','Traffic and conversion']}\nout=root/'director-payout-threshold.json'\nout.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\\n')\nassert json.loads(out.read_text())==result\nprint(json.dumps(result,ensure_ascii=False))"
+      ],
+      "inputs": [
+        "products/distribution/invoice-referral-fit/raw/zoho.html"
+      ],
+      "outputs": [
+        "products/distribution/invoice-referral-fit/director-payout-threshold.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795719962",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179571996212",
+  "input_sha256": "497d46dd27a6ccac3f5f535da8f99ac45acc25ac8fec2dffd7adb96d554f5ccd"
+}
