@@ -1,0 +1,33 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"sha256\": \"3d6a49b16ce32e06f1904ff3b29ba6df465cfe2252d3e81d58aafd9f4ae2d7af\",\n  \"urls_read\": 788,\n  \"matching_pointers\": [\n    \"https://www.honeybadger.io/blog/write-for-us/\"\n  ],\n  \"match_count\": 1,\n  \"scope\": \"Sitemap paths only. Absence of matching paths leaves current paid intake unknown.\"\n}\n\n",
+  "artifacts": [
+    "products/services/honeybadger-paid-writing/director-child-sitemap-screen.json",
+    "products/receipts/TASK-179565516112.json"
+  ],
+  "request": {
+    "id": "TASK-179565516112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T01:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport json, re, hashlib, xml.etree.ElementTree as ET\nfrom urllib.parse import urlsplit\np=Path('products/services/honeybadger-paid-writing/raw/official-sitemap-0.xml'); data=p.read_bytes()\nurls=[e.text.strip() for e in ET.fromstring(data).iter() if e.tag.rsplit('}',1)[-1]=='loc' and e.text]\nlinks=[u for u in urls if re.search(r'write[-_]?for|guest[-_]?post|contribut|paid[-_]?writ|author[-_]?guid|editorial',urlsplit(u).path,re.I)]\nr={'sha256':hashlib.sha256(data).hexdigest(),'urls_read':len(urls),'matching_pointers':links[:40],'match_count':len(links),'scope':'Sitemap paths only. Absence of matching paths leaves current paid intake unknown.'}\no=p.parent.parent/'director-child-sitemap-screen.json';o.write_text(json.dumps(r,indent=2));print(o.read_text())"
+      ],
+      "inputs": [
+        "products/services/honeybadger-paid-writing/raw/official-sitemap-0.xml"
+      ],
+      "outputs": [
+        "products/services/honeybadger-paid-writing/director-child-sitemap-screen.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795655161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179565516112",
+  "input_sha256": "2d6f894122882d1d3eaf1d1f5bc7dbaea915db5d17f8efdc31224c618c528422"
+}
