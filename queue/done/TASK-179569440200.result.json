@@ -1,0 +1,11 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"status\": \"PRIVATE_DELIVERY_CANDIDATE\",\n  \"archive_sha256\": \"80b451146e7cdf45c3adada847d22dbe1dcaa8c192077cdf08b6d1fe323c6364\",\n  \"files\": {\n    \"invoice-regression.py\": \"c99719e32dc4d2b8b83375771447cff8452d3724720c6497628708b3f5287c13\",\n    \"invoice-fixtures.json\": \"e18ab2e03269ddf25ab7a1dcd0d6aece2e91c8afaa6c2c4b8a30d910d39ec24c\"\n  },\n  \"prior_behavior_verification_sha256\": \"0ac1b202cf0be88cfb1d0ed3524369adffd358f6c2fe5e277d2042f0701ae4ae\",\n  \"checks\": [\n    \"archive CRC\",\n    \"exact two-member inventory\",\n    \"source byte equality\",\n    \"clean extraction\",\n    \"Python compilation\",\n    \"fixture JSON parsing\",\n    \"base64 round trip\"\n  ],\n  \"remaining_before_handoff\": [\n    \"Confirm usage instructions and terms for the exact package.\",\n    \"Verify marketplace product and Canadian payout eligibility before proposing activation.\"\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-gumroad-fit/private-exercise/delivery/invoice-regression.zip.b64",
+    "products/distribution/sqlite-gumroad-fit/private-exercise/delivery/archive-verification.json",
+    "products/receipts/TASK-179569440200.json"
+  ],
+  "id": "TASK-179569440200",
+  "input_sha256": "86edc89b1da4cbae53b7747c4a7e22e6ab595be984e1dfb5b33d55252a0daec0"
+}
