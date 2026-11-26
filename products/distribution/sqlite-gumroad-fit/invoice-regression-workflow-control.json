@@ -1,0 +1,150 @@
+{
+  "sqlite_version": "3.40.1",
+  "queries": {
+    "join": "SELECT COALESCE(SUM(i.amount),0) FROM invoice i JOIN tag t ON t.invoice_id=i.id",
+    "distinct_amount": "SELECT COALESCE(SUM(DISTINCT i.amount),0) FROM invoice i JOIN tag t ON t.invoice_id=i.id",
+    "exists": "SELECT COALESCE(SUM(i.amount),0) FROM invoice i WHERE EXISTS (SELECT 1 FROM tag t WHERE t.invoice_id=i.id)"
+  },
+  "results": [
+    {
+      "case": "single_invoice",
+      "invoices": [
+        [
+          1,
+          100
+        ]
+      ],
+      "tags": [
+        [
+          1
+        ]
+      ],
+      "expected": 100,
+      "actual": {
+        "join": 100,
+        "distinct_amount": 100,
+        "exists": 100
+      },
+      "passing_queries": [
+        "join",
+        "distinct_amount",
+        "exists"
+      ]
+    },
+    {
+      "case": "multiple_tags",
+      "invoices": [
+        [
+          1,
+          100
+        ]
+      ],
+      "tags": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": 100,
+      "actual": {
+        "join": 200,
+        "distinct_amount": 100,
+        "exists": 100
+      },
+      "passing_queries": [
+        "distinct_amount",
+        "exists"
+      ]
+    },
+    {
+      "case": "equal_invoice_amounts",
+      "invoices": [
+        [
+          1,
+          100
+        ],
+        [
+          2,
+          100
+        ]
+      ],
+      "tags": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": 200,
+      "actual": {
+        "join": 200,
+        "distinct_amount": 100,
+        "exists": 200
+      },
+      "passing_queries": [
+        "join",
+        "exists"
+      ]
+    },
+    {
+      "case": "untagged_invoice",
+      "invoices": [
+        [
+          1,
+          100
+        ],
+        [
+          2,
+          50
+        ]
+      ],
+      "tags": [
+        [
+          1
+        ]
+      ],
+      "expected": 100,
+      "actual": {
+        "join": 100,
+        "distinct_amount": 100,
+        "exists": 100
+      },
+      "passing_queries": [
+        "join",
+        "distinct_amount",
+        "exists"
+      ]
+    },
+    {
+      "case": "empty_selection",
+      "invoices": [
+        [
+          1,
+          100
+        ]
+      ],
+      "tags": [],
+      "expected": 0,
+      "actual": {
+        "join": 0,
+        "distinct_amount": 0,
+        "exists": 0
+      },
+      "passing_queries": [
+        "join",
+        "distinct_amount",
+        "exists"
+      ]
+    }
+  ],
+  "local_candidate_inventory": [
+    "README.md",
+    "diagnose.py",
+    "example-case.json"
+  ],
+  "finding": "The single baseline passes all three queries. Two additional fixtures distinguish both flawed queries from the one that passes the whole suite.",
+  "commercial_limit": "Fictional in-memory run using Python sqlite3. This tests the value of a regression exercise. Compare it against the actual released free package before claiming a distinct paid benefit. No buyer, sale or payout observed."
+}
