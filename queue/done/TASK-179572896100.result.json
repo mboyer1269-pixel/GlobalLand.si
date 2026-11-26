@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"sources\": [\n    {\n      \"url\": \"https://www.liveca.ca/\",\n      \"sha256\": \"a53ac266f23eb5c53c3b68480f41ccb2e11d00229af6f2dc4a10af9617477fbb\",\n      \"literal_matches\": [\n        \"bookkeeping\",\n        \"accounts payable\"\n      ]\n    },\n    {\n      \"url\": \"https://www.liveca.ca/contact\",\n      \"sha256\": \"0d557c5233ef74b919a232fa5b6743358e86958391cf0dd120ce3a929654d8aa\",\n      \"literal_matches\": [\n        \"What services interest you?\",\n        \"Current Accounting System?\"\n      ]\n    }\n  ],\n  \"workflow\": \"LiveCA advertises bookkeeping and accounts payable services.\",\n  \"route_observation\": \"The reviewed contact form asks prospective clients to specify the services they want and their accounting system.\",\n  \"disposition\": \"Hold this route. The reviewed sources do not establish that the form accepts supplier inquiries.\",\n  \"reconsider_when\": \"LiveCA publishes a vendor contact route or explicitly states that the existing form accepts supplier inquiries.\",\n  \"commercial_effect\": \"No inquiry sent. Buying interest, acceptance and settlement remain unverified.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/liveca-invoice-pilot/route-disposition.json",
+    "products/receipts/TASK-179572896100.json"
+  ],
+  "id": "TASK-179572896100",
+  "input_sha256": "710b6a677f4bcaf3aa43e26c520aa290b241233405ffe6e26bc3c6ddf2010e16"
+}

@@ -1,0 +1,25 @@
+{
+  "sources": [
+    {
+      "url": "https://www.liveca.ca/",
+      "sha256": "a53ac266f23eb5c53c3b68480f41ccb2e11d00229af6f2dc4a10af9617477fbb",
+      "literal_matches": [
+        "bookkeeping",
+        "accounts payable"
+      ]
+    },
+    {
+      "url": "https://www.liveca.ca/contact",
+      "sha256": "0d557c5233ef74b919a232fa5b6743358e86958391cf0dd120ce3a929654d8aa",
+      "literal_matches": [
+        "What services interest you?",
+        "Current Accounting System?"
+      ]
+    }
+  ],
+  "workflow": "LiveCA advertises bookkeeping and accounts payable services.",
+  "route_observation": "The reviewed contact form asks prospective clients to specify the services they want and their accounting system.",
+  "disposition": "Hold this route. The reviewed sources do not establish that the form accepts supplier inquiries.",
+  "reconsider_when": "LiveCA publishes a vendor contact route or explicitly states that the existing form accepts supplier inquiries.",
+  "commercial_effect": "No inquiry sent. Buying interest, acceptance and settlement remain unverified."
+}
