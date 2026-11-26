@@ -1,0 +1,49 @@
+{
+  "scope": "Repository local-download directory. Confirm against the served release before making listing claims.",
+  "files": [
+    {
+      "path": "products/sites/sqlite-statement-diagnostic/local/README.md",
+      "sha256": "53a82b11a58ddbe6b022817d82e28458f2f4fbcb1f0bc1ac72922be1fc14183c",
+      "invoice_tag_signals": {
+        "sum(distinct": false,
+        "invoice_id": false,
+        "coalesce(sum": false,
+        "equal_invoice_amounts": false
+      }
+    },
+    {
+      "path": "products/sites/sqlite-statement-diagnostic/local/diagnose.py",
+      "sha256": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+      "invoice_tag_signals": {
+        "sum(distinct": false,
+        "invoice_id": false,
+        "coalesce(sum": false,
+        "equal_invoice_amounts": false
+      }
+    },
+    {
+      "path": "products/sites/sqlite-statement-diagnostic/local/example-case.json",
+      "sha256": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f",
+      "invoice_tag_signals": {
+        "sum(distinct": false,
+        "invoice_id": false,
+        "coalesce(sum": false,
+        "equal_invoice_amounts": false
+      }
+    }
+  ],
+  "control_available": true,
+  "coverage": "available",
+  "executed_control_sha256": "24d3455afc12ffab2e3d3156b222f26f78eec63118c2ac7cebff715f4e8906c4",
+  "queries_passing_every_recorded_case": [
+    "exists"
+  ],
+  "recorded_case_names": [
+    "single_invoice",
+    "multiple_tags",
+    "equal_invoice_amounts",
+    "untagged_invoice",
+    "empty_selection"
+  ],
+  "interpretation": "Marker matches are navigation evidence. Inspect matching material and verify the exact live inventory before deciding whether the candidate adds a distinct runnable exercise."
+}
