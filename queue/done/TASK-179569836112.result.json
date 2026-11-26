@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "contact.html\nToronto Events\nAI Events in Toronto\nProduct Management Events in Toronto\nDesign Events in Toronto\nMarketing Events in Toronto\nToronto\nOur spaces in New York, London and Toronto host client training, AI strategy sessions and our industry events. Visit us or book a session for your team.\nLocated at The Well, BrainStation Toronto is anchored in the city's premier tech and lifestyle hub alongside leading global companies and world-class dining. Near Union Station and the King/Spadina transit lines, our space is easily accessible for those in the downtown core and beyond.\nBrainStation Toronto\n482 Front St W, 2nd Floor, Toronto, ON M5V 0W1, Canada\nEvents in Toronto\nLearn SQL\ncurriculum.html\nToronto Events\nAI Events in Toronto\nProduct Management Events in Toronto\nDesign Events in Toronto\nMarketing Events in Toronto\nToronto\nEquip your teams to turn data into decisions faster with AI. Go from foundational data analysis and Excel to SQL and interactive Tableau dashboards, while gaining hands-on data cleaning, querying, and data storytelling skills taught by leading data practitioners.\nGain essential Data Analyst skills with hands-on instruction from industry leaders working at the best global tech companies like Amazon, Meta, and Microsoft.\nStructured Query Language (SQL)\nReceive hands-on training from data analytics leaders working at companies like Amazon, Meta, and Microsoft.\nSQL Queries\nSQL for Data Analysis\nExplore the foundations of programming languages and learn Structured Query Language (SQL): the best programming language for data analysis, utilizing AI assistants for queries and syntax optimization.\nExplore how AI tools can support workflows and advanced analytics. Use natural language prompts to accelerate SQL query generation, summarize findings, uncover patterns, and augment analysis across complex datasets.\nJoin breakout room sessions in smaller teams as part of the hands-on projects in our online courses, where you will collaborate and learn together.\nDatabases & SQL\nYou will get hands-on experience with the core data analytics toolkit, including Microsoft Excel, MySQL, and Tableau, and use AI tools like Claude to accelerate data cleaning, query writing, and reporting. You will also use creative tools like Canva to present your findings.\nYes. AI is an accelerator, not a replacement for analytical skill. You will learn the core data analytics fundamentals in depth: data collection and cleaning, SQL and databases, data visualization, and data storytelling. AI is woven throughout to help you work faster and focus on insight, but the foundational skills remain the core of the course.\nThe course is a part-time, 8-week program designed for working professionals. It requires 3 hours of live instruction per week, which you will attend in person at one of our locations in either New York, Toronto, or London, or entirely live online. Students typically spend an additional 2 to 4 hours per week applying what they've learned to their hands-on data analysis project.\nAbsolutely. Because this course builds practical, in-demand data and AI skills, it qualifies for most corporate Learning & Development budgets. We provide an Employer Sponsorship Package complete with a syllabus breakdown and an expense justification letter to help you pitch the ROI of this course to your manager.\nBrainStation certified professionals. At our New York, Toronto, and London locations, you'll have access to networking mixers, industry panel events, and collaborative workspaces, and all learners gain access to our community Slack, where you can connect with peers and instructors and stay in touch after the course ends.\nDon't worry: flexibility is built into the program. If you need to miss a session, our team will help make sure you're able to catch up with your cohort. Sessions are live, interactive, and hands-on, so it's important to make class attendance a priority.\nEvents in Toronto\nLearn SQL\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179569836112.json"
+  ],
+  "request": {
+    "id": "TASK-179569836112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T13:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nimport re\nclass Page(HTMLParser):\n def __init__(self): super().__init__(); self.skip=False; self.parts=[]\n def handle_starttag(self,t,a):\n  if t in ('style','script'): self.skip=True\n  if t=='a':\n   u=dict(a).get('href','')\n   if u.startswith('mailto:'): self.parts.append(u)\n def handle_endtag(self,t):\n  if t in ('style','script'): self.skip=False\n def handle_data(self,d):\n  if not self.skip and d.strip(): self.parts.append(' '.join(d.split()))\nfor p in sorted(Path('products/services/sqlite-training-buyer/raw/').glob('*.html')):\n parser=Page(); parser.feed(p.read_text()); print(p.name)\n for s in dict.fromkeys(parser.parts):\n  if re.search(r'\\bSQL\\b|partner|compound|mailto:|Toronto|corporate|hands.on',s,re.I): print(s[:480])\n"
+      ],
+      "inputs": [
+        "products/services/sqlite-training-buyer/raw/"
+      ],
+      "outputs": [],
+      "mission_id": "SQLITE-REGRESSION-TRAINING-BUYER-20261126"
+    },
+    "description": "Broker action during THINK-1795698361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179569836112",
+  "input_sha256": "338d6edf300fc802332a4ebc86ae0a27e96eb52bc9fef73ae8f69a8ad0e00d1a"
+}
