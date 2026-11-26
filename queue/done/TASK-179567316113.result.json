@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "As a full-service e-commerce growth consultancy, we design, develop and market responsive e-commerce stores on the Shopify Plus platform. Our build capabilities include Shopify POS, commerce technology, systems integration, app strategy, and the selection and implementation. We can also seamlessly migrate from your current platform to Shopify Plus for a smooth transition. We’re constantly learning and improving how we build with established and emerging technologies, so we can continue to provide innovative solutions.\nOur expertise consists of: custom Shopify store design and development, website re-platforming (i.e. from Magento, Wordpress, etc.), technical and user experience audits, user-focused e-commerce designs, front-end and back-end development projects, content creation and migration, order and account migration, ERP integration, team training or support, and more.\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179567316113.json"
+  ],
+  "request": {
+    "id": "TASK-179567316113",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T06:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nclass Scan(HTMLParser):\n def handle_data(self,data):\n  s=' '.join(data.split())\n  if len(s)<1400 and any(k in s.lower() for k in ('migrat','catalog','product data','re-platform','replatform')): print(s)\nScan().feed(Path('products/services/stream-commerce-catalogue/raw/services.html').read_text())\nfor root in ('products/services','products/distribution'):\n for p in Path(root).rglob('*'):\n  if p.is_file() and 'stream-commerce-catalogue' not in str(p) and p.suffix in ('.md','.json','.txt') and p.stat().st_size<200000:\n   s=p.read_text(errors='replace').lower()\n   if 'streamcommerce.com' in s or 'stream commerce' in s: print('PRIOR MENTION',p)"
+      ],
+      "inputs": [
+        "products/services/",
+        "products/distribution/"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795673161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179567316113",
+  "input_sha256": "c30e48e860aa910d9e5e598370ac00bc5096517a7e46abe4244e206212887f0a"
+}
