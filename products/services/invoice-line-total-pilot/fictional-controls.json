@@ -1,0 +1,38 @@
+{
+  "provenance": "Fictional controls generated and checked offline",
+  "currency": "CAD",
+  "scope": "Sum line amounts supplied to two decimals and compare with the declared pre-tax subtotal for the same invoice",
+  "excluded": [
+    "tax",
+    "discount allocation",
+    "quantity-times-rate verification",
+    "foreign exchange",
+    "import validation"
+  ],
+  "results": [
+    {
+      "case": "matching",
+      "line_amounts": [
+        "19.95",
+        "10.05",
+        "19.95"
+      ],
+      "computed_subtotal": "49.95",
+      "declared_subtotal": "49.95",
+      "declared_minus_computed": "0.00",
+      "verdict": "MATCH"
+    },
+    {
+      "case": "subtotal_mismatch",
+      "line_amounts": [
+        "19.95",
+        "10.05",
+        "19.95"
+      ],
+      "computed_subtotal": "49.95",
+      "declared_subtotal": "39.95",
+      "declared_minus_computed": "-10.00",
+      "verdict": "MISMATCH"
+    }
+  ]
+}

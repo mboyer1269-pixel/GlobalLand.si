@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"provenance\": \"Fictional controls generated and checked offline\",\n  \"currency\": \"CAD\",\n  \"scope\": \"Sum line amounts supplied to two decimals and compare with the declared pre-tax subtotal for the same invoice\",\n  \"excluded\": [\n    \"tax\",\n    \"discount allocation\",\n    \"quantity-times-rate verification\",\n    \"foreign exchange\",\n    \"import validation\"\n  ],\n  \"results\": [\n    {\n      \"case\": \"matching\",\n      \"line_amounts\": [\n        \"19.95\",\n        \"10.05\",\n        \"19.95\"\n      ],\n      \"computed_subtotal\": \"49.95\",\n      \"declared_subtotal\": \"49.95\",\n      \"declared_minus_computed\": \"0.00\",\n      \"verdict\": \"MATCH\"\n    },\n    {\n      \"case\": \"subtotal_mismatch\",\n      \"line_amounts\": [\n        \"19.95\",\n        \"10.05\",\n        \"19.95\"\n      ],\n      \"computed_subtotal\": \"49.95\",\n      \"declared_subtotal\": \"39.95\",\n      \"declared_minus_computed\": \"-10.00\",\n      \"verdict\": \"MISMATCH\"\n    }\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/services/invoice-line-total-pilot/fictional-controls.json",
+    "products/receipts/TASK-179572140101.json"
+  ],
+  "id": "TASK-179572140101",
+  "input_sha256": "45b2b6a6de0f59f5318b6daeebe061c196cc82001a3dc972e868120d858d7cca"
+}
