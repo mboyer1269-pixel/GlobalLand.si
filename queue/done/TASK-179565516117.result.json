@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "Write for us\nWrite for Honeybadger\nWhen you write for us you'll be paid well and more people will see your articles.\nWe are not currently seeking authors.\nDo you love to write in-depth blog posts, but hate promoting them?\nDo you wish you could spend more time writing, but stop yourself because it doesn't pay the bills?\nWe're looking for a few developers who'd like to write for us. We'll pay you well ($500/post), and we'll make sure your posts look good and reach the right audience.\nThis isn't some content-farm BS. We want to build long-term relationships with authors who care about their subject matter and their work.\nYou can't accept payment via PayPal\nYou aren't able to write independently, drawing from your own research and experience.\nWe would like to establish collaborative relationships with authors who love explaining how things work and who make complex topics graspable to beginners.\nA pattern we like to use to generate interesting topics is [big topic] for [platform] . Where:\nWe have a very developer-friendly process for writing.\nWe have good written documentation for each step: submitting a proposal, asking for review, etc.\nWe pay $500 per article, usually within a week of you approving our final edits.\nWe only pay via PayPal. We'll need to have your PayPal id on file before we accept any article proposals.\nA brief cover letter saying hello, and explaining the kind of things you'd like to write about.\nTwo articles about some aspect of application development you've written that you're proud of. Links to blog posts are ok.\nIs the author able to make complex things seem simple?\nDoes the writing style seem friendly? Like something I'd voluntarily spend my free time reading?\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179565516117.json"
+  ],
+  "request": {
+    "id": "TASK-179565516117",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T01:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport html,re,sys\ns=Path(sys.argv[1]).read_text(); m=re.search(r'<(?:article|main)\\b[^>]*>(.*?)</(?:article|main)>',s,re.S|re.I); s=m[1] if m else s\nfor t in re.findall(r'<(?:p|h[1-4]|li)\\b[^>]*>(.*?)</(?:p|h[1-4]|li)>',s,re.S|re.I):\n t=' '.join(html.unescape(re.sub(r'<[^>]*>',' ',t)).split());\n if re.search(r'pay|writ|pitch|author|\\bAI\\b|generat|guideline|submit|accept|closed',t,re.I): print(t[:600])",
+        "products/services/honeybadger-paid-writing/raw/official-blog-write-for-us.html"
+      ],
+      "inputs": [
+        "products/services/honeybadger-paid-writing/raw/official-blog-write-for-us.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795655161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179565516117",
+  "input_sha256": "3c50069b74b96f0736ec2051a62ab1780942e01c0512b25ba46426fce2726dfa"
+}
