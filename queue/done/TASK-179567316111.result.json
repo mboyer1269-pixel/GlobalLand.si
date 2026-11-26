@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "['/contact-us', 'https://streamcommerce.com/services', 'mailto:hello@streamcommerce.com']\n['A multi-brand e-commerce store that was designed, built and launched on Shopify Plus to offer North American users an all-new direct-to-consumer experience.', 'Global Team in Toronto, Montreal, London.', 'Join our Shopify Plus team and stand out in a cluttered agency landscape.', 'Our team of industry experts allows us to make informed and strategic decisions quickly. As the world changes, we listen, and we deliver world-class e-commerce websites on Shopify Plus.', 'The relaunch of a heritage Luxury British lifestyle brand that included a website redesign and re-platform to Shopify Plus. Increased functionality, speed, user experience and features complemented an overhauled ERP system and store growth.', '{ \"@context\": \"https://schema.org\", \"@type\": \"Organization\", \"address\": { \"@type\": \"PostalAddress\", \"addressLocality\": \"Toronto, Ontario, Canada\", \"postalCode\": \"L4K 5W1\", \"streetAddress\": \"140A Great Gulf Dr\" }, \"email\": \"hello@streamcommerce.com\", \"member\": [ { \"@type\": \"Organization\" } ], \"name\": \"Stream Commerce\", \"telephone\": \"\" }']\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179567316111.json"
+  ],
+  "request": {
+    "id": "TASK-179567316111",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T06:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nclass Scan(HTMLParser):\n def handle_starttag(self, tag, attrs):\n  href=dict(attrs).get('href','')\n  if tag=='a' and any(k in href.lower() for k in ('migrat','contact','service','mailto')): links.add(href)\n def handle_data(self, data):\n  s=' '.join(data.split())\n  if len(s)<1300 and any(k in s.lower() for k in ('migrat','toronto','catalog','shopify plus','product data')): lines.add(s)\nlinks=set();lines=set();Scan().feed(Path('products/services/stream-commerce-catalogue/raw/home.html').read_text());print(sorted(links)[:35]);print(sorted(lines)[:25])"
+      ],
+      "inputs": [
+        "products/services/stream-commerce-catalogue/raw/home.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795673161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179567316111",
+  "input_sha256": "e3ef8e41c3b967858cde82d42bb40f5958a41bad6d24b21009f88b6b706cd8f0"
+}
