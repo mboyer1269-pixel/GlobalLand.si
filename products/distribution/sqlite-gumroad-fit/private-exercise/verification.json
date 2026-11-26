@@ -1,0 +1,143 @@
+{
+  "free_download_hashes": {
+    "live-local-readme.md": "53a82b11a58ddbe6b022817d82e28458f2f4fbcb1f0bc1ac72922be1fc14183c",
+    "live-diagnose.py": "d141db09848dcea48449991a1c54b1bfdf9acee6069dc979e9bf4dabd95a56e7",
+    "live-example-case.json": "9b82f1e4721d5081336cba4918584eb2a6aa1d8d4d21c689d554e92c2548346f"
+  },
+  "free_baseline_exit": 0,
+  "free_case_id": "page-example",
+  "free_expected_rows": [
+    [
+      "1",
+      "a"
+    ],
+    [
+      "2",
+      "b"
+    ],
+    [
+      "3",
+      "c"
+    ]
+  ],
+  "exercise_runs": {
+    "join": {
+      "exit": 1,
+      "report": {
+        "sqlite_version": "3.40.1",
+        "query": "join",
+        "results": [
+          {
+            "case": "single_invoice",
+            "expected": 100,
+            "actual": 100,
+            "passed": true
+          },
+          {
+            "case": "multiple_tags",
+            "expected": 100,
+            "actual": 200,
+            "passed": false
+          },
+          {
+            "case": "equal_invoice_amounts",
+            "expected": 200,
+            "actual": 200,
+            "passed": true
+          },
+          {
+            "case": "untagged_invoice",
+            "expected": 100,
+            "actual": 100,
+            "passed": true
+          },
+          {
+            "case": "empty_selection",
+            "expected": 0,
+            "actual": 0,
+            "passed": true
+          }
+        ]
+      }
+    },
+    "distinct_amount": {
+      "exit": 1,
+      "report": {
+        "sqlite_version": "3.40.1",
+        "query": "distinct_amount",
+        "results": [
+          {
+            "case": "single_invoice",
+            "expected": 100,
+            "actual": 100,
+            "passed": true
+          },
+          {
+            "case": "multiple_tags",
+            "expected": 100,
+            "actual": 100,
+            "passed": true
+          },
+          {
+            "case": "equal_invoice_amounts",
+            "expected": 200,
+            "actual": 100,
+            "passed": false
+          },
+          {
+            "case": "untagged_invoice",
+            "expected": 100,
+            "actual": 100,
+            "passed": true
+          },
+          {
+            "case": "empty_selection",
+            "expected": 0,
+            "actual": 0,
+            "passed": true
+          }
+        ]
+      }
+    },
+    "exists": {
+      "exit": 0,
+      "report": {
+        "sqlite_version": "3.40.1",
+        "query": "exists",
+        "results": [
+          {
+            "case": "single_invoice",
+            "expected": 100,
+            "actual": 100,
+            "passed": true
+          },
+          {
+            "case": "multiple_tags",
+            "expected": 100,
+            "actual": 100,
+            "passed": true
+          },
+          {
+            "case": "equal_invoice_amounts",
+            "expected": 200,
+            "actual": 200,
+            "passed": true
+          },
+          {
+            "case": "untagged_invoice",
+            "expected": 100,
+            "actual": 100,
+            "passed": true
+          },
+          {
+            "case": "empty_selection",
+            "expected": 0,
+            "actual": 0,
+            "passed": true
+          }
+        ]
+      }
+    }
+  },
+  "scope": "Fictional local runs. The documented free example runs one authored case. The proposed exercise supplies five invoice fixtures, three prewritten queries and an exit code for regressions. It saves assembling those inputs and a runner. It does not establish buyer demand or seller eligibility."
+}

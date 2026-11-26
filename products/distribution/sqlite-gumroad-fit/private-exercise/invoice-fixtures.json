@@ -1,0 +1,94 @@
+{
+  "queries": {
+    "join": "SELECT COALESCE(SUM(i.amount),0) FROM invoice i JOIN tag t ON t.invoice_id=i.id",
+    "distinct_amount": "SELECT COALESCE(SUM(DISTINCT i.amount),0) FROM invoice i JOIN tag t ON t.invoice_id=i.id",
+    "exists": "SELECT COALESCE(SUM(i.amount),0) FROM invoice i WHERE EXISTS (SELECT 1 FROM tag t WHERE t.invoice_id=i.id)"
+  },
+  "cases": [
+    {
+      "case": "single_invoice",
+      "invoices": [
+        [
+          1,
+          100
+        ]
+      ],
+      "tags": [
+        [
+          1
+        ]
+      ],
+      "expected": 100
+    },
+    {
+      "case": "multiple_tags",
+      "invoices": [
+        [
+          1,
+          100
+        ]
+      ],
+      "tags": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": 100
+    },
+    {
+      "case": "equal_invoice_amounts",
+      "invoices": [
+        [
+          1,
+          100
+        ],
+        [
+          2,
+          100
+        ]
+      ],
+      "tags": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": 200
+    },
+    {
+      "case": "untagged_invoice",
+      "invoices": [
+        [
+          1,
+          100
+        ],
+        [
+          2,
+          50
+        ]
+      ],
+      "tags": [
+        [
+          1
+        ]
+      ],
+      "expected": 100
+    },
+    {
+      "case": "empty_selection",
+      "invoices": [
+        [
+          1,
+          100
+        ]
+      ],
+      "tags": [],
+      "expected": 0
+    }
+  ]
+}
