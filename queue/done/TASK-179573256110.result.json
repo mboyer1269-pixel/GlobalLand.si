@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "Bookkeeping automation software /ca/business/bookkeeping-automation-platform\nReceipt & invoice capture /ca/business/product/capture-receipts-and-invoices\nBookkeeping automation software /ca/bookkeeping-automation-platform\nReceipt & invoice capture /ca/partner/product/capture-bookkeeping-data\nExplore Dext for businesses /business/bookkeeping-automation-platform\nCapture receipts and invoices /business/product/capture-receipts-and-invoices\nSee how bookkeeping automation works /business/bookkeeping-automation-platform\nReceipt & Invoice capture /ca/business/product/capture-receipts-and-invoices\nReceipt & Invoice capture /ca/business/product/capture-receipts-and-invoices\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179573256110.json"
+  ],
+  "request": {
+    "id": "TASK-179573256110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T22:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nclass Links(HTMLParser):\n def __init__(self):\n  super().__init__(); self.url=None; self.label=[]\n def handle_starttag(self,t,a):\n  if t=='a': self.url=dict(a).get('href'); self.label=[]\n def handle_data(self,s):\n  if self.url: self.label.append(s)\n def handle_endtag(self,t):\n  if t=='a' and self.url:\n   label=' '.join(' '.join(self.label).split())\n   if any(k in (label+' '+self.url).lower() for k in ['extraction','export','invoice','automation']): print(label, self.url)\n   self.url=None\nLinks().feed(Path('products/services/invoice-export-qa-alternative/raw/dext-canada.html').read_text())"
+      ],
+      "inputs": [
+        "products/services/invoice-export-qa-alternative/raw/dext-canada.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795732561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179573256110",
+  "input_sha256": "09fe75e1ca8f952f804c59ba317080d802bb754b8d2a4399ce7acc8ba602a432"
+}
