@@ -212,25 +212,22 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1817,
-    "turns_without_verified_revenue": 1817,
-    "turns_without_outcome": 0,
+    "turns_without_new_interpreted_feedback": 1818,
+    "turns_without_verified_revenue": 1818,
+    "turns_without_outcome": 1,
     "outcome_threshold": 12,
-    "dry_since": null,
+    "dry_since": "2026-11-26T23:06:41Z",
     "last_outcome_turn": "THINK-1795734020",
-    "last_productive_turn": "THINK-1795734020",
-    "last_turn": "THINK-1795734020",
+    "last_productive_turn": "THINK-1795734361",
+    "last_turn": "THINK-1795734361",
     "last_change": {
       "productive": true,
-      "outcome": true,
-      "mission_outcomes": [
-        "INVOICE-EXPORT-QA-ALTERNATIVE"
-      ],
+      "outcome": false,
+      "mission_outcomes": [],
       "new_products": [
-        "products/services/invoice-export-qa-alternative/dext-bounded-verdict.json",
-        "products/services/invoice-export-qa-alternative/raw/dext-partner-capture.html"
+        "products/services/buyer-posted-invoice-reconciliation/raw/fixed-price-discovery.xml"
       ],
-      "new_product_count": 2,
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
