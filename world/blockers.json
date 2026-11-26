@@ -174,14 +174,14 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "35 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "36 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 35,
+      "reports": 36,
       "opened_at": "2026-11-26T08:05:52Z",
-      "last_reported_at": "2026-11-26T16:36:35Z"
+      "last_reported_at": "2026-11-26T17:00:48Z"
     }
   ],
   "resolved_recent": [
@@ -221,28 +221,25 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-26T17:00:48Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1793,
-    "turns_without_verified_revenue": 1793,
-    "turns_without_outcome": 35,
+    "turns_without_new_interpreted_feedback": 1794,
+    "turns_without_verified_revenue": 1794,
+    "turns_without_outcome": 36,
     "outcome_threshold": 12,
     "dry_since": "2026-11-26T08:05:52Z",
     "last_outcome_turn": "THINK-1795680001",
     "last_productive_turn": "THINK-1795710961",
-    "last_turn": "THINK-1795710961",
+    "last_turn": "THINK-1795712402",
     "last_change": {
-      "productive": true,
+      "productive": false,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [
-        "products/distribution/sqlite-original-regression-exercise/private-evaluation-verification.json",
-        "products/distribution/sqlite-original-regression-exercise/private-evaluation.zip.b64"
-      ],
-      "new_product_count": 2,
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
