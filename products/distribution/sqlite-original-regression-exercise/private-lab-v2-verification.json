@@ -1,0 +1,316 @@
+{
+  "archive_sha256": "889b9af3f9cdd0411001322ff481ede0c98969b3d0c9bf9358f574cba4085ac8",
+  "files": {
+    "exercise.py": "758f4382dc2820826b56558fad4f4f6797cbc156dd9c7698242d8566efbc1b15",
+    "README.md": "da39aa4e52e2ce3355619874f0ff33eb7d7c04833f49dbd0eb6488711c1fa5d2"
+  },
+  "runs": [
+    {
+      "exit": 0,
+      "report": {
+        "query": "preaggregate",
+        "sqlite_version": "3.40.1",
+        "cases": [
+          {
+            "name": "single grant",
+            "expected": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "actual": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "match": true
+          },
+          {
+            "name": "multiple grants",
+            "expected": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "actual": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "match": true
+          },
+          {
+            "name": "same-value events",
+            "expected": [
+              [
+                "red",
+                "D1",
+                14
+              ]
+            ],
+            "actual": [
+              [
+                "red",
+                "D1",
+                14
+              ]
+            ],
+            "match": true
+          },
+          {
+            "name": "same id across teams",
+            "expected": [
+              [
+                "blue",
+                "D1",
+                4
+              ],
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "actual": [
+              [
+                "blue",
+                "D1",
+                4
+              ],
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "match": true
+          },
+          {
+            "name": "absent grants",
+            "expected": [],
+            "actual": [],
+            "match": true
+          }
+        ],
+        "failures": []
+      }
+    },
+    {
+      "exit": 1,
+      "report": {
+        "query": "global-join",
+        "sqlite_version": "3.40.1",
+        "cases": [
+          {
+            "name": "single grant",
+            "expected": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "actual": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "match": true
+          },
+          {
+            "name": "multiple grants",
+            "expected": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "actual": [
+              [
+                "red",
+                "D1",
+                14
+              ]
+            ],
+            "match": false
+          },
+          {
+            "name": "same-value events",
+            "expected": [
+              [
+                "red",
+                "D1",
+                14
+              ]
+            ],
+            "actual": [
+              [
+                "red",
+                "D1",
+                14
+              ]
+            ],
+            "match": true
+          },
+          {
+            "name": "same id across teams",
+            "expected": [
+              [
+                "blue",
+                "D1",
+                4
+              ],
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "actual": [
+              [
+                "blue",
+                "D1",
+                8
+              ],
+              [
+                "red",
+                "D1",
+                14
+              ]
+            ],
+            "match": false
+          },
+          {
+            "name": "absent grants",
+            "expected": [],
+            "actual": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "match": false
+          }
+        ],
+        "failures": [
+          "multiple grants",
+          "same id across teams",
+          "absent grants"
+        ]
+      }
+    },
+    {
+      "exit": 1,
+      "report": {
+        "query": "distinct-sum",
+        "sqlite_version": "3.40.1",
+        "cases": [
+          {
+            "name": "single grant",
+            "expected": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "actual": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "match": true
+          },
+          {
+            "name": "multiple grants",
+            "expected": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "actual": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "match": true
+          },
+          {
+            "name": "same-value events",
+            "expected": [
+              [
+                "red",
+                "D1",
+                14
+              ]
+            ],
+            "actual": [
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "match": false
+          },
+          {
+            "name": "same id across teams",
+            "expected": [
+              [
+                "blue",
+                "D1",
+                4
+              ],
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "actual": [
+              [
+                "blue",
+                "D1",
+                4
+              ],
+              [
+                "red",
+                "D1",
+                7
+              ]
+            ],
+            "match": true
+          },
+          {
+            "name": "absent grants",
+            "expected": [],
+            "actual": [],
+            "match": true
+          }
+        ],
+        "failures": [
+          "same-value events"
+        ]
+      }
+    }
+  ],
+  "scope": "Clean extraction and fictional SQLite execution. Redistribution authority and buyer response are outside this test."
+}

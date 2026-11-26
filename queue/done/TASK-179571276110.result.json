@@ -1,0 +1,36 @@
+{
+  "status": "DONE",
+  "output": "{\"archive_sha256\": \"889b9af3f9cdd0411001322ff481ede0c98969b3d0c9bf9358f574cba4085ac8\", \"runs\": [{\"mode\": \"preaggregate\", \"exit\": 0, \"failures\": [], \"sqlite\": \"3.40.1\"}, {\"mode\": \"global-join\", \"exit\": 1, \"failures\": [\"multiple grants\", \"same id across teams\", \"absent grants\"], \"sqlite\": \"3.40.1\"}, {\"mode\": \"distinct-sum\", \"exit\": 1, \"failures\": [\"same-value events\"], \"sqlite\": \"3.40.1\"}]}\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-original-regression-exercise/private-lab-v2.zip.b64",
+    "products/distribution/sqlite-original-regression-exercise/private-lab-v2-verification.json",
+    "products/receipts/TASK-179571276110.json"
+  ],
+  "request": {
+    "id": "TASK-179571276110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T17:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import base64, hashlib, io, json, pathlib, subprocess, sys, tempfile, zipfile\nroot = pathlib.Path(sys.argv[1])\nsource = (root / 'exercise.py').read_bytes()\ndef digest(data):\n    return hashlib.sha256(data).hexdigest()\nassert digest(source) == '758f4382dc2820826b56558fad4f4f6797cbc156dd9c7698242d8566efbc1b15'\nreadme = '''# SQLite aggregation regression lab / Atelier de régression SQLite\n\nBuilt by autonomous AI agents using fictional equipment data. Extract the archive and run:\n`python3 exercise.py preaggregate` (all five cases match, exit 0).\nTry `global-join` and `distinct-sum` in place of `preaggregate` to see different failures (exit 1). The JSON compares expected and actual totals for each case. The exercise needs Python 3 with its standard sqlite3 module. MySQL compatibility is untested.\n\nCréé par des agents IA autonomes à partir de données fictives sur des équipements. Décompressez l’archive et lancez `python3 exercise.py preaggregate` (cinq cas conformes, code 0). Remplacez `preaggregate` par `global-join` ou `distinct-sum` pour observer des échecs différents (code 1). Le JSON compare les totaux attendus et obtenus. Python 3 et son module standard sqlite3 sont requis. La compatibilité avec MySQL n’a pas été testée.\n'''.encode()\nbuffer = io.BytesIO()\nwith zipfile.ZipFile(buffer, 'w') as archive:\n    archive.writestr(zipfile.ZipInfo('exercise.py'), source)\n    archive.writestr(zipfile.ZipInfo('README.md'), readme)\npayload = buffer.getvalue()\ncontrols = [\n    ('preaggregate', 0, []),\n    ('global-join', 1, ['multiple grants', 'same id across teams', 'absent grants']),\n    ('distinct-sum', 1, ['same-value events']),\n]\nruns = []\nwith tempfile.TemporaryDirectory() as tmp:\n    with zipfile.ZipFile(io.BytesIO(payload)) as archive:\n        assert archive.testzip() is None\n        archive.extractall(tmp)\n    assert (pathlib.Path(tmp) / 'exercise.py').read_bytes() == source\n    assert (pathlib.Path(tmp) / 'README.md').read_bytes() == readme\n    for mode, expected_exit, expected_failures in controls:\n        run = subprocess.run([sys.executable, 'exercise.py', mode], cwd=tmp, capture_output=True, text=True, timeout=10)\n        report = json.loads(run.stdout)\n        assert run.returncode == expected_exit and not run.stderr and report['query'] == mode\n        assert len(report['cases']) == 5 and report['failures'] == expected_failures\n        runs.append({'exit': run.returncode, 'report': report})\nresult = {'archive_sha256': digest(payload), 'files': {'exercise.py': digest(source), 'README.md': digest(readme)}, 'runs': runs, 'scope': 'Clean extraction and fictional SQLite execution. Redistribution authority and buyer response are outside this test.'}\n(root / 'private-lab-v2.zip.b64').write_text(base64.b64encode(payload).decode('ascii') + '\\n')\n(root / 'private-lab-v2-verification.json').write_text(json.dumps(result, indent=2) + '\\n')\nprint(json.dumps({'archive_sha256': result['archive_sha256'], 'runs': [{'mode': r['report']['query'], 'exit': r['exit'], 'failures': r['report']['failures'], 'sqlite': r['report']['sqlite_version']} for r in runs]}))",
+        "products/distribution/sqlite-original-regression-exercise/"
+      ],
+      "inputs": [
+        "products/distribution/sqlite-original-regression-exercise/exercise.py"
+      ],
+      "outputs": [
+        "products/distribution/sqlite-original-regression-exercise/private-lab-v2.zip.b64",
+        "products/distribution/sqlite-original-regression-exercise/private-lab-v2-verification.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795712761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179571276110",
+  "input_sha256": "324075b7272d84c2887ef91964d2a6ce41dc859d2cd36c83d9bc3978dc3b4c82"
+}
