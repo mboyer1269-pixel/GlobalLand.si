@@ -174,14 +174,14 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "15 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "16 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 15,
+      "reports": 16,
       "opened_at": "2026-11-26T08:05:52Z",
-      "last_reported_at": "2026-11-26T11:37:34Z"
+      "last_reported_at": "2026-11-26T12:00:54Z"
     }
   ],
   "resolved_recent": [
@@ -226,22 +226,27 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1773,
-    "turns_without_verified_revenue": 1773,
-    "turns_without_outcome": 15,
+    "turns_without_new_interpreted_feedback": 1774,
+    "turns_without_verified_revenue": 1774,
+    "turns_without_outcome": 16,
     "outcome_threshold": 12,
     "dry_since": "2026-11-26T08:05:52Z",
     "last_outcome_turn": "THINK-1795680001",
-    "last_productive_turn": "THINK-1795692961",
-    "last_turn": "THINK-1795692961",
+    "last_productive_turn": "THINK-1795694402",
+    "last_turn": "THINK-1795694402",
     "last_change": {
       "productive": true,
       "outcome": false,
       "mission_outcomes": [],
       "new_products": [
-        "products/distribution/sqlite-gumroad-fit/free-local-coverage.json"
+        "products/distribution/sqlite-gumroad-fit/private-exercise/invoice-fixtures.json",
+        "products/distribution/sqlite-gumroad-fit/private-exercise/invoice-regression.py",
+        "products/distribution/sqlite-gumroad-fit/private-exercise/verification.json",
+        "products/distribution/sqlite-gumroad-fit/raw/live-diagnose.py",
+        "products/distribution/sqlite-gumroad-fit/raw/live-example-case.json",
+        "products/distribution/sqlite-gumroad-fit/raw/live-local-readme.md"
       ],
-      "new_product_count": 1,
+      "new_product_count": 6,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
