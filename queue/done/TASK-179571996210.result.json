@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": "https://www.zoho.com/affiliate/#faq\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179571996210.json"
+  ],
+  "request": {
+    "id": "TASK-179571996210",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T19:06:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nfrom urllib.parse import urljoin,urlsplit\nclass Links(HTMLParser):\n def handle_starttag(self,tag,attrs):\n  u=dict(attrs).get('href') or ''\n  if tag=='a' and any(k in u.lower() for k in ('terms','payout','faq','agreement')):\n   dest=urljoin('https://www.zoho.com/affiliate/',u)\n   if urlsplit(dest).hostname=='www.zoho.com': print(dest.split('?')[0])\nLinks().feed(Path('products/distribution/invoice-referral-fit/raw/zoho.html').read_text())"
+      ],
+      "inputs": [
+        "products/distribution/invoice-referral-fit/raw/zoho.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795719962",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179571996210",
+  "input_sha256": "f8cae92eb1437945fb5368d2721263c8d7c7a1b3b5922c2f7a7ea88999e7611d"
+}
