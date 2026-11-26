@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "\n",
+  "artifacts": [
+    "products/receipts/TASK-179573256112.json"
+  ],
+  "request": {
+    "id": "TASK-179573256112",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-26T22:36:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from html.parser import HTMLParser\nfrom pathlib import Path\nimport re,sys\nclass Page(HTMLParser):\n def __init__(self):\n  super().__init__(); self.skip=False; self.parts=[]\n def handle_starttag(self,tag,attrs):\n  if tag in ('script','style'): self.skip=True\n def handle_endtag(self,tag):\n  if tag in ('script','style'): self.skip=False\n def handle_data(self,data):\n  if not self.skip: self.parts.append(data)\npage=Page(); page.feed(Path(sys.argv[1]).read_text())\nvisible=' '.join(' '.join(page.parts).split())\nfor m in re.finditer(r'line.items?|sub.?total|CSV|export|net amount|tax amount',visible,re.I):\n print(visible[max(0,m.start()-80):m.end()+95])",
+        "products/services/invoice-export-qa-alternative/raw/dext-partner-capture.html"
+      ],
+      "inputs": [
+        "products/services/invoice-export-qa-alternative/raw/dext-partner-capture.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795732561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179573256112",
+  "input_sha256": "57a5e29ff4ae83a8faed59ab99cc65592b92188577e4b93b551b0bc7262be0e7"
+}
