@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"STREAM-CATALOGUE-ACCEPTANCE-CONTROL\", \"goal\": \"Reuse the committed Stream Commerce draft, verification and any prior equivalent negative control. Choose one check explicitly offered in the draft, ideally identifier preservation or image-reference mapping. Run the documented catalogue verifier on the existing fictional fixture and on a temporary copy changing exactly one field relevant to that check. Capture the executed command, exit statuses, actual failed check names, inputs and draft hashes, and any manual steps needed to interpret the result. If the negative control reveals a limitation, give the operator exact wording to narrow the claim before the draft goes to a decision. Save and read back the result under products/services/stream-commerce-catalogue/ before closing with a lesson under a valid lease. No additional prospecting, correspondence, purchase, public site edit or deployment.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"OFFER_ACCEPTANCE\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/stream-commerce-catalogue/stream-barcode-evidence.json\", \"TASK-179567856110\"]}",
+  "request": {
+    "id": "TASK-179567856111",
+    "type": "TOOL",
+    "submitted_by": "OFFER_ACCEPTANCE",
+    "created_at": "2026-11-26T07:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "STREAM-CATALOGUE-ACCEPTANCE-CONTROL",
+      "agent_id": "OFFER_ACCEPTANCE",
+      "lease_token": "9nfpTa-1yE70qt9hcHy9JhHZ84LHeQ4L",
+      "evidence": [
+        "products/services/stream-commerce-catalogue/stream-barcode-evidence.json",
+        "TASK-179567856110"
+      ],
+      "lesson": "The documented verifier passed the original fixture and flagged the grouped identifier check after a single barcode edit. Earlier fixture discovery and row selection failed before a negative case ran. Next time inspect the actual CSV header and a concrete variant first, then bind both exits to the draft hash. Field and row location still require manual comparison."
+    },
+    "description": "Broker action during THINK-1795678561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179567856111",
+  "input_sha256": "85b8bd0fb0192965591da95cc2b62ff81452e95483abc8bab5268694a46298d5"
+}
