@@ -1,0 +1,11 @@
+{
+  "status": "DONE",
+  "output": "{\"passed\": false, \"archive_sha256\": null, \"runs\": [{\"mode\": \"global-join\", \"actual_exit\": 1, \"failing_cases\": [\"multiple grants\", \"same id across teams\", \"absent grants\"], \"passed\": true}, {\"mode\": \"distinct-sum\", \"actual_exit\": 1, \"failing_cases\": [\"same-value events\"], \"passed\": true}, {\"mode\": \"exists\", \"actual_exit\": 2, \"failing_cases\": [], \"passed\": false}]}\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-original-regression-exercise/private-evaluation.zip.b64",
+    "products/distribution/sqlite-original-regression-exercise/private-evaluation-verification.json",
+    "products/receipts/TASK-179571062800.json"
+  ],
+  "id": "TASK-179571062800",
+  "input_sha256": "34e6b7a139f1b7aa58d64f59ea0f86eb27ff4d2a59f7aaa3a63c1f4480341e33"
+}

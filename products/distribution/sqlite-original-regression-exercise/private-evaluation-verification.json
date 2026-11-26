@@ -1,0 +1,42 @@
+{
+  "previous_verification_sha256": "60e549f74cd14e8486ba2c16f7f3262c850019f18f9df9b9f458e1e55d11c6e8",
+  "exercise_sha256": "758f4382dc2820826b56558fad4f4f6797cbc156dd9c7698242d8566efbc1b15",
+  "scope": "Private synthetic evaluation only",
+  "runs": [
+    {
+      "mode": "global-join",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "failing_cases": [
+        "multiple grants",
+        "same id across teams",
+        "absent grants"
+      ],
+      "stdout": "{\n  \"query\": \"global-join\",\n  \"sqlite_version\": \"3.40.1\",\n  \"cases\": [\n    {\n      \"name\": \"single grant\",\n      \"expected\": [\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"actual\": [\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"match\": true\n    },\n    {\n      \"name\": \"multiple grants\",\n      \"expected\": [\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"actual\": [\n        [\n          \"red\",\n          \"D1\",\n          14\n        ]\n      ],\n      \"match\": false\n    },\n    {\n      \"name\": \"same-value events\",\n      \"expected\": [\n        [\n          \"red\",\n          \"D1\",\n          14\n        ]\n      ],\n      \"actual\": [\n        [\n          \"red\",\n          \"D1\",\n          14\n        ]\n      ],\n      \"match\": true\n    },\n    {\n      \"name\": \"same id across teams\",\n      \"expected\": [\n        [\n          \"blue\",\n          \"D1\",\n          4\n        ],\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"actual\": [\n        [\n          \"blue\",\n          \"D1\",\n          8\n        ],\n        [\n          \"red\",\n          \"D1\",\n          14\n        ]\n      ],\n      \"match\": false\n    },\n    {\n      \"name\": \"absent grants\",\n      \"expected\": [],\n      \"actual\": [\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"match\": false\n    }\n  ],\n  \"failures\": [\n    \"multiple grants\",\n    \"same id across teams\",\n    \"absent grants\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "mode": "distinct-sum",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "failing_cases": [
+        "same-value events"
+      ],
+      "stdout": "{\n  \"query\": \"distinct-sum\",\n  \"sqlite_version\": \"3.40.1\",\n  \"cases\": [\n    {\n      \"name\": \"single grant\",\n      \"expected\": [\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"actual\": [\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"match\": true\n    },\n    {\n      \"name\": \"multiple grants\",\n      \"expected\": [\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"actual\": [\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"match\": true\n    },\n    {\n      \"name\": \"same-value events\",\n      \"expected\": [\n        [\n          \"red\",\n          \"D1\",\n          14\n        ]\n      ],\n      \"actual\": [\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"match\": false\n    },\n    {\n      \"name\": \"same id across teams\",\n      \"expected\": [\n        [\n          \"blue\",\n          \"D1\",\n          4\n        ],\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"actual\": [\n        [\n          \"blue\",\n          \"D1\",\n          4\n        ],\n        [\n          \"red\",\n          \"D1\",\n          7\n        ]\n      ],\n      \"match\": true\n    },\n    {\n      \"name\": \"absent grants\",\n      \"expected\": [],\n      \"actual\": [],\n      \"match\": true\n    }\n  ],\n  \"failures\": [\n    \"same-value events\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "mode": "exists",
+      "expected_exit": 0,
+      "actual_exit": 2,
+      "passed": false,
+      "failing_cases": [],
+      "stdout": "",
+      "stderr": "usage: exercise.py [-h] {global-join,distinct-sum,preaggregate}\nexercise.py: error: argument query: invalid choice: 'exists' (choose from 'global-join', 'distinct-sum', 'preaggregate')\n"
+    }
+  ],
+  "extracted_source_matches": true,
+  "passed": false
+}
