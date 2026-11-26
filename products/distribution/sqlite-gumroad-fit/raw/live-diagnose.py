@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+# GlobalLand SQLite multi-statement diagnoser. Made by autonomous AI agents. MIT.
+# Runs pasted synthetic SQL through the real SQLite C API (ctypes) in :memory: only.
+# No customer Python/shell, no extensions, no ATTACH, no VACUUM, bounded statements/rows/VM steps/time.
+# Usage: python3 -I diagnose.py CASE.json [REPORT.json]
+import ctypes as C, json, sys, time, re
+L=C.CDLL('libsqlite3.so.0');P=C.c_void_p
+AUTH=C.CFUNCTYPE(C.c_int,P,C.c_int,C.c_char_p,C.c_char_p,C.c_char_p,C.c_char_p)
+PROG=C.CFUNCTYPE(C.c_int,P)
+for n,r,a in [('sqlite3_libversion',C.c_char_p,[]),('sqlite3_open',C.c_int,[C.c_char_p,C.POINTER(P)]),
+ ('sqlite3_prepare_v2',C.c_int,[P,P,C.c_int,C.POINTER(P),C.POINTER(P)]),('sqlite3_step',C.c_int,[P]),
+ ('sqlite3_finalize',C.c_int,[P]),('sqlite3_close',C.c_int,[P]),('sqlite3_column_count',C.c_int,[P]),
+ ('sqlite3_column_text',C.c_char_p,[P,C.c_int]),('sqlite3_errmsg',C.c_char_p,[P]),
+ ('sqlite3_error_offset',C.c_int,[P]),('sqlite3_next_stmt',P,[P,P]),('sqlite3_limit',C.c_int,[P,C.c_int,C.c_int]),
+ ('sqlite3_set_authorizer',C.c_int,[P,AUTH,P]),('sqlite3_progress_handler',None,[P,C.c_int,PROG,P])]:
+  f=getattr(L,n);f.restype=r;f.argtypes=a
+ROW,DONE=100,101
+LIM=dict(sql_bytes=65536,statements=50,rows_kept=50,vm_steps=2000000,seconds=2.0)
+PRAGMA_OK={'foreign_keys','table_info','table_xinfo','index_list','index_info','recursive_triggers','case_sensitive_like'}
+KEYS={'case_id','seed_sql','query_sql','reproduce_first_statement_only','expected_last_rows'}
+def lead(t):
+  return re.sub(r'^(\s+|--[^\n]*(\n|$)|/\*.*?\*/)+','',t,flags=re.S)
+class Box:
+  def __init__(s): s.ops=0;s.deadline=0;s.denied=[]
+def mkdb(box):
+  db=P();rc=L.sqlite3_open(b':memory:',C.byref(db))
+  if rc: raise RuntimeError('open failed %d'%rc)
+  L.sqlite3_limit(db,7,0);L.sqlite3_limit(db,1,LIM['sql_bytes'])
+  def auth(_u,code,a,b,c,d):
+    if code in (24,25): box.denied.append('ATTACH/DETACH');return 1
+    if code==19 and (a or b'').decode().lower() not in PRAGMA_OK: box.denied.append('PRAGMA '+(a or b'').decode());return 1
+    if code==31 and (b or b'').decode().lower()=='load_extension': box.denied.append('load_extension');return 1
+    return 0
+  def prog(_u):
+    box.ops+=1000
+    return 1 if (box.ops>LIM['vm_steps'] or time.monotonic()>box.deadline) else 0
+  box.cb=(AUTH(auth),PROG(prog))
+  L.sqlite3_set_authorizer(db,box.cb[0],None);L.sqlite3_progress_handler(db,1000,box.cb[1],None)
+  return db
+def run(db,box,sql,first_only):
+  b=sql.encode();buf=C.create_string_buffer(b);base=C.cast(buf,C.c_void_p).value;end=base+len(b);p=base
+  out=dict(statements=[],error=None,unexecuted_tail=None,input_bytes=len(b))
+  box.deadline=time.monotonic()+LIM['seconds']
+  while p<end:
+    if len(out['statements'])>=LIM['statements']: out['error']=dict(phase='limit',kind='STATEMENT_LIMIT');break
+    st=P();tl=P();rc=L.sqlite3_prepare_v2(db,p,-1,C.byref(st),C.byref(tl));off=p-base
+    if rc:
+      out['error']=dict(phase='prepare',kind='PREPARE_ERROR',statement_index=len(out['statements'])+1,start_byte=off,rc=rc,
+        message=L.sqlite3_errmsg(db).decode(errors='replace'),error_offset=L.sqlite3_error_offset(db))
+      if st.value: L.sqlite3_finalize(st)
+      break
+    nt=tl.value if tl.value else end
+    if nt<=p: out['error']=dict(phase='prepare',kind='NO_TAIL_PROGRESS');break
+    if not st.value: p=nt;continue
+    text=C.string_at(p,nt-p).decode(errors='replace').strip()
+    rec=dict(index=len(out['statements'])+1,start_byte=off,end_byte=nt-base,sql=text[:300])
+    if lead(text)[:6].upper()=='VACUUM':
+      rec['finalize_rc']=L.sqlite3_finalize(st);rec['executed']=False;out['statements'].append(rec)
+      out['error']=dict(phase='policy',kind='VACUUM_DENIED',statement_index=rec['index']);break
+    cols=L.sqlite3_column_count(st);rows=[];n=0
+    while (rc:=L.sqlite3_step(st))==ROW:
+      n+=1
+      if len(rows)<LIM['rows_kept']:
+        rows.append([None if v is None else v.decode(errors='replace') for v in (L.sqlite3_column_text(st,i) for i in range(cols))])
+    msg=L.sqlite3_errmsg(db).decode(errors='replace') if rc!=DONE else None
+    rec.update(executed=True,columns=cols,row_count=n,rows=rows,step_rc=rc,finalize_rc=L.sqlite3_finalize(st))
+    out['statements'].append(rec);p=nt
+    if rc!=DONE:
+      out['error']=dict(phase='step',kind='INTERRUPTED_BY_LIMIT' if rc==9 else 'STEP_ERROR',statement_index=rec['index'],rc=rc,message=msg,rows_before_error=n);break
+    if first_only: break
+  rest=C.string_at(p,end-p).decode(errors='replace') if p<end else ''
+  t=lead(rest).strip()
+  out['unexecuted_tail']=t[:300] if t.strip(';').strip() else None
+  out['final_byte']=p-base
+  return out
+def diagnose(case):
+  if not isinstance(case,dict): return dict(status='INVALID_CASE',detail='case must be a JSON object')
+  bad=sorted(set(case)-KEYS)
+  if bad or not isinstance(case.get('query_sql'),str): return dict(status='INVALID_CASE',detail='unknown keys %s or missing query_sql'%bad)
+  for k in ('seed_sql','query_sql'):
+    v=case.get(k) or ''
+    if not isinstance(v,str) or len(v.encode())>LIM['sql_bytes']: return dict(status='INVALID_CASE',detail=k+' must be text <= %d bytes'%LIM['sql_bytes'])
+  rep=dict(tool='globalland-sqlite-diagnose/1',sqlite_version=L.sqlite3_libversion().decode(),case_id=case.get('case_id'),limits=LIM,runs={})
+  modes=(['as_written_first_statement_only'] if case.get('reproduce_first_statement_only') else [])+['all_statements']
+  for m in modes:
+    box=Box();db=mkdb(box);r={};t0=time.monotonic()
+    if case.get('seed_sql'):
+      s=run(db,box,case['seed_sql'],False)
+      if s['error']: r['seed_error']=s['error']
+    if 'seed_error' not in r: r.update(run(db,box,case['query_sql'],m.startswith('as_written')))
+    r['denied']=box.denied;r['elapsed_s']=round(time.monotonic()-t0,3)
+    r['open_statements_after_run']=bool(L.sqlite3_next_stmt(db,None))
+    r['close_rc']=L.sqlite3_close(db)
+    rep['runs'][m]=r
+  exp=case.get('expected_last_rows')
+  if exp is not None:
+    a=rep['runs']['all_statements'];st=[x for x in a.get('statements') or [] if x.get('executed')]
+    rep['expected_match']=bool(st) and st[-1]['rows']==exp and not a.get('error') and not a.get('seed_error')
+  rep['status']='OK'
+  return rep
+if __name__=='__main__':
+  case=json.load(open(sys.argv[1],encoding='utf-8'))
+  rep=diagnose(case);s=json.dumps(rep,indent=1,ensure_ascii=False)
+  if len(sys.argv)>2: open(sys.argv[2],'w',encoding='utf-8').write(s)
+  print(s)
