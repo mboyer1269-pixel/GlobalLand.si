@@ -1,0 +1,9 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source_receipt\": \"products/distribution/sqlite-original-regression-exercise/private-evaluation-verification.json\",\n  \"archive_sha256\": null,\n  \"exists_run\": {\n    \"mode\": \"exists\",\n    \"expected_exit\": 0,\n    \"actual_exit\": 2,\n    \"passed\": false,\n    \"failing_cases\": [],\n    \"stdout\": \"\",\n    \"stderr\": \"usage: exercise.py [-h] {global-join,distinct-sum,preaggregate}\\nexercise.py: error: argument query: invalid choice: 'exists' (choose from 'global-join', 'distinct-sum', 'preaggregate')\\n\"\n  },\n  \"candidate_files\": [\n    \"exercise.py\",\n    \"private-evaluation-verification.json\",\n    \"private-evaluation.zip.b64\",\n    \"verification.json\"\n  ]\n}\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179571096100.json"
+  ],
+  "id": "TASK-179571096100",
+  "input_sha256": "55e60fbdd8bb78c10e3e90bb43aec5de0c4747f58f2d6ab7fbd79d69abe97ab7"
+}
