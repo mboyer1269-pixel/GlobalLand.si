@@ -212,22 +212,24 @@
     "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1899,
-    "turns_without_verified_revenue": 1899,
-    "turns_without_outcome": 4,
+    "turns_without_new_interpreted_feedback": 1900,
+    "turns_without_verified_revenue": 1900,
+    "turns_without_outcome": 5,
     "outcome_threshold": 12,
     "dry_since": "2026-11-27T21:35:48Z",
     "last_outcome_turn": "THINK-1795815001",
-    "last_productive_turn": "THINK-1795818601",
-    "last_turn": "THINK-1795818601",
+    "last_productive_turn": "THINK-1795818901",
+    "last_turn": "THINK-1795818901",
     "last_change": {
       "productive": true,
       "outcome": false,
       "mission_outcomes": [],
       "new_products": [
-        "products/distribution/sqlite-instructor-pilot/reconciliation/private-quote-intake-static-check.json"
+        "products/distribution/sqlite-instructor-pilot/separate-site/verification.json",
+        "products/sites/sqlite-join-exercise/index.html",
+        "products/sites/sqlite-join-exercise/sqlite-preview.zip.b64"
       ],
-      "new_product_count": 1,
+      "new_product_count": 3,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
