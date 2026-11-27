@@ -207,26 +207,28 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-27T16:01:06Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1881,
-    "turns_without_verified_revenue": 1881,
-    "turns_without_outcome": 8,
+    "turns_without_new_interpreted_feedback": 1882,
+    "turns_without_verified_revenue": 1882,
+    "turns_without_outcome": 9,
     "outcome_threshold": 12,
     "dry_since": "2026-11-27T14:00:58Z",
     "last_outcome_turn": "THINK-1795786561",
-    "last_productive_turn": "THINK-1795793221",
-    "last_turn": "THINK-1795795217",
+    "last_productive_turn": "THINK-1795795561",
+    "last_turn": "THINK-1795795561",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
-      "new_research_count": 1,
+      "new_products": [
+        "products/distribution/sqlite-instructor-pilot/evaluation-card-en-fr.md"
+      ],
+      "new_product_count": 1,
+      "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
