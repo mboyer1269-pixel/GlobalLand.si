@@ -1,0 +1,35 @@
+{
+  "status": "DONE",
+  "output": "{\"scope\": \"New-notice titles only. Original notices govern eligibility and acceptance. No hit does not establish absence of demand.\", \"source_sha256\": \"c0eebf11d274366211eaf196dc8411cf063262194c399fd6825713c295601be6\", \"rows\": 30, \"title_fields\": [\"title-titre-eng\", \"title-titre-fra\"], \"hit_count\": 0, \"hits\": []}\n\n",
+  "artifacts": [
+    "products/services/canadabuys-data-qa-intake/new-notice-title-screen.json",
+    "products/receipts/TASK-179577396113.json"
+  ],
+  "request": {
+    "id": "TASK-179577396113",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-27T10:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import csv, hashlib, json, re, sys\nfrom pathlib import Path\nroot=Path(sys.argv[1])\np=root/'raw/new-tender-notices.csv'\nwith p.open(encoding='utf-8-sig',newline='') as f:\n reader=csv.DictReader(f)\n titles=[k for k in reader.fieldnames if re.search('title|titre',k,re.I)]\n fields=[k for k in reader.fieldnames if re.search('title|titre|solicitation|reference|closing|url',k,re.I)]\n rows=list(reader)\nassert titles\npattern=re.compile(r'reconcil|\\bcatalog|inventory|inventaire|spreadsheet|tableur|data quality|qualit. des donn.es',re.I)\nhits=[{k:r[k] for k in fields} for r in rows if any(pattern.search(r.get(k) or '') for k in titles)]\nout={'scope':'New-notice titles only. Original notices govern eligibility and acceptance. No hit does not establish absence of demand.','source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'rows':len(rows),'title_fields':titles,'hit_count':len(hits),'hits':hits[:12]}\n(root/'new-notice-title-screen.json').write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\\n')\nprint(json.dumps(out)[:3000])",
+        "products/services/canadabuys-data-qa-intake"
+      ],
+      "inputs": [
+        "products/services/canadabuys-data-qa-intake/raw/new-tender-notices.csv"
+      ],
+      "outputs": [
+        "products/services/canadabuys-data-qa-intake/new-notice-title-screen.json"
+      ],
+      "mission_id": "CANADABUYS-STANDALONE-DATA-QA-20261127"
+    },
+    "description": "Broker action during THINK-1795773961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179577396113",
+  "input_sha256": "30e8a573303ce7079a8a3b9aebe45ddc770e1e715350aee1f57031c962705969"
+}
