@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"review_scope\": \"One new-notice snapshot. Original buyer notices were not inspected because the recorded screens yielded no candidate.\",\n  \"verified_snapshot\": {\n    \"path\": \"products/services/canadabuys-data-qa-intake/raw/new-tender-notices.csv\",\n    \"sha256\": \"c0eebf11d274366211eaf196dc8411cf063262194c399fd6825713c295601be6\",\n    \"rows\": 30\n  },\n  \"prior_screen_receipts\": {\n    \"titles\": {\n      \"task\": \"TASK-179577396113\",\n      \"matches\": 0\n    },\n    \"descriptions\": {\n      \"task\": \"TASK-179577542700\",\n      \"matches\": 0\n    }\n  },\n  \"open_notice_coverage\": {\n    \"task\": \"TASK-179577396100\",\n    \"result\": \"Fetch size limit. Open-notice coverage unavailable.\"\n  },\n  \"decision\": \"No original notice selected from this snapshot. No buyer-specific sample or quote justified by this evidence.\",\n  \"reopen_on\": \"A readable current original notice with separately quotable offline reconciliation, an acceptance criterion and a permitted response route.\",\n  \"commercial_observations\": \"Buyer demand beyond this screened snapshot is unknown. No submission, acceptance or settlement established.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/canadabuys-data-qa-intake/screen-decision-20261127.json",
+    "products/receipts/TASK-179577902701.json"
+  ],
+  "id": "TASK-179577902701",
+  "input_sha256": "b1d3b111d9235585af86a7f714f4b444d063c3c3c75282da183b7d17e47390e5"
+}
