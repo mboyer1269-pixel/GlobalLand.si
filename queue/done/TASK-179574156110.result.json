@@ -1,0 +1,30 @@
+{
+  "status": "DONE",
+  "output": " might be added to the platform fee to cover processing fees: +1.5% for international (outside of the US) transactions +1.5% for PayPal transa\nees: +1.5% for international (outside of the US) transactions +1.5% for PayPal transactions +0.5% for subscription payments Here’s an example \noutside of the US) transactions +1.5% for PayPal transactions +0.5% for subscription payments Here’s an example breakdown where someone in Fra\nuct price $20.00 Tax (20% VAT) $4.00 Total $24.00 Platform fee ($0.50 + 5% of total + 1.5% int’l payment) $2.06 Net profit (total - tax - platfo\nce $20.00 Tax (20% VAT) $4.00 Total $24.00 Platform fee ($0.50 + 5% of total + 1.5% int’l payment) $2.06 Net profit (total - tax - platform fe\n0% VAT) $4.00 Total $24.00 Platform fee ($0.50 + 5% of total + 1.5% int’l payment) $2.06 Net profit (total - tax - platform fee) $17.94 You ca\nt your current plan and platform fees via your store plan page . Payout fees Lemon Squeezy will always try to minimize any fees associated with payouts\nr bank accounts outside the US Payouts via PayPal A flat fee of $0.50 per payout for accounts in the US 3% capped at $30 per payout for accounts\nueezy’s marketing features have additional fees. These include: +5% for payments recovered through abandoned cart emails +3% for affiliate ref\nxt Supported countries → Scroll to top On this page Platform fee Payout fees → Payouts via Stripe → Payouts via PayPal Marketing fees Custom pricing © \n\n",
+  "artifacts": [
+    "products/receipts/TASK-179574156110.json"
+  ],
+  "request": {
+    "id": "TASK-179574156110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-27T01:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nfrom html.parser import HTMLParser\nimport re\nclass Visible(HTMLParser):\n def __init__(self):\n  super().__init__(); self.hidden=0; self.text=[]\n def handle_starttag(self, tag, attrs):\n  if tag in ('script','style'): self.hidden+=1\n def handle_endtag(self, tag):\n  if tag in ('script','style'): self.hidden=max(0,self.hidden-1)\n def handle_data(self, data):\n  if not self.hidden: self.text.append(data)\np=Visible()\np.feed(Path('products/distribution/sqlite-lemonsqueezy-fit/raw/fees.html').read_text())\ns=' '.join(' '.join(p.text).split())\nfor m in list(re.finditer(r'5\\s*%|50\\s*¢|0\\.50|payout fees',s,re.I))[:16]:\n print(s[max(0,m.start()-65):m.end()+75])\n"
+      ],
+      "inputs": [
+        "products/distribution/sqlite-lemonsqueezy-fit/raw/fees.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795741561",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179574156110",
+  "input_sha256": "23fbaaea0ee70ca27a76dd15058045a569742f0ffd35af2eb259d3440e815307"
+}
