@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"prior_check\": \"TASK-179574660200\",\n  \"scope\": \"Exact payload identity and receipt readback for the existing private listing decision. Redistribution, seller activation and settlement require separate evidence.\",\n  \"private-lab-v2.zip.b64\": {\n    \"present\": true,\n    \"file_sha256\": \"550f30479c66effe7b3be1e860d0a7f963c5482bfef9e1f1f6edc34998dd8551\"\n  },\n  \"private-lab-v2-verification.json\": {\n    \"present\": true,\n    \"file_sha256\": \"ba4b89570a335fcfc4c734d5380cd4d5968e1d35903515e53fdbb68f9a21e55b\"\n  },\n  \"decoded_archive_sha256\": \"889b9af3f9cdd0411001322ff481ede0c98969b3d0c9bf9358f574cba4085ac8\",\n  \"members\": [\n    {\n      \"name\": \"exercise.py\",\n      \"size\": 2676,\n      \"sha256\": \"758f4382dc2820826b56558fad4f4f6797cbc156dd9c7698242d8566efbc1b15\",\n      \"source_candidates\": [\n        {\n          \"path\": \"products/distribution/sqlite-original-regression-exercise/exercise.py\",\n          \"same_bytes\": true\n        }\n      ]\n    },\n    {\n      \"name\": \"README.md\",\n      \"size\": 936,\n      \"sha256\": \"da39aa4e52e2ce3355619874f0ff33eb7d7c04833f49dbd0eb6488711c1fa5d2\",\n      \"source_candidates\": []\n    }\n  ],\n  \"duplicate_member_names\": false\n}\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-lemonsqueezy-fit/director-payload-diagnostic.json",
+    "products/receipts/TASK-179574696100.json"
+  ],
+  "id": "TASK-179574696100",
+  "input_sha256": "eb8bdb0597dbeded9c4f0b740f0465c570d6dbdbf92284189b5d6ad95ffd35ce"
+}
