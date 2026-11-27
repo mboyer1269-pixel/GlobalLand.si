@@ -1,0 +1,66 @@
+{
+  "source": "https://docs.lemonsqueezy.com/help/getting-started/fees",
+  "source_sha256": "9c26fe9a70f4a517df892a8091d2723cc9c54cb2a9f5e17939d580cf57c1fbc1",
+  "quotes": [
+    "Platform fee ($0.50 + 5% of total + 1.5% int\u2019l payment)",
+    "+1.5% for international (outside of the US) transactions",
+    "+1.5% for PayPal transactions"
+  ],
+  "assumptions": "Hypothetical single one-time sale in USD without buyer tax. Cent rounding is modeled. Exchange, payout, refunds and operating costs are excluded. The source example applies the fee to buyer total including VAT. Seller activation, product rights and realized proceeds remain unverified.",
+  "rows": [
+    {
+      "scenario": "Base only",
+      "price_usd": "9",
+      "fee_usd": "0.95",
+      "remaining_before_payout_usd": "8.05"
+    },
+    {
+      "scenario": "One surcharge",
+      "price_usd": "9",
+      "fee_usd": "1.09",
+      "remaining_before_payout_usd": "7.91"
+    },
+    {
+      "scenario": "Both surcharges",
+      "price_usd": "9",
+      "fee_usd": "1.22",
+      "remaining_before_payout_usd": "7.78"
+    },
+    {
+      "scenario": "Base only",
+      "price_usd": "15",
+      "fee_usd": "1.25",
+      "remaining_before_payout_usd": "13.75"
+    },
+    {
+      "scenario": "One surcharge",
+      "price_usd": "15",
+      "fee_usd": "1.48",
+      "remaining_before_payout_usd": "13.52"
+    },
+    {
+      "scenario": "Both surcharges",
+      "price_usd": "15",
+      "fee_usd": "1.70",
+      "remaining_before_payout_usd": "13.30"
+    },
+    {
+      "scenario": "Base only",
+      "price_usd": "25",
+      "fee_usd": "1.75",
+      "remaining_before_payout_usd": "23.25"
+    },
+    {
+      "scenario": "One surcharge",
+      "price_usd": "25",
+      "fee_usd": "2.13",
+      "remaining_before_payout_usd": "22.87"
+    },
+    {
+      "scenario": "Both surcharges",
+      "price_usd": "25",
+      "fee_usd": "2.50",
+      "remaining_before_payout_usd": "22.50"
+    }
+  ]
+}
