@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"input\": \"products/sites/sqlite-statement-diagnostic/index.html\",\n  \"sha256\": \"f71bdac2fe5c9623bdbf65626d968008e846414e1cea8912cc42633e3d155fb5\",\n  \"matches_restoration_receipt\": true,\n  \"checks\": {\n    \"en\": {\n      \"matching_sections\": 1,\n      \"sections\": [\n        {\n          \"mailto\": [\n            {\n              \"public_recipient_matches\": true,\n              \"subject_matches\": true,\n              \"body_has_experiment_line\": true,\n              \"body_has_quote_intent\": true,\n              \"body_has_separate_sql_fields\": true\n            }\n          ],\n          \"manual_subject_present\": true,\n          \"manual_sql_fields_present\": true,\n          \"manual_quote_intent_present\": true,\n          \"visible_copy_ends_in_fragment\": false\n        }\n      ]\n    },\n    \"fr\": {\n      \"matching_sections\": 1,\n      \"sections\": [\n        {\n          \"mailto\": [\n            {\n              \"public_recipient_matches\": true,\n              \"subject_matches\": true,\n              \"body_has_experiment_line\": true,\n              \"body_has_quote_intent\": true,\n              \"body_has_separate_sql_fields\": true\n            }\n          ],\n          \"manual_subject_present\": true,\n          \"manual_sql_fields_present\": true,\n          \"manual_quote_intent_present\": true,\n          \"visible_copy_ends_in_fragment\": false\n        }\n      ]\n    }\n  },\n  \"scope\": \"Offline inspection of the staged quote form. This establishes neither mail client behavior nor live intake, orders or settlement.\"\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-instructor-pilot/reconciliation/private-quote-intake-static-check.json",
+    "products/receipts/TASK-179581716100.json"
+  ],
+  "id": "TASK-179581716100",
+  "input_sha256": "54e05b7608d67be65584f86ec5071d56521acbc11fbb785de44683c72b89f2cf"
+}

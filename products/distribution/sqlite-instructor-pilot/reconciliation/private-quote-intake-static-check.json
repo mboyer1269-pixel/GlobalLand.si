@@ -1,0 +1,48 @@
+{
+  "input": "products/sites/sqlite-statement-diagnostic/index.html",
+  "sha256": "f71bdac2fe5c9623bdbf65626d968008e846414e1cea8912cc42633e3d155fb5",
+  "matches_restoration_receipt": true,
+  "checks": {
+    "en": {
+      "matching_sections": 1,
+      "sections": [
+        {
+          "mailto": [
+            {
+              "public_recipient_matches": true,
+              "subject_matches": true,
+              "body_has_experiment_line": true,
+              "body_has_quote_intent": true,
+              "body_has_separate_sql_fields": true
+            }
+          ],
+          "manual_subject_present": true,
+          "manual_sql_fields_present": true,
+          "manual_quote_intent_present": true,
+          "visible_copy_ends_in_fragment": false
+        }
+      ]
+    },
+    "fr": {
+      "matching_sections": 1,
+      "sections": [
+        {
+          "mailto": [
+            {
+              "public_recipient_matches": true,
+              "subject_matches": true,
+              "body_has_experiment_line": true,
+              "body_has_quote_intent": true,
+              "body_has_separate_sql_fields": true
+            }
+          ],
+          "manual_subject_present": true,
+          "manual_sql_fields_present": true,
+          "manual_quote_intent_present": true,
+          "visible_copy_ends_in_fragment": false
+        }
+      ]
+    }
+  },
+  "scope": "Offline inspection of the staged quote form. This establishes neither mail client behavior nor live intake, orders or settlement."
+}
