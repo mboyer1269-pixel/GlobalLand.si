@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source\": \"products/services/canadabuys-data-qa-intake/raw/new-tender-notices.csv\",\n  \"sha256\": \"c0eebf11d274366211eaf196dc8411cf063262194c399fd6825713c295601be6\",\n  \"rows_verified\": 30,\n  \"recorded_screens\": [\n    {\n      \"task\": \"TASK-179577396113\",\n      \"scope\": \"Bilingual titles\",\n      \"hits\": 0\n    },\n    {\n      \"task\": \"TASK-179577542700\",\n      \"scope\": \"Six bilingual description fields\",\n      \"hits\": 0\n    }\n  ],\n  \"open_feed\": {\n    \"task\": \"TASK-179577396100\",\n    \"result\": \"Fetch size limit\"\n  },\n  \"buyer_evidence\": \"The cited screens yielded no candidate for original-notice verification. Standalone scope, acceptance, eligibility and market demand remain unknown beyond that coverage.\",\n  \"reconsider_when\": \"A readable original current notice explicitly invites a separately quotable offline reconciliation deliverable and states the acceptance criterion and response route.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/canadabuys-data-qa-intake/director-bounded-coverage.json",
+    "products/receipts/TASK-179578062103.json"
+  ],
+  "id": "TASK-179578062103",
+  "input_sha256": "e49f52b154903116ecb7d9232c32fa784d745626413fbea8ea7f0d04e0a59271"
+}
