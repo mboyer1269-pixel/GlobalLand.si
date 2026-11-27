@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"draft_sha256\": \"4354db998e4f0001ed5c33b9345f7ebc8ef3d8b42fa3b1227eebb9ac290b0c6b\",\n  \"scope\": \"Separate offline row comparison on fictional text. Requires matching unique SKUs and both before/after tables. Existing verifier and draft are unchanged.\",\n  \"fixtures\": {\n    \"source\": \"SKU,Barcode\\nSH-100-BLK,0012345\\nSH-100-BLU,0054321\\n\",\n    \"reordered_match\": \"SKU,Barcode\\nSH-100-BLU,0054321\\nSH-100-BLK,0012345\\n\",\n    \"swapped_barcodes\": \"SKU,Barcode\\nSH-100-BLU,0012345\\nSH-100-BLK,0054321\\n\",\n    \"duplicate_sku\": \"SKU,Barcode\\nSH-100-BLU,0054321\\nSH-100-BLU,0012345\\n\"\n  },\n  \"results\": {\n    \"reordered_match\": [],\n    \"swapped_barcodes\": [\n      {\n        \"sku\": \"SH-100-BLK\",\n        \"field\": \"Barcode\",\n        \"before\": \"0012345\",\n        \"after\": \"0054321\"\n      },\n      {\n        \"sku\": \"SH-100-BLU\",\n        \"field\": \"Barcode\",\n        \"before\": \"0054321\",\n        \"after\": \"0012345\"\n      }\n    ],\n    \"duplicate_sku\": \"Blank or repeated SKU prevents a reliable row comparison\"\n  },\n  \"buyer_result_en\": \"Two barcode values changed across two SKUs. See the before and after text for each SKU.\",\n  \"buyer_result_fr\": \"Deux valeurs de code-barres ont changé pour deux UGS. Consultez les valeurs avant et après pour chaque UGS.\",\n  \"limits\": \"Synthetic rehearsal only. No live import, recipient delivery, paid order or settlement was tested.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/stream-commerce-catalogue/delivery-rehearsal/director-manual-comparison-control.json",
+    "products/receipts/TASK-179574876100.json"
+  ],
+  "id": "TASK-179574876100",
+  "input_sha256": "7617f3628971e715460c4fec72442ddb2b4826a0442ec64d288b4515a6728816"
+}

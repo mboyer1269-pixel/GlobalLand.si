@@ -1,0 +1,31 @@
+{
+  "draft_sha256": "4354db998e4f0001ed5c33b9345f7ebc8ef3d8b42fa3b1227eebb9ac290b0c6b",
+  "scope": "Separate offline row comparison on fictional text. Requires matching unique SKUs and both before/after tables. Existing verifier and draft are unchanged.",
+  "fixtures": {
+    "source": "SKU,Barcode\nSH-100-BLK,0012345\nSH-100-BLU,0054321\n",
+    "reordered_match": "SKU,Barcode\nSH-100-BLU,0054321\nSH-100-BLK,0012345\n",
+    "swapped_barcodes": "SKU,Barcode\nSH-100-BLU,0012345\nSH-100-BLK,0054321\n",
+    "duplicate_sku": "SKU,Barcode\nSH-100-BLU,0054321\nSH-100-BLU,0012345\n"
+  },
+  "results": {
+    "reordered_match": [],
+    "swapped_barcodes": [
+      {
+        "sku": "SH-100-BLK",
+        "field": "Barcode",
+        "before": "0012345",
+        "after": "0054321"
+      },
+      {
+        "sku": "SH-100-BLU",
+        "field": "Barcode",
+        "before": "0054321",
+        "after": "0012345"
+      }
+    ],
+    "duplicate_sku": "Blank or repeated SKU prevents a reliable row comparison"
+  },
+  "buyer_result_en": "Two barcode values changed across two SKUs. See the before and after text for each SKU.",
+  "buyer_result_fr": "Deux valeurs de code-barres ont changé pour deux UGS. Consultez les valeurs avant et après pour chaque UGS.",
+  "limits": "Synthetic rehearsal only. No live import, recipient delivery, paid order or settlement was tested."
+}
