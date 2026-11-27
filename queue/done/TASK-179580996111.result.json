@@ -1,0 +1,37 @@
+{
+  "status": "DONE",
+  "output": "patching file /tmp/tmp4rx2mz49/preview.html (read from products/distribution/sqlite-instructor-pilot/reconciliation/live-index.html)\npatching file /tmp/tmp4rx2mz49/restored.html (read from /tmp/tmp4rx2mz49/preview.html)\n{\n  \"sqlite_version\": \"3.40.1\",\n  \"before\": [\n    [\n      \"DEMO-C\",\n      6,\n      5\n    ]\n  ],\n  \"after\": [\n    [\n      \"DEMO-B\",\n      4,\n      null\n    ],\n    [\n      \"DEMO-C\",\n      6,\n      5\n    ],\n    [\n      \"DEMO-D\",\n      0,\n      null\n    ]\n  ]\n}\n\n{\"live_sha256\": \"1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db\", \"shared_candidate_sha256\": \"f71bdac2fe5c9623bdbf65626d968008e846414e1cea8912cc42633e3d155fb5\", \"preview_index_sha256\": \"ef9f8dc368fa7485bd23d2f7cb91d11381e31af3d3bea58d8c75d68b7ce3adad\", \"archive_sha256\": \"8325a93711826740de4fffb9d43a312b048b26a43212280fd53df55fb5c11eb2\", \"reverse_restores_live\": true, \"learner_command\": \"python3 run.py\", \"learner_exit\": 0, \"learner_stdout\": \"{\\n  \\\"sqlite_version\\\": \\\"3.40.1\\\",\\n  \\\"before\\\": [\\n    [\\n      \\\"DEMO-C\\\",\\n      6,\\n      5\\n    ]\\n  ],\\n  \\\"after\\\": [\\n    [\\n      \\\"DEMO-B\\\",\\n      4,\\n      null\\n    ],\\n    [\\n      \\\"DEMO-C\\\",\\n      6,\\n      5\\n    ],\\n    [\\n      \\\"DEMO-D\\\",\\n      0,\\n      null\\n    ]\\n  ]\\n}\\n\", \"standalone_patch\": \"products/distribution/sqlite-instructor-pilot/placement/index.diff\", \"payload\": \"products/distribution/sqlite-instructor-pilot/placement/sqlite-preview.zip.b64\", \"decision\": \"Standalone preview verified against fresh live baseline. Shared candidate carries separate bilingual private quote changes. Site files untouched. Public deployment requires an independently approved exact digest.\"}\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-instructor-pilot/reconciliation/shared-candidate-changes.diff",
+    "products/distribution/sqlite-instructor-pilot/reconciliation/standalone-verification.json",
+    "products/receipts/TASK-179580996111.json"
+  ],
+  "request": {
+    "id": "TASK-179580996111",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-27T20:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport base64,difflib,hashlib,io,json,subprocess,tempfile,zipfile\nroot=Path('products/distribution/sqlite-instructor-pilot')\nfolder=root/'reconciliation'\nlive=folder/'live-index.html'\npatch=root/'placement/index.diff'\npayload=root/'placement/sqlite-preview.zip.b64'\nsite=Path('products/sites/sqlite-statement-diagnostic/index.html')\nsha=lambda data: hashlib.sha256(data).hexdigest()\nlive_bytes=live.read_bytes()\nsite_bytes=site.read_bytes()\narchive=base64.b64decode(payload.read_bytes().strip(),validate=True)\nassert sha(live_bytes)=='1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db'\nassert sha(archive)=='8325a93711826740de4fffb9d43a312b048b26a43212280fd53df55fb5c11eb2'\nwith tempfile.TemporaryDirectory() as temp:\n p=Path(temp)\n preview=p/'preview.html'\n subprocess.run(['patch','--batch','--fuzz=0','-o',str(preview),str(live),str(patch)],check=True)\n restored=p/'restored.html'\n subprocess.run(['patch','--batch','--fuzz=0','-R','-o',str(restored),str(preview),str(patch)],check=True)\n assert restored.read_bytes()==live_bytes\n assert 'href=\"sqlite-preview.zip\"' in preview.read_text()\n with zipfile.ZipFile(io.BytesIO(archive)) as z:\n  assert set(z.namelist())=={'README.md','after.sql','before.sql','run.py','seed.sql'}\n  learner=p/'learner'\n  z.extractall(learner)\n run=subprocess.run(['python3','run.py'],cwd=learner,check=True,capture_output=True,text=True)\n print(run.stdout)\n candidate=preview.read_bytes()\nassert sha(candidate)=='ef9f8dc368fa7485bd23d2f7cb91d11381e31af3d3bea58d8c75d68b7ce3adad'\nchanges=''.join(difflib.unified_diff(live_bytes.decode().splitlines(True),site_bytes.decode().splitlines(True),fromfile='served-index.html',tofile='shared-candidate-index.html'))\n(folder/'shared-candidate-changes.diff').write_text(changes)\nproof=dict(live_sha256=sha(live_bytes),shared_candidate_sha256=sha(site_bytes),preview_index_sha256=sha(candidate),archive_sha256=sha(archive),reverse_restores_live=True,learner_command='python3 run.py',learner_exit=run.returncode,learner_stdout=run.stdout,standalone_patch=str(patch),payload=str(payload),decision='Standalone preview verified against fresh live baseline. Shared candidate carries separate bilingual private quote changes. Site files untouched. Public deployment requires an independently approved exact digest.')\n(folder/'standalone-verification.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\\n')\nprint(json.dumps(proof))\n"
+      ],
+      "inputs": [
+        "products/distribution/sqlite-instructor-pilot/placement/",
+        "products/distribution/sqlite-instructor-pilot/reconciliation/live-index.html",
+        "products/sites/sqlite-statement-diagnostic/index.html"
+      ],
+      "outputs": [
+        "products/distribution/sqlite-instructor-pilot/reconciliation/shared-candidate-changes.diff",
+        "products/distribution/sqlite-instructor-pilot/reconciliation/standalone-verification.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795809961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179580996111",
+  "input_sha256": "098128c2395ee84f43d8cf3acae2aa03a6700b7a82e267f5fb2b15347c5e353c"
+}
