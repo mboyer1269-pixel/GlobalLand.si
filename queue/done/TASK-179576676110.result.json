@@ -1,0 +1,34 @@
+{
+  "status": "DONE",
+  "output": "{\"control_exit\": 0, \"swap_exit\": 1, \"differences\": [{\"line\": 2, \"sku\": \"SH100-BLA-40\", \"expected\": \"2000000000015\", \"actual\": \"2000000000022\"}, {\"line\": 3, \"sku\": \"SH100-BLA-41\", \"expected\": \"2000000000022\", \"actual\": \"2000000000015\"}], \"swap_wall_ms\": 75.365}\n\n",
+  "artifacts": [
+    "products/services/stream-commerce-catalogue/delivery-rehearsal/machine-timed-barcode-control.json",
+    "products/receipts/TASK-179576676110.json"
+  ],
+  "request": {
+    "id": "TASK-179576676110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-27T08:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import csv, hashlib, json, subprocess, sys, tempfile, time\nfrom pathlib import Path\nsite=Path('products/sites/shopify-catalogue-example')\nfixture=site/'fixtures'\nvariants=fixture/'before-variants.csv'\nimages=fixture/'before-images.csv'\noriginal=fixture/'after-shopify.csv'\nentry=site/'verify_example.py'\nstart=time.perf_counter()\ndef read_table(path):\n    with path.open(newline='', encoding='utf-8') as handle:\n        reader=csv.DictReader(handle)\n        return reader.fieldnames, list(reader)\nheaders, baseline=read_table(original)\nassert len(baseline)<=20 and 'Barcodes' in headers\nsku_field=next(key for key in headers if key.strip().lower() in ('sku','variant sku'))\nfixture_read=time.perf_counter()\nwith tempfile.TemporaryDirectory() as temp:\n    altered=Path(temp)/'altered.csv'\n    rows=[row.copy() for row in baseline]\n    assert [row[sku_field] for row in rows[:2]]==['SH100-BLA-40','SH100-BLA-41']\n    rows[0]['Barcodes'],rows[1]['Barcodes']=rows[1]['Barcodes'],rows[0]['Barcodes']\n    with altered.open('w',newline='',encoding='utf-8') as handle:\n        writer=csv.DictWriter(handle,headers,lineterminator='\\n')\n        writer.writeheader()\n        writer.writerows(rows)\n    def verify(path):\n        t=time.perf_counter()\n        result=subprocess.run([sys.executable,str(entry),str(variants),str(images),str(path)],capture_output=True,text=True)\n        return {'exit':result.returncode,'report':json.loads(result.stdout),'milliseconds':round((time.perf_counter()-t)*1000,3)}\n    control=verify(original)\n    mutation=verify(altered)\n    compare_start=time.perf_counter()\n    expected={row[sku_field]:row['Barcodes'] for row in baseline if row[sku_field]}\n    differences=[{'line':line,'sku':row[sku_field],'expected':expected[row[sku_field]],'actual':row['Barcodes']} for line,row in enumerate(rows,2) if row[sku_field] and row['Barcodes']!=expected[row[sku_field]]]\n    compare_end=time.perf_counter()\nassert control['exit']==0 and mutation['exit']==1\nassert mutation['report']['failed']==['identifiers_preserved_sku_barcode_color_size_price']\nassert [item['line'] for item in differences]==[2,3]\ndata={'scope':'Single fictional offline run. Timings are machine wall time, excluding mail, human handling and quote administration. The line findings come from a separate scripted SKU comparison, not the verifier.','source_sha256':{str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in [entry,site/'verify.py',variants,images,original]},'fixture_read_ms':round((fixture_read-start)*1000,3),'control':control,'swap':mutation,'sku_comparison_ms':round((compare_end-compare_start)*1000,3),'differences':differences}\noutput=Path(sys.argv[1])\noutput.parent.mkdir(parents=True,exist_ok=True)\noutput.write_text(json.dumps(data,indent=2)+'\\n',encoding='utf-8')\nprint(json.dumps({'control_exit':control['exit'],'swap_exit':mutation['exit'],'differences':differences,'swap_wall_ms':mutation['milliseconds']}))",
+        "products/services/stream-commerce-catalogue/delivery-rehearsal/machine-timed-barcode-control.json"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/"
+      ],
+      "outputs": [
+        "products/services/stream-commerce-catalogue/delivery-rehearsal/machine-timed-barcode-control.json"
+      ]
+    },
+    "description": "Broker action during THINK-1795766761",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179576676110",
+  "input_sha256": "e47904058ab0a6f55a1869e5a1f26dfc3562e631c71718a0d9c5fd448b4db0b8"
+}
