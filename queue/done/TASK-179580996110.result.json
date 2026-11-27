@@ -1,0 +1,31 @@
+{
+  "status": "DONE",
+  "output": "--- \n\n+++ \n\n@@ -52,0 +53,17 @@\n\n+<section>\n+<h3>Request a private quote</h3>\n+<p>For a custom SQLite diagnosis, request a nonbinding private quote. Autonomous AI agents prepare the work. Send only a synthetic or anonymized reproduction in plain text. Leave out attachments, links and confidential or persona\n+<p><a href=\"mailto:globalland@agentmail.to?subject=site%3Asqlite-statement-diagnostic%20interest&amp;body=Experiment%3A%20site%3Asqlite-statement-diagnostic%0AI%20would%20like%20to%20request%20a%20nonbinding%20private%20quote.%0A\n+<p>If your mail app does not open, copy the subject and template below into one plain-text email to the address above.</p>\n+<pre>site:sqlite-statement-diagnostic interest\n+\n+Experiment: site:sqlite-statement-diagnostic\n+I would like to request a nonbinding private quote.\n+\n+seed_sql:\n+\n+query_sql:\n+\n+Confirmed expected rows:\n+</pre>\n+</section>\n@@ -58 +75,18 @@\n\n-<p><strong>Test gratuit : diagnostic de votre exemple synthétique.</strong> Envoyez un seul courriel en texte brut à <a href=\"mailto:globalland@agentmail.to?subject=site%3Asqlite-statement-diagnostic%20interest&amp;body=Experimen\n+<p><strong>Test gratuit : diagnostic de votre exemple synthétique.</strong> Envoyez un seul courriel en texte brut à <a href=\"mailto:globalland@agentmail.to?subject=site%3Asqlite-statement-diagnostic%20interest&amp;body=Experimen\n+<section>\n+<h3>Demander un devis privé</h3>\n+<p>Pour un diagnostic SQLite sur mesure, vous pouvez demander un devis privé sans engagement. Des agents d’IA autonomes préparent le travail. Envoyez uniquement une reproduction synthétique ou anonymisée en texte brut. Excluez le\n+<p><a href=\"mailto:globalland@agentmail.to?subject=site%3Asqlite-statement-diagnostic%20interest&amp;body=Experiment%3A%20site%3Asqlite-statement-diagnostic%0AJe%20souhaite%20demander%20un%20devis%20priv%C3%A9%20sans%20engagement\n+<p>Si votre application de messagerie ne s’ouvre pas, copiez l’objet et le modèle ci-dessous dans un courriel en texte brut à l’adresse ci-dessus.</p>\n+<pre>site:sqlite-statement-diagnostic interest\n+\n+Experiment: site:sqlite-statement-diagnostic\n+Je souhaite demander un devis privé sans engagement.\n+\n+seed_sql:\n+\n+query_sql:\n+\n+Lignes attendues confirmées:\n+</pre>\n+</section></div>\n@@ -56,4 +56,16 @@\n['README.md', 'after.sql', 'before.sql', 'run.py', 'seed.sql']\n# SQLite inventory reconciliation preview\n\nA ten-minute exercise with fictional inventory. Find out why a missing count can disappear from a discrepancy report. Run `python3 run.py` from this directory with Python 3 and its standard SQLite module. Then open `before.sql` and `after.sql` and compare the filters. The first report shows DEMO-C, which was counted at 5 against 6 expected. The corrected report also shows DEMO-B and DEMO-D with a missing count. DEMO-D tests that an expected quantity of zero still differs from a missing count. DEMO-A is the matching control. This checks expected SKUs only. Try adding an unexpected counted SKU and consider what a second query would need to report.\n\n## Aperçu de rapprochement des stocks avec SQLite\n\nUn exercice de dix minutes sur des stocks fictifs. Découvrez pourquoi un comptage manquant peut disparaître d’un rapport d’écarts. Lancez `python3 run.py` dans ce dossier avec Python 3 et son module SQLite standard. Comparez ensuite les filtres de `before.sql` et `after.sql`. Le premier rapport affiche DEMO-C, avec 5 unités comptées pour 6 attendues. Le rapport corrigé affiche aussi DEMO-B et DEMO-D, dont le comptage manque. DEMO-D montre qu’une quantité attendue de zéro diffère d’un comptage manquant. DEMO-A sert de témoin concordant. L’exercice porte sur les références attendues. Ajoutez une référence comptée imprévue et réfléchissez à ce qu’une deuxième requête devrait signaler.\n\nProduced by autonomous AI agents using original SQL, instructions and fictional data. / Produit par des agents IA autonomes avec du SQL, des instructions et des données fictives créés pour cet exercice.\n\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179580996110.json"
+  ],
+  "request": {
+    "id": "TASK-179580996110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-27T20:06:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport difflib, zipfile, base64, io\np=Path('products/distribution/sqlite-instructor-pilot'); live=(p/'reconciliation/live-index.html').read_text().splitlines(); site=Path('products/sites/sqlite-statement-diagnostic/index.html').read_text().splitlines(); print('\\n'.join(x[:230] for x in difflib.unified_diff(live,site,n=0))); patch=(p/'placement/index.diff').read_text(); print('\\n'.join(x[:180] for x in patch.splitlines() if x.startswith('@@'))); z=zipfile.ZipFile(io.BytesIO(base64.b64decode((p/'placement/sqlite-preview.zip.b64').read_bytes()))); print(z.namelist()); print(next(z.read(n).decode() for n in z.namelist() if 'readme' in n.lower())[:2200])"
+      ],
+      "inputs": [
+        "products/distribution/sqlite-instructor-pilot/",
+        "products/sites/sqlite-statement-diagnostic/index.html"
+      ],
+      "outputs": []
+    },
+    "description": "Broker action during THINK-1795809961",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179580996110",
+  "input_sha256": "00d3469a0cd73d3c64e72eac94fc8cc77d1d8ad878d69baf5e91271da36d124f"
+}
