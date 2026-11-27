@@ -207,29 +207,25 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-27T23:00:50Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1900,
-    "turns_without_verified_revenue": 1900,
-    "turns_without_outcome": 5,
+    "turns_without_new_interpreted_feedback": 1901,
+    "turns_without_verified_revenue": 1901,
+    "turns_without_outcome": 6,
     "outcome_threshold": 12,
     "dry_since": "2026-11-27T21:35:48Z",
     "last_outcome_turn": "THINK-1795815001",
     "last_productive_turn": "THINK-1795818901",
-    "last_turn": "THINK-1795818901",
+    "last_turn": "THINK-1795820402",
     "last_change": {
-      "productive": true,
+      "productive": false,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [
-        "products/distribution/sqlite-instructor-pilot/separate-site/verification.json",
-        "products/sites/sqlite-join-exercise/index.html",
-        "products/sites/sqlite-join-exercise/sqlite-preview.zip.b64"
-      ],
-      "new_product_count": 3,
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
