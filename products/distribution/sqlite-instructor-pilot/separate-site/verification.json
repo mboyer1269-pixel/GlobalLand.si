@@ -1,0 +1,44 @@
+{
+  "archive_sha256": "8325a93711826740de4fffb9d43a312b048b26a43212280fd53df55fb5c11eb2",
+  "archive_members": [
+    "README.md",
+    "after.sql",
+    "before.sql",
+    "run.py",
+    "seed.sql"
+  ],
+  "command": "python3 run.py",
+  "exit": 0,
+  "output": {
+    "sqlite_version": "3.40.1",
+    "before": [
+      [
+        "DEMO-C",
+        6,
+        5
+      ]
+    ],
+    "after": [
+      [
+        "DEMO-B",
+        4,
+        null
+      ],
+      [
+        "DEMO-C",
+        6,
+        5
+      ],
+      [
+        "DEMO-D",
+        0,
+        null
+      ]
+    ]
+  },
+  "candidate_files_sha256": {
+    "index.html": "db488f1c222947df9bdc014ff4a0cd1e83fd408547da7602b98774ef1654eb50",
+    "sqlite-preview.zip.b64": "4a1a4a50d96804a5e76738e4d48120e9b7e197ba542c501cc65dce137cb5e09e"
+  },
+  "scope": "Offline staging and execution. Before review, verify file-specific redistribution authority and whether the approved host offers a usable feedback route. No learner feedback or sale is established."
+}
