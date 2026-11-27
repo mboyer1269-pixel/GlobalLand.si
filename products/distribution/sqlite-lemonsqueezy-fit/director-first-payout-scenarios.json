@@ -1,0 +1,42 @@
+{
+  "source": "https://docs.lemonsqueezy.com/help/getting-started/getting-paid",
+  "status": "modeled_pending_verification_of_threshold_currency_and_payout_method",
+  "scenarios": [
+    {
+      "case": "base",
+      "sales_to_threshold": 4,
+      "balance_usd": "55.00",
+      "modeled_bank_fee_usd": "0.55",
+      "after_modeled_bank_fee_usd": "54.45"
+    },
+    {
+      "case": "one surcharge",
+      "sales_to_threshold": 4,
+      "balance_usd": "54.08",
+      "modeled_bank_fee_usd": "0.54",
+      "after_modeled_bank_fee_usd": "53.54"
+    },
+    {
+      "case": "both surcharges",
+      "sales_to_threshold": 4,
+      "balance_usd": "53.20",
+      "modeled_bank_fee_usd": "0.53",
+      "after_modeled_bank_fee_usd": "52.67"
+    }
+  ],
+  "limits": "Hypothetical USD sales at USD 15, starting from a zero platform balance. Canadian bank payout fee is modeled at 1% only if that route and rate apply. Taxes, conversion, refunds, operating costs, activation and settlement are unverified.",
+  "source_sha256": "9384e2e5d31762969077dc34cd9b50484b222bba5597d3d7ba5759af7efbd3bc",
+  "passages": [
+    "er taxes ), etc. and the net sales will be paid out to your bank account or PayPal account. We take care of all of these individual fees so that you only have to know about",
+    "ank payouts You can set up payouts to be sent right to your bank account at Settings \u00bb Payout . As part of connecting your bank account, you may be asked to verify your ide",
+    "k account at Settings \u00bb Payout . As part of connecting your bank account, you may be asked to verify your identity for fraud prevention. Payouts made using bank transfers w",
+    " of the month . Payouts can take 1-5 days to appear in your bank account. For example, if you make a sale on the 4th of the month, it will be included in the payout created",
+    "tual fee varies depending on your payout method, region and settlement currency. Read more about payout fees . Currency Bank payouts will be made in USD. For bank payouts to a cur",
+    "r PayPal account. Read more about PayPal fees here . Payout threshold There is a minimum payout threshold of $50 . If your upcoming payout doesn\u2019t meet this threshold it",
+    "yPal fees here . Payout threshold There is a minimum payout threshold of $50 . If your upcoming payout doesn\u2019t meet this threshold it will remain \u201cPending\u201d and be rolled",
+    "hreshold of $50 . If your upcoming payout doesn\u2019t meet this threshold it will remain \u201cPending\u201d and be rolled over to the next payout cycle. This will happen each week un",
+    "ppen each week until the upcoming payout meets the required threshold. You can check the status of your upcoming payout from Settings \u00bb Payout . Payout invoices For ever",
+    "ts Supported countries Schedule Payout fees Currency Payout threshold Payout invoices \u00a9 2026 Sold through Link, LLC f/k/a Lemon Squeezy LLC \u2022 Privacy \u2022 Terms \u2022 DPA \u2022"
+  ],
+  "threshold_assumption_usd": "50"
+}
