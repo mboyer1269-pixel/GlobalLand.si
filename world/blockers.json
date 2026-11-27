@@ -168,23 +168,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-PROGRESS",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "3 tours consécutifs sans résultat vérifiable",
-      "detail": "Aucune mission terminée ou abandonnée, aucun nouveau produit hors products/research/, aucun revenu vérifié. Missions ouvertes : AGENCY-LAUNCH-QA-PILOT, AGENCY-QA-PARTNER-INTAKE, AKAMAI-PAID-TUTORIAL-PITCH, ALGORA-BOUNDED-DOCS-DELIVERY-20261126, AUSTRALIAN-BUYER-DATA-QUALITY-PILOT, AWARD-PRIME-SUBCONTRACT-SAMPLE, BILINGUAL-TECHNICAL-AGENCY-PAID-PILOT, BOAMP-DATA-QUALITY-ACCEPTANCE-PILOT, BOAMP-DATE-FIRST-LINK-QA-PILOT, BUYER-CONTROLLED-EN-FR-LOCALIZATION-SAMPLE, BUYER-PAID-FEED-RECONCILIATION, BUYER-POSTED-INVOICE-RECONCILIATION-PILOT, BUYER-REQUEST-BILINGUAL-DOCUMENTATION, CANADA-STANDALONE-DATA-QA-BUYER, CANADABUYS-OFFLINE-RECONCILIATION-QUOTE, CANADIAN-PUBLIC-CATALOGUE-QA-PILOT, CANADIAN-SMALL-RFQ-DATA-DELIVERY, CATALOGUE-CAD60-HANDLING-TIME, CATALOGUE-CHECKOUT-ACTIVATION-HANDOFF, CATALOGUE-COMMISSION-SCOPE-CHECK ; consulter la collection missions paginée pour la suite.",
-      "open_missions_total": 120,
-      "missions_truncated": true,
-      "missions_collection": "missions",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 3,
-      "opened_at": "2026-11-27T14:00:58Z",
-      "last_reported_at": "2026-11-27T14:30:45Z"
     }
   ],
   "resolved_recent": [
@@ -224,26 +207,28 @@
     }
   ],
   "progress": {
-    "stalled_turns": 3,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-27T14:00:58Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1876,
-    "turns_without_verified_revenue": 1876,
-    "turns_without_outcome": 3,
+    "turns_without_new_interpreted_feedback": 1877,
+    "turns_without_verified_revenue": 1877,
+    "turns_without_outcome": 4,
     "outcome_threshold": 12,
     "dry_since": "2026-11-27T14:00:58Z",
     "last_outcome_turn": "THINK-1795786561",
-    "last_productive_turn": "THINK-1795786561",
-    "last_turn": "THINK-1795789801",
+    "last_productive_turn": "THINK-1795790161",
+    "last_turn": "THINK-1795790161",
     "last_change": {
-      "productive": false,
+      "productive": true,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
-      "new_research_count": 1,
+      "new_products": [
+        "products/services/csv-fixed-price-buyer-test/buyer-wording-screen.json"
+      ],
+      "new_product_count": 1,
+      "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
     }
