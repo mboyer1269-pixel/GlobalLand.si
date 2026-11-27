@@ -1,0 +1,4 @@
+CREATE TABLE expected (sku TEXT PRIMARY KEY, quantity INTEGER NOT NULL);
+CREATE TABLE counted (sku TEXT PRIMARY KEY, quantity INTEGER NOT NULL);
+INSERT INTO expected VALUES ('DEMO-A', 8), ('DEMO-B', 4), ('DEMO-C', 6), ('DEMO-D', 0);
+INSERT INTO counted VALUES ('DEMO-A', 8), ('DEMO-C', 5);
