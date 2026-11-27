@@ -1,0 +1,34 @@
+{
+  "baseline_sha256": "1dbcaa64a3f399c03612ce1c999e342fc901727ed4889bfee83a0afc7bcd78db",
+  "candidate_index_sha256": "ef9f8dc368fa7485bd23d2f7cb91d11381e31af3d3bea58d8c75d68b7ce3adad",
+  "archive_sha256": "8325a93711826740de4fffb9d43a312b048b26a43212280fd53df55fb5c11eb2",
+  "download_target": "sqlite-preview.zip",
+  "staged_payload": "sqlite-preview.zip.b64",
+  "reverse_restores_baseline": true,
+  "sqlite_version": "3.40.1",
+  "before": [
+    [
+      "DEMO-C",
+      6,
+      5
+    ]
+  ],
+  "after": [
+    [
+      "DEMO-B",
+      4,
+      null
+    ],
+    [
+      "DEMO-C",
+      6,
+      5
+    ],
+    [
+      "DEMO-D",
+      0,
+      null
+    ]
+  ],
+  "scope": "Offline SQL rerun and staged patch. Hosted download and classroom feedback unobserved. Public placement requires a site dry run and host-enforced independent review of the exact release digest."
+}
