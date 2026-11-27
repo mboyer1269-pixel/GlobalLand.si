@@ -174,14 +174,14 @@
       "status": "OPEN",
       "owner": "AGENTS",
       "category": "PROGRESS",
-      "title": "14 tours consécutifs sans mission conclue ni revenu vérifié",
+      "title": "15 tours consécutifs sans mission conclue ni revenu vérifié",
       "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
       "mission_id": null,
       "expected_gain": null,
       "raised_by": "PROGRESS-DETECTOR",
-      "reports": 14,
+      "reports": 15,
       "opened_at": "2026-11-26T23:06:41Z",
-      "last_reported_at": "2026-11-27T02:30:45Z"
+      "last_reported_at": "2026-11-27T02:36:43Z"
     }
   ],
   "resolved_recent": [
@@ -221,27 +221,25 @@
     }
   ],
   "progress": {
-    "stalled_turns": 0,
+    "stalled_turns": 1,
     "threshold": 3,
-    "stalled_since": null,
+    "stalled_since": "2026-11-27T02:36:43Z",
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1831,
-    "turns_without_verified_revenue": 1831,
-    "turns_without_outcome": 14,
+    "turns_without_new_interpreted_feedback": 1832,
+    "turns_without_verified_revenue": 1832,
+    "turns_without_outcome": 15,
     "outcome_threshold": 12,
     "dry_since": "2026-11-26T23:06:41Z",
     "last_outcome_turn": "THINK-1795734020",
     "last_productive_turn": "THINK-1795746602",
-    "last_turn": "THINK-1795746602",
+    "last_turn": "THINK-1795746961",
     "last_change": {
-      "productive": true,
+      "productive": false,
       "outcome": false,
       "mission_outcomes": [],
-      "new_products": [
-        "products/distribution/sqlite-lemonsqueezy-fit/exact-payload-inventory.json"
-      ],
-      "new_product_count": 1,
+      "new_products": [],
+      "new_product_count": 0,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
