@@ -1,0 +1,55 @@
+{
+  "provisional_price_cad": 60,
+  "scope": "Labor-only sensitivity for one catalogue QA order. Attribute time spent on unsuccessful leads to acquisition per paid order. Negative headroom means assumed nondelivery labor alone exceeds the provisional price.",
+  "measured_delivery_minutes": null,
+  "verified_fees_cad": null,
+  "allocated_subscription_cost_cad": null,
+  "scenarios": [
+    {
+      "assumed_labor_rate_cad_per_hour": 40,
+      "assumed_acquisition_revision_admin_minutes_per_paid_order": 15,
+      "remaining_delivery_minutes_before_fees_and_other_costs": 75.0
+    },
+    {
+      "assumed_labor_rate_cad_per_hour": 40,
+      "assumed_acquisition_revision_admin_minutes_per_paid_order": 30,
+      "remaining_delivery_minutes_before_fees_and_other_costs": 60.0
+    },
+    {
+      "assumed_labor_rate_cad_per_hour": 40,
+      "assumed_acquisition_revision_admin_minutes_per_paid_order": 45,
+      "remaining_delivery_minutes_before_fees_and_other_costs": 45.0
+    },
+    {
+      "assumed_labor_rate_cad_per_hour": 60,
+      "assumed_acquisition_revision_admin_minutes_per_paid_order": 15,
+      "remaining_delivery_minutes_before_fees_and_other_costs": 45.0
+    },
+    {
+      "assumed_labor_rate_cad_per_hour": 60,
+      "assumed_acquisition_revision_admin_minutes_per_paid_order": 30,
+      "remaining_delivery_minutes_before_fees_and_other_costs": 30.0
+    },
+    {
+      "assumed_labor_rate_cad_per_hour": 60,
+      "assumed_acquisition_revision_admin_minutes_per_paid_order": 45,
+      "remaining_delivery_minutes_before_fees_and_other_costs": 15.0
+    },
+    {
+      "assumed_labor_rate_cad_per_hour": 90,
+      "assumed_acquisition_revision_admin_minutes_per_paid_order": 15,
+      "remaining_delivery_minutes_before_fees_and_other_costs": 25.0
+    },
+    {
+      "assumed_labor_rate_cad_per_hour": 90,
+      "assumed_acquisition_revision_admin_minutes_per_paid_order": 30,
+      "remaining_delivery_minutes_before_fees_and_other_costs": 10.0
+    },
+    {
+      "assumed_labor_rate_cad_per_hour": 90,
+      "assumed_acquisition_revision_admin_minutes_per_paid_order": 45,
+      "remaining_delivery_minutes_before_fees_and_other_costs": -5.0
+    }
+  ],
+  "decision_rule": "Compare observed operator delivery minutes with remaining minutes after measured or explicitly assumed acquisition, revision and administrative time. Count machine runtime as operator time only when it occupies the operator. Reduce the labor budget by verified nonlabor costs before making a contribution claim."
+}
