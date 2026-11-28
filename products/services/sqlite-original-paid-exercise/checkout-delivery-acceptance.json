@@ -1,0 +1,77 @@
+{
+  "state": "private_checkout_acceptance_packet",
+  "archive_sha256": "76bdf9b059b77ee575f4c3fed3787059a07a0b2bf78e8babb4bee282d30bf08c",
+  "members_sha256": {
+    "README.md": "094612576506c6b2c53ed62c557f1a6cbd406d4c876d940015af504d7f8b7974",
+    "seed.sql": "17a186e142f9f77966148a4f84cff120bb4f77e079a5b64d60088b5f35800eea",
+    "exercise.sql": "240441e5393b965ace3a1560895375f8cd0c5a75116124c49f43e2c8560701f3",
+    "solution.sql": "ec4021d84c5c46058f5648859549013cc7acc61e205cfdb0c126948e6e1da38a",
+    "check.py": "4999c8eff9240a645a8f750c7af128c5c2647611286de4196d42387142273c84"
+  },
+  "observed_offline_controls": {
+    "exercise.sql": {
+      "exit": 1,
+      "stdout": "SQLite 3.40.1 | Python 3.11.2\nExpected [(1, 8, 5), (2, 4, 0), (3, 3, 3)]\nObserved [(1, 8, 5), (3, 3, 3)]\n",
+      "stderr": "",
+      "expected_exit": 1
+    },
+    "solution.sql": {
+      "exit": 0,
+      "stdout": "SQLite 3.40.1 | Python 3.11.2\nExpected [(1, 8, 5), (2, 4, 0), (3, 3, 3)]\nObserved [(1, 8, 5), (2, 4, 0), (3, 3, 3)]\n",
+      "stderr": "",
+      "expected_exit": 0
+    }
+  },
+  "sqlite_version": "3.40.1",
+  "fictional_changed_data_control": [
+    {
+      "table": "purchase_order",
+      "field": "ordered",
+      "key": 2,
+      "before": 4,
+      "after": 11,
+      "starter_rows": [
+        [
+          1,
+          8,
+          5
+        ],
+        [
+          3,
+          3,
+          3
+        ]
+      ],
+      "solution_rows": [
+        [
+          1,
+          8,
+          5
+        ],
+        [
+          2,
+          11,
+          0
+        ],
+        [
+          3,
+          3,
+          3
+        ]
+      ],
+      "pass": true
+    }
+  ],
+  "before_activation": [
+    "Record the authorized seller decision for redistribution of this exact archive.",
+    "Confirm seller eligibility and the selected payment and payout setup against current official terms.",
+    "Obtain independent review of the exact public release."
+  ],
+  "test_mode_if_officially_supported": [
+    "Use only the authorized platform test checkout.",
+    "Download the delivered file through the buyer path and compare its SHA-256 and exact member hashes with this packet.",
+    "Extract into an empty directory and follow the buyer README. Confirm the starter fails and the solution passes on the documented fixture.",
+    "Save a redacted test receipt with the archive hash and control exits. Record any live sale, payout and Treasury settlement separately."
+  ],
+  "checkout_result": "unobserved"
+}
