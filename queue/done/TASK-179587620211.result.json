@@ -1,0 +1,39 @@
+{
+  "status": "DONE",
+  "output": "patching file /tmp/tmp9cdc11de/index.html\n{\"staged\": \"c51c52bccd913d808ece4a7dec4d0a0bb13fbfd0c0ca201f30a9fd7eb62c0ab7\", \"preserved\": \"518a7843922faae2a1638530e4e59234524e81ab7496c34324e644ab6b4fc5eb\", \"files\": 9}\n\n",
+  "artifacts": [
+    "products/distribution/catalogue-editor-example-placement/release-owner-handoff/preserved-concurrent-index.html",
+    "products/sites/shopify-catalogue-example/index.html",
+    "products/receipts/TASK-179587620211.json"
+  ],
+  "request": {
+    "id": "TASK-179587620211",
+    "type": "TOOL",
+    "submitted_by": "ACQUISITION",
+    "created_at": "2026-11-28T14:30:02Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path\nimport hashlib, subprocess, tempfile, json\nsite=Path(\"products/sites/shopify-catalogue-example/\")\nroot=Path(\"products/distribution/catalogue-editor-example-placement/\")\nhandoff=root/'release-owner-handoff'\nbaseline=root/'placement-live-readback.html'\nmanifest=json.loads((handoff/'verification.json').read_text())\nsha=lambda b:hashlib.sha256(b).hexdigest()\ncurrent=(site/'index.html').read_bytes()\nassert sha(current)==manifest['concurrent_draft_sha256']\nassert sha(baseline.read_bytes())==manifest['served_sha256']\nexpected=manifest['current_draft_other_files_sha256']\nassert {str(f.relative_to(site)):sha(f.read_bytes()) for f in site.rglob('*') if f.is_file() and f!=site/'index.html'}==expected\nwith tempfile.TemporaryDirectory() as tmp:\n    candidate=Path(tmp)/'index.html'\n    candidate.write_bytes(baseline.read_bytes())\n    subprocess.run(['patch','--batch','--forward',str(candidate),str(handoff/'worked-example-only.diff')],check=True)\n    payload=candidate.read_bytes()\nassert sha(payload)==manifest['worked_example_index_sha256']\n(handoff/'preserved-concurrent-index.html').write_bytes(current)\n(site/'index.html').write_bytes(payload)\nprint(json.dumps({'staged':sha(payload),'preserved':sha(current),'files':1+len(expected)}))\n"
+      ],
+      "inputs": [
+        "products/sites/shopify-catalogue-example/",
+        "products/distribution/catalogue-editor-example-placement/placement-live-readback.html",
+        "products/distribution/catalogue-editor-example-placement/release-owner-handoff/verification.json",
+        "products/distribution/catalogue-editor-example-placement/release-owner-handoff/worked-example-only.diff"
+      ],
+      "outputs": [
+        "products/distribution/catalogue-editor-example-placement/release-owner-handoff/preserved-concurrent-index.html",
+        "products/sites/shopify-catalogue-example/index.html"
+      ],
+      "mission_id": "CATALOGUE-BUYER-EXAMPLE-PLACEMENT"
+    },
+    "description": "Broker action during THINK-1795876202",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179587620211",
+  "input_sha256": "a3baa2464b3981226d426bf332dd2961bde382a12b9183af64b8b59d27c294e2"
+}
