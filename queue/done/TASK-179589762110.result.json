@@ -1,0 +1,32 @@
+{
+  "status": "DONE",
+  "output": "exercise.sql\n-- Fix the query so it includes orders without receipts.\nSELECT p.id, p.ordered, SUM(r.quantity) AS received\nFROM purchase_order AS p JOIN receipt AS r ON p.id = r.order_id\nGROUP BY p.id, p.ordered\nORDER BY p.id;\n\nsolution.sql\nWITH receipt_total AS (\n    SELECT order_id, SUM(quantity) AS received\n    FROM receipt\n    GROUP BY order_id\n)\nSELECT p.id, p.ordered, COALESCE(r.received, 0) AS received\nFROM purchase_order AS p LEFT JOIN receipt_total AS r ON p.id = r.order_id\nORDER BY p.id;\n\n\n",
+  "artifacts": [
+    "products/receipts/TASK-179589762110.json"
+  ],
+  "request": {
+    "id": "TASK-179589762110",
+    "type": "TOOL",
+    "submitted_by": "DIRECTOR",
+    "created_at": "2026-11-28T20:27:01Z",
+    "action": "EXEC",
+    "args": {
+      "argv": [
+        "python3",
+        "-c",
+        "import base64,io,sys,zipfile\nfrom pathlib import Path\nwith zipfile.ZipFile(io.BytesIO(base64.b64decode(Path(sys.argv[1]).read_text()))) as archive:\n    for name in ('exercise.sql', 'solution.sql'):\n        print(name, archive.read(name).decode(), sep='\\n')",
+        "products/services/sqlite-original-paid-exercise/director-candidate/sqlite-reconciliation.zip.b64"
+      ],
+      "inputs": [
+        "products/services/sqlite-original-paid-exercise/director-candidate/sqlite-reconciliation.zip.b64"
+      ],
+      "outputs": [],
+      "mission_id": "SQLITE-ORIGINAL-PAID-EXERCISE"
+    },
+    "description": "Broker action during THINK-1795897621",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179589762110",
+  "input_sha256": "5860e353280e9d07b57918a159f72f90e9c29763af2c96a7d563c823148a876c"
+}
