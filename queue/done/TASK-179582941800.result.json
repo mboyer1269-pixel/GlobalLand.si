@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"source\": \"https://peppol.org/members/peppol-certified-service-providers/\",\n  \"source_sha256\": \"41db92d2709636a03d99d6b5c5143b76e668557992a16565ecee803b8c3fa015\",\n  \"table_rows_parsed\": 789,\n  \"country_reference_rows\": 2,\n  \"rows\": [\n    {\n      \"table_row\": 397,\n      \"country_references\": [\n        \"Canada\"\n      ],\n      \"linked_hosts\": []\n    },\n    {\n      \"table_row\": 599,\n      \"country_references\": [\n        \"Canada\"\n      ],\n      \"linked_hosts\": []\n    }\n  ],\n  \"scope\": \"Explicit Canada or Canadian text in HTML table rows only. Linked hosts are navigation hints. An empty result does not rule out providers in other markup or providers that omit country references. Rows do not establish purchasing intent, eligibility, or permission to contact.\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/peppol-implementer-pilot/director-country-row-navigation.json",
+    "products/receipts/TASK-179582941800.json"
+  ],
+  "id": "TASK-179582941800",
+  "input_sha256": "cd7b8ac5f27327dbdb19bf0df6d241588d13a901eebb5375f74e18876398918f"
+}
