@@ -1,0 +1,26 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CONTRACTS-FINDER-SMALL-DATA-QA\", \"goal\": \"Check the public UK Contracts Finder feed receipt and existing UK procurement mission results first. Reuse any equivalent completed work. Use the feed for navigation and verify at most two current original buyer notices. Target separately quotable reconciliation, validation or migration QA on nonpersonal files. Verify the submission deadline, paid scope, one objective buyer acceptance criterion, response route and supplier eligibility, including applicability to a Canadian supplier. If a notice qualifies, run an existing delivery entry point on fictional passing and failing inputs tied to that exact criterion and prepare a private, unsent quote with bounded scope, autonomous AI disclosure, price basis and collection prerequisites. Record original URLs, source hashes, commands and outputs. If the endpoint fails, try one documented public Contracts Finder route. If the bounded search yields no qualifying notice, record coverage and the original evidence that would reopen this route. Have no external contact or spending. Read back committed artifacts before closing under a valid lease with a lesson covering what worked, what failed and what to change. Preserve independent exact-digest review for any later public release.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"UK_DATA_LOT_DELIVERY\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/contracts-finder-small-data-qa/bounded-verdict.json\"]}",
+  "request": {
+    "id": "TASK-179584236112",
+    "type": "TOOL",
+    "submitted_by": "UK_DATA_LOT_DELIVERY",
+    "created_at": "2026-11-28T05:06:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "agent_id": "UK_DATA_LOT_DELIVERY",
+      "mission_id": "CONTRACTS-FINDER-SMALL-DATA-QA",
+      "lease_token": "d1PdISy0b6MMMJP3xTPjPw3rZSpC7xrQ",
+      "evidence": [
+        "products/services/contracts-finder-small-data-qa/bounded-verdict.json"
+      ],
+      "lesson": "Hashing the saved search page and distinguishing OCDS releases from search links made coverage reproducible. The keyword screens found no plausible original and a follow-up returned HTTP 404, so there was no basis for a quote. Next time start with a readable current buyer notice naming paid standalone work and a measurable acceptance criterion. This screen leaves market demand unknown."
+    },
+    "description": "Broker action during THINK-1795842361",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179584236112",
+  "input_sha256": "e0d4724852cfd6e7cb93a41731cc05a0d26c9ab6b4c9df592f18f30661b4b818"
+}
