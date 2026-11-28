@@ -1,0 +1,70 @@
+{
+  "synthetic": true,
+  "answer_key_task": "TASK-179585850100",
+  "input_sha256": "f83f55635df8fd5f6cf43de972e54687b5a6ecaf48ca8649559511360360b0c2",
+  "produced_sha256": "b2fd83a0ab024498ffc1647d3e8b4a6fd3b9506d8157e565a2758aeff188fa14",
+  "command": [
+    "/usr/bin/python3",
+    "verify_example.py",
+    "variants.csv",
+    "images.csv",
+    "produced.csv"
+  ],
+  "exit": 1,
+  "stdout": {
+    "rows": 20,
+    "products": 2,
+    "checks": {
+      "utf8_no_bom_lf_only": true,
+      "header_matches_documented_names": true,
+      "no_product_split_across_files": true,
+      "handle_rows_contiguous": true,
+      "title_only_on_first_row": true,
+      "sku_unique": true,
+      "identifiers_preserved_sku_barcode_color_size_price": false,
+      "color_size_combo_unique_per_product": true,
+      "image_positions_1_to_n": true,
+      "all_input_images_present_once_per_product": true,
+      "variant_image_is_first_image_of_its_color": false,
+      "image_only_rows_have_no_variant_fields": true
+    },
+    "failed": [
+      "identifiers_preserved_sku_barcode_color_size_price",
+      "variant_image_is_first_image_of_its_color"
+    ]
+  },
+  "stderr": "",
+  "findings": [
+    {
+      "sku": "SYN-B-BL-XXL",
+      "record": 20,
+      "field": "Barcodes",
+      "expected": "0000000000020",
+      "observed": "0000000000000"
+    },
+    {
+      "sku": "SYN-B-BL-XXL",
+      "record": 20,
+      "field": "Variant image URL",
+      "expected": "https://example.com/img/SYN-B-Blue-1.jpg",
+      "observed": "https://example.invalid/fictional-variant.png"
+    }
+  ],
+  "answer_key_match": true,
+  "seconds": {
+    "extraction": 0.0003211819566786289,
+    "verification": 0.02501800423488021,
+    "row_location": 0.00039155082777142525,
+    "response_render_and_write": 0.00012716976925730705,
+    "automated_review": 6.137136369943619e-05,
+    "total": 0.025919278152287006,
+    "workflow_design": null,
+    "independent_review": null,
+    "customer_revisions": null,
+    "administration": null
+  },
+  "hypothetical_hourly_rate_cad": 60,
+  "provisional_price_cad": 60,
+  "remaining_minutes_before_deductions_and_unmeasured_effort": 59.99956801203079,
+  "decision": "Keep provisional scope only. This rehearsal times scripted execution and response rendering. It excludes workflow design, independent review, revisions, administration and deductions. No realized margin or actual buyer activity was measured."
+}
