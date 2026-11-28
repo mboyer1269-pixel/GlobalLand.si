@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Fictional row-location cross-check. The catalogue verifier, report preparation effort and Shopify import were outside this execution.\",\n  \"fixture\": \"products/services/catalogue-qa/fulfillment/synthetic-ours.csv\",\n  \"fixture_sha256\": \"d2e15cc8158b744f959b327e266723c37df72d47841024bac2ba6baa710cc17a\",\n  \"record_numbering\": \"One-based CSV data records after the header\",\n  \"identical_control_findings\": 0,\n  \"reordered_control_findings\": 0,\n  \"reordered_mutation_findings\": [\n    {\n      \"sku\": \"SYN-B-BL-XXL\",\n      \"field\": \"Barcodes\",\n      \"expected\": \"0000000000020\",\n      \"observed\": \"0000000000000\",\n      \"baseline_record\": 20,\n      \"candidate_record\": 1\n    },\n    {\n      \"sku\": \"SYN-B-BL-XXL\",\n      \"field\": \"Variant image URL\",\n      \"expected\": \"https://example.com/img/SYN-B-Blue-1.jpg\",\n      \"observed\": \"https://example.invalid/fictional-variant.png\",\n      \"baseline_record\": 20,\n      \"candidate_record\": 1\n    }\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/fixed-price-trial/sku-location-cross-check.json",
+    "products/receipts/TASK-179585316100.json"
+  ],
+  "id": "TASK-179585316100",
+  "input_sha256": "7a322f6ca415e8b9d253dc1f410a59e91abe110a0bcbf1fe55f95a1f337772d3"
+}

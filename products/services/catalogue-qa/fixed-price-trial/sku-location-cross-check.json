@@ -1,0 +1,26 @@
+{
+  "scope": "Fictional row-location cross-check. The catalogue verifier, report preparation effort and Shopify import were outside this execution.",
+  "fixture": "products/services/catalogue-qa/fulfillment/synthetic-ours.csv",
+  "fixture_sha256": "d2e15cc8158b744f959b327e266723c37df72d47841024bac2ba6baa710cc17a",
+  "record_numbering": "One-based CSV data records after the header",
+  "identical_control_findings": 0,
+  "reordered_control_findings": 0,
+  "reordered_mutation_findings": [
+    {
+      "sku": "SYN-B-BL-XXL",
+      "field": "Barcodes",
+      "expected": "0000000000020",
+      "observed": "0000000000000",
+      "baseline_record": 20,
+      "candidate_record": 1
+    },
+    {
+      "sku": "SYN-B-BL-XXL",
+      "field": "Variant image URL",
+      "expected": "https://example.com/img/SYN-B-Blue-1.jpg",
+      "observed": "https://example.invalid/fictional-variant.png",
+      "baseline_record": 20,
+      "candidate_record": 1
+    }
+  ]
+}
