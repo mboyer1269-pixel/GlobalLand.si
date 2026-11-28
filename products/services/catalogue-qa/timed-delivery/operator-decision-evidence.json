@@ -1,0 +1,31 @@
+{
+  "terms_sha256": "449856ff717c44da65c951b67732f916971c35fee3d4c98642d1cd3b2002ee9e",
+  "evidence": {
+    "products/services/catalogue-qa/timed-delivery/rehearsal.json": "8ab8764a7c8ad70fc3f8dbde4c361f26363ed8a726e0cb251514f6a73453a5dd",
+    "products/services/catalogue-qa/timed-delivery/inline-response.md": "cfb3940d5a5b01dec8012272fd4caf67a277f516ea9ed14e7694caf9cff3e4b5"
+  },
+  "observed_synthetic_findings": [
+    {
+      "sku": "SYN-B-BL-XXL",
+      "record": 20,
+      "field": "Barcodes"
+    },
+    {
+      "sku": "SYN-B-BL-XXL",
+      "record": 20,
+      "field": "Variant image URL"
+    }
+  ],
+  "observed_automated_seconds": 0.025919278152287006,
+  "provisional_quote_cad": 60,
+  "hypothetical_hourly_target_cad": 60,
+  "gross_all_in_time_ceiling_minutes": 60,
+  "unmeasured_effort": [
+    "workflow design",
+    "independent review",
+    "customer revisions",
+    "administration"
+  ],
+  "decision_use": "Reuse any recorded operator decision on this exact terms hash. If the decision is pending, use this technical evidence for the existing approval or decline. For an eligible commission inquiry before approval, use the existing nonbinding clarification. Record actual review, revisions and administration on the first authorized delivery.",
+  "commercial_evidence": "Synthetic rehearsal only. Buyer response, order acceptance and settlement require separate evidence."
+}
