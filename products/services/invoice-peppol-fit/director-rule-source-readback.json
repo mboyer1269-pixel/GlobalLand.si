@@ -1,0 +1,51 @@
+{
+  "scope": "Whitespace-normalized visible source excerpts. Verify field boundaries against the original HTML before citing. Checker behavior requires separate execution.",
+  "rules": [
+    {
+      "rule": "BR-CO-10",
+      "url": "https://docs.peppol.eu/poacc/billing/3.0/rules/ubl-tc434/BR-CO-10/",
+      "capture_sha256": "29e99135f017d8c43d3fa5a981c1fb09854fffc1809e9bd85962932942e9403b",
+      "fields": {
+        "message": [
+          "Sum of Invoice line net amount (BT-106) = Σ Invoice line net amount (BT-131)."
+        ],
+        "context": [
+          "cac:LegalMonetaryTotal"
+        ],
+        "test": [
+          "(xs:decimal(cbc:LineExtensionAmount) = xs:decimal(round(sum(//(cac:InvoiceLine|cac:CreditNoteLine)/xs:decimal(cbc:LineExtensionAmount)) * 10 * 10) div 100))"
+        ]
+      },
+      "matching_visible_lines": [
+        "Sum of Invoice line net amount (BT-106) = Σ Invoice line net amount (BT-131).",
+        "(xs:decimal(cbc:LineExtensionAmount) = xs:decimal(round(sum(//(cac:InvoiceLine|cac:CreditNoteLine)/xs:decimal(cbc:LineExtensionAmount)) * 10 * 10) div 100))",
+        "cbc:LineExtensionAmount",
+        "cbc:LineExtensionAmount"
+      ],
+      "status": "MESSAGE_AND_TEST_LOCATED"
+    },
+    {
+      "rule": "BR-CO-13",
+      "url": "https://docs.peppol.eu/poacc/billing/3.0/rules/ubl-tc434/BR-CO-13/",
+      "capture_sha256": "c1660138ae7fe618b8aa19b866dbe9c14eab55a78801008e08b54e177af16a24",
+      "fields": {
+        "message": [
+          "Invoice total amount without VAT (BT-109) = Σ Invoice line net amount (BT-131) - Sum of allowances on document level (BT-107) + Sum of charges on document level (BT-108)."
+        ],
+        "context": [
+          "cac:LegalMonetaryTotal"
+        ],
+        "test": [
+          "((cbc:ChargeTotalAmount) and (cbc:AllowanceTotalAmount) and (xs:decimal(cbc:TaxExclusiveAmount) = round((xs:decimal(cbc:LineExtensionAmount) + xs:decimal(cbc:ChargeTotalAmount) - xs:decimal(cbc:AllowanceTotalAmount)) * 10 * 10) div 100 )) or (not(cbc:ChargeTotalAmount) and (cbc:AllowanceTotalAmount) and (xs:decimal(cbc:TaxExclusiveAmount) = round((xs:decimal(cbc:LineExtensionAmount) - xs:decimal(cbc:AllowanceTotalAmount)) * 10 * 10 ) div 100)) or ((cbc:ChargeTotalAmount) and not(cbc:AllowanceTotalAmount) and (xs:decimal(cbc:TaxExclusiveAmount) = round((xs:decimal(cbc:LineExtensionAmount) + xs:decimal(cbc:ChargeTotalAmount)) * 10 * 10 ) div 100)) or (not(cbc:ChargeTotalAmount) and not(cbc:AllowanceTotalAmount) and (xs:decimal(cbc:TaxExclusiveAmount) = xs:decimal(cbc:LineExtensionAmount)))"
+        ]
+      },
+      "matching_visible_lines": [
+        "Invoice total amount without VAT (BT-109) = Σ Invoice line net amount (BT-131) - Sum of allowances on document level (BT-107) + Sum of charges on document level (BT-108).",
+        "((cbc:ChargeTotalAmount) and (cbc:AllowanceTotalAmount) and (xs:decimal(cbc:TaxExclusiveAmount) = round((xs:decimal(cbc:LineExtensionAmount) + xs:decimal(cbc:ChargeTotalAmount) - xs:decimal(cbc:AllowanceTotalAmount)) * 10 * 10) div 100 )) or (not(cbc:ChargeTotalAmount) and (cbc:AllowanceTotalAmount) and (xs:decimal(cbc:TaxExclusiveAmount) = round((xs:decimal(cbc:LineExtensionAmount) - xs:decimal(cbc:AllowanceTotalAmount)) * 10 * 10 ) div 100)) or ((cbc:ChargeTotalAmount) and not(cbc:AllowanceTotalAmount) and (xs:decimal(cbc:TaxExclusiveAmount) = round((xs:decimal(cbc:LineExtensionAmount) + xs:decimal(cbc:ChargeTotalAmount)) * 10 * 10 ) div 100)) or (not(cbc:ChargeTotalAmount) and not(cbc:AllowanceTotalAmount) and (xs:decimal(cbc:TaxExclusiveAmount) = xs:decimal(cbc:LineExtensionAmount)))",
+        "cbc:TaxExclusiveAmount",
+        "cbc:TaxExclusiveAmount"
+      ],
+      "status": "MESSAGE_AND_TEST_LOCATED"
+    }
+  ]
+}
