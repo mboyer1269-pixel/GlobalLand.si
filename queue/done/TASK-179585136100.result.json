@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"fixture\": \"products/services/catalogue-qa/fulfillment/synthetic-ours.csv\",\n  \"fixture_sha256\": \"d2e15cc8158b744f959b327e266723c37df72d47841024bac2ba6baa710cc17a\",\n  \"synthetic\": true,\n  \"scope\": \"Same-order fictional record location control. Record numbers are 1-based after the header. The actual verifier and manual report timing are separate.\",\n  \"missing_fields\": [\n    \"Image Src\",\n    \"Variant Barcode\",\n    \"Variant SKU\"\n  ],\n  \"record_count\": 20,\n  \"status\": \"MISSING_FIELDS\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/catalogue-qa/fixed-price-trial/director-fixture-location-only.json",
+    "products/receipts/TASK-179585136100.json"
+  ],
+  "id": "TASK-179585136100",
+  "input_sha256": "686a11241f2a9c40d9ce0271267c2c6128860c85919450a88e054876dd51c0b8"
+}

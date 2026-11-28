@@ -1,0 +1,13 @@
+{
+  "fixture": "products/services/catalogue-qa/fulfillment/synthetic-ours.csv",
+  "fixture_sha256": "d2e15cc8158b744f959b327e266723c37df72d47841024bac2ba6baa710cc17a",
+  "synthetic": true,
+  "scope": "Same-order fictional record location control. Record numbers are 1-based after the header. The actual verifier and manual report timing are separate.",
+  "missing_fields": [
+    "Image Src",
+    "Variant Barcode",
+    "Variant SKU"
+  ],
+  "record_count": 20,
+  "status": "MISSING_FIELDS"
+}
