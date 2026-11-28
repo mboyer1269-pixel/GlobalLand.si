@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Hash-verified source excerpts with normalized whitespace. Rule applicability and implementation behavior require separate checks.\",\n  \"rules\": [\n    {\n      \"rule\": \"BR-CO-10\",\n      \"url\": \"https://docs.peppol.eu/poacc/billing/3.0/rules/ubl-tc434/BR-CO-10/\",\n      \"capture_sha256\": \"29e99135f017d8c43d3fa5a981c1fb09854fffc1809e9bd85962932942e9403b\",\n      \"fields\": {},\n      \"status\": \"INCOMPLETE_EXTRACTION\"\n    },\n    {\n      \"rule\": \"BR-CO-13\",\n      \"url\": \"https://docs.peppol.eu/poacc/billing/3.0/rules/ubl-tc434/BR-CO-13/\",\n      \"capture_sha256\": \"c1660138ae7fe618b8aa19b866dbe9c14eab55a78801008e08b54e177af16a24\",\n      \"fields\": {},\n      \"status\": \"INCOMPLETE_EXTRACTION\"\n    }\n  ]\n}\n\n\n",
+  "artifacts": [
+    "products/services/invoice-peppol-fit/director-rule-excerpts.json",
+    "products/receipts/TASK-179582436200.json"
+  ],
+  "id": "TASK-179582436200",
+  "input_sha256": "506df285352fe17e70807d41887c146e355b26c23e358269d82303778a8e2e8c"
+}
