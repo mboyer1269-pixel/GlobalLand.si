@@ -1,0 +1,104 @@
+{
+  "scope": "products/services",
+  "interpretation": "Candidates for readback. Stored and decoded hashes are distinct. A candidate match does not establish reuse rights or link an earlier run to the archive.",
+  "findings": [
+    {
+      "path": "products/services/existing-package-marketplace-checkout/sqlite-package-execution.json",
+      "stored_file_sha256": "72a7ada8003ac6031ea63991565ea0c57a335d17655e73c9273d8fc3eb4ad3fc",
+      "bytes": 2590,
+      "kind": "evidence candidate",
+      "navigation": [
+        {
+          "line": 14,
+          "text": "\"stdout\": \"{\\n \\\"tool\\\": \\\"globalland-sqlite-diagnose/1\\\",\\n \\\"sqlite_version\\\": \\\"3.40.1\\\",\\n \\\"case_id\\\": \\\"page-example\\\",\\n \\\"limits\\\": {\\n  \\\"sql_bytes\\\": 65536,\\n  \\\"statements\\\": 50,\\n  \\\"rows_kept\\\": 50,\\n  \\\"vm_steps\\\": 2000000,\\n  \\\"seconds\\\": 2.0\\n },\\n \\\"runs\\\": {\\n  \\\"as_written_first_s"
+        },
+        {
+          "line": 16,
+          "text": "\"scope\": \"Clean-directory execution of the existing staged package on its synthetic example. Inspect the returned report before claiming semantic success. Checkout, redistribution rights, sales and settlement require separate evidence.\""
+        }
+      ]
+    },
+    {
+      "path": "products/services/sqlite-editorial-baseline/commission-sample/execution.json",
+      "stored_file_sha256": "e0f4a58d8e6700b4ee7d8bea1f856f2634b9f697b1901db88d4fb7bac88cd7cc",
+      "bytes": 551,
+      "kind": "evidence candidate",
+      "navigation": []
+    },
+    {
+      "path": "products/services/sqlite-editorial-baseline/execution.json",
+      "stored_file_sha256": "de76585f9122a055fc41068baf10d447473e5c2e61c28392b57abc484dffa9fc",
+      "bytes": 2287,
+      "kind": "evidence candidate",
+      "navigation": [
+        {
+          "line": 4,
+          "text": "\"stdout\": \"{\\n \\\"tool\\\": \\\"globalland-sqlite-diagnose/1\\\",\\n \\\"sqlite_version\\\": \\\"3.40.1\\\",\\n \\\"case_id\\\": \\\"page-example\\\",\\n \\\"limits\\\": {\\n  \\\"sql_bytes\\\": 65536,\\n  \\\"statements\\\": 50,\\n  \\\"rows_kept\\\": 50,\\n  \\\"vm_steps\\\": 2000000,\\n  \\\"seconds\\\": 2.0\\n },\\n \\\"runs\\\": {\\n  \\\"as_written_first_s"
+        }
+      ]
+    },
+    {
+      "path": "products/services/sqlite-repair/crawler-discovery/manifest.json",
+      "stored_file_sha256": "0f3201c78c4a9fc9815f3a8c3cff94cfe0f1bce921f63532521375f0526640b9",
+      "bytes": 3264,
+      "kind": "evidence candidate",
+      "navigation": []
+    },
+    {
+      "path": "products/services/sqlite-repair/discovery/manifest.json",
+      "stored_file_sha256": "f500b2f0a7afd24be9ff172d0e96061735b26e151a6aad0a3b3b7c8c1674fa26",
+      "bytes": 2457,
+      "kind": "evidence candidate",
+      "navigation": []
+    },
+    {
+      "path": "products/services/sqlite-repair/local-delivery/clean-run-report.json",
+      "stored_file_sha256": "9c3ff1d7403375583f84b3b238d59b6aa26b34eb3ac5d655dbbca220d87ba6f9",
+      "bytes": 1655,
+      "kind": "evidence candidate",
+      "navigation": [
+        {
+          "line": 87,
+          "text": "\"expected_match\": true,"
+        }
+      ]
+    },
+    {
+      "path": "products/services/sqlite-repair/local-delivery/release/manifest.json",
+      "stored_file_sha256": "2852b77bcf1422c3183d2db23d34ea5d571abbaae65407d1ce03d2c297816bdc",
+      "bytes": 4073,
+      "kind": "evidence candidate",
+      "navigation": []
+    },
+    {
+      "path": "products/services/sqlite-repair/original-fixture/verified-handoff/manifest.json",
+      "stored_file_sha256": "a9b23032e62c42bf5f94c746ee89732fee0c786fc81b415c31a06f2d3c7b23bf",
+      "bytes": 2790,
+      "kind": "evidence candidate",
+      "navigation": [
+        {
+          "line": 23,
+          "text": "\"tool_expected_match\": true,"
+        },
+        {
+          "line": 73,
+          "text": "\"tool_expected_match\": true,"
+        }
+      ]
+    },
+    {
+      "path": "products/services/sqlite-repair/original-fixture-controls/execution.json",
+      "stored_file_sha256": "001a676dcd7b956b009002c20183674b774f94be28cb19bc7695a82ae93f2ca4",
+      "bytes": 1810,
+      "kind": "evidence candidate",
+      "navigation": []
+    },
+    {
+      "path": "products/services/sqlite-repair/release/manifest.json",
+      "stored_file_sha256": "8198d076c8f3f452e2f4e0c055bdbbddc0f0f6c57cd54bab42ef94eae3d3a0af",
+      "bytes": 1273,
+      "kind": "evidence candidate",
+      "navigation": []
+    }
+  ]
+}
