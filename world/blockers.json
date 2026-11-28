@@ -168,20 +168,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-OUTCOME",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "19 tours consécutifs sans mission conclue ni revenu vérifié",
-      "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 19,
-      "opened_at": "2026-11-28T05:36:42Z",
-      "last_reported_at": "2026-11-28T10:37:14Z"
     }
   ],
   "resolved_recent": [
@@ -221,25 +207,30 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-28T10:37:14Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1946,
-    "turns_without_verified_revenue": 1946,
-    "turns_without_outcome": 19,
+    "turns_without_new_interpreted_feedback": 1947,
+    "turns_without_verified_revenue": 1947,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-28T05:36:42Z",
-    "last_outcome_turn": "THINK-1795843816",
-    "last_productive_turn": "THINK-1795861817",
-    "last_turn": "THINK-1795862161",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1795863619",
+    "last_productive_turn": "THINK-1795863619",
+    "last_turn": "THINK-1795863619",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "CATALOGUE-QA-TIMED-DELIVERY"
+      ],
+      "new_products": [
+        "products/services/catalogue-qa/timed-delivery/inline-response.md",
+        "products/services/catalogue-qa/timed-delivery/rehearsal.json"
+      ],
+      "new_product_count": 2,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
