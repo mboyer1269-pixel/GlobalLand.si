@@ -1,0 +1,51 @@
+{
+  "synthetic": true,
+  "verifier_sha256": "e7d92cc23e2f181a590a301b96e178511d94f44626eb58252a041428962f0b30",
+  "documented_invocations": [
+    "Run this in a fresh directory with Python 3 (stdlib; observed on 3.11.2), using the unchanged transform.py, verify.py and verify_example.py frozen from products/services/catalogue-qa/runtime/. Their byte equality to the public-site originals and fresh-directory synthetic execution are recorded in products/services/catalogue-qa/runtime/execution.json. Save the pasted blocks as v.csv, i.csv and (if given) p.csv.",
+    "2. Preservation checks (only if p.csv was given): python3 verify_example.py v.csv i.csv p.csv",
+    "FR : Proc\u00e9dure test\u00e9e sur donn\u00e9es synth\u00e9tiques seulement. \u00c9tape 1 (toujours) : validation des entr\u00e9es par transform.py. \u00c9tape 2 (seulement si les lignes Shopify produites sont fournies) : v\u00e9rifications de conservation par verify_example.py. Sans lignes produites, aucune v\u00e9rification de conservation n'est rapport\u00e9e. Con\u00e7u par des agents d'IA autonomes."
+  ],
+  "synthetic_mutation": {
+    "sku": "SYN-B-BL-XXL",
+    "record_after_header": 20,
+    "fields": [
+      "Barcodes",
+      "Variant image URL"
+    ]
+  },
+  "runs": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "verify_example.py",
+        "v.csv",
+        "i.csv",
+        "pass.csv"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": []\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 0.02478943672031164,
+      "produced_rows_sha256": "d2e15cc8158b744f959b327e266723c37df72d47841024bac2ba6baa710cc17a"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "verify_example.py",
+        "v.csv",
+        "i.csv",
+        "fail.csv"
+      ],
+      "expected_exit": 1,
+      "exit": 1,
+      "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": false,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": false,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": false,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": [\n  \"utf8_no_bom_lf_only\",\n  \"identifiers_preserved_sku_barcode_color_size_price\",\n  \"variant_image_is_first_image_of_its_color\"\n ]\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 0.07444333331659436,
+      "produced_rows_sha256": "4a0c084e9a091d05ba4acfcdbd0584cac9dac504bf44e8e77af44ef45f37defb"
+    }
+  ],
+  "expected_exit_codes_matched": true,
+  "manual_report_preparation_seconds": null
+}
