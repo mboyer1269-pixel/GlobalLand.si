@@ -1,0 +1,511 @@
+<!DOCTYPE HTML><html lang="en"><head><meta charset="UTF-8"/><META name="GENERATOR" content="IBM HomePage Builder 2001 V5.0.0 for Windows"><meta name="msvalidate.01" content="3BB4D18369B9C21326AF7A99FCCC5A09" /><meta property="fb:app_id" content="537395183072744" /><title>Accepting Payments and Getting Paid - itch.io</title><meta name="csrf_token" value="WyI5WGEzIiwxNzk1ODQzODcwLCI3Z05PSFh2TGJxS3lCM0kiXQ==.UYUhJ8n80fYSbwo9VIiu9JlR3AI=" /><meta content="Accepting Payments and Getting Paid" property="og:title"/><meta content="itch.io" property="og:site_name"/><meta content="4503599627724030" property="twitter:account_id"/><link rel="manifest" href="/static/manifest.json"/><link href="https://itch.io/docs/creators/payments.amp" rel="amphtml"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#FA5C5C"/><link href="https://static.itch.io/main.css?1795840860" rel="stylesheet"/><script type="text/javascript">if (!window.location.hostname.match(/localhost/)) {      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', "G-36R7NPBMLS", {});
+      (function(d, t, s, m) {
+        s = d.createElement(t);
+        s.src = "https:\/\/www.googletagmanager.com\/gtag\/js?id=G-36R7NPBMLS";
+        s.async = 1;
+        m = d.getElementsByTagName(t)[0];
+        m.parentNode.insertBefore(s, m);
+      })(document, "script");
+      }</script><script type="text/javascript">window.itchio_translations_url = 'https://static.itch.io/translations';</script><script type="text/javascript" src="https://static.itch.io/lib.min.js?1795840860"></script><script type="text/javascript" src="https://static.itch.io/bundle.min.js?1795840860"></script><script data-src="https://static.itch.io/react.min.js?1795840860" id="lib_react_src"></script><script type="text/javascript" src="https://static.itch.io/extern.min.js?1795840860"></script><script type="text/javascript">I.current_user = null;</script></head><body class="locale_en wide_layout_widget layout_widget responsive" data-page_name="docs" data-host="itch.io"><div class="header_widget base_widget" id="header_3639933"><a class="skip_to_main" href="#maincontent">Skip to main content</a><div class="primary_header"><h1 title="itch.io - indie game hosting marketplace" class="title"><a title="itch.io - indie game hosting marketplace" class="header_logo" href="/"><span class="visually_hidden">itch.io</span><img alt="itch.io logo &amp; title" height="199" class="full_logo" width="775" src="https://static.itch.io/images/logo-black-new.svg"/><img alt="itch.io logo" height="235" class="minimal_logo" width="262" src="https://static.itch.io/images/itchio-textless-black.svg"/></a></h1><div class="header_buttons"><a href="/games" class="header_button browse_btn" data-label="browse">Browse Games</a><a href="/jams" class="header_button jams_btn" data-label="jams">Game Jams</a><a href="/developers" class="header_button developers_btn" data-label="developers"><span aria-hidden="true" class="icon icon-upload"></span>Upload Game</a><a href="/sales" class="header_button browse_sales_btn active_site_promotion_btn" data-label="browse_sales"><span>Creator Day &amp; Black Friday 2026</span></a><a href="/devlogs" class="header_button devlogs_btn" data-label="devlogs">Developer Logs</a><a href="/community" class="header_button community.home_btn" data-label="community.home">Community</a></div><form action="/search" class="game_search"><input name="q" type="text" class="search_input" placeholder="Search for games, jams, tags or creators" required="required"/><button aria-label="Search" class="submit_btn"><svg fill="none" width="18" version="1.1" stroke-width="3" stroke-linejoin="round" stroke="currentColor" stroke-linecap="round" role="img" height="18" viewBox="0 0 24 24" class="svgicon icon_search" aria-hidden><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button></form><div class="user_panel_widget base_widget" id="user_panel_6107537"><a data-register_action="header" data-label="log_in" href="/login" class="panel_button">Log in</a><a data-register_action="header" data-label="register" href="/register" class="panel_button register_button">Register</a></div></div><div class="header_dropdown" data-target="site_promotion"><strong>On Sale: </strong><a href="/games/on-sale">Games</a><a href="/game-assets/on-sale">Assets</a><a href="/tools/on-sale">Tools</a><a href="/physical-games/on-sale">Tabletop</a><a href="/comics/on-sale">Comics</a></div><div class="header_dropdown" data-target="browse"><a href="/games/store">Indie game store</a><a href="/games/free">Free games</a><a href="/games/fun">Fun games</a><a href="/games/tag-horror">Horror games</a><div class="divider"></div><a href="/tools">Game development</a><a href="/game-assets">Assets</a><a href="/comics">Comics</a><div class="divider"></div><a href="/sales">Sales</a><a href="/bundles">Bundles</a><div class="divider"></div><a href="/jobs">Jobs</a><div class="divider"></div><a href="/tags">Tags</a><a href="/game-development/engines">Game Engines</a></div></div><div class="knowledge_base_article_page page_widget base_widget logged_out category_creators name_payments" id="knowledge_base_article_8816826"><button class="mobile_menu"></button><div class="column_wrapper"><section class="nav_column"><h3 class="column_header">General</h3><div class="tab_btn "><a href="/docs/general/about">About itch.io</a></div><div class="tab_btn "><a href="/docs/general/faq">FAQ</a></div><div class="tab_btn "><a href="/docs/general/community-rules">Community rules</a></div><div class="tab_btn "><a href="/docs/creators/game-jams">Hosting a jam</a></div><div class="tab_btn "><a href="/support">Support &amp; contact</a></div><h3 class="column_header">Buying</h3><div class="tab_btn "><a href="/docs/buying/already-bought">Finding existing purchases</a></div><h3 class="column_header">Creating</h3><div class="tab_btn "><a href="/docs/creators/faq">Creator FAQ</a></div><div class="tab_btn "><a href="/docs/creators/quality-guidelines">Quality guidelines</a></div><div class="tab_btn "><a href="/docs/creators/getting-started">Getting started</a></div><div class="tab_btn "><a href="/docs/creators/access-control">Access control</a></div><div class="tab_btn "><a href="/docs/creators/getting-indexed">Search &amp; Browse</a></div><div class="tab_btn "><a href="/docs/creators/design">Designing your page</a></div><div class="tab_btn "><a href="/docs/creators/interact">Interacting with fans</a></div><div class="tab_btn "><a href="/docs/creators/widget">Widget embed</a></div><div class="tab_btn "><a href="/docs/creators/html5">HTML5 games</a></div><div class="tab_btn "><a href="/docs/creators/limited-releases">Limited releases</a></div><div class="tab_btn "><a href="/docs/creators/exclusive-content">Exclusive content</a></div><div class="tab_btn "><a href="/docs/creators/css-guide">Custom CSS</a></div><h3 class="column_header">Integrations</h3><div class="tab_btn "><a href="/docs/creators/kickstarter">Kickstarter</a></div><div class="tab_btn "><a href="/docs/creators/patreon">Patreon</a></div><h3 class="column_header">Selling</h3><div class="tab_btn "><a href="/docs/creators/how-buying-works">How buying works</a></div><div class="tab_btn selected"><a href="/docs/creators/payments">Getting paid &amp; VAT</a></div><div class="tab_btn "><a href="/docs/creators/pricing">Pricing</a></div><div class="tab_btn "><a href="/docs/creators/download-keys">Download keys</a></div><div class="tab_btn "><a href="/docs/creators/sales">Hosting a sale</a></div><div class="tab_btn "><a href="/docs/creators/bundles">Co-op bundles</a></div><h3 class="column_header">Accounts</h3><div class="tab_btn "><a href="/docs/advanced/two-factor-authentication">Two-factor authentication</a></div><div class="tab_btn "><a href="/docs/accounts/followers">Followers</a></div><h3 class="column_header">App</h3><div class="tab_btn "><a href="/docs/app/faq">itch.io app FAQ</a></div><div class="tab_btn "><a href="/docs/itch/">App guide</a></div><h3 class="column_header">API</h3><div class="tab_btn "><a href="/docs/api/overview">Overview</a></div><div class="tab_btn "><a href="/docs/api/oauth">OAuth Applications</a></div><div class="tab_btn "><a href="/docs/api/serverside">Server-side API reference</a></div><div class="tab_btn "><a href="/docs/api/javascript">JavaScript API reference</a></div><div class="tab_btn "><a href="/docs/api/sub-products">Sub-products reference</a></div><h3 class="column_header">More</h3><div class="tab_btn "><a href="/press-kit">Press Kit</a></div><div class="tab_btn "><a href="/docs/general/sponsors">Become a Sponsor</a></div><h3 class="column_header">Legal</h3><div class="tab_btn "><a href="/docs/legal/terms">Terms of service</a></div><div class="tab_btn "><a href="/docs/legal/privacy-policy">Privacy Policy</a></div><div class="tab_btn "><a href="/docs/legal/cookie-policy">Cookie Policy</a></div></section><div class="content_column"><h1>Accepting Payments and Getting Paid</h1><div class="text_content"><div class="ssi_content"><p>Our guide, <a href="/docs/creators/how-buying-works">How buying works</a>, explained the process buyers
+go through when purchasing something on itch.io. This guide explains how
+creators can accept payments and get paid.</p>
+
+<p><div class="navigation"><a href="javascript:void(0)" class="hide_toc_btn"></a><h3>Table of contents</h3><ul><li><a href="#how-itchio-handles-payments">How itch.io handles payments</a></li>
+<ul><li><a href="#how-itchio-handles-payments/paypal">PayPal</a></li>
+<li><a href="#how-itchio-handles-payments/stripe">Stripe</a></li></ul>
+<li><a href="#open-revenue-sharing">Open Revenue Sharing</a></li>
+<li><a href="#payment-processor-fees">Payment Processor Fees</a></li>
+<li><a href="#payment-modes">Payment modes</a></li>
+<ul><li><a href="#payment-modes/direct-to-you">Direct to you</a></li>
+<li><a href="#payment-modes/collected-by-itchio-and-paid-later-aka-itchio-payouts">Collected by itch.io &amp; paid later (aka itch.io Payouts)</a></li></ul>
+<li><a href="#requesting-payouts">Requesting Payouts</a></li>
+<ul><li><a href="#requesting-payouts/payout-eligibility-requirements">Payout Eligibility Requirements</a></li>
+<li><a href="#requesting-payouts/payout-review-process">Payout Review Process</a></li>
+<li><a href="#requesting-payouts/payment-requirements">Payment Requirements</a></li></ul>
+<li><a href="#vat-support">VAT support</a></li>
+<li><a href="#currencies">Currencies</a></li>
+<li><a href="#tax-interview">Tax Interview</a></li>
+<li><a href="#tax-withholding">Tax Withholding</a></li>
+<li><a href="#account-adjustments">Account Adjustments</a></li></ul></div></p>
+
+<h2 id="how-itchio-handles-payments">How itch.io handles payments</h2>
+
+<p>itch.io works with third-party payment gateways to handle all financial
+transactions. The following payment providers are available:</p>
+
+<ul>
+<li><a href="http://www.paypal.com">PayPal</a> &mdash; Pay with PayPal balance, card, or bank</li>
+<li><a href="http://stripe.com">Stripe</a> &mdash; Pay with credit or debit card</li>
+</ul>
+
+
+<p><strong>itch.io</strong> never stores any payment information on its servers. Buyers are
+directed to the payment gateways where they can securely enter their purchase
+information.</p>
+
+<h3 id="how-itchio-handles-payments/paypal">PayPal</h3>
+
+<p>When using PayPal, the buyer will be redirected to the PayPal web page where they
+can securely pay, then back to <strong>itch.io</strong> with a secret download access link.</p>
+
+<p>For most PayPal transactions, a fee of $0.30 + 2.9% is applied per
+transaction. Depending on your account here may be additional fees for currency
+conversion when receiving funds into your account.</p>
+
+<p><span class="learn_more"><a href="https://www.paypal.com/webapps/mpp/merchant-fees"><span class="icon icon-lifebuoy"></span>Read more about PayPal fees</a></span></p>
+
+<h3 id="how-itchio-handles-payments/stripe">Stripe</h3>
+
+<p>When using Stripe the buyer will be redirected to a checkout page on
+<strong>itch.io</strong> where they can enter their credit card. <strong>itch.io</strong> never sees or
+stores credit card numbers. Payment information is sent security to Stripe
+through the buyer&rsquo;s browser session.</p>
+
+<p>For most credit card transactions, Stripe takes a fee of $0.30 + 2.9%.</p>
+
+<p><span class="learn_more"><a href="https://stripe.com/us/pricing"><span class="icon icon-lifebuoy"></span>Read more about Stripe&#039;s pricing</a></span></p>
+
+<h2 id="open-revenue-sharing">Open Revenue Sharing</h2>
+
+<p>itch.io is a marketplace for creators of all kind. It&rsquo;s our goal to support
+creators by giving them the tools to sell and distribute their work. As a way
+of saying thanks to those using itch.io, we utilize an <strong>Open Revenue Sharing</strong>
+model. (<a href="https://itch.io/updates/introducing-open-revenue-sharing">Read about the launch</a>)</p>
+
+<p>You (the seller) can decide what percentage of your sales will go towards
+itch.io, from 0% to 100%. All money collected is used directly for running
+servers, paying for bandwidth, and supporting the development of new
+functionality. You can read more about itch.io&rsquo;s mission on our <a href="/docs/general/about">About
+page</a>.</p>
+
+<div class="image_caption_wrapper">
+<img class="image_holder" width=600 src="/static/images/docs/revenue-share.png" alt="itch.io's Open Revenue Share slider, located in account settings" />
+<div class="image_caption"><strong>itch.io</strong>'s Open Revenue Share slider, located in account settings</div>
+</div>
+
+
+<p>Here&rsquo;s an example of how Open Revenue Sharing is calculated for a transaction.
+For the sake of simplicity, we'll assume the default rate, 10%, and that we're
+working in USD.</p>
+
+<p>First, itch.io will take the percentage configured on your account&rsquo;s revenue
+sharing settings. In this example, the default would be 10% of $10. Next, the
+payment provider fee is subtracted (Generally $0.30 + 2.9% of the total
+price).</p>
+
+<pre><code>      --itch.io--   ----PayPal/Stripe----
+$10 - ($10 * 0.1) - $0.30 - ($10 * 0.029) = $8.41
+</code></pre>
+
+<blockquote><p>You can choose what percentage of your sales to give to support the
+development and operational costs of <strong>itch.io</strong> in your <a href="/user/settings/seller">Seller
+Settings</a>.</p></blockquote>
+
+<h2 id="payment-processor-fees">Payment Processor Fees</h2>
+
+<p>All payment processors we work with (PayPal, Stripe) have a <em>per-transaction</em>
+fee. Regardless of whether you're receiving payouts from us or using our
+<em>direct</em> payments system, this fee is applied per transaction at the time or
+purchase.</p>
+
+<blockquote><p>On the dashboard we report gross revenue, which is the total amount paid by
+buyers, before any fees have been subtracted. Because fees can fluctuate
+slightly, your final net earnings will be calculated when you request a
+payout when using our Payouts system.</p></blockquote>
+
+<p>A payment processor&rsquo;s fee is typically comprised of a fixed amount around 30
+cents and a percentage amount around 2.9%. Due to the fixed fee, the total
+percentage of the entire transaction the fee represents changes depending on
+the price of your product.</p>
+
+<p>For example 30 cents of a 1 dollar payment is 30%, 30 cents of a 2 dollar
+payment is 15%, etc. <strong>You can avoid high payment processor fees by selling
+your work for a higher price.</strong></p>
+
+<p>For this reason we recommend people minimally sell their work at $2 to avoid
+giving up a large percentage of their earnings to the payment processor.</p>
+
+<h2 id="payment-modes">Payment modes</h2>
+
+<p>itch.io supports two different payout modes. Your choice affects what payment
+options are available to buyers, who is listed as the merchant of record,
+taxes, how chargebacks are handled, and more.</p>
+
+<p>Here&rsquo;s a table of the differences, refer to the table below for more detailed
+explanations.</p>
+
+<table class="nice_table">
+
+<thead>
+<tr>
+<td></td>
+<td>Direct to you</td>
+<td>Collected by itch.io (Payouts)</td>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td><strong>Setup</strong></td>
+<td>Manually connect to each payment provider. Provide tax information to each payment provider</td>
+<td>No manual connection. Complete one tax interview on itch.io and accept seller terms</td>
+</tr>
+
+<tr>
+<td><strong>Payment methods for buyers</strong></td>
+<td>You have to manually setup each payment provider you want to support</td>
+<td>You instantly get every supported method. New ones added will automatically be available</td>
+</tr>
+
+<tr>
+<td><strong>Currency</strong></td>
+<td>You manually select a currency</td>
+<td>itch.io handles all transactions as USD. You get paid in USD. We handle automatic currency conversion</td>
+</tr>
+
+<tr>
+<td><strong>Getting paid</strong></td>
+<td>Each transaction goes directly into the balance of the respective payment provider you've connected</td>
+<td>itch.io collects payments, you request a payout at a later time. You can be paid via PayPal or Payoneer</td>
+</tr>
+
+<tr>
+<td><strong>Merchant of Record</strong></td>
+<td>You are the Merchant of Record</td>
+<td>itch.io is the Merchant of Record</td>
+</tr>
+
+<tr>
+<td><strong>Chargebacks</strong></td>
+<td>You are liable for chargebacks</td>
+<td>itch.io is liable for chargebacks</td>
+</tr>
+
+<tr>
+<td><strong>Fraud detection</strong></td>
+<td>itch.io provides fraud detection</td>
+<td>itch.io provides fraud detection</td>
+</tr>
+
+<tr>
+<td><strong>VAT</strong></td>
+<td>You are responsible for collection and remittance. You can enable automatic VAT collection from itch.io</td>
+<td>VAT is always automatically collected. itch.io is responsible for remittance</td>
+</tr>
+
+<tr>
+<td><strong>Tax forms</strong></td>
+<td>Each payment provider will generate tax forms for you</td>
+<td>itch.io will generate tax forms for you</td>
+</tr>
+
+<tr>
+<td><strong>Split transactions</strong></td>
+<td>Your account only supports transactions that go fully to your account. No support for co-op bundles</td>
+<td>You can participant in any promotions that split payments across multiple sellers, like <a href="/docs/creators/bundles">co-op bundles</a></td>
+</tr>
+
+<tr>
+<td><strong>Transaction eligibility</strong></td>
+<td>You may need to configure your payment provider account to accept payments from certain regions, otherwise they may be blocked</td>
+<td>itch.io's payment provider account is configured to accept all payments</td>
+</tr>
+
+<tr>
+<td><strong>Refunds</strong></td>
+<td>itch.io will refund payments on your behalf when necessary</td>
+<td>itch.io will refund payments on your behalf when necessary</td>
+</tr>
+
+</tbody>
+
+</table>
+
+
+<h3 id="payment-modes/direct-to-you">Direct to you</h3>
+
+<p>In order to sell with <strong>Direct to you</strong>, you must manually connect every
+payment provider you wish to make available to your buyers. Your payment
+provider account will be the <em>Merchant of Record,</em> meaning that transactions
+will list your name (or company name).</p>
+
+<p>You will need to provide your tax identity information directly to each payment
+provider you connect with. They will report your income and file tax forms at
+the end of the year.</p>
+
+<p>Each individual transaction will appear on your account as they happen. You
+will have access to your earnings as soon as the respective payment provider
+makes it available to you.</p>
+
+<p>In this mode you are responsible for collecting and remitting VAT tax. You can
+enable tax collection from your payout mode selection screen on your account
+settings.</p>
+
+<p>The following payment processors are available for &ldquo;Direct to you&rdquo;:</p>
+
+<ul>
+<li><strong>PayPal</strong> &mdash; Note: in some regions a business PayPal account may be required</li>
+<li><strong>Stripe</strong></li>
+</ul>
+
+
+<h3 id="payment-modes/collected-by-itchio-and-paid-later-aka-itchio-payouts">Collected by itch.io &amp; paid later (aka itch.io Payouts)</h3>
+
+<p>Selling with the <strong>itch.io Payouts system</strong> requires you to provide your tax
+identity information directly to itch.io. We use a third-party service to
+collect and securely store your information. They will also mail your tax forms
+at the end of the year.</p>
+
+<p>With this model, itch.io is the <em>Merchant of record</em>. Payments go directly to
+itch.io, and you claim your earnings later by requesting a payout.</p>
+
+<p>itch.io is not a bank; request your earnings in a timely manner. If you don&rsquo;t
+withdraw earnings from your account older than a year, we may charge a
+maintenance fee proportional to any unclaimed money. (<a href="/docs/legal/terms#10-unclaimed-earnings-in-publisher-accounts">Read more in our Terms
+of Service</a>)</p>
+
+<p>See the <a href="#requesting-payouts">Requesting Payouts</a> section below for complete
+details on the payout process, review times, eligibility requirements, and
+payment methods.</p>
+
+<h2 id="requesting-payouts">Requesting Payouts</h2>
+
+<p>This section applies only to sellers using the <strong>Collected by itch.io (Payouts)</strong> system.</p>
+
+<p>When using itch.io&rsquo;s payout system, payments from buyers accumulate in your
+itch.io account balance. You can request a payout once you meet the eligibility
+requirements below.</p>
+
+<h3 id="requesting-payouts/payout-eligibility-requirements">Payout Eligibility Requirements</h3>
+
+<p>To create a payout request, you must meet these requirements:</p>
+
+<p><strong>Tax Interview Completed</strong>: You must complete the tax identity verification
+form. We validate your information during the payout review period. See the
+<a href="#tax-interview">Tax Interview</a> section for details.</p>
+
+<p><strong>Minimum Balance</strong>: You must have at least <strong>$5.00 USD</strong> available to request
+a payout.</p>
+
+<p><strong>Payout Method Selected</strong>: You must configure at least one payout method (eg.
+PayPal, Payoneer) on your account. Please note that the <strong>Direct to you</strong>
+system is completely independent from the payouts system and those connected
+accounts are not compatible and can not be used with the payouts system.</p>
+
+<p><strong>Transaction Waiting Period</strong>: Revenue from transactions becomes available 7
+days after the purchase date. That waiting period allows us to deal with fraud
+and various problems that can arise regarding payments.</p>
+
+<p>In some cases, we may apply an extended waiting period of up to 30 days. This
+typically occurs when permanently closing an account balance to ensure all
+revenue-adjusting events (refunds, chargebacks, disputes) have time to
+finalize.</p>
+
+<p><strong>Outstanding Payout Limit</strong>: Accounts may have at most 3 payouts in progress.
+You must wait for us to process an existing payout before requesting another.</p>
+
+<blockquote><p><strong>Note:</strong> Requesting payouts more frequently may cause you to lose more to
+transfer fees. We recommend collecting payouts about once a month. Storing
+money on your itch.io account over a year can result in a charge from
+itch.io, see <a href="https://itch.io/docs/legal/terms#10-unclaimed-earnings-in-publisher-accounts">Unclaimed Earnings In Publisher
+Accounts</a>.</p></blockquote>
+
+<h3 id="requesting-payouts/payout-review-process">Payout Review Process</h3>
+
+<p>Staff review all payouts before payment. We require a minimum of 7 days after
+you create a payout and typically complete reviews within 10 to 14 days. This
+review period lets us assess risk and fraud issues and allows balance-adjusting
+events to settle (e.g., refunds, chargebacks).</p>
+
+<p>If we determine your payout is high-risk (eg. large volume of suspicious
+transactions) then we may place an extended review period on your payout. We
+will contact you to discuss the situation and determine the best course of
+action.</p>
+
+<p>First-time sellers may experience longer review times as we verify account
+activity. Your patience is appreciated.</p>
+
+<h3 id="requesting-payouts/payment-requirements">Payment Requirements</h3>
+
+<p>Before we can send payment, your payout must meet these conditions:</p>
+
+<p><strong>Tax Validation</strong>: Your tax information must reach <strong>Validated</strong> state.
+You can complete the tax interview before requesting a payout, but validation
+occurs during the review period. We cannot process payouts with unvalidated,
+failed, or incomplete tax information.</p>
+
+<p><strong>Fraud Review</strong>: All transactions in the payout must clear fraud review. We
+employ a risk analysis system to mark transactions for human review if they are
+suspected of fraud.</p>
+
+<p><strong>Staff Approval</strong>: After meeting all requirements above, staff must review and
+approve the payout before we send payment. Our final review is to check for any
+suspicious activity or terms violations. If we have any questions about the
+activity in the payout we will reach out to you to collect more information.</p>
+
+<h2 id="vat-support">VAT support</h2>
+
+<p>European VAT laws dictate that any business, when selling to customers
+currently located in the European Union, must collect value-added tax
+(VAT) according to the current rate of the country the seller is
+buying from.</p>
+
+<blockquote><p>Note that EU-VAT also applies to non-EU business, and that it&rsquo;s
+the country one is <em>buying from</em>, not <em>living in</em>, that is taken
+into account.</p></blockquote>
+
+<p>To help you comply with this legislation, itch.io allows you to:</p>
+
+<ul>
+<li>Collect billing addresses whenever someone purchases one of your items from an EU country.</li>
+<li>Calculate the VAT rate to collect based on the buyer&rsquo;s location, and optionally bill it on top of the base item price (exclusive). This option can be disabled to have inclusive VAT pricing.</li>
+</ul>
+
+
+<p>With the <em>Direct to you</em> model, you are responsible for registering at a VAT
+MOSS and paying the tax collected. You can export all the necessary information
+about your transactions for your quarterly reporting from your dashboard.
+itch.io automatically collects address and geo-location from IP address for any
+buyers when necessary.</p>
+
+<p>When using the <em>Collected by itch.io</em> model however, both those features are
+enabled by default, and <strong>itch.io</strong> pays tax quarterly to our VAT MOSS account
+located in Ireland. No work is required from you.</p>
+
+<h2 id="currencies">Currencies</h2>
+
+<p>The <em>Collected by itch.io</em> model only supports accepting USD.</p>
+
+<p>For <em>Direct payments</em>, you can select the currency you with to sell in. For
+PayPal users, it&rsquo;s important to ensure your PayPal account is configured to
+accept the currency you selected, otherwise your payments may get blocked.</p>
+
+<p>When using <strong>PayPal</strong>, the following currencies are supported:</p>
+
+<ul>
+<li><strong>USD</strong> &mdash; U.S. Dollar</li>
+<li><strong>CAD</strong> &mdash; Canadian Dollar</li>
+<li><strong>GBP</strong> &mdash; British Pound</li>
+<li><strong>EUR</strong> &mdash; Euro</li>
+<li><strong>JPY</strong> &mdash; Japanese Yen</li>
+<li><strong>AUD</strong> &mdash; Australian Dollar</li>
+</ul>
+
+
+<p>When using <strong>Stripe</strong>, the following countries and currencies are available:</p>
+
+<ul>
+<li><strong>United States</strong> &mdash; USD</li>
+<li><strong>Canada</strong> &mdash; CAD, USD</li>
+<li><strong>Ireland</strong> &mdash; EUR, GBP, USD</li>
+<li><strong>United Kingdom</strong> &mdash; EUR, GBP, USD</li>
+</ul>
+
+
+<blockquote><p>If you payment provider account is for a specific currency, you must set the
+same currency in your <a href="/user/settings/seller">Seller settings</a> page;
+otherwise, you may be unable to receive payments.</p></blockquote>
+
+<h2 id="tax-interview">Tax Interview</h2>
+
+<p>If you are using itch.io&rsquo;s <strong>Payouts</strong> system then you must complete a <strong>Tax
+Interview</strong> before your account is eligible to collect any earnings through a
+payout. You can find instructions on how to complete the Tax Interview during
+the seller onboarding when setting up your account, or by navigating to the
+<em>Tax Information</em> tab on your account settings page.</p>
+
+<p>Before your account can collect any payments you should complete the tax
+interview. After completing the tax interview your information will be on file
+and your account will ready to accept payments. (During this time your
+Validation Status may be shown as pending, but you can still start collecting
+payments)</p>
+
+<p>Before your account is eligible to receive earnings through a payout, your tax
+information must be validated. Validation will take place after you open your
+first payout request. This means you can start selling before your information
+is validated, but you can not collect any earnings until validation succeeds.
+Generally validation happens instantly, but in some cases it may take longer to
+verify the information you have provided. If the validation has failed, then it
+will be reported on the <em>Tax Information</em> page.  <strong>We are unable to process any
+payouts unless your tax information validates</strong>.  You can either retake the tax
+interview or <a href="/support">contact support</a> for more assistance</p>
+
+<p><strong>During the tax interview, you must provide a Tax Identification Number (eg.
+Social Security Number, EIN, ITIN, local Tax Number, etc.).</strong> If you do not
+provide a valid Tax Identification Number then your account will be subject to
+the default 30% withholding rate, even if you are located in the United States
+or in a country that has a tax treaty with the United States.</p>
+
+<h2 id="tax-withholding">Tax Withholding</h2>
+
+<blockquote><p>This section is only relevant to sellers who are doing business as an entity located outside of the United States</p></blockquote>
+
+<p>Since itch.io is a U.S. company, funds we send to foreign entities are subject
+to <a href="https://www.irs.gov/individuals/international-taxpayers/nra-withholding">a withholding
+tax</a>.
+This only applies to sellers using itch.io&rsquo;s <strong>Collected by itch.io
+(Payouts)</strong>. Using Direct Payments you may be subject to the same tax but it
+is handled directly by the payment providers and not itch.io</p>
+
+<p>The default tax rate is 30% but you may be eligible for a reduced rate if you
+operate in <a href="https://www.irs.gov/businesses/international-businesses/united-states-income-tax-treaties-a-to-z">a country that has a tax treaty with the United
+States</a>,
+and you provide a Tax Identification Number.</p>
+
+<ul>
+<li>For some countries, you may be able to to enter the tax identification number you have already been issued by your government</li>
+<li>Otherwise, you may be able to apply for a tax number from the United States
+
+<ul>
+<li><a href="https://www.irs.gov/businesses/small-businesses-self-employed/get-an-employer-identification-number">Learn how to apply for an EIN</a> &mdash; Simpler to get, but may not be available</li>
+<li><a href="https://www.irs.gov/tin/itin/how-to-apply-for-an-itin">Learn how to apply for an ITIN</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>After you complete the tax interview you'll be shown your withholding rate on
+your seller account settings page. If you don&rsquo;t agree with what is displayed,
+you'll have to retake the interview. You can <a href="/support">contact support</a> to get
+help with updating your tax information.</p>
+
+<blockquote><p>Although it may be possible to complete the tax interview without a tax
+identification number, <strong>you will be assigned the default withholding rate of
+30% even if your country is eligible for a reduced rate</strong>. Please take the
+time to fill out the tax interview as much as you can. If you are unsure,
+then we recommending contacting a local financial professional.</p></blockquote>
+
+<h2 id="account-adjustments">Account Adjustments</h2>
+
+<p>This only applies to sellers using itch.io&rsquo;s <strong>Collected by itch.io
+(Payouts)</strong>. If itch.io needs to debit your account for previous activity then
+an adjustment will be applied the next time you request a payout. Any
+adjustments will be shown after you create a payout under the <em>Adjustments
+summary</em> section. If you do not see this section then there are no adjustments.</p>
+
+<p>If the sum of your adjustments is larger than the sum of your revenue to be
+claimed, then you will not be able to initiate a payout. Once your balance is
+above your debits you can create a payout.</p>
+
+<p>Here&rsquo;s a list of adjustments you may see:</p>
+
+<ul>
+<li><strong>Refunds</strong> &mdash; If a payment to your account is refunded after the funds for it have been paid out then we'll deduct that amount on a future payout. Payments refunded in a pending payout will be subtracted before the payment is delivered, and not be added as an adjustment.</li>
+<li><strong>Chargebacks</strong> &mdash; A chargeback is a fee imposed by a payment processor when a buyer opens a dispute with their bank or card company. Chargebacks are commonly associated with fraud, but sometimes they can happen because of the types of buyers a project has. If we notice a high rate of disputes on your account, or disputes from customers, then the chargeback fees may be applied to your account.</li>
+<li><strong>Payout Fees</strong> &mdash; When collecting a payout, the processor may charge a fee for the money transfer. PayPal is the most common payout method. <a href="https://www.paypal.com/us/webapps/mpp/merchant-fees#paypal-payouts">Learn more about PayPal payout fees</a>. Generally, requesting payouts more frequently will cause you to lose more to fees. We recommend collecting payouts about once a month. <strong>Note:</strong> storing money on your itch.io account over a year can result in a charge from itch.io, see <a href="https://itch.io/docs/legal/terms#10-unclaimed-earnings-in-publisher-accounts">Unclaimed Earnings In Publisher Accounts</a>.</li>
+<li><strong>Tax Identity</strong> &mdash; Upon completing your tax interview we used a third-party service to verify the identity you provided. This is a federal requirement. A flat fee of $3.00 will be applied to your account once.</li>
+</ul>
+
+
+<blockquote><p><strong>Why does itch.io pass fees on to me?</strong> itch.io utilizes &ldquo;<a href="https://itch.io/docs/general/about">Open Revenue
+Sharing</a>,&rdquo; a system where
+sellers can decide what percentage of their revenue is shared with the
+platform. Because we are not guaranteed an amount from sellers through the
+sales of their goods, we pass any operating costs directly onto the seller.
+This includes payment processor fees, and any of the fees listed above.</p></blockquote>
+</div><p class="social_nag"><span class="icon icon-heart"></span> Follow itch.io on <a href="https://www.youtube.com/itchiogames">YouTube</a>, <a href="https://bsky.app/profile/itch.io">Bluesky</a>, <a href="https://twitter.com/itchio">X</a>, <a href="https://www.facebook.com/itchiogames">Facebook</a>, or <a href="/chat">Join our Discord</a> for new games and site updates.</p></div></div></div></div><div class="footer"><div class="primary"><div class="social"><a href="https://twitter.com/itchio"><svg style="vertical-align: -0.0625em" width="1em" version="1.1" class="svgicon icon_twitter" role="img" height="1em" aria-label="Twitter" viewBox="0 0 16 16" aria-hidden><path fill="currentColor" d="M9.332 6.925 14.544 1h-1.235L8.783 6.145 5.17 1H1l5.466 7.78L1 14.993h1.235l4.78-5.433 3.816 5.433H15L9.332 6.925ZM7.64 8.848l-.554-.775L2.68 1.91h1.897l3.556 4.975.554.775 4.622 6.466h-1.897L7.64 8.848Z"></path></svg><span class="screenreader_only">itch.io on Twitter</span></a><a href="https://www.facebook.com/itchiogames"><svg style="vertical-align: -0.0625em" width="1em" version="1.1" class="svgicon icon_facebook" fill="currentColor" height="1em" viewBox="0 0 1024 1024" aria-hidden role="img"><path d="M853.35 0h-682.702c-94.25 0-170.648 76.42-170.648 170.686v682.63c0 94.266 76.398 170.684 170.648 170.684h341.352v-448h-128v-128h128v-96c0-88.366 71.634-160 160-160h160v128h-160c-17.674 0-32 14.328-32 32v96h176l-32 128h-144v448h213.35c94.25 0 170.65-76.418 170.65-170.684v-682.63c0-94.266-76.4-170.686-170.65-170.686z"></path></svg><span class="screenreader_only">itch.io on Facebook</span></a></div><a href="/docs/general/about">About</a><a href="/docs/general/faq">FAQ</a><a href="/blog">Blog</a><a href="/support">Contact us</a></div><div class="secondary"><span class="copyright">Copyright © 2026 itch corp</span><span class="spacer"> · </span><a href="/directory">Directory</a><span class="spacer"> · </span><a href="/docs/legal/terms" rel="nofollow">Terms</a><span class="spacer"> · </span><a href="/docs/legal/privacy-policy" rel="nofollow">Privacy</a><span class="spacer"> · </span><a href="/docs/legal/cookie-policy" rel="nofollow">Cookies</a></div></div><script type="text/template" id="loading_lightbox_tpl"><div aria-live="polite" class="lightbox loading_lightbox"><div class="loader_outer"><div class="loader_label">Loading</div><div class="loader_bar"><div class="loader_bar_slider"></div></div></div></div></script><script type="text/javascript">new I.KnowledgeBaseArticle('#knowledge_base_article_8816826', null);init_Header('#header_3639933', {"autocomplete_props":{"ca_source":25,"ca_types":{"bundle":6,"jam":4,"featured_tag":7,"game":1,"browse_facet":8},"autocomplete_url":"\/autocomplete","search_url":"\/search","i18n":{"search":"Search","search_placeholder":"Search for games, jams, tags or creators"}}});
+I.setup_page();</script></body></html>
