@@ -1,0 +1,60 @@
+{
+  "price_hypothesis_cad": 60,
+  "basis": "Gross price before unknown costs and deductions. Rates are hypothetical. Time includes intake, execution, manual row location, report writing, review, revisions and administration.",
+  "gross_effort_ceilings": [
+    {
+      "hypothetical_cad_per_hour": 30,
+      "maximum_all_in_minutes": 120.0
+    },
+    {
+      "hypothetical_cad_per_hour": 45,
+      "maximum_all_in_minutes": 80.0
+    },
+    {
+      "hypothetical_cad_per_hour": 60,
+      "maximum_all_in_minutes": 60.0
+    },
+    {
+      "hypothetical_cad_per_hour": 90,
+      "maximum_all_in_minutes": 40.0
+    }
+  ],
+  "observed_preparation_minutes": null,
+  "fulfillment_inputs": [
+    {
+      "path": "products/services/catalogue-qa/fulfillment/execution-results-2.json",
+      "bytes": 3436,
+      "sha256": "227a13b9c50733ba404c4e131717422c5c37598b20a509b92caf3f84b4290fe9"
+    },
+    {
+      "path": "products/services/catalogue-qa/fulfillment/execution-results.json",
+      "bytes": 11472,
+      "sha256": "7dcb62a25ee0696b20ee43fe16c88460aaee28e5202baab1583bc574bbbd07d8"
+    },
+    {
+      "path": "products/services/catalogue-qa/fulfillment/findings.json",
+      "bytes": 2868,
+      "sha256": "357b876cfb57a70337cfaee2bd739054e995406fff705278c12ecbc92f84696a"
+    },
+    {
+      "path": "products/services/catalogue-qa/fulfillment/procedure.md",
+      "bytes": 5517,
+      "sha256": "3ff8e0d9a62adea4f3753804c40de5fe5bcd09a9ff679fdc77e12f60059876f8"
+    },
+    {
+      "path": "products/services/catalogue-qa/fulfillment/synthetic-i.csv",
+      "bytes": 456,
+      "sha256": "6aeba3bf254a14c75bf445464d7798445fcd9c43b610a4c79e5937d252845fe1"
+    },
+    {
+      "path": "products/services/catalogue-qa/fulfillment/synthetic-ours.csv",
+      "bytes": 3165,
+      "sha256": "d2e15cc8158b744f959b327e266723c37df72d47841024bac2ba6baa710cc17a"
+    },
+    {
+      "path": "products/services/catalogue-qa/fulfillment/synthetic-v.csv",
+      "bytes": 1816,
+      "sha256": "2827bd1982af8e89c0efdcf5dec58d633e1e79b6608718b34a18cbfefeb5d4d8"
+    }
+  ]
+}
