@@ -1,0 +1,59 @@
+{
+  "synthetic": true,
+  "earlier_result": "TASK-179585676100",
+  "purpose": "Check whether the two cell changes alone reproduce the earlier formatting failure.",
+  "changes": [
+    {
+      "record": 20,
+      "sku": "SYN-B-BL-XXL",
+      "field": "Barcodes",
+      "expected": "0000000000020",
+      "observed": "0000000000000"
+    },
+    {
+      "record": 20,
+      "sku": "SYN-B-BL-XXL",
+      "field": "Variant image URL",
+      "expected": "https://example.com/img/SYN-B-Blue-1.jpg",
+      "observed": "https://example.invalid/fictional-variant.png"
+    }
+  ],
+  "runs": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "verify_example.py",
+        "synthetic-v.csv",
+        "synthetic-i.csv",
+        "clean.csv"
+      ],
+      "exit": 0,
+      "sha256": "d2e15cc8158b744f959b327e266723c37df72d47841024bac2ba6baa710cc17a",
+      "lf_count": 21,
+      "cr_count": 0,
+      "failed_checks": [],
+      "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": true,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": true,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "verify_example.py",
+        "synthetic-v.csv",
+        "synthetic-i.csv",
+        "modified.csv"
+      ],
+      "exit": 1,
+      "sha256": "b2fd83a0ab024498ffc1647d3e8b4a6fd3b9506d8157e565a2758aeff188fa14",
+      "lf_count": 21,
+      "cr_count": 0,
+      "failed_checks": [
+        "identifiers_preserved_sku_barcode_color_size_price",
+        "variant_image_is_first_image_of_its_color"
+      ],
+      "stdout": "{\n \"rows\": 20,\n \"products\": 2,\n \"checks\": {\n  \"utf8_no_bom_lf_only\": true,\n  \"header_matches_documented_names\": true,\n  \"no_product_split_across_files\": true,\n  \"handle_rows_contiguous\": true,\n  \"title_only_on_first_row\": true,\n  \"sku_unique\": true,\n  \"identifiers_preserved_sku_barcode_color_size_price\": false,\n  \"color_size_combo_unique_per_product\": true,\n  \"image_positions_1_to_n\": true,\n  \"all_input_images_present_once_per_product\": true,\n  \"variant_image_is_first_image_of_its_color\": false,\n  \"image_only_rows_have_no_variant_fields\": true\n },\n \"failed\": [\n  \"identifiers_preserved_sku_barcode_color_size_price\",\n  \"variant_image_is_first_image_of_its_color\"\n ]\n}\n",
+      "stderr": ""
+    }
+  ],
+  "isolated_two_failures": true
+}
