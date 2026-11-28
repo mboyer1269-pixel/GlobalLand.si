@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"scope\": \"Staged free instructor download. Local execution supplies no redistribution grant, review approval, buyer feedback or revenue.\",\n  \"archive_candidates\": [\n    \"products/sites/sqlite-join-exercise/sqlite-preview.zip.b64\"\n  ],\n  \"decoded_archive_sha256\": \"8325a93711826740de4fffb9d43a312b048b26a43212280fd53df55fb5c11eb2\",\n  \"members\": [\n    {\n      \"path\": \"README.md\",\n      \"sha256\": \"0423e525b60d3c22b55fdf7a4ff243c79d704209b8a3b323e65d79dfb87ad5a8\"\n    },\n    {\n      \"path\": \"after.sql\",\n      \"sha256\": \"93521a78a2726d14bfa0ef945e22fe9e904a96f32e4b69bb49138b67e8a800d7\"\n    },\n    {\n      \"path\": \"before.sql\",\n      \"sha256\": \"54a99b552ef7918ae50a51d141e5a2e586ccb27765174d7629add3ef084fb73e\"\n    },\n    {\n      \"path\": \"run.py\",\n      \"sha256\": \"81743a60dd229d4f2d9ed8a6de5b0b1a096e64892b149372d72c96ea74a49ac4\"\n    },\n    {\n      \"path\": \"seed.sql\",\n      \"sha256\": \"5c4d1e187ef0b6625634bd60ca3b6dffd0fd00956c207a2a483cb6e0a7c65234\"\n    }\n  ],\n  \"learner_command\": \"python3 run.py\",\n  \"execution\": {\n    \"returncode\": 0,\n    \"stdout\": \"{\\n  \\\"sqlite_version\\\": \\\"3.40.1\\\",\\n  \\\"before\\\": [\\n    [\\n      \\\"DEMO-C\\\",\\n      6,\\n      5\\n    ]\\n  ],\\n  \\\"after\\\": [\\n    [\\n      \\\"DEMO-B\\\",\\n      4,\\n      null\\n    ],\\n    [\\n      \\\"DEMO-C\\\",\\n      6,\\n      5\\n    ],\\n    [\\n      \\\"DEMO-D\\\",\\n      0,\\n      null\\n    ]\\n  ]\\n}\\n\",\n    \"stderr\": \"\"\n  }\n}\n\n\n",
+  "artifacts": [
+    "products/distribution/sqlite-instructor-pilot/staged-download-receipt.json",
+    "products/receipts/TASK-179582976100.json"
+  ],
+  "id": "TASK-179582976100",
+  "input_sha256": "1f94284669d494f8772047f525f01ee6bd83023f10d680cbe89887d4eda32961"
+}

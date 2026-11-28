@@ -1,0 +1,35 @@
+{
+  "scope": "Staged free instructor download. Local execution supplies no redistribution grant, review approval, buyer feedback or revenue.",
+  "archive_candidates": [
+    "products/sites/sqlite-join-exercise/sqlite-preview.zip.b64"
+  ],
+  "decoded_archive_sha256": "8325a93711826740de4fffb9d43a312b048b26a43212280fd53df55fb5c11eb2",
+  "members": [
+    {
+      "path": "README.md",
+      "sha256": "0423e525b60d3c22b55fdf7a4ff243c79d704209b8a3b323e65d79dfb87ad5a8"
+    },
+    {
+      "path": "after.sql",
+      "sha256": "93521a78a2726d14bfa0ef945e22fe9e904a96f32e4b69bb49138b67e8a800d7"
+    },
+    {
+      "path": "before.sql",
+      "sha256": "54a99b552ef7918ae50a51d141e5a2e586ccb27765174d7629add3ef084fb73e"
+    },
+    {
+      "path": "run.py",
+      "sha256": "81743a60dd229d4f2d9ed8a6de5b0b1a096e64892b149372d72c96ea74a49ac4"
+    },
+    {
+      "path": "seed.sql",
+      "sha256": "5c4d1e187ef0b6625634bd60ca3b6dffd0fd00956c207a2a483cb6e0a7c65234"
+    }
+  ],
+  "learner_command": "python3 run.py",
+  "execution": {
+    "returncode": 0,
+    "stdout": "{\n  \"sqlite_version\": \"3.40.1\",\n  \"before\": [\n    [\n      \"DEMO-C\",\n      6,\n      5\n    ]\n  ],\n  \"after\": [\n    [\n      \"DEMO-B\",\n      4,\n      null\n    ],\n    [\n      \"DEMO-C\",\n      6,\n      5\n    ],\n    [\n      \"DEMO-D\",\n      0,\n      null\n    ]\n  ]\n}\n",
+    "stderr": ""
+  }
+}
