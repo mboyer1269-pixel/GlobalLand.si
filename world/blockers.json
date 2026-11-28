@@ -168,20 +168,6 @@
       "reports": 1,
       "opened_at": "2026-11-16T20:07:30Z",
       "last_reported_at": "2026-11-16T20:07:30Z"
-    },
-    {
-      "id": "SYSTEM-NO-OUTCOME",
-      "status": "OPEN",
-      "owner": "AGENTS",
-      "category": "PROGRESS",
-      "title": "31 tours consécutifs sans mission conclue ni revenu vérifié",
-      "detail": "De nouveaux fichiers ne suffisent plus : conclure ou abandonner une mission avec preuves, ou mettre un produit devant de vrais acheteurs.",
-      "mission_id": null,
-      "expected_gain": null,
-      "raised_by": "PROGRESS-DETECTOR",
-      "reports": 31,
-      "opened_at": "2026-11-27T21:35:48Z",
-      "last_reported_at": "2026-11-28T05:07:15Z"
     }
   ],
   "resolved_recent": [
@@ -221,25 +207,29 @@
     }
   ],
   "progress": {
-    "stalled_turns": 1,
+    "stalled_turns": 0,
     "threshold": 3,
-    "stalled_since": "2026-11-28T05:07:15Z",
+    "stalled_since": null,
     "activity_semantics": "operational",
     "commercial_state": "AVAILABLE",
-    "turns_without_new_interpreted_feedback": 1926,
-    "turns_without_verified_revenue": 1926,
-    "turns_without_outcome": 31,
+    "turns_without_new_interpreted_feedback": 1927,
+    "turns_without_verified_revenue": 1927,
+    "turns_without_outcome": 0,
     "outcome_threshold": 12,
-    "dry_since": "2026-11-27T21:35:48Z",
-    "last_outcome_turn": "THINK-1795815001",
-    "last_productive_turn": "THINK-1795842030",
-    "last_turn": "THINK-1795842361",
+    "dry_since": null,
+    "last_outcome_turn": "THINK-1795843816",
+    "last_productive_turn": "THINK-1795843816",
+    "last_turn": "THINK-1795843816",
     "last_change": {
-      "productive": false,
-      "outcome": false,
-      "mission_outcomes": [],
-      "new_products": [],
-      "new_product_count": 0,
+      "productive": true,
+      "outcome": true,
+      "mission_outcomes": [
+        "CONTRACTS-FINDER-SMALL-DATA-QA"
+      ],
+      "new_products": [
+        "products/services/contracts-finder-small-data-qa/bounded-verdict.json"
+      ],
+      "new_product_count": 1,
       "new_research_count": 0,
       "rewritten_count": 0,
       "revenue_gain_cents": 0
