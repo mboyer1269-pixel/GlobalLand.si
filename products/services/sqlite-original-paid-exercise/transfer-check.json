@@ -1,0 +1,45 @@
+{
+  "archive_sha256": "76bdf9b059b77ee575f4c3fed3787059a07a0b2bf78e8babb4bee282d30bf08c",
+  "sqlite_version": "3.40.1",
+  "fictional_data": true,
+  "mutations": [
+    {
+      "table": "purchase_order",
+      "field": "ordered",
+      "key": 2,
+      "before": 4,
+      "after": 11,
+      "starter_rows": [
+        [
+          1,
+          8,
+          5
+        ],
+        [
+          3,
+          3,
+          3
+        ]
+      ],
+      "solution_rows": [
+        [
+          1,
+          8,
+          5
+        ],
+        [
+          2,
+          11,
+          0
+        ],
+        [
+          3,
+          3,
+          3
+        ]
+      ],
+      "pass": true
+    }
+  ],
+  "state": "PASS"
+}

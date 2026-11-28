@@ -1,0 +1,10 @@
+{
+  "status": "DONE",
+  "output": "{\n  \"archive_sha256\": \"76bdf9b059b77ee575f4c3fed3787059a07a0b2bf78e8babb4bee282d30bf08c\",\n  \"sqlite_version\": \"3.40.1\",\n  \"fictional_data\": true,\n  \"mutations\": [\n    {\n      \"table\": \"purchase_order\",\n      \"field\": \"ordered\",\n      \"key\": 2,\n      \"before\": 4,\n      \"after\": 11,\n      \"starter_rows\": [\n        [\n          1,\n          8,\n          5\n        ],\n        [\n          3,\n          3,\n          3\n        ]\n      ],\n      \"solution_rows\": [\n        [\n          1,\n          8,\n          5\n        ],\n        [\n          2,\n          11,\n          0\n        ],\n        [\n          3,\n          3,\n          3\n        ]\n      ],\n      \"pass\": true\n    }\n  ],\n  \"state\": \"PASS\"\n}\n\n\n",
+  "artifacts": [
+    "products/services/sqlite-original-paid-exercise/transfer-check.json",
+    "products/receipts/TASK-179588736100.json"
+  ],
+  "id": "TASK-179588736100",
+  "input_sha256": "15f5575512c32e72fd0b6e0a9783984273a1f8d480530af944432eb1afdb0464"
+}
