@@ -1,0 +1,27 @@
+{
+  "status": "DONE",
+  "output": "{\"mission_id\": \"CATALOGUE-QA-TIMED-DELIVERY\", \"goal\": \"Measure whether the existing CAD 60 catalogue QA offer can support the work it promises. Check the full mission and product records for an equivalent timed result and reuse it if present. Otherwise run one timed offline delivery rehearsal from a fictional plain-text intake using the existing 20-row fixtures, documented verifier, and TASK-179585850100 isolated failure and buyer-report-isolated-control.md as the answer key. Start timing before extracting the CSV blocks. Execute the verifier, locate its grouped discrepancies by SKU, write the actual inline buyer response, and check it against the answer key. Record elapsed time for extraction, verification, row location, report writing and final review where observed. If a phase cannot be reliably timed, leave it unknown. Leave customer revisions and administrative effort unknown and calculate the time remaining for them at a clearly labeled hypothetical CAD 60 hourly rate before deductions. Return an executed response and a keep, narrow or withdraw decision for the provisional scope, with exact private wording if it changes. Use existing fixtures, keep the rehearsal unsent and staged outside public sites, and require host-enforced independent exact-digest review before any public change. Record no buyer, order or revenue from this synthetic exercise. Read back the committed evidence and close under the actual lease with a lesson.\", \"parent_id\": \"WORLD-FIRST-REVENUE\", \"agent_id\": \"FULFILLMENT\", \"priority\": 1, \"status\": \"COMPLETED\", \"lease_token\": null, \"lease_expires_at\": null, \"evidence\": [\"products/services/catalogue-qa/timed-delivery/rehearsal.json\", \"products/services/catalogue-qa/timed-delivery/inline-response.md\"]}",
+  "request": {
+    "id": "TASK-179586216112",
+    "type": "TOOL",
+    "submitted_by": "FULFILLMENT",
+    "created_at": "2026-11-28T10:36:01Z",
+    "action": "WORLD",
+    "args": {
+      "op": "complete_mission",
+      "mission_id": "CATALOGUE-QA-TIMED-DELIVERY",
+      "agent_id": "FULFILLMENT",
+      "lease_token": "2fT_AaYSXa5T51hXk9YuZJai7z6pZAeK",
+      "evidence": [
+        "products/services/catalogue-qa/timed-delivery/rehearsal.json",
+        "products/services/catalogue-qa/timed-delivery/inline-response.md"
+      ],
+      "lesson": "Timed extraction, execution, SKU localization, response rendering and automated review matched the byte-isolated answer key. The verifier still gives grouped diagnostics, and this scripted control could not measure workflow design, real intake variability, independent review, revisions or administration. Keep CAD 60 provisional for the bounded scope and measure those steps separately on the next authorized delivery."
+    },
+    "description": "Broker action during THINK-1795862161",
+    "estimated_cost_cad": 0,
+    "approved_by": null
+  },
+  "id": "TASK-179586216112",
+  "input_sha256": "5ad3d37fad5083887ae7f8317166bf89b57bc1db80e38ef66cc2a3f4d30b7c9c"
+}
