@@ -1,0 +1,105 @@
+{
+  "archive_sha256": "76bdf9b059b77ee575f4c3fed3787059a07a0b2bf78e8babb4bee282d30bf08c",
+  "member_hashes_verified": [
+    "README.md",
+    "check.py",
+    "exercise.sql",
+    "seed.sql",
+    "solution.sql"
+  ],
+  "scope": "Fictional offline learner controls on the exact private archive. The equivalent query wraps the supplied solution and checks acceptance of a different SQL expression with the same result. These controls do not establish correctness on arbitrary learner datasets.",
+  "all_pass": true,
+  "trials": {
+    "solution": {
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_observed_rows": [
+        [
+          1,
+          8,
+          5
+        ],
+        [
+          2,
+          4,
+          0
+        ],
+        [
+          3,
+          3,
+          3
+        ]
+      ],
+      "stdout": "SQLite 3.40.1 | Python 3.11.2\nExpected [(1, 8, 5), (2, 4, 0), (3, 3, 3)]\nObserved [(1, 8, 5), (2, 4, 0), (3, 3, 3)]\n",
+      "stderr": "",
+      "pass": true
+    },
+    "equivalent": {
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "expected_observed_rows": [
+        [
+          1,
+          8,
+          5
+        ],
+        [
+          2,
+          4,
+          0
+        ],
+        [
+          3,
+          3,
+          3
+        ]
+      ],
+      "stdout": "SQLite 3.40.1 | Python 3.11.2\nExpected [(1, 8, 5), (2, 4, 0), (3, 3, 3)]\nObserved [(1, 8, 5), (2, 4, 0), (3, 3, 3)]\n",
+      "stderr": "",
+      "pass": true
+    },
+    "wrong_total": {
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_observed_rows": [
+        [
+          1,
+          8,
+          6
+        ],
+        [
+          2,
+          4,
+          1
+        ],
+        [
+          3,
+          3,
+          4
+        ]
+      ],
+      "stdout": "SQLite 3.40.1 | Python 3.11.2\nExpected [(1, 8, 5), (2, 4, 0), (3, 3, 3)]\nObserved [(1, 8, 6), (2, 4, 1), (3, 3, 4)]\n",
+      "stderr": "",
+      "pass": true
+    },
+    "missing_row": {
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "expected_observed_rows": [
+        [
+          1,
+          8,
+          5
+        ],
+        [
+          3,
+          3,
+          3
+        ]
+      ],
+      "stdout": "SQLite 3.40.1 | Python 3.11.2\nExpected [(1, 8, 5), (2, 4, 0), (3, 3, 3)]\nObserved [(1, 8, 5), (3, 3, 3)]\n",
+      "stderr": "",
+      "pass": true
+    }
+  }
+}
