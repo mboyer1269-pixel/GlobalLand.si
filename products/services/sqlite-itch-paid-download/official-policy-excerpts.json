@@ -1,0 +1,590 @@
+[
+  {
+    "source": "https://itch.io/docs/creators/payments",
+    "sha256": "26248bab355f028dbe7c73dea71e66ae6f69b33bcc954c082a63f3b91e3d1608",
+    "excerpts": [
+      {
+        "line": 2,
+        "text": "itch.io"
+      },
+      {
+        "line": 3,
+        "text": "Browse GamesGame JamsUpload GameCreator Day & Black Friday 2026Developer LogsCommunityLog inRegisterOn Sale: GamesAssetsToolsTabletopComicsIndie game storeFree gamesFun gamesHorror gamesGame developmentAssetsComicsSalesBundlesJobsTagsGame Engines"
+      },
+      {
+        "line": 4,
+        "text": "General"
+      },
+      {
+        "line": 27,
+        "text": "How itch.io handles payments"
+      },
+      {
+        "line": 28,
+        "text": "PayPal"
+      },
+      {
+        "line": 29,
+        "text": "Stripe"
+      },
+      {
+        "line": 30,
+        "text": "Open Revenue Sharing"
+      },
+      {
+        "line": 33,
+        "text": "Direct to you"
+      },
+      {
+        "line": 34,
+        "text": "Collected by itch.io & paid later (aka itch.io Payouts)"
+      },
+      {
+        "line": 35,
+        "text": "Requesting Payouts"
+      },
+      {
+        "line": 36,
+        "text": "Payout Eligibility Requirements"
+      },
+      {
+        "line": 37,
+        "text": "Payout Review Process"
+      },
+      {
+        "line": 38,
+        "text": "Payment Requirements"
+      },
+      {
+        "line": 40,
+        "text": "Currencies"
+      },
+      {
+        "line": 41,
+        "text": "Tax Interview"
+      },
+      {
+        "line": 42,
+        "text": "Tax Withholding"
+      },
+      {
+        "line": 43,
+        "text": "Account Adjustments"
+      },
+      {
+        "line": 45,
+        "text": "itch.io works with third-party payment gateways to handle all financial transactions. The following payment providers are available:"
+      },
+      {
+        "line": 46,
+        "text": "PayPal — Pay with PayPal balance, card, or bank"
+      },
+      {
+        "line": 47,
+        "text": "Stripe — Pay with credit or debit card"
+      },
+      {
+        "line": 48,
+        "text": "itch.io never stores any payment information on its servers. Buyers are directed to the payment gateways where they can securely enter their purchase information."
+      },
+      {
+        "line": 49,
+        "text": "PayPal"
+      },
+      {
+        "line": 50,
+        "text": "When using PayPal, the buyer will be redirected to the PayPal web page where they can securely pay, then back to itch.io with a secret download access link."
+      },
+      {
+        "line": 51,
+        "text": "For most PayPal transactions, a fee of $0.30 + 2.9% is applied per transaction. Depending on your account here may be additional fees for currency conversion when receiving funds into your account."
+      },
+      {
+        "line": 52,
+        "text": "Read more about PayPal fees"
+      },
+      {
+        "line": 53,
+        "text": "Stripe"
+      },
+      {
+        "line": 54,
+        "text": "When using Stripe the buyer will be redirected to a checkout page on itch.io where they can enter their credit card. itch.io never sees or stores credit card numbers. Payment information is sent security to Stripe through the buyer’s browser session."
+      },
+      {
+        "line": 55,
+        "text": "For most credit card transactions, Stripe takes a fee of $0.30 + 2.9%."
+      },
+      {
+        "line": 56,
+        "text": "Read more about Stripe's pricing"
+      },
+      {
+        "line": 57,
+        "text": "Open Revenue Sharing"
+      },
+      {
+        "line": 58,
+        "text": "itch.io is a marketplace for creators of all kind. It’s our goal to support creators by giving them the tools to sell and distribute their work. As a way of saying thanks to those using itch.io, we utilize an Open Revenue Sharing model. (Read about the launch)"
+      },
+      {
+        "line": 59,
+        "text": "You (the seller) can decide what percentage of your sales will go towards itch.io, from 0% to 100%. All money collected is used directly for running servers, paying for bandwidth, and supporting the development of new functionality. You can read more about itch.io’s mission on our About page."
+      },
+      {
+        "line": 60,
+        "text": "itch.io's Open Revenue Share slider, located in account settings"
+      },
+      {
+        "line": 61,
+        "text": "Here’s an example of how Open Revenue Sharing is calculated for a transaction. For the sake of simplicity, we'll assume the default rate, 10%, and that we're working in USD."
+      },
+      {
+        "line": 62,
+        "text": "First, itch.io will take the percentage configured on your account’s revenue sharing settings. In this example, the default would be 10% of $10. Next, the payment provider fee is subtracted (Generally $0.30 + 2.9% of the total price)."
+      },
+      {
+        "line": 63,
+        "text": "--itch.io-- ----PayPal/Stripe---- $10 - ($10 * 0.1) - $0.30 - ($10 * 0.029) = $8.41"
+      },
+      {
+        "line": 64,
+        "text": "You can choose what percentage of your sales to give to support the development and operational costs of itch.io in your Seller Settings."
+      },
+      {
+        "line": 65,
+        "text": "Payment Processor Fees"
+      },
+      {
+        "line": 66,
+        "text": "All payment processors we work with (PayPal, Stripe) have a per-transaction fee. Regardless of whether you're receiving payouts from us or using our direct payments system, this fee is applied per transaction at the time or purchase."
+      },
+      {
+        "line": 67,
+        "text": "On the dashboard we report gross revenue, which is the total amount paid by buyers, before any fees have been subtracted. Because fees can fluctuate slightly, your final net earnings will be calculated when you request a payout when using our Payouts system."
+      },
+      {
+        "line": 68,
+        "text": "A payment processor’s fee is typically comprised of a fixed amount around 30 cents and a percentage amount around 2.9%. Due to the fixed fee, the total percentage of the entire transaction the fee represents changes depending on the price of your product."
+      },
+      {
+        "line": 71,
+        "text": "Payment modes"
+      },
+      {
+        "line": 72,
+        "text": "itch.io supports two different payout modes. Your choice affects what payment options are available to buyers, who is listed as the merchant of record, taxes, how chargebacks are handled, and more."
+      },
+      {
+        "line": 73,
+        "text": "Here’s a table of the differences, refer to the table below for more detailed explanations."
+      },
+      {
+        "line": 74,
+        "text": "Direct to you Collected by itch.io (Payouts)"
+      },
+      {
+        "line": 75,
+        "text": "Setup Manually connect to each payment provider. Provide tax information to each payment provider No manual connection. Complete one tax interview on itch.io and accept seller terms"
+      },
+      {
+        "line": 76,
+        "text": "Payment methods for buyers You have to manually setup each payment provider you want to support You instantly get every supported method. New ones added will automatically be available"
+      },
+      {
+        "line": 77,
+        "text": "Currency You manually select a currency itch.io handles all transactions as USD. You get paid in USD. We handle automatic currency conversion"
+      },
+      {
+        "line": 78,
+        "text": "Getting paid Each transaction goes directly into the balance of the respective payment provider you've connected itch.io collects payments, you request a payout at a later time. You can be paid via PayPal or Payoneer"
+      },
+      {
+        "line": 79,
+        "text": "Merchant of Record You are the Merchant of Record itch.io is the Merchant of Record"
+      },
+      {
+        "line": 90,
+        "text": "Each individual transaction will appear on your account as they happen. You will have access to your earnings as soon as the respective payment provider makes it available to you."
+      },
+      {
+        "line": 91,
+        "text": "In this mode you are responsible for collecting and remitting VAT tax. You can enable tax collection from your payout mode selection screen on your account settings."
+      },
+      {
+        "line": 92,
+        "text": "The following payment processors are available for “Direct to you”:"
+      },
+      {
+        "line": 93,
+        "text": "PayPal — Note: in some regions a business PayPal account may be required"
+      },
+      {
+        "line": 94,
+        "text": "Stripe"
+      },
+      {
+        "line": 95,
+        "text": "Collected by itch.io & paid later (aka itch.io Payouts)"
+      },
+      {
+        "line": 96,
+        "text": "Selling with the itch.io Payouts system requires you to provide your tax identity information directly to itch.io. We use a third-party service to collect and securely store your information. They will also mail your tax forms at the end of the year."
+      },
+      {
+        "line": 97,
+        "text": "With this model, itch.io is the Merchant of record. Payments go directly to itch.io, and you claim your earnings later by requesting a payout."
+      },
+      {
+        "line": 98,
+        "text": "itch.io is not a bank; request your earnings in a timely manner. If you don’t withdraw earnings from your account older than a year, we may charge a maintenance fee proportional to any unclaimed money. (Read more in our Terms of Service)"
+      },
+      {
+        "line": 99,
+        "text": "See the Requesting Payouts section below for complete details on the payout process, review times, eligibility requirements, and payment methods."
+      },
+      {
+        "line": 100,
+        "text": "Requesting Payouts"
+      },
+      {
+        "line": 101,
+        "text": "This section applies only to sellers using the Collected by itch.io (Payouts) system."
+      },
+      {
+        "line": 102,
+        "text": "When using itch.io’s payout system, payments from buyers accumulate in your itch.io account balance. You can request a payout once you meet the eligibility requirements below."
+      },
+      {
+        "line": 103,
+        "text": "Payout Eligibility Requirements"
+      },
+      {
+        "line": 104,
+        "text": "To create a payout request, you must meet these requirements:"
+      },
+      {
+        "line": 105,
+        "text": "Tax Interview Completed: You must complete the tax identity verification form. We validate your information during the payout review period. See the Tax Interview section for details."
+      },
+      {
+        "line": 106,
+        "text": "Minimum Balance: You must have at least $5.00 USD available to request a payout."
+      },
+      {
+        "line": 107,
+        "text": "Payout Method Selected: You must configure at least one payout method (eg. PayPal, Payoneer) on your account. Please note that the Direct to you system is completely independent from the payouts system and those connected accounts are not compatible and can not be used with the payouts system."
+      },
+      {
+        "line": 108,
+        "text": "Transaction Waiting Period: Revenue from transactions becomes available 7 days after the purchase date. That waiting period allows us to deal with fraud and various problems that can arise regarding payments."
+      },
+      {
+        "line": 109,
+        "text": "In some cases, we may apply an extended waiting period of up to 30 days. This typically occurs when permanently closing an account balance to ensure all revenue-adjusting events (refunds, chargebacks, disputes) have time to finalize."
+      },
+      {
+        "line": 110,
+        "text": "Outstanding Payout Limit: Accounts may have at most 3 payouts in progress. You must wait for us to process an existing payout before requesting another."
+      },
+      {
+        "line": 111,
+        "text": "Note: Requesting payouts more frequently may cause you to lose more to transfer fees. We recommend collecting payouts about once a month. Storing money on your itch.io account over a year can result in a charge from itch.io, see Unclaimed Earnings In Publisher Accounts."
+      },
+      {
+        "line": 112,
+        "text": "Payout Review Process"
+      },
+      {
+        "line": 113,
+        "text": "Staff review all payouts before payment. We require a minimum of 7 days after you create a payout and typically complete reviews within 10 to 14 days. This review period lets us assess risk and fraud issues and allows balance-adjusting events to settle (e.g., refunds, chargebacks)."
+      },
+      {
+        "line": 114,
+        "text": "If we determine your payout is high-risk (eg. large volume of suspicious transactions) then we may place an extended review period on your payout. We will contact you to discuss the situation and determine the best course of action."
+      },
+      {
+        "line": 115,
+        "text": "First-time sellers may experience longer review times as we verify account activity. Your patience is appreciated."
+      },
+      {
+        "line": 116,
+        "text": "Payment Requirements"
+      },
+      {
+        "line": 117,
+        "text": "Before we can send payment, your payout must meet these conditions:"
+      },
+      {
+        "line": 118,
+        "text": "Tax Validation: Your tax information must reach Validated state. You can complete the tax interview before requesting a payout, but validation occurs during the review period. We cannot process payouts with unvalidated, failed, or incomplete tax information."
+      },
+      {
+        "line": 119,
+        "text": "Fraud Review: All transactions in the payout must clear fraud review. We employ a risk analysis system to mark transactions for human review if they are suspected of fraud."
+      },
+      {
+        "line": 120,
+        "text": "Staff Approval: After meeting all requirements above, staff must review and approve the payout before we send payment. Our final review is to check for any suspicious activity or terms violations. If we have any questions about the activity in the payout we will reach out to you to collect more information."
+      },
+      {
+        "line": 121,
+        "text": "VAT support"
+      },
+      {
+        "line": 130,
+        "text": "The Collected by itch.io model only supports accepting USD."
+      },
+      {
+        "line": 131,
+        "text": "For Direct payments, you can select the currency you with to sell in. For PayPal users, it’s important to ensure your PayPal account is configured to accept the currency you selected, otherwise your payments may get blocked."
+      },
+      {
+        "line": 132,
+        "text": "When using PayPal, the following currencies are supported:"
+      },
+      {
+        "line": 133,
+        "text": "USD — U.S. Dollar"
+      },
+      {
+        "line": 134,
+        "text": "CAD — Canadian Dollar"
+      },
+      {
+        "line": 135,
+        "text": "GBP — British Pound"
+      },
+      {
+        "line": 138,
+        "text": "AUD — Australian Dollar"
+      },
+      {
+        "line": 139,
+        "text": "When using Stripe, the following countries and currencies are available:"
+      },
+      {
+        "line": 140,
+        "text": "United States — USD"
+      },
+      {
+        "line": 141,
+        "text": "Canada — CAD, USD"
+      },
+      {
+        "line": 142,
+        "text": "Ireland — EUR, GBP, USD"
+      },
+      {
+        "line": 144,
+        "text": "If you payment provider account is for a specific currency, you must set the same currency in your Seller settings page; otherwise, you may be unable to receive payments."
+      },
+      {
+        "line": 145,
+        "text": "Tax Interview"
+      },
+      {
+        "line": 146,
+        "text": "If you are using itch.io’s Payouts system then you must complete a Tax Interview before your account is eligible to collect any earnings through a payout. You can find instructions on how to complete the Tax Interview during the seller onboarding when setting up your account, or by navigating to the Tax Information tab on your account settings page."
+      },
+      {
+        "line": 147,
+        "text": "Before your account can collect any payments you should complete the tax interview. After completing the tax interview your information will be on file and your account will ready to accept payments. (During this time your Validation Status may be shown as pending, but you can still start collecting payments)"
+      },
+      {
+        "line": 148,
+        "text": "Before your account is eligible to receive earnings through a payout, your tax information must be validated. Validation will take place after you open your first payout request. This means you can start selling before your information is validated, but you can not collect any earnings until validation succeeds. Generally validation happens instantly, but in some cases it may take longer to verify the information you have provided. If the validation has failed, then it will be reported on the Tax Information page. We are unable to process any payouts unless your tax information validates. You can either retake the tax interview or contact support for more assistance"
+      },
+      {
+        "line": 149,
+        "text": "During the tax interview, you must provide a Tax Identification Number (eg. Social Security Number, EIN, ITIN, local Tax Number, etc.). If you do not provide a valid Tax Identification Number then your account will be subject to the default 30% withholding rate, even if you are located in the United States or in a country that has a tax treaty with the United States."
+      },
+      {
+        "line": 150,
+        "text": "Tax Withholding"
+      },
+      {
+        "line": 151,
+        "text": "This section is only relevant to sellers who are doing business as an entity located outside of the United States"
+      },
+      {
+        "line": 152,
+        "text": "Since itch.io is a U.S. company, funds we send to foreign entities are subject to a withholding tax. This only applies to sellers using itch.io’s Collected by itch.io (Payouts). Using Direct Payments you may be subject to the same tax but it is handled directly by the payment providers and not itch.io"
+      },
+      {
+        "line": 153,
+        "text": "The default tax rate is 30% but you may be eligible for a reduced rate if you operate in a country that has a tax treaty with the United States, and you provide a Tax Identification Number."
+      },
+      {
+        "line": 157,
+        "text": "Learn how to apply for an ITIN"
+      },
+      {
+        "line": 158,
+        "text": "After you complete the tax interview you'll be shown your withholding rate on your seller account settings page. If you don’t agree with what is displayed, you'll have to retake the interview. You can contact support to get help with updating your tax information."
+      },
+      {
+        "line": 159,
+        "text": "Although it may be possible to complete the tax interview without a tax identification number, you will be assigned the default withholding rate of 30% even if your country is eligible for a reduced rate. Please take the time to fill out the tax interview as much as you can. If you are unsure, then we recommending contacting a local financial professional."
+      },
+      {
+        "line": 160,
+        "text": "Account Adjustments"
+      },
+      {
+        "line": 161,
+        "text": "This only applies to sellers using itch.io’s Collected by itch.io (Payouts). If itch.io needs to debit your account for previous activity then an adjustment will be applied the next time you request a payout. Any adjustments will be shown after you create a payout under the Adjustments summary section. If you do not see this section then there are no adjustments."
+      },
+      {
+        "line": 162,
+        "text": "If the sum of your adjustments is larger than the sum of your revenue to be claimed, then you will not be able to initiate a payout. Once your balance is above your debits you can create a payout."
+      },
+      {
+        "line": 163,
+        "text": "Here’s a list of adjustments you may see:"
+      },
+      {
+        "line": 164,
+        "text": "Refunds — If a payment to your account is refunded after the funds for it have been paid out then we'll deduct that amount on a future payout. Payments refunded in a pending payout will be subtracted before the payment is delivered, and not be added as an adjustment."
+      },
+      {
+        "line": 165,
+        "text": "Chargebacks — A chargeback is a fee imposed by a payment processor when a buyer opens a dispute with their bank or card company. Chargebacks are commonly associated with fraud, but sometimes they can happen because of the types of buyers a project has. If we notice a high rate of disputes on your account, or disputes from customers, then the chargeback fees may be applied to your account."
+      },
+      {
+        "line": 166,
+        "text": "Payout Fees — When collecting a payout, the processor may charge a fee for the money transfer. PayPal is the most common payout method. Learn more about PayPal payout fees. Generally, requesting payouts more frequently will cause you to lose more to fees. We recommend collecting payouts about once a month. Note: storing money on your itch.io account over a year can result in a charge from itch.io, see Unclaimed Earnings In Publisher Accounts."
+      },
+      {
+        "line": 167,
+        "text": "Tax Identity — Upon completing your tax interview we used a third-party service to verify the identity you provided. This is a federal requirement. A flat fee of $3.00 will be applied to your account once."
+      },
+      {
+        "line": 168,
+        "text": "Why does itch.io pass fees on to me? itch.io utilizes “Open Revenue Sharing,” a system where sellers can decide what percentage of their revenue is shared with the platform. Because we are not guaranteed an amount from sellers through the sales of their goods, we pass any operating costs directly onto the seller. This includes payment processor fees, and any of the fees listed above."
+      }
+    ]
+  },
+  {
+    "source": "https://itch.io/docs/creators/quality-guidelines",
+    "sha256": "f9f98212faefa057bc82ec419c4526b9c3a2bb07ff3cf16c730ac0fc88449bd9",
+    "excerpts": [
+      {
+        "line": 2,
+        "text": "itch.io"
+      },
+      {
+        "line": 3,
+        "text": "Browse GamesGame JamsUpload GameCreator Day & Black Friday 2026Developer LogsCommunityLog inRegisterOn Sale: GamesAssetsToolsTabletopComicsIndie game storeFree gamesFun gamesHorror gamesGame developmentAssetsComicsSalesBundlesJobsTagsGame Engines"
+      },
+      {
+        "line": 4,
+        "text": "General"
+      },
+      {
+        "line": 44,
+        "text": "Avoid uploading ‘reskins’, or many project pages for minor changes"
+      },
+      {
+        "line": 45,
+        "text": "Avoid uploading excessive amounts of automatically generated or AI-generated content"
+      },
+      {
+        "line": 46,
+        "text": "Accurately tag your use of generative AI"
+      },
+      {
+        "line": 47,
+        "text": "Avoid only uploading keys or links to other stores"
+      },
+      {
+        "line": 86,
+        "text": "If the page undergoes significant changes, or you need to adjust pricing or ownership rules, you can create a new page. However, if it appears you are recreating pages solely to boost visibility, your account may be penalized and no longer be eligible for our discovery features."
+      },
+      {
+        "line": 87,
+        "text": "Removing access to paid content from your buyers without providng any means to continue accessing it is against our terms of service, and may result in account suspension, cancellation of payouts, and refunding of purchases."
+      },
+      {
+        "line": 88,
+        "text": "Adult content must be labeled"
+      },
+      {
+        "line": 106,
+        "text": "Do not use unrelated tags or classifications to promote your game"
+      },
+      {
+        "line": 107,
+        "text": "Building an easy-to-browse and accurate database of projects is a priority at itch.io. Adding tags, tools, engines, and classifications that are unrelated to your project in an attempt to increase its visibility is against our rules. If violated, your account will be removed from our browse and search pages, and you will no longer be eligible for our discovery features."
+      },
+      {
+        "line": 108,
+        "text": "Do not upload misleading content"
+      },
+      {
+        "line": 129,
+        "text": "Do not create multiple project pages for projects that are essentially the same but have only minor adjustments. If the code or asset changes are substantial, it’s acceptable. Additionally, if you're trying to preserve different versions of the project, e.g., jam versus final, that’s also acceptable."
+      },
+      {
+        "line": 130,
+        "text": "If you need to sell different tiers of the same product you can use our individual pricing tools."
+      },
+      {
+        "line": 131,
+        "text": "Avoid uploading excessive amounts of automatically generated or AI-generated content"
+      },
+      {
+        "line": 132,
+        "text": "While we understand in some cases automatically generated or AI-generated content can be useful or interesting, do not use automated systems to mass produce product pages. We will consider this spam and may remove your pages from our browse and search pages."
+      },
+      {
+        "line": 133,
+        "text": "This includes but is not limited to:"
+      },
+      {
+        "line": 137,
+        "text": "Please ensure that your content brings something new and valuable to the community. If your project involves automatic or AI generation, make sure it’s clearly stated in your project description and that it adds substantial value to the user experience."
+      },
+      {
+        "line": 138,
+        "text": "Accurately tag your use of generative AI"
+      },
+      {
+        "line": 139,
+        "text": "Generative AI refers to artificial intelligence systems that create new content (text, images, music) by learning from large datasets. This includes large language models like ChatGPT and image generation models like DALL-E, Midjourney, and Stable Diffusion that create new outputs based on training data."
+      },
+      {
+        "line": 140,
+        "text": "We ask that you accurately tag your project if it contains materials produced by generative AI by utilizing the AI Disclosure section on your project’s edit page."
+      },
+      {
+        "line": 141,
+        "text": "Projects using self-contained algorithms without external large datasets don’t require an AI disclosure. For example, traditional game AI like NPC pathfinding, enemy behavior patterns, procedural level generation, fuzzy logic systems, and dynamic difficulty adjustment, dynamic music, etc. are not considered generative AI and don’t need to be disclosed."
+      },
+      {
+        "line": 142,
+        "text": "Projects that indicate that they use generative AI will appear on the AI Assisted browse page."
+      },
+      {
+        "line": 143,
+        "text": "We are strictly enforcing disclosure for all game asset, soundtrack, physical game, comic, and book pages due to legal ambiguity around rights associated with Generative AI content. Failure to tag these pages may result in delisting."
+      },
+      {
+        "line": 144,
+        "text": "Avoid only uploading keys or links to other stores"
+      },
+      {
+        "line": 145,
+        "text": "Please try not to upload just Steam keys, or put a link to your Steam store page without uploading any files. Someone buying a game on itch.io wants to to be able to access it on itch.io through our website and app. If possible, your uploads should be DRM free, but it isn’t a requirement."
+      },
+      {
+        "line": 146,
+        "text": "If you're concerned about maintaining multiple builds, please try out our command line tools. They're significantly easier to use than anything provided by any other store or platform. You can even find integrations with popular game engines."
+      },
+      {
+        "line": 147,
+        "text": "Prefer uploading your files directly to itch.io"
+      }
+    ]
+  }
+]
